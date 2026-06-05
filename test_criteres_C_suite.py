@@ -6,11 +6,11 @@ python -m pytest V9/test_criteres_C_suite.py -v
 """
 from __future__ import annotations
 
-from assemblage import (negation, disjonction, conjonction, implication,
+from bourbaki.assemblage.assemblage import (negation, disjonction, conjonction, implication,
                         equivalence, existe, pour_tout)
-from propositions import A, B, C, SIG_PROP
-import noyau
-import criteres_C_suite as KS
+from bourbaki.logique.propositions import A, B, C, SIG_PROP
+from bourbaki.logique import noyau
+from bourbaki.logique.criteres import criteres_C_suite as KS
 
 S = SIG_PROP
 

@@ -4,11 +4,11 @@ python -m pytest V9/test_criteres_quantif.py -v
 """
 from __future__ import annotations
 
-from assemblage import (Assemblage, negation, implication, equivalence, egalite,
+from bourbaki.assemblage.assemblage import (Assemblage, negation, implication, equivalence, egalite,
                         pour_tout, tau_x, substitution_b_x_a)
-from propositions import SIG_PROP
-import noyau
-from tactiques_egalite import (instanciation, instanciation_en_x,
+from bourbaki.logique.propositions import SIG_PROP
+from bourbaki.logique import noyau
+from bourbaki.logique.tactiques.tactiques_egalite import (instanciation, instanciation_en_x,
                                reflexivite_terme, c44)
 
 S = SIG_PROP

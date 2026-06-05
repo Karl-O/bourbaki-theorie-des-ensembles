@@ -8,10 +8,10 @@ La bijection distributive D : A×(B⊔C) → (A×B)⊔(A×C) est le ré-arrangem
 paliers : fonctionnel, domaine, valeur générique + sur chaque copie, injectif,
 image, puis l'assemblage bijection / Eq / égalité des cardinaux.
 """
-import ensembles_abrege as E
-import ensembles_distributivite_cardinale as D
-from ensembles_cardinaux import est_bijection_de, cardinal, equipotent
-from formule import var, egal, appartient, subst_t
+from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.cardinaux.arithmetique import ensembles_distributivite_cardinale as D
+from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de, cardinal, equipotent
+from bourbaki.logique.formule import var, egal, appartient, subst_t
 
 
 def _D():

@@ -1,9 +1,9 @@
 """Tests V9 — §II.3.4 Fonctions : graphe fonctionnel, valeur f(x), C46."""
 from __future__ import annotations
 
-from formule import var, egal, et, equiv, appartient, existe, pourtout, impl
-from ensembles_abrege import est_fonctionnel, valeur, couple
-from ensembles_fonctions import valeur_dans_graphe, valeur_caracterisation
+from bourbaki.logique.formule import var, egal, et, equiv, appartient, existe, pourtout, impl
+from bourbaki.ensembles.ensembles_abrege import est_fonctionnel, valeur, couple
+from bourbaki.ensembles.fonctions.ensembles_fonctions import valeur_dans_graphe, valeur_caracterisation
 
 
 def test_est_fonctionnel():
@@ -13,8 +13,8 @@ def test_est_fonctionnel():
 
 
 def test_composee_fonctionnelle():
-    from ensembles_abrege import composee
-    from ensembles_fonctions_composee import composee_fonctionnelle
+    from bourbaki.ensembles.ensembles_abrege import composee
+    from bourbaki.ensembles.fonctions.ensembles_fonctions_composee import composee_fonctionnelle
     vG, vF = var("G"), var("F")
     t = composee_fonctionnelle("G", "F")
     cible = impl(et(est_fonctionnel(vF), est_fonctionnel(vG)),
@@ -23,9 +23,9 @@ def test_composee_fonctionnelle():
 
 
 def test_composition_valeur():
-    from formule import existe, appartient
-    from ensembles_abrege import composee, valeur, couple
-    from ensembles_fonctions_composee import composition_valeur
+    from bourbaki.logique.formule import existe, appartient
+    from bourbaki.ensembles.ensembles_abrege import composee, valeur, couple
+    from bourbaki.ensembles.fonctions.ensembles_fonctions_composee import composition_valeur
     vG, vF, vx, vy = var("G"), var("F"), var("x"), var("y")
     t = composition_valeur("G", "F", "x")
     fx = valeur(vF, vx)

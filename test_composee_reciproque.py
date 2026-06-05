@@ -1,9 +1,9 @@
 """Test V9 — §II.3.3 Proposition 3 (E.II.42) : (Gp∘G)⁻¹ = G⁻¹ ∘ Gp⁻¹."""
 from __future__ import annotations
 
-from formule import var, egal
-from ensembles_abrege import composee, reciproque
-from ensembles_composee_reciproque import reciproque_composee
+from bourbaki.logique.formule import var, egal
+from bourbaki.ensembles.ensembles_abrege import composee, reciproque
+from bourbaki.ensembles.fonctions.ensembles_composee_reciproque import reciproque_composee
 
 
 def test_reciproque_composee():

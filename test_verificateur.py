@@ -9,10 +9,10 @@ Démo :  python V9/exemples_livre.py
 """
 from __future__ import annotations
 
-from assemblage import Assemblage, implication
-from notation import lire_formule, afficher
-from verificateur_preuve import executer_preuve, prouver_par_llm
-from exemples_livre import verifier_tous
+from bourbaki.assemblage.assemblage import Assemblage, implication
+from bourbaki.logique.notation import lire_formule, afficher
+from bourbaki.logique.verificateur_preuve import executer_preuve, prouver_par_llm
+from outils_ia.exemples_livre import verifier_tous
 
 A = Assemblage(("=", "a", "b"))
 

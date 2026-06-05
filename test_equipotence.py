@@ -1,9 +1,9 @@
 """Tests §III.3 — équipotence : définitions bien formées + théorèmes du graphe identité."""
-from formule import var, egal, et, equiv, appartient
-import noyau_abrege as N
-import ensembles_abrege as E
-import ensembles_cardinaux as C
-import ensembles_equipotence as EQ
+from bourbaki.logique.formule import var, egal, et, equiv, appartient
+from bourbaki.logique import noyau_abrege as N
+from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.cardinaux import ensembles_cardinaux as C
+from bourbaki.cardinaux import ensembles_equipotence as EQ
 
 
 # ── Définitions (E.III.3.1) bien formées et closes ────────────────────────────

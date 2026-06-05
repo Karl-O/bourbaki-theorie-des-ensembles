@@ -4,9 +4,9 @@ Chaque test vérifie que la CONCLUSION du théorème renvoyé par le noyau est
 EXACTEMENT la cible visée (et qu'il est clos pour les théorèmes inconditionnels,
 ou que ses hypothèses sont les conditions attendues pour les conditionnels).
 """
-from formule import var, et, impl, appartient, alpha_egal
-import ensembles_abrege as E
-import ensembles_morphismes as M
+from bourbaki.logique.formule import var, et, impl, appartient, alpha_egal
+from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.fonctions import ensembles_morphismes as M
 
 
 def test_identite_preserve_clos_et_cible():

@@ -2,9 +2,9 @@
 
 Chaque test vérifie la conclusion EXACTE (== cible reconstruite) et est_clos.
 """
-from formule import (var, egal, et, impl, non, appartient, inclus, pourtout, equiv)
-import ensembles_abrege as E
-import ensembles_produit_famille as P
+from bourbaki.logique.formule import (var, egal, et, impl, non, appartient, inclus, pourtout, equiv)
+from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.familles import ensembles_produit_famille as P
 
 
 def test_membre_parties():
@@ -79,7 +79,7 @@ def test_projection_dans_facteur():
 
 def test_axiomes_bien_formes():
     # les deux nouveaux axiomes sont dans la théorie et exploitables via N.axiome
-    import noyau_abrege as N
+    from bourbaki.logique import noyau_abrege as N
     t = E.theorie_ensembles()
     assert any(ax == E.AXIOME_PARTIES for ax in t.axiomes)
     assert any(ax == E.AXIOME_PRODUIT_FAM for ax in t.axiomes)

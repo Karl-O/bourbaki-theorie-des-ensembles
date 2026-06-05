@@ -3,10 +3,10 @@
   • produit_cardinal_bien_defini : Card(X×Y) ne dépend que de Card X, Card Y ;
   • produit_cardinal_commutatif  : a·b = b·a  (Card(X×Y) = Card(Y×X)).
 """
-from formule import var, egal, et, impl, subst_t
-import ensembles_abrege as E
-from ensembles_cardinaux import cardinal, est_bijection_de, equipotent
-import ensembles_arith_cardinale as A
+from bourbaki.logique.formule import var, egal, et, impl, subst_t
+from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.cardinaux.ensembles_cardinaux import cardinal, est_bijection_de, equipotent
+from bourbaki.cardinaux.arithmetique import ensembles_arith_cardinale as A
 
 
 def test_produit_cardinal_binaire_def():
@@ -68,7 +68,7 @@ def test_reassoc_graphe_domaine():
 
 def test_reassoc_graphe_valeur():
     """(3.1) {u∈(X×Y)×Z} ⊢ R(u) = (pr₁(pr₁u), (pr₂(pr₁u), pr₂u))."""
-    from formule import appartient
+    from bourbaki.logique.formule import appartient
     t = A.reassoc_graphe_valeur("X", "Y", "Z", "u")
     R = A._reassoc_graphe("X", "Y", "Z", "k")
     Tu = subst_t(var("u"), "k", A._reassoc_terme("k"))

@@ -8,12 +8,12 @@ Benchmark :  python V9/test_chercheur_ia.py
 """
 from __future__ import annotations
 
-from assemblage import implication, disjonction
-from propositions import A, B, C, D, SIG_PROP
-import noyau
-from modele import RegressionLogistique
-from chercheur_ia import jeu_relevance, prouver_guide
-from encodeur import traits_paire_seq
+from bourbaki.assemblage.assemblage import implication, disjonction
+from bourbaki.logique.propositions import A, B, C, D, SIG_PROP
+from bourbaki.logique import noyau
+from outils_ia.modele import RegressionLogistique
+from outils_ia.chercheur_ia import jeu_relevance, prouver_guide
+from outils_ia.encodeur import traits_paire_seq
 
 # Buts d'entraînement et de test (fragment propositionnel, atomes).
 _ENTRAIN = [implication(A, A), implication(B, B),

@@ -3,9 +3,9 @@
 Vérifie la conclusion EXACTE (== cible) et les hypothèses de chaque théorème
 certifié par le noyau abrégé.
 """
-from formule import var, et, impl, appartient, pourtout, subst_t, inclus
-import ensembles_abrege as E
-import ensembles_projections_terme as P
+from bourbaki.logique.formule import var, et, impl, appartient, pourtout, subst_t, inclus
+from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.fonctions import ensembles_projections_terme as P
 
 
 _X = var("x")

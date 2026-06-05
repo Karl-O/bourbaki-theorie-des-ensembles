@@ -7,12 +7,12 @@ python -m pytest V9/test_congruence_quantif.py -v
 """
 from __future__ import annotations
 
-from assemblage import (Assemblage, negation, implication, equivalence, egalite,
+from bourbaki.assemblage.assemblage import (Assemblage, negation, implication, equivalence, egalite,
                         existe, pour_tout)
-from propositions import SIG_PROP
-from tactiques import a_implique_a
-import criteres_C as K
-import congruence_quantif as Q
+from bourbaki.logique.propositions import SIG_PROP
+from bourbaki.logique.tactiques.tactiques import a_implique_a
+from bourbaki.logique.criteres import criteres_C as K
+from bourbaki.logique import congruence_quantif as Q
 
 S = SIG_PROP
 X, Y = Assemblage(("x",)), Assemblage(("y",))

@@ -1,10 +1,10 @@
 """Tests V9 — §II.3 Correspondances : graphe, domaine/image, image directe, coupe."""
 from __future__ import annotations
 
-from formule import var, egal, impl, equiv, appartient, existe, pourtout, non, inclus as inclus_
-from ensembles_abrege import (est_un_graphe, dom, img, image, couple, singleton,
+from bourbaki.logique.formule import var, egal, impl, equiv, appartient, existe, pourtout, non, inclus as inclus_
+from bourbaki.ensembles.ensembles_abrege import (est_un_graphe, dom, img, image, couple, singleton,
                               VIDE, est_un_couple)
-from ensembles_correspondances import (image_croissante, image_dans_img, image_vide,
+from bourbaki.ensembles.base.ensembles_correspondances import (image_croissante, image_dans_img, image_vide,
                                        coupe_membre)
 
 

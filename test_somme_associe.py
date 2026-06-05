@@ -9,11 +9,11 @@ On certifie ici tout le THÉORÈME, ASSEMBLAGE COMPLET :
   • image(K, (A⊔B)⊔C) = A⊔(B⊔C) (surjectivité, 3 antécédents) ;
   • est_bijection_de, Eq((A⊔B)⊔C, A⊔(B⊔C)), Card((A⊔B)⊔C)=Card(A⊔(B⊔C)).
 """
-import ensembles_abrege as E
-import ensembles_somme_associe as A
-from ensembles_somme_disjointe import somme_disjointe, ZERO, UN
-from ensembles_cardinaux import est_bijection_de, equipotent, cardinal
-from formule import var, egal, appartient, et, ou, existe, equiv
+from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.cardinaux.arithmetique import ensembles_somme_associe as A
+from bourbaki.ensembles.familles.ensembles_somme_disjointe import somme_disjointe, ZERO, UN
+from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de, equipotent, cardinal
+from bourbaki.logique.formule import var, egal, appartient, et, ou, existe, equiv
 
 
 def _K():

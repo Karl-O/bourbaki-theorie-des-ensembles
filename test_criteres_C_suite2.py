@@ -1,10 +1,10 @@
 """Tests V9 — équivalences C24/C25 longues, re-vérifiées par le noyau."""
 from __future__ import annotations
 
-from assemblage import (negation, disjonction, conjonction, implication, equivalence)
-from propositions import A, B, C, SIG_PROP
-import noyau
-import criteres_C_suite2 as KS2
+from bourbaki.assemblage.assemblage import (negation, disjonction, conjonction, implication, equivalence)
+from bourbaki.logique.propositions import A, B, C, SIG_PROP
+from bourbaki.logique import noyau
+from bourbaki.logique.criteres import criteres_C_suite2 as KS2
 
 S = SIG_PROP
 

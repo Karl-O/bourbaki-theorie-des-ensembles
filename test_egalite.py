@@ -8,10 +8,10 @@ python -m pytest V9/test_egalite.py -v
 """
 from __future__ import annotations
 
-from assemblage import Assemblage, implication, conjonction, equivalence, egalite
-import noyau
-import tactiques_prop as P
-from tactiques_egalite import importation, symetrie, transitivite
+from bourbaki.assemblage.assemblage import Assemblage, implication, conjonction, equivalence, egalite
+from bourbaki.logique import noyau
+from bourbaki.logique.tactiques import tactiques_prop as P
+from bourbaki.logique.tactiques.tactiques_egalite import importation, symetrie, transitivite
 
 A = Assemblage(("=", "a", "b"))
 B = Assemblage(("=", "b", "c"))

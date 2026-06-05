@@ -6,10 +6,10 @@ cf. docstring de ensembles_produit_commute). On certifie ici les 6 lemmes clos /
 hypothétiques réellement prouvés par le noyau."""
 from __future__ import annotations
 
-from formule import var, egal, et, appartient
-import ensembles_abrege as E
-from ensembles_cardinaux import est_bijection_de, equipotent
-from ensembles_produit_commute import (
+from bourbaki.logique.formule import var, egal, et, appartient
+from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de, equipotent
+from bourbaki.cardinaux.arithmetique.ensembles_produit_commute import (
     membre_produit_pr1, membre_produit_pr2, membre_produit_egal_couple,
     swap_graphe_fonctionnel, swap_graphe_domaine, swap_graphe_valeur,
     swap_graphe_injective, swap_graphe_image, swap_est_bijection,

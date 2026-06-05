@@ -7,11 +7,11 @@ python -m pytest V9/test_prouveur_goal.py -v
 """
 from __future__ import annotations
 
-from assemblage import implication, negation, disjonction
-from propositions import A, B, C, D, SIG_PROP
-import noyau
-import prouveur_goal
-from chercheur_ia import prouver_guide
+from bourbaki.assemblage.assemblage import implication, negation, disjonction
+from bourbaki.logique.propositions import A, B, C, D, SIG_PROP
+from bourbaki.logique import noyau
+from outils_ia import prouveur_goal
+from outils_ia.chercheur_ia import prouver_guide
 
 
 def _p(but, **kw):

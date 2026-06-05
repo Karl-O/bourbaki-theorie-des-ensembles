@@ -2,10 +2,10 @@
 
 Chaque test vérifie la conclusion EXACTE (== cible reconstruite) et est_clos.
 """
-from formule import var, egal, non
-import ensembles_abrege as E
-import ensembles_vide_singleton as VS
-from ensembles_cardinaux import equipotent
+from bourbaki.logique.formule import var, egal, non
+from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.cardinaux import ensembles_vide_singleton as VS
+from bourbaki.cardinaux.ensembles_cardinaux import equipotent
 
 
 def test_image_sur_vide():

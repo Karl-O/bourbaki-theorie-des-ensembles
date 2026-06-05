@@ -1,8 +1,8 @@
 """Tests — De Morgan des familles (§II.4 Prop. 5) et identités de composition-valeur."""
-from formule import var, egal, impl, existe, appartient
-import ensembles_abrege as E
-import ensembles_familles_demorgan as M
-import ensembles_composee_valeurs as CV
+from bourbaki.logique.formule import var, egal, impl, existe, appartient
+from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.familles import ensembles_familles_demorgan as M
+from bourbaki.ensembles.fonctions import ensembles_composee_valeurs as CV
 
 
 # ── (A) De Morgan des familles ───────────────────────────────────────────────
@@ -27,7 +27,7 @@ def test_de_morgan_reunion_famille():
 
 def test_axiome_compl_fam_clos():
     """L'axiome de la famille des complémentaires est clos et dans la théorie."""
-    from formule import libres_f
+    from bourbaki.logique.formule import libres_f
     assert not libres_f(E.AXIOME_COMPL_FAM)
     assert E.AXIOME_COMPL_FAM in E.theorie_ensembles().axiomes
 

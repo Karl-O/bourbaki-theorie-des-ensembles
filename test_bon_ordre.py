@@ -4,9 +4,9 @@ Chaque théorème est vérifié sur sa CIBLE EXACTE + clôture (ou hypothèses a
 """
 from __future__ import annotations
 
-from formule import var, egal, et, impl, ou, non, appartient, inclus, pourtout, existe
-import ensembles_abrege as E
-import ensembles_bon_ordre as BO
+from bourbaki.logique.formule import var, egal, et, impl, ou, non, appartient, inclus, pourtout, existe
+from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ordre import ensembles_bon_ordre as BO
 
 
 def _R(a, b):

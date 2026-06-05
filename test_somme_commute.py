@@ -4,11 +4,11 @@ La bijection K : A⊔B → B⊔A flippe le marqueur : (u,0)↦(u,1) et (v,1)↦(
 On vérifie ses paliers : fonctionnel, domaine, valeur sur chaque copie, injectif,
 image, assemblage bijection, et l'équipotence finale.
 """
-import ensembles_abrege as E
-import ensembles_somme_commute as C
-from ensembles_somme_disjointe import somme_disjointe, ZERO, UN
-from ensembles_cardinaux import est_bijection_de, equipotent
-from formule import var, egal, appartient
+from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.cardinaux.arithmetique import ensembles_somme_commute as C
+from bourbaki.ensembles.familles.ensembles_somme_disjointe import somme_disjointe, ZERO, UN
+from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de, equipotent
+from bourbaki.logique.formule import var, egal, appartient
 
 
 def _K():

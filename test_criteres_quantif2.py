@@ -1,10 +1,10 @@
 """Tests V9 — C34, C35, C38 (sous-ensemble verrouillé de C32–C42)."""
 from __future__ import annotations
 
-from assemblage import (Assemblage, negation, conjonction, implication,
+from bourbaki.assemblage.assemblage import (Assemblage, negation, conjonction, implication,
                         equivalence, egalite, existe, pour_tout)
-from propositions import A, B, SIG_PROP
-import criteres_quantif2 as Q2
+from bourbaki.logique.propositions import A, B, SIG_PROP
+from bourbaki.logique.criteres import criteres_quantif2 as Q2
 
 S = SIG_PROP
 X, Y = Assemblage(("x",)), Assemblage(("y",))

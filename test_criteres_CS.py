@@ -8,8 +8,8 @@ python -m pytest V9/test_criteres_CS.py -v
 """
 from __future__ import annotations
 
-from assemblage import Assemblage, egalite, disjonction, negation
-import criteres_CS as CS
+from bourbaki.assemblage.assemblage import Assemblage, egalite, disjonction, negation
+from bourbaki.logique.criteres import criteres_CS as CS
 
 # termes/relations concrets (lettres minuscules = termes ; = signe spécifique)
 def L(n):

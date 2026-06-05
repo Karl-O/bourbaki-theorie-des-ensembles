@@ -9,9 +9,9 @@ Démo :  python V9/test_chercheur.py
 """
 from __future__ import annotations
 
-from assemblage import Assemblage, disjonction, implication
-import noyau
-from chercheur import Prouveur, saturer_mp
+from bourbaki.assemblage.assemblage import Assemblage, disjonction, implication
+from bourbaki.logique import noyau
+from outils_ia.chercheur import Prouveur, saturer_mp
 
 A = Assemblage(("=", "a", "b"))
 B = Assemblage(("=", "b", "c"))

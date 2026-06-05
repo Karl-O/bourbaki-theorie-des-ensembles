@@ -1,9 +1,9 @@
 """Test V9 — caractérisation de l'ensemble vide A=∅ ⇔ (∀z)¬(z∈A)."""
 from __future__ import annotations
 
-from formule import var, egal, non, appartient, pourtout, equiv
-from ensembles_abrege import VIDE
-from ensembles_vide import vide_ssi_sans_element
+from bourbaki.logique.formule import var, egal, non, appartient, pourtout, equiv
+from bourbaki.ensembles.ensembles_abrege import VIDE
+from bourbaki.ensembles.base.ensembles_vide import vide_ssi_sans_element
 
 
 def test_vide_ssi_sans_element():

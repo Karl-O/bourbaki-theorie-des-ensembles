@@ -5,10 +5,10 @@ python -m pytest V9/test_noyau_abrege.py -v
 from __future__ import annotations
 import pytest
 
-from formule import (var, egal, appartient, ou, impl, equiv, pourtout, existe,
+from bourbaki.logique.formule import (var, egal, appartient, ou, impl, equiv, pourtout, existe,
                      tau, subst_f)
-import noyau_abrege as N
-import ensembles_abrege as E
+from bourbaki.logique import noyau_abrege as N
+from bourbaki.ensembles import ensembles_abrege as E
 
 A = egal(var("a"), var("b"))
 B = egal(var("b"), var("c"))

@@ -9,11 +9,11 @@ Démo :  python V9/test_ia_valeurs.py
 """
 from __future__ import annotations
 
-from assemblage import implication
-from propositions import A, B, C, SIG_PROP
-from encodeur import encoder, encoder_sequence, TRAITS
-from modele import RegressionLogistique
-from donnees_entrainement import jeu_de_donnees
+from bourbaki.assemblage.assemblage import implication
+from bourbaki.logique.propositions import A, B, C, SIG_PROP
+from outils_ia.encodeur import encoder, encoder_sequence, TRAITS
+from outils_ia.modele import RegressionLogistique
+from outils_ia.donnees_entrainement import jeu_de_donnees
 
 _COMPTES = lambda a: encoder(a, SIG_PROP)          # encodage par comptes (sig atomes)
 

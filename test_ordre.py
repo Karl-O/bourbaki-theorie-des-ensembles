@@ -1,9 +1,9 @@
 """Tests — Chapitre III §1 : relations d'ordre, ensembles ordonnés (théorèmes directs)."""
 from __future__ import annotations
 
-from formule import var, egal, et, impl, appartient, pourtout, inclus
-import ensembles_abrege as E
-import ensembles_ordre as O
+from bourbaki.logique.formule import var, egal, et, impl, appartient, pourtout, inclus
+from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ordre import ensembles_ordre as O
 
 
 def _R(a, b):

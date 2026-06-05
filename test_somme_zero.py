@@ -3,11 +3,11 @@
 La bijection K : B → ∅⊔B est l'injection droite v↦(v,1) (la copie gauche ∅×{0} est
 vide).  On vérifie ses paliers, l'équipotence Eq(∅⊔B, B), et l'égalité cardinale.
 """
-import ensembles_abrege as E
-import ensembles_somme_zero as Z
-from ensembles_somme_disjointe import somme_disjointe, UN
-from ensembles_cardinaux import est_bijection_de, equipotent, cardinal
-from formule import var, egal, appartient
+from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.cardinaux.arithmetique import ensembles_somme_zero as Z
+from bourbaki.ensembles.familles.ensembles_somme_disjointe import somme_disjointe, UN
+from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de, equipotent, cardinal
+from bourbaki.logique.formule import var, egal, appartient
 
 
 def _K():

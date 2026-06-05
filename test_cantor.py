@@ -4,10 +4,10 @@ Chaque test vérifie la conclusion EXACTE (== cible reconstruite) et, pour les
 théorèmes clos, est_clos ; pour les lemmes conditionnels, l'ensemble des
 hypothèses attendues.
 """
-from formule import (var, egal, et, impl, non, appartient, inclus, equiv)
-import ensembles_abrege as E
-import ensembles_cantor as C
-from ensembles_cardinaux import (est_injection_de, inf_egal_card, est_bijection_de,
+from bourbaki.logique.formule import (var, egal, et, impl, non, appartient, inclus, equiv)
+from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.cardinaux import ensembles_cantor as C
+from bourbaki.cardinaux.ensembles_cardinaux import (est_injection_de, inf_egal_card, est_bijection_de,
                                  equipotent, inf_strict_card)
 
 

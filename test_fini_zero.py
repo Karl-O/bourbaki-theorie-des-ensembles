@@ -10,12 +10,12 @@ Vérifie (conclusion EXACTE + est_clos) :
 Et la FIDÉLITÉ du successeur : successeur(𝔞) EST la somme cardinale binaire
 somme_cardinale_binaire(𝔞, {∅}) = Card(𝔞 ⊔ {∅}) (définition de 𝔞+1 de Bourbaki).
 """
-from formule import var, egal, non, et
-import ensembles_abrege as E
-from ensembles_cardinaux import cardinal, est_cardinal
-from ensembles_somme_disjointe import somme_disjointe, somme_cardinale_binaire
-import ensembles_entiers as Ent
-from ensembles_fini_zero import (cardinal_vide_egale_vide, successeur_zero_egale_un,
+from bourbaki.logique.formule import var, egal, non, et
+from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.cardinaux.ensembles_cardinaux import cardinal, est_cardinal
+from bourbaki.ensembles.familles.ensembles_somme_disjointe import somme_disjointe, somme_cardinale_binaire
+from bourbaki.entiers import ensembles_entiers as Ent
+from bourbaki.entiers.ensembles_fini_zero import (cardinal_vide_egale_vide, successeur_zero_egale_un,
                                  zero_distinct_successeur_zero, zero_est_un_cardinal,
                                  fini_zero)
 

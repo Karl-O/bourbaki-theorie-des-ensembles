@@ -1,9 +1,9 @@
 """Tests V9 — §II.2 projections pr₁(x,y)=x, pr₂(x,y)=y et l'identité τx(x=a)=a."""
 from __future__ import annotations
 
-from formule import var, egal, tau
-from ensembles_abrege import couple, pr1, pr2
-from ensembles_projections import tau_egal, projection_premiere, projection_seconde
+from bourbaki.logique.formule import var, egal, tau
+from bourbaki.ensembles.ensembles_abrege import couple, pr1, pr2
+from bourbaki.ensembles.fonctions.ensembles_projections import tau_egal, projection_premiere, projection_seconde
 
 
 def test_tau_egal():

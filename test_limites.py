@@ -3,10 +3,10 @@
 Chaque test vérifie que la conclusion certifiée par le noyau est EXACTEMENT la
 cible attendue (et le statut des hypothèses résiduelles), et non une devinette.
 """
-from formule import var, egal, appartient, et, impl, pourtout, equiv
-import noyau_abrege as N
-import ensembles_abrege as E
-import ensembles_limites as L
+from bourbaki.logique.formule import var, egal, appartient, et, impl, pourtout, equiv
+from bourbaki.logique import noyau_abrege as N
+from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.familles import ensembles_limites as L
 
 
 def _leq():

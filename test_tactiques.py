@@ -8,9 +8,9 @@ vérifie la propagation correcte des hypothèses.
 """
 from __future__ import annotations
 
-from assemblage import Assemblage, implication, disjonction
-import noyau
-import tactiques as T
+from bourbaki.assemblage.assemblage import Assemblage, implication, disjonction
+from bourbaki.logique import noyau
+from bourbaki.logique.tactiques import tactiques as T
 
 A = Assemblage(("=", "a", "b"))
 B = Assemblage(("=", "b", "c"))

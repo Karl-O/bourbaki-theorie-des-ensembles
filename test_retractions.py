@@ -4,9 +4,9 @@ Chaque théorème est vérifié sur sa CONCLUSION EXACTE (== cible) et sur .est_
 Les cibles sont construites indépendamment (par les définitions de ensembles_abrege
 ou par le mécanisme de substitution canonique), pas extraites de la preuve.
 """
-from formule import var, egal, et, appartient, impl, pourtout, existe
-import ensembles_abrege as E
-import ensembles_retractions as RS
+from bourbaki.logique.formule import var, egal, et, appartient, impl, pourtout, existe
+from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.fonctions import ensembles_retractions as RS
 
 
 # ── Définition 11 : prédicats bien formés ─────────────────────────────────────

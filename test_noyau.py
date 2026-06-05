@@ -6,14 +6,14 @@ Ou la démo lisible :  python V9/test_noyau.py
 from __future__ import annotations
 import pytest
 
-from assemblage import (
+from bourbaki.assemblage.assemblage import (
     Assemblage, concat, disjonction, negation, implication, tau_x,
 )
-from lecture import (
+from bourbaki.logique.lecture import (
     depuis_assemblage, vers_assemblage, est_significatif,
     est_relation, est_terme, NonSignificatif,
 )
-import noyau
+from bourbaki.logique import noyau
 
 # Relation atomique concrète : A = (a = b), assemblage « = a b ».
 A = Assemblage(("=", "a", "b"))

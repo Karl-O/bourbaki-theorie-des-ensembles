@@ -13,12 +13,12 @@ python -m pytest V9/test_quantif_egalite.py -v
 from __future__ import annotations
 import pytest
 
-from assemblage import (
+from bourbaki.assemblage.assemblage import (
     Assemblage, implication, substitution_b_x_a, tau_x,
     conjonction, equivalence, egalite, existe, pour_tout,
 )
-from lecture import depuis_assemblage, vers_assemblage, est_relation, est_terme
-import noyau
+from bourbaki.logique.lecture import depuis_assemblage, vers_assemblage, est_relation, est_terme
+from bourbaki.logique import noyau
 
 # Relations / termes concrets.
 R = Assemblage(("=", "x", "a"))     # x = a   (relation, x libre)
@@ -48,7 +48,7 @@ def test_existe_est_substitution_de_tau():
 
 
 def test_pour_tout_est_negation_existe_negation():
-    from assemblage import negation
+    from bourbaki.assemblage.assemblage import negation
     assert pour_tout("x", R) == negation(existe("x", negation(R)))
 
 

@@ -8,9 +8,9 @@ des axiomes EXISTANTS (réunion + produit + paire), AUCUN axiome nouveau.  On
 vérifie la forme, la décomposition par la réunion, les deux injections
 canoniques et la caractérisation complète de l'appartenance.
 """
-import ensembles_abrege as E
-import ensembles_somme_disjointe as S
-from formule import var, egal, et, ou, impl, appartient, existe
+from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.familles import ensembles_somme_disjointe as S
+from bourbaki.logique.formule import var, egal, et, ou, impl, appartient, existe
 
 
 def test_somme_disjointe_reunion_clos():
@@ -80,7 +80,7 @@ def test_somme_disjointe_termes():
 def test_somme_cardinale_binaire_forme():
     """a + b := Card(A⊔B) : la somme cardinale binaire est le cardinal de la somme
     disjointe (miroir de ab := Card(A×B)) ; forme exacte."""
-    from ensembles_cardinaux import cardinal
+    from bourbaki.cardinaux.ensembles_cardinaux import cardinal
     t = S.somme_cardinale_binaire("A", "B")
     assert t == cardinal(S.somme_disjointe(var("A"), var("B")))
 

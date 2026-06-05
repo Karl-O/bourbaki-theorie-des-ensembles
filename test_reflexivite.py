@@ -5,14 +5,14 @@ Démo lisible :  python V9/test_reflexivite.py
 """
 from __future__ import annotations
 
-from assemblage import (
+from bourbaki.assemblage.assemblage import (
     Assemblage, negation, implication, conjonction, equivalence,
     egalite, pour_tout,
 )
-import noyau
-import tactiques as T
-import tactiques_prop as P
-from tactiques_egalite import instanciation_en_x, reflexivite
+from bourbaki.logique import noyau
+from bourbaki.logique.tactiques import tactiques as T
+from bourbaki.logique.tactiques import tactiques_prop as P
+from bourbaki.logique.tactiques.tactiques_egalite import instanciation_en_x, reflexivite
 
 A = Assemblage(("=", "a", "b"))
 B = Assemblage(("=", "b", "c"))

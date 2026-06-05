@@ -1,10 +1,10 @@
 """Tests V9 — différence E∖X et lois de De Morgan (binaires)."""
 from __future__ import annotations
 
-from formule import var, egal, et, non, appartient, equiv
-from ensembles_abrege import difference, reunion, intersection
-from ensembles_difference import de_morgan_reunion, de_morgan_inter
-from tactiques_abrege2 import demorgan_ou, demorgan_et, et_ou_distrib
+from bourbaki.logique.formule import var, egal, et, non, appartient, equiv
+from bourbaki.ensembles.ensembles_abrege import difference, reunion, intersection
+from bourbaki.ensembles.base.ensembles_difference import de_morgan_reunion, de_morgan_inter
+from bourbaki.logique.tactiques.tactiques_abrege2 import demorgan_ou, demorgan_et, et_ou_distrib
 
 
 def test_demorgan_propositionnel():
@@ -15,7 +15,7 @@ def test_demorgan_propositionnel():
 
 
 def __or(p, q):
-    from formule import ou
+    from bourbaki.logique.formule import ou
     return ou(p, q)
 
 

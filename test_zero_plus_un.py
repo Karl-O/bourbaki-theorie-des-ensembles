@@ -7,11 +7,11 @@ Vérifie (conclusion EXACTE + est_clos) :
   • eq_somme_zero_un       ⊢ Eq(∅⊔{∅}, {∅}) ;
   • card_somme_zero_un     ⊢ Card(∅⊔{∅}) = Card({∅})   (= « 0+1 = 1 » au niveau cardinal).
 """
-from formule import var, egal
-import ensembles_abrege as E
-from ensembles_cardinaux import equipotent, cardinal, est_bijection_de
-from ensembles_somme_disjointe import somme_disjointe, somme_cardinale_binaire, UN
-from ensembles_zero_plus_un import (
+from bourbaki.logique.formule import var, egal
+from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.cardinaux.ensembles_cardinaux import equipotent, cardinal, est_bijection_de
+from bourbaki.ensembles.familles.ensembles_somme_disjointe import somme_disjointe, somme_cardinale_binaire, UN
+from bourbaki.entiers.ensembles_zero_plus_un import (
     const_graphe_fonctionnel, const_graphe_domaine, const_graphe_valeur,
     const_graphe_injective, const_graphe_image, const_est_bijection,
     eq_singletons, somme_zero_un_egale_singleton, membre_singleton_vide,

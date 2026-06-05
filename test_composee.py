@@ -1,9 +1,9 @@
 """Test V9 — §II.3.3 graphe composé : (x,z)∈G'∘G ⇔ (∃y)((x,y)∈G et (y,z)∈G')."""
 from __future__ import annotations
 
-from formule import var, equiv, egal, et, appartient, existe
-from ensembles_abrege import couple, composee, image
-from ensembles_composee import couple_composee, image_composee
+from bourbaki.logique.formule import var, equiv, egal, et, appartient, existe
+from bourbaki.ensembles.ensembles_abrege import couple, composee, image
+from bourbaki.ensembles.fonctions.ensembles_composee import couple_composee, image_composee
 
 
 def test_couple_composee():

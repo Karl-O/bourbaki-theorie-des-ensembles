@@ -1,8 +1,8 @@
 """Tests V9 — critères formatifs CF1–CF8 (sur la couche lecture)."""
 from __future__ import annotations
 
-from assemblage import Assemblage, egalite
-import criteres_CF as CF
+from bourbaki.assemblage.assemblage import Assemblage, egalite
+from bourbaki.logique.criteres import criteres_CF as CF
 
 R = egalite(Assemblage(("x",)), Assemblage(("a",)))   # (x = a), relation
 Sr = egalite(Assemblage(("x",)), Assemblage(("b",)))  # (x = b), relation

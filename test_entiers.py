@@ -3,16 +3,16 @@
 Vérifie : (1) les DÉFINITIONS se construisent (clos, sans gonflement) ;
 (2) le théorème DIRECT « Card(X) est un cardinal » == cible exacte + clos.
 """
-from formule import var, egal, et, non, impl
-import noyau_abrege as N
-import ensembles_entiers as Ent
-from ensembles_cardinaux import cardinal, est_cardinal
-from ensembles_entiers_theoremes import (
+from bourbaki.logique.formule import var, egal, et, non, impl
+from bourbaki.logique import noyau_abrege as N
+from bourbaki.entiers import ensembles_entiers as Ent
+from bourbaki.cardinaux.ensembles_cardinaux import cardinal, est_cardinal
+from bourbaki.entiers.ensembles_entiers_theoremes import (
     card_est_un_cardinal,
     fini_implique_cardinal, fini_implique_distinct_successeur,
     caracterisation_fini, fini_implique_non_infini,
     ensemble_fini_card_est_cardinal, ensemble_fini_card_distinct_successeur)
-import ensembles_infinis as Inf
+from bourbaki.entiers import ensembles_infinis as Inf
 
 
 def test_definitions_se_construisent():
@@ -40,7 +40,7 @@ def test_card_est_un_cardinal():
 
 def test_card_vide_est_un_cardinal():
     """0 = Card(∅) est un cardinal (cas particulier X := ∅, terme passé directement)."""
-    import ensembles_abrege as E
+    from bourbaki.ensembles import ensembles_abrege as E
     thm = card_est_un_cardinal(E.VIDE, "X'")
     cible = est_cardinal(cardinal(E.VIDE), "X'")
     assert thm.conclusion == cible
@@ -70,7 +70,7 @@ def test_caracterisation_fini():
     thm = caracterisation_fini("a")
     assert thm.est_clos
     # Fini(𝔞) EST la conjonction ; l'équivalence est Fini(𝔞) ⇔ Fini(𝔞).
-    from formule import equiv
+    from bourbaki.logique.formule import equiv
     assert thm.conclusion == equiv(Ent.est_fini(a), Ent.est_fini(a))
     # et Fini(𝔞) est BIEN la conjonction (cardinal ∧ ≠succ)  — fidélité Déf. 1
     assert Ent.est_fini(a) == et(est_cardinal(a), non(egal(a, Ent.successeur(a))))

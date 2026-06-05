@@ -2,10 +2,10 @@
 
 Chaque théorème : conclusion == cible EXACTE et démonstration CLOSE (certifiée
 par le noyau).  Les définitions sont vérifiées bien formées."""
-from formule import var, appartient, equiv, et, existe
-import ensembles_abrege as E
-import ensembles_isomorphismes as I
-from ensembles_cardinaux import est_bijection_de
+from bourbaki.logique.formule import var, appartient, equiv, et, existe
+from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.fonctions import ensembles_isomorphismes as I
+from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de
 
 
 def _G_relation():

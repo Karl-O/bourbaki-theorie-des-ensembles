@@ -2,10 +2,10 @@
 
 Chaque théorème : conclusion EXACTE (== cible) et clôture (.est_clos).
 """
-from formule import (var, egal, et, appartient, existe, inclus, impl, pourtout,
+from bourbaki.logique.formule import (var, egal, et, appartient, existe, inclus, impl, pourtout,
                      equiv)
-import ensembles_abrege as E
-import ensembles_restrictions as R
+from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.fonctions import ensembles_restrictions as R
 
 
 def test_couple_restriction():
