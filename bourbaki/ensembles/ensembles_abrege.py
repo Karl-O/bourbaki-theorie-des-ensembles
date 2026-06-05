@@ -889,6 +889,64 @@ def theorie_diagonale_cantor(x, f, z="z"):
     return N.Theorie("Diagonale-Cantor", [axiome_diagonale_cantor(x, f, z)])
 
 
+# ── §II.5.2 — Ensemble des applications 𝓕(E;F) et exposant F^E ────────────────
+# Bourbaki (E.II.5.2, Déf. 4 ; E.II.13, Déf. 6 « fonction »).  Une APPLICATION de
+# E dans F est un triple f = ((G, E), F) où G est un GRAPHE FONCTIONNEL de domaine
+# E inclus dans E×F.  L'ensemble de ces graphes fonctionnels est F^E (« exposant »,
+# E.II.5.2), et l'ensemble des triples est 𝓕(E;F) (« applications »).
+#
+# AXIOMES DE DÉFINITION (membership, S8 + A1) — légitimes : ce sont les définitions
+# de Bourbaki (caractérisations d'appartenance), PAS des théorèmes (Propositions).
+# Existence des deux ensembles : sélection S8 dans P(E×F) (pour F^E) puis dans
+# P(P(P(E×F)) × …) (pour 𝓕), unicité par A1 — exactement comme AXIOME_PRODUIT_FAM
+# (lui aussi caractérisé par « fonctionnel ∧ dom = I ∧ … »).  Paramétrés par E, F,
+# instanciés via les théories dédiées `theorie_exposant` / `theorie_applications`.
+
+# Déf. de F^E = { G ∈ P(E×F) | G fonctionnel ∧ dom G = E }  (E.II.5.2) :
+#   (∀G)( G ∈ F^E  ⇔  ( G ⊂ E×F  ∧  G fonctionnel  ∧  dom G = E ) )
+# Liant universel externe « G ».  E, F sont des PARAMÈTRES.
+def axiome_exposant(e, f, g="G"):
+    """⊢-schéma : (∀G)(G ∈ F^E ⇔ (G ⊂ E×F et G fonctionnel et dom G = E))  (Déf., S8+A1).
+
+    Caractérise l'appartenance au support F^E des GRAPHES FONCTIONNELS de E dans F
+    (E.II.5.2).  E, F paramètres ; instancié via theorie_exposant."""
+    vE, vF, vg = _terme_var(e), _terme_var(f), var(g)
+    corps = et(et(inclus(vg, produit(vE, vF)), est_fonctionnel(vg)),
+               egal(dom(vg), vE))
+    return pourtout(g, equiv(appartient(vg, exposant(vE, vF)), corps))
+
+
+def theorie_exposant(e, f, g="G"):
+    """Théorie ne contenant que l'instance de l'axiome de F^E (E.II.5.2)."""
+    return N.Theorie("Exposant", [axiome_exposant(e, f, g)])
+
+
+# Déf. de 𝓕(E;F) = { ((G,E),F) | G ∈ F^E }  (E.II.5.2, Déf. 4 ; une application est
+# le triple (graphe fonctionnel, source, but)) :
+#   (∀t)( t ∈ 𝓕(E;F)  ⇔  (∃G)( t = ((G,E),F)  ∧  G ∈ F^E ) )
+# Liant universel externe « t », liant existentiel interne « G ».  E, F paramètres.
+def axiome_applications(e, f, t="t", g="G"):
+    """⊢-schéma : (∀t)(t ∈ 𝓕(E;F) ⇔ (∃G)(t = ((G,E),F) et G ∈ F^E))  (Déf. 4, S8+A1).
+
+    Caractérise l'appartenance à l'ensemble 𝓕(E;F) des APPLICATIONS de E dans F :
+    une application est le triple ((G,E),F) d'un graphe fonctionnel G ∈ F^E avec sa
+    source E et son but F (E.II.5.2).  E, F paramètres ; via theorie_applications."""
+    vE, vF, vt, vg = _terme_var(e), _terme_var(f), var(t), var(g)
+    triple = couple(couple(vg, vE), vF)                 # ((G, E), F)
+    corps = existe(g, et(egal(vt, triple), appartient(vg, exposant(vE, vF))))
+    return pourtout(t, equiv(appartient(vt, applications(vE, vF)), corps))
+
+
+def theorie_applications(e, f, t="t", g="G"):
+    """Théorie ne contenant que l'instance de l'axiome de 𝓕(E;F) (E.II.5.2, Déf. 4)."""
+    return N.Theorie("Applications", [axiome_applications(e, f, t, g)])
+
+
+def application_vide(f):
+    """ω_F := ((∅, ∅), F)  (l'application vide ∅→F : graphe vide, source ∅, but F)."""
+    return couple(couple(VIDE, VIDE), _terme_var(f))
+
+
 # Déf. de P(X) (axiome A3, E.II.5.1 ; existence = axiome A3, unicité = A1) :
 #   (∀X)(∀Y)(Y ∈ P(X) ⇔ Y ⊂ X)
 # Le liant interne de ⊂ est « z » (cohérent avec inclus/A1).
@@ -996,6 +1054,8 @@ __all__ = ["paire", "singleton", "VIDE", "reunion", "intersection", "difference"
            "restriction", "est_constante", "est_invariant", "coincident", "prolonge",
            "graphe_terme", "fonction_terme", "axiome_graphe_terme", "theorie_graphe_terme",
            "diagonale_cantor", "axiome_diagonale_cantor", "theorie_diagonale_cantor",
+           "axiome_exposant", "theorie_exposant",
+           "axiome_applications", "theorie_applications", "application_vide",
            "valeur_famille", "reunion_famille", "inter_famille", "est_recouvrement",
            "plus_fin", "sont_disjoints", "famille_disjointe", "est_partition", "somme_famille",
            "parties", "exposant", "applications", "produit_famille", "projection_indice",
