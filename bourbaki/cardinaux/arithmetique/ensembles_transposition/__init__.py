@@ -10,25 +10,29 @@ C'est le terme le plus proche de Δ_S (le MODÈLE, ensembles_equipotence) : Δ_S
 chaque u à lui-même, et la transposition ne change que les images de p et q (échange).
 
 Sous-package :
-  • _membre   : `transpo_membre`  ⊢ (x,y)∈τ ⇔ (clauses de cas) — la brique CLÉ ;
-  • _bijection: les 4 conjoints de est_bijection_de(τ,S,S) + `transpo_valeur_q`.
+  • _membre      : `transpo_membre`  ⊢ (x,y)∈τ ⇔ (clauses de cas) — la brique CLÉ ;
+  • _bijection   : transpo_fonctionnel, transpo_domaine (CLOS) ;
+  • _injective   : transpo_injective (CLOS) ;
+  • _valeur_image: transpo_valeur_q, transpo_image (CLOS) ;
+  • _existence   : transposition_existe (les 4 conjoints + τ(q)=p + S5 témoin).
 
-Re-exporte l'API publique : transpo, transpo_membre, transposition_existe,
-transpo_valeur_q (selon ce qui est CLOS).
+Re-exporte l'API publique complète : transpo, transpo_membre, transpo_fonctionnel,
+transpo_domaine, transpo_injective, transpo_image, transpo_valeur_q,
+transposition_existe.
 """
 from __future__ import annotations
 
 from bourbaki.cardinaux.arithmetique.ensembles_transposition._membre import (
     transpo, transpo_membre)
+from bourbaki.cardinaux.arithmetique.ensembles_transposition._bijection import (
+    transpo_fonctionnel, transpo_domaine)
+from bourbaki.cardinaux.arithmetique.ensembles_transposition._injective import (
+    transpo_injective)
+from bourbaki.cardinaux.arithmetique.ensembles_transposition._valeur_image import (
+    transpo_valeur_q, transpo_image)
+from bourbaki.cardinaux.arithmetique.ensembles_transposition._existence import (
+    transposition_existe)
 
-__all__ = ["transpo", "transpo_membre"]
-
-# Les théorèmes de bijection / existence sont ré-exportés s'ils sont clos.
-try:
-    from bourbaki.cardinaux.arithmetique.ensembles_transposition._bijection import (
-        transpo_fonctionnel, transpo_domaine, transpo_injective, transpo_image,
-        transpo_valeur_q, transposition_existe)
-    __all__ += ["transpo_fonctionnel", "transpo_domaine", "transpo_injective",
-                "transpo_image", "transpo_valeur_q", "transposition_existe"]
-except ImportError:
-    pass
+__all__ = ["transpo", "transpo_membre", "transpo_fonctionnel", "transpo_domaine",
+           "transpo_injective", "transpo_image", "transpo_valeur_q",
+           "transposition_existe"]
