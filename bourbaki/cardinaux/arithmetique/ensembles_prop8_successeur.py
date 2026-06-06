@@ -196,6 +196,55 @@ def reduction_back_and_forth(a="A", b="B"):
     return N.loi_deduction(hard, chain)
 
 
+# ═══════════════════════════════════════════════════════════════════════════════
+# CŒUR back-and-forth, CAS 1 (le marqueur est FIXÉ par la bijection) — CLOS
+# ═══════════════════════════════════════════════════════════════════════════════
+def prop8_cas_marqueur_fixe(a="A", b="B", h="h"):
+    """⊢ est_bijection_de(h, A⊔{∅}, B⊔{∅}) ⇒ ((h(*)=*) ⇒ Eq(A, B)).   (CAS 1 ; clos.)
+
+    CAS 1 COMPLET du cœur back-and-forth de la Proposition 8 (cf.
+    ensembles_prop8_coeur) : si une bijection h : A⊔{∅} → B⊔{∅} FIXE le point marqué
+    * = (∅,1), alors A et B sont équipotents.  Preuve : la restriction g = h|(A×{0})
+    est une bijection A×{0} → B×{0} (les 4 conjoints de est_bijection_de établis
+    contre les seules hypothèses « h bijection » + « h(*)=* », le conjoint IMAGE
+    excluant le marqueur des deux côtés par injectivité/fonctionnalité de h), d'où
+    Eq(A×{0}, B×{0}) (S5) puis Eq(A, B) (eq_copies_gauches_implique_eq).
+
+    REPORTÉ pour l'inconditionnel eq_somme_un_implique_eq : le CAS 2 (h(*)=(b₀,0),
+    échange ponctuel a₀↦b₀ au niveau du graphe) et le recollement par cas sur
+    somme_un_plus_point appliqué à h(*)."""
+    from bourbaki.cardinaux.arithmetique.ensembles_prop8_coeur import eq_cas_fixe_implique_eq
+    return eq_cas_fixe_implique_eq(a, b, h)
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# PROPOSITION 8, ASSEMBLÉE MODULO le seul CAS 2 (recollement par cas, CLOS)
+# ═══════════════════════════════════════════════════════════════════════════════
+def eq_somme_un_implique_eq_mod_cas2(a="A", b="B", h="h"):
+    """⊢ H2(A,B) ⇒ (Eq(A⊔{∅}, B⊔{∅}) ⇒ Eq(A, B)).   (cœur back-and-forth modulo CAS 2.)
+
+    Le CŒUR back-and-forth, RECOLLÉ par analyse de cas sur l'image du marqueur :
+    le CAS 1 (h(*)=*) est CLOS (ensembles_prop8_coeur), et le CAS 2 (h(*)∈B×{0},
+    échange a₀↦b₀) est l'unique hypothèse reportée
+        H2(A,B) := (∀h)((bij(h,A⊔{∅},B⊔{∅}) et h(*)∈B×{0}) ⇒ Eq(A×{0},B×{0})).
+    Cf. ensembles_prop8_assemblage.  Réexporté ici pour grouper l'API Prop. 8."""
+    from bourbaki.cardinaux.arithmetique.ensembles_prop8_assemblage import (
+        eq_somme_un_implique_eq_mod_cas2 as _impl)
+    return _impl(a, b, h)
+
+
+def prop8_successeur_injectif_mod_cas2(a="A", b="B", h="h"):
+    """⊢ H2(A,B) ⇒ ((successeur(A) = successeur(B)) ⇒ (Card A = Card B)).
+
+    La PROPOSITION 8 (E.III.3.4, « le successeur cardinal est injectif »), ASSEMBLÉE
+    modulo le SEUL CAS 2 (H2).  Finir la Proposition 8 inconditionnellement ne demande
+    plus QUE de prouver H2 (le cas de l'échange a₀↦b₀).  Cf. ensembles_prop8_assemblage."""
+    from bourbaki.cardinaux.arithmetique.ensembles_prop8_assemblage import (
+        prop8_successeur_injectif_mod_cas2 as _impl)
+    return _impl(a, b, h)
+
+
 __all__ = ["prop1_reciproque_t", "successeur_egale_card_somme",
            "successeur_egal_implique_eq_somme", "eq_implique_eq_somme_un",
-           "reduction_back_and_forth"]
+           "reduction_back_and_forth", "prop8_cas_marqueur_fixe",
+           "eq_somme_un_implique_eq_mod_cas2", "prop8_successeur_injectif_mod_cas2"]
