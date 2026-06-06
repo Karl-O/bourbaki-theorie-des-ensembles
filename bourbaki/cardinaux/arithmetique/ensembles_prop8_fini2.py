@@ -23,6 +23,8 @@ bijection sont certifiés par le noyau.
 """
 from __future__ import annotations
 
+import functools
+
 from bourbaki.logique.formule import (Terme, var, egal, et, non, appartient, existe)
 from bourbaki.logique import noyau_abrege as N
 from bourbaki.ensembles import ensembles_abrege as E
@@ -70,6 +72,7 @@ def _BS(b):
 # ═══════════════════════════════════════════════════════════════════════════════
 # CAS 2 PROUVÉ :  ⊢ H2(A,B)   (la transposition ferme le cas 2)
 # ═══════════════════════════════════════════════════════════════════════════════
+@functools.lru_cache(maxsize=None)
 def cas2_h2(a="A", b="B", h=_H, tau=_TAU):
     """⊢ H2(A,B) = (∀h)((bij(h,A⊔{∅},B⊔{∅}) et h(*)∈B×{0}) ⇒ Eq(A×{0},B×{0})).
 
@@ -108,6 +111,7 @@ def cas2_h2(a="A", b="B", h=_H, tau=_TAU):
 # ═══════════════════════════════════════════════════════════════════════════════
 # PROPOSITION 8 INCONDITIONNELLE :  ⊢ (succ A = succ B) ⇒ (Card A = Card B)
 # ═══════════════════════════════════════════════════════════════════════════════
+@functools.lru_cache(maxsize=None)
 def prop8_successeur_injectif(a="A", b="B", h=_H, tau=_TAU):
     """⊢ (successeur(A) = successeur(B)) ⇒ (Card A = Card B).   (PROPOSITION 8, E.III.3.4.)
 

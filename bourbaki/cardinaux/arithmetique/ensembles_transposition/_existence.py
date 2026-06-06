@@ -10,6 +10,8 @@ S5 prend le TERME τ comme témoin.  C'est la transposition CONSTRUITE et PROUV�
 """
 from __future__ import annotations
 
+import functools
+
 from bourbaki.logique.formule import (Terme, var, egal, et, non, appartient, existe)
 from bourbaki.logique import noyau_abrege as N
 from bourbaki.ensembles import ensembles_abrege as E
@@ -29,6 +31,7 @@ def _t(v):
     return v if isinstance(v, Terme) else var(v)
 
 
+@functools.lru_cache(maxsize=None)
 def transposition_existe(s="S", p="p", q="q"):
     """⊢ (p∈S et q∈S et ¬(p=q)) ⇒ (∃τ)(est_bijection_de(τ, S, S) et τ(q)=p).
 
