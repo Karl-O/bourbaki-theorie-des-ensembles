@@ -10,25 +10,84 @@ et ∃ reste un NŒUD (jamais τ-substitué) → AUCUN gonflement exponentiel.
 `developper_f` donne le pont vers l'assemblage-τ (justification, petits cas).
 """
 from __future__ import annotations
-from dataclasses import dataclass
 
 from bourbaki.assemblage import assemblage as A
 
 
-@dataclass(frozen=True)
+# ── Termes / Formules : immuables, HASH CACHÉ + égalité court-circuitée ────────
+# PERF (cf. note mémoire) : les termes τ-cardinaux sont profondément imbriqués
+# (profondeur 7 ≈ 156k nœuds).  Le hash structurel et l'égalité sont O(taille) ;
+# recalculés à chaque appel (matching MP, conclusion==cible, dicts de substitution),
+# ils dominaient le coût (~min/théorème).  On les rend immuables avec un hash CACHÉ
+# (calculé 1×) et une égalité qui REJETTE en O(1) sur hash différent (cas courant)
+# avant toute descente structurelle.  Sémantique INCHANGÉE (eq structurelle exacte) ;
+# seule la vitesse change.  `__slots__` supprime le __dict__ par nœud (mémoire/accès).
+# Drop-in du dataclass(frozen=True) précédent : mêmes champs, même interface, même
+# égalité ; aucune construction directe Terme()/Formule() hors de ce module, aucun
+# usage de dataclasses.replace/fields → réécriture sûre.
+
 class Terme:
-    tag: str                 # 'var' | 'tau' | 'app'
-    nom: str = ""
-    lieur: str = ""          # variable liée ('tau')
-    args: tuple = ()         # ('tau' : (Formule,)) | ('app' : Terme…)
+    """Terme primitif : 'var' | 'tau' | 'app'.  Immuable (hash caché)."""
+    __slots__ = ("tag", "nom", "lieur", "args", "_hash")
+
+    def __init__(self, tag, nom="", lieur="", args=()):
+        self.tag = tag                   # 'var' | 'tau' | 'app'
+        self.nom = nom
+        self.lieur = lieur               # variable liée ('tau')
+        self.args = args                 # ('tau' : (Formule,)) | ('app' : Terme…)
+        self._hash = None
+
+    def __hash__(self):
+        h = self._hash
+        if h is None:                    # calculé une seule fois (immuable)
+            h = hash((self.tag, self.nom, self.lieur, self.args))
+            self._hash = h
+        return h
+
+    def __eq__(self, other):
+        if self is other:
+            return True
+        if other.__class__ is not Terme:
+            return NotImplemented
+        if hash(self) != hash(other):    # rejet O(1) du cas courant (≠)
+            return False
+        return (self.tag == other.tag and self.nom == other.nom
+                and self.lieur == other.lieur and self.args == other.args)
+
+    def __repr__(self):
+        return f"Terme({self.tag!r}, nom={self.nom!r}, lieur={self.lieur!r}, args={self.args!r})"
 
 
-@dataclass(frozen=True)
 class Formule:
-    tag: str                 # primitifs : '=' 'in' 'non' 'ou' 'exists'
-    lieur: str = ""          # variable liée ('exists')
-    termes: tuple = ()       # arguments Terme ('=', 'in')
-    sous: tuple = ()         # sous-formules ('non','ou','exists')
+    """Formule primitive : '=' 'in' 'non' 'ou' 'exists'.  Immuable (hash caché)."""
+    __slots__ = ("tag", "lieur", "termes", "sous", "_hash")
+
+    def __init__(self, tag, lieur="", termes=(), sous=()):
+        self.tag = tag                   # primitifs : '=' 'in' 'non' 'ou' 'exists'
+        self.lieur = lieur               # variable liée ('exists')
+        self.termes = termes             # arguments Terme ('=', 'in')
+        self.sous = sous                 # sous-formules ('non','ou','exists')
+        self._hash = None
+
+    def __hash__(self):
+        h = self._hash
+        if h is None:
+            h = hash((self.tag, self.lieur, self.termes, self.sous))
+            self._hash = h
+        return h
+
+    def __eq__(self, other):
+        if self is other:
+            return True
+        if other.__class__ is not Formule:
+            return NotImplemented
+        if hash(self) != hash(other):    # rejet O(1) du cas courant (≠)
+            return False
+        return (self.tag == other.tag and self.lieur == other.lieur
+                and self.termes == other.termes and self.sous == other.sous)
+
+    def __repr__(self):
+        return f"Formule({self.tag!r}, lieur={self.lieur!r}, termes={self.termes!r}, sous={self.sous!r})"
 
 
 # ── Termes ────────────────────────────────────────────────────────────────────
