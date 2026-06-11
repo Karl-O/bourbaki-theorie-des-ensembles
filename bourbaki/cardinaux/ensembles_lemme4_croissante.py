@@ -38,6 +38,9 @@ from bourbaki.cardinaux.ensembles_ordinal_cardinal_bon_ordre import (
 )
 from bourbaki.ordre.ensembles_ordre_monotone import est_strictement_croissante
 from bourbaki.cardinaux.ensembles_bien_ordonne_total import bon_ordre_est_total
+from bourbaki.cardinaux.ensembles_segments_construction import (
+    seg as _seg, membre_segment as _membre_seg,
+)
 
 
 def _t(t):
@@ -273,8 +276,72 @@ def lemme_4_cible(R="R", E_set="E", f="f", x="x"):
     return pourtout(x, impl(appartient(vx, vE), Rf(vx, _val(f, vx))))
 
 
+# ════════════════════════════════════════════════════════════════════════════
+#  COROLLAIRE 1 (E.III.2.6) — aucune application strictement croissante n'envoie E
+#  dans un SEGMENT PROPRE  ]←,a[  de E.   (⇒ pas d'iso d'un bon ordre sur un de ses
+#  segments propres : un tel iso enverrait E DANS le segment.)
+# ════════════════════════════════════════════════════════════════════════════
+def _segE(R, E_set, a):
+    """seg(R,E,a) = ]←,a[ = { u∈E | R{u,a} et u≠a }  (ground set E, extrémité a)."""
+    return _seg(R, E_set, a)
+
+
+def cor1_pas_dans_segment(R="R", E_set="E", g="g", a="a", t="t"):
+    """⊢ { est_bien_ordonne(R,E),  a∈E,  g strict crois. E→E }
+            ⊢ ¬ (∀t)( t∈E ⇒ g(t) ∈ seg(R,E,a) ).
+
+    🎯 COR 1 §III.2 : g (strict. croissante E→E) ne peut envoyer E dans le segment
+    PROPRE ]←,a[.  Sinon g(a)∈]←,a[ donne g(a) <_R a, mais Lemme 4 donne a ≤_R g(a),
+    et l'antisymétrie force a=g(a), contredisant g(a)≠a.  (Un iso de E sur ]←,a[
+    enverrait E dans ]←,a[ : impossible — Cor 1.)"""
+    vR, vE, vg, va = var(R), var(E_set), var(g), var(a)
+    Rf = _R_de(R)
+    Sa = _segE(R, E_set, va)
+    vt = var(t)
+    Hmap_f = pourtout(t, impl(appartient(vt, vE), appartient(_val(vg, vt), Sa)))
+    Hmap = N.assume(Hmap_f)
+    Ha = N.assume(appartient(va, vE))                          # a∈E
+
+    # (∀t)(t∈E ⇒ g(t)∈E)  dérivé de Hmap + seg⊂E
+    Ht = N.assume(appartient(vt, vE))
+    gt_in_Sa = N.modus_ponens(Ht, instancie(Hmap, vt))
+    gt_unpack = N.modus_ponens(gt_in_Sa,
+                               equivalence_avant(_membre_seg(R, E_set, va, _val(vg, vt))))
+    gt_in_E = conjonction_elim_gauche(conjonction_elim_gauche(gt_unpack))   # g(t)∈E
+    fdans = N.generalisation(t, N.loi_deduction(appartient(vt, vE), gt_in_E))
+
+    # Lemme 4 (f:=g) : a∈E ⇒ R{a,g(a)}
+    l4 = lemme_4(R, E_set, g)
+    l4 = _decharge(l4, _f_dans_E(vg, vE), fdans)               # décharge f:E→E
+    ga = _val(vg, va)
+    Rag = N.modus_ponens(Ha, instancie(l4, va))                # R{a, g(a)}
+
+    # g(a)∈]←,a[ ⇒ R{g(a),a} et g(a)≠a
+    ga_in_Sa = N.modus_ponens(Ha, instancie(Hmap, va))
+    ga_unpack = N.modus_ponens(ga_in_Sa,
+                               equivalence_avant(_membre_seg(R, E_set, va, ga)))
+    Rga = conjonction_elim_droite(conjonction_elim_gauche(ga_unpack))       # R{g(a),a}
+    ga_ne_a = conjonction_elim_droite(ga_unpack)                            # g(a)≠a
+
+    # antisymétrie : a=g(a) ; contradiction avec g(a)≠a
+    anti = _antisym_de_bo(E.est_bien_ordonne(Rf, vE))
+    anti_inst = instancie(instancie(anti, va), ga)
+    a_eq_ga = N.modus_ponens(conjonction_intro(Rag, Rga), anti_inst)        # a=g(a)
+    ga_eq_a = N.modus_ponens(a_eq_ga, symetrie(va, ga))                     # g(a)=a
+    contra = _ex_falso(ga_eq_a, ga_ne_a, non(Hmap_f))                       # ¬Hmap  [Hmap,…]
+    return _refute_self(N.loi_deduction(Hmap_f, contra))                    # ¬Hmap  [bo,a∈E,scr]
+
+
+def cor1_pas_dans_segment_cible(R="R", E_set="E", g="g", a="a", t="t"):
+    """ÉNONCÉ-cible (test miroir) de cor1_pas_dans_segment."""
+    vE, vt, va = var(E_set), var(t), var(a)
+    Sa = _segE(R, E_set, va)
+    return non(pourtout(t, impl(appartient(vt, vE), appartient(_val(g, vt), Sa))))
+
+
 __all__ = [
     "A_bad", "axiome_A", "theorie_A", "A_membre", "A_inclus_E",
     "A_vide", "lemme_4", "lemme_4_cible",
+    "cor1_pas_dans_segment", "cor1_pas_dans_segment_cible",
     "_val", "_strict", "_coup",
 ]

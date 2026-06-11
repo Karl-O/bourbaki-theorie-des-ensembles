@@ -44,6 +44,18 @@ def test_lemme_4():
     assert scr in l4.hypotheses                       # stricte croissance réellement requise
 
 
+def test_cor1_pas_dans_segment():
+    """{ bo, a∈E, g strict crois. E→E } ⊢ ¬(∀t)(t∈E ⇒ g(t)∈]←,a[)  (Cor 1 §III.2)."""
+    c1 = L.cor1_pas_dans_segment()
+    assert not c1.est_clos
+    assert len(c1.hypotheses) == 3
+    assert c1.conclusion == L.cor1_pas_dans_segment_cible()
+    assert c1.conclusion not in c1.hypotheses
+    # le bon ordre CANONIQUE est bien l'hypothèse (chainable)
+    Rf = L._R_de("R")
+    assert E.est_bien_ordonne(Rf, var("E")) in c1.hypotheses
+
+
 def test_parametrable():
     l4 = L.lemme_4("Rp", "F", "g")
     assert len(l4.hypotheses) == 3
