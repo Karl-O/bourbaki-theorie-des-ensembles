@@ -26,7 +26,7 @@ from bourbaki.logique.formule import (
 from bourbaki.logique import noyau_abrege as N
 from bourbaki.ensembles import ensembles_abrege as E
 from bourbaki.logique.tactiques.tactiques_abrege2 import (
-    conjonction_elim_gauche, conjonction_elim_droite, instancie, cas,
+    conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite, instancie, cas,
     equivalence_avant,
 )
 from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie
@@ -34,7 +34,7 @@ from bourbaki.ensembles.base.ensembles_couples import (
     membre_paire_gauche, membre_paire_droite,
 )
 from bourbaki.cardinaux.ensembles_ordinal_cardinal_bon_ordre import (
-    plus_petit_de_bon_ordre,
+    bon_ordre_donne_clause_plus_petit,
 )
 
 
@@ -129,10 +129,13 @@ def bon_ordre_est_total(R="R", E_set="E", x="x", y="y"):
     vE, vx, vy = _t(E_set), var(x), var(y)
     P = E.paire(vx, vy)
 
-    # plus petit élément de la paire {x,y}
-    pp = plus_petit_de_bon_ordre(Rf, E_set, P)                  # {bo, {x,y}⊂E, {x,y}≠∅} ⊢ ∃a(...)
-    pp = _decharge(pp, inclus(P, vE), _paire_incluse(vx, vy, vE))   # décharge {x,y}⊂E
-    pp = _decharge(pp, non(egal(P, E.VIDE)), _paire_non_vide(vx, vy))  # décharge {x,y}≠∅
+    # plus petit élément de la paire {x,y} — via la clause CANONIQUE (binder X standard,
+    # bo reste est_bien_ordonne(R,E) canonique, chainable), instanciée au TERME {x,y}.
+    bo = E.est_bien_ordonne(Rf, vE)                            # est_bien_ordonne(R,E) CANONIQUE
+    clause = N.modus_ponens(N.assume(bo), bon_ordre_donne_clause_plus_petit(Rf, E_set))
+    inst = instancie(clause, P)                                # ({x,y}⊂E et {x,y}≠∅) ⇒ ∃a(...)
+    prem = conjonction_intro(_paire_incluse(vx, vy, vE), _paire_non_vide(vx, vy))
+    pp = N.modus_ponens(prem, inst)                            # {bo, x∈E, y∈E} ⊢ ∃a(...)
 
     # témoin m = plus petit de {x,y}
     va = var("a")
