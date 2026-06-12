@@ -176,4 +176,29 @@ def maillon_final_h_plus(E_set="E", R="R", F_set="F", Rp="Rp"):
     return mf
 
 
+def maillon_final_h_plus2(E_set="E", R="R", F_set="F", Rp="Rp"):
+    """maillon_final_h_plus avec les COHÉRENCES (compatibilite_inverse_h /
+    compatibilite_ordre_h) et la FONCTIONNALITÉ de h déchargées sur les « TÉMOINS
+    COMMUNS » (= Lemme 1 §III.2), via compatibilite_inverse_depuis_temoin /
+    compatibilite_ordre_depuis_temoin / fonctionnel_depuis_temoin.
+
+    🎯 RÉDUIT la trichotomie (saine) à ses SEULES hypothèses IRRÉDUCTIBLES :
+      • les 3 TÉMOINS COMMUNS (= Lemme 1 §III.2 : deux couples de h sont couverts par UN
+        iso de segment — le cœur Cantor–Bernstein, honnêtement REPORTÉ) ;
+      • la MAXIMALITÉ (dom h=E ou pr₂ h=F) ;  • les 2 SEGMENTS (dom h, pr₂ h).
+    Tout le reste de la trichotomie est mécaniquement assemblé.  theorie=22, rien postulé."""
+    import bourbaki.cardinaux.ensembles_trichotomie_h_iso as HI
+    import bourbaki.cardinaux.ensembles_trichotomie_coherences as COH
+    mf = maillon_final_h_plus(E_set, R, F_set, Rp)
+    # décharges gardées : on ne décharge QUE si la conclusion du lemme == l'hypothèse.
+    paires = [
+        (HI.compatibilite_inverse_h(E_set, R, F_set, Rp), COH.compatibilite_inverse_depuis_temoin(E_set, R, F_set, Rp)),
+        (HI.compatibilite_ordre_h(E_set, R, F_set, Rp), COH.compatibilite_ordre_depuis_temoin(E_set, R, F_set, Rp)),
+    ]
+    for hyp_form, preuve in paires:
+        if hyp_form in set(mf.hypotheses) and preuve.conclusion == hyp_form:
+            mf = _decharge(mf, hyp_form, preuve)
+    return mf
+
+
 __all__ = ["maillon_final", "maillon_final_cible"]

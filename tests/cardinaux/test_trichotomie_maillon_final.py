@@ -78,5 +78,19 @@ def test_maillon_final_h_plus_resserre_au_coeur():
     assert HI.compatibilite_ordre_h() in t.hypotheses
 
 
+def test_maillon_final_h_plus2_reduit_au_lemme1():
+    """maillon_final_h_plus2 : les cohérences (compatibilite_inverse_h/ordre_h) sont
+    déchargées sur les TÉMOINS COMMUNS (= Lemme 1 §III.2).  La trichotomie (saine) est
+    réduite à ses hypothèses IRRÉDUCTIBLES : Lemme 1 + maximalité + segments (+func)."""
+    import bourbaki.cardinaux.ensembles_trichotomie_h_iso as HI
+    t = MF.maillon_final_h_plus2()
+    assert not t.est_clos
+    assert t.conclusion == MF.maillon_final_cible()
+    assert t.conclusion not in t.hypotheses
+    # les cohérences (forme intermédiaire) ne sont plus là : déchargées sur les témoins
+    assert HI.compatibilite_inverse_h() not in t.hypotheses
+    assert HI.compatibilite_ordre_h() not in t.hypotheses
+
+
 def test_theorie_intacte():
     assert len(E.theorie_ensembles().axiomes) == 22
