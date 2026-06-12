@@ -67,10 +67,11 @@ def _couple_dans(t, u, G):
 def _val(f, x):
     """f(x) au sens Bourbaki = valeur du graphe f en x.
 
-    Le liant interne est forcé à « yv » (lettre fraîche, distincte des variables
-    de quantification x, y, z, t) pour éviter toute collision de capture lorsque
-    f(y) figure DANS une formule quantifiée sur y (« verrou liant valeur »)."""
-    return E.valeur(_terme(f), _terme(x), b="yv")
+    Le liant interne est forcé à « j » : LETTRE SIMPLE fraîche (JAMAIS utilisée comme
+    liant de quantification dans le projet — audit), donc (a) pas de collision de capture
+    quand f(y) figure dans une formule quantifiée, et (b) alpha_tau-COMPATIBLE (le pont
+    τ_valeur ↔ τ_y, impossible avec « yv » multi-caractères que tau() refuse)."""
+    return E.valeur(_terme(f), _terme(x), b="j")
 
 
 def _strict(t, u, G):

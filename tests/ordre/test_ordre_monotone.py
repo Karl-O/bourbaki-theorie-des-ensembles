@@ -18,7 +18,7 @@ def _couple_dans(t, u, G):
 
 
 def _val(f, x):
-    return E.valeur(f, x, b="yv")
+    return E.valeur(f, x, b="j")
 
 
 def _strict(t, u, G):

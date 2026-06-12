@@ -91,8 +91,9 @@ def _f_dans_E(f, E_set, t="t"):
 
 
 def _val(f, x):
-    """f(x) au sens Bourbaki, liant interne « yv » (cohérent avec ordre_monotone._val)."""
-    return E.valeur(_t(f), _t(x), b="yv")
+    """f(x) au sens Bourbaki, liant interne « j » LETTRE SIMPLE (cohérent avec
+    ordre_monotone._val ; alpha_tau-compatible, jamais liant de quantif — audit)."""
+    return E.valeur(_t(f), _t(x), b="j")
 
 
 def _coup(a, b, R):

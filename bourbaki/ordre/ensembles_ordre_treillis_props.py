@@ -73,8 +73,9 @@ def _couple_dans(t, u, G):
 
 
 def _val(f, x):
-    """f(x) au sens Bourbaki, liant frais « yv » (cf. ensembles_ordre_monotone)."""
-    return E.valeur(_terme(f), _terme(x), b="yv")
+    """f(x) au sens Bourbaki, liant frais « j » LETTRE SIMPLE (cf. ensembles_ordre_monotone ;
+    alpha_tau-compatible, jamais liant de quantif)."""
+    return E.valeur(_terme(f), _terme(x), b="j")
 
 
 def _strict(t, u, G):
