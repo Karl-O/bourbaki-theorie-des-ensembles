@@ -108,7 +108,7 @@ def val_dans_F(E_set="E", R="R", F_set="F", Rp="Rp",
         appartient(vp, vE),
         E.est_segment(vS, Rf, vE)),
         E.est_segment(vT, Rpf, vF)),
-        V.est_isomorphisme_ordre(vphi, vS, vT, Rf, Rpf)),
+        V.est_isomorphisme_ordre(vphi, vS, vT, Rf, Rpf, "px", "pw")),
         appartient(vp, vS))
     return pourtout(p, pourtout(S, pourtout(T, pourtout(phi,
         impl(premisse, appartient(E.valeur(vphi, vp), vF))))))
@@ -127,7 +127,7 @@ def _coeur_temoin(E_set, R, F_set, Rp, x_t, v_t, S, T, phi):
     return et(et(et(et(
         E.est_segment(vS, Rf, vE),
         E.est_segment(vT, Rpf, vF)),
-        V.est_isomorphisme_ordre(vphi, vS, vT, Rf, Rpf)),
+        V.est_isomorphisme_ordre(vphi, vS, vT, Rf, Rpf, "px", "pw")),
         appartient(x_t, vS)),
         egal(v_t, E.valeur(vphi, x_t)))
 
@@ -204,7 +204,7 @@ def dom_h_initial_sous_val(E_set="E", R="R", F_set="F", Rp="Rp",
     preuves = [
         (E.est_segment(vS, Rf, vE), Hseg_S),
         (E.est_segment(vT, Rpf, vF), Hseg_T),
-        (V.est_isomorphisme_ordre(vphi, vS, vT, Rf, Rpf), Hiso),
+        (V.est_isomorphisme_ordre(vphi, vS, vT, Rf, Rpf, "px", "pw"), Hiso),
         (appartient(vy, vS), Hy_in_S),
         (appartient(vy, vE), Hy_in_E),
         (appartient(vvv, vF), Hvv_F),

@@ -65,7 +65,7 @@ def test_couple_iso_dans_h():
     vS, vT, vphi, vu, vv = var("S"), var("T"), var("phi"), var("u"), var("v")
     assert E.est_segment(vS, Rf, var("E")) in cid.hypotheses
     assert E.est_segment(vT, Rpf, var("F")) in cid.hypotheses
-    assert V.est_isomorphisme_ordre(vphi, vS, vT, Rf, Rpf) in cid.hypotheses
+    assert V.est_isomorphisme_ordre(vphi, vS, vT, Rf, Rpf, "px", "pw") in cid.hypotheses
     assert egal(vv, E.valeur(vphi, vu)) in cid.hypotheses
 
 

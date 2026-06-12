@@ -284,7 +284,7 @@ def extension_iso_hypotheses(E_set="E", R="R", F_set="F", Rp="Rp",
     return [
         E.est_segment(vS, Rf, vE),
         E.est_segment(vT, Rpf, vF),
-        V.est_isomorphisme_ordre(vphi, vS, vT, Rf, Rpf),
+        V.est_isomorphisme_ordre(vphi, vS, vT, Rf, Rpf, "px", "pw"),
         appartient(va, vS),
         appartient(va, vE),
         appartient(vb, vF),

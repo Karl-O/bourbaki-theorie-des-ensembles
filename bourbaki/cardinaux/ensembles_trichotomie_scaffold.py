@@ -98,7 +98,7 @@ def _h_parts(E_set, R, F_set, Rp, u, v, S="S", T="T", phi="phi"):
     coeur = et(et(et(et(
         E.est_segment(vS, Rf, vE),
         E.est_segment(vT, Rpf, vF)),
-        V.est_isomorphisme_ordre(vphi, vS, vT, Rf, Rpf)),
+        V.est_isomorphisme_ordre(vphi, vS, vT, Rf, Rpf, "px", "pw")),
         appartient(vu, vS)),
         egal(vv, E.valeur(vphi, vu)))
     temoin = existe(S, existe(T, existe(phi, coeur)))
@@ -227,7 +227,7 @@ def couple_iso_dans_h(E_set="E", R="R", F_set="F", Rp="Rp",
 
     Hseg_S = N.assume(E.est_segment(vS, Rf, vE))
     Hseg_T = N.assume(E.est_segment(vT, Rpf, vF))
-    Hiso = N.assume(V.est_isomorphisme_ordre(vphi, vS, vT, Rf, Rpf))
+    Hiso = N.assume(V.est_isomorphisme_ordre(vphi, vS, vT, Rf, Rpf, "px", "pw"))
     Hu_S = N.assume(appartient(vu, vS))
     Hu_E = N.assume(appartient(vu, vE))                   # u∈E
     Hv_F = N.assume(appartient(vv, vF))                   # v∈F
@@ -239,7 +239,7 @@ def couple_iso_dans_h(E_set="E", R="R", F_set="F", Rp="Rp",
         return et(et(et(et(
             E.est_segment(sS, Rf, vE),
             E.est_segment(sT, Rpf, vF)),
-            V.est_isomorphisme_ordre(sphi, sS, sT, Rf, Rpf)),
+            V.est_isomorphisme_ordre(sphi, sS, sT, Rf, Rpf, "px", "pw")),
             appartient(vu, sS)),
             egal(vv, E.valeur(sphi, vu)))
 
