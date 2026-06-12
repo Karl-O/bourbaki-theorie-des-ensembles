@@ -27,12 +27,12 @@ def test_la_capture_existe_en_forme_defaut():
 
 
 def test_canonique_pas_de_capture():
-    """La forme CANONIQUE (xo,yo) : f(yo)=τ_y((yo,y)∈f) correct ; la capture ABSENTE."""
+    """La forme CANONIQUE (x,w) : f(w)=τ_y((w,y)∈f) correct ; la capture ABSENTE."""
     co = C.compatible_ordre_canon(var("f"), var("E"), _Rf("R"), _Rf("Rp"))
-    correct_fyo = E.valeur(var("f"), var("yo"))    # τ_y((yo,y)∈f) — VALEUR correcte
+    correct_fw = E.valeur(var("f"), var(C.ISO_Y))  # τ_y((w,y)∈f) — VALEUR correcte
     capture_fy = E.valeur(var("f"), var("y"))      # τ_y((y,y)∈f)  — la capture
     s = repr(co)
-    assert repr(correct_fyo) in s                  # la valeur correcte de f(yo) figure
+    assert repr(correct_fw) in s                   # la valeur correcte de f(w) figure
     assert repr(capture_fy) not in s               # la forme capturée N'apparaît PAS
 
 

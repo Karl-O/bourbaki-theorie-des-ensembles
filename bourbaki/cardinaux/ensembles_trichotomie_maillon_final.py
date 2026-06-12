@@ -112,4 +112,45 @@ def maillon_final_cible(E_set="E", R="R", F_set="F", Rp="Rp"):
     return C.trichotomie_ordinaux_canon(_t(E_set), _R_de(R), _t(F_set), _R_de(Rp))
 
 
+def maillon_final_h(E_set="E", R="R", F_set="F", Rp="Rp"):
+    """⊢ trichotomie_ordinaux_canon(E,R,F,Rp) avec les 2 hypothèses d'iso DÉCHARGÉES sur
+    l'iso maximal h = h_iso_max : on instancie maillon_final à D:=dom h, I:=pr₂ h, h:=h,
+    hi:=h⁻¹, et on décharge
+
+      • iso_canon(h, dom h, pr₂ h, R, Rp)   par  h_est_isomorphisme_ordre_sous_hyp
+      • iso_canon(h⁻¹, pr₂ h, dom h, Rp, R) par  reciproque_isomorphisme_ordre (keystone)
+
+    Il RESTE en hypothèses (le vrai gap, plus profond) : les 4 conjoints de h_iso
+    (func h, compatibilite_inverse_h, compatibilite_ordre_h, surjectivité) + les 2 de
+    reciproque (func h, dom h=dom h) + maximalité (dom h=E ou pr₂ h=F) + dom/pr₂ segments.
+    Ceci CHAÎNE le maillon final aux pièces commitées — preuve que la cible saine se
+    construit depuis l'existant.  theorie=22, rien postulé."""
+    import bourbaki.cardinaux.ensembles_trichotomie_scaffold as TS
+    import bourbaki.cardinaux.ensembles_trichotomie_h_iso as HI
+    import bourbaki.cardinaux.ensembles_iso_ordre_reciproque as RE
+    Rf, Rpf = _R_de(R), _R_de(Rp)
+    vE, vF = _t(E_set), _t(F_set)
+    h = TS.h_iso_max(E_set, R, F_set, Rp)
+    domh, imgh = E.dom(h), E.img(h)
+    hi = E.reciproque(h)
+
+    mf = maillon_final(vE, R, vF, Rp, domh, imgh, h, hi)
+    # décharge hyp 1 : iso_canon(h, dom h, pr₂ h, R, Rp)
+    hyp1 = C.est_isomorphisme_ordre_canon(h, domh, imgh, Rf, Rpf)
+    h_iso = HI.h_est_isomorphisme_ordre_sous_hyp(E_set, R, F_set, Rp)
+    assert h_iso.conclusion == hyp1, "h_iso ne conclut pas la forme attendue"
+    mf = _decharge(mf, hyp1, h_iso)
+    # décharge hyp 2 : iso_canon(h⁻¹, pr₂ h, dom h, Rp, R)
+    hyp2 = C.est_isomorphisme_ordre_canon(hi, imgh, domh, Rpf, Rf)
+    recip = RE.reciproque_isomorphisme_ordre(h, domh, imgh, Rf, Rpf)
+    assert recip.conclusion == hyp2, "reciproque ne conclut pas la forme attendue"
+    mf = _decharge(mf, hyp2, recip)
+    return mf
+
+
+def _decharge(thm, hyp, preuve_hyp):
+    """De Γ∪{H}⊢C et Δ⊢H, déduit Γ∪Δ⊢C."""
+    return N.modus_ponens(preuve_hyp, N.loi_deduction(hyp, thm))
+
+
 __all__ = ["maillon_final", "maillon_final_cible"]

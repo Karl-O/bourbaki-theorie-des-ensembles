@@ -38,9 +38,15 @@ from __future__ import annotations
 from bourbaki.ordre import ensembles_ordre_vocab as V
 from bourbaki.ordre import ensembles_ordinaux as O
 
-# Binders d'ordre canoniques : ≠ "y" (τ de valeur), ≠ "w" (slot de composition_valeur).
-ISO_X = "xo"
-ISO_Y = "yo"
+# Binders d'ordre canoniques : ≠ "y" (le τ interne de valeur, source de la capture).
+# On choisit (x, w) — la convention DÉJÀ utilisée par les modules clés iso-ordre
+# (h_est_isomorphisme_ordre_sous_hyp, reciproque_isomorphisme_ordre) — de sorte que
+# leurs conclusions CHAÎNENT directement avec la cible canonique (aucune ré-énonciation).
+# NB : « w » entre en collision avec un slot interne de composition_valeur ; cela
+# n'affecte QUE la preuve de composee_isomorphisme_ordre (qui reste en (x, x2)), PAS les
+# notions iso-ordre elles-mêmes (compatible_ordre n'utilise pas composition_valeur).
+ISO_X = "x"
+ISO_Y = "w"
 
 
 def compatible_ordre_canon(f, e, R, Rp):

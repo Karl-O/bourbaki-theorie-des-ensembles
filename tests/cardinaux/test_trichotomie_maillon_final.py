@@ -39,5 +39,25 @@ def test_les_5_hypotheses_sont_structurelles():
         assert h in t.hypotheses
 
 
+def test_maillon_final_h_chaine_les_pieces_commitees():
+    """maillon_final_h : la cible SAINE est dérivée de l'iso maximal h, avec les 2
+    hypothèses d'iso DÉCHARGÉES via h_est_isomorphisme_ordre_sous_hyp + reciproque
+    (keystone).  Il reste les hypothèses PLUS PROFONDES (cohérences/témoins, surjectivité,
+    func, dom, maximalité, segments) — le vrai gap restant."""
+    t = MF.maillon_final_h()
+    assert not t.est_clos
+    # conclusion = la cible SAINE (anti-capture)
+    assert t.conclusion == MF.maillon_final_cible()
+    assert t.conclusion not in t.hypotheses
+    # les 2 hypothèses d'iso (h, h⁻¹) ne sont PLUS là (déchargées sur les pièces commitées)
+    import bourbaki.cardinaux.ensembles_trichotomie_scaffold as TS
+    from bourbaki.cardinaux.ensembles_trichotomie_maillon_final import _R_de
+    from bourbaki.ordre import ensembles_iso_ordre_canon as C
+    h = TS.h_iso_max("E", "R", "F", "Rp")
+    Rf, Rpf = _R_de("R"), _R_de("Rp")
+    iso_h = C.est_isomorphisme_ordre_canon(h, E.dom(h), E.img(h), Rf, Rpf)
+    assert iso_h not in t.hypotheses          # déchargée (n'est plus une hypothèse)
+
+
 def test_theorie_intacte():
     assert len(E.theorie_ensembles().axiomes) == 22
