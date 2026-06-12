@@ -134,17 +134,20 @@ def maillon_final_h(E_set="E", R="R", F_set="F", Rp="Rp"):
     domh, imgh = E.dom(h), E.img(h)
     hi = E.reciproque(h)
 
-    mf = maillon_final(vE, R, vF, Rp, domh, imgh, h, hi)
-    # décharge hyp 1 : iso_canon(h, dom h, pr₂ h, R, Rp)
     hyp1 = C.est_isomorphisme_ordre_canon(h, domh, imgh, Rf, Rpf)
+    hyp2 = C.est_isomorphisme_ordre_canon(hi, imgh, domh, Rpf, Rf)
     h_iso = HI.h_est_isomorphisme_ordre_sous_hyp(E_set, R, F_set, Rp)
     assert h_iso.conclusion == hyp1, "h_iso ne conclut pas la forme attendue"
-    mf = _decharge(mf, hyp1, h_iso)
-    # décharge hyp 2 : iso_canon(h⁻¹, pr₂ h, dom h, Rp, R)
-    hyp2 = C.est_isomorphisme_ordre_canon(hi, imgh, domh, Rpf, Rf)
+    # reciproque a iso(h,...)=hyp1 PARMI ses hypotheses → la décharger aussi via h_iso,
+    # sinon le maillon réintroduirait iso(h,...) comme hypothèse.
     recip = RE.reciproque_isomorphisme_ordre(h, domh, imgh, Rf, Rpf)
     assert recip.conclusion == hyp2, "reciproque ne conclut pas la forme attendue"
-    mf = _decharge(mf, hyp2, recip)
+    assert hyp1 in recip.hypotheses, "reciproque devrait porter iso(h,...) en hypothese"
+    recip = _decharge(recip, hyp1, h_iso)                 # iso(h,...) déchargé de reciproque
+
+    mf = maillon_final(vE, R, vF, Rp, domh, imgh, h, hi)
+    mf = _decharge(mf, hyp1, h_iso)                        # décharge hyp 1
+    mf = _decharge(mf, hyp2, recip)                        # décharge hyp 2 (sans réintroduire iso(h))
     return mf
 
 
