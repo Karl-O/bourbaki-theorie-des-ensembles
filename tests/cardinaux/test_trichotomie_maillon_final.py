@@ -59,5 +59,24 @@ def test_maillon_final_h_chaine_les_pieces_commitees():
     assert iso_h not in t.hypotheses          # déchargée (n'est plus une hypothèse)
 
 
+def test_maillon_final_h_plus_resserre_au_coeur():
+    """maillon_final_h_plus : la cible SAINE dérivée de h, avec EN PLUS la surjectivité
+    (CLOS) et les égalités réflexives déchargées.  Il ne reste que les 6 hypothèses
+    SUBSTANTIELLES — dont le CŒUR DUR (compatibilite_inverse_h, compatibilite_ordre_h
+    = Lemme 1 §III.2)."""
+    import bourbaki.cardinaux.ensembles_trichotomie_h_iso as HI
+    import bourbaki.cardinaux.ensembles_trichotomie_coherences as COH
+    t = MF.maillon_final_h_plus()
+    assert not t.est_clos
+    assert t.conclusion == MF.maillon_final_cible()
+    assert t.conclusion not in t.hypotheses
+    assert len(t.hypotheses) <= 6                      # resserré (depuis 8)
+    # la surjectivité (CLOS) est bien déchargée
+    assert COH.surjectivite_h_image().conclusion not in t.hypotheses
+    # le cœur dur reste (Lemme 1 §III.2) — honnêtement reporté
+    assert HI.compatibilite_inverse_h() in t.hypotheses
+    assert HI.compatibilite_ordre_h() in t.hypotheses
+
+
 def test_theorie_intacte():
     assert len(E.theorie_ensembles().axiomes) == 22

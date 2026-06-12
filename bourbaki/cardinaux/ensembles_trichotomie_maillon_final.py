@@ -156,4 +156,24 @@ def _decharge(thm, hyp, preuve_hyp):
     return N.modus_ponens(preuve_hyp, N.loi_deduction(hyp, thm))
 
 
+def maillon_final_h_plus(E_set="E", R="R", F_set="F", Rp="Rp"):
+    """maillon_final_h avec EN PLUS les hypothèses INCONDITIONNELLES déchargées :
+      • la SURJECTIVITÉ de h sur pr₂ h  (surjectivite_h_image, CLOS) ;
+      • les égalités RÉFLEXIVES dom h=dom h / image h=image h  (N.reflexivite).
+    Resserre le gap aux SEULES hypothèses substantielles : maximalité (dom h=E ou pr₂ h=F),
+    cohérences compatibilite_inverse_h / compatibilite_ordre_h (= Lemme 1 §III.2, cœur dur),
+    fonctionnalité de h, et les segments dom h / pr₂ h.  theorie=22, rien postulé."""
+    import bourbaki.cardinaux.ensembles_trichotomie_coherences as COH
+    mf = maillon_final_h(E_set, R, F_set, Rp)
+    # surjectivité (CLOS)
+    surj = COH.surjectivite_h_image(E_set, R, F_set, Rp)
+    if surj.conclusion in set(mf.hypotheses):
+        mf = _decharge(mf, surj.conclusion, surj)
+    # égalités réflexives (t = t)
+    for h in list(mf.hypotheses):
+        if h.tag == "=" and h.termes[0] == h.termes[1]:
+            mf = _decharge(mf, h, N.reflexivite(h.termes[0]))
+    return mf
+
+
 __all__ = ["maillon_final", "maillon_final_cible"]
