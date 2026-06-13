@@ -15,7 +15,7 @@ ici au niveau du noyau).  theorie_ensembles() INCHANGÉE = 22 ; aucun axiome ajo
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import Terme, var, appartient, et, ou
+from bourbaki.logique.formule import Terme, var, appartient, et, ou, non
 from bourbaki.logique import noyau_abrege as N
 from bourbaki.ensembles import ensembles_abrege as E
 from bourbaki.ensembles.ensembles_theoremes import _instance_reunion, egalite_par_extension
@@ -24,7 +24,7 @@ from bourbaki.logique.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
     et_congruence_droite, et_congruence_gauche, ou_congruence,
     equivalence_transitivite, equivalence_symetrie, assoc_et, et_ou_distrib,
-    cas, syllogisme,
+    cas, syllogisme, demorgan_ou, demorgan_et, equiv_neg,
 )
 
 
@@ -37,6 +37,28 @@ def _instance_inter(a, b, z):
     from bourbaki.logique.tactiques.tactiques_abrege2 import instancie
     ax = N.axiome(E.theorie_ensembles(), E.AXIOME_INTER)
     return instancie(instancie(instancie(ax, a), b), z)
+
+
+def _instance_diff(e, x, z):
+    """⊢ (z ∈ e∖x) ⇔ (z∈e et ¬(z∈x))   (instance de AXIOME_DIFF aux termes e,x,z)."""
+    from bourbaki.logique.tactiques.tactiques_abrege2 import instancie
+    ax = N.axiome(E.theorie_ensembles(), E.AXIOME_DIFF)
+    return instancie(instancie(instancie(ax, e), x), z)
+
+
+def _et_et_distrib(p, q, r):
+    """⊢ (P et (Q et R)) ⇔ ((P et Q) et (P et R))   (P dupliqué)."""
+    hf = N.assume(et(p, et(q, r)))
+    pp, qr = conjonction_elim_gauche(hf), conjonction_elim_droite(hf)
+    fwd = N.loi_deduction(et(p, et(q, r)), conjonction_intro(
+        conjonction_intro(pp, conjonction_elim_gauche(qr)),
+        conjonction_intro(pp, conjonction_elim_droite(qr))))
+    hb = N.assume(et(et(p, q), et(p, r)))
+    pq, pr = conjonction_elim_gauche(hb), conjonction_elim_droite(hb)
+    bwd = N.loi_deduction(et(et(p, q), et(p, r)), conjonction_intro(
+        conjonction_elim_gauche(pq),
+        conjonction_intro(conjonction_elim_droite(pq), conjonction_elim_droite(pr))))
+    return conjonction_intro(fwd, bwd)
 
 
 def _refl_equiv(f):
@@ -240,9 +262,47 @@ def distributivite_reunion_intersection(a="A", b="B", c="C"):
                                  E.intersection(E.reunion(va, vb), E.reunion(va, vc)))
 
 
+def de_morgan_complement_reunion(e="E", a="A", b="B"):
+    """⊢ E∖(A∪B) = (E∖A)∩(E∖B)   (De Morgan, complément relatif, E.II.1)."""
+    vE, va, vb, vz = _t(e), _t(a), _t(b), var("z")
+    zE, nA, nB = appartient(vz, vE), non(appartient(vz, va)), non(appartient(vz, vb))
+    zA, zB = appartient(vz, va), appartient(vz, vb)
+    char_u = N.generalisation("z", equivalence_transitivite(equivalence_transitivite(equivalence_transitivite(
+        _instance_diff(vE, E.reunion(va, vb), vz),
+        et_congruence_droite(zE, equiv_neg(_instance_reunion(va, vb, vz)))),
+        et_congruence_droite(zE, demorgan_ou(zA, zB))),
+        _et_et_distrib(zE, nA, nB)))
+    DEA, DEB = E.difference(vE, va), E.difference(vE, vb)
+    char_v = N.generalisation("z", equivalence_transitivite(equivalence_transitivite(
+        _instance_inter(DEA, DEB, vz),
+        et_congruence_gauche(_instance_diff(vE, va, vz), appartient(vz, DEB))),
+        et_congruence_droite(et(zE, nA), _instance_diff(vE, vb, vz))))
+    return egalite_par_extension(char_u, char_v, E.difference(vE, E.reunion(va, vb)),
+                                 E.intersection(DEA, DEB))
+
+
+def de_morgan_complement_intersection(e="E", a="A", b="B"):
+    """⊢ E∖(A∩B) = (E∖A)∪(E∖B)   (De Morgan, complément relatif, E.II.1)."""
+    vE, va, vb, vz = _t(e), _t(a), _t(b), var("z")
+    zE, nA, nB = appartient(vz, vE), non(appartient(vz, va)), non(appartient(vz, vb))
+    zA, zB = appartient(vz, va), appartient(vz, vb)
+    char_u = N.generalisation("z", equivalence_transitivite(equivalence_transitivite(equivalence_transitivite(
+        _instance_diff(vE, E.intersection(va, vb), vz),
+        et_congruence_droite(zE, equiv_neg(_instance_inter(va, vb, vz)))),
+        et_congruence_droite(zE, demorgan_et(zA, zB))),
+        et_ou_distrib(zE, nA, nB)))
+    DEA, DEB = E.difference(vE, va), E.difference(vE, vb)
+    char_v = N.generalisation("z", equivalence_transitivite(
+        _instance_reunion(DEA, DEB, vz),
+        ou_congruence(_instance_diff(vE, va, vz), _instance_diff(vE, vb, vz))))
+    return egalite_par_extension(char_u, char_v, E.difference(vE, E.intersection(va, vb)),
+                                 E.reunion(DEA, DEB))
+
+
 __all__ = [
     "associativite_reunion", "associativite_intersection",
     "idempotence_reunion", "idempotence_intersection",
     "absorption_reunion", "absorption_intersection",
     "distributivite_intersection_reunion", "distributivite_reunion_intersection",
+    "de_morgan_complement_reunion", "de_morgan_complement_intersection",
 ]

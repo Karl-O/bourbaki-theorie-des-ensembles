@@ -7,8 +7,8 @@ from bourbaki.logique.formule import var, egal
 from bourbaki.ensembles import ensembles_abrege as E
 import bourbaki.ensembles.ensembles_algebre_booleenne as M
 
-A, B, C = var("A"), var("B"), var("C")
-U, I = E.reunion, E.intersection
+A, B, C, Ev = var("A"), var("B"), var("C"), var("E")
+U, I, D = E.reunion, E.intersection, E.difference
 
 
 def _check(t, lhs, rhs):
@@ -47,6 +47,14 @@ def test_distributivite_intersection_reunion():
 
 def test_distributivite_reunion_intersection():
     _check(M.distributivite_reunion_intersection(), U(A, I(B, C)), I(U(A, B), U(A, C)))
+
+
+def test_de_morgan_complement_reunion():
+    _check(M.de_morgan_complement_reunion(), D(Ev, U(A, B)), I(D(Ev, A), D(Ev, B)))
+
+
+def test_de_morgan_complement_intersection():
+    _check(M.de_morgan_complement_intersection(), D(Ev, I(A, B)), U(D(Ev, A), D(Ev, B)))
 
 
 def test_theorie_inchangee_22():
