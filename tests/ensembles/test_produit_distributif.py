@@ -34,6 +34,17 @@ def test_distributif_intersection_clos_et_fidele():
     assert lhs != rhs
 
 
+def test_intersection_produits_clos_et_fidele():
+    t = M.couple_dans_intersection_produits()
+    assert t.est_clos and not t.hypotheses
+    lhs = _couple_in(E.intersection(E.produit(var("A"), var("B")),
+                                    E.produit(var("C"), var("D"))))               # (u,v)∈(A×B)∩(C×D)
+    rhs = _couple_in(E.produit(E.intersection(var("A"), var("C")),
+                               E.intersection(var("B"), var("D"))))               # (u,v)∈(A∩C)×(B∩D)
+    assert t.conclusion == equiv(lhs, rhs)
+    assert lhs != rhs
+
+
 def test_parametrable():
     t = M.couple_dans_produit_distributif_reunion(u="x", v="y", a="P", b="Q", c="R")
     assert t.est_clos

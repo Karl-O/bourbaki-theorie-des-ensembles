@@ -106,7 +106,50 @@ def couple_dans_produit_distributif_intersection(u="u", v="v", a="A", b="B", c="
         equivalence_transitivite(e1, e2), e3), e4), e5)
 
 
+def _reshuffle4(p, q, r, s):
+    """⊢ ((P et Q) et (R et S)) ⇔ ((P et R) et (Q et S))   (échange des conjoints médians)."""
+    from bourbaki.logique.formule import et as _et
+    h = N.assume(_et(_et(p, q), _et(r, s)))
+    pq, rs = conjonction_elim_gauche(h), conjonction_elim_droite(h)
+    fwd = N.loi_deduction(_et(_et(p, q), _et(r, s)), conjonction_intro(
+        conjonction_intro(conjonction_elim_gauche(pq), conjonction_elim_gauche(rs)),
+        conjonction_intro(conjonction_elim_droite(pq), conjonction_elim_droite(rs))))
+    h2 = N.assume(_et(_et(p, r), _et(q, s)))
+    pr, qs = conjonction_elim_gauche(h2), conjonction_elim_droite(h2)
+    bwd = N.loi_deduction(_et(_et(p, r), _et(q, s)), conjonction_intro(
+        conjonction_intro(conjonction_elim_gauche(pr), conjonction_elim_gauche(qs)),
+        conjonction_intro(conjonction_elim_droite(pr), conjonction_elim_droite(qs))))
+    return conjonction_intro(fwd, bwd)
+
+
+def couple_dans_intersection_produits(u="u", v="v", a="A", b="B", c="C", d="D"):
+    """⊢ ((u,v) ∈ (A×B)∩(C×D)) ⇔ ((u,v) ∈ (A∩C)×(B∩D)).   (E.II.2 : (A×B)∩(C×D)=(A∩C)×(B∩D).)"""
+    vu, vv, vA, vB, vC, vD = _t(u), _t(v), _t(a), _t(b), _t(c), _t(d)
+    AB, CD = E.produit(vA, vB), E.produit(vC, vD)
+    cpl = E.couple(vu, vv)
+    uA, vB_, uC, vD_ = appartient(vu, vA), appartient(vv, vB), appartient(vu, vC), appartient(vv, vD)
+    # (u,v)∈(A×B)∩(C×D) ⇔ ((u,v)∈A×B et (u,v)∈C×D)
+    e1 = _instance_inter(AB, CD, cpl)
+    # ⇔ ((u∈A et v∈B) et (u∈C et v∈D))   (congruence des 2 conjoints)
+    e2 = equivalence_transitivite(
+        et_congruence_gauche(couple_dans_produit_ssi(vu, vv, vA, vB), appartient(cpl, CD)),
+        et_congruence_droite(et(uA, vB_), couple_dans_produit_ssi(vu, vv, vC, vD)))
+    # ⇔ ((u∈A et u∈C) et (v∈B et v∈D))   (échange médian)
+    e3 = _reshuffle4(uA, vB_, uC, vD_)
+    # ⇔ (u∈(A∩C) et v∈(B∩D))
+    e4 = equivalence_transitivite(
+        et_congruence_gauche(equivalence_symetrie(_instance_inter(vA, vC, vu)), et(vB_, vD_)),
+        et_congruence_droite(appartient(vu, E.intersection(vA, vC)),
+                             equivalence_symetrie(_instance_inter(vB, vD, vv))))
+    # ⇔ (u,v)∈(A∩C)×(B∩D)
+    e5 = equivalence_symetrie(couple_dans_produit_ssi(
+        vu, vv, E.intersection(vA, vC), E.intersection(vB, vD)))
+    return equivalence_transitivite(equivalence_transitivite(equivalence_transitivite(
+        equivalence_transitivite(e1, e2), e3), e4), e5)
+
+
 __all__ = [
     "couple_dans_produit_distributif_reunion",
     "couple_dans_produit_distributif_intersection",
+    "couple_dans_intersection_produits",
 ]
