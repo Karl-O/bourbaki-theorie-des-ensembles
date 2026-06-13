@@ -1,0 +1,190 @@
+"""§II.1 — ALGÈBRE de la réunion / l'intersection : associativité, idempotence,
+absorption (égalités ensemblistes, lois de treillis booléen).
+
+Bourbaki E.II.1 (et formulaire) : ∪ et ∩ sont associatives, idempotentes, et liées
+par les lois d'absorption.  La commutativité est déjà certifiée
+(`ensembles_theoremes.commutativite_reunion/intersection`).  On complète ici :
+
+    (A∪B)∪C = A∪(B∪C)        (A∩B)∩C = A∩(B∩C)        A∪A = A    A∩A = A
+    A∪(A∩B) = A              A∩(A∪B) = A
+
+Toutes CLOSES (0 hyp), par extensionnalité (`egalite_par_extension`) à partir des
+axiomes de membership ∪/∩ (AXIOME_REUNION/INTER, dans les 22) et de lois
+propositionnelles fermées (associativité/idempotence/absorption de ∨ et ∧, prouvées
+ici au niveau du noyau).  theorie_ensembles() INCHANGÉE = 22 ; aucun axiome ajouté.
+"""
+from __future__ import annotations
+
+from bourbaki.logique.formule import Terme, var, appartient, et, ou
+from bourbaki.logique import noyau_abrege as N
+from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ensembles_theoremes import _instance_reunion, egalite_par_extension
+from bourbaki.logique.tactiques.tactiques_abrege import a_implique_a
+from bourbaki.logique.tactiques.tactiques_abrege2 import (
+    conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
+    et_congruence_droite, et_congruence_gauche, ou_congruence,
+    equivalence_transitivite, equivalence_symetrie, assoc_et, cas, syllogisme,
+)
+
+
+def _t(x):
+    return x if isinstance(x, Terme) else var(x)
+
+
+def _instance_inter(a, b, z):
+    """⊢ (z ∈ a∩b) ⇔ (z∈a et z∈b)   (instance de AXIOME_INTER aux termes a,b,z)."""
+    from bourbaki.logique.tactiques.tactiques_abrege2 import instancie
+    ax = N.axiome(E.theorie_ensembles(), E.AXIOME_INTER)
+    return instancie(instancie(instancie(ax, a), b), z)
+
+
+def _refl_equiv(f):
+    """⊢ (F ⇔ F)."""
+    return conjonction_intro(a_implique_a(f), a_implique_a(f))
+
+
+# ── ou-introductions (gauche / droite) ───────────────────────────────────────
+def _oui_g(a, b):
+    """⊢ A ⇒ (A∨B)."""
+    return N.s2(a, b)
+
+
+def _oui_d(a, b):
+    """⊢ B ⇒ (A∨B)."""
+    return syllogisme(N.s2(b, a), N.s3(b, a))   # B⇒(B∨A)⇒(A∨B)
+
+
+# ── lois propositionnelles fermées ───────────────────────────────────────────
+def _ou_idempotent(p):
+    """⊢ (P∨P) ⇔ P."""
+    inner = cas(N.assume(ou(p, p)), a_implique_a(p), a_implique_a(p))   # P sous (P∨P)
+    fwd = N.loi_deduction(ou(p, p), inner)
+    return conjonction_intro(fwd, _oui_g(p, p))
+
+
+def _et_idempotent(p):
+    """⊢ (P et P) ⇔ P."""
+    fwd = N.loi_deduction(et(p, p), conjonction_elim_gauche(N.assume(et(p, p))))
+    hp = N.assume(p)
+    bwd = N.loi_deduction(p, conjonction_intro(hp, hp))
+    return conjonction_intro(fwd, bwd)
+
+
+def _assoc_ou(p, q, r):
+    """⊢ ((P∨Q)∨R) ⇔ (P∨(Q∨R))."""
+    QR, PQ = ou(q, r), ou(p, q)
+    PQR_l, P_QR = ou(PQ, r), ou(p, QR)
+    # ── fwd : (P∨Q)∨R ⇒ P∨(Q∨R) ──
+    fromP = _oui_g(p, QR)                                  # P ⇒ P∨(Q∨R)
+    fromQ = syllogisme(_oui_g(q, r), _oui_d(p, QR))        # Q ⇒ (Q∨R) ⇒ P∨(Q∨R)
+    imp_PQ = N.loi_deduction(PQ, cas(N.assume(PQ), fromP, fromQ))   # (P∨Q) ⇒ P∨(Q∨R)
+    fromR = syllogisme(_oui_d(q, r), _oui_d(p, QR))        # R ⇒ (Q∨R) ⇒ P∨(Q∨R)
+    fwd = N.loi_deduction(PQR_l, cas(N.assume(PQR_l), imp_PQ, fromR))
+    # ── bwd : P∨(Q∨R) ⇒ (P∨Q)∨R ──
+    fromPb = syllogisme(_oui_g(p, q), _oui_g(PQ, r))       # P ⇒ (P∨Q) ⇒ (P∨Q)∨R
+    fromQb = syllogisme(_oui_d(p, q), _oui_g(PQ, r))       # Q ⇒ (P∨Q) ⇒ (P∨Q)∨R
+    fromRb = _oui_d(PQ, r)                                 # R ⇒ (P∨Q)∨R
+    imp_QR = N.loi_deduction(QR, cas(N.assume(QR), fromQb, fromRb))  # (Q∨R) ⇒ (P∨Q)∨R
+    bwd = N.loi_deduction(P_QR, cas(N.assume(P_QR), fromPb, imp_QR))
+    return conjonction_intro(fwd, bwd)
+
+
+def _absorption_ou(p, q):
+    """⊢ (P∨(P et Q)) ⇔ P."""
+    pq_to_p = N.loi_deduction(et(p, q), conjonction_elim_gauche(N.assume(et(p, q))))
+    fwd = N.loi_deduction(ou(p, et(p, q)), cas(N.assume(ou(p, et(p, q))), a_implique_a(p), pq_to_p))
+    return conjonction_intro(fwd, _oui_g(p, et(p, q)))
+
+
+def _absorption_et(p, q):
+    """⊢ (P et (P∨Q)) ⇔ P."""
+    fwd = N.loi_deduction(et(p, ou(p, q)), conjonction_elim_gauche(N.assume(et(p, ou(p, q)))))
+    hp = N.assume(p)
+    bwd = N.loi_deduction(p, conjonction_intro(hp, N.modus_ponens(hp, _oui_g(p, q))))
+    return conjonction_intro(fwd, bwd)
+
+
+# ════════════════════════════════════════════════════════════════════════════
+#  ÉGALITÉS ENSEMBLISTES  (E.II.1)
+# ════════════════════════════════════════════════════════════════════════════
+def associativite_reunion(a="A", b="B", c="C"):
+    """⊢ (A∪B)∪C = A∪(B∪C)."""
+    va, vb, vc, vz = _t(a), _t(b), _t(c), var("z")
+    AB, BC = E.reunion(va, vb), E.reunion(vb, vc)
+    zA, zB, zC = appartient(vz, va), appartient(vz, vb), appartient(vz, vc)
+    char_u = N.generalisation("z", equivalence_transitivite(equivalence_transitivite(
+        _instance_reunion(AB, vc, vz),
+        ou_congruence(_instance_reunion(va, vb, vz), _refl_equiv(zC))),
+        _assoc_ou(zA, zB, zC)))
+    char_v = N.generalisation("z", equivalence_transitivite(
+        _instance_reunion(va, BC, vz),
+        ou_congruence(_refl_equiv(zA), _instance_reunion(vb, vc, vz))))
+    return egalite_par_extension(char_u, char_v, E.reunion(AB, vc), E.reunion(va, BC))
+
+
+def associativite_intersection(a="A", b="B", c="C"):
+    """⊢ (A∩B)∩C = A∩(B∩C)."""
+    va, vb, vc, vz = _t(a), _t(b), _t(c), var("z")
+    AB, BC = E.intersection(va, vb), E.intersection(vb, vc)
+    zA, zB, zC = appartient(vz, va), appartient(vz, vb), appartient(vz, vc)
+    char_u = N.generalisation("z", equivalence_transitivite(equivalence_transitivite(
+        _instance_inter(AB, vc, vz),
+        et_congruence_gauche(_instance_inter(va, vb, vz), zC)),
+        equivalence_symetrie(assoc_et(zA, zB, zC))))
+    char_v = N.generalisation("z", equivalence_transitivite(
+        _instance_inter(va, BC, vz),
+        et_congruence_droite(zA, _instance_inter(vb, vc, vz))))
+    return egalite_par_extension(char_u, char_v, E.intersection(AB, vc), E.intersection(va, BC))
+
+
+def idempotence_reunion(a="A"):
+    """⊢ A∪A = A."""
+    va, vz = _t(a), var("z")
+    zA = appartient(vz, va)
+    char_u = N.generalisation("z", equivalence_transitivite(_instance_reunion(va, va, vz),
+                                                            _ou_idempotent(zA)))
+    char_v = N.generalisation("z", _refl_equiv(zA))
+    return egalite_par_extension(char_u, char_v, E.reunion(va, va), va)
+
+
+def idempotence_intersection(a="A"):
+    """⊢ A∩A = A."""
+    va, vz = _t(a), var("z")
+    zA = appartient(vz, va)
+    char_u = N.generalisation("z", equivalence_transitivite(_instance_inter(va, va, vz),
+                                                            _et_idempotent(zA)))
+    char_v = N.generalisation("z", _refl_equiv(zA))
+    return egalite_par_extension(char_u, char_v, E.intersection(va, va), va)
+
+
+def absorption_reunion(a="A", b="B"):
+    """⊢ A∪(A∩B) = A."""
+    va, vb, vz = _t(a), _t(b), var("z")
+    AB = E.intersection(va, vb)
+    zA, zB = appartient(vz, va), appartient(vz, vb)
+    char_u = N.generalisation("z", equivalence_transitivite(equivalence_transitivite(
+        _instance_reunion(va, AB, vz),
+        ou_congruence(_refl_equiv(zA), _instance_inter(va, vb, vz))),
+        _absorption_ou(zA, zB)))
+    char_v = N.generalisation("z", _refl_equiv(zA))
+    return egalite_par_extension(char_u, char_v, E.reunion(va, AB), va)
+
+
+def absorption_intersection(a="A", b="B"):
+    """⊢ A∩(A∪B) = A."""
+    va, vb, vz = _t(a), _t(b), var("z")
+    AB = E.reunion(va, vb)
+    zA, zB = appartient(vz, va), appartient(vz, vb)
+    char_u = N.generalisation("z", equivalence_transitivite(equivalence_transitivite(
+        _instance_inter(va, AB, vz),
+        et_congruence_droite(zA, _instance_reunion(va, vb, vz))),
+        _absorption_et(zA, zB)))
+    char_v = N.generalisation("z", _refl_equiv(zA))
+    return egalite_par_extension(char_u, char_v, E.intersection(va, AB), va)
+
+
+__all__ = [
+    "associativite_reunion", "associativite_intersection",
+    "idempotence_reunion", "idempotence_intersection",
+    "absorption_reunion", "absorption_intersection",
+]

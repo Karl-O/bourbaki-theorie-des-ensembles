@@ -1,0 +1,47 @@
+"""Tests §II.1 — associativité / idempotence / absorption de ∪ et ∩ (égalités).
+
+Honnêteté LCF : chaque théorème est CLOS (0 hyp), sa conclusion est l'ÉGALITÉ FIDÈLE
+littérale annoncée, les deux membres DIFFÈRENT (non trivial), theorie = 22.
+"""
+from bourbaki.logique.formule import var, egal
+from bourbaki.ensembles import ensembles_abrege as E
+import bourbaki.ensembles.ensembles_algebre_booleenne as M
+
+A, B, C = var("A"), var("B"), var("C")
+U, I = E.reunion, E.intersection
+
+
+def _check(t, lhs, rhs):
+    assert t.est_clos and not t.hypotheses
+    assert t.conclusion == egal(lhs, rhs)
+    assert lhs != rhs                                  # égalité NON triviale
+
+
+def test_associativite_reunion():
+    _check(M.associativite_reunion(), U(U(A, B), C), U(A, U(B, C)))
+
+
+def test_associativite_intersection():
+    _check(M.associativite_intersection(), I(I(A, B), C), I(A, I(B, C)))
+
+
+def test_idempotence_reunion():
+    _check(M.idempotence_reunion(), U(A, A), A)
+
+
+def test_idempotence_intersection():
+    _check(M.idempotence_intersection(), I(A, A), A)
+
+
+def test_absorption_reunion():
+    _check(M.absorption_reunion(), U(A, I(A, B)), A)
+
+
+def test_absorption_intersection():
+    _check(M.absorption_intersection(), I(A, U(A, B)), A)
+
+
+def test_theorie_inchangee_22():
+    for f in M.__all__:
+        getattr(M, f)()
+    assert len(E.theorie_ensembles().axiomes) == 22
