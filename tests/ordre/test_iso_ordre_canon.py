@@ -18,22 +18,25 @@ def _Rf(g="R"):
     return lambda a, b: appartient(E.couple(a, b), vg)
 
 
-def test_la_capture_existe_en_forme_defaut():
-    """La forme DÉFAUT est bien défectueuse : f(y) = τ_y((y,y)∈f) y apparaît capturé."""
+def test_la_capture_ne_se_produit_plus_en_forme_defaut():
+    """La forme DÉFAUT ne capture PLUS : valeur b='j' ⇒ f(y)=τ_j((y,j)∈f), pas (y,y)."""
     co = V.compatible_ordre(var("f"), var("E"), _Rf("R"), _Rf("Rp"))   # défaut x,y
-    capture_fy = E.valeur(var("f"), var("y"))                          # τ_y((y,y)∈f)
-    # la valeur capturée (point fixe) apparaît dans la forme défaut
-    assert repr(capture_fy) in repr(co)
+    capture_fy = E.valeur(var("f"), var("y"))                          # τ_y((y,y)∈f) — l'ancienne capture
+    correct_fy = E.valeur(var("f"), var("y"), b='j')                   # τ_j((y,j)∈f) — VALEUR correcte
+    s = repr(co)
+    # la VALEUR correcte de f(y) (liant frais j) figure ; la forme capturée N'apparaît PAS
+    assert repr(correct_fy) in s
+    assert repr(capture_fy) not in s
 
 
 def test_canonique_pas_de_capture():
-    """La forme CANONIQUE (x,w) : f(w)=τ_y((w,y)∈f) correct ; la capture ABSENTE."""
+    """La forme CANONIQUE (x,w) : f(w)=τ_j((w,j)∈f) correct ; aucune capture (y,y) ni (w,w)."""
     co = C.compatible_ordre_canon(var("f"), var("E"), _Rf("R"), _Rf("Rp"))
-    correct_fw = E.valeur(var("f"), var(C.ISO_Y))  # τ_y((w,y)∈f) — VALEUR correcte
-    capture_fy = E.valeur(var("f"), var("y"))      # τ_y((y,y)∈f)  — la capture
+    correct_fw = E.valeur(var("f"), var(C.ISO_Y), b='j')  # τ_j((w,j)∈f) — VALEUR correcte
+    capture_fy = E.valeur(var("f"), var("y"))             # τ_y((y,y)∈f)  — capture y
     s = repr(co)
-    assert repr(correct_fw) in s                   # la valeur correcte de f(w) figure
-    assert repr(capture_fy) not in s               # la forme capturée N'apparaît PAS
+    assert repr(correct_fw) in s                          # la valeur correcte de f(w) figure
+    assert repr(capture_fy) not in s                      # aucune capture (y,y)
 
 
 def test_cible_canonique_differe_du_defaut_defectueux():

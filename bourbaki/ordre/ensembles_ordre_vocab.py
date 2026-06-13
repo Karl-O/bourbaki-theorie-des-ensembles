@@ -153,7 +153,7 @@ def compatible_ordre(f, e, R, Rp, x="x", y="y"):
     « f respecte l'ordre dans les deux sens » : x≤y ⇔ f(x)≤'f(y)  (cœur de la
     Déf. III.1.3 d'isomorphisme d'ensembles ordonnés)."""
     vx, vy, vE = var(x), var(y), _terme(e)
-    fx, fy = E.valeur(_terme(f), vx), E.valeur(_terme(f), vy)
+    fx, fy = E.valeur(_terme(f), vx, b='j'), E.valeur(_terme(f), vy, b='j')
     return pourtout(x, pourtout(y,
         impl(et(appartient(vx, vE), appartient(vy, vE)),
              equiv(R(vx, vy), Rp(fx, fy)))))

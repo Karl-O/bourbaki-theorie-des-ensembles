@@ -84,7 +84,7 @@ def test_theorie_intervalles_quatre_axiomes():
 def test_compatible_ordre_forme():
     g = V.compatible_ordre(f, Es, R, Rp)
     vx, vy = var("x"), var("y")
-    fx, fy = E.valeur(f, vx), E.valeur(f, vy)
+    fx, fy = E.valeur(f, vx, b='j'), E.valeur(f, vy, b='j')
     cible = pourtout("x", pourtout("y",
         impl(et(appartient(vx, Es), appartient(vy, Es)),
              equiv(R(vx, vy), Rp(fx, fy)))))
