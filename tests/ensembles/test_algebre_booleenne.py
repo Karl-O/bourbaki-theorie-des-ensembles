@@ -41,6 +41,14 @@ def test_absorption_intersection():
     _check(M.absorption_intersection(), I(A, U(A, B)), A)
 
 
+def test_distributivite_intersection_reunion():
+    _check(M.distributivite_intersection_reunion(), I(A, U(B, C)), U(I(A, B), I(A, C)))
+
+
+def test_distributivite_reunion_intersection():
+    _check(M.distributivite_reunion_intersection(), U(A, I(B, C)), I(U(A, B), U(A, C)))
+
+
 def test_theorie_inchangee_22():
     for f in M.__all__:
         getattr(M, f)()

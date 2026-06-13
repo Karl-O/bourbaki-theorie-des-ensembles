@@ -23,7 +23,8 @@ from bourbaki.logique.tactiques.tactiques_abrege import a_implique_a
 from bourbaki.logique.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
     et_congruence_droite, et_congruence_gauche, ou_congruence,
-    equivalence_transitivite, equivalence_symetrie, assoc_et, cas, syllogisme,
+    equivalence_transitivite, equivalence_symetrie, assoc_et, et_ou_distrib,
+    cas, syllogisme,
 )
 
 
@@ -183,8 +184,65 @@ def absorption_intersection(a="A", b="B"):
     return egalite_par_extension(char_u, char_v, E.intersection(va, AB), va)
 
 
+def _ou_et_distrib(p, q, r):
+    """⊢ (P ou (Q et R)) ⇔ ((P ou Q) et (P ou R))   (distribution de ∨ sur et, dual)."""
+    PQ, PR, QR = ou(p, q), ou(p, r), et(q, r)
+    target = et(PQ, PR)
+    # ── fwd : P∨(Q et R) ⇒ (P∨Q) et (P∨R) ──
+    hp = N.assume(p)
+    fromP = N.loi_deduction(p, conjonction_intro(N.modus_ponens(hp, _oui_g(p, q)),
+                                                 N.modus_ponens(hp, _oui_g(p, r))))
+    hqr = N.assume(QR)
+    fromQR = N.loi_deduction(QR, conjonction_intro(
+        N.modus_ponens(conjonction_elim_gauche(hqr), _oui_d(p, q)),
+        N.modus_ponens(conjonction_elim_droite(hqr), _oui_d(p, r))))
+    fwd = N.loi_deduction(ou(p, QR), cas(N.assume(ou(p, QR)), fromP, fromQR))
+    # ── bwd : (P∨Q) et (P∨R) ⇒ P∨(Q et R) ──
+    h = N.assume(target)
+    hpq, hpr = conjonction_elim_gauche(h), conjonction_elim_droite(h)   # P∨Q ; P∨R
+    p_to_goal = _oui_g(p, QR)                                           # P ⇒ P∨(Q et R)
+    hq = N.assume(q)
+    r_to_goal_uq = N.loi_deduction(r, N.modus_ponens(conjonction_intro(hq, N.assume(r)),
+                                                     _oui_d(p, QR)))    # R ⇒ goal  (sous q)
+    q_to_goal = N.loi_deduction(q, cas(hpr, p_to_goal, r_to_goal_uq))   # Q ⇒ goal
+    bwd = N.loi_deduction(target, cas(hpq, p_to_goal, q_to_goal))
+    return conjonction_intro(fwd, bwd)
+
+
+def distributivite_intersection_reunion(a="A", b="B", c="C"):
+    """⊢ A∩(B∪C) = (A∩B)∪(A∩C)   (distributivité de ∩ sur ∪, E.II.1)."""
+    va, vb, vc, vz = _t(a), _t(b), _t(c), var("z")
+    zA, zB, zC = appartient(vz, va), appartient(vz, vb), appartient(vz, vc)
+    char_u = N.generalisation("z", equivalence_transitivite(equivalence_transitivite(
+        _instance_inter(va, E.reunion(vb, vc), vz),
+        et_congruence_droite(zA, _instance_reunion(vb, vc, vz))),
+        et_ou_distrib(zA, zB, zC)))
+    char_v = N.generalisation("z", equivalence_transitivite(
+        _instance_reunion(E.intersection(va, vb), E.intersection(va, vc), vz),
+        ou_congruence(_instance_inter(va, vb, vz), _instance_inter(va, vc, vz))))
+    return egalite_par_extension(char_u, char_v, E.intersection(va, E.reunion(vb, vc)),
+                                 E.reunion(E.intersection(va, vb), E.intersection(va, vc)))
+
+
+def distributivite_reunion_intersection(a="A", b="B", c="C"):
+    """⊢ A∪(B∩C) = (A∪B)∩(A∪C)   (distributivité de ∪ sur ∩, E.II.1)."""
+    va, vb, vc, vz = _t(a), _t(b), _t(c), var("z")
+    zA, zB, zC = appartient(vz, va), appartient(vz, vb), appartient(vz, vc)
+    char_u = N.generalisation("z", equivalence_transitivite(equivalence_transitivite(
+        _instance_reunion(va, E.intersection(vb, vc), vz),
+        ou_congruence(_refl_equiv(zA), _instance_inter(vb, vc, vz))),
+        _ou_et_distrib(zA, zB, zC)))
+    char_v = N.generalisation("z", equivalence_transitivite(equivalence_transitivite(
+        _instance_inter(E.reunion(va, vb), E.reunion(va, vc), vz),
+        et_congruence_gauche(_instance_reunion(va, vb, vz), appartient(vz, E.reunion(va, vc)))),
+        et_congruence_droite(ou(zA, zB), _instance_reunion(va, vc, vz))))
+    return egalite_par_extension(char_u, char_v, E.reunion(va, E.intersection(vb, vc)),
+                                 E.intersection(E.reunion(va, vb), E.reunion(va, vc)))
+
+
 __all__ = [
     "associativite_reunion", "associativite_intersection",
     "idempotence_reunion", "idempotence_intersection",
     "absorption_reunion", "absorption_intersection",
+    "distributivite_intersection_reunion", "distributivite_reunion_intersection",
 ]
