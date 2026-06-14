@@ -38,7 +38,7 @@ PREUVE.
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (var, egal, et, appartient, existe, Terme)
+from bourbaki.logique.formule import (var, egal, et, equiv, impl, appartient, existe, Terme)
 from bourbaki.logique import noyau_abrege as N
 from bourbaki.ensembles import ensembles_abrege as E
 from bourbaki.logique.tactiques.tactiques_abrege2 import (
@@ -52,11 +52,21 @@ from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de
 from bourbaki.cardinaux.ensembles_bijection import reciproque_est_bijection
 from bourbaki.ensembles.fonctions.ensembles_reciproque import couple_reciproque
 from bourbaki.ensembles.fonctions.ensembles_fonctions import valeur_dans_graphe
+from bourbaki.ordre.ensembles_valeur_bridge import valeur_j_egal_y, valeur_y_egal_j
 
 
 def _T(v):
     """Coercion nom→terme (accepte un Terme ou un nom de variable)."""
     return v if isinstance(v, Terme) else var(v)
+
+
+def _rw(thm, eq_thm, contexte, hole="hj0"):
+    """Réécrit `a`→`b` dans la formule de `thm` via Leibniz S6, où eq_thm ⊢ a=b et
+    `contexte(trou)` reconstruit la formule de thm avec `a` remplacé par le trou.
+    Retourne ⊢ thm.conclusion[a:=b].  (Pont liant-valeur τ_j↔τ_y aux frontières.)"""
+    a, b = eq_thm.conclusion.termes                       # a = b
+    eqv = N.modus_ponens(eq_thm, N.s6(a, b, hole, contexte(var(hole))))   # F[a] ⇔ F[b]
+    return N.modus_ponens(thm, equivalence_avant(eqv))    # F[b]
 
 
 def _R_defaut(nom):
@@ -168,17 +178,31 @@ def compatible_ordre_reciproque(phi, S, T, R, Rp):
     #   ⚠️ BINDERS x,w (PAS x,y) pour la clause de φ : avec le second binder « y »,
     #   fy=valeur(φ,var y)=τy((y,y)∈φ) S'AUTO-CAPTURE (POISON) et n'est plus
     #   instanciable.  Avec « w », fy=τy((w,y)∈φ) est sain.
-    hcompat = N.assume(compatible_ordre(vphi, vS, R, Rp, x="x", y="w"))
+    # ── PONT 1 (hypothèse) : compatible_ordre(φ,S,R,R') est construit en liant « j » par
+    #   la fonction ; on le PONTE ∀x∀w vers le liant « y » sur les variables PLAINES x,w
+    #   (φ(x)=τj((x,j)∈φ) → τy((x,y)∈φ), x plaine ⇒ pas d'imbrication, pas de capture).
+    #   La preuve interne (section en « y ») se raccorde ainsi sans toucher aux τy imbriqués.
+    hcompat_j = N.assume(compatible_ordre(vphi, vS, R, Rp, x="x", y="w"))   # [τj], ∀x∀w
+    hx, hw = var("x"), var("w")
+    xwS = et(appartient(hx, vS), appartient(hw, vS))
+    phw_j = E.valeur(vphi, hw, b="j")
+    phx_y = E.valeur(vphi, hx)                          # φ(x)[τy]
+    body_j = instancie(instancie(hcompat_j, hx), hw)    # (x∈S∧w∈S)⇒(R{x,w}⇔R'{φx[τj],φw[τj]})
+    body_y = _rw(body_j, valeur_j_egal_y(vphi, hx),
+                 lambda h: impl(xwS, equiv(R(hx, hw), Rp(h, phw_j))))
+    body_y = _rw(body_y, valeur_j_egal_y(vphi, hw),
+                 lambda h: impl(xwS, equiv(R(hx, hw), Rp(phx_y, h))))
+    hcompat = N.generalisation("x", N.generalisation("w", body_y))   # compatible_ordre(φ)[τy]
     inst = instancie(instancie(hcompat, finv_x), finv_w)
-    #   (φ⁻¹(x)∈S et φ⁻¹(w)∈S) ⇒ (R{φ⁻¹(x),φ⁻¹(w)} ⇔ R'{φ(φ⁻¹(x)),φ(φ⁻¹(w))})
+    #   (φ⁻¹(x)∈S et φ⁻¹(w)∈S) ⇒ (R{φ⁻¹(x),φ⁻¹(w)} ⇔ R'{φ(φ⁻¹(x))[τy],φ(φ⁻¹(w))[τy]})
     equiv_phi = N.modus_ponens(conjonction_intro(finv_x_inS, finv_w_inS), inst)
-    #   R{φ⁻¹(x),φ⁻¹(w)} ⇔ R'{φ(φ⁻¹(x)), φ(φ⁻¹(w))}
+    #   R{φ⁻¹(x),φ⁻¹(w)} ⇔ R'{φ(φ⁻¹(x))[τy], φ(φ⁻¹(w))[τy]}   (raccordé à la section en « y »)
 
-    # section : φ(φ⁻¹(x))=x  et  φ(φ⁻¹(w))=w
-    sec_x = _section_local(vphi, vx, vT, x_inT)        # φ(φ⁻¹(x))=x
-    sec_w = _section_local(vphi, vw, vT, w_inT)        # φ(φ⁻¹(w))=w
-    phi_finv_x = E.valeur(vphi, finv_x)
-    phi_finv_w = E.valeur(vphi, finv_w)
+    # section : φ(φ⁻¹(x))=x  et  φ(φ⁻¹(w))=w   (preuve INTERNE en liant « y », inchangée)
+    sec_x = _section_local(vphi, vx, vT, x_inT)        # φ(φ⁻¹(x))[τy]=x
+    sec_w = _section_local(vphi, vw, vT, w_inT)        # φ(φ⁻¹(w))[τy]=w
+    phi_finv_x = E.valeur(vphi, finv_x)                # φ(φ⁻¹(x))[τy]
+    phi_finv_w = E.valeur(vphi, finv_w)                # φ(φ⁻¹(w))[τy]
 
     # réécriture Leibniz (S6) : R'{φ(φ⁻¹(x)),φ(φ⁻¹(w))} ⇔ R'{x,w}
     leib1 = N.modus_ponens(sec_x, N.s6(phi_finv_x, vx, "w0", Rp(var("w0"), phi_finv_w)))
@@ -188,8 +212,18 @@ def compatible_ordre_reciproque(phi, S, T, R, Rp):
     rp_eq = equivalence_transitivite(leib1, leib2)     # R'{φ(φ⁻¹(x)),φ(φ⁻¹(w))} ⇔ R'{x,w}
 
     # R{φ⁻¹(x),φ⁻¹(w)} ⇔ R'{x,w}, puis symétrie ⇒ R'{x,w} ⇔ R{φ⁻¹(x),φ⁻¹(w)}
-    chained = equivalence_transitivite(equiv_phi, rp_eq)   # R{φ⁻¹(x),φ⁻¹(w)} ⇔ R'{x,w}
-    body = equivalence_symetrie(chained)                   # R'{x,w} ⇔ R{φ⁻¹(x),φ⁻¹(w)}
+    chained = equivalence_transitivite(equiv_phi, rp_eq)   # R{φ⁻¹(x)[τy],φ⁻¹(w)[τy]} ⇔ R'{x,w}
+    body = equivalence_symetrie(chained)                   # R'{x,w} ⇔ R{φ⁻¹(x)[τy],φ⁻¹(w)[τy]}
+
+    # ── PONT 2 (frontière corps→cible) : φ⁻¹(·) en τy → τj ──
+    #   la cible compatible_ordre(φ⁻¹,T,R',R) écrit φ⁻¹(·) en liant « j » ; le corps
+    #   est en « y » (valeur_dans_graphe/AXIOME_DOM internes).  On réécrit y→j.
+    finv_x_j, finv_w_j = E.valeur(Phinv, vx, b="j"), E.valeur(Phinv, vw, b="j")
+    body = _rw(body, valeur_y_egal_j(Phinv, vx),
+               lambda hh: equiv(Rp(vx, vw), R(hh, finv_w)))
+    body = _rw(body, valeur_y_egal_j(Phinv, vw),
+               lambda hh: equiv(Rp(vx, vw), R(finv_x_j, hh)))
+    #   body : R'{x,w} ⇔ R{φ⁻¹(x)[τj], φ⁻¹(w)[τj]}  = corps de compatible_ordre(φ⁻¹,T,R',R)
 
     inner = N.loi_deduction(hyp, body)
     return N.generalisation("x", N.generalisation("w", inner))
