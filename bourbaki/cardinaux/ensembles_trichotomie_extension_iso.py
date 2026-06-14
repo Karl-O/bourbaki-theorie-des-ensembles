@@ -78,6 +78,7 @@ from bourbaki.logique.formule import (
 from bourbaki.logique import noyau_abrege as N
 from bourbaki.ensembles import ensembles_abrege as E
 from bourbaki.ordre import ensembles_ordre_vocab as V
+from bourbaki.ordre.ensembles_pont_binder import pont_compatible
 from bourbaki.logique.tactiques.tactiques_abrege import syllogisme, a_implique_a
 from bourbaki.logique.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
@@ -341,7 +342,10 @@ def compat_extension_sous_iso(E_set="E", R="R", F_set="F", Rp="Rp", a="a", b="b"
     b_notin_T = MP.point_pas_dans_son_segment(Rp, F_set, b)  # ¬(b∈T)
 
     # ── hypothèses explicites (assumées) ─────────────────────────────────────
-    H_compat = N.assume(hyp_compat_h(E_set, R, F_set, Rp, a, b))
+    H_compat = N.assume(hyp_compat_h(E_set, R, F_set, Rp, a, b))   # compatible_ordre(h,S,R,Rp)[τj]
+    # PONT j→y : la preuve interne lit h(x),h(y) en « y » (E.valeur défaut) ; on convertit
+    # l'hypothèse compatible_ordre(h) du liant « j » vers « y » (xc,yc plaines).
+    H_compat = pont_compatible(H_compat, hg, S, Rf, Rpf, "xc", "yc", "j2y")
     H_into_T = N.assume(hyp_h_envoie_S_dans_T(E_set, R, F_set, Rp, a, b))
     H_S_dom = N.assume(hyp_S_inclus_dom_h(E_set, R, F_set, Rp, a))
     H_a_som = N.assume(hyp_a_sommet_de_S(R, E_set, a))
@@ -523,8 +527,10 @@ def compat_extension_sous_iso(E_set="E", R="R", F_set="F", Rp="Rp", a="a", b="b"
                    N.loi_deduction(egal(vy, va), cas_y_eq_a()))   # iff [prem, hyps]
 
     body_imp = N.loi_deduction(prem, iff_body)        # (x∈SaA et y∈SaA) ⇒ iff
-    res = N.generalisation("xa", N.generalisation("ya", body_imp))
-    return res
+    res = N.generalisation("xa", N.generalisation("ya", body_imp))   # compatible_ordre(h⁺,…)[τy]
+    # PONT y→j : la cible compatible_ordre(h⁺,…) (fonction) écrit h⁺(·) en « j » ; le corps
+    # est prouvé en « y ».  On convertit y→j (xa,ya plaines) pour matcher.
+    return pont_compatible(res, hp, SaA, le_a, le_b, "xa", "ya", "y2j")
 
 
 def compat_extension_cible(E_set="E", R="R", F_set="F", Rp="Rp", a="a", b="b"):
