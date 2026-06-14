@@ -47,6 +47,7 @@ from bourbaki.ensembles.fonctions.ensembles_fonctions import valeur_dans_graphe
 from bourbaki.ensembles.fonctions.ensembles_fonctions_composee import composition_valeur
 from bourbaki.ordre.ensembles_ordre_vocab import (est_isomorphisme_ordre,
                                                   compatible_ordre)
+from bourbaki.ordre.ensembles_pont_binder import pont_compatible
 from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de
 from bourbaki.cardinaux.ensembles_composee_bijection import composee_bijection_conjoints
 
@@ -158,9 +159,14 @@ def composee_isomorphisme_ordre(f="f", g="g", S="S", T="T", U="U",
 
     # projections gauche (bijective) / droite (compatible_ordre) des deux isos
     bij_f = conjonction_elim_gauche(h_iso_f)                         # est_bijective(f,S,T)
-    co_f = conjonction_elim_droite(h_iso_f)                          # compatible_ordre(f,S,R,R')
+    co_f = conjonction_elim_droite(h_iso_f)                          # compatible_ordre(f,S,R,R')[τj]
     bij_g = conjonction_elim_gauche(h_iso_g)                         # est_bijective(g,T,U)
-    co_g = conjonction_elim_droite(h_iso_g)                          # compatible_ordre(g,T,R',R'')
+    co_g = conjonction_elim_droite(h_iso_g)                          # compatible_ordre(g,T,R',R'')[τj]
+    # PONT j→y : la preuve interne (valeur f(x), g(·), composition_valeur) est en « y » ;
+    # on convertit les deux compatible_ordre du liant « j » (compatible_ordre fonction)
+    # vers « y » sur les variables PLAINES x,x2 (pas de capture).
+    co_f = pont_compatible(co_f, vf, vS, R, Rp, "x", "x2", "j2y")    # compatible_ordre(f,S,R,R')[τy]
+    co_g = pont_compatible(co_g, vg, vT, Rp, Rpp, "x", "x2", "j2y")  # compatible_ordre(g,T,R',R'')[τy]
 
     # ══ CONJOINT (a) : BIJECTION  est_bijective(g∘f, S, U) ══════════════════════
     bd_f = _bijection_de_depuis_iso(bij_f, vf, h_func_f, h_dom_f)    # est_bijection_de(f,S,T)
@@ -219,7 +225,10 @@ def composee_isomorphisme_ordre(f="f", g="g", S="S", T="T", U="U",
 
     # (∀x)(∀x2)((x∈S et x2∈S) ⇒ (R{x,x2} ⇔ R''{(g∘f)(x),(g∘f)(x2)}))
     body = N.loi_deduction(et(appartient(vx, vS), appartient(vw, vS)), eq_final)
-    conj_b = N.generalisation("x", N.generalisation("x2", body))   # compatible_ordre(g∘f,S,R,R'')
+    conj_b = N.generalisation("x", N.generalisation("x2", body))   # compatible_ordre(g∘f,S,R,R'')[τy]
+    # PONT y→j : la cible est_isomorphisme_ordre(g∘f,…) écrit (g∘f)(·) en liant « j »
+    # (compatible_ordre fonction) ; on convertit le corps prouvé en « y » vers « j ».
+    conj_b = pont_compatible(conj_b, comp, vS, R, Rpp, "x", "x2", "y2j")   # …[τj] = cible
 
     # ── ASSEMBLAGE : est_isomorphisme_ordre(g∘f, S, U, R, R'') ───────────────────
     return conjonction_intro(conj_a, conj_b)
