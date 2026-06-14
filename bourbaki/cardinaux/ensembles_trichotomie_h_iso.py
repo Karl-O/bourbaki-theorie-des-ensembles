@@ -73,6 +73,7 @@ from bourbaki.logique.formule import (
 from bourbaki.logique import noyau_abrege as N
 from bourbaki.ensembles import ensembles_abrege as E
 from bourbaki.ordre import ensembles_ordre_vocab as V
+from bourbaki.ordre.ensembles_pont_binder import pont_compatible
 from bourbaki.logique.tactiques.tactiques_abrege import syllogisme
 from bourbaki.logique.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
@@ -302,7 +303,10 @@ def h_compatible_ordre_sous_hyp(E_set="E", R="R", F_set="F", Rp="Rp", x="x", y="
         N.modus_ponens(conjonction_elim_droite(Hxy),
                        N.loi_deduction(appartient(vy, domh), equiv_xy))))
     body = N.loi_deduction(et(appartient(vx, domh), appartient(vy, domh)), res)
-    return N.generalisation(x, N.generalisation(y, body))
+    concl = N.generalisation(x, N.generalisation(y, body))   # compatible_ordre(h,dom h,R,Rp)[τy]
+    # PONT y→j : la cible compatible_ordre (fonction) écrit h(·) en liant « j » ; le corps
+    # est prouvé « par couples » via valeur(h,·) en « y ».  On convertit y→j (x,w plaines).
+    return pont_compatible(concl, h, domh, Rf, Rpf, x, y, "y2j")   # [τj] = cible
 
 
 def h_compatible_ordre_sous_hyp_cible(E_set="E", R="R", F_set="F", Rp="Rp", x="x", y="w"):
