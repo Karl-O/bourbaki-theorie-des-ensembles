@@ -74,6 +74,8 @@ from bourbaki.logique.formule import (
 from bourbaki.logique import noyau_abrege as N
 from bourbaki.ensembles import ensembles_abrege as E
 from bourbaki.ordre import ensembles_ordre_vocab as V
+from bourbaki.ordre.ensembles_pont_binder import reecrire
+from bourbaki.ordre.ensembles_valeur_bridge import valeur_j_egal_y
 from bourbaki.logique.tactiques.tactiques_abrege import syllogisme
 from bourbaki.logique.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
@@ -196,7 +198,15 @@ def compatibilite_ordre_depuis_temoin(E_set="E", R="R", F_set="F", Rp="Rp",
     c_compat = conjonction_elim_droite(c_iso)      # compatible_ordre(φ,S,R,Rp)
     # instancier à (u,u') sous u∈S et u'∈S : R{u,u'} ⇔ Rp{φ(u),φ(u')}
     compat_inst = instancie(instancie(c_compat, vu), vup)
-    equiv_phi = N.modus_ponens(conjonction_intro(c_uS, c_upS), compat_inst)  # R{u,u'} ⇔ Rp{φ(u),φ(u')}
+    equiv_phi = N.modus_ponens(conjonction_intro(c_uS, c_upS), compat_inst)  # R{u,u'} ⇔ Rp{φ(u)[τj],φ(u')[τj]}
+    # PONT j→y : compatible_ordre (fonction) écrit φ(·) en liant « j » ; la suite du
+    # raisonnement (v=φ(u) du cœur, fu/fup) est en « y ».  On convertit φ(u),φ(u') j→y
+    # (u,u' PLAINES ⇒ pas de capture) pour raccorder.
+    fu_j, fup_j = E.valeur(vphi, vu, b="j"), E.valeur(vphi, vup, b="j")
+    equiv_phi = reecrire(equiv_phi, valeur_j_egal_y(vphi, vu),
+                         lambda hh: equiv(Rf(vu, vup), Rpf(hh, fup_j)))
+    equiv_phi = reecrire(equiv_phi, valeur_j_egal_y(vphi, vup),
+                         lambda hh: equiv(Rf(vu, vup), Rpf(fu, hh)))   # Rp{φ(u)[τy],φ(u')[τy]}
 
     # réécrire Rp{φ(u),φ(u')} → Rp{v,v'}  via v=φ(u) (sens φ(u)→v) et v'=φ(u')
     # v=φ(u) ⇒ φ(u)=v
