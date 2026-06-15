@@ -720,6 +720,92 @@ def dom_h_est_segment_sans_val_cible(E_set="E", R="R", F_set="F", Rp="Rp", x="xa
     return E.est_segment(E.dom(h), Rf, _t(E_set), x, y)
 
 
+def _seg_dom_sans_val_binders(E_set, R, F_set, Rp, xb, yb):
+    """⊢ est_segment(dom h, R, E)  aux binders (xb,yb) ARBITRAIRES — SANS val_dans_F.
+
+    `dom_h_est_segment_sans_val` (binders SÛRS xa,ya) α-renommé vers (xb,yb), comme
+    `A._dom_segment_aux_binders` mais sur la version VAL-FREE (codomaine DÉRIVÉ)."""
+    from bourbaki.logique.tactiques.tactiques_abrege2 import (
+        conjonction_elim_gauche as cg, conjonction_elim_droite as cd, _peler_pourtout,
+    )
+    from bourbaki.logique.tactiques.tactiques_abrege_quantif import (
+        alpha_pour_tout, congruence_pour_tout,
+    )
+    ds = dom_h_est_segment_sans_val(E_set, R, F_set, Rp, x="xa", y="ya")
+    borne = cg(ds)                                    # dom h ⊂ E
+    init = cd(ds)                                     # (∀xa)(∀ya)(…)
+    _, body_xa = _peler_pourtout(init.conclusion)     # (∀ya)(…)
+    eqv_ext = alpha_pour_tout("xa", xb, body_xa)
+    init = N.modus_ponens(init, equivalence_avant(eqv_ext))   # (∀xb)(∀ya)(…)
+    _, body_xb = _peler_pourtout(init.conclusion)
+    _, body_in = _peler_pourtout(body_xb)
+    eqv_in = alpha_pour_tout("ya", yb, body_in)
+    eqv_lift = congruence_pour_tout(eqv_in, xb)
+    init = N.modus_ponens(init, equivalence_avant(eqv_lift))   # (∀xb)(∀yb)(…)
+    return conjonction_intro(borne, init)
+
+
+# ════════════════════════════════════════════════════════════════════════════
+#  🎯🎯 ASSEMBLAGE FINAL — trichotomie réduite, val_dans_F ÉLIMINÉ.
+# ════════════════════════════════════════════════════════════════════════════
+def trichotomie_ordinaux_canon_close(E_set="E", R="R", F_set="F", Rp="Rp"):
+    """⊢ trichotomie_ordinaux_canon(E,R,F,Rp)  (== maillon_final_cible) sous les 5
+    hypothèses { bo(R,E), bo(Rp,F), residu_univ_app, (dom h=E ou pr₂h=F),
+    est_segment(pr₂h,Rp,F)[x,w] }.
+
+    🎯🎯 RÉDUCTION vs `A.trichotomie_ordinaux_canon_prouve_min` (6 hyps) : le résidu
+    `val_dans_F` est ÉLIMINÉ.  On part de `maillon_final_h_plus3` et on décharge le
+    segment dom du maillon (seg(dom h)[x,w]) par `dom_h_est_segment_sans_val`
+    (VAL-FREE : codomaine DÉRIVÉ via le pont CLOS, PAS postulé) au lieu de la version
+    `_sous_val` (qui injectait val_dans_F).  RÉSULTAT : 5 hypothèses, val_dans_F DISPARU.
+
+    🔬 RÉSIDUS STRUCTURELS SUBSISTANTS (rapportés, JAMAIS postulés — cf. docstring du
+    module pour le détail des blocages) :
+      • residu_univ_app  : son CONTENU géométrique est PROUVÉ (residu_univ_app_renforce,
+        CLOS) mais son antécédent ANT_12 (déposé) est trop faible de 2 segments
+        (seg(Sp,R,E), seg(Tg,Rp,F)) ⇒ non déchargeable EN L'ÉTAT.
+      • (dom h=E ou pr₂h=F) MAXIMALITÉ : déchargeable via maximalite_donne_trichotomie_close
+        mais cela RÉINTRODUIT h_graphe_hyp (axiome opaque couple-only de h) + seg(pr₂h),
+        FAISANT GROSSIR le résidu — on la GARDE (comme `_min`).
+      • est_segment(pr₂h,Rp,F)[x,w]  : l'initialité de l'IMAGE pr₂h=image(h,dom h) est
+        CIRCULAIRE pour le CORE (T=pr₂h serait sa propre hypothèse seg(T)) et requiert
+        l'iso INVERSE / la surjectivité (maillon distinct non clos).
+
+    INVARIANT : theorie_ensembles() = 22.  RIEN POSTULÉ : chaque décharge est une PREUVE
+    CLOSE.  NON vacueux.  Noms ambiants CANONIQUES E,F,R,Rp.  NE MODIFIE AUCUN fichier."""
+    from bourbaki.cardinaux import ensembles_maillon_coherences_prouvees as MCP
+    from bourbaki.cardinaux import ensembles_trichotomie_assemble as A
+    assert (E_set, R, F_set, Rp) == ("E", "R", "F", "Rp"), \
+        "noms ambiants CANONIQUES requis"
+    mf = MCP.maillon_final_h_plus3(E_set, R, F_set, Rp)
+    seg = A._seg_dom_form(E_set, R, F_set, Rp, "x", "w")      # est_segment(dom h,R,E)[x,w]
+    if seg in set(mf.hypotheses):
+        preuve = _seg_dom_sans_val_binders(E_set, R, F_set, Rp, "x", "w")   # VAL-FREE
+        assert preuve.conclusion == seg, "seg(dom h)[x,w] sans val ≠ hypothèse du maillon"
+        mf = N.modus_ponens(preuve, N.loi_deduction(seg, mf))
+    return mf
+
+
+def trichotomie_ordinaux_canon_close_cible(E_set="E", R="R", F_set="F", Rp="Rp"):
+    """ÉNONCÉ-cible (test miroir) : trichotomie_ordinaux_canon(E,R,F,Rp)
+    (== maillon_final_cible)."""
+    from bourbaki.cardinaux import ensembles_maillon_coherences_prouvees as MCP
+    return MCP.maillon_final_h_plus3_cible(E_set, R, F_set, Rp)
+
+
+def trichotomie_ordinaux_canon_close_hypotheses(E_set="E", R="R", F_set="F", Rp="Rp"):
+    """Les 5 HYPOTHÈSES SURVIVANTES ATTENDUES (documentation / test miroir) :
+       { bo(R,E), bo(Rp,F), residu_univ_app, (dom h=E ou pr₂h=F),
+         est_segment(pr₂h,Rp,F)[x,w] }.   (val_dans_F ÉLIMINÉ vs `_min`.)"""
+    from bourbaki.cardinaux import ensembles_fusion_depuis_coincidence_app as FDA
+    from bourbaki.cardinaux import ensembles_trichotomie_assemble as A
+    honnetes = list(FDA.fusion_depuis_coincidence_app_hypotheses(E_set, R, F_set, Rp))
+    return honnetes + [
+        A._maximalite_form(E_set, R, F_set, Rp),
+        A._seg_img_form(E_set, R, F_set, Rp, "x", "w"),
+    ]
+
+
 __all__ = [
     "image_segment_est_segment", "image_segment_est_segment_cible",
     "restriction_inclus_produit_image", "restriction_inclus_produit_image_cible",
@@ -728,4 +814,6 @@ __all__ = [
     "residu_univ_app_renforce_antecedent",
     "dom_h_initial_sans_val",
     "dom_h_est_segment_sans_val", "dom_h_est_segment_sans_val_cible",
+    "trichotomie_ordinaux_canon_close", "trichotomie_ordinaux_canon_close_cible",
+    "trichotomie_ordinaux_canon_close_hypotheses",
 ]
