@@ -99,6 +99,83 @@ def composee_dans_S(g="psi", f="phi", S="S", T="T", t="t"):
     return N.generalisation(t, body)                         # (∀t)(t∈S ⇒ (g∘f)(t)[j]∈S)
 
 
+def raccord_phip(phi="phi", phip="phip", S="S", T="T", u="u"):
+    """⊢ { φ⊂S×T, dom φ=S, φ func, φ' func, dom(φ'⁻¹)=T, (φ'⁻¹∘φ) func }
+         ⊢ (∀u)( u∈S ⇒ valeur(φ', valeur(c,u,b="j"), b="j") = valeur(φ,u,b="j") )
+       où c := φ'⁻¹∘φ = composee(reciproque(φ'), φ).   (BRIQUE 4 — raccord φ'(c(u))=φ(u).)
+
+    c(u)=φ'⁻¹(φ(u)) (composition_valeur_t) ; φ'(φ'⁻¹(φ(u)))=φ(u) (section_reciproque,
+    sous φ(u)∈T) ; pont liant j↔y aux frontières (le point c(u)[j] porte un τ_j, donc
+    le pont externe sur φ'(c(u)) NE capture PAS — contrairement au cas τ_y)."""
+    from bourbaki.logique.formule import existe
+    from bourbaki.logique.tactiques.tactiques_abrege2 import equivalence_arriere
+    from bourbaki.logique.tactiques.tactiques_abrege_egalite import composer_egalites
+    from bourbaki.cardinaux.ensembles_iso_ordre_reciproque import section_reciproque
+    from bourbaki.ensembles.fonctions.ensembles_composee_valeurs import composition_valeur_t
+    vphi, vphip, vS, vT, vu, vy = var(phi), var(phip), var(S), var(T), var(u), var("y")
+    Phinv = E.reciproque(vphip)               # φ'⁻¹
+    c = E.composee(Phinv, vphi)               # c = φ'⁻¹∘φ
+    Hu = N.assume(appartient(vu, vS))         # u∈S
+    phi_u_y = E.valeur(vphi, vu)              # φ(u)[y]
+    cu_j = E.valeur(c, vu, b="j")             # c(u)[j]  (forme _val du séquent coincidence)
+    finv_phiu_y = E.valeur(Phinv, phi_u_y)    # φ'⁻¹(φ(u))[y]
+
+    # φ(u)[y] ∈ T  (codomaine φ:S→T)
+    phiu_in_T = valeur_dans_codomaine(phi, S, T, u)       # [hyps φ⊂S×T, dom φ=S, u∈S]
+
+    # c(u)[y] = φ'⁻¹(φ(u))[y]  : composition_valeur_t(φ'⁻¹, φ, u), hyps domaine (∃) déchargées
+    comp_eq = composition_valeur_t(Phinv, vphi, vu)       # c(u)[y] = φ'⁻¹(φ(u))[y]
+    #   (∃y)((u,y)∈φ)  [u∈dom φ de u∈S + dom φ=S]
+    Hdomphi = N.assume(egal(E.dom(vphi), vS))
+    u_in_domphi = N.modus_ponens(Hu, equivalence_arriere(N.modus_ponens(
+        Hdomphi, N.s6(E.dom(vphi), vS, "hdp", appartient(vu, var("hdp"))))))
+    axdphi = instancie(instancie(N.axiome(E.theorie_ensembles(), E.AXIOME_DOM), vphi), vu)
+    exF = N.modus_ponens(u_in_domphi, equivalence_avant(axdphi))
+    comp_eq = N.modus_ponens(exF, N.loi_deduction(
+        existe("y", appartient(E.couple(vu, vy), vphi)), comp_eq))
+    #   (∃y)((φ(u),y)∈φ'⁻¹)  [φ(u)∈dom φ'⁻¹=T de φ(u)∈T]
+    Hdomrec = N.assume(egal(E.dom(Phinv), vT))
+    phiu_in_domrec = N.modus_ponens(phiu_in_T, equivalence_arriere(N.modus_ponens(
+        Hdomrec, N.s6(E.dom(Phinv), vT, "hdr", appartient(phi_u_y, var("hdr"))))))
+    axdrec = instancie(instancie(N.axiome(E.theorie_ensembles(), E.AXIOME_DOM), Phinv), phi_u_y)
+    exG = N.modus_ponens(phiu_in_domrec, equivalence_avant(axdrec))
+    comp_eq = N.modus_ponens(exG, N.loi_deduction(
+        existe("y", appartient(E.couple(phi_u_y, vy), Phinv)), comp_eq))   # c(u)[y]=φ'⁻¹(φ(u))[y] [hyp comp func]
+
+    # section : φ'(φ'⁻¹(φ(u)[y]))[y] = φ(u)[y]   (section_reciproque, hyp φ(u)∈T déchargée)
+    sec = section_reciproque(vphip, phi_u_y, vT)          # φ'(φ'⁻¹(φ(u)))[y] = φ(u)[y]  [hyp φ(u)∈T]
+    sec = N.modus_ponens(phiu_in_T, N.loi_deduction(appartient(phi_u_y, vT), sec))
+
+    # ── chaînage vers la cible (tout ramené en « j » par ponts sûrs) ──
+    #   c(u)[j] = c(u)[y] = φ'⁻¹(φ(u))[y]   (pont sur c + comp_eq)
+    cu_j_eq_finv = composer_egalites(valeur_j_egal_y(c, vu), comp_eq)      # c(u)[j] = φ'⁻¹(φ(u))[y]
+    #   φ'(c(u)[j])[j] = φ'(c(u)[j])[y]   (pont externe ; point c(u)[j] porte τ_j → sûr)
+    lhs_jy = valeur_j_egal_y(vphip, cu_j)                 # φ'(c(u)[j])[j] = φ'(c(u)[j])[y]
+    #   φ'(c(u)[j])[y] = φ'(φ'⁻¹(φ(u))[y])[y]   (Leibniz : c(u)[j] → φ'⁻¹(φ(u))[y])
+    rew = N.modus_ponens(cu_j_eq_finv, N.s6(cu_j, finv_phiu_y, "hr1",
+        egal(E.valeur(vphip, cu_j), E.valeur(vphip, var("hr1")))))
+    #   rew : (φ'(c(u)[j])[y] = φ'(c(u)[j])[y]) ⇔ (φ'(c(u)[j])[y] = φ'(φ'⁻¹(φ(u))[y])[y])
+    lhsy_eq_seclhs = N.modus_ponens(N.reflexivite(E.valeur(vphip, cu_j)),
+                                    equivalence_avant(rew))    # φ'(c(u)[j])[y] = φ'(φ'⁻¹(φ(u))[y])[y]
+    #   chaîne : φ'(c(u)[j])[j] = φ'(c(u)[j])[y] = φ'(φ'⁻¹(φ(u))[y])[y] = φ(u)[y]
+    lhs_eq_phiuy = composer_egalites(composer_egalites(lhs_jy, lhsy_eq_seclhs), sec)   # φ'(c(u)[j])[j] = φ(u)[y]
+    #   φ(u)[y] = φ(u)[j]   (pont inverse)
+    from bourbaki.ordre.ensembles_valeur_bridge import valeur_y_egal_j
+    lhs_eq_phiuj = composer_egalites(lhs_eq_phiuy, valeur_y_egal_j(vphi, vu))   # φ'(c(u)[j])[j] = φ(u)[j]
+
+    body = N.loi_deduction(appartient(vu, vS), lhs_eq_phiuj)
+    return N.generalisation(u, body)          # (∀u)(u∈S ⇒ φ'(c(u))[j]=φ(u)[j])
+
+
+def raccord_phip_cible(phi="phi", phip="phip", S="S", T="T", u="u"):
+    """ÉNONCÉ-cible (test miroir) : (∀u)(u∈S ⇒ φ'(c(u))[j]=φ(u)[j]), c=φ'⁻¹∘φ."""
+    vphi, vphip, vS, vu = var(phi), var(phip), var(S), var(u)
+    c = E.composee(E.reciproque(vphip), vphi)
+    cu_j = E.valeur(c, vu, b="j")
+    return pourtout(u, impl(appartient(vu, vS),
+                            egal(E.valeur(vphip, cu_j, b="j"), E.valeur(vphi, vu, b="j"))))
+
+
 def composee_dans_S_cible(g="psi", f="phi", S="S", T="T", t="t"):
     """ÉNONCÉ-cible (test miroir) : (∀t)(t∈S ⇒ valeur(g∘f,t,b="j") ∈ S)."""
     vf, vg, vS, vt = var(f), var(g), var(S), var(t)

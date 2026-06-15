@@ -22,6 +22,20 @@ def test_composee_dans_S_hyps_structurelles():
     assert len(t.hypotheses) == 6
 
 
+def test_raccord_phip_conclusion():
+    """BRIQUE 4 — raccord φ'(c(u))=φ(u), c=φ'⁻¹∘φ.  Conditionnel propre, fidèle, non vacueux."""
+    t = G.raccord_phip()
+    assert not t.est_clos
+    assert t.conclusion == G.raccord_phip_cible()
+    assert t.conclusion not in t.hypotheses
+
+
+def test_raccord_phip_hyps():
+    t = G.raccord_phip()
+    assert len(t.hypotheses) == 5
+
+
 def test_theorie_inchangee_22():
     G.composee_dans_S()
+    G.raccord_phip()
     assert len(E.theorie_ensembles().axiomes) == 22
