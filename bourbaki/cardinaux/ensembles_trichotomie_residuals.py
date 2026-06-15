@@ -17,18 +17,59 @@ du théorème (= CLOS).  Le cœur mathématique (coïncidence, maximalité) est 
 ailleurs ; ce qui restait n'était que de la BONNE-FORMATION géométrique.
 
 ────────────────────────────────────────────────────────────────────────────────
-LE LEMME CŒUR (R1, partie #8 ; et R4) :
+CE MODULE LIVRE (theorie=22, rien postulé, NE MODIFIE AUCUN fichier existant) :
 
-  🎯 `image_segment_est_segment(φ,S,T,S0,E,F,R,Rp)` :
+  🎯 LE LEMME CŒUR (le contenu géométrique de R1) :
+     `image_segment_est_segment(φ,S,T,S0,E,F,R,Rp)` :
         { iso(φ,S,T,R,Rp)[px,pw],  func φ,  dom φ=S,
           est_segment(S0,R,E),  est_segment(T,Rp,F),  inclus(S0,S),  bo(R,E) }
         ⊢ est_segment( image(φ,S0), Rp, F ).
      « L'IMAGE d'un sous-segment par un iso d'ordre est un segment du codomaine. »
-     C'est LE lemme géométrique : image(φ,S0) est CLOS VERS LE BAS dans F.
+     image(φ,S0) est CLOS VERS LE BAS dans F (sens arrière de compatible_ordre +
+     surjectivité image=but + initialité du sous-segment).  7 hyps HONNÊTES.
+
+  🎯 `restriction_inclus_produit_image(φ,X)`  CLOS : φ|X ⊂ X × image(φ,X).
+     `restriction_inclus_produit_Tp(...)` : resserre au codomaine PARTAGÉ Tp (= #13).
+
+  🎯🎯 `residu_univ_app_renforce(...)`  CLOS : le UNIVERSEL prouvant le CONSÉQUENT du
+     résidu (#8 segment image  ∧  #13 inclusion graphe) sous l'antécédent ANT_12
+     RENFORCÉ des DEUX segments seg(Sp,R,E)+seg(Tg,Rp,F) — les SEULS conjoints
+     manquant à `residu_univ_app` (déposé) pour être un théorème.  Le contenu
+     géométrique du résidu est ainsi ENTIÈREMENT PROUVÉ (CORE + #13).
+
+  🎯 `dom_h_est_segment_sans_val(...)`  CLOS : est_segment(dom h, R, E) SANS l'hypothèse
+     opaque `val_dans_F` — le codomaine φ(y)∈F est DÉRIVÉ via le pont CLOS
+     `val_dans_F_depuis_structure` (sa prémisse de structure de graphe est portée par
+     le cœur STRENGTHENED de h).  ÉLIMINE le résidu R2.
+
+  🎯🎯 `trichotomie_ordinaux_canon_close(...)` : trichotomie_ordinaux_canon SOUS 5
+     hypothèses { bo(R,E), bo(Rp,F), residu_univ_app, (dom h=E ou pr₂h=F),
+     est_segment(pr₂h,Rp,F)[x,w] } — val_dans_F ÉLIMINÉ vs les 6 de `_min`.
+
+────────────────────────────────────────────────────────────────────────────────
+🔬 RÉSIDUS STRUCTURELS IRRÉDUCTIBLES SUBSISTANTS (rapportés, JAMAIS postulés) :
+
+  • residu_univ_app  : son CONTENU est PROUVÉ (residu_univ_app_renforce, CLOS) ; mais
+    son antécédent DÉPOSÉ (ANT_12) est trop faible de DEUX segments — seg(Sp,R,E)
+    (initialité du petit domaine) et seg(Tg,Rp,F) (grand codomaine segment).  Ces deux
+    SONT portés par les CŒURS dans la fusion (cœur petit ⊢ seg(Sp,R,E) ; cœur grand
+    ⊢ seg(Tg,Rp,F)), mais `residu_univ_app` (figé dans le dépôt) ne les inclut pas dans
+    son antécédent ⇒ non déchargeable EN L'ÉTAT sans refondre la fusion (fichier figé).
+
+  • est_segment(pr₂h,Rp,F)  : CIRCULAIRE pour le CORE (pr₂h=image(h,dom h) est SON
+    PROPRE codomaine T ⇒ l'hyp seg(T)=seg(pr₂h) = le but).  Requiert l'initialité de
+    l'IMAGE via l'iso INVERSE / la surjectivité de h (maillon distinct, non clos).
+
+  • (dom h=E ou pr₂h=F) MAXIMALITÉ  : déchargeable (maximalite_donne_trichotomie_close)
+    mais cela RÉINTRODUIT h_graphe_hyp + seg(pr₂h) — FAISANT GROSSIR le résidu.
+
+  • h_inclus_dom_pr2 (= h_graphe_hyp, inclus(h, dom h × pr₂h))  : NON extractible de
+    l'axiome OPAQUE de h, qui caractérise QUE les couples (u,v)∈h — jamais un z
+    ARBITRAIRE ; rien n'exclut un non-couple z∈h.  Limitation couple-only PRÉ-EXISTANTE.
 
 INVARIANT : theorie_ensembles() = 22.  Rien postulé : tout DÉRIVE des axiomes
-IMAGE/DOM, de est_segment (Déf. 2), de compatible_ordre (sens arrière) et de la
-surjectivité (image=but).  NON vacueux.  NE MODIFIE AUCUN fichier existant.
+IMAGE/DOM/RESTRICTION/PRODUIT, de est_segment (Déf. 2), de compatible_ordre (sens
+arrière), de la surjectivité (image=but) et de ponts CLOS du dépôt.  NON vacueux.
 """
 from __future__ import annotations
 
