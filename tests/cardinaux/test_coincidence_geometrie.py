@@ -86,10 +86,21 @@ def test_coincidence_close_assemblage():
     assert cod_c not in t.hypotheses                        # cod_c DÉCHARGÉE
 
 
+def test_coincidence_univ_close_nestee():
+    """🎯 VERSION NESTÉE : φ1:S1≅T1, φ2 sur segment ⊃ S1 (S1⊂dom φ2) coïncident sur S1.
+    coincidence_close(φ1, φ2|S1) + restriction_valeur → (∀u)(u∈S1⇒φ1(u)=φ2(u)).
+    C'est la forme consommée par fusion_hyp (Lemme 1 §III.2)."""
+    t = G.coincidence_univ_close()
+    assert not t.est_clos
+    assert t.conclusion == G.coincidence_univ_close_cible()    # (∀u)(u∈S1 ⇒ φ1(u)=φ2(u))
+    assert t.conclusion not in t.hypotheses                    # NON tautologique
+
+
 def test_theorie_inchangee_22():
     G.composee_dans_S()
     G.raccord_phip()
     G.retraction_phi()
     G.retraction_kc()
     G.coincidence_close()
+    G.coincidence_univ_close()
     assert len(E.theorie_ensembles().axiomes) == 22

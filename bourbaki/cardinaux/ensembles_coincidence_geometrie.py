@@ -211,7 +211,7 @@ def raccord_phip(phi="phi", phip="phip", S="S", T="T", u="u"):
     from bourbaki.logique.tactiques.tactiques_abrege_egalite import composer_egalites
     from bourbaki.cardinaux.ensembles_iso_ordre_reciproque import section_reciproque
     from bourbaki.ensembles.fonctions.ensembles_composee_valeurs import composition_valeur_t
-    vphi, vphip, vS, vT, vu, vy = var(phi), var(phip), var(S), var(T), var(u), var("y")
+    vphi, vphip, vS, vT, vu, vy = _t(phi), _t(phip), _t(S), _t(T), var(u), var("y")
     Phinv = E.reciproque(vphip)               # φ'⁻¹
     c = E.composee(Phinv, vphi)               # c = φ'⁻¹∘φ
     Hu = N.assume(appartient(vu, vS))         # u∈S
@@ -304,7 +304,7 @@ def retraction_kc(phi="phi", phip="phip", S="S", T="T", x="x"):
     from bourbaki.cardinaux.ensembles_iso_ordre_reciproque import section_reciproque
     from bourbaki.ensembles.fonctions.ensembles_composee_valeurs import composition_valeur_t
     from bourbaki.ordre.ensembles_valeur_bridge import valeur_y_egal_j
-    vphi, vphip, vS, vT, vx, vy = var(phi), var(phip), var(S), var(T), var(x), var("y")
+    vphi, vphip, vS, vT, vx, vy = _t(phi), _t(phip), _t(S), _t(T), var(x), var("y")
     PhiInv = E.reciproque(vphi)               # φ⁻¹
     PhipInv = E.reciproque(vphip)             # φ'⁻¹
     c = E.composee(PhipInv, vphi)             # c = φ'⁻¹∘φ
@@ -409,7 +409,7 @@ def coincidence_close(phi="phi", phip="phip", S="S", T="T", u="u"):
     et déchargeables via auto_de_deux_isos+strict_croissante_depuis_iso, REPORT mineur) +
     les structurelles d'iso.  Conclusion φ(u)=φ'(u) sur S, NON tautologique."""
     from bourbaki.cardinaux.ensembles_trichotomie_restriction import coincidence_sur_chevauchement
-    vphi, vphip, vS, vT = var(phi), var(phip), var(S), var(T)
+    vphi, vphip, vS, vT = _t(phi), _t(phip), _t(S), _t(T)
     PhipInv, PhiInv = E.reciproque(vphip), E.reciproque(vphi)
     c = E.composee(PhipInv, vphi)             # c = φ'⁻¹∘φ  (TERME)
     k = E.composee(PhiInv, vphip)             # k = φ⁻¹∘φ'  (TERME)
@@ -425,6 +425,47 @@ def coincidence_close(phi="phi", phip="phip", S="S", T="T", u="u"):
         assert b.conclusion in out.hypotheses, "brique ne matche pas une hyp de coincidence"
         out = N.modus_ponens(b, N.loi_deduction(b.conclusion, out))   # décharge la famille
     return out
+
+
+def coincidence_univ_close(phi1="phi1", phi2="phi2", S1="S1", T1="T1", u="u"):
+    """⊢ { hyps de coincidence_close(φ1, φ2|S1, S1, T1)  +  φ2 fonctionnel,  S1 ⊂ dom φ2 }
+         ⊢ (∀u)( u∈S1 ⇒ φ1(u) = φ2(u) ).
+
+    🎯 VERSION NESTÉE de la coïncidence (cœur de fusion_hyp / Lemme 1 §III.2) : φ1:S1≅T1
+    et φ2 sur un segment plus grand (S1⊂dom φ2) coïncident sur S1.  On applique
+    `coincidence_close` à φ2|S1 = restriction(φ2,S1) (qui donne φ1(u)=(φ2|S1)(u) sur S1),
+    puis `restriction_valeur` réécrit (φ2|S1)(u)=φ2(u) (ponts liant j↔y).  Géométrie
+    déchargée (via coincidence_close) ; reste les hyps structurelles de φ2|S1 + φ2."""
+    from bourbaki.logique.tactiques.tactiques_abrege_egalite import composer_egalites
+    from bourbaki.logique.tactiques.tactiques_abrege2 import instancie as _i
+    from bourbaki.ordre.ensembles_valeur_bridge import valeur_y_egal_j
+    from bourbaki.cardinaux.ensembles_cantor_bernstein_bij import restriction_valeur
+    vphi1, vphi2, vS1, vu = var(phi1), var(phi2), var(S1), var(u)
+    phi2S1 = E.restriction(vphi2, vS1)
+    base = coincidence_close(phi1, phi2S1, S1, T1, u)         # (∀u)(u∈S1⇒φ1(u)[j]=(φ2|S1)(u)[j])
+    Hu = N.assume(appartient(vu, vS1))
+    base_u = N.modus_ponens(Hu, _i(base, vu))                # φ1(u)[j]=(φ2|S1)(u)[j]
+    # u∈dom φ2  (de u∈S1 et S1⊂dom φ2)
+    Hsub = N.assume(inclus(vS1, E.dom(vphi2)))
+    u_in_dom = N.modus_ponens(Hu, _i(Hsub, vu))             # u∈dom φ2
+    # restriction_valeur : (φ2|S1)(u)[y]=φ2(u)[y]  [φ2 func, u∈S1, u∈dom φ2]
+    rv = restriction_valeur(phi2, S1, u)
+    rv = N.modus_ponens(Hu, N.loi_deduction(appartient(vu, vS1), rv))
+    rv = N.modus_ponens(u_in_dom, N.loi_deduction(appartient(vu, E.dom(vphi2)), rv))   # (φ2|S1)(u)[y]=φ2(u)[y]
+    # ponts j↔y : (φ2|S1)(u)[j] = (φ2|S1)(u)[y] = φ2(u)[y] = φ2(u)[j]
+    rvj = composer_egalites(composer_egalites(valeur_j_egal_y(phi2S1, vu), rv),
+                            valeur_y_egal_j(vphi2, vu))      # (φ2|S1)(u)[j] = φ2(u)[j]
+    # φ1(u)[j] = (φ2|S1)(u)[j] = φ2(u)[j]
+    final = composer_egalites(base_u, rvj)                   # φ1(u)[j]=φ2(u)[j]
+    body = N.loi_deduction(appartient(vu, vS1), final)
+    return N.generalisation(u, body)
+
+
+def coincidence_univ_close_cible(phi1="phi1", phi2="phi2", S1="S1", T1="T1", u="u"):
+    """ÉNONCÉ-cible : (∀u)(u∈S1 ⇒ φ1(u)=φ2(u))."""
+    vphi1, vphi2, vS1, vu = var(phi1), var(phi2), var(S1), var(u)
+    return pourtout(u, impl(appartient(vu, vS1),
+                            egal(E.valeur(vphi1, vu, b="j"), E.valeur(vphi2, vu, b="j"))))
 
 
 def coincidence_close_cible(phi="phi", phip="phip", S="S", T="T", u="u"):
