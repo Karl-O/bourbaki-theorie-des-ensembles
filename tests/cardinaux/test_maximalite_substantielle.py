@@ -83,10 +83,12 @@ def test_couple_ab_dans_h_residu():
     assert not thm.est_clos
     assert thm.conclusion == MS.couple_ab_dans_h_residu_cible()
     assert thm.conclusion not in thm.hypotheses              # NON vacueux
-    # les 5 résidus structurels sont présents
-    for r in MS.couple_ab_dans_h_residu_hyps():
+    # les 4 résidus structurels sont présents
+    residu = MS.couple_ab_dans_h_residu_hyps()
+    assert len(residu) == 4
+    for r in residu:
         assert r in thm.hypotheses
-    # 9 hyps : 5 résidu + a∈E + b∈F + func h + a∉dom h
+    # 9 hyps : 4 résidu + dom h=seg(R,E,a) + a∈E + b∈F + func h + a∉dom h
     assert len(thm.hypotheses) == 9
 
 
@@ -109,9 +111,9 @@ def test_maximalite_donne_trichotomie_hypotheses():
     # 3 HONNÊTES {bo(R,E), bo(Rp,F), residu_univ_app}
     honnetes = set(FDA.fusion_depuis_coincidence_app_hypotheses("E", "R", "F", "Rp"))
     assert honnetes <= hyps
-    # 5 RÉSIDU back-and-forth (au témoin a*,b*)
+    # 4 RÉSIDU back-and-forth (au témoin a*,b*)
     residu = set(MS.maximalite_donne_trichotomie_prouve_residu())
-    assert len(residu) == 5
+    assert len(residu) == 4
     assert residu <= hyps
     # 2 SEGMENTS (dom h, pr₂ h)
     h = TS.h_iso_max("E", "R", "F", "Rp")
@@ -119,16 +121,16 @@ def test_maximalite_donne_trichotomie_hypotheses():
     seg_dom = E.est_segment(E.dom(h), Rf, var("E"))
     seg_img = E.est_segment(E.img(h), Rpf, var("F"))
     assert seg_dom in hyps and seg_img in hyps
-    # AUCUNE autre hypothèse : 3 + 5 + 2 = 10, parfaitement classées
+    # AUCUNE autre hypothèse : 3 + 4 + 2 = 9, parfaitement classées
     classified = honnetes | residu | {seg_dom, seg_img}
     assert hyps == classified
-    assert len(hyps) == 10
+    assert len(hyps) == 9
 
 
 def test_maximalite_residu_est_le_gap_precis():
     """Le RÉSIDU 3 = l'iso de h⁺* w.r.t. R/Rp (et non les ordres adjoints) — le GAP."""
     residu = MS.maximalite_donne_trichotomie_prouve_residu()
-    assert len(residu) == 5
+    assert len(residu) == 4
     # le 3ᵉ résidu EST l'iso (R,Rp) de h⁺* sur les segments fermés ]←,a*]≅]←,b*]
     h = TS.h_iso_max("E", "R", "F", "Rp")
     Rf, Rpf = _R_de("R"), _R_de("Rp")

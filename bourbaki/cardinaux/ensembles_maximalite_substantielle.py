@@ -294,13 +294,42 @@ def _coeur_temoin_concret(E_set, R, F_set, Rp, vu, vv, vS, vT, vphi):
         inclus(vphi, E.produit(vS, vT)))
 
 
+def _dom_hplus_eq_Saa(E_set, R, F_set, Rp, a, b):
+    """⊢ { dom h = seg(R,E,a) } ⊢ dom(h⁺) = ]←,a] = seg(R,E,a)∪{a}.   (theorie=22.)
+
+    dom(h⁺)=dom(h∪{(a,b)})=dom h ∪ dom{(a,b)} (dom_reunion_graphes) ; dom{(a,b)}={a}
+    (ADJ.dom_singleton_couple) ; sous dom h=seg(R,E,a) (Prop 1), réécriture Leibniz
+    ⇒ dom(h⁺)=seg(R,E,a)∪{a}=]←,a].  DÉRIVE le RÉSIDU (9) de la donnée Prop 1."""
+    from bourbaki.ensembles.fonctions.ensembles_restriction_somme import dom_reunion_graphes
+    va, vb = _t(a), _t(b)
+    h = TS.h_iso_max(E_set, R, F_set, Rp)
+    G = ADJ.graphe_point(va, vb)
+    hplus = _hplus(E_set, R, F_set, Rp, a, b)
+    Sa = _seg(R, E_set, a)
+    SaA = _Saa(R, E_set, a)                                  # = reunion(seg(R,E,a), {a})
+    domh, domG = E.dom(h), E.dom(G)
+    Saglob = E.singleton(va)
+
+    dr = dom_reunion_graphes(h, G)                           # dom(h∪G)=dom h ∪ dom G
+    dsc = ADJ.dom_singleton_couple(a, b)                     # dom G = {a}
+    # réécrire dom G → {a} :  dom h ∪ dom G  →  dom h ∪ {a}
+    step1 = _leib(domG, Saglob, dsc,
+                  lambda w: egal(E.dom(hplus), E.reunion(domh, w)), dr)   # dom h⁺ = dom h ∪ {a}
+    # réécrire dom h → seg(R,E,a) :  dom h ∪ {a}  →  seg(R,E,a) ∪ {a}
+    Hdom_eq = N.assume(egal(domh, Sa))                       # dom h = seg(R,E,a)
+    step2 = _leib(domh, Sa, Hdom_eq,
+                  lambda w: egal(E.dom(hplus), E.reunion(w, Saglob)), step1)  # dom h⁺ = seg∪{a}
+    assert step2.conclusion == egal(E.dom(hplus), SaA)
+    return step2                                             # dom(h⁺) = ]←,a]   [dom h=seg]
+
+
 def couple_ab_dans_h_residu(E_set="E", R="R", F_set="F", Rp="Rp", a="a", b="b"):
-    """⊢ { ── 5 RÉSIDU STRUCTUREL (précisément reportés, JAMAIS postulés) :
+    """⊢ { ── 4 RÉSIDU STRUCTUREL (précisément reportés, JAMAIS postulés) :
               (1) est_segment(]←,a], R, E)
               (2) est_segment(]←,b], Rp, F)
               (3) est_isomorphisme_ordre(h⁺, ]←,a], ]←,b], R, Rp)
-              (9) dom(h⁺) = ]←,a]
               (10) h⁺ ⊂ ]←,a]×]←,b]
+           ── + dom h = seg(R,E,a)  (DONNÉE Prop 1, fournit le RÉSIDU (9) dom h⁺=]←,a])
            ── + conjoints EXPLICITES déchargés depuis a,b sommets :  a∈E, b∈F
            ── + structurels HONNÊTES :  func h, a∉dom h }
           ⊢ ( a, b ) ∈ h.
@@ -332,11 +361,12 @@ def couple_ab_dans_h_residu(E_set="E", R="R", F_set="F", Rp="Rp", a="a", b="b"):
     TbB = _Tbb(Rp, F_set, b)
     Rf, Rpf = _R_de(R), _R_de(Rp)
 
-    # ── les 5 hypothèses RÉSIDU + 2 explicites + valeur ──
+    # ── 4 hypothèses RÉSIDU + dom-Prop1 + 2 explicites + valeur ──
     Hseg_S = N.assume(E.est_segment(SaA, Rf, vE))                  # (1)
     Hseg_T = N.assume(E.est_segment(TbB, Rpf, vF))                 # (2)
     Hiso = N.assume(V.est_isomorphisme_ordre(hplus, SaA, TbB, Rf, Rpf, "px", "pw"))  # (3)
-    Hdom = N.assume(egal(E.dom(hplus), SaA))                       # (9)
+    # (9) dom(h⁺)=]←,a] DÉRIVÉ de dom h = seg(R,E,a) (DONNÉE Prop 1, _dom_hplus_eq_Saa)
+    Hdom = _dom_hplus_eq_Saa(E_set, R, F_set, Rp, a, b)           # dom h⁺=]←,a]  [dom h=seg(R,E,a)]
     Hgraph = N.assume(inclus(hplus, E.produit(SaA, TbB)))          # (10)
     Ha_E = N.assume(appartient(va, vE))                            # a∈E
     Hb_F = N.assume(appartient(vb, vF))                            # b∈F
@@ -373,7 +403,10 @@ def couple_ab_dans_h_residu_cible(E_set="E", R="R", F_set="F", Rp="Rp", a="a", b
 
 
 def couple_ab_dans_h_residu_hyps(E_set="E", R="R", F_set="F", Rp="Rp", a="a", b="b"):
-    """Les 5 hypothèses RÉSIDU STRUCTUREL (documentation / test miroir)."""
+    """Les 4 hypothèses RÉSIDU STRUCTUREL (documentation / test miroir).
+
+    Le RÉSIDU (9) dom h⁺=]←,a] N'EST PLUS une hypothèse : il est DÉRIVÉ de
+    dom h = seg(R,E,a) (donnée Prop 1) par _dom_hplus_eq_Saa."""
     va, vb = _t(a), _t(b)
     vE, vF = _t(E_set), _t(F_set)
     hplus = _hplus(E_set, R, F_set, Rp, a, b)
@@ -384,7 +417,6 @@ def couple_ab_dans_h_residu_hyps(E_set="E", R="R", F_set="F", Rp="Rp", a="a", b=
         E.est_segment(SaA, Rf, vE),
         E.est_segment(TbB, Rpf, vF),
         V.est_isomorphisme_ordre(hplus, SaA, TbB, Rf, Rpf, "px", "pw"),
-        egal(E.dom(hplus), SaA),
         inclus(hplus, E.produit(SaA, TbB)),
     ]
 
@@ -432,7 +464,6 @@ def _prop1_temoin(R, e_set, d_term, w="w"):
     petit_x = et(appartient(var("x"), DmD),
                  pourtout(w, impl(appartient(var(w), DmD), Rf(var("x"), var(w)))))
     body_x = et(petit_x, egal(vd, _seg(R, e_set, var("x"))))
-    a_star = N.s5  # placeholder (unused)
     from bourbaki.logique.formule import tau
     a_t = tau("x", body_x)
     # prop1 (3 hyps) ⊢ ∃x body_x
@@ -443,15 +474,17 @@ def _prop1_temoin(R, e_set, d_term, w="w"):
 
 def maximalite_donne_trichotomie_prouve(E_set="E", R="R", F_set="F", Rp="Rp"):
     """🎯🎯 TARGET B.  ⊢ { bo(R,E), bo(Rp,F), residu_univ_app,
-            ── + RÉSIDU back-and-forth (5 formules, au témoin a*=min(E∖dom h),
+            ── + RÉSIDU back-and-forth (4 formules, au témoin a*=min(E∖dom h),
                   b*=min(F∖pr₂h)), précisément reportées :
               (1) est_segment(]←,a*], R, E)
               (2) est_segment(]←,b*], Rp, F)
-              (3) est_isomorphisme_ordre(h⁺*, ]←,a*], ]←,b*], R, Rp)
-              (9) dom(h⁺*) = ]←,a*]
+              (3) est_isomorphisme_ordre(h⁺*, ]←,a*], ]←,b*], R, Rp)   ← GAP CŒUR
               (10) h⁺* ⊂ ]←,a*]×]←,b*]
             ── + est_segment(dom h, R, E), est_segment(pr₂ h, Rp, F) }
           ⊢ ( dom h = E )  ou  ( pr₂ h = F )   ( == maximalite_donne_trichotomie ).
+
+    (Le RÉSIDU (9) dom h⁺*=]←,a*] est DÉRIVÉ — _dom_hplus_eq_Saa — de dom h=seg(R,E,a*),
+     donnée par Prop 1 ; il N'EST PLUS une hypothèse.)
 
     🎯 Argument de MAXIMALITÉ (back-and-forth, magnitude Cantor–Bernstein).  PAR
     L'ABSURDE : supposons ¬(dom h=E ∨ pr₂h=F), i.e. dom h≠E ET pr₂h≠F.
@@ -467,7 +500,7 @@ def maximalite_donne_trichotomie_prouve(E_set="E", R="R", F_set="F", Rp="Rp"):
 
     Les SEULES hypothèses survivantes : {bo(R,E), bo(Rp,F), residu_univ_app} (HONNÊTES,
     via func h = fonctionnel_h_prouve) + les 2 SEGMENTS (dom h, pr₂ h) + le RÉSIDU
-    back-and-forth (5 formules au témoin a*,b*).  theorie=22, rien postulé, NON vacueux.
+    back-and-forth (4 formules au témoin a*,b*).  theorie=22, rien postulé, NON vacueux.
 
     ⚠️ GAP PRÉCIS (RÉSIDU 3) : extension_iso_depuis_iso_h fournit l'iso de h⁺* pour les
     ordres ADJOINTS ≤'_a/≤'_b, PAS pour R/Rp — le pont ≤'⇔R sur le segment fermé
@@ -511,14 +544,16 @@ def maximalite_donne_trichotomie_prouve(E_set="E", R="R", F_set="F", Rp="Rp"):
 
     # ── (a*,b*)∈h via couple_ab_dans_h_residu (au témoin a*,b*) ──
     couple_in_h = couple_ab_dans_h_residu(E_set, R, F_set, Rp, a_star, b_star)
-    #   hyps : 5 RÉSIDU(a*,b*) + a*∈E + b*∈F + func h + a*∉dom h
-    # décharger a*∈E, b*∈F, func h, a*∉dom h
+    #   hyps : 4 RÉSIDU(a*,b*) + dom h=seg(R,E,a*) + a*∈E + b*∈F + func h + a*∉dom h
+    # décharger dom h=seg(R,E,a*) par dom_eq_seg (Prop 1), a*∈E, b*∈F, func h, a*∉dom h
+    couple_in_h = N.modus_ponens(dom_eq_seg,
+        N.loi_deduction(egal(domh, _seg(R, E_set, a_star)), couple_in_h))    # déch. dom h=seg
     couple_in_h = N.modus_ponens(a_in_E, N.loi_deduction(appartient(a_star, vE), couple_in_h))
     couple_in_h = N.modus_ponens(b_in_F, N.loi_deduction(appartient(b_star, vF), couple_in_h))
     couple_in_h = N.modus_ponens(func_h, N.loi_deduction(E.est_fonctionnel(h), couple_in_h))
     couple_in_h = N.modus_ponens(a_not_dom,
         N.loi_deduction(non(appartient(a_star, domh)), couple_in_h))
-    #   couple_in_h : (a*,b*)∈h  [5 RÉSIDU, bo×2, residu, segments... + paire-hyps]
+    #   couple_in_h : (a*,b*)∈h  [4 RÉSIDU, bo×2, residu, segments + Hneg]
 
     # ── a*∈dom h, CONTREDIT a*∉dom h ──
     ab_in_h_form = appartient(E.couple(a_star, b_star), h)
