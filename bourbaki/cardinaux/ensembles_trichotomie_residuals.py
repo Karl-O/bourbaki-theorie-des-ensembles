@@ -53,6 +53,10 @@ from bourbaki.ensembles.fonctions.ensembles_valeur_codomaine import couple_valeu
 from bourbaki.ordre.ensembles_valeur_bridge import valeur_y_egal_j
 from bourbaki.cardinaux.ensembles_coincidence_univ_app import _premisse_liste
 from bourbaki.cardinaux.ensembles_fusion_depuis_coincidence_app import _DISCHARGEABLE
+from bourbaki.cardinaux import ensembles_trichotomie_scaffold as TS
+from bourbaki.cardinaux import ensembles_trichotomie_scaffold_maximalite as M
+from bourbaki.cardinaux import ensembles_trichotomie_dom_segment as DS
+from bourbaki.cardinaux import ensembles_trichotomie_pont_val as PV
 
 
 def _t(t):
@@ -556,10 +560,172 @@ def _elim_conj(HH, i, n):
     return t
 
 
+# ════════════════════════════════════════════════════════════════════════════
+#  🎯 R2 — est_segment(dom h, R, E)  SANS val_dans_F  (via le PONT clos).
+#
+#  `DS.dom_h_est_segment_sous_val` prouve seg(dom h) mais SOUS l'hypothèse OPAQUE
+#  `val_dans_F` (postulant φ(p)∈F).  Ici on RE-PROUVE l'initialité de dom h en
+#  routant le codomaine φ(y)∈F par `PV.val_dans_F_depuis_structure` (CLOS) : sa
+#  prémisse de STRUCTURE DE GRAPHE (φ⊂S×T, dom φ=S) est FOURNIE par le cœur témoin
+#  STRENGTHENED de h (les 3 conjoints func/dom/graphe de `_h_parts`).  RÉSULTAT :
+#  `val_dans_F` (R2) DISPARAÎT — la borne codomaine est DÉRIVÉE, plus postulée.
+# ════════════════════════════════════════════════════════════════════════════
+def dom_h_initial_sans_val(E_set="E", R="R", F_set="F", Rp="Rp",
+                           x="xa", y="ya", S="S", T="T", phi="phi"):
+    """⊢ (∀x)(∀y)( (x∈dom h et y∈E et R{y,x}) ⇒ y∈dom h ).   (SANS val_dans_F, CLOS.)
+
+    RE-PREUVE de `DS.dom_h_initial_sous_val` où l'unique pas non-INCONDITIONNEL
+    (φ(y)∈F) est DÉRIVÉ par `PV.val_dans_F_depuis_structure` (CLOS) au lieu d'être
+    postulé via val_dans_F : la prémisse de structure de graphe (φ⊂S×T, dom φ=S) est
+    le cœur STRENGTHENED de h.  CLOS (0 hyp) : theorie=22, NON vacueux."""
+    from bourbaki.logique.tactiques.tactiques_abrege import syllogisme
+    from bourbaki.logique.tactiques.tactiques_abrege_quantif import (
+        existe_elimination, alpha_existe,
+    )
+    from bourbaki.cardinaux.ensembles_codomaine_reconciliation import _rename_iso_order_binders
+    Rf, Rpf = _R_de(R), _R_de(Rp)
+    vE, vF = _t(E_set), _t(F_set)
+    vx, vy = var(x), var(y)
+    h = TS.h_iso_max(E_set, R, F_set, Rp)
+    zd, zy = "zd", "y"
+    vzd, vzy = var(zd), var(zy)
+
+    coeur = DS._coeur_temoin(E_set, R, F_set, Rp, vx, vzd, S, T, phi)
+    Hcoeur = N.assume(coeur)
+    Hgraph = conjonction_elim_droite(Hcoeur)                   # φ⊂S×T
+    r_app = conjonction_elim_gauche(Hcoeur)
+    Hdom = conjonction_elim_droite(r_app)                      # dom(φ)=S
+    r_app = conjonction_elim_gauche(r_app)
+    Hfunc = conjonction_elim_droite(r_app)                     # func φ
+    Hc5 = conjonction_elim_gauche(r_app)
+    c4 = conjonction_elim_gauche(Hc5)
+    Hx_in_S = conjonction_elim_droite(c4)                      # x∈S
+    c3 = conjonction_elim_gauche(c4)
+    Hiso = conjonction_elim_droite(c3)                         # iso(φ,S,T)[px,pw]
+    c2 = conjonction_elim_gauche(c3)
+    Hseg_T = conjonction_elim_droite(c2)                       # seg(T,Rp,F)
+    Hseg_S = conjonction_elim_gauche(c2)                       # seg(S,R,E)
+
+    vS, vT, vphi = var(S), var(T), var(phi)
+    phi_y = E.valeur(vphi, vy)                                 # φ(y)
+
+    # ── INITIALITÉ de S : (x∈S et y∈E et R{y,x}) ⇒ y∈S ──
+    Hy_in_E = N.assume(appartient(vy, vE))
+    HRyx = N.assume(Rf(vy, vx))
+    init_S = conjonction_elim_droite(Hseg_S)
+    init_xy = instancie(instancie(init_S, vx), vy)
+    premisse_init = conjonction_intro(conjonction_intro(Hx_in_S, Hy_in_E), HRyx)
+    Hy_in_S = N.modus_ponens(premisse_init, init_xy)          # y∈S
+
+    # ── φ(y)∈F via val_dans_F_depuis_structure (CLOS) — PAS de val_dans_F ──────────
+    #   STRUCT(y,S,T,φ) = et(et(base5, φ⊂S×T), dom φ=S), base5 iso binders DÉFAUT [x,y].
+    #   le cœur porte iso[px,pw] ; α-renommer vers [x,y] pour STRUCT.
+    iso_xy = _rename_iso_order_binders(Hiso, "x", "y")        # iso(φ,S,T)[x,y]
+    vdfs = PV.val_dans_F_depuis_structure(E_set, R, F_set, Rp)  # (∀p,S,T,φ)(STRUCT⇒φ(p)∈F) CLOS
+    vdfs_inst = instancie(instancie(instancie(instancie(vdfs, vy), vS), vT), vphi)
+    struct = PV.struct_iso_segment(E_set, R, F_set, Rp, vy, vS, vT, vphi)
+    #   construire la preuve de STRUCT : et(et(base5, φ⊂S×T), dom φ=S)
+    base5_proof = conjonction_intro(conjonction_intro(conjonction_intro(conjonction_intro(
+        Hy_in_E, Hseg_S), Hseg_T), iso_xy), Hy_in_S)
+    struct_proof = conjonction_intro(conjonction_intro(base5_proof, Hgraph), Hdom)
+    assert struct_proof.conclusion == struct, "STRUCT proof ≠ struct_iso_segment"
+    Hphi_y_in_F = N.modus_ponens(struct_proof, vdfs_inst)     # φ(y)∈F   (DÉRIVÉ, sans val_dans_F)
+
+    # ── (y, vv) ∈ h  via couple_iso_dans_h, vv FRAÎCHE ────────────────────────────
+    vv_name = "vv"
+    vvv = var(vv_name)
+    cid = TS.couple_iso_dans_h(E_set, R, F_set, Rp, S, T, phi, y, vv_name)
+    Hvv_F = N.assume(appartient(vvv, vF))
+    Hvv_eq = N.assume(egal(vvv, phi_y))
+    preuves = [
+        (E.est_segment(vS, Rf, vE), Hseg_S),
+        (E.est_segment(vT, Rpf, vF), Hseg_T),
+        (V.est_isomorphisme_ordre(vphi, vS, vT, Rf, Rpf, "px", "pw"), Hiso),
+        (appartient(vy, vS), Hy_in_S),
+        (appartient(vy, vE), Hy_in_E),
+        (appartient(vvv, vF), Hvv_F),
+        (egal(vvv, phi_y), Hvv_eq),
+        (E.est_fonctionnel(vphi), Hfunc),
+        (egal(E.dom(vphi), vS), Hdom),
+        (inclus(vphi, E.produit(vS, vT)), Hgraph),
+    ]
+    couple_in_h = cid
+    for hyp_f, preuve in preuves:
+        couple_in_h = N.modus_ponens(preuve, N.loi_deduction(hyp_f, couple_in_h))
+
+    body_ex = appartient(E.couple(vy, vzy), h)
+    ex_z = N.modus_ponens(couple_in_h, N.s5(body_ex, vvv, zy))
+    dom_eq_y = DS._inst_dom(h, vy)
+    y_in_dom_vv = N.modus_ponens(ex_z, equivalence_arriere(dom_eq_y))
+
+    prem_vv = et(appartient(vvv, vF), egal(vvv, phi_y))
+    Hprem_vv = N.assume(prem_vv)
+    y_in_dom_2 = N.modus_ponens(
+        conjonction_elim_droite(Hprem_vv),
+        N.modus_ponens(conjonction_elim_gauche(Hprem_vv),
+                       N.loi_deduction(appartient(vvv, vF),
+                           N.loi_deduction(egal(vvv, phi_y), y_in_dom_vv))))
+    imp_vv = N.loi_deduction(prem_vv, y_in_dom_2)
+    ex_vv_to_dom = existe_elimination(imp_vv, vv_name)
+    refl = N.reflexivite(phi_y)
+    ex_vv = N.modus_ponens(
+        conjonction_intro(Hphi_y_in_F, refl),
+        N.s5(prem_vv, phi_y, vv_name))
+    y_in_dom = N.modus_ponens(ex_vv, ex_vv_to_dom)            # y∈dom h  [coeur, y∈E, R{y,x}]
+
+    imp_coeur = N.loi_deduction(coeur, y_in_dom)
+    imp_phi = existe_elimination(imp_coeur, phi)
+    imp_T = existe_elimination(imp_phi, T)
+    imp_S = existe_elimination(imp_T, S)
+
+    hdt = TS.h_membre_donne_temoin(E_set, R, F_set, Rp, "u", "v", S, T, phi)
+    couple_imp = instancie(instancie(hdt, vx), vzd)
+    cz_to_dom = syllogisme(couple_imp, imp_S)
+    ex_v_to_dom = existe_elimination(cz_to_dom, zd)
+    dom_eq_x = DS._inst_dom(h, vx)
+    body_x_native = appartient(E.couple(vx, vzy), h)
+    ren_x = alpha_existe(zy, zd, body_x_native)
+    x_dom_to_ex = syllogisme(equivalence_avant(dom_eq_x), equivalence_avant(ren_x))
+    x_to_dom = syllogisme(x_dom_to_ex, ex_v_to_dom)          # x∈domh ⇒ y∈dom h  [y∈E, R{y,x}]
+
+    imp1 = N.loi_deduction(Rf(vy, vx), x_to_dom)
+    imp2 = N.loi_deduction(appartient(vy, vE), imp1)
+    premisse_seg = et(et(appartient(vx, E.dom(h)), appartient(vy, vE)), Rf(vy, vx))
+    Hprem = N.assume(premisse_seg)
+    Hx_dom = conjonction_elim_gauche(conjonction_elim_gauche(Hprem))
+    Hy_E2 = conjonction_elim_droite(conjonction_elim_gauche(Hprem))
+    HRyx2 = conjonction_elim_droite(Hprem)
+    step = N.modus_ponens(HRyx2, N.modus_ponens(Hy_E2, imp2))
+    y_in_dom_final = N.modus_ponens(Hx_dom, step)
+    body = N.loi_deduction(premisse_seg, y_in_dom_final)
+    return N.generalisation(x, N.generalisation(y, body))    # initialité de dom h  (CLOS)
+
+
+def dom_h_est_segment_sans_val(E_set="E", R="R", F_set="F", Rp="Rp",
+                               x="xa", y="ya", S="S", T="T", phi="phi"):
+    """⊢ est_segment(dom h, R, E).   (SANS val_dans_F — CLOS, theorie=22.)
+
+    🎯 R2 DÉCHARGÉ.  Conjonction de la borne dom h⊂E (INCONDITIONNELLE, M.h_dom_inclus_E)
+    et de l'initialité `dom_h_initial_sans_val` (codomaine DÉRIVÉ via le pont clos).
+    Élimine le résidu `val_dans_F` : seg(dom h) n'est plus conditionnel.  NON vacueux."""
+    incl = M.h_dom_inclus_E(E_set, R, F_set, Rp)
+    init = dom_h_initial_sans_val(E_set, R, F_set, Rp, x, y, S, T, phi)
+    return conjonction_intro(incl, init)
+
+
+def dom_h_est_segment_sans_val_cible(E_set="E", R="R", F_set="F", Rp="Rp", x="xa", y="ya"):
+    """ÉNONCÉ-cible (test miroir) : est_segment(dom h, R, E) [binders x,y]."""
+    Rf = _R_de(R)
+    h = TS.h_iso_max(E_set, R, F_set, Rp)
+    return E.est_segment(E.dom(h), Rf, _t(E_set), x, y)
+
+
 __all__ = [
     "image_segment_est_segment", "image_segment_est_segment_cible",
     "restriction_inclus_produit_image", "restriction_inclus_produit_image_cible",
     "restriction_inclus_produit_Tp", "restriction_inclus_produit_Tp_cible",
     "residu_univ_app_renforce", "residu_univ_app_renforce_cible",
     "residu_univ_app_renforce_antecedent",
+    "dom_h_initial_sans_val",
+    "dom_h_est_segment_sans_val", "dom_h_est_segment_sans_val_cible",
 ]
