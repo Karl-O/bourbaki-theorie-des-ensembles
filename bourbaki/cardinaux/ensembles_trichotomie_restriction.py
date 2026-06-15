@@ -81,6 +81,9 @@ from bourbaki.cardinaux.ensembles_bien_ordonne_lemme_1_segments import (
     seg, seg_strict_monotone_de_bon_ordre,
 )
 from bourbaki.cardinaux.ensembles_iso_unicite_finale import auto_iso_est_identite
+from bourbaki.cardinaux.ensembles_iso_unicite_sous_domaine import (
+    auto_iso_est_identite_sous_domaine,
+)
 from bourbaki.cardinaux.ensembles_lemme4_croissante import _val, _R_de
 
 
@@ -255,8 +258,8 @@ def _retraction_phip(R, S, phi, phip, c, u="u"):
 
 
 def coincidence_sur_chevauchement(R="R", S="S", phi="phi", phip="phip", c="c",
-                                  k="k", u="u"):
-    """⊢ { est_bien_ordonne(R,S),
+                                  k="k", u="u", E_set="E"):
+    """⊢ { est_bien_ordonne(R,E),  inclus(S,E),                   [BON ORDRE AMBIANT]
            (∀t)(t∈S ⇒ c(t)∈S),  c strict. croissante S→S,        [c=φ'⁻¹∘φ : S→S iso]
            (∀t)(t∈S ⇒ k(t)∈S),  k strict. croissante S→S,        [k=c⁻¹ : S→S iso]
            (∀x)(x∈S ⇒ k(c(x))=x),                                [k∘c = id_S]
@@ -265,10 +268,18 @@ def coincidence_sur_chevauchement(R="R", S="S", phi="phi", phip="phip", c="c",
 
     🎯 BRIQUE (3) — COÏNCIDENCE de deux isos de segments sur leur CHEVAUCHEMENT (le
     plus petit segment).  c := φ'⁻¹∘φ est un AUTOMORPHISME d'ordre de S, donc, par
-    auto_iso_est_identite (Cor 1 §III.2, CLOS), c = id_S : c(u)=u pour tout u∈S.
-    Avec l'hypothèse de rétraction φ'(c(u))=φ(u) on obtient φ'(u)=φ'(c(u))=φ(u).
+    auto_iso_est_identite_sous_domaine (Cor 1 §III.2, variante SOUS-DOMAINE), c = id_S :
+    c(u)=u pour tout u∈S.  Avec l'hypothèse de rétraction φ'(c(u))=φ(u) on obtient
+    φ'(u)=φ'(c(u))=φ(u).
 
-    PREUVE.  auto_iso_est_identite(R,S,c,k) donne (∀u)(u∈S ⇒ c(u)=u).  Sous u∈S :
+    🔑 BON ORDRE AMBIANT.  La coïncidence consomme le bon ordre AMBIANT
+    est_bien_ordonne(R,E) + inclus(S,E), JAMAIS la formule littérale bo(R,S) (qui est
+    FAUSSE pour un segment PROPRE S⊊E — cf. l'en-tête de ensembles_lemme4_sous_domaine).
+    C'est crucial pour la fusion : S est un SEGMENT du grand bon ordre (E,R), et bo(R,S)
+    ne peut s'y discharger.  On route donc par auto_iso_est_identite_sous_domaine.
+
+    PREUVE.  auto_iso_est_identite_sous_domaine(R,E,S,c,k) donne (∀u)(u∈S ⇒ c(u)=u).
+    Sous u∈S :
       • c(u)=u  (point fixe).
       • φ'(c(u)) = φ(u)  (hypothèse de rétraction).
       • transport de c(u)=u dans φ'(c(u)) : φ'(c(u)) = φ'(u).
@@ -281,8 +292,8 @@ def coincidence_sur_chevauchement(R="R", S="S", phi="phi", phip="phip", c="c",
     vS = _t(S)
     vu = var(u)
 
-    # ── point fixe de c via auto_iso_est_identite (Cor 1, CLOS) ────────────────
-    pf = auto_iso_est_identite(R, S, c, k, x="u")          # (∀u)(u∈S ⇒ c(u)=u)  [6 hyps géom.]
+    # ── point fixe de c via auto_iso_est_identite_sous_domaine (Cor 1 SOUS-DOMAINE) ──
+    pf = auto_iso_est_identite_sous_domaine(R, E_set, S, c, k, x="u")  # (∀u)(u∈S⇒c(u)=u)  [7 hyps]
     Hu = N.assume(appartient(vu, vS))                      # u∈S
     cu_eq_u = N.modus_ponens(Hu, instancie(pf, vu))        # c(u) = u
 
@@ -317,7 +328,7 @@ def coincidence_sur_chevauchement(R="R", S="S", phi="phi", phip="phip", c="c",
 
 
 def coincidence_sur_chevauchement_cible(R="R", S="S", phi="phi", phip="phip",
-                                        c="c", k="k", u="u"):
+                                        c="c", k="k", u="u", E_set="E"):
     """ÉNONCÉ-cible (test miroir) de coincidence_sur_chevauchement."""
     return _coincide_concl(R, S, phi, phip, u)
 

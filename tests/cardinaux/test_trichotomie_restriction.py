@@ -20,6 +20,9 @@ from bourbaki.ensembles import ensembles_abrege as E
 from bourbaki.ordre import ensembles_ordre_vocab as V
 from bourbaki.cardinaux import ensembles_trichotomie_restriction as Rstr
 from bourbaki.cardinaux.ensembles_iso_unicite_finale import auto_iso_est_identite
+from bourbaki.cardinaux.ensembles_iso_unicite_sous_domaine import (
+    auto_iso_est_identite_sous_domaine,
+)
 
 
 def _R_de(R="R"):
@@ -121,16 +124,22 @@ def test_coincidence_conditionnelle():
 
 
 def test_coincidence_hypotheses_explicites():
-    """Les 7 hypothèses = exactement les 6 géométriques d'auto_iso_est_identite (sur
-    R,S,c,k) + la rétraction φ'(c(u))=φ(u) — toutes EXPLICITES, fidèles, non postulées."""
+    """Les 8 hypothèses = exactement les 7 d'auto_iso_est_identite_sous_domaine (sur
+    R,E,S,c,k — BON ORDRE AMBIANT bo(R,E)+inclus(S,E), JAMAIS bo(R,S)) + la rétraction
+    φ'(c(u))=φ(u) — toutes EXPLICITES, fidèles, non postulées."""
     thm = Rstr.coincidence_sur_chevauchement()
-    auto = auto_iso_est_identite("R", "S", "c", "k", x="u")
+    auto = auto_iso_est_identite_sous_domaine("R", "E", "S", "c", "k", x="u")
     auto_hyps = set(auto.hypotheses)
     b3_hyps = set(thm.hypotheses)
-    assert auto_hyps.issubset(b3_hyps), "les hyps géométriques d'auto_iso doivent figurer"
+    assert auto_hyps.issubset(b3_hyps), "les hyps d'auto_iso (sous-domaine) doivent figurer"
     retr = Rstr._retraction_phip("R", "S", "phi", "phip", "c", "u")
-    assert b3_hyps == auto_hyps | {retr}, "exactement auto_iso + rétraction"
-    assert len(b3_hyps) == 7
+    assert b3_hyps == auto_hyps | {retr}, "exactement auto_iso sous-domaine + rétraction"
+    assert len(b3_hyps) == 8
+    # le bon ordre est AMBIANT : bo(R,E)+inclus(S,E), jamais bo(R,S) (faux sur segment propre)
+    Rf = _R_de("R")
+    assert E.est_bien_ordonne(Rf, var("E")) in b3_hyps
+    assert inclus(var("S"), var("E")) in b3_hyps
+    assert E.est_bien_ordonne(Rf, var("S")) not in b3_hyps
 
 
 def test_coincidence_non_vacueux():
