@@ -3,7 +3,8 @@ deux isos sur SEGMENTS EMBOÎTÉS S1 ⊂ S2 (dernière pièce de la TRICHOTOMIE,
 
 Certifie que `ensembles_coincidence_univ` livre :
 
-  ✅ coincidence_univ : ⊢ {  est_bien_ordonne(R,S1),  S1 ⊂ S2,  compatible_ordre(φ2,S2),
+  ✅ coincidence_univ : ⊢ {  est_bien_ordonne(R,E) + inclus(S1,E)  [BON ORDRE AMBIANT,
+                             jamais bo(R,S1)],  S1 ⊂ S2,  compatible_ordre(φ2,S2),
                              iso(φ1,S1,T1),  est_bijective(φ2,S1,T1),  + géométrie }
                           ⊢ (∀u)( u ∈ S1 ⇒ φ1(u) = φ2(u) ).
 
