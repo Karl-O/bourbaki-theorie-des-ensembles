@@ -72,6 +72,14 @@ porte AUCUNE égalité de valeurs (φ_petit=φ_grand), seulement la BONNE FORME 
 SURVIVRE aux éliminations existentielles de l'assemblage (les conjoints à variables-
 témoins libres bloqueraient `existe_elimination`).  `coincidence_univ` est, lui, GONE.
 
+────────────────────────────────────────────────────────────────────────────────
+⚠️ CONTRAINTE DE NOMMAGE (héritée de coincidence_point_app/coincidence_univ_app).  La
+coïncidence PROUVÉE est un SCHÉMA sur F,R,R' avec l'ambiant E HARDCODÉ « E » (binders
+internes non re-renommables).  `fusion_depuis_coincidence_app` est donc paramétrable sur
+les POINTS (u,v,u',v') et les noms de témoins-segments, mais les noms AMBIANTS doivent
+rester CANONIQUES : E="E", F="F", R="R", Rp="Rp".  (L'original POSTULÉ, lui, est
+relation-paramétrique car il assume `coincidence_univ` comme FORMULE opaque.)
+
 INVARIANT : theorie_ensembles() = 22.  Rien postulé : la COÏNCIDENCE est PROUVÉE
 (coincidence_univ_app CLOS) ; seul subsiste le RÉSIDU géométrique ci-dessus (≠ coïncidence).
 NON vacueux : fusion_hyp n'est aucune hypothèse.
