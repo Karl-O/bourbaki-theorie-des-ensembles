@@ -436,13 +436,31 @@ def coincidence_univ_close(phi1="phi1", phi2="phi2", S1="S1", T1="T1", u="u"):
     `coincidence_close` à φ2|S1 = restriction(φ2,S1) (qui donne φ1(u)=(φ2|S1)(u) sur S1),
     puis `restriction_valeur` réécrit (φ2|S1)(u)=φ2(u) (ponts liant j↔y).  Géométrie
     déchargée (via coincidence_close) ; reste les hyps structurelles de φ2|S1 + φ2."""
+    phi2S1 = E.restriction(var(phi2), var(S1))
+    base = coincidence_close(phi1, phi2S1, S1, T1, u)         # (∀u)(u∈S1⇒φ1(u)[j]=(φ2|S1)(u)[j])
+    return _coincidence_univ_assemble(base, phi2, S1, u)
+
+
+def coincidence_univ_close_isos(phi1="phi1", phi2="phi2", S1="S1", T1="T1", u="u"):
+    """🎯🎯 coincidence_univ_close AVEC STRICTE CROISSANCE DÉCHARGÉE (via coincidence_close_isos).
+
+    Identique à coincidence_univ_close mais la base φ1≅φ2|S1 est obtenue par
+    `coincidence_close_isos` (c,k automorphismes ⇒ stricte croissance dérivée des isos) :
+    plus aucune hyp de stricte croissance.  Forme consommée par fusion_hyp (Lemme 1 §III.2)."""
+    phi2S1 = E.restriction(var(phi2), var(S1))
+    base = coincidence_close_isos(phi1, phi2S1, S1, T1, u)    # strict déchargée
+    return _coincidence_univ_assemble(base, phi2, S1, u)
+
+
+def _coincidence_univ_assemble(base, phi2, S1, u):
+    """Commun à coincidence_univ_close[_isos] : depuis base ⊢ (∀u)(u∈S1⇒φ1(u)=(φ2|S1)(u)),
+    réécrit (φ2|S1)(u)=φ2(u) (restriction_valeur + ponts j↔y) ⊢ (∀u)(u∈S1⇒φ1(u)=φ2(u))."""
     from bourbaki.logique.tactiques.tactiques_abrege_egalite import composer_egalites
     from bourbaki.logique.tactiques.tactiques_abrege2 import instancie as _i
     from bourbaki.ordre.ensembles_valeur_bridge import valeur_y_egal_j
     from bourbaki.cardinaux.ensembles_cantor_bernstein_bij import restriction_valeur
-    vphi1, vphi2, vS1, vu = var(phi1), var(phi2), var(S1), var(u)
+    vphi2, vS1, vu = var(phi2), var(S1), var(u)
     phi2S1 = E.restriction(vphi2, vS1)
-    base = coincidence_close(phi1, phi2S1, S1, T1, u)         # (∀u)(u∈S1⇒φ1(u)[j]=(φ2|S1)(u)[j])
     Hu = N.assume(appartient(vu, vS1))
     base_u = N.modus_ponens(Hu, _i(base, vu))                # φ1(u)[j]=(φ2|S1)(u)[j]
     # u∈dom φ2  (de u∈S1 et S1⊂dom φ2)

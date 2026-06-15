@@ -108,6 +108,16 @@ def test_coincidence_univ_close_nestee():
     assert t.conclusion not in t.hypotheses                    # NON tautologique
 
 
+def test_coincidence_univ_close_isos_nestee_strict_dechargee():
+    """🎯🎯 VERSION NESTÉE + STRICTE CROISSANCE DÉCHARGÉE : φ1:S1≅T1, φ2 sur segment ⊃ S1
+    coïncident sur S1, SANS hyp de stricte croissance (via coincidence_close_isos)."""
+    t = G.coincidence_univ_close_isos()
+    assert not t.est_clos
+    assert t.conclusion == G.coincidence_univ_close_cible()    # (∀u)(u∈S1 ⇒ φ1(u)=φ2(u))
+    assert t.conclusion not in t.hypotheses                    # NON tautologique
+    assert all("croissante" not in repr(h) for h in t.hypotheses)
+
+
 def test_theorie_inchangee_22():
     G.composee_dans_S()
     G.raccord_phip()
@@ -116,4 +126,5 @@ def test_theorie_inchangee_22():
     G.coincidence_close()
     G.coincidence_close_isos()
     G.coincidence_univ_close()
+    G.coincidence_univ_close_isos()
     assert len(E.theorie_ensembles().axiomes) == 22
