@@ -45,8 +45,18 @@ def test_retraction_phi_conclusion():
     assert len(t.hypotheses) == 2
 
 
+def test_retraction_kc_conclusion():
+    """BRIQUE 3 — k∘c=id (rétraction).  k(c(x))=φ⁻¹(φ'(φ'⁻¹(φ(x))))=φ⁻¹(φ(x))=x via
+    composition_valeur_t (×2) + section_reciproque + retraction_phi.  Conditionnel fidèle."""
+    t = G.retraction_kc()
+    assert not t.est_clos
+    assert t.conclusion == G.retraction_kc_cible()
+    assert t.conclusion not in t.hypotheses
+
+
 def test_theorie_inchangee_22():
     G.composee_dans_S()
     G.raccord_phip()
     G.retraction_phi()
+    G.retraction_kc()
     assert len(E.theorie_ensembles().axiomes) == 22

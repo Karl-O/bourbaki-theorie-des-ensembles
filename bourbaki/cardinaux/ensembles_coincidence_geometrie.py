@@ -238,6 +238,123 @@ def raccord_phip_cible(phi="phi", phip="phip", S="S", T="T", u="u"):
                             egal(E.valeur(vphip, cu_j, b="j"), E.valeur(vphi, vu, b="j"))))
 
 
+def _decharge_exists_dom(g, x_term, dom_eq_thm, dom_set, in_dom_thm):
+    """⊢ (∃y)((x_term, y) ∈ g)  à partir de : (x_term ∈ dom_set), (dom g = dom_set).
+    Renvoie (∃y)((x,y)∈g) [AXIOME_DOM], via x∈dom_set + dom g=dom_set ⇒ x∈dom g."""
+    from bourbaki.logique.tactiques.tactiques_abrege2 import equivalence_arriere
+    vy = var("y")
+    x_in_domg = N.modus_ponens(in_dom_thm, equivalence_arriere(N.modus_ponens(
+        dom_eq_thm, N.s6(E.dom(g), dom_set, "hde", appartient(x_term, var("hde"))))))
+    axd = instancie(instancie(N.axiome(E.theorie_ensembles(), E.AXIOME_DOM), g), x_term)
+    return N.modus_ponens(x_in_domg, equivalence_avant(axd))         # (∃y)((x_term,y)∈g)
+
+
+def retraction_kc(phi="phi", phip="phip", S="S", T="T", x="x"):
+    """⊢ { φ⊂S×T, dom φ=S, φ func, φ⁻¹ func,  φ'⊂S×T, dom φ'=S, φ' func, dom(φ'⁻¹)=T,
+           (φ'⁻¹∘φ) func, (φ⁻¹∘φ') func }
+         ⊢ (∀x)( x∈S ⇒ valeur(k, valeur(c,x,j), j) = x )
+       où c := φ'⁻¹∘φ = composee(reciproque φ',φ),  k := φ⁻¹∘φ' = composee(reciproque φ,φ').
+
+    🎯 BRIQUE 3 — RÉTRACTION k∘c = id_S.  k(c(x)) = φ⁻¹(φ'(φ'⁻¹(φ(x)))) = φ⁻¹(φ(x)) = x :
+      • c(x) = φ'⁻¹(φ(x))               (composition_valeur_t sur c)
+      • φ'(c(x)) = φ'(φ'⁻¹(φ(x))) = φ(x) (section_reciproque φ', φ(x)∈T)
+      • k(c(x)) = φ⁻¹(φ'(c(x))) = φ⁻¹(φ(x))  (composition_valeur_t sur k ; c(x) en τ_j → sûr)
+      • φ⁻¹(φ(x)) = x                    (retraction_phi)
+    Ponts liant j↔y sur points PLAINS / τ_j (jamais τ_y) → pas de capture."""
+    from bourbaki.logique.formule import existe
+    from bourbaki.logique.tactiques.tactiques_abrege_egalite import composer_egalites
+    from bourbaki.logique.tactiques.tactiques_abrege2 import equivalence_arriere
+    from bourbaki.cardinaux.ensembles_iso_ordre_reciproque import section_reciproque
+    from bourbaki.ensembles.fonctions.ensembles_composee_valeurs import composition_valeur_t
+    from bourbaki.ordre.ensembles_valeur_bridge import valeur_y_egal_j
+    vphi, vphip, vS, vT, vx, vy = var(phi), var(phip), var(S), var(T), var(x), var("y")
+    PhiInv = E.reciproque(vphi)               # φ⁻¹
+    PhipInv = E.reciproque(vphip)             # φ'⁻¹
+    c = E.composee(PhipInv, vphi)             # c = φ'⁻¹∘φ
+    k = E.composee(PhiInv, vphip)             # k = φ⁻¹∘φ'
+    Hx = N.assume(appartient(vx, vS))         # x∈S
+    phi_x_y = E.valeur(vphi, vx)              # φ(x)[y]
+    phi_x_j = E.valeur(vphi, vx, b="j")       # φ(x)[j]
+    cx_j = E.valeur(c, vx, b="j")             # c(x)[j]   (point τ_j)
+
+    Hdomphi = N.assume(egal(E.dom(vphi), vS))
+    Hdomphip = N.assume(egal(E.dom(vphip), vS))
+    Hdomrec = N.assume(egal(E.dom(PhipInv), vT))      # dom φ'⁻¹ = T
+    phiu_in_T = valeur_dans_codomaine(phi, S, T, x)   # φ(x)[y]∈T   [hyps φ⊂S×T, dom φ=S, x∈S]
+
+    # ── (A) c(x)[j] = φ'⁻¹(φ(x))[y]  (composition_valeur_t sur c + pont) ──
+    comp_c = composition_valeur_t(PhipInv, vphi, vx)          # c(x)[y] = φ'⁻¹(φ(x)[y])[y]
+    comp_c = N.modus_ponens(_decharge_exists_dom(vphi, vx, Hdomphi, vS, Hx),
+        N.loi_deduction(existe("y", appartient(E.couple(vx, vy), vphi)), comp_c))
+    comp_c = N.modus_ponens(_decharge_exists_dom(PhipInv, phi_x_y, Hdomrec, vT, phiu_in_T),
+        N.loi_deduction(existe("y", appartient(E.couple(phi_x_y, vy), PhipInv)), comp_c))
+    finv_phix_y = E.valeur(PhipInv, phi_x_y)                  # φ'⁻¹(φ(x))[y]
+    cxj_eq_finv = composer_egalites(valeur_j_egal_y(c, vx), comp_c)   # c(x)[j] = φ'⁻¹(φ(x))[y]
+
+    # ── (C) φ'(c(x)[j])[y] = φ(x)[y]  (réécrit c(x)[j]→φ'⁻¹(φ(x)), section_reciproque) ──
+    #   réécrire c(x)[j] → φ'⁻¹(φ(x))[y] dans valeur(φ', ·, y)
+    phip_cxj_y = E.valeur(vphip, cx_j)                        # φ'(c(x)[j])[y]
+    rewC = N.modus_ponens(cxj_eq_finv, N.s6(cx_j, finv_phix_y, "hrc",
+        egal(phip_cxj_y, E.valeur(vphip, var("hrc")))))
+    phip_cxj_eq = N.modus_ponens(N.reflexivite(phip_cxj_y), equivalence_avant(rewC))  # φ'(c(x)[j])[y]=φ'(φ'⁻¹(φ(x)))[y]
+    sec = section_reciproque(vphip, phi_x_y, vT)              # φ'(φ'⁻¹(φ(x)[y]))[y]=φ(x)[y]  [hyp φ(x)∈T]
+    sec = N.modus_ponens(phiu_in_T, N.loi_deduction(appartient(phi_x_y, vT), sec))
+    phip_cxj_y_eq_phix = composer_egalites(phip_cxj_eq, sec)  # φ'(c(x)[j])[y] = φ(x)[y]
+
+    # ── (B) k(c(x)[j])[j] = φ⁻¹(φ'(c(x)[j]))[y]  (pont externe + composition_valeur_t sur k) ──
+    lhs_j = E.valeur(k, cx_j, b="j")                          # TARGET LHS : k(c(x)[j])[j]
+    lhs_jy = valeur_j_egal_y(k, cx_j)                         # k(c(x)[j])[j] = k(c(x)[j])[y]  (cx_j τ_j → sûr)
+    comp_k = composition_valeur_t(PhiInv, vphip, cx_j)        # k(c(x)[j])[y] = φ⁻¹(φ'(c(x)[j]))[y]
+    #   décharge domaines : c(x)[j]∈dom φ'=S, φ'(c(x)[j])∈dom φ⁻¹=T
+    #   c(x)[j]∈S : φ'⁻¹(φ(x))[y]∈S (valeur_dans_codomaine, φ(x)∈T) + c(x)[j]=φ'⁻¹(φ(x))[y]
+    from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie as _sym
+    finv_in_S = valeur_dans_codomaine(PhipInv, vT, vS, phi_x_y)   # φ'⁻¹(φ(x))[y]∈S  [hyp φ(x)∈T]
+    finv_in_S = N.modus_ponens(phiu_in_T, N.loi_deduction(appartient(phi_x_y, vT), finv_in_S))
+    cxj_in_S = N.modus_ponens(finv_in_S, equivalence_avant(N.modus_ponens(
+        N.modus_ponens(cxj_eq_finv, _sym(cx_j, finv_phix_y)),     # φ'⁻¹(φ(x))[y] = c(x)[j]
+        N.s6(finv_phix_y, cx_j, "hcs", appartient(var("hcs"), vS)))))   # c(x)[j]∈S
+    comp_k = N.modus_ponens(_decharge_exists_dom(vphip, cx_j, Hdomphip, vS, cxj_in_S),
+        N.loi_deduction(existe("y", appartient(E.couple(cx_j, vy), vphip)), comp_k))
+    #   φ'(c(x)[j])[y]∈T : de φ'(c(x)[j])[y]=φ(x)[y] (C) et φ(x)[y]∈T
+    HdomPhiInv = N.assume(egal(E.dom(PhiInv), vT))            # dom φ⁻¹ = T
+    phipcxj_in_T = N.modus_ponens(phiu_in_T, equivalence_arriere(N.modus_ponens(
+        phip_cxj_y_eq_phix, N.s6(phip_cxj_y, phi_x_y, "hpt", appartient(var("hpt"), vT)))))  # φ'(c(x)[j])[y]∈T
+    comp_k = N.modus_ponens(_decharge_exists_dom(PhiInv, phip_cxj_y, HdomPhiInv, vT, phipcxj_in_T),
+        N.loi_deduction(existe("y", appartient(E.couple(phip_cxj_y, vy), PhiInv)), comp_k))
+    #   k(c(x)[j])[j] = φ⁻¹(φ'(c(x)[j]))[y]
+    lhs_eq_kfinv = composer_egalites(lhs_jy, comp_k)         # k(c(x)[j])[j] = φ⁻¹(φ'(c(x)[j])[y])[y]
+
+    # ── (D) réécrit φ'(c(x)[j])[y] → φ(x)[y] dans φ⁻¹(·)[y], puis φ(x)[y]→φ(x)[j], puis retraction ──
+    finv_phipcxj_y = E.valeur(PhiInv, phip_cxj_y)            # φ⁻¹(φ'(c(x)[j]))[y]
+    finv_phix_y2 = E.valeur(PhiInv, phi_x_y)                 # φ⁻¹(φ(x)[y])[y]
+    rewD = N.modus_ponens(phip_cxj_y_eq_phix, N.s6(phip_cxj_y, phi_x_y, "hrd",
+        egal(finv_phipcxj_y, E.valeur(PhiInv, var("hrd")))))
+    d_eq = N.modus_ponens(N.reflexivite(finv_phipcxj_y), equivalence_avant(rewD))  # φ⁻¹(φ'(c(x)[j]))[y]=φ⁻¹(φ(x)[y])[y]
+    #   φ⁻¹(φ(x)[y])[y] = φ⁻¹(φ(x)[j])[y]   (pont φ(x) y→j, x plaine)
+    finv_phix_j = E.valeur(PhiInv, phi_x_j)                  # φ⁻¹(φ(x)[j])[y]
+    yj_eq = N.modus_ponens(valeur_y_egal_j(vphi, vx), N.s6(phi_x_y, phi_x_j, "hyj",
+        egal(finv_phix_y2, E.valeur(PhiInv, var("hyj")))))
+    finvy_eq_finvj = N.modus_ponens(N.reflexivite(finv_phix_y2), equivalence_avant(yj_eq))  # φ⁻¹(φ(x)[y])[y]=φ⁻¹(φ(x)[j])[y]
+    #   retraction_phi : φ⁻¹(φ(x)[j])[y] = x
+    retr = retraction_phi(phi, S, T, x)                      # (∀x)(x∈S⇒φ⁻¹(φ(x)[j])=x)
+    retr_x = N.modus_ponens(Hx, instancie(retr, vx))        # φ⁻¹(φ(x)[j])[y]=x
+
+    # ── chaîne finale : k(c(x)[j])[j] = φ⁻¹(φ'(c(x)[j]))[y] = φ⁻¹(φ(x)[y])[y] = φ⁻¹(φ(x)[j])[y] = x ──
+    chain = composer_egalites(composer_egalites(composer_egalites(lhs_eq_kfinv, d_eq), finvy_eq_finvj), retr_x)
+    body = N.loi_deduction(appartient(vx, vS), chain)
+    return N.generalisation(x, body)          # (∀x)(x∈S ⇒ k(c(x))[j]=x)
+
+
+def retraction_kc_cible(phi="phi", phip="phip", S="S", T="T", x="x"):
+    """ÉNONCÉ-cible (test miroir) : (∀x)(x∈S ⇒ valeur(k, valeur(c,x,j), j)=x)."""
+    vphi, vphip, vS, vx = var(phi), var(phip), var(S), var(x)
+    c = E.composee(E.reciproque(vphip), vphi)
+    k = E.composee(E.reciproque(vphi), vphip)
+    cx_j = E.valeur(c, vx, b="j")
+    return pourtout(x, impl(appartient(vx, vS),
+                            egal(E.valeur(k, cx_j, b="j"), vx)))
+
+
 def composee_dans_S_cible(g="psi", f="phi", S="S", T="T", t="t"):
     """ÉNONCÉ-cible (test miroir) : (∀t)(t∈S ⇒ valeur(g∘f,t,b="j") ∈ S)."""
     vf, vg, vS, vt = var(f), var(g), var(S), var(t)
