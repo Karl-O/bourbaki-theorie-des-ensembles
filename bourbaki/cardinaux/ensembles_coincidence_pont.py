@@ -123,8 +123,8 @@ def _leib(hole, a, b, h_ab, phi_fun, h_phi_a):
 #  la convention τ_j attendue par lemme_4 / iso_donne_strict_croissant, par
 #  Leibniz (S6) sur les égalités valeur(c,p,"y")=valeur(c,p,"j") du pont.
 # ════════════════════════════════════════════════════════════════════════════
-def compat_y_vers_jv(c="c", S="S", R="R"):
-    """⊢ { compatible_ordre(c,S,R,R)  [liants de quantif. a,b] }
+def compat_y_vers_jv(c="c", S="S", R="R", ib_x="a", ib_y="b"):
+    """⊢ { compatible_ordre(c,S,R,R)  [liants de quantif. ib_x,ib_y (déf. a,b)] }
             ⊢ _compat_yv(c,S,R)        [liants de quantif. x,y].
 
     ALIGNEMENT DES LIANTS de quantification.  ⚠️ Depuis que `compatible_ordre` adopte le
@@ -138,8 +138,8 @@ def compat_y_vers_jv(c="c", S="S", R="R"):
     (liants a,b) — `conclusion ∉ hypothèses` (vérifié par test)."""
     Rf = _R_de(R)
     vc, vS = _t(c), _t(S)
-    # SOURCE compatible_ordre(c,S,R,R) DÉJÀ en τ_j (liant-valeur « j »), liants quantif a,b.
-    co = compatible_ordre(vc, vS, Rf, Rf, x="a", y="b")
+    # SOURCE compatible_ordre(c,S,R,R) DÉJÀ en τ_j (liant-valeur « j »), liants quantif ib_x,ib_y.
+    co = compatible_ordre(vc, vS, Rf, Rf, x=ib_x, y=ib_y)
     # α-renommage a,b ↦ x,y : instancier le corps à x,y puis regénéraliser.
     co_inst = instancie(instancie(N.assume(co), var("x")), var("y"))
     return N.generalisation("x", N.generalisation("y", co_inst))  # _compat_yv(c,S,R)
@@ -193,9 +193,12 @@ def inj_y_vers_jv_cible(c="c", S="S"):
 #  est_isomorphisme_ordre(c,S,S,R,R) = est_bijective (⇒ injective_dans) ET
 #  compatible_ordre : exactement les deux entrées des deux ponts ci-dessus.
 # ════════════════════════════════════════════════════════════════════════════
-def strict_croissante_depuis_iso(c="c", S="S", R="R"):
-    """⊢ { est_isomorphisme_ordre(c,S,S,R,R)  [UNE clean iso, liants a,b] }
+def strict_croissante_depuis_iso(c="c", S="S", R="R", ib_x="a", ib_y="b"):
+    """⊢ { est_isomorphisme_ordre(c,S,S,R,R)  [UNE clean iso, liants ib_x,ib_y (déf. a,b)] }
             ⊢ est_strictement_croissante(R,R,c,S,S)  [τ_j].
+
+    ib_x,ib_y = liants de quantif. de l'iso source (défaut a,b ; passer x,x2 pour
+    apparier la sortie de composee_isomorphisme_ordre / auto_de_deux_isos).
 
     🎯 GAIN « MODULO ISOS » : la STRICTE CROISSANCE τ_j résiduelle de la coïncidence
     est DÉRIVÉE depuis UN SEUL iso d'ordre de (S,R) — pas postulée.  De l'iso on extrait
@@ -209,16 +212,16 @@ def strict_croissante_depuis_iso(c="c", S="S", R="R"):
     l'hypothèse (un iso).  UNE seule hypothèse : « c est un iso d'ordre de (S,R) »."""
     Rf = _R_de(R)
     vc, vS = _t(c), _t(S)
-    iso = est_isomorphisme_ordre(vc, vS, vS, Rf, Rf, x="a", y="b")   # 1 hyp
+    iso = est_isomorphisme_ordre(vc, vS, vS, Rf, Rf, x=ib_x, y=ib_y)   # 1 hyp
     Hiso = N.assume(iso)
     bij = conjonction_elim_gauche(Hiso)                              # est_bijective(c,S,S)
-    co = conjonction_elim_droite(Hiso)                              # compatible_ordre(c,S,R,R) [a,b]
+    co = conjonction_elim_droite(Hiso)                              # compatible_ordre(c,S,R,R) [ib_x,ib_y]
     inj = conjonction_elim_gauche(bij)                              # injective_dans(c,S)
 
     # ponts : compat τ_y → τ_j  ;  inj τ_y → τ_j
     compat_jv = N.modus_ponens(
-        co, N.loi_deduction(compatible_ordre(vc, vS, Rf, Rf, x="a", y="b"),
-                            compat_y_vers_jv(c, S, R)))             # _compat_yv(c,S,R)
+        co, N.loi_deduction(compatible_ordre(vc, vS, Rf, Rf, x=ib_x, y=ib_y),
+                            compat_y_vers_jv(c, S, R, ib_x, ib_y)))  # _compat_yv(c,S,R)
     inj_jv = N.modus_ponens(
         inj, N.loi_deduction(E.injective_dans(vc, vS),
                              inj_y_vers_jv(c, S)))                   # _inj_hyp(c,S)

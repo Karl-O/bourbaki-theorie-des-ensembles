@@ -147,7 +147,7 @@ def iso_donne_strict_croissant(R="R", E_set="E", h="h", x="x", y="y"):
     τ((x,·)∈h) — le MÊME terme à α-renommage du liant lié ; le noyau les apparie via
     leur représentation interne (les hypothèses sont écrites avec _val=« yv » pour
     être l'EXACTE forme consommée par lemme_4 / point_fixe_automorphisme)."""
-    vR, vE, vh = var(R), var(E_set), var(h)
+    vR, vE, vh = var(R), _t(E_set), _t(h)   # h,E acceptent un TERME composé (c=φ'⁻¹∘φ)
     Rf = _R_de(R)
     vx, vy = var(x), var(y)
     hx, hy = _val(vh, vx), _val(vh, vy)

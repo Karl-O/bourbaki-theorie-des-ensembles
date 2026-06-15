@@ -86,6 +86,18 @@ def test_coincidence_close_assemblage():
     assert cod_c not in t.hypotheses                        # cod_c DÉCHARGÉE
 
 
+def test_coincidence_close_isos_strict_dechargee():
+    """🎯🎯 STRICTE CROISSANCE DÉCHARGÉE : coincidence_close_isos dérive la stricte
+    croissance de c=φ'⁻¹∘φ et k=φ⁻¹∘φ' depuis les isos (auto_de_deux_isos +
+    strict_croissante_depuis_iso) — il ne reste AUCUNE hyp de stricte croissance."""
+    t = G.coincidence_close_isos()
+    assert not t.est_clos
+    assert t.conclusion == G.coincidence_close_cible()         # conclusion préservée
+    assert t.conclusion not in t.hypotheses                    # NON tautologique
+    # AUCUNE hypothèse de stricte croissance ne subsiste (toutes dérivées des isos) :
+    assert all("croissante" not in repr(h) for h in t.hypotheses)
+
+
 def test_coincidence_univ_close_nestee():
     """🎯 VERSION NESTÉE : φ1:S1≅T1, φ2 sur segment ⊃ S1 (S1⊂dom φ2) coïncident sur S1.
     coincidence_close(φ1, φ2|S1) + restriction_valeur → (∀u)(u∈S1⇒φ1(u)=φ2(u)).
@@ -102,5 +114,6 @@ def test_theorie_inchangee_22():
     G.retraction_phi()
     G.retraction_kc()
     G.coincidence_close()
+    G.coincidence_close_isos()
     G.coincidence_univ_close()
     assert len(E.theorie_ensembles().axiomes) == 22

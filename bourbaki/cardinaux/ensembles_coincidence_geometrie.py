@@ -474,6 +474,37 @@ def coincidence_close_cible(phi="phi", phip="phip", S="S", T="T", u="u"):
     return coincidence_sur_chevauchement_cible("R", S, phi, phip, "c", "k", u)
 
 
+def coincidence_close_isos(phi="phi", phip="phip", S="S", T="T", u="u"):
+    """⊢ { est_bien_ordonne(R,S) + isos d'ordre de φ,φ' (et de leurs réciproques φ'⁻¹,φ⁻¹)
+           + structurelles }  ⊢  (∀u)( u∈S ⇒ φ(u) = φ'(u) ).
+
+    🎯🎯 coincidence_close AVEC LA STRICTE CROISSANCE de c=φ'⁻¹∘φ et k=φ⁻¹∘φ' DÉCHARGÉE
+    (plus AUCUNE hyp de stricte croissance postulée — c'était le dernier résidu « modulo
+    isos »).  c,k sont des AUTOMORPHISMES D'ORDRE de (S,R) : `auto_de_deux_isos` (composée
+    de deux isos = iso, CLOS) en fournit l'iso(c,S,S,R,R) [resp. k], et
+    `strict_croissante_depuis_iso` (CLOS) en tire la stricte croissance τ_j EXACTE
+    consommée par coincidence_close.  Les liants d'ordre de l'iso sont x,x2 (sortie de
+    composee_isomorphisme_ordre), passés à strict_croissante_depuis_iso via ib_x/ib_y.
+
+    Reste en hyps : bon ordre + isos de φ,φ',φ'⁻¹,φ⁻¹ + structurelles — PLUS de stricte
+    croissance.  Conclusion φ(u)=φ'(u) sur S, NON tautologique."""
+    from bourbaki.cardinaux.ensembles_coincidence_pont import strict_croissante_depuis_iso
+    from bourbaki.cardinaux.ensembles_coincidence_decharge import auto_de_deux_isos
+    vphi, vphip = _t(phi), _t(phip)
+    base = coincidence_close(phi, phip, S, T, u)                  # 15 hyps incl strict_c, strict_k
+    c_term = E.composee(E.reciproque(vphip), vphi)               # c = φ'⁻¹∘φ
+    k_term = E.composee(E.reciproque(vphi), vphip)               # k = φ⁻¹∘φ'
+    # c = composee(reciproque φ', φ) ⇒ auto(phi, reciproque φ') ; k = composee(reciproque φ, φ') ⇒ auto(phip, reciproque φ)
+    for ct, ph_arg, psi_arg in [(c_term, phi, E.reciproque(vphip)),
+                                (k_term, phip, E.reciproque(vphi))]:
+        scr = strict_croissante_depuis_iso(ct, S, "R", ib_x="x", ib_y="x2")   # 1 hyp : iso(.,S,S,R,R)[x,x2]
+        iso_t = auto_de_deux_isos(ph_arg, psi_arg, S, T, "R", "Rp")           # ⊢ iso(composee(psi,ph),S,S,R,R)
+        scr = N.modus_ponens(iso_t, N.loi_deduction(iso_t.conclusion, scr))   # décharge l'iso → strict (6 hyps iso/func/dom)
+        assert scr.conclusion in base.hypotheses, "stricte croissance ne matche pas une hyp de coincidence_close"
+        base = N.modus_ponens(scr, N.loi_deduction(scr.conclusion, base))     # décharge strict_c / strict_k
+    return base
+
+
 def composee_dans_S_cible(g="psi", f="phi", S="S", T="T", t="t"):
     """ÉNONCÉ-cible (test miroir) : (∀t)(t∈S ⇒ valeur(g∘f,t,b="j") ∈ S)."""
     vf, vg, vS, vt = var(f), var(g), var(S), var(t)
