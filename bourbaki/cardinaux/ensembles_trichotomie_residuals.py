@@ -357,7 +357,6 @@ def restriction_inclus_produit_image(phi="phi", X="X"):
     from bourbaki.ensembles.fonctions.ensembles_restrictions import _inst_restriction
     from bourbaki.ensembles.familles.ensembles_produit import couple_dans_produit_ssi
     vphi, vX = _t(phi), _t(X)
-    fX = E.restriction(vphi, vX)
     img = E.image(vphi, vX)
     prod = E.produit(vX, img)
     vz = var("z")
