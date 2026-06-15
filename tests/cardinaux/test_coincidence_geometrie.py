@@ -96,6 +96,8 @@ def test_coincidence_close_isos_strict_dechargee():
     assert t.conclusion not in t.hypotheses                    # NON tautologique
     # AUCUNE hypothèse de stricte croissance ne subsiste (toutes dérivées des isos) :
     assert all("croissante" not in repr(h) for h in t.hypotheses)
+    # AUCUNE hypothèse iso(φ'⁻¹)/iso(φ⁻¹) ne subsiste (dérivées via reciproque_isomorphisme_ordre) :
+    assert sum(1 for h in t.hypotheses if "reciproque" in repr(h) and repr(h).count("exists") >= 4) == 0
 
 
 def test_coincidence_univ_close_nestee():

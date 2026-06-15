@@ -25,6 +25,7 @@ from bourbaki.logique import noyau_abrege as N
 from bourbaki.ensembles import ensembles_abrege as E
 from bourbaki.logique.tactiques.tactiques_abrege2 import (
     equivalence_avant, instancie, conjonction_intro,
+    conjonction_elim_gauche, conjonction_elim_droite,
 )
 from bourbaki.ordre.ensembles_valeur_bridge import valeur_j_egal_y
 from bourbaki.ensembles.fonctions.ensembles_valeur_codomaine import valeur_dans_codomaine
@@ -33,6 +34,21 @@ from bourbaki.ensembles.fonctions.ensembles_fonctions_composee import compositio
 
 def _t(x):
     return x if isinstance(x, Terme) else var(x)
+
+
+def _rename_iso_y(iso_thm, to_y):
+    """α-renomme le SECOND liant de quantif. d'ordre d'un théorème iso.
+
+    iso_thm.conclusion = et(est_bijective(φ,S,T), compatible_ordre(φ,S,R,R')[x, ·]) ;
+    on renomme le second liant (« · ») en `to_y` par instanciation-puis-regénéralisation
+    (le premier reste « x »).  Le conjoint bijective est inchangé (ses liants u,up sont
+    fixés par la définition).  Hypothèses de iso_thm PRÉSERVÉES.  Sert à apparier les
+    conventions de liants entre lemmes (reciproque_isomorphisme_ordre=w ↔ auto=x2)."""
+    bij = conjonction_elim_gauche(iso_thm)                  # est_bijective(φ,S,T)
+    compat = conjonction_elim_droite(iso_thm)               # (∀x)(∀·) compatible
+    body = instancie(instancie(compat, var("x")), var(to_y))   # corps[x, to_y]
+    compat2 = N.generalisation("x", N.generalisation(to_y, body))
+    return conjonction_intro(bij, compat2)
 
 
 def composee_dans_S(g="psi", f="phi", S="S", T="T", t="t"):
@@ -520,6 +536,25 @@ def coincidence_close_isos(phi="phi", phip="phip", S="S", T="T", u="u"):
         scr = N.modus_ponens(iso_t, N.loi_deduction(iso_t.conclusion, scr))   # décharge l'iso → strict (6 hyps iso/func/dom)
         assert scr.conclusion in base.hypotheses, "stricte croissance ne matche pas une hyp de coincidence_close"
         base = N.modus_ponens(scr, N.loi_deduction(scr.conclusion, base))     # décharge strict_c / strict_k
+
+    # ── décharge des ISOS RÉCIPROQUES iso(φ'⁻¹), iso(φ⁻¹) (introduites par auto) ──
+    # iso(X⁻¹) est DÉRIVÉ de {iso(X), func X, dom X=S} (reciproque_isomorphisme_ordre,
+    # KEYSTONE) — tous déjà présents → réduction NETTE (−2 hyps, rien de neuf).  Pont de
+    # liants : reciproque produit le liant « w », auto attend « x2 » → _rename_iso_y.
+    from bourbaki.cardinaux.ensembles_iso_ordre_reciproque import reciproque_isomorphisme_ordre
+    from bourbaki.cardinaux.ensembles_coincidence_decharge import _Rgraphe
+    from bourbaki.ordre.ensembles_ordre_vocab import est_isomorphisme_ordre as _Viso
+    Rf, Rpf = _Rgraphe("R"), _Rgraphe("Rp")
+    for X in [phip, phi]:                                    # X⁻¹ = φ'⁻¹ (route c), φ⁻¹ (route k)
+        vX = _t(X)
+        rio = reciproque_isomorphisme_ordre(X, S, T, Rf, Rpf)   # {iso(X)[x,w],func X,dom X=S}⊢iso(X⁻¹)[x,w]
+        rio = _rename_iso_y(rio, "x2")                          # ⊢ iso(X⁻¹)[x,x2]  (hyps inchangées)
+        iso_X_x2 = _Viso(vX, _t(S), _t(T), Rf, Rpf, "x", "x2")  # forme présente dans base
+        iso_X_w  = _Viso(vX, _t(S), _t(T), Rf, Rpf, "x", "w")   # forme attendue par rio
+        fwd = _rename_iso_y(N.assume(iso_X_x2), "w")            # ⊢_{iso(X)[x,x2]} iso(X)[x,w]
+        rio = N.modus_ponens(fwd, N.loi_deduction(iso_X_w, rio))  # hyps {iso(X)[x,x2],func X,dom X=S}
+        if rio.conclusion in base.hypotheses:                   # décharge la réciproque
+            base = N.modus_ponens(rio, N.loi_deduction(rio.conclusion, base))
     return base
 
 
