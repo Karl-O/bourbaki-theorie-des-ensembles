@@ -124,39 +124,25 @@ def _leib(hole, a, b, h_ab, phi_fun, h_phi_a):
 #  Leibniz (S6) sur les égalités valeur(c,p,"y")=valeur(c,p,"j") du pont.
 # ════════════════════════════════════════════════════════════════════════════
 def compat_y_vers_jv(c="c", S="S", R="R"):
-    """⊢ { compatible_ordre(c,S,R,R)  [τ_y, liants frais a,b — bien formé] }
-            ⊢ _compat_yv(c,S,R)        [τ_j].
+    """⊢ { compatible_ordre(c,S,R,R)  [liants de quantif. a,b] }
+            ⊢ _compat_yv(c,S,R)        [liants de quantif. x,y].
 
-    🎯 PONT « valeur b=y ↔ b=j » sur la COMPATIBILITÉ D'ORDRE.  On instancie la
-    compatibilité d'ordre τ_y (écrite avec des liants FRAIS a,b pour éviter la capture
-    du liant de valeur par défaut « y ») à des points frais p,q, puis on RÉÉCRIT les
-    deux valeurs c(p), c(q) de τ_y vers τ_j par Leibniz (S6) sur les égalités
-    `valeur(c,p,"y")=valeur(c,p,"j")` du pont (valeur_y_egal_j, CLOS).  On regénéralise
-    enfin en (x,y) — les liants attendus par _compat_yv (le τ_j interne « j » ne
-    collisionne pas).  UNE seule hypothèse (la compatibilité τ_y) ; rien postulé.
+    ALIGNEMENT DES LIANTS de quantification.  ⚠️ Depuis que `compatible_ordre` adopte le
+    liant-VALEUR « j » (= celui de `_val`, ETAPE binder-j), sa valeur c(x) est écrite
+    `τ_j((x,j)∈c)` — EXACTEMENT comme `_compat_yv` (qui emploie `_val`).  L'ancien PONT
+    de valeur τ_y→τ_j est donc devenu l'IDENTITÉ ; il ne reste que la renomination des
+    LIANTS DE QUANTIFICATION (source a,b ↦ x,y attendus par `_compat_yv`), par
+    instanciation/regénéralisation (α-renommage).  UNE seule hypothèse ; rien postulé.
 
-    NON vacueux : la conclusion (compatibilité τ_j) DIFFÈRE de l'hypothèse (τ_y) par
-    le liant de valeur — le pont est réellement consommé."""
+    NON vacueux : la conclusion (liants x,y) DIFFÈRE structurellement de l'hypothèse
+    (liants a,b) — `conclusion ∉ hypothèses` (vérifié par test)."""
     Rf = _R_de(R)
     vc, vS = _t(c), _t(S)
-    # SOURCE : compatible_ordre τ_y, liants FRAIS a,b (bien formé : valeur(c,b) ≠ capture).
+    # SOURCE compatible_ordre(c,S,R,R) DÉJÀ en τ_j (liant-valeur « j »), liants quantif a,b.
     co = compatible_ordre(vc, vS, Rf, Rf, x="a", y="b")
-    vp, vq = var(_P), var(_Q)
-    cp_y, cq_y = E.valeur(vc, vp), E.valeur(vc, vq)               # τ_y
-    cp_j, cq_j = E.valeur(vc, vp, b="j"), E.valeur(vc, vq, b="j") # τ_j
-    eqp, eqq = valeur_y_egal_j(vc, vp), valeur_y_egal_j(vc, vq)   # c(·)_y = c(·)_j
-
-    co_inst = instancie(instancie(N.assume(co), vp), vq)
-    hyp = et(appartient(vp, vS), appartient(vq, vS))
-    # corps τ_y instancié : (p∈S et q∈S) ⇒ ( R{p,q} ⇔ R{c(p)_y, c(q)_y} )
-    s1 = _leib("hole_compat_yjv1", cp_y, cp_j, eqp,
-               lambda w: impl(hyp, equiv(Rf(vp, vq), Rf(w, cq_y))), co_inst)
-    s2 = _leib("hole_compat_yjv2", cq_y, cq_j, eqq,
-               lambda w: impl(hyp, equiv(Rf(vp, vq), Rf(cp_j, w))), s1)
-    gen = N.generalisation(_P, N.generalisation(_Q, s2))          # ∀p∀q (τ_j body)
-    # réinstancie à x,y (sans collision avec τ_j) puis regénéralise pour aligner les liants
-    inst_xy = instancie(instancie(gen, var("x")), var("y"))
-    return N.generalisation("x", N.generalisation("y", inst_xy))  # _compat_yv(c,S,R)
+    # α-renommage a,b ↦ x,y : instancier le corps à x,y puis regénéraliser.
+    co_inst = instancie(instancie(N.assume(co), var("x")), var("y"))
+    return N.generalisation("x", N.generalisation("y", co_inst))  # _compat_yv(c,S,R)
 
 
 def compat_y_vers_jv_cible(c="c", S="S", R="R"):
