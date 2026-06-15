@@ -29,6 +29,15 @@ def test_iso_restriction_image_hyps():
     assert len(thm.hypotheses) >= 1
 
 
+# ── RACCORD APPLIQUÉ : φ2|S1 iso S1 ≅ T1 (codomaine réconcilié) ────────────────
+def test_iso_restriction_vers_T1_conclusion():
+    """iso(φ2|S1, S1, T1) : le codomaine image(φ2,S1) est réécrit en T1 (codomaine_egal_image)."""
+    thm = M.iso_restriction_vers_T1()
+    assert thm.conclusion == M.iso_restriction_vers_T1_cible()   # iso(φ2|S1,S1,T1)
+    assert thm.conclusion not in set(thm.hypotheses)             # non vacueux
+    assert len(E.theorie_ensembles().axiomes) == 22
+
+
 # ── SOUS-LEMME (2) : ψ=(φ2|S1)∘(φ1⁻¹) iso T1 ≅ image(φ2,S1) ───────────────────
 def test_iso_T1_vers_image_conclusion():
     thm = M.iso_T1_vers_image()

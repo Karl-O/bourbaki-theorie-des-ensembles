@@ -136,6 +136,36 @@ def iso_restriction_image_cible(phi2="phi2", S1="S1", S2="S2", R="R", Rp="Rp",
     return V.est_isomorphisme_ordre(fX, vS1, E.image(vphi2, vS1), Rf, Rpf, x, y)
 
 
+def iso_restriction_vers_T1(phi2="phi2", S1="S1", T1="T1", S2="S2", F="F",
+                            R="R", Rp="Rp", x="a", y="b", phi1="phi1"):
+    """⊢ { hyps de iso_restriction_image  ∪  hyps de codomaine_egal_image }
+          ⊢ est_isomorphisme_ordre(φ2|S1, S1, T1, R, R')  [liants x, y].
+
+    🎯 RACCORD DE CODOMAINE APPLIQUÉ : `iso_restriction_image` donne
+    iso(φ2|S1, S1, image(φ2,S1)) ; `codomaine_egal_image` donne T1 = image(φ2,S1) ;
+    on RÉÉCRIT (Leibniz S6) le codomaine image(φ2,S1) ↦ T1 dans l'iso → iso(φ2|S1, S1, T1).
+    C'est EXACTEMENT l'hypothèse iso(φ2|S1, S1, T1) consommée par coincidence_close_isos
+    (versant nesté) : la restriction de φ2 à S1 est un iso de S1 sur le MÊME codomaine T1
+    que φ1.  Le codomaine n'apparaît qu'au conjoint surjectif (egal(image(φ2|S1,S1), ·)),
+    d'où une réécriture S6 propre (un seul site)."""
+    Rf, Rpf = _R_de(R), _R_de(Rp)
+    vphi2, vS1, vT1 = _t(phi2), _t(S1), _t(T1)
+    fX, img = E.restriction(vphi2, vS1), E.image(vphi2, vS1)
+    iso_img = iso_restriction_image(phi2, S1, S2, R, Rp, x, y)        # iso(φ2|S1,S1,image)[x,y]
+    ceq = codomaine_egal_image(phi1, phi2, S1, T1, S2, F, R, Rp)      # ⊢ T1 = image(φ2,S1)
+    img_eq_T1 = N.modus_ponens(ceq, symetrie(vT1, img))              # ⊢ image(φ2,S1) = T1
+    hole = V.est_isomorphisme_ordre(fX, vS1, var("w"), Rf, Rpf, x, y)  # iso(φ2|S1,S1, w )
+    equiv = N.modus_ponens(img_eq_T1, N.s6(img, vT1, "w", hole))      # iso[image] ⇔ iso[T1]
+    return N.modus_ponens(iso_img, equivalence_avant(equiv))          # iso(φ2|S1, S1, T1)[x,y]
+
+
+def iso_restriction_vers_T1_cible(phi2="phi2", S1="S1", T1="T1", R="R", Rp="Rp", x="a", y="b"):
+    """ÉNONCÉ-cible (test miroir) : est_isomorphisme_ordre(φ2|S1, S1, T1, R, R')."""
+    Rf, Rpf = _R_de(R), _R_de(Rp)
+    vphi2, vS1, vT1 = _t(phi2), _t(S1), _t(T1)
+    return V.est_isomorphisme_ordre(E.restriction(vphi2, vS1), vS1, vT1, Rf, Rpf, x, y)
+
+
 # ════════════════════════════════════════════════════════════════════════════
 #  Helpers de pont de liants d'ordre (idiome _rename_iso_y, partagé).
 # ════════════════════════════════════════════════════════════════════════════
@@ -590,6 +620,7 @@ def codomaine_egal_image_cible(phi1="phi1", phi2="phi2", S1="S1", T1="T1"):
 
 __all__ = [
     "iso_restriction_image", "iso_restriction_image_cible",
+    "iso_restriction_vers_T1", "iso_restriction_vers_T1_cible",
     "iso_T1_vers_image", "iso_T1_vers_image_cible",
     "segment_inclus_par_iso",
     "codomaine_egal_image", "codomaine_egal_image_cible",
