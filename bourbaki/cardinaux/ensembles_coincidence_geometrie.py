@@ -99,6 +99,43 @@ def composee_dans_S(g="psi", f="phi", S="S", T="T", t="t"):
     return N.generalisation(t, body)                         # (∀t)(t∈S ⇒ (g∘f)(t)[j]∈S)
 
 
+def composee_dans_S_t(g, f, S, T, t="t"):
+    """⊢ { f⊂S×T, dom f=S, f func, g⊂T×S, dom g=T, g func, (g∘f) func }
+         ⊢ (∀t)( t∈S ⇒ valeur(g∘f, t, b="j") ∈ S ).   (version TERMES de composee_dans_S.)
+
+    Identique à composee_dans_S mais g, f sont des TERMES (ex. g=reciproque φ') : utilise
+    `composition_valeur_t` (au lieu de composition_valeur, name-based) — d'où l'hyp
+    (g∘f) fonctionnel EXPLICITE en plus."""
+    from bourbaki.logique.formule import existe
+    from bourbaki.logique.tactiques.tactiques_abrege2 import equivalence_arriere
+    from bourbaki.ensembles.fonctions.ensembles_composee_valeurs import composition_valeur_t
+    vg, vf, vS, vT, vt, vy = _t(g), _t(f), _t(S), _t(T), var(t), var("y")
+    comp = E.composee(vg, vf)
+    ft_y = E.valeur(vf, vt)               # f(t)[y]
+    gft_y = E.valeur(vg, ft_y)            # g(f(t))[y]
+    ct_y = E.valeur(comp, vt)             # (g∘f)(t)[y]
+    ct_j = E.valeur(comp, vt, b="j")      # (g∘f)(t)[j]
+    Ht = N.assume(appartient(vt, vS))
+
+    ft_in_T = valeur_dans_codomaine(vf, vS, vT, vt)          # f(t)[y]∈T
+    gft_in_S = valeur_dans_codomaine(vg, vT, vS, ft_y)       # g(f(t))[y]∈S [hyp f(t)∈T]
+    gft_in_S = N.modus_ponens(ft_in_T, N.loi_deduction(appartient(ft_y, vT), gft_in_S))
+
+    comp_eq = composition_valeur_t(vg, vf, vt)               # (g∘f)(t)[y]=g(f(t))[y]  [hyps ∃dom×2, comp func]
+    comp_eq = N.modus_ponens(_decharge_exists_dom(vf, vt, N.assume(egal(E.dom(vf), vS)), vS, Ht),
+        N.loi_deduction(existe("y", appartient(E.couple(vt, vy), vf)), comp_eq))
+    comp_eq = N.modus_ponens(_decharge_exists_dom(vg, ft_y, N.assume(egal(E.dom(vg), vT)), vT, ft_in_T),
+        N.loi_deduction(existe("y", appartient(E.couple(ft_y, vy), vg)), comp_eq))
+
+    eqv_y = N.modus_ponens(comp_eq, N.s6(ct_y, gft_y, "hgy", appartient(var("hgy"), vS)))
+    ct_y_in_S = N.modus_ponens(gft_in_S, equivalence_arriere(eqv_y))   # (g∘f)(t)[y]∈S
+    eqv_j = N.modus_ponens(valeur_j_egal_y(comp, vt),
+                           N.s6(ct_j, ct_y, "hgj", appartient(var("hgj"), vS)))
+    ct_j_in_S = N.modus_ponens(ct_y_in_S, equivalence_arriere(eqv_j))  # (g∘f)(t)[j]∈S
+    body = N.loi_deduction(appartient(vt, vS), ct_j_in_S)
+    return N.generalisation(t, body)
+
+
 def retraction_phi(phi="phi", S="S", T="T", x="x"):
     """⊢ { dom φ=S,  φ⁻¹ fonctionnel }  ⊢ (∀x)( x∈S ⇒ valeur(φ⁻¹, valeur(φ,x), )=x ).
 

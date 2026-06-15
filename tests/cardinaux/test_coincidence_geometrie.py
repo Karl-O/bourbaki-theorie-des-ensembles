@@ -54,6 +54,21 @@ def test_retraction_kc_conclusion():
     assert t.conclusion not in t.hypotheses
 
 
+def test_composee_dans_S_t_termes():
+    """Version TERMES de composee_dans_S (pour c=composee(reciproque φ',φ), g terme).
+    composition_valeur_t au lieu de composition_valeur → 1 hyp comp-func en plus."""
+    from bourbaki.logique.formule import var
+    t = G.composee_dans_S_t(E.reciproque(var("phip")), var("phi"), var("S"), var("T"))
+    assert not t.est_clos
+    # même cible que composee_dans_S mais avec le terme composé
+    c = E.composee(E.reciproque(var("phip")), var("phi"))
+    from bourbaki.logique.formule import pourtout, impl, appartient
+    cible = pourtout("t", impl(appartient(var("t"), var("S")),
+                               appartient(E.valeur(c, var("t"), b="j"), var("S"))))
+    assert t.conclusion == cible
+    assert t.conclusion not in t.hypotheses
+
+
 def test_theorie_inchangee_22():
     G.composee_dans_S()
     G.raccord_phip()
