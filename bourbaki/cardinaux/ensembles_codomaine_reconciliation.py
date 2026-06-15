@@ -360,13 +360,21 @@ def segment_inclus_par_iso(chi, A, B, Rp, F, a="a", t="t"):
     🎯 CŒUR de la réconciliation : un iso χ : B ≅ A entre DEUX SEGMENTS EMBOÎTÉS A⊂B
     d'un bon ordre (F,R') force B⊂A (donc, avec A⊂B, l'ÉGALITÉ).
 
+    🔑 BON ORDRE AMBIANT.  lemme_4 est appliqué via `lemme_4_sous_domaine` sur le bon
+    ordre AMBIANT (F,R') + inclus(B,F), JAMAIS bo(R',B) (FAUSSE pour un segment PROPRE
+    B⊊F : la composante réflexive R'{x,x}⇔x∈B échoue pour x∈F∖B).  C'est le fix du REPORT
+    historique « reste hyp bo(R',B) mais on a bo(R',F) » : les DEUX hyps bo(R',F) et
+    inclus(B,F) sont DÉJÀ dans le séquent de segment_inclus_par_iso, donc le résidu se
+    discharge sans rien ajouter.
+
     PREUVE.  χ:B→A, A⊂B, donc χ envoie B DANS B (`_chi_dans_B`) ; χ est strictement
-    croissant (`_strict_croissante_depuis_iso_into`).  lemme_4 sur (B,R') :
+    croissant (`_strict_croissante_depuis_iso_into`).  lemme_4_sous_domaine sur (F,R')|B :
     ∀x∈B, R'{x, χ(x)}.  Pour a∈B : χ(a)∈A et a≤χ(a) ; A étant un SEGMENT de F, de
     χ(a)∈A, a∈F (a∈B⊂F) et a≤χ(a) on conclut a∈A.  D'où B⊂A.
 
     χ est un TERME (ψ ou ψ⁻¹).  Binder de point « a », élément courant « t »."""
-    from bourbaki.cardinaux.ensembles_lemme4_croissante import lemme_4, _val
+    from bourbaki.cardinaux.ensembles_lemme4_sous_domaine import lemme_4_sous_domaine
+    from bourbaki.cardinaux.ensembles_lemme4_croissante import _val
     Rpf = _R_de(Rp)
     vchi, vA, vB, vF = _t(chi), _t(A), _t(B), _t(F)
     vt = var(t)
@@ -376,15 +384,15 @@ def segment_inclus_par_iso(chi, A, B, Rp, F, a="a", t="t"):
     fdans = _chi_dans_B(vchi, vB, vA)       # {dom χ=B, image(χ,B)=A, A⊂B} ⊢ (∀t)(t∈B⇒χ(t)[j]∈B)
     scr = _strict_croissante_depuis_iso_into(vchi, vB, vA, Rp)   # {iso(χ,B,A,R',R')} ⊢ strict crois χ B→B
 
-    # lemme_4 sur (B,R') : (∀x)(x∈B ⇒ R'{x, χ(x)})
-    l4 = lemme_4(Rp, vB, vchi)              # hyps : bo(R',B), (∀t)(t∈B⇒χ(t)[j]∈B), strict crois
-    #   décharge la map self χ:B→B et la stricte croissance
+    # lemme_4_sous_domaine sur (F,R')|B : (∀x)(x∈B ⇒ R'{x, χ(x)})  [bo AMBIANT bo(R',F)+inclus(B,F)]
+    l4 = lemme_4_sous_domaine(Rp, vF, vB, vchi)  # hyps : bo(R',F), inclus(B,F), map, strict crois
+    #   décharge la map self χ:B→B et la stricte croissance  (bo(R',F)+inclus(B,F) restent)
     from bourbaki.cardinaux.ensembles_lemme4_croissante import _f_dans_E
     from bourbaki.ordre.ensembles_ordre_monotone import est_strictement_croissante
     l4 = N.modus_ponens(fdans, N.loi_deduction(_f_dans_E(vchi, vB), l4))
     l4 = N.modus_ponens(scr, N.loi_deduction(
         est_strictement_croissante(var(Rp), var(Rp), vchi, vB, vB), l4))
-    #   reste hyp : bo(R',B)  — mais on a bo(R',F), pas bo(R',B) ! → voir REPORT ci-dessous.
+    #   reste hyps : bo(R',F), inclus(B,F)  — TOUTES DEUX dans le séquent de cette fonction.
 
     # corps : t∈B ⇒ t∈A
     Ht = N.assume(appartient(vt, vB))
@@ -426,8 +434,7 @@ def codomaine_egal_image(phi1="phi1", phi2="phi2", S1="S1", T1="T1", S2="S2",
             est_isomorphisme_ordre(φ2, S2, T2, R, R'),  est_fonctionnel(φ2),  dom φ2=S2,
             inclus(S1, S2),
             est_segment(T1, R', F),  est_segment(image(φ2,S1), R', F),
-            est_bien_ordonne(R', F),
-            est_bien_ordonne(R', T1),  est_bien_ordonne(R', image(φ2,S1)) }
+            est_bien_ordonne(R', F) }                          [BON ORDRE AMBIANT seul]
           ⊢ egal(T1, image(φ2, S1)).
 
     🎯 RÉCONCILIATION DU CODOMAINE (Lemme 1 §III.2).  φ1 : S1 ≅ T1 et φ2|S1 : S1 ≅ φ2⟨S1⟩
@@ -446,13 +453,13 @@ def codomaine_egal_image(phi1="phi1", phi2="phi2", S1="S1", T1="T1", S2="S2",
             • T1 ⊂ I  ⟹  ψ⁻¹ : I ≅ T1, self-map de I ⟹ I ⊂ T1 ;
           d'où la DOUBLE INCLUSION puis l'ÉGALITÉ (inclusion_antisymetrique).
 
-    NOTE D'HONNÊTETÉ : est_bien_ordonne(R',T1) et est_bien_ordonne(R',I) sont portées en
-    hypothèses EXPLICITES — convention DÉJÀ adoptée par coincidence_univ (le bon ordre
-    de la RELATION NUE R' sur un segment n'est PAS dérivable comme FORMULE LITTÉRALE de
-    est_bien_ordonne(R',F) : la composante reflexive R'{x,x}⇔x∈T1 échoue pour les points
-    de F∖T1, cf. ensembles_sous_bien_ordonne — seul l'ORDRE INDUIT R'_T1 est bien ordonné).
-    Les inclus(T1,F)/inclus(I,F) sont DÉRIVÉS du conjoint gauche de est_segment (non
-    portés).  theorie=22 ; conclusion non vacueuse."""
+    🔑 BON ORDRE AMBIANT (fix du REPORT historique).  est_bien_ordonne(R',T1) et
+    est_bien_ordonne(R',I) NE SONT PLUS portées : le cœur segment_inclus_par_iso route
+    désormais par lemme_4_sous_domaine, qui consomme le bon ordre AMBIANT bo(R',F) +
+    inclus(B,F) (B = T1 ou I) au lieu de la formule LITTÉRALE bo(R',B) (FAUSSE sur un
+    segment PROPRE : R'{x,x}⇔x∈B échoue pour x∈F∖B).  Les inclus(T1,F)/inclus(I,F)
+    nécessaires sont DÉRIVÉS du conjoint gauche de est_segment (non portés).  Le séquent
+    ne porte donc QUE bo(R',F).  theorie=22 ; conclusion non vacueuse."""
     from bourbaki.cardinaux.ensembles_iso_ordre_reciproque import reciproque_isomorphisme_ordre
     from bourbaki.cardinaux.ensembles_bijection import (
         reciproque_fonctionnelle, reciproque_domaine, image_reciproque,

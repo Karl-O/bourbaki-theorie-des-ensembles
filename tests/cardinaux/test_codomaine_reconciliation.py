@@ -66,17 +66,17 @@ def test_codomaine_egal_image_theorie_intacte():
 
 
 def test_codomaine_egal_image_hyps_honnetes():
-    """Les 12 hypothèses sont EXACTEMENT les données NESTÉES de la fusion (+ bon ordre
-    des deux segments, convention coincidence_univ).  Aucune hypothèse parasite."""
+    """Les 10 hypothèses sont EXACTEMENT les données NESTÉES de la fusion, avec le BON
+    ORDRE AMBIANT bo(R',F) SEUL — plus de bo(R',T1)/bo(R',I) sur les SEGMENTS (route
+    lemme_4_sous_domaine, qui consomme bo(R',F)+inclus(B,F) dérivées de est_segment).
+    Aucune hypothèse parasite."""
     thm = M.codomaine_egal_image()
     Rf, Rpf = _Rg("R"), _Rg("Rp")
     p1, p2, S1, T1, S2, T2, F = (var("phi1"), var("phi2"), var("S1"), var("T1"),
                                  var("S2"), var("T2"), var("F"))
     I = E.image(p2, S1)
     attendues = {
-        E.est_bien_ordonne(Rpf, F),
-        E.est_bien_ordonne(Rpf, T1),
-        E.est_bien_ordonne(Rpf, I),
+        E.est_bien_ordonne(Rpf, F),                # BON ORDRE AMBIANT seul
         E.est_segment(T1, Rpf, F),
         E.est_segment(I, Rpf, F),
         V.est_isomorphisme_ordre(p1, S1, T1, Rf, Rpf, "x", "w"),
@@ -88,3 +88,6 @@ def test_codomaine_egal_image_hyps_honnetes():
         inclus(S1, S2),
     }
     assert set(thm.hypotheses) == attendues
+    # les bo SUR SEGMENTS ont disparu (faux sur segment propre — bo ambiant les couvre)
+    assert E.est_bien_ordonne(Rpf, T1) not in set(thm.hypotheses)
+    assert E.est_bien_ordonne(Rpf, I) not in set(thm.hypotheses)
