@@ -160,11 +160,11 @@ def A_vide(R="R", E_set="E", f="f"):
     Cœur par minimalité : si A≠∅, m=min(A) donne f(m)<m, donc f(f(m))<f(m) (f strict),
     donc f(m)∈A ; mais m=min(A) force R{m,f(m)}, et l'antisymétrie avec R{f(m),m} donne
     m=f(m), contredisant f(m)≠m."""
-    vR, vE, vf = var(R), var(E_set), var(f)
+    vR, vE, vf = var(R), _t(E_set), _t(f)   # f/E_set acceptent un TERME (ex. c=φ'⁻¹∘φ composé)
     Rf = _R_de(R)
     A = A_bad(vR, vE, vf)
     Hfdans = N.assume(_f_dans_E(vf, vE))
-    Hscr = N.assume(est_strictement_croissante(vR, vR, vf, vE, vE))
+    Hscr = N.assume(est_strictement_croissante(vR, vR, vf, vE, vE))  # vf peut être un TERME composé (cf. _t ci-dessus)
 
     # plus petit élément de A — via la clause CANONIQUE (bo = est_bien_ordonne(R,E)
     # standard, chainable / partagé avec la totalité), instanciée au TERME A.
@@ -221,7 +221,7 @@ def lemme_4(R="R", E_set="E", f="f", x="x"):
 
     De A=∅ (A_vide) : x∈E impose, par TOTALITÉ, R{x,f(x)} ou R{f(x),x} ; le 2ᵉ cas force
     f(x)=x (sinon x∈A=∅), d'où R{x,f(x)}."""
-    vR, vE, vf = var(R), var(E_set), var(f)
+    vR, vE, vf = var(R), _t(E_set), _t(f)   # f/E_set acceptent un TERME (ex. c=φ'⁻¹∘φ composé)
     Rf = _R_de(R)
     A = A_bad(vR, vE, vf)
     vx = var(x)

@@ -392,6 +392,47 @@ def retraction_kc_cible(phi="phi", phip="phip", S="S", T="T", x="x"):
                             egal(E.valeur(k, cx_j, b="j"), vx)))
 
 
+def coincidence_close(phi="phi", phip="phip", S="S", T="T", u="u"):
+    """⊢ { est_bien_ordonne(R,S),  c strict. croissante S→S,  k strict. croissante S→S,
+           + structurelles de φ,φ' (graphe⊂S×T, dom, func, func réciproque) }
+         ⊢ (∀u)( u∈S ⇒ φ(u) = φ'(u) ),   c:=φ'⁻¹∘φ, k:=φ⁻¹∘φ'.
+
+    🎯🎯 ASSEMBLAGE Jalon1-a — coïncidence de deux isos sur le chevauchement, RÉSIDU
+    GÉOMÉTRIE DÉCHARGÉ.  On appelle `coincidence_sur_chevauchement` avec c,k = les TERMES
+    composées (φ'⁻¹∘φ, φ⁻¹∘φ') — possible depuis le fix var→_t de A_vide/lemme_4/
+    point_fixe_automorphisme (verrou composite-vs-nom levé) — et on DÉCHARGE ses 4 familles
+    de géométrie par les briques (formes TERMES, matching exact, AUCUN pont de nom) :
+      • cod_c, cod_k  ← composee_dans_S_t ;
+      • k∘c=id        ← retraction_kc ;
+      • φ'(c(u))=φ(u) ← raccord_phip.
+    Restent en hyps : bon ordre + stricte croissance de c,k (vraies — c,k sont des isos —
+    et déchargeables via auto_de_deux_isos+strict_croissante_depuis_iso, REPORT mineur) +
+    les structurelles d'iso.  Conclusion φ(u)=φ'(u) sur S, NON tautologique."""
+    from bourbaki.cardinaux.ensembles_trichotomie_restriction import coincidence_sur_chevauchement
+    vphi, vphip, vS, vT = var(phi), var(phip), var(S), var(T)
+    PhipInv, PhiInv = E.reciproque(vphip), E.reciproque(vphi)
+    c = E.composee(PhipInv, vphi)             # c = φ'⁻¹∘φ  (TERME)
+    k = E.composee(PhiInv, vphip)             # k = φ⁻¹∘φ'  (TERME)
+    base = coincidence_sur_chevauchement("R", S, phi, phip, c, k, u)   # 7 hyps (c,k TERMES)
+    bricks = [
+        composee_dans_S_t(PhipInv, vphi, vS, vT),    # (∀t)(t∈S⇒c(t)[j]∈S)
+        composee_dans_S_t(PhiInv, vphip, vS, vT),    # (∀t)(t∈S⇒k(t)[j]∈S)
+        retraction_kc(phi, phip, S, T, x="u"),       # (∀u)(u∈S⇒k(c(u))[j]=u)
+        raccord_phip(phi, phip, S, T, u="u"),        # (∀u)(u∈S⇒φ'(c(u))[j]=φ(u))
+    ]
+    out = base
+    for b in bricks:
+        assert b.conclusion in out.hypotheses, "brique ne matche pas une hyp de coincidence"
+        out = N.modus_ponens(b, N.loi_deduction(b.conclusion, out))   # décharge la famille
+    return out
+
+
+def coincidence_close_cible(phi="phi", phip="phip", S="S", T="T", u="u"):
+    """ÉNONCÉ-cible (test miroir) : (∀u)(u∈S ⇒ φ(u)=φ'(u))."""
+    from bourbaki.cardinaux.ensembles_trichotomie_restriction import coincidence_sur_chevauchement_cible
+    return coincidence_sur_chevauchement_cible("R", S, phi, phip, "c", "k", u)
+
+
 def composee_dans_S_cible(g="psi", f="phi", S="S", T="T", t="t"):
     """ÉNONCÉ-cible (test miroir) : (∀t)(t∈S ⇒ valeur(g∘f,t,b="j") ∈ S)."""
     vf, vg, vS, vt = var(f), var(g), var(S), var(t)

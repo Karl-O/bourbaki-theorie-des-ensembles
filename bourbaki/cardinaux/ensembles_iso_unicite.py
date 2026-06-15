@@ -88,7 +88,7 @@ def point_fixe_automorphisme(R="R", E_set="E", h="h", k="k", x="x"):
     Lemme 4 sur h : x ≤ h(x).  Lemme 4 sur k, instancié à h(x)∈E : h(x) ≤ k(h(x)).
     Rétraction k(h(x))=x : donc h(x) ≤ x.  Antisymétrie (x ≤ h(x) et h(x) ≤ x)
     ⇒ x = h(x), i.e. h(x)=x."""
-    vR, vE, vh, vk = var(R), var(E_set), var(h), var(k)
+    vR, vE, vh, vk = var(R), _t(E_set), _t(h), _t(k)   # h,k acceptent un TERME composé (c=φ'⁻¹∘φ)
     Rf = _R_de(R)
     vx = var(x)
     hx = _val(vh, vx)                                           # h(x)

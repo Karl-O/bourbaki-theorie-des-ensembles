@@ -69,9 +69,27 @@ def test_composee_dans_S_t_termes():
     assert t.conclusion not in t.hypotheses
 
 
+def test_coincidence_close_assemblage():
+    """🎯 ASSEMBLAGE : coïncidence (Lemme 1) avec les 4 familles de géométrie DÉCHARGÉES.
+    Conditionnel sur {bon ordre, c/k strict. croissantes, structurelles iso} SEULEMENT —
+    le résidu géométrique (c,k:S→S, k∘c=id, raccord) n'est PLUS une hypothèse."""
+    from bourbaki.logique.formule import var, pourtout, impl, appartient
+    t = G.coincidence_close()
+    assert not t.est_clos
+    assert t.conclusion == G.coincidence_close_cible()      # (∀u)(u∈S ⇒ φ(u)=φ'(u))
+    assert t.conclusion not in t.hypotheses                 # NON tautologique
+    # les 4 familles de géométrie sont ABSENTES des hypothèses (déchargées) :
+    vphi, vphip, vS = var("phi"), var("phip"), var("S")
+    c = E.composee(E.reciproque(vphip), vphi)
+    cod_c = pourtout("t", impl(appartient(var("t"), vS),
+                               appartient(E.valeur(c, var("t"), b="j"), vS)))
+    assert cod_c not in t.hypotheses                        # cod_c DÉCHARGÉE
+
+
 def test_theorie_inchangee_22():
     G.composee_dans_S()
     G.raccord_phip()
     G.retraction_phi()
     G.retraction_kc()
+    G.coincidence_close()
     assert len(E.theorie_ensembles().axiomes) == 22
