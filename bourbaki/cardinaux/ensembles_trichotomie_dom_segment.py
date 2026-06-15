@@ -115,21 +115,32 @@ def val_dans_F(E_set="E", R="R", F_set="F", Rp="Rp",
 
 
 def _coeur_temoin(E_set, R, F_set, Rp, x_t, v_t, S, T, phi):
-    """FORMULE coeur(S,T,φ ; x,v) telle qu'elle sort de h_membre_donne_temoin :
+    """FORMULE coeur(S,T,φ ; x,v) telle qu'elle sort de h_membre_donne_temoin
+    (STRENGTHENED, 8 conjoints — ARCHITECTURE « φ APPLICATION ») :
 
         est_segment(S,R,E) et est_segment(T,Rp,F)
-        et est_isomorphisme_ordre(φ,S,T,R,Rp) et x∈S et v=valeur(φ,x).
+        et est_isomorphisme_ordre(φ,S,T,R,Rp) et x∈S et v=valeur(φ,x)
+        et est_fonctionnel(φ) et dom(φ)=S et φ⊂S×T.
+
+    DOIT mirroir EXACTEMENT TS._h_parts (sinon h_membre_donne_temoin et _coeur_temoin
+    divergent).  Les 3 conjoints func/dom/graphe sont précisément ce que
+    couple_iso_dans_h requiert maintenant pour le MÊME φ témoin (cf.
+    dom_h_initial_sous_val).
 
     x_t, v_t : TERMES (les coordonnées du couple) ; S,T,phi : NOMS de liants ∃."""
     Rf, Rpf = _R_de(R), _R_de(Rp)
     vE, vF = _t(E_set), _t(F_set)
     vS, vT, vphi = var(S), var(T), var(phi)
-    return et(et(et(et(
+    coeur5 = et(et(et(et(
         E.est_segment(vS, Rf, vE),
         E.est_segment(vT, Rpf, vF)),
         V.est_isomorphisme_ordre(vphi, vS, vT, Rf, Rpf, "px", "pw")),
         appartient(x_t, vS)),
         egal(v_t, E.valeur(vphi, x_t)))
+    return et(et(et(coeur5,
+        E.est_fonctionnel(vphi)),
+        egal(E.dom(vphi), vS)),
+        inclus(vphi, E.produit(vS, vT)))
 
 
 # ════════════════════════════════════════════════════════════════════════════
@@ -165,7 +176,15 @@ def dom_h_initial_sous_val(E_set="E", R="R", F_set="F", Rp="Rp",
     # ════════ sous le coeur témoin (S,T,φ ; x, zd), démontrer y∈dom h ════════
     coeur = _coeur_temoin(E_set, R, F_set, Rp, vx, vzd, S, T, phi)
     Hcoeur = N.assume(coeur)
-    c4 = conjonction_elim_gauche(Hcoeur)                       # …et x∈S
+    # ── PÈLE les 3 conjoints « φ APPLICATION » (graphe, dom, func) au niveau externe ──
+    #    coeur8 = et(et(et(coeur5, func), dom), graphe).
+    Hgraph = conjonction_elim_droite(Hcoeur)                   # φ⊂S×T
+    r_app = conjonction_elim_gauche(Hcoeur)                    # et(et(coeur5, func), dom)
+    Hdom = conjonction_elim_droite(r_app)                      # dom(φ)=S
+    r_app = conjonction_elim_gauche(r_app)                     # et(coeur5, func)
+    Hfunc = conjonction_elim_droite(r_app)                     # est_fonctionnel(φ)
+    Hc5 = conjonction_elim_gauche(r_app)                       # coeur5 (5 conjoints orig.)
+    c4 = conjonction_elim_gauche(Hc5)                          # …et x∈S
     Hx_in_S = conjonction_elim_droite(c4)                      # x∈S
     c3 = conjonction_elim_gauche(c4)                           # …et iso
     Hiso = conjonction_elim_droite(c3)                         # iso(φ,S,T)
@@ -209,6 +228,10 @@ def dom_h_initial_sous_val(E_set="E", R="R", F_set="F", Rp="Rp",
         (appartient(vy, vE), Hy_in_E),
         (appartient(vvv, vF), Hvv_F),
         (egal(vvv, phi_y), Hvv_eq),
+        # ── 3 hyps « φ APPLICATION » de couple_iso_dans_h, fournies par le cœur témoin ──
+        (E.est_fonctionnel(vphi), Hfunc),
+        (egal(E.dom(vphi), vS), Hdom),
+        (inclus(vphi, E.produit(vS, vT)), Hgraph),
     ]
     couple_in_h = cid
     for hyp_f, preuve in preuves:

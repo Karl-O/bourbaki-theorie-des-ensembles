@@ -86,7 +86,17 @@ def _h_parts(E_set, R, F_set, Rp, u, v, S="S", T="T", phi="phi"):
 
         dans_produit := (u∈E et v∈F)
         temoin       := (∃S)(∃T)(∃φ)( est_segment(S,R,E) et est_segment(T,Rp,F)
-                          et est_isomorphisme_ordre(φ,S,T,R,Rp) et u∈S et v=valeur(φ,u) ).
+                          et est_isomorphisme_ordre(φ,S,T,R,Rp) et u∈S et v=valeur(φ,u)
+                          et est_fonctionnel(φ) et dom(φ)=S et φ⊂S×T ).
+
+    ⚠️ ARCHITECTURE « φ APPLICATION » (func/dom/graphe) : depuis la trichotomie
+    fonctionne avec h = UNION de GRAPHES d'isos de segments enregistrés comme
+    APPLICATIONS (le témoin φ porte non seulement iso(φ,S,T) mais aussi sa structure
+    de graphe fonctionnel : est_fonctionnel(φ), dom(φ)=S, φ⊂S×T).  Ces 3 conjoints
+    SUPPLÉMENTAIRES alimentent la PRÉMISSE-APPLICATIONS consommée par
+    coincidence_univ_app (cf. ensembles_fusion_app / coincidence_point_app).  La
+    CONVENTION du dernier conjoint suit EXACTEMENT coincidence_univ_app :
+    inclus(φ, E.produit(S,T)).
 
     On les RETOURNE séparément (et NON via .sous, car « et » est encodé en ¬(¬∨¬))
     pour pouvoir les passer à projection_gauche / projection_droite."""
@@ -95,12 +105,17 @@ def _h_parts(E_set, R, F_set, Rp, u, v, S="S", T="T", phi="phi"):
     vE, vF = _t(E_set), _t(F_set)
     vS, vT, vphi = var(S), var(T), var(phi)
     dans_produit = et(appartient(vu, vE), appartient(vv, vF))
-    coeur = et(et(et(et(
+    coeur5 = et(et(et(et(
         E.est_segment(vS, Rf, vE),
         E.est_segment(vT, Rpf, vF)),
         V.est_isomorphisme_ordre(vphi, vS, vT, Rf, Rpf, "px", "pw")),
         appartient(vu, vS)),
         egal(vv, E.valeur(vphi, vu)))
+    # ── 3 conjoints « φ APPLICATION » appendus AU NIVEAU EXTERNE (les 5 d'abord) ──
+    coeur = et(et(et(coeur5,
+        E.est_fonctionnel(vphi)),
+        egal(E.dom(vphi), vS)),
+        inclus(vphi, E.produit(vS, vT)))
     temoin = existe(S, existe(T, existe(phi, coeur)))
     return dans_produit, temoin
 
@@ -205,14 +220,21 @@ def h_membre_donne_temoin_cible(E_set="E", R="R", F_set="F", Rp="Rp",
 def couple_iso_dans_h(E_set="E", R="R", F_set="F", Rp="Rp",
                       S="S", T="T", phi="phi", u="u", v="v"):
     """⊢ { est_segment(S,R,E), est_segment(T,Rp,F), est_isomorphisme_ordre(φ,S,T,R,Rp),
-           u∈S, u∈E, v∈F, v=φ(u) }
+           u∈S, u∈E, v∈F, v=φ(u),
+           est_fonctionnel(φ), dom(φ)=S, φ⊂S×T }
             ⊢ ( u, v ) ∈ h.
 
     🎯 CHAQUE couple (u,v) d'un iso φ:S≅T de segments (v=φ(u)) APPARTIENT à h : h est
     bien l'UNION (recollement) de tous les graphes d'iso de couples de segments
     isomorphes (étape d.3 du blueprint).  Sous les hypothèses STRUCTURELLES (S,T
-    segments, φ iso, u dans le segment, v dans le produit, v=φ(u)).  INCONDITIONNEL,
-    theorie=22.
+    segments, φ iso, u dans le segment, v dans le produit, v=φ(u)) PLUS la structure
+    « φ APPLICATION » (est_fonctionnel(φ), dom(φ)=S, φ⊂S×T — l'iso enregistré comme
+    GRAPHE fonctionnel, cf. _h_parts).  INCONDITIONNEL, theorie=22.
+
+    ⚠️ ARCHITECTURE func/dom : depuis le renforcement de _h_parts, le témoin de h
+    porte 8 conjoints (les 5 originaux + func + dom + graphe).  couple_iso_dans_h
+    requiert donc 3 hypothèses STRUCTURELLES de plus (func/dom/graphe de φ) — les
+    données « φ application » du contexte, fidèles à h = union de GRAPHES d'isos.
 
     ⚠️ v est pris GÉNÉRIQUE (variable) avec l'hypothèse v=φ(u) explicite : c'est
     INDISPENSABLE pour éviter la capture du liant ∃φ par le terme φ(u)=τy((u,y)∈φ)
@@ -232,20 +254,30 @@ def couple_iso_dans_h(E_set="E", R="R", F_set="F", Rp="Rp",
     Hu_E = N.assume(appartient(vu, vE))                   # u∈E
     Hv_F = N.assume(appartient(vv, vF))                   # v∈F
     Hveq = N.assume(egal(vv, fu))                         # v=φ(u)
+    # ── 3 hypothèses « φ APPLICATION » (func/dom/graphe) ──────────────────────────
+    Hfunc = N.assume(E.est_fonctionnel(vphi))            # est_fonctionnel(φ)
+    Hdom = N.assume(egal(E.dom(vphi), vS))               # dom(φ)=S
+    Hgraph = N.assume(inclus(vphi, E.produit(vS, vT)))   # φ⊂S×T
 
-    # cœur(σ,τ,p) := segments + iso + u∈σ + (v = p(u))  paramétré par les noms à
-    # ré-existentialiser, EXACTEMENT comme dans _h_parts (v GÉNÉRIQUE, ≠ aucun liant).
+    # cœur(σ,τ,p) := segments + iso + u∈σ + (v = p(u)) + func + dom + graphe, paramétré
+    # par les noms à ré-existentialiser, EXACTEMENT comme dans _h_parts (v GÉNÉRIQUE).
     def coeur(sS, sT, sphi):
-        return et(et(et(et(
+        coeur5 = et(et(et(et(
             E.est_segment(sS, Rf, vE),
             E.est_segment(sT, Rpf, vF)),
             V.est_isomorphisme_ordre(sphi, sS, sT, Rf, Rpf, "px", "pw")),
             appartient(vu, sS)),
             egal(vv, E.valeur(sphi, vu)))
+        return et(et(et(coeur5,
+            E.est_fonctionnel(sphi)),
+            egal(E.dom(sphi), sS)),
+            inclus(sphi, E.produit(sS, sT)))
 
-    # preuve du cœur aux TÉMOINS (S,T,φ) : la dernière conjonction v=φ(u) est Hveq.
-    preuve_coeur = conjonction_intro(conjonction_intro(conjonction_intro(
+    # preuve du cœur aux TÉMOINS (S,T,φ) : 5 conjoints originaux + func + dom + graphe.
+    preuve_coeur5 = conjonction_intro(conjonction_intro(conjonction_intro(
         conjonction_intro(Hseg_S, Hseg_T), Hiso), Hu_S), Hveq)
+    preuve_coeur = conjonction_intro(conjonction_intro(conjonction_intro(
+        preuve_coeur5, Hfunc), Hdom), Hgraph)
 
     # ── introduction des 3 existentiels (bottom-up), bodies = ceux de _h_parts ──
     body_phi = coeur(vS, vT, var(phi))                    # phi libre, S,T = témoins

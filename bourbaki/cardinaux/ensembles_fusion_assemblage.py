@@ -137,16 +137,29 @@ def coincidence_univ(E_set="E", R="R", F_set="F", Rp="Rp",
 #    coeur₁ = ((((seg S, seg T), iso(φ,S,T)), u∈S), v=φ(u))   (forme de _coeur1)
 # ════════════════════════════════════════════════════════════════════════════
 def _decompose_coeur(Hc):
-    """De ⊢ coeur (= _coeur1 / _temoin1_ex body) extrait (segS, segT, iso, in, val)."""
-    val = conjonction_elim_droite(Hc)               # v=φ(u)
-    r1 = conjonction_elim_gauche(Hc)                # (((seg,seg),iso),u∈S)
+    """De ⊢ coeur (= _coeur1 / _temoin1_ex body, STRENGTHENED 8 conjoints) extrait
+    (segS, segT, iso, in, val, func, dom, graph).
+
+    ⚠️ ARCHITECTURE func/dom : le cœur porte maintenant 8 conjoints —
+        et(et(et(coeur5, func), dom), graphe).
+    On PÈLE d'abord les 3 conjoints externes (graphe, dom, func) puis on applique la
+    logique d'origine sur coeur5.  On APPEND (func, dom, graph) au tuple retourné
+    (les appelants qui ne s'en servent pas ignorent les extras)."""
+    graph = conjonction_elim_droite(Hc)             # φ⊂S×T
+    r = conjonction_elim_gauche(Hc)                 # et(et(coeur5, func), dom)
+    dom = conjonction_elim_droite(r)                # dom(φ)=S
+    r = conjonction_elim_gauche(r)                  # et(coeur5, func)
+    func = conjonction_elim_droite(r)               # est_fonctionnel(φ)
+    Hc5 = conjonction_elim_gauche(r)                # coeur5 (5 conjoints originaux)
+    val = conjonction_elim_droite(Hc5)              # v=φ(u)
+    r1 = conjonction_elim_gauche(Hc5)               # (((seg,seg),iso),u∈S)
     inn = conjonction_elim_droite(r1)               # u∈S
     r2 = conjonction_elim_gauche(r1)                # ((seg,seg),iso)
     iso = conjonction_elim_droite(r2)               # iso(φ,S,T)
     r3 = conjonction_elim_gauche(r2)                # (seg S, seg T)
     segS = conjonction_elim_gauche(r3)              # seg S
     segT = conjonction_elim_droite(r3)              # seg T
-    return segS, segT, iso, inn, val
+    return segS, segT, iso, inn, val, func, dom, graph
 
 
 # ════════════════════════════════════════════════════════════════════════════
@@ -187,9 +200,9 @@ def _branche_couvrante(E_set, R, F_set, Rp,
       • H_incl : S_petit⊂S_grand,
       • H_coinc : coincidence_univ.
     Conclusion : temoin_commun_h(uA,vA,uB,vB) (binders S,T,phi)."""
-    # conjoints des cœurs
-    segSp, segTp, isop, uA_in, vA_eq = _decompose_coeur(H_coeur_A)   # petit
-    segSg, segTg, isog, uB_in, vB_eq = _decompose_coeur(H_coeur_B)   # grand
+    # conjoints des cœurs (8-uplet : on ignore func/dom/graphe ici)
+    segSp, segTp, isop, uA_in, vA_eq, *_ = _decompose_coeur(H_coeur_A)   # petit
+    segSg, segTg, isog, uB_in, vB_eq, *_ = _decompose_coeur(H_coeur_B)   # grand
     # coïncidence au point uA (uA∈S_petit) : φ_petit(uA)=φ_grand(uA)
     coinc_uA = _coinc_point(H_coinc, Sp, Tp, phip, Sg, Tg, phig,
                             segSp, segTp, isop, segSg, segTg, isog, H_incl, uA_in, uA)
@@ -275,8 +288,8 @@ def _core_with_witnesses(E_set, R, F_set, Rp, u, v, up, vp,
     les deux antécédents ; branche Sb⊂Sa suivie du SWAP des antécédents."""
     Rf = _R_de(R)
     vE = _t(E_set)
-    segSa, _, _, _, _ = _decompose_coeur(H_coeurA)
-    segSb, _, _, _, _ = _decompose_coeur(H_coeurB)
+    segSa, *_ = _decompose_coeur(H_coeurA)
+    segSb, *_ = _decompose_coeur(H_coeurB)
 
     # — comparabilité Sa,Sb (brique 1) : décharger les 2 hyps de segment depuis les cœurs —
     comp = CMP.segments_abstraits_comparables(R, E_set, _t(Sa), _t(Sb))

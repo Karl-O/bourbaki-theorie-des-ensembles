@@ -73,7 +73,7 @@ NE MODIFIE AUCUN fichier existant.
 from __future__ import annotations
 
 from bourbaki.logique.formule import (
-    Terme, var, egal, et, impl, appartient, existe, pourtout,
+    Terme, var, egal, et, impl, appartient, existe, pourtout, inclus,
 )
 from bourbaki.logique import noyau_abrege as N
 from bourbaki.ensembles import ensembles_abrege as E
@@ -116,16 +116,34 @@ def _temoin1_ex(E_set, R, F_set, Rp, u, v, S="S", T="T", phi="phi"):
 
 def _coeur1(E_set, R, F_set, Rp, u, v, vS, vT, vphi):
     """Le CŒUR (sans les ∃) de _temoin1_ex aux termes vS,vT,vphi :
-       seg S, seg T, iso φ, u∈S, v=φ(u)  (forme de _h_parts, binders px/pw)."""
+       seg S, seg T, iso φ, u∈S, v=φ(u), func φ, dom φ=S, φ⊂S×T
+       (forme de _h_parts STRENGTHENED, binders px/pw).
+
+    ⚠️ ARCHITECTURE func/dom : DOIT mirroir EXACTEMENT TS._h_parts (8 conjoints : les
+    5 originaux + func + dom + graphe au niveau EXTERNE), sinon _temoin1_ex (qui
+    réutilise _h_parts) et _coeur1 divergent et la fusion casse."""
     Rf, Rpf = _R_de(R), _R_de(Rp)
     vE, vF = _t(E_set), _t(F_set)
     vu, vv = _t(u), _t(v)
-    return et(et(et(et(
+    coeur5 = et(et(et(et(
         E.est_segment(vS, Rf, vE),
         E.est_segment(vT, Rpf, vF)),
         _iso(vphi, vS, vT, Rf, Rpf)),
         appartient(vu, vS)),
         egal(vv, E.valeur(vphi, vu)))
+    # ── 3 conjoints « φ APPLICATION » appendus AU NIVEAU EXTERNE (les 5 d'abord) ──
+    return et(et(et(coeur5,
+        E.est_fonctionnel(vphi)),
+        egal(E.dom(vphi), vS)),
+        inclus(vphi, E.produit(vS, vT)))
+
+
+def _coeur5_de(Hc8):
+    """De ⊢ coeur8 (= _coeur1 STRENGTHENED), pèle les 3 conjoints externes func/dom/
+    graphe et retourne ⊢ coeur5 (les 5 conjoints originaux : seg,seg,iso,u∈S,v=φ(u)).
+
+    coeur8 = et(et(et(coeur5, func), dom), graphe).  On élimine 3 fois à gauche."""
+    return conjonction_elim_gauche(conjonction_elim_gauche(conjonction_elim_gauche(Hc8)))
 
 
 # ════════════════════════════════════════════════════════════════════════════
@@ -154,7 +172,8 @@ def temoin_commun_diagonal_depuis_h(E_set="E", R="R", F_set="F", Rp="Rp",
     vS, vT, vphi = var(S), var(T), var(phi)
 
     # ── implication de corps  coeur1 ⇒ coeur_diag  (CLOSE) ──────────────────────
-    Hc = N.assume(_coeur1(E_set, R, F_set, Rp, u, v, vS, vT, vphi))
+    Hc8 = N.assume(_coeur1(E_set, R, F_set, Rp, u, v, vS, vT, vphi))
+    Hc = _coeur5_de(Hc8)                           # pèle func/dom/graphe → coeur5
     c_v = conjonction_elim_droite(Hc)              # v=φ(u)
     c_rest = conjonction_elim_gauche(Hc)           # seg S, seg T, iso, u∈S
     c_uS = conjonction_elim_droite(c_rest)         # u∈S
@@ -219,7 +238,8 @@ def temoin_fonc_diagonal_depuis_h(E_set="E", R="R", F_set="F", Rp="Rp",
     vS, vT, vphi = var(S), var(T), var(phi)
 
     # cœur de temoin_commun_fonc_h(u,v,v) : (seg S, seg T, iso, u∈S, v=φ(u), v=φ(u))
-    Hc = N.assume(_coeur1(E_set, R, F_set, Rp, u, v, vS, vT, vphi))
+    Hc8 = N.assume(_coeur1(E_set, R, F_set, Rp, u, v, vS, vT, vphi))
+    Hc = _coeur5_de(Hc8)                           # pèle func/dom/graphe → coeur5
     c_v = conjonction_elim_droite(Hc)              # v=φ(u)
     c_rest = conjonction_elim_gauche(Hc)           # seg S, seg T, iso, u∈S  (= 4 conjoints)
     # coeur_fonc = (((( (seg S, seg T, iso), u∈S ), v=φ(u)), v=φ(u))  [reprend c_rest entier]

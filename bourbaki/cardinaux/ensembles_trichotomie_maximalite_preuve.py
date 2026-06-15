@@ -249,13 +249,21 @@ def h_maximal_preuve_cible(E_set="E", R="R", F_set="F", Rp="Rp", a="a", b="b"):
 # ════════════════════════════════════════════════════════════════════════════
 def extension_iso_donne_antecedent(E_set="E", R="R", F_set="F", Rp="Rp",
                                    S="S", T="T", phi="phi", a="a", b="b", y="y"):
-    """⊢ { S seg E, T seg F, φ:S≅T iso, a∈S, a∈E, b∈F, b=φ(a) } ⊢ a∈dom(h).
+    """⊢ { S seg E, T seg F, φ:S≅T iso, a∈S, a∈E, b∈F, b=φ(a),
+           func φ, dom φ=S, φ⊂S×T } ⊢ a∈dom(h).
 
-    Si (a,b) est un point (b=φ(a)) d'un iso φ:S≅T de segments, alors (a,b)∈h
-    (couple_iso_dans_h) donc a∈dom(h).  CONDITIONNEL aux 7 hypothèses STRUCTURELLES
-    de couple_iso_dans_h (les MÊMES, sans en ajouter).  C'est l'étape : « on ne peut
-    pas étendre h par un point d'iso de segments par-dessus son domaine » — a y est
-    DÉJÀ.  NON vacueux : a∈dom(h) ≠ aucune des 7 hypothèses."""
+    Si (a,b) est un point (b=φ(a)) d'un iso-APPLICATION φ:S≅T de segments, alors
+    (a,b)∈h (couple_iso_dans_h) donc a∈dom(h).  CONDITIONNEL aux 10 hypothèses
+    STRUCTURELLES de couple_iso_dans_h (les 7 originales + les 3 « φ APPLICATION »
+    func/dom/graphe — cf. ARCHITECTURE func/dom du scaffold).  C'est l'étape : « on ne
+    peut pas étendre h par un point d'iso de segments par-dessus son domaine » — a y est
+    DÉJÀ.  NON vacueux : a∈dom(h) ≠ aucune des 10 hypothèses.
+
+    ⚠️ ARCHITECTURE func/dom (RÉSISTANCE HONNÊTE) : couple_iso_dans_h requiert depuis
+    le renforcement func(φ)/dom(φ)=S/φ⊂S×T.  Ici l'iso ADJOINT φ:S≅T n'est pas extrait
+    de h (c'est un témoin d'extension produit en amont) ; ses données func/dom/graphe
+    sont donc PORTÉES en hypothèses STRUCTURELLES explicites (l'iso est fourni comme
+    APPLICATION), JAMAIS postulées.  Le théorème reste pleinement signifiant."""
     va, vb = _t(a), _t(b)
     h = TS.h_iso_max(E_set, R, F_set, Rp)
     cid = TS.couple_iso_dans_h(E_set, R, F_set, Rp, S, T, phi, a, b)        # 7 hyps ⊢ (a,b)∈h
@@ -274,9 +282,11 @@ def extension_iso_donne_antecedent_cible(E_set="E", R="R", F_set="F", Rp="Rp", a
 
 def extension_iso_hypotheses(E_set="E", R="R", F_set="F", Rp="Rp",
                              S="S", T="T", phi="phi", a="a", b="b"):
-    """Les 7 HYPOTHÈSES STRUCTURELLES (liste de formules) — celles de couple_iso_dans_h,
-    partagées par extension_iso_donne_antecedent et adjonction_contredit_segment_propre.
+    """Les 10 HYPOTHÈSES STRUCTURELLES (liste de formules) — celles de couple_iso_dans_h
+    (7 originales + 3 « φ APPLICATION » func/dom/graphe), partagées par
+    extension_iso_donne_antecedent et adjonction_contredit_segment_propre.
     Pour documentation / tests miroir."""
+    from bourbaki.logique.formule import inclus
     Rf = TS._R_de(R)
     Rpf = TS._R_de(Rp)
     vE, vF = _t(E_set), _t(F_set)
@@ -289,6 +299,10 @@ def extension_iso_hypotheses(E_set="E", R="R", F_set="F", Rp="Rp",
         appartient(va, vE),
         appartient(vb, vF),
         egal(vb, E.valeur(vphi, va)),
+        # ── 3 hyps « φ APPLICATION » (architecture func/dom) ──
+        E.est_fonctionnel(vphi),
+        egal(E.dom(vphi), vS),
+        inclus(vphi, E.produit(vS, vT)),
     ]
 
 
@@ -298,10 +312,12 @@ def extension_iso_hypotheses(E_set="E", R="R", F_set="F", Rp="Rp",
 # ════════════════════════════════════════════════════════════════════════════
 def adjonction_contredit_segment_propre(E_set="E", R="R", F_set="F", Rp="Rp",
                                         S="S", T="T", phi="phi", a="a", b="b", y="y"):
-    """🎯 ⊢ { S seg E, T seg F, φ:S≅T, a∈S, a∈E, b∈F, b=φ(a) } ⊢ ¬( dom(h) = seg(R,E,a) ).
+    """🎯 ⊢ { S seg E, T seg F, φ:S≅T, a∈S, a∈E, b∈F, b=φ(a),
+            func φ, dom φ=S, φ⊂S×T } ⊢ ¬( dom(h) = seg(R,E,a) ).
 
-    CŒUR de la maximalité (blueprint d.5), honnêtement CONDITIONNEL aux 7 hypothèses
-    structurelles (production d'un point témoin (a,b) d'un iso de segments).
+    CŒUR de la maximalité (blueprint d.5), honnêtement CONDITIONNEL aux 10 hypothèses
+    structurelles (production d'un point témoin (a,b) d'un iso-APPLICATION de segments ;
+    les 3 conjoints func/dom/graphe relèvent de l'ARCHITECTURE func/dom du scaffold).
 
     PREUVE.  De ces hypothèses, a∈dom(h) (extension_iso_donne_antecedent).  Si l'on
     avait dom(h)=seg(R,E,a), Leibniz donnerait a∈seg(R,E,a) — IMPOSSIBLE

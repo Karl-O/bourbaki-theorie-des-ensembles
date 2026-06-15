@@ -6,9 +6,10 @@ On certifie (ensembles_trichotomie_maximalite_preuve) :
      • couple_dans_h_donne_valeur     : {(a,b)∈h} ⊢ b∈pr₂(h).
      • point_pas_dans_son_segment     : ⊢ ¬(a∈seg(R,E,a)).
      • 🎯 h_maximal_preuve            : ⊢ h_maximal(E,R,F,Rp)  (FERME la formule posée).
-  ⚠️ CONDITIONNELS (7 hyps STRUCTURELLES explicites, REPORTÉ précis) :
-     • extension_iso_donne_antecedent : {7 hyps} ⊢ a∈dom(h).
-     • adjonction_contredit_segment_propre : {7 hyps} ⊢ ¬(dom h = seg(R,E,a)).
+  ⚠️ CONDITIONNELS (10 hyps STRUCTURELLES explicites, REPORTÉ précis ; ARCHITECTURE
+     func/dom : 7 originales + func/dom/graphe de l'iso-application φ) :
+     • extension_iso_donne_antecedent : {10 hyps} ⊢ a∈dom(h).
+     • adjonction_contredit_segment_propre : {10 hyps} ⊢ ¬(dom h = seg(R,E,a)).
 theorie_ensembles() reste = 22 ; rien postulé ; conclusions non tautologiques.
 """
 from bourbaki.logique.formule import var, egal, appartient, non, Formule
@@ -75,12 +76,13 @@ def test_h_maximal_preuve_parametrable():
 def test_extension_iso_donne_antecedent():
     thm = P.extension_iso_donne_antecedent()
     assert not thm.est_clos
-    assert len(thm.hypotheses) == 7                       # 7 hyps STRUCTURELLES
+    # ARCHITECTURE func/dom : 10 hyps (7 originales + func/dom/graphe de φ application)
+    assert len(thm.hypotheses) == 10                      # 10 hyps STRUCTURELLES
     assert thm.conclusion == P.extension_iso_donne_antecedent_cible()
     assert thm.conclusion not in thm.hypotheses           # NON vacueux
-    # les 7 hyps coïncident avec celles posées
+    # les 10 hyps coïncident avec celles posées
     hyps = P.extension_iso_hypotheses()
-    assert len(hyps) == 7
+    assert len(hyps) == 10
     for h in hyps:
         assert h in thm.hypotheses
 
@@ -91,7 +93,8 @@ def test_extension_iso_donne_antecedent():
 def test_adjonction_contredit_segment_propre():
     thm = P.adjonction_contredit_segment_propre()
     assert not thm.est_clos
-    assert len(thm.hypotheses) == 7                       # MÊMES 7 hyps structurelles
+    # ARCHITECTURE func/dom : MÊMES 10 hyps structurelles (7 + func/dom/graphe)
+    assert len(thm.hypotheses) == 10
     assert thm.conclusion == P.adjonction_contredit_segment_propre_cible()
     assert thm.conclusion not in thm.hypotheses           # NON vacueux
     hyps = P.extension_iso_hypotheses()

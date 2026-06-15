@@ -53,13 +53,18 @@ def test_h_membre_donne_temoin():
 #  couple_iso_dans_h : chaque (u, v=φ(u)) d'un iso de segments ∈ h  (INCOND.).
 # ════════════════════════════════════════════════════════════════════════════
 def test_couple_iso_dans_h():
-    """{ S seg E, T seg F, φ:S≅T iso, u∈S, u∈E, v∈F, v=φ(u) } ⊢ (u,v)∈h."""
+    """{ S seg E, T seg F, φ:S≅T iso, u∈S, u∈E, v∈F, v=φ(u),
+        func φ, dom φ=S, φ⊂S×T } ⊢ (u,v)∈h.
+
+    ⚠️ ARCHITECTURE func/dom : le témoin de h porte désormais 8 conjoints (5 originaux
+    + func + dom + graphe), donc couple_iso_dans_h requiert 10 hypothèses (7 + 3)."""
     cid = TS.couple_iso_dans_h()
     assert not cid.est_clos
-    assert len(cid.hypotheses) == 7            # 7 hypothèses STRUCTURELLES
+    assert len(cid.hypotheses) == 10           # 7 structurelles + 3 « φ application »
     assert cid.conclusion == TS.couple_iso_dans_h_cible()
     assert cid.conclusion not in cid.hypotheses    # NON vacueux
-    # les hypothèses-clés (segments + iso + v=φ(u)) sont bien présentes
+    # les hypothèses-clés (segments + iso + v=φ(u) + func/dom/graphe) sont présentes
+    from bourbaki.logique.formule import inclus
     Rf = TS._R_de("R")
     Rpf = TS._R_de("Rp")
     vS, vT, vphi, vu, vv = var("S"), var("T"), var("phi"), var("u"), var("v")
@@ -67,6 +72,9 @@ def test_couple_iso_dans_h():
     assert E.est_segment(vT, Rpf, var("F")) in cid.hypotheses
     assert V.est_isomorphisme_ordre(vphi, vS, vT, Rf, Rpf, "px", "pw") in cid.hypotheses
     assert egal(vv, E.valeur(vphi, vu)) in cid.hypotheses
+    assert E.est_fonctionnel(vphi) in cid.hypotheses
+    assert egal(E.dom(vphi), vS) in cid.hypotheses
+    assert inclus(vphi, E.produit(vS, vT)) in cid.hypotheses
 
 
 # ════════════════════════════════════════════════════════════════════════════
