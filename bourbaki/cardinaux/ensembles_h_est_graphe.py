@@ -368,6 +368,7 @@ def trichotomie_ordinaux_canon_close_v3_hypotheses(E_set="E", R="R", F_set="F", 
 __all__ = [
     "axiome_h_graphe", "theorie_h_graphe", "h_membre_set",
     "h_membre_depuis_set", "h_membre_depuis_set_cible",
+    "axiome_h_depuis_set", "axiome_h_depuis_set_cible",
     "h_est_graphe", "h_est_graphe_cible",
     "trichotomie_ordinaux_canon_close_v3", "trichotomie_ordinaux_canon_close_v3_cible",
     "trichotomie_ordinaux_canon_close_v3_hypotheses",
