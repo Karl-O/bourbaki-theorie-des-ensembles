@@ -202,7 +202,7 @@ def equipotence_symetrique(f="F", x="X", y="Y"):
 # ── Composée de bijections (transitivité de Eq) — les 4 conjoints ─────────────
 def composee_image(g="G", f="F", x="X", y="Y", z="Z"):
     """⊢_{image(F,X)=Y, image(G,Y)=Z}  image(G∘F, X) = Z.   (4e conjoint, via Prop. 5.)"""
-    vG, vF, vX, vY, vZ = var(g), var(f), var(x), var(y), var(z)
+    vG, vF, vX, vY, vZ = _T(g), _T(f), var(x), var(y), var(z)   # g,f acceptent un TERME composé
     ic = image_composee(g, f, x)                                  # image(G∘F,X)=image(G,image(F,X))
     f_img = N.assume(egal(E.image(vF, vX), vY))
     rw = N.modus_ponens(f_img, congruence_terme(E.image(vF, vX), vY, E.image(vG, var("w"))))
@@ -212,7 +212,7 @@ def composee_image(g="G", f="F", x="X", y="Y", z="Z"):
 
 def composee_domaine(g="G", f="F", x="X", y="Y"):
     """⊢_{dom F=X, image(F,X)=Y, dom G=Y}  dom(G∘F) = X.   (2e conjoint de la transitivité.)"""
-    vG, vF, vX, vY = var(g), var(f), var(x), var(y)
+    vG, vF, vX, vY = _T(g), _T(f), var(x), var(y)   # g,f acceptent un TERME composé
     vz, vm = var("z"), var("m")
     comp = E.composee(vG, vF)
     zmF = appartient(E.couple(vz, vm), vF)                        # (z,m)∈F
@@ -277,7 +277,7 @@ _GG = [None]   # canal pour passer vG à _inj_setup (évite un long passage d'ar
 def composee_injective(g="G", f="F", x="X", y="Y"):
     """⊢_{F,G fonctionnels, dom F=X, image(F,X)=Y, dom G=Y, F inj/X, G inj/Y}
        injective_dans(G∘F, X).   (3e conjoint de la transitivité.)"""
-    vG, vF, vX, vY = var(g), var(f), var(x), var(y)
+    vG, vF, vX, vY = _T(g), _T(f), var(x), var(y)   # g,f acceptent un TERME composé
     _GG[0] = vG
     vu, vup = var("u"), var("up")
     comp = E.composee(vG, vF)

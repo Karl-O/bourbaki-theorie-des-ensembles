@@ -6,7 +6,7 @@ Donc si f:A→B et g:B→C sont des applications, g∘f est une application de A
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import var, egal, et, appartient, existe, subst_f
+from bourbaki.logique.formule import var, egal, et, appartient, existe, subst_f, Terme
 from bourbaki.logique import noyau_abrege as N
 from bourbaki.ensembles import ensembles_abrege as E
 from bourbaki.logique.tactiques.tactiques_abrege2 import (conjonction_intro, conjonction_elim_gauche,
@@ -18,9 +18,13 @@ from bourbaki.ensembles.fonctions.ensembles_composee import couple_composee, _in
 from bourbaki.ensembles.fonctions.ensembles_fonctions import valeur_dans_graphe, valeur_caracterisation
 
 
+def _tc(t):
+    return t if isinstance(t, Terme) else var(t)
+
+
 def composee_fonctionnelle(g="G", f="F"):
     """⊢ ((F fonctionnel) et (G fonctionnel)) ⇒ (G∘F fonctionnel).   (Proposition 6, E.II.46.)"""
-    vG, vF = var(g), var(f)
+    vG, vF = _tc(g), _tc(f)
     u, v, z, vy, vyp = var("u"), var("v"), var("z"), var("y"), var("yp")
     comp = E.composee(vG, vF)
     hfg = N.assume(et(E.est_fonctionnel(vF), E.est_fonctionnel(vG)))

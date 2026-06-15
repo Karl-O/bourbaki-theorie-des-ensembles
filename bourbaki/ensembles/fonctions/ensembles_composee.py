@@ -5,7 +5,7 @@ correspondances et des fonctions.
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import var, egal, et, appartient, existe, subst_f
+from bourbaki.logique.formule import var, egal, et, appartient, existe, subst_f, Terme
 from bourbaki.logique import noyau_abrege as N
 from bourbaki.ensembles import ensembles_abrege as E
 from bourbaki.logique.tactiques.tactiques_abrege2 import (conjonction_intro, conjonction_elim_gauche,
@@ -27,9 +27,13 @@ def _inst_composee(gp, g, w):
     return instancie(instancie(instancie(ax, gp), g), w)
 
 
+def _tc(t):
+    return t if isinstance(t, Terme) else var(t)
+
+
 def couple_composee(gp="Gp", g="G", x="x", z="z"):
     """⊢ ((x,z) ∈ G'∘G) ⇔ (∃y)((x,y)∈G et (y,z)∈G').   (x, z distincts de p, r, y.)"""
-    vGp, vG, vx, vz = var(gp), var(g), var(x), var(z)
+    vGp, vG, vx, vz = _tc(gp), _tc(g), _tc(x), _tc(z)
     vp, vr, vy = var("p"), var("r"), var("y")
     inst = _inst_composee(vGp, vG, E.couple(vx, vz))
     phi = lambda pp, rr: existe("y", et(appartient(E.couple(pp, vy), vG),
@@ -64,7 +68,7 @@ def image_composee(gp="Gp", g="G", aa="A"):
 
     Le liant interne « x » de l'axiome image est contourné par alpha_existe
     (on renomme l'existentielle externe en « y » avant d'expanser y∈G⟨A⟩)."""
-    vGp, vG, vA = var(gp), var(g), var(aa)
+    vGp, vG, vA = _tc(gp), _tc(g), _tc(aa)   # gp,g acceptent un TERME composé
     vx, vy, vz = var("x"), var("y"), var("z")
     comp = E.composee(vGp, vG)
     xA = appartient(vx, vA)
