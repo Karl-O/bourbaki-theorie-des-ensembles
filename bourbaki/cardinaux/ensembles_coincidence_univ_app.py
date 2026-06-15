@@ -140,7 +140,7 @@ def reciproque_inclus_produit_miroir(g, A, B):
 #  THÉORÈME — COÏNCIDENCE UNIVERSELLE par PRÉMISSE PROPRE (per-witness).
 # ════════════════════════════════════════════════════════════════════════════
 def coincidence_univ_app_point(phi1="phi1", phi2="phi2", S1="S1", T1="T1",
-                               S2="S2", T2="T2", F="F", R="R", Rp="Rp"):
+                               S2="S2", T2="T2", F="F", R="R", Rp="Rp", Eamb="E"):
     """⊢ {  PRÉMISSE PROPRE (voir docstring module)  }
           ⊢ (∀u)( u∈S1 ⇒ φ1(u) = φ2(u) ).
 
@@ -242,7 +242,7 @@ def coincidence_univ_app_point(phi1="phi1", phi2="phi2", S1="S1", T1="T1",
     p_recip_phi2S1 = reciproque_inclus_produit_miroir(phi2S1, vS1, vT1)  # (φ2|S1)⁻¹⊂T1×S1
 
     # ── ASSEMBLAGE : décharge des 11 hyps DÉRIVÉES ─────────────────────────────
-    base = coincidence_univ_close_isos(phi1, phi2, S1, T1)        # 15 hyps brutes
+    base = coincidence_univ_close_isos(phi1, phi2, S1, T1, E_set=Eamb)  # bo AMBIANT VRAI E (pas S2)
     base = discharge(base, p_func_phi2S1)        # func(φ2|S1)
     base = discharge(base, p_dom_phi2S1)         # dom(φ2|S1)=S1
     base = discharge(base, func_c)               # func(c)
@@ -265,47 +265,31 @@ def coincidence_univ_app_point_cible(phi1="phi1", phi2="phi2", S1="S1", T1="T1")
 
 
 def coincidence_univ_app_point_premisse(phi1="phi1", phi2="phi2", S1="S1", T1="T1",
-                                        S2="S2", T2="T2", F="F", R="R", Rp="Rp"):
-    """La PRÉMISSE PROPRE attendue (13 formules), pour vérifier que le séquent ne
-    porte QUE ces hypothèses-là (test de propreté).
+                                        S2="S2", T2="T2", F="F", R="R", Rp="Rp", Eamb="E"):
+    """La PRÉMISSE PROPRE attendue (14 formules), pour vérifier que le séquent ne
+    porte QUE ces hypothèses-là (test de propreté).  Délègue à `_premisse_liste`.
 
-    🔑 BON ORDRE AMBIANT : bo(R,S2) [R-side] et bo(R',F) [F-side] SEULS ; les trois bons
-    ordres sur des SEGMENTS (bo(R,S1), bo(R',T1), bo(R',image)) ont disparu (faux sur
-    segment propre, re-basés sur le bon ordre ambiant)."""
-    Rf, Rpf = _R_de(R), _R_de(Rp)
-    vphi1, vphi2 = _t(phi1), _t(phi2)
-    vS1, vT1, vS2, vT2 = _t(S1), _t(T1), _t(S2), _t(T2)
-    phi2S1 = E.restriction(vphi2, vS1)
-    img = E.image(vphi2, vS1)
-    return {
-        V.est_isomorphisme_ordre(vphi1, vS1, vT1, Rf, Rpf, "x", "y"),
-        V.est_isomorphisme_ordre(vphi2, vS2, vT2, Rf, Rpf, "a", "b"),
-        E.est_fonctionnel(vphi1),
-        E.est_fonctionnel(vphi2),
-        egal(E.dom(vphi1), vS1),
-        egal(E.dom(vphi2), vS2),
-        inclus(vS1, vS2),
-        E.est_segment(vT1, Rpf, _t(F)),
-        E.est_segment(img, Rpf, _t(F)),
-        E.est_bien_ordonne(Rpf, _t(F)),       # BON ORDRE AMBIANT F-side
-        E.est_bien_ordonne(Rf, vS2),          # BON ORDRE AMBIANT R-side (S2 ⊇ S1)
-        inclus(vphi1, E.produit(vS1, vT1)),
-        inclus(phi2S1, E.produit(vS1, vT1)),
-    }
+    🔑 BON ORDRE AMBIANT VRAI : bo(R,E) [R-side, E = ambiant ⊇ S1] et bo(R',F) [F-side]
+    SEULS ; les bons ordres sur des SEGMENTS PROPRES (bo(R,S1), bo(R,S2), bo(R',T1),
+    bo(R',image)) ont disparu (faux sur segment propre).  inclus(S1,E) fournie par
+    est_segment(S1,R,E) dans la fusion."""
+    return set(_premisse_liste(phi1, phi2, S1, T1, S2, T2, F, R, Rp, Eamb))
 
 
-def _premisse_liste(phi1, phi2, S1, T1, S2, T2, F, R, Rp):
+def _premisse_liste(phi1, phi2, S1, T1, S2, T2, F, R, Rp, Eamb="E"):
     """La prémisse propre, en LISTE ORDONNÉE (source de vérité pour la conjonction).
 
-    🔑 BON ORDRE AMBIANT (re-base, branche coincidence-ambient-bo).  Les bons ordres
-    consommés sont AMBIANTS : bo(R,S2) (R-side : S2 = grand segment ⊇ S1, via
-    coincidence_univ_close_isos E:=S2, inclus(S1,S2) déjà présente) et bo(R',F) (F-side :
-    via lemme_4_sous_domaine, inclus(T1,F)/inclus(I,F) dérivées de est_segment).  Les
-    trois bons ordres SUR DES SEGMENTS — bo(R,S1), bo(R',T1), bo(R',image(φ2,S1)) — ont
-    DISPARU : ils sont FAUX sur un segment propre et étaient le verrou de la fusion."""
+    🔑 BON ORDRE AMBIANT VRAI (re-base R-side, branche rside-ambient-E).  Les bons ordres
+    consommés sont les bons ordres AMBIANTS des ENSEMBLES SOUS-JACENTS : bo(R,E) (R-side,
+    E = le bon ordre ambiant ⊇ S1, via coincidence_univ_close_isos E_set:=E ; inclus(S1,E)
+    fournie par est_segment(S1,R,E) dans la fusion) et bo(R',F) (F-side, via
+    lemme_4_sous_domaine).  Les bons ordres SUR DES SEGMENTS PROPRES — bo(R,S1), bo(R,S2),
+    bo(R',T1), bo(R',image(φ2,S1)) — ont TOUS DISPARU : FAUX sur un segment propre
+    (réflexivité R{x,x}⇔x∈S échoue hors S), donc INDÉCHARGEABLES dans la fusion.  Seuls
+    subsistent les bons ordres des ENSEMBLES AMBIANTS E, F — tous deux fournis par la fusion."""
     Rf, Rpf = _R_de(R), _R_de(Rp)
     v1, v2 = _t(phi1), _t(phi2)
-    s1, t1, s2, t2 = _t(S1), _t(T1), _t(S2), _t(T2)
+    s1, t1, s2, t2, eamb = _t(S1), _t(T1), _t(S2), _t(T2), _t(Eamb)
     phi2S1, img = E.restriction(v2, s1), E.image(v2, s1)
     return [
         V.est_isomorphisme_ordre(v1, s1, t1, Rf, Rpf, "x", "y"),
@@ -314,7 +298,8 @@ def _premisse_liste(phi1, phi2, S1, T1, S2, T2, F, R, Rp):
         egal(E.dom(v1), s1), egal(E.dom(v2), s2), inclus(s1, s2),
         E.est_segment(t1, Rpf, _t(F)), E.est_segment(img, Rpf, _t(F)),
         E.est_bien_ordonne(Rpf, _t(F)),       # BON ORDRE AMBIANT F-side
-        E.est_bien_ordonne(Rf, s2),           # BON ORDRE AMBIANT R-side (S2 ⊇ S1)
+        E.est_bien_ordonne(Rf, eamb),         # BON ORDRE AMBIANT R-side VRAI (E ⊇ S1)
+        inclus(s1, eamb),                     # inclus(S1,E) — fournie par est_segment(S1,R,E)
         inclus(v1, E.produit(s1, t1)), inclus(phi2S1, E.produit(s1, t1)),
     ]
 
@@ -338,7 +323,7 @@ def _elim_conjoint(HH, i, n):
 
 
 def coincidence_univ_app(phi1="phi1", phi2="phi2", S1="S1", T1="T1",
-                         S2="S2", T2="T2", F="F", R="R", Rp="Rp"):
+                         S2="S2", T2="T2", F="F", R="R", Rp="Rp", Eamb="E"):
     """⊢ (∀S1)(∀T1)(∀φ1)(∀S2)(∀T2)(∀φ2)( PRÉMISSE_APPLICATIONS ⇒ (∀w)(w∈S1 ⇒ φ1(w)=φ2(w)) ).
 
     🎯🎯🎯 COÏNCIDENCE UNIVERSELLE (Lemme 1 §III.2), forme APPLICATIONS — **THÉORÈME CLOS**.
@@ -357,8 +342,8 @@ def coincidence_univ_app(phi1="phi1", phi2="phi2", S1="S1", T1="T1",
 
     RESTE pour brancher fusion : renforcer `axiome_h`/témoin₁ pour témoigner func/dom
     (l'architecture « φ application »), afin que fusion fournisse cette prémisse."""
-    thm = coincidence_univ_app_point(phi1, phi2, S1, T1, S2, T2, F, R, Rp)
-    prem = _premisse_liste(phi1, phi2, S1, T1, S2, T2, F, R, Rp)
+    thm = coincidence_univ_app_point(phi1, phi2, S1, T1, S2, T2, F, R, Rp, Eamb)
+    prem = _premisse_liste(phi1, phi2, S1, T1, S2, T2, F, R, Rp, Eamb)
     assert set(thm.hypotheses) == set(prem), "prémisse ≠ hypothèses du séquent point"
     H = _conjoindre(prem)
     HH = N.assume(H)
@@ -371,9 +356,9 @@ def coincidence_univ_app(phi1="phi1", phi2="phi2", S1="S1", T1="T1",
 
 
 def coincidence_univ_app_cible(phi1="phi1", phi2="phi2", S1="S1", T1="T1",
-                               S2="S2", T2="T2", F="F", R="R", Rp="Rp"):
+                               S2="S2", T2="T2", F="F", R="R", Rp="Rp", Eamb="E"):
     """ÉNONCÉ-cible (test miroir) : (∀6 témoins)(prémisse ⇒ coïncidence sur S1)."""
-    prem = _premisse_liste(phi1, phi2, S1, T1, S2, T2, F, R, Rp)
+    prem = _premisse_liste(phi1, phi2, S1, T1, S2, T2, F, R, Rp, Eamb)
     concl = coincidence_univ_app_point_cible(phi1, phi2, S1, T1)
     imp = impl(_conjoindre(prem), concl)
     for w in [phi2, T2, S2, phi1, T1, S1]:

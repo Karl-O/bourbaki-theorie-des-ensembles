@@ -30,11 +30,12 @@ def test_conclusion_est_la_cible():
 
 
 def test_hypotheses_sont_la_premisse_propre():
-    """Les hypothèses du séquent sont EXACTEMENT la prémisse propre (13 formules).
+    """Les hypothèses du séquent sont EXACTEMENT la prémisse propre (14 formules).
 
-    🔑 BON ORDRE AMBIANT : 13 (et non 15) — les trois bons ordres SUR DES SEGMENTS
-    (bo(R,S1), bo(R',T1), bo(R',image)) ont disparu (faux sur segment propre), remplacés
-    par les bons ordres AMBIANTS bo(R,S2)+bo(R',F) (inclus(S1,S2) déjà présente)."""
+    🔑 BON ORDRE AMBIANT VRAI : les SEULS bons ordres sont ceux des ENSEMBLES AMBIANTS
+    bo(R,E) [R-side] + bo(R',F) [F-side] ; TOUS les bons ordres sur des segments propres
+    (bo(R,S1), bo(R,S2), bo(R',T1), bo(R',image)) ont disparu (faux sur segment propre).
+    inclus(S1,E) est fournie par est_segment(S1,R,E) dans la fusion → prémisse DISCHARGEABLE."""
     thm = coincidence_univ_app_point()
     hyps = set(thm.hypotheses)
     premisse = coincidence_univ_app_point_premisse()
@@ -45,14 +46,16 @@ def test_hypotheses_sont_la_premisse_propre():
     assert not superflues, "hypothèses brutes résiduelles (non déchargées):\n" + "\n".join(
         afficher_f(f)[:160] for f in superflues)
     assert hyps == premisse
-    assert len(hyps) == 13
-    # le bon ordre est AMBIANT : bo(R,S2)+bo(R',F), jamais bo sur un segment propre
-    from bourbaki.logique.formule import var, appartient
+    assert len(hyps) == 14
+    # le bon ordre est AMBIANT VRAI : bo(R,E)+bo(R',F), JAMAIS bo sur un segment (propre)
+    from bourbaki.logique.formule import var, appartient, inclus
     Rf = lambda a, b: appartient(E.couple(a, b), var("R"))
     Rpf = lambda a, b: appartient(E.couple(a, b), var("Rp"))
     img = E.image(var("phi2"), var("S1"))
-    assert E.est_bien_ordonne(Rf, var("S2")) in hyps
+    assert E.est_bien_ordonne(Rf, var("E")) in hyps
     assert E.est_bien_ordonne(Rpf, var("F")) in hyps
+    assert inclus(var("S1"), var("E")) in hyps            # fournie par est_segment(S1,R,E)
+    assert E.est_bien_ordonne(Rf, var("S2")) not in hyps
     assert E.est_bien_ordonne(Rf, var("S1")) not in hyps
     assert E.est_bien_ordonne(Rpf, var("T1")) not in hyps
     assert E.est_bien_ordonne(Rpf, img) not in hyps

@@ -19,8 +19,9 @@ def test_coincidence_point_app_conclusion():
 
 
 def test_coincidence_point_app_hyps_applications():
-    """Les hypothèses sont la prémisse-applications (13, BON ORDRE AMBIANT) + p∈S_petit
-    = 14, toutes honnêtes.  (13 et non 15 : les trois bons ordres sur SEGMENTS — bo(R,Sp),
-    bo(R',Tp), bo(R',image) — ont disparu, re-basés sur bo(R,Sg)+bo(R',F) ambiants.)"""
+    """Les hypothèses sont la prémisse-applications (14, BON ORDRE AMBIANT VRAI) + p∈S_petit
+    = 15, toutes honnêtes.  Les bons ordres sur SEGMENTS PROPRES (bo(R,Sp), bo(R,Sg),
+    bo(R',Tp), bo(R',image)) ont disparu, re-basés sur bo(R,E)+bo(R',F) ambiants VRAIS
+    (inclus(Sp,E) fournie par est_segment) → prémisse DISCHARGEABLE dans la fusion."""
     t = coincidence_point_app()
-    assert len(t.hypotheses) == 14
+    assert len(t.hypotheses) == 15
