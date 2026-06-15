@@ -217,9 +217,9 @@ def trichotomie_ordinaux_canon_prouve_cible(E_set="E", R="R", F_set="F", Rp="Rp"
 
 
 def trichotomie_ordinaux_canon_prouve_hypotheses(E_set="E", R="R", F_set="F", Rp="Rp"):
-    """Les 7 HYPOTHÈSES SURVIVANTES ATTENDUES (documentation / test miroir) du
+    """Les 6 HYPOTHÈSES SURVIVANTES ATTENDUES (documentation / test miroir) du
     RÉSIDU STRUCTUREL irréductible de l'assemblage MAXIMAL :
-        3 HONNÊTES { bo(R,E), bo(Rp,F), residu_univ_app }
+        2 HONNÊTES { bo(R,E), bo(Rp,F) }   (residu_univ_app ÉLIMINÉ)
         + val_dans_F + h_graphe_hyp
         + est_segment(pr₂h,Rp,F)[x,w] + est_segment(pr₂h,Rp,F)[x,y]."""
     from bourbaki.cardinaux import ensembles_fusion_depuis_coincidence_app as FDA
@@ -237,15 +237,16 @@ def trichotomie_ordinaux_canon_prouve_hypotheses(E_set="E", R="R", F_set="F", Rp
 #     maillon est déchargé (échange seg_dom ↔ val_dans_F ; pas de h_graphe).
 # ════════════════════════════════════════════════════════════════════════════
 def trichotomie_ordinaux_canon_prouve_min(E_set="E", R="R", F_set="F", Rp="Rp"):
-    """⊢ trichotomie_ordinaux_canon(E,R,F,Rp)  (== maillon_final_cible) sous les 6
-    hypothèses { bo(R,E), bo(Rp,F), residu_univ_app, ( dom h=E ou pr₂h=F ),
-    est_segment(pr₂h,Rp,F)[x,w], val_dans_F }.
+    """⊢ trichotomie_ordinaux_canon(E,R,F,Rp)  (== maillon_final_cible) sous les 5
+    hypothèses { bo(R,E), bo(Rp,F), ( dom h=E ou pr₂h=F ),
+    est_segment(pr₂h,Rp,F)[x,w], val_dans_F }.   (residu_univ_app ÉLIMINÉ.)
 
     ASSEMBLAGE LE PLUS SERRÉ EN COMPTE.  On NE décharge PAS la maximalité (l'échanger
     contre `maximalite_donne_trichotomie_close` réintroduirait `h_graphe_hyp` — l'opaque
     de h — et des segments [x,y], FAISANT GROSSIR le résidu).  On décharge UNIQUEMENT le
     segment dom[x,w] du maillon via `dom_h_est_segment_sous_val` (PROUVÉE sous
-    `val_dans_F`).  RÉSULTAT : 6 hypothèses, dont 5 STRUCTURELLES HONNÊTES + bo(R,E).
+    `val_dans_F`).  RÉSULTAT : 5 hypothèses (residu_univ_app DÉRIVÉ de
+    residu_univ_app_renforce, CLOS).
 
     theorie=22, rien postulé.  Conclusion == maillon_final_cible.  NON vacueux."""
     assert (E_set, R, F_set, Rp) == ("E", "R", "F", "Rp"), \
@@ -258,8 +259,9 @@ def trichotomie_ordinaux_canon_prouve_min(E_set="E", R="R", F_set="F", Rp="Rp"):
 
 
 def trichotomie_ordinaux_canon_prouve_min_hypotheses(E_set="E", R="R", F_set="F", Rp="Rp"):
-    """Les 6 HYPOTHÈSES SURVIVANTES ATTENDUES de l'assemblage MINIMAL :
-        3 HONNÊTES + maximalité + est_segment(pr₂h,Rp,F)[x,w] + val_dans_F."""
+    """Les 5 HYPOTHÈSES SURVIVANTES ATTENDUES de l'assemblage MINIMAL :
+        2 HONNÊTES + maximalité + est_segment(pr₂h,Rp,F)[x,w] + val_dans_F.
+        (residu_univ_app ÉLIMINÉ — dérivé de residu_univ_app_renforce, CLOS.)"""
     from bourbaki.cardinaux import ensembles_fusion_depuis_coincidence_app as FDA
     honnetes = list(FDA.fusion_depuis_coincidence_app_hypotheses(E_set, R, F_set, Rp))
     return honnetes + [

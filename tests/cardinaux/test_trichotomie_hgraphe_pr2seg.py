@@ -5,10 +5,10 @@ VÉRIFIE (theorie=22, rien postulé, NON vacueux) :
   • TARGET 2 `pr2_h_est_segment` : est_segment(pr₂h,Rp,F) CLOS (0 hyp).
   • TARGET 1 `h_inclus_dom_pr2` : inclus(h,dom h×pr₂h) (== h_graphe_hyp) sous l'unique
     hypothèse est_un_graphe(h) (résidu opaque irréductible, strictement plus faible).
-  • `maximalite_close_via_est_un_graphe` : (dom h=E ∨ pr₂h=F) sous {bo,bo,residu,
-    est_un_graphe(h)}.
+  • `maximalite_close_via_est_un_graphe` : (dom h=E ∨ pr₂h=F) sous {bo,bo,
+    est_un_graphe(h)}  (residu_univ_app ÉLIMINÉ).
   • `trichotomie_ordinaux_canon_close_v2` : trichotomie_ordinaux_canon SOUS
-    {bo(R,E), bo(Rp,F), residu_univ_app, est_un_graphe(h)} (== maillon_final_cible).
+    {bo(R,E), bo(Rp,F), est_un_graphe(h)} (== maillon_final_cible).
 """
 from bourbaki.cardinaux import ensembles_trichotomie_hgraphe_pr2seg as HG
 from bourbaki.cardinaux import ensembles_maximalite_close as MAX
@@ -69,7 +69,7 @@ def test_maximalite_close_via_est_un_graphe():
     honn = set(FDA.fusion_depuis_coincidence_app_hypotheses())
     expected = honn | {E.est_un_graphe(h)}
     assert set(mc.hypotheses) == expected, \
-        "maximalité doit survivre sous {bo,bo,residu,est_un_graphe(h)}"
+        "maximalité doit survivre sous {bo,bo,est_un_graphe(h)}  (residu_univ_app ÉLIMINÉ)"
 
 
 # ── assemblage close-v2 ──────────────────────────────────────────────────────
@@ -78,11 +78,11 @@ def test_close_v2_conclusion_est_trichotomie():
     assert v2.conclusion == HG.trichotomie_ordinaux_canon_close_v2_cible()
 
 
-def test_close_v2_hypotheses_sont_bo_bo_residu_est_un_graphe():
+def test_close_v2_hypotheses_sont_bo_bo_est_un_graphe():
     v2 = HG.trichotomie_ordinaux_canon_close_v2()
     attendu = set(HG.trichotomie_ordinaux_canon_close_v2_hypotheses())
     assert set(v2.hypotheses) == attendu
-    assert len(list(v2.hypotheses)) == 4
+    assert len(list(v2.hypotheses)) == 3   # {bo, bo, est_un_graphe} — residu_univ_app ÉLIMINÉ
     # contenu précis
     h = TS.h_iso_max()
     bo_R = E.est_bien_ordonne(_Rf("R"), var("E"))

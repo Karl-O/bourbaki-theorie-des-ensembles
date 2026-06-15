@@ -3,13 +3,13 @@
 Vérifie `ensembles_maillon_coherences_prouvees` :
 
   • `fonctionnel_h_prouve` ⊢ EXACTEMENT est_fonctionnel(h) sous les SEULES hypothèses
-    HONNÊTES { bo(R,E), bo(R',F), residu_univ_app } (miroir de compatibilite_inverse_h
-    _prouve, côté fonctionnalité).
+    HONNÊTES { bo(R,E), bo(R',F) } (miroir de compatibilite_inverse_h_prouve, côté
+    fonctionnalité).  ⚠️ `residu_univ_app` ÉLIMINÉ (dérivé de residu_univ_app_renforce).
 
   • `maillon_final_h_plus3` ⊢ trichotomie_ordinaux_canon(E,R,F,Rp) (== maillon_final_cible)
     avec les 3 cohérences (compatibilite_inverse_h, est_fonctionnel(h), compatibilite
-    _ordre_h) REMPLACÉES par {bo,bo,residu} : il ne reste QUE {bo,bo,residu} + maximalité
-    + 2 segments.  Les 3 cohérences/témoins ont DISPARU.
+    _ordre_h) REMPLACÉES par {bo,bo} : il ne reste QUE {bo,bo} + maximalité + 2 segments.
+    Les 3 cohérences/témoins ont DISPARU.
 
 theorie_ensembles() = 22 (rien postulé).
 """
@@ -39,11 +39,11 @@ def test_fonctionnel_conclusion_est_la_cible():
 
 
 def test_fonctionnel_hypotheses_honnetes():
-    """Hypothèses == exactement { bo(R,E), bo(R',F), residu_univ_app } (3 carries)."""
+    """Hypothèses == exactement { bo(R,E), bo(R',F) } (2 carries) — residu_univ_app ÉLIMINÉ."""
     thm = M.fonctionnel_h_prouve()
     honnetes = set(FDA.fusion_depuis_coincidence_app_hypotheses())
     assert set(thm.hypotheses) == honnetes
-    assert len(thm.hypotheses) == 3
+    assert len(thm.hypotheses) == 2
 
 
 def test_fonctionnel_non_vacueux():
@@ -85,14 +85,14 @@ def test_plus3_temoins_communs_absents():
 
 
 def test_plus3_hypotheses_exactes():
-    """Hypothèses == { bo(R,E), bo(R',F), residu_univ_app, maximalité, 2 segments }."""
+    """Hypothèses == { bo(R,E), bo(R',F), maximalité, 2 segments } (residu ÉLIMINÉ)."""
     mf3 = M.maillon_final_h_plus3()
     assert set(mf3.hypotheses) == set(M.maillon_final_h_plus3_hypotheses())
-    assert len(mf3.hypotheses) == 6
+    assert len(mf3.hypotheses) == 5
 
 
-def test_plus3_contient_les_trois_honnetes():
-    """Les 3 hypothèses HONNÊTES {bo,bo,residu} sont bien PRÉSENTES (remplaçant les cohérences)."""
+def test_plus3_contient_les_deux_honnetes():
+    """Les 2 hypothèses HONNÊTES {bo,bo} sont bien PRÉSENTES (remplaçant les cohérences)."""
     mf3 = M.maillon_final_h_plus3()
     hs = set(mf3.hypotheses)
     for honnete in FDA.fusion_depuis_coincidence_app_hypotheses():
@@ -103,7 +103,7 @@ def test_plus3_maximalite_et_segments_restent():
     """La MAXIMALITÉ (dom h=E ∨ pr₂ h=F) et les 2 SEGMENTS demeurent."""
     mf3 = M.maillon_final_h_plus3()
     hs = set(mf3.hypotheses)
-    # exactement 1 disjonction (maximalité) et 5 autres (3 honnêtes + 2 segments)
+    # exactement 1 disjonction (maximalité) et 4 autres (2 honnêtes + 2 segments)
     disj = [x for x in hs if x.tag == "ou"]
     assert len(disj) == 1
 

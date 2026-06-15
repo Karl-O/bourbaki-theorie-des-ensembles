@@ -494,14 +494,14 @@ def _pr2_seg_binders(E_set, R, F_set, Rp, xb, yb):
 #  🎯🎯 ASSEMBLAGE v2 — pr₂h-segment + maximalité (via h-graphe) DÉCHARGÉS.
 # ════════════════════════════════════════════════════════════════════════════
 def maximalite_close_via_est_un_graphe(E_set="E", R="R", F_set="F", Rp="Rp"):
-    """⊢ { bo(R,E), bo(Rp,F), residu_univ_app, est_un_graphe(h) }
+    """⊢ { bo(R,E), bo(Rp,F), est_un_graphe(h) }
           ⊢ ( dom h = E ) ou ( pr₂ h = F ).
 
-    `MAX.maximalite_donne_trichotomie_close` (6 hyps) dont les 3 structurelles sont
+    `MAX.maximalite_donne_trichotomie_close` (5 hyps) dont les 3 structurelles sont
     déchargées : est_segment(dom h) ← _seg_dom_sans_val_binders [x,y] (CLOS) ;
     est_segment(pr₂h) ← pr2_h_est_segment (TARGET 2, CLOS) ; inclus(h,dom h×pr₂h)
-    ← h_inclus_dom_pr2 (TARGET 1, sous est_un_graphe(h)).  Restent {bo,bo,residu,
-    est_un_graphe(h)}."""
+    ← h_inclus_dom_pr2 (TARGET 1, sous est_un_graphe(h)).  Restent {bo,bo,
+    est_un_graphe(h)}  (residu_univ_app ÉLIMINÉ)."""
     from bourbaki.cardinaux import ensembles_trichotomie_residuals as RES
     h = TS.h_iso_max(E_set, R, F_set, Rp)
     Rf, Rpf = _R_de(R), _R_de(Rp)
@@ -529,9 +529,9 @@ def maximalite_close_via_est_un_graphe_cible(E_set="E", R="R", F_set="F", Rp="Rp
 
 def trichotomie_ordinaux_canon_close_v2(E_set="E", R="R", F_set="F", Rp="Rp"):
     """⊢ trichotomie_ordinaux_canon(E,R,F,Rp)  (== maillon_final_cible) SOUS
-    { bo(R,E), bo(Rp,F), residu_univ_app, est_un_graphe(h) }.
+    { bo(R,E), bo(Rp,F), est_un_graphe(h) }.
 
-    🎯🎯 RÉDUCTION vs `RES.trichotomie_ordinaux_canon_close` (5 hyps) : DEUX résidus
+    🎯🎯 RÉDUCTION vs `RES.trichotomie_ordinaux_canon_close` (4 hyps) : DEUX résidus
     structurels DÉCHARGÉS.
 
       • est_segment(pr₂h,Rp,F)[x,w]  ← TARGET 2 (`_pr2_seg_binders`, CLOS) ;
@@ -539,18 +539,19 @@ def trichotomie_ordinaux_canon_close_v2(E_set="E", R="R", F_set="F", Rp="Rp"):
         DANS la décharge, règle ses 3 hyps structurelles (seg dom CLOS, seg pr₂h CLOS
         via TARGET 2, h_graphe via TARGET 1) en N'INTRODUISANT que est_un_graphe(h).
 
-    HYPOTHÈSES SURVIVANTES (4) : { bo(R,E), bo(Rp,F), residu_univ_app,
-    est_un_graphe(h) }.  Soit, vs le séquent BUT {bo,bo,residu}, l'UNIQUE résidu
-    STRUCTUREL est_un_graphe(h) — l'opacité couple-only IRRÉDUCTIBLE de l'axiome de h
-    (cf. h_inclus_dom_pr2), STRICTEMENT plus faible que l'ancien h_graphe_hyp.
+    HYPOTHÈSES SURVIVANTES (3) : { bo(R,E), bo(Rp,F), est_un_graphe(h) }.  Soit, vs le
+    séquent BUT {bo,bo}, l'UNIQUE résidu STRUCTUREL est_un_graphe(h) — l'opacité
+    couple-only IRRÉDUCTIBLE de l'axiome de h (cf. h_inclus_dom_pr2), STRICTEMENT plus
+    faible que l'ancien h_graphe_hyp.
 
     🔬 RÉSIDU SUBSISTANT (rapporté, JAMAIS postulé) :
       • est_un_graphe(h) = (∀z)(z∈h ⇒ z couple) : l'axiome de h (axiome_h, theorie_h)
         caractérise UNIQUEMENT (u,v)∈h ⇔ corps — il ne dit RIEN d'un z ARBITRAIRE ∈ h ;
         « tout z∈h est un couple » n'en est PAS dérivable.  C'est l'ex-résidu h_graphe_hyp
-        ABAISSÉ à sa forme la plus faible et la plus fidèle (Déf. 1, E.II.37).  Le résidu
-        residu_univ_app subsiste (son antécédent ANT_12 déposé est trop faible — cf.
-        RES.residu_univ_app_renforce).
+        ABAISSÉ à sa forme la plus faible et la plus fidèle (Déf. 1, E.II.37).
+      • residu_univ_app est désormais ÉLIMINÉ : son CONTENU géométrique (#8 ∧ #13) est
+        DÉRIVÉ de `RES.residu_univ_app_renforce` (CLOS) dès la fusion (cœurs portant
+        seg(Sp,R,E)+seg(Tg,Rp,F)).  Il ne reste donc QUE est_un_graphe(h) en sus de {bo,bo}.
 
     INVARIANT : theorie_ensembles() = 22.  RIEN POSTULÉ.  NON vacueux.  Noms ambiants
     CANONIQUES E,F,R,Rp.  Conclusion == trichotomie_ordinaux_canon.  NE MODIFIE AUCUN
@@ -583,8 +584,8 @@ def trichotomie_ordinaux_canon_close_v2_cible(E_set="E", R="R", F_set="F", Rp="R
 
 
 def trichotomie_ordinaux_canon_close_v2_hypotheses(E_set="E", R="R", F_set="F", Rp="Rp"):
-    """Les 4 HYPOTHÈSES SURVIVANTES ATTENDUES (documentation / test miroir) :
-       { bo(R,E), bo(Rp,F), residu_univ_app, est_un_graphe(h) }."""
+    """Les 3 HYPOTHÈSES SURVIVANTES ATTENDUES (documentation / test miroir) :
+       { bo(R,E), bo(Rp,F), est_un_graphe(h) }.  (residu_univ_app ÉLIMINÉ.)"""
     from bourbaki.cardinaux import ensembles_fusion_depuis_coincidence_app as FDA
     h = TS.h_iso_max(E_set, R, F_set, Rp)
     honnetes = list(FDA.fusion_depuis_coincidence_app_hypotheses(E_set, R, F_set, Rp))

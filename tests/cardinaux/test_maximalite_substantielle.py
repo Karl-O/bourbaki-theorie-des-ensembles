@@ -3,11 +3,12 @@
 On certifie (ensembles_maximalite_substantielle) :
 
   🎯🎯 TARGET A — h_est_iso_prouve :
-        { bo(R,E), bo(Rp,F), residu_univ_app } ⊢ est_isomorphisme_ordre(h,dom h,pr₂ h,R,Rp).
-     Les 3 SEULES hypothèses survivantes = celles des 3 cohérences prouvées (HONNÊTES).
+        { bo(R,E), bo(Rp,F) } ⊢ est_isomorphisme_ordre(h,dom h,pr₂ h,R,Rp).
+     Les 2 SEULES hypothèses survivantes = celles des cohérences prouvées (HONNÊTES).
+     ⚠️ `residu_univ_app` ÉLIMINÉ (dérivé de residu_univ_app_renforce, CLOS).
 
   🎯🎯 TARGET B — maximalite_donne_trichotomie_prouve :
-        { bo(R,E), bo(Rp,F), residu_univ_app, 2 segments, 5 RÉSIDU back-and-forth }
+        { bo(R,E), bo(Rp,F), 2 segments, 4 RÉSIDU back-and-forth }
           ⊢ ( dom h = E ) ou ( pr₂ h = F )   ( == maximalite_donne_trichotomie ).
      RÉSIDU précisément reporté (le pont ≤'⇔R sur le segment fermé) ; JAMAIS postulé.
 
@@ -54,9 +55,9 @@ def test_h_est_iso_prouve_conclusion():
 def test_h_est_iso_prouve_hypotheses_honnetes():
     thm = MS.h_est_iso_prouve()
     assert not thm.est_clos
-    # EXACTEMENT les 3 hypothèses HONNÊTES {bo(R,E), bo(Rp,F), residu_univ_app}
+    # EXACTEMENT les 2 hypothèses HONNÊTES {bo(R,E), bo(Rp,F)} — residu_univ_app ÉLIMINÉ
     expected = set(MS.h_est_iso_prouve_hypotheses())
-    assert len(expected) == 3
+    assert len(expected) == 2
     assert set(thm.hypotheses) == expected
     # = celles de la fusion (coïncidence CLOSE)
     assert set(thm.hypotheses) == set(
@@ -108,7 +109,7 @@ def test_maximalite_donne_trichotomie_hypotheses():
     thm = MS.maximalite_donne_trichotomie_prouve()
     assert not thm.est_clos
     hyps = set(thm.hypotheses)
-    # 3 HONNÊTES {bo(R,E), bo(Rp,F), residu_univ_app}
+    # 2 HONNÊTES {bo(R,E), bo(Rp,F)} — residu_univ_app ÉLIMINÉ
     honnetes = set(FDA.fusion_depuis_coincidence_app_hypotheses("E", "R", "F", "Rp"))
     assert honnetes <= hyps
     # 4 RÉSIDU back-and-forth (au témoin a*,b*)
@@ -121,10 +122,10 @@ def test_maximalite_donne_trichotomie_hypotheses():
     seg_dom = E.est_segment(E.dom(h), Rf, var("E"))
     seg_img = E.est_segment(E.img(h), Rpf, var("F"))
     assert seg_dom in hyps and seg_img in hyps
-    # AUCUNE autre hypothèse : 3 + 4 + 2 = 9, parfaitement classées
+    # AUCUNE autre hypothèse : 2 + 4 + 2 = 8, parfaitement classées
     classified = honnetes | residu | {seg_dom, seg_img}
     assert hyps == classified
-    assert len(hyps) == 9
+    assert len(hyps) == 8
 
 
 def test_maximalite_residu_est_le_gap_precis():

@@ -4,9 +4,10 @@ par VARIABLE FRAÎCHE (déblocage de la collision τ).
 On certifie (ensembles_maximalite_close) :
 
   🎯🎯 maximalite_donne_trichotomie_close :
-        { bo(R,E), bo(Rp,F), residu_univ_app,
+        { bo(R,E), bo(Rp,F),
           est_segment(dom h,R,E), est_segment(pr₂h,Rp,F), inclus(h,dom h×pr₂h) }
           ⊢ ( dom h = E ) ou ( pr₂ h = F )   ( == maximalite_donne_trichotomie ).
+        ⚠️ `residu_univ_app` ÉLIMINÉ (dérivé de residu_univ_app_renforce, CLOS).
 
 Le point CENTRAL : le RÉSIDU (3) (iso de h⁺ pour R/Rp), τ-BLOQUÉ dans
 maximalite_donne_trichotomie_prouve (le pont iso_hplus_pour_R_majorants_discharges
@@ -79,13 +80,13 @@ def test_close_hypotheses():
     thm = MC.maximalite_donne_trichotomie_close()
     assert not thm.est_clos
     hyps = set(thm.hypotheses)
-    # EXACTEMENT 6 : 3 HONNÊTES + 2 segments + h_graphe_hyp
+    # EXACTEMENT 5 : 2 HONNÊTES + 2 segments + h_graphe_hyp  (residu_univ_app ÉLIMINÉ)
     expected = set(MC.maximalite_donne_trichotomie_close_hypotheses())
-    assert len(expected) == 6
+    assert len(expected) == 5
     assert hyps == expected
-    # 3 HONNÊTES présentes
+    # 2 HONNÊTES présentes
     honnetes = set(FDA.fusion_depuis_coincidence_app_hypotheses("E", "R", "F", "Rp"))
-    assert len(honnetes) == 3
+    assert len(honnetes) == 2
     assert honnetes <= hyps
     # les 2 segments + h-graphe
     h = TS.h_iso_max("E", "R", "F", "Rp")
@@ -96,7 +97,7 @@ def test_close_hypotheses():
 
 
 def test_close_hypotheses_toutes_ab_independantes():
-    """Les 6 hypothèses survivantes sont TOUTES a,b-INDÉPENDANTES (elles survivent
+    """Les 5 hypothèses survivantes sont TOUTES a,b-INDÉPENDANTES (elles survivent
     à existe_elimination — c'est ce qui rend la clôture possible)."""
     thm = MC.maximalite_donne_trichotomie_close()
     for hh in thm.hypotheses:

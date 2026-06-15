@@ -6,14 +6,14 @@ Vérifie `ensembles_trichotomie_assemble` :
     (== maillon_final_cible) avec la MAXIMALITÉ et les segments dom DÉCHARGÉS sur leurs
     PREUVES (maximalite_donne_trichotomie_close, dom_h_est_segment_sous_val).  Hypothèses
     HONNÊTES survivantes = RÉSIDU STRUCTUREL irréductible
-    { bo(R,E), bo(Rp,F), residu_univ_app, val_dans_F, h_graphe_hyp, 2× segment pr₂ }.
+    { bo(R,E), bo(Rp,F), val_dans_F, h_graphe_hyp, 2× segment pr₂ }  (6).
 
   • `trichotomie_ordinaux_canon_prouve_min` (assemblage MINIMAL en COMPTE) ⊢ idem, en
     GARDANT la maximalité intacte et en ne déchargeant que le segment dom du maillon
-    (6 hypothèses ; pas de h_graphe).
+    (5 hypothèses ; pas de h_graphe).
 
-  • RÉSIDU `residu_univ_app` (#8/#13) RAPPORTÉ comme l'unique pièce géométrique
-    irréductible parmi les honnêtes ; PRÉSENT dans les deux assemblages.
+  • `residu_univ_app` (#8/#13) ÉLIMINÉ partout (dérivé de residu_univ_app_renforce,
+    CLOS) : il n'est PLUS hypothèse d'aucun assemblage.
 
 theorie_ensembles() = 22 (rien postulé).  Conclusion == trichotomie_ordinaux_canon.
 """
@@ -60,10 +60,10 @@ def test_prouve_conclusion_est_trichotomie_canon():
 
 
 def test_prouve_hypotheses_exactes():
-    """Hypothèses == résidu structurel documenté (3 honnêtes + val_dans_F + h_graphe + 2 seg pr₂)."""
+    """Hypothèses == résidu structurel documenté (2 honnêtes + val_dans_F + h_graphe + 2 seg pr₂)."""
     thm = TA.trichotomie_ordinaux_canon_prouve()
     assert set(thm.hypotheses) == set(TA.trichotomie_ordinaux_canon_prouve_hypotheses())
-    assert len(set(thm.hypotheses)) == 7
+    assert len(set(thm.hypotheses)) == 6
 
 
 def test_prouve_maximalite_et_segment_dom_decharges():
@@ -78,18 +78,19 @@ def test_prouve_maximalite_et_segment_dom_decharges():
         assert E.est_segment(E.dom(h), _R_de("R"), var("E"), xb, yb) not in hs
 
 
-def test_prouve_contient_les_trois_honnetes():
-    """Les 3 hypothèses HONNÊTES {bo,bo,residu} restent PRÉSENTES."""
+def test_prouve_contient_les_deux_honnetes():
+    """Les 2 hypothèses HONNÊTES {bo,bo} restent PRÉSENTES."""
     thm = TA.trichotomie_ordinaux_canon_prouve()
     hs = set(thm.hypotheses)
     for honnete in FDA.fusion_depuis_coincidence_app_hypotheses():
         assert honnete in hs
 
 
-def test_prouve_residu_univ_app_present():
-    """Le RÉSIDU géométrique residu_univ_app (#8/#13) est PRÉSENT (irréductible)."""
+def test_prouve_residu_univ_app_elimine():
+    """Le RÉSIDU géométrique residu_univ_app (#8/#13) est ÉLIMINÉ (dérivé de
+    residu_univ_app_renforce, CLOS) — il N'EST PLUS une hypothèse."""
     thm = TA.trichotomie_ordinaux_canon_prouve()
-    assert FDA.residu_univ_app("E", "R", "F", "Rp") in set(thm.hypotheses)
+    assert FDA.residu_univ_app("E", "R", "F", "Rp") not in set(thm.hypotheses)
 
 
 def test_prouve_non_vacueux():
@@ -107,10 +108,11 @@ def test_min_conclusion_est_trichotomie_canon():
 
 
 def test_min_hypotheses_exactes():
-    """Hypothèses == { bo, bo, residu, maximalité, segment pr₂[x,w], val_dans_F } (6)."""
+    """Hypothèses == { bo, bo, maximalité, segment pr₂[x,w], val_dans_F } (5).
+    (residu_univ_app ÉLIMINÉ — dérivé de residu_univ_app_renforce, CLOS.)"""
     thm = TA.trichotomie_ordinaux_canon_prouve_min()
     assert set(thm.hypotheses) == set(TA.trichotomie_ordinaux_canon_prouve_min_hypotheses())
-    assert len(set(thm.hypotheses)) == 6
+    assert len(set(thm.hypotheses)) == 5
 
 
 def test_min_maximalite_intacte():
@@ -131,10 +133,11 @@ def test_min_segment_dom_decharge_pour_val_dans_F():
     assert DS.val_dans_F("E", "R", "F", "Rp") in hs
 
 
-def test_min_residu_univ_app_present():
-    """Le RÉSIDU géométrique residu_univ_app (#8/#13) est PRÉSENT (irréductible)."""
+def test_min_residu_univ_app_elimine():
+    """Le RÉSIDU géométrique residu_univ_app (#8/#13) est ÉLIMINÉ (dérivé de
+    residu_univ_app_renforce, CLOS) — il N'EST PLUS une hypothèse."""
     thm = TA.trichotomie_ordinaux_canon_prouve_min()
-    assert FDA.residu_univ_app("E", "R", "F", "Rp") in set(thm.hypotheses)
+    assert FDA.residu_univ_app("E", "R", "F", "Rp") not in set(thm.hypotheses)
 
 
 def test_min_non_vacueux():

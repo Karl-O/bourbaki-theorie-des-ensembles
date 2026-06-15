@@ -3,7 +3,8 @@
 ────────────────────────────────────────────────────────────────────────────────
 RÔLE.  `trichotomie_ordinaux_canon_close_v2`
 (`ensembles_trichotomie_hgraphe_pr2seg`) conclut `trichotomie_ordinaux_canon`
-sous 4 hypothèses { bo(R,E), bo(Rp,F), residu_univ_app, est_un_graphe(h) }.
+sous 3 hypothèses { bo(R,E), bo(Rp,F), est_un_graphe(h) }  (residu_univ_app déjà
+ÉLIMINÉ dès la fusion via residu_univ_app_renforce, CLOS).
 Le DERNIER résidu `est_un_graphe(h) = (∀z)(z∈h ⇒ z est un couple)` était OPAQUE :
 l'axiome déposé de h (`TS.axiome_h` / `TS.theorie_h`) est COUPLE-ONLY — il
 caractérise SEULEMENT l'appartenance d'un COUPLE :
@@ -34,9 +35,11 @@ CE MODULE LIVRE (theorie_ensembles=22 ; le nouvel axiome est dans theorie_h_grap
   ✅ `h_est_graphe` : ⊢ est_un_graphe(h)   (== TS.h-as-set : z∈h ⇒ z couple).
      DÉRIVÉ de la forme SET (z∈h ⇒ ∃a∃b(z=(a,b) et …) ⇒ ∃a∃b z=(a,b) = z couple).
      PAS postulé : suit STRUCTURELLEMENT de la définition ensembliste.
-  ✅ `trichotomie_ordinaux_canon_close_v3` : trichotomie_ordinaux_canon SOUS les
-     3 hypothèses { bo(R,E), bo(Rp,F), residu_univ_app } — est_un_graphe(h) DÉCHARGÉ
-     par `h_est_graphe`.  Conclusion == trichotomie_ordinaux_canon (== maillon_final_cible).
+  🎯🎯🎯 `trichotomie_ordinaux_canon_close_v3` : trichotomie_ordinaux_canon SOUS les
+     2 SEULES hypothèses { bo(R,E), bo(Rp,F) } = la prémisse PROPRE du Théorème 3 §III.2
+     — est_un_graphe(h) DÉCHARGÉ par `h_est_graphe`, residu_univ_app ÉLIMINÉ dès la fusion
+     (residu_univ_app_renforce, CLOS).  Conclusion == trichotomie_ordinaux_canon
+     (== maillon_final_cible).  THÉORÈME 3 §III.2 (TRICHOTOMIE DES ORDINAUX) CLOS.
 
 INVARIANT : theorie_ensembles() = 22 (le nouvel axiome vit dans theorie_h_graphe,
 JAMAIS dans theorie_ensembles).  RIEN POSTULÉ du but : est_un_graphe(h) DÉRIVE de la
@@ -327,13 +330,16 @@ def h_est_graphe_cible(E_set="E", R="R", F_set="F", Rp="Rp"):
 #  🎯🎯 close-v3 — est_un_graphe(h) DÉCHARGÉ → hyps { bo, bo, residu_univ_app }.
 # ════════════════════════════════════════════════════════════════════════════
 def trichotomie_ordinaux_canon_close_v3(E_set="E", R="R", F_set="F", Rp="Rp"):
-    """⊢ trichotomie_ordinaux_canon(E,R,F,Rp)  (== maillon_final_cible) SOUS
-    { bo(R,E), bo(Rp,F), residu_univ_app }.
+    """🎯🎯🎯 ⊢ trichotomie_ordinaux_canon(E,R,F,Rp)  (== maillon_final_cible) SOUS
+    EXACTEMENT { bo(R,E), bo(Rp,F) } = la prémisse PROPRE du Théorème 3 §III.2.
 
-    🎯🎯 RÉDUCTION vs `HG.trichotomie_ordinaux_canon_close_v2` (4 hyps) : le DERNIER
-    résidu structurel est_un_graphe(h) est DÉCHARGÉ par `h_est_graphe` (CLOS sous
-    theorie_h_graphe — la forme SET fidèle de h).  Survivent les 3 hypothèses HONNÊTES
-    { bo(R,E), bo(Rp,F), residu_univ_app }.
+    🎯🎯🎯 THÉORÈME 3 §III.2 (TRICHOTOMIE DES ORDINAUX) CLOS.  Les deux résidus restants
+    sont ÉLIMINÉS :
+      • est_un_graphe(h)  ← `h_est_graphe` (CLOS sous theorie_h_graphe, forme SET fidèle) ;
+      • residu_univ_app   ← son contenu géométrique (#8 ∧ #13) est DÉRIVÉ de
+        `RES.residu_univ_app_renforce` (CLOS) dès la FUSION (`fusion_depuis_coincidence_app`),
+        l'antécédent renforcé (seg(Sp,R,E)+seg(Tg,Rp,F)) étant déchargé des CŒURS.
+    Il ne reste donc QUE les deux bons ordres — la prémisse du théorème.
 
     INVARIANT : theorie_ensembles()=22 (le seul axiome neuf, axiome_h_graphe, vit dans
     theorie_h_graphe).  RIEN POSTULÉ du but.  NON vacueux.  Noms ambiants CANONIQUES
@@ -341,7 +347,7 @@ def trichotomie_ordinaux_canon_close_v3(E_set="E", R="R", F_set="F", Rp="Rp"):
     from bourbaki.cardinaux import ensembles_trichotomie_hgraphe_pr2seg as HG
     assert (E_set, R, F_set, Rp) == ("E", "R", "F", "Rp"), \
         "noms ambiants CANONIQUES requis"
-    v2 = HG.trichotomie_ordinaux_canon_close_v2(E_set, R, F_set, Rp)   # 4 hyps
+    v2 = HG.trichotomie_ordinaux_canon_close_v2(E_set, R, F_set, Rp)   # 3 hyps {bo,bo,est_un_graphe}
     h = TS.h_iso_max(E_set, R, F_set, Rp)
     graphe_hyp = E.est_un_graphe(h)
     if graphe_hyp in set(v2.hypotheses):
@@ -359,8 +365,9 @@ def trichotomie_ordinaux_canon_close_v3_cible(E_set="E", R="R", F_set="F", Rp="R
 
 
 def trichotomie_ordinaux_canon_close_v3_hypotheses(E_set="E", R="R", F_set="F", Rp="Rp"):
-    """Les 3 HYPOTHÈSES SURVIVANTES ATTENDUES (documentation / test miroir) :
-       { bo(R,E), bo(Rp,F), residu_univ_app }  (est_un_graphe(h) déchargé)."""
+    """Les 2 HYPOTHÈSES SURVIVANTES ATTENDUES (documentation / test miroir) :
+       { bo(R,E), bo(Rp,F) } = la prémisse PROPRE du Théorème 3 §III.2.
+       (est_un_graphe(h) ET residu_univ_app DÉCHARGÉS.)"""
     from bourbaki.cardinaux import ensembles_fusion_depuis_coincidence_app as FDA
     return list(FDA.fusion_depuis_coincidence_app_hypotheses(E_set, R, F_set, Rp))
 

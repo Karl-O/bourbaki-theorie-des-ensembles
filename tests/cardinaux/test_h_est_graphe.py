@@ -1,5 +1,5 @@
 """Tests — §III.2 Th3 TRICHOTOMIE : `est_un_graphe(h)` PROUVÉ (forme SET de h) et
-décharge de close-v3 → hyps {bo, bo, residu_univ_app}.
+décharge de close-v3 → hyps {bo, bo} = Théorème 3 §III.2 CLOS.
 
 VÉRIFIE (theorie_ensembles=22, rien postulé du but, NON vacueux) :
   • Forme SET `h_membre_set` : z∈h ⇔ (∃a)(∃b)(z=(a,b) et corps_h(a,b)), instanciée.
@@ -9,7 +9,7 @@ VÉRIFIE (theorie_ensembles=22, rien postulé du but, NON vacueux) :
     (== TS.axiome_h(…,cu,cv), α-représentant canonique), CLOS.
   • `h_est_graphe` : est_un_graphe(h) CLOS (0 hyp).
   • `trichotomie_ordinaux_canon_close_v3` : trichotomie_ordinaux_canon SOUS
-    {bo(R,E), bo(Rp,F), residu_univ_app} (est_un_graphe(h) DÉCHARGÉ).
+    {bo(R,E), bo(Rp,F)} (est_un_graphe(h) ET residu_univ_app DÉCHARGÉS) = Théorème 3 CLOS.
 """
 from bourbaki.cardinaux import ensembles_h_est_graphe as HGr
 from bourbaki.cardinaux import ensembles_trichotomie_scaffold as TS
@@ -100,7 +100,7 @@ def test_h_est_graphe_theorie_22():
     assert len(E.theorie_ensembles().axiomes) == 22
 
 
-# ── close-v3 : est_un_graphe(h) DÉCHARGÉ → {bo, bo, residu_univ_app} ───────────
+# ── close-v3 : est_un_graphe(h) DÉCHARGÉ → {bo, bo} = Théorème 3 §III.2 CLOS ─────
 def test_close_v3_conclusion_est_trichotomie():
     v3 = HGr.trichotomie_ordinaux_canon_close_v3()
     assert v3.conclusion == HGr.trichotomie_ordinaux_canon_close_v3_cible()
@@ -108,16 +108,26 @@ def test_close_v3_conclusion_est_trichotomie():
     assert v3.conclusion == HG.trichotomie_ordinaux_canon_close_v2_cible()
 
 
-def test_close_v3_hypotheses_sont_bo_bo_residu():
+def test_close_v3_hypotheses_sont_bo_bo():
+    """🎯🎯 THÉORÈME 3 §III.2 CLOS : v3 a EXACTEMENT {bo(R,E), bo(Rp,F)} = la prémisse
+    propre du théorème.  residu_univ_app ET est_un_graphe(h) ÉLIMINÉS."""
     v3 = HGr.trichotomie_ordinaux_canon_close_v3()
     attendu = set(HGr.trichotomie_ordinaux_canon_close_v3_hypotheses())
     assert set(v3.hypotheses) == attendu
-    assert len(list(v3.hypotheses)) == 3
-    # bo(R,E), bo(Rp,F) présents
+    assert len(list(v3.hypotheses)) == 2
+    # bo(R,E), bo(Rp,F) présents — ET SEULS
     bo_R = E.est_bien_ordonne(_Rf("R"), var("E"))
     bo_Rp = E.est_bien_ordonne(_Rf("Rp"), var("F"))
     hs = set(v3.hypotheses)
     assert bo_R in hs and bo_Rp in hs
+    assert hs == {bo_R, bo_Rp}
+
+
+def test_close_v3_residu_univ_app_elimine():
+    """🎯🎯 residu_univ_app N'EST PLUS une hypothèse de v3 (dérivé de
+    residu_univ_app_renforce, CLOS) — la dernière pièce géométrique est PAYÉE."""
+    v3 = HGr.trichotomie_ordinaux_canon_close_v3()
+    assert FDA.residu_univ_app("E", "R", "F", "Rp") not in set(v3.hypotheses)
 
 
 def test_close_v3_est_un_graphe_discharged():
@@ -137,7 +147,7 @@ def test_close_v3_egale_v2_moins_est_un_graphe():
 
 
 def test_close_v3_honnetes_sont_fusion_hyps():
-    """Les 3 hyps survivantes == les hyps HONNÊTES de la fusion (bo,bo,residu)."""
+    """Les 2 hyps survivantes == les hyps HONNÊTES de la fusion (bo,bo)."""
     v3 = HGr.trichotomie_ordinaux_canon_close_v3()
     honn = set(FDA.fusion_depuis_coincidence_app_hypotheses())
     assert set(v3.hypotheses) == honn

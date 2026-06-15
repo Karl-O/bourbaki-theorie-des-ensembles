@@ -150,12 +150,13 @@ def test_close_conclusion_est_la_trichotomie():
     assert thm.conclusion == MCP.maillon_final_h_plus3_cible("E", "R", "F", "Rp")
 
 
-def test_close_cinq_hypotheses_exactes():
-    """Exactement 5 hypothèses : bo(R,E), bo(Rp,F), residu_univ_app, maximalité,
-    seg(pr₂h,Rp,F)[x,w].  val_dans_F (présent dans `_min`) est ÉLIMINÉ."""
+def test_close_quatre_hypotheses_exactes():
+    """Exactement 4 hypothèses : bo(R,E), bo(Rp,F), maximalité, seg(pr₂h,Rp,F)[x,w].
+    val_dans_F (présent dans `_min`) est ÉLIMINÉ ; residu_univ_app AUSSI ÉLIMINÉ
+    (dérivé de residu_univ_app_renforce, CLOS)."""
     thm = RES.trichotomie_ordinaux_canon_close()
     assert set(thm.hypotheses) == set(RES.trichotomie_ordinaux_canon_close_hypotheses())
-    assert len(set(thm.hypotheses)) == 5
+    assert len(set(thm.hypotheses)) == 4
 
 
 def test_close_val_dans_F_elimine():
@@ -175,6 +176,6 @@ def test_close_strictement_moins_d_hypotheses_que_min():
 
 
 def test_close_non_vacueux():
-    """La conclusion (trichotomie) n'est AUCUNE des 5 hypothèses."""
+    """La conclusion (trichotomie) n'est AUCUNE des 4 hypothèses."""
     thm = RES.trichotomie_ordinaux_canon_close()
     assert thm.conclusion not in set(thm.hypotheses)

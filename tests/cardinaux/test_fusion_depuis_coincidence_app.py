@@ -4,11 +4,13 @@
 `fusion_hyp` sur la coïncidence **PROUVÉE** (`coincidence_point_app` → `coincidence_univ_app`,
 THÉORÈME CLOS) au lieu de la coïncidence **POSTULÉE** (`coincidence_univ`).
 
-Hypothèses survivantes (3) : { bo(R,E), bo(R',F), residu_univ_app } — `coincidence_univ`
-est GONE.  `residu_univ_app` est un universel CLOS portant SEULEMENT les deux conjoints
-géométriquement résistants (#8 segment-image, #13 graphe-restriction), strictement plus
-faible que `coincidence_univ` (aucune égalité de valeurs).  Conclusion == T2.fusion_hyp
-LITTÉRALEMENT ; non tautologique ; theorie=22.
+Hypothèses survivantes (2) : { bo(R,E), bo(R',F) } — `coincidence_univ` est GONE et
+`residu_univ_app` est GONE.  Le contenu géométrique du résidu (#8 segment-image,
+#13 graphe-restriction) est désormais DÉRIVÉ de `residu_univ_app_renforce` (CLOS,
+theorie=22), dont l'antécédent renforcé ajoute à ANT_12 les deux segments seg(Sp,R,E)
+et seg(Tg,Rp,F), TOUS DEUX portés par les CŒURS.  Il ne reste QUE les deux bons ordres
+= la prémisse propre du Théorème 3 §III.2.  Conclusion == T2.fusion_hyp LITTÉRALEMENT ;
+non tautologique ; theorie=22.
 """
 from bourbaki.ensembles import ensembles_abrege as E
 from bourbaki.cardinaux import ensembles_fusion_depuis_coincidence_app as FDA
@@ -35,35 +37,34 @@ def test_coincidence_univ_est_GONE():
     assert FDA.residu_univ_app() != cu
 
 
-def test_exactement_trois_hypotheses_survivantes():
-    """Les hyps SURVIVANTES sont EXACTEMENT { bo(R,E), bo(R',F), residu_univ_app }.
+def test_exactement_deux_hypotheses_survivantes():
+    """Les hyps SURVIVANTES sont EXACTEMENT { bo(R,E), bo(R',F) }.
 
-    Les deux CŒURS sont des témoins INTERNES, éliminés en ∃ (comme l'original) : ils ne
-    survivent PAS dans le séquent final."""
+    = la prémisse propre du Théorème 3 §III.2.  `residu_univ_app` est GONE (son contenu
+    est dérivé de `residu_univ_app_renforce`, CLOS).  Les deux CŒURS sont des témoins
+    INTERNES, éliminés en ∃ (comme l'original) : ils ne survivent PAS dans le séquent."""
     t = FDA.fusion_depuis_coincidence_app()
-    assert len(t.hypotheses) == 3
+    assert len(t.hypotheses) == 2
     assert set(t.hypotheses) == set(FDA.fusion_depuis_coincidence_app_hypotheses())
 
 
-def test_residu_est_load_bearing_et_clos():
-    """`residu_univ_app` est une VRAIE hypothèse (load-bearing), universel CLOS (∀ témoins).
-
-    Son seul libre = les paramètres ambiants E,R,F,R' (comme coincidence_univ)."""
-    from bourbaki.logique.formule import libres_f
+def test_residu_univ_app_est_GONE():
+    """🎯🎯 LE PAIEMENT FINAL : `residu_univ_app` (le RÉSIDU géométrique reporté) N'EST
+    PLUS une hypothèse.  Son contenu (#8 segment-image, #13 graphe-restriction) est
+    DÉRIVÉ de `residu_univ_app_renforce` (CLOS) à l'intérieur de _coinc_point_app."""
     t = FDA.fusion_depuis_coincidence_app()
     res = FDA.residu_univ_app()
-    assert res in set(t.hypotheses)              # consommée
-    assert res != t.conclusion                   # non tautologique
-    assert libres_f(res) == {"E", "R", "F", "Rp"}   # CLOS sur les 6 témoins
+    assert res not in set(t.hypotheses)
 
 
 def test_bons_ordres_ambiants_load_bearing():
-    """Les deux bons ordres AMBIANTS bo(R,E) et bo(R',F) sont des hypothèses survivantes."""
+    """Les deux bons ordres AMBIANTS bo(R,E) et bo(R',F) sont les SEULES hypothèses."""
     t = FDA.fusion_depuis_coincidence_app()
     hyps = set(t.hypotheses)
-    boR, boRp, _res = FDA.fusion_depuis_coincidence_app_hypotheses()
+    boR, boRp = FDA.fusion_depuis_coincidence_app_hypotheses()
     assert boR in hyps
     assert boRp in hyps
+    assert hyps == {boR, boRp}
 
 
 def test_non_vacueux():
@@ -110,7 +111,7 @@ def test_parametrable_sur_les_points():
     t = FDA.fusion_depuis_coincidence_app("E", "R", "F", "Rp",
                                           u="aa", v="bb", up="cc", vp="dd")
     assert not t.est_clos
-    assert len(t.hypotheses) == 3
+    assert len(t.hypotheses) == 2
     assert t.conclusion == FDA.fusion_depuis_coincidence_app_cible(
         "E", "R", "F", "Rp", u="aa", v="bb", up="cc", vp="dd")
 

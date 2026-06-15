@@ -3,10 +3,11 @@
 Vérifie que `ensembles_h_bien_defini` DÉRIVE (sans postuler) les FORMULES de cohérence
 `compatibilite_inverse_h` (A) et `compatibilite_ordre_h` (B) — POSÉES en hypothèses
 explicites dans `ensembles_trichotomie_h_iso` — sous les SEULES hypothèses HONNÊTES
-{ bo(R,E), bo(R',F), residu_univ_app }.
+{ bo(R,E), bo(R',F) }.
 
 Contrôles : conclusion == la FORMULE-builder (importée de ensembles_trichotomie_h_iso) ;
-hypothèses == exactement les 3 carries honnêtes ; NON vacuité ; theorie_ensembles=22.
+hypothèses == exactement les 2 carries honnêtes {bo,bo} (residu_univ_app ÉLIMINÉ) ;
+NON vacuité ; theorie_ensembles=22.
 """
 import pytest
 
@@ -32,10 +33,10 @@ def test_target1_conclusion_est_la_formule():
 
 
 def test_target1_hypotheses_honnetes():
-    """Hypothèses == exactement { bo(R,E), bo(R',F), residu_univ_app } (3 carries)."""
+    """Hypothèses == exactement { bo(R,E), bo(R',F) } (2 carries)."""
     thm = HBD.compatibilite_inverse_h_prouve()
     assert set(thm.hypotheses) == set(HBD.h_bien_defini_hypotheses())
-    assert len(thm.hypotheses) == 3
+    assert len(thm.hypotheses) == 2
 
 
 def test_target1_non_vacueux():
@@ -59,10 +60,10 @@ def test_target2_conclusion_est_la_formule():
 
 
 def test_target2_hypotheses_honnetes():
-    """Hypothèses == exactement { bo(R,E), bo(R',F), residu_univ_app } (3 carries)."""
+    """Hypothèses == exactement { bo(R,E), bo(R',F) } (2 carries)."""
     thm = HBD.compatibilite_ordre_h_prouve()
     assert set(thm.hypotheses) == set(HBD.h_bien_defini_hypotheses())
-    assert len(thm.hypotheses) == 3
+    assert len(thm.hypotheses) == 2
 
 
 def test_target2_non_vacueux():

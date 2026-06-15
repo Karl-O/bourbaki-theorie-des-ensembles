@@ -282,14 +282,14 @@ def maillon_final_h_plus3_cible(E_set="E", R="R", F_set="F", Rp="Rp"):
 
 
 def maillon_final_h_plus3_hypotheses(E_set="E", R="R", F_set="F", Rp="Rp"):
-    """Les 6 HYPOTHÈSES SURVIVANTES ATTENDUES (documentation / test miroir) :
-       les 3 HONNÊTES de la fusion {bo(R,E), bo(R',F), residu_univ_app}
+    """Les 5 HYPOTHÈSES SURVIVANTES ATTENDUES (documentation / test miroir) :
+       les 2 HONNÊTES de la fusion {bo(R,E), bo(R',F)}  (residu_univ_app ÉLIMINÉ)
        + maximalité (dom h=E ∨ pr₂ h=F) + les 2 segments (dom h, pr₂ h).
 
     Les 2 SEGMENTS et la MAXIMALITÉ sont EXTRAITS de `maillon_final_h_plus` (source
     CANONIQUE — mêmes binders xo/yo de est_segment, mêmes côtés du « ou »), pour éviter
     toute divergence de nommage de liants.  Concrètement = les hypothèses de
-    `maillon_final_h_plus` PRIVÉES des 3 cohérences, AUGMENTÉES des 3 honnêtes."""
+    `maillon_final_h_plus` PRIVÉES des 3 cohérences, AUGMENTÉES des 2 honnêtes."""
     h = TS.h_iso_max(E_set, R, F_set, Rp)
     honnetes = FDA.fusion_depuis_coincidence_app_hypotheses(E_set, R, F_set, Rp)
     coherences = {

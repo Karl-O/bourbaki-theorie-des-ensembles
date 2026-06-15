@@ -3,7 +3,8 @@ VARIABLE FRAÎCHE (déblocage de la collision τ).
 
 ────────────────────────────────────────────────────────────────────────────────
 RÔLE.  CLORE `maximalite_donne_trichotomie` (dom h=E ∨ pr₂h=F) jusqu'aux hypothèses
-HONNÊTES { bo(R,E), bo(Rp,F), residu_univ_app }.
+HONNÊTES { bo(R,E), bo(Rp,F) }.  (residu_univ_app ÉLIMINÉ — dérivé de
+residu_univ_app_renforce, CLOS.)
 
 La preuve antérieure `maximalite_donne_trichotomie_prouve`
 (ensembles_maximalite_substantielle) prouvait la conclusion mais laissait 4 RÉSIDU
@@ -26,7 +27,7 @@ variable fraîche « a » mais LÈVE « modus ponens : mineure ≠ antécédent 
 CE MODULE LIVRE (theorie=22, rien postulé — NE MODIFIE AUCUN fichier existant) :
 
   🎯🎯 `maximalite_donne_trichotomie_close(E,R,F,Rp)` :
-        { bo(R,E), bo(Rp,F), residu_univ_app,                  [ 3 HONNÊTES ]
+        { bo(R,E), bo(Rp,F),                                   [ 2 HONNÊTES ]
           est_segment(dom h,R,E), est_segment(pr₂h,Rp,F),      [ Prop 1 ]
           inclus(h, dom h × pr₂h) }                            [ « h graphe », S8 ]
           ⊢  ( dom h = E ) ou ( pr₂ h = F )   ( == maximalite_donne_trichotomie ).
@@ -51,8 +52,7 @@ CE MODULE LIVRE (theorie=22, rien postulé — NE MODIFIE AUCUN fichier existant
   CONTRADICTION avec a∉dom h.  existe_elimination retire b puis a.
 
 INVARIANT : theorie_ensembles() = 22.  Rien postulé.  Hypothèses HONNÊTES
-{bo(R,E), bo(Rp,F), residu_univ_app}.  NON vacueux : la conclusion n'est aucune
-hypothèse.
+{bo(R,E), bo(Rp,F)}.  NON vacueux : la conclusion n'est aucune hypothèse.
 """
 from __future__ import annotations
 
@@ -615,7 +615,7 @@ def _corps_min(R, e_set, d_term, a, w="w"):
 #  🎯🎯 LE THÉORÈME — maximalité substantielle CLOSE par variable fraîche.
 # ════════════════════════════════════════════════════════════════════════════
 def maximalite_donne_trichotomie_close(E_set="E", R="R", F_set="F", Rp="Rp"):
-    """🎯🎯 ⊢ { bo(R,E), bo(Rp,F), residu_univ_app           [ 3 HONNÊTES ]
+    """🎯🎯 ⊢ { bo(R,E), bo(Rp,F)                            [ 2 HONNÊTES ]
                est_segment(dom h, R, E), est_segment(pr₂h, Rp, F),
                inclus(h, dom h × pr₂h)                       [ 3 STRUCTURELS a,b-INDÉP. ] }
           ⊢ ( dom h = E )  ou  ( pr₂ h = F )   ( == maximalite_donne_trichotomie ).
@@ -636,9 +636,9 @@ def maximalite_donne_trichotomie_close(E_set="E", R="R", F_set="F", Rp="Rp"):
     DÉRIVÉ.  Les RÉSIDU (1),(2) (segments fermés ]←,a],]←,b]) et (10) (h⁺⊂]←,a]×]←,b])
     sont AUSSI dérivés (les deux derniers depuis « h graphe »).
 
-    HYPOTHÈSES SURVIVANTES (6, toutes a,b-INDÉPENDANTES) :
-      • 3 HONNÊTES : bo(R,E), bo(Rp,F), residu_univ_app (portées par func h /
-        h_est_iso_prouve / Prop 1) ;
+    HYPOTHÈSES SURVIVANTES (5, toutes a,b-INDÉPENDANTES) :
+      • 2 HONNÊTES : bo(R,E), bo(Rp,F) (portées par func h / h_est_iso_prouve / Prop 1 ;
+        residu_univ_app ÉLIMINÉ — dérivé de residu_univ_app_renforce, CLOS) ;
       • est_segment(dom h, R, E), est_segment(pr₂h, Rp, F) : « dom h, pr₂h sont des
         segments » (Prop 1 ; déjà résidus de maximalite_donne_trichotomie_prouve) ;
       • inclus(h, dom h × pr₂h) : « h est un graphe » (= h_graphe_hyp), fidèle à
@@ -762,9 +762,9 @@ def maximalite_donne_trichotomie_close_cible(E_set="E", R="R", F_set="F", Rp="Rp
 
 
 def maximalite_donne_trichotomie_close_hypotheses(E_set="E", R="R", F_set="F", Rp="Rp"):
-    """Les 6 HYPOTHÈSES SURVIVANTES (documentation / test miroir) :
-       3 HONNÊTES + est_segment(dom h,R,E) + est_segment(pr₂h,Rp,F) + h_graphe_hyp.
-       Toutes a,b-INDÉPENDANTES."""
+    """Les 5 HYPOTHÈSES SURVIVANTES (documentation / test miroir) :
+       2 HONNÊTES + est_segment(dom h,R,E) + est_segment(pr₂h,Rp,F) + h_graphe_hyp.
+       (residu_univ_app ÉLIMINÉ.)  Toutes a,b-INDÉPENDANTES."""
     from bourbaki.cardinaux import ensembles_fusion_depuis_coincidence_app as FDA
     Rf, Rpf = _R_de(R), _R_de(Rp)
     vE, vF = _t(E_set), _t(F_set)

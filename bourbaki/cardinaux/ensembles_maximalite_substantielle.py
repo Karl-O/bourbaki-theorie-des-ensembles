@@ -229,8 +229,9 @@ def h_est_iso_prouve_cible(E_set="E", R="R", F_set="F", Rp="Rp"):
 
 
 def h_est_iso_prouve_hypotheses(E_set="E", R="R", F_set="F", Rp="Rp"):
-    """Les 3 HYPOTHÈSES SURVIVANTES (documentation / test miroir) de TARGET A :
-       [ bo(R,E), bo(R',F), residu_univ_app ]  (= celles des 3 cohérences prouvées)."""
+    """Les 2 HYPOTHÈSES SURVIVANTES (documentation / test miroir) de TARGET A :
+       [ bo(R,E), bo(R',F) ]  (= celles des cohérences prouvées).
+       ⚠️ `residu_univ_app` ÉLIMINÉ (dérivé de residu_univ_app_renforce, CLOS)."""
     return FDA.fusion_depuis_coincidence_app_hypotheses(E_set, R, F_set, Rp)
 
 

@@ -49,12 +49,13 @@ CE MODULE LIVRE (theorie=22, rien postulé, NE MODIFIE AUCUN fichier existant) :
 ────────────────────────────────────────────────────────────────────────────────
 🔬 RÉSIDUS STRUCTURELS IRRÉDUCTIBLES SUBSISTANTS (rapportés, JAMAIS postulés) :
 
-  • residu_univ_app  : son CONTENU est PROUVÉ (residu_univ_app_renforce, CLOS) ; mais
-    son antécédent DÉPOSÉ (ANT_12) est trop faible de DEUX segments — seg(Sp,R,E)
-    (initialité du petit domaine) et seg(Tg,Rp,F) (grand codomaine segment).  Ces deux
-    SONT portés par les CŒURS dans la fusion (cœur petit ⊢ seg(Sp,R,E) ; cœur grand
-    ⊢ seg(Tg,Rp,F)), mais `residu_univ_app` (figé dans le dépôt) ne les inclut pas dans
-    son antécédent ⇒ non déchargeable EN L'ÉTAT sans refondre la fusion (fichier figé).
+  • residu_univ_app  : ✅ ÉLIMINÉ (re-thread `residu-elimine`).  Son CONTENU est PROUVÉ
+    (residu_univ_app_renforce, CLOS) ; son antécédent renforcé ajoute à ANT_12 les DEUX
+    segments seg(Sp,R,E) (initialité du petit domaine) et seg(Tg,Rp,F) (grand codomaine
+    segment).  Dans la fusion `fusion_depuis_coincidence_app`, `_coinc_point_app` instancie
+    residu_univ_app_renforce aux 6 témoins et DÉCHARGE son antécédent : les deux segments
+    sont fournis par les CŒURS (cœur petit ⊢ seg(Sp,R,E) ; cœur grand ⊢ seg(Tg,Rp,F)),
+    les 12 conjoints d'ANT_12 par le contexte.  `residu_univ_app` n'est PLUS hypothèse.
 
   • est_segment(pr₂h,Rp,F)  : CIRCULAIRE pour le CORE (pr₂h=image(h,dom h) est SON
     PROPRE codomaine T ⇒ l'hyp seg(T)=seg(pr₂h) = le but).  Requiert l'initialité de
@@ -834,9 +835,10 @@ def trichotomie_ordinaux_canon_close_cible(E_set="E", R="R", F_set="F", Rp="Rp")
 
 
 def trichotomie_ordinaux_canon_close_hypotheses(E_set="E", R="R", F_set="F", Rp="Rp"):
-    """Les 5 HYPOTHÈSES SURVIVANTES ATTENDUES (documentation / test miroir) :
-       { bo(R,E), bo(Rp,F), residu_univ_app, (dom h=E ou pr₂h=F),
-         est_segment(pr₂h,Rp,F)[x,w] }.   (val_dans_F ÉLIMINÉ vs `_min`.)"""
+    """Les 4 HYPOTHÈSES SURVIVANTES ATTENDUES (documentation / test miroir) :
+       { bo(R,E), bo(Rp,F), (dom h=E ou pr₂h=F), est_segment(pr₂h,Rp,F)[x,w] }.
+       (val_dans_F ÉLIMINÉ vs `_min` ; residu_univ_app ÉLIMINÉ — dérivé de
+        residu_univ_app_renforce, CLOS.)"""
     from bourbaki.cardinaux import ensembles_fusion_depuis_coincidence_app as FDA
     from bourbaki.cardinaux import ensembles_trichotomie_assemble as A
     honnetes = list(FDA.fusion_depuis_coincidence_app_hypotheses(E_set, R, F_set, Rp))

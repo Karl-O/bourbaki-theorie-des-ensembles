@@ -14,13 +14,15 @@ coïncident sur le petit).  Ici on la REMPLACE par un appel à `coincidence_poin
 CŒURS STRENGTHENED (iso/func/dom/graphe/segment) + bons ordres AMBIANTS + comparabilité.
 
 ────────────────────────────────────────────────────────────────────────────────
-CE MODULE LIVRE (theorie=22, rien postulé — `coincidence_univ` est GONE) :
+CE MODULE LIVRE (theorie=22, rien postulé — `coincidence_univ` GONE, `residu_univ_app` GONE) :
 
-  ✅ `fusion_depuis_coincidence_app(...)` :
-        { est_bien_ordonne(R,E),  est_bien_ordonne(R',F),  CŒUR₁(couple A),  CŒUR₁(couple B),
-          RÉSIDU_GÉOMÉTRIQUE (voir ci-dessous) }  ⊢  fusion_hyp(u,v,u',v').
+  🎯🎯 `fusion_depuis_coincidence_app(...)` :
+        { est_bien_ordonne(R,E),  est_bien_ordonne(R',F) }  ⊢  fusion_hyp(u,v,u',v').
      i.e. CONCLUSION == `ensembles_temoin_deux_couples.fusion_hyp(...)` LITTÉRALEMENT
-     (le MÊME énoncé-cible que `fusion_depuis_coincidence`), **SANS `coincidence_univ`**.
+     (le MÊME énoncé-cible que `fusion_depuis_coincidence`), **SANS `coincidence_univ`**
+     ET **SANS `residu_univ_app`** : il ne reste QUE les deux bons ordres ambiants =
+     la prémisse PROPRE du Théorème 3 §III.2.  Les CŒURS₁ sont des témoins INTERNES
+     éliminés existentiellement (ils NE survivent PAS dans le séquent).
 
 ────────────────────────────────────────────────────────────────────────────────
 DÉCHARGE DE LA PRÉMISSE_APPLICATIONS (14 conjoints de coincidence_point_app).
@@ -39,38 +41,33 @@ Pour le point p∈S_petit, `coincidence_point_app(φp,φg,Sp,Tp,Sg,Tg,F,R,Rp,p)`
   • 10 est_bien_ordonne(R,E)       ← AMBIANT (hypothèse de fusion)
   • 11 inclus(Sp,E)               ← CŒUR petit, 1ᵉʳ conjoint de est_segment(Sp,R,E)
   • 12 inclus(φp,Sp×Tp)           ← CŒUR petit (conjoint graphe)
-  • 8  est_segment(image(φg,Sp),R',F)   ← RÉSIDU (voir NOTE), via `residu_univ_app`
-  • 13 inclus(φg|Sp,Sp×Tp)              ← RÉSIDU (voir NOTE), via `residu_univ_app`
+  • 8  est_segment(image(φg,Sp),R',F)   ← DÉRIVÉ de `residu_univ_app_renforce` (CLOS)
+  • 13 inclus(φg|Sp,Sp×Tp)              ← DÉRIVÉ de `residu_univ_app_renforce` (CLOS)
 
 Enfin, la conclusion φp(p)[j]=φg(p)[j] est convertie en φp(p)[y]=φg(p)[y] (liant-valeur
 DÉFAUT « y », forme attendue par `temoin_commun_couvrant`) via `valeur_j_egal_y` (CS1,
 α-renommage τ_j→τ_y) + transitivité.
 
 ────────────────────────────────────────────────────────────────────────────────
-⚠️ RÉSIDU GÉOMÉTRIQUE HONNÊTE (PRÉCIS, jamais postulé comme coïncidence).  DEUX conjoints
-de la PRÉMISSE_APPLICATIONS ne sont PAS dérivables des { CŒURS, bo(R,E), bo(R',F),
-comparabilité } :
+🎯🎯 RÉSIDU GÉOMÉTRIQUE ÉLIMINÉ (re-thread `residu-elimine`).  DEUX conjoints de la
+PRÉMISSE_APPLICATIONS ne se dérivent pas des { CŒURS, bo(R,E), bo(R',F), comparabilité }
+SEULS :
 
   #8  est_segment(image(φ_grand,S_petit), R', F)
         « l'IMAGE du petit segment par le GRAND iso est un segment de F ».
-        VRAI (image d'un segment par un iso d'ordre = segment ; magnitude Lemme 1),
-        mais AUCUNE brique du dépôt ne le prouve : `codomaine_egal_image` (le seul
-        consommateur) le REQUIERT lui-même en hypothèse.
+        VRAI (image d'un segment par un iso d'ordre = segment ; magnitude Lemme 1).
 
   #13 inclus(restriction(φ_grand,S_petit), S_petit × T_petit)
         « la RESTRICTION du grand graphe au petit domaine tombe dans S_petit×T_petit ».
-        `restriction_incluse` ne donne que φ_g|Sp ⊂ φ_g ⊂ Sg×Tg (codomaine T_grand, pas
-        T_petit) ; passer à T_petit exige image(φ_g,Sp)=T_petit — NON dérivable du graphe
-        seul.  C'est l'inclusion structurelle déjà PORTÉE en hypothèse honnête par
-        `coincidence_univ_app_point` (cf. sa NOTE D'HONNÊTETÉ).
 
-Ces DEUX conjoints sont PORTÉS dans `residu_univ_app` — un UNIVERSEL CLOS (∀ sur les 6
-témoins, comme `coincidence_univ`) qui, sous les 12 conjoints DÉCHARGEABLES, conclut
-SEULEMENT (#8 et #13).  Il est STRICTEMENT PLUS FAIBLE que `coincidence_univ` : il ne
-porte AUCUNE égalité de valeurs (φ_petit=φ_grand), seulement la BONNE FORME (segment
-+ inclusion de graphe) des objets image/restriction.  C'est un universel CLOS afin de
-SURVIVRE aux éliminations existentielles de l'assemblage (les conjoints à variables-
-témoins libres bloqueraient `existe_elimination`).  `coincidence_univ` est, lui, GONE.
+MAIS ils SONT dérivables des CŒURS + DEUX segments seg(Sp,R,E) (initialité du petit
+domaine) + seg(Tg,Rp,F) (grand codomaine segment) — eux-mêmes PORTÉS par les CŒURS dans
+la fusion (cœur petit ⊢ seg(Sp,R,E) ; cœur grand ⊢ seg(Tg,Rp,F)).  C'est exactement
+`residu_univ_app_renforce` (`ensembles_trichotomie_residuals`) : un UNIVERSEL CLOS
+(∀ sur les 6 témoins) qui, sous (ANT_12 ∧ seg(Sp,R,E) ∧ seg(Tg,Rp,F)), PROUVE (#8 ∧ #13).
+`_coinc_point_app` l'instancie aux 6 témoins et DÉCHARGE son antécédent renforcé depuis
+les CŒURS — `residu_univ_app` n'apparaît donc PLUS comme hypothèse de la fusion.
+`coincidence_univ` ET `residu_univ_app` sont, tous deux, GONE.
 
 ────────────────────────────────────────────────────────────────────────────────
 ⚠️ CONTRAINTE DE NOMMAGE (héritée de coincidence_point_app/coincidence_univ_app).  La
@@ -178,16 +175,19 @@ def residu_univ_app(E_set="E", R="R", F_set="F", Rp="Rp",
 def _coinc_point_app(E_set, R, F_set, Rp,
                      Sp, Tp, phip, Sg, Tg, phig,
                      segSp, segTp, isop, funcP, domP, graphP,    # CŒUR petit
-                     isog, funcG, domG,                          # CŒUR grand (iso/func/dom)
-                     H_incl, H_boR, H_boRp, H_residu, p_in_small, p):
+                     isog, funcG, domG, segTg,                   # CŒUR grand (iso/func/dom/segT)
+                     H_incl, H_boR, H_boRp, p_in_small, p):
     """⊢ φ_petit(p)=φ_grand(p)  [liant-valeur « y », forme couvrante] sous :
-       { CŒUR petit (segSp,segTp,isop,funcP,domP,graphP), CŒUR grand (isog,funcG,domG),
-         inclus(Sp,Sg), bo(R,E), bo(R',F), RÉSIDU_univ, p∈Sp }.
+       { CŒUR petit (segSp,segTp,isop,funcP,domP,graphP), CŒUR grand (isog,funcG,domG,segTg),
+         inclus(Sp,Sg), bo(R,E), bo(R',F), p∈Sp }.   ⚠️ PLUS de `residu_univ_app`.
 
     Analogue de `FA._coinc_point` mais qui appelle `coincidence_point_app` (= consomme
     `coincidence_univ_app`, THÉORÈME CLOS) et DÉCHARGE sa PRÉMISSE_APPLICATIONS (14 conj.)
-    des CŒURS + bons ordres ambiants + comparabilité + RÉSIDU (#8,#13).  `coincidence_univ`
-    n'apparaît NULLE PART : la coïncidence est PROUVÉE."""
+    des CŒURS + bons ordres ambiants + comparabilité.  Les conjoints RÉSIDU (#8,#13) sont
+    DÉRIVÉS de `residu_univ_app_renforce` (CLOS, theorie=22) : on l'instancie aux 6 témoins
+    et on DÉCHARGE son antécédent RENFORCÉ = ANT_12 + seg(Sp,R,E) [= segSp, CŒUR petit] +
+    seg(Tg,Rp,F) [= segTg, CŒUR grand].  `residu_univ_app` n'apparaît NULLE PART : son
+    CONTENU géométrique est PROUVÉ (residu_univ_app_renforce) et déchargé ICI."""
     Rf, Rpf = _R_de(R), _R_de(Rp)
     vSp, vTp, vphip = _t(Sp), _t(Tp), _t(phip)
     vSg, vTg, vphig = _t(Sg), _t(Tg), _t(phig)
@@ -203,13 +203,17 @@ def _coinc_point_app(E_set, R, F_set, Rp,
     # ── #11 : inclus(Sp,E) = 1ᵉʳ conjoint de est_segment(Sp,R,E) (CŒUR petit) ─────
     incl_SpE = conjonction_elim_gauche(segSp)
 
-    # ── #8,#13 : RÉSIDU instancié aux 6 témoins, antécédent = les 12 conjoints ────
-    H_res_inst = H_residu
+    # ── #8,#13 : DÉRIVÉS de residu_univ_app_renforce (CLOS), antécédent RENFORCÉ ──
+    #   residu_univ_app_renforce : (∀6)( (ANT_12 et seg(Sp,R,E) et seg(Tg,Rp,F)) ⇒ cons ).
+    #   On l'instancie aux 6 témoins (MÊME ordre que residu_univ_app : Sp,Tp,φp,Sg,Tg,φg)
+    #   puis on DÉCHARGE son antécédent = les 12 conjoints d'ANT_12 PLUS segSp + segTg.
+    from bourbaki.cardinaux.ensembles_trichotomie_residuals import residu_univ_app_renforce
+    H_res_inst = residu_univ_app_renforce(E_set, R, F_set, Rp)   # CLOS — 0 hypothèse
     for wterm in (vSp, vTp, vphip, vSg, vTg, vphig):
-        H_res_inst = instancie(H_res_inst, wterm)      # ANT_12 ⇒ (seg image et φg|Sp⊂Sp×Tp)
+        H_res_inst = instancie(H_res_inst, wterm)      # (ANT_12 et segSp et segTg) ⇒ (seg image et φg|Sp⊂Sp×Tp)
     ant_proof = _conj_proof([
         iso0, iso1, funcP, funcG, domP, domG, H_incl, segTp,
-        H_boRp, H_boR, incl_SpE, graphP,
+        H_boRp, H_boR, incl_SpE, graphP, segSp, segTg,
     ])
     cons_residu = N.modus_ponens(ant_proof, H_res_inst)   # (seg image) et (φg|Sp⊂Sp×Tp)
     res8 = conjonction_elim_gauche(cons_residu)           # est_segment(image(φg,Sp),R',F)
@@ -250,19 +254,21 @@ def _conj_proof(preuves):
 def _branche_couvrante_app(E_set, R, F_set, Rp,
                            uA, vA, uB, vB,
                            Sp, Tp, phip, Sg, Tg, phig,
-                           H_coeur_A, H_coeur_B, H_incl, H_boR, H_boRp, H_residu):
+                           H_coeur_A, H_coeur_B, H_incl, H_boR, H_boRp):
     """Sur la branche S_petit⊂S_grand : le GRAND iso couvre les deux antécédents.
     Décharge les 9 hyps de `temoin_commun_couvrant` (RÉUTILISÉ, CLOS-cond) depuis les
-    deux CŒURS + comparabilité + bons ordres + RÉSIDU ; la coïncidence φp(uA)=φg(uA)
-    est PROUVÉE par `_coinc_point_app` (consomme coincidence_univ_app, CLOS)."""
+    deux CŒURS + comparabilité + bons ordres ; la coïncidence φp(uA)=φg(uA) est PROUVÉE
+    par `_coinc_point_app` (consomme coincidence_univ_app, CLOS), dont les résidus #8/#13
+    sont DÉRIVÉS de residu_univ_app_renforce (CLOS) — PLUS de `residu_univ_app`."""
     segSp, segTp, isop, uA_in, vA_eq, funcP, domP, graphP = FA._decompose_coeur(H_coeur_A)
     segSg, segTg, isog, uB_in, vB_eq, funcG, domG, graphG = FA._decompose_coeur(H_coeur_B)
 
     # coïncidence PROUVÉE au point uA (uA∈S_petit) : φ_petit(uA)=φ_grand(uA)  [liant y]
+    #   segTg (= seg(Tg,Rp,F), CŒUR grand) décharge le seg(Tg) de l'antécédent renforcé.
     coinc_uA = _coinc_point_app(E_set, R, F_set, Rp, Sp, Tp, phip, Sg, Tg, phig,
                                 segSp, segTp, isop, funcP, domP, graphP,
-                                isog, funcG, domG,
-                                H_incl, H_boR, H_boRp, H_residu, uA_in, uA)
+                                isog, funcG, domG, segTg,
+                                H_incl, H_boR, H_boRp, uA_in, uA)
 
     couvre = TCV.temoin_commun_couvrant(E_set, R, F_set, Rp, uA, vA, uB, vB,
                                         Sp, Sg, Tg, phip, phig)
@@ -291,13 +297,14 @@ def _branche_couvrante_app(E_set, R, F_set, Rp,
 # ════════════════════════════════════════════════════════════════════════════
 def _core_with_witnesses_app(E_set, R, F_set, Rp, u, v, up, vp,
                              Sa, Ta, pa, Sb, Tb, pb,
-                             H_coeurA, H_coeurB, H_boR, H_boRp, H_residu):
-    """{ CŒUR_A(u,v ; Sa,Ta,pa), CŒUR_B(u',v' ; Sb,Tb,pb), bo(R,E), bo(R',F),
-         RÉSIDU_univ } ⊢ temoin_commun_h(u,v,u',v').
+                             H_coeurA, H_coeurB, H_boR, H_boRp):
+    """{ CŒUR_A(u,v ; Sa,Ta,pa), CŒUR_B(u',v' ; Sb,Tb,pb), bo(R,E), bo(R',F) }
+         ⊢ temoin_commun_h(u,v,u',v').   ⚠️ PLUS de `residu_univ_app`.
 
     Comparabilité (brique 1) ⇒ Sa⊂Sb ∨ Sb⊂Sa ; sur chaque branche la construction
     couvrante (app) avec coïncidence PROUVÉE couvre les deux antécédents ; branche
-    Sb⊂Sa suivie du SWAP (FA._swap_temoin_commun, RÉUTILISÉ)."""
+    Sb⊂Sa suivie du SWAP (FA._swap_temoin_commun, RÉUTILISÉ).  Les résidus #8/#13
+    sont DÉRIVÉS de residu_univ_app_renforce (CLOS) à l'intérieur de _coinc_point_app."""
     Rf = _R_de(R)
     vE = _t(E_set)
     segSa, *_ = FA._decompose_coeur(H_coeurA)
@@ -316,14 +323,14 @@ def _core_with_witnesses_app(E_set, R, F_set, Rp, u, v, up, vp,
     HA = N.assume(A_incl)
     brA = _branche_couvrante_app(E_set, R, F_set, Rp, u, v, up, vp,
                                  Sa, Ta, pa, Sb, Tb, pb,
-                                 H_coeurA, H_coeurB, HA, H_boR, H_boRp, H_residu)
+                                 H_coeurA, H_coeurB, HA, H_boR, H_boRp)
     impA = N.loi_deduction(A_incl, brA)
 
     # — branche Sb⊂Sa : petit=B, grand=A ⇒ temoin_commun_h(u',v',u,v), puis SWAP —
     HB = N.assume(B_incl)
     brB_swapped = _branche_couvrante_app(E_set, R, F_set, Rp, up, vp, u, v,
                                          Sb, Tb, pb, Sa, Ta, pa,
-                                         H_coeurB, H_coeurA, HB, H_boR, H_boRp, H_residu)
+                                         H_coeurB, H_coeurA, HB, H_boR, H_boRp)
     swap = FA._swap_temoin_commun(E_set, R, F_set, Rp, u, v, up, vp)
     brB = N.modus_ponens(brB_swapped, swap)
     impB = N.loi_deduction(B_incl, brB)
@@ -338,34 +345,38 @@ def fusion_depuis_coincidence_app(E_set="E", R="R", F_set="F", Rp="Rp",
                                   u="ua", v="va", up="ub", vp="vb",
                                   S="S", T="T", phi="phi",
                                   Sb="S2", Tb="T2", pb="phi2"):
-    """⊢ { bo(R,E), bo(R',F), RÉSIDU_univ } ⊢ fusion_hyp(u,v,u',v').
+    """⊢ { bo(R,E), bo(R',F) } ⊢ fusion_hyp(u,v,u',v').   ⚠️ PLUS de `residu_univ_app`.
 
     🎯🎯 RE-CÂBLAGE : la FUSION (Lemme 1 §III.2) repose désormais sur la COÏNCIDENCE
     **PROUVÉE** (`coincidence_point_app` → `coincidence_univ_app`, CLOS), **PAS** sur
     `coincidence_univ` (POSTULÉE — RETIRÉE).  Conclusion == `T2.fusion_hyp(...)`
     LITTÉRALEMENT (même cible que `FA.fusion_depuis_coincidence`).
 
-    Hypothèses SURVIVANTES (exactement 3 ; cf. `fusion_depuis_coincidence_app_hypotheses`) :
+    🎯🎯 RÉSIDU ÉLIMINÉ : les conjoints géométriques #8 (seg image) et #13 (φg|Sp⊂Sp×Tp)
+    de la PRÉMISSE_APPLICATIONS ne sont PLUS portés par l'hypothèse `residu_univ_app`.
+    Ils sont DÉRIVÉS, à l'intérieur de `_coinc_point_app`, de `residu_univ_app_renforce`
+    (CLOS, theorie=22) — un universel PROUVÉ dont l'antécédent RENFORCÉ ajoute à ANT_12
+    les deux segments seg(Sp,R,E) et seg(Tg,Rp,F), TOUS DEUX portés par les CŒURS
+    (cœur petit ⊢ seg(Sp,R,E) ; cœur grand ⊢ seg(Tg,Rp,F)).  Plus rien à reporter.
+
+    Hypothèses SURVIVANTES (exactement 2 ; cf. `fusion_depuis_coincidence_app_hypotheses`) :
       • est_bien_ordonne(R,E)      — arrière-plan structurel (côté E) ;
       • est_bien_ordonne(R',F)     — arrière-plan structurel (côté F ; consommé par la
-                                     coïncidence PROUVÉE — bo AMBIANT F-side) ;
-      • RÉSIDU_univ                — universel CLOS portant SEULEMENT #8 (seg image) et
-                                     #13 (φg|Sp⊂Sp×Tp), strictement plus faible que
-                                     coincidence_univ (aucune égalité de valeurs).
+                                     coïncidence PROUVÉE — bo AMBIANT F-side).
+    = EXACTEMENT la prémisse propre du Théorème 3 §III.2 (deux bons ordres).
     Les deux CŒURS (_coeur1) sont des témoins INTERNES, assumés aux témoins-VARIABLES puis
     ÉLIMINÉS en ∃ (comme l'original) : ils NE survivent PAS dans le séquent.
-    ⚠️ `coincidence_univ` est ABSENTE.  theorie=22.  NON vacueux.
+    ⚠️ `coincidence_univ` ABSENTE.  ⚠️ `residu_univ_app` ABSENTE.  theorie=22.  NON vacueux.
 
     PREUVE.  `_core_with_witnesses_app` (route coincidence_point_app) PROUVE
-    temoin_commun_h(u,v,u',v') sous {CŒURS, bo, bo, RÉSIDU} ; on élimine les 3 ∃ de
-    couple₂ (RÉSIDU CLOS + bos CLOS ⇒ pas de variable-témoin libre), compose avec
-    α-renommage (FA._rename_temoin1) et h_membre_donne_temoin (CLOS), puis élimine les
-    3 ∃ de couple₁ ⇒ fusion_hyp.  Mêmes points-variables ua,va,ub,vb que l'original."""
+    temoin_commun_h(u,v,u',v') sous {CŒURS, bo, bo} ; on élimine les 3 ∃ de
+    couple₂ (bos CLOS + résidu DÉRIVÉ d'un universel CLOS ⇒ pas de variable-témoin libre),
+    compose avec α-renommage (FA._rename_temoin1) et h_membre_donne_temoin (CLOS), puis
+    élimine les 3 ∃ de couple₁ ⇒ fusion_hyp.  Mêmes points-variables ua,va,ub,vb."""
     vu, vv, vup, vvp = _t(u), _t(v), _t(up), _t(vp)
 
     H_boR = N.assume(FA._bo_form(R, E_set))                       # est_bien_ordonne(R,E)
     H_boRp = N.assume(E.est_bien_ordonne(_R_de(Rp), _t(F_set)))   # est_bien_ordonne(R',F)
-    H_residu = N.assume(residu_univ_app(E_set, R, F_set, Rp))     # RÉSIDU universel CLOS
 
     coeurA = T2._coeur1(E_set, R, F_set, Rp, u, v, var(S), var(T), var(phi))
     coeurB = T2._coeur1(E_set, R, F_set, Rp, up, vp, var(Sb), var(Tb), var(pb))
@@ -374,7 +385,7 @@ def fusion_depuis_coincidence_app(E_set="E", R="R", F_set="F", Rp="Rp",
 
     tch = _core_with_witnesses_app(E_set, R, F_set, Rp, u, v, up, vp,
                                    var(S), var(T), var(phi), var(Sb), var(Tb), var(pb),
-                                   H_coeurA, H_coeurB, H_boR, H_boRp, H_residu)
+                                   H_coeurA, H_coeurB, H_boR, H_boRp)
 
     # — éliminer les 3 ∃ de couple₂ : coeurB ⇒ tch  ⟹  temoin₁[Sb,Tb,pb](u',v') ⇒ tch —
     impB = N.loi_deduction(coeurB, tch)
@@ -396,7 +407,7 @@ def fusion_depuis_coincidence_app(E_set="E", R="R", F_set="F", Rp="Rp",
     impA = existe_elimination(impA, phi)
     impA = existe_elimination(impA, T)
     impA = existe_elimination(impA, S)
-    return impA                                      # = fusion_hyp  [hyps : bo, bo, CŒURS, RÉSIDU]
+    return impA                                      # = fusion_hyp  [hyps : bo, bo  (CŒURS internes)]
 
 
 def fusion_depuis_coincidence_app_cible(E_set="E", R="R", F_set="F", Rp="Rp",
@@ -409,17 +420,18 @@ def fusion_depuis_coincidence_app_cible(E_set="E", R="R", F_set="F", Rp="Rp",
 
 
 def fusion_depuis_coincidence_app_hypotheses(E_set="E", R="R", F_set="F", Rp="Rp"):
-    """Les TROIS hypothèses SURVIVANTES (documentation / test miroir) :
-       [ est_bien_ordonne(R,E),  est_bien_ordonne(R',F),  residu_univ_app ].
+    """Les DEUX hypothèses SURVIVANTES (documentation / test miroir) :
+       [ est_bien_ordonne(R,E),  est_bien_ordonne(R',F) ].
+       = EXACTEMENT la prémisse propre du Théorème 3 §III.2 (deux bons ordres).
 
-    ⚠️ `coincidence_univ` ABSENTE.  Les deux CŒURS (_coeur1) sont des témoins INTERNES
-    éliminés existentiellement (comme dans `FA.fusion_depuis_coincidence`, qui survit
-    avec {bo(R,E), coincidence_univ}) : ils NE figurent PAS dans le séquent final.
-    Le séquent final ne porte QUE ces trois formules-là."""
+    ⚠️ `coincidence_univ` ABSENTE.  ⚠️ `residu_univ_app` ABSENTE — son contenu géométrique
+    (#8 seg image, #13 inclusion graphe) est DÉRIVÉ de `residu_univ_app_renforce` (CLOS),
+    dont les deux segments d'antécédent (seg(Sp,R,E), seg(Tg,Rp,F)) sont déchargés des
+    CŒURS.  Les deux CŒURS (_coeur1) sont des témoins INTERNES éliminés existentiellement :
+    ils NE figurent PAS dans le séquent final.  Le séquent ne porte QUE ces deux bons ordres."""
     return [
         FA._bo_form(R, E_set),
         E.est_bien_ordonne(_R_de(Rp), _t(F_set)),
-        residu_univ_app(E_set, R, F_set, Rp),
     ]
 
 

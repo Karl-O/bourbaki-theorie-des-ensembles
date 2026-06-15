@@ -13,12 +13,12 @@ couples (B) de l'iso maximal h.  Ce module les PROUVE comme THÉORÈMES, en asse
 DEUX briques DÉJÀ CLOSES côté Lemme 1 §III.2 (coïncidence des isos de segments) :
 
   • `fusion_depuis_coincidence_app` (ensembles_fusion_depuis_coincidence_app) :
-        { bo(R,E), bo(R',F), residu_univ_app } ⊢ fusion_hyp(u,v,u',v')
+        { bo(R,E), bo(R',F) } ⊢ fusion_hyp(u,v,u',v')
     — la FUSION (deux couples de h sont couverts par UN iso commun de segments)
       DÉRIVÉE de la COÏNCIDENCE PROUVÉE (coincidence_univ_app, THÉORÈME CLOS).  La
-      coïncidence du Lemme 1 n'est PLUS postulée ; ne subsiste que le RÉSIDU
-      géométrique honnête (résidu_univ_app : segment-de-l'image + inclusion-de-graphe,
-      strictement plus FAIBLE que la coïncidence — AUCUNE égalité de valeurs).
+      coïncidence du Lemme 1 n'est PLUS postulée ; et le RÉSIDU géométrique
+      (residu_univ_app : segment-de-l'image + inclusion-de-graphe) est désormais
+      DÉRIVÉ de `residu_univ_app_renforce` (CLOS) — il ne SUBSISTE PLUS.
   • `temoin_commun_depuis_deux_h_couples` / `temoin_inv_depuis_deux_h_couples`
         (ensembles_temoin_deux_couples) : de {(u,v)∈h, (u',v')∈h, fusion_hyp}
       produisent le TÉMOIN COMMUN  temoin_commun_h / temoin_commun_inv_h.
@@ -30,17 +30,18 @@ DEUX briques DÉJÀ CLOSES côté Lemme 1 §III.2 (coïncidence des isos de segm
 CE MODULE LIVRE (PROUVÉ, theorie=22, rien postulé) :
 
   ✅ compatibilite_inverse_h_prouve(...) :
-        { bo(R,E), bo(R',F), residu_univ_app } ⊢ compatibilite_inverse_h.   (A)
+        { bo(R,E), bo(R',F) } ⊢ compatibilite_inverse_h.   (A)
   ✅ compatibilite_ordre_h_prouve(...) :
-        { bo(R,E), bo(R',F), residu_univ_app } ⊢ compatibilite_ordre_h.     (B)
+        { bo(R,E), bo(R',F) } ⊢ compatibilite_ordre_h.     (B)
      i.e. CONCLUSION == la FORMULE-builder `compatibilite_inverse_h` /
      `compatibilite_ordre_h` de `ensembles_trichotomie_h_iso`, LITTÉRALEMENT (noms de
      liants par DÉFAUT u,v,u'[,v']).
 
-Les 3 hypothèses SURVIVANTES sont des arrière-plans STRUCTURELS HONNÊTES (bons ordres
-ambiants + résidu géométrique) — JAMAIS la coïncidence (PROUVÉE) ni les cohérences
-elles-mêmes (qui seraient des tautologies).  C'est l'INVERSE du statut « hypothèse
-explicite » de ensembles_trichotomie_h_iso : ces formules sont désormais DÉRIVÉES.
+Les 2 hypothèses SURVIVANTES sont des arrière-plans STRUCTURELS HONNÊTES (les deux bons
+ordres ambiants) — JAMAIS la coïncidence (PROUVÉE), ni le résidu géométrique (DÉRIVÉ de
+residu_univ_app_renforce, CLOS), ni les cohérences elles-mêmes (qui seraient des
+tautologies).  C'est l'INVERSE du statut « hypothèse explicite » de
+ensembles_trichotomie_h_iso : ces formules sont désormais DÉRIVÉES.
 
 ────────────────────────────────────────────────────────────────────────────────
 ⚠️ CONTRAINTE DE NOMMAGE (héritée de coincidence_univ_app / fusion_depuis_coincidence
@@ -53,7 +54,7 @@ que (·,·)∈h avec h OPAQUE — aucun liant interne u/v/u'/v' à éviter).  Le
 restent CANONIQUES : E_set="E", F_set="F", R="R", Rp="Rp".
 
 INVARIANT : theorie_ensembles() = 22.  Rien postulé.  NON vacueux : (A),(B) ne sont
-AUCUNE de leurs hypothèses (≠ bo, ≠ résidu).
+AUCUNE de leurs hypothèses (≠ bo).
 
 NE MODIFIE AUCUN fichier existant.
 """
@@ -119,11 +120,11 @@ def _renommer_quantificateurs(thm, noms_internes, noms_cibles):
 
 
 # ════════════════════════════════════════════════════════════════════════════
-#  TÉMOINS COMMUNS PROUVÉS sous { bo(R,E), bo(R',F), residu_univ_app }.
+#  TÉMOINS COMMUNS PROUVÉS sous { bo(R,E), bo(R',F) }.
 #  Assemblent fusion_depuis_coincidence_app (CLOS-cond) + temoin_*_depuis_deux_h.
 # ════════════════════════════════════════════════════════════════════════════
 def _fusion_hyp_prouve():
-    """⊢ { bo(R,E), bo(R',F), residu_univ_app } ⊢ fusion_hyp(ua,va,ub,vb).
+    """⊢ { bo(R,E), bo(R',F) } ⊢ fusion_hyp(ua,va,ub,vb).
 
     DÉLÈGUE à fusion_depuis_coincidence_app (noms-témoins ua,va,ub,vb par défaut) :
     la FUSION dérivée de la coïncidence PROUVÉE (coincidence_univ_app CLOS)."""
@@ -131,7 +132,7 @@ def _fusion_hyp_prouve():
 
 
 def _temoin_commun_prouve():
-    """⊢ { (ua,va)∈h, (ub,vb)∈h, bo(R,E), bo(R',F), residu_univ_app }
+    """⊢ { (ua,va)∈h, (ub,vb)∈h, bo(R,E), bo(R',F) }
           ⊢ temoin_commun_h(ua,va,ub,vb).
 
     temoin_commun_depuis_deux_h_couples assume {couples, fusion_hyp} ; on DÉCHARGE
@@ -147,7 +148,7 @@ def _temoin_commun_prouve():
 
 
 def _temoin_inv_prouve():
-    """⊢ { (ua,va)∈h, (ub,va)∈h, bo(R,E), bo(R',F), residu_univ_app }
+    """⊢ { (ua,va)∈h, (ub,va)∈h, bo(R,E), bo(R',F) }
           ⊢ temoin_commun_inv_h(ua,va,ub).
 
     Côté INVERSE (deux antécédents de la MÊME valeur va).  fusion_inv_hyp(ua,va,ub)
@@ -252,7 +253,7 @@ def _transport_ordre():
 #  🎯🎯 TARGET 1 — compatibilite_inverse_h PROUVÉE.
 # ════════════════════════════════════════════════════════════════════════════
 def compatibilite_inverse_h_prouve(E_set="E", R="R", F_set="F", Rp="Rp"):
-    """⊢ { bo(R,E), bo(R',F), residu_univ_app } ⊢ compatibilite_inverse_h.
+    """⊢ { bo(R,E), bo(R',F) } ⊢ compatibilite_inverse_h.
 
     🎯🎯 (A) — COHÉRENCE INVERSE de h (= son INJECTIVITÉ par couples) PROUVÉE comme
     THÉORÈME (et NON prise en hypothèse comme dans ensembles_trichotomie_h_iso).
@@ -304,7 +305,7 @@ def compatibilite_inverse_h_prouve_cible(E_set="E", R="R", F_set="F", Rp="Rp"):
 #  🎯🎯 TARGET 2 — compatibilite_ordre_h PROUVÉE.
 # ════════════════════════════════════════════════════════════════════════════
 def compatibilite_ordre_h_prouve(E_set="E", R="R", F_set="F", Rp="Rp"):
-    """⊢ { bo(R,E), bo(R',F), residu_univ_app } ⊢ compatibilite_ordre_h.
+    """⊢ { bo(R,E), bo(R',F) } ⊢ compatibilite_ordre_h.
 
     🎯🎯 (B) — COHÉRENCE D'ORDRE de h (= sa COMPATIBILITÉ D'ORDRE par couples) PROUVÉE
     comme THÉORÈME (et NON prise en hypothèse comme dans ensembles_trichotomie_h_iso).
@@ -350,11 +351,11 @@ def compatibilite_ordre_h_prouve_cible(E_set="E", R="R", F_set="F", Rp="Rp"):
 
 
 def h_bien_defini_hypotheses(E_set="E", R="R", F_set="F", Rp="Rp"):
-    """Les 3 HYPOTHÈSES SURVIVANTES (documentation / test miroir) communes aux deux
-    cohérences PROUVÉES :  [ bo(R,E), bo(R',F), residu_univ_app ].
+    """Les 2 HYPOTHÈSES SURVIVANTES (documentation / test miroir) communes aux deux
+    cohérences PROUVÉES :  [ bo(R,E), bo(R',F) ].  ⚠️ `residu_univ_app` ÉLIMINÉ.
 
     Identiques aux hypothèses de fusion_depuis_coincidence_app (la FUSION dérivée de
-    la coïncidence CLOSE)."""
+    la coïncidence CLOSE, résidu DÉRIVÉ de residu_univ_app_renforce)."""
     return FDA.fusion_depuis_coincidence_app_hypotheses(E_set, R, F_set, Rp)
 
 
