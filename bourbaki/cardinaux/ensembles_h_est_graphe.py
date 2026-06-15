@@ -287,7 +287,6 @@ def h_est_graphe(E_set="E", R="R", F_set="F", Rp="Rp", z="z", a="a", b="b"):
     z_to_couple_ab = syllogisme(equivalence_avant(eq_set), mono_ab)
 
     # ── α-renommer (∃a)(∃b)(z=(a,b)) → est_un_couple(z) = (∃x)(∃y)(z=(x,y)) ───────
-    cible_couple = E.est_un_couple(vz)                        # (∃x)(∃y)(z=(x,y))  binders x,y
     src_couple = existe(a, existe(b, egal(vz, E.couple(va, vb))))
     eqv_rename = _alpha_existe2(src_couple, a, b, "x", "y", vz)
     z_to_couple = syllogisme(z_to_couple_ab, equivalence_avant(eqv_rename))   # z∈h ⇒ z couple
