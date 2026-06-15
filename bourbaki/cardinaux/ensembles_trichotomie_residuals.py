@@ -51,6 +51,8 @@ from bourbaki.ensembles.base.ensembles_correspondances import (
 )
 from bourbaki.ensembles.fonctions.ensembles_valeur_codomaine import couple_valeur_dans_graphe
 from bourbaki.ordre.ensembles_valeur_bridge import valeur_y_egal_j
+from bourbaki.cardinaux.ensembles_coincidence_univ_app import _premisse_liste
+from bourbaki.cardinaux.ensembles_fusion_depuis_coincidence_app import _DISCHARGEABLE
 
 
 def _t(t):
@@ -410,8 +412,154 @@ def restriction_inclus_produit_Tp_cible(phig="phig", Sp="Sp", Tp="Tp"):
     return inclus(E.restriction(vphig, vSp), E.produit(vSp, vTp))
 
 
+# ════════════════════════════════════════════════════════════════════════════
+#  🎯 RÉSIDU UNIVERSEL RENFORCÉ — le CONTENU géométrique du résidu, PROUVÉ CLOS.
+#
+#  `residu_univ_app` (déposé) a pour antécédent ANT_12 ; on a ÉTABLI (CORE + #13)
+#  que son conséquent (#8 ∧ #13) est DÉRIVABLE dès qu'on AJOUTE à ANT_12 les DEUX
+#  segments  seg(Sp,R,E)  et  seg(Tg,Rp,F)  — qui sont EXACTEMENT les conjoints
+#  manquants.  `residu_univ_app_renforce` prouve le UNIVERSEL CLOS correspondant.
+# ════════════════════════════════════════════════════════════════════════════
+def _residu_consequent_prouve(E_set, R, F_set, Rp, Sp, Tp, phip, Sg, Tg, phig):
+    """⊢ { ANT_12(witnesses)  ∪  { seg(Sp,R,E), seg(Tg,Rp,F) } }
+          ⊢ ( est_segment(image(φg,Sp),R',F)  et  inclus(φg|Sp, Sp×Tp) ).
+
+    Le CONSÉQUENT (#8 ∧ #13) du résidu, PROUVÉ depuis ANT_12 RENFORCÉ des deux
+    segments manquants seg(Sp,R,E) (initialité du petit domaine) et seg(Tg,Rp,F)
+    (le grand codomaine est un segment).  #8 ← image_segment_est_segment (CORE) ;
+    #13 ← restriction_inclus_produit_Tp.  Les hyps de #13 (codomaine_egal_image)
+    sont déchargées : son seg(image)=#8 par le CORE, son iso_p[x,w] par α-renommage
+    de l'iso_p[x,y] d'ANT_12.  Toutes les autres hyps SONT dans ANT_12+2segs."""
+    from bourbaki.cardinaux.ensembles_codomaine_reconciliation import _rename_iso_order_binders
+    Rf, Rpf = _R_de(R), _R_de(Rp)
+    vphip, vphig = _t(phip), _t(phig)
+    vSp, vTp, vSg, vTg = _t(Sp), _t(Tp), _t(Sg), _t(Tg)
+
+    # ── #8 via le CORE (φ=φg, S=Sg, T=Tg, S0=Sp ; iso binders a,b = ceux d'ANT_12 #1) ──
+    res8 = image_segment_est_segment(phi=phig, S=Sg, T=Tg, S0=Sp,
+                                     E_set=E_set, F_set=F_set, R=R, Rp=Rp, px="a", pw="b")
+    f8 = E.est_segment(E.image(vphig, vSp), Rpf, _t(F_set))   # = prem[8]
+
+    # ── #13 via restriction_inclus_produit_Tp ; ses hyps codomaine_egal_image ─────
+    res13 = restriction_inclus_produit_Tp(phip=phip, phig=phig, Sp=Sp, Tp=Tp,
+                                          Sg=Sg, F_set=F_set, R=R, Rp=Rp)
+    #   codomaine_egal_image utilise un codomaine GÉNÉRIQUE T2 (var libre) pour le grand
+    #   iso : iso(φg,Sg,T2)[a,b].  T2 n'apparaît QUE dans cette hyp ; on la passe en
+    #   antécédent (loi_deduction), GÉNÉRALISE sur T2 (libre dans aucune autre hyp), puis
+    #   INSTANCIE à Tg → iso(φg,Sg,Tg)[a,b] = ANT_12 #1, qu'on décharge par H_iso_g.
+    iso_g_T2 = V.est_isomorphisme_ordre(vphig, vSg, var("T2"), Rf, Rpf, "a", "b")
+    iso_g_Tg = V.est_isomorphisme_ordre(vphig, vSg, vTg, Rf, Rpf, "a", "b")
+    if iso_g_T2 in set(res13.hypotheses):
+        imp_T2 = N.loi_deduction(iso_g_T2, res13)            # iso(φg,Sg,T2) ⇒ inclus(...)  [T2 libre conclusion]
+        imp_Tg = instancie(N.generalisation("T2", imp_T2), vTg)   # iso(φg,Sg,Tg) ⇒ inclus(...)
+        res13 = N.modus_ponens(N.assume(iso_g_Tg), imp_Tg)   # inclus(...)  [hyp: iso(φg,Sg,Tg)[a,b] = #1]
+    #   décharger l'hyp seg(image(φg,Sp)) de res13 par #8 (res8)
+    if f8 in set(res13.hypotheses):
+        res13 = N.modus_ponens(res8, N.loi_deduction(f8, res13))
+    #   décharger l'hyp iso_p[x,w] de res13 par α-renommage de iso_p[x,y] (présent dans ANT_12)
+    iso_p_xy = V.est_isomorphisme_ordre(vphip, vSp, vTp, Rf, Rpf, "x", "y")
+    iso_p_xw = V.est_isomorphisme_ordre(vphip, vSp, vTp, Rf, Rpf, "x", "w")
+    if iso_p_xw in set(res13.hypotheses):
+        ren = _rename_iso_order_binders(N.assume(iso_p_xy), "x", "w")   # iso_p[x,y] ⊢ iso_p[x,w]
+        res13 = N.modus_ponens(ren, N.loi_deduction(iso_p_xw, res13))
+    #   res13 dépend maintenant de : reste(codomaine_egal_image) + iso_p[x,y] + (hyps de res8)
+
+    return conjonction_intro(res8, res13)       # (#8 ∧ #13)
+
+
+def residu_univ_app_renforce(E_set="E", R="R", F_set="F", Rp="Rp",
+                             a="rSp", b="rTp", c="rphip", d="rSg", e="rTg", g="rphig"):
+    """⊢ (∀Sp)(∀Tp)(∀φp)(∀Sg)(∀Tg)(∀φg)(
+            ( ANT_12  et  seg(Sp,R,E)  et  seg(Tg,Rp,F) )
+              ⇒  ( est_segment(image(φg,Sp),R',F)  et  φg|Sp ⊂ Sp×Tp ) ).
+
+    🎯🎯 LE CONTENU GÉOMÉTRIQUE DU RÉSIDU, PROUVÉ EN UNIVERSEL CLOS.  Identique à
+    `residu_univ_app` MAIS dont l'antécédent est RENFORCÉ des DEUX segments manquants
+    seg(Sp,R,E) (initialité du petit domaine) + seg(Tg,Rp,F) (grand codomaine segment).
+    Sous cet antécédent, le conséquent (#8 ∧ #13) est ENTIÈREMENT DÉRIVÉ (CORE + #13).
+
+    🔑 C'est la PREUVE que la matière géométrique du résidu est CLOSE : le seul écart
+    avec `residu_univ_app` (déposé) est l'AJOUT, dans l'antécédent, des deux segments
+    seg(Sp,R,E) et seg(Tg,Rp,F).  Dans la fusion (Lemme 1) ces deux segments SONT
+    portés par les CŒURS (cœur PETIT porte seg(Sp,R,E) ; cœur GRAND porte seg(Tg,Rp,F)) —
+    le résidu déposé aurait pu les inclure dans son antécédent.  CLOS (0 hyp).
+
+    NON vacueux : le conséquent (segment image + inclusion graphe) ne figure pas dans
+    l'antécédent renforcé.  theorie=22.  Binders FRAIS (witnesses du résidu déposé)."""
+    Rf, Rpf = _R_de(R), _R_de(Rp)
+    vE, vF = _t(E_set), _t(F_set)
+    # ANT_12 conjoints (mêmes indices/forme que residu_univ_app)
+    prem = _premisse_liste(c, g, a, b, d, e, F_set, R, Rp, E_set)
+    ant12 = [prem[i] for i in _DISCHARGEABLE]
+    seg_Sp = E.est_segment(_t(a), Rf, vE)               # seg(Sp,R,E)  [MANQUANT #1]
+    seg_Tg = E.est_segment(_t(e), Rpf, vF)              # seg(Tg,Rp,F) [MANQUANT #2]
+    ant_full = ant12 + [seg_Sp, seg_Tg]
+    ant = _conj(ant_full)
+    cons = et(prem[8], prem[13])
+
+    # ── prouver le conséquent depuis les hyps explicites, puis décharger via ANT ──
+    conseq = _residu_consequent_prouve(E_set, R, F_set, Rp, a, b, c, d, e, g)
+    assert conseq.conclusion == cons, "conséquent ≠ (#8 et #13)"
+    # toutes les hyps de conseq DOIVENT être des conjoints de ant_full
+    Hant = N.assume(ant)
+    extracted = {f: _elim_conj(Hant, i, len(ant_full)) for i, f in enumerate(ant_full)}
+    out = conseq
+    for hyp_f in list(conseq.hypotheses):
+        assert hyp_f in extracted, "hyp du conséquent hors antécédent renforcé : " + repr(hyp_f)[:80]
+        out = N.modus_ponens(extracted[hyp_f], N.loi_deduction(hyp_f, out))
+    imp = N.loi_deduction(ant, out)                     # ANT_renforce ⇒ (#8 et #13)
+    for w in (g, e, d, c, b, a):                        # ∀ sur les 6 témoins
+        imp = N.generalisation(w, imp)
+    return imp
+
+
+def residu_univ_app_renforce_cible(E_set="E", R="R", F_set="F", Rp="Rp",
+                                   a="rSp", b="rTp", c="rphip", d="rSg", e="rTg", g="rphig"):
+    """ÉNONCÉ-cible (test miroir) de residu_univ_app_renforce :
+        (∀6)( (ANT_12 et seg(Sp,R,E) et seg(Tg,Rp,F)) ⇒ (prem[8] et prem[13]) )."""
+    Rf, Rpf = _R_de(R), _R_de(Rp)
+    prem = _premisse_liste(c, g, a, b, d, e, F_set, R, Rp, E_set)
+    ant12 = [prem[i] for i in _DISCHARGEABLE]
+    seg_Sp = E.est_segment(_t(a), Rf, _t(E_set))
+    seg_Tg = E.est_segment(_t(e), Rpf, _t(F_set))
+    body = impl(_conj(ant12 + [seg_Sp, seg_Tg]), et(prem[8], prem[13]))
+    for w in (g, e, d, c, b, a):
+        body = pourtout(w, body)
+    return body
+
+
+def residu_univ_app_renforce_antecedent(E_set="E", R="R", F_set="F", Rp="Rp",
+                                        a="rSp", b="rTp", c="rphip", d="rSg",
+                                        e="rTg", g="rphig"):
+    """Les DEUX conjoints AJOUTÉS à ANT_12 dans l'antécédent renforcé (documentation) :
+       [ seg(Sp,R,E),  seg(Tg,Rp,F) ]  (= les conjoints manquant de `residu_univ_app`)."""
+    Rf, Rpf = _R_de(R), _R_de(Rp)
+    return [E.est_segment(_t(a), Rf, _t(E_set)),
+            E.est_segment(_t(e), Rpf, _t(F_set))]
+
+
+def _conj(formules):
+    """Conjonction left-nested et(et(...et(p0,p1),p2)...,pn)."""
+    acc = formules[0]
+    for f in formules[1:]:
+        acc = et(acc, f)
+    return acc
+
+
+def _elim_conj(HH, i, n):
+    """De HH ⊢ conjonction left-nested de n formules, extrait la i-ème (0-indexée)."""
+    t = HH
+    for _ in range(n - 1 - i):
+        t = conjonction_elim_gauche(t)
+    if i > 0:
+        t = conjonction_elim_droite(t)
+    return t
+
+
 __all__ = [
     "image_segment_est_segment", "image_segment_est_segment_cible",
     "restriction_inclus_produit_image", "restriction_inclus_produit_image_cible",
     "restriction_inclus_produit_Tp", "restriction_inclus_produit_Tp_cible",
+    "residu_univ_app_renforce", "residu_univ_app_renforce_cible",
+    "residu_univ_app_renforce_antecedent",
 ]
