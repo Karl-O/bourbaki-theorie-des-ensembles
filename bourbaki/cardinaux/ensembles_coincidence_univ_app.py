@@ -11,8 +11,8 @@ isos déjà renommés en x,x2, domaines de restrictions, etc.).  Ce module REGRO
   • est_isomorphisme_ordre(φ2, S2, T2, R, R')[a,b],  est_fonctionnel(φ2),  dom φ2 = S2
   • inclus(S1, S2)
   • est_segment(T1, R', F),   est_segment(image(φ2,S1), R', F)
-  • est_bien_ordonne(R',F), est_bien_ordonne(R',T1), est_bien_ordonne(R',image(φ2,S1))
-  • est_bien_ordonne(R, S1)
+  • est_bien_ordonne(R',F)            ← BON ORDRE AMBIANT F-side (seul)
+  • est_bien_ordonne(R, S2)           ← BON ORDRE AMBIANT R-side (S2 ⊇ S1 ; inclus(S1,S2) ci-dessus)
   • [STRUCTURELLES de graphe — honnêtes, voir NOTE] :
       inclus(φ1, produit(S1,T1)),   inclus(restriction(φ2,S1), produit(S1,T1))
 
@@ -47,6 +47,16 @@ restriction φ2|S1 ⊂ S1×T1 (le codomaine effectif de la restriction est T1=im
 par codomaine_egal_image — porter S1×T1 directement évite de reconstruire ce raccord
 ici).  Les DEUX inclusions RÉCIPROQUES (recip φ1, recip φ2|S1) sont, elles, DÉRIVÉES
 de ces deux forward-inclusions (pas portées).
+
+────────────────────────────────────────────────────────────────────────────────
+RE-BASE BON ORDRE AMBIANT (branche coincidence-ambient-bo).  La prémisse ne consomme
+QUE des bons ordres AMBIANTS : bo(R,S2) (côté E, via coincidence_univ_close_isos avec
+E:=S2 et inclus(S1,S2) ; le cœur auto_iso_est_identite_sous_domaine route par
+bo(R,S2)+inclus(S1,S2)) et bo(R',F) (côté F, via lemme_4_sous_domaine ; inclus(T1,F),
+inclus(image(φ2,S1),F) dérivées de est_segment).  Les TROIS bons ordres SUR DES SEGMENTS
+— bo(R,S1), bo(R',T1), bo(R',image(φ2,S1)) — ont DISPARU.  C'est crucial pour la fusion :
+ces formules LITTÉRALES sont FAUSSES sur un segment PROPRE (R{x,x}⇔x∈S échoue pour
+x hors S) et NE pouvaient se discharger dans le contexte de fusion.  Prémisse : 13 conjoints.
 
 INVARIANT : theorie_ensembles() = 22.  Rien postulé.  NON vacueux (conclusion ≠ hyp).
 """
@@ -256,8 +266,12 @@ def coincidence_univ_app_point_cible(phi1="phi1", phi2="phi2", S1="S1", T1="T1")
 
 def coincidence_univ_app_point_premisse(phi1="phi1", phi2="phi2", S1="S1", T1="T1",
                                         S2="S2", T2="T2", F="F", R="R", Rp="Rp"):
-    """La PRÉMISSE PROPRE attendue (15 formules), pour vérifier que le séquent ne
-    porte QUE ces hypothèses-là (test de propreté)."""
+    """La PRÉMISSE PROPRE attendue (13 formules), pour vérifier que le séquent ne
+    porte QUE ces hypothèses-là (test de propreté).
+
+    🔑 BON ORDRE AMBIANT : bo(R,S2) [R-side] et bo(R',F) [F-side] SEULS ; les trois bons
+    ordres sur des SEGMENTS (bo(R,S1), bo(R',T1), bo(R',image)) ont disparu (faux sur
+    segment propre, re-basés sur le bon ordre ambiant)."""
     Rf, Rpf = _R_de(R), _R_de(Rp)
     vphi1, vphi2 = _t(phi1), _t(phi2)
     vS1, vT1, vS2, vT2 = _t(S1), _t(T1), _t(S2), _t(T2)
@@ -273,17 +287,22 @@ def coincidence_univ_app_point_premisse(phi1="phi1", phi2="phi2", S1="S1", T1="T
         inclus(vS1, vS2),
         E.est_segment(vT1, Rpf, _t(F)),
         E.est_segment(img, Rpf, _t(F)),
-        E.est_bien_ordonne(Rpf, _t(F)),
-        E.est_bien_ordonne(Rpf, vT1),
-        E.est_bien_ordonne(Rpf, img),
-        E.est_bien_ordonne(Rf, vS1),
+        E.est_bien_ordonne(Rpf, _t(F)),       # BON ORDRE AMBIANT F-side
+        E.est_bien_ordonne(Rf, vS2),          # BON ORDRE AMBIANT R-side (S2 ⊇ S1)
         inclus(vphi1, E.produit(vS1, vT1)),
         inclus(phi2S1, E.produit(vS1, vT1)),
     }
 
 
 def _premisse_liste(phi1, phi2, S1, T1, S2, T2, F, R, Rp):
-    """La prémisse propre, en LISTE ORDONNÉE (source de vérité pour la conjonction)."""
+    """La prémisse propre, en LISTE ORDONNÉE (source de vérité pour la conjonction).
+
+    🔑 BON ORDRE AMBIANT (re-base, branche coincidence-ambient-bo).  Les bons ordres
+    consommés sont AMBIANTS : bo(R,S2) (R-side : S2 = grand segment ⊇ S1, via
+    coincidence_univ_close_isos E:=S2, inclus(S1,S2) déjà présente) et bo(R',F) (F-side :
+    via lemme_4_sous_domaine, inclus(T1,F)/inclus(I,F) dérivées de est_segment).  Les
+    trois bons ordres SUR DES SEGMENTS — bo(R,S1), bo(R',T1), bo(R',image(φ2,S1)) — ont
+    DISPARU : ils sont FAUX sur un segment propre et étaient le verrou de la fusion."""
     Rf, Rpf = _R_de(R), _R_de(Rp)
     v1, v2 = _t(phi1), _t(phi2)
     s1, t1, s2, t2 = _t(S1), _t(T1), _t(S2), _t(T2)
@@ -294,8 +313,8 @@ def _premisse_liste(phi1, phi2, S1, T1, S2, T2, F, R, Rp):
         E.est_fonctionnel(v1), E.est_fonctionnel(v2),
         egal(E.dom(v1), s1), egal(E.dom(v2), s2), inclus(s1, s2),
         E.est_segment(t1, Rpf, _t(F)), E.est_segment(img, Rpf, _t(F)),
-        E.est_bien_ordonne(Rpf, _t(F)), E.est_bien_ordonne(Rpf, t1),
-        E.est_bien_ordonne(Rpf, img), E.est_bien_ordonne(Rf, s1),
+        E.est_bien_ordonne(Rpf, _t(F)),       # BON ORDRE AMBIANT F-side
+        E.est_bien_ordonne(Rf, s2),           # BON ORDRE AMBIANT R-side (S2 ⊇ S1)
         inclus(v1, E.produit(s1, t1)), inclus(phi2S1, E.produit(s1, t1)),
     ]
 
@@ -324,11 +343,17 @@ def coincidence_univ_app(phi1="phi1", phi2="phi2", S1="S1", T1="T1",
 
     🎯🎯🎯 COÏNCIDENCE UNIVERSELLE (Lemme 1 §III.2), forme APPLICATIONS — **THÉORÈME CLOS**.
     Généralise `coincidence_univ_app_point` sur les 6 témoins (S1,T1,φ1,S2,T2,φ2) après
-    avoir replié sa prémisse propre (15 formules) en une seule conjonction antécédente.
+    avoir replié sa prémisse propre (13 formules) en une seule conjonction antécédente.
     La PRÉMISSE renforce `coincidence_univ` (postulée) en témoignant φ1,φ2 comme
-    APPLICATIONS (iso + func + dom) + bon ordres + inclusions de graphe — toutes des
-    données HONNÊTES fournies par le contexte de fusion.  `.est_clos == True` (0 hypothèse) :
-    le contenu géométrique de Lemme 1 est ENTIÈREMENT PROUVÉ (schéma sur F, R, R').
+    APPLICATIONS (iso + func + dom) + bons ordres AMBIANTS + inclusions de graphe — toutes
+    des données HONNÊTES fournies par le contexte de fusion.  `.est_clos == True`
+    (0 hypothèse) : le contenu géométrique de Lemme 1 est ENTIÈREMENT PROUVÉ (schéma sur
+    F, R, R').
+
+    🔑 BON ORDRE AMBIANT : les bons ordres consommés sont bo(R,S2) [R-side, S2 = grand
+    segment ⊇ S1] et bo(R',F) [F-side] — JAMAIS bo sur un segment PROPRE (bo(R,S1),
+    bo(R',T1), bo(R',image(φ2,S1)) ont DISPARU : faux sur segment propre, donc indéchargeable
+    dans la fusion).  C'est le re-base de la branche coincidence-ambient-bo.
 
     RESTE pour brancher fusion : renforcer `axiome_h`/témoin₁ pour témoigner func/dom
     (l'architecture « φ application »), afin que fusion fournisse cette prémisse."""

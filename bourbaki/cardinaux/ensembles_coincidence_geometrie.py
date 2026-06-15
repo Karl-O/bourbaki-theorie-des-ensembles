@@ -408,8 +408,9 @@ def retraction_kc_cible(phi="phi", phip="phip", S="S", T="T", x="x"):
                             egal(E.valeur(k, cx_j, b="j"), vx)))
 
 
-def coincidence_close(phi="phi", phip="phip", S="S", T="T", u="u"):
-    """⊢ { est_bien_ordonne(R,S),  c strict. croissante S→S,  k strict. croissante S→S,
+def coincidence_close(phi="phi", phip="phip", S="S", T="T", u="u", E_set="E"):
+    """⊢ { est_bien_ordonne(R,E),  inclus(S,E),                         [BON ORDRE AMBIANT]
+           c strict. croissante S→S,  k strict. croissante S→S,
            + structurelles de φ,φ' (graphe⊂S×T, dom, func, func réciproque) }
          ⊢ (∀u)( u∈S ⇒ φ(u) = φ'(u) ),   c:=φ'⁻¹∘φ, k:=φ⁻¹∘φ'.
 
@@ -421,15 +422,19 @@ def coincidence_close(phi="phi", phip="phip", S="S", T="T", u="u"):
       • cod_c, cod_k  ← composee_dans_S_t ;
       • k∘c=id        ← retraction_kc ;
       • φ'(c(u))=φ(u) ← raccord_phip.
-    Restent en hyps : bon ordre + stricte croissance de c,k (vraies — c,k sont des isos —
-    et déchargeables via auto_de_deux_isos+strict_croissante_depuis_iso, REPORT mineur) +
-    les structurelles d'iso.  Conclusion φ(u)=φ'(u) sur S, NON tautologique."""
+    Restent en hyps : bon ordre AMBIANT bo(R,E)+inclus(S,E) (JAMAIS bo(R,S), faux sur
+    segment propre) + stricte croissance de c,k (vraies — c,k sont des isos — et
+    déchargeables via auto_de_deux_isos+strict_croissante_depuis_iso, REPORT mineur) +
+    les structurelles d'iso.  Conclusion φ(u)=φ'(u) sur S, NON tautologique.
+
+    `E_set` = ensemble AMBIANT bien ordonné dont S est un sous-ensemble (E.III.2.6) ;
+    défaut « E » (sous-ordre quelconque) ; la fusion nestée passe S2."""
     from bourbaki.cardinaux.ensembles_trichotomie_restriction import coincidence_sur_chevauchement
     vphi, vphip, vS, vT = _t(phi), _t(phip), _t(S), _t(T)
     PhipInv, PhiInv = E.reciproque(vphip), E.reciproque(vphi)
     c = E.composee(PhipInv, vphi)             # c = φ'⁻¹∘φ  (TERME)
     k = E.composee(PhiInv, vphip)             # k = φ⁻¹∘φ'  (TERME)
-    base = coincidence_sur_chevauchement("R", S, phi, phip, c, k, u)   # 7 hyps (c,k TERMES)
+    base = coincidence_sur_chevauchement("R", S, phi, phip, c, k, u, E_set=E_set)  # bo AMBIANT
     bricks = [
         composee_dans_S_t(PhipInv, vphi, vS, vT),    # (∀t)(t∈S⇒c(t)[j]∈S)
         composee_dans_S_t(PhiInv, vphip, vS, vT),    # (∀t)(t∈S⇒k(t)[j]∈S)
@@ -443,7 +448,8 @@ def coincidence_close(phi="phi", phip="phip", S="S", T="T", u="u"):
     return out
 
 
-def coincidence_univ_close(phi1="phi1", phi2="phi2", S1="S1", T1="T1", u="u"):
+def coincidence_univ_close(phi1="phi1", phi2="phi2", S1="S1", T1="T1", u="u",
+                           E_set="S2"):
     """⊢ { hyps de coincidence_close(φ1, φ2|S1, S1, T1)  +  φ2 fonctionnel,  S1 ⊂ dom φ2 }
          ⊢ (∀u)( u∈S1 ⇒ φ1(u) = φ2(u) ).
 
@@ -451,20 +457,27 @@ def coincidence_univ_close(phi1="phi1", phi2="phi2", S1="S1", T1="T1", u="u"):
     et φ2 sur un segment plus grand (S1⊂dom φ2) coïncident sur S1.  On applique
     `coincidence_close` à φ2|S1 = restriction(φ2,S1) (qui donne φ1(u)=(φ2|S1)(u) sur S1),
     puis `restriction_valeur` réécrit (φ2|S1)(u)=φ2(u) (ponts liant j↔y).  Géométrie
-    déchargée (via coincidence_close) ; reste les hyps structurelles de φ2|S1 + φ2."""
+    déchargée (via coincidence_close) ; reste les hyps structurelles de φ2|S1 + φ2.
+
+    BON ORDRE AMBIANT bo(R,E)+inclus(S1,E) ; E := S2 par défaut (cf. coincidence_univ_close_isos)."""
     phi2S1 = E.restriction(var(phi2), var(S1))
-    base = coincidence_close(phi1, phi2S1, S1, T1, u)         # (∀u)(u∈S1⇒φ1(u)[j]=(φ2|S1)(u)[j])
+    base = coincidence_close(phi1, phi2S1, S1, T1, u, E_set=E_set)   # bo AMBIANT
     return _coincidence_univ_assemble(base, phi2, S1, u)
 
 
-def coincidence_univ_close_isos(phi1="phi1", phi2="phi2", S1="S1", T1="T1", u="u"):
+def coincidence_univ_close_isos(phi1="phi1", phi2="phi2", S1="S1", T1="T1", u="u",
+                                E_set="S2"):
     """🎯🎯 coincidence_univ_close AVEC STRICTE CROISSANCE DÉCHARGÉE (via coincidence_close_isos).
 
     Identique à coincidence_univ_close mais la base φ1≅φ2|S1 est obtenue par
     `coincidence_close_isos` (c,k automorphismes ⇒ stricte croissance dérivée des isos) :
-    plus aucune hyp de stricte croissance.  Forme consommée par fusion_hyp (Lemme 1 §III.2)."""
+    plus aucune hyp de stricte croissance.  Forme consommée par fusion_hyp (Lemme 1 §III.2).
+
+    Le BON ORDRE est AMBIANT bo(R,E)+inclus(S1,E) (jamais bo(R,S1), faux sur segment
+    propre).  Pour la fusion nestée, E := S2 (le grand segment ⊇ S1), de sorte que
+    inclus(S1,E) = inclus(S1,S2) — DÉJÀ une donnée de la fusion."""
     phi2S1 = E.restriction(var(phi2), var(S1))
-    base = coincidence_close_isos(phi1, phi2S1, S1, T1, u)    # strict déchargée
+    base = coincidence_close_isos(phi1, phi2S1, S1, T1, u, E_set=E_set)   # strict déchargée, bo AMBIANT
     return _coincidence_univ_assemble(base, phi2, S1, u)
 
 
@@ -508,9 +521,9 @@ def coincidence_close_cible(phi="phi", phip="phip", S="S", T="T", u="u"):
     return coincidence_sur_chevauchement_cible("R", S, phi, phip, "c", "k", u)
 
 
-def coincidence_close_isos(phi="phi", phip="phip", S="S", T="T", u="u"):
-    """⊢ { est_bien_ordonne(R,S) + isos d'ordre de φ,φ' (et de leurs réciproques φ'⁻¹,φ⁻¹)
-           + structurelles }  ⊢  (∀u)( u∈S ⇒ φ(u) = φ'(u) ).
+def coincidence_close_isos(phi="phi", phip="phip", S="S", T="T", u="u", E_set="E"):
+    """⊢ { est_bien_ordonne(R,E) + inclus(S,E) + isos d'ordre de φ,φ' (et de leurs
+           réciproques φ'⁻¹,φ⁻¹) + structurelles }  ⊢  (∀u)( u∈S ⇒ φ(u) = φ'(u) ).
 
     🎯🎯 coincidence_close AVEC LA STRICTE CROISSANCE de c=φ'⁻¹∘φ et k=φ⁻¹∘φ' DÉCHARGÉE
     (plus AUCUNE hyp de stricte croissance postulée — c'était le dernier résidu « modulo
@@ -525,7 +538,7 @@ def coincidence_close_isos(phi="phi", phip="phip", S="S", T="T", u="u"):
     from bourbaki.cardinaux.ensembles_coincidence_pont import strict_croissante_depuis_iso
     from bourbaki.cardinaux.ensembles_coincidence_decharge import auto_de_deux_isos
     vphi, vphip = _t(phi), _t(phip)
-    base = coincidence_close(phi, phip, S, T, u)                  # 15 hyps incl strict_c, strict_k
+    base = coincidence_close(phi, phip, S, T, u, E_set=E_set)     # bo AMBIANT bo(R,E)+inclus(S,E)
     c_term = E.composee(E.reciproque(vphip), vphi)               # c = φ'⁻¹∘φ
     k_term = E.composee(E.reciproque(vphi), vphip)               # k = φ⁻¹∘φ'
     # c = composee(reciproque φ', φ) ⇒ auto(phi, reciproque φ') ; k = composee(reciproque φ, φ') ⇒ auto(phip, reciproque φ)

@@ -42,19 +42,19 @@ def coincidence_point_app(phip="phip", phig="phig", Sp="Sp", Tp="Tp",
           ⊢ φ_petit(p) = φ_grand(p)   [liant « j »].
 
     Instancie `coincidence_univ_app` (CLOS) aux 6 témoins (Sp,Tp,φ_petit,Sg,Tg,φ_grand),
-    décharge sa PRÉMISSE (15 formules-applications, conjointes) depuis les hypothèses,
-    puis spécialise au point p∈Sp.  La coïncidence ponctuelle est ainsi PROUVÉE
-    (coincidence_univ_app n'apporte AUCUNE hypothèse — c'est un théorème clos)."""
+    décharge sa PRÉMISSE (13 formules-applications, conjointes ; bons ordres AMBIANTS
+    bo(R,Sg)+bo(R',F)) depuis les hypothèses, puis spécialise au point p∈Sp.  La coïncidence
+    ponctuelle est ainsi PROUVÉE (coincidence_univ_app n'apporte AUCUNE hypothèse — clos)."""
     thm = coincidence_univ_app()                            # ⊢ (∀6 témoins)(prém ⇒ coïncidence)
     inst = thm
     for w in (_t(Sp), _t(Tp), _t(phip), _t(Sg), _t(Tg), _t(phig)):   # ordre ∀ : S1,T1,φ1,S2,T2,φ2
         inst = instancie(inst, w)                           # ⊢ prém(témoins) ⇒ (∀w)(w∈Sp ⇒ φp(w)=φg(w))
-    # prouver la PRÉMISSE (conjonction left-nested) à partir de ses 15 conjoints assumés
+    # prouver la PRÉMISSE (conjonction left-nested) à partir de ses 13 conjoints assumés
     prem = _premisse_liste(phip, phig, Sp, Tp, Sg, Tg, F, R, Rp)
     acc = N.assume(prem[0])
     for pi in prem[1:]:
-        acc = conjonction_intro(acc, N.assume(pi))          # ⊢_{15} conjonction = PRÉMISSE
-    forall_w = N.modus_ponens(acc, inst)                    # ⊢_{15} (∀w)(w∈Sp ⇒ φp(w)=φg(w))
+        acc = conjonction_intro(acc, N.assume(pi))          # ⊢_{13} conjonction = PRÉMISSE
+    forall_w = N.modus_ponens(acc, inst)                    # ⊢_{13} (∀w)(w∈Sp ⇒ φp(w)=φg(w))
     imp_p = instancie(forall_w, _t(p))                      # p∈Sp ⇒ φp(p)=φg(p)
     Hp = N.assume(appartient(_t(p), _t(Sp)))
     return N.modus_ponens(Hp, imp_p)                        # ⊢_{15, p∈Sp} φp(p)=φg(p)

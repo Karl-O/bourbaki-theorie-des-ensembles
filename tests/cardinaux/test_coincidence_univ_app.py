@@ -30,7 +30,11 @@ def test_conclusion_est_la_cible():
 
 
 def test_hypotheses_sont_la_premisse_propre():
-    """Les hypothèses du séquent sont EXACTEMENT la prémisse propre (15 formules)."""
+    """Les hypothèses du séquent sont EXACTEMENT la prémisse propre (13 formules).
+
+    🔑 BON ORDRE AMBIANT : 13 (et non 15) — les trois bons ordres SUR DES SEGMENTS
+    (bo(R,S1), bo(R',T1), bo(R',image)) ont disparu (faux sur segment propre), remplacés
+    par les bons ordres AMBIANTS bo(R,S2)+bo(R',F) (inclus(S1,S2) déjà présente)."""
     thm = coincidence_univ_app_point()
     hyps = set(thm.hypotheses)
     premisse = coincidence_univ_app_point_premisse()
@@ -41,7 +45,17 @@ def test_hypotheses_sont_la_premisse_propre():
     assert not superflues, "hypothèses brutes résiduelles (non déchargées):\n" + "\n".join(
         afficher_f(f)[:160] for f in superflues)
     assert hyps == premisse
-    assert len(hyps) == 15
+    assert len(hyps) == 13
+    # le bon ordre est AMBIANT : bo(R,S2)+bo(R',F), jamais bo sur un segment propre
+    from bourbaki.logique.formule import var, appartient
+    Rf = lambda a, b: appartient(E.couple(a, b), var("R"))
+    Rpf = lambda a, b: appartient(E.couple(a, b), var("Rp"))
+    img = E.image(var("phi2"), var("S1"))
+    assert E.est_bien_ordonne(Rf, var("S2")) in hyps
+    assert E.est_bien_ordonne(Rpf, var("F")) in hyps
+    assert E.est_bien_ordonne(Rf, var("S1")) not in hyps
+    assert E.est_bien_ordonne(Rpf, var("T1")) not in hyps
+    assert E.est_bien_ordonne(Rpf, img) not in hyps
 
 
 def test_non_vacueux():

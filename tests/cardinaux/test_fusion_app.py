@@ -19,6 +19,8 @@ def test_coincidence_point_app_conclusion():
 
 
 def test_coincidence_point_app_hyps_applications():
-    """Les hypothèses sont la prémisse-applications (15) + p∈S_petit = 16, toutes honnêtes."""
+    """Les hypothèses sont la prémisse-applications (13, BON ORDRE AMBIANT) + p∈S_petit
+    = 14, toutes honnêtes.  (13 et non 15 : les trois bons ordres sur SEGMENTS — bo(R,Sp),
+    bo(R',Tp), bo(R',image) — ont disparu, re-basés sur bo(R,Sg)+bo(R',F) ambiants.)"""
     t = coincidence_point_app()
-    assert len(t.hypotheses) == 16
+    assert len(t.hypotheses) == 14
