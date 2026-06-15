@@ -124,7 +124,7 @@ _ISO_X, _ISO_Y = "x", "x2"
 def coincidence_univ(phi1="phi1", phi2="phi2", psi="psi", chi="chi",
                      S1="S1", S2="S2", T1="T1", c="c", k="k", u="u",
                      G="G", Gp="Gp"):
-    """⊢ {  est_bien_ordonne(R, S1),
+    """⊢ {  est_bien_ordonne(R, E) + inclus(S1, E),   [BON ORDRE AMBIANT, jamais bo(R,S1)]
             S1 ⊂ S2,                              [SEGMENTS EMBOÎTÉS — CONSOMMÉ]
             compatible_ordre(φ2, S2),             [φ2 ordre-compat sur le GRAND segment]
             iso(φ1, S1, T1),                      [φ1 : S1 ≅ T1 — CONSOMMÉ]
