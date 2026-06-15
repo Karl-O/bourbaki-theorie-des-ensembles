@@ -297,6 +297,121 @@ def image_segment_est_segment_cible(phi="phi", S0="S0", F_set="F", Rp="Rp"):
     return E.est_segment(E.image(vphi, vS0), Rpf, vF)
 
 
+# ════════════════════════════════════════════════════════════════════════════
+#  RÉSIDU #13 — inclus( restriction(φ,X), X × image(φ,X) )  (INCONDITIONNEL).
+# ════════════════════════════════════════════════════════════════════════════
+def restriction_inclus_produit_image(phi="phi", X="X"):
+    """⊢ restriction(φ,X) ⊂ X × image(φ,X).   (INCONDITIONNEL, theorie=22.)
+
+    z∈φ|X ⇔ (∃p)(∃q)(z=(p,q) et p∈X et (p,q)∈φ)  [AXIOME_RESTRICTION].  Pour un tel
+    témoin (p,q) : p∈X et q∈image(φ,X) (témoin x:=p, AXIOME_IMAGE) donc
+    (p,q)∈X×image(φ,X) (couple_dans_produit_ssi) ; z=(p,q) ⇒ z∈X×image(φ,X) (Leibniz).
+    « Le graphe restreint à X tombe dans X × φ⟨X⟩ »  (son codomaine EFFECTIF)."""
+    from bourbaki.ensembles.fonctions.ensembles_restrictions import _inst_restriction
+    from bourbaki.ensembles.familles.ensembles_produit import couple_dans_produit_ssi
+    vphi, vX = _t(phi), _t(X)
+    fX = E.restriction(vphi, vX)
+    img = E.image(vphi, vX)
+    prod = E.produit(vX, img)
+    vz = var("z")
+    # ⚠️ AXIOME_RESTRICTION lie p,q EN INTERNE ; couple_dans_produit_ssi AUSSI.  On
+    #    α-renomme le corps ∃ de la restriction vers des binders FRAIS rp,rq (≠ p,q,x).
+    vrp, vrq = var("rp"), var("rq")
+
+    from bourbaki.logique.tactiques.tactiques_abrege_quantif import alpha_existe
+    from bourbaki.logique.formule import subst_f
+    inst0 = _inst_restriction(vphi, vX, vz)            # z∈φ|X ⇔ (∃p)(∃q)body0  (binders p,q)
+    body0 = et(et(egal(vz, E.couple(var("p"), var("q"))), appartient(var("p"), vX)),
+               appartient(E.couple(var("p"), var("q")), vphi))
+    # α-renommer (∃p)(∃q)body0 → (∃rp)(∃rq)body  (binders FRAIS rp,rq ≠ p,q,x).
+    ren_q = alpha_existe("q", "rq", body0)             # (∃q)body0 ⇔ (∃rq)body0[q:=rq]
+    eqv_q_lift = _congruence_existe(ren_q, "p")        # (∃p)(∃q)body0 ⇔ (∃p)(∃rq)body0[q:=rq]
+    body_p2 = existe("rq", subst_f(vrq, "q", body0))   # (∃rq)(body0[q:=rq])  (corps sous ∃p)
+    ren_p = alpha_existe("p", "rp", body_p2)           # (∃p)(∃rq)… ⇔ (∃rp)(∃rq)…
+    inst = _equiv_transit(inst0, eqv_q_lift, ren_p)    # z∈φ|X ⇔ (∃rp)(∃rq)body
+
+    body = et(et(egal(vz, E.couple(vrp, vrq)), appartient(vrp, vX)),
+              appartient(E.couple(vrp, vrq), vphi))
+    Hb = N.assume(body)
+    z_eq = conjonction_elim_gauche(conjonction_elim_gauche(Hb))   # z=(rp,rq)
+    p_in_X = conjonction_elim_droite(conjonction_elim_gauche(Hb)) # rp∈X
+    pq_in = conjonction_elim_droite(Hb)                           # (rp,rq)∈φ
+
+    # rq ∈ image(φ,X)  via AXIOME_IMAGE (témoin x:=rp)
+    img_car = _inst_image(vphi, vX, vrq)               # rq∈img ⇔ (∃x)(x∈X et (x,rq)∈φ)
+    body_img = et(appartient(var("x"), vX), appartient(E.couple(var("x"), vrq), vphi))
+    wit = conjonction_intro(p_in_X, pq_in)             # rp∈X et (rp,rq)∈φ  = (rp|x)body_img
+    ex_img = N.modus_ponens(wit, N.s5(body_img, vrp, "x"))   # (∃x)(x∈X et (x,rq)∈φ)
+    q_in_img = N.modus_ponens(ex_img, equivalence_arriere(img_car))   # rq∈image(φ,X)
+
+    # (rp,rq) ∈ X × image(φ,X)
+    ssi = couple_dans_produit_ssi(vrp, vrq, vX, img)   # ((rp,rq)∈X×img) ⇔ (rp∈X et rq∈img)
+    pq_in_prod = N.modus_ponens(conjonction_intro(p_in_X, q_in_img),
+                                equivalence_arriere(ssi))   # (rp,rq)∈X×img
+    # z=(rp,rq) ⇒ z∈X×img  (Leibniz, slot frais)
+    z_in_prod = N.modus_ponens(pq_in_prod, equivalence_arriere(N.modus_ponens(
+        z_eq, N.s6(vz, E.couple(vrp, vrq), "rslotR", appartient(var("rslotR"), prod)))))   # z∈X×img
+    avant = existe_elimination(existe_elimination(
+        N.loi_deduction(body, z_in_prod), "rq"), "rp")  # (∃rp)(∃rq)body ⇒ z∈X×img
+    z_imp = syllogisme(equivalence_avant(inst), avant)  # z∈φ|X ⇒ z∈X×img
+    return N.generalisation("z", z_imp)                 # φ|X ⊂ X×image(φ,X)
+
+
+def _congruence_existe(thm_eq, x):
+    """⊢ (R⇔S) (x non libre dans Γ) ⟹ Γ ⊢ (∃x)R ⇔ (∃x)S."""
+    from bourbaki.logique.tactiques.tactiques_abrege_quantif import monotonie_existe
+    avant = monotonie_existe(equivalence_avant(thm_eq), x)
+    arriere = monotonie_existe(equivalence_arriere(thm_eq), x)
+    return conjonction_intro(avant, arriere)
+
+
+def _equiv_transit(*equivs):
+    """Chaîne d'équivalences A⇔B, B⇔C, … en A⇔Z (equivalence_transitivite répété)."""
+    from bourbaki.logique.tactiques.tactiques_abrege2 import equivalence_transitivite
+    acc = equivs[0]
+    for e in equivs[1:]:
+        acc = equivalence_transitivite(acc, e)
+    return acc
+
+
+def restriction_inclus_produit_image_cible(phi="phi", X="X"):
+    """ÉNONCÉ-cible (test miroir) : restriction(φ,X) ⊂ X × image(φ,X)."""
+    vphi, vX = _t(phi), _t(X)
+    return inclus(E.restriction(vphi, vX), E.produit(vX, E.image(vphi, vX)))
+
+
+def restriction_inclus_produit_Tp(phip="phip", phig="phig", Sp="Sp", Tp="Tp",
+                                  Sg="Sg", F_set="F", R="R", Rp="Rp"):
+    """⊢ {  hyps de codomaine_egal_image(φp,φg,Sp,Tp,Sg,F,R,Rp)  }
+          ⊢ inclus( restriction(φg, Sp), Sp × Tp ).   (= conjoint #13 du résidu.)
+
+    🎯 RÉSIDU #13.  `restriction_inclus_produit_image` donne φg|Sp ⊂ Sp×image(φg,Sp)
+    (INCONDITIONNEL) ; `codomaine_egal_image` donne Tp=image(φg,Sp) ; Leibniz réécrit
+    image(φg,Sp)↦Tp dans le codomaine.  RESSERRE le codomaine effectif au Tp PARTAGÉ
+    (ce que `restriction_incluse` seule — φg|Sp⊂φg⊂Sg×Tg — ne donnait pas).
+
+    ⚠️ Les hyps sont CELLES de codomaine_egal_image (iso/func/dom de φp,φg + inclus(Sp,Sg)
+    + 2 segments + bo(R',F)) — TOUTES dischargeables dans le contexte du résidu."""
+    from bourbaki.cardinaux.ensembles_codomaine_reconciliation import codomaine_egal_image
+    vphig, vSp, vTp = _t(phig), _t(Sp), _t(Tp)
+    img = E.image(vphig, vSp)
+    incl_img = restriction_inclus_produit_image(vphig, vSp)   # φg|Sp ⊂ Sp×image(φg,Sp)
+    ceq = codomaine_egal_image(phip, phig, Sp, Tp, Sg, F_set, R, Rp)   # ⊢ Tp = image(φg,Sp)
+    img_eq_Tp = N.modus_ponens(ceq, symetrie(vTp, img))      # image(φg,Sp) = Tp
+    # Leibniz : image(φg,Sp)↦Tp dans inclus(φg|Sp, Sp × · )
+    leib = N.s6(img, vTp, "rslotP",
+                inclus(E.restriction(vphig, vSp), E.produit(vSp, var("rslotP"))))
+    return N.modus_ponens(incl_img, equivalence_avant(N.modus_ponens(img_eq_Tp, leib)))
+
+
+def restriction_inclus_produit_Tp_cible(phig="phig", Sp="Sp", Tp="Tp"):
+    """ÉNONCÉ-cible (test miroir) : inclus(restriction(φg,Sp), Sp × Tp)."""
+    vphig, vSp, vTp = _t(phig), _t(Sp), _t(Tp)
+    return inclus(E.restriction(vphig, vSp), E.produit(vSp, vTp))
+
+
 __all__ = [
     "image_segment_est_segment", "image_segment_est_segment_cible",
+    "restriction_inclus_produit_image", "restriction_inclus_produit_image_cible",
+    "restriction_inclus_produit_Tp", "restriction_inclus_produit_Tp_cible",
 ]
