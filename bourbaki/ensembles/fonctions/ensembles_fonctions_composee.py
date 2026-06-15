@@ -78,7 +78,7 @@ def composition_valeur(g="G", f="F", x="x"):
     """⊢ (g∘f)(x) = g(f(x))   sous {F fonctionnel, G fonctionnel, x∈dom F, f(x)∈dom G}.
 
     Verrou clé : la valeur d'une composée au niveau des fonctions. (E.II.16, x↦g(f(x)).)"""
-    vG, vF, vx, vy = var(g), var(f), var(x), var("y")
+    vG, vF, vx, vy = _tc(g), _tc(f), _tc(x), var("y")   # g,f,x acceptent un TERME composé
     comp = E.composee(vG, vF)
     fx = E.valeur(vF, vx)
     gfx = E.valeur(vG, fx)                              # g(f(x))
