@@ -7,6 +7,8 @@ que la conclusion est la cible, que theorie=22, et que le séquent est non vacue
 from bourbaki.logique.formule import afficher_f
 from bourbaki.ensembles import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_coincidence_univ_app import (
+    coincidence_univ_app,
+    coincidence_univ_app_cible,
     coincidence_univ_app_point,
     coincidence_univ_app_point_cible,
     coincidence_univ_app_point_premisse,
@@ -60,3 +62,11 @@ def test_reciproque_inclus_produit_miroir():
     p = reciproque_inclus_produit_miroir(var("G"), var("A"), var("B"))
     assert p.conclusion == inclus(E.reciproque(var("G")), E.produit(var("B"), var("A")))
     assert set(p.hypotheses) == {inclus(var("G"), E.produit(var("A"), var("B")))}
+
+
+def test_coincidence_univ_app_FORMULE_close():
+    """🎯🎯🎯 La FORMULE coincidence_univ' (renforcée, généralisée sur 6 témoins) est CLOSE."""
+    t = coincidence_univ_app()
+    assert t.est_clos                                   # THÉORÈME inconditionnel (0 hyp)
+    assert t.conclusion == coincidence_univ_app_cible()
+    assert len(E.theorie_ensembles().axiomes) == 22

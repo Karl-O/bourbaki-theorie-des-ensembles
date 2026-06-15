@@ -282,8 +282,83 @@ def coincidence_univ_app_point_premisse(phi1="phi1", phi2="phi2", S1="S1", T1="T
     }
 
 
+def _premisse_liste(phi1, phi2, S1, T1, S2, T2, F, R, Rp):
+    """La prémisse propre, en LISTE ORDONNÉE (source de vérité pour la conjonction)."""
+    Rf, Rpf = _R_de(R), _R_de(Rp)
+    v1, v2 = _t(phi1), _t(phi2)
+    s1, t1, s2, t2 = _t(S1), _t(T1), _t(S2), _t(T2)
+    phi2S1, img = E.restriction(v2, s1), E.image(v2, s1)
+    return [
+        V.est_isomorphisme_ordre(v1, s1, t1, Rf, Rpf, "x", "y"),
+        V.est_isomorphisme_ordre(v2, s2, t2, Rf, Rpf, "a", "b"),
+        E.est_fonctionnel(v1), E.est_fonctionnel(v2),
+        egal(E.dom(v1), s1), egal(E.dom(v2), s2), inclus(s1, s2),
+        E.est_segment(t1, Rpf, _t(F)), E.est_segment(img, Rpf, _t(F)),
+        E.est_bien_ordonne(Rpf, _t(F)), E.est_bien_ordonne(Rpf, t1),
+        E.est_bien_ordonne(Rpf, img), E.est_bien_ordonne(Rf, s1),
+        inclus(v1, E.produit(s1, t1)), inclus(phi2S1, E.produit(s1, t1)),
+    ]
+
+
+def _conjoindre(formules):
+    """Conjonction left-nested et(et(...et(p0,p1),p2)...,pn)."""
+    acc = formules[0]
+    for f in formules[1:]:
+        acc = et(acc, f)
+    return acc
+
+
+def _elim_conjoint(HH, i, n):
+    """De HH ⊢ conjonction left-nested de n formules, extrait la i-ème (0-indexée)."""
+    t = HH
+    for _ in range(n - 1 - i):
+        t = conjonction_elim_gauche(t)
+    if i > 0:
+        t = conjonction_elim_droite(t)
+    return t
+
+
+def coincidence_univ_app(phi1="phi1", phi2="phi2", S1="S1", T1="T1",
+                         S2="S2", T2="T2", F="F", R="R", Rp="Rp"):
+    """⊢ (∀S1)(∀T1)(∀φ1)(∀S2)(∀T2)(∀φ2)( PRÉMISSE_APPLICATIONS ⇒ (∀w)(w∈S1 ⇒ φ1(w)=φ2(w)) ).
+
+    🎯🎯🎯 COÏNCIDENCE UNIVERSELLE (Lemme 1 §III.2), forme APPLICATIONS — **THÉORÈME CLOS**.
+    Généralise `coincidence_univ_app_point` sur les 6 témoins (S1,T1,φ1,S2,T2,φ2) après
+    avoir replié sa prémisse propre (15 formules) en une seule conjonction antécédente.
+    La PRÉMISSE renforce `coincidence_univ` (postulée) en témoignant φ1,φ2 comme
+    APPLICATIONS (iso + func + dom) + bon ordres + inclusions de graphe — toutes des
+    données HONNÊTES fournies par le contexte de fusion.  `.est_clos == True` (0 hypothèse) :
+    le contenu géométrique de Lemme 1 est ENTIÈREMENT PROUVÉ (schéma sur F, R, R').
+
+    RESTE pour brancher fusion : renforcer `axiome_h`/témoin₁ pour témoigner func/dom
+    (l'architecture « φ application »), afin que fusion fournisse cette prémisse."""
+    thm = coincidence_univ_app_point(phi1, phi2, S1, T1, S2, T2, F, R, Rp)
+    prem = _premisse_liste(phi1, phi2, S1, T1, S2, T2, F, R, Rp)
+    assert set(thm.hypotheses) == set(prem), "prémisse ≠ hypothèses du séquent point"
+    H = _conjoindre(prem)
+    HH = N.assume(H)
+    for i, pi in enumerate(prem):                       # décharge chaque conjoint → hyp unique H
+        thm = N.modus_ponens(_elim_conjoint(HH, i, len(prem)), N.loi_deduction(pi, thm))
+    imp = N.loi_deduction(H, thm)                       # ⊢ H ⇒ C  (CLOS)
+    for w in [phi2, T2, S2, phi1, T1, S1]:              # ∀ sur les 6 témoins (F,R,R' restent libres)
+        imp = N.generalisation(w, imp)
+    return imp
+
+
+def coincidence_univ_app_cible(phi1="phi1", phi2="phi2", S1="S1", T1="T1",
+                               S2="S2", T2="T2", F="F", R="R", Rp="Rp"):
+    """ÉNONCÉ-cible (test miroir) : (∀6 témoins)(prémisse ⇒ coïncidence sur S1)."""
+    prem = _premisse_liste(phi1, phi2, S1, T1, S2, T2, F, R, Rp)
+    concl = coincidence_univ_app_point_cible(phi1, phi2, S1, T1)
+    imp = impl(_conjoindre(prem), concl)
+    for w in [phi2, T2, S2, phi1, T1, S1]:
+        imp = pourtout(w, imp)
+    return imp
+
+
 __all__ = [
     "coincidence_univ_app_point", "coincidence_univ_app_point_cible",
     "coincidence_univ_app_point_premisse",
+    "coincidence_univ_app", "coincidence_univ_app_cible",
     "reciproque_inclusion_monotone", "reciproque_inclus_produit_miroir",
 ]
