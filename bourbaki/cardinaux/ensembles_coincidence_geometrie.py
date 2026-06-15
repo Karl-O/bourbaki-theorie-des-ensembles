@@ -99,6 +99,68 @@ def composee_dans_S(g="psi", f="phi", S="S", T="T", t="t"):
     return N.generalisation(t, body)                         # (∀t)(t∈S ⇒ (g∘f)(t)[j]∈S)
 
 
+def retraction_phi(phi="phi", S="S", T="T", x="x"):
+    """⊢ { dom φ=S,  φ⁻¹ fonctionnel }  ⊢ (∀x)( x∈S ⇒ valeur(φ⁻¹, valeur(φ,x), )=x ).
+
+    φ⁻¹∘φ = id sur S (RETRACTION de φ, sens domaine — distinct de `section_reciproque`
+    qui donne φ∘φ⁻¹=id sur l'image).  (x,φ(x))∈φ (valeur_dans_graphe), donc (φ(x),x)∈φ⁻¹
+    (couple_reciproque) ; φ⁻¹ fonctionnel ⇒ φ⁻¹(φ(x))=x (valeur_caracterisation).  Liant
+    « y » (helpers).  φ⁻¹ fonctionnel = φ injective (vrai pour un iso).  Sous-lemme BRIQUE 3."""
+    from bourbaki.logique.formule import existe
+    from bourbaki.logique.tactiques.tactiques_abrege2 import equivalence_arriere
+    from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie
+    from bourbaki.ensembles.fonctions.ensembles_fonctions import (
+        valeur_dans_graphe, valeur_caracterisation)
+    from bourbaki.ensembles.fonctions.ensembles_reciproque import couple_reciproque
+    from bourbaki.ordre.ensembles_valeur_bridge import valeur_y_egal_j
+    vphi, vS, vT, vx, vy = var(phi), var(S), var(T), var(x), var("y")
+    Phinv = E.reciproque(vphi)
+    Hx = N.assume(appartient(vx, vS))            # x∈S
+    phi_x_y = E.valeur(vphi, vx)                 # φ(x)[y]  (sortie des helpers)
+    phi_x = E.valeur(vphi, vx, b="j")            # φ(x)[j]  (POINT en « j » : évite la capture
+    #                                              du liant « y » interne de valeur_caracterisation)
+    finv_phix = E.valeur(Phinv, phi_x)           # φ⁻¹(φ(x)[j])[y]
+
+    # (x,φ(x)[y])∈φ  [valeur_dans_graphe, hyp (∃y)(x,y)∈φ déchargée via x∈dom φ=S]
+    x_phix = valeur_dans_graphe(vphi, vx)
+    Hdomphi = N.assume(egal(E.dom(vphi), vS))
+    x_in_domphi = N.modus_ponens(Hx, equivalence_arriere(N.modus_ponens(
+        Hdomphi, N.s6(E.dom(vphi), vS, "hdx", appartient(vx, var("hdx"))))))
+    axd = instancie(instancie(N.axiome(E.theorie_ensembles(), E.AXIOME_DOM), vphi), vx)
+    exx = N.modus_ponens(x_in_domphi, equivalence_avant(axd))
+    x_phix = N.modus_ponens(exx, N.loi_deduction(
+        existe("y", appartient(E.couple(vx, vy), vphi)), x_phix))     # (x,φ(x)[y])∈φ
+    # pont y→j sur le point φ(x) (x plaine → sûr) : (x,φ(x)[j])∈φ
+    x_phix = N.modus_ponens(x_phix, equivalence_avant(N.modus_ponens(
+        valeur_y_egal_j(vphi, vx),
+        N.s6(phi_x_y, phi_x, "hpj", appartient(E.couple(vx, var("hpj")), vphi)))))   # (x,φ(x)[j])∈φ
+
+    # (φ(x),x)∈φ⁻¹  [couple_reciproque(φ, φ(x), x), CLOS]
+    cr = couple_reciproque(vphi, phi_x, vx)      # ((φ(x),x)∈φ⁻¹) ⇔ ((x,φ(x))∈φ)
+    phix_x = N.modus_ponens(x_phix, equivalence_arriere(cr))          # (φ(x),x)∈φ⁻¹
+
+    # φ⁻¹(φ(x))=x  [valeur_caracterisation(φ⁻¹, φ(x)) ; hyps φ⁻¹ func + (∃y)(φ(x),y)∈φ⁻¹]
+    vc = valeur_caracterisation(Phinv, phi_x)    # ((φ(x),y)∈φ⁻¹ ⇔ y=φ⁻¹(φ(x)))
+    vc_x = instancie(N.generalisation("y", vc), vx)   # ((φ(x),x)∈φ⁻¹ ⇔ x=φ⁻¹(φ(x)))
+    x_eq = N.modus_ponens(phix_x, equivalence_avant(vc_x))            # x=φ⁻¹(φ(x))
+    eq = N.modus_ponens(x_eq, symetrie(vx, finv_phix))               # φ⁻¹(φ(x))=x
+    #   décharge l'hyp domaine (∃y)(φ(x),y)∈φ⁻¹ de valeur_caracterisation via phix_x
+    ex_recip = N.modus_ponens(phix_x, N.s5(appartient(E.couple(phi_x, vy), Phinv), vx, "y"))
+    eq = N.modus_ponens(ex_recip, N.loi_deduction(
+        existe("y", appartient(E.couple(phi_x, vy), Phinv)), eq))     # φ⁻¹(φ(x))=x
+
+    body = N.loi_deduction(appartient(vx, vS), eq)
+    return N.generalisation(x, body)             # (∀x)(x∈S ⇒ φ⁻¹(φ(x))=x)
+
+
+def retraction_phi_cible(phi="phi", S="S", T="T", x="x"):
+    """ÉNONCÉ-cible (test miroir) : (∀x)(x∈S ⇒ φ⁻¹(φ(x)[j])=x)  (point φ(x) en « j »)."""
+    vphi, vS, vx = var(phi), var(S), var(x)
+    Phinv = E.reciproque(vphi)
+    return pourtout(x, impl(appartient(vx, vS),
+                            egal(E.valeur(Phinv, E.valeur(vphi, vx, b="j")), vx)))
+
+
 def raccord_phip(phi="phi", phip="phip", S="S", T="T", u="u"):
     """⊢ { φ⊂S×T, dom φ=S, φ func, φ' func, dom(φ'⁻¹)=T, (φ'⁻¹∘φ) func }
          ⊢ (∀u)( u∈S ⇒ valeur(φ', valeur(c,u,b="j"), b="j") = valeur(φ,u,b="j") )

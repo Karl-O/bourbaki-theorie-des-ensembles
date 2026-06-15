@@ -35,7 +35,18 @@ def test_raccord_phip_hyps():
     assert len(t.hypotheses) == 5
 
 
+def test_retraction_phi_conclusion():
+    """Sous-lemme BRIQUE 3 — φ⁻¹(φ(x))=x (retraction de φ).  Point φ(x) en « j » pour
+    éviter la capture du liant « y » de valeur_caracterisation.  2 hyps {dom φ=S, φ⁻¹ func}."""
+    t = G.retraction_phi()
+    assert not t.est_clos
+    assert t.conclusion == G.retraction_phi_cible()
+    assert t.conclusion not in t.hypotheses
+    assert len(t.hypotheses) == 2
+
+
 def test_theorie_inchangee_22():
     G.composee_dans_S()
     G.raccord_phip()
+    G.retraction_phi()
     assert len(E.theorie_ensembles().axiomes) == 22
