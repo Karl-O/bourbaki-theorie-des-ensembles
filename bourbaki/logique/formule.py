@@ -27,8 +27,8 @@ from bourbaki.assemblage import assemblage as A
 # usage de dataclasses.replace/fields → réécriture sûre.
 
 class Terme:
-    """Terme primitif : 'var' | 'tau' | 'app'.  Immuable (hash caché)."""
-    __slots__ = ("tag", "nom", "lieur", "args", "_hash")
+    """Terme primitif : 'var' | 'tau' | 'app'.  Immuable (hash + libres cachés)."""
+    __slots__ = ("tag", "nom", "lieur", "args", "_hash", "_libres")
 
     def __init__(self, tag, nom="", lieur="", args=()):
         self.tag = tag                   # 'var' | 'tau' | 'app'
@@ -36,6 +36,7 @@ class Terme:
         self.lieur = lieur               # variable liée ('tau')
         self.args = args                 # ('tau' : (Formule,)) | ('app' : Terme…)
         self._hash = None
+        self._libres = None              # frozenset des variables libres (caché, immuable)
 
     def __hash__(self):
         h = self._hash
@@ -59,8 +60,8 @@ class Terme:
 
 
 class Formule:
-    """Formule primitive : '=' 'in' 'non' 'ou' 'exists'.  Immuable (hash caché)."""
-    __slots__ = ("tag", "lieur", "termes", "sous", "_hash")
+    """Formule primitive : '=' 'in' 'non' 'ou' 'exists'.  Immuable (hash + libres cachés)."""
+    __slots__ = ("tag", "lieur", "termes", "sous", "_hash", "_libres")
 
     def __init__(self, tag, lieur="", termes=(), sous=()):
         self.tag = tag                   # primitifs : '=' 'in' 'non' 'ou' 'exists'
@@ -68,6 +69,7 @@ class Formule:
         self.termes = termes             # arguments Terme ('=', 'in')
         self.sous = sous                 # sous-formules ('non','ou','exists')
         self._hash = None
+        self._libres = None              # frozenset des variables libres (caché, immuable)
 
     def __hash__(self):
         h = self._hash
@@ -125,19 +127,47 @@ def coll(x, f, y="y"):
 
 
 # ── Variables libres ──────────────────────────────────────────────────────────
+# Mémoïsation : l'ensemble des variables libres est INVARIANT (nœuds immuables) ; on le
+# calcule UNE fois par nœud (frozenset caché `_libres`), et la récursion interne réutilise
+# le cache → coût total O(nb de sous-termes distincts) au lieu de O(taille) par appel (clé
+# sur les τ-cardinaux profonds).  L'API publique renvoie une COPIE `set` fraîche à chaque
+# appel : comportement EXTERNE strictement identique (set mutable, mêmes éléments) — le
+# cache frozenset est protégé d'une éventuelle mutation côté appelant.
+def _libres_t(t: Terme) -> frozenset:
+    c = t._libres
+    if c is None:
+        if t.tag == "var":
+            c = frozenset((t.nom,))
+        elif t.tag == "tau":
+            c = _libres_f(t.args[0]) - frozenset((t.lieur,))
+        elif t.args:
+            c = frozenset().union(*(_libres_t(a) for a in t.args))
+        else:
+            c = frozenset()
+        t._libres = c
+    return c
+
+
+def _libres_f(f: Formule) -> frozenset:
+    c = f._libres
+    if c is None:
+        s = frozenset().union(*(_libres_t(t) for t in f.termes)) if f.termes else frozenset()
+        if f.tag == "exists":
+            c = s | (_libres_f(f.sous[0]) - frozenset((f.lieur,)))
+        elif f.sous:
+            c = s | frozenset().union(*(_libres_f(g) for g in f.sous))
+        else:
+            c = s
+        f._libres = c
+    return c
+
+
 def libres_t(t: Terme) -> set:
-    if t.tag == "var":
-        return {t.nom}
-    if t.tag == "tau":
-        return libres_f(t.args[0]) - {t.lieur}
-    return set().union(*(libres_t(a) for a in t.args)) if t.args else set()
+    return set(_libres_t(t))
 
 
 def libres_f(f: Formule) -> set:
-    s = set().union(*(libres_t(t) for t in f.termes)) if f.termes else set()
-    if f.tag == "exists":
-        return s | (libres_f(f.sous[0]) - {f.lieur})
-    return s | (set().union(*(libres_f(g) for g in f.sous)) if f.sous else set())
+    return set(_libres_f(f))
 
 
 def _fraiche(eviter: set) -> str:
