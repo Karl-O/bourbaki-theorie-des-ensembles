@@ -542,19 +542,36 @@ def coincidence_close_isos(phi="phi", phip="phip", S="S", T="T", u="u"):
     # KEYSTONE) — tous déjà présents → réduction NETTE (−2 hyps, rien de neuf).  Pont de
     # liants : reciproque produit le liant « w », auto attend « x2 » → _rename_iso_y.
     from bourbaki.cardinaux.ensembles_iso_ordre_reciproque import reciproque_isomorphisme_ordre
+    from bourbaki.cardinaux.ensembles_bijection import reciproque_fonctionnelle, reciproque_domaine
     from bourbaki.cardinaux.ensembles_coincidence_decharge import _Rgraphe
     from bourbaki.ordre.ensembles_ordre_vocab import est_isomorphisme_ordre as _Viso
     Rf, Rpf = _Rgraphe("R"), _Rgraphe("Rp")
+
+    def _decharge(thm, base):                                # MP : remplace thm.conclusion (∈base) par les hyps de thm
+        return N.modus_ponens(thm, N.loi_deduction(thm.conclusion, base)) if thm.conclusion in base.hypotheses else base
+
     for X in [phip, phi]:                                    # X⁻¹ = φ'⁻¹ (route c), φ⁻¹ (route k)
-        vX = _t(X)
-        rio = reciproque_isomorphisme_ordre(X, S, T, Rf, Rpf)   # {iso(X)[x,w],func X,dom X=S}⊢iso(X⁻¹)[x,w]
-        rio = _rename_iso_y(rio, "x2")                          # ⊢ iso(X⁻¹)[x,x2]  (hyps inchangées)
-        iso_X_x2 = _Viso(vX, _t(S), _t(T), Rf, Rpf, "x", "x2")  # forme présente dans base
-        iso_X_w  = _Viso(vX, _t(S), _t(T), Rf, Rpf, "x", "w")   # forme attendue par rio
-        fwd = _rename_iso_y(N.assume(iso_X_x2), "w")            # ⊢_{iso(X)[x,x2]} iso(X)[x,w]
-        rio = N.modus_ponens(fwd, N.loi_deduction(iso_X_w, rio))  # hyps {iso(X)[x,x2],func X,dom X=S}
-        if rio.conclusion in base.hypotheses:                   # décharge la réciproque
-            base = N.modus_ponens(rio, N.loi_deduction(rio.conclusion, base))
+        vX, vS, vT = _t(X), _t(S), _t(T)
+        iso_X_x2 = _Viso(vX, vS, vT, Rf, Rpf, "x", "x2")     # iso(X)[x,x2] — forme présente dans base
+        iso_X_w  = _Viso(vX, vS, vT, Rf, Rpf, "x", "w")      # iso(X)[x,w]  — forme attendue par reciproque
+        Hiso = N.assume(iso_X_x2)
+        bijve = conjonction_elim_gauche(Hiso)                # est_bijective(X,S,T)  [indép. du liant x2/w]
+        inj_X = conjonction_elim_gauche(bijve)               # injective_dans(X,S)
+        surj_X = conjonction_elim_droite(bijve)              # image(X,S)=T
+
+        # (1) iso(X⁻¹) ← reciproque_isomorphisme_ordre {iso(X),func X,dom X=S}
+        rio = _rename_iso_y(reciproque_isomorphisme_ordre(X, S, T, Rf, Rpf), "x2")  # ⊢ iso(X⁻¹)[x,x2]
+        fwd = _rename_iso_y(N.assume(iso_X_x2), "w")         # ⊢_{iso(X)[x,x2]} iso(X)[x,w]
+        rio = N.modus_ponens(fwd, N.loi_deduction(iso_X_w, rio))   # hyps {iso(X)[x,x2],func X,dom X=S}
+        base = _decharge(rio, base)
+        # (2) func(X⁻¹) ← reciproque_fonctionnelle {func X,dom X=S,inj(X,S)}
+        rf = reciproque_fonctionnelle(X, S)
+        rf = N.modus_ponens(inj_X, N.loi_deduction(E.injective_dans(vX, vS), rf))  # hyps {func X,dom X=S,iso(X)}
+        base = _decharge(rf, base)
+        # (3) dom(X⁻¹)=T ← reciproque_domaine {dom X=S,image(X,S)=T}
+        rd = reciproque_domaine(X, S, T)
+        rd = N.modus_ponens(surj_X, N.loi_deduction(egal(E.image(vX, vS), vT), rd))  # hyps {dom X=S,iso(X)}
+        base = _decharge(rd, base)
     return base
 
 
