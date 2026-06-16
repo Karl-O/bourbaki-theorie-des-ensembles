@@ -17,8 +17,9 @@ from bourbaki.entiers.ensembles_entiers import successeur, ZERO
 from bourbaki.entiers.ensembles_ensemble_NN import ensemble_NN
 from bourbaki.cardinaux.ensembles_cardinaux import inf_egal_card
 from bourbaki.entiers.ensembles_aleph0 import (
-    successeur_non_nul, inf_egal_NN_diff, _NN_sans_zero,
+    successeur_non_nul, inf_egal_NN_diff, _NN_sans_zero, s_injective_safe, _s,
 )
+from bourbaki.entiers.ensembles_ensemble_NN import ensemble_NN as _NN
 
 
 def test_theorie_22():
@@ -41,6 +42,17 @@ def test_inf_egal_NN_diff():
     assert th.conclusion == inf_egal_card(_NN_sans_zero(), ensemble_NN())
     # non-vacuous : c'est bien un ∃F (encodé ¬∀¬), pas une tautologie
     assert th.conclusion.tag in ("non", "exists")
+
+
+def test_s_injective_safe():
+    """MATH de l'injectivité de la translation (étape 3) — CLOSE en liants SÛRS m0/m0p.
+
+    ⚠ Lent (Prop 8 + N_existe).  Non convertible vers la forme défaut u/up exigée par
+    est_injection_de (verrou structurel de liants, cf. docstring du module)."""
+    inj = s_injective_safe()
+    assert inj.est_clos
+    assert not inj.hypotheses
+    assert inj.conclusion == E.injective_dans(_s(_NN()), _NN(), "m0", "m0p")
 
 
 def test_theorie_22_apres():

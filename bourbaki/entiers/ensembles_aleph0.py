@@ -329,5 +329,119 @@ def inf_egal_NN_diff():
     return res
 
 
+# ════════════════════════════════════════════════════════════════════════════
+#  🎯 INJECTIVITÉ de la translation s = n↦successeur(n) sur NN  (MATH VÉRIFIÉE).
+#
+#  ⚠️⚠️ VERROU STRUCTUREL DE LIANTS (diagnostic complet — bloque inf_egal_NN/étape 3).
+#  ----------------------------------------------------------------------------
+#  Le but final est `inf_egal_card(NN, NN∖{0}) = (∃F)est_injection_de(F, NN, NN∖{0})`,
+#  dont le TÉMOIN-S5 a pour antécédent `est_injection_de(s, NN, NN∖{0})` en FORME
+#  PAR DÉFAUT : les sous-formules `est_fonctionnel(s)` (liants u,v,z) et
+#  `injective_dans(s, NN)` (liants u,up) sont FIXÉES par ensembles_cardinaux.
+#
+#  Or les NOMS u,v,z,up coïncident avec des liants INTERNES À LA FOIS de
+#    • `successeur(n)` = Card(n⊔{∅}) = τZ(equipotent(…, Z)) — equipotent/est_bijection_de
+#      lient u,v,z,F,Z ; ET
+#    • `NN` = τy((∀x)(x∈y ⇔ Fini x)) — Fini⊃est_cardinal lie u (entre autres).
+#  Construire `injective_dans(s, NN)` DIRECTEMENT garde ces u,v,z LITTÉRAUX (simple
+#  nidification), mais TOUTE dérivation qui les introduit par substitution / α-renommage
+#  (membre_graphe_terme, alpha_pour_tout, instanciation) DÉCLENCHE le capture-évitement
+#  qui renomme les liants internes en « @0 » → la conclusion devient α-équivalente mais
+#  STRUCTURELLEMENT distincte de la cible (le noyau compare `==` strictement, PAS modulo α).
+#
+#  • `_membre_s(NN, u, …)` ÉCHOUE pour u ∈ {u,up,v,z} (subst_t(u,'n0',successeur(n0))
+#    @0-renomme l'intérieur de successeur → MP interne de membre_graphe_terme casse).
+#  • La MATH est NÉANMOINS CORRECTE et close : `s_injective_safe()` ci-dessous PROUVE
+#    `injective_dans(s, NN, "m0", "m0p")` (liants SÛRS) — est_clos=True, 0 hyp, vérifié.
+#    Route : valeur(s,u)=successeur(u) (existe_temoin + _membre_s côté SÛR) ; hyp
+#    s(u)=s(u') ⇒ succ(u)=succ(u') ⇒ (PROP 8) Card u=Card u' ; u,u'∈NN ⇒ Fini ⇒ cardinal
+#    ⇒ Card u=u, Card u'=u' (cardinal_de_cardinal) ⇒ u=u'.
+#  • Le PONT manquant : convertir `injective_dans(s,NN,"m0","m0p")` →
+#    `injective_dans(s,NN,"u","up")` (défaut).  Le faire au niveau « F libre »
+#    (injective_dans(F,NN,m0,m0p) ⇔ injective_dans(F,NN)) ÉCHOUE aussi : `NN` contient
+#    un « u » interne, donc renommer m0→u y injecte « @0 ».
+#
+#  RÉSOLUTIONS POSSIBLES (toutes hors de portée d'un simple lemme) :
+#    (a) représentation des termes en De Bruijn / hash-consing (== modulo α) — Tier 2/3
+#        du chantier perf déjà identifié ;
+#    (b) refactor de est_fonctionnel/injective_dans/est_injection_de pour liants FRAIS
+#        garantis (change le cœur, impacte tout le dépôt).
+#  Tant que (a)/(b) ne sont pas faits, étape 3 (inf_egal_NN) et l'aval (NN_eq_NN_sans_zero,
+#  aleph0_egal_succ, aleph0_infini) RESTENT OUVERTES.  Étapes 1,2 (successeur_non_nul,
+#  inf_egal_NN_diff) sont CLOSES et committées.
+# ════════════════════════════════════════════════════════════════════════════
+def _valeur_s_reduit(uname):
+    """{uname∈NN} ⊢ s(uname) = successeur(uname).   (uname liant SÛR ∉ {u,up,v,z,y,F,Z}.)
+
+    (uname,succ uname)∈s (_membre_s ⇐) ⇒ uname dans dom s ; existe_temoin donne
+    (uname, s(uname))∈s ; _membre_s (⇒, projection droite) donne s(uname)=succ uname.
+    N'invoque PAS est_fonctionnel(s) (donc pas de capture liée à u,v,z)."""
+    NN = ensemble_NN()
+    s = _s(NN)
+    vu = _t(uname)
+    succ_u = successeur(vu)
+    su = E.valeur(s, vu)
+    mem_succ = instancie(N.generalisation("w0", _membre_s(NN, uname, "w0")), succ_u)
+    cpl = N.modus_ponens(_conj_intro(N.assume(appartient(vu, NN)), N.reflexivite(succ_u)),
+                         equivalence_arriere(mem_succ))           # (uname,succ uname)∈s
+    r = appartient(E.couple(vu, var("y")), s)
+    cpl_val = N.modus_ponens(N.modus_ponens(cpl, N.s5(r, succ_u, "y")),
+                             N.existe_temoin(r, "y"))             # (uname, s(uname))∈s
+    mem_val = instancie(N.generalisation("w0", _membre_s(NN, uname, "w0")), su)
+    return conjonction_elim_droite(N.modus_ponens(cpl_val, equivalence_avant(mem_val)))
+
+
+@lru_cache(maxsize=None)
+def _prop8_general():
+    """⊢ (∀A)(∀B)((succ A = succ B) ⇒ (Card A = Card B))  [PROP 8 généralisée, MÉMOÏSÉE]."""
+    from bourbaki.cardinaux.arithmetique.ensembles_prop8_fini2 import prop8_successeur_injectif
+    return N.generalisation("A", N.generalisation("B", prop8_successeur_injectif()))
+
+
+def s_injective_safe(u="m0", up="m0p"):
+    """⊢ injective_dans(s, NN, u, up)   (liants SÛRS u,up — MATH de l'injectivité, CLOSE).
+
+    🎯 MATH VÉRIFIÉE de l'étape 3 (cf. note VERROU ci-dessus) : la translation
+    s = {(n, successeur(n)) | n∈NN} est INJECTIVE sur NN.  Close, 0 hyp — MAIS en
+    liants SÛRS m0,m0p, non convertible vers la forme défaut u,up exigée par
+    `est_injection_de` (verrou structurel)."""
+    NN = ensemble_NN()
+    s = _s(NN)
+    from bourbaki.entiers.ensembles_ensemble_NN import appartenance_NN_instanciee
+    from bourbaki.entiers.ensembles_entiers_theoremes import fini_implique_cardinal
+    from bourbaki.entiers.ensembles_fini_successeur import cardinal_de_cardinal
+    vu, vup = var(u), var(up)
+
+    def card_eq_self(uname):
+        v = var(uname)
+        h = N.assume(appartient(v, NN))
+        fini = N.modus_ponens(h, equivalence_avant(appartenance_NN_instanciee(v)))
+        return N.modus_ponens(N.modus_ponens(fini, fini_implique_cardinal(v)),
+                              cardinal_de_cardinal(v))                       # Card v = v  [v∈NN]
+
+    def p8(a, b):
+        return instancie(instancie(_prop8_general(), a), b)
+
+    hyp = et(et(appartient(vu, NN), appartient(vup, NN)),
+             egal(E.valeur(s, vu), E.valeur(s, vup)))
+    h = N.assume(hyp)
+    uNN = conjonction_elim_gauche(conjonction_elim_gauche(h))
+    upNN = conjonction_elim_droite(conjonction_elim_gauche(h))
+    valeq = conjonction_elim_droite(h)                                      # s(u)=s(u')
+    su = N.modus_ponens(uNN, N.loi_deduction(appartient(vu, NN), _valeur_s_reduit(u)))
+    sup = N.modus_ponens(upNN, N.loi_deduction(appartient(vup, NN), _valeur_s_reduit(up)))
+    succ_eq = composer_egalites(
+        composer_egalites(N.modus_ponens(su, symetrie(E.valeur(s, vu), successeur(vu))), valeq), sup)
+    card_eq = N.modus_ponens(succ_eq, p8(vu, vup))                          # Card u = Card u'
+    cu = N.modus_ponens(uNN, N.loi_deduction(appartient(vu, NN), card_eq_self(u)))
+    cup = N.modus_ponens(upNN, N.loi_deduction(appartient(vup, NN), card_eq_self(up)))
+    u_eq = composer_egalites(
+        composer_egalites(N.modus_ponens(cu, symetrie(cardinal(vu), vu)), card_eq), cup)
+    inj = N.generalisation(u, N.generalisation(up, N.loi_deduction(hyp, u_eq)))
+    assert inj.conclusion == E.injective_dans(s, NN, u, up), \
+        "s_injective_safe : conclusion ≠ injective_dans(s, NN, u, up)"
+    return inj
+
+
 __all__ = ["aleph_0", "card_egal_succ_card_diff", "successeur_non_nul",
-           "inf_egal_NN_diff"]
+           "inf_egal_NN_diff", "s_injective_safe"]
