@@ -34,11 +34,31 @@ est un SEGMENT de (a,Ro) ; s'il est PROPRE (≠a), `prop1_segment_propre_clos` d
 pr₂h'=seg(a,Ro,t) pour t=min(a∖pr₂h')∈a ⇒ Eq(B, seg(a,Ro,t)).
 
 ────────────────────────────────────────────────────────────────────────────────
-CE QUE CE MODULE LIVRE (theorie_ensembles=22 ; rien postulé du but) — voir RAPPORT
-pour le statut EXACT de la clôture finale et l'arête B=a.
+CE QUE CE MODULE LIVRE (theorie_ensembles=22 ; rien postulé du but) :
+
+  ✅ les 5 briques h-niveau INSTANCIÉES à (B,graphe_induit(Ro,B),a,Ro), réduites aux
+     SEULES honnêtes { bo(Ro,a), B⊆a } (iso/func/maximalité) ou CLOSES (les 2 segments) ;
+  🎯 `eq_B_pr2_sous_dom_eq_B`  : { bo, B⊆a, dom h'=B } ⊢ Eq(B, pr₂h')  (func/dom récupérés) ;
+  🎯 `pr2_eq_seg_exists`       : { bo, pr₂h'≠a } ⊢ ∃t(t∈a et pr₂h'=seg(Ro,a,t)) (Prop 1) ;
+  🎯 `realise_segment_pour_B_sans_dom` :
+        { bo(Ro,a),  B⊆a,  ¬(pr₂h'=a) }  ⊢  (∃t)( t∈a et Eq( B , seg(Ro,a,t) ) ).
+     soit la conclusion de subset_realise_segment POUR CE B sous l'UNIQUE condition de
+     branche HONNÊTE `¬(pr₂h'=a)` (= « B n'épuise pas a » ; pr₂h'=a ssi B est order-iso
+     à TOUT a, donc équipotent à a).
+
+⚠️⚠️ STATUT du `subset_realise_segment` LITTÉRAL (∀B, INCLUANT B=a) — il N'EST PAS
+clos, et ne PEUT pas l'être : pour B=a la conclusion exige Eq(a, seg(Ro,a,t)) avec
+seg PROPRE (strict, E.III.2.1), FAUX pour a fini (segment propre = a privé d'un élément)
+ET pour le cardinal TOP Card(a).  Le maillon `realisation_garde_depuis_subset`
+(ensembles_realisation_segment_close) instancie `subset_realise_segment` en B=image(F,c)
+pour TOUT cardinal c≤a, DONC en c=Card(a) (le top) ⇒ exige Eq(B,a) avec un segment
+PROPRE : structurellement impossible.  Le `¬(pr₂h'=a)` survivant EST exactement cette
+obstruction : pour B « plus court » que a il s'élimine (B order-iso à un segment propre),
+pour B=a il TIENT (B épuise a).  Voir RAPPORT pour la sortie possible (réénoncer le GATE
+sur c<Card(a), restructurant pullback_onto).
 
 INVARIANT : theorie_ensembles() = 22.  Hypothèses HONNÊTES : { bo(_R_de(Ro),a),
-B⊆a } (+ le cas de branche).  NON vacueux.  NE MODIFIE AUCUN fichier existant.
+B⊆a, ¬(pr₂h'=a) }.  NON vacueux.  NE MODIFIE AUCUN fichier existant.
 """
 from __future__ import annotations
 
