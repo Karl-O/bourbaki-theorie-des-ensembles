@@ -50,7 +50,7 @@ from bourbaki.ensembles import ensembles_abrege as E
 from bourbaki.ordre import ensembles_ordre_vocab as V
 from bourbaki.logique.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite, instancie,
-    equivalence_avant,
+    equivalence_avant, cas,
 )
 
 from bourbaki.cardinaux import ensembles_trichotomie_scaffold as TS
@@ -353,10 +353,61 @@ def realise_segment_pour_B_cible(Ro="Ro", a="asr", B="Bsr"):
                           equipotent(vB, seg(Ro, va, var("x")))))
 
 
+# ════════════════════════════════════════════════════════════════════════════
+#  RÉDUCTION : dom h'=B DÉCHARGÉ via maximalité + ¬(pr₂h'=a)  (cas / ex falso).
+# ════════════════════════════════════════════════════════════════════════════
+def dom_eq_B_depuis_branche(Ro="Ro", a="asr", B="Bsr"):
+    """⊢ { bo(Ro,a), B⊆a, ¬(pr₂h'=a) } ⊢ dom h' = B.
+
+    🎯 La MAXIMALITÉ donne ( dom h'=B ) ou ( pr₂h'=a ) (maximalite_h_prime, sous {bo,B⊆a}).
+    Sous ¬(pr₂h'=a), l'analyse de cas (cas) : branche pr₂h'=a ⇒ ex falso ⇒ dom h'=B ;
+    branche dom h'=B ⇒ direct.  theorie=22."""
+    from bourbaki.logique.tactiques.tactiques_abrege import a_implique_a
+    vh = h_prime(Ro, a, B)
+    domh, imgh = E.dom(vh), E.img(vh)
+    vB, va = _t(B), _t(a)
+    dom_eq_B = egal(domh, vB)
+    pr2_eq_a = egal(imgh, va)
+
+    mx = maximalite_h_prime(Ro, a, B)            # ( dom h'=B ) ou ( pr₂h'=a )   [bo, B⊆a]
+    assert mx.conclusion == ou(dom_eq_B, pr2_eq_a), "maximalité mal formée"
+    Hneq = N.assume(non(pr2_eq_a))               # ¬(pr₂h'=a)  (branche)
+    # branche A : dom h'=B ⇒ dom h'=B
+    brA = a_implique_a(dom_eq_B)
+    # branche B : pr₂h'=a ⇒ dom h'=B  (ex falso : pr₂h'=a contre ¬(pr₂h'=a))
+    HB = N.assume(pr2_eq_a)
+    falso = N.modus_ponens(HB, N.modus_ponens(Hneq, N.s2(non(pr2_eq_a), dom_eq_B)))
+    brB = N.loi_deduction(pr2_eq_a, falso)       # pr₂h'=a ⇒ dom h'=B
+    res = cas(mx, brA, brB)                      # dom h'=B  [bo, B⊆a, ¬(pr₂h'=a)]
+    assert res.conclusion == dom_eq_B, "conclusion ≠ dom h'=B"
+    return res
+
+
+def realise_segment_pour_B_sans_dom(Ro="Ro", a="asr", B="Bsr"):
+    """⊢ { bo(Ro,a),  B⊆a,  ¬(pr₂h'=a) }
+            ⊢ (∃t)( t∈a  et  Eq( B , seg(Ro,a,t) ) ).
+
+    🎯 `realise_segment_pour_B` avec dom h'=B DÉCHARGÉ par dom_eq_B_depuis_branche
+    (maximalité + ¬(pr₂h'=a)).  L'hypothèse pr₂h'≠a SUBSUME dom h'=B (via maximalité) :
+    il ne reste que { bo(Ro,a), B⊆a, pr₂h'≠a }.  theorie=22, NON vacueux.
+
+    Ainsi `subset_realise_segment` POUR CE B est CLOS aux SEULES honnêtes { bo(Ro,a),
+    B⊆a, pr₂h'≠a }, où pr₂h'≠a EST la condition « B n'épuise pas a » (B est order-iso
+    à un segment PROPRE de a ssi pr₂h'≠a)."""
+    base = realise_segment_pour_B(Ro, a, B)      # [B⊆a, dom h'=B, pr₂h'≠a, bo(Ro,a)]
+    vh = h_prime(Ro, a, B)
+    dom_eq_B = egal(E.dom(vh), _t(B))
+    dom_proof = dom_eq_B_depuis_branche(Ro, a, B)   # [bo, B⊆a, ¬(pr₂h'=a)] ⊢ dom h'=B
+    res = N.modus_ponens(dom_proof, N.loi_deduction(dom_eq_B, base))
+    assert res.conclusion == realise_segment_pour_B_cible(Ro, a, B)
+    return res
+
+
 __all__ = [
     "h_prime", "iso_h_prime", "func_h_prime", "maximalite_h_prime",
     "seg_dom_h_prime", "seg_pr2_h_prime",
     "eq_B_pr2_sous_dom_eq_B", "eq_B_pr2_sous_dom_eq_B_cible",
     "pr2_eq_seg_exists", "pr2_eq_seg_exists_cible",
     "realise_segment_pour_B", "realise_segment_pour_B_cible",
+    "dom_eq_B_depuis_branche", "realise_segment_pour_B_sans_dom",
 ]
