@@ -243,8 +243,120 @@ def eq_B_pr2_sous_dom_eq_B_cible(Ro="Ro", a="asr", B="Bsr"):
     return equipotent(_t(B), E.img(vh))
 
 
+# ════════════════════════════════════════════════════════════════════════════
+#  pr₂h' est un SEGMENT PROPRE ⇒ pr₂h' = seg(Ro,a,t) pour t = min(a∖pr₂h') ∈ a.
+# ════════════════════════════════════════════════════════════════════════════
+def pr2_eq_seg_exists(Ro="Ro", a="asr", B="Bsr"):
+    """⊢ { bo(Ro,a),  pr₂h' ≠ a }  ⊢  (∃t)( t∈a  et  pr₂h' = seg(Ro,a,t) ).
+
+    🎯 pr₂h' est un SEGMENT de (a,Ro) (seg_pr2_h_prime, CLOS) ; PROPRE (≠a, hyp branche).
+    `prop1_segment_propre_clos(Ro,a,pr₂h')` (E.III.2.1) donne alors un x = min(a∖pr₂h')
+    avec pr₂h'=seg(Ro,a,x) ; x∈a∖pr₂h' ⇒ x∈a (AXIOME_DIFF).  On bâtit (∃t)(t∈a et
+    pr₂h'=seg(Ro,a,t)).  theorie=22."""
+    from bourbaki.cardinaux import ensembles_trichotomie_prop1 as P1
+    from bourbaki.logique.tactiques.tactiques_abrege_quantif import existe_elimination
+    va = _t(a)
+    vh = h_prime(Ro, a, B)
+    imgh = E.img(vh)
+    Rof = _R_de(Ro)
+
+    # prop1_segment_propre_clos : chaîne d'implications  neq ⇒ ( seg ⇒ ( bo ⇒ ∃x(...) ) )
+    #   (loi_deduction bo, puis seg, puis neq ⇒ neq est l'antécédent EXTERNE).
+    p1 = P1.prop1_segment_propre_clos(Ro, a, imgh)          # CLOS (chaîne d'impl)
+    bo_form = E.est_bien_ordonne(Rof, va)
+    seg_form = E.est_segment(imgh, Rof, va)
+    neq_form = non(egal(imgh, va))
+    seg_pr2 = seg_pr2_h_prime(Ro, a, B)                     # est_segment(pr₂h',Ro,a)  CLOS
+    assert seg_pr2.conclusion == seg_form, "seg_pr2 ≠ est_segment(pr₂h',Ro,a)"
+    Hbo = N.assume(bo_form)                                 # bo(Ro,a) honnête
+    Hneq = N.assume(neq_form)                               # pr₂h' ≠ a (branche)
+    # décharger la chaîne : neq (externe), puis seg, puis bo (interne)
+    ex_x = N.modus_ponens(Hneq, p1)                         # seg ⇒ ( bo ⇒ ∃x )
+    ex_x = N.modus_ponens(seg_pr2, ex_x)                    # bo ⇒ ∃x
+    ex_x = N.modus_ponens(Hbo, ex_x)                        # ∃x( petit ∧ pr₂h'=seg )
+
+    # per-témoin x : ( petit ∧ pr₂h'=seg(Ro,a,x) ) ⊢ ( x∈a et pr₂h'=seg(Ro,a,x) )
+    DmD = E.difference(va, imgh)
+    petit_x = E.est_plus_petit_element(Rof, DmD, var("x"), x="w")
+    eq_x = egal(imgh, seg(Ro, va, var("x")))
+    corps_x = et(petit_x, eq_x)
+    Hx = N.assume(corps_x)
+    petit = conjonction_elim_gauche(Hx)                     # est_plus_petit(Ro,a∖pr₂h',x)
+    eq_seg = conjonction_elim_droite(Hx)                    # pr₂h'=seg(Ro,a,x)
+    x_in_diff = conjonction_elim_gauche(petit)              # x∈a∖pr₂h'
+    # x∈a∖pr₂h' ⇒ x∈a (AXIOME_DIFF)
+    ax_diff = N.axiome(E.theorie_ensembles(), E.AXIOME_DIFF)
+    diff_ssi = instancie(instancie(instancie(ax_diff, va), imgh), var("x"))
+    x_split = N.modus_ponens(x_in_diff, equivalence_avant(diff_ssi))   # x∈a et ¬(x∈pr₂h')
+    x_in_a = conjonction_elim_gauche(x_split)               # x∈a
+    # cible per-témoin : ( x∈a et pr₂h'=seg(Ro,a,x) )
+    corps_cible = conjonction_intro(x_in_a, eq_seg)
+    body_ex = et(appartient(var("x"), va), egal(imgh, seg(Ro, va, var("x"))))
+    assert corps_cible.conclusion == body_ex, "corps per-témoin mal formé"
+    # introduire (∃t)  — binder « x » (le binder du témoin de prop1)
+    ex_intro = N.modus_ponens(corps_cible, N.s5(body_ex, var("x"), "x"))
+    wit_imp = N.loi_deduction(corps_x, ex_intro)
+    res = N.modus_ponens(ex_x, existe_elimination(wit_imp, "x"))   # ∃t(t∈a et pr₂h'=seg(Ro,a,t))
+    return res
+
+
+def pr2_eq_seg_exists_cible(Ro="Ro", a="asr", B="Bsr"):
+    """ÉNONCÉ-cible (test miroir) : (∃t)( t∈a et pr₂h' = seg(Ro,a,t) )  [binder « x »]."""
+    va = _t(a)
+    vh = h_prime(Ro, a, B)
+    imgh = E.img(vh)
+    return existe("x", et(appartient(var("x"), va), egal(imgh, seg(Ro, va, var("x")))))
+
+
+# ════════════════════════════════════════════════════════════════════════════
+#  ASSEMBLAGE per-B : (∃t)( t∈a et Eq(B, seg(Ro,a,t)) )  sous {bo,B⊆a,dom h'=B,pr₂h'≠a}.
+# ════════════════════════════════════════════════════════════════════════════
+def realise_segment_pour_B(Ro="Ro", a="asr", B="Bsr"):
+    """⊢ { bo(Ro,a),  B⊆a,  dom h'=B,  pr₂h'≠a }
+            ⊢ (∃t)( t∈a  et  Eq( B , seg(Ro,a,t) ) ).
+
+    🎯 Compose Eq(B,pr₂h') (eq_B_pr2_sous_dom_eq_B, branche dom h'=B) et pr₂h'=seg(Ro,a,t)
+    (pr2_eq_seg_exists, branche pr₂h'≠a) : pour le témoin t, pr₂h'=seg(Ro,a,t) réécrit
+    (Leibniz) Eq(B,pr₂h') en Eq(B,seg(Ro,a,t)).  C'est la conclusion de subset_realise_
+    segment POUR CE B, sous le bon ordre + les 2 conditions de branche.  theorie=22."""
+    from bourbaki.logique.tactiques.tactiques_abrege_quantif import existe_elimination
+    va = _t(a)
+    vB = _t(B)
+    vh = h_prime(Ro, a, B)
+    imgh = E.img(vh)
+
+    eq_Bpr2 = eq_B_pr2_sous_dom_eq_B(Ro, a, B)              # Eq(B,pr₂h')  [bo,B⊆a,dom=B]
+    ex_seg = pr2_eq_seg_exists(Ro, a, B)                    # ∃t(t∈a et pr₂h'=seg)  [bo,pr₂h'≠a]
+
+    # per-témoin t : ( t∈a et pr₂h'=seg(Ro,a,t) ) ⊢ ( t∈a et Eq(B,seg(Ro,a,t)) )
+    vt = var("x")
+    segt = seg(Ro, va, vt)
+    corps_t = et(appartient(vt, va), egal(imgh, segt))
+    Ht = N.assume(corps_t)
+    t_in_a = conjonction_elim_gauche(Ht)
+    eq_pr2_seg = conjonction_elim_droite(Ht)                # pr₂h'=seg(Ro,a,t)
+    # réécrire pr₂h' → seg(Ro,a,t) dans Eq(B,pr₂h')
+    eq_Bseg = _leib(imgh, segt, eq_pr2_seg, lambda w: equipotent(vB, w), eq_Bpr2)  # Eq(B,seg)
+    corps_cible = conjonction_intro(t_in_a, eq_Bseg)
+    body_ex = et(appartient(vt, va), equipotent(vB, segt))
+    assert corps_cible.conclusion == body_ex, "corps per-témoin (Eq) mal formé"
+    ex_intro = N.modus_ponens(corps_cible, N.s5(body_ex, vt, "x"))
+    wit_imp = N.loi_deduction(corps_t, ex_intro)
+    res = N.modus_ponens(ex_seg, existe_elimination(wit_imp, "x"))   # ∃t(t∈a et Eq(B,seg))
+    return res
+
+
+def realise_segment_pour_B_cible(Ro="Ro", a="asr", B="Bsr"):
+    """ÉNONCÉ-cible (test miroir) : (∃t)( t∈a et Eq( B , seg(Ro,a,t) ) )  [binder « x »]."""
+    va, vB = _t(a), _t(B)
+    return existe("x", et(appartient(var("x"), va),
+                          equipotent(vB, seg(Ro, va, var("x")))))
+
+
 __all__ = [
     "h_prime", "iso_h_prime", "func_h_prime", "maximalite_h_prime",
     "seg_dom_h_prime", "seg_pr2_h_prime",
     "eq_B_pr2_sous_dom_eq_B", "eq_B_pr2_sous_dom_eq_B_cible",
+    "pr2_eq_seg_exists", "pr2_eq_seg_exists_cible",
+    "realise_segment_pour_B", "realise_segment_pour_B_cible",
 ]
