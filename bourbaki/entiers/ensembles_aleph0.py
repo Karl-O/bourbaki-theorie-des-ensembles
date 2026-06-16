@@ -88,8 +88,16 @@ from bourbaki.cardinaux.arithmetique.ensembles_prop8_successeur import (
 )
 from bourbaki.cardinaux.arithmetique.ensembles_arith_cardinale import _prop1_direct_t
 from bourbaki.cardinaux.ensembles_equipotence import equipotence_reflexive
-from bourbaki.ensembles.familles.ensembles_somme_disjointe import somme_disjointe
+from bourbaki.ensembles.familles.ensembles_somme_disjointe import (
+    somme_disjointe, injection_droite_dans_somme, _dans_singleton, UN as _UN_MARQUEUR,
+)
 from bourbaki.logique.tactiques.tactiques_abrege2 import conjonction_intro as _conj_intro
+
+# ── briques pour « successeur ≠ 0 » (NN-indépendantes, rapides) ────────────────
+from bourbaki.cardinaux.ensembles_cardinaux_props_restantes_prop7 import (
+    cardinal_egal_zero_ssi_vide,
+)
+from bourbaki.ensembles.base.ensembles_vide import non_vide_ssi_element
 
 
 def _t(t):
@@ -167,6 +175,42 @@ def card_egal_succ_card_diff(X, x0):
     assert cardX_eq_succ.conclusion == egal(cardinal(vX), successeur(cD)), \
         "card_egal_succ_card_diff : conclusion ≠ (Card X = successeur(Card(X∖{x0})))"
     return N.loi_deduction(appartient(vx0, vX), cardX_eq_succ)  # (x0∈X) ⇒ Card X = successeur(Card(X∖{x0}))
+
+
+# ════════════════════════════════════════════════════════════════════════════
+#  🎯 successeur(t) ≠ 0   (le successeur d'un cardinal n'est JAMAIS nul)
+# ════════════════════════════════════════════════════════════════════════════
+def successeur_non_nul(t="j"):
+    """🎯 ⊢ ¬( successeur(t) = 0 ).   (THÉORÈME CLOS, 0 hyp — NN-indépendant.)
+
+    successeur(t) = t + 1 = Card(t ⊔ {∅})  et  0 = Card(∅).  Or t⊔{∅} N'EST PAS vide :
+    le marqueur (∅,1) y appartient (injection_droite_dans_somme, ∅∈{∅}), donc
+    (∃z)(z∈t⊔{∅}), d'où ¬(t⊔{∅}=∅)  (non_vide_ssi_element).  Par la contraposée de
+    cardinal_egal_zero_ssi_vide (« Card X = Card∅ ⇔ X=∅ »), ¬(t⊔{∅}=∅) ⇒
+    ¬(Card(t⊔{∅}) = Card∅) = ¬(successeur(t) = 0).
+
+    ⚠ Le paramètre t reçoit par défaut le NOM « j » (≠ liants internes « t » de
+    image_reciproque / equipotence_symetrique appelés par cardinal_egal_zero_ssi_vide) :
+    un t libre nommé « t » se ferait capturer par une généralisation interne.  CLOS,
+    SANS hypothèse, ne touche PAS N_existe (rapide).  theorie=22."""
+    vt = _t(t)
+    sing = E.singleton(E.VIDE)                            # {∅}  (= marqueur 1)
+    S = somme_disjointe(vt, sing)                         # t ⊔ {∅}  (= sous-ensemble de succ t)
+    star = E.couple(E.VIDE, _UN_MARQUEUR)                 # (∅, 1)  ∈ t⊔{∅}
+    # (∅,1) ∈ t⊔{∅}  (∅∈{∅} déchargé)
+    star_in_S = N.modus_ponens(_dans_singleton(E.VIDE),
+                               injection_droite_dans_somme(E.VIDE, vt, sing))
+    # (∃z)(z ∈ t⊔{∅})  (témoin (∅,1), via S5)
+    ex = N.modus_ponens(star_in_S, N.s5(appartient(var("z"), S), star, "z"))
+    # ¬(t⊔{∅} = ∅)  (le « a un élément » ⇒ « ≠ ∅ »)
+    S_non_vide = N.modus_ponens(ex, equivalence_arriere(non_vide_ssi_element(S)))
+    # contraposée de (Card S = Card∅) ⇒ (S=∅) :  ¬(S=∅) ⇒ ¬(Card S = Card∅)
+    ez = cardinal_egal_zero_ssi_vide(S)                   # (Card S = Card∅) ⇔ (S=∅)
+    contra = contraposition(equivalence_avant(ez))        # ¬(S=∅) ⇒ ¬(Card S = Card∅)
+    res = N.modus_ponens(S_non_vide, contra)              # ¬(Card(t⊔{∅}) = Card∅)
+    assert res.conclusion == non(egal(successeur(vt), ZERO)), \
+        "successeur_non_nul : conclusion ≠ ¬(successeur(t)=0)"
+    return res
 
 
 # ════════════════════════════════════════════════════════════════════════════
@@ -248,4 +292,4 @@ def s_fonctionnel(a):
     return res
 
 
-__all__ = ["aleph_0"]
+__all__ = ["aleph_0", "card_egal_succ_card_diff", "successeur_non_nul"]
