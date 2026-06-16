@@ -623,7 +623,12 @@ def aleph0_egal_succ():
     cNN = cardinal(NN)
     cD = cardinal(D)
     # Card NN = successeur(Card(NN∖{0}))
-    surg = N.modus_ponens(zero_dans_NN(), card_egal_succ_card_diff(NN, ZERO))
+    # La chirurgie est bâtie en NOMS SYMBOLIQUES X, x0 (sa machinerie interne — graphe de
+    # copie marquée, partie_reunion_complement — collisionnerait avec les τ-liants de NN /
+    # ZERO si on les passait DIRECTEMENT) puis GÉNÉRALISÉE et INSTANCIÉE aux TERMES NN, 0.
+    surg_gen = N.generalisation("X", N.generalisation("x0", card_egal_succ_card_diff("X", "x0")))
+    surg_imp = instancie(instancie(surg_gen, NN), ZERO)     # (0∈NN) ⇒ Card NN = succ(Card(NN∖{0}))
+    surg = N.modus_ponens(zero_dans_NN(), surg_imp)         # Card NN = succ(Card(NN∖{0}))
     assert surg.conclusion == egal(cNN, successeur(cD)), \
         "aleph0_egal_succ : chirurgie ≠ (Card NN = succ(Card(NN∖{0})))"
     # Card NN = Card(NN∖{0})   (Prop. 1, depuis Eq(NN, NN∖{0}))
