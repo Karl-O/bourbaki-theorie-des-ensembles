@@ -99,16 +99,25 @@ from bourbaki.logique.tactiques.tactiques_abrege2 import (
     instancie, contraposition, equivalence_avant, equivalence_arriere, dne, dni,
     antecedent_consequent,
 )
-from bourbaki.logique.tactiques.tactiques_abrege_quantif import existe_elimination
+from bourbaki.logique.tactiques.tactiques_abrege_quantif import (
+    existe_elimination, alpha_pour_tout, alpha_existe, congruence_existe,
+)
+from bourbaki.logique.tactiques.tactiques_abrege import a_implique_a
+from bourbaki.logique.tactiques.tactiques_abrege2 import ou_congruence
 
 from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie
+
+from bourbaki.ensembles.base.ensembles_vide import non_vide_ssi_element
+from bourbaki.ordre.ensembles_pont_binder import reecrire
 
 from bourbaki.entiers.ensembles_recurrence_C61 import (
     principe_recurrence, _fini_et_P_implique_succ, _fini_implique_P, _P_pred,
 )
-# NB : `cardinaux_bien_ordonnes_close` (CLOS, bourbaki.cardinaux.ensembles_gate_onto_top)
-# EST le déclencheur du résidu #2 `bon_ordre_min_universel` : il PROUVE le ≤-min mais ne
-# peut être MP-déchargé sur le contre-exemple concret (kernel blocker, cf. _A_inclus_interv).
+# `cardinaux_bien_ordonnes_close` (CLOS, 0 hyp) DÉCHARGE désormais le ≤-min du contre-exemple :
+# le blocage de liant ('z' du τ-cardinal ZERO renommé '@0' dans la forme RAW comme conclusion)
+# est CONTOURNÉ par un pont α (cf. `_A_inclus_interv_raw`).  Le résidu #2 `bon_ordre_min_universel`
+# est ÉLIMINÉ ; il ne reste que `predecesseur_fini_universel`.
+from bourbaki.cardinaux.ensembles_gate_onto_top import cardinaux_bien_ordonnes_close
 from bourbaki.entiers.ensembles_entiers_theoremes import (
     theorie_intervalle_entiers, axiome_intervalle_entiers,
 )
@@ -211,20 +220,11 @@ def _A_membre(P, n0, x, mbind="mApr"):
 def _A_inclus_interv(P, n0, mbind="mApr", z="zincl"):
     """⊢ inclus(A, [0,n0], z='zincl')  = (∀zincl)( zincl∈A ⇒ zincl∈[0,n0] ).
 
-    PREUVE (CLOSE, 0 hyp) que A ⊂ [0,n0] — fournie au comparateur FRAIS 'zincl'.  C'est
+    PREUVE (CLOSE, 0 hyp) que A ⊂ [0,n0] — fournie au comparateur FRAIS 'zincl' (≠ le 'z'
+    interne du τ-cardinal ZERO ⇒ AUCUN renommage du liant interne : il reste 'z').  C'est
     α-ÉQUIVALENT à la forme CANONIQUE `inclus(A,[0,n0])` (binder 'z') attendue par
-    `cardinaux_bien_ordonnes`, MAIS ≠ STRUCTURELLEMENT.
-
-    ⚠️ KERNEL BLOCKER (la raison du RÉSIDU #2).  `inclus(A,[0,n0])` (binder 'z' par défaut)
-    est CONSTRUIT RAW : le 'z' externe SHADOWE le 'z' interne du τ-cardinal ZERO, sans
-    renommage.  Toute DÉRIVATION amenant le comparateur à 'z' (ou tout liant interne de
-    ZERO) renomme ce 'z' en '@0' (subst_f capture-évitante).  La forme RAW canonique est
-    donc INACCESSIBLE comme CONCLUSION (seulement comme antécédent / hyp assumée), et les
-    ponts α (`alpha_pour_tout`) reconstruisent le côté 'z' en '@0' (asymétrie avant/arrière).
-    ⇒ on ne PEUT PAS produire `inclus(A,[0,n0])` STRUCTURELLEMENT identique à l'antécédent de
-    cbo, donc cbo n'est pas MP-déchargeable sur A.  Cette fonction CERTIFIE néanmoins que
-    A⊂[0,n0] est VRAI et DÉMONTRABLE (forme 'zincl', α-équivalente) — le résidu #2 n'est
-    PAS un gap mathématique mais une butée de canonicalisation du NOYAU."""
+    `cardinaux_bien_ordonnes`, et le PONT α `_A_inclus_interv_raw` produit cette dernière
+    EXACTEMENT (cf. là-bas pour le contournement du binder 'z'/'@0')."""
     vn0, vz = _t(n0), var(z)
     interv = E.intervalle_entiers(ZERO, vn0)
     A = _A(P, vn0)
@@ -234,6 +234,143 @@ def _A_inclus_interv(P, n0, mbind="mApr", z="zincl"):
     res = N.generalisation(z, N.loi_deduction(appartient(vz, A), z_in))  # inclus(A,[0,n0]) @ 'zincl'
     assert res.conclusion == inclus(A, interv, z), "A_sub ≠ inclus(A,[0,n0]) @ 'zincl'"
     assert res.est_clos, "A_sub non clos"
+    return res
+
+
+def _eq_alpha_formule(f1, f2):
+    """⊢ ( f1 ⇔ f2 )  où f1, f2 ne diffèrent QUE par l'α-renommage de liants ∃ (mêmes
+    connecteurs ¬/∨, mêmes termes).  Congruence STRUCTURELLE récursive :
+      • f1 == f2          : réflexivité (a_implique_a des deux sens) ;
+      • ¬A vs ¬B          : ¬-congruence (double contraposition de A⇔B) ;
+      • A∨B vs A'∨B'      : ou_congruence ;
+      • (∃u)R vs (∃v)R'   : si u≠v, alpha_existe(u,v,R) (α-renommage du ∃ ; v FRAIS, e.g.
+                            '@k', ⇒ aucune capture) ; sinon congruence_existe sur le corps.
+    Sert à PONTER `bodyZ ⇔ bodyZ@0` (le corps du τ-cardinal ZERO dont un ∃z interne a été
+    renommé '@0' par subst_f) ⇒ via s7, l'égalité τ ZERO = ZERO@0 (cf. _A_inclus_interv_raw)."""
+    if f1 == f2:
+        return conjonction_intro(a_implique_a(f1), a_implique_a(f1))
+    if f1.tag == "non" and f2.tag == "non":
+        s = _eq_alpha_formule(f1.sous[0], f2.sous[0])
+        from bourbaki.logique.tactiques.tactiques_abrege2 import contraposition
+        return conjonction_intro(contraposition(equivalence_arriere(s)),
+                                 contraposition(equivalence_avant(s)))      # ¬A ⇔ ¬B
+    if f1.tag == "ou" and f2.tag == "ou":
+        return ou_congruence(_eq_alpha_formule(f1.sous[0], f2.sous[0]),
+                             _eq_alpha_formule(f1.sous[1], f2.sous[1]))
+    if f1.tag == "exists" and f2.tag == "exists":
+        if f1.lieur != f2.lieur:
+            return alpha_existe(f1.lieur, f2.lieur, f1.sous[0])             # (∃u)R ⇔ (∃v)(v|u)R
+        return congruence_existe(_eq_alpha_formule(f1.sous[0], f2.sous[0]), f1.lieur)
+    raise ValueError(f"_eq_alpha_formule : structures incompatibles ({f1.tag},{f2.tag})")
+
+
+def _trouve_interv(obj):
+    """Cherche STRUCTURELLEMENT le sous-terme `interv_ent(ZERO@0, n0)` CORROMPU dans `obj`
+    (Formule ou Terme) — celui dont l'arg[0] (le ZERO) a son ∃z interne renommé '@0', donc
+    `args[0] ≠ ZERO` (≠ structurel).  Ignore tout `interv_ent` PROPRE (arg[0] == ZERO,
+    p.ex. à l'intérieur du terme A).  Renvoie le Terme corrompu, ou None.  Duck-typing :
+    une Formule porte `.termes`/`.sous`, un Terme porte `.args`."""
+    if hasattr(obj, "termes"):                       # Formule
+        for t in obj.termes:
+            r = _trouve_interv(t)
+            if r is not None:
+                return r
+        for s in obj.sous:
+            r = _trouve_interv(s)
+            if r is not None:
+                return r
+        return None
+    # Terme
+    if getattr(obj, "tag", None) == "app" and obj.nom == "interv_ent" \
+            and len(obj.args) == 2 and obj.args[0] != ZERO:
+        return obj
+    for a in getattr(obj, "args", ()):               # 'app' → Termes ; 'tau' → Formules
+        r = _trouve_interv(a)
+        if r is not None:
+            return r
+    return None
+
+
+def _A_inclus_interv_raw(P, n0, mbind="mApr"):
+    """⊢ inclus(A, [0,n0])  = (∀z)( z∈A ⇒ z∈[0,n0] )   (binder 'z' PAR DÉFAUT, forme RAW).
+
+    🎯🎯 CONTOURNEMENT DU BINDER 'z'/'@0' (ce qui DÉBLOQUE le résidu #2 → ÉLIMINÉ).
+
+    La forme RAW `inclus(A,[0,n0])` (que cbo instancié à S:=A dépose comme antécédent) a son
+    comparateur 'z' SHADOWANT un ∃z INTERNE du τ-cardinal ZERO=[0,..] (ZERO contient un ∃z).
+    La PROUVER directement au comparateur 'z' renomme ce ∃z interne en '@0' (subst_f
+    capture-évitante quand on instancie l'axiome de séparation au TERME var('z')) ⇒ on n'obtient
+    que la forme '@0' (`raw_at0`), STRUCTURELLEMENT ≠ de la forme RAW 'z' de cbo, et les ponts α
+    ne reconstruisent JAMAIS la forme 'z' comme conclusion (asymétrie subst_f : introduire
+    var('z') re-renomme le ∃z interne).
+
+    PONT s7 (qui MARCHE).  raw_at0 et la cible RAW ne diffèrent QUE par l'unique ∃z→'@0' DANS
+    le corps de ZERO (ZERO = τZ(bodyZ), bodyZ vs bodyZ@0 = un ∃z renommé '@0').  On PROUVE
+    l'égalité de TERMES  ZERO@0 = ZERO  par :
+        s7 :  (∀Z)( bodyZ@0 ⇔ bodyZ )  ⇒  ( τZ(bodyZ@0) = τZ(bodyZ) )
+    où l'équivalence interne `bodyZ@0 ⇔ bodyZ` est la congruence STRUCTURELLE `_eq_alpha_formule`
+    (renommage '@0'→'z' du ∃, propre).  Puis on RÉÉCRIT (Leibniz s6, `reecrire`) ZERO@0→ZERO dans
+    raw_at0 ⇒ la forme RAW 'z' EXACTE (== inclus(A,[0,n0]), vérifié, CLOS, 0 hyp).  theorie=22."""
+    vn0 = _t(n0)
+    interv = E.intervalle_entiers(ZERO, vn0)
+    A = _A(P, vn0)
+    asub_zincl = _A_inclus_interv(P, vn0, mbind)         # inclus(A,[0,n0],'zincl')  CLOS
+    body_z = impl(appartient(var("z"), A), appartient(var("z"), interv))
+    ren = alpha_pour_tout("z", "zincl", body_z)          # (∀z)body_z ⇔ (∀zincl)(zincl|z)body_z
+    raw_at0 = N.modus_ponens(asub_zincl, equivalence_arriere(ren))   # forme '@0' (∃z interne→'@0')
+
+    # extraire ZERO@0 (le τ-cardinal corrompu) : c'est l'arg[0] de l'intervalle interv_ent(.,n0)
+    # qui apparaît dans la 2ᵉ membership `z∈interv@0` du corps.  Recherche STRUCTURELLE robuste.
+    interv_at0 = _trouve_interv(raw_at0.conclusion)
+    ZERO_at0 = interv_at0.args[0]
+    bodyZ, bodyZ_at0 = ZERO.args[0], ZERO_at0.args[0]
+    # s7 : ZERO@0 = ZERO  (congruence interne bodyZ@0 ⇔ bodyZ, généralisée sur 'Z', puis s7)
+    eqZ = N.modus_ponens(N.generalisation("Z", _eq_alpha_formule(bodyZ_at0, bodyZ)),
+                         N.s7(bodyZ_at0, bodyZ, "Z"))    # τZ(bodyZ@0) = τZ(bodyZ)  =  ZERO@0 = ZERO
+    assert eqZ.conclusion == egal(ZERO_at0, ZERO), "s7 ne conclut pas ZERO@0 = ZERO"
+    # réécrire ZERO@0 → ZERO dans raw_at0 (Leibniz s6) ⇒ forme RAW 'z' EXACTE
+    res = reecrire(raw_at0, eqZ, lambda h: inclus(A, E.intervalle_entiers(h, vn0)))
+    assert res.conclusion == inclus(A, interv), "A_sub_raw ≠ inclus(A,[0,n0]) RAW 'z'"
+    assert res.est_clos, "A_sub_raw non clos"
+    return res
+
+
+def _A_non_vide(P, n0, n0_in_A):
+    """⊢ ¬( A(n0) = ∅ )   depuis une preuve `n0_in_A` de  n0 ∈ A(n0)  (témoin de NON-vacuité).
+
+    `n0_in_A` : Theoreme de conclusion `n0 ∈ A(n0)` (sous les hyps de l'appelant).  On
+    introduit (∃z)(z∈A) par S5 (témoin n0) puis on MP le sens ARRIÈRE de
+    `non_vide_ssi_element(A)` : ¬(A=∅) ⇔ (∃z)(z∈A).  Hyps = celles de n0_in_A."""
+    A = _A(P, _t(n0))
+    assert n0_in_A.conclusion == appartient(_t(n0), A), "n0_in_A ne conclut pas n0∈A(n0)"
+    ex_z = N.modus_ponens(n0_in_A, N.s5(appartient(var("z"), A), _t(n0), "z"))  # (∃z)(z∈A)
+    res = N.modus_ponens(ex_z, equivalence_arriere(non_vide_ssi_element(A)))    # ¬(A=∅)
+    assert res.conclusion == non(egal(A, E.VIDE)), "A_non_vide mal formé"
+    return res
+
+
+def _min_A_via_cbo(P, n0, n0_in_A, mbind="mApr"):
+    """⊢ bon_ordre_min_A(P, n0)   ( (∃m)( m∈A et (∀x)(x∈A ⇒ m≤x) ) )   DÉRIVÉ de cbo CLOS.
+
+    🎯🎯 DÉCHARGE INTÉGRALE du ≤-min du contre-exemple par `cardinaux_bien_ordonnes_close`
+    (CLOS, 0 hyp), SANS résidu `bon_ordre_min_universel`.  cbo (générique en `a`) est
+    généralisé sur `a`, instancié à n0, puis à S:=A.  Son antécédent instancié est EXACTEMENT
+    `inclus(A,[0,n0]) et A≠∅` (forme RAW binder 'z' — `instancie(S:=A)` n'introduit pas de 'z'
+    libre, donc le 'z' interne de ZERO reste 'z') :
+      • `inclus(A,[0,n0])` RAW : produit par `_A_inclus_interv_raw` (pont α, CLOS) ;
+      • `A≠∅` : `_A_non_vide` depuis `n0_in_A` (le contre-exemple n0 témoigne A≠∅).
+    MP ⇒ le ≤-min.  Hyps = celles de n0_in_A (typiquement {Fini n0, ¬P[n0]}) — AUCUN résidu
+    bon_ordre.  theorie=22."""
+    vn0 = _t(n0)
+    A = _A(P, vn0)
+    interv = E.intervalle_entiers(ZERO, vn0)
+    A_sub = _A_inclus_interv_raw(P, vn0, mbind)          # inclus(A,[0,n0]) RAW   [CLOS]
+    A_ne = _A_non_vide(P, vn0, n0_in_A)                  # ¬(A=∅)                [hyps de n0_in_A]
+    cbo = cardinaux_bien_ordonnes_close()                # ⊢ cardinaux_bien_ordonnes(a)  CLOS
+    inst = instancie(instancie(N.generalisation("a", cbo), vn0), A)   # (inclus∧≠∅) ⇒ (∃m)min
+    ante = conjonction_intro(A_sub, A_ne)                # inclus(A,[0,n0]) et A≠∅
+    res = N.modus_ponens(ante, inst)                     # (∃m)( m∈A et (∀x)(x∈A ⇒ m≤x) )
+    assert res.conclusion == bon_ordre_min_A(P, vn0), "min via cbo ≠ bon_ordre_min_A"
     return res
 
 
@@ -337,33 +474,27 @@ def principe_recurrence_preuve(P, n="n", n0="n0pr", mbind="mApr", k="kpred"):
     h_nP_n0 = N.assume(non(P(vn0)))                       # ¬P[n0]
     A = _A(P, vn0)
 
-    # ── n0 ∈ A  (n0∈[0,n0] par réflexivité 0≤n0≤n0 + card ; Fini n0 ; ¬P[n0]) — JUSTIFIE A≠∅,
-    #    donc la NON-VACUITÉ du résidu `bon_ordre_min_universel` (le min porte sur un A≠∅).
+    # ── n0 ∈ A  (n0∈[0,n0] par réflexivité 0≤n0≤n0 + card ; Fini n0 ; ¬P[n0]) — TÉMOIGNE A≠∅
+    #    (DÉCHARGE la garde de non-vacuité de cbo, cf. _min_A_via_cbo / _A_non_vide).
     card_n0 = conjonction_elim_gauche(h_fini_n0)          # est_cardinal(n0)
     zero_le_n0 = _cut(zero_inf_egal_cardinal(vn0), est_cardinal(vn0), card_n0)  # 0≤n0
     corps_interv_n0 = conjonction_intro(conjonction_intro(card_n0, zero_le_n0), _refl_le(vn0))
     n0_in_interv = N.modus_ponens(corps_interv_n0, equivalence_arriere(_membre_interv_0(vn0, vn0)))
     corps_A_n0 = conjonction_intro(n0_in_interv, conjonction_intro(h_fini_n0, h_nP_n0))
     n0_in_A = N.modus_ponens(corps_A_n0, equivalence_arriere(_A_membre(P, vn0, vn0, mbind)))  # n0∈A
-    # (n0∈A est prouvé : il TÉMOIGNE A≠∅ ; non utilisé directement plus bas — le min vient du résidu.)
 
     # ════════════════════════════════════════════════════════════════════════
-    #  BON ORDRE : le ≤-MIN de A.
+    #  BON ORDRE : le ≤-MIN de A — DÉCHARGÉ INTÉGRALEMENT par cbo (CLOS, 0 hyp).
     #
-    #  ⚠️ KERNEL BLOCKER (cf. _A_inclus_interv & le rapport) : `cardinaux_bien_ordonnes_close(n0)`
-    #  est CLOS et donne (∀S)((S⊂[0,n0] et S≠∅)⇒(∃m)min(S)) ; l'appliquer à A=A(n0) par
-    #  instanciation+MP exigerait de FOURNIR l'antécédent `A⊂[0,n0]` = inclus(A,[0,n0]) dans la
-    #  forme RAW EXACTE que `inclus` construit (liant 'z' SHADOWANT le 'z' interne de ZERO).
-    #  Or TOUTE dérivation (substitution capture-évitante du noyau) renomme ce 'z' interne en
-    #  '@0' ⇒ la forme RAW est INACCESSIBLE comme CONCLUSION (seulement comme antécédent).  Le
-    #  ≤-min de A — instance VRAIE de la séparation S8 + cardinaux_bien_ordonnes — est donc
-    #  fourni par le RÉSIDU HONNÊTE `bon_ordre_min_universel(P)` (FERMÉ en n0 : ∀n0), instancié
-    #  ici à n0.  C'est le 2ᵉ report (avec predecesseur_fini_universel) ; il SERAIT déchargé par
-    #  cardinaux_bien_ordonnes_close SANS la canonicalisation des liants (limitation du NOYAU,
-    #  PAS des maths).  cf. _A_inclus_interv : `A⊂[0,n0]` EST prouvé (forme α-canonique) mais
-    #  non MP-branchable sur cbo.
-    h_bom = N.assume(bon_ordre_min_universel(P, n0=n0))   # (∀n0)(∃m)min(A(n0))  [RÉSIDU #2]
-    ex_min = instancie(h_bom, vn0)                       # (∃m)( min de A(n0) )
+    #  🎯 `cardinaux_bien_ordonnes_close` (CLOS) généralisé sur `a`, instancié à n0 puis à S:=A,
+    #  donne (S⊂[0,n0] et S≠∅) ⇒ (∃m)min(S).  Les DEUX conjoints de l'antécédent sont PROUVÉS :
+    #    • A⊂[0,n0] (= inclus(A,[0,n0]) RAW 'z') par `_A_inclus_interv_raw` (pont α zincl→z qui
+    #      contourne le binder 'z'/'@0' du τ-cardinal ZERO — cf. sa docstring) ;
+    #    • A≠∅ par `_A_non_vide` depuis n0∈A (le contre-exemple TÉMOIGNE la non-vacuité — c'est
+    #      la garde de non-vacuité, déchargée INTERNE ICI).
+    #  MP ⇒ le ≤-min.  AUCUN résidu `bon_ordre_min_universel` : le verrou de canonicalisation est
+    #  levé.  Reste l'UNIQUE résidu honnête `predecesseur_fini_universel` (Prop. 2 §III.5).
+    ex_min = _min_A_via_cbo(P, vn0, n0_in_A, mbind)       # (∃m)( min de A(n0) )  [Fini n0, ¬P[n0]]
 
     mmin = "m"; xcmp = "x"                                # binders de cardinaux_bien_ordonnes
     vmin, vx = var(mmin), var(xcmp)

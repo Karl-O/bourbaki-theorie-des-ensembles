@@ -2,13 +2,14 @@
 
 Vérifie :
   • principe_recurrence_P_pred(b,c) conclut EXACTEMENT principe_recurrence(_P_pred(b),c)
-    (le REPORT #1 de N_collectivise_final), sous EXACTEMENT deux résidus honnêtes :
-    predecesseur_fini_universel (Prop. 2 §III.5, gap maths) et bon_ordre_min_universel
-    (≤-min du contre-exemple ; instance de cardinaux_bien_ordonnes_close bloquée comme
-    résidu par une limitation de canonicalisation des liants du NOYAU) ;
+    (le REPORT #1 de N_collectivise_final), sous EXACTEMENT UN résidu honnête :
+    predecesseur_fini_universel (Prop. 2 §III.5, vrai gap maths).  Le ≤-min du
+    contre-exemple est DÉCHARGÉ via cardinaux_bien_ordonnes_close (CLOS), grâce au pont
+    de liant _A_inclus_interv_raw (s7 sur ZERO@0=ZERO) — plus de résidu bon_ordre_min ;
   • la généricité (principe_recurrence_preuve marche pour un P quelconque) ;
-  • A⊂[0,n0] est PROUVÉ (forme α-équivalente, _A_inclus_interv) ;
-  • N_collectivise_report1_discharge ÉLIMINE le report #1, laissant {report#2, 2 résidus} ;
+  • A⊂[0,n0] est PROUVÉ (forme α-équivalente, _A_inclus_interv ; et forme RAW close
+    _A_inclus_interv_raw qui décharge le min via cbo) ;
+  • N_collectivise_report1_discharge ÉLIMINE le report #1, laissant {report#2, 1 résidu} ;
   • theorie_ensembles() == 22 (aucun axiome ajouté hors théories DÉDIÉES paramétrées).
 """
 import pytest
@@ -31,17 +32,15 @@ def test_principe_P_pred_conclusion_est_la_cible():
     assert thm.conclusion == C.principe_recurrence(C._P_pred("b"), "c")
 
 
-# ── résidus EXACTS : {bon_ordre_min_universel, predecesseur_fini_universel} ────
-def test_principe_P_pred_deux_residus_honnetes():
+# ── résidu EXACT : {predecesseur_fini_universel} (bon_ordre_min DÉCHARGÉ via cbo) ──
+def test_principe_P_pred_un_residu_honnete():
     thm = M.principe_recurrence_P_pred("b", "c")
-    P = C._P_pred("b")
     attendus = {
-        M.bon_ordre_min_universel(P, n0="n0pr"),
         M.predecesseur_fini_universel(k="kpred"),
     }
     assert set(thm.hypotheses) == attendus, \
         f"résidus inattendus : {[repr(h)[:80] for h in thm.hypotheses]}"
-    assert len(thm.hypotheses) == 2
+    assert len(thm.hypotheses) == 1
 
 
 def test_principe_P_pred_non_vacueux():
@@ -56,8 +55,8 @@ def test_principe_generique_pour_P_arbitraire():
     P = lambda t: est_fini(t)
     thm = M.principe_recurrence_preuve(P, "n")
     assert thm.conclusion == C.principe_recurrence(P, "n")
-    # mêmes deux familles de résidus (instanciées à ce P)
-    assert len(thm.hypotheses) == 2
+    # même résidu unique (bon_ordre_min déchargé via cbo, pour tout P)
+    assert len(thm.hypotheses) == 1
 
 
 # ── A ⊂ [0,n0] est PROUVÉ (forme α-équivalente, CLOSE) ────────────────────────
@@ -79,12 +78,14 @@ def test_predecesseur_fini_universel_forme():
         impl(et(est_fini(vm), non(egal(vm, ZERO))), M.predecesseur_fini(vm, "kpred")))
 
 
-def test_bon_ordre_min_universel_ferme_en_n0():
+def test_bon_ordre_min_decharge_via_cbo():
+    """Le ≤-min du contre-exemple est DÉCHARGÉ via cardinaux_bien_ordonnes_close :
+    le pont de liant _A_inclus_interv_raw est CLOS, et bon_ordre_min n'est PLUS un résidu."""
     P = C._P_pred("b")
-    f = M.bon_ordre_min_universel(P, n0="n0pr")
-    # FERMÉ en n0 : aucune variable n0pr libre (c'est (∀n0pr)…)
-    from bourbaki.logique.formule import libres_f
-    assert "n0pr" not in libres_f(f)
+    raw = M._A_inclus_interv_raw(P, "n0pr")
+    assert raw.est_clos, "le pont de liant _A_inclus_interv_raw doit être CLOS (0 hyp)"
+    thm = M.principe_recurrence_P_pred("b", "c")
+    assert M.bon_ordre_min_universel(P, n0="n0pr") not in set(thm.hypotheses)
 
 
 # ── DÉCHARGE du report #1 de N_collectivise_final ─────────────────────────────
@@ -100,12 +101,10 @@ def test_report1_discharge_elimine_principe():
 
 def test_report1_discharge_residus_exacts():
     disc = M.N_collectivise_report1_discharge()
-    P = C._P_pred("b")
     cpe = pourtout("c", pourtout("b", C.cardinal_pas_entre(var("b"), var("c"))))  # report #2
-    bom = M.bon_ordre_min_universel(P, n0="n0pr")
     pred = M.predecesseur_fini_universel(k="kpred")
-    assert set(disc.hypotheses) == {cpe, bom, pred}
-    assert len(disc.hypotheses) == 3
+    assert set(disc.hypotheses) == {cpe, pred}
+    assert len(disc.hypotheses) == 2
 
 
 def test_theorie_reste_22_apres_tout():
