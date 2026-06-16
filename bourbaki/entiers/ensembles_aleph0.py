@@ -99,6 +99,11 @@ from bourbaki.cardinaux.ensembles_cardinaux_props_restantes_prop7 import (
 )
 from bourbaki.ensembles.base.ensembles_vide import non_vide_ssi_element
 
+# ── briques pour les inégalités cardinales (NN ∖ {0} ↔ NN) ─────────────────────
+from bourbaki.cardinaux.ensembles_clause_plus_petit_monotonie import (
+    inf_egal_card_de_inclus_terme,
+)
+
 
 def _t(t):
     """Coercion str/Terme → Terme."""
@@ -292,4 +297,37 @@ def s_fonctionnel(a):
     return res
 
 
-__all__ = ["aleph_0", "card_egal_succ_card_diff", "successeur_non_nul"]
+# ════════════════════════════════════════════════════════════════════════════
+#  🎯 inf_egal_card(NN∖{0}, NN)   (la partie NN∖{0} est ≤ NN — trivial : inclusion)
+# ════════════════════════════════════════════════════════════════════════════
+def _NN_sans_zero():
+    """Le terme NN ∖ {0}  (NN privé de l'entier 0)."""
+    return E.difference(ensemble_NN(), E.singleton(ZERO))
+
+
+def inf_egal_NN_diff():
+    """🎯 ⊢ inf_egal_card( NN ∖ {0}, NN ).   (THÉORÈME CLOS, 0 hyp — la moitié FACILE.)
+
+    NN∖{0} ⊂ NN (une différence est incluse dans le minuende : z∈NN∖{0} ⇒ z∈NN par
+    AXIOME_DIFF, projection gauche) ; or A⊂B ⇒ A≤B (inf_egal_card_de_inclus_terme,
+    l'inclusion canonique Δ_A : A→B est une injection).  D'où NN∖{0} ≤ NN.  CLOS,
+    SANS hypothèse, NN-indépendant (n'invoque PAS N_existe — rapide).  theorie=22."""
+    NN = ensemble_NN()
+    sing0 = E.singleton(ZERO)                             # {0}
+    D = E.difference(NN, sing0)                           # NN ∖ {0}
+    vz = var("z")
+    # AXIOME_DIFF instancié : (z∈NN∖{0}) ⇔ (z∈NN et ¬(z∈{0}))
+    ax = N.axiome(E.theorie_ensembles(), E.AXIOME_DIFF)
+    inst = instancie(instancie(instancie(ax, NN), sing0), vz)
+    hz = N.assume(appartient(vz, D))
+    zNN = conjonction_elim_gauche(N.modus_ponens(hz, equivalence_avant(inst)))   # z∈NN
+    incl = N.generalisation("z", N.loi_deduction(appartient(vz, D), zNN))        # NN∖{0} ⊂ NN
+    assert incl.conclusion == inclus(D, NN), "inf_egal_NN_diff : inclusion inattendue"
+    res = N.modus_ponens(incl, inf_egal_card_de_inclus_terme(D, NN))             # NN∖{0} ≤ NN
+    assert res.conclusion == inf_egal_card(D, NN), \
+        "inf_egal_NN_diff : conclusion ≠ inf_egal_card(NN∖{0}, NN)"
+    return res
+
+
+__all__ = ["aleph_0", "card_egal_succ_card_diff", "successeur_non_nul",
+           "inf_egal_NN_diff"]
