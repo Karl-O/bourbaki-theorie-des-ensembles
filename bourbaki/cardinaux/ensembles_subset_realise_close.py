@@ -494,8 +494,7 @@ def pr2_eq_a_donne_eq_B_a(Ro="Ro", a="asr", B="Bsr"):
     from bourbaki.cardinaux.ensembles_cantor_bernstein_final._recollement import cantor_bernstein
     from bourbaki.cardinaux.ensembles_clause_plus_petit_correspondance import inf_egal_card_de_inclus
     from bourbaki.cardinaux.ensembles_cardinaux_consequences import _inf_egal_transitive_t
-    from bourbaki.cardinaux.ensembles_cardinaux import inf_egal_card
-    from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie as _sym_eq
+    from bourbaki.cardinaux.ensembles_cardinaux import equipotent as _eq
     va, vB = _t(a), _t(B)
     vh = h_prime(Ro, a, B)
     domh, imgh = E.dom(vh), E.img(vh)
@@ -512,14 +511,11 @@ def pr2_eq_a_donne_eq_B_a(Ro="Ro", a="asr", B="Bsr"):
                   iso)
     # iso_implique_equipotent(h', dom h', a, Rind, Ro, x, w) : Eq(dom h', a)
     iie = RSC.iso_implique_equipotent(f=vh, X=domh, Y=va, R=OI.graphe_induit(Ro, B),
-                                      Rp=va if False else _t(Ro), x="x", y="w")
+                                      Rp=_t(Ro), x="x", y="w")
     triple = conjonction_intro(conjonction_intro(iso_a, func), N.reflexivite(domh))
     eq_dom_a = N.modus_ponens(triple, iie)      # Eq(dom h', a)
 
     # a ≤ dom h' :  Eq(dom h',a) ⇒ Eq(a,dom h') (sym) ⇒ a ≤ dom h'
-    from bourbaki.cardinaux.ensembles_cardinaux import equipotent as _eq
-    from bourbaki.entiers.ensembles_cardinal_pas_entre import bijection_implique_equipotent  # noqa
-    # symétrie de Eq : Eq(dom h',a) ⇒ Eq(a,dom h')
     eq_a_dom = _eq_symetrie(domh, va, eq_dom_a)            # Eq(a, dom h')
     a_le_dom = N.modus_ponens(eq_a_dom, equipotent_implique_inf_egal(va, domh))   # a ≤ dom h'
 
