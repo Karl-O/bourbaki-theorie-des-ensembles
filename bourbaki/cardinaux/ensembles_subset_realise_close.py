@@ -45,6 +45,15 @@ CE QUE CE MODULE LIVRE (theorie_ensembles=22 ; rien postulé du but) :
      soit la conclusion de subset_realise_segment POUR CE B sous l'UNIQUE condition de
      branche HONNÊTE `¬(pr₂h'=a)` (= « B n'épuise pas a » ; pr₂h'=a ssi B est order-iso
      à TOUT a, donc équipotent à a).
+  🎯 `equipotent_implique_inf_egal` (CLOS) : Eq(X,Y) ⇒ X≤Y (bijection = injection) ;
+  🎯 `pr2_eq_a_donne_eq_B_a` : { bo, B⊆a, pr₂h'=a } ⊢ Eq(B,a)  (via Eq(dom h',a),
+     dom h'⊆B, B⊆a, CANTOR-BERNSTEIN) — donc ¬Eq(B,a) ⇒ ¬(pr₂h'=a) (contraposée) ;
+  🎯🎯 `realise_segment_pour_B_clean` — LA FORME PROPRE/INTERPRÉTABLE :
+        { bo(Ro,a),  B⊆a,  ¬Eq(B,a) }  ⊢  (∃t)( t∈a et Eq( B , seg(Ro,a,t) ) ).
+     La condition de branche est la CARDINALE HONNÊTE `¬Eq(B,a)` (« B strictement plus
+     court que a »), qui EST la condition VRAIE : tout B⊆a NON équipotent à a est
+     équipotent à un segment PROPRE seg(Ro,a,t).  C'est le THÉORÈME DE REPRÉSENTATION
+     ORDINALE (effondrement de Mostowski) RESTREINT — et CLOS — au cas honnête B≁a.
 
 ⚠️⚠️ STATUT du `subset_realise_segment` LITTÉRAL (∀B, INCLUANT B=a) — il N'EST PAS
 clos, et ne PEUT pas l'être : pour B=a la conclusion exige Eq(a, seg(Ro,a,t)) avec
@@ -430,4 +439,154 @@ __all__ = [
     "pr2_eq_seg_exists", "pr2_eq_seg_exists_cible",
     "realise_segment_pour_B", "realise_segment_pour_B_cible",
     "dom_eq_B_depuis_branche", "realise_segment_pour_B_sans_dom",
+    "equipotent_implique_inf_egal",
+    "pr2_eq_a_donne_eq_B_a", "realise_segment_pour_B_clean",
+    "realise_segment_pour_B_clean_cible",
 ]
+
+
+# ════════════════════════════════════════════════════════════════════════════
+#  ✅ equipotent(X,Y) ⇒ X≤Y  — une bijection est une injection.  (CLOS, theorie=22.)
+# ════════════════════════════════════════════════════════════════════════════
+def equipotent_implique_inf_egal(X="X", Y="Y"):
+    """⊢ equipotent(X,Y) ⇒ inf_egal_card(X,Y).   CLOS, 0 hypothèse.
+
+    Une bijection F:X→Y est une injection : est_bijection_de(F,X,Y) =
+    (func∧dom=X)∧injective_dans(F,X)∧image(F,X)=Y ; de image(F,X)=Y on tire
+    image(F,X)⊆Y (Leibniz sur image⊆image réflexif), d'où est_injection_de(F,X,Y),
+    puis (∃F) = inf_egal_card(X,Y) ; ∃-élim du témoin de bijection.  theorie=22."""
+    from bourbaki.logique.tactiques.tactiques_abrege import a_implique_a
+    from bourbaki.logique.tactiques.tactiques_abrege_quantif import existe_elimination
+    from bourbaki.cardinaux.ensembles_cardinaux import (
+        est_bijection_de, est_injection_de, inf_egal_card,
+    )
+    vX, vY, vF = _t(X), _t(Y), var("F")
+    bij = est_bijection_de(vF, vX, vY)
+    img = E.image(vF, vX)
+    Hb = N.assume(bij)
+    func_dom = conjonction_elim_gauche(Hb)              # func∧dom=X
+    bijective = conjonction_elim_droite(Hb)             # injective_dans∧image=Y
+    inj_dans = conjonction_elim_gauche(bijective)       # injective_dans(F,X)
+    img_eq = conjonction_elim_droite(bijective)         # image(F,X)=Y
+    # image(F,X)⊆Y : Leibniz (image=Y) sur image⊆image (réflexif)
+    incl_II = N.generalisation("z", a_implique_a(appartient(var("z"), img)))   # image⊆image
+    incl_iY = _leib(img, vY, img_eq, lambda w: inclus(img, w), incl_II)        # image⊆Y
+    inj = conjonction_intro(conjonction_intro(func_dom, inj_dans), incl_iY)
+    assert inj.conclusion == est_injection_de(vF, vX, vY), "recompose injection KO"
+    le = N.modus_ponens(inj, N.s5(est_injection_de(var("F"), vX, vY), vF, "F"))  # inf_egal_card
+    return existe_elimination(N.loi_deduction(bij, le), "F")   # equipotent ⇒ inf_egal
+
+
+# ════════════════════════════════════════════════════════════════════════════
+#  pr₂h'=a  ⇒  Eq(B,a)   (donc ¬Eq(B,a) ⇒ ¬(pr₂h'=a) : branche éliminée par B≁a).
+# ════════════════════════════════════════════════════════════════════════════
+def pr2_eq_a_donne_eq_B_a(Ro="Ro", a="asr", B="Bsr"):
+    """⊢ { bo(Ro,a), B⊆a, pr₂h'=a } ⊢ Eq(B, a).
+
+    🎯 Si pr₂h'=a, l'iso h' (de dom h' sur pr₂h'=a) AUGMENTÉ de func/dom donne
+    Eq(dom h', a) (iso_implique_equipotent) ; donc a≤dom h' (equipotent_implique_inf_egal
+    sur Eq(a,dom h') = sym), dom h'⊆B (seg_dom_h_prime ⇒ 1ᵉʳ conjoint) ⇒ dom h'≤B ⇒
+    a≤B (transitivité) ; B⊆a ⇒ B≤a ; CANTOR-BERNSTEIN ⇒ Eq(B,a).  theorie=22.
+
+    CONSÉQUENCE (contraposée) : ¬Eq(B,a) ⇒ ¬(pr₂h'=a) — la condition de branche
+    ¬(pr₂h'=a) de realise_segment_pour_B_sans_dom est IMPLIQUÉE par « B n'est pas
+    équipotent à a », i.e. B est strictement « plus court » que a."""
+    from bourbaki.cardinaux.ensembles_cantor_bernstein_final._recollement import cantor_bernstein
+    from bourbaki.cardinaux.ensembles_clause_plus_petit_correspondance import inf_egal_card_de_inclus
+    from bourbaki.cardinaux.ensembles_cardinaux_consequences import _inf_egal_transitive_t
+    from bourbaki.cardinaux.ensembles_cardinaux import inf_egal_card
+    from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie as _sym_eq
+    va, vB = _t(a), _t(B)
+    vh = h_prime(Ro, a, B)
+    domh, imgh = E.dom(vh), E.img(vh)
+    Rind_f = OI.Rind(Ro, B)
+    Rof = _R_de(Ro)
+
+    iso = iso_h_prime(Ro, a, B)                 # est_iso(h', dom h', pr₂h', Rind, Ro, x, w)
+    func = func_h_prime(Ro, a, B)               # est_fonctionnel(h')
+    H_pr2 = N.assume(egal(imgh, va))            # pr₂h' = a
+
+    # réécrire pr₂h' → a dans l'iso (Leibniz) : est_iso(h', dom h', a, Rind, Ro)
+    iso_a = _leib(imgh, va, H_pr2,
+                  lambda w: V.est_isomorphisme_ordre(vh, domh, w, Rind_f, Rof, x="x", y="w"),
+                  iso)
+    # iso_implique_equipotent(h', dom h', a, Rind, Ro, x, w) : Eq(dom h', a)
+    iie = RSC.iso_implique_equipotent(f=vh, X=domh, Y=va, R=OI.graphe_induit(Ro, B),
+                                      Rp=va if False else _t(Ro), x="x", y="w")
+    triple = conjonction_intro(conjonction_intro(iso_a, func), N.reflexivite(domh))
+    eq_dom_a = N.modus_ponens(triple, iie)      # Eq(dom h', a)
+
+    # a ≤ dom h' :  Eq(dom h',a) ⇒ Eq(a,dom h') (sym) ⇒ a ≤ dom h'
+    from bourbaki.cardinaux.ensembles_cardinaux import equipotent as _eq
+    from bourbaki.entiers.ensembles_cardinal_pas_entre import bijection_implique_equipotent  # noqa
+    # symétrie de Eq : Eq(dom h',a) ⇒ Eq(a,dom h')
+    eq_a_dom = _eq_symetrie(domh, va, eq_dom_a)            # Eq(a, dom h')
+    a_le_dom = N.modus_ponens(eq_a_dom, equipotent_implique_inf_egal(va, domh))   # a ≤ dom h'
+
+    # dom h' ⊆ B  (1ᵉʳ conjoint de est_segment(dom h',Rind,B))
+    seg_dom = seg_dom_h_prime(Ro, a, B)         # est_segment(dom h', Rind, B)
+    dom_sub_B = conjonction_elim_gauche(seg_dom)   # dom h' ⊆ B
+    dom_le_B = N.modus_ponens(dom_sub_B, inf_egal_card_de_inclus(domh, vB))   # dom h' ≤ B
+
+    # a ≤ B  (transitivité : a ≤ dom h' ≤ B)
+    trans = _inf_egal_transitive_t(va, domh, vB)   # (a≤dom h' et dom h'≤B) ⇒ a≤B
+    a_le_B = N.modus_ponens(conjonction_intro(a_le_dom, dom_le_B), trans)     # a ≤ B
+
+    # B ≤ a  (B⊆a)
+    H_B_sub = N.assume(inclus(vB, va))          # B⊆a (honnête)
+    B_le_a = N.modus_ponens(H_B_sub, inf_egal_card_de_inclus(vB, va))         # B ≤ a
+
+    # CANTOR-BERNSTEIN : (B≤a et a≤B) ⇒ Eq(B,a)
+    #   ⚠️ passer les NOMS (B,a) et non var(...) : cantor_bernstein gère ses binders
+    #   internes f,g,D via les NOMS de ses arguments (sinon collision Leibniz).
+    Bn = B if isinstance(B, str) else B.nom
+    an = a if isinstance(a, str) else a.nom
+    cb = cantor_bernstein(Bn, an)               # (B≤a et a≤B) ⇒ Eq(B,a)
+    eq_Ba = N.modus_ponens(conjonction_intro(B_le_a, a_le_B), cb)             # Eq(B, a)
+    assert eq_Ba.conclusion == _eq(vB, va), "conclusion ≠ Eq(B,a)"
+    return eq_Ba
+
+
+def _eq_symetrie(X, Y, h_eq_XY):
+    """De ⊢ Eq(X,Y) [h_eq_XY] déduit ⊢ Eq(Y,X).  (symétrie de l'équipotence, dépôt.)"""
+    from bourbaki.cardinaux.ensembles_cardinaux_theoremes import equipotence_symetrique
+    imp = equipotence_symetrique(f="F", x=_t(X), y=_t(Y))   # Eq(X,Y) ⇒ Eq(Y,X)
+    return N.modus_ponens(h_eq_XY, imp)
+
+
+def realise_segment_pour_B_clean(Ro="Ro", a="asr", B="Bsr"):
+    """⊢ { bo(Ro,a),  B⊆a,  ¬Eq(B,a) }
+            ⊢ (∃t)( t∈a  et  Eq( B , seg(Ro,a,t) ) ).
+
+    🎯🎯 LA FORME PROPRE/INTERPRÉTABLE — la condition de branche opaque ¬(pr₂h'=a) est
+    REMPLACÉE par la condition CARDINALE HONNÊTE `¬Eq(B,a)` (« B n'est pas équipotent à
+    a », i.e. B strictement plus court).  Via pr2_eq_a_donne_eq_B_a (pr₂h'=a ⇒ Eq(B,a))
+    contraposé : ¬Eq(B,a) ⇒ ¬(pr₂h'=a), qui décharge la condition de
+    realise_segment_pour_B_sans_dom.  theorie=22, NON vacueux.
+
+    C'est subset_realise_segment RESTREINT aux B avec ¬Eq(B,a) — la forme VRAIE et
+    CLOSE.  (Le cas Eq(B,a), notamment B=a, est précisément l'exception où aucun
+    segment PROPRE ne convient.)"""
+    from bourbaki.cardinaux.ensembles_cardinaux import equipotent as _eq
+    from bourbaki.logique.tactiques.tactiques_abrege2 import contraposition
+    va, vB = _t(a), _t(B)
+    vh = h_prime(Ro, a, B)
+    imgh = E.img(vh)
+    pr2_eq_a = egal(imgh, va)
+
+    # pr₂h'=a ⇒ Eq(B,a)  ; contraposée : ¬Eq(B,a) ⇒ ¬(pr₂h'=a)
+    bridge = pr2_eq_a_donne_eq_B_a(Ro, a, B)              # [bo, B⊆a, pr₂h'=a] ⊢ Eq(B,a)
+    imp_bridge = N.loi_deduction(pr2_eq_a, bridge)        # [bo, B⊆a] ⊢ pr₂h'=a ⇒ Eq(B,a)
+    contra = contraposition(imp_bridge)                  # ¬Eq(B,a) ⇒ ¬(pr₂h'=a)  [bo, B⊆a]
+    H_neq_eq = N.assume(non(_eq(vB, va)))                 # ¬Eq(B,a) (honnête)
+    not_pr2_eq_a = N.modus_ponens(H_neq_eq, contra)       # ¬(pr₂h'=a)  [bo, B⊆a, ¬Eq(B,a)]
+
+    base = realise_segment_pour_B_sans_dom(Ro, a, B)      # [bo, B⊆a, ¬(pr₂h'=a)]
+    res = N.modus_ponens(not_pr2_eq_a, N.loi_deduction(non(pr2_eq_a), base))
+    assert res.conclusion == realise_segment_pour_B_cible(Ro, a, B)
+    return res
+
+
+def realise_segment_pour_B_clean_cible(Ro="Ro", a="asr", B="Bsr"):
+    """ÉNONCÉ-cible (test miroir) : (∃t)( t∈a et Eq( B , seg(Ro,a,t) ) )."""
+    return realise_segment_pour_B_cible(Ro, a, B)

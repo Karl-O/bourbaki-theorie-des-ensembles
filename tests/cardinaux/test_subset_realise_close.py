@@ -101,3 +101,35 @@ def test_realise_segment_pour_B_sans_dom_3_hyps():
     vh = M.h_prime()
     assert set(t.hypotheses) == {_bo_Ro_a(), _B_sub_a(), non(egal(E.img(vh), E.var("asr")))}
     assert len(E.theorie_ensembles().axiomes) == 22
+
+
+# ── equipotent ⇒ ≤  (CLOS) ────────────────────────────────────────────────────
+def test_equipotent_implique_inf_egal_clos():
+    t = M.equipotent_implique_inf_egal()
+    assert t.est_clos and len(t.hypotheses) == 0
+    assert len(E.theorie_ensembles().axiomes) == 22
+
+
+# ── pr₂h'=a ⇒ Eq(B,a) (Cantor-Bernstein) ─────────────────────────────────────
+def test_pr2_eq_a_donne_eq_B_a():
+    from bourbaki.logique.formule import egal
+    from bourbaki.cardinaux.ensembles_cardinaux import equipotent
+    t = M.pr2_eq_a_donne_eq_B_a()
+    assert t.conclusion == equipotent(E.var("Bsr"), E.var("asr"))   # Eq(B,a)
+    assert t.conclusion not in set(t.hypotheses)
+    # 3 hyps honnêtes : bo, B⊆a, pr₂h'=a
+    vh = M.h_prime()
+    assert set(t.hypotheses) == {_bo_Ro_a(), _B_sub_a(), egal(E.img(vh), E.var("asr"))}
+
+
+# ── FORME PROPRE : ¬Eq(B,a) ⇒ ∃t(t∈a et Eq(B,seg)) ───────────────────────────
+def test_realise_segment_pour_B_clean_3_hyps():
+    from bourbaki.logique.formule import non
+    from bourbaki.cardinaux.ensembles_cardinaux import equipotent
+    t = M.realise_segment_pour_B_clean()
+    assert t.conclusion == M.realise_segment_pour_B_clean_cible()
+    assert t.conclusion not in set(t.hypotheses)
+    # exactement 3 hyps HONNÊTES : bo(Ro,a), B⊆a, ¬Eq(B,a)
+    assert set(t.hypotheses) == {_bo_Ro_a(), _B_sub_a(),
+                                 non(equipotent(E.var("Bsr"), E.var("asr")))}
+    assert len(E.theorie_ensembles().axiomes) == 22
