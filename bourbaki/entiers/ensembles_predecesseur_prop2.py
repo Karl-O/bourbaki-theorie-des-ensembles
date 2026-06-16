@@ -250,7 +250,7 @@ def eq_retire_ajoute(x, x0):
     eq_X_DsVide = N.modus_ponens(conjonction_intro(eq_X_somme, eq_somme_somme), trans)  # Eq(X, D⊔{∅})
     assert eq_X_DsVide.conclusion == equipotent(vX, DsVide), \
         "eq_retire_ajoute : conclusion ≠ Eq(X, D⊔{∅})"
-    return N.loi_deduction(appartient(vx0, vX), eq_X_DsVide)  # (x0∈X) ⇒ Eq(X, D⊔{∅})  [bij W]
+    return N.loi_deduction(appartient(vx0, vX), eq_X_DsVide)  # (x0∈X) ⇒ Eq(X, D⊔{∅})  CLOS
 
 
 # ════════════════════════════════════════════════════════════════════════════
@@ -286,7 +286,7 @@ def m_egal_successeur_card_diff(m, x0):
     m_eq_card_m = N.modus_ponens(card_m_eq_m, symetrie(cardinal(vm), vm))  # m = Card m
 
     # Eq(m, D⊔{∅}) ⇒ Card m = Card(D⊔{∅})
-    eq_m_DsVide = N.modus_ponens(h_x0, eq_retire_ajoute(vm, vx0))   # Eq(m, D⊔{∅})  [bij W]
+    eq_m_DsVide = N.modus_ponens(h_x0, eq_retire_ajoute(vm, vx0))   # Eq(m, D⊔{∅})  CLOS
     card_eq = N.modus_ponens(eq_m_DsVide, _prop1_direct_t(vm, DsVide))  # Card m = Card(D⊔{∅})
 
     # successeur(Card D) = Card(Card D ⊔ {∅})
@@ -443,7 +443,7 @@ def predecesseur_fini_universel_preuve(m="mpred", k="kpred", x0="x0pred"):
     vx0 = var(x0)
     h_x0_in_m = N.assume(appartient(vx0, vm))              # x0 ∈ m
 
-    # m = successeur(Card D)   [bij W]
+    # m = successeur(Card D)
     m_eq_succ = N.modus_ponens(conjonction_intro(card_m, h_x0_in_m),
                                m_egal_successeur_card_diff(vm, vx0))   # m = successeur(Card D)
     # est_cardinal(Card D) — on ALIGNE le liant interne sur celui de est_cardinal (« X »),
@@ -473,12 +473,12 @@ def predecesseur_fini_universel_preuve(m="mpred", k="kpred", x0="x0pred"):
     # ex_x0 lie « z » : on l'α-renomme « z »→x0 pour l'apparier à ex_imp.
     ex_x0_renomme = N.modus_ponens(ex_x0,
         equivalence_avant(alpha_existe("z", x0, appartient(var("z"), vm))))  # (∃x0)(x0∈m)
-    pred_m = N.modus_ponens(ex_x0_renomme, ex_imp)         # predecesseur_fini(m)  [ante, univ]
+    pred_m = N.modus_ponens(ex_x0_renomme, ex_imp)         # predecesseur_fini(m)  [ante]
     assert pred_m.conclusion == predecesseur_fini(vm, k), \
         "predecesseur_fini(m) mal formé après élimination du témoin"
 
     # ── (Fini m et m≠0) ⇒ predecesseur_fini(m), généralisation sur m ────────────
-    corps_concl = N.loi_deduction(ante, pred_m)            # (Fini m et m≠0) ⇒ predecesseur_fini(m)  [univ]
+    corps_concl = N.loi_deduction(ante, pred_m)            # (Fini m et m≠0) ⇒ predecesseur_fini(m)  CLOS
     res = N.generalisation(m, corps_concl)                 # (∀m)( … )
     assert res.conclusion == predecesseur_fini_universel(k=k), \
         "conclusion ≠ predecesseur_fini_universel(k='kpred')"
