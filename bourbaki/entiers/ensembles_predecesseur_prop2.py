@@ -1,8 +1,9 @@
 """§III.5 — PROPOSITION 2 :  « tout entier (cardinal fini) m ≠ 0 est un successeur ».
 
-OBJECTIF (le DERNIER maillon avant ℕ inconditionnel) — fermer le résidu honnête
-`predecesseur_fini_universel` (ensembles_principe_recurrence_preuve), seul report de
-`N_collectivise_vrai` (ensembles_recurrence_vraie) :
+🎯🎯🎯 LE DERNIER MAILLON AVANT ℕ — fermé INCONDITIONNELLEMENT.  Ce module CLÔT le
+résidu honnête `predecesseur_fini_universel` (ensembles_principe_recurrence_preuve),
+seul report de `N_collectivise_vrai` (ensembles_recurrence_vraie), et en déduit
+`N_existe` ⊢ coll(x, Fini x) à 0 HYPOTHÈSE : ℕ EXISTE, INCONDITIONNEL.
 
     predecesseur_fini_universel() :=
         (∀m)( ( Fini m et ¬(m = 0) ) ⇒
@@ -20,22 +21,21 @@ PREUVE (m cardinal fini ≠ 0 ; témoin k := Card(m∖{x0}) pour x0 ∈ m) :
     Card(Card D ⊔ {∅}) = Card(D⊔{∅})      (Eq(Card D, D) ⇒ Card =, somme invariance) ;
     ⇒ m = successeur(Card D).  POSE k := Card D.
   • est_cardinal(k) = est_cardinal(Card D)  (card_est_un_cardinal, INCONDITIONNEL).
-  • k < m :  k ≤ successeur(k) = m (cardinal_inf_egal_successeur) ; k ≠ m (sinon
+  • k < m :  k ≤ successeur(k) = m (_inf_egal_k_successeur) ; k ≠ m (sinon
     m = successeur(m) contredit Fini(m) = (… et m ≠ m+1)).
 
 ────────────────────────────────────────────────────────────────────────────────
-LE CŒUR `eq_retire_ajoute` (la SEULE surgery) :  m = D ∪ {x0} ({x0}⊂m, partie_reunion_
-complement + commutativité) ; Eq(D∪{x0}, D⊔{x0}) (réunion disjointe ≃ somme,
-recollement des injections canoniques — Prop. 10 §II.4) ; Eq({x0},{∅}) (eq_singletons)
-+ Eq(D,D) ⇒ Eq(D⊔{x0}, D⊔{∅}) (eq_somme_invariant) ; transitivité ⇒ Eq(m, D⊔{∅}).
+LE CŒUR `eq_retire_ajoute` (CLOS, 0 hyp) :  m = D ∪ {x0} ({x0}⊂m, partie_reunion_
+complement + commutativité) ; D ∩ {x0} = ∅ ; Eq(D∪{x0}, D⊔{x0}) (réunion disjointe ≃
+somme, Prop. 10 §II.4 — `eq_reunion_disjointe_somme`, CLOS) ; Eq({x0},{∅})
+(eq_singletons) + Eq(D,D) ⇒ Eq(D⊔{x0}, D⊔{∅}) (eq_somme_invariant) ; transitivité ⇒
+Eq(m, D⊔{∅}).
 
-  Le SEUL maillon non encore clos du projet est `est_bijection_de(W, D∪{x0}, D⊔{x0})`
-  (W = recollement des injections canoniques pour deux ensembles DISJOINTS) ; il est
-  ISOLÉ ici comme `bijection_reunion_somme_hyp`, DÉCHARGÉ par loi_deduction, JAMAIS
-  postulé.  Toute son infra (reunion_graphes_fonctionnelle, dom_reunion_graphes,
-  image_reunion_graphes, reunion_graphes_injective) est close (cf.
-  ensembles_recollement_props.reunion_equipotente_somme_si_bijection : « assemblage
-  long laissé à un round dédié »).
+  La bijectivité INCONDITIONNELLE du recollement canonique W (D∪{x0} → D⊔{x0}, sous
+  disjonction) — le « dernier mille » jadis laissé à un round dédié — est désormais
+  PROUVÉE (ensembles_reunion_somme_bijection.eq_reunion_somme, CLOS : les 4 conjoints
+  de est_bijection_de assemblés depuis les copies marquées + l'infra recollement,
+  toutes closes).  Plus AUCUN résidu.
 
 ⚠️ INVARIANT : theorie_ensembles() = 22.  Rien postulé.
 """
@@ -152,38 +152,8 @@ def _eq_somme_invariant_t(ta, tb, ta1, tb1):
 
 
 # ════════════════════════════════════════════════════════════════════════════
-#  CŒUR — surgery « retrait + adjonction d'un point »
-#  La SEULE hypothèse résiduelle ISOLÉE — universelle, FERMÉE, m/x0-INDÉPENDANTE.
+#  CŒUR — surgery « retrait + adjonction d'un point »  (INCONDITIONNEL)
 # ════════════════════════════════════════════════════════════════════════════
-def _W(a, b):
-    """W(A,B) := recollement canonique des injections a↦(a,0), b↦(b,1) (terme)."""
-    from bourbaki.ensembles.familles.ensembles_recollement_props import (
-        bijection_canonique_reunion_somme,
-    )
-    return bijection_canonique_reunion_somme(_t(a), _t(b))
-
-
-def recollement_bijection_universel(a="Are", b="Bre"):
-    """ÉNONCÉ résiduel UNIVERSEL (FERMÉ en A, B, m/x0-INDÉPENDANT) :
-        (∀A)(∀B)( ( A ∩ B = ∅ )  ⇒  est_bijection_de( W(A,B), A∪B, A⊔B ) ),
-    W(A,B) = recollement des injections canoniques a↦(a,0), b↦(b,1).
-
-    ⚠️ RÉSIDU HONNÊTE — la bijectivité du recollement canonique de deux ensembles
-    DISJOINTS (Prop. 10 §II.4, « la réunion d'une famille disjointe est équipotente à
-    sa somme », cas binaire).  Toute l'infra de recollement est CLOSE
-    (reunion_graphes_fonctionnelle, dom_reunion_graphes, image_reunion_graphes,
-    reunion_graphes_injective) ; seul l'ASSEMBLAGE des 4 conjoints de est_bijection_de
-    pour CES graphes-termes reste « laissé à un round dédié »
-    (cf. ensembles_recollement_props.reunion_equipotente_somme_si_bijection).  Posé en
-    HYPOTHÈSE explicite, universelle, FERMÉE, JAMAIS postulée ; theorie=22."""
-    na = a if isinstance(a, str) else a.nom
-    nb = b if isinstance(b, str) else b.nom
-    va, vb = var(na), var(nb)
-    corps = impl(egal(E.intersection(va, vb), E.VIDE),
-                 est_bijection_de(_W(va, vb), E.reunion(va, vb), somme_disjointe(va, vb)))
-    return pourtout(na, pourtout(nb, corps))
-
-
 def _disjoint_diff_singleton(x, x0):
     """⊢ ( (X∖{x0}) ∩ {x0} ) = ∅.   (D et {x0} sont DISJOINTS, D := X∖{x0}.)
 
@@ -201,25 +171,15 @@ def _disjoint_diff_singleton(x, x0):
 
 
 def eq_reunion_disjointe_somme(a, b):
-    """⊢ { recollement_bijection_universel } ⊢ ( A ∩ B = ∅ ) ⇒ Eq(A ∪ B, A ⊔ B).
+    """⊢ ( A ∩ B = ∅ ) ⇒ Eq(A ∪ B, A ⊔ B).   (THÉORÈME CLOS, 0 hyp — Prop. 10 §II.4.)
 
-    La réunion (disjointe) A∪B est équipotente à la somme A⊔B (Prop. 10 §II.4),
-    pour A, B DISJOINTS, MODULO recollement_bijection_universel.  Sous A∩B=∅, l'universel
-    fournit est_bijection_de(W, A∪B, A⊔B) ; reunion_equipotente_somme_si_bijection
-    (CLOS) en tire Eq(A∪B, A⊔B)."""
-    from bourbaki.ensembles.familles.ensembles_recollement_props import (
-        reunion_equipotente_somme_si_bijection,
-    )
-    va, vb = _t(a), _t(b)
-    h_univ = N.assume(recollement_bijection_universel())   # (∀A)(∀B)(A∩B=∅ ⇒ bij W)
-    inst = instancie(instancie(h_univ, va), vb)            # (A∩B=∅) ⇒ est_bijection_de(W,A∪B,A⊔B)
-    disj = egal(E.intersection(va, vb), E.VIDE)
-    h_disj = N.assume(disj)
-    bij = N.modus_ponens(h_disj, inst)                     # est_bijection_de(W, A∪B, A⊔B)  [univ, disj]
-    eq = _cut(reunion_equipotente_somme_si_bijection(va, vb),
-              est_bijection_de(_W(va, vb), E.reunion(va, vb), somme_disjointe(va, vb)),
-              bij)                                          # Eq(A∪B, A⊔B)  [univ, disj]
-    return N.loi_deduction(disj, eq)                       # (A∩B=∅) ⇒ Eq(A∪B, A⊔B)  [univ]
+    La réunion (disjointe) A∪B est équipotente à la somme A⊔B, pour A, B DISJOINTS.
+    Réexporte le théorème CLOS `eq_reunion_somme` (ensembles_reunion_somme_bijection),
+    où la bijectivité INCONDITIONNELLE du recollement canonique W (sous A∩B=∅) est
+    PROUVÉE (les 4 conjoints assemblés depuis les copies marquées + l'infra recollement,
+    toutes closes)."""
+    from bourbaki.cardinaux.ensembles_reunion_somme_bijection import eq_reunion_somme
+    return eq_reunion_somme(_t(a), _t(b))                  # (A∩B=∅) ⇒ Eq(A∪B, A⊔B)  CLOS
 
 
 def singleton_inclus(x0, e):
@@ -241,21 +201,19 @@ def singleton_inclus(x0, e):
 
 
 def eq_retire_ajoute(x, x0):
-    """⊢ { recollement_bijection_universel } ⊢
-         ( x0 ∈ X ) ⇒ Eq( X, (X∖{x0}) ⊔ {∅} ).
+    """⊢ ( x0 ∈ X ) ⇒ Eq( X, (X∖{x0}) ⊔ {∅} ).   (THÉORÈME CLOS, 0 hyp.)
 
     🎯 LE CŒUR de la Proposition 2 : retirer le point x0 de X puis ré-adjoindre la
     marque {∅} redonne un ensemble équipotent à X.  Sous x0∈X :
       • {x0} ⊂ X (singleton_inclus) ⇒ {x0}∪D = X (partie_reunion_complement, D=X∖{x0}) ;
         commutativité ⇒ D∪{x0} = X, d'où X = D∪{x0} ;
       • D ∩ {x0} = ∅ (_disjoint_diff_singleton) ;
-      • Eq(D∪{x0}, D⊔{x0})  (eq_reunion_disjointe_somme sous D∩{x0}=∅, MODULO
-        recollement_bijection_universel) ;
+      • Eq(D∪{x0}, D⊔{x0})  (eq_reunion_disjointe_somme sous D∩{x0}=∅, CLOS — Prop. 10 §II.4) ;
       • réécriture D∪{x0}↦X (Leibniz) ⇒ Eq(X, D⊔{x0}) ;
       • Eq(D,D) (réflexivité) et Eq({x0},{∅}) (eq_singletons) ⇒ Eq(D⊔{x0}, D⊔{∅})
         (eq_somme_invariant) ;
       • transitivité ⇒ Eq(X, D⊔{∅}).
-    Unique hypothèse résiduelle : recollement_bijection_universel."""
+    INCONDITIONNEL (aucune hypothèse résiduelle)."""
     vX, vx0 = _t(x), _t(x0)
     sing = E.singleton(vx0)                                # {x0}
     D = E.difference(vX, sing)                             # D = X∖{x0}
@@ -274,9 +232,9 @@ def eq_retire_ajoute(x, x0):
     comm = _comm_reunion_t(D, sing)                        # D∪{x0} = {x0}∪D
     Dux0_eq_X = composer_egalites(comm, x0uD_eq_X)         # D∪{x0} = X
 
-    # ── Eq(D∪{x0}, D⊔{x0})  [hyp recollement_bijection_universel], via D∩{x0}=∅ ─
+    # ── Eq(D∪{x0}, D⊔{x0})  (CLOS, Prop. 10 §II.4), via D∩{x0}=∅ ────────────────
     disj = _disjoint_diff_singleton(vX, vx0)               # (D∩{x0}) = ∅
-    eq_union_somme = N.modus_ponens(disj, eq_reunion_disjointe_somme(D, sing))  # Eq(D∪{x0}, D⊔{x0})  [univ]
+    eq_union_somme = N.modus_ponens(disj, eq_reunion_disjointe_somme(D, sing))  # Eq(D∪{x0}, D⊔{x0})
     # réécrire D∪{x0} ↦ X  ⇒  Eq(X, D⊔{x0})
     eq_X_somme = N.modus_ponens(eq_union_somme, equivalence_avant(N.modus_ponens(
         Dux0_eq_X, N.s6(Dux0, vX, "w", equipotent(var("w"), DsX0)))))  # Eq(X, D⊔{x0})
@@ -299,8 +257,8 @@ def eq_retire_ajoute(x, x0):
 #  ÉGALITÉ NOYAU :  m = successeur( Card(m∖{x0}) )   sous { Fini m, x0 ∈ m }
 # ════════════════════════════════════════════════════════════════════════════
 def m_egal_successeur_card_diff(m, x0):
-    """⊢ { bijection_reunion_somme_hyp(m∖{x0},{x0}) } ⊢
-         ( est_cardinal(m)  et  x0 ∈ m )  ⇒  ( m = successeur( Card(m∖{x0}) ) ).
+    """⊢ ( est_cardinal(m)  et  x0 ∈ m )  ⇒  ( m = successeur( Card(m∖{x0}) ) ).
+       (THÉORÈME CLOS, 0 hyp.)
 
     Sous est_cardinal(m) et x0∈m, avec D := m∖{x0} :
       • Card m = m            (cardinal_de_cardinal) ;
@@ -440,17 +398,15 @@ def _k_inf_strict_m_t(m_term, k_term):
 #  🎯 PROPOSITION 2 (E.III.5) — predecesseur_fini_universel
 # ════════════════════════════════════════════════════════════════════════════
 def predecesseur_fini_universel_preuve(m="mpred", k="kpred", x0="x0pred"):
-    """⊢ { bijection_reunion_somme_hyp(m∖{x0},{x0}) } ⊢ predecesseur_fini_universel().
+    """🎯🎯 ⊢ predecesseur_fini_universel().   (THÉORÈME CLOS, 0 hyp.)
 
-    🎯 La PROPOSITION 2 §III.5 « tout entier ≠ 0 est un successeur », sous l'UNIQUE
-    hypothèse résiduelle isolée bijection_reunion_somme_hyp (bijectivité du recollement
-    canonique D∪{x0} → D⊔{x0} pour D, {x0} disjoints).  Conclusion ÉGALE LITTÉRALEMENT
-    predecesseur_fini_universel(k='kpred').
+    La PROPOSITION 2 §III.5 « tout entier ≠ 0 est un successeur », INCONDITIONNELLE.
+    Conclusion ÉGALE LITTÉRALEMENT predecesseur_fini_universel(k='kpred').
 
     Sous Fini(m) et m≠0 :  Fini(m) ⇒ est_cardinal(m) ; m≠∅ ⇒ (∃x0)(x0∈m), témoin x0 ;
     k := Card(m∖{x0}) ; m = successeur(k) (m_egal_successeur_card_diff) ;
-    est_cardinal(k) (card_est_un_cardinal) ; k < m (_k_inf_strict_m) ; ∃-introduction
-    du témoin k ; généralisation sur m et décharge de l'antécédent."""
+    est_cardinal(k) (card_est_un_cardinal) ; k < m (_k_inf_strict_m_t) ; ∃-introduction
+    du témoin k ; généralisation sur m et décharge de l'antécédent.  theorie=22."""
     vm = var(m)
     sing0 = E.singleton(var(x0))                           # {x0}
     D = E.difference(vm, sing0)                            # D = m∖{x0}
@@ -511,7 +467,7 @@ def predecesseur_fini_universel_preuve(m="mpred", k="kpred", x0="x0pred"):
     assert ex_k.conclusion == cible_pred, "∃-intro du témoin Card D ne donne pas predecesseur_fini(m)"
 
     # ── décharge PROPRE du témoin x0 (x0 NON libre dans la conclusion ni dans les
-    #    hypothèses ouvertes : ante sans x0, recollement_bijection_universel FERMÉ) ──
+    #    hypothèses ouvertes : ante sans x0, et le CŒUR eq_retire_ajoute est CLOS) ──
     imp_x0 = N.loi_deduction(appartient(vx0, vm), ex_k)    # (x0∈m) ⇒ predecesseur_fini(m)
     ex_imp = existe_elimination(imp_x0, x0)                # (∃x0)(x0∈m) ⇒ predecesseur_fini(m)
     # ex_x0 lie « z » : on l'α-renomme « z »→x0 pour l'apparier à ex_imp.
@@ -523,45 +479,39 @@ def predecesseur_fini_universel_preuve(m="mpred", k="kpred", x0="x0pred"):
 
     # ── (Fini m et m≠0) ⇒ predecesseur_fini(m), généralisation sur m ────────────
     corps_concl = N.loi_deduction(ante, pred_m)            # (Fini m et m≠0) ⇒ predecesseur_fini(m)  [univ]
-    res = N.generalisation(m, corps_concl)                 # (∀m)( … )  [univ]
+    res = N.generalisation(m, corps_concl)                 # (∀m)( … )
     assert res.conclusion == predecesseur_fini_universel(k=k), \
         "conclusion ≠ predecesseur_fini_universel(k='kpred')"
-    return res                                             # [recollement_bijection_universel]
+    return res                                             # CLOS, 0 hyp
 
 
 # ════════════════════════════════════════════════════════════════════════════
 #  🎯🎯 ℕ EXISTE — N_collectivise_vrai DÉCHARGÉ de predecesseur_fini_universel
 # ════════════════════════════════════════════════════════════════════════════
 def N_existe(a="a", x="x", c="c", b="b", Y="y", k="kpred"):
-    """🎯🎯 ⊢ { recollement_bijection_universel } ⊢ coll(x, Fini x).
+    """🎯🎯🎯 ⊢ coll(x, Fini x).   (THÉORÈME CLOS, 0 hyp — ℕ EXISTE, INCONDITIONNEL.)
 
-    L'ensemble ℕ des entiers naturels EXISTE (Théorème 1, E.III.6.1), sous l'UNIQUE
-    résidu `recollement_bijection_universel` (bijectivité du recollement canonique de
-    deux ensembles DISJOINTS, Prop. 10 §II.4 — infra 100 % close, assemblage laissé à
-    un round dédié).
-
-    `N_collectivise_vrai` (ensembles_recurrence_vraie) conclut coll(x, Fini x) sous le
-    SEUL résidu `predecesseur_fini_universel` (Prop. 2 §III.5).  Ce module FERME Prop. 2
-    modulo `recollement_bijection_universel` (predecesseur_fini_universel_preuve).  On
-    DÉCHARGE donc predecesseur_fini_universel par notre preuve : coll(x, Fini x) tient
-    sous le SEUL `recollement_bijection_universel`.  Si ce dernier était postulé/clos, ℕ
-    serait INCONDITIONNEL.  theorie=22, rien postulé."""
+    L'ensemble ℕ des entiers naturels EXISTE (Théorème 1, E.III.6.1), SANS AUCUNE
+    hypothèse.  `N_collectivise_vrai` (ensembles_recurrence_vraie) conclut coll(x,Fini x)
+    sous le SEUL résidu `predecesseur_fini_universel` (Prop. 2 §III.5) ; ce module ferme
+    Prop. 2 INCONDITIONNELLEMENT (predecesseur_fini_universel_preuve, CLOS).  On DÉCHARGE
+    donc predecesseur_fini_universel par notre preuve close ⇒ coll(x, Fini x) à 0 hyp.
+    theorie=22, rien postulé."""
     from bourbaki.entiers.ensembles_recurrence_vraie import N_collectivise_vrai
     from bourbaki.entiers.ensembles_N_collectivise import _coll_fini
     ncv = N_collectivise_vrai(a, x, c, b, Y)               # coll(x,Fini x)  [predecesseur_fini_universel]
     pfu = predecesseur_fini_universel(k=k)                 # le résidu de N_collectivise_vrai
     assert pfu in ncv.hypotheses, \
         "predecesseur_fini_universel absent des hypothèses de N_collectivise_vrai (forme ?)"
-    preuve_pfu = predecesseur_fini_universel_preuve(k=k)   # ⊢ pfu  [recollement_bijection_universel]
+    preuve_pfu = predecesseur_fini_universel_preuve(k=k)   # ⊢ pfu  (CLOS, 0 hyp)
     assert preuve_pfu.conclusion == pfu, \
         "predecesseur_fini_universel_preuve ne conclut pas le résidu attendu"
-    res = _cut(ncv, pfu, preuve_pfu)                       # coll(x,Fini x)  [recollement_bijection_universel]
+    res = _cut(ncv, pfu, preuve_pfu)                       # coll(x,Fini x)  (CLOS, 0 hyp)
     assert res.conclusion == _coll_fini(x), "N_existe : conclusion ≠ coll(x, Fini x)"
     return res
 
 
 __all__ = [
-    "recollement_bijection_universel",
     "eq_reunion_disjointe_somme", "singleton_inclus", "eq_retire_ajoute",
     "m_egal_successeur_card_diff", "_k_inf_strict_m", "_k_inf_strict_m_t",
     "predecesseur_fini_universel_preuve",
