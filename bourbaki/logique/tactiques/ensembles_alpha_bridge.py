@@ -49,23 +49,90 @@ sous un terme.  Ce cas n'apparaît pas pour le verrou ℵ₀ (les atomes devienn
 from __future__ import annotations
 
 from bourbaki.logique.formule import (
-    Formule, var, existe, subst_f, libres_f, alpha_egal, _fraiche,
+    Formule, Terme, var, tau, subst_f, alpha_egal,
 )
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.logique.tactiques.tactiques_abrege import a_implique_a
+from bourbaki.logique.tactiques.tactiques_abrege import a_implique_a, syllogisme
 from bourbaki.logique.tactiques.tactiques_abrege2 import (
     conjonction_intro, equiv_neg, ou_congruence, equivalence_transitivite,
-    equivalence_avant,
+    equivalence_symetrie, equivalence_avant,
 )
 from bourbaki.logique.tactiques.tactiques_abrege_quantif import (
-    alpha_existe, congruence_existe,
+    congruence_existe, existe_elimination,
 )
+
+
+def _vars_t(t: Terme, acc: set) -> None:
+    """Collecte TOUTES les variables d'un terme — LIBRES *ET* LIÉES (liants τ inclus)."""
+    if t.tag == "var":
+        acc.add(t.nom)
+    elif t.tag == "tau":
+        acc.add(t.lieur)                 # liant τ (capital : on l'évite aussi)
+        _vars_f(t.args[0], acc)
+    else:                                # 'app'
+        for a in t.args:
+            _vars_t(a, acc)
+
+
+def _vars_f(f: Formule, acc: set) -> None:
+    """Collecte TOUTES les variables d'une formule — LIBRES *ET* LIÉES (∃ inclus)."""
+    for t in f.termes:
+        _vars_t(t, acc)
+    if f.tag == "exists":
+        acc.add(f.lieur)                 # liant ∃
+    for g in f.sous:
+        _vars_f(g, acc)
+
+
+def _fraiche_totale(fs) -> str:
+    """Nom EXOTIQUE « @k » évitant TOUTES les variables (libres ET liées) des formules fs.
+
+    `formule._fraiche` n'évite que les variables LIBRES ; or les τ-termes profonds (NN,
+    successeur) contiennent des liants INTERNES « @0 » (issus d'un capture-évitement
+    antérieur).  Renommer un liant ∃ vers un tel « @0 » déclencherait à nouveau le
+    capture-évitement (→ structure divergente).  On évite donc AUSSI les liants."""
+    eviter = set()
+    for f in fs:
+        _vars_f(f, eviter)
+    k = 0
+    while True:
+        c = "@" + str(k)
+        if c not in eviter:
+            return c
+        k += 1
 
 
 def _refl_equiv(f: Formule):
     """⊢ F ⇔ F   (réflexivité de l'équivalence : (F⇒F) et (F⇒F))."""
     aa = a_implique_a(f)
     return conjonction_intro(aa, aa)
+
+
+def _alpha_existe_exact(b: str, c: str, gb: Formule):
+    """⊢ (∃b)gb ⇔ (∃c)(c|b)gb,   AVEC LES DEUX CÔTÉS STRUCTURELLEMENT EXACTS.
+
+    `tactiques_abrege_quantif.alpha_existe` n'est PAS fiable ici : son sens DIRECT
+    passe par le ROND-TRIP `(b|c)(c|b)gb`, et si le NOM b coïncide avec un τ-liant
+    INTERNE à gb (cas du verrou : la cible lie « u » alors que NN/successeur lient « u »
+    en interne), la deuxième substitution re-substitue « b » → le capture-évitement
+    renomme le liant interne en « @k » → résultat α-équivalent mais ≠ structurellement.
+
+    On reconstruit donc les deux implications SANS rond-trip, à partir des SEULES
+    primitives S5 et témoin-∃ (existe_temoin), dont la sortie est exacte :
+      • SENS DIRECT  (∃b)gb ⇒ (∃c)(c|b)gb :
+            existe_temoin(gb,b) : (∃b)gb ⇒ (W|b)gb   où W = τb(gb) ;
+            s5((c|b)gb, W, c)   : (W|c)(c|b)gb ⇒ (∃c)(c|b)gb ;
+            or (W|c)(c|b)gb = (W|b)gb  (c neuf ⇒ pas de capture) → syllogisme.
+      • SENS RÉCIPROQUE  (∃c)(c|b)gb ⇒ (∃b)gb :
+            s5(gb, var(c), b) : (c|b)gb ⇒ (∃b)gb ;  existe_elimination(·, c).
+    Les deux sens ne substituent JAMAIS le nom b (qui collisionne) — seul c (neuf) et
+    le témoin canonique W interviennent, donc AUCUNE @k-injection.  SOUND (S5, témoin-∃,
+    existe_elimination sont déjà certifiés)."""
+    gb_c = subst_f(var(c), b, gb)                # (c|b)gb
+    W = tau(b, gb)                               # témoin canonique τb(gb)
+    fwd = syllogisme(N.existe_temoin(gb, b), N.s5(gb_c, W, c))   # (∃b)gb ⇒ (∃c)(c|b)gb
+    bwd = existe_elimination(N.s5(gb, var(c), b), c)             # (∃c)(c|b)gb ⇒ (∃b)gb
+    return conjonction_intro(fwd, bwd)
 
 
 def bridge_equiv(f: Formule, g: Formule):
@@ -91,16 +158,16 @@ def bridge_equiv(f: Formule, g: Formule):
         b, gb = g.lieur, g.sous[0]
         if a == b:                               # même liant → congruence directe
             return congruence_existe(bridge_equiv(fb, gb), a)
-        # liants distincts : on renomme LES DEUX vers un nom FRAIS EXOTIQUE c.
-        eviter = libres_f(fb) | libres_f(gb) | {a, b}
-        c = _fraiche(eviter)                     # « @k » — jamais un liant interne
+        # liants distincts : on renomme LES DEUX vers un nom FRAIS EXOTIQUE c, évitant
+        # TOUTES les variables (libres ET liées) des deux corps — sinon un liant ∃ pourrait
+        # tomber sur un liant interne « @k » et re-déclencher le capture-évitement.
+        c = _fraiche_totale((fb, gb))            # « @k » — jamais un liant (même interne)
         fb_c = subst_f(var(c), a, fb)            # (c|a)Fb  (c neuf ⇒ pas de @-injection)
         gb_c = subst_f(var(c), b, gb)            # (c|b)Gb
-        eq_f = alpha_existe(a, c, fb)            # (∃a)Fb ⇔ (∃c)(c|a)Fb
-        eq_g = alpha_existe(b, c, gb)            # (∃b)Gb ⇔ (∃c)(c|b)Gb
+        eq_f = _alpha_existe_exact(a, c, fb)     # (∃a)Fb ⇔ (∃c)(c|a)Fb  (exact des 2 côtés)
+        eq_g = _alpha_existe_exact(b, c, gb)     # (∃b)Gb ⇔ (∃c)(c|b)Gb  (exact des 2 côtés)
         eq_mid = congruence_existe(bridge_equiv(fb_c, gb_c), c)  # (∃c)(c|a)Fb ⇔ (∃c)(c|b)Gb
         # (∃a)Fb ⇔ (∃c)(c|a)Fb ⇔ (∃c)(c|b)Gb ⇔ (∃b)Gb
-        from bourbaki.logique.tactiques.tactiques_abrege2 import equivalence_symetrie
         chaine = equivalence_transitivite(eq_f, eq_mid)
         return equivalence_transitivite(chaine, equivalence_symetrie(eq_g))
 
