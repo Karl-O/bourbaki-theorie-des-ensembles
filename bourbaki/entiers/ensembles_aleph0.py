@@ -79,6 +79,18 @@ from bourbaki.entiers.ensembles_ensemble_NN import (
     zero_dans_NN, NN_clos_successeur,
 )
 
+# ── briques pour la chirurgie de cardinal (surgery GÉNÉRALE, SANS est_cardinal) ──
+from bourbaki.entiers.ensembles_predecesseur_prop2 import (
+    eq_retire_ajoute, _eq_sym_t, _eq_son_cardinal, _eq_somme_invariant_t,
+)
+from bourbaki.cardinaux.arithmetique.ensembles_prop8_successeur import (
+    successeur_egale_card_somme,
+)
+from bourbaki.cardinaux.arithmetique.ensembles_arith_cardinale import _prop1_direct_t
+from bourbaki.cardinaux.ensembles_equipotence import equipotence_reflexive
+from bourbaki.ensembles.familles.ensembles_somme_disjointe import somme_disjointe
+from bourbaki.logique.tactiques.tactiques_abrege2 import conjonction_intro as _conj_intro
+
 
 def _t(t):
     """Coercion str/Terme → Terme."""
@@ -108,6 +120,53 @@ def aleph_0():
 
     Le cardinal de l'ensemble concret NN = { x | Fini x } des entiers naturels."""
     return cardinal(ensemble_NN())
+
+
+# ════════════════════════════════════════════════════════════════════════════
+#  CHIRURGIE GÉNÉRALE — Card X = successeur( Card(X∖{x0}) )  pour x0 ∈ X
+#  (variante de m_egal_successeur_card_diff SANS est_cardinal(X) : vaut pour TOUT
+#   ensemble X, en particulier X = NN qui n'est PAS un cardinal.)
+# ════════════════════════════════════════════════════════════════════════════
+def card_egal_succ_card_diff(X, x0):
+    """⊢ ( x0 ∈ X ) ⇒ Card X = successeur( Card(X ∖ {x0}) ).   (THÉORÈME, version GÉNÉRALE.)
+
+    Mirroir de `m_egal_successeur_card_diff` (ensembles_predecesseur_prop2) PRIVÉ de
+    l'étape « Card m = m » (qui exigeait est_cardinal(m)) : pour un ENSEMBLE QUELCONQUE
+    X avec x0∈X, D := X∖{x0}, on a — par la chirurgie retrait+adjonction —
+      Card X = Card(D⊔{∅})   (Eq(X,D⊔{∅}) via eq_retire_ajoute ⇒ Card =, _prop1_direct_t) ;
+      Card(D⊔{∅}) = Card(Card D ⊔ {∅})   (Eq(Card D, D) ⇒ Card =, somme invariante) ;
+      Card(Card D ⊔ {∅}) = successeur(Card D)   (successeur_egale_card_somme) ;
+    d'où Card X = successeur(Card D).  CLOS modulo la seule hyp honnête x0∈X.  theorie=22."""
+    vX, vx0 = _t(X), _t(x0)
+    sing = E.singleton(vx0)
+    D = E.difference(vX, sing)                             # D = X∖{x0}
+    cD = cardinal(D)                                       # Card D
+    sing_vide = E.singleton(E.VIDE)                        # {∅}
+    DsVide = somme_disjointe(D, sing_vide)                 # D ⊔ {∅}
+    cDsVide = cardinal(DsVide)                             # Card(D⊔{∅})
+    cDsVide_card = somme_disjointe(cD, sing_vide)          # Card D ⊔ {∅}
+
+    h = N.assume(appartient(vx0, vX))                      # x0 ∈ X
+    # Eq(X, D⊔{∅}) ⇒ Card X = Card(D⊔{∅})
+    eq_X_DsVide = N.modus_ponens(h, eq_retire_ajoute(vX, vx0))          # Eq(X, D⊔{∅})  CLOS
+    card_eq = N.modus_ponens(eq_X_DsVide, _prop1_direct_t(vX, DsVide))  # Card X = Card(D⊔{∅})
+    # successeur(Card D) = Card(Card D ⊔ {∅})
+    succ_eq = successeur_egale_card_somme(cD)              # succ(Card D) = Card(Card D ⊔ {∅})
+    # Card(Card D ⊔ {∅}) = Card(D⊔{∅})  via Eq(Card D, D)
+    eq_cardD_D = N.modus_ponens(_eq_son_cardinal(D), _eq_sym_t(D, cD))  # Eq(Card D, D)
+    eq_vide = instancie(N.generalisation("X", equipotence_reflexive("X")), sing_vide)  # Eq({∅},{∅})
+    inv = _eq_somme_invariant_t(cD, sing_vide, D, sing_vide)
+    eq_sommes = N.modus_ponens(conjonction_intro(eq_cardD_D, eq_vide), inv)  # Eq(Card D⊔{∅}, D⊔{∅})
+    card_sommes_eq = N.modus_ponens(eq_sommes, _prop1_direct_t(cDsVide_card, DsVide))  # Card(CardD⊔{∅})=Card(D⊔{∅})
+
+    # chaîne : Card X = Card(D⊔{∅}) = Card(Card D ⊔ {∅}) = successeur(Card D)
+    card_DsVide_eq = N.modus_ponens(card_sommes_eq, symetrie(cardinal(cDsVide_card), cDsVide))  # Card(D⊔{∅})=Card(CardD⊔{∅})
+    chain = composer_egalites(card_eq, card_DsVide_eq)     # Card X = Card(Card D ⊔ {∅})
+    card_card_eq_succ = N.modus_ponens(succ_eq, symetrie(successeur(cD), cardinal(cDsVide_card)))  # Card(CardD⊔{∅})=succ(CardD)
+    cardX_eq_succ = composer_egalites(chain, card_card_eq_succ)  # Card X = successeur(Card D)
+    assert cardX_eq_succ.conclusion == egal(cardinal(vX), successeur(cD)), \
+        "card_egal_succ_card_diff : conclusion ≠ (Card X = successeur(Card(X∖{x0})))"
+    return N.loi_deduction(appartient(vx0, vX), cardX_eq_succ)  # (x0∈X) ⇒ Card X = successeur(Card(X∖{x0}))
 
 
 # ════════════════════════════════════════════════════════════════════════════
