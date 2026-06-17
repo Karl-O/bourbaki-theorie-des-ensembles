@@ -19,6 +19,7 @@ def test_theorie_reste_22():
     assert len(E.theorie_ensembles().axiomes) == 22
     # appel des constructions principales
     C.union_famille_fonctionnelle()
+    C.valeur_union_famille()
     C.extension_un_pas_union_fonctionnelle()
     assert len(E.theorie_ensembles().axiomes) == 22
 
@@ -43,6 +44,24 @@ def test_union_famille_fonctionnelle():
     # UNE hypothèse honnête, EXACTEMENT famille_compatible(𝔇)
     assert len(r.hypotheses) == 1
     assert C.famille_compatible(vD) in r.hypotheses
+    # non vacuous
+    assert r.conclusion not in r.hypotheses
+    assert len(E.theorie_ensembles().axiomes) == 22
+
+
+def test_valeur_union_famille():
+    """Transfert de valeur : { compat, p∈𝔇, u∈dom p } ⊢ valeur(⋃𝔇,u)=valeur(p,u)  [3 hyps]."""
+    r = C.valeur_union_famille()
+    vD, vp, vu = var("Df"), var("pcf"), var("u")
+    U = C.union_famille(vD)
+    # conclusion EXACTE
+    assert r.conclusion == egal(E.valeur(U, vu), E.valeur(vp, vu))
+    # TROIS hypothèses honnêtes
+    assert len(r.hypotheses) == 3
+    from bourbaki.logique.formule import appartient
+    assert C.famille_compatible(vD) in r.hypotheses
+    assert appartient(vp, vD) in r.hypotheses
+    assert appartient(vu, E.dom(vp)) in r.hypotheses
     # non vacuous
     assert r.conclusion not in r.hypotheses
     assert len(E.theorie_ensembles().axiomes) == 22

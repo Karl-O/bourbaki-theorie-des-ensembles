@@ -254,6 +254,85 @@ def union_famille_fonctionnelle(D="Df", p="pcf", q="qcf",
 
 
 # ════════════════════════════════════════════════════════════════════════════
+#  TRANSFERT DE VALEUR DANS LA RÉUNION D'UNE FAMILLE  (la version FAMILLE de
+#  `valeur_essai_reunion` ; brique de l'équation de récursion au point x).
+# ════════════════════════════════════════════════════════════════════════════
+def _membre_dans_union(D, p, c, hpD, hcp):
+    """De ⊢ p∈𝔇 [hpD] et ⊢ c∈p [hcp] déduit ⊢ c∈⋃𝔇  (introduction réunion-famille).
+
+    Motif Zermelo `_couple_dans_union_intro` : un témoin p∈𝔇 contenant c suffit."""
+    vD, vp, vc = _t(D), _t(p), _t(c)
+    corps_temoin = conjonction_intro(hpD, hcp)                  # p∈𝔇 et c∈p
+    R = et(appartient(var("punion"), vD), appartient(vc, var("punion")))
+    ex = N.modus_ponens(corps_temoin, N.s5(R, vp, "punion"))   # (∃p)(p∈𝔇 et c∈p)
+    return N.modus_ponens(ex, equivalence_arriere(_inst_union_famille(vD, vc)))  # c∈⋃𝔇
+
+
+def valeur_union_famille(D="Df", p="pcf", u="u", q="qcf"):
+    """{ famille_compatible(𝔇), p∈𝔇, u∈dom(p) }
+        ⊢ valeur( ⋃𝔇, u ) = valeur( p, u )                              [3 hyps honnêtes].
+
+    🎯 TRANSFERT DE VALEUR (version FAMILLE de `valeur_essai_reunion`).  La réunion
+    ⋃𝔇 d'une famille compatible COÏNCIDE, sur le domaine de chaque membre p, avec p :
+    en u∈dom p, ⋃𝔇 rend la même valeur que l'essai p.  DONC l'équation de récursion
+    d'un essai PASSE À LA RÉUNION (brique de l'équation au point x du pas (iii)).
+
+    PREUVE : (i) ⋃𝔇 fonctionnel ; (u, valeur(p,u))∈p (valeur_dans_graphe sous u∈dom p) ;
+    p∈𝔇 ⇒ (u,valeur(p,u))∈⋃𝔇 (_membre_dans_union) ; valeur_caracterisation(⋃𝔇,u)
+    instanciée donne valeur(⋃𝔇,u)=valeur(p,u).
+
+    ⚠️ TROIS hypothèses HONNÊTES (theorie=22), déchargées par loi_deduction :
+      famille_compatible(𝔇) (cohérence), p∈𝔇 (p est un essai de la famille), u∈dom p
+      (u est dans le domaine de cet essai).  Conclusion ∉ hypothèses (non vacuous)."""
+    from bourbaki.ensembles.fonctions.ensembles_fonctions import (
+        valeur_dans_graphe, valeur_caracterisation,
+    )
+    from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie
+    vD, vp, vu = _t(D), _t(p), _t(u)
+    U = union_famille(vD)
+    pu = E.valeur(vp, vu)                                   # valeur(p,u)
+
+    # (i) ⋃𝔇 fonctionnel  (sous famille_compatible(𝔇))
+    func_U = union_famille_fonctionnelle(D, p, q)          # [famille_compatible(𝔇)]
+    func_U_form = E.est_fonctionnel(U)
+
+    # u∈dom p ⇒ (∃y)((u,y)∈p) ⇒ (u, valeur(p,u))∈p
+    h_udomp = N.assume(appartient(vu, E.dom(vp)))          # u∈dom p   [HONNÊTE]
+    ax_dom = N.axiome(E.theorie_ensembles(), E.AXIOME_DOM)
+    car_dom = instancie(instancie(ax_dom, vp), vu)         # u∈dom p ⇔ (∃y)((u,y)∈p)
+    ex_p = N.modus_ponens(h_udomp, equivalence_avant(car_dom))   # (∃y)((u,y)∈p)
+    u_pu_p = N.modus_ponens(ex_p, N.loi_deduction(
+        existe("y", appartient(E.couple(vu, var("y")), vp)),
+        valeur_dans_graphe(vp, vu)))                       # (u, valeur(p,u))∈p
+
+    # p∈𝔇 ⇒ (u,valeur(p,u))∈⋃𝔇
+    h_pD = N.assume(appartient(vp, vD))                    # p∈𝔇   [HONNÊTE]
+    u_pu_U = _membre_dans_union(vD, vp, E.couple(vu, pu), h_pD, u_pu_p)   # (u,valeur(p,u))∈⋃𝔇
+
+    # valeur_caracterisation(⋃𝔇, u) instancié à y:=valeur(p,u)
+    vc = valeur_caracterisation(U, vu)                     # hyps : func(⋃𝔇), (∃y)((u,y)∈⋃𝔇)
+    vc_pu = instancie(N.generalisation("y", vc), pu)       # ((u,valeur(p,u))∈⋃𝔇) ⇔ (valeur(p,u)=valeur(⋃𝔇,u))
+    pu_eq = N.modus_ponens(u_pu_U, equivalence_avant(vc_pu))   # valeur(p,u)=valeur(⋃𝔇,u)
+    res = N.modus_ponens(pu_eq, symetrie(pu, E.valeur(U, vu)))  # valeur(⋃𝔇,u)=valeur(p,u)
+
+    # décharge les hypothèses de valeur_caracterisation : func(⋃𝔇) [par (i)] et
+    # (∃y)((u,y)∈⋃𝔇) [par S5 sur u_pu_U].
+    ex_U = N.modus_ponens(u_pu_U, N.s5(appartient(E.couple(vu, var("y")), U), pu, "y"))
+    res = N.modus_ponens(func_U, N.loi_deduction(func_U_form, res))   # décharge func(⋃𝔇) par (i)
+    res = N.modus_ponens(ex_U, N.loi_deduction(
+        existe("y", appartient(E.couple(vu, var("y")), U)), res))     # décharge (∃y)((u,y)∈⋃𝔇)
+
+    cible = egal(E.valeur(U, vu), pu)
+    assert res.conclusion == cible, "valeur_union_famille : ≠ valeur(⋃𝔇,u)=valeur(p,u)"
+    compat_form = famille_compatible(vD, p, q)
+    assert compat_form in res.hypotheses, "valeur_union_famille : compatibilité absente"
+    assert appartient(vp, vD) in res.hypotheses, "valeur_union_famille : p∈𝔇 absente"
+    assert appartient(vu, E.dom(vp)) in res.hypotheses, "valeur_union_famille : u∈dom p absente"
+    assert res.conclusion not in res.hypotheses, "valeur_union_famille : VACUOUS"
+    return res
+
+
+# ════════════════════════════════════════════════════════════════════════════
 #  (iii) 🎯 RECOLLEMENT-FAMILLE + EXTENSION D'UN PAS, moitié FONCTIONNALITÉ.
 #  est_fonctionnel( ⋃𝔇 ∪ {(x,v)} )  sous  { famille_compatible(𝔇), dom(⋃𝔇)=seg(R,E,x) }.
 # ════════════════════════════════════════════════════════════════════════════
@@ -309,6 +388,8 @@ __all__ = [
     "famille_compatible",
     # (i) 🎯 family-union-functional (le cœur réutilisable, 1 hyp honnête)
     "union_famille_fonctionnelle",
+    # transfert de valeur dans la réunion-famille (3 hyps honnêtes)
+    "valeur_union_famille",
     # (iii) 🎯 recollement-famille + extension d'un pas (2 hyps honnêtes)
     "extension_un_pas_union_fonctionnelle",
 ]
