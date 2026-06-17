@@ -93,7 +93,10 @@ from bourbaki.ordre.ensembles_c60_coeur import (
 )
 from bourbaki.ordre.ensembles_c60_existence_close import (
     singleton_couple_fonctionnel, dom_singleton_couple, domaines_essai_disjoints,
-    dom_essai, est_essai, couvert_essai,
+    dom_essai, est_essai, couvert_essai, couverture_essais_via_c59,
+)
+from bourbaki.ordre.ensembles_recursion_transfinie_existence import (
+    couverture_totale, heredite_couverture,
 )
 
 
@@ -587,6 +590,158 @@ def couvert_essai_depuis_famille(vh, D="Df", G="G", e="E", x="x0", v="v0", z="ze
     return res
 
 
+# ════════════════════════════════════════════════════════════════════════════
+#  🎯 ÉTAPE 3 — EXISTENCE C60, via la RÉALISATION DE LA FAMILLE des essais.
+#
+#  La famille D=Dfam(x) des essais des y<x est ici un TERME PARAMÉTRÉ par x (le
+#  RÉSIDU honnête : sa collectivisation par S8 sur 𝔓(E×V) à partir de l'existence
+#  per-y `(∀y∈seg)(∃p_y)(est_essai(p_y,y))`, et la preuve dom(⋃Dfam(x))=seg, restent
+#  à construire — voir le rapport en bas).  `realisation_famille` PAQUETTE en UNE
+#  hypothèse honnête les 5 propriétés de Dfam(x) dont `couvert_essai_depuis_famille`
+#  a montré qu'elles SUFFISENT — c'est la RÉDUCTION exacte de l'hérédité de couverture.
+# ════════════════════════════════════════════════════════════════════════════
+def _proprietes_famille(Dfam, vval, vh, G, e, x):
+    """Les 5 propriétés HONNÊTES de la famille Dfam(x) au point x (conjonction) :
+
+      membres_fonctionnels(Dfam(x)) ∧ coincidence_membres(Dfam(x))
+      ∧ dom(⋃Dfam(x)) = seg(R,E,x) ∧ recursion_sur_segment(Dfam(x),…) ∧ vval(x)=vh(x).
+
+    Ce sont EXACTEMENT les 5 hyps de `couvert_essai_depuis_famille` (fonctionnalité +
+    cohésion-valeur des essais ⇐ `solutions_coincident`, couverture des y<x, récursion
+    déjà satisfaite sur le segment, équation au nouveau point)."""
+    R = _graphe_R(G)
+    Dx = Dfam(x)
+    Ux = union_famille(Dx)
+    seg = E.segment_extremite(R, _t(e), x)
+    return et(et(et(et(
+        membres_fonctionnels(Dx),
+        coincidence_membres(Dx)),
+        egal(E.dom(Ux), seg)),
+        recursion_sur_segment(Dx, vh, G, e, x)),
+        equation_au_point(vval(x), vh, x))
+
+
+def realisation_famille(Dfam, vval, vh, G="G", e="E", x="x0tf", y="ytf"):
+    """RÉSIDU HONNÊTE — la RÉALISABILITÉ de la famille des essais :
+
+      (∀x)( x∈E ⇒ ( (∀y)(y∈seg(R,E,x) ⇒ couvert_essai[y]) ⇒ propriétés(Dfam(x)) ) ).
+
+    « Pour tout x∈E dont tous les y<x sont couverts, la famille Dfam(x) des essais des
+    y<x REALISE ses 5 propriétés (fonctionnalité, cohésion-valeur, dom=seg, récursion-
+    sur-segment, valeur au point). »  C'est LE RÉSIDU exact : sa preuve demande la
+    COLLECTIVISATION par S8 de la famille des essais des y<x (à partir de l'existence
+    per-y) et la COUVERTURE des segments dom(⋃Dfam(x))=seg(R,E,x).  HYPOTHÈSE HONNÊTE.
+
+    Dfam, vval : fonctions Python (Terme x) → (Terme) ; vh : règle Terme→Terme."""
+    R = _graphe_R(G)
+    ve = _t(e)
+    couvert = couvert_essai(vh, R, ve)
+    vx = var(x)
+    seg = E.segment_extremite(R, ve, vx)
+    antec = pourtout(y, impl(appartient(var(y), seg), couvert(var(y))))
+    return pourtout(x, impl(appartient(vx, ve),
+                            impl(antec, _proprietes_famille(Dfam, vval, vh, G, e, vx))))
+
+
+def heredite_couverture_realisee(Dfam, vval, vh, G="G", e="E",
+                                 x="x0tf", y="ytf", z="zess", p="pess"):
+    """{ realisation_famille(Dfam, vval, vh, R, E) }
+        ⊢ heredite_couverture(couvert_essai, R, E)                  [1 hyp honnête].
+
+    🎯 LA DÉCHARGE DE L'HÉRÉDITÉ DE COUVERTURE.  Pour x∈E avec tous les y<x couverts,
+    `realisation_famille` fournit les 5 propriétés de Dfam(x), que
+    `couvert_essai_depuis_famille` transforme en couvert_essai[x] (construction de
+    l'essai p_x' = ⋃Dfam(x) ∪ {(x,vval(x))}).  L'hérédité de couverture (E6) en sort.
+
+    ⚠️ UNE hypothèse HONNÊTE (le RÉSIDU `realisation_famille` : collectivisation des
+    essais + couverture des segments).  Non vacuous."""
+    R = _graphe_R(G)
+    ve = _t(e)
+    couvert = couvert_essai(vh, R, ve)
+    vx = var(x)
+    seg = E.segment_extremite(R, ve, vx)
+    antec = pourtout(y, impl(appartient(var(y), seg), couvert(var(y))))
+
+    h_real = N.assume(realisation_famille(Dfam, vval, vh, G, e, x, y))
+    h_xE = N.assume(appartient(vx, ve))
+    h_antec = N.assume(antec)
+    # 5 propriétés de Dfam(x)
+    r5 = N.modus_ponens(h_antec, N.modus_ponens(h_xE, instancie(h_real, vx)))
+    c5 = conjonction_elim_droite(r5)
+    c4 = conjonction_elim_droite(conjonction_elim_gauche(r5))
+    c3 = conjonction_elim_droite(conjonction_elim_gauche(conjonction_elim_gauche(r5)))
+    c2 = conjonction_elim_droite(conjonction_elim_gauche(conjonction_elim_gauche(conjonction_elim_gauche(r5))))
+    c1 = conjonction_elim_gauche(conjonction_elim_gauche(conjonction_elim_gauche(conjonction_elim_gauche(r5))))
+
+    Dx = Dfam(vx)
+    Ux = union_famille(Dx)
+    cef = couvert_essai_depuis_famille(vh, Dx, G, e, vx, vval(vx), z, p)   # 5 hyps
+    r = cef
+    r = N.modus_ponens(c1, N.loi_deduction(membres_fonctionnels(Dx), r))
+    r = N.modus_ponens(c2, N.loi_deduction(coincidence_membres(Dx), r))
+    r = N.modus_ponens(c3, N.loi_deduction(egal(E.dom(Ux), seg), r))
+    r = N.modus_ponens(c4, N.loi_deduction(recursion_sur_segment(Dx, vh, G, e, vx), r))
+    r = N.modus_ponens(c5, N.loi_deduction(equation_au_point(vval(vx), vh, vx), r))  # couvert[x]
+
+    body = N.loi_deduction(appartient(vx, ve), N.loi_deduction(antec, r))
+    res = N.generalisation(x, body)
+
+    cible = heredite_couverture(couvert, R, ve, x, y)
+    assert res.conclusion == cible, "heredite_couverture_realisee : ≠ heredite_couverture"
+    assert realisation_famille(Dfam, vval, vh, G, e, x, y) in res.hypotheses, \
+        "heredite_couverture_realisee : realisation_famille absente"
+    assert len(res.hypotheses) == 1, "heredite_couverture_realisee : hyps ≠ 1"
+    assert res.conclusion not in res.hypotheses, "heredite_couverture_realisee : VACUOUS"
+    return res
+
+
+def recursion_transfinie_existence(Dfam, vval, vh, G="G", e="E",
+                                   x="x0tf", y="ytf", z="zess", p="pess",
+                                   ebind="Eax", xbind="xAax"):
+    """🎯🎯 EXISTENCE C60 (§III.2, RÉCURRENCE TRANSFINIE) :
+
+      { est_bien_ordonne(R,E),  realisation_famille(Dfam,vval,vh,R,E) }
+        ⊢ (∀x)( x∈E ⇒ (∃p)( est_essai(p, vh, R, E, x) ) ).
+
+    « Sur l'ensemble bien ordonné (E,R), tout point x est COUVERT par un essai —
+    une fonction partielle p sur seg(R,E,x)∪{x} VÉRIFIANT l'équation de récursion
+    valeur(p,z)=vh(z) sur tout son domaine. »  C'est l'EXISTENCE de la solution de
+    l'équation de récursion C60 (la solution globale f = ⋃ des essais étant alors
+    fonctionnelle et totale par recollement-famille + couverture).
+
+    PREUVE : `heredite_couverture_realisee` DÉCHARGE l'hérédité de couverture (E6) à
+    partir du RÉSIDU `realisation_famille` (via `couvert_essai_depuis_famille`) ; on
+    l'injecte dans `couverture_essais_via_c59` (E6 = squelette C59), ce qui décharge sa
+    seconde hypothèse.  Ne restent que le BON ORDRE et le RÉSIDU.
+
+    ⚠️ DEUX hypothèses HONNÊTES (theorie=22), déchargées par loi_deduction :
+      • est_bien_ordonne(R,E)            — (E,R) bien ordonné (donnée de C60) ;
+      • realisation_famille(Dfam,…)      — LE RÉSIDU : pour chaque x dont les y<x sont
+        couverts, la famille Dfam(x) de leurs essais réalise ses 5 propriétés.  Sa
+        preuve demande la COLLECTIVISATION S8 de la famille des essais (à partir de
+        l'existence per-y) et la COUVERTURE des segments dom(⋃Dfam(x))=seg(R,E,x) —
+        le dernier chantier (cf. RAPPORT en bas).
+    Conclusion ∉ hypothèses (non vacuous)."""
+    R = _graphe_R(G)
+    ve = _t(e)
+    couvert = couvert_essai(vh, R, ve)
+
+    her = heredite_couverture_realisee(Dfam, vval, vh, G, e, x, y, z, p)   # [realisation]
+    her_form = heredite_couverture(couvert, R, ve, x, y)
+    e6 = couverture_essais_via_c59(vh, e, G, x, y, ebind, xbind, p, z)     # {bo, her} ⊢ couverture
+    res = N.modus_ponens(her, N.loi_deduction(her_form, e6))              # {bo, realisation} ⊢ couverture
+
+    cible = couverture_totale(couvert, ve, x)
+    assert res.conclusion == cible, "recursion_transfinie_existence : ≠ couverture totale (existence)"
+    W = E.est_bien_ordonne(R, ve)
+    assert W in res.hypotheses, "recursion_transfinie_existence : bon ordre absent"
+    assert realisation_famille(Dfam, vval, vh, G, e, x, y) in res.hypotheses, \
+        "recursion_transfinie_existence : realisation_famille absente"
+    assert len(res.hypotheses) == 2, "recursion_transfinie_existence : hyps ≠ 2"
+    assert res.conclusion not in res.hypotheses, "recursion_transfinie_existence : VACUOUS"
+    return res
+
+
 __all__ = [
     # brique graphe→valeur (le chunk reporté, CLOS)
     "couple_donne_valeur",
@@ -595,6 +750,9 @@ __all__ = [
     # équation de récursion sur tout le domaine + couverture en x
     "recursion_sur_segment", "equation_au_point",
     "recursion_essai_prolonge", "couvert_essai_depuis_famille",
+    # 🎯 étape 3 — existence C60 via la réalisation de la famille
+    "realisation_famille", "heredite_couverture_realisee",
+    "recursion_transfinie_existence",
     # énoncés de cohésion HONNÊTE de la famille
     "membres_fonctionnels", "coincidence_membres",
     # 🎯 étape 1 — LE PONT solutions_coincident → famille_compatible

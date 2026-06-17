@@ -154,3 +154,47 @@ def test_couvert_essai_depuis_famille():
     assert F.equation_au_point(var("v0"), _vh, var("x0")) in r.hypotheses
     assert r.conclusion not in r.hypotheses
     assert len(E.theorie_ensembles().axiomes) == 22
+
+
+# ── 🎯 ÉTAPE 3 — existence C60 via la réalisation de la famille ─────────────────
+def _Dfam(x):
+    """Famille des essais des y<x au point x (terme paramétré)."""
+    return E.app("Dfam_c60", x)
+
+
+def _vval(x):
+    """Valeur posée au nouveau point x (terme paramétré)."""
+    return E.app("vval_c60", x)
+
+
+def test_heredite_couverture_realisee():
+    """🎯 { realisation_famille } ⊢ heredite_couverture(couvert_essai)  [1 hyp honnête]."""
+    from bourbaki.ordre.ensembles_recursion_transfinie_existence import heredite_couverture
+    from bourbaki.ordre.ensembles_c60_existence_close import couvert_essai
+    r = F.heredite_couverture_realisee(_Dfam, _vval, _vh)
+    R = _graphe_R("G")
+    couvert = couvert_essai(_vh, R, var("E"))
+    assert r.conclusion == heredite_couverture(couvert, R, var("E"), "x0tf", "ytf")
+    assert len(r.hypotheses) == 1
+    assert F.realisation_famille(_Dfam, _vval, _vh) in r.hypotheses
+    assert r.conclusion not in r.hypotheses
+    assert len(E.theorie_ensembles().axiomes) == 22
+
+
+def test_recursion_transfinie_existence():
+    """🎯🎯 EXISTENCE C60 : { bon ordre, realisation_famille } ⊢ (∀x∈E)(∃p)(est_essai(p,x))."""
+    from bourbaki.ordre.ensembles_recursion_transfinie_existence import couverture_totale
+    from bourbaki.ordre.ensembles_c60_existence_close import couvert_essai
+    r = F.recursion_transfinie_existence(_Dfam, _vval, _vh)
+    R = _graphe_R("G")
+    ve = var("E")
+    couvert = couvert_essai(_vh, R, ve)
+    # conclusion EXACTE = couverture totale par essais (l'existence de la solution)
+    assert r.conclusion == couverture_totale(couvert, ve, "x0tf")
+    # DEUX hypothèses honnêtes : bon ordre + résidu de réalisation de la famille
+    assert len(r.hypotheses) == 2
+    assert E.est_bien_ordonne(R, ve) in r.hypotheses
+    assert F.realisation_famille(_Dfam, _vval, _vh) in r.hypotheses
+    # non vacuous + theorie intangible
+    assert r.conclusion not in r.hypotheses
+    assert len(E.theorie_ensembles().axiomes) == 22
