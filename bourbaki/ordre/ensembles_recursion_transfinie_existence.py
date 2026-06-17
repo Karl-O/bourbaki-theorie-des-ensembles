@@ -82,7 +82,8 @@ from bourbaki.logique.tactiques.tactiques_abrege_egalite import (
 from bourbaki.ordre.ensembles_recurrence_transfinie import (
     heredite_transfinie, conclusion_transfinie,
     regle_coherente_sur_segments, coincidence_solutions,
-    recursion_transfinie_unicite, _graphe_R, _P_egal_valeurs,
+    recursion_transfinie_unicite, recurrence_transfinie_preuve,
+    _graphe_R, _P_egal_valeurs,
 )
 
 
@@ -230,6 +231,97 @@ def reunion_essais_fonctionnelle(g="G", h="H"):
     return reunion_graphes_fonctionnelle(_t(g), _t(h))
 
 
+# ════════════════════════════════════════════════════════════════════════════
+#  LEMME (c) — COUVERTURE TRANSFINIE  (le squelette C59 de l'existence).
+#
+#  Dans la construction de Bourbaki, f = ⋃essais ; pour que f soit définie PARTOUT
+#  il faut que TOUT x∈E soit COUVERT (= appartienne au domaine d'un essai vérifiant
+#  l'équation de récursion).  La couverture se prouve par C59-INDUCTION : si tout
+#  y<x est couvert, alors x est couvert (on prolonge l'essai d'un pas, en posant
+#  f(x) = h(x, f|seg(R,E,x)) — c'est l'UNIQUE valeur possible).
+#
+#  CE LEMME EST LE SQUELETTE C59 de cette étape : il est PLEINEMENT GÉNÉRIQUE sur le
+#  prédicat `couvert : Terme → Formule`.  C'EST une instance CLOSE du méta-théorème
+#  C59 (recurrence_transfinie_preuve) appliqué à P := couvert.  La SEULE obligation
+#  restante (le PROLONGEMENT D'UN PAS = l'hérédité de la couverture) est exposée
+#  comme HYPOTHÈSE HONNÊTE — c'est EXACTEMENT le point dur reporté (cf. frontière).
+# ════════════════════════════════════════════════════════════════════════════
+def heredite_couverture(couvert, R, e, x="x", y="y"):
+    """L'HÉRÉDITÉ de la couverture (= prolongement d'un pas) :
+
+        (∀x)( x∈E ⇒ ( (∀y)(y∈seg(R,E,x) ⇒ couvert[y])  ⇒  couvert[x] ) ).
+
+    « Si tout y<x est couvert (un essai est défini sur seg(R,E,x)), alors x est
+    couvert (on prolonge l'essai en x). »  C'est `heredite_transfinie(couvert,R,E)`.
+    HYPOTHÈSE HONNÊTE : son contenu EST le prolongement-d'un-pas, qui exige le
+    recollement/la collectivisation des essais (point dur reporté de C60-existence)."""
+    return heredite_transfinie(couvert, R, e, x, y)
+
+
+def couverture_totale(couvert, e, x="x"):
+    """CONCLUSION de couverture :  (∀x)( x∈E ⇒ couvert[x] )  (tout point est couvert)."""
+    return conclusion_transfinie(couvert, e, x)
+
+
+def couverture_transfinie(couvert, e="E", G="G", x0="x0tf", y="ytf",
+                          ebind="Eax", xbind="xAax"):
+    """⊢ { est_bien_ordonne(R,E),  heredite_couverture(couvert,R,E) }
+         ⊢ (∀x)( x∈E ⇒ couvert[x] )                       [ COUVERTURE TOTALE ].
+
+    SQUELETTE C59 de l'EXISTENCE : si la couverture est héréditaire (prolongement
+    d'un pas), alors tout point de E est couvert.  DÉRIVÉ du méta-théorème C59
+    `recurrence_transfinie_preuve` appliqué à P := couvert.
+
+    ⚠️ DEUX HYPOTHÈSES HONNÊTES (jamais postulées ; theorie=22), déchargées par
+    loi_deduction :
+      • est_bien_ordonne(R,E)            — (E,R) bien ordonné (donnée de C60) ;
+      • heredite_couverture(couvert,…)   — le PROLONGEMENT D'UN PAS (point dur :
+        construction de l'essai sur seg(R,E,x) — REPORTÉ, cf. frontière).
+    La conclusion (couverture totale) ∉ hypothèses (non vacuous).
+
+    couvert : fonction Python Terme→Formule (« x est couvert par un essai »).
+    R = relation portée par le graphe G (a≤b := (a,b)∈G)."""
+    ve = _t(e)
+    R = _graphe_R(G)
+
+    c59 = recurrence_transfinie_preuve(couvert, e, G, x0, y, ebind, xbind)  # W⇒(héréd⇒concl) [CLOS]
+
+    W = E.est_bien_ordonne(R, ve)
+    her = heredite_couverture(couvert, R, ve, x0, y)
+    inner = N.modus_ponens(N.assume(W), c59)             # héréd ⇒ concl   [W]
+    concl = N.modus_ponens(N.assume(her), inner)         # concl  [W, héréd]
+
+    cible = couverture_totale(couvert, ve, x0)
+    assert concl.conclusion == cible, "couverture_transfinie : conclusion ≠ couverture_totale"
+    assert W in concl.hypotheses and her in concl.hypotheses, "hyps inattendues"
+    assert len(concl.hypotheses) == 2, "hypothèses résiduelles inattendues (≠ 2)"
+    assert concl.conclusion not in concl.hypotheses, "couverture_transfinie : VACUOUS"
+    return concl
+
+
+# ════════════════════════════════════════════════════════════════════════════
+#  LEMME (d) — ÉQUATION pour la réunion (transfert de VALEUR) au niveau BINAIRE.
+#
+#  La réunion f=⋃essais doit, en tout point u où elle est définie par l'essai G,
+#  RENDRE la valeur de cet essai : f(u)=G(u).  Au niveau BINAIRE (réunion de 2
+#  essais G, H), c'est `valeur_reunion_gauche` : valeur(G∪H,u)=valeur(G,u) sur
+#  dom G.  C'est le pas (d) — l'équation de la réunion hérite de celle de l'essai.
+#  (La version FAMILLE — ⋃ d'une famille quelconque d'essais — est la frontière.)
+# ════════════════════════════════════════════════════════════════════════════
+def valeur_essai_reunion(g="G", h="H", u="u"):
+    """{ est_fonctionnel(G), est_fonctionnel(H), (∀u)¬(u∈dom G et u∈dom H), u∈dom G }
+        ⊢ valeur(G∪H, u) = valeur(G, u).
+
+    TRANSFERT DE VALEUR (d) au niveau binaire : la réunion de deux essais COÏNCIDE,
+    sur le domaine de G, avec G.  Donc si G(u)=h(u,G|seg) (équation de l'essai G),
+    alors (G∪H)(u)=h(u,…) aussi — l'équation de récursion PASSE À LA RÉUNION.
+    Délègue à `valeur_reunion_gauche` (infra recollement).  4 hyps honnêtes."""
+    from bourbaki.ensembles.fonctions.ensembles_recollement_bijection import (
+        valeur_reunion_gauche,
+    )
+    return valeur_reunion_gauche(_t(g), _t(h), _t(u))
+
+
 __all__ = [
     # énoncés
     "equation_recursion", "regle_locale",
@@ -237,4 +329,8 @@ __all__ = [
     "solutions_coincident",
     # (b) fonctionnalité de la réunion de deux essais (brique recollement)
     "reunion_essais_fonctionnelle",
+    # (c) couverture transfinie (squelette C59 de l'existence, 2 hyps honnêtes)
+    "heredite_couverture", "couverture_totale", "couverture_transfinie",
+    # (d) transfert de valeur de la réunion au niveau binaire (4 hyps honnêtes)
+    "valeur_essai_reunion",
 ]

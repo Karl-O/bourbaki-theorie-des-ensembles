@@ -109,3 +109,55 @@ def test_b_reunion_essais_fonctionnelle():
 def test_b_reunion_essais_non_vacuous():
     th = EX.reunion_essais_fonctionnelle()
     assert th.conclusion not in th.hypotheses
+
+
+# ══════════════════════════════════════════════════════════════════════════════
+#  LEMME (c) — COUVERTURE TRANSFINIE (squelette C59 de l'existence).
+# ══════════════════════════════════════════════════════════════════════════════
+def _couvert(x):
+    """Prédicat-test « x est couvert » := x ∈ Couv  (symbolique)."""
+    return appartient(x, var("Couv"))
+
+
+def test_c_couverture_transfinie_deux_hyps_honnetes():
+    th = EX.couverture_transfinie(_couvert)
+    assert len(th.hypotheses) == 2
+    e = var("E")
+    R = _graphe_R("G")
+    assert E.est_bien_ordonne(R, e) in th.hypotheses
+    assert EX.heredite_couverture(_couvert, R, e, "x0tf", "ytf") in th.hypotheses
+
+
+def test_c_couverture_transfinie_conclusion_exacte():
+    th = EX.couverture_transfinie(_couvert)
+    e = var("E")
+    assert th.conclusion == EX.couverture_totale(_couvert, e, "x0tf")
+
+
+def test_c_couverture_transfinie_non_vacuous():
+    th = EX.couverture_transfinie(_couvert)
+    assert th.conclusion not in th.hypotheses
+
+
+def test_c_generique_autre_couvert():
+    def couv2(x):
+        return non(egal(x, app("bot")))
+    th = EX.couverture_transfinie(couv2)
+    assert len(th.hypotheses) == 2
+    assert th.conclusion not in th.hypotheses
+
+
+# ══════════════════════════════════════════════════════════════════════════════
+#  LEMME (d) — TRANSFERT DE VALEUR de la réunion (binaire).
+# ══════════════════════════════════════════════════════════════════════════════
+def test_d_valeur_essai_reunion():
+    th = EX.valeur_essai_reunion()
+    # 4 hyps honnêtes : func G, func H, dom disjoints, u∈dom G
+    assert len(th.hypotheses) == 4
+    assert th.conclusion == egal(E.valeur(E.reunion(var("G"), var("H")), var("u")),
+                                 E.valeur(var("G"), var("u")))
+
+
+def test_d_valeur_essai_reunion_non_vacuous():
+    th = EX.valeur_essai_reunion()
+    assert th.conclusion not in th.hypotheses
