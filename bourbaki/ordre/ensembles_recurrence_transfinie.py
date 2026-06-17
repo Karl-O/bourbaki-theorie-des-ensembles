@@ -66,17 +66,16 @@ RIEN n'est postulé ; tout est DÉRIVÉ.
 from __future__ import annotations
 
 from bourbaki.logique.formule import (
-    Terme, var, app, egal, et, non, impl, equiv, appartient, existe, pourtout, inclus,
+    Terme, var, app, egal, et, non, impl, equiv, appartient, pourtout, inclus,
 )
 from bourbaki.logique import noyau_abrege as N
 from bourbaki.ensembles import ensembles_abrege as E
 
 from bourbaki.logique.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
-    instancie, contraposition, equivalence_avant, equivalence_arriere, dne, dni,
+    instancie, equivalence_avant, equivalence_arriere, dne, dni,
     antecedent_consequent,
 )
-from bourbaki.logique.tactiques.tactiques_abrege import a_implique_a
 from bourbaki.ensembles.base.ensembles_vide import non_vide_ssi_element
 
 
