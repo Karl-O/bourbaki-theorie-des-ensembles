@@ -40,9 +40,10 @@ from bourbaki.logique.tactiques.tactiques_abrege2 import (
 )
 from bourbaki.logique.tactiques.tactiques_abrege_quantif import existe_elimination
 from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie, composer_egalites
+from bourbaki.ensembles.base.ensembles_couples import singleton_membre
 
 from bourbaki.ordre.ensembles_recurrence_transfinie import _graphe_R
-from bourbaki.ordre.ensembles_c60_existence_close import est_essai, couvert_essai
+from bourbaki.ordre.ensembles_c60_existence_close import est_essai, couvert_essai, dom_essai
 from bourbaki.ordre.ensembles_c60_coeur import (
     union_famille, famille_compatible, valeur_union_famille, _inst_union_famille,
 )
@@ -244,6 +245,216 @@ def valeur_union_egale_regle(vh, e="E", G="G", x="x0", V="Vval",
     return res
 
 
+# ════════════════════════════════════════════════════════════════════════════
+#  🎯 CLAUSE (P2 universelle) — clause_P2(vh,…)  [CLOS, 0 hyp].
+#  coincidence_membres_realise est 0-hyp ; on l'enveloppe (∀x∈E)(antéc ⇒ ·).
+# ════════════════════════════════════════════════════════════════════════════
+def coincidence_segment_realise(vh, e="E", G="G", x="x0", V="Vval",
+                                y="ytf", yD="yD", z="zess"):
+    """⊢ clause_P2(vh,e,G,x,V,y)                                       [CLOS, 0 hyp].
+
+    🎯 LA CLAUSE (P2) SOUS FORME UNIVERSELLE, INCONDITIONNELLE.  `coincidence_membres_realise`
+    donne coincidence_membres(Dfam_real(x)) CLOS (0 hyp) pour tout x ; on l'enveloppe
+    dans (∀x)( x∈E ⇒ ( antecedent_couverture(x) ⇒ coincidence_membres(Dfam_real(x)) ) )
+    par loi_deduction (déchargeant x∈E et l'antécédent VACUEUSEMENT — la conclusion ne
+    dépend ni de x∈E ni de l'antécédent) puis généralisation.  Aucune hypothèse."""
+    from bourbaki.ordre.ensembles_c60_realisation import (
+        clause_P2 as _clause_P2, antecedent_couverture,
+    )
+    ve, vx = _t(e), var(x)
+    Dx = Dfam_real(vh, e, G, vx, V)
+
+    coinc = coincidence_membres_realise(vh, e, G, vx, V, yD, z)   # ⊢ coincidence_membres(Dx)  [CLOS]
+    antec = antecedent_couverture(vh, e, G, vx, y)
+    body = N.loi_deduction(appartient(vx, ve),
+                           N.loi_deduction(antec, coinc))
+    res = N.generalisation(x, body)
+
+    cible = _clause_P2(vh, e, G, x, V, y)
+    assert res.conclusion == cible, "coincidence_segment_realise : ≠ clause_P2"
+    assert res.est_clos, "coincidence_segment_realise : non clos (devrait être 0 hyp)"
+    return res
+
+
+# ════════════════════════════════════════════════════════════════════════════
+#  L'ANTÉCÉDENT AMBIANT — variante honnête de antecedent_couverture où l'essai
+#  témoin de chaque y<x vit dans l'ambiant 𝔓(E×V) (condition de membership Dfam_real).
+# ════════════════════════════════════════════════════════════════════════════
+def antecedent_couverture_ambiant(vh, e="E", G="G", x="x0", V="Vval",
+                                  y="ytf", p="pcf", z="zess"):
+    """(∀y)( y∈seg(R,E,x) ⇒ (∃p)( p∈𝔓(E×V) ∧ est_essai(p,vh,R,E,y) ) ).
+
+    « Tout y<x est couvert par un essai DANS L'AMBIANT 𝔓(E×V). »  C'est l'hypothèse
+    d'induction de C59, RENFORCÉE par la condition d'appartenance à l'ambiant — la SEULE
+    chose dont la membership Dfam_real(x) a besoin en plus de est_essai (l'axiome S8
+    sélectionne DANS 𝔓(E×V)).  C'est HONNÊTE : un essai sur un segment est un graphe de
+    couples (z,vh(z)) ⊂ E×V dès que les valeurs-règle vivent dans V (le contenant des
+    valeurs candidates) — la donnée naturelle de la construction de Bourbaki."""
+    R = _graphe_R(G)
+    ve, vx = _t(e), _t(x)
+    seg = E.segment_extremite(R, ve, vx)
+    vy, vp = var(y), var(p)
+    corps = existe(p, et(appartient(vp, ambiant(e, V)),
+                         est_essai(vp, vh, R, ve, vy, z)))
+    return pourtout(y, impl(appartient(vy, seg), corps))
+
+
+# ════════════════════════════════════════════════════════════════════════════
+#  🎯 HELPER PARTAGÉ (P3-⊇ et P4) — la COUVERTURE :
+#  { antecedent_couverture_ambiant(x) , z∈seg(R,E,x) } ⊢ (∃p)( p∈Dfam_real(x) ∧ z∈dom p ).
+# ════════════════════════════════════════════════════════════════════════════
+def _couverture_membre(vh, e, G, x, V, z, p="pcf", yD="yD", zb="zess"):
+    """{ antecedent_couverture_ambiant(x), z∈seg(R,E,x) }
+        ⊢ (∃p)( p∈Dfam_real(x) ∧ z∈dom(p) ∧ valeur(⋃Dfam_real(x),z)=vh(z) ).
+
+    LE CŒUR PARTAGÉ par P3-⊇ et P4.  z<x est couvert par un essai p_z DANS L'AMBIANT
+    (hyp ambiante) ; comme z∈seg(x) ∧ est_essai(p_z,z), on a p_z∈Dfam_real(x) (axiome
+    S8) ; z∈dom(p_z)=seg(z)∪{z} (z∈{z}) ; et par `valeur_union_egale_regle`,
+    valeur(⋃Dfam_real(x),z)=vh(z).  Renvoie l'existentiel sur le témoin p_z (éliminable).
+
+    Renvoie un Theoreme dont la conclusion est l'existentiel ci-dessus, sous les deux
+    hypothèses honnêtes (antécédent ambiant + z∈seg)."""
+    R = _graphe_R(G)
+    ve, vx, vz = _t(e), _t(x), var(z)
+    zname = z
+    Dx = Dfam_real(vh, e, G, vx, V)
+    Ux = union_famille(Dx)
+    seg = E.segment_extremite(R, ve, vx)
+    vp = var(p)
+
+    # hypothèses honnêtes
+    h_ant = N.assume(antecedent_couverture_ambiant(vh, e, G, vx, V, "ytf", p, zb))
+    h_zseg = N.assume(appartient(vz, seg))                         # z∈seg(R,E,x)
+
+    # antécédent ambiant instancié à z : z∈seg ⇒ (∃p)(p∈amb ∧ est_essai(p,z))
+    ant_z = N.modus_ponens(h_zseg, instancie(h_ant, vz))          # (∃p)( p∈amb ∧ est_essai(p,z) )
+
+    # corps du témoin p :  p∈amb ∧ est_essai(p, vh, R, E, z)
+    corps_p = et(appartient(vp, ambiant(e, V)), est_essai(vp, vh, R, ve, vz, zb))
+    h_corps = N.assume(corps_p)
+    p_amb = conjonction_elim_gauche(h_corps)                      # p∈𝔓(E×V)
+    essai_p = conjonction_elim_droite(h_corps)                    # est_essai(p,z)
+
+    # p∈Dfam_real(x) :  (p∈amb) ∧ (∃yD)( yD∈seg ∧ est_essai(p,yD) ), via S8 ⇐
+    #   le témoin yD := z (z∈seg, est_essai(p,z))
+    sel_corps = et(appartient(vz, seg), est_essai(vp, vh, R, ve, vz, zb))
+    sel_zz = conjonction_intro(h_zseg, essai_p)                   # z∈seg ∧ est_essai(p,z)
+    sel_ex = N.modus_ponens(sel_zz, N.s5(
+        et(appartient(var(yD), seg), est_essai(vp, vh, R, ve, var(yD), zb)), vz, yD))  # (∃yD)(...)
+    corps_D = et(appartient(vp, ambiant(e, V)), sel_ex.conclusion)
+    membre_D = conjonction_intro(p_amb, sel_ex)                   # p∈amb ∧ (∃yD)(...)
+    ax = _inst_Dfam_real(vh, e, G, vx, vp, V, yD)                 # p∈Dx ⇔ (amb ∧ (∃yD)essai)
+    p_in_Dx = N.modus_ponens(membre_D, equivalence_arriere(ax))   # p∈Dfam_real(x)
+
+    # z∈dom(p) :  dom(p)=seg(z)∪{z}, z∈{z}⊆dom(p)
+    dom_eq = conjonction_elim_droite(conjonction_elim_gauche(essai_p))   # dom(p)=seg(z)∪{z}
+    sx = E.singleton(vz)
+    z_in_sx = N.modus_ponens(N.reflexivite(vz), equivalence_arriere(singleton_membre(vz, vz)))  # z∈{z}
+    # z∈seg(z)∪{z}  (côté droit de la réunion)
+    from bourbaki.ensembles.ensembles_theoremes import _instance_reunion
+    segz = E.segment_extremite(R, ve, vz)
+    # z∈{z} ⇒ (z∈{z} ou z∈segz) [s2] ⇒ (z∈segz ou z∈{z}) [s3]
+    Bz, Az = appartient(vz, sx), appartient(vz, segz)
+    z_disj = N.modus_ponens(N.modus_ponens(z_in_sx, N.s2(Bz, Az)), N.s3(Bz, Az))  # z∈segz ou z∈{z}
+    z_in_dom_essai = N.modus_ponens(z_disj,
+        equivalence_arriere(_instance_reunion(segz, sx, vz)))      # z∈seg(z)∪{z}
+    # réécrit seg(z)∪{z} → dom(p) via dom(p)=seg(z)∪{z} (symétrie)
+    dom_eq_sym = N.modus_ponens(dom_eq, symetrie(E.dom(vp), dom_essai(R, ve, vz)))  # seg(z)∪{z}=dom(p)
+    z_in_domp = N.modus_ponens(z_in_dom_essai, equivalence_avant(
+        N.modus_ponens(dom_eq_sym, N.s6(dom_essai(R, ve, vz), E.dom(vp), "wdz", appartient(vz, var("wdz"))))))  # z∈dom(p)
+
+    # valeur(⋃Dx,z)=vh(z)   via valeur_union_egale_regle  (décharge p∈Dx, z∈dom p)
+    vue = valeur_union_egale_regle(vh, e, G, vx, V, p, zname, "qcf", yD, zb)   # {p∈Dx, z∈dom p}
+    vue = N.modus_ponens(p_in_Dx, N.loi_deduction(appartient(vp, Dx), vue))
+    vue = N.modus_ponens(z_in_domp, N.loi_deduction(appartient(vz, E.dom(vp)), vue))  # valeur(⋃Dx,z)=vh(z)
+
+    # construit le témoin existentiel :  p∈Dx ∧ z∈dom p ∧ valeur(⋃Dx,z)=vh(z)
+    eq_form = egal(E.valeur(Ux, vz), vh(vz))
+    temoin_corps = et(et(appartient(vp, Dx), appartient(vz, E.dom(vp))), eq_form)
+    temoin = conjonction_intro(conjonction_intro(p_in_Dx, z_in_domp), vue)
+    assert temoin.conclusion == temoin_corps
+
+    # existentiel sur p (témoin p) ; corps NE dépend que de p, z (pas du binder du témoin S8)
+    gabarit = et(et(appartient(vp, Dx), appartient(vz, E.dom(vp))), eq_form)
+    ex_temoin = N.modus_ponens(temoin, N.s5(gabarit, vp, p))      # (∃p)( p∈Dx ∧ z∈dom p ∧ val=vh )
+
+    # élimine le témoin p de l'antécédent ambiant (corps_p ⇒ ∃p(gabarit))
+    imp = N.loi_deduction(corps_p, ex_temoin)
+    ex_imp = existe_elimination(imp, p)                           # (∃p)(corps_p) ⇒ (∃p)(gabarit)
+    res = N.modus_ponens(ant_z, ex_imp)                           # (∃p)(gabarit)   [hyps honnêtes]
+    return res
+
+
+# ════════════════════════════════════════════════════════════════════════════
+#  🎯 CLAUSE (P4) — recursion_segment_realise(vh,…)  ⊢ clause_P4  [hyp ambiante + bo].
+# ════════════════════════════════════════════════════════════════════════════
+def clause_P4_ambiant(vh, e="E", G="G", x="x0", V="Vval", y="ytf", p="pcf", zb="zess"):
+    """(∀x)( x∈E ⇒ ( antecedent_couverture_ambiant(x) ⇒ recursion_sur_segment(Dfam_real(x),…) ) ).
+
+    Variante de clause_P4 où l'antécédent est l'antécédent d'induction AMBIANT (essais des
+    y<x dans 𝔓(E×V)) — la SEULE chose en plus de est_essai dont la membership Dfam_real(x)
+    a besoin (l'axiome S8 sélectionne DANS 𝔓(E×V))."""
+    ve, vx = _t(e), var(x)
+    Dx = Dfam_real(vh, e, G, vx, V)
+    antec = antecedent_couverture_ambiant(vh, e, G, vx, V, y, p, zb)
+    return pourtout(x, impl(appartient(vx, ve),
+        impl(antec, recursion_sur_segment(Dx, vh, G, e, vx))))
+
+
+def recursion_segment_realise(vh, e="E", G="G", x="x0", V="Vval", y="ytf",
+                              z="zrs", p="pcf", zb="zess"):
+    """⊢ clause_P4_ambiant(vh,e,G,x,V,y)                              [CLOS, 0 hyp].
+
+    🎯 LA CLAUSE (P4), sous l'antécédent d'induction AMBIANT.  Pour x∈E avec l'antécédent
+    ambiant, tout z∈seg(R,E,x) vérifie valeur(⋃Dfam_real(x),z)=vh(z) : par
+    `_couverture_membre`, z est couvert par un essai p_z∈Dfam_real(x) avec z∈dom(p_z),
+    donc valeur(⋃Dfam_real(x),z)=vh(z) (la valeur de la réunion hérite de la règle,
+    `valeur_union_egale_regle`).  Le témoin p_z est éliminé, puis on enveloppe et
+    généralise — l'antécédent ambiant (x-dépendant) étant l'ANTÉCÉDENT (déchargé par
+    loi_deduction AVANT généralisation), x n'est libre dans AUCUNE hypothèse.  CLOS.
+
+    ⚠️ L'antécédent est antecedent_couverture_ambiant (PLUS FORT que antecedent_couverture
+    de clause_P4) : il exige que l'essai-témoin de chaque y<x vive dans 𝔓(E×V), condition
+    sans laquelle la membership Dfam_real(x) (sélection S8 dans 𝔓(E×V)) ne peut être
+    établie.  C'est HONNÊTE : un essai sur seg est un graphe de couples (z,vh(z)) ⊂ E×V."""
+    R = _graphe_R(G)
+    ve, vx = _t(e), var(x)
+    Dx = Dfam_real(vh, e, G, vx, V)
+    Ux = union_famille(Dx)
+    seg = E.segment_extremite(R, ve, vx)
+    vz = var(z)
+    antec = antecedent_couverture_ambiant(vh, e, G, vx, V, y, p, zb)
+
+    h_antec = N.assume(antec)                                    # antécédent ambiant (x-dépendant)
+
+    # but du corps :  z∈seg ⇒ valeur(⋃Dx,z)=vh(z)
+    cov = _couverture_membre(vh, e, G, vx, V, z, p, "yD", zb)    # (∃p)(p∈Dx ∧ z∈dom p ∧ val=vh)
+    #   sous {antecedent_couverture_ambiant(x, binder=ytf), z∈seg} — aligne le binder y du ∀
+    eq_form = egal(E.valeur(Ux, vz), vh(vz))
+    pq = var(p)
+    gabarit = et(et(appartient(pq, Dx), appartient(vz, E.dom(pq))), eq_form)
+    h_g = N.assume(gabarit)
+    val_z = conjonction_elim_droite(h_g)                         # valeur(⋃Dx,z)=vh(z)
+    imp_g = N.loi_deduction(gabarit, val_z)
+    ex_imp = existe_elimination(imp_g, p)                        # (∃p)(gabarit) ⇒ val=vh
+    val_z_final = N.modus_ponens(cov, ex_imp)                    # valeur(⋃Dx,z)=vh(z)  [antec ambiant, z∈seg]
+
+    body_z = N.loi_deduction(appartient(vz, seg), val_z_final)   # z∈seg ⇒ val=vh   [antec ambiant]
+    rec = N.generalisation(z, body_z)                            # recursion_sur_segment(Dx,…)  [antec ambiant]
+    assert rec.conclusion == recursion_sur_segment(Dx, vh, G, e, vx), \
+        "recursion_segment_realise : ≠ recursion_sur_segment(Dx,…)"
+
+    # enveloppe (∀x)( x∈E ⇒ ( antec_ambiant(x) ⇒ rec ) ) — décharge antec PUIS x∈E, généralise
+    body = N.loi_deduction(appartient(vx, ve),
+                           N.loi_deduction(antec, rec))
+    res = N.generalisation(x, body)
+
+    cible = clause_P4_ambiant(vh, e, G, x, V, y, p, zb)
+    assert res.conclusion == cible, "recursion_segment_realise : ≠ clause_P4_ambiant"
+    assert res.est_clos, "recursion_segment_realise : non clos (devrait être 0 hyp)"
+    return res
+
+
 __all__ = [
     # brique : l'équation de récursion d'un membre en un antécédent
     "valeur_membre_egale_regle",
@@ -253,4 +464,10 @@ __all__ = [
     "famille_compatible_realise",
     # 🎯 brique : valeur de la réunion en un point du domaine d'un membre = vh
     "valeur_union_egale_regle",
+    # 🎯 clause (P2 universelle) CLOSE
+    "coincidence_segment_realise",
+    # antécédent renforcé (essais dans l'ambiant) + helper de couverture
+    "antecedent_couverture_ambiant",
+    # 🎯 clause (P4) sous l'antécédent ambiant
+    "recursion_segment_realise",
 ]
