@@ -38,7 +38,9 @@ from bourbaki.logique.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
     equivalence_avant, equivalence_arriere, instancie,
 )
-from bourbaki.logique.tactiques.tactiques_abrege_quantif import existe_elimination
+from bourbaki.logique.tactiques.tactiques_abrege_quantif import (
+    existe_elimination, alpha_existe, alpha_pour_tout,
+)
 from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie, composer_egalites
 from bourbaki.ensembles.base.ensembles_couples import singleton_membre
 
@@ -452,6 +454,231 @@ def recursion_segment_realise(vh, e="E", G="G", x="x0", V="Vval", y="ytf",
     cible = clause_P4_ambiant(vh, e, G, x, V, y, p, zb)
     assert res.conclusion == cible, "recursion_segment_realise : ≠ clause_P4_ambiant"
     assert res.est_clos, "recursion_segment_realise : non clos (devrait être 0 hyp)"
+    return res
+
+
+# ════════════════════════════════════════════════════════════════════════════
+#  🎯 CLAUSE (P3) — couverture_segment_realise(vh,…)  ⊢ clause_P3_ambiant  [1 hyp : bo].
+#  dom(⋃Dfam_real(x)) = seg(R,E,x), par double inclusion + extensionnalité.
+# ════════════════════════════════════════════════════════════════════════════
+def clause_P3_ambiant(vh, e="E", G="G", x="x0", V="Vval", y="ytf", p="pcf", zb="zess"):
+    """(∀x)( x∈E ⇒ ( antecedent_couverture_ambiant(x) ⇒ dom(⋃Dfam_real(x)) = seg(R,E,x) ) ).
+
+    Variante de clause_P3 où l'antécédent est l'antécédent d'induction AMBIANT (essais des
+    y<x dans 𝔓(E×V)) — nécessaire pour la membership Dfam_real(x) dans l'inclusion ⊇."""
+    R = _graphe_R(G)
+    ve, vx = _t(e), var(x)
+    Dx = Dfam_real(vh, e, G, vx, V)
+    Ux = union_famille(Dx)
+    seg = E.segment_extremite(R, ve, vx)
+    antec = antecedent_couverture_ambiant(vh, e, G, vx, V, y, p, zb)
+    return pourtout(x, impl(appartient(vx, ve),
+        impl(antec, egal(E.dom(Ux), seg))))
+
+
+def couverture_segment_realise(vh, e="E", G="G", x="x0", V="Vval", y="ytf",
+                               p="pcf", zb="zess", w="wseg", zz="zseg"):
+    """{ est_bien_ordonne(R,E) }  ⊢  clause_P3_ambiant(vh,e,G,x,V,y)   [1 hyp : bon ordre].
+
+    🎯 LA CLAUSE (P3), sous l'antécédent d'induction AMBIANT.  Les domaines des essais des
+    y<x RECOUVRENT EXACTEMENT le segment seg(R,E,x).  Double inclusion + extensionnalité :
+
+      (⊆)  z∈dom(⋃Dfam_real(x)) ⇒ (∃w)((z,w)∈⋃D) ⇒ (∃p∈D)((z,w)∈p) ⇒ z∈dom(p).  p∈D ⇒
+           (∃y∈seg(x))est_essai(p,y) ⇒ dom(p)=seg(y)∪{y}.  Donc z∈seg(y)∪{y} :
+             • z∈seg(y) : z≤y∧z≠y, y≤x∧y≠x → z≤x (TRANSITIVITÉ) et z≠x (ANTISYMÉTRIE :
+               z=x ⇒ x≤y∧y≤x ⇒ x=y, contredisant y≠x) → z∈seg(x) ;
+             • z∈{y}    : z=y∈seg(x).
+           TRANSITIVITÉ + ANTISYMÉTRIE proviennent du BON ORDRE (est_bien_ordonne ⊃ est_ordre).
+
+      (⊇)  z∈seg(x) ⇒ z couvert par un essai p_z∈Dfam_real(x), z∈dom(p_z) (`_couverture_membre`)
+           ⇒ (z,valeur(p_z,z))∈p_z ⇒ ∈⋃D ⇒ z∈dom(⋃D).
+
+    ⚠️ UNE hypothèse HONNÊTE : est_bien_ordonne(R,E) (le bon ordre, pour la transitivité
+    et l'antisymétrie de ⊆).  L'antécédent ambiant (⊇) est l'ANTÉCÉDENT de la clause.
+    Conclusion == clause_P3_ambiant."""
+    from bourbaki.ensembles.ensembles_theoremes import extensionnalite_appliquee
+    from bourbaki.logique.formule import inclus, non, ou
+    from bourbaki.ensembles.ensembles_theoremes import _instance_reunion
+    from bourbaki.logique.tactiques.tactiques_abrege2 import cas, antecedent_consequent
+    R = _graphe_R(G)
+    ve, vx = _t(e), var(x)
+    Dx = Dfam_real(vh, e, G, vx, V)
+    Ux = union_famille(Dx)
+    seg = E.segment_extremite(R, ve, vx)
+    dU = E.dom(Ux)
+
+    antec = antecedent_couverture_ambiant(vh, e, G, vx, V, y, p, zb)
+    h_antec = N.assume(antec)
+    bo = E.est_bien_ordonne(R, ve)
+    h_bo = N.assume(bo)                                          # bon ordre   [HONNÊTE]
+
+    # extrait transitivité + antisymétrie de est_bien_ordonne
+    #   bo = et( est_relation_ordre_dans(R,E), petit )
+    #   est_relation_ordre_dans = et( est_relation_ordre, est_reflexive_dans_ordre )
+    #   est_relation_ordre = et( et(ordre_transitif, ordre_antisymetrique), ordre_refl_implicite )
+    ord_dans = conjonction_elim_gauche(h_bo)                    # est_relation_ordre_dans
+    rel_ordre = conjonction_elim_gauche(ord_dans)               # est_relation_ordre
+    trans_antisym = conjonction_elim_gauche(rel_ordre)          # et(transitif, antisym)
+    trans = conjonction_elim_gauche(trans_antisym)              # ordre_transitif(R)
+    antisym = conjonction_elim_droite(trans_antisym)            # ordre_antisymetrique(R)
+
+    vw, vz = var(w), var(zz)
+
+    # axiome dom :  z∈dom(⋃D) ⇔ (∃w)((z,w)∈⋃D)
+    ax_dom = N.axiome(E.theorie_ensembles(), E.AXIOME_DOM)
+    car_dom = instancie(instancie(ax_dom, Ux), vz)              # z∈dom⋃D ⇔ (∃w)((z,w)∈⋃D)
+
+    # ── (⊆) inclus(dom(⋃D), seg) :  z∈dom(⋃D) ⇒ z∈seg(x) ────────────────────────
+    from bourbaki.logique.tactiques.tactiques_abrege_quantif import alpha_existe
+    h_z_dU = N.assume(appartient(vz, dU))                       # z∈dom(⋃D)
+    ex_w0 = N.modus_ponens(h_z_dU, equivalence_avant(car_dom))  # (∃y)((z,y)∈⋃D)
+    ex_w = N.modus_ponens(ex_w0, equivalence_avant(alpha_existe(
+        "y", w, appartient(E.couple(vz, var("y")), Ux))))       # (∃w)((z,w)∈⋃D)  [renommé]
+    # corps témoin w :  (z,w)∈⋃D ⇒ z∈seg(x)
+    h_zw_U = N.assume(appartient(E.couple(vz, vw), Ux))         # (z,w)∈⋃D
+    ex_pq = N.modus_ponens(h_zw_U, equivalence_avant(_inst_union_famille(Dx, E.couple(vz, vw))))
+    #   ex_pq : (∃punion)( punion∈D ∧ (z,w)∈punion )
+    pun = "punion"
+    vpun = var(pun)
+    corps_pun = et(appartient(vpun, Dx), appartient(E.couple(vz, vw), vpun))
+    h_pun = N.assume(corps_pun)
+    pun_in_D = conjonction_elim_gauche(h_pun)                   # punion∈D
+    zw_in_pun = conjonction_elim_droite(h_pun)                  # (z,w)∈punion
+    # z∈dom(punion)  via axiome dom + S5
+    ex_w2 = N.modus_ponens(zw_in_pun, N.s5(appartient(E.couple(vz, var("y")), vpun), vw, "y"))
+    car_dom_pun = instancie(instancie(ax_dom, vpun), vz)        # z∈dom(punion) ⇔ (∃y)((z,y)∈punion)
+    z_in_dpun = N.modus_ponens(ex_w2, equivalence_arriere(car_dom_pun))  # z∈dom(punion)
+    # punion∈D ⇒ (∃yseg∈seg(x)) est_essai(punion, yseg)   [axiome S8]
+    axS8 = _inst_Dfam_real(vh, e, G, vx, vpun, V, "yseg")
+    corpsS8 = N.modus_ponens(pun_in_D, equivalence_avant(axS8))  # amb ∧ (∃yseg)(...)
+    selS8 = conjonction_elim_droite(corpsS8)                    # (∃yseg)( yseg∈seg(x) ∧ est_essai(punion,yseg) )
+    # corps témoin yseg :  yseg∈seg(x) ∧ est_essai(punion,yseg) ⇒ z∈seg(x)
+    vys = var("yseg")
+    corps_ys = et(appartient(vys, seg), est_essai(vpun, vh, R, ve, vys, zb))
+    h_ys = N.assume(corps_ys)
+    ys_in_seg = conjonction_elim_gauche(h_ys)                   # yseg∈seg(x)
+    essai_ys = conjonction_elim_droite(h_ys)                    # est_essai(punion,yseg)
+    dom_pun_eq = conjonction_elim_droite(conjonction_elim_gauche(essai_ys))  # dom(punion)=seg(yseg)∪{yseg}
+    # z∈seg(yseg)∪{yseg}  (réécrire dom(punion))
+    segys = E.segment_extremite(R, ve, vys)
+    sys = E.singleton(vys)
+    z_in_segys_union = N.modus_ponens(z_in_dpun, equivalence_avant(
+        N.modus_ponens(dom_pun_eq, N.s6(E.dom(vpun), dom_essai(R, ve, vys), "wdz", appartient(vz, var("wdz"))))))
+    z_disj = N.modus_ponens(z_in_segys_union, equivalence_avant(_instance_reunion(segys, sys, vz)))  # z∈seg(yseg) ou z∈{yseg}
+
+    # segment membership instances (binder order E, x, y) :
+    th_seg = E.theorie_segment_extremite(R)
+    ax_seg = N.axiome(th_seg, E.axiome_segment_extremite(R))
+    # yseg∈seg(x) ⇔ ((yseg∈E ∧ yseg≤x) ∧ yseg≠x)
+    ys_seg_mem = instancie(instancie(instancie(ax_seg, ve), vx), vys)
+    ys_body = N.modus_ponens(ys_in_seg, equivalence_avant(ys_seg_mem))   # (yseg∈E ∧ yseg≤x) ∧ yseg≠x
+    ys_le_x = conjonction_elim_droite(conjonction_elim_gauche(ys_body))  # yseg≤x = (yseg,x)∈G
+    ys_ne_x = conjonction_elim_droite(ys_body)                          # yseg≠x
+
+    # CASE A : z∈seg(yseg) ⇒ z∈seg(x)
+    h_zsegys = N.assume(appartient(vz, segys))
+    # z∈seg(yseg) ⇔ ((z∈E ∧ z≤yseg) ∧ z≠yseg)
+    z_segys_mem = instancie(instancie(instancie(ax_seg, ve), vys), vz)
+    z_body = N.modus_ponens(h_zsegys, equivalence_avant(z_segys_mem))
+    z_in_E = conjonction_elim_gauche(conjonction_elim_gauche(z_body))    # z∈E
+    z_le_ys = conjonction_elim_droite(conjonction_elim_gauche(z_body))   # z≤yseg = (z,yseg)∈G
+    # transitivité : (z≤yseg ∧ yseg≤x) ⇒ z≤x
+    trans_inst = instancie(instancie(instancie(trans, vz), vys), vx)     # ((z,yseg)∈G ∧ (yseg,x)∈G)⇒(z,x)∈G
+    z_le_x = N.modus_ponens(conjonction_intro(z_le_ys, ys_le_x), trans_inst)  # (z,x)∈G
+    # z≠x  (antisymétrie) : si z=x alors (x,yseg)∈G et (yseg,x)∈G ⇒ x=yseg, contredisant yseg≠x
+    #   ¬(z=x) prouvé par : assume z=x, dérive yseg=x via antisym appliqué, contredire yseg≠x
+    h_z_eq_x = N.assume(egal(vz, vx))
+    # réécrit z→x dans z≤yseg : (x,yseg)∈G
+    x_le_ys = N.modus_ponens(z_le_ys, equivalence_avant(
+        N.modus_ponens(h_z_eq_x, N.s6(vz, vx, "wzx", appartient(E.couple(var("wzx"), vys), _t(G))))))  # (x,yseg)∈G
+    # antisym (x,yseg) : ((x,yseg)∈G ∧ (yseg,x)∈G) ⇒ x=yseg
+    antisym_inst = instancie(instancie(antisym, vx), vys)
+    x_eq_ys = N.modus_ponens(conjonction_intro(x_le_ys, ys_le_x), antisym_inst)  # x=yseg
+    ys_eq_x = N.modus_ponens(x_eq_ys, symetrie(vx, vys))                 # yseg=x
+    faux = N.modus_ponens(ys_eq_x, N.modus_ponens(ys_ne_x, N.s2(non(egal(vys, vx)), egal(vz, vx) and non(egal(vz, vx)))))
+    # construire ¬(z=x) proprement : (z=x) ⇒ FAUX, donc ¬(z=x)
+    z_ne_x_cibleA = non(egal(vz, vx))
+    inner = N.modus_ponens(ys_eq_x, N.modus_ponens(ys_ne_x, N.s2(non(egal(vys, vx)), z_ne_x_cibleA)))
+    impA_neg = N.loi_deduction(egal(vz, vx), inner)                     # (z=x) ⇒ ¬(z=x)
+    _, notP = antecedent_consequent(impA_neg.conclusion)
+    z_ne_x = N.modus_ponens(impA_neg, N.s1(notP))                       # ¬(z=x)
+    # z∈seg(x) ⇐ ((z∈E ∧ z≤x) ∧ z≠x)
+    z_seg_mem = instancie(instancie(instancie(ax_seg, ve), vx), vz)     # z∈seg(x) ⇔ ((z∈E ∧ z≤x)∧z≠x)
+    z_in_segx_A = N.modus_ponens(
+        conjonction_intro(conjonction_intro(z_in_E, z_le_x), z_ne_x),
+        equivalence_arriere(z_seg_mem))                                 # z∈seg(x)
+    impA = N.loi_deduction(appartient(vz, segys), z_in_segx_A)
+
+    # CASE B : z∈{yseg} ⇒ z∈seg(x)  (z=yseg, yseg∈seg(x))
+    h_zsys = N.assume(appartient(vz, sys))
+    z_eq_ys = N.modus_ponens(h_zsys, equivalence_avant(singleton_membre(vz, vys)))  # z=yseg
+    ys_eq_z = N.modus_ponens(z_eq_ys, symetrie(vz, vys))               # yseg=z
+    z_in_segx_B = N.modus_ponens(ys_in_seg, equivalence_avant(
+        N.modus_ponens(ys_eq_z, N.s6(vys, vz, "wyz", appartient(var("wyz"), seg)))))  # z∈seg(x)
+    impB = N.loi_deduction(appartient(vz, sys), z_in_segx_B)
+
+    z_in_segx = cas(z_disj, impA, impB)                                # z∈seg(x)   [sous corps_ys, …]
+    # élimine témoin yseg
+    imp_ys = N.loi_deduction(corps_ys, z_in_segx)
+    ex_ys = existe_elimination(imp_ys, "yseg")
+    z_in_segx_2 = N.modus_ponens(selS8, ex_ys)                         # z∈seg(x)   [corps_pun, …]
+    # élimine témoin punion
+    imp_pun = N.loi_deduction(corps_pun, z_in_segx_2)
+    ex_pun = existe_elimination(imp_pun, pun)
+    z_in_segx_3 = N.modus_ponens(ex_pq, ex_pun)                        # z∈seg(x)   [(z,w)∈⋃D, …]
+    # élimine témoin w
+    imp_w = N.loi_deduction(appartient(E.couple(vz, vw), Ux), z_in_segx_3)
+    ex_w_imp = existe_elimination(imp_w, w)
+    z_in_segx_4 = N.modus_ponens(ex_w, ex_w_imp)                       # z∈seg(x)   [z∈dom⋃D, bo]
+    incl_sub0 = N.generalisation(zz, N.loi_deduction(appartient(vz, dU), z_in_segx_4))  # (∀zseg)(z∈dU⇒z∈seg)
+    incl_sub = N.modus_ponens(incl_sub0, equivalence_avant(alpha_pour_tout(
+        zz, "z", impl(appartient(vz, dU), appartient(vz, seg)))))      # dom⋃D ⊂ seg
+
+    # ── (⊇) inclus(seg, dom(⋃D)) :  z∈seg(x) ⇒ z∈dom(⋃D) ────────────────────────
+    cov = _couverture_membre(vh, e, G, vx, V, zz, p, "yD", zb)          # (∃p)(p∈D ∧ z∈dom p ∧ val=vh)  [antec, z∈seg]
+    vpc = var(p)
+    gab = et(et(appartient(vpc, Dx), appartient(vz, E.dom(vpc))), egal(E.valeur(Ux, vz), vh(vz)))
+    h_gab = N.assume(gab)
+    pc_in_D = conjonction_elim_gauche(conjonction_elim_gauche(h_gab))   # p∈D
+    z_in_dpc = conjonction_elim_droite(conjonction_elim_gauche(h_gab))  # z∈dom(p)
+    # z∈dom(p) ⇒ (∃y)((z,y)∈p) ⇒ (z, valeur(p,z))∈p
+    car_dom_pc = instancie(instancie(ax_dom, vpc), vz)                 # z∈dom p ⇔ (∃y)((z,y)∈p)
+    ex_y_pc = N.modus_ponens(z_in_dpc, equivalence_avant(car_dom_pc))  # (∃y)((z,y)∈p)
+    from bourbaki.ensembles.fonctions.ensembles_fonctions import valeur_dans_graphe
+    zvz_in_pc = N.modus_ponens(ex_y_pc, N.loi_deduction(
+        existe("y", appartient(E.couple(vz, var("y")), vpc)),
+        valeur_dans_graphe(vpc, vz)))                                  # (z,valeur(p,z))∈p
+    # (z,valeur(p,z))∈⋃D  via _membre_dans_union pattern
+    cple = E.couple(vz, E.valeur(vpc, vz))
+    Rform = et(appartient(var("punion"), Dx), appartient(cple, var("punion")))
+    ex_intro = N.modus_ponens(conjonction_intro(pc_in_D, zvz_in_pc), N.s5(Rform, vpc, "punion"))  # (∃punion)(...)
+    cple_in_U = N.modus_ponens(ex_intro, equivalence_arriere(_inst_union_famille(Dx, cple)))      # (z,val)∈⋃D
+    # z∈dom(⋃D)  via axiome dom + S5
+    ex_w_U = N.modus_ponens(cple_in_U, N.s5(appartient(E.couple(vz, var("y")), Ux), E.valeur(vpc, vz), "y"))
+    z_in_dU = N.modus_ponens(ex_w_U, equivalence_arriere(car_dom))     # z∈dom(⋃D)   [gab]
+    # élimine témoin p de cov
+    imp_gab = N.loi_deduction(gab, z_in_dU)
+    ex_gab = existe_elimination(imp_gab, p)
+    z_in_dU_2 = N.modus_ponens(cov, ex_gab)                            # z∈dom(⋃D)   [antec, z∈seg]
+    incl_sup0 = N.generalisation(zz, N.loi_deduction(appartient(vz, seg), z_in_dU_2))  # (∀zseg)(z∈seg⇒z∈dU)
+    incl_sup = N.modus_ponens(incl_sup0, equivalence_avant(alpha_pour_tout(
+        zz, "z", impl(appartient(vz, seg), appartient(vz, dU)))))      # seg ⊂ dom⋃D
+
+    # extensionnalité : (dom⋃D⊂seg ∧ seg⊂dom⋃D) ⇒ dom⋃D=seg
+    dom_eq = N.modus_ponens(conjonction_intro(incl_sub, incl_sup),
+                            extensionnalite_appliquee(dU, seg))         # dom(⋃D)=seg   [antec, bo]
+    assert dom_eq.conclusion == egal(dU, seg), "couverture_segment_realise : ≠ dom(⋃D)=seg"
+
+    # enveloppe (∀x)( x∈E ⇒ ( antec_ambiant(x) ⇒ dom⋃D=seg ) ) ; bo reste libre
+    body = N.loi_deduction(appartient(vx, ve),
+                           N.loi_deduction(antec, dom_eq))
+    res = N.generalisation(x, body)
+
+    cible = clause_P3_ambiant(vh, e, G, x, V, y, p, zb)
+    assert res.conclusion == cible, "couverture_segment_realise : ≠ clause_P3_ambiant"
+    assert bo in res.hypotheses, "couverture_segment_realise : bon ordre absent"
+    assert len(res.hypotheses) == 1, "couverture_segment_realise : hyps ≠ 1 (devrait être {bo})"
+    assert res.conclusion not in res.hypotheses, "couverture_segment_realise : VACUOUS"
     return res
 
 
