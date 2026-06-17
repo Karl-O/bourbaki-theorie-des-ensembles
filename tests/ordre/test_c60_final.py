@@ -78,3 +78,79 @@ def test_extension_un_pas_depuis_coincidence():
     assert egal(E.dom(U), seg) in r.hypotheses
     assert r.conclusion not in r.hypotheses
     assert len(E.theorie_ensembles().axiomes) == 22
+
+
+# ── valeur de l'essai trivial / domaine et valeur de l'essai prolongé ───────────
+def _vh(t):
+    """Règle-test vh(t) := valeur(Hh, t)  (fonction-valeur de la règle)."""
+    return E.valeur(var("Hh"), t)
+
+
+def test_valeur_singleton_couple_clos():
+    """valeur({(x,v)}, x) = v  [CLOS, 0 hyp]."""
+    r = F.valeur_singleton_couple()
+    vx, vv = var("x0"), var("v0")
+    S = E.singleton(E.couple(vx, vv))
+    assert r.conclusion == egal(E.valeur(S, vx), vv)
+    assert r.est_clos
+
+
+def test_dom_extension_un_pas():
+    """dom(⋃𝔇 ∪ {(x,v)}) = seg∪{x}  [1 hyp honnête dom(⋃𝔇)=seg]."""
+    from bourbaki.ordre.ensembles_c60_existence_close import dom_essai
+    r = F.dom_extension_un_pas()
+    vD = var("Df")
+    U = union_famille(vD)
+    seg = E.segment_extremite(_graphe_R("G"), var("E"), var("x0"))
+    S = E.singleton(E.couple(var("x0"), var("v0")))
+    assert r.conclusion == egal(E.dom(E.reunion(U, S)), dom_essai(_graphe_R("G"), var("E"), var("x0")))
+    assert len(r.hypotheses) == 1
+    assert egal(E.dom(U), seg) in r.hypotheses
+    assert r.conclusion not in r.hypotheses
+
+
+def test_valeur_nouveau_point():
+    """valeur(⋃𝔇 ∪ {(x,v)}, x) = v  [3 hyps honnêtes]."""
+    r = F.valeur_nouveau_point()
+    vD = var("Df")
+    U = union_famille(vD)
+    S = E.singleton(E.couple(var("x0"), var("v0")))
+    seg = E.segment_extremite(_graphe_R("G"), var("E"), var("x0"))
+    assert r.conclusion == egal(E.valeur(E.reunion(U, S), var("x0")), var("v0"))
+    assert len(r.hypotheses) == 3
+    assert F.membres_fonctionnels(vD) in r.hypotheses
+    assert F.coincidence_membres(vD) in r.hypotheses
+    assert egal(E.dom(U), seg) in r.hypotheses
+    assert r.conclusion not in r.hypotheses
+
+
+def test_recursion_essai_prolonge():
+    """🎯 (∀z∈dom(p_x'))(valeur(p_x',z)=vh(z))  [5 hyps honnêtes]."""
+    r = F.recursion_essai_prolonge(_vh)
+    vD = var("Df")
+    U = union_famille(vD)
+    seg = E.segment_extremite(_graphe_R("G"), var("E"), var("x0"))
+    assert len(r.hypotheses) == 5
+    assert F.membres_fonctionnels(vD) in r.hypotheses
+    assert F.coincidence_membres(vD) in r.hypotheses
+    assert egal(E.dom(U), seg) in r.hypotheses
+    assert F.recursion_sur_segment(vD, _vh, "G", "E", "x0") in r.hypotheses
+    assert F.equation_au_point(var("v0"), _vh, var("x0")) in r.hypotheses
+    assert r.conclusion not in r.hypotheses
+    assert len(E.theorie_ensembles().axiomes) == 22
+
+
+def test_couvert_essai_depuis_famille():
+    """🎯 DÉCHARGE COMPLÈTE en x : construit l'essai p_x' ⇒ couvert_essai(x)  [5 hyps]."""
+    from bourbaki.ordre.ensembles_c60_existence_close import couvert_essai
+    r = F.couvert_essai_depuis_famille(_vh)
+    vD = var("Df")
+    couvert = couvert_essai(_vh, _graphe_R("G"), var("E"), "pess", "zess")(var("x0"))
+    assert r.conclusion == couvert
+    assert len(r.hypotheses) == 5
+    assert F.membres_fonctionnels(vD) in r.hypotheses
+    assert F.coincidence_membres(vD) in r.hypotheses
+    assert F.recursion_sur_segment(vD, _vh, "G", "E", "x0") in r.hypotheses
+    assert F.equation_au_point(var("v0"), _vh, var("x0")) in r.hypotheses
+    assert r.conclusion not in r.hypotheses
+    assert len(E.theorie_ensembles().axiomes) == 22

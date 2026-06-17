@@ -72,17 +72,28 @@ from bourbaki.ensembles import ensembles_abrege as E
 
 from bourbaki.logique.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
-    equivalence_avant, equivalence_arriere, instancie,
+    equivalence_avant, equivalence_arriere, instancie, cas,
 )
 from bourbaki.logique.tactiques.tactiques_abrege_egalite import (
-    symetrie, composer_egalites,
+    symetrie, composer_egalites, congruence_terme,
 )
 from bourbaki.ensembles.fonctions.ensembles_fonctions import valeur_caracterisation
+from bourbaki.ensembles.base.ensembles_couples import singleton_membre
+from bourbaki.ensembles.fonctions.ensembles_restriction_somme import (
+    dom_reunion_graphes, membre_reunion_graphes,
+)
+from bourbaki.ensembles.fonctions.ensembles_recollement_bijection import (
+    valeur_reunion_droite, valeur_reunion_gauche,
+)
 
 from bourbaki.ordre.ensembles_recurrence_transfinie import _graphe_R
 from bourbaki.ordre.ensembles_c60_coeur import (
     union_famille, famille_compatible, union_famille_fonctionnelle,
     extension_un_pas_union_fonctionnelle,
+)
+from bourbaki.ordre.ensembles_c60_existence_close import (
+    singleton_couple_fonctionnel, dom_singleton_couple, domaines_essai_disjoints,
+    dom_essai, est_essai, couvert_essai,
 )
 
 
@@ -300,9 +311,290 @@ def extension_un_pas_depuis_coincidence(D="Df", G="G", e="E", x="x0", v="v0"):
     return res
 
 
+# ════════════════════════════════════════════════════════════════════════════
+#  VALEUR DE L'ESSAI TRIVIAL  valeur({(x,v)}, x) = v.
+# ════════════════════════════════════════════════════════════════════════════
+def valeur_singleton_couple(x="x0", v="v0"):
+    """⊢ valeur( {(x,v)}, x ) = v                                    [CLOS, 0 hyp].
+
+    La valeur de l'essai trivial {(x,v)} en son unique point x est v.  DÉRIVÉ de
+    (E1) `singleton_couple_fonctionnel` (fonctionnalité), de (x,v)∈{(x,v)} (membre
+    d'un singleton) et de `couple_donne_valeur` ((x,v)∈{(x,v)} ⇒ v=valeur({(x,v)},x)),
+    puis symétrie."""
+    vx, vv = _t(x), _t(v)
+    cpl = E.couple(vx, vv)
+    S = E.singleton(cpl)
+    cpl_in = N.modus_ponens(N.reflexivite(cpl), equivalence_arriere(singleton_membre(cpl, cpl)))  # (x,v)∈S
+    funcS = singleton_couple_fonctionnel(vx, vv)                   # func S   [CLOS]
+    cdv = couple_donne_valeur(S, vx, vv)                           # {func S,(x,v)∈S} ⊢ v=valeur(S,x)
+    v_eq = N.modus_ponens(funcS, N.loi_deduction(E.est_fonctionnel(S), cdv))
+    v_eq = N.modus_ponens(cpl_in, N.loi_deduction(appartient(cpl, S), v_eq))   # v=valeur(S,x)
+    res = N.modus_ponens(v_eq, symetrie(vv, E.valeur(S, vx)))      # valeur(S,x)=v
+
+    cible = egal(E.valeur(S, vx), vv)
+    assert res.conclusion == cible, "valeur_singleton_couple : ≠ valeur({(x,v)},x)=v"
+    assert res.est_clos, "valeur_singleton_couple non clos"
+    return res
+
+
+# ════════════════════════════════════════════════════════════════════════════
+#  DOMAINE DE L'ESSAI PROLONGÉ  dom(⋃𝔇 ∪ {(x,v)}) = seg(R,E,x) ∪ {x} = dom_essai.
+# ════════════════════════════════════════════════════════════════════════════
+def dom_extension_un_pas(D="Df", G="G", e="E", x="x0", v="v0"):
+    """{ dom(⋃𝔇) = seg(R,E,x) } ⊢ dom( ⋃𝔇 ∪ {(x,v)} ) = seg(R,E,x) ∪ {x}
+                                                                    [1 hyp honnête].
+
+    Le DOMAINE de l'essai prolongé est exactement le segment FERMÉ en x (= dom_essai).
+    DÉRIVÉ : dom(⋃𝔇∪{(x,v)}) = dom(⋃𝔇)∪dom({(x,v)}) (`dom_reunion_graphes`, CLOS)
+    = dom(⋃𝔇)∪{x} (E2 dom({(x,v)})={x}) = seg∪{x} (1 hyp honnête dom(⋃𝔇)=seg).
+    La cible coïncide avec `dom_essai(R,E,x)` — le domaine attendu de l'essai en x."""
+    vD, vx, vv = _t(D), _t(x), _t(v)
+    U = union_famille(vD)
+    S = E.singleton(E.couple(vx, vv))
+    R = _graphe_R(G)
+    seg = E.segment_extremite(R, _t(e), vx)
+    sx = E.singleton(vx)
+
+    dr = dom_reunion_graphes(U, S)                                # dom(⋃𝔇∪S)=dom⋃𝔇∪domS  [CLOS]
+    domS = dom_singleton_couple(vx, vv)                           # domS={x}              [CLOS]
+    cong = congruence_terme(E.dom(S), sx, E.reunion(E.dom(U), var("w")), "w")
+    rw = N.modus_ponens(domS, cong)                              # dom⋃𝔇∪domS = dom⋃𝔇∪{x}
+    step = composer_egalites(dr, rw)                             # dom(⋃𝔇∪S)=dom⋃𝔇∪{x}
+    h_dom_seg = N.assume(egal(E.dom(U), seg))                    # dom(⋃𝔇)=seg   [HONNÊTE]
+    cong2 = congruence_terme(E.dom(U), seg, E.reunion(var("w"), sx), "w")
+    rw2 = N.modus_ponens(h_dom_seg, cong2)                       # dom⋃𝔇∪{x}=seg∪{x}
+    res = composer_egalites(step, rw2)                           # dom(⋃𝔇∪S)=seg∪{x}
+
+    cible = egal(E.dom(E.reunion(U, S)), dom_essai(R, _t(e), vx))
+    assert res.conclusion == cible, "dom_extension_un_pas : ≠ dom(⋃𝔇∪{(x,v)})=seg∪{x}"
+    assert egal(E.dom(U), seg) in res.hypotheses, "dom_extension_un_pas : dom(⋃𝔇)=seg absente"
+    assert res.conclusion not in res.hypotheses, "dom_extension_un_pas : VACUOUS"
+    return res
+
+
+# ════════════════════════════════════════════════════════════════════════════
+#  ÉQUATION DE RÉCURSION AU NOUVEAU POINT  valeur(⋃𝔇 ∪ {(x,v)}, x) = v.
+# ════════════════════════════════════════════════════════════════════════════
+def valeur_nouveau_point(D="Df", G="G", e="E", x="x0", v="v0"):
+    """{ membres_fonctionnels(𝔇), coincidence_membres(𝔇), dom(⋃𝔇)=seg(R,E,x) }
+        ⊢ valeur( ⋃𝔇 ∪ {(x,v)}, x ) = v                            [3 hyps honnêtes].
+
+    🎯 L'ÉQUATION DE RÉCURSION AU NOUVEAU POINT x : l'essai prolongé rend bien la
+    valeur v au point x (en posant v := vh(x), c'est valeur(p_x',x)=vh(x)).  DÉRIVÉ :
+    valeur(⋃𝔇∪{(x,v)},x)=valeur({(x,v)},x) (`valeur_reunion_droite`, côté droit, sur
+    x∈dom{(x,v)}) = v (`valeur_singleton_couple`).  On DÉCHARGE les 4 hyps de
+    valeur_reunion_droite : func(⋃𝔇) [PONT (étape 1)+(i)], func({(x,v)}) [E1 CLOS],
+    disjonction des domaines [E4 sous dom(⋃𝔇)=seg], x∈dom({(x,v)}) [E2+singleton CLOS].
+    Ne restent que les 3 données HONNÊTES de la famille + couverture.  Non vacuous."""
+    vD, vx, vv = _t(D), _t(x), _t(v)
+    U = union_famille(vD)
+    cpl = E.couple(vx, vv)
+    S = E.singleton(cpl)
+    R = _graphe_R(G)
+    seg = E.segment_extremite(R, _t(e), vx)
+
+    # valeur_reunion_droite(⋃𝔇, S, x) : {func ⋃𝔇, func S, disj, x∈dom S} ⊢ valeur(⋃𝔇∪S,x)=valeur(S,x)
+    vrd = valeur_reunion_droite(U, S, vx)
+    funcU_form = E.est_fonctionnel(U)
+    funcS_form = E.est_fonctionnel(S)
+
+    # décharge func ⋃𝔇 par le PONT + (i)
+    funcU = union_fonctionnelle_depuis_coincidence(D)            # {membres_fonctionnels, coincidence} ⊢ func ⋃𝔇
+    # décharge func S par E1
+    funcS = singleton_couple_fonctionnel(vx, vv)                 # func S   [CLOS]
+    # disjonction des domaines (E4) sous dom(⋃𝔇)=seg
+    disj = domaines_essai_disjoints(U, G, e, x, v)              # {dom(⋃𝔇)=seg} ⊢ (∀u)¬(u∈dom⋃𝔇 et u∈domS)
+    disj_form = disj.conclusion
+    # x∈dom S   (x∈{x} réécrit en x∈dom S via E2)
+    domS_eq = dom_singleton_couple(vx, vv)                       # dom S = {x}   [CLOS]
+    x_in_sx = N.modus_ponens(N.reflexivite(vx), equivalence_arriere(singleton_membre(vx, vx)))  # x∈{x}
+    x_in_domS = N.modus_ponens(x_in_sx, equivalence_arriere(
+        N.modus_ponens(domS_eq, N.s6(E.dom(S), E.singleton(vx), "w", appartient(vx, var("w"))))))  # x∈dom S
+
+    r = vrd
+    r = N.modus_ponens(funcU, N.loi_deduction(funcU_form, r))
+    r = N.modus_ponens(funcS, N.loi_deduction(funcS_form, r))
+    r = N.modus_ponens(disj, N.loi_deduction(disj_form, r))
+    r = N.modus_ponens(x_in_domS, N.loi_deduction(appartient(vx, E.dom(S)), r))  # valeur(⋃𝔇∪S,x)=valeur(S,x)
+
+    # chaîne avec valeur(S,x)=v
+    vSx = valeur_singleton_couple(vx, vv)                        # valeur(S,x)=v   [CLOS]
+    res = composer_egalites(r, vSx)                              # valeur(⋃𝔇∪S,x)=v
+
+    cible = egal(E.valeur(E.reunion(U, S), vx), vv)
+    assert res.conclusion == cible, "valeur_nouveau_point : ≠ valeur(⋃𝔇∪{(x,v)},x)=v"
+    assert membres_fonctionnels(vD) in res.hypotheses, "valeur_nouveau_point : membres_fonctionnels absente"
+    assert coincidence_membres(vD) in res.hypotheses, "valeur_nouveau_point : coincidence_membres absente"
+    assert egal(E.dom(U), seg) in res.hypotheses, "valeur_nouveau_point : dom(⋃𝔇)=seg absente"
+    assert res.conclusion not in res.hypotheses, "valeur_nouveau_point : VACUOUS"
+    return res
+
+
+# ════════════════════════════════════════════════════════════════════════════
+#  ÉNONCÉS — hypothèses HONNÊTES de l'équation de récursion sur le segment.
+# ════════════════════════════════════════════════════════════════════════════
+def recursion_sur_segment(D, vh, G, e, x, z="zrs"):
+    """(∀z)( z∈seg(R,E,x) ⇒ valeur(⋃𝔇,z)=vh(z) )   — la récursion DÉJÀ satisfaite par ⋃𝔇.
+
+    « La réunion des essais des y<x SATISFAIT DÉJÀ l'équation de récursion sur le
+    segment seg(R,E,x). »  C'est le contenu INDUCTIF : les essais des y<x sont des
+    solutions, donc leur réunion l'est sur le segment.  HYPOTHÈSE HONNÊTE."""
+    vD, vx = _t(D), _t(x)
+    R = _graphe_R(G)
+    seg = E.segment_extremite(R, _t(e), vx)
+    vz = var(z)
+    U = union_famille(vD)
+    return pourtout(z, impl(appartient(vz, seg), egal(E.valeur(U, vz), vh(vz))))
+
+
+def equation_au_point(v, vh, x):
+    """v = vh(x)   — l'ÉQUATION DE RÉCURSION au nouveau point x (v est la valeur-règle).
+
+    « La valeur v posée au nouveau point x EST la valeur-règle vh(x) = h(x, p_x|seg). »
+    HYPOTHÈSE HONNÊTE (la définition même de l'extension d'un pas)."""
+    return egal(_t(v), vh(_t(x)))
+
+
+# ════════════════════════════════════════════════════════════════════════════
+#  🎯 ÉQUATION DE RÉCURSION SUR TOUT LE DOMAINE DE L'ESSAI PROLONGÉ.
+# ════════════════════════════════════════════════════════════════════════════
+def recursion_essai_prolonge(vh, D="Df", G="G", e="E", x="x0", v="v0", z="zess"):
+    """{ membres_fonctionnels(𝔇), coincidence_membres(𝔇), dom(⋃𝔇)=seg(R,E,x),
+        recursion_sur_segment(𝔇,vh,…), v=vh(x) }
+        ⊢ (∀z)( z∈dom(⋃𝔇 ∪ {(x,v)}) ⇒ valeur(⋃𝔇 ∪ {(x,v)}, z) = vh(z) )
+                                                                    [5 hyps honnêtes].
+
+    🎯 L'ÉQUATION DE RÉCURSION sur TOUT le domaine de l'essai prolongé p_x' := ⋃𝔇∪{(x,v)}.
+    PREUVE par cas sur z∈dom(p_x')=seg∪{x} (membre_reunion_graphes) :
+      • z∈seg : valeur(p_x',z)=valeur(⋃𝔇,z) (`valeur_reunion_gauche`, z∈dom(⋃𝔇)=seg)
+                = vh(z)  (`recursion_sur_segment`) ;
+      • z=x  : valeur(p_x',x)=v (`valeur_nouveau_point`) = vh(x) (`v=vh(x)`),
+               réécrit z→x via z∈{x}.
+    Le binder z vaut 'zess' (celui de `est_essai`).  Conclusion ∉ hypothèses (non vacuous)."""
+    vD, vx, vv = _t(D), _t(x), _t(v)
+    U = union_famille(vD)
+    S = E.singleton(E.couple(vx, vv))
+    pxp = E.reunion(U, S)
+    R = _graphe_R(G)
+    seg = E.segment_extremite(R, _t(e), vx)
+    sx = E.singleton(vx)
+    vz = var(z)
+
+    funcU_form = E.est_fonctionnel(U)
+    funcS_form = E.est_fonctionnel(S)
+    dom_seg = egal(E.dom(U), seg)
+
+    # z∈dom(p_x')=seg∪{x}  ⇒  z∈seg ∨ z∈{x}.  dom(p_x') membership via dom_extension.
+    # On travaille avec le DOMAINE RÉEL dom(p_x') ; on le réécrit en seg∪{x} (dom_extension).
+    dom_eq = dom_extension_un_pas(D, G, e, x, v)             # dom(p_x')=seg∪{x}   [dom(⋃𝔇)=seg]
+    h_z = N.assume(appartient(vz, E.dom(pxp)))               # z∈dom(p_x')
+    # réécrit dom(p_x') → seg∪{x}
+    z_in_segx = N.modus_ponens(h_z, equivalence_avant(N.modus_ponens(dom_eq,
+        N.s6(E.dom(pxp), dom_essai(R, _t(e), vx), "w", appartient(vz, var("w"))))))  # z∈seg∪{x}
+    disj = N.modus_ponens(z_in_segx, equivalence_avant(membre_reunion_graphes(seg, sx, vz)))  # z∈seg ou z∈{x}
+
+    # ── CASE A : z∈seg ⇒ valeur(p_x',z)=vh(z)
+    hzseg = N.assume(appartient(vz, seg))
+    vrg = valeur_reunion_gauche(U, S, vz)                    # {funcU,funcS,disjdom,z∈domU} ⊢ val(p_x',z)=val(⋃𝔇,z)
+    funcU = union_fonctionnelle_depuis_coincidence(D)
+    funcS = singleton_couple_fonctionnel(vx, vv)
+    disjdom = domaines_essai_disjoints(U, G, e, x, vv)
+    disjdom_form = disjdom.conclusion
+    seg_eq_domU = N.modus_ponens(N.assume(dom_seg), symetrie(E.dom(U), seg))   # seg=dom⋃𝔇
+    z_in_domU = N.modus_ponens(hzseg, equivalence_avant(
+        N.modus_ponens(seg_eq_domU, N.s6(seg, E.dom(U), "w", appartient(vz, var("w"))))))  # z∈dom⋃𝔇
+    rA = vrg
+    rA = N.modus_ponens(funcU, N.loi_deduction(funcU_form, rA))
+    rA = N.modus_ponens(funcS, N.loi_deduction(funcS_form, rA))
+    rA = N.modus_ponens(disjdom, N.loi_deduction(disjdom_form, rA))
+    rA = N.modus_ponens(z_in_domU, N.loi_deduction(appartient(vz, E.dom(U)), rA))  # val(p_x',z)=val(⋃𝔇,z)
+    h_rs = N.assume(recursion_sur_segment(vD, vh, G, e, x))  # (∀z)(z∈seg⇒val(⋃𝔇,z)=vh(z))
+    uz_vh = N.modus_ponens(hzseg, instancie(h_rs, vz))       # val(⋃𝔇,z)=vh(z)
+    rA_full = composer_egalites(rA, uz_vh)                   # val(p_x',z)=vh(z)
+    impA = N.loi_deduction(appartient(vz, seg), rA_full)
+
+    # ── CASE B : z∈{x} ⇒ valeur(p_x',z)=vh(z)
+    vnp = valeur_nouveau_point(D, G, e, x, v)                # val(p_x',x)=v
+    h_veq = N.assume(equation_au_point(vv, vh, vx))          # v=vh(x)   [HONNÊTE]
+    vpx_vhx = composer_egalites(vnp, h_veq)                  # val(p_x',x)=vh(x)
+    hzx = N.assume(appartient(vz, sx))
+    z_eq_x = N.modus_ponens(hzx, equivalence_avant(singleton_membre(vz, vx)))  # z=x
+    trough = egal(E.valeur(pxp, var("w")), vh(var("w")))     # gabarit (w∉p_x' car p_x' contient x)
+    equ = N.modus_ponens(z_eq_x, N.s6(vz, vx, "w", trough))  # (val(p_x',z)=vh(z)) ⇔ (val(p_x',x)=vh(x))
+    goalB = N.modus_ponens(vpx_vhx, equivalence_arriere(equ))  # val(p_x',z)=vh(z)
+    impB = N.loi_deduction(appartient(vz, sx), goalB)
+
+    # ── combiner les cas, généraliser
+    combined = cas(disj, impA, impB)                         # val(p_x',z)=vh(z)
+    body = N.loi_deduction(appartient(vz, E.dom(pxp)), combined)
+    res = N.generalisation(z, body)
+
+    cible = pourtout(z, impl(appartient(vz, E.dom(pxp)), egal(E.valeur(pxp, vz), vh(vz))))
+    assert res.conclusion == cible, "recursion_essai_prolonge : ≠ équation de récursion sur dom(p_x')"
+    assert membres_fonctionnels(vD) in res.hypotheses, "recursion_essai_prolonge : membres_fonctionnels absente"
+    assert coincidence_membres(vD) in res.hypotheses, "recursion_essai_prolonge : coincidence_membres absente"
+    assert dom_seg in res.hypotheses, "recursion_essai_prolonge : dom(⋃𝔇)=seg absente"
+    assert recursion_sur_segment(vD, vh, G, e, x) in res.hypotheses, "recursion_essai_prolonge : récursion-segment absente"
+    assert equation_au_point(vv, vh, vx) in res.hypotheses, "recursion_essai_prolonge : v=vh(x) absente"
+    assert res.conclusion not in res.hypotheses, "recursion_essai_prolonge : VACUOUS"
+    return res
+
+
+# ════════════════════════════════════════════════════════════════════════════
+#  🎯 ÉTAPE 2 (DISCHARGE COMPLET) — couvert_essai(x) par construction de l'essai.
+# ════════════════════════════════════════════════════════════════════════════
+def couvert_essai_depuis_famille(vh, D="Df", G="G", e="E", x="x0", v="v0", z="zess",
+                                 p="pess"):
+    """{ membres_fonctionnels(𝔇), coincidence_membres(𝔇), dom(⋃𝔇)=seg(R,E,x),
+        recursion_sur_segment(𝔇,vh,…), v=vh(x) }
+        ⊢ couvert_essai(x) = (∃p)( est_essai(p, vh, R, E, x) )      [5 hyps honnêtes].
+
+    🎯 LA DÉCHARGE COMPLÈTE de l'hérédité de la couverture (E6) en x : on EXHIBE l'essai
+    p_x' := ⋃𝔇 ∪ {(x,v)} et on prouve `est_essai(p_x', x)` :
+      • est_fonctionnel(p_x')            ⇐ `extension_un_pas_depuis_coincidence` (étape 2 fct) ;
+      • dom(p_x') = seg(R,E,x)∪{x}       ⇐ `dom_extension_un_pas` ;
+      • (∀z∈dom p_x')(valeur(p_x',z)=vh(z)) ⇐ `recursion_essai_prolonge`.
+    puis couvert_essai(x) = (∃p)(est_essai(p,x)) par S5 (témoin p_x').
+
+    ⚠️ CINQ hypothèses HONNÊTES (theorie=22), déchargées par loi_deduction.  Les trois
+    premières sont la cohésion des essais (⇐ `solutions_coincident`) + leur fonctionnalité
+    + la couverture des y<x (dom(⋃𝔇)=seg) ; les deux dernières sont l'équation de
+    récursion (déjà satisfaite sur le segment par les essais des y<x, et posée au
+    nouveau point x).  Conclusion ∉ hypothèses (non vacuous)."""
+    vD, vx, vv = _t(D), _t(x), _t(v)
+    U = union_famille(vD)
+    S = E.singleton(E.couple(vx, vv))
+    pxp = E.reunion(U, S)
+    R = _graphe_R(G)
+
+    func = extension_un_pas_depuis_coincidence(D, G, e, x, v)   # func(p_x')   [3 hyps]
+    dom_eq = dom_extension_un_pas(D, G, e, x, v)                # dom(p_x')=seg∪{x}  [1 hyp]
+    rec = recursion_essai_prolonge(vh, D, G, e, x, v, z)        # (∀z∈dom)(val=vh)  [5 hyps]
+
+    # est_essai(p_x', x) = (func ∧ dom=seg∪{x}) ∧ équation
+    essai = conjonction_intro(conjonction_intro(func, dom_eq), rec)
+    essai_form = est_essai(pxp, vh, R, _t(e), vx, z)
+    assert essai.conclusion == essai_form, "couvert_essai_depuis_famille : ≠ est_essai(p_x',x)"
+
+    # couvert_essai(x) = (∃p)(est_essai(p,x))  par S5 (témoin p_x')
+    couvert = couvert_essai(vh, R, _t(e), p, z)(vx)            # (∃p)(est_essai(p,…))
+    # corps de couvert avec binder p : est_essai(var(p), …)
+    corps = est_essai(var(p), vh, R, _t(e), vx, z)
+    res = N.modus_ponens(essai, N.s5(corps, pxp, p))           # (∃p)(est_essai(p,x))
+
+    assert res.conclusion == couvert, "couvert_essai_depuis_famille : ≠ couvert_essai(x)"
+    assert res.conclusion not in res.hypotheses, "couvert_essai_depuis_famille : VACUOUS"
+    return res
+
+
 __all__ = [
     # brique graphe→valeur (le chunk reporté, CLOS)
     "couple_donne_valeur",
+    # valeur de l'essai trivial / domaine et valeur de l'essai prolongé
+    "valeur_singleton_couple", "dom_extension_un_pas", "valeur_nouveau_point",
+    # équation de récursion sur tout le domaine + couverture en x
+    "recursion_sur_segment", "equation_au_point",
+    "recursion_essai_prolonge", "couvert_essai_depuis_famille",
     # énoncés de cohésion HONNÊTE de la famille
     "membres_fonctionnels", "coincidence_membres",
     # 🎯 étape 1 — LE PONT solutions_coincident → famille_compatible
