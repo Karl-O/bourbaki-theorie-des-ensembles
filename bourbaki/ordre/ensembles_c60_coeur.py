@@ -42,12 +42,6 @@ CE QUI EST CLOS ICI (theorie_ensembles()=22 intangible ; tout DÉRIVÉ, rien pos
          membres), SIMPLIFIÉE : la compatibilité est DONNÉE, sans chercher de membre
          commun.]
 
-  (i') COMPATIBILITÉ DEPUIS LA COHÉRENCE — `compatibilite_via_coincidence` :
-        montre que l'hypothèse `famille_compatible` est EXACTEMENT le type d'énoncé
-        que `solutions_coincident` (cohérence ponctuelle des solutions) fournit — le
-        PONT entre la cohérence des essais et la fonctionnalité de leur réunion.
-        (squelette ; cf. rapport.)
-
   (iii) VALEUR AU NOUVEAU POINT — `extension_un_pas_union_fonctionnelle` :
         { famille_compatible(𝔇), dom(⋃𝔇)=seg(R,E,x) }
         ⊢ est_fonctionnel( ⋃𝔇 ∪ {(x,v)} )                                [2 hyps honnêtes].
@@ -66,13 +60,21 @@ LA FRONTIÈRE RÉSIDUELLE (reportée, honnêtement — voir le rapport en bas).
     • l'ÉQUATION DE RÉCURSION au point x : valeur(p_x∪{(x,v)}, x) = vh(x) avec
       v:=vh(x), et le transfert de l'équation sur le segment (via `valeur_essai_reunion`
       généralisée à la famille) ;
-    • la DÉCHARGE de l'hérédité honnête de (E6) par l'assemblage de (i)+(iii).
+    • la DÉCHARGE de l'hérédité honnête de (E6) par l'assemblage de (i)+(iii) ;
+    • le PONT (i') `famille_compatible(𝔇)` ⟸ `solutions_coincident` : NON construit ici.
+      `solutions_coincident` prouve la coïncidence au niveau VALEUR (vf,vg : Terme→Terme,
+      (∀x∈E) vf(x)=vg(x)) ; `famille_compatible` est au niveau GRAPHE (membres p,q∈𝔇,
+      couples (a,b)∈p, (a,c)∈q ⇒ b=c).  Relier les deux exige, pour des graphes p,q
+      FONCTIONNELS, le passage (a,b)∈p ⇒ b=valeur(p,a) (valeur_caracterisation/C46) —
+      un chunk distinct non clos ici.  C'est pourquoi `famille_compatible` reste une
+      HYPOTHÈSE HONNÊTE (la coïncidence-graphe des essais) plutôt qu'un théorème dérivé.
 
 INVARIANT : theorie_ensembles()=22.  Les hypothèses (compatibilité de la famille,
-domaine = segment) sont HONNÊTES — la compatibilité EST la cohérence des essais
-(`solutions_coincident`), le domaine=segment EST la couverture des y<x.  Déchargées
-par loi_deduction.  Aucun axiome nouveau dans theorie_ensembles : la collectivisation
-⋃𝔇 vit dans une THÉORIE DÉDIÉE (motif Zermelo `Union`).
+domaine = segment) sont HONNÊTES — la compatibilité EST la cohérence (niveau graphe)
+des essais (cf. `solutions_coincident` au niveau valeur), le domaine=segment EST la
+couverture des y<x.  Déchargées par loi_deduction.  Aucun axiome nouveau dans
+theorie_ensembles : la collectivisation ⋃𝔇 vit dans une THÉORIE DÉDIÉE (motif
+Zermelo `Union`).
 """
 from __future__ import annotations
 
