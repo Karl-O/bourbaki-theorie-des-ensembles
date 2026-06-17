@@ -529,7 +529,6 @@ def couverture_segment_realise(vh, e="E", G="G", x="x0", V="Vval", y="ytf",
     car_dom = instancie(instancie(ax_dom, Ux), vz)              # z∈dom⋃D ⇔ (∃w)((z,w)∈⋃D)
 
     # ── (⊆) inclus(dom(⋃D), seg) :  z∈dom(⋃D) ⇒ z∈seg(x) ────────────────────────
-    from bourbaki.logique.tactiques.tactiques_abrege_quantif import alpha_existe
     h_z_dU = N.assume(appartient(vz, dU))                       # z∈dom(⋃D)
     ex_w0 = N.modus_ponens(h_z_dU, equivalence_avant(car_dom))  # (∃y)((z,y)∈⋃D)
     ex_w = N.modus_ponens(ex_w0, equivalence_avant(alpha_existe(
