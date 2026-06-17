@@ -244,5 +244,168 @@ def essai_dans_parties_depuis_bien_formes(vh, e="E", G="G", y="ypont", V="Vval",
     return res
 
 
+# ════════════════════════════════════════════════════════════════════════════
+#  🎯 LE PONT bare→ambiant AU NIVEAU ANTÉCÉDENT.
+#  antecedent_couverture(x)  +  essais_bien_formes  +  rule-codomain
+#     ⊢  antecedent_couverture_ambiant(x).
+# ════════════════════════════════════════════════════════════════════════════
+def antecedent_ambiant_depuis_bare(vh, e="E", G="G", x="x0", V="Vval",
+                                   y="ytf", p="pcf", z="zess", q="qwf", w="wwf"):
+    """{ antecedent_couverture(x), essais_bien_formes(vh), rule-codomain }
+        ⊢ antecedent_couverture_ambiant(x).
+
+    🎯 LE PONT bare→ambiant, AU NIVEAU DE L'ANTÉCÉDENT D'INDUCTION.  Pour chaque y<x,
+    l'antécédent BARE fournit un essai pess avec est_essai(pess,y) ; `essai_dans_parties
+    _depuis_bien_formes` (sous essais_bien_formes + rule-codomain) le SITUE dans 𝔓(E×V) ;
+    on conjoint, on réintroduit l'existentiel ambiant (∃pcf)(pcf∈𝔓(E×V)∧est_essai), on
+    élimine le témoin pess.  C'est EXACTEMENT le pont qui relie l'antécédent d'induction
+    BARE de C59 à l'antécédent AMBIANT exigé par les clauses (P3),(P4) de c60_clauses.
+
+    ⚠️ TROIS hypothèses HONNÊTES : antecedent_couverture(x) (l'hyp d'induction C59),
+    essais_bien_formes(vh) (structure des essais), rule-codomain (vh:…→V).  theorie=22."""
+    from bourbaki.ordre.ensembles_c60_existence_close import couvert_essai
+    from bourbaki.ordre.ensembles_c60_realisation import antecedent_couverture
+    from bourbaki.ordre.ensembles_c60_clauses import antecedent_couverture_ambiant
+    R = _graphe_R(G)
+    ve, vx = _t(e), _t(x)
+    seg = E.segment_extremite(R, ve, vx)
+    vy = var(y)
+    pess = "pess"                                            # binder témoin de couvert_essai (défaut)
+    vpess = var(pess)
+
+    h_bare = N.assume(antecedent_couverture(vh, e, G, vx, y))   # (∀y)(y∈seg ⇒ (∃pess)essai)
+    h_wf = N.assume(essais_bien_formes(vh, e, G, V, q, w, z))
+    h_rule = N.assume(rule_codomain(vh, V, z))
+
+    # but : y∈seg ⇒ (∃pcf)(pcf∈𝔓(E×V) ∧ est_essai(pcf,y))
+    h_yseg = N.assume(appartient(vy, seg))                   # y∈seg
+    bare_y = N.modus_ponens(h_yseg, instancie(h_bare, vy))   # (∃pess)est_essai(pess,y)
+
+    # corps témoin pess : est_essai(pess,y) ⇒ (∃pcf)(pcf∈𝔓 ∧ est_essai(pcf,y))
+    essai_pess = est_essai(vpess, vh, R, ve, vy, z)
+    h_essai = N.assume(essai_pess)
+    # pess∈𝔓(E×V)  (décharge essai(pess,y) du converter, garde wf + rule)
+    inpar = essai_dans_parties_depuis_bien_formes(vh, e, G, y, V, pess, "cpont", "apont", "bpont", z, q, w)
+    inpar = N.modus_ponens(h_essai, N.loi_deduction(essai_pess, inpar))   # pess∈𝔓(E×V)  [wf, rule, essai(pess,y)]
+    conj = conjonction_intro(inpar, h_essai)                 # pess∈𝔓 ∧ est_essai(pess,y)
+    # (∃pcf)(pcf∈𝔓 ∧ est_essai(pcf,y))   intro sur pcf
+    gabarit = et(appartient(var(p), ambiant(e, V)), est_essai(var(p), vh, R, ve, vy, z))
+    ex_pcf = N.modus_ponens(conj, N.s5(gabarit, vpess, p))   # (∃pcf)(...)
+    # élimine témoin pess
+    imp = N.loi_deduction(essai_pess, ex_pcf)
+    ex_imp = existe_elimination(imp, pess)                   # (∃pess)essai(pess,y) ⇒ (∃pcf)(...)
+    body_y = N.modus_ponens(bare_y, ex_imp)                  # (∃pcf)(...)   [y∈seg, hyps]
+
+    res = N.generalisation(y, N.loi_deduction(appartient(vy, seg), body_y))
+    cible = antecedent_couverture_ambiant(vh, e, G, vx, V, y, p, z)
+    assert res.conclusion == cible, "antecedent_ambiant_depuis_bare : ≠ antecedent_couverture_ambiant"
+    return res
+
+
+# ════════════════════════════════════════════════════════════════════════════
+#  🎯 CLAUSES BARE DÉRIVÉES DES CLAUSES AMBIANTES (via le pont d'antécédent).
+# ════════════════════════════════════════════════════════════════════════════
+def _clause_bare_depuis_ambiant(ambiant_thm, clause_bare_form, clause_ambiant_form,
+                                vh, e, G, x, V, y, p, z, q, w, conc_builder):
+    """Schéma : { ambiant_thm sous Γ } ∪ { antecedent bridge hyps }
+        ⊢ clause_bare_form.
+
+    Pour x∈E : on assume antecedent_couverture(x) (bare), on en DÉRIVE
+    antecedent_couverture_ambiant(x) via `antecedent_ambiant_depuis_bare`, on l'injecte
+    dans la clause AMBIANTE (instanciée à x, x∈E déchargé) pour obtenir la conclusion ;
+    on enveloppe (∀x)(x∈E ⇒ (antéc bare ⇒ conclusion)) = clause BARE."""
+    from bourbaki.ordre.ensembles_c60_realisation import antecedent_couverture
+    from bourbaki.ordre.ensembles_c60_clauses import antecedent_couverture_ambiant
+    ve, vx = _t(e), var(x)
+    antec_bare = antecedent_couverture(vh, e, G, vx, y)
+    antec_amb = antecedent_couverture_ambiant(vh, e, G, vx, V, y, p, z)
+    conc = conc_builder(vx)
+
+    h_xE = N.assume(appartient(vx, ve))
+    h_antec_bare = N.assume(antec_bare)
+    # bare(x) + wf + rule ⊢ ambiant(x)
+    bridge = antecedent_ambiant_depuis_bare(vh, e, G, vx, V, y, p, z, q, w)
+    amb_x = N.modus_ponens(h_antec_bare, N.loi_deduction(antec_bare, bridge))   # ambiant(x)  [wf,rule,bare]
+    # clause ambiante instanciée à x : x∈E ⇒ (ambiant(x) ⇒ conc)
+    cl_x = N.modus_ponens(h_xE, instancie(ambiant_thm, vx))         # ambiant(x) ⇒ conc   [Γ]
+    conc_x = N.modus_ponens(amb_x, cl_x)                            # conc   [Γ,wf,rule,bare,x∈E]
+    body = N.loi_deduction(appartient(vx, ve), N.loi_deduction(antec_bare, conc_x))
+    res = N.generalisation(x, body)
+    assert res.conclusion == clause_bare_form, "_clause_bare_depuis_ambiant : ≠ clause bare"
+    return res
+
+
+def recursion_transfinie_existence_final(vh, e="E", G="G", V="Vval",
+                                         x="x0tf", y="ytf", p="pcf", z="zess",
+                                         q="qwf", w="wwf"):
+    """🎯🎯🎯 EXISTENCE C60 (§III.2) — bare→ambiant PONTÉ :
+
+      { est_bien_ordonne(R,E),  essais_bien_formes(vh),  rule_codomain(vh,V) }
+        ⊢ (∀x)( x∈E ⇒ (∃p)( est_essai(p, vh, R, E, x) ) ).
+
+    On part de `recursion_transfinie_existence_complet` (existence sous { bo, clause_P3
+    (BARE), clause_P4 (BARE) }) et on DÉCHARGE les deux clauses BARE :
+      • clause_P3 (bare) ⇐ `couverture_segment_realise` (clause_P3_AMBIANT sous {bo})
+        + pont d'antécédent (`antecedent_ambiant_depuis_bare`) ;
+      • clause_P4 (bare) ⇐ `recursion_segment_realise` (clause_P4_AMBIANT, CLOS)
+        + pont d'antécédent.
+    Le pont (`essai_dans_parties` : essai+graphe+dom⊂E+rule-codomain ⇒ p∈𝔓(E×V)) DÉCHARGE
+    la condition d'appartenance ambiante de chaque essai-témoin.  Ne restent que les
+    hypothèses NATURELLES de C60 : le bon ordre, la bonne formation des essais (graphe de
+    domaine ⊂ E), et rule-codomain (la règle h produit ses valeurs dans V).
+
+    ⚠️ TROIS hypothèses HONNÊTES (theorie=22), JAMAIS de bare clause résiduelle :
+      • est_bien_ordonne(R,E)  — (E,R) bien ordonné (donnée C60) ;
+      • essais_bien_formes(vh) — tout essai est un graphe de domaine ⊂ E (structure) ;
+      • rule_codomain(vh,V)    — (∀z) vh(z)∈V (la règle prend ses valeurs dans V).
+    Conclusion ∉ hypothèses (non vacuous)."""
+    from bourbaki.ordre.ensembles_c60_clauses import (
+        recursion_transfinie_existence_complet,
+        couverture_segment_realise, recursion_segment_realise,
+        clause_P3_ambiant, clause_P4_ambiant,
+    )
+    from bourbaki.ordre.ensembles_c60_realisation import (
+        clause_P3 as _clause_P3, clause_P4 as _clause_P4, Dfam_real,
+    )
+    from bourbaki.ordre.ensembles_c60_coeur import union_famille
+    R = _graphe_R(G)
+    ve = _t(e)
+
+    base = recursion_transfinie_existence_complet(vh, e, G, V, x, y)   # {bo, P3bare, P4bare}
+
+    # clause_P3 (bare) théorème : depuis couverture_segment_realise (P3 ambiant sous {bo})
+    p3_amb = couverture_segment_realise(vh, e, G, x, V, y, p, z)       # {bo} ⊢ clause_P3_ambiant
+    seg_b = lambda vx: E.segment_extremite(R, ve, vx)
+    def _conc3(vx):
+        Ux = union_famille(Dfam_real(vh, e, G, vx, V))
+        return egal(E.dom(Ux), E.segment_extremite(R, ve, vx))
+    p3_bare = _clause_bare_depuis_ambiant(
+        p3_amb, _clause_P3(vh, e, G, x, V, y), clause_P3_ambiant(vh, e, G, x, V, y, p, z),
+        vh, e, G, x, V, y, p, z, q, w, _conc3)
+    base = N.modus_ponens(p3_bare, N.loi_deduction(_clause_P3(vh, e, G, x, V, y), base))
+
+    # clause_P4 (bare) théorème : depuis recursion_segment_realise (P4 ambiant CLOS)
+    p4_amb = recursion_segment_realise(vh, e, G, x, V, y, "zrs", p, z)  # ⊢ clause_P4_ambiant [CLOS]
+    from bourbaki.ordre.ensembles_c60_final import recursion_sur_segment
+    def _conc4(vx):
+        Dx = Dfam_real(vh, e, G, vx, V)
+        return recursion_sur_segment(Dx, vh, G, e, vx)
+    p4_bare = _clause_bare_depuis_ambiant(
+        p4_amb, _clause_P4(vh, e, G, x, V, y), clause_P4_ambiant(vh, e, G, x, V, y, p, z),
+        vh, e, G, x, V, y, p, z, q, w, _conc4)
+    base = N.modus_ponens(p4_bare, N.loi_deduction(_clause_P4(vh, e, G, x, V, y), base))
+
+    W = E.est_bien_ordonne(R, ve)
+    assert W in base.hypotheses, "final : bon ordre absent"
+    assert essais_bien_formes(vh, e, G, V, q, w, z) in base.hypotheses, "final : essais_bien_formes absente"
+    assert rule_codomain(vh, V, z) in base.hypotheses, "final : rule-codomain absente"
+    assert _clause_P3(vh, e, G, x, V, y) not in base.hypotheses, "final : P3 bare NON déchargée"
+    assert _clause_P4(vh, e, G, x, V, y) not in base.hypotheses, "final : P4 bare NON déchargée"
+    assert base.conclusion not in base.hypotheses, "final : VACUOUS"
+    return base
+
+
 __all__ = ["rule_codomain", "essai_dans_parties",
-           "essais_bien_formes", "essai_dans_parties_depuis_bien_formes"]
+           "essais_bien_formes", "essai_dans_parties_depuis_bien_formes",
+           "antecedent_ambiant_depuis_bare",
+           "recursion_transfinie_existence_final"]
