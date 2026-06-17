@@ -43,16 +43,15 @@ NOTATIONS : a·a := produit_cardinal_binaire(a,a) := Card(a×a).
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (Terme, var, egal, et, non, impl, existe, pourtout,
-                     appartient, inclus, subst_t, subst_f)
+from bourbaki.logique.formule import (Terme, var, egal, et, impl, existe, appartient)
 from bourbaki.logique import noyau_abrege as N
 from bourbaki.ensembles import ensembles_abrege as E
 from bourbaki.logique.tactiques.tactiques_abrege import a_implique_a, syllogisme
 from bourbaki.logique.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
-    equivalence_avant, equivalence_arriere, equivalence_transitivite, instancie)
+    equivalence_avant, equivalence_arriere, instancie)
 from bourbaki.logique.tactiques.tactiques_abrege_egalite import (
-    symetrie, composer_egalites, congruence_terme)
+    symetrie, composer_egalites)
 from bourbaki.logique.tactiques.tactiques_abrege_quantif import existe_elimination
 
 from bourbaki.ensembles.ensembles_theoremes import egalite_par_extension
@@ -62,7 +61,7 @@ from bourbaki.ensembles.fonctions.ensembles_fonction_terme import (
 from bourbaki.ensembles.fonctions.ensembles_fonctions import valeur_caracterisation
 
 from bourbaki.cardinaux.ensembles_cardinaux import (
-    cardinal, equipotent, inf_egal_card, est_bijection_de, est_injection_de)
+    cardinal, inf_egal_card, est_injection_de)
 from bourbaki.cardinaux.arithmetique.ensembles_arith_cardinale import (
     produit_cardinal_binaire, _prop1_direct_t)
 from bourbaki.cardinaux.ensembles_cantor_bernstein_final._recollement import cantor_bernstein
