@@ -682,6 +682,59 @@ def couverture_segment_realise(vh, e="E", G="G", x="x0", V="Vval", y="ytf",
     return res
 
 
+# ════════════════════════════════════════════════════════════════════════════
+#  🎯 ASSEMBLAGE — EXISTENCE C60 avec (P2) DÉCHARGÉE ; (P3),(P4) restantes (bare).
+# ════════════════════════════════════════════════════════════════════════════
+def recursion_transfinie_existence_complet(vh, e="E", G="G", V="Vval",
+                                           x="x0tf", y="ytf"):
+    """🎯 EXISTENCE C60 (§III.2) pour la famille CONCRÈTE Dfam_real, (P2) DÉCHARGÉE :
+
+      { est_bien_ordonne(R,E),  clause_P3,  clause_P4 }
+        ⊢ (∀x)( x∈E ⇒ (∃p)( est_essai(p, vh, R, E, x) ) ).
+
+    On part de `recursion_transfinie_existence_reduite` (= existence sous {bo,P2,P3,P4})
+    et on DÉCHARGE la clause (P2) par `coincidence_segment_realise` (CLOS, 0 hyp).  Ne
+    restent que { bon ordre, clause_P3, clause_P4 } — trois hypothèses honnêtes.
+
+    ⚠️ HONNÊTETÉ DU RÉSIDU.  Les clauses (P3),(P4) restantes sont ici prises sous leur
+    forme NOMINALE `clause_P3` / `clause_P4` (antécédent d'induction BARE de C59, i.e.
+    « tout y<x est couvert par un essai »).  Ce module CLÔT (P3),(P4) sous leur forme
+    AMBIANTE `clause_P3_ambiant` / `clause_P4_ambiant` (`couverture_segment_realise` sous
+    {bo} ; `recursion_segment_realise` CLOS), où l'antécédent EXIGE EN PLUS que les
+    essais-témoins des y<x vivent dans 𝔓(E×V) (`antecedent_couverture_ambiant`) — la
+    SEULE chose dont la membership Dfam_real(x) (sélection S8 dans 𝔓(E×V)) a besoin.
+    Le PONT bare→ambiant (montrer qu'un essai sur un segment est ipso facto ⊂E×V, donc
+    ∈𝔓(E×V)) demande de relier les valeurs-règle vh(z) à V — un chunk à part NON clos
+    ici (vh est OPAQUE, sans contrainte vh(z)∈V).  C'est pourquoi (P3),(P4) BARE
+    restent des hypothèses honnêtes de l'assemblage, tandis que leurs variantes AMBIANTES
+    sont des THÉORÈMES (closes/sous bo).  Conclusion ∉ hypothèses (non vacuous)."""
+    from bourbaki.ordre.ensembles_c60_realisation import (
+        recursion_transfinie_existence_reduite, clause_P2 as _clause_P2,
+        clause_P3 as _clause_P3, clause_P4 as _clause_P4,
+    )
+    from bourbaki.ordre.ensembles_recursion_transfinie_existence import couverture_totale
+    R = _graphe_R(G)
+    ve = _t(e)
+    couvert = couvert_essai(vh, R, ve)
+
+    base = recursion_transfinie_existence_reduite(vh, e, G, V, x, y)   # {bo,P2,P3,P4}
+    p2 = coincidence_segment_realise(vh, e, G, x, V, y)               # ⊢ clause_P2  [CLOS]
+    p2_form = _clause_P2(vh, e, G, x, V, y)
+    assert p2.conclusion == p2_form, "existence_complet : ≠ clause_P2"
+    res = N.modus_ponens(p2, N.loi_deduction(p2_form, base))          # {bo,P3,P4}
+
+    cible = couverture_totale(couvert, ve, x)
+    assert res.conclusion == cible, "existence_complet : ≠ couverture totale (existence)"
+    W = E.est_bien_ordonne(R, ve)
+    assert W in res.hypotheses, "existence_complet : bon ordre absent"
+    assert _clause_P3(vh, e, G, x, V, y) in res.hypotheses, "existence_complet : P3 absente"
+    assert _clause_P4(vh, e, G, x, V, y) in res.hypotheses, "existence_complet : P4 absente"
+    assert p2_form not in res.hypotheses, "existence_complet : P2 PAS déchargée"
+    assert len(res.hypotheses) == 3, "existence_complet : hyps ≠ 3 (devrait être {bo,P3,P4})"
+    assert res.conclusion not in res.hypotheses, "existence_complet : VACUOUS"
+    return res
+
+
 __all__ = [
     # brique : l'équation de récursion d'un membre en un antécédent
     "valeur_membre_egale_regle",
@@ -696,5 +749,9 @@ __all__ = [
     # antécédent renforcé (essais dans l'ambiant) + helper de couverture
     "antecedent_couverture_ambiant",
     # 🎯 clause (P4) sous l'antécédent ambiant
-    "recursion_segment_realise",
+    "clause_P4_ambiant", "recursion_segment_realise",
+    # 🎯 clause (P3) sous l'antécédent ambiant (sous bon ordre)
+    "clause_P3_ambiant", "couverture_segment_realise",
+    # 🎯 assemblage : existence C60 avec (P2) déchargée, {bo,P3,P4} restantes
+    "recursion_transfinie_existence_complet",
 ]
