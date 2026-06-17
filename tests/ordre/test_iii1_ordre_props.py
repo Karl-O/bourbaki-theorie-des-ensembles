@@ -32,9 +32,7 @@ def test_ordre_induit_est_ordre_clos():
 def test_ordre_induit_est_ordre_conclusion():
     t = P.ordre_induit_est_ordre(R)
     R_E = E.ordre_induit(R, var("E"))
-    # binders xp/yp/zp (ceux de la preuve) — énoncé α-équivalent au défaut x/y/z
-    cible = impl(E.est_relation_ordre(R, "xp", "yp", "zp"),
-                 E.est_relation_ordre(R_E, "xp", "yp", "zp"))
+    cible = impl(E.est_relation_ordre(R), E.est_relation_ordre(R_E))
     assert t.conclusion == cible
 
 
@@ -59,7 +57,7 @@ def test_ordre_produit_est_preordre_conclusion():
     href = pourtout("i", impl(appartient(vi, vI), E.ordre_reflexif_implicite(R_i, "a", "b")))
     ante = et(htr, href)
     Pr = V.relation_ordre_produit(Rfam, "I", "i")
-    cons = E.est_relation_preordre(Pr, "xp", "yp", "zp")
+    cons = E.est_relation_preordre(Pr)
     assert t.conclusion == impl(ante, cons)
 
 

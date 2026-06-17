@@ -36,10 +36,11 @@ hypothèses portent sur la RELATION R elle-même, comme dans `ensembles_ordre.py
       extensionnalité.  THÉORÈME CLOS sous ces deux SEULES hypothèses honnêtes.
 
 ──────────────────────────────────────────────────────────────────────────────
-Binders : au niveau PRODUIT les points sont nommés « xp, yp, zp » (≠ a,b,c des
-binders de ordre_transitif/_antisymetrique du FACTEUR) pour qu'aucune
-instanciation de la propriété du facteur en (pr_ι xp, …) ne capture.  L'indice est
-« i » (défaut de ordre_produit).  RIEN dans theorie_ensembles n'est touché (22).
+Binders : au niveau PRODUIT les points sont nommés « x, y, z » (défaut) et les
+binders du FACTEUR « a, b, c » (distincts), de sorte qu'aucune instanciation de la
+propriété du facteur en (pr_ι x, …) ne capture (la relation R_ι ne contient pas
+x,y,z dans les usages).  L'indice est « i » (défaut de ordre_produit).  RIEN dans
+theorie_ensembles n'est touché (22).
 """
 from __future__ import annotations
 
@@ -55,7 +56,7 @@ from bourbaki.logique.tactiques.tactiques_abrege2 import (
 # ════════════════════════════════════════════════════════════════════════════
 #  (1) L'ordre INDUIT sur une partie est une relation d'ordre  (E.III.1.1, Ex. 2)
 # ════════════════════════════════════════════════════════════════════════════
-def ordre_induit_est_ordre(R, e="E", x="xp", y="yp", z="zp"):
+def ordre_induit_est_ordre(R, e="E", x="x", y="y", z="z"):
     """⊢ est_relation_ordre(R) ⇒ est_relation_ordre(ordre_induit(R, E)).
 
     R_E{a,b} := (R{a,b} et a∈E et b∈E).  Les trois conditions de la relation
@@ -125,7 +126,7 @@ def ordre_induit_est_ordre(R, e="E", x="xp", y="yp", z="zp"):
 # ════════════════════════════════════════════════════════════════════════════
 #  (2) L'ordre PRODUIT est une relation de PRÉORDRE  (E.III.1.4)
 # ════════════════════════════════════════════════════════════════════════════
-def ordre_produit_est_preordre(Rfam, I="I", i="i", x="xp", y="yp", z="zp",
+def ordre_produit_est_preordre(Rfam, I="I", i="i", x="x", y="y", z="z",
                                a="a", b="b", c="c"):
     """⊢ ( (∀ι)(ι∈I ⇒ ordre_transitif(R_ι))  et  (∀ι)(ι∈I ⇒ ordre_reflexif_implicite(R_ι)) )
           ⇒  est_relation_preordre(relation_ordre_produit(Rfam, I)).
