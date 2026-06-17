@@ -137,6 +137,27 @@ def test_cone_existence():
     assert attendu not in th.hypotheses
 
 
+# ── cone_existence_forall : relation (6) « pour tout α » (forme Bourbaki) ──────
+def test_cone_existence_forall():
+    vE, vf, vu, vi, vF, vy, va, vb = _ctx()
+    th = I7.cone_existence_forall("E", "f", "u", _leq(), "I", "F", "a", "b", "yy")
+    u_y = I7.cone_canonique_valeur(vE, vf, vu, vy)
+    fa = E.valeur(__import__("bourbaki.ordre.ensembles_limites_canoniques",
+                             fromlist=["f_canon_proj"]).f_canon_proj(vE, vf, va), u_y)
+    ua_y = I7.cone_u_valeur(vu, va, vy)
+    eq6 = egal(fa, ua_y)
+    attendu = pourtout("a", impl(appartient(va, vi), eq6))
+    assert th.conclusion == attendu
+    # α∈I est DÉCHARGÉ (généralisation sur α réussie) ; 3 hyps honnêtes restantes
+    assert appartient(va, vi) not in th.hypotheses
+    compat = I7.cone_compatible(vf, vu, _leq(), vi, vF, "a", "b", "yy")
+    Hprod = appartient(u_y, E.produit_famille(vE, vi))
+    assert compat in th.hypotheses
+    assert Hprod in th.hypotheses
+    assert appartient(vy, vF) in th.hypotheses
+    assert len(th.hypotheses) == 3
+
+
 # ── REPORTES bien renseigné (honnêteté) ───────────────────────────────────────
 def test_reportes():
     assert isinstance(I7.REPORTES, list) and len(I7.REPORTES) >= 1

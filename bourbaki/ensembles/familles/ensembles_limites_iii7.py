@@ -321,6 +321,23 @@ def cone_existence(Efam="E", f="f", u="u", leq=None, i="I", ff="F",
     return N.modus_ponens(in_lim, rel6_imp)                   # f_α(u(y)) = u_α(y)
 
 
+def cone_existence_forall(Efam="E", f="f", u="u", leq=None, i="I", ff="F",
+                          a="a", b="b", y="yy"):
+    """{ (u_α) compatible, u(y)∈∏, y∈F } ⊢ (∀α)( α∈I ⇒ f_α(u(y)) = u_α(y) ).
+
+    Relation (6) sous sa forme « pour tout α » (u_α = f_α∘u pour tout α, Prop. 1).
+    On décharge α∈I de cone_existence en implication puis on généralise sur α — α
+    n'est libre dans aucune hypothèse résiduelle (compatibilité lie α ; u(y)∈∏ et
+    y∈F ne mentionnent pas α libre).  (Prop. 1, §III.7.2, relation (6).)"""
+    if leq is None:
+        leq = _gleq()
+    vi = _t(i)
+    va = var(a)
+    ex = cone_existence(Efam, f, u, leq, i, ff, a, b, y)      # {compat, u(y)∈∏, α∈I, y∈F} ⊢ eq6
+    imp = N.loi_deduction(appartient(va, vi), ex)             # {compat, u(y)∈∏, y∈F} ⊢ α∈I ⇒ eq6
+    return N.generalisation(a, imp)                           # (∀α)(α∈I ⇒ f_α(u(y))=u_α(y))
+
+
 # Résultats DURS introduits mais NON prouvés — honnêteté.
 REPORTES = [
     "Proposition 1, 1° UNICITÉ de u (« et une seule ») — extensionnalité du produit "
@@ -337,5 +354,6 @@ __all__ = [
     "cone_compatible", "axiome_cone_canonique", "theorie_cone_canonique",
     "cone_compatibilite", "cone_coordonnee_valeur", "cone_condition_1",
     "cone_image_dans_limite", "cone_relation_6", "cone_existence",
+    "cone_existence_forall",
     "REPORTES",
 ]
