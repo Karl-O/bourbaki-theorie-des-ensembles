@@ -296,8 +296,11 @@ def carre_inf_egal_si_hard(a="A"):
     vA = _t(a)
     a_card = cardinal(vA)                                # a = Card(A)
     aa = produit_cardinal_binaire(a_card, a_card)        # a·a = Card(a×a)
-    # Cantor–Bernstein : (a≤a·a et a·a≤a) ⇒ Eq(a, a·a)
-    cb = cantor_bernstein(a_card, aa)                    # (a≤a·a et a·a≤a) ⇒ Eq(a,a·a)
+    # Cantor–Bernstein, version TERME (généralise puis instancie, comme prop9/prop10 :
+    # évite la capture des noms internes f,g de la machinerie Knaster–Tarski).
+    cb_nom = cantor_bernstein("A", "B", "f", "g")        # (A≤B et B≤A) ⇒ Eq(A,B)
+    cb_gen = N.generalisation("A", N.generalisation("B", cb_nom))
+    cb = instancie(instancie(cb_gen, a_card), aa)        # (a≤a·a et a·a≤a) ⇒ Eq(a,a·a)
     hyp = et(inf_egal_card(a_card, aa), inf_egal_card(aa, a_card))
     h = N.assume(hyp)
     eq_a_aa = N.modus_ponens(h, cb)                      # Eq(a, a·a)
