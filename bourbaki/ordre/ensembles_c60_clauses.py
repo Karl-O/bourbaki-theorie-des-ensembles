@@ -44,7 +44,7 @@ from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie, compos
 from bourbaki.ordre.ensembles_recurrence_transfinie import _graphe_R
 from bourbaki.ordre.ensembles_c60_existence_close import est_essai, couvert_essai
 from bourbaki.ordre.ensembles_c60_coeur import (
-    union_famille, famille_compatible, valeur_union_famille,
+    union_famille, famille_compatible, valeur_union_famille, _inst_union_famille,
 )
 from bourbaki.ordre.ensembles_c60_final import (
     membres_fonctionnels, coincidence_membres, recursion_sur_segment,
