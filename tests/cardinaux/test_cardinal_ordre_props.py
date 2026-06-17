@@ -15,6 +15,7 @@ from bourbaki.ensembles import ensembles_abrege as E
 from bourbaki.logique.formule import var, et, impl
 from bourbaki.cardinaux.ensembles_cardinaux import inf_egal_card, cardinal
 from bourbaki.ensembles.familles.ensembles_somme_disjointe import somme_disjointe
+from bourbaki.cardinaux.arithmetique.ensembles_arith_cardinale import produit_cardinal_binaire
 from bourbaki.cardinaux import ensembles_cardinal_ordre_props as P
 
 
@@ -101,6 +102,41 @@ def test_produit_cardinale_monotone_droite_clos():
     cible = impl(inf_egal_card(var("B"), var("B1")),
                  inf_egal_card(cardinal(E.produit(var("C"), var("B"))),
                                cardinal(E.produit(var("C"), var("B1")))))
+    assert thm.est_clos
+    assert len(thm.hypotheses) == 0
+    assert thm.conclusion == cible
+
+
+# ── (7) ADDITIVITÉ de ≤ pour le produit cardinal (both vary, Prop. 14 produit) ──
+def test_produit_cardinale_additive_clos():
+    """⊢ (A ≤ A₁ et B ≤ B₁) ⇒ Card(A×B) ≤ Card(A₁×B₁), CLOS, conclusion EXACTE."""
+    thm = P.produit_cardinale_additive()
+    cible = impl(et(inf_egal_card(var("A"), var("A1")), inf_egal_card(var("B"), var("B1"))),
+                 inf_egal_card(cardinal(E.produit(var("A"), var("B"))),
+                               cardinal(E.produit(var("A1"), var("B1")))))
+    assert thm.est_clos
+    assert len(thm.hypotheses) == 0
+    assert thm.conclusion == cible
+
+
+def test_produit_cardinale_additive_non_tautologie():
+    """Anti-tautologie : ≤ des facteurs ≠ ≤ des cardinaux des produits."""
+    thm = P.produit_cardinale_additive()
+    ante, cons = thm.conclusion.sous
+    assert ante != cons
+    assert thm.conclusion not in thm.hypotheses
+
+
+# ── (8) version CARDINAUX (a≤a₁ et b≤b₁ ⇒ a·b ≤ a₁·b₁ via produit_cardinal_binaire) ──
+def test_cardinal_inf_egal_produit_additive_clos():
+    """⊢ (Card A ≤ Card A₁ et Card B ≤ Card B₁) ⇒
+          a·b ≤ a₁·b₁  (produit_cardinal_binaire-phrased), CLOS, EXACT."""
+    thm = P.cardinal_inf_egal_produit_additive()
+    cA, cB = cardinal(var("A")), cardinal(var("B"))
+    cA1, cB1 = cardinal(var("A1")), cardinal(var("B1"))
+    cible = impl(et(inf_egal_card(cA, cA1), inf_egal_card(cB, cB1)),
+                 inf_egal_card(produit_cardinal_binaire(cA, cB),
+                               produit_cardinal_binaire(cA1, cB1)))
     assert thm.est_clos
     assert len(thm.hypotheses) == 0
     assert thm.conclusion == cible

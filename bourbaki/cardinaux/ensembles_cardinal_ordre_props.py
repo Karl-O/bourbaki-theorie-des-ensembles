@@ -67,7 +67,8 @@ from bourbaki.cardinaux.arithmetique.ensembles_arith_cardinale_props_exposant_mo
     inf_egal_transporte_cardinal)
 from bourbaki.cardinaux.arithmetique.ensembles_somme_monotone import inf_egal_somme_invariant
 from bourbaki.cardinaux.arithmetique.ensembles_arith_cardinale_props_produit_monotone import (
-    inf_egal_produit_gauche, inf_egal_produit_droite)
+    inf_egal_produit_gauche, inf_egal_produit_droite, inf_egal_produit_invariant)
+from bourbaki.cardinaux.arithmetique.ensembles_arith_cardinale import produit_cardinal_binaire
 
 
 def _t(v):
@@ -187,6 +188,50 @@ def produit_cardinale_monotone_droite(b="B", b1="B1", c="C"):
     return N.loi_deduction(inf_egal_card(vb, vb1), le_card)
 
 
+# ═══════════════════════════════════════════════════════════════════════════════
+# (7)  ADDITIVITÉ de ≤ pour le PRODUIT cardinal (both vary, niveau Card du support)
+#      — miroir EXACT de somme_cardinale_additive, comblant le trou symétrique.
+# ═══════════════════════════════════════════════════════════════════════════════
+def produit_cardinale_additive(a="A", b="B", a1="A1", b1="B1"):
+    """⊢ (A ≤ A₁ et B ≤ B₁) ⇒ Card(A×B) ≤ Card(A₁×B₁).   (Prop. 14 PRODUIT ; clos.)
+
+    Pendant BOTH-VARY au niveau Card du support, exact miroir de
+    somme_cardinale_additive : inf_egal_produit_invariant donne l'inégalité
+    ENSEMBLISTE A×B ≤ A₁×B₁ sous (A ≤ A₁ et B ≤ B₁) ; le transport par Card (aux
+    termes A×B, A₁×B₁) conclut Card(A×B) ≤ Card(A₁×B₁), i.e. a·b ≤ a₁·b₁ où
+    a·b := produit_cardinal_binaire(A,B) = Card(A×B).  NON tautologique : antécédent
+    = ≤ des facteurs, conséquent = ≤ des cardinaux des produits ; le pont est le
+    transport.  (Combinaison de théorèmes clos ; aucune machinerie nouvelle.)"""
+    va, vb, va1, vb1 = _t(a), _t(b), _t(a1), _t(b1)
+    AB = E.produit(va, vb)                 # A×B
+    A1B1 = E.produit(va1, vb1)             # A₁×B₁
+    inv = inf_egal_produit_invariant("F", "G", va, vb, va1, vb1)   # (A≤A₁ et B≤B₁) ⇒ A×B ≤ A₁×B₁
+    hyp = et(inf_egal_card(va, va1), inf_egal_card(vb, vb1))
+    h = N.assume(hyp)
+    le_ens = N.modus_ponens(h, inv)        # A×B ≤ A₁×B₁   [sous hyp]
+    transp = _transporte_t(AB, A1B1)       # (A×B ≤ A₁×B₁) ⇒ Card(A×B) ≤ Card(A₁×B₁)
+    le_card = N.modus_ponens(le_ens, transp)
+    return N.loi_deduction(hyp, le_card)
+
+
+def cardinal_inf_egal_produit_additive(a="A", b="B", a1="A1", b1="B1"):
+    """⊢ (Card A ≤ Card A₁ et Card B ≤ Card B₁) ⇒
+          produit_cardinal_binaire(Card A, Card B) ≤ produit_cardinal_binaire(Card A₁, Card B₁).
+       (= a≤a₁ et b≤b₁ ⇒ a·b ≤ a₁·b₁ sur les CARDINAUX a=Card A, …, avec
+        a·b = produit_cardinal_binaire(Card A, Card B) = Card(Card A × Card B).)
+
+    🎯 PROPOSITION 14 §III.3 (PRODUIT), forme OPÉRATION sur les cardinaux : (7)
+    généralisé en (∀A)(∀B)(∀A₁)(∀B₁) puis INSTANCIÉ aux termes Card·.  Conséquent
+    LITTÉRALEMENT phrasé avec produit_cardinal_binaire (= Card(·×·)).  Miroir EXACT
+    de cardinal_inf_egal_somme_additive côté produit ; clos, theorie=22."""
+    va, vb, va1, vb1 = _t(a), _t(b), _t(a1), _t(b1)
+    gen = N.generalisation("A", N.generalisation("B", N.generalisation("A1",
+        N.generalisation("B1", produit_cardinale_additive("A", "B", "A1", "B1")))))
+    return instancie(instancie(instancie(instancie(gen, cardinal(va)), cardinal(vb)),
+                               cardinal(va1)), cardinal(vb1))
+
+
 __all__ = ["somme_cardinale_additive", "cardinal_inf_egal_somme_additive",
            "somme_cardinale_monotone_gauche", "somme_cardinale_monotone_droite",
-           "produit_cardinale_monotone_gauche", "produit_cardinale_monotone_droite"]
+           "produit_cardinale_monotone_gauche", "produit_cardinale_monotone_droite",
+           "produit_cardinale_additive", "cardinal_inf_egal_produit_additive"]
