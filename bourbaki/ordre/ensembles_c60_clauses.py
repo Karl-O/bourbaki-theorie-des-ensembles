@@ -43,12 +43,16 @@ from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie, compos
 
 from bourbaki.ordre.ensembles_recurrence_transfinie import _graphe_R
 from bourbaki.ordre.ensembles_c60_existence_close import est_essai, couvert_essai
-from bourbaki.ordre.ensembles_c60_coeur import union_famille
+from bourbaki.ordre.ensembles_c60_coeur import (
+    union_famille, famille_compatible, valeur_union_famille,
+)
 from bourbaki.ordre.ensembles_c60_final import (
-    coincidence_membres, recursion_sur_segment,
+    membres_fonctionnels, coincidence_membres, recursion_sur_segment,
+    famille_compatible_depuis_coincidence,
 )
 from bourbaki.ordre.ensembles_c60_realisation import (
     Dfam_real, _inst_Dfam_real, membre_Dfam_real, ambiant,
+    membres_fonctionnels_realise,
 )
 
 
@@ -163,9 +167,90 @@ def coincidence_membres_realise(vh, e="E", G="G", x="x0", V="Vval",
     return res
 
 
+# ════════════════════════════════════════════════════════════════════════════
+#  🎯 COROLLAIRE — famille_compatible(Dfam_real(x))  [CLOS, 0 hyp].
+#  (P1)+(P2) closes ⇒ le PONT solutions_coincident→famille_compatible se décharge.
+# ════════════════════════════════════════════════════════════════════════════
+def famille_compatible_realise(vh, e="E", G="G", x="x0", V="Vval",
+                               y="yD", z="zess"):
+    """⊢ famille_compatible( Dfam_real(x) )                           [CLOS, 0 hyp].
+
+    🎯 La famille concrète Dfam_real(x) est COMPATIBLE PAR PAIRES, INCONDITIONNELLEMENT.
+    Le PONT `famille_compatible_depuis_coincidence` (c60_final) DÉRIVE famille_compatible
+    de { membres_fonctionnels(D), coincidence_membres(D) } ; ces DEUX hypothèses sont
+    désormais des THÉORÈMES CLOS pour la famille concrète :
+      • membres_fonctionnels(D)  ⇐ `membres_fonctionnels_realise` (P1, CLOS) ;
+      • coincidence_membres(D)   ⇐ `coincidence_membres_realise`  (P2, CLOS).
+    Donc famille_compatible(D) est CLOS — ce qui débloque `union_famille_fonctionnelle`,
+    `valeur_union_famille` et tout le recollement de la famille concrète SANS hypothèse."""
+    ve, vx = _t(e), _t(x)
+    Dx = Dfam_real(vh, e, G, vx, V)
+
+    pont = famille_compatible_depuis_coincidence(Dx)            # {mf(D), cm(D)} ⊢ compat(D)
+    p1 = membres_fonctionnels_realise(vh, e, G, vx, V)          # ⊢ membres_fonctionnels(D)  [CLOS]
+    p2 = coincidence_membres_realise(vh, e, G, vx, V, y, z)     # ⊢ coincidence_membres(D)   [CLOS]
+
+    res = N.modus_ponens(p1, N.loi_deduction(membres_fonctionnels(Dx), pont))
+    res = N.modus_ponens(p2, N.loi_deduction(coincidence_membres(Dx), res))
+
+    cible = famille_compatible(Dx)
+    assert res.conclusion == cible, "famille_compatible_realise : ≠ famille_compatible(Dfam_real(x))"
+    assert res.est_clos, "famille_compatible_realise : non clos (devrait être 0 hyp)"
+    return res
+
+
+# ════════════════════════════════════════════════════════════════════════════
+#  🎯 BRIQUE — valeur(⋃Dfam_real(x), u) = vh(u)  pour u dans le domaine d'un membre.
+#  (la valeur de la réunion HÉRITE de la règle vh ; famille_compatible déchargée.)
+# ════════════════════════════════════════════════════════════════════════════
+def valeur_union_egale_regle(vh, e="E", G="G", x="x0", V="Vval",
+                             p="pcf", u="u", q="qcf", y="yD", z="zess"):
+    """{ p∈Dfam_real(x), u∈dom(p) } ⊢ valeur( ⋃Dfam_real(x), u ) = vh(u)
+                                                                    [2 hyps honnêtes].
+
+    🎯 La VALEUR DE LA RÉUNION ⋃Dfam_real(x) en u COÏNCIDE avec la règle vh(u), dès que
+    u est dans le domaine d'un membre p de la famille.  PREUVE (chaîne) :
+      • valeur(⋃D,u) = valeur(p,u)  ⇐ `valeur_union_famille` (c60_coeur), dont la
+        3ᵉ hypothèse famille_compatible(D) est DÉCHARGÉE par `famille_compatible_realise`
+        (CLOS) ; ne restent que p∈D et u∈dom p ;
+      • valeur(p,u) = vh(u)         ⇐ `valeur_membre_egale_regle` (P2-brique), sous p∈D,
+        u∈dom p.
+      • chaîne :  valeur(⋃D,u) = valeur(p,u) = vh(u).
+
+    ⚠️ DEUX hypothèses HONNÊTES : p∈Dfam_real(x), u∈dom(p).  Non vacuous.  C'est la
+    BRIQUE de l'équation de récursion sur le segment (P4)."""
+    ve, vx = _t(e), _t(x)
+    Dx = Dfam_real(vh, e, G, vx, V)
+    U = union_famille(Dx)
+    vp, vu = var(p), var(u)
+
+    # valeur(⋃D,u)=valeur(p,u)  ; décharge famille_compatible(D) par le corollaire CLOS
+    vuf = valeur_union_famille(Dx, p, u, q)                     # {compat(D), p∈D, u∈dom p}
+    compat = famille_compatible_realise(vh, e, G, vx, V, y, z)  # ⊢ famille_compatible(D)  [CLOS]
+    vuf = N.modus_ponens(compat, N.loi_deduction(famille_compatible(Dx), vuf))   # {p∈D, u∈dom p}
+    assert vuf.conclusion == egal(E.valeur(U, vu), E.valeur(vp, vu)), \
+        "valeur_union_egale_regle : ≠ valeur(⋃D,u)=valeur(p,u)"
+
+    # valeur(p,u)=vh(u)  (P2-brique)
+    vpu = valeur_membre_egale_regle(vh, e, G, vx, V, p, u, y, z)   # {p∈D, u∈dom p}
+
+    res = composer_egalites(vuf, vpu)                          # valeur(⋃D,u)=vh(u)
+
+    cible = egal(E.valeur(U, vu), vh(vu))
+    assert res.conclusion == cible, "valeur_union_egale_regle : ≠ valeur(⋃D,u)=vh(u)"
+    assert appartient(vp, Dx) in res.hypotheses, "valeur_union_egale_regle : p∈D absente"
+    assert appartient(vu, E.dom(vp)) in res.hypotheses, "valeur_union_egale_regle : u∈dom p absente"
+    assert res.conclusion not in res.hypotheses, "valeur_union_egale_regle : VACUOUS"
+    return res
+
+
 __all__ = [
     # brique : l'équation de récursion d'un membre en un antécédent
     "valeur_membre_egale_regle",
     # 🎯 clause (P2) CLOSE par construction
     "coincidence_membres_realise",
+    # 🎯 corollaire : famille_compatible(Dfam_real(x)) CLOS (débloque le recollement)
+    "famille_compatible_realise",
+    # 🎯 brique : valeur de la réunion en un point du domaine d'un membre = vh
+    "valeur_union_egale_regle",
 ]
