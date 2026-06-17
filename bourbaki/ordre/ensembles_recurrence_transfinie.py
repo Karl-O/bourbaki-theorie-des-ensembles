@@ -346,7 +346,92 @@ def recurrence_transfinie_preuve(P, e="E", G="G", x0="x0tf", y="ytf",
     return res
 
 
+# ════════════════════════════════════════════════════════════════════════════
+#  C60 — DÉFINITION PAR RÉCURRENCE TRANSFINIE : énoncés + UNICITÉ (corollaire C59).
+#
+#  Bourbaki, E.III.2 Critère C60 : sur un ensemble bien ordonné (E,R), une « règle »
+#  qui à chaque x associe une valeur dépendant de la restriction de f au segment
+#  seg(R,E,x) DÉTERMINE une UNIQUE fonction f vérifiant l'équation de récursion
+#       f(x) = (règle appliquée à f|seg(R,E,x))    pour tout x∈E.
+#
+#  EXISTENCE (la moitié dure : f = réunion des fonctions partielles sur les segments,
+#  via la machinerie de recollement) → REPORTÉE honnêtement (gros chantier ; cf.
+#  l'infra `ensembles_recollement_bijection`).  UNICITÉ → CONSÉQUENCE DIRECTE de C59
+#  (induction transfinie) ci-dessous : deux solutions coïncident PONCTUELLEMENT.
+#
+#  On représente une « solution candidate » par sa fonction-VALEUR  vf : Terme→Terme
+#  (vf(x) = la valeur de la candidate en x, p.ex. E.valeur(graphe_de(f),x)).  Le
+#  prédicat d'induction est  P[x] := ( vf(x) = vg(x) ).
+# ════════════════════════════════════════════════════════════════════════════
+def _P_egal_valeurs(vf, vg):
+    """Prédicat d'induction P[x] := ( vf(x) = vg(x) )  (fonction Terme→Formule)."""
+    return lambda x: egal(vf(_t(x)), vg(_t(x)))
+
+
+def regle_coherente_sur_segments(vf, vg, R, e, x="x", y="y"):
+    """HÉRÉDITÉ de l'unicité = « la règle respecte la coïncidence sur les segments » :
+
+        (∀x)( x∈E ⇒ ( (∀y)( y∈seg(R,E,x) ⇒ vf(y)=vg(y) )  ⇒  vf(x)=vg(x) ) ).
+
+    C'est EXACTEMENT `heredite_transfinie(P,R,E)` pour P[x] := vf(x)=vg(x).  Sa vérité
+    EST le contenu de l'équation de récursion C60 : si vf=((règle)|f) et vg=((règle)|g)
+    et que f,g coïncident sur seg(R,E,x), alors la règle — qui ne dépend de f QUE via
+    f|seg(R,E,x) — rend la même valeur, donc vf(x)=vg(x).  HYPOTHÈSE HONNÊTE, INTENTION-
+    NELLE (l'unicité C60 N'est PAS inconditionnelle : elle suppose que les deux solutions
+    obéissent à la MÊME règle de récursion ; cette coïncidence-sur-segments en est la
+    traduction fidèle)."""
+    P = _P_egal_valeurs(vf, vg)
+    return heredite_transfinie(P, R, e, x, y)
+
+
+def coincidence_solutions(vf, vg, e, x="x"):
+    """CONCLUSION d'unicité (PONCTUELLE) :  (∀x)( x∈E ⇒ vf(x)=vg(x) )."""
+    P = _P_egal_valeurs(vf, vg)
+    return conclusion_transfinie(P, e, x)
+
+
+def recursion_transfinie_unicite(vf, vg, e="E", G="G", x0="x0tf", y="ytf",
+                                 ebind="Eax", xbind="xAax"):
+    """⊢ { est_bien_ordonne(R,E),  regle_coherente_sur_segments(vf,vg,R,E) } ⊢
+         (∀x)( x∈E ⇒ vf(x)=vg(x) )                            [ UNICITÉ C60 ].
+
+    MOITIÉ UNICITÉ du Critère C60 (définition par récursion transfinie), DÉRIVÉE du
+    métathéorème C59 `recurrence_transfinie_preuve` appliqué à P[x] := vf(x)=vg(x).
+    Deux solutions d'une même règle de récursion (toutes deux cohérentes sur les
+    segments) COÏNCIDENT en tout point de E.
+
+    ⚠️ DEUX HYPOTHÈSES HONNÊTES, INTENTIONNELLES, déchargées par loi_deduction
+    (JAMAIS postulées ; theorie=22) :
+      • est_bien_ordonne(R,E)            — (E,R) est bien ordonné (hypothèse de C60) ;
+      • regle_coherente_sur_segments(…)  — l'équation de récursion C60 elle-même
+        (la règle ne dépend de la solution que via sa restriction au segment).
+    L'EXISTENCE d'une solution reste REPORTÉE (moitié dure, recollement).
+
+    vf, vg : fonctions Python Terme→Terme (les fonctions-VALEUR des deux candidates).
+    R = relation portée par le graphe G (a≤b := (a,b)∈G)."""
+    ve = _t(e)
+    R = _graphe_R(G)
+    P = _P_egal_valeurs(vf, vg)
+
+    c59 = recurrence_transfinie_preuve(P, e, G, x0, y, ebind, xbind)  # W⇒(héréd⇒concl) [CLOS]
+
+    W = E.est_bien_ordonne(R, ve)
+    her = regle_coherente_sur_segments(vf, vg, R, ve, x0, y)          # = heredite_transfinie(P)
+    inner = N.modus_ponens(N.assume(W), c59)                          # héréd ⇒ concl   [W]
+    concl = N.modus_ponens(N.assume(her), inner)                      # concl  [W, héréd]
+
+    cible = coincidence_solutions(vf, vg, ve, x0)
+    assert concl.conclusion == cible, "conclusion ≠ coincidence_solutions(vf,vg,E)"
+    assert W in concl.hypotheses and her in concl.hypotheses, "hyps inattendues"
+    assert len(concl.hypotheses) == 2, "hypothèses résiduelles inattendues (≠ 2)"
+    return concl
+
+
 __all__ = [
+    # C59 — induction transfinie (CLOS, 0 hyp)
     "heredite_transfinie", "conclusion_transfinie", "recurrence_transfinie",
     "recurrence_transfinie_preuve",
+    # C60 — définition par récursion transfinie : UNICITÉ (corollaire C59, 2 hyps honnêtes)
+    "regle_coherente_sur_segments", "coincidence_solutions",
+    "recursion_transfinie_unicite",
 ]
