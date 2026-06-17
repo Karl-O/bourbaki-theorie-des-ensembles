@@ -193,4 +193,56 @@ def essai_dans_parties(vh, e="E", G="G", y="ypont", V="Vval",
     return res
 
 
-__all__ = ["rule_codomain", "essai_dans_parties"]
+# ════════════════════════════════════════════════════════════════════════════
+#  WELL-FORMEDNESS DES ESSAIS — l'hypothèse honnête « tout essai est un graphe de
+#  domaine ⊂ E » (la structure d'un essai de Bourbaki, non encodée dans est_essai).
+# ════════════════════════════════════════════════════════════════════════════
+def essais_bien_formes(vh, e="E", G="G", V="Vval", q="qwf", w="wwf", z="zrc"):
+    """(∀q)(∀w)( est_essai(q,vh,R,E,w) ⇒ ( est_un_graphe(q) ∧ dom(q)⊂E ) ).
+
+    « Tout essai (au sens est_essai) est un GRAPHE de domaine ⊂ E. »  C'est la
+    STRUCTURE d'un essai de Bourbaki (un graphe fonctionnel partiel sur un segment
+    initial de E) — propriété NON encodée dans le prédicat `est_essai` déposé
+    (= fonctionnel ∧ dom=seg∪{w} ∧ équation de récursion), donc une hypothèse HONNÊTE
+    de bonne formation.  C'est l'INTRANT structurel que `essai_dans_parties` consomme
+    pour situer l'essai dans 𝔓(E×V)."""
+    R = _graphe_R(G)
+    ve = _t(e)
+    vq, vw = var(q), var(w)
+    return pourtout(q, pourtout(w, impl(
+        est_essai(vq, vh, R, ve, vw, z),
+        et(E.est_un_graphe(vq), inclus(E.dom(vq), ve)))))
+
+
+def essai_dans_parties_depuis_bien_formes(vh, e="E", G="G", y="ypont", V="Vval",
+                                          p="ppont", c="cpont", a="apont",
+                                          b="bpont", z="zrc", q="qwf", w="wwf"):
+    """{ est_essai(p,vh,R,E,y), essais_bien_formes(vh), rule-codomain } ⊢ p∈𝔓(E×V).
+
+    `essai_dans_parties` avec ses deux intrants STRUCTURELS (est_un_graphe(p), dom(p)⊂E)
+    DÉCHARGÉS depuis l'hypothèse universelle de bonne formation `essais_bien_formes`
+    instanciée à (p,y).  Ne restent que les hypothèses NATURELLES { est_essai(p,y),
+    essais_bien_formes, rule-codomain }."""
+    R = _graphe_R(G)
+    ve, vy = _t(e), _t(y)
+    vp = var(p)
+    base = essai_dans_parties(vh, e, G, y, V, p, c, a, b, z)   # {essai, graphe, dom⊂E, rule}
+    h_essai = est_essai(vp, vh, R, ve, vy, z)
+    h_wf = N.assume(essais_bien_formes(vh, e, G, V, q, w, z))  # (∀q)(∀w)(essai⇒graphe∧dom⊂E)
+    # instancier à (p,y) puis MP avec est_essai(p,y)
+    wf_py = instancie(instancie(h_wf, vp), vy)                # essai(p,y) ⇒ (graphe(p) ∧ dom p⊂E)
+    h_ess_assume = N.assume(h_essai)
+    conj = N.modus_ponens(h_ess_assume, wf_py)                # graphe(p) ∧ dom p⊂E
+    graphe_p = conjonction_elim_gauche(conj)                  # est_un_graphe(p)
+    domsub_p = conjonction_elim_droite(conj)                  # dom p ⊂ E
+    res = N.modus_ponens(graphe_p, N.loi_deduction(E.est_un_graphe(vp), base))
+    res = N.modus_ponens(domsub_p, N.loi_deduction(inclus(E.dom(vp), ve), res))
+    cible = appartient(vp, ambiant(e, V))
+    assert res.conclusion == cible, "essai_dans_parties_depuis_bien_formes : ≠ p∈𝔓(E×V)"
+    assert E.est_un_graphe(vp) not in res.hypotheses, "graphe(p) non déchargé"
+    assert inclus(E.dom(vp), ve) not in res.hypotheses, "dom⊂E non déchargé"
+    return res
+
+
+__all__ = ["rule_codomain", "essai_dans_parties",
+           "essais_bien_formes", "essai_dans_parties_depuis_bien_formes"]
