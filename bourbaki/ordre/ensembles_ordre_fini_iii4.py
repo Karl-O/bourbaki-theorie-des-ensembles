@@ -388,9 +388,198 @@ def _inclus_refl_via(t):
     return N.generalisation("z", body)                   # t⊂t
 
 
+# ════════════════════════════════════════════════════════════════════════════
+#  PROPOSITION 3 (variante FILTRANTE à droite — majorant dans E)
+# ════════════════════════════════════════════════════════════════════════════
+_ZMJ = "zmjf"   # liant fixe de majorant ici
+
+
+def _maj(G, A, m, E_set):
+    """majorant(G,A,m,E) avec liant interne FIXÉ à _ZMJ (évite la capture du point)."""
+    return majorant(G, _t(A), _t(m), _t(E_set), x=_ZMJ)
+
+
+def _filtrant_droite_G(G, E_set, x="xfd", y="yfd", z="zfd"):
+    """est_filtrant_droite pour la relation de graphe R(a,b):=(a,b)∈G."""
+    R = lambda a, b: _couple_dans(a, b, G)
+    return E.est_filtrant_droite(R, _t(E_set), x, y, z)
+
+
+def _P_majorant(G, E_set, m="m_mjf"):
+    """P(X) := ( X⊂E et ¬(X=∅) ) ⇒ (∃m)( majorant(G,X,m,E) )."""
+    vE = _t(E_set)
+    def P(X):
+        vX = _t(X)
+        garde = et(inclus(vX, vE), non(egal(vX, E.VIDE)))
+        return impl(garde, existe(m, _maj(G, vX, var(m), vE)))
+    return P
+
+
+def prop3_filtrant_enonce(G, E_set, X="Xmjt", m="m_mjf"):
+    """⊢-cible : ( est_ordre(G,E) et est_filtrant_droite_G(G,E) ) ⇒
+        (∀X)( ( est_fini_ensemble(X) et X⊂E et ¬(X=∅) )
+              ⇒ (∃m)( majorant(G,X,m,E) ) ).
+
+    « Toute partie finie non vide d'un ensemble ordonné filtrant à droite est
+    majorée. »  (Prop. 3 §III.4, variante filtrante.)"""
+    vE = _t(E_set)
+    vX = var(X)
+    corps = impl(et(et(est_fini_ensemble(vX), inclus(vX, vE)), non(egal(vX, E.VIDE))),
+                 existe(m, _maj(G, vX, var(m), vE)))
+    return impl(et(est_ordre(G, E_set), _filtrant_droite_G(G, E_set)),
+                pourtout(X, corps))
+
+
+def _preuve_pas_filtrant(G, E_set, hord, hfilt, P, X="Xrec", x="xrec", m="m_mjf"):
+    """{ hord, hfilt } ⊢ _pas_ensemble(P)  pour P = _P_majorant(G,E)."""
+    from bourbaki.entiers.ensembles_recurrence_finie import _pas_ensemble
+    vE = _t(E_set)
+    vX, vx = var(X), var(x)
+    Xux = E.reunion(vX, E.singleton(vx))
+    # décompose est_ordre
+    refl = conjonction_elim_gauche(conjonction_elim_gauche(hord))
+    trans = conjonction_elim_droite(hord)
+
+    hpas = N.assume(et(et(est_fini_ensemble(vX), non(appartient(vx, vX))), P(vX)))
+    hPX = conjonction_elim_droite(hpas)                   # P(X)
+    garde = et(inclus(Xux, vE), non(egal(Xux, E.VIDE)))
+    hgarde = N.assume(garde)
+    Xux_sub_E = conjonction_elim_gauche(hgarde)           # X∪{x} ⊂ E
+
+    # x ∈ X∪{x} ; x∈E
+    mem_x = _membre_union_singleton(vx, vX, vx)
+    x_in_Xux = N.modus_ponens(_ou_droite(appartient(vx, vX), N.reflexivite(vx)),
+                              equivalence_arriere(mem_x))
+    x_in_E = N.modus_ponens(x_in_Xux, instancie(Xux_sub_E, vx))
+    # X⊂E (liant "z")
+    vz2 = var("z")
+    hzX = N.assume(appartient(vz2, vX))
+    z_in_Xux = N.modus_ponens(N.modus_ponens(hzX, N.s2(appartient(vz2, vX), egal(vz2, vx))),
+                              equivalence_arriere(_membre_union_singleton(vz2, vX, vx)))
+    z_in_E = N.modus_ponens(z_in_Xux, instancie(Xux_sub_E, vz2))
+    X_sub_E = N.generalisation("z", N.loi_deduction(appartient(vz2, vX), z_in_E))
+
+    # tiers exclu sur ¬(X=∅)
+    from bourbaki.logique.tactiques.tactiques_abrege2 import tiers_exclu
+    te = tiers_exclu(egal(vX, E.VIDE))
+    va = var(_ZMJ)   # liant du majorant : on raisonne sur a := _ZMJ
+
+    # ============ CAS A : X=∅ — x est un majorant de X∪{x} dans E ============
+    hXvide = N.assume(egal(vX, E.VIDE))
+    # majorant(G,X∪{x},x,E) = x∈E et (∀a)(a∈X∪{x} ⇒ (a,x)∈G)
+    ha_in = N.assume(appartient(va, Xux))
+    disj_a = N.modus_ponens(ha_in, equivalence_avant(_membre_union_singleton(va, vX, vx)))
+    #   a∈X : contradiction (X=∅)
+    haX = N.assume(appartient(va, vX))
+    leibV = N.s6(vX, E.VIDE, "wv", appartient(va, var("wv")))
+    a_in_vide = N.modus_ponens(haX, equivalence_avant(N.modus_ponens(hXvide, leibV)))
+    nv = instancie(N.axiome(E.theorie_ensembles(), E.AXIOME_VIDE), va)
+    falsoA = N.modus_ponens(a_in_vide, N.modus_ponens(nv, N.s2(non(appartient(va, E.VIDE)), _couple_dans(va, vx, G))))
+    casA_aX = N.loi_deduction(appartient(va, vX), falsoA)
+    #   a=x : (a,x)∈G via réfl (x,x)∈G
+    hax = N.assume(egal(va, vx))
+    xxG = N.modus_ponens(x_in_E, instancie(refl, vx))     # (x,x)∈G
+    x_eq_a = N.modus_ponens(hax, symetrie(va, vx))
+    axG = N.modus_ponens(xxG, equivalence_avant(N.modus_ponens(x_eq_a, N.s6(vx, va, "wax", _couple_dans(var("wax"), vx, G)))))
+    casA_ax = N.loi_deduction(egal(va, vx), axG)
+    ax_final_A = cas(disj_a, casA_aX, casA_ax)
+    maj_body_A = N.generalisation(_ZMJ, N.loi_deduction(appartient(va, Xux), ax_final_A))
+    majx_A = conjonction_intro(x_in_E, maj_body_A)        # majorant(G,X∪{x},x,E)
+    exA = N.modus_ponens(majx_A, N.s5(_maj(G, Xux, var(m), vE), vx, m))
+    casA = N.loi_deduction(egal(vX, E.VIDE), exA)
+
+    # ============ CAS B : X≠∅ ============
+    hXnv = N.assume(non(egal(vX, E.VIDE)))
+    ex_mX = N.modus_ponens(conjonction_intro(X_sub_E, hXnv), hPX)   # (∃m)maj(X,m)
+    vm = var(m)
+    hmaj = N.assume(_maj(G, vX, vm, vE))                  # maj(X,m): m∈E et (∀a)(a∈X⇒(a,m)∈G)
+    m_in_E = conjonction_elim_gauche(hmaj)
+    m_maj = conjonction_elim_droite(hmaj)
+    # filtrant : (m∈E et x∈E) ⇒ (∃z)(z∈E et (m,z)∈G et (x,z)∈G)
+    filt_inst = instancie(instancie(hfilt, vm), vx)
+    ex_z = N.modus_ponens(conjonction_intro(m_in_E, x_in_E), filt_inst)   # (∃z)(...)
+    vw = var("zfd")
+    hz = N.assume(et(et(appartient(vw, vE), _couple_dans(vm, vw, G)), _couple_dans(vx, vw, G)))
+    w_in_E = conjonction_elim_gauche(conjonction_elim_gauche(hz))
+    mw_G = conjonction_elim_droite(conjonction_elim_gauche(hz))
+    xw_G = conjonction_elim_droite(hz)
+    # z(=w) est un majorant de X∪{x} : ∀a∈X∪{x} (a,w)∈G
+    ha_inB = N.assume(appartient(va, Xux))
+    disj_aB = N.modus_ponens(ha_inB, equivalence_avant(_membre_union_singleton(va, vX, vx)))
+    #   a∈X ⇒ (a,m)∈G puis trans (m,w) ⇒ (a,w)∈G
+    haX_B = N.assume(appartient(va, vX))
+    am_G = N.modus_ponens(haX_B, instancie(m_maj, va))
+    trans_amw = instancie(instancie(instancie(trans, va), vm), vw)
+    aw_G_B = N.modus_ponens(conjonction_intro(am_G, mw_G), trans_amw)
+    casB_aX = N.loi_deduction(appartient(va, vX), aw_G_B)
+    #   a=x ⇒ (a,w)∈G via (x,w)∈G + Leibniz x↦a
+    hax_B = N.assume(egal(va, vx))
+    x_eq_a_B = N.modus_ponens(hax_B, symetrie(va, vx))
+    aw_G_Bb = N.modus_ponens(xw_G, equivalence_avant(N.modus_ponens(x_eq_a_B, N.s6(vx, va, "wxw", _couple_dans(var("wxw"), vw, G)))))
+    casB_ax = N.loi_deduction(egal(va, vx), aw_G_Bb)
+    aw_final = cas(disj_aB, casB_aX, casB_ax)
+    maj_body_B = N.generalisation(_ZMJ, N.loi_deduction(appartient(va, Xux), aw_final))
+    majw = conjonction_intro(w_in_E, maj_body_B)          # majorant(G,X∪{x},w,E)
+    exB_w = N.modus_ponens(majw, N.s5(_maj(G, Xux, var(m), vE), vw, m))   # (∃m)maj(X∪{x},m)
+    # éliminer le témoin z(=w) du filtrant
+    imp_z = N.loi_deduction(et(et(appartient(vw, vE), _couple_dans(vm, vw, G)), _couple_dans(vx, vw, G)), exB_w)
+    exB_fromZ = N.modus_ponens(ex_z, existe_elimination(imp_z, "zfd"))
+    # éliminer le témoin m
+    imp_m = N.loi_deduction(_maj(G, vX, vm, vE), exB_fromZ)
+    exB = N.modus_ponens(ex_mX, existe_elimination(imp_m, m))
+    casB = N.loi_deduction(non(egal(vX, E.VIDE)), exB)
+
+    ex_total = cas(te, casA, casB)
+    PXux = N.loi_deduction(garde, ex_total)
+    corps = N.loi_deduction(et(et(est_fini_ensemble(vX), non(appartient(vx, vX))), P(vX)), PXux)
+    res = N.generalisation(X, N.generalisation(x, corps))
+    assert res.conclusion == _pas_ensemble(P, X, x), "pas filtrant mal formé"
+    return res
+
+
+def prop3_filtrant(G="Gmjt", E_set="Emjt", X="Xmjt", m="m_mjf"):
+    """🎯 ⊢ prop3_filtrant_enonce(G,E).   (Prop. 3 §III.4, variante filtrante à droite.)
+
+    Toute partie FINIE non vide d'un ensemble ORDONNÉ FILTRANT à droite est majorée
+    (admet un majorant DANS E).  Via `recurrence_finie` ; le pas combine le majorant m
+    de X avec le point x par la propriété filtrante (z∈E majore m et x) + transitivité."""
+    vE = _t(E_set)
+    hyp_conj = N.assume(et(est_ordre(G, E_set), _filtrant_droite_G(G, E_set)))
+    hord = conjonction_elim_gauche(hyp_conj)
+    hfilt = conjonction_elim_droite(hyp_conj)
+    P = _P_majorant(G, E_set, m)
+
+    # P(∅) vacuous (¬(∅=∅) faux)
+    concl0 = existe(m, _maj(G, E.VIDE, var(m), vE))
+    n_refl = N.assume(et(inclus(E.VIDE, vE), non(egal(E.VIDE, E.VIDE))))
+    nr = conjonction_elim_droite(n_refl)
+    falso0 = N.modus_ponens(N.reflexivite(E.VIDE), N.modus_ponens(nr, N.s2(non(egal(E.VIDE, E.VIDE)), concl0)))
+    P0 = N.loi_deduction(et(inclus(E.VIDE, vE), non(egal(E.VIDE, E.VIDE))), falso0)
+    assert P0.conclusion == P(E.VIDE), "P(∅) filtrant mal formé"
+
+    pas = _preuve_pas_filtrant(G, E_set, hord, hfilt, P, m=m)
+    rf = recurrence_finie(P)
+    fini_imp_PX = N.modus_ponens(conjonction_intro(P0, pas), rf)   # [hord, hfilt]
+
+    vX = var(X)
+    inst = instancie(fini_imp_PX, vX)
+    hfin = N.assume(et(et(est_fini_ensemble(vX), inclus(vX, vE)), non(egal(vX, E.VIDE))))
+    fini_ens_X = conjonction_elim_gauche(conjonction_elim_gauche(hfin))
+    X_sub = conjonction_elim_droite(conjonction_elim_gauche(hfin))
+    X_nv = conjonction_elim_droite(hfin)
+    PX = N.modus_ponens(fini_ens_X, inst)
+    ex_m = N.modus_ponens(conjonction_intro(X_sub, X_nv), PX)
+    corps = N.loi_deduction(et(et(est_fini_ensemble(vX), inclus(vX, vE)), non(egal(vX, E.VIDE))), ex_m)
+    concl = N.generalisation(X, corps)
+    res = N.loi_deduction(et(est_ordre(G, E_set), _filtrant_droite_G(G, E_set)), concl)
+    assert res.conclusion == prop3_filtrant_enonce(G, E_set, X, m), "conclusion ≠ énoncé filtrant"
+    return res
+
+
 __all__ = [
     "_membre_union_singleton",
     "_P_plus_grand",
     "prop3_total_enonce", "prop3_total",
     "cor1_total_enonce", "cor1_total",
+    "prop3_filtrant_enonce", "prop3_filtrant",
 ]

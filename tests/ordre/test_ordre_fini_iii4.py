@@ -5,6 +5,7 @@ from bourbaki.ensembles import ensembles_abrege as E
 from bourbaki.ordre.ensembles_ordre_fini_iii4 import (
     prop3_total, prop3_total_enonce,
     cor1_total, cor1_total_enonce,
+    prop3_filtrant, prop3_filtrant_enonce,
     _membre_union_singleton,
 )
 
@@ -28,3 +29,9 @@ def test_cor1_total_clos():
     r = cor1_total()
     assert r.est_clos, f"hyps résiduelles : {r.hypotheses}"
     assert r.conclusion == cor1_total_enonce("Gpgt", "Epgt", "m_pgf")
+
+
+def test_prop3_filtrant_clos():
+    r = prop3_filtrant()
+    assert r.est_clos, f"hyps résiduelles : {r.hypotheses}"
+    assert r.conclusion == prop3_filtrant_enonce("Gmjt", "Emjt", "Xmjt", "m_mjf")
