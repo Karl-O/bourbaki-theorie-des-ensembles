@@ -20,6 +20,21 @@ On l'assemble par CANTOR–BERNSTEIN sur les deux injections curry/uncurry (stri
 le schéma de `prop10_close`, mais on s'arrête au niveau ENSEMBLISTE Eq(·,·), avant de
 passer aux cardinaux).  Rien postulé ; theorie_ensembles INCHANGÉE (22 axiomes).
 
+PROPOSITION 2 (E II.31, n° 2) — REPORTÉE (résidu HONNÊTE, non fermée cette passe).
+  Énoncé : u : E'→E, v : F→F' ; la fonction f ↦ v∘f∘u de 𝓕(E;F) dans 𝓕(E';F') est
+  injective si u surjective & v injective, surjective si u injective & v surjective ;
+  bijective (Cor) si u,v bijectives.  La PREUVE de Bourbaki est par retraction/section
+  (1° : s section de u, r rétraction de v ⇒ r∘(v∘f∘u)∘s = f ; 2° en miroir).
+  VERROU : la CONSTRUCTION du graphe-terme de la conjugaison f ↦ v∘f∘u (recomposition
+  d'applications EMBALLÉES, bien-définition + injectivité back-and-forth) est exactement
+  le « verrou dur » DÉJÀ documenté et REPORTÉ dans
+  `ensembles_arith_cardinale_props_exposant_monotone` (les énoncés cardinaux de
+  monotonie y restent CONDITIONNELS faute de cette même injection d'espaces de
+  fonctions) — échelle Prop 9/10.  De plus, `composition_valeur` à un point qui est
+  lui-même une valeur τy(...) déclenche une capture de liant (cf. note de
+  `composee_associee_droite_valeur`).  Tractable mais hors budget ; rien de FAUX/vide
+  n'est posé ici (aucune conclusion fausse, aucun axiome ajouté).
+
 theorie_ensembles INCHANGÉE ; aucun fichier déposé modifié (tout est IMPORTÉ).
 """
 from __future__ import annotations
