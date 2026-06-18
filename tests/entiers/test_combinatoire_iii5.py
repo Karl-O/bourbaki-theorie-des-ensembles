@@ -19,3 +19,25 @@ def test_somme_succ_distribue_close():
     th = somme_succ_distribue()
     assert th.est_clos
     assert th.conclusion == cible
+
+
+def test_somme_zero_neutre_droite_close():
+    from bourbaki.entiers.ensembles_combinatoire_iii5 import somme_zero_neutre_droite
+    from bourbaki.cardinaux.ensembles_cardinaux import cardinal
+    from bourbaki.ensembles.ensembles_abrege import VIDE
+    a = var("Asz")
+    cible = impl(est_cardinal(a),
+                 egal(somme_cardinale_binaire(a, cardinal(VIDE)), a))
+    th = somme_zero_neutre_droite()
+    assert th.est_clos
+    assert th.conclusion == cible
+
+
+def test_somme_binaire_entier_close():
+    from bourbaki.entiers.ensembles_combinatoire_iii5 import somme_binaire_entier
+    a, b = var("asbe"), var("bsbe")
+    cible = impl(et(est_fini(a), est_fini(b)),
+                 est_fini(somme_cardinale_binaire(a, b)))
+    th = somme_binaire_entier()
+    assert th.est_clos
+    assert th.conclusion == cible

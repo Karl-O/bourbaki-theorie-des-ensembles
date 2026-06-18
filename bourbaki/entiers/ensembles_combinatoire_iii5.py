@@ -178,4 +178,135 @@ def somme_succ_distribue(a="Asd", b="Bsd"):
     return res
 
 
-__all__ = ["somme_succ_distribue"]
+# ════════════════════════════════════════════════════════════════════════════
+#  a + 0 = a    (sous est_cardinal a)
+# ════════════════════════════════════════════════════════════════════════════
+def somme_zero_neutre_droite(a="Asz"):
+    """⊢ est_cardinal a ⇒ somme_cardinale_binaire(a, 0) = a.   (a + 0 = a, 0 = Card∅.)
+
+    a+0 = Card(a⊔∅)  [sdc(a,∅,a,Card∅) ; Card a=a, Card∅=Card∅, 0=Card∅ DÉF]
+        = Card(∅⊔a)  [commutativité]
+        = Card a = a [zéro neutre + Card a=a]."""
+    from bourbaki.cardinaux.arithmetique.ensembles_arith_somme import (
+        somme_cardinale_commutative, somme_cardinale_zero_neutre,
+    )
+    va = _t(a)
+    vide = E.VIDE
+    card_vide = cardinal(vide)                          # Card∅ = 0 = ZERO  (DÉF ZERO=Card∅)
+    a_vide = somme_disjointe(va, vide)                  # a ⊔ ∅
+    h = N.assume(est_cardinal(va))
+    cdc_gen = N.generalisation("zcdc", cardinal_de_cardinal("zcdc"))
+    card_a = N.modus_ponens(h, instancie(cdc_gen, va))  # Card a = a
+    refl_v = N.reflexivite(card_vide)                   # Card∅ = Card∅
+    # a+0 = Card(a⊔∅)
+    sdc = _sdc(va, vide, va, card_vide)                 # (Card a=a et Card∅=Card∅) ⇒ Card(a⊔∅)=a+0
+    lhs = somme_cardinale_binaire(va, card_vide)        # a+0  (ZERO == Card∅)
+    eq0 = N.modus_ponens(conjonction_intro(card_a, refl_v), sdc)  # Card(a⊔∅) = a+0
+    a0_eq_card = N.modus_ponens(eq0, symetrie(cardinal(a_vide), lhs))  # a+0 = Card(a⊔∅)
+    # Card(a⊔∅) = Card(∅⊔a)
+    comm = somme_cardinale_commutative(a if isinstance(a, str) else va, vide)  # Card(a⊔∅)=Card(∅⊔a)
+    # Card(∅⊔a) = Card a
+    zn = somme_cardinale_zero_neutre(a if isinstance(a, str) else va)          # Card(∅⊔a)=Card a
+    # chaîne a+0 = Card(a⊔∅) = Card(∅⊔a) = Card a = a
+    ch1 = composer_egalites(a0_eq_card, comm)           # a+0 = Card(∅⊔a)
+    ch2 = composer_egalites(ch1, zn)                    # a+0 = Card a
+    final = composer_egalites(ch2, card_a)              # a+0 = a
+    res = N.loi_deduction(est_cardinal(va), final)
+    cible = impl(est_cardinal(va), egal(lhs, va))
+    assert res.conclusion == cible, "somme_zero_neutre_droite : conclusion inattendue"
+    return res
+
+
+# ════════════════════════════════════════════════════════════════════════════
+#  🎯 PROPOSITION 1 §III.5.1 (cas BINAIRE) — SOMME de deux entiers est un entier
+# ════════════════════════════════════════════════════════════════════════════
+def _P_somme(a):
+    """P[b] := Fini( a + b ),  pour a fixé (TERME)."""
+    va = _t(a)
+    return lambda b: est_fini(somme_cardinale_binaire(va, _t(b)))
+
+
+def _preuve_P0_somme(a, hfa):
+    """{ Fini a [hfa] } ⊢ Fini(a + 0).   (a+0=a sous est_cardinal a, puis Leibniz.)"""
+    va = _t(a)
+    ca = conjonction_elim_gauche(hfa)                   # est_cardinal a
+    a0_eq_a = N.modus_ponens(ca, somme_zero_neutre_droite(a))   # a+0 = a
+    lhs = somme_cardinale_binaire(va, cardinal(E.VIDE)) # a+0
+    a_eq_a0 = N.modus_ponens(a0_eq_a, symetrie(lhs, va))        # a = a+0
+    leib = N.s6(va, lhs, "wp0", est_fini(var("wp0")))   # (a=a+0) ⇒ (Fini a ⇔ Fini(a+0))
+    eqv = N.modus_ponens(a_eq_a0, leib)
+    return N.modus_ponens(hfa, equivalence_avant(eqv))  # Fini(a+0)
+
+
+def _preuve_step_somme(a, hfa, n="nsom"):
+    """{ Fini a [hfa] } ⊢ (∀n)( (Fini n et Fini(a+n)) ⇒ Fini(a+(n+1)) )."""
+    va = _t(a)
+    vn = var(n)
+    ca = conjonction_elim_gauche(hfa)                   # est_cardinal a
+    sum_an = somme_cardinale_binaire(va, vn)            # a+n
+    succ_an = successeur(sum_an)                        # (a+n)+1
+    hstep = N.assume(et(est_fini(vn), est_fini(sum_an)))
+    fini_n = conjonction_elim_gauche(hstep)             # Fini n
+    fini_an = conjonction_elim_droite(hstep)            # Fini(a+n)
+    cn = conjonction_elim_gauche(fini_n)                # est_cardinal n
+    # a+(n+1) = (a+n)+1   (somme_succ_distribue, sous card a et card n)
+    ssd = somme_succ_distribue(a if isinstance(a, str) else va,
+                               n)                       # (card a et card n) ⇒ a+(n+1)=(a+n)+1
+    a_n1_eq = N.modus_ponens(conjonction_intro(ca, cn), ssd)   # a+(n+1) = successeur(a+n)
+    # Fini(a+n) ⇒ Fini((a+n)+1)
+    fifs_gen = N.generalisation("zfifs", fini_implique_fini_successeur("zfifs"))
+    fini_succ_an = N.modus_ponens(fini_an, instancie(fifs_gen, sum_an))  # Fini(successeur(a+n))
+    # Leibniz : a+(n+1) = successeur(a+n) ⇒ (Fini(a+(n+1)) ⇔ Fini(successeur(a+n)))
+    lhs = somme_cardinale_binaire(va, successeur(vn))   # a+(n+1)
+    leib = N.s6(lhs, succ_an, "wstp", est_fini(var("wstp")))   # (a+(n+1)=succ(a+n))⇒(Fini(a+(n+1))⇔Fini(succ(a+n)))
+    eqv = N.modus_ponens(a_n1_eq, leib)
+    fini_a_n1 = N.modus_ponens(fini_succ_an, equivalence_arriere(eqv))  # Fini(a+(n+1))
+    body = N.loi_deduction(et(est_fini(vn), est_fini(sum_an)), fini_a_n1)
+    return N.generalisation(n, body)
+
+
+def somme_binaire_entier(a="asbe", b="bsbe", n="nsbe", k="kpred"):
+    """🎯 ⊢ (Fini a et Fini b) ⇒ Fini(somme_cardinale_binaire(a, b)).
+
+    PROPOSITION 1 §III.5.1, cas BINAIRE : « la somme de deux entiers est un entier »
+    (clôt somme_binaire_entier_cible).  Récurrence C61 sur b avec P[b] := Fini(a+b),
+    sous l'hypothèse Fini a :
+      • P[0] : a+0 = a (somme_zero_neutre_droite) ⇒ Fini(a+0) ;
+      • P[n]⇒P[n+1] : a+(n+1) = (a+n)+1 (somme_succ_distribue) et
+        Fini(a+n) ⇒ Fini((a+n)+1) (fini_implique_fini_successeur).
+    C61 (principe_recurrence_preuve, résidu predecesseur DÉCHARGÉ par sa preuve close)
+    donne (∀b)(Fini b ⇒ Fini(a+b)) ; on instancie à b, on décharge Fini b puis Fini a.
+    theorie=22, 0 hyp."""
+    va, vb = _t(a), _t(b)
+    P = _P_somme(va)
+
+    # ── sous Fini a : P[0] et le pas ───────────────────────────────────────────
+    hfa = N.assume(est_fini(va))
+    p0 = _preuve_P0_somme(va, hfa)                      # Fini(a+0)            [Fini a]
+    step = _preuve_step_somme(va, hfa, n)               # (∀n)(... ⇒ ...)      [Fini a]
+    assert p0.conclusion == P(ZERO), "P[0] mal formé"
+    from bourbaki.entiers.ensembles_recurrence_C61 import _fini_et_P_implique_succ
+    assert step.conclusion == _fini_et_P_implique_succ(P, n), "pas mal formé"
+
+    # ── C61 déchargé du résidu prédécesseur ────────────────────────────────────
+    princ_imp = principe_recurrence_preuve(P, n, k=k)   # {pfu} ⊢ (P[0] et pas) ⇒ (∀b)(Fini b ⇒ P[b])
+    pfu = predecesseur_fini_universel(k=k)
+    assert pfu in princ_imp.hypotheses, "predecesseur_fini_universel absent"
+    princ_imp = _cut(princ_imp, pfu, predecesseur_fini_universel_preuve(k=k))
+
+    ante = conjonction_intro(p0, step)                  # P[0] et pas          [Fini a]
+    fini_implique_Pb = N.modus_ponens(ante, princ_imp)  # (∀b)(Fini b ⇒ Fini(a+b))  [Fini a]
+
+    # ── prémisse-conjonction (Fini a et Fini b) : décharge Fini a, instancie b ──
+    hconj = N.assume(et(est_fini(va), est_fini(vb)))
+    fa = conjonction_elim_gauche(hconj)
+    fb = conjonction_elim_droite(hconj)
+    fini_impl_Pb_2 = _cut(N.loi_deduction(est_fini(va), fini_implique_Pb), est_fini(va), fa)
+    Pb2 = N.modus_ponens(fb, instancie(fini_impl_Pb_2, vb))    # Fini(a+b)     [conj]
+    res = N.loi_deduction(et(est_fini(va), est_fini(vb)), Pb2)
+    cible = impl(et(est_fini(va), est_fini(vb)), est_fini(somme_cardinale_binaire(va, vb)))
+    assert res.conclusion == cible, "somme_binaire_entier : conclusion inattendue"
+    return res
+
+
+__all__ = ["somme_succ_distribue", "somme_zero_neutre_droite", "somme_binaire_entier"]
