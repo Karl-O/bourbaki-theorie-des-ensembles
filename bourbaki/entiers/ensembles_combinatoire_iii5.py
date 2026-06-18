@@ -301,7 +301,7 @@ def somme_binaire_entier(a="asbe", b="bsbe", n="nsbe", k="kpred"):
     hconj = N.assume(et(est_fini(va), est_fini(vb)))
     fa = conjonction_elim_gauche(hconj)
     fb = conjonction_elim_droite(hconj)
-    fini_impl_Pb_2 = _cut(N.loi_deduction(est_fini(va), fini_implique_Pb), est_fini(va), fa)
+    fini_impl_Pb_2 = _cut(fini_implique_Pb, est_fini(va), fa)  # (∀n)(Fini n ⇒ Fini(a+n))  [conj]
     Pb2 = N.modus_ponens(fb, instancie(fini_impl_Pb_2, vb))    # Fini(a+b)     [conj]
     res = N.loi_deduction(et(est_fini(va), est_fini(vb)), Pb2)
     cible = impl(et(est_fini(va), est_fini(vb)), est_fini(somme_cardinale_binaire(va, vb)))
