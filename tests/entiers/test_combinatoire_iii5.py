@@ -1,0 +1,21 @@
+"""Tests §III.5 combinatoire (1ère vague) : Prop. 1 binaire (somme/produit entiers)."""
+from bourbaki.logique.formule import egal, impl, et, var
+from bourbaki.cardinaux.ensembles_cardinaux import est_cardinal
+from bourbaki.entiers.ensembles_entiers import successeur, est_fini
+from bourbaki.ensembles.familles.ensembles_somme_disjointe import somme_cardinale_binaire
+from bourbaki.ensembles.ensembles_abrege import theorie_ensembles
+
+
+def test_theorie_inchangee():
+    assert len(theorie_ensembles().axiomes) == 22
+
+
+def test_somme_succ_distribue_close():
+    from bourbaki.entiers.ensembles_combinatoire_iii5 import somme_succ_distribue
+    a, b = var("Asd"), var("Bsd")
+    cible = impl(et(est_cardinal(a), est_cardinal(b)),
+                 egal(somme_cardinale_binaire(a, successeur(b)),
+                      successeur(somme_cardinale_binaire(a, b))))
+    th = somme_succ_distribue()
+    assert th.est_clos
+    assert th.conclusion == cible
