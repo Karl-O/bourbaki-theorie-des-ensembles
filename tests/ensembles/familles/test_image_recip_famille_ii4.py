@@ -50,11 +50,43 @@ def test_prop4_egalite():
     assert inner.sous[1] == egal(L, R)
 
 
+# ── Prop. 3 (E.II.25) — image directe d'une réunion / intersection ────────────
+def test_prop3_reunion_egalite_inconditionnelle():
+    t = M.image_reunion_egal()
+    assert t.est_clos and len(t.hypotheses) == 0
+    g, fam, i = var("G"), var("X"), var("I")
+    reun = E.reunion_famille(fam, i)
+    L = E.image(g, reun)
+    R = E.reunion_famille(M.famille_image(g, fam), i)
+    assert t.conclusion == egal(L, R)
+
+
+def test_prop3_inter_incluse_inconditionnelle():
+    t = M.image_inter_incluse()
+    assert t.est_clos and len(t.hypotheses) == 0   # Γ⟨⋂X⟩ ⊂ ⋂Γ⟨X_ι⟩
+
+
+# ── Cor. de la Prop. 4 (E.II.25) — image directe d'une inter sous injection ───
+def test_cor_arriere_si_injective():
+    t = M.image_inter_arriere_si_inj()
+    assert t.est_clos and len(t.hypotheses) == 0
+
+
+def test_cor_egalite_si_injective():
+    t = M.image_inter_egal_si_injective()
+    assert t.est_clos and len(t.hypotheses) == 0
+    g, fam, i = var("G"), var("X"), var("I")
+    inter = E.inter_famille(fam, i)
+    L = E.image(g, inter)
+    R = E.inter_famille(M.famille_image(g, fam), i)
+    assert t.conclusion.tag == "ou"
+    inner = t.conclusion.sous[1]
+    assert inner.tag == "ou"
+    assert inner.sous[1] == egal(L, R)
+
+
 if __name__ == "__main__":
-    test_theorie_inchangee()
-    test_prop6_arriere_inconditionnel()
-    test_prop6_egalite()
-    test_prop4_incluse_inconditionnel()
-    test_prop4_arriere()
-    test_prop4_egalite()
-    print("OK Prop 4/6")
+    for n in list(globals()):
+        if n.startswith("test_"):
+            globals()[n]()
+    print("OK Prop 3/4/6 + Cor")

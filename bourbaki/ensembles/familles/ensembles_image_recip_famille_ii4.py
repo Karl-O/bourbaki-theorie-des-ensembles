@@ -428,9 +428,203 @@ def _membre_fam_recip_b(g, fam, i, a, xb):
     return etr(membre_eq, membre_image_recip(vg, Yi, va, xb))
 
 
+# ══════════════════════════════════════════════════════════════════════════════
+# Prop. 3 (E.II.25) — IMAGE DIRECTE d'une RÉUNION / INTERSECTION de famille.
+#   Γ⟨⋃X⟩ = ⋃Γ⟨X_ι⟩  (=, incond.)   ;   Γ⟨⋂X⟩ ⊂ ⋂Γ⟨X_ι⟩  (⊂, incond.)
+# ══════════════════════════════════════════════════════════════════════════════
+def _membre_fam_image(g, fam, i, y):
+    """⊢ (y ∈ (Γ⟨X·⟩)_ι) ⇔ (∃x)(x∈X_ι et (x,y)∈Γ).
+
+    via (Γ⟨X·⟩)_ι = Γ⟨X_ι⟩ (théorie de valeur dédiée) puis AXIOME_IMAGE."""
+    vg, vfam, vi, vy = _t(g), _t(fam), _t(i), _t(y)
+    Xi = E.valeur_famille(vfam, vi)
+    val_eq = _val_image(vg, vfam, vi)                       # (Γ⟨X·⟩)_ι = Γ⟨X_ι⟩
+    membre_eq = _membre_eq(E.valeur_famille(famille_image(vg, vfam), vi),
+                           E.image(vg, Xi), val_eq, vy)     # y∈(…)_ι ⇔ y∈Γ⟨X_ι⟩
+    return etr(membre_eq, _inst_image(vg, Xi, vy))
+
+
+def image_reunion_egal(g="G", fam="X", i="I"):
+    """⊢ Γ⟨⋃_ι X_ι⟩ = ⋃_ι Γ⟨X_ι⟩.   (E.II.25, Prop. 3, 1re formule — INCONDITIONNELLE.)
+
+    y∈Γ⟨⋃X⟩ ⇔ (∃x)(x∈⋃X et (x,y)∈Γ) ⇔ (∃x)((∃i)(i∈I et x∈X_i) et (x,y)∈Γ) ;
+    on commute ∃x∃i, réassocie, et tire (∃i)(i∈I et (∃x)(x∈X_i et (x,y)∈Γ))
+        = (∃i)(i∈I et y∈Γ⟨X_i⟩) = caractérisation de ⋃Γ⟨X·⟩."""
+    from bourbaki.logique.tactiques.tactiques_abrege_quantif import (
+        et_existe_gauche, existe_commute, et_existe_droite)
+    vg, vfam, vI = _t(g), _t(fam), _t(i)
+    vy, vx, vi = var("y"), var("x"), var("i")
+    Xi = E.valeur_famille(vfam, vi)
+    reun = E.reunion_famille(vfam, vI)
+    fam_im = famille_image(vg, vfam)
+    gxy = appartient(E.couple(vx, vy), vg)                  # (x,y)∈Γ
+
+    # ── membre gauche ─────────────────────────────────────────────────────────
+    L = _inst_image(vg, reun, vy)                           # ⇔ (∃x)(x∈⋃X et (x,y)∈Γ)
+    reun_x = _inst_reunion(vfam, vI, vx)                    # x∈⋃X ⇔ (∃i)(i∈I et x∈X_i)
+    L2 = etr(L, congruence_existe(et_congruence_gauche(reun_x, gxy), "x"))
+    Pi = et(appartient(vi, vI), appartient(vx, Xi))
+    L3 = etr(L2, congruence_existe(et_existe_gauche("i", Pi, gxy), "x"))   # ⇔ (∃x)(∃i)(Pi et (x,y)∈Γ)
+    L4 = etr(L3, existe_commute("x", "i", et(Pi, gxy)))                    # ⇔ (∃i)(∃x)(Pi et (x,y)∈Γ)
+    # ((i∈I et x∈X_i) et (x,y)∈Γ) ⇔ (i∈I et (x∈X_i et (x,y)∈Γ))
+    rearr = _assoc_et_droite(appartient(vi, vI), appartient(vx, Xi), gxy)
+    inner_S = et(appartient(vx, Xi), gxy)
+    pull_x = esym(et_existe_droite(appartient(vi, vI), "x", inner_S))      # (∃x)(i∈I et S) ⇔ (i∈I et (∃x)S)
+    L5 = etr(L4, congruence_existe(etr(congruence_existe(rearr, "x"), pull_x), "i"))
+    char_L = N.generalisation("y", L5)
+
+    # ── membre droit ──────────────────────────────────────────────────────────
+    R = _inst_reunion(fam_im, vI, vy)                       # ⇔ (∃i)(i∈I et y∈(Γ⟨X·⟩)_i)
+    membre_i = _membre_fam_image(vg, vfam, vi, vy)          # y∈(…)_i ⇔ (∃x)(x∈X_i et (x,y)∈Γ)
+    R2 = etr(R, congruence_existe(et_congruence_droite(appartient(vi, vI), membre_i), "i"))
+    char_R = N.generalisation("y", R2)
+
+    return egalite_par_extension(char_L, char_R, E.image(vg, reun),
+                                 E.reunion_famille(fam_im, vI))
+
+
+def image_inter_incluse(g="G", fam="X", i="I"):
+    """⊢ Γ⟨⋂_ι X_ι⟩ ⊂ ⋂_ι Γ⟨X_ι⟩.   (E.II.25, Prop. 3, 2e formule — INCONDITIONNELLE.)
+
+    y∈Γ⟨⋂X⟩ : témoin x∈⋂X, (x,y)∈Γ ; pour i∈I, x∈X_i, donc y∈Γ⟨X_i⟩, ∀i∈I :
+    y∈⋂Γ⟨X_ι⟩.  (L'inclusion inverse est FAUSSE en général — note* du PDF.)"""
+    vg, vfam, vI = _t(g), _t(fam), _t(i)
+    vy, vx, vi = var("z"), var("x"), var("i")
+    inter = E.inter_famille(vfam, vI)
+    fam_im = famille_image(vg, vfam)
+    L = E.image(vg, inter)
+    R = E.inter_famille(fam_im, vI)
+
+    hL = N.assume(appartient(vy, L))
+    exX = N.modus_ponens(hL, equivalence_avant(_inst_image(vg, inter, vy)))  # (∃x)(x∈⋂X et (x,y)∈Γ)
+    body = et(appartient(vx, inter), appartient(E.couple(vx, vy), vg))
+    hb = N.assume(body)
+    x_inter = cg(hb)
+    gxy = cd(hb)
+    hI = N.assume(appartient(vi, vI))
+    fa = N.modus_ponens(x_inter, equivalence_avant(_inst_inter(vfam, vI, vx)))  # (∀i)(i∈I⇒x∈X_i)
+    x_Xi = N.modus_ponens(hI, instancie(fa, vi))                                # x∈X_i
+    Xi = E.valeur_famille(vfam, vi)
+    wit_i = conjonction_intro(x_Xi, gxy)                                        # x∈X_i et (x,y)∈Γ
+    y_GXi = N.modus_ponens(N.modus_ponens(wit_i, N.s5(
+        et(appartient(vx, Xi), appartient(E.couple(vx, vy), vg)), vx, "x")),
+        equivalence_arriere(_membre_fam_image(vg, vfam, vi, vy)))               # y∈(Γ⟨X·⟩)_i
+    fa_i = N.generalisation("i", N.loi_deduction(appartient(vi, vI), y_GXi))
+    y_R = N.modus_ponens(fa_i, equivalence_arriere(_inst_inter(fam_im, vI, vy)))  # y∈⋂Γ⟨X·⟩
+    imp_x = existe_elimination(N.loi_deduction(body, y_R), "x")
+    y_R_final = N.modus_ponens(exX, imp_x)
+    return N.generalisation("z", N.loi_deduction(appartient(vy, L), y_R_final))
+
+
+def _assoc_et_droite(a, b, c):
+    """⊢ ((A et B) et C) ⇔ (A et (B et C))."""
+    h1 = N.assume(et(et(a, b), c))
+    ab = cg(h1)
+    fwd = N.loi_deduction(et(et(a, b), c),
+                          conjonction_intro(cg(ab), conjonction_intro(cd(ab), cd(h1))))
+    h2 = N.assume(et(a, et(b, c)))
+    bc = cd(h2)
+    bwd = N.loi_deduction(et(a, et(b, c)),
+                          conjonction_intro(conjonction_intro(cg(h2), cg(bc)), cd(bc)))
+    return conjonction_intro(fwd, bwd)
+
+
+# ══════════════════════════════════════════════════════════════════════════════
+# Cor. de la Prop. 4 (E.II.25) — IMAGE DIRECTE d'une INTERSECTION sous INJECTION.
+#   {Injective(f)} ⊢ Γ⟨⋂X⟩ = ⋂Γ⟨X_ι⟩
+# ══════════════════════════════════════════════════════════════════════════════
+def image_inter_arriere_si_inj(g="G", fam="X", i="I", a="alpha"):
+    """{Injective(f), α∈I} ⊢ ⋂_ι Γ⟨X_ι⟩ ⊂ Γ⟨⋂_ι X_ι⟩.   (Cor. Prop. 4, sens ⊃.)
+
+    CONDITIONNÉ (fidèle, Bourbaki : f injection, I≠∅).  y∈⋂Γ⟨X_ι⟩ : en i=α, témoin
+    x∈X_α, (x,y)∈f.  Pour tout i∈I, y∈Γ⟨X_i⟩ donne un témoin x_i avec (x_i,y)∈f ;
+    Injective(f) (f⁻¹ univalent) ⇒ x_i=x ; donc x∈X_i.  Ainsi x∈⋂X, (x,y)∈f :
+    y∈Γ⟨⋂X⟩."""
+    vg, vfam, vI, valpha = _t(g), _t(fam), _t(i), _t(a)
+    vy, vx, vxq, vi = var("z"), var("x"), var("xq"), var("i")
+    inter = E.inter_famille(vfam, vI)
+    fam_im = famille_image(vg, vfam)
+    L = E.inter_famille(fam_im, vI)
+    R = E.image(vg, inter)
+    hInj = N.assume(injective(vg))
+    h_aI = N.assume(appartient(valpha, vI))
+
+    hL = N.assume(appartient(vy, L))
+    fa_L = N.modus_ponens(hL, equivalence_avant(_inst_inter(fam_im, vI, vy)))  # (∀i)(i∈I⇒y∈(Γ⟨X·⟩)_i)
+    y_GX_alpha = N.modus_ponens(h_aI, instancie(fa_L, valpha))                 # y∈(…)_α
+    exA = N.modus_ponens(y_GX_alpha, equivalence_avant(
+        _membre_fam_image(vg, vfam, valpha, vy)))                             # (∃x)(x∈X_α et (x,y)∈f)
+    Xalpha = E.valeur_famille(vfam, valpha)
+    bodyA = et(appartient(vx, Xalpha), appartient(E.couple(vx, vy), vg))
+    hb = N.assume(bodyA)
+    gxy = cd(hb)                                                              # (x,y)∈f
+    hI = N.assume(appartient(vi, vI))
+    y_GX_i = N.modus_ponens(hI, instancie(fa_L, vi))                          # y∈(…)_i
+    Xi = E.valeur_famille(vfam, vi)
+    bodyI = et(appartient(vxq, Xi), appartient(E.couple(vxq, vy), vg))        # binder xq
+    exI_xq = N.modus_ponens(y_GX_i, equivalence_avant(
+        _membre_fam_image_b(vg, vfam, vi, vy, "xq")))                         # (∃x')(x'∈X_i et (x',y)∈f)
+    hbI = N.assume(bodyI)
+    xqXi = cg(hbI)
+    xqgy = cd(hbI)                                                            # (x',y)∈f
+    inj_inst = instancie(instancie(instancie(hInj, vx), vxq), vy)            # ((x,y)∈f et (x',y)∈f)⇒x=x'
+    x_eq_xq = N.modus_ponens(conjonction_intro(gxy, xqgy), inj_inst)          # x=x'
+    x_Xi = N.modus_ponens(xqXi, equivalence_arriere(
+        N.modus_ponens(x_eq_xq, N.s6(vx, vxq, "w", appartient(var("w"), Xi)))))  # x∈X_i
+    imp_bodyI = existe_elimination(N.loi_deduction(bodyI, x_Xi), "xq")
+    x_Xi_final = N.modus_ponens(exI_xq, imp_bodyI)                            # x∈X_i
+    fa_x = N.generalisation("i", N.loi_deduction(appartient(vi, vI), x_Xi_final))
+    x_inter = N.modus_ponens(fa_x, equivalence_arriere(_inst_inter(vfam, vI, vx)))  # x∈⋂X
+    wit_R = conjonction_intro(x_inter, gxy)
+    y_R = N.modus_ponens(N.modus_ponens(wit_R, N.s5(
+        et(appartient(vx, inter), appartient(E.couple(vx, vy), vg)), vx, "x")),
+        equivalence_arriere(_inst_image(vg, inter, vy)))                     # y∈Γ⟨⋂X⟩
+    imp_x = existe_elimination(N.loi_deduction(bodyA, y_R), "x")
+    y_R_final = N.modus_ponens(exA, imp_x)
+    incl = N.generalisation("z", N.loi_deduction(appartient(vy, L), y_R_final))
+    return N.loi_deduction(injective(vg), N.loi_deduction(appartient(valpha, vI), incl))
+
+
+def _membre_fam_image_b(g, fam, i, y, xb):
+    """Comme _membre_fam_image mais avec binder témoin `xb`."""
+    from bourbaki.logique.tactiques.tactiques_abrege_quantif import alpha_existe
+    vg, vfam, vi, vy = _t(g), _t(fam), _t(i), _t(y)
+    Xi = E.valeur_famille(vfam, vi)
+    base = _membre_fam_image(vg, vfam, vi, vy)             # ⇔ (∃x)(x∈X_i et (x,y)∈Γ)
+    if xb == "x":
+        return base
+    body0 = et(appartient(var("x"), Xi), appartient(E.couple(var("x"), vy), vg))
+    return etr(base, alpha_existe("x", xb, body0))
+
+
+def image_inter_egal_si_injective(g="G", fam="X", i="I", a="alpha"):
+    """{Injective(f), α∈I} ⊢ Γ⟨⋂_ι X_ι⟩ = ⋂_ι Γ⟨X_ι⟩.   (E.II.25, Cor. de la Prop. 4.)
+
+    CONDITIONNÉE (fidèle, Bourbaki : f injection, I≠∅) — jamais postulée.
+    Double inclusion : ⊂ (`image_inter_incluse`, INCOND.) et ⊃
+    (`image_inter_arriere_si_inj`, sous Injective + α∈I)."""
+    from bourbaki.ensembles.ensembles_theoremes import extensionnalite_appliquee
+    vg, vfam, vI, valpha = _t(g), _t(fam), _t(i), _t(a)
+    inter = E.inter_famille(vfam, vI)
+    fam_im = famille_image(vg, vfam)
+    L = E.image(vg, inter)
+    R = E.inter_famille(fam_im, vI)
+    hInj = N.assume(injective(vg))
+    h_aI = N.assume(appartient(valpha, vI))
+    incl_LR = image_inter_incluse(vg, vfam, vI)                              # L⊂R (incond.)
+    incl_RL = N.modus_ponens(h_aI, N.modus_ponens(hInj,
+        image_inter_arriere_si_inj(vg, vfam, vI, valpha)))                   # R⊂L
+    eqt = N.modus_ponens(conjonction_intro(incl_LR, incl_RL),
+                         extensionnalite_appliquee(L, R))
+    return N.loi_deduction(injective(vg),
+                           N.loi_deduction(appartient(valpha, vI), eqt))
+
+
 __all__ = [
     "fonctionnelle", "injective", "membre_image_recip", "image_recip",
     "famille_image_recip", "famille_image",
     "image_recip_diff_arriere", "image_recip_diff_avant", "image_recip_difference",
     "image_recip_inter_incluse", "image_recip_inter_arriere", "image_recip_inter_egal",
+    "image_reunion_egal", "image_inter_incluse",
+    "image_inter_arriere_si_inj", "image_inter_egal_si_injective",
 ]
