@@ -383,9 +383,9 @@ def cor1_total(G="Gpgt", E_set="Epgt", m="m_pgf"):
 
 
 def _inclus_refl_via(t):
-    vz = var("zincl")
+    vz = var("z")
     body = N.loi_deduction(appartient(vz, t), N.assume(appartient(vz, t)))   # z∈t⇒z∈t
-    return N.generalisation("zincl", body)               # t⊂t
+    return N.generalisation("z", body)                   # t⊂t
 
 
 __all__ = [
