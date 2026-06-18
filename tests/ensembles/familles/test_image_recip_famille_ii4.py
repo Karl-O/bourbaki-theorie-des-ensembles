@@ -26,8 +26,35 @@ def test_prop6_egalite():
     assert cons == egal(L, R)
 
 
+# ── Prop. 4 (E.II.25) — image réciproque d'une intersection ───────────────────
+def test_prop4_incluse_inconditionnel():
+    t = M.image_recip_inter_incluse()
+    assert t.est_clos and len(t.hypotheses) == 0   # f⁻¹⟨⋂Y⟩ ⊂ ⋂f⁻¹⟨Y_ι⟩
+
+
+def test_prop4_arriere():
+    t = M.image_recip_inter_arriere()
+    assert t.est_clos and len(t.hypotheses) == 0   # {Fonct, α∈I} ⊃
+
+
+def test_prop4_egalite():
+    t = M.image_recip_inter_egal()
+    assert t.est_clos and len(t.hypotheses) == 0
+    g, fam, i = var("f"), var("Y"), var("I")
+    inter = E.inter_famille(fam, i)
+    L = M.image_recip(g, inter)
+    R = E.inter_famille(M.famille_image_recip(g, fam), i)
+    assert t.conclusion.tag == "ou"              # Fonct ⇒ (α∈I ⇒ (L=R))
+    inner = t.conclusion.sous[1]
+    assert inner.tag == "ou"
+    assert inner.sous[1] == egal(L, R)
+
+
 if __name__ == "__main__":
     test_theorie_inchangee()
     test_prop6_arriere_inconditionnel()
     test_prop6_egalite()
-    print("OK Prop 6")
+    test_prop4_incluse_inconditionnel()
+    test_prop4_arriere()
+    test_prop4_egalite()
+    print("OK Prop 4/6")

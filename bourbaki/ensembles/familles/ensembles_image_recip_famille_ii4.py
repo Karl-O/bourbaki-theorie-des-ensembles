@@ -290,8 +290,147 @@ def image_recip_difference(g="f", b="B", y="Y"):
     return N.loi_deduction(fonctionnelle(vg), eqt)
 
 
+# ══════════════════════════════════════════════════════════════════════════════
+# Prop. 4 (E.II.25) — IMAGE RÉCIPROQUE d'une INTERSECTION de famille.
+#   f⁻¹⟨⋂Y⟩ = ⋂ f⁻¹⟨Y_ι⟩
+# ══════════════════════════════════════════════════════════════════════════════
+def _membre_fam_recip(g, fam, i, a):
+    """⊢ (a ∈ (f⁻¹⟨Y·⟩)_ι) ⇔ (∃x)(x∈Y_ι et (a,x)∈f).
+
+    via (f⁻¹⟨Y·⟩)_ι = f⁻¹⟨Y_ι⟩ (théorie de valeur dédiée) puis membre_image_recip."""
+    vg, vfam, vi, va = _t(g), _t(fam), _t(i), _t(a)
+    Yi = E.valeur_famille(vfam, vi)
+    val_eq = _val_recip(vg, vfam, vi)                       # (f⁻¹⟨Y·⟩)_ι = f⁻¹⟨Y_ι⟩
+    membre_eq = _membre_eq(E.valeur_famille(famille_image_recip(vg, vfam), vi),
+                           image_recip(vg, Yi), val_eq, va)  # a∈(…)_ι ⇔ a∈f⁻¹⟨Y_ι⟩
+    return etr(membre_eq, membre_image_recip(vg, Yi, va))
+
+
+def image_recip_inter_incluse(g="f", fam="Y", i="I"):
+    """⊢ f⁻¹⟨⋂_ι Y_ι⟩ ⊂ ⋂_ι f⁻¹⟨Y_ι⟩.   (Prop. 4, sens ⊂ — INCONDITIONNEL.)
+
+    a∈f⁻¹⟨⋂Y⟩ : témoin x∈⋂Y, (a,x)∈f ; pour i∈I, x∈Y_i, donc x témoigne a∈f⁻¹⟨Y_i⟩,
+    et ceci ∀i∈I, soit a∈⋂f⁻¹⟨Y_ι⟩."""
+    vg, vfam, vI = _t(g), _t(fam), _t(i)
+    va, vx, vi = var("z"), var("x"), var("i")
+    inter = E.inter_famille(vfam, vI)
+    fam_r = famille_image_recip(vg, vfam)
+    L = image_recip(vg, inter)
+    R = E.inter_famille(fam_r, vI)
+
+    hL = N.assume(appartient(va, L))
+    exX = N.modus_ponens(hL, equivalence_avant(membre_image_recip(vg, inter, va)))  # (∃x)(x∈⋂Y et (a,x)∈f)
+    body = et(appartient(vx, inter), appartient(E.couple(va, vx), vg))
+    hb = N.assume(body)
+    x_inter = cg(hb)
+    axf = cd(hb)
+    # pour i∈I : x∈Y_i
+    hI = N.assume(appartient(vi, vI))
+    fa = N.modus_ponens(x_inter, equivalence_avant(_inst_inter(vfam, vI, vx)))  # (∀i)(i∈I⇒x∈Y_i)
+    x_Yi = N.modus_ponens(hI, instancie(fa, vi))                                # x∈Y_i
+    Yi = E.valeur_famille(vfam, vi)
+    wit_i = conjonction_intro(x_Yi, axf)                                        # x∈Y_i et (a,x)∈f
+    a_fri = N.modus_ponens(N.modus_ponens(wit_i, N.s5(
+        et(appartient(vx, Yi), appartient(E.couple(va, vx), vg)), vx, "x")),
+        equivalence_arriere(_membre_fam_recip(vg, vfam, vi, va)))               # a∈(f⁻¹⟨Y·⟩)_i
+    # ∀i(i∈I ⇒ a∈(…)_i)  — sous body ; éliminer le témoin x ensuite
+    fa_i = N.generalisation("i", N.loi_deduction(appartient(vi, vI), a_fri))
+    a_R = N.modus_ponens(fa_i, equivalence_arriere(_inst_inter(fam_r, vI, va)))  # a∈⋂f⁻¹⟨Y·⟩
+    imp_x = existe_elimination(N.loi_deduction(body, a_R), "x")
+    a_R_final = N.modus_ponens(exX, imp_x)
+    return N.generalisation("z", N.loi_deduction(appartient(va, L), a_R_final))
+
+
+def image_recip_inter_arriere(g="f", fam="Y", i="I", a="alpha"):
+    """{Fonctionnelle(f), α∈I} ⊢ ⋂_ι f⁻¹⟨Y_ι⟩ ⊂ f⁻¹⟨⋂_ι Y_ι⟩.   (Prop. 4, sens ⊃.)
+
+    CONDITIONNÉ (fidèlement) : f application (Fonctionnelle) et I≠∅ (via α∈I).
+    a∈⋂f⁻¹⟨Y_ι⟩ : pour i=α, témoin x avec x∈Y_α, (a,x)∈f.  Pour tout i∈I, a∈f⁻¹⟨Y_i⟩
+    donne un témoin x_i ; Fonctionnelle ⇒ x_i = x ; donc x∈Y_i.  Ainsi x∈⋂Y,
+    (a,x)∈f : a∈f⁻¹⟨⋂Y⟩."""
+    from bourbaki.logique.tactiques.tactiques_abrege2 import contraposition
+    vg, vfam, vI, valpha = _t(g), _t(fam), _t(i), _t(a)
+    va, vx, vxq, vi = var("z"), var("x"), var("xq"), var("i")
+    inter = E.inter_famille(vfam, vI)
+    fam_r = famille_image_recip(vg, vfam)
+    L = E.inter_famille(fam_r, vI)
+    R = image_recip(vg, inter)
+    hFun = N.assume(fonctionnelle(vg))
+    h_aI = N.assume(appartient(valpha, vI))
+
+    hL = N.assume(appartient(va, L))
+    fa_L = N.modus_ponens(hL, equivalence_avant(_inst_inter(fam_r, vI, va)))  # (∀i)(i∈I⇒a∈(f⁻¹⟨Y·⟩)_i)
+    # témoin x en i=α : a∈(f⁻¹⟨Y·⟩)_α
+    a_fr_alpha = N.modus_ponens(h_aI, instancie(fa_L, valpha))               # a∈(…)_α
+    exA = N.modus_ponens(a_fr_alpha, equivalence_avant(
+        _membre_fam_recip(vg, vfam, valpha, va)))                            # (∃x)(x∈Y_α et (a,x)∈f)
+    Yalpha = E.valeur_famille(vfam, valpha)
+    bodyA = et(appartient(vx, Yalpha), appartient(E.couple(va, vx), vg))
+    hb = N.assume(bodyA)
+    axf = cd(hb)                                                             # (a,x)∈f
+    # ∀i∈I : x∈Y_i.  Soit i∈I.  a∈(…)_i donne témoin x' avec x'∈Y_i, (a,x')∈f.
+    hI = N.assume(appartient(vi, vI))
+    a_fr_i = N.modus_ponens(hI, instancie(fa_L, vi))                         # a∈(…)_i
+    Yi = E.valeur_famille(vfam, vi)
+    bodyI = et(appartient(vxq, Yi), appartient(E.couple(va, vxq), vg))       # binder xq
+    exI_xq = N.modus_ponens(a_fr_i, equivalence_avant(_membre_fam_recip_b(vg, vfam, vi, va, "xq")))
+    hbI = N.assume(bodyI)
+    xqYi = cg(hbI)
+    axqf = cd(hbI)                                                           # (a,x')∈f
+    fun_inst = instancie(instancie(instancie(hFun, va), vx), vxq)
+    x_eq_xq = N.modus_ponens(conjonction_intro(axf, axqf), fun_inst)         # x=x'
+    x_Yi = N.modus_ponens(xqYi, equivalence_arriere(
+        N.modus_ponens(x_eq_xq, N.s6(vx, vxq, "w", appartient(var("w"), Yi)))))  # x∈Y_i
+    imp_bodyI_xYi = existe_elimination(N.loi_deduction(bodyI, x_Yi), "xq")
+    x_Yi_final = N.modus_ponens(exI_xq, imp_bodyI_xYi)                       # x∈Y_i (sous hI, body)
+    fa_x = N.generalisation("i", N.loi_deduction(appartient(vi, vI), x_Yi_final))  # (∀i)(i∈I⇒x∈Y_i)
+    x_inter = N.modus_ponens(fa_x, equivalence_arriere(_inst_inter(vfam, vI, vx)))  # x∈⋂Y
+    wit_R = conjonction_intro(x_inter, axf)                                  # x∈⋂Y et (a,x)∈f
+    a_R = N.modus_ponens(N.modus_ponens(wit_R, N.s5(
+        et(appartient(vx, inter), appartient(E.couple(va, vx), vg)), vx, "x")),
+        equivalence_arriere(membre_image_recip(vg, inter, va)))             # a∈f⁻¹⟨⋂Y⟩
+    imp_x = existe_elimination(N.loi_deduction(bodyA, a_R), "x")
+    a_R_final = N.modus_ponens(exA, imp_x)
+    incl = N.generalisation("z", N.loi_deduction(appartient(va, L), a_R_final))
+    return N.loi_deduction(fonctionnelle(vg), N.loi_deduction(appartient(valpha, vI), incl))
+
+
+def image_recip_inter_egal(g="f", fam="Y", i="I", a="alpha"):
+    """{Fonctionnelle(f), α∈I} ⊢ f⁻¹⟨⋂_ι Y_ι⟩ = ⋂_ι f⁻¹⟨Y_ι⟩.   (E.II.25, Prop. 4.)
+
+    CONDITIONNÉE (fidèle, Bourbaki : f application, I≠∅) — jamais postulée.
+    Double inclusion : ⊂ (`image_recip_inter_incluse`, INCOND.) et ⊃
+    (`image_recip_inter_arriere`, sous Fonctionnelle + α∈I)."""
+    from bourbaki.ensembles.ensembles_theoremes import extensionnalite_appliquee
+    vg, vfam, vI, valpha = _t(g), _t(fam), _t(i), _t(a)
+    inter = E.inter_famille(vfam, vI)
+    fam_r = famille_image_recip(vg, vfam)
+    L = image_recip(vg, inter)
+    R = E.inter_famille(fam_r, vI)
+    hFun = N.assume(fonctionnelle(vg))
+    h_aI = N.assume(appartient(valpha, vI))
+    incl_LR = image_recip_inter_incluse(vg, vfam, vI)                        # L⊂R (incond.)
+    incl_RL = N.modus_ponens(h_aI, N.modus_ponens(hFun,
+        image_recip_inter_arriere(vg, vfam, vI, valpha)))                    # R⊂L
+    eqt = N.modus_ponens(conjonction_intro(incl_LR, incl_RL),
+                         extensionnalite_appliquee(L, R))
+    return N.loi_deduction(fonctionnelle(vg),
+                           N.loi_deduction(appartient(valpha, vI), eqt))
+
+
+def _membre_fam_recip_b(g, fam, i, a, xb):
+    """Comme _membre_fam_recip mais avec binder témoin `xb` (α-renommé)."""
+    vg, vfam, vi, va = _t(g), _t(fam), _t(i), _t(a)
+    Yi = E.valeur_famille(vfam, vi)
+    val_eq = _val_recip(vg, vfam, vi)
+    membre_eq = _membre_eq(E.valeur_famille(famille_image_recip(vg, vfam), vi),
+                           image_recip(vg, Yi), val_eq, va)
+    return etr(membre_eq, membre_image_recip(vg, Yi, va, xb))
+
+
 __all__ = [
     "fonctionnelle", "injective", "membre_image_recip", "image_recip",
     "famille_image_recip", "famille_image",
     "image_recip_diff_arriere", "image_recip_diff_avant", "image_recip_difference",
+    "image_recip_inter_incluse", "image_recip_inter_arriere", "image_recip_inter_egal",
 ]
