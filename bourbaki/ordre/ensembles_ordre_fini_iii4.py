@@ -35,7 +35,7 @@ from bourbaki.logique.tactiques.tactiques_abrege import a_implique_a, syllogisme
 from bourbaki.logique.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
     equivalence_avant, equivalence_arriere, instancie, cas,
-    equivalence_transitivite,
+    equivalence_transitivite, contraposition,
 )
 from bourbaki.logique.tactiques.tactiques_abrege_quantif import (
     existe_elimination, alpha_existe,
@@ -576,10 +576,378 @@ def prop3_filtrant(G="Gmjt", E_set="Emjt", X="Xmjt", m="m_mjf"):
     return res
 
 
+# ════════════════════════════════════════════════════════════════════════════
+#  COROLLAIRE 2 §III.4 (E III.34) — TOUT ENSEMBLE ORDONNÉ FINI NON VIDE ADMET
+#  UN ÉLÉMENT MAXIMAL.   (Variante PARTIELLEMENT ordonnée — preuve genuine.)
+# ════════════════════════════════════════════════════════════════════════════
+_ZEM = "zemf"   # liant fixe d'element_maximal ici (évite la capture du point x)
+
+
+def _emax(G, A, m):
+    """element_maximal(G,A,m) avec liant interne FIXÉ à _ZEM."""
+    return element_maximal(G, _t(A), _t(m), x=_ZEM)
+
+
+def _P_maximal(G, E_set, m="m_emf", a="a_emf"):
+    """P(X) := X⊂E ⇒ (∀a)( a∈X ⇒ (∃m)( m∈X et (a,m)∈G et _emax(G,X,m) ) ).
+
+    « Tout élément a d'une partie X (de E) est dominé par un élément maximal de X. »
+    NOTE : pas de garde « ¬(X=∅) » — l'antécédent est seulement X⊂E (la quantif
+    interne sur a∈X est triviale si X=∅, et le but du Cor 2 ré-injecte la non-vacuité
+    via le témoin z∈E)."""
+    vE = _t(E_set)
+    def P(X):
+        vX = _t(X)
+        va, vm = var(a), var(m)
+        concl = existe(m, et(et(appartient(vm, vX), _couple_dans(va, vm, G)),
+                             _emax(G, vX, vm)))
+        return impl(inclus(vX, vE),
+                    pourtout(a, impl(appartient(va, vX), concl)))
+    return P
+
+
+def _emax_de_pourtout(G, A, m_in, corps_gen):
+    """Assemble _emax(G,A,m) = et(m∈A, (∀_ZEM)(...)) depuis m_in (m∈A) et le corps généralisé."""
+    return conjonction_intro(m_in, corps_gen)
+
+
+def _preuve_pas_maximal(G, E_set, hord, P, X="Xrec", x="xrec",
+                        m="m_emf", a="a_emf"):
+    """{ hord:est_ordre(G,E) } ⊢ _pas_ensemble(P)  pour P = _P_maximal(G,E)."""
+    from bourbaki.entiers.ensembles_recurrence_finie import _pas_ensemble
+    from bourbaki.logique.tactiques.tactiques_abrege2 import tiers_exclu, dne, dni
+    vE = _t(E_set)
+    vX, vx = var(X), var(x)
+    va, vm = var(a), var(m)
+    vt = var(_ZEM)
+    Xux = E.reunion(vX, E.singleton(vx))
+
+    # décompose est_ordre : refl, antisym, trans
+    refl = conjonction_elim_gauche(conjonction_elim_gauche(hord))
+    antisym = conjonction_elim_droite(conjonction_elim_gauche(hord))
+    trans = conjonction_elim_droite(hord)
+
+    hpas = N.assume(et(et(est_fini_ensemble(vX), non(appartient(vx, vX))), P(vX)))
+    hPX = conjonction_elim_droite(hpas)                   # P(X)
+
+    # ── guard : X∪{x} ⊂ E ────────────────────────────────────────────────────
+    hgarde = N.assume(inclus(Xux, vE))
+    Xux_sub_E = hgarde
+    # x∈X∪{x} ; x∈E
+    mem_x = _membre_union_singleton(vx, vX, vx)
+    x_in_Xux = N.modus_ponens(_ou_droite(appartient(vx, vX), N.reflexivite(vx)),
+                              equivalence_arriere(mem_x))
+    x_in_E = N.modus_ponens(x_in_Xux, instancie(Xux_sub_E, vx))
+    # X⊂E (liant "z")
+    vz2 = var("z")
+    hzX = N.assume(appartient(vz2, vX))
+    z_in_Xux = N.modus_ponens(N.modus_ponens(hzX, N.s2(appartient(vz2, vX), egal(vz2, vx))),
+                              equivalence_arriere(_membre_union_singleton(vz2, vX, vx)))
+    z_in_E = N.modus_ponens(z_in_Xux, instancie(Xux_sub_E, vz2))
+    X_sub_E = N.generalisation("z", N.loi_deduction(appartient(vz2, vX), z_in_E))
+    # P(X) appliqué : (∀a)(a∈X ⇒ ∃m(m∈X et (a,m)∈G et emax(G,X,m)))
+    PX_body = N.modus_ponens(X_sub_E, hPX)
+
+    # but interne (sur le point a fixé dans X∪{x}) :
+    #   GOAL(a) := (∃m)( m∈X∪{x} et (a,m)∈G et emax(G,X∪{x},m) )
+    def GOAL(a_term):
+        return existe(m, et(et(appartient(vm, Xux), _couple_dans(a_term, vm, G)),
+                            _emax(G, Xux, vm)))
+
+    # ─────────────────────────────────────────────────────────────────────────
+    #  SOUS-LEMME 1 : si m∈X et emax(G,X,m) et ¬((m,x)∈G) alors emax(G,X∪{x},m).
+    #  donné en arguments : pm_in_X (m∈X), pmax_X (emax(G,X,m)), pn_mx (¬(m,x)∈G)
+    # ─────────────────────────────────────────────────────────────────────────
+    def sublemme1(M, pM_in_X, pmax_X, pn_Mx):
+        """M un TERME. ⊢ emax(G,X∪{x},M)  (sous les preuves données)."""
+        vt = var(_ZEM)                                    # liant LOCAL (évite capture extérieure)
+        emax_body_X = conjonction_elim_droite(pmax_X)     # (∀t)((t∈X et (M,t)∈G)⇒t=M)
+        # M∈X∪{x}
+        M_in_Xux = N.modus_ponens(
+            N.modus_ponens(pM_in_X, N.s2(appartient(M, vX), egal(M, vx))),
+            equivalence_arriere(_membre_union_singleton(M, vX, vx)))
+        # corps : (t∈X∪{x} et (M,t)∈G) ⇒ t=M
+        hbody = N.assume(et(appartient(vt, Xux), _couple_dans(M, vt, G)))
+        t_in_Xux = conjonction_elim_gauche(hbody)
+        Mt = conjonction_elim_droite(hbody)               # (M,t)∈G
+        disj_t = N.modus_ponens(t_in_Xux, equivalence_avant(_membre_union_singleton(vt, vX, vx)))
+        #  t∈X : emax_X(t) → t=M
+        htX = N.assume(appartient(vt, vX))
+        emax_t = instancie(emax_body_X, vt)               # (t∈X et (M,t)∈G)⇒t=M
+        t_eq_M_X = N.modus_ponens(conjonction_intro(htX, Mt), emax_t)
+        casX = N.loi_deduction(appartient(vt, vX), t_eq_M_X)
+        #  t=x : (M,t)∈G=(M,x)∈G contradiction ¬((M,x)∈G) → ex falso egal(t,M)
+        htx = N.assume(egal(vt, vx))
+        #  transporte (M,t)∈G en (M,x)∈G via Leibniz t↦x
+        Mx = N.modus_ponens(Mt, equivalence_avant(
+            N.modus_ponens(htx, N.s6(vt, vx, "wsl1", _couple_dans(M, var("wsl1"), G)))))
+        falso = N.modus_ponens(Mx, N.modus_ponens(pn_Mx,
+                    N.s2(non(_couple_dans(M, vx, G)), egal(vt, M))))
+        casx = N.loi_deduction(egal(vt, vx), falso)
+        t_eq_M = cas(disj_t, casX, casx)
+        corps_gen = N.generalisation(_ZEM,
+            N.loi_deduction(et(appartient(vt, Xux), _couple_dans(M, vt, G)), t_eq_M))
+        return conjonction_intro(M_in_Xux, corps_gen)     # emax(G,X∪{x},M)
+
+    # ─────────────────────────────────────────────────────────────────────────
+    #  SOUS-LEMME 2 : si m∈X, emax(G,X,m) et (m,x)∈G alors emax(G,X∪{x},x).
+    # ─────────────────────────────────────────────────────────────────────────
+    def sublemme2(M, pM_in_X, pmax_X, p_Mx):
+        """M un TERME. ⊢ emax(G,X∪{x},x)  (sous les preuves données)."""
+        vt = var(_ZEM)                                    # liant LOCAL
+        emax_body_X = conjonction_elim_droite(pmax_X)     # (∀t)((t∈X et (M,t)∈G)⇒t=M)
+        # x∈X∪{x} déjà : x_in_Xux
+        hbody = N.assume(et(appartient(vt, Xux), _couple_dans(vx, vt, G)))
+        t_in_Xux = conjonction_elim_gauche(hbody)
+        xt = conjonction_elim_droite(hbody)               # (x,t)∈G
+        disj_t = N.modus_ponens(t_in_Xux, equivalence_avant(_membre_union_singleton(vt, vX, vx)))
+        #  t=x : egal(t,x) directement
+        htx = N.assume(egal(vt, vx))
+        casx = N.loi_deduction(egal(vt, vx), htx)         # t=x
+        #  t∈X : (x,t)∈G et (M,x)∈G trans→(M,t)∈G ; emax_X(t)→t=M ;
+        #        Leibniz t=M sur (x,t)→(x,M)∈G ; (x,M)∈G et (M,x)∈G antisym→x=M ;
+        #        donc t=M=x → egal(t,x)
+        htX = N.assume(appartient(vt, vX))
+        trans_Mxt = instancie(instancie(instancie(trans, M), vx), vt)   # ((M,x)∈G et (x,t)∈G)⇒(M,t)∈G
+        Mt = N.modus_ponens(conjonction_intro(p_Mx, xt), trans_Mxt)     # (M,t)∈G
+        emax_t = instancie(emax_body_X, vt)               # (t∈X et (M,t)∈G)⇒t=M
+        t_eq_M = N.modus_ponens(conjonction_intro(htX, Mt), emax_t)     # t=M
+        # (x,M)∈G via Leibniz t↦M sur (x,t)∈G
+        xM = N.modus_ponens(xt, equivalence_avant(
+            N.modus_ponens(t_eq_M, N.s6(vt, M, "wsl2", _couple_dans(vx, var("wsl2"), G)))))
+        # antisym : ((x,M)∈G et (M,x)∈G)⇒x=M
+        antisym_xM = instancie(instancie(antisym, vx), M)
+        x_eq_M = N.modus_ponens(conjonction_intro(xM, p_Mx), antisym_xM)  # x=M
+        M_eq_x = N.modus_ponens(x_eq_M, symetrie(vx, M))                  # M=x
+        # t=M et M=x → t=x
+        t_eq_x = composer_egalites(t_eq_M, M_eq_x)         # t=x
+        casX = N.loi_deduction(appartient(vt, vX), t_eq_x)
+        t_eq_x_final = cas(disj_t, casX, casx)
+        corps_gen = N.generalisation(_ZEM,
+            N.loi_deduction(et(appartient(vt, Xux), _couple_dans(vx, vt, G)), t_eq_x_final))
+        return conjonction_intro(x_in_Xux, corps_gen)     # emax(G,X∪{x},x)
+
+    # ─────────────────────────────────────────────────────────────────────────
+    #  Fixe a∈X∪{x}, prouve GOAL(a).
+    # ─────────────────────────────────────────────────────────────────────────
+    ha_in = N.assume(appartient(va, Xux))
+    disj_a = N.modus_ponens(ha_in, equivalence_avant(_membre_union_singleton(va, vX, vx)))  # a∈X ou a=x
+
+    # ══════ CAS a∈X ══════════════════════════════════════════════════════════
+    haX = N.assume(appartient(va, vX))
+    # P(X) à a : (∃m)(m∈X et (a,m)∈G et emax(G,X,m))
+    ex_mX = N.modus_ponens(haX, instancie(PX_body, va))
+    hwit = N.assume(et(et(appartient(vm, vX), _couple_dans(va, vm, G)), _emax(G, vX, vm)))
+    m_in_X = conjonction_elim_gauche(conjonction_elim_gauche(hwit))
+    am_G = conjonction_elim_droite(conjonction_elim_gauche(hwit))    # (a,m)∈G
+    emax_X_m = conjonction_elim_droite(hwit)                         # emax(G,X,m)
+    te_mx = tiers_exclu(_couple_dans(vm, vx, G))                     # (m,x)∈G ou ¬((m,x)∈G)
+    #   (m,x)∈G : témoin x
+    hmx = N.assume(_couple_dans(vm, vx, G))
+    ax_G = N.modus_ponens(conjonction_intro(am_G, hmx),
+                          instancie(instancie(instancie(trans, va), vm), vx))   # (a,x)∈G
+    emax_Xux_x = sublemme2(vm, m_in_X, emax_X_m, hmx)
+    wit_x = conjonction_intro(conjonction_intro(x_in_Xux, ax_G), emax_Xux_x)
+    ex_x = N.modus_ponens(wit_x, N.s5(et(et(appartient(vm, Xux), _couple_dans(va, vm, G)), _emax(G, Xux, vm)), vx, m))
+    casA_mx = N.loi_deduction(_couple_dans(vm, vx, G), ex_x)
+    #   ¬((m,x)∈G) : témoin m
+    hnmx = N.assume(non(_couple_dans(vm, vx, G)))
+    emax_Xux_m = sublemme1(vm, m_in_X, emax_X_m, hnmx)
+    m_in_Xux = N.modus_ponens(
+        N.modus_ponens(m_in_X, N.s2(appartient(vm, vX), egal(vm, vx))),
+        equivalence_arriere(_membre_union_singleton(vm, vX, vx)))
+    wit_m = conjonction_intro(conjonction_intro(m_in_Xux, am_G), emax_Xux_m)
+    ex_m = N.modus_ponens(wit_m, N.s5(et(et(appartient(vm, Xux), _couple_dans(va, vm, G)), _emax(G, Xux, vm)), vm, m))
+    casA_nmx = N.loi_deduction(non(_couple_dans(vm, vx, G)), ex_m)
+    goal_wit = cas(te_mx, casA_mx, casA_nmx)              # GOAL(a)  sous le témoin m
+    imp_wit = N.loi_deduction(et(et(appartient(vm, vX), _couple_dans(va, vm, G)), _emax(G, vX, vm)), goal_wit)
+    goal_aX = N.modus_ponens(ex_mX, existe_elimination(imp_wit, m))   # GOAL(a) sous a∈X
+    casA = N.loi_deduction(appartient(va, vX), goal_aX)
+
+    # ══════ CAS a=x ═══════════════════════════════════════════════════════════
+    hax = N.assume(egal(va, vx))
+    # On prouve GOAL(x) puis on transporte a↦x (Leibniz) — plus simple : prouver GOAL(a)
+    # en transportant. On travaille directement avec a et le fait a=x.
+    # tiers_exclu(_emax(G,X∪{x},x))
+    te_emax = tiers_exclu(_emax(G, Xux, vx))
+    #   --- emax(G,X∪{x},x) vrai : témoin x ---
+    h_emax_x = N.assume(_emax(G, Xux, vx))
+    xx_G = N.modus_ponens(x_in_E, instancie(refl, vx))   # (x,x)∈G
+    # (a,x)∈G via a=x : Leibniz a↦x sur (x,x)∈G donne... on veut (a,x)∈G : Leibniz x↦a sur (x,x)→(a,x)
+    x_eq_a = N.modus_ponens(hax, symetrie(va, vx))       # x=a
+    ax_G_T = N.modus_ponens(xx_G, equivalence_avant(
+        N.modus_ponens(x_eq_a, N.s6(vx, va, "wax1", _couple_dans(var("wax1"), vx, G)))))  # (a,x)∈G
+    wit_T = conjonction_intro(conjonction_intro(x_in_Xux, ax_G_T), h_emax_x)
+    ex_T = N.modus_ponens(wit_T, N.s5(et(et(appartient(vm, Xux), _couple_dans(va, vm, G)), _emax(G, Xux, vm)), vx, m))
+    casX_true = N.loi_deduction(_emax(G, Xux, vx), ex_T)
+
+    #   --- ¬emax(G,X∪{x},x) : x∈X∪{x} prouvable, donc ¬(∀t)Φ, donc (∃t)¬Φ ---
+    h_n_emax = N.assume(non(_emax(G, Xux, vx)))
+    #   _emax(G,Xux,x) = et(x∈Xux, pourtout(_ZEM, Φ)) où Φ(t)=impl(et(t∈Xux,(x,t)∈G),egal(t,x))
+    Pc = appartient(vx, Xux)
+    Qc = pourtout(_ZEM, impl(et(appartient(vt, Xux), _couple_dans(vx, vt, G)), egal(vt, vx)))
+    # de ¬(P et Q) et ⊢P déduire ¬Q : via contraposition de (Q⇒(P et Q))
+    imp_PetQ = N.loi_deduction(Qc, conjonction_intro(x_in_Xux, N.assume(Qc)))   # Q⇒(P et Q)
+    nQ = N.modus_ponens(h_n_emax, contraposition(imp_PetQ))   # ¬Q = ¬(∀t)Φ
+    #   ¬(∀t)Φ : pourtout(t,Φ)=non(existe(t,non Φ)), donc ¬(∀t)Φ = ¬¬(∃t)¬Φ → (∃t)¬Φ via dne
+    Phi = impl(et(appartient(vt, Xux), _couple_dans(vx, vt, G)), egal(vt, vx))
+    ex_nPhi_zem = N.modus_ponens(nQ, dne(existe(_ZEM, non(Phi))))   # (∃_ZEM)¬Φ
+    #   α-renomme le témoin _ZEM → _TW (fresh) pour libérer _ZEM (réutilisé dans sublemme1)
+    _TW = "twemf"
+    vt = var(_TW)
+    ex_nPhi = N.modus_ponens(ex_nPhi_zem, equivalence_avant(alpha_existe(_ZEM, _TW, non(Phi))))  # (∃_TW)¬Φ[_TW]
+    #   élimine témoin t : ¬Φ(t)=¬(impl(A,B)), A=et(t∈Xux,(x,t)∈G), B=egal(t,x)
+    Aimp = et(appartient(vt, Xux), _couple_dans(vx, vt, G))
+    Bimp = egal(vt, vx)
+    h_nphi = N.assume(non(impl(Aimp, Bimp)))
+    #   A : ¬A ⇒ (A⇒B) [ex falso s2] ; contrapose ¬(A⇒B)⇒¬¬A ⇒ A
+    exfalso_A = N.s2(Bimp, non(Aimp))                    # B... no: need ¬A⇒(A⇒B). (A⇒B)=ou(¬A,B); ¬A⇒(¬A ou B)
+    nA_imp = N.s2(non(Aimp), Bimp)                       # ¬A ⇒ (¬A ou B) = ¬A⇒(A⇒B)
+    getA = N.modus_ponens(N.modus_ponens(h_nphi, contraposition(nA_imp)), dne(Aimp))  # A
+    #   ¬B : B⇒(A⇒B) [B⇒(¬A ou B)] contrapose
+    nB_imp = syllogisme(N.s2(Bimp, non(Aimp)), N.s3(Bimp, non(Aimp)))  # B⇒ou(B,¬A)⇒ou(¬A,B) = B⇒(A⇒B)
+    nB = N.modus_ponens(h_nphi, contraposition(nB_imp))  # ¬B = ¬egal(t,x)
+    t_in_Xux = conjonction_elim_gauche(getA)
+    xt_G = conjonction_elim_droite(getA)                 # (x,t)∈G
+    #   t∈X ou t=x ; t=x ⇒ egal(t,x) contradicts ¬B → ex falso ; so t∈X
+    disj_t2 = N.modus_ponens(t_in_Xux, equivalence_avant(_membre_union_singleton(vt, vX, vx)))
+    #   pour produire GOAL(a) on a besoin de t∈X (avec (x,t)∈G). Construire t∈X par cas :
+    #     t∈X → t∈X ; t=x → ex falso (¬egal(t,x)) → t∈X
+    htX2 = N.assume(appartient(vt, vX))
+    castX = N.loi_deduction(appartient(vt, vX), htX2)
+    htx2 = N.assume(egal(vt, vx))
+    falso_tX = N.modus_ponens(htx2, N.modus_ponens(nB, N.s2(non(egal(vt, vx)), appartient(vt, vX))))
+    castx = N.loi_deduction(egal(vt, vx), falso_tX)
+    t_in_X = cas(disj_t2, castX, castx)                  # t∈X
+    #   P(X) à t : (∃m)(m∈X et (t,m)∈G et emax(G,X,m))
+    ex_mt = N.modus_ponens(t_in_X, instancie(PX_body, vt))
+    hwit2 = N.assume(et(et(appartient(vm, vX), _couple_dans(vt, vm, G)), _emax(G, vX, vm)))
+    m_in_X2 = conjonction_elim_gauche(conjonction_elim_gauche(hwit2))
+    tm_G = conjonction_elim_droite(conjonction_elim_gauche(hwit2))   # (t,m)∈G
+    emax_X_m2 = conjonction_elim_droite(hwit2)
+    # (x,m)∈G : (x,t)∈G + (t,m)∈G trans
+    xm_G = N.modus_ponens(conjonction_intro(xt_G, tm_G),
+                          instancie(instancie(instancie(trans, vx), vt), vm))   # (x,m)∈G
+    te_mx2 = tiers_exclu(_couple_dans(vm, vx, G))
+    #   (m,x)∈G : (x,m)∈G + (m,x)∈G antisym → x=m → m∈X but x∉X → ex falso
+    hmx2 = N.assume(_couple_dans(vm, vx, G))
+    antisym_xm = instancie(instancie(antisym, vx), vm)   # ((x,m)∈G et (m,x)∈G)⇒x=m
+    x_eq_m = N.modus_ponens(conjonction_intro(xm_G, hmx2), antisym_xm)   # x=m
+    # m∈X et x=m → x∈X (Leibniz m↦x : (m=x)⇒(m∈X⇔x∈X))
+    m_eq_x = N.modus_ponens(x_eq_m, symetrie(vx, vm))    # m=x
+    x_in_X = N.modus_ponens(m_in_X2, equivalence_avant(
+        N.modus_ponens(m_eq_x, N.s6(vm, vx, "wmx", appartient(var("wmx"), vX)))))   # x∈X
+    # contradiction avec ¬(x∈X) (hyp du pas)
+    hnxX = conjonction_elim_droite(conjonction_elim_gauche(hpas))   # ¬(x∈X)
+    GOALa = GOAL(va)
+    falso_goal = N.modus_ponens(x_in_X, N.modus_ponens(hnxX, N.s2(non(appartient(vx, vX)), GOALa)))
+    casmx2 = N.loi_deduction(_couple_dans(vm, vx, G), falso_goal)   # GOAL(a)
+    #   ¬((m,x)∈G) : témoin m via sublemme1 ; (a,m)∈G : a=x donc (x,m)∈G transporté
+    hnmx2 = N.assume(non(_couple_dans(vm, vx, G)))
+    emax_Xux_m2 = sublemme1(vm, m_in_X2, emax_X_m2, hnmx2)
+    m_in_Xux2 = N.modus_ponens(
+        N.modus_ponens(m_in_X2, N.s2(appartient(vm, vX), egal(vm, vx))),
+        equivalence_arriere(_membre_union_singleton(vm, vX, vx)))
+    # (a,m)∈G : (x,m)∈G + a=x Leibniz x↦a
+    am_G2 = N.modus_ponens(xm_G, equivalence_avant(
+        N.modus_ponens(x_eq_a, N.s6(vx, va, "wax2", _couple_dans(var("wax2"), vm, G)))))   # (a,m)∈G
+    wit_m2 = conjonction_intro(conjonction_intro(m_in_Xux2, am_G2), emax_Xux_m2)
+    ex_m2 = N.modus_ponens(wit_m2, N.s5(et(et(appartient(vm, Xux), _couple_dans(va, vm, G)), _emax(G, Xux, vm)), vm, m))
+    casnmx2 = N.loi_deduction(non(_couple_dans(vm, vx, G)), ex_m2)   # GOAL(a)
+    goal_from_m = cas(te_mx2, casmx2, casnmx2)            # GOAL(a) sous témoin m
+    imp_wit2 = N.loi_deduction(et(et(appartient(vm, vX), _couple_dans(vt, vm, G)), _emax(G, vX, vm)), goal_from_m)
+    goal_from_t = N.modus_ponens(ex_mt, existe_elimination(imp_wit2, m))   # GOAL(a) sous témoin t
+    imp_nphi = N.loi_deduction(non(impl(Aimp, Bimp)), goal_from_t)
+    goal_neg = N.modus_ponens(ex_nPhi, existe_elimination(imp_nphi, _TW))   # GOAL(a) sous ¬emax(Xux,x)
+    casX_false = N.loi_deduction(non(_emax(G, Xux, vx)), goal_neg)
+
+    goal_ax = cas(te_emax, casX_true, casX_false)        # GOAL(a)  sous a=x
+    casB = N.loi_deduction(egal(va, vx), goal_ax)
+
+    # ── combine a∈X / a=x ────────────────────────────────────────────────────
+    goal_a = cas(disj_a, casA, casB)                     # GOAL(a)  sous a∈X∪{x}
+    body_a = N.generalisation(a, N.loi_deduction(appartient(va, Xux), goal_a))
+    PXux = N.loi_deduction(inclus(Xux, vE), body_a)      # P(X∪{x})
+    corps = N.loi_deduction(et(et(est_fini_ensemble(vX), non(appartient(vx, vX))), P(vX)), PXux)
+    res = N.generalisation(X, N.generalisation(x, corps))
+    assert res.conclusion == _pas_ensemble(P, X, x), "pas maximal mal formé"
+    return res
+
+
+def cor2_enonce(G, E_set, m="m_emf"):
+    """⊢-cible : ( est_ordre(G,E) et est_fini_ensemble(E) et ¬(E=∅) )
+        ⇒ (∃m)( element_maximal(G,E,m) ).
+
+    « Tout ensemble ordonné FINI non vide admet un élément maximal. »
+    (Corollaire 2 §III.4, E III.34.)"""
+    vE = _t(E_set)
+    return impl(et(et(est_ordre(G, E_set), est_fini_ensemble(vE)), non(egal(vE, E.VIDE))),
+                existe(m, _emax(G, vE, var(m))))
+
+
+def cor2_maximal(G="Gemf", E_set="Eemf", X="Xemf", m="m_emf"):
+    """🎯 ⊢ cor2_enonce(G,E).   (Corollaire 2 §III.4 — élément maximal, ordre PARTIEL.)
+
+    Via `recurrence_finie` sur P(X):=X⊂E⇒(∀a)(a∈X⇒(∃m)(m∈X et (a,m)∈G et emax(G,X,m))) :
+    base ∅ (a∈∅ ex falso), pas par extension d'un maximal de X au point ajouté (tiers
+    exclu sur (m,x)∈G + l'antisymétrie/transitivité de l'ordre).  À X:=E avec un témoin
+    z∈E (non-vacuité) on obtient l'élément maximal."""
+    vE = _t(E_set)
+    hyp = N.assume(et(et(est_ordre(G, E_set), est_fini_ensemble(vE)), non(egal(vE, E.VIDE))))
+    hord = conjonction_elim_gauche(conjonction_elim_gauche(hyp))
+    hfin = conjonction_elim_droite(conjonction_elim_gauche(hyp))
+    hnv = conjonction_elim_droite(hyp)
+    P = _P_maximal(G, E_set, m)
+    va, vm = var("a_emf"), var(m)
+
+    # ── P(∅) : ∅⊂E ⇒ (∀a)(a∈∅ ⇒ GOAL) ; a∈∅ ex falso ────────────────────────
+    h0sub = N.assume(inclus(E.VIDE, vE))
+    ha0 = N.assume(appartient(va, E.VIDE))
+    nv0 = instancie(N.axiome(E.theorie_ensembles(), E.AXIOME_VIDE), va)   # ¬(a∈∅)
+    concl0 = existe(m, et(et(appartient(vm, E.VIDE), _couple_dans(va, vm, G)), _emax(G, E.VIDE, vm)))
+    falso0 = N.modus_ponens(ha0, N.modus_ponens(nv0, N.s2(non(appartient(va, E.VIDE)), concl0)))
+    body0 = N.generalisation("a_emf", N.loi_deduction(appartient(va, E.VIDE), falso0))
+    P0 = N.loi_deduction(inclus(E.VIDE, vE), body0)
+    assert P0.conclusion == P(E.VIDE), "P(∅) maximal mal formé"
+
+    pas = _preuve_pas_maximal(G, E_set, hord, P, m=m)    # _pas_ensemble(P)  [hord]
+    rf = recurrence_finie(P)
+    fini_imp_PX = N.modus_ponens(conjonction_intro(P0, pas), rf)   # (∀X)(Fini-ens X ⇒ P(X))  [hord]
+
+    # ── instancie à E : P(E) ; E⊂E ; (∀a)(a∈E ⇒ GOAL) ───────────────────────
+    inst = instancie(fini_imp_PX, vE)                    # Fini-ens E ⇒ P(E)
+    PE = N.modus_ponens(hfin, inst)                      # P(E) = (E⊂E ⇒ (∀a)(a∈E⇒GOAL))
+    E_sub_E = _inclus_refl_via(vE)
+    forall_a = N.modus_ponens(E_sub_E, PE)               # (∀a)(a∈E ⇒ ∃m(m∈E et (a,m)∈G et emax(G,E,m)))
+
+    # ── non-vide : (∃z)(z∈E) ────────────────────────────────────────────────
+    from bourbaki.ensembles.base.ensembles_vide import non_vide_ssi_element
+    ex_z = N.modus_ponens(hnv, equivalence_avant(non_vide_ssi_element(vE)))   # (∃z)(z∈E)
+    vz = var("z")
+    hz = N.assume(appartient(vz, vE))
+    # instancie (∀a) en z
+    inst_z = instancie(forall_a, vz)                     # z∈E ⇒ ∃m(m∈E et (z,m)∈G et emax(G,E,m))
+    ex_m = N.modus_ponens(hz, inst_z)
+    # élimine témoin m ; extrait emax(G,E,m) ; ∃-intro existe(m, _emax(G,E,m))
+    hwit = N.assume(et(et(appartient(vm, vE), _couple_dans(vz, vm, G)), _emax(G, vE, vm)))
+    emax_m = conjonction_elim_droite(hwit)               # _emax(G,E,m)
+    ex_emax = N.modus_ponens(emax_m, N.s5(_emax(G, vE, vm), vm, m))   # (∃m)_emax(G,E,m)
+    imp_wit = N.loi_deduction(et(et(appartient(vm, vE), _couple_dans(vz, vm, G)), _emax(G, vE, vm)), ex_emax)
+    ex_from_z = N.modus_ponens(ex_m, existe_elimination(imp_wit, m))   # (∃m)_emax(G,E,m) sous z∈E
+    imp_z = N.loi_deduction(appartient(vz, vE), ex_from_z)
+    ex_final = N.modus_ponens(ex_z, existe_elimination(imp_z, "z"))    # (∃m)_emax(G,E,m)
+
+    res = N.loi_deduction(et(et(est_ordre(G, E_set), est_fini_ensemble(vE)), non(egal(vE, E.VIDE))), ex_final)
+    assert res.conclusion == cor2_enonce(G, E_set, m), "conclusion ≠ énoncé cor2"
+    return res
+
+
 __all__ = [
     "_membre_union_singleton",
     "_P_plus_grand",
     "prop3_total_enonce", "prop3_total",
     "cor1_total_enonce", "cor1_total",
     "prop3_filtrant_enonce", "prop3_filtrant",
+    "_emax", "_P_maximal", "_preuve_pas_maximal",
+    "cor2_enonce", "cor2_maximal",
 ]

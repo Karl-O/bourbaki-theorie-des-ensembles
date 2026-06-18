@@ -7,6 +7,7 @@ from bourbaki.ordre.ensembles_ordre_fini_iii4 import (
     cor1_total, cor1_total_enonce,
     prop3_filtrant, prop3_filtrant_enonce,
     _membre_union_singleton,
+    cor2_maximal, cor2_enonce,
 )
 
 
@@ -35,3 +36,9 @@ def test_prop3_filtrant_clos():
     r = prop3_filtrant()
     assert r.est_clos, f"hyps résiduelles : {r.hypotheses}"
     assert r.conclusion == prop3_filtrant_enonce("Gmjt", "Emjt", "Xmjt", "m_mjf")
+
+
+def test_cor2_maximal_clos():
+    r = cor2_maximal()
+    assert r.est_clos, f"hyps résiduelles : {r.hypotheses}"
+    assert r.conclusion == cor2_enonce("Gemf", "Eemf", "m_emf")
