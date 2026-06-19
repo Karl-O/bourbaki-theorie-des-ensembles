@@ -60,7 +60,7 @@ from bourbaki.logique.tactiques.tactiques_abrege2 import (
     equivalence_avant, equivalence_arriere, equivalence_transitivite,
     equivalence_symetrie, instancie, cas,
 )
-from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie
+from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie, composer_egalites
 
 from bourbaki.cardinaux.ensembles_cardinaux import est_cardinal, inf_egal_card, cardinal
 from bourbaki.entiers.ensembles_entiers import successeur, ZERO, est_fini, est_entier
@@ -333,6 +333,167 @@ def decomp_zero(b="b"):
     return res
 
 
+# ════════════════════════════════════════════════════════════════════════════
+#  BASE de récurrence P[0] :  Card([0,0]) = successeur(0)
+# ════════════════════════════════════════════════════════════════════════════
+def _intervalle_aa_abstrait(a="aiaa"):
+    """⊢ est_cardinal(a) ⇒ [a,a] = {a}.   (CLOS, 0 hyp.)
+
+    a = VARIABLE FRAÎCHE (AUCUN τ) → extensionnalité A1 au binder « z » SANS
+    collision.  z∈[a,a] ⟺ (z card et a≤z et z≤a) ; antisymétrie (a≤z et z≤a, avec
+    card(a), card(z)) ⇒ z=a ; réciproquement z=a ⇒ (a card, a≤a, a≤a)."""
+    from bourbaki.cardinaux.ensembles_cardinaux_props_restantes_ordre import (
+        inf_egal_antisymetrique_card,
+    )
+    from bourbaki.ensembles.ensembles_theoremes import egalite_par_extension
+    va = _t(a)
+    seg = E.intervalle_entiers(va, va)
+    sing = E.singleton(va)
+    # Point « zz » pour les caractérisations de membre (évite que l'instanciation des
+    # axiomes/lemmes renomme un τ interne) ; la relation commune R := (zz = a) est
+    # τ-LIBRE et [a,a]/{a} sont τ-libres (a variable), donc egalite_par_extension
+    # (qui ré-instancie à « z ») est capture-safe.
+    zz = "zz"
+    vz = var(zz)
+
+    h_card_a = N.assume(est_cardinal(va))                # est_cardinal(a)
+    mem = _mem_int_t(va, va, vz)                         # zz∈[a,a] ⇔ (zz card et a≤zz et zz≤a)
+    sm = singleton_membre(vz, va)                        # zz∈{a} ⇔ zz=a
+
+    # charU : (∀zz)( zz∈[a,a] ⇔ zz=a )
+    # (⇒) zz∈[a,a] ⇒ zz=a
+    h_in = N.assume(appartient(vz, seg))
+    corps = N.modus_ponens(h_in, equivalence_avant(mem))
+    z_card = conjonction_elim_gauche(conjonction_elim_gauche(corps))
+    z0 = conjonction_elim_droite(conjonction_elim_gauche(corps))   # a ≤ zz
+    z1 = conjonction_elim_droite(corps)                  # zz ≤ a
+    anti = inf_egal_antisymetrique_card("aant", "bant")  # (∀a∀b)((a≤b et b≤a et card a et card b)⇒a=b)
+    anti_inst = instancie(instancie(anti, vz), va)       # (zz≤a et a≤zz et card zz et card a) ⇒ zz=a
+    hyp_anti = conjonction_intro(conjonction_intro(conjonction_intro(z1, z0), z_card), h_card_a)
+    z_eq_a = N.modus_ponens(hyp_anti, anti_inst)         # zz = a
+    imp_fwd = N.loi_deduction(appartient(vz, seg), z_eq_a)
+    # (⇐) zz=a ⇒ zz∈[a,a]
+    h_eq = N.assume(egal(vz, va))                        # zz = a
+    refl_a = instancie(N.generalisation("X", inf_egal_reflexif("X")), va)  # a ≤ a
+    corps_a = conjonction_intro(conjonction_intro(h_card_a, refl_a), refl_a)
+    a_in_seg = N.modus_ponens(corps_a, equivalence_arriere(_mem_int_t(va, va, va)))  # a∈[a,a]
+    a_eq_z = N.modus_ponens(h_eq, symetrie(vz, va))      # a = zz
+    z_in_seg = N.modus_ponens(a_in_seg, equivalence_avant(N.modus_ponens(
+        a_eq_z, N.s6(va, vz, "w", appartient(var("w"), seg)))))
+    imp_bwd = N.loi_deduction(egal(vz, va), z_in_seg)
+    charU = N.generalisation(zz, conjonction_intro(imp_fwd, imp_bwd))   # (∀zz)(zz∈[a,a] ⇔ zz=a)
+    charV = N.generalisation(zz, sm)                                    # (∀zz)(zz∈{a} ⇔ zz=a)
+
+    egalite = egalite_par_extension(charU, charV, seg, sing, x="z")     # [a,a] = {a}
+    return N.loi_deduction(est_cardinal(va), egalite)
+
+
+def _intervalle_zero_zero():
+    """⊢ [0,0] = {0}.   (CLOS, 0 hyp.)
+
+    INSTANCIE `_intervalle_aa_abstrait` à a := ZERO (théorème CLOS → capture-safe),
+    décharge est_cardinal(0) (zero_est_un_cardinal)."""
+    from bourbaki.entiers.ensembles_fini_zero import zero_est_un_cardinal
+    abstr = N.generalisation("aiaa", _intervalle_aa_abstrait("aiaa"))
+    inst = instancie(abstr, ZERO)                        # est_cardinal(0) ⇒ [0,0]={0}
+    return N.modus_ponens(zero_est_un_cardinal(), inst)  # [0,0] = {0}
+
+
+def _instance_diff_t(e, x, z):
+    """⊢ ( z ∈ e∖x ) ⇔ ( z∈e et ¬(z∈x) )   (axiome de la différence, termes)."""
+    ax = N.axiome(E.theorie_ensembles(), E.AXIOME_DIFF)
+    return instancie(instancie(instancie(ax, _t(e)), _t(x)), _t(z))
+
+
+def _singleton_diff_self_abstrait(a="asds"):
+    """⊢ {a} ∖ {a} = ∅.   (CLOS, 0 hyp.)
+
+    a = VARIABLE FRAÎCHE.  z∈{a}∖{a} ⟺ (z∈{a} et z∉{a}) — contradictoire — d'où
+    {a}∖{a} et ∅ ont les mêmes membres (aucun)."""
+    from bourbaki.ensembles.ensembles_theoremes import egalite_par_extension, vide_sans_element
+    va = _t(a)
+    sing = E.singleton(va)
+    diff = E.difference(sing, sing)
+    zz = "zz"
+    vz = var(zz)
+
+    di = _instance_diff_t(sing, sing, vz)          # zz∈{a}∖{a} ⇔ (zz∈{a} et zz∉{a})
+    # (⇒) zz∈{a}∖{a} ⇒ zz∈∅  (faux ⇒ tout) : de (zz∈{a} et zz∉{a}) déduire ⊥ puis zz∈∅
+    h_in = N.assume(appartient(vz, diff))
+    conj = N.modus_ponens(h_in, equivalence_avant(di))   # zz∈{a} et zz∉{a}
+    pin = conjonction_elim_gauche(conj)            # zz∈{a}
+    pnin = conjonction_elim_droite(conj)           # ¬(zz∈{a})
+    falso = N.modus_ponens(pin, N.modus_ponens(pnin,
+        N.s2(non(appartient(vz, sing)), appartient(vz, E.VIDE))))   # ⊥ ⇒ zz∈∅
+    imp_fwd = N.loi_deduction(appartient(vz, diff), falso)
+    # (⇐) zz∈∅ ⇒ zz∈{a}∖{a}  (vide_sans_element : ¬(zz∈∅))
+    h_vide = N.assume(appartient(vz, E.VIDE))
+    falso2 = N.modus_ponens(h_vide, N.modus_ponens(vide_sans_element(zz),
+        N.s2(non(appartient(vz, E.VIDE)), appartient(vz, diff))))   # ⊥ ⇒ zz∈{a}∖{a}
+    imp_bwd = N.loi_deduction(appartient(vz, E.VIDE), falso2)
+    charU = N.generalisation(zz, conjonction_intro(imp_fwd, imp_bwd))   # (∀zz)(zz∈diff ⇔ zz∈∅)
+    charV = N.generalisation(zz, _a_imp_a_equiv(appartient(vz, E.VIDE)))  # (∀zz)(zz∈∅ ⇔ zz∈∅)
+    return egalite_par_extension(charU, charV, diff, E.VIDE, x="z")     # {a}∖{a} = ∅
+
+
+def _card_singleton_zero_egale_succ_zero():
+    """⊢ Card({0}) = successeur(0).   (CLOS, 0 hyp.)
+
+    card_egal_succ_card_diff({0}, 0) : 0∈{0} ⇒ Card{0} = successeur(Card({0}∖{0})) ;
+    {0}∖{0}=∅ (_singleton_diff_self) ⇒ Card({0}∖{0})=Card∅ ; or 0 = Card∅
+    (définitionnel ZERO=Card(∅)), donc successeur(Card∅) = successeur(0)."""
+    from bourbaki.entiers.ensembles_aleph0 import card_egal_succ_card_diff
+    sing0 = E.singleton(ZERO)
+    diff0 = E.difference(sing0, sing0)
+
+    # 0 ∈ {0} : singleton_membre(0,0) sens ⇐ depuis 0=0
+    zero_in = N.modus_ponens(N.reflexivite(ZERO),
+                             equivalence_arriere(singleton_membre(ZERO, ZERO)))   # 0 ∈ {0}
+    # card_egal_succ_card_diff sur des NOMS frais puis instanciation aux termes
+    cesd_gen = N.generalisation("Xcesd", N.generalisation("x0cesd",
+        card_egal_succ_card_diff(var("Xcesd"), var("x0cesd"))))
+    cesd = instancie(instancie(cesd_gen, sing0), ZERO)   # (0∈{0}) ⇒ Card{0}=successeur(Card({0}∖{0}))
+    card0_eq = N.modus_ponens(zero_in, cesd)        # Card{0} = successeur(Card({0}∖{0}))
+    diff_eq = N.generalisation("asds", _singleton_diff_self_abstrait("asds"))
+    diff_eq0 = instancie(diff_eq, ZERO)             # {0}∖{0} = ∅
+    # Card({0}∖{0}) = Card∅  (Leibniz du terme Card)
+    card_diff_eq_card_vide = N.modus_ponens(N.reflexivite(cardinal(diff0)),
+        equivalence_avant(N.modus_ponens(diff_eq0,
+            N.s6(diff0, E.VIDE, "w", egal(cardinal(diff0), cardinal(var("w")))))))  # Card({0}∖{0})=Card∅
+    # successeur(Card({0}∖{0})) = successeur(Card∅)   (congruence de successeur via Leibniz)
+    refl_succ = N.reflexivite(successeur(cardinal(diff0)))   # succ(Card({0}∖{0})) = succ(Card({0}∖{0}))
+    succ_eq = N.modus_ponens(refl_succ, equivalence_avant(N.modus_ponens(
+        card_diff_eq_card_vide,
+        N.s6(cardinal(diff0), cardinal(E.VIDE), "w",
+             egal(successeur(cardinal(diff0)), successeur(var("w")))))))   # succ(Card({0}∖{0}))=succ(Card∅)
+    # ZERO == cardinal(VIDE) définitionnellement, donc successeur(Card∅)==successeur(ZERO)
+    return composer_egalites(card0_eq, succ_eq)     # Card{0} = successeur(0)
+
+
+def prop5_base_enonce():
+    """Formule : Card([0,0]) = successeur(0)."""
+    return egal(cardinal(E.intervalle_entiers(ZERO, ZERO)), successeur(ZERO))
+
+
+def prop5_base():
+    """🎯 ⊢ Card([0,0]) = successeur(0).   (CLOS, 0 hyp — base de la récurrence Prop 5.)
+
+    [0,0] = {0} (_intervalle_zero_zero) ⇒ Card[0,0] = Card{0} (Leibniz) ;
+    Card{0} = successeur(0) (_card_singleton_zero_egale_succ_zero)."""
+    seg = E.intervalle_entiers(ZERO, ZERO)
+    sing0 = E.singleton(ZERO)
+    eq_sets = _intervalle_zero_zero()                   # [0,0] = {0}
+    # Card[0,0] = Card{0}  : Leibniz seg↦sing0 dans (Card seg = Card seg)
+    refl = N.reflexivite(cardinal(seg))                 # Card[0,0] = Card[0,0]
+    card_seg_eq_card_sing = N.modus_ponens(refl, equivalence_avant(N.modus_ponens(
+        eq_sets, N.s6(seg, sing0, "w", egal(cardinal(seg), cardinal(var("w")))))))  # Card[0,0]=Card{0}
+    card_sing_eq = _card_singleton_zero_egale_succ_zero()   # Card{0} = successeur(0)
+    res = composer_egalites(card_seg_eq_card_sing, card_sing_eq)   # Card[0,0] = successeur(0)
+    assert res.conclusion == prop5_base_enonce(), "prop5_base : conclusion inattendue"
+    return res
+
+
 __all__ = [
     "_decomp_generique", "decomp_zero", "decomp_zero_enonce",
+    "prop5_base", "prop5_base_enonce",
 ]
