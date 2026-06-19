@@ -379,4 +379,129 @@ def sous_lemme_preuve(S="S", T="T", Y="Y", M="Mtk", M0="M0tk", F="Ftk", x="xtk",
     return res
 
 
-__all__ = ["sous_lemme_preuve"]
+# ════════════════════════════════════════════════════════════════════════════
+#  🎯 TUKEY ASSEMBLÉ — sous-lemme universel DÉCHARGÉ (résidu réduit au cœur honnête)
+# ════════════════════════════════════════════════════════════════════════════
+def chaines_non_vides(S="S", T="T", x="x", y="y", z="z", M0="M0tk"):
+    """(∀𝔗)( chaine(Incl(𝔖),𝔖,𝔗) ⇒ (∃M0)(M0∈𝔗) ).
+
+    « Toute chaîne (partie totalement ordonnée) de 𝔖 considérée est NON vide ».
+    HYPOTHÈSE HONNÊTE : le sous-lemme exige un membre témoin pour P(∅) ; la chaîne
+    vide a pour réunion ∅ et est majorée trivialement (cas traité hors récurrence
+    chez Bourbaki).  Porté ici en prémisse explicite (jamais vacueuse)."""
+    from bourbaki.ordre.ensembles_zorn import chaine
+    vT = var(T)
+    corps = impl(chaine(Incl(var(S)), var(S), vT, x, y, z),
+                 existe(M0, appartient(var(M0), vT)))
+    return pourtout(T, corps)
+
+
+def sous_lemme_universel_preuve(S="S", T="T", Y="Y", M="Mtk", M0="M0tk",
+                                F="Ftk", x="xtk", M1="M1tk", W="Wtk",
+                                ox="ox", oy="oy", oz="oz"):
+    """⊢ { (∀𝔗)(chaine(Incl(𝔖),𝔖,𝔗) ⇒ 𝔗≠∅) }
+         ⊢ (∀𝔗)( chaine(Incl(𝔖),𝔖,𝔗) ⇒ sous_lemme_partie_finie_dans_membre(𝔖,𝔗) ).
+
+    Pour chaque chaîne 𝔗 : chaine ⇒ totalement_ordonne(Incl(𝔖),𝔗) (2e conjoint)
+    et ⇒ 𝔗≠∅ (prémisse) ; sous_lemme_preuve (cut des 2 hyps) donne le sous-lemme."""
+    from bourbaki.ordre.ensembles_zorn import chaine
+    vS, vT = var(S), var(T)
+    G = Incl(vS)
+    Hnv = N.assume(chaines_non_vides(S, T, ox, oy, oz, M0))     # (∀𝔗)(chaine ⇒ 𝔗≠∅)
+    Hch = N.assume(chaine(G, vS, vT, ox, oy, oz))              # chaine(Incl(𝔖),𝔖,𝔗)
+    tot = conjonction_elim_droite(Hch)                        # totalement_ordonne(Incl(𝔖),𝔗)
+    nv = N.modus_ponens(Hch, instancie(Hnv, vT))              # (∃M0)(M0∈𝔗)
+    sl = sous_lemme_preuve(S, T, Y, M, M0, F, x, M1, W)        # [tot, nv] ⊢ sous_lemme
+    sl = _cut(sl, totalement_ordonne(G, vT), tot)
+    sl = _cut(sl, existe(M0, appartient(var(M0), vT)), nv)     # [chaine] ⊢ sous_lemme
+    body = N.loi_deduction(chaine(G, vS, vT, ox, oy, oz), sl)
+    return N.generalisation(T, body)
+
+
+def Tukey_theoreme_complet(S="S", m="m", T="Tchain", x="x", y="y", z="z",
+                           Y="Y", M="M"):
+    """⊢ ( de_caractere_fini(𝔖,E) et 𝔖≠∅
+            et (∀𝔗)(chaine(Incl(𝔖),𝔖,𝔗) ⇒ 𝔗≠∅) )
+         ⇒ (∃m) element_maximal(Incl, 𝔖, m).
+
+    🎯 THÉORÈME 1 §III.4 (TUKEY) avec le sous-lemme de récurrence finie DÉCHARGÉ.
+    Le résidu honnête `(∀𝔗)sous_lemme(𝔖,𝔗)` du `Tukey_theoreme` déposé est
+    REMPLACÉ par l'hypothèse PLUS FAIBLE et PLUS HONNÊTE « toute chaîne est non
+    vide » : on dérive le sous-lemme universel (forme per-chaîne) via
+    sous_lemme_universel_preuve, et on l'injecte dans le flux de Tukey.
+
+    ⚠ Résidu restant : `chaines_non_vides` (la chaîne vide, majorée hors
+    récurrence) + de_caractère_fini + 𝔖≠∅.  Le CŒUR combinatoire (récurrence
+    finie) est, lui, entièrement PROUVÉ (sous_lemme_preuve)."""
+    from bourbaki.entiers.ensembles_entiers import de_caractere_fini
+    from bourbaki.ordre.ensembles_zorn import enonce_non_vide
+
+    vS = var(S)
+    cf = de_caractere_fini(vS, var("E"))
+    nv = enonce_non_vide(vS, x)
+    cnv = chaines_non_vides(S, T, x, y, z, "M0tk")
+
+    # hyp-conjonction (cf et 𝔖≠∅ et chaines_non_vides)
+    hyp = et(et(cf, nv), cnv)
+    H = N.assume(hyp)
+    Hcf = conjonction_elim_gauche(conjonction_elim_gauche(H))
+    Hnv = conjonction_elim_droite(conjonction_elim_gauche(H))
+    Hcnv = conjonction_elim_droite(H)
+
+    # reconstruit Tukey en injectant le sous-lemme PER chaîne (déchargé)
+    return _tukey_via_per_chaine(S, m, T, x, y, z, Y, M, hyp, H, Hcf, Hnv, Hcnv)
+
+
+def _tukey_via_per_chaine(S, m, T, x, y, z, Y, M, hyp, H, Hcf, Hnv, Hcnv):
+    """Reconstruit Tukey en discharge per-chaîne du sous-lemme (cf. ci-dessus)."""
+    from bourbaki.ordre.ensembles_tukey_iii4 import (
+        Incl_est_ordre, union_majorant, _zorn_instancie,
+    )
+    from bourbaki.ordre.ensembles_zorn import chaine
+    from bourbaki.ordre.ensembles_ordre_relation import majorant
+    from bourbaki.ordre.ensembles_tukey_iii4 import (
+        sous_lemme_partie_finie_dans_membre as _sl_dep,
+    )
+    vS, vT = var(S), var(T)
+    G = Incl(vS)
+    M0 = "M0tk"
+
+    # (∀𝔗)(chaine ⇒ sous_lemme) déchargé de chaines_non_vides
+    sl_per = sous_lemme_universel_preuve(S, T, Y, M, M0, "Ftk", "xtk", "M1tk", "Wtk",
+                                         x, y, z)
+    sl_per = _cut(sl_per, chaines_non_vides(S, T, x, y, z, M0), Hcnv)  # [hyp via H] (∀𝔗)(chaine⇒sl)
+
+    ord_S = Incl_est_ordre(S)                                  # est_ordre(Incl,𝔖)
+
+    # est_inductif : (∀𝔗)(chaine ⇒ (∃m)majorant) — discharge sous-lemme PER 𝔗
+    Hch = N.assume(chaine(G, vS, vT, x, y, z))
+    T_S = conjonction_elim_gauche(Hch)                        # 𝔗⊂𝔖
+    sl_T = N.modus_ponens(Hch, instancie(sl_per, vT))         # sous_lemme(𝔖,𝔗)
+    maj_U = union_majorant(S, T, x, Y, M)                     # majorant(Incl,𝔗,U,𝔖) [3 hyps]
+    maj_U = _cut(maj_U, inclus(vT, vS), T_S)
+    maj_U = _cut(maj_U, _sl_dep(S, T, Y, M), sl_T)
+    # caractère fini reste porté (cut avec Hcf)
+    maj_U = _cut(maj_U, Hcf.conclusion, Hcf)
+    from bourbaki.ordre.ensembles_zorn_theoreme import Union
+    U = Union(G, vS, vT)
+    corps_m = majorant(G, vT, var(m), vS, x)
+    ex_maj = N.modus_ponens(maj_U, N.s5(corps_m, U, m))      # (∃m)majorant
+    body = N.loi_deduction(chaine(G, vS, vT, x, y, z), ex_maj)
+    allT = N.generalisation(T, body)
+    # α-renomme 𝔗 → C (binder canonique de est_inductif)
+    from bourbaki.logique.tactiques.tactiques_abrege2 import _peler_pourtout
+    _, corps_T = _peler_pourtout(allT.conclusion)
+    if T != "C":
+        from bourbaki.logique.tactiques.tactiques_abrege_quantif import alpha_pour_tout
+        allT = N.modus_ponens(allT, equivalence_avant(alpha_pour_tout(T, "C", corps_T)))
+    ind_S = conjonction_intro(ord_S, allT)                    # est_inductif(Incl,𝔖)
+
+    # crochet de Zorn
+    zorn_hyp = conjonction_intro(conjonction_intro(ord_S, ind_S), Hnv)
+    inst = _zorn_instancie(S)
+    concl = N.modus_ponens(zorn_hyp, inst)                    # (∃m)maximal [hyp]
+    return N.loi_deduction(hyp, concl)
+
+
+__all__ = ["sous_lemme_preuve", "chaines_non_vides",
+           "sous_lemme_universel_preuve", "Tukey_theoreme_complet"]

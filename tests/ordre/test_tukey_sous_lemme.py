@@ -22,3 +22,22 @@ def test_sous_lemme_conclusion_et_hyps():
 
 def test_theorie_22():
     assert len(E.theorie_ensembles().axiomes) == 22
+
+
+def test_tukey_complet_clos():
+    from bourbaki.ordre.ensembles_tukey_sous_lemme import (
+        Tukey_theoreme_complet, chaines_non_vides,
+    )
+    from bourbaki.ordre.ensembles_tukey_iii4 import Incl
+    from bourbaki.entiers.ensembles_entiers import de_caractere_fini
+    from bourbaki.ordre.ensembles_zorn import enonce_non_vide
+    from bourbaki.ordre.ensembles_ordre_relation import element_maximal
+    from bourbaki.logique.formule import var, et, impl, existe
+    r = Tukey_theoreme_complet()
+    assert r.est_clos and len(r.hypotheses) == 0
+    cf = de_caractere_fini(var("S"), var("E"))
+    nv = enonce_non_vide(var("S"), "x")
+    cnv = chaines_non_vides("S", "Tchain", "x", "y", "z", "M0tk")
+    target = impl(et(et(cf, nv), cnv),
+                  existe("m", element_maximal(Incl(var("S")), var("S"), var("m"), "x")))
+    assert r.conclusion == target
