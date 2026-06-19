@@ -46,16 +46,13 @@ from bourbaki.cardinaux.ensembles_cantor_bernstein_fin import (
     partie_reunion_complement, partie_disjoint_complement,
 )
 from bourbaki.entiers.ensembles_predecesseur_prop2 import eq_reunion_disjointe_somme
-from bourbaki.cardinaux.arithmetique.ensembles_arith_somme import (
-    somme_disjointe_cardinal, _prop1_direct_t,
-)
+from bourbaki.cardinaux.arithmetique.ensembles_arith_somme import _prop1_direct_t
 from bourbaki.entiers.ensembles_combinatoire_iii5 import somme_zero_neutre_droite, _sdc
 from bourbaki.entiers.ensembles_simplification_additive import simplification_additive_finie
 from bourbaki.cardinaux.ensembles_cardinaux_props_restantes_prop7 import (
     cardinal_egal_zero_ssi_vide,
 )
 from bourbaki.entiers.ensembles_prop6_bien_ordonne_iii5 import partie_finie_est_finie
-from bourbaki.entiers.ensembles_entiers_theoremes import card_est_un_cardinal
 from bourbaki.ensembles.ensembles_vide_identites import reunion_vide_neutre
 
 
