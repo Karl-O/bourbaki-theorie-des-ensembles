@@ -141,7 +141,7 @@ def partie_finie_est_finie(X="Xpf", Eens="Epf", xfd="xfd"):
 #  (B) CLAUSE « PLUS PETIT » — toute partie non vide d'un FINI totalement
 #  ordonné a un plus petit élément  (la 2e composante de est_bien_ordonne).
 # ════════════════════════════════════════════════════════════════════════════
-def _petit_clause(G, E_set, X="X", a="a", w="w"):
+def _petit_clause(G, E_set, X="Sbo", a="a", w="w"):
     """La 2e composante de est_bien_ordonne(R_G, E), TEXTUELLEMENT (binders X,a,w) :
         (∀X)( (X⊂E et ¬(X=∅)) ⇒ (∃a)(a∈X et (∀w)(w∈X ⇒ (a,w)∈G)) )."""
     vG, vE = _t(G), _t(E_set)
@@ -152,7 +152,7 @@ def _petit_clause(G, E_set, X="X", a="a", w="w"):
     return pourtout(X, impl(et(inclus(vX, vE), non(egal(vX, E.VIDE))), petit))
 
 
-def clause_plus_petit_fini_total(G="Gbo", E_set="Ebo", X="X", a="a", w="w"):
+def clause_plus_petit_fini_total(G="Gbo", E_set="Ebo", X="Sbo", a="a", w="w"):
     """⊢ ( totalement_ordonne(G,E) et est_fini_ensemble(E) ) ⇒
          (∀X)( (X⊂E et ¬(X=∅)) ⇒ (∃a)(a∈X et (∀w)(w∈X ⇒ (a,w)∈G)) ).
 
@@ -169,8 +169,9 @@ def clause_plus_petit_fini_total(G="Gbo", E_set="Ebo", X="X", a="a", w="w"):
     htot = conjonction_elim_gauche(hH)                  # totalement_ordonne(G,E)
     hEfini = conjonction_elim_droite(hH)                # est_fini_ensemble(E)
 
-    # prop3_total_min : totalement_ordonne(G,E) ⇒ (∀X)((Fini X et X⊂E et X≠∅)⇒(∃m)ppe)
-    p3 = prop3_total_min(G, E_set, X)                   # ⊢ totalement_ordonne ⇒ (∀X)(...)
+    # prop3_total_min : totalement_ordonne(G,E) ⇒ (∀Xppt)((Fini Xppt et Xppt⊂E et Xppt≠∅)⇒(∃m)ppe)
+    # ⚠️ binder SÛR « Xppt » (le défaut) — « X » collisionnerait avec le τ-cardinal interne.
+    p3 = prop3_total_min(G, E_set)                      # ⊢ totalement_ordonne ⇒ (∀Xppt)(...)
     forall_X = N.modus_ponens(htot, p3)
     p3_X = instancie(forall_X, vX)                      # (Fini X et X⊂E et X≠∅) ⇒ (∃m)ppe(G,X,m)
 
@@ -222,7 +223,7 @@ def clause_plus_petit_fini_total(G="Gbo", E_set="Ebo", X="X", a="a", w="w"):
 #  (B) CIBLE PRINCIPALE — fini_total_est_bien_ordonne
 #  (sous l'hyp ORDRE explicite est_relation_ordre_dans(R_G, E), cf. note d'honnêteté)
 # ════════════════════════════════════════════════════════════════════════════
-def fini_total_est_bien_ordonne_enonce(G, E_set, x="x", y="y", z="z", X="X", a="a", w="w"):
+def fini_total_est_bien_ordonne_enonce(G, E_set, x="x", y="y", z="z", X="Sbo", a="a", w="w"):
     """⊢-cible :
         ( est_relation_ordre_dans(R_G,E) et totalement_ordonne(G,E) et est_fini_ensemble(E) )
         ⇒ est_bien_ordonne_graphe(G, E).
@@ -239,7 +240,7 @@ def fini_total_est_bien_ordonne_enonce(G, E_set, x="x", y="y", z="z", X="X", a="
 
 
 def fini_total_est_bien_ordonne(G="Gbo", E_set="Ebo",
-                                x="x", y="y", z="z", X="X", a="a", w="w"):
+                                x="x", y="y", z="z", X="Sbo", a="a", w="w"):
     """🎯 ⊢ ( est_relation_ordre_dans(R_G,E) et totalement_ordonne(G,E) et est_fini_ensemble(E) )
             ⇒ est_bien_ordonne_graphe(G, E).
 
@@ -251,7 +252,11 @@ def fini_total_est_bien_ordonne(G="Gbo", E_set="Ebo",
     R = R_de(vG)
 
     cible_bo = est_bien_ordonne_graphe(vG, vE, x, y, z, X, a, w)
-    ord_part_cible, petit_part_cible = cible_bo.sous   # est_relation_ordre_dans , clause-petit
+    # Les 2 conjoints de est_bien_ordonne, construits TEXTUELLEMENT (l'encodage de
+    # `et` via De Morgan rend .sous opaque ; on rebâtit par les abrégés et on
+    # VALIDE l'assemblage par égalité finale à cible_bo).
+    ord_part_cible = est_relation_ordre_dans(R, vE, x, y, z)
+    petit_part_cible = _petit_clause(G, E_set, X, a, w)
 
     hyp = et(et(est_relation_ordre_dans(R, vE, x, y, z), totalement_ordonne(G, E_set)),
              est_fini_ensemble(vE))
