@@ -298,8 +298,21 @@ def successeur_ordre_strict(x="x", b="b"):
     return res
 
 
+def successeur_ordre_t(x_term, b_term):
+    """⊢ est_cardinal(X) ⇒ ( ( X ≤ B+1 ) ⟺ ( X ≤ B ou X = B+1 ) )  pour des TERMES.
+
+    successeur_ordre (CLOS avec des NOMS « xso », « bso ») GÉNÉRALISÉ sur les deux
+    puis INSTANCIÉ aux TERMES — capture-safe (les termes peuvent contenir des
+    τ-cardinaux ou des variables liées en aval ; l'instanciation d'un théorème clos
+    renomme déterministe sans collision)."""
+    base = successeur_ordre("xso", "bso")                 # CLOS (noms)
+    gen = N.generalisation("xso", N.generalisation("bso", base))
+    return instancie(instancie(gen, _t(x_term)), _t(b_term))
+
+
 __all__ = [
     "successeur_ordre_enonce", "successeur_ordre_reciproque", "successeur_ordre",
+    "successeur_ordre_t",
     "succ_pas_inf_egal_enonce", "succ_pas_inf_egal",
     "successeur_ordre_strict_enonce_fini", "successeur_ordre_strict",
 ]
