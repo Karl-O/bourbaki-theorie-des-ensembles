@@ -40,6 +40,23 @@ def test_prop2_injectivite_conclusion_y_egal_z():
     assert len(th.hypotheses) == 9
 
 
+def test_prop3_g_coordonnee_egale_construit():
+    th = P.prop3_g_coordonnee_egale()
+    # conclusion = pr_α x = pr_α x'
+    assert th.conclusion == egal(E.projection_indice(var("xx"), var("a")),
+                                 E.projection_indice(var("xp"), var("a")))
+
+
+def test_prop3_g_injective_pointwise():
+    th = P.prop3_g_injective_pointwise()
+    # conclusion = pr_λ x = pr_λ x'
+    assert th.conclusion == egal(E.projection_indice(var("xx"), var("lam")),
+                                 E.projection_indice(var("xp"), var("lam")))
+    assert th.conclusion not in th.hypotheses
+    assert len(th.hypotheses) == 8
+
+
 def test_theorie_toujours_22_apres():
     P.prop2_injectivite()
+    P.prop3_g_injective_pointwise()
     assert len(E.theorie_ensembles().axiomes) == 22

@@ -51,6 +51,7 @@ from bourbaki.logique import noyau_abrege as N
 from bourbaki.ensembles import ensembles_abrege as E
 from bourbaki.ensembles.familles import ensembles_limites as L
 from bourbaki.ordre import ensembles_limites_canoniques as C
+from bourbaki.ordre.ensembles_limites_props2 import cofinal_canonique_coordonnee
 from bourbaki.logique.tactiques.tactiques_abrege2 import (
     instancie, conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
 )
@@ -272,6 +273,117 @@ def prop2_injectivite(EfamE="E", fE="f", EfamF="Ep", fF="fp", u="u", leq=None,
     return N.modus_ponens(conj_ext, ext)               # y = z
 
 
+# ════════════════════════════════════════════════════════════════════════════
+#  PROPOSITION 3 (§III.7.2) — cofinal ⇒ g canonique INJECTIVE (cœur pointwise)
+#  g(x)=(f_α(x))_{α∈J}.  Si g(x)=g(x'), alors pr_α x=pr_α x' pour α∈J ; par
+#  cofinalité, pour tout λ∈I il existe α∈J avec λ≤α, et la relation (1) propage
+#  l'égalité : pr_λ x = f_{λα}(pr_α x) = f_{λα}(pr_α x') = pr_λ x'.
+# ════════════════════════════════════════════════════════════════════════════
+def prop3_g_coordonnee_egale(Efam="E", f="f", leq=None, i="I", J="J",
+                             x="xx", xp="xp", a="a"):
+    """{ α∈J, x∈lim←_I, x'∈lim←_I, g(x)=g(x') } ⊢ pr_α x = pr_α x'.
+
+    SENS « g injective sur les indices de J » : de g(x)=g(x') on tire l'égalité des
+    coordonnées d'indice α∈J de x et x' (E III.55).  Preuve :
+        pr_α x = f_α(x)            [(3) renversé : pr_α(g(x))=f_α(x) ; f_α=pr_α sur lim]
+               = pr_α(g(x))        [formule (3), via canonique f_α(x)=pr_α x]
+               = pr_α(g(x'))       [congruence : g(x)=g(x')]
+               = pr_α x'.          [(3) puis canonique, en x']
+    On enchaîne directement pr_α(g(x))=f_α(x)=pr_α x (et idem x')."""
+    if leq is None:
+        leq = _gleq()
+    vE, vf, vi, vJ = _t(Efam), _t(f), _t(i), _t(J)
+    va, vx, vxp = _t(a), _t(x), _t(xp)
+    g = C.application_canonique_g(vE, vf, vJ)
+    pra_gx = E.projection_indice(E.valeur(g, vx), va)     # pr_α(g(x))
+    pra_gxp = E.projection_indice(E.valeur(g, vxp), va)   # pr_α(g(x'))
+    prx = E.projection_indice(vx, va)                     # pr_α x
+    prxp = E.projection_indice(vxp, va)                   # pr_α x'
+    fa_x = C.application_canonique_proj_valeur(vE, vf, va, vx)    # f_α(x)
+    fa_xp = C.application_canonique_proj_valeur(vE, vf, va, vxp)  # f_α(x')
+
+    # (3) en x : pr_α(g(x)) = f_α(x)   ;  canonique : f_α(x)=pr_α x  (x∈lim_I, α∈J⊂I)
+    eq3_x = cofinal_canonique_coordonnee(vE, vf, leq, vi, vJ, x, a)    # pr_α(g(x))=f_α(x)
+    canon_x = _canon_proj_au_point(vE, vf, leq, vi, va, vx)            # f_α(x)=pr_α x
+    # pr_α x = pr_α(g(x))  : renverser eq3_x∘canon_x
+    gx_to_prx = composer_egalites(eq3_x, canon_x)                     # pr_α(g(x))=pr_α x
+    prx_eq_gx = N.modus_ponens(gx_to_prx, symetrie(pra_gx, prx))      # pr_α x=pr_α(g(x))
+    # congruence : g(x)=g(x') ⟹ pr_α(g(x))=pr_α(g(x'))
+    Heq = N.assume(egal(E.valeur(g, vx), E.valeur(g, vxp)))
+    cong = N.modus_ponens(Heq, congruence_terme(
+        E.valeur(g, vx), E.valeur(g, vxp),
+        E.projection_indice(var("w"), va), "w"))                     # pr_α(g(x))=pr_α(g(x'))
+    # pr_α(g(x')) = f_α(x') = pr_α x'
+    eq3_xp = cofinal_canonique_coordonnee(vE, vf, leq, vi, vJ, xp, a)  # pr_α(g(x'))=f_α(x')
+    canon_xp = _canon_proj_au_point(vE, vf, leq, vi, va, vxp)          # f_α(x')=pr_α x'
+    gxp_to_prxp = composer_egalites(eq3_xp, canon_xp)                 # pr_α(g(x'))=pr_α x'
+    # chaîne : pr_α x = pr_α(g(x)) = pr_α(g(x')) = pr_α x'
+    ch1 = composer_egalites(prx_eq_gx, cong)                          # pr_α x=pr_α(g(x'))
+    return composer_egalites(ch1, gxp_to_prxp)                        # pr_α x=pr_α x'
+
+
+def _canon_proj_au_point(Efam, f, leq, i, a_terme, z_terme):
+    """{ z∈lim←, α∈I } ⊢ f_α(z)=pr_α z, termes α,z quelconques (instance axiome (2))."""
+    vE, vf, vi = _t(Efam), _t(f), _t(i)
+    va, vz = _t(a_terme), _t(z_terme)
+    ax = N.axiome(C.theorie_canonique_proj(vE, vf, leq, vi),
+                  C.axiome_canonique_proj(vE, vf, leq, vi))
+    inst = instancie(instancie(ax, va), vz)
+    Hz = N.assume(appartient(vz, L.lim_proj(vE, vf)))
+    Ha = N.assume(appartient(va, vi))
+    return N.modus_ponens(conjonction_intro(Hz, Ha), inst)
+
+
+def prop3_g_injective_pointwise(Efam="E", f="f", leq=None, i="I", J="J",
+                                lam="lam", a="a", x="xx", xp="xp"):
+    """{ λ∈I, α∈J, λ≤α, x∈lim←_I, x'∈lim←_I, g(x)=g(x') } ⊢ pr_λ x = pr_λ x'.
+
+    CŒUR de l'injectivité de g (Prop. 3, E III.55) sous un TÉMOIN cofinal α∈J, λ≤α.
+    Bourbaki : « comme J est cofinal dans I, il existe λ tel que α≤λ ; comme
+    f_α(f_α(x))≠... ».  Ici, pour λ∈I quelconque et α∈J majorant (λ≤α fourni par la
+    cofinalité), on propage l'égalité des α-coordonnées (prop3_g_coordonnee_egale) le
+    long de la transition f_{λα} via la relation (1) :
+        pr_λ x = f_{λα}(pr_α x)        [relation (1) en x∈lim_I, λ≤α]
+               = f_{λα}(pr_α x')       [congruence : pr_α x=pr_α x']
+               = pr_λ x'.              [relation (1) en x', renversée].
+
+    La cofinalité de J (∃ témoin α) reste portée comme HYPOTHÈSE de témoin (λ∈I, α∈J,
+    λ≤α) ; la généralisation « ∀λ + extensionnalité ⇒ x=x' » et la SURJECTIVITÉ de g
+    (donc la BIJECTIVITÉ complète) restent REPORTÉES (cf. REPORTES)."""
+    if leq is None:
+        leq = _gleq()
+    vE, vf, vi, vJ = _t(Efam), _t(f), _t(i), _t(J)
+    vlam, va, vx, vxp = var(lam), var(a), _t(x), _t(xp)
+    # limite_projective_relation_1 fait var(f) en interne : si vf est déjà un Terme,
+    # son f apparaît DOUBLEMENT enveloppé var(var('f')).  On construit f_{λα} avec le
+    # MÊME enveloppage pour que les termes s'apparient (symetrie/congruence).
+    vf_rel = var(vf)
+    flama = L.appl_proj(vf_rel, vlam, va)                 # f_{λα}  (apparié à relation_1)
+    prx_a = E.projection_indice(vx, va)                   # pr_α x
+    prxp_a = E.projection_indice(vxp, va)                 # pr_α x'
+    prx_lam = E.projection_indice(vx, vlam)               # pr_λ x
+    prxp_lam = E.projection_indice(vxp, vlam)             # pr_λ x'
+
+    # relation (1) en x, au couple (λ,α) avec λ≤α : pr_λ x = f_{λα}(pr_α x)
+    rel1_x = L.limite_projective_relation_1(vE, vf, leq, vi, vx, lam, a)   # prem⇒pr_λ x=f_{λα}(pr_α x)
+    rel1_xp = L.limite_projective_relation_1(vE, vf, leq, vi, vxp, lam, a) # prem⇒pr_λ x'=f_{λα}(pr_α x')
+    prem = et(et(appartient(vlam, vi), appartient(va, vi)), leq(vlam, va))
+    Hprem = N.assume(prem)
+    eq1_x = N.modus_ponens(Hprem, rel1_x)                 # pr_λ x = f_{λα}(pr_α x)
+    eq1_xp = N.modus_ponens(Hprem, rel1_xp)               # pr_λ x' = f_{λα}(pr_α x')
+    # α∈J ⊂ I requis par limite (déjà via prem α∈I) ; et α∈J pour prop3_g_coordonnee_egale.
+    # égalité des α-coordonnées : pr_α x = pr_α x'
+    coord_eq = prop3_g_coordonnee_egale(vE, vf, leq, vi, vJ, x, xp, a)     # pr_α x=pr_α x'
+    # f_{λα}(pr_α x) = f_{λα}(pr_α x')  (congruence)
+    cong = N.modus_ponens(coord_eq, congruence_terme(
+        prx_a, prxp_a, E.valeur(flama, var("w")), "w"))   # f_{λα}(pr_α x)=f_{λα}(pr_α x')
+    # pr_λ x' = f_{λα}(pr_α x')  renversée → f_{λα}(pr_α x') = pr_λ x'
+    eq1_xp_sym = N.modus_ponens(eq1_xp, symetrie(prxp_lam, E.valeur(flama, prxp_a)))
+    # chaîne : pr_λ x = f_{λα}(pr_α x) = f_{λα}(pr_α x') = pr_λ x'
+    ch1 = composer_egalites(eq1_x, cong)                  # pr_λ x=f_{λα}(pr_α x')
+    return composer_egalites(ch1, eq1_xp_sym)             # pr_λ x=pr_λ x'
+
+
 # Résultats DURS introduits mais NON prouvés (honnêteté).
 REPORTES = [
     "Proposition 2 (E.III.7.2) : identité d'ensembles u⁻¹(x') = lim← u_α⁻¹(x'_α) — "
@@ -279,9 +391,10 @@ REPORTES = [
     "— REPORTÉ (seule l'injectivité du Corollaire est prouvée).",
     "Corollaire Prop. 2, cas BIJECTIF (u bijective si u_α bijectives) — la "
     "SURJECTIVITÉ exige le cône universel / la limite des préimages — REPORTÉ.",
-    "Proposition 3 (§III.7.2) : cofinal ⇒ g canonique BIJECTIVE — la bijectivité "
-    "reste hors d'atteinte (seul « g bien définie / compatible » est prouvé dans "
-    "ensembles_limites_props2.cofinal_canonique_compatible) — REPORTÉ.",
+    "Proposition 3 (§III.7.2) : cofinal ⇒ g canonique BIJECTIVE — l'INJECTIVITÉ est "
+    "désormais prouvée POINTWISE (prop3_g_coordonnee_egale, prop3_g_injective_pointwise : "
+    "pr_λ x=pr_λ x' sous témoin cofinal λ≤α∈J) ; la généralisation ∀λ+extensionnalité "
+    "⇒ x=x', et la SURJECTIVITÉ de g (donc la bijectivité complète), restent REPORTÉES.",
 ]
 
 
@@ -290,5 +403,6 @@ __all__ = [
     "axiome_lim_proj_u", "theorie_lim_proj_u",
     "lim_u_coordonnee", "lim_u_coordonnee_egale", "lim_u_projection_egale",
     "prop2_injectivite",
+    "prop3_g_coordonnee_egale", "prop3_g_injective_pointwise",
     "REPORTES",
 ]
