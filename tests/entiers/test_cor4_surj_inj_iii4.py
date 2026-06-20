@@ -15,4 +15,4 @@ def test_section_finie_implique_bijective_close():
 
 
 def test_theorie_inchangee():
-    assert len(theorie_ensembles()) == 22
+    assert len(theorie_ensembles().axiomes) == 22
