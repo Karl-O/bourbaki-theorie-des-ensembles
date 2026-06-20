@@ -324,8 +324,106 @@ def prop4_surjective(a="aP4surj", b="bP4surj", y="yP4surj", u="uP4surj"):
     return res
 
 
+# ════════════════════════════════════════════════════════════════════════════
+#  🎯 PROP 4 ASSEMBLÉE : x↦a+x est un ISOMORPHISME D'ORDRE de [0,b] sur [a,a+b]
+#
+#  Bundle des QUATRE propriétés établies (sous (est_entier a et est_entier b)) :
+#    (1) bien-définie  : x∈[0,b] ⇒ a+x∈[a,a+b]
+#    (2) strictement croissante : (card x, card x') ⇒ (x<x' ⇒ a+x<a+x')
+#    (3) injective     : (card x, card x') ⇒ (a+x=a+x' ⇒ x=x')
+#    (4) surjective    : y∈[a,a+b] ⇒ (∃u)(u∈[0,b] et a+u=y)
+#  (énoncé combinatoire de l'iso d'ordre, sans réifier l'application — chacune des
+#   quatre composantes est un théorème CLOS ré-employé.)
+# ════════════════════════════════════════════════════════════════════════════
+def _strict_card(a, x, xp):
+    from bourbaki.cardinaux.ensembles_cardinaux import inf_strict_card
+    va, vx, vxp = _t(a), _t(x), _t(xp)
+    return impl(inf_strict_card(vx, vxp),
+                inf_strict_card(somme_cardinale_binaire(va, vx),
+                                somme_cardinale_binaire(va, vxp)))
+
+
+def prop4_ordre_iso_enonce(a="aP4iso", b="bP4iso", x="xP4iso", xp="xpP4iso",
+                           y="yP4iso", u="uP4iso"):
+    va, vb, vx, vxp, vy = _t(a), _t(b), _t(x), _t(xp), _t(y)
+    ab = somme_cardinale_binaire(va, vb)
+    seg_dom = E.intervalle_entiers(ZERO, vb)
+    bd = impl(appartient(vx, seg_dom),
+              appartient(somme_cardinale_binaire(va, vx), E.intervalle_entiers(va, ab)))
+    cards = et(est_cardinal(vx), est_cardinal(vxp))
+    st = impl(cards, _strict_card(va, vx, vxp))
+    inj = impl(cards, impl(egal(somme_cardinale_binaire(va, vx),
+                                somme_cardinale_binaire(va, vxp)), egal(vx, vxp)))
+    surj = impl(appartient(vy, E.intervalle_entiers(va, ab)),
+                existe(u, et(appartient(var(u), seg_dom),
+                             egal(somme_cardinale_binaire(va, var(u)), vy))))
+    return impl(et(est_entier(va), est_entier(vb)),
+                et(et(et(bd, st), inj), surj))
+
+
+def prop4_ordre_iso(a="aP4iso", b="bP4iso", x="xP4iso", xp="xpP4iso",
+                    y="yP4iso", u="uP4iso"):
+    """🎯 ⊢ ( est_entier a et est_entier b ) ⇒
+              ( (x∈[0,b] ⇒ a+x∈[a,a+b])
+                et ((card x et card x') ⇒ (x<x' ⇒ a+x<a+x'))
+                et ((card x et card x') ⇒ (a+x=a+x' ⇒ x=x'))
+                et (y∈[a,a+b] ⇒ (∃u)(u∈[0,b] et a+u=y)) ).
+       (CLOS, 0 hyp — Prop. 4 §III.5 : x↦a+x ISOMORPHISME D'ORDRE [0,b]→[a,a+b].)
+
+    Conjonction des quatre composantes CLOSES : bien-définie, strictement croissante,
+    injective, surjective, ré-employées sous la garde uniforme (est_entier a et
+    est_entier b).  (est_cardinal a déchargée par fini_implique_cardinal pour la
+    bien-définition.)  Énoncé combinatoire — l'application n'est pas réifiée."""
+    from bourbaki.entiers.ensembles_prop5_prop4_iii5 import prop4_translation_bien_definie
+    from bourbaki.entiers.ensembles_prop4_strict_iii5 import prop4_translation_stricte
+    va, vb, vx, vxp, vy = _t(a), _t(b), _t(x), _t(xp), _t(y)
+    ab = somme_cardinale_binaire(va, vb)
+    seg_dom = E.intervalle_entiers(ZERO, vb)
+
+    ante = et(est_entier(va), est_entier(vb))
+    h = N.assume(ante)
+    h_enta = conjonction_elim_gauche(h)
+    h_entb = conjonction_elim_droite(h)
+    card_a = N.modus_ponens(h_enta, fini_implique_cardinal(va))   # est_cardinal a
+
+    # (1) bien-définie : (card a et x∈[0,b]) ⇒ a+x∈[a,a+b] ; on décharge card a
+    bd_thm = prop4_translation_bien_definie(a, b, x)
+    h_xin = N.assume(appartient(vx, seg_dom))
+    ax_in = N.modus_ponens(conjonction_intro(card_a, h_xin), bd_thm)
+    bd = N.loi_deduction(appartient(vx, seg_dom), ax_in)         # x∈[0,b] ⇒ a+x∈[a,a+b]
+
+    # (2) strictement croissante : (est_entier a et card x et card x') ⇒ (x<x'⇒a+x<a+x')
+    st_thm = prop4_translation_stricte(a, x, xp)
+    cards = et(est_cardinal(vx), est_cardinal(vxp))
+    h_cards = N.assume(cards)
+    st_inner = N.modus_ponens(conjonction_intro(conjonction_intro(
+        h_enta, conjonction_elim_gauche(h_cards)), conjonction_elim_droite(h_cards)), st_thm)
+    st = N.loi_deduction(cards, st_inner)                        # (card x et card x') ⇒ (x<x'⇒a+x<a+x')
+
+    # (3) injective : même garde
+    inj_thm = prop4_translation_injective(a, x, xp)
+    h_cards2 = N.assume(cards)
+    inj_inner = N.modus_ponens(conjonction_intro(conjonction_intro(
+        h_enta, conjonction_elim_gauche(h_cards2)), conjonction_elim_droite(h_cards2)), inj_thm)
+    inj = N.loi_deduction(cards, inj_inner)
+
+    # (4) surjective : (est_entier a et est_entier b et y∈[a,a+b]) ⇒ (∃u)…
+    surj_thm = prop4_surjective(a, b, y, u)
+    h_yin = N.assume(appartient(vy, E.intervalle_entiers(va, ab)))
+    ex = N.modus_ponens(conjonction_intro(conjonction_intro(h_enta, h_entb), h_yin), surj_thm)
+    surj = N.loi_deduction(appartient(vy, E.intervalle_entiers(va, ab)), ex)
+
+    conj = conjonction_intro(conjonction_intro(conjonction_intro(bd, st), inj), surj)
+    res = N.loi_deduction(ante, conj)
+    assert res.conclusion == prop4_ordre_iso_enonce(a, b, x, xp, y, u), \
+        "prop4_ordre_iso : conclusion inattendue"
+    assert res.est_clos and not res.hypotheses, "prop4_ordre_iso : non close !"
+    return res
+
+
 __all__ = [
     "existe_complement_somme_cardinal", "existe_complement_somme_cardinal_enonce",
     "additive_order_cancel", "additive_order_cancel_enonce",
     "prop4_surjective", "prop4_surjective_enonce",
+    "prop4_ordre_iso", "prop4_ordre_iso_enonce",
 ]

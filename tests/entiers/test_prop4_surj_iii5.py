@@ -4,6 +4,7 @@ from bourbaki.entiers.ensembles_prop4_surj_iii5 import (
     existe_complement_somme_cardinal, existe_complement_somme_cardinal_enonce,
     additive_order_cancel, additive_order_cancel_enonce,
     prop4_surjective, prop4_surjective_enonce,
+    prop4_ordre_iso, prop4_ordre_iso_enonce,
 )
 
 
@@ -23,6 +24,12 @@ def test_prop4_surjective_close():
     t = prop4_surjective()
     assert t.est_clos and not t.hypotheses
     assert t.conclusion == prop4_surjective_enonce()
+
+
+def test_prop4_ordre_iso_close():
+    t = prop4_ordre_iso()
+    assert t.est_clos and not t.hypotheses
+    assert t.conclusion == prop4_ordre_iso_enonce()
 
 
 def test_theorie_inchangee():
