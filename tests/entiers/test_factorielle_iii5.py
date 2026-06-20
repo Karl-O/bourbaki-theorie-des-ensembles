@@ -1,6 +1,6 @@
 """Tests §III.5.8 — FACTORIELLE (E III.41, Déf. 2) : caractérisation récursive."""
 from bourbaki.logique.formule import app, var, egal, impl, pourtout
-from bourbaki.logique.noyau_abrege import theorie_ensembles
+from bourbaki.ensembles.ensembles_abrege import theorie_ensembles
 from bourbaki.entiers.ensembles_entiers import est_fini, successeur, ZERO, UN
 from bourbaki.cardinaux.arithmetique.ensembles_arith_cardinale import (
     produit_cardinal_binaire,
@@ -17,7 +17,7 @@ def _f(x):
 
 def test_theorie_22():
     factorielle_entier_de(_f)
-    assert len(theorie_ensembles()) == 22
+    assert len(theorie_ensembles().axiomes) == 22
 
 
 def test_factorielle_entier_de_conclusion():
