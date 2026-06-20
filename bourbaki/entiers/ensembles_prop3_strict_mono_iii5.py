@@ -388,7 +388,9 @@ def produit_strict_monotone(a="aP3", b="bP3", c="cP3", d="dP3"):
 
     # d·c ≠ 0  via Prop. 7 (d≠0 et c≠0 ⇒ d·c≠0)
     # prop7_produit_non_nul(d,c) : ¬(Card(d×c)=Card∅) ⟺ (¬(Card d=Card∅) et ¬(Card c=Card∅))
-    p7 = prop7_produit_non_nul(vd, vc)
+    _p7g = N.generalisation("Ap7m", N.generalisation("Bp7m",
+            prop7_produit_non_nul("Ap7m", "Bp7m")))
+    p7 = instancie(instancie(_p7g, vd), vc)
     # ¬(Card d=Card∅) = (d≠0) ; ¬(Card c=Card∅) = (c≠0)  — d, c sont des cardinaux.
     cd = conjonction_elim_gauche(h_ent_d)          # est_cardinal d
     cc = conjonction_elim_gauche(h_ent_c)          # est_cardinal c
@@ -515,11 +517,21 @@ def _distrib_droite(a, d, c, ca, cd, cc):
     #   puis c·(a+d) = Card(c×(a⊔d)) exige a+d=Card(a⊔d) DANS le produit → réécriture par
     #   congruence_terme avec l'égalité (a+d)=Card(a⊔d) [RÉFLEXIVE !].
     adc = produit_cardinal_binaire(ad, vc)         # (a+d)·c = Card((a+d)×c)
-    comm1 = _comm_t(ad, vc)    # Card((a+d)×c) = Card(c×(a+d))
-    # (a+d) == Card(a⊔d) littéralement (déf de somme_cardinale_binaire) → c×(a+d) == c×(a⊔d).
-    #   donc Card(c×(a+d)) == Card(c×(a⊔d)) SYNTAXIQUEMENT.  comm1 conclut déjà = Card(c×(a⊔d)).
-    chain_left = composer_egalites(comm1, lhs_dist)   # Card((a+d)×c) = c·a + c·d
-    #   (a+d)·c == Card((a+d)×c) (déf produit_cardinal_binaire) → adc == comm1.lhs syntaxiquement
+    comm1 = _comm_t(ad, vc)    # Card((a+d)×c) = Card(c×(a+d))   [c×(a+d) = c×Card(a⊔d)]
+    # PONT D'INVARIANCE : Card(c×(a+d)) = Card(c×(a⊔d)).  (a+d) = Card(a⊔d) est un
+    #   CARDINAL, ≠ le SET (a⊔d) ; produit_cardinal_bien_defini(c, a⊔d, c, a+d) sous
+    #   (Card c=c et Card(a⊔d)=a+d réflexif) donne Card(c×(a⊔d)) = c·(a+d) = Card(c×(a+d)).
+    from bourbaki.entiers.ensembles_prop3_produit_entier_iii5 import _pcbd_t
+    a_disj_d = somme_disjointe(va, vd)             # a⊔d  (SET)
+    card_c = N.modus_ponens(cc, _card_de_card_t(vc))   # Card c = c
+    refl_ad = N.reflexivite(ad)                    # Card(a⊔d) = a+d  (ad == Card(a⊔d))
+    bd = _pcbd_t(vc, a_disj_d, vc, ad)             # (Card c=c et Card(a⊔d)=a+d) ⇒ Card(c×(a⊔d))=c·(a+d)
+    c_times_ad_card = produit_cardinal_binaire(vc, ad)   # c·(a+d) = Card(c×(a+d))
+    eq_cad = N.modus_ponens(conjonction_intro(card_c, refl_ad), bd)  # Card(c×(a⊔d)) = Card(c×(a+d))
+    Card_c_disj = cardinal(E.produit(vc, a_disj_d))
+    eq_cad_sym = N.modus_ponens(eq_cad, symetrie(Card_c_disj, c_times_ad_card))  # Card(c×(a+d)) = Card(c×(a⊔d))
+    chain_pont = composer_egalites(comm1, eq_cad_sym)   # Card((a+d)×c) = Card(c×(a⊔d))
+    chain_left = composer_egalites(chain_pont, lhs_dist)   # Card((a+d)×c) = c·a + c·d
     # (3) c·a = a·c, c·d = d·c  (commut produit) puis a·c + d·c
     comm_ca = _comm_t(vc, va)  # Card(c×a) = Card(a×c)  = c·a = a·c
     comm_cd = _comm_t(vc, vd)  # Card(c×d) = Card(d×c)  = c·d = d·c
