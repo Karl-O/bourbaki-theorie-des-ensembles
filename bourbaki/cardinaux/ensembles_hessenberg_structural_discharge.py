@@ -173,10 +173,101 @@ def U_disjoint_S0(E_set="E", S="S0", U="Ucadre", z="z"):
     return res
 
 
+# ════════════════════════════════════════════════════════════════════════════
+#  (E) set→cardinal — S₀ ⊂ E  ⊢  Card S₀ ≤ Card E.
+#
+#  inf_egal_card_de_inclus : (S₀⊂E) ⇒ inf_egal_card(S₀,E).   [niveau ENSEMBLES]
+#  invariance de ≤ par équipotence (Eq(X,Card X), Prop 1) + transitivité :
+#     Card S₀ ~ S₀ ≤ E ~ Card E.   ⇒ inf_egal_card(Card S₀, Card E).
+# ════════════════════════════════════════════════════════════════════════════
+def _eq_implique_le_t(tX, tY):
+    """⊢ equipotent(X,Y) ⇒ inf_egal_card(X,Y)  pour des TERMES X,Y (CLOS)."""
+    from bourbaki.cardinaux.ensembles_subset_realise_close import (
+        equipotent_implique_inf_egal,
+    )
+    gen = N.generalisation("X", N.generalisation("Y",
+        equipotent_implique_inf_egal("X", "Y")))
+    return instancie(instancie(gen, _t(tX)), _t(tY))
+
+
+def _eq_card_le_set(tX):
+    """⊢ inf_egal_card(Card X, X).   (Card X ~ X via Eq(X,Card X) + symétrie.)"""
+    from bourbaki.cardinaux.ensembles_cardinaux_theoremes import (
+        equipotent_son_cardinal,
+    )
+    from bourbaki.cardinaux.ensembles_bijection import equipotence_symetrique
+    from bourbaki.cardinaux.ensembles_cardinaux import equipotent
+    vX = _t(tX)
+    cX = cardinal(vX)
+    # Eq(X, Card X)  (Prop 1, instanciée au terme X)
+    eq_x_cx = instancie(N.generalisation("X", equipotent_son_cardinal("X")), vX)
+    # symétrie : Eq(X,Card X) ⇒ Eq(Card X, X)   (instanciée aux termes X, Card X)
+    sym = instancie(instancie(N.generalisation("X", N.generalisation("Y",
+        equipotence_symetrique("F", "X", "Y"))), vX), cX)
+    eq_cx_x = N.modus_ponens(eq_x_cx, sym)                    # Eq(Card X, X)
+    return N.modus_ponens(eq_cx_x, _eq_implique_le_t(cX, vX))  # Card X ≤ X
+
+
+def _set_le_eq_card(tX):
+    """⊢ inf_egal_card(X, Card X).   (X ~ Card X via Eq(X,Card X).)"""
+    from bourbaki.cardinaux.ensembles_cardinaux_theoremes import (
+        equipotent_son_cardinal,
+    )
+    vX = _t(tX)
+    cX = cardinal(vX)
+    eq_x_cx = instancie(N.generalisation("X", equipotent_son_cardinal("X")), vX)  # Eq(X,Card X)
+    return N.modus_ponens(eq_x_cx, _eq_implique_le_t(vX, cX))  # X ≤ Card X
+
+
+def _le_trans_t(tX, tY, tZ):
+    """⊢ (X≤Y et Y≤Z) ⇒ X≤Z  pour des TERMES (transitivité instanciée)."""
+    from bourbaki.cardinaux.ensembles_cardinaux_props_restantes_ordre import (
+        inf_egal_transitive_general,
+    )
+    g = inf_egal_transitive_general("Xt", "Yt", "Zt")
+    return instancie(instancie(instancie(g, _t(tX)), _t(tY)), _t(tZ))
+
+
+def card_inclus_inf_egal(S="S0", E_set="E"):
+    """{ S₀ ⊂ E } ⊢ Card S₀ ≤ Card E.            [1 hyp HONNÊTE].
+
+    🎯 PONT set→cardinal (cat. E) : l'hyp honnête « Card S₀ ≤ Card E » de Hessenberg
+    est DÉRIVÉE de l'inclusion ensembliste S₀⊂E.  Chaîne d'invariance de ≤ par
+    équipotence (Prop 1, Eq(X,Card X)) :
+        Card S₀  ≤  S₀  ≤  E  ≤  Card E
+    via `inf_egal_card_de_inclus` (S₀⊂E ⇒ S₀≤E) et transitivité de ≤.  CLOS sous la
+    seule hyp S₀⊂E ; conclusion ∉ hyps ; theorie=22."""
+    from bourbaki.cardinaux.ensembles_clause_plus_petit_monotonie import (
+        inf_egal_card_de_inclus,
+    )
+    vE, vS = _t(E_set), _t(S)
+    cS, cE = cardinal(vS), cardinal(vE)
+    cible = inf_egal_card(cS, cE)
+
+    h_sub = N.assume(inclus(vS, vE))                         # S₀ ⊂ E
+    # S₀ ≤ E  (niveau ensembles)
+    S_le_E = N.modus_ponens(h_sub, inf_egal_card_de_inclus(S, E_set))
+    # Card S₀ ≤ S₀
+    cS_le_S = _eq_card_le_set(vS)
+    # E ≤ Card E
+    E_le_cE = _set_le_eq_card(vE)
+    # Card S₀ ≤ S₀ ≤ E  : transitivité
+    cS_le_E = N.modus_ponens(conjonction_intro(cS_le_S, S_le_E),
+                             _le_trans_t(cS, vS, vE))         # Card S₀ ≤ E
+    # Card S₀ ≤ E ≤ Card E : transitivité
+    res = N.modus_ponens(conjonction_intro(cS_le_E, E_le_cE),
+                         _le_trans_t(cS, vE, cE))             # Card S₀ ≤ Card E
+    assert res.conclusion == cible, \
+        f"card_inclus_inf_egal : conclusion inattendue\n{res.conclusion}\nvs\n{cible}"
+    assert res.conclusion not in res.hypotheses, "card_inclus_inf_egal : VACUOUS"
+    return res
+
+
 __all__ = [
     "bijection_dom",
     "bijection_image",
     "frame_dom_image",
     "U_non_vide",
     "U_disjoint_S0",
+    "card_inclus_inf_egal",
 ]

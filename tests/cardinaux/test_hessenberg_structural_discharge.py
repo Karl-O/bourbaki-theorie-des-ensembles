@@ -4,7 +4,7 @@ from bourbaki.logique.formule import (
 )
 from bourbaki.ensembles import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import (
-    cardinal, est_bijection_de,
+    cardinal, est_bijection_de, inf_egal_card,
 )
 import bourbaki.cardinaux.ensembles_hessenberg_structural_discharge as M
 
@@ -51,4 +51,12 @@ def test_U_disjoint_S0():
     vz = var("z")
     assert t.conclusion == pourtout("z", impl(appartient(vz, vU), non(appartient(vz, vS))))
     assert set(t.hypotheses) == {inclus(vU, E.difference(vE, vS))}
+    assert t.conclusion not in t.hypotheses
+
+
+def test_card_inclus_inf_egal():
+    t = M.card_inclus_inf_egal()
+    vE, vS = var("E"), var("S0")
+    assert t.conclusion == inf_egal_card(cardinal(vS), cardinal(vE))
+    assert set(t.hypotheses) == {inclus(vS, vE)}
     assert t.conclusion not in t.hypotheses
