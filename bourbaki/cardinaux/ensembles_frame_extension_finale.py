@@ -598,6 +598,126 @@ def extension_absurde(E_set="E", phi0="phi0", psi="psi", S="S0", U="Ucadre", u="
     return faux
 
 
+# ════════════════════════════════════════════════════════════════════════════
+#  (4e) CLÔTURE TRICHOTOMIE : { 𝔟≤a, ¬(𝔟<a) } ⊢ 𝔟=a.
+#       (𝔟<a := 𝔟≤a ∧ 𝔟≠a ; ¬(𝔟<a) avec 𝔟≤a ⇒ ¬(𝔟≠a) ⇒ 𝔟=a.)
+# ════════════════════════════════════════════════════════════════════════════
+def card_S0_egal_card_E(S="S0", E_set="E"):
+    """{ Card S₀ ≤ Card E,  ¬( Card S₀ < Card E ) } ⊢ Card S₀ = Card E.   [CLOS, hyps HONNÊTES].
+
+    🎯 La CLÔTURE de l'argument de Bourbaki (E.III.48) : le « CLAIM : Card(F)=𝔞 ».  Le
+    complément du maximal étant trop grand pour 𝔟<a (l'extension contredit la maximalité,
+    `extension_absurde`), on a ¬(𝔟<a) ; or 𝔟≤a (S₀⊂E) ; donc 𝔟=a (𝔟<a=𝔟≤a∧𝔟≠a, donc
+    ¬(𝔟<a)∧𝔟≤a ⇒ ¬(𝔟≠a) ⇒ 𝔟=a par élimination de la double négation).
+
+    Hyps HONNÊTES (jamais postulées) : 𝔟≤a (de S₀⊂E, équipotence/injection canonique),
+    ¬(𝔟<a) (conclusion de l'argument de contradiction, via `extension_absurde`).
+    Conclusion ∉ hyps ; theorie=22."""
+    vS, vE = _t(S), _t(E_set)
+    b, a = cardinal(vS), cardinal(vE)
+    lt = inf_strict_card(b, a)                             # 𝔟<a = (𝔟≤a et 𝔟≠a)
+    cible = egal(b, a)
+
+    h_le = N.assume(inf_egal_card(b, a))                   # 𝔟≤a            [HONNÊTE]
+    h_nlt = N.assume(non(lt))                              # ¬(𝔟<a)         [HONNÊTE]
+
+    # sous 𝔟≠a : 𝔟≤a ∧ 𝔟≠a = 𝔟<a, contredit ¬(𝔟<a) ⇒ ⊥.  Donc ¬(𝔟≠a).
+    h_ne = N.assume(non(cible))                            # 𝔟≠a  (pour réfuter)
+    lt_proof = conjonction_intro(h_le, h_ne)              # 𝔟<a
+    assert lt_proof.conclusion == lt
+    # ⊥ : ¬(𝔟<a) et 𝔟<a ⇒ n'importe quoi ; on vise ¬¬(𝔟=a)=¬(𝔟≠a).
+    cible_nn = non(non(cible))                            # ¬¬(𝔟=a)
+    faux = N.modus_ponens(lt_proof, N.modus_ponens(h_nlt,
+        N.s2(non(lt), cible_nn)))                         # ¬¬(𝔟=a)  (ex falso)
+    # décharge 𝔟≠a : (𝔟≠a) ⇒ ¬¬(𝔟=a)  — mais c'est ¬(𝔟≠a) qu'on veut ; en fait
+    # faux est SOUS h_ne ; on décharge h_ne pour obtenir (𝔟≠a)⇒¬¬(𝔟=a), puis ⊥.
+    # Plus direct : on a {¬(𝔟=a)} ⊢ ¬¬(𝔟=a) ; loi_deduction ⇒ (𝔟≠a)⇒¬¬(𝔟=a).
+    impl_ne_nn = N.loi_deduction(non(cible), faux)        # (𝔟≠a) ⇒ ¬¬(𝔟=a)
+    # (𝔟≠a)⇒¬(𝔟≠a) ⇒ ¬(𝔟≠a)  (auto-réfutation : A⇒¬A ⊢ ¬A).
+    # ¬¬(𝔟=a) = ¬(𝔟≠a) littéralement, donc impl_ne_nn : (𝔟≠a)⇒¬(𝔟≠a).
+    assert impl_ne_nn.conclusion == impl(non(cible), non(non(cible)))
+    # de P⇒¬P déduire ¬P :  ¬P ∨ ¬P via S3 sur (P⇒¬P)=(¬P∨¬P) ... en fait P⇒¬P = ¬P∨¬P
+    #   qui se simplifie ; on applique l'auto-réfutation standard.
+    nn = _auto_refutation(impl_ne_nn, non(cible))         # ⊢ ¬(𝔟≠a) = ¬¬(𝔟=a)
+    assert nn.conclusion == non(non(cible))
+    # tiers exclu (𝔟=a) ∨ ¬(𝔟=a) + cas : branche 1 triviale ; branche 2 ⊥ (nn).
+    from bourbaki.logique.tactiques.tactiques_abrege2 import tiers_exclu, cas
+    te = tiers_exclu(cible)                                # (𝔟=a) ∨ ¬(𝔟=a)
+    cas1 = N.loi_deduction(cible, N.assume(cible))         # (𝔟=a) ⇒ (𝔟=a)
+    h_ne2 = N.assume(non(cible))                           # ¬(𝔟=a)
+    faux2 = N.modus_ponens(h_ne2, N.modus_ponens(nn,
+        N.s2(non(non(cible)), cible)))                     # 𝔟=a  (ex falso : nn et ¬(𝔟=a))
+    cas2 = N.loi_deduction(non(cible), faux2)              # ¬(𝔟=a) ⇒ (𝔟=a)
+    res = cas(te, cas1, cas2)                              # 𝔟=a
+    assert res.conclusion == cible, \
+        f"card_S0_egal_card_E : conclusion inattendue\n{res.conclusion}\nvs\n{cible}"
+    assert res.conclusion not in res.hypotheses, "card_S0_egal_card_E : VACUOUS"
+    return res
+
+
+def _auto_refutation(impl_p_np, P):
+    """De ⊢ (P ⇒ ¬P) déduit ⊢ ¬P.   (P⇒¬P = ¬P∨¬P ; idempotence par S1/S3.)"""
+    # P⇒¬P  est  ¬P ∨ ¬P.  S1 : (¬P ∨ ¬P) ⇒ ¬P.
+    np = non(P)
+    s1 = N.s1(np)                                          # (¬P ∨ ¬P) ⇒ ¬P
+    return N.modus_ponens(impl_p_np, s1)
+
+
+def card_S0_egal_card_E_cible(S="S0", E_set="E"):
+    """ÉNONCÉ-cible (test miroir)."""
+    vS, vE = _t(S), _t(E_set)
+    return egal(cardinal(vS), cardinal(vE))
+
+
+# ════════════════════════════════════════════════════════════════════════════
+#  (5) hessenberg_a_carre_egal_a — ASSEMBLAGE FINAL : a²=a (Théorème 2).
+#      Branche Card S₀=Card E (card_S0_egal_card_E) + Card(S₀×S₀)=Card S₀
+#      (maximal_carre_egal) sur hessenberg_aa_egal_de_maximal.
+# ════════════════════════════════════════════════════════════════════════════
+def hessenberg_a_carre_egal_a(E_set="E", S="S0"):
+    """{ Card S₀ ≤ Card E,  ¬(Card S₀ < Card E),  Card(S₀×S₀)=Card S₀ }
+        ⊢ est_infini(Card E) ⇒ ( Card E · Card E = Card E ).   [hyps HONNÊTES].
+
+    🎯🎯 THÉORÈME 2 (HESSENBERG, E.III.48-49) : 𝔞²=𝔞 pour 𝔞 infini — ASSEMBLÉ depuis
+    l'EXTENSION FINALE du maximal.  `card_S0_egal_card_E` ferme le « CLAIM : Card(F)=𝔞 »
+    (l'extension du maximal contredit la maximalité dès que 𝔟<a, d'où ¬(𝔟<a), d'où 𝔟=a) ;
+    `hessenberg_aa_egal_de_maximal` (déjà clos sous Card S₀=Card E et Card(S₀×S₀)=Card S₀)
+    referme l'égalité a²=a.  La conclusion est LITTÉRALEMENT `enonce_hessenberg(E)`.
+
+    RÉSIDUS HONNÊTES (jamais postulés vrais ; fournis par l'argument de Zorn E.III.48) :
+      • Card S₀ ≤ Card E        (S₀⊂E) ;
+      • ¬(Card S₀ < Card E)     (= conclusion de l'argument de contradiction d'extension,
+        `extension_absurde` ; SES propres résidus — cadre/recollement/dom-img — sont
+        documentés dans les pièces (1)-(4d)) ;
+      • Card(S₀×S₀)=Card S₀     (φ₀ bijective ⇐ `maximal_carre_egal`).
+    theorie=22 ; non vacuous."""
+    from bourbaki.cardinaux.ensembles_hessenberg_maximal_card import (
+        hessenberg_aa_egal_de_maximal,
+    )
+    from bourbaki.cardinaux.ensembles_hessenberg import enonce_hessenberg
+    vE, vS = _t(E_set), _t(S)
+    cE, cS = cardinal(vE), cardinal(vS)
+    SxS = E.produit(vS, vS)
+
+    # Card S₀ = Card E  (clôture trichotomie, sous 𝔟≤a et ¬(𝔟<a)).
+    cS_eq_cE = card_S0_egal_card_E(S, E_set)              # {𝔟≤a, ¬(𝔟<a)} ⊢ Card S₀=Card E
+    assert cS_eq_cE.conclusion == egal(cS, cE)
+
+    # hessenberg_aa_egal_de_maximal : {Card S₀=Card E, Card(S₀×S₀)=Card S₀}
+    #                                  ⊢ est_infini(Card E) ⇒ Card E·Card E=Card E
+    haa = hessenberg_aa_egal_de_maximal(E_set, S)
+    # décharge Card S₀=Card E par card_S0_egal_card_E
+    haa = N.modus_ponens(cS_eq_cE, N.loi_deduction(egal(cS, cE), haa))
+
+    cible = enonce_hessenberg(E_set)
+    assert haa.conclusion == cible, \
+        f"hessenberg_a_carre_egal_a : conclusion inattendue\n{haa.conclusion}\nvs\n{cible}"
+    assert egal(cardinal(SxS), cS) in haa.hypotheses, \
+        "hessenberg_a_carre_egal_a : hyp Card(S₀×S₀)=Card S₀ absente"
+    assert haa.conclusion not in haa.hypotheses, "hessenberg_a_carre_egal_a : VACUOUS"
+    return haa
+
+
 __all__ = [
     "cadre_bijection",
     "cadre_bijection_cible",
@@ -611,4 +731,7 @@ __all__ = [
     "projection_seconde_t",
     "extension_force_egalite",
     "extension_absurde",
+    "card_S0_egal_card_E",
+    "card_S0_egal_card_E_cible",
+    "hessenberg_a_carre_egal_a",
 ]

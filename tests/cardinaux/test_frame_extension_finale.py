@@ -17,7 +17,10 @@ from bourbaki.cardinaux.ensembles_frame_extension_finale import (
     cadre_card_trois_b, cadre_card_trois_b_cible,
     phi_etendue_bijection, extension_dans_frame, extension_ordre,
     extension_force_egalite, extension_absurde,
+    card_S0_egal_card_E, card_S0_egal_card_E_cible,
+    hessenberg_a_carre_egal_a,
 )
+from bourbaki.cardinaux.ensembles_hessenberg import enonce_hessenberg
 
 
 def test_theorie_inchangee():
@@ -72,4 +75,20 @@ def test_extension_absurde():
     r = extension_absurde()
     assert r.conclusion not in r.hypotheses
     assert len(r.hypotheses) >= 1
+    assert len(E.theorie_ensembles().axiomes) == 22
+
+
+def test_card_S0_egal_card_E():
+    r = card_S0_egal_card_E()
+    assert r.conclusion == card_S0_egal_card_E_cible()
+    assert r.conclusion not in r.hypotheses
+    assert len(r.hypotheses) >= 1
+    assert len(E.theorie_ensembles().axiomes) == 22
+
+
+def test_hessenberg_a_carre_egal_a():
+    r = hessenberg_a_carre_egal_a()
+    assert r.conclusion == enonce_hessenberg("E")     # est_infini(Card E)⇒CardE·CardE=CardE
+    assert r.conclusion not in r.hypotheses
+    assert len(r.hypotheses) >= 1                      # résidus honnêtes
     assert len(E.theorie_ensembles().axiomes) == 22
