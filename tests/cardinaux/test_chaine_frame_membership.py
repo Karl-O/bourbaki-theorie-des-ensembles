@@ -27,6 +27,16 @@ def test_union_chaine_dans_frame():
     assert th.conclusion not in th.hypotheses        # non vacuous
 
 
+def test_frame_inductif_chaine():
+    from bourbaki.ordre.ensembles_zorn import est_inductif
+    from bourbaki.cardinaux.ensembles_hessenberg_hard import frame_pair, frame_ordre
+    from bourbaki.cardinaux.ensembles_chaine_frame_membership import frame_inductif_chaine
+    th = frame_inductif_chaine("E")
+    Gam, Fr = frame_ordre(var("E")), frame_pair(var("E"))
+    assert th.conclusion == est_inductif(Gam, Fr, "C", "m", "x", "y", "z")
+    assert th.conclusion not in th.hypotheses
+
+
 def test_theorie_inchangee():
     from bourbaki.ensembles.ensembles_abrege import theorie_ensembles
     assert len(theorie_ensembles().axiomes) == 22

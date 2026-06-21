@@ -171,7 +171,47 @@ def _instancie_membre(vE, p_term):
     return instancie(instancie(ax, vE), p_term)
 
 
+# ════════════════════════════════════════════════════════════════════════════
+#  (3) FRAME-INDUCTIF (chaîne) — re-export du `frame_inductif` clos, AVEC le
+#      diagnostic EXACT de l'obstruction qui empêche de décharger
+#      `enonce_chaine_majoree` inconditionnellement.
+# ════════════════════════════════════════════════════════════════════════════
+def frame_inductif_chaine(E_set="E", C="C", m="m", x="x", y="y", z="z"):
+    """{ est_ordre(Γ𝔉,𝔉), enonce_chaine_majoree(Γ𝔉,𝔉) } ⊢ est_inductif(Γ𝔉,𝔉).
+
+    = `frame_inductif` (déjà clos en amont) — RE-EXPORTÉ tel quel.  L'hypothèse
+    HONNÊTE `enonce_chaine_majoree` N'EST PAS déchargée par ce module ; voici
+    l'OBSTRUCTION EXACTE (REPORTÉE, jamais postulée vraie) :
+
+      enonce_chaine_majoree(Γ𝔉,𝔉) = (∀C)( chaine(Γ𝔉,𝔉,C) ⇒ (∃m) majorant(Γ𝔉,C,m,𝔉) ),
+      majorant(Γ𝔉,C,m,𝔉) = ( m∈𝔉 et (∀x)(x∈C ⇒ (x,m)∈Γ𝔉) ),  témoin m=(⋃S,⋃φ).
+
+      • OBSTRUCTION A (témoin abstrait) : C est quantifié UNIVERSELLEMENT, donc
+        ⋃S=⋃pr₁(C) et ⋃φ=⋃pr₂(C) sont des FONCTIONS de C ; produire le couple-témoin
+        m exige d'EXTRAIRE de chaque membre (S_i,φ_i)∈C ses projections et de les
+        unionner.  Cette construction (familles indexées par les membres de C) n'est
+        PAS disponible.  De surcroît la frame-membership `union_chaine_dans_frame`
+        ci-dessus est sous hyps HONNÊTES (compat/dirigée/injectifs + dom/inj/img-valeur
+        + ⋃S⊂E + ⋃S infini), elles-mêmes non déchargées pour une chaîne abstraite.
+
+      • OBSTRUCTION B (ordre opaque) : le second conjoint (∀x)(x∈C ⇒ (x,m)∈Γ𝔉)
+        exige (S_i,φ_i) ≤ (⋃S,⋃φ) dans `frame_ordre`.  Or `frame_ordre` est un TERME
+        OPAQUE (`E.app("hessenberg_frame_ordre",·)`) SANS aucun axiome définissant
+        l'appartenance (x,m)∈Γ𝔉 — il n'existe PAS d'`axiome_frame_ordre` dans le
+        dépôt (à la différence de `axiome_frame` pour 𝔉).  Donc (x,m)∈Γ𝔉 n'est PAS
+        établissable : la moitié « ordre » du majorant est hors d'atteinte.
+
+    Ce module ferme donc l'ASSEMBLAGE bijection (étape 1, fonctionnalité dérivée) et
+    la FRAME-MEMBERSHIP (étape 2, via l'axiome opaque 𝔉) ; la décharge de
+    `enonce_chaine_majoree` reste bloquée par A+B.  `frame_inductif` (et donc
+    `frame_inductif_chaine`) demeure CLOS sous ses deux hyps honnêtes ; conclusion ∉
+    hyps ; theorie=22."""
+    from bourbaki.cardinaux.ensembles_hessenberg_inductivite import frame_inductif
+    return frame_inductif(E_set, C, m, x, y, z)
+
+
 __all__ = [
     "union_chaine_est_bijection",
     "union_chaine_dans_frame",
+    "frame_inductif_chaine",
 ]
