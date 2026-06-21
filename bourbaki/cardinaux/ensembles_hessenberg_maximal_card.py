@@ -34,7 +34,9 @@ from bourbaki.cardinaux.arithmetique.ensembles_arith_cardinale import (
     produit_cardinal_binaire, _prop1_direct_t, produit_cardinal_bien_defini,
 )
 from bourbaki.cardinaux.ensembles_cardinaux_theoremes import inf_egal_reflexif
-from bourbaki.cardinaux.ensembles_hessenberg import enonce_hard_aa_inf_egal_a
+from bourbaki.cardinaux.ensembles_hessenberg import (
+    enonce_hard_aa_inf_egal_a, hessenberg_depuis_hard, enonce_hessenberg,
+)
 from bourbaki.entiers.ensembles_infinis import est_infini
 from bourbaki.logique.tactiques.tactiques_abrege2 import (
     instancie, conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
@@ -160,7 +162,47 @@ def hessenberg_a_carre_inf_egal(E_set="E", S="S0"):
     return res
 
 
+# ════════════════════════════════════════════════════════════════════════════
+#  (3) hessenberg_aa_egal_de_maximal — a²=a (Théorème 2) sous les 2 hyps honnêtes.
+#  Branche `hessenberg_a_carre_inf_egal` (≥ dur) sur le PONT `hessenberg_depuis_hard`
+#  (diagonale + Cantor–Bernstein closes), livrant l'égalité a²=a.
+# ════════════════════════════════════════════════════════════════════════════
+def hessenberg_aa_egal_de_maximal(E_set="E", S="S0"):
+    """{ Card(S₀)=Card(E),  Card(S₀×S₀)=Card(S₀) }
+        ⊢ est_infini(Card E) ⇒ ( Card E · Card E = Card E ).     [2 hyps honnêtes].
+
+    🎯🎯 THÉORÈME 2 (HESSENBERG, E.III.6.3) : 𝔞²=𝔞 pour 𝔞 infini — ASSEMBLÉ sous les
+    deux hypothèses honnêtes du maximal de Zorn (le maximal atteint Card E et son carré
+    vaut Card S₀).  `hessenberg_a_carre_inf_egal` fournit le ≥ dur (enonce_hard) ; le
+    pont `hessenberg_depuis_hard` (diagonale ≤ + Cantor–Bernstein, CLOS) referme
+    l'égalité.  La conclusion est LITTÉRALEMENT `enonce_hessenberg(E)`.
+
+    RÉSIDUS HONNÊTES (jamais postulés vrais ; à fournir par la conclusion de l'argument
+    de Zorn de Bourbaki, E.III.48) :
+       • Card(S₀)=Card(E)        — « CLAIM : Card(F)=𝔞 » (extension+contradiction) ;
+       • Card(S₀×S₀)=Card(S₀)    — φ₀ bijective (⇐ `maximal_carre_egal`).
+    theorie=22 ; non vacuous."""
+    vE = _t(E_set)
+    cE = cardinal(vE)
+    hard = hessenberg_a_carre_inf_egal(E_set, S)          # {2 hyps} ⊢ enonce_hard(E)
+    pont = hessenberg_depuis_hard(E_set)                  # enonce_hard(E) ⇒ enonce_hessenberg(E)
+    assert hard.conclusion == enonce_hard_aa_inf_egal_a(E_set), \
+        "hessenberg_aa_egal_de_maximal : enonce_hard inattendu"
+    res = N.modus_ponens(hard, pont)                      # enonce_hessenberg(E)
+
+    from bourbaki.cardinaux.ensembles_hessenberg import enonce_hessenberg
+    assert res.conclusion == enonce_hessenberg(E_set), \
+        f"hessenberg_aa_egal_de_maximal : conclusion inattendue\n{res.conclusion}"
+    cS = cardinal(_t(S))
+    SxS = E.produit(_t(S), _t(S))
+    assert egal(cS, cE) in res.hypotheses and egal(cardinal(SxS), cS) in res.hypotheses, \
+        "hessenberg_aa_egal_de_maximal : hyps honnêtes manquantes"
+    assert res.conclusion not in res.hypotheses, "hessenberg_aa_egal_de_maximal : VACUOUS"
+    return res
+
+
 __all__ = [
     "maximal_carre_egal",
     "hessenberg_a_carre_inf_egal",
+    "hessenberg_aa_egal_de_maximal",
 ]
