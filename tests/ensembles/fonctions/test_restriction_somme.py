@@ -42,6 +42,31 @@ def test_reunion_graphes_fonctionnelle_pivot():
         E.est_fonctionnel(vG), E.est_fonctionnel(vH), disj})
 
 
+def test_antecedent_dans_domaine_liant_frais():
+    """Liant ∃ FRAIS (y≠"y") : même CONCLUSION que le défaut (α-pont vers AXIOME_DOM)."""
+    th_def = antecedent_dans_domaine("u", "v", "F")
+    th_fr = antecedent_dans_domaine("u", "v", "F", y="yfrais")
+    assert th_fr.conclusion == th_def.conclusion
+    assert th_fr.hypotheses == frozenset()
+
+
+def test_reunion_graphes_fonctionnelle_temoins_frais():
+    """Pivot avec témoins FRAIS : conclusion α-équivalente (binders frais), 3 hyps."""
+    vG, vH = var("G"), var("H")
+    th = reunion_graphes_fonctionnelle("G", "H",
+                                       u="uu", v="vv", z="zz", y="yy")
+    # conclusion : est_fonctionnel-forme mais liée sur uu/vv/zz (α-équiv. de u/v/z)
+    attendu = pourtout("uu", pourtout("vv", pourtout("zz", impl(
+        et(appartient(E.couple(var("uu"), var("vv")), E.reunion(vG, vH)),
+           appartient(E.couple(var("uu"), var("zz")), E.reunion(vG, vH))),
+        egal(var("vv"), var("zz"))))))
+    assert th.conclusion == attendu
+    disj = pourtout("uu", non(et(appartient(var("uu"), E.dom(vG)),
+                                 appartient(var("uu"), E.dom(vH)))))
+    assert th.hypotheses == frozenset({
+        E.est_fonctionnel(vG), E.est_fonctionnel(vH), disj})
+
+
 def test_dom_reunion_graphes():
     th = dom_reunion_graphes("G", "H")
     vG, vH = var("G"), var("H")
