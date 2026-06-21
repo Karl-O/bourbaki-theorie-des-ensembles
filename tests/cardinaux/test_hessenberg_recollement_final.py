@@ -61,3 +61,23 @@ def test_negation_b_inf_strict_a():
     for hh in sorted(thm.hypotheses, key=str):
         print("  ", hh)
     assert len(E.theorie_ensembles().axiomes) == 22
+
+
+def test_hessenberg_a_carre_egal_a_inconditionnel():
+    thm = M.hessenberg_a_carre_egal_a_inconditionnel("E", "S0", "phi0", "psi",
+                                                     "Ucadre", "uwit")
+    cible = M.hessenberg_a_carre_egal_a_inconditionnel_cible("E")
+    assert thm.conclusion == cible
+    assert thm.conclusion not in thm.hypotheses
+    vS, vE = var("S0"), var("E")
+    b = cardinal(vS)
+    # ¬(𝔟<a) DOIT être déchargée (dérivée par negation_b_inf_strict_a)
+    assert non(inf_strict_card(b, cardinal(vE))) not in thm.hypotheses, \
+        "¬(𝔟<a) non déchargée"
+    # Card(S₀×S₀)=Card S₀ honnête présente
+    SxS = E.produit(vS, vS)
+    assert egal(cardinal(SxS), b) in thm.hypotheses
+    print("\nHYPS HONNÊTES hessenberg_a_carre_egal_a_inconditionnel:")
+    for hh in sorted(thm.hypotheses, key=str):
+        print("  ", hh)
+    assert len(E.theorie_ensembles().axiomes) == 22

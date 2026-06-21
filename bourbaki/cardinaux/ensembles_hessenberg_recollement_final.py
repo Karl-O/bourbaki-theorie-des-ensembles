@@ -260,11 +260,67 @@ def negation_b_inf_strict_a_cible(E_set="E", S="S0"):
     return non(inf_strict_card(cardinal(vS), cardinal(vE)))
 
 
+# ════════════════════════════════════════════════════════════════════════════
+#  (D) hessenberg_a_carre_egal_a_inconditionnel — a²=a, ¬(𝔟<a) DÉCHARGÉE.
+#      Plombe `negation_b_inf_strict_a` dans `hessenberg_a_carre_egal_a`
+#      (qui exige {𝔟≤a, ¬(𝔟<a), Card(S₀×S₀)=Card S₀}), déchargeant ¬(𝔟<a).
+# ════════════════════════════════════════════════════════════════════════════
+def hessenberg_a_carre_egal_a_inconditionnel(E_set="E", S="S0", phi0="phi0",
+                                             psi="psi", U="Ucadre", u="uwit"):
+    """⊢ ( 𝔟≤a, Card(S₀×S₀)=Card S₀, + les hyps honnêtes de negation_b_inf_strict_a )
+          ⇒ ( est_infini(Card E) ⇒ Card E·Card E = Card E ).     [hyps HONNÊTES].
+
+    🎯🎯 THÉORÈME 2 (HESSENBERG) avec le « CLAIM : Card S₀=Card E » FERMÉ par la
+    CONTRADICTION d'extension : `negation_b_inf_strict_a` fournit ¬(𝔟<a) (sous ses hyps
+    arithmétiques+géométriques honnêtes), qu'on DÉCHARGE dans `hessenberg_a_carre_egal_a`.
+
+    Reste alors comme hypothèses honnêtes :
+      • 𝔟≤a  (= Card S₀ ≤ Card E, de S₀⊂E ; RÉSIDU : le pont set→cardinal de
+        `inf_egal_card_de_inclus` n'est pas réécrit ici — porté honnêtement) ;
+      • Card(S₀×S₀)=Card S₀  (= `maximal_carre_egal`, φ₀ bijective) ;
+      • toutes les hyps honnêtes de `negation_b_inf_strict_a` (arithmétiques : S₀⊂E,
+        est_cardinal(𝔟), est_infini(𝔟), 𝔟·𝔟=𝔟 ; géométriques : Z=S₀, u∈U, U∩S₀=∅).
+    a²=a JAMAIS supposé ; ¬(𝔟<a) DÉRIVÉE (déchargée).  Conclusion ∉ hyps ; theorie=22."""
+    from bourbaki.cardinaux.ensembles_frame_extension_finale import (
+        hessenberg_a_carre_egal_a,
+    )
+    from bourbaki.cardinaux.ensembles_hessenberg import enonce_hessenberg
+    vE, vS = _t(E_set), _t(S)
+    b, a = cardinal(vS), cardinal(vE)
+    nlt = non(inf_strict_card(b, a))                     # ¬(𝔟<a)
+
+    haa = hessenberg_a_carre_egal_a(E_set, S)            # {𝔟≤a, ¬(𝔟<a), carré} ⊢ a²=a (sous est_inf)
+    assert nlt in haa.hypotheses, \
+        f"hessenberg_a_carre_egal_a_inconditionnel : ¬(𝔟<a) absente de haa.hypotheses"
+
+    neg = negation_b_inf_strict_a(E_set, S, phi0, psi, U, u)   # ⊢ ¬(𝔟<a) sous hyps honnêtes
+    assert neg.conclusion == nlt
+
+    res = N.modus_ponens(neg, N.loi_deduction(nlt, haa))  # ¬(𝔟<a) DÉCHARGÉE
+
+    cible = enonce_hessenberg(E_set)
+    assert res.conclusion == cible, \
+        f"hessenberg_a_carre_egal_a_inconditionnel : conclusion inattendue\n{res.conclusion}\nvs\n{cible}"
+    assert nlt not in res.hypotheses, \
+        "hessenberg_a_carre_egal_a_inconditionnel : ¬(𝔟<a) non déchargée"
+    assert res.conclusion not in res.hypotheses, \
+        "hessenberg_a_carre_egal_a_inconditionnel : VACUOUS"
+    return res
+
+
+def hessenberg_a_carre_egal_a_inconditionnel_cible(E_set="E"):
+    """ÉNONCÉ-cible (test miroir)."""
+    from bourbaki.cardinaux.ensembles_hessenberg import enonce_hessenberg
+    return enonce_hessenberg(_t(E_set))
+
+
 __all__ = [
     "_b_le_complement",
     "_b_le_complement_cible",
     "negation_b_inf_strict_a",
     "negation_b_inf_strict_a_cible",
+    "hessenberg_a_carre_egal_a_inconditionnel",
+    "hessenberg_a_carre_egal_a_inconditionnel_cible",
     "produit_b",
     "somme_b",
 ]
