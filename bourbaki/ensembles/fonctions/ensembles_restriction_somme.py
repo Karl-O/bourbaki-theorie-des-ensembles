@@ -67,16 +67,28 @@ def membre_reunion_graphes(g="G", h="H", z="z"):
 # ── (u,v)∈F ⇒ u∈dom F ─────────────────────────────────────────────────────────
 def antecedent_dans_domaine(u="u", v="v", f="F", y="y"):
     """⊢ ((u,v) ∈ F) ⇒ (u ∈ dom F).   (un couple de F atteste l'antécédent dans le
-    domaine ; u,v,f noms ou termes.  Liant interne 'y' du domaine — paramétrable.)"""
+    domaine ; u,v,f noms ou termes.  Liant interne du domaine — paramétrable via `y`.)
+
+    Avec le défaut `y="y"`, le pas S5 produit directement `(∃y)((u,y)∈F)`, la forme
+    EXACTE du membre droit de AXIOME_DOM (qui fixe le liant « y ») : aucun pont, build
+    BYTE-IDENTIQUE à l'historique.  Avec un liant FRAIS (`y≠"y"`, choisi par l'appelant
+    pour éviter une τ-capture du témoin/liant dans F), on α-convertit le `(∃frais)…`
+    obtenu vers le `(∃y)…` requis par AXIOME_DOM (`alpha_bridge`, renommage de liant ∃
+    DÉRIVÉ) — la conclusion reste la même."""
     vu, vv, vf = _t(u), _t(v), _t(f)
     cpl = E.couple(vu, vv)
     huv = N.assume(appartient(cpl, vf))                       # (u,v)∈F
-    # (∃y)((u,y)∈F) par S5, témoin y:=v
+    # (∃y)((u,y)∈F) par S5, témoin y:=v, sur le liant (paramétrable) `y`
     body = appartient(E.couple(vu, var(y)), vf)              # (u,y)∈F
-    ex = N.modus_ponens(huv, N.s5(body, vv, y))             # (∃y)((u,y)∈F)
-    # AXIOME_DOM : u∈dom F ⇔ (∃y)((u,y)∈F)
+    ex = N.modus_ponens(huv, N.s5(body, vv, y))             # (∃<y>)((u,<y>)∈F)
+    # AXIOME_DOM : u∈dom F ⇔ (∃y)((u,y)∈F)   (liant FIXÉ « y »)
     ax_dom = N.axiome(E.theorie_ensembles(), E.AXIOME_DOM)
     car = instancie(instancie(ax_dom, vf), vu)               # u∈dom F ⇔ (∃y)((u,y)∈F)
+    car_exists = antecedent_consequent(equivalence_arriere(car).conclusion)[0]  # (∃y)((u,y)∈F)
+    # si le liant fourni n'est pas « y », α-convertir vers la forme de AXIOME_DOM
+    if ex.conclusion != car_exists:
+        from bourbaki.logique.tactiques.ensembles_alpha_bridge import alpha_bridge
+        ex = alpha_bridge(ex, car_exists)                    # (∃y)((u,y)∈F)
     u_in_dom = N.modus_ponens(ex, equivalence_arriere(car))  # u∈dom F
     return N.loi_deduction(appartient(cpl, vf), u_in_dom)
 
