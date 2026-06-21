@@ -305,16 +305,40 @@ def phi_etendue_bijection(phi0="phi0", psi="psi", S="S0", U="Ucadre"):
     domR = E.reunion(E.dom(vphi0), E.dom(vpsi))
     assert inj.conclusion == E.injective_dans(phi1, domR)
 
-    # hyps honnêtes : dom(φ₁)=Z×Z et image(φ₁,Z×Z)=Z.  On les utilise pour réécrire
-    #   injective_dans(φ₁, domφ₀∪domψ) en injective_dans(φ₁, Z×Z) et pour le 4ᵉ conjoint.
-    h_dom = N.assume(egal(E.dom(phi1), ZxZ))                # dom(φ₁)=Z×Z       [HONNÊTE]
-    h_img = N.assume(egal(E.image(phi1, ZxZ), Z))          # image(φ₁,Z×Z)=Z   [HONNÊTE]
-    # domφ₀∪domψ = dom(φ₁) (dom_reunion_graphes, symétrisé) = Z×Z (h_dom).
+    # dom(φ₁)=Z×Z et image(φ₁,Z×Z)=Z — DÉRIVÉS via les corollaires GAP A
+    #   (dom_reunion_egale_cible / image_reunion_egale_cible) à partir d'hyps
+    #   STRUCTURELLES PLUS PRIMITIVES sur les témoins (dom φ₀=S₀², dom ψ=F, S₀²∪F=Z² ;
+    #   img φ₀=imgG, img ψ=imgH, imgG∪imgH=Z).  Le pont couple→égalité-d'ensembles
+    #   GLOBAL est ainsi FERMÉ (lemmes généraux clos) ; ne subsistent que ces hyps
+    #   structurelles (dom/image des bijections-témoins, identités géométriques),
+    #   genuinement honnêtes (fournies par l'argument de Zorn E.III.48).
+    from bourbaki.ensembles.fonctions.ensembles_dom_image_reunion import (
+        dom_reunion_egale_cible, image_reunion_egale_cible,
+    )
     from bourbaki.ensembles.fonctions.ensembles_restriction_somme import dom_reunion_graphes
+    Fcadre = cadre_ensemble(S, U)                           # F = cadre Z²∖S₀²
+    SxS = E.produit(vS, vS)
+    domG, domH = E.dom(vphi0), E.dom(vpsi)
+    imgG, imgH = E.image(vphi0, domG), E.image(vpsi, domH)
+    # GAP A (dom) : {dom φ₀=S₀², dom ψ=F, S₀²∪F=Z×Z} ⊢ dom(φ₁)=Z×Z.
+    h_dom = dom_reunion_egale_cible(vphi0, vpsi, SxS, Fcadre, ZxZ)
+    assert h_dom.conclusion == egal(E.dom(phi1), ZxZ)
+    # GAP A (image) : {img φ₀=imgG, img ψ=imgH, imgG∪imgH=Z} ⊢ image(φ₁,domR)=Z,
+    #   puis réécrit domR→Z×Z (h_dom) en image(φ₁,Z×Z)=Z.
+    h_img_domR = image_reunion_egale_cible(vphi0, vpsi, imgG, imgH, Z)
+    assert h_img_domR.conclusion == egal(E.image(phi1, domR), Z)
+    domR_eq_ZxZ_for_img = composer_egalites(
+        N.modus_ponens(dom_reunion_graphes(vphi0, vpsi), symetrie(E.dom(phi1), domR)),
+        h_dom)                                              # domR = Z×Z
+    s6img = N.s6(domR, ZxZ, "wimg", egal(E.image(phi1, var("wimg")), Z))
+    h_img = N.modus_ponens(h_img_domR, equivalence_avant(
+        N.modus_ponens(domR_eq_ZxZ_for_img, s6img)))        # image(φ₁,Z×Z)=Z
+    assert h_img.conclusion == egal(E.image(phi1, ZxZ), Z)
+    # domφ₀∪domψ = dom(φ₁) (dom_reunion_graphes, symétrisé) = Z×Z (h_dom).
     dom_rg = dom_reunion_graphes(vphi0, vpsi)               # dom(φ₁) = domφ₀∪domψ
     assert dom_rg.conclusion == egal(E.dom(phi1), domR)
-    domR_eq_dom = N.modus_ponens(dom_rg, symetrie(E.dom(phi1), domR))  # domφ₀∪domψ = dom(φ₁)
-    domR_eq_ZxZ = composer_egalites(domR_eq_dom, h_dom)    # domφ₀∪domψ = Z×Z
+    domR_eq_dom2 = N.modus_ponens(dom_rg, symetrie(E.dom(phi1), domR))  # domφ₀∪domψ = dom(φ₁)
+    domR_eq_ZxZ = composer_egalites(domR_eq_dom2, h_dom)    # domφ₀∪domψ = Z×Z
     # réécrire injective_dans(φ₁, domφ₀∪domψ) → injective_dans(φ₁, Z×Z) via S6.
     s6inj = N.s6(domR, ZxZ, "winj", E.injective_dans(phi1, var("winj")))
     inj_ZxZ = N.modus_ponens(inj, equivalence_avant(N.modus_ponens(domR_eq_ZxZ, s6inj)))
