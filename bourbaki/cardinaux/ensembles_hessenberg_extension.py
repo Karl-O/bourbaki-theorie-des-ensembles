@@ -215,7 +215,154 @@ def complement_grand_cible(E_set="E", S="S0"):
     return non(inf_egal_card(cR, cS))
 
 
+# ════════════════════════════════════════════════════════════════════════════════
+#  (2)  existe_sous_ensemble_cardinal — réaliser un cardinal c ≤ Card A comme un
+#       SOUS-ENSEMBLE.
+#
+#  CŒUR CLOS (étape interne) : { est_cardinal(c), c ≤ Card A }
+#                              ⊢ (∃U)( U ⊂ Card A  et  Card U = c ).
+#  c'est la construction de l'IMAGE Im := F⟨c⟩ ⊂ Card A d'un témoin d'injection
+#  F : c ↪ Card A, avec Card Im = c (injection_donne_equipotent_image + Prop 1 +
+#  Card c = c).  EXACTEMENT le motif de existe_complement_depuis_inf_egal (Prop 13).
+#  NB : le sous-ensemble vit dans Card A (le cardinal, un τ-ensemble), pas dans A.
+# ════════════════════════════════════════════════════════════════════════════════
+from bourbaki.cardinaux.ensembles_realisation_segment_close import (
+    injection_donne_equipotent_image,
+)
+from bourbaki.cardinaux.arithmetique.ensembles_arith_somme import _prop1_direct_t
+from bourbaki.cardinaux.arithmetique.ensembles_copie_marquee import _eq_sym_t
+from bourbaki.cardinaux.ensembles_cardinaux_theoremes import equipotent_son_cardinal
+
+
+def _cardinal_est_son_cardinal_t(tX):
+    return _cardinal_est_son_cardinal(_t(tX))
+
+
+def existe_sous_ensemble_cardinal_dans_card(c="cE", A="AE", U="UE"):
+    """⊢ ( est_cardinal(c)  et  c ≤ Card A )  ⇒  (∃U)( U ⊂ Card A  et  Card U = c ).
+
+    🎯 CŒUR CLOS de la réalisation d'un cardinal comme sous-ensemble — mais DANS le
+    cardinal Card A (un τ-ensemble équipotent à A), PAS dans A.  Témoin U := image(F,c)
+    avec F : c ↪ Card A (témoin de c≤Card A).  Im ⊂ Card A (4ᵉ conjoint est_injection_de) ;
+    Card Im = Card c = c (injection_donne_equipotent_image + Prop 1 + est_cardinal(c)).
+    Motif IDENTIQUE à existe_complement_depuis_inf_egal (Prop 13).  Gardes honnêtes :
+    est_cardinal(c), c ≤ Card A.  theorie=22, NON vacuous."""
+    vc, vA = _t(c), _t(A)
+    cardA = cardinal(vA)
+    Uname = U if isinstance(U, str) else U.nom
+    inj_F = est_injection_de(var("F"), vc, cardA)
+
+    ante = et(est_cardinal(vc), inf_egal_card(vc, cardA))
+    h = N.assume(ante)
+    h_card_c = conjonction_elim_gauche(h)                   # est_cardinal(c)
+    h_le = conjonction_elim_droite(h)                       # c ≤ Card A
+
+    wit = N.modus_ponens(h_le, N.existe_temoin(inj_F, "F"))   # est_injection_de(τF, c, Card A)
+    Ft = tau("F", inj_F)
+    Im = E.image(Ft, vc)                                    # Im = F⟨c⟩
+    Im_sub = conjonction_elim_droite(wit)                   # Im ⊂ Card A
+    eq_c_Im = N.modus_ponens(wit, injection_donne_equipotent_image(Ft, vc, cardA))   # Eq(c, Im)
+
+    # Card Im = c
+    eq_Im_c = N.modus_ponens(eq_c_Im, _eq_sym_t(vc, Im))    # Eq(Im, c)
+    cardIm_eq_cardc = N.modus_ponens(eq_Im_c, _prop1_direct_t(Im, vc))   # Card Im = Card c
+    cardc_eq_c = N.modus_ponens(h_card_c, _cardinal_est_son_cardinal_t(vc))   # Card c = c
+    cardIm_eq_c = composer_egalites(cardIm_eq_cardc, cardc_eq_c)   # Card Im = c
+
+    # (∃U)( U ⊂ Card A  et  Card U = c )
+    corps = et(inclus(var(Uname), cardA), egal(cardinal(var(Uname)), vc))
+    body_Im = et(Im_sub, cardIm_eq_c)
+    conj = conjonction_intro(Im_sub, cardIm_eq_c)
+    assert conj.conclusion == et(inclus(Im, cardA), egal(cardinal(Im), vc))
+    ex = N.modus_ponens(conj, N.s5(corps, Im, Uname))       # (∃U)(U⊂Card A et Card U=c)
+    res = N.loi_deduction(ante, ex)
+
+    cible = impl(ante, existe(Uname, corps))
+    assert res.conclusion == cible, \
+        f"existe_sous_ensemble_cardinal_dans_card : conclusion inattendue\n{res.conclusion}"
+    assert res.conclusion not in res.hypotheses, "VACUOUS"
+    return res
+
+
+def existe_sous_ensemble_cardinal_dans_card_cible(c="cE", A="AE", U="UE"):
+    """ÉNONCÉ-cible (test miroir)."""
+    vc, vA = _t(c), _t(A)
+    cardA = cardinal(vA)
+    Uname = U if isinstance(U, str) else U.nom
+    corps = et(inclus(var(Uname), cardA), egal(cardinal(var(Uname)), vc))
+    return impl(et(est_cardinal(vc), inf_egal_card(vc, cardA)), existe(Uname, corps))
+
+
+# ════════════════════════════════════════════════════════════════════════════════
+#  existe_sous_ensemble_cardinal — la VERSION CIBLE (sous-ensemble de A lui-même).
+#  RÉSIDU HONNÊTE ISOLÉ : le TRANSPORT du sous-ensemble de Card A vers A via la
+#  bijection Eq(Card A, A).  Voir bloc REPORT.
+# ════════════════════════════════════════════════════════════════════════════════
+def _transport_sous_ensemble_hyp(c, A, U, V):
+    """ÉNONCÉ du RÉSIDU honnête `transport_sous_ensemble` :
+
+        (∃U)( U ⊂ Card A  et  Card U = c )  ⇒  (∃V)( V ⊂ A  et  Card V = c ).
+
+    VRAI (la bijection canonique g : Card A → A, témoin de Eq(Card A, A) symétrisé de
+    equipotent_son_cardinal, envoie U sur g⟨U⟩ ⊂ A avec Card g⟨U⟩ = Card U = c), mais sa
+    PREUVE exige l'extraction-témoin de la bijection + image directe d'une partie + son
+    équipotence (image_reciproque_image / composition d'injections).  ISOLÉ ici, JAMAIS
+    postulé vrai : déchargé en hypothèse explicite par loi_deduction."""
+    vc, vA = _t(c), _t(A)
+    cardA = cardinal(vA)
+    Un = U if isinstance(U, str) else U.nom
+    Vn = V if isinstance(V, str) else V.nom
+    src = existe(Un, et(inclus(var(Un), cardA), egal(cardinal(var(Un)), vc)))
+    dst = existe(Vn, et(inclus(var(Vn), vA), egal(cardinal(var(Vn)), vc)))
+    return impl(src, dst)
+
+
+def existe_sous_ensemble_cardinal(c="cE", A="AE", U="UE", V="VE"):
+    """{ transport_sous_ensemble(c,A) }  ⊢
+        ( est_cardinal(c)  et  c ≤ Card A )  ⇒  (∃V)( V ⊂ A  et  Card V = c ).
+
+    🎯 RÉALISATION d'un cardinal c ≤ Card A comme SOUS-ENSEMBLE de A (E.III.48, pièce de
+    l'argument d'extension : choisir U ⊂ E∖S₀ avec Card U = 𝔟).  Le CŒUR — produire un
+    sous-ensemble de Card A de cardinal c — est CLOS
+    (existe_sous_ensemble_cardinal_dans_card).  La seule étape RÉSIDUELLE, le TRANSPORT
+    de Card A vers A via la bijection canonique Eq(Card A, A), est ISOLÉE en l'hypothèse
+    HONNÊTE `transport_sous_ensemble` (jamais postulée vraie ; cf. REPORT).  theorie=22,
+    NON vacuous."""
+    vc, vA = _t(c), _t(A)
+    cardA = cardinal(vA)
+    Vn = V if isinstance(V, str) else V.nom
+    ante = et(est_cardinal(vc), inf_egal_card(vc, cardA))
+
+    h = N.assume(ante)
+    core = existe_sous_ensemble_cardinal_dans_card(c, A, U)    # ante ⇒ (∃U)(U⊂Card A et Card U=c)
+    sub_in_card = N.modus_ponens(h, core)                      # (∃U)(U⊂Card A et Card U=c)
+    transp = N.assume(_transport_sous_ensemble_hyp(c, A, U, V))   # HYP HONNÊTE
+    sub_in_A = N.modus_ponens(sub_in_card, transp)             # (∃V)(V⊂A et Card V=c)
+    res = N.loi_deduction(ante, sub_in_A)
+
+    cible = impl(ante, existe(Vn, et(inclus(var(Vn), vA), egal(cardinal(var(Vn)), vc))))
+    assert res.conclusion == cible, \
+        f"existe_sous_ensemble_cardinal : conclusion inattendue\n{res.conclusion}\nvs\n{cible}"
+    assert _transport_sous_ensemble_hyp(c, A, U, V) in res.hypotheses, \
+        "existe_sous_ensemble_cardinal : hyp transport absente"
+    assert res.conclusion not in res.hypotheses, "existe_sous_ensemble_cardinal : VACUOUS"
+    return res
+
+
+def existe_sous_ensemble_cardinal_cible(c="cE", A="AE", U="UE", V="VE"):
+    """ÉNONCÉ-cible (test miroir) de existe_sous_ensemble_cardinal."""
+    vc, vA = _t(c), _t(A)
+    cardA = cardinal(vA)
+    Vn = V if isinstance(V, str) else V.nom
+    ante = et(est_cardinal(vc), inf_egal_card(vc, cardA))
+    return impl(ante, existe(Vn, et(inclus(var(Vn), vA), egal(cardinal(var(Vn)), vc))))
+
+
 __all__ = [
     "complement_grand",
     "complement_grand_cible",
+    "existe_sous_ensemble_cardinal_dans_card",
+    "existe_sous_ensemble_cardinal_dans_card_cible",
+    "existe_sous_ensemble_cardinal",
+    "existe_sous_ensemble_cardinal_cible",
 ]

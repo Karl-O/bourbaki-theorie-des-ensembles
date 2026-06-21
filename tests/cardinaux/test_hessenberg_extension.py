@@ -2,6 +2,9 @@
 from bourbaki.ensembles import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_hessenberg_extension import (
     complement_grand, complement_grand_cible,
+    existe_sous_ensemble_cardinal_dans_card,
+    existe_sous_ensemble_cardinal_dans_card_cible,
+    existe_sous_ensemble_cardinal, existe_sous_ensemble_cardinal_cible,
 )
 
 
@@ -25,3 +28,19 @@ def test_complement_grand_clos_et_cible():
     assert inclus(vS, vE) in thm.hypotheses
     assert egal(somme_cardinale_binaire(cS, cS), cS) in thm.hypotheses
     assert inf_strict_card(cS, cE) in thm.hypotheses
+
+
+def test_existe_sous_ensemble_dans_card_clos():
+    thm = existe_sous_ensemble_cardinal_dans_card()
+    assert thm.conclusion == existe_sous_ensemble_cardinal_dans_card_cible()
+    assert thm.est_clos
+    assert thm.conclusion not in thm.hypotheses
+
+
+def test_existe_sous_ensemble_cardinal_conditionnel():
+    thm = existe_sous_ensemble_cardinal()
+    assert thm.conclusion == existe_sous_ensemble_cardinal_cible()
+    assert thm.conclusion not in thm.hypotheses
+    # exactement 1 hyp honnête : le transport
+    from bourbaki.cardinaux.ensembles_hessenberg_extension import _transport_sous_ensemble_hyp
+    assert _transport_sous_ensemble_hyp("cE", "AE", "UE", "VE") in thm.hypotheses
