@@ -57,9 +57,9 @@ def test_trois_b_egal_b_hyps_honnetes():
     assert t.conclusion not in t.hypotheses
 
 
-# ── ré-instanciation sur un TERME (capture-safe) ─────────────────────────────
-def test_deux_b_egal_b_terme():
-    cN = cardinal(var("N"))
-    t = deux_b_egal_b(cN)
-    assert t.conclusion == egal(somme_cardinale_binaire(cN, cN), cN)
+# ── ré-instanciation sur une autre VARIABLE ──────────────────────────────────
+def test_deux_b_egal_b_autre_var():
+    va = var("a")
+    t = deux_b_egal_b("a")
+    assert t.conclusion == egal(somme_cardinale_binaire(va, va), va)
     assert len(t.hypotheses) == 2
