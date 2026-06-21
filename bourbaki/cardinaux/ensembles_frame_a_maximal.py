@@ -44,6 +44,7 @@ from bourbaki.logique.tactiques.tactiques_abrege_egalite import (
     symetrie, congruence_terme,
 )
 from bourbaki.logique.tactiques.tactiques_abrege_quantif import existe_elimination
+from bourbaki.logique.tactiques.ensembles_alpha_bridge import alpha_bridge
 from bourbaki.ensembles.fonctions.ensembles_projections import projection_premiere
 
 from bourbaki.entiers.ensembles_entiers import est_fini_ensemble
@@ -276,7 +277,13 @@ def frame_a_maximal(E_set="E"):
 
     # composants déchargeants, binders ALIGNÉS sur ceux de `zorn` (x,y,z / C,m,x,y,z).
     ordre = _frame_ordre_xyz(E_set)                        # est_ordre(Γ𝔉,𝔉,x,y,z)
-    induct = frame_inductif_clean(E_set, "C", "m", "x", "y", "z")  # est_inductif(Γ𝔉,𝔉,C,m,x,y,z)
+    # ⚠️ τ-HYGIÈNE : frame_inductif_clean(.,x="x") déclenche une CAPTURE interne (le τ
+    #   τx((∃y)(x=paire…)) du témoin de chaîne collisionne avec le point x → @0, et la S5
+    #   de membre_donne_inclus_premiere échoue).  On le construit donc avec le binder SÛR
+    #   "xmaj" (cas qui passe) puis on α-convertit est_inductif(.,xmaj,..) → (.,x,..) via
+    #   alpha_bridge — les deux formules sont α-équivalentes (xmaj/x = même binder lié).
+    induct_safe = frame_inductif_clean(E_set, "C", "m", "xmaj", "y", "z")  # est_inductif(.,xmaj,y,z)
+    induct = alpha_bridge(induct_safe, est_inductif(Gam, Fr, "C", "m", "x", "y", "z"))
     h_nv = N.assume(enonce_non_vide(Fr, "x"))              # 𝔉(E)≠∅(x)             [HONNÊTE]
 
     conj = conjonction_intro(conjonction_intro(ordre, induct), h_nv)
