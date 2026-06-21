@@ -16,6 +16,25 @@ Ce module construit, depuis la bijection φ₀ du maximal, le CŒUR CARDINAL :
   • `hessenberg_a_carre_inf_egal` — Card(S₀)=Card(E) et Card(S₀×S₀)=Card S₀
                                     ⇒ Card E · Card E ≤ Card E  (= enonce_hard).
 
+OBSTRUCTION PRÉCISE — la pièce `trois_b_egal_b` (3𝔟=𝔟) ET le « CLAIM : Card(S₀)=Card(E) »
+(extension+contradiction) restent HONNÊTEMENT non assemblés.  Le verrou EXACT, commun aux
+deux, est identifié :
+
+  Bourbaki dérive 𝔟≤2𝔟≤3𝔟≤𝔟²=𝔟 — l'étape DURE étant 3𝔟≤𝔟², qui exige « 3≤𝔟 »,
+  c.-à-d. « n≤a pour tout entier n quand a est infini » (E.III.45, remarque de la Déf. 1).
+  Or CETTE chaîne est EXPLICITEMENT REPORTÉE dans le dépôt
+  (`bourbaki/entiers/ensembles_infinis.py`, en-tête : « exige la chaîne 'a infini ⇒ n<a
+  pour tout entier n' », NON disponible).  Sans elle :
+    • `3≤𝔟` (donc `3𝔟≤𝔟·𝔟`) n'est pas établissable → `trois_b_egal_b` BLOQUÉ ;
+    • l'extension du maximal (cadre (S₀∪U)²∖(S₀×S₀) de cardinal 3𝔟²=3𝔟=𝔟=Card U, puis
+      bijection sur U prolongeant φ₀, contredisant la maximalité) BLOQUÉE au même point.
+  C'est pourquoi `Card(S₀)=Card(E)` reste une HYPOTHÈSE HONNÊTE de
+  `hessenberg_a_carre_inf_egal` / `hessenberg_aa_egal_de_maximal` (jamais postulée vraie).
+
+CE QUI EST CLOS (route qui CONTOURNE 3𝔟=𝔟) : une fois `Card S₀=Card E` ADMIS comme hyp
+honnête, l'égalité a²=a tombe SANS `trois_b_egal_b` — par bien-déf du produit cardinal
+(`maximal_carre_egal`+`produit_cardinal_bien_defini`) + réflexivité + pont Cantor–Bernstein.
+
 INVARIANT : theorie_ensembles() reste = 22.  Aucun axiome nouveau ; rien postulé ;
 a²=a n'est JAMAIS supposé, le ≥ dur jamais supposé vrai.  Noyau INTACT.
 """
