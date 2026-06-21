@@ -190,8 +190,10 @@ def frame_inductif_clean(E_set="E", C="C", m="m", x="xmaj", y="y", z="z"):
     vE = _t(E_set)
     Gam, Fr = frame_ordre(vE), frame_pair(vE)
     fi = frame_inductif_inconditionnel(E_set, C, m, x, y, z)   # {est_ordre, m_dans_frame} ⊢ est_inductif
-    ordre = frame_ordre_est_ordre(E_set)                       # ⊢ est_ordre(Γ𝔉,𝔉)   CLOS
-    hyp_ord = est_ordre(Gam, Fr)
+    # BINDER-ALIGN : l'hyp est_ordre de fi est est_ordre(Γ𝔉,𝔉,x,y,z) (binders de frame_inductif_clean).
+    # frame_ordre_est_ordre prend les binders en paramètres (x="p",y="q",z="r") ; on cale (x,y,z).
+    ordre = _frame_ordre_xyz_named(E_set, x, y, z)             # ⊢ est_ordre(Γ𝔉,𝔉,x,y,z)   CLOS
+    hyp_ord = est_ordre(Gam, Fr, x, y, z)
     assert ordre.conclusion == hyp_ord, "frame_inductif_clean : est_ordre forme inattendue"
     assert hyp_ord in fi.hypotheses, "frame_inductif_clean : est_ordre absente de fi"
     res = N.modus_ponens(ordre, N.loi_deduction(hyp_ord, fi))  # est_inductif, est_ordre déchargée
@@ -222,25 +224,32 @@ def _rebind(thm, *cibles):
     return cur
 
 
-def _frame_ordre_xyz(E_set):
-    """⊢ est_ordre(Γ𝔉(E),𝔉(E),"x","y","z").                                  CLOS.
+def _frame_ordre_xyz_named(E_set, x="x", y="y", z="z"):
+    """⊢ est_ordre(Γ𝔉(E),𝔉(E),x,y,z).                                        CLOS.
 
-    `frame_ordre_est_ordre` ne peut PAS produire le liant "x" (collision interne avec le
-    "x" des projections pr₁/pr₂).  On rebinde donc CHAQUE composant — réflexivité (1
-    liant), antisymétrie (2), transitivité (3) — depuis ses liants sûrs (px,py,pz) vers
-    (x,y,z) par instanciation+re-généralisation, puis on reconjugue en est_ordre(x,y,z)."""
+    `frame_ordre_est_ordre` ne peut PAS produire directement des liants arbitraires
+    (collision interne avec le "x" des projections pr₁/pr₂).  On rebinde donc CHAQUE
+    composant — réflexivité (1 liant), antisymétrie (2), transitivité (3) — depuis ses
+    liants SÛRS (px,py,pz) vers (x,y,z) par instanciation+re-généralisation (motif
+    prop9/prop10), puis on reconjugue en est_ordre(x,y,z).  x,y,z = binders CIBLES
+    (alignés sur l'hyp est_ordre du consommateur)."""
     from bourbaki.cardinaux.ensembles_frame_ordre_est_ordre import (
         frame_ordre_reflexive, frame_ordre_antisymetrique, frame_ordre_transitive,
     )
     vE = _t(E_set)
     Gam, Fr = frame_ordre(vE), frame_pair(vE)
-    refl = _rebind(frame_ordre_reflexive(E_set, "px"), "x")              # reflexivite_sur(.,.,x)
-    anti = _rebind(frame_ordre_antisymetrique(E_set, "px", "py"), "x", "y")  # antisymetrie(.,x,y)
-    trans = _rebind(frame_ordre_transitive(E_set, "px", "py", "pz"), "x", "y", "z")
+    refl = _rebind(frame_ordre_reflexive(E_set, "px"), x)              # reflexivite_sur(.,.,x)
+    anti = _rebind(frame_ordre_antisymetrique(E_set, "px", "py"), x, y)  # antisymetrie(.,x,y)
+    trans = _rebind(frame_ordre_transitive(E_set, "px", "py", "pz"), x, y, z)
     res = conjonction_intro(conjonction_intro(refl, anti), trans)
-    cible = est_ordre(Gam, Fr, "x", "y", "z")
-    assert res.conclusion == cible, f"_frame_ordre_xyz : ≠ est_ordre(x,y,z)\n{res.conclusion}"
+    cible = est_ordre(Gam, Fr, x, y, z)
+    assert res.conclusion == cible, f"_frame_ordre_xyz_named : ≠ est_ordre({x},{y},{z})\n{res.conclusion}"
     return res
+
+
+def _frame_ordre_xyz(E_set):
+    """⊢ est_ordre(Γ𝔉(E),𝔉(E),"x","y","z").  CLOS.  (cas par défaut x,y,z.)"""
+    return _frame_ordre_xyz_named(E_set, "x", "y", "z")
 
 
 # ════════════════════════════════════════════════════════════════════════════
