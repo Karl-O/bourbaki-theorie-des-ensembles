@@ -147,8 +147,6 @@ def _frame_reconstruction(E_set, p):
     pr1p, pr2p = E.pr1(vp), E.pr2(vp)
     cible = egal(vp, E.couple(pr1p, pr2p))
     # p∈𝔉 ⇒ (∃S)(∃φ)( p=(S,φ) et S⊂E et S infini et φ:S×S→S bij )
-    fm = frame_membre()                                    # (p∈𝔉) ⇔ corps_frame  (binders S, phi)
-    # frame_membre est sur les variables "E","p" ; on l'instancie aux termes via généralisation.
     decl = N.modus_ponens(N.assume(appartient(vp, Fr)),
                           equivalence_avant(_frame_membre_t(vE, vp)))  # (∃S)(∃φ)(…)
     exS = decl.conclusion                                  # (∃S)(∃φ)(…)
@@ -184,10 +182,9 @@ def _frame_reconstruction(E_set, p):
 
 def _frame_membre_t(vE, vp):
     """Version TERME de frame_membre : ⊢ (p∈𝔉(E)) ⇔ corps_frame, instancié aux termes."""
-    fm = frame_membre()                                    # sur variables "E","p"
-    # frame_membre = instancie(instancie(ax,"E"),"p") ; on régénéralise puis réinstancie.
-    gen = N.generalisation("p", N.generalisation("E", fm))
-    return instancie(instancie(gen, _t(vE)), _t(vp))
+    from bourbaki.cardinaux.ensembles_hessenberg_hard import theorie_frame, axiome_frame
+    ax = N.axiome(theorie_frame(), axiome_frame())         # (∀E)(∀p)( p∈𝔉(E) ⇔ corps )
+    return instancie(instancie(ax, _t(vE)), _t(vp))
 
 
 # ════════════════════════════════════════════════════════════════════════════
