@@ -65,15 +65,15 @@ def membre_reunion_graphes(g="G", h="H", z="z"):
 
 
 # ── (u,v)∈F ⇒ u∈dom F ─────────────────────────────────────────────────────────
-def antecedent_dans_domaine(u="u", v="v", f="F"):
+def antecedent_dans_domaine(u="u", v="v", f="F", y="y"):
     """⊢ ((u,v) ∈ F) ⇒ (u ∈ dom F).   (un couple de F atteste l'antécédent dans le
-    domaine ; u,v,f noms ou termes.  Liant interne 'y' du domaine.)"""
+    domaine ; u,v,f noms ou termes.  Liant interne 'y' du domaine — paramétrable.)"""
     vu, vv, vf = _t(u), _t(v), _t(f)
     cpl = E.couple(vu, vv)
     huv = N.assume(appartient(cpl, vf))                       # (u,v)∈F
     # (∃y)((u,y)∈F) par S5, témoin y:=v
-    body = appartient(E.couple(vu, var("y")), vf)             # (u,y)∈F
-    ex = N.modus_ponens(huv, N.s5(body, vv, "y"))            # (∃y)((u,y)∈F)
+    body = appartient(E.couple(vu, var(y)), vf)              # (u,y)∈F
+    ex = N.modus_ponens(huv, N.s5(body, vv, y))             # (∃y)((u,y)∈F)
     # AXIOME_DOM : u∈dom F ⇔ (∃y)((u,y)∈F)
     ax_dom = N.axiome(E.theorie_ensembles(), E.AXIOME_DOM)
     car = instancie(instancie(ax_dom, vf), vu)               # u∈dom F ⇔ (∃y)((u,y)∈F)
@@ -82,7 +82,7 @@ def antecedent_dans_domaine(u="u", v="v", f="F"):
 
 
 # ── LEMME PIVOT : réunion de graphes fonctionnels à domaines disjoints ─────────
-def reunion_graphes_fonctionnelle(g="G", h="H"):
+def reunion_graphes_fonctionnelle(g="G", h="H", u="u", v="v", z="z", y="y"):
     """{est_fonctionnel(G), est_fonctionnel(H), (∀u)¬(u∈dom G et u∈dom H)}
         ⊢ est_fonctionnel(G∪H).
 
@@ -93,15 +93,15 @@ def reunion_graphes_fonctionnelle(g="G", h="H"):
     dans H — mais alors u∈dom G ET u∈dom H, contraire à la disjonction (ex
     falso).  Liants u,v,z (= ceux de est_fonctionnel, ≠ w,y)."""
     vg, vh = _t(g), _t(h)
-    vu, vv, vz = var("u"), var("v"), var("z")
+    vu, vv, vz = var(u), var(v), var(z)
     GuH = E.reunion(vg, vh)
     cplv, cplz = E.couple(vu, vv), E.couple(vu, vz)
 
     hG = N.assume(E.est_fonctionnel(vg))                      # G fonctionnel
     hH = N.assume(E.est_fonctionnel(vh))                      # H fonctionnel
     # disjonction des domaines : (∀u)¬(u∈dom G et u∈dom H)
-    disj_axiom = pourtout("u", non(et(appartient(vu, E.dom(vg)),
-                                      appartient(vu, E.dom(vh)))))
+    disj_axiom = pourtout(u, non(et(appartient(vu, E.dom(vg)),
+                                    appartient(vu, E.dom(vh)))))
     hD = N.assume(disj_axiom)
     ndisj = instancie(hD, vu)                                 # ¬(u∈dom G et u∈dom H)
 
@@ -114,10 +114,10 @@ def reunion_graphes_fonctionnelle(g="G", h="H"):
     carZ = membre_reunion_graphes(vg, vh, cplz)              # (u,z)∈G∪H ⇔ ((u,z)∈G ou (u,z)∈H)
 
     # antécédents dans les domaines
-    adG_v = antecedent_dans_domaine(vu, vv, vg)             # (u,v)∈G ⇒ u∈dom G
-    adH_v = antecedent_dans_domaine(vu, vv, vh)             # (u,v)∈H ⇒ u∈dom H
-    adG_z = antecedent_dans_domaine(vu, vz, vg)             # (u,z)∈G ⇒ u∈dom G
-    adH_z = antecedent_dans_domaine(vu, vz, vh)             # (u,z)∈H ⇒ u∈dom H
+    adG_v = antecedent_dans_domaine(vu, vv, vg, y)         # (u,v)∈G ⇒ u∈dom G
+    adH_v = antecedent_dans_domaine(vu, vv, vh, y)         # (u,v)∈H ⇒ u∈dom H
+    adG_z = antecedent_dans_domaine(vu, vz, vg, y)         # (u,z)∈G ⇒ u∈dom G
+    adH_z = antecedent_dans_domaine(vu, vz, vh, y)         # (u,z)∈H ⇒ u∈dom H
 
     cible = egal(vv, vz)
 
@@ -163,7 +163,7 @@ def reunion_graphes_fonctionnelle(g="G", h="H"):
 
     vz_eq = cas(in_v, branche_v_dans_G(), branche_v_dans_H())        # v=z
     impl_uvz = N.loi_deduction(et(appartient(cplv, GuH), appartient(cplz, GuH)), vz_eq)
-    gen = N.generalisation("u", N.generalisation("v", N.generalisation("z", impl_uvz)))
+    gen = N.generalisation(u, N.generalisation(v, N.generalisation(z, impl_uvz)))
     return gen                                                       # est_fonctionnel(G∪H)
 
 
