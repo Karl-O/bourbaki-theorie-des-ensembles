@@ -123,8 +123,7 @@ def U_non_vide(U="Ucadre"):
     cardeq = N.modus_ponens(h_vide, bwd)                 # Card U = Card ∅
     falsum = N.modus_ponens(cardeq, N.modus_ponens(h_ne,
         N.s2(non(egal(cU, c0)), cible)))                 # cible (ex falso)
-    res = N.modus_ponens(falsum, N.s1(cible)) if False else \
-        _decharge_auto(h_vide, falsum, vU)
+    res = _decharge_auto(h_vide, falsum, vU)
     assert res.conclusion == cible, \
         f"U_non_vide : conclusion inattendue\n{res.conclusion}\nvs\n{cible}"
     assert res.conclusion not in res.hypotheses, "U_non_vide : VACUOUS"
