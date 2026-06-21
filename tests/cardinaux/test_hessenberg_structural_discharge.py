@@ -1,6 +1,6 @@
 """Tests — décharge structurelle des hyps honnêtes de Hessenberg a²=a (cat. A, C, E)."""
 from bourbaki.logique.formule import (
-    var, egal, et, non, impl, pourtout, appartient, inclus,
+    var, egal, et, non, impl, pourtout, appartient, inclus, equiv,
 )
 from bourbaki.ensembles import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import (
@@ -60,3 +60,14 @@ def test_card_inclus_inf_egal():
     assert t.conclusion == inf_egal_card(cardinal(vS), cardinal(vE))
     assert set(t.hypotheses) == {inclus(vS, vE)}
     assert t.conclusion not in t.hypotheses
+
+
+def test_couple_dans_produit_reunion_gauche():
+    t = M.couple_dans_produit_reunion_gauche()
+    assert t.est_clos
+    vu, vv, vA, vB, vC = var("u"), var("v"), var("A"), var("B"), var("C")
+    AB = E.reunion(vA, vB)
+    cpl = E.couple(vu, vv)
+    lhs = appartient(cpl, E.produit(AB, vC))
+    rhs = appartient(cpl, E.reunion(E.produit(vA, vC), E.produit(vB, vC)))
+    assert t.conclusion == equiv(lhs, rhs)

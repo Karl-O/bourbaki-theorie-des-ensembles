@@ -263,6 +263,55 @@ def card_inclus_inf_egal(S="S0", E_set="E"):
     return res
 
 
+# ════════════════════════════════════════════════════════════════════════════
+#  (B) géométrie produit — CŒUR pointwise de (A∪B)×C = (A×C)∪(B×C).
+#
+#  Miroir GAUCHE de couple_dans_produit_distributif_reunion (qui couvre A×(B∪C)).
+#  (u,v)∈(A∪B)×C ⇔ (u∈A∪B et v∈C) ⇔ ((u∈A ou u∈B) et v∈C)
+#               ⇔ ((u∈A et v∈C) ou (u∈B et v∈C))  [distrib via commutativité]
+#               ⇔ ((u,v)∈A×C ou (u,v)∈B×C) ⇔ (u,v)∈(A×C)∪(B×C).
+#  L'égalité ENSEMBLISTE pleine (∀z couple ou non) reste reportée (extensionnalité +
+#  poussée des ∃p,q de AXIOME_PRODUIT) — cf. note du module produit_distributif.
+# ════════════════════════════════════════════════════════════════════════════
+def couple_dans_produit_reunion_gauche(u="u", v="v", a="A", b="B", c="C"):
+    """⊢ ((u,v) ∈ (A∪B)×C) ⇔ ((u,v) ∈ (A×C)∪(B×C)).   [CLOS, 0 hyp].
+
+    🎯 CŒUR pointwise de la GÉOMÉTRIE PRODUIT (cat. B) : distribution GAUCHE du
+    produit cartésien sur la réunion (E.II.2), miroir de
+    couple_dans_produit_distributif_reunion.  Brique réutilisable vers
+    (S₀∪U)²=S₀²∪(S₀×U)∪(U×S₀)∪U² (l'égalité ensembliste pleine reste à lever par
+    extensionnalité)."""
+    from bourbaki.ensembles.familles.ensembles_produit import couple_dans_produit_ssi
+    from bourbaki.ensembles.ensembles_theoremes import _instance_reunion
+    from bourbaki.logique.tactiques.tactiques_abrege2 import (
+        et_congruence_gauche, et_ou_distrib, ou_congruence, comm_et,
+        equivalence_symetrie, equivalence_transitivite,
+    )
+    vu, vv, vA, vB, vC = _t(u), _t(v), _t(a), _t(b), _t(c)
+    AB = E.reunion(vA, vB)
+    uA, uB, vCm = appartient(vu, vA), appartient(vu, vB), appartient(vv, vC)
+    # (u,v)∈(A∪B)×C ⇔ (u∈A∪B et v∈C)
+    e1 = couple_dans_produit_ssi(vu, vv, AB, vC)
+    # (u∈A∪B et v∈C) ⇔ ((u∈A ou u∈B) et v∈C)
+    e2 = et_congruence_gauche(_instance_reunion(vA, vB, vu), vCm)
+    # ((u∈A ou u∈B) et v∈C) ⇔ (v∈C et (u∈A ou u∈B))   (commutativité)
+    e3 = comm_et(ou(uA, uB), vCm)
+    # (v∈C et (u∈A ou u∈B)) ⇔ ((v∈C et u∈A) ou (v∈C et u∈B))   (distrib)
+    e4 = et_ou_distrib(vCm, uA, uB)
+    # ((v∈C et u∈A) ou (v∈C et u∈B)) ⇔ ((u∈A et v∈C) ou (u∈B et v∈C))   (commut sous ou)
+    e5 = ou_congruence(comm_et(vCm, uA), comm_et(vCm, uB))
+    # ((u∈A et v∈C) ou (u∈B et v∈C)) ⇔ ((u,v)∈A×C ou (u,v)∈B×C)
+    e6 = ou_congruence(equivalence_symetrie(couple_dans_produit_ssi(vu, vv, vA, vC)),
+                       equivalence_symetrie(couple_dans_produit_ssi(vu, vv, vB, vC)))
+    # ((u,v)∈A×C ou (u,v)∈B×C) ⇔ (u,v)∈(A×C)∪(B×C)
+    e7 = equivalence_symetrie(_instance_reunion(E.produit(vA, vC), E.produit(vB, vC),
+                                                E.couple(vu, vv)))
+    res = equivalence_transitivite(equivalence_transitivite(equivalence_transitivite(
+        equivalence_transitivite(equivalence_transitivite(
+            equivalence_transitivite(e1, e2), e3), e4), e5), e6), e7)
+    return res
+
+
 __all__ = [
     "bijection_dom",
     "bijection_image",
@@ -270,4 +319,5 @@ __all__ = [
     "U_non_vide",
     "U_disjoint_S0",
     "card_inclus_inf_egal",
+    "couple_dans_produit_reunion_gauche",
 ]
