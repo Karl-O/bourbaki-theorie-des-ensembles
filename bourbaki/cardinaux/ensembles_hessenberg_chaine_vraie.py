@@ -205,8 +205,86 @@ def extension_ordre_chainee(E_set="E", phi0="phi0", psi="psi", S="S0", U="Ucadre
     return res
 
 
+# ════════════════════════════════════════════════════════════════════════════
+#  STEP 4 — Z=S₀ DÉRIVÉ via la maximalité (extension_force_egalite).
+#  STEP 2 décharge (Z,φ₁)∈𝔉 ; STEP 3 décharge l'ordre ; reste element_maximal honnête.
+# ════════════════════════════════════════════════════════════════════════════
+def extension_force_egalite_chainee(E_set="E", phi0="phi0", psi="psi", S="S0", U="Ucadre"):
+    """{ element_maximal(Γ𝔉,𝔉,(S₀,φ₀))  [maximal-data],  … [STEP 2+3] } ⊢ Z = S₀.
+
+    🎯 STEP 4 — LE CŒUR : la maximalité de (S₀,φ₀) appliquée à l'extension (Z,φ₁)
+    [∈𝔉 par STEP 2, ≥(S₀,φ₀) par STEP 3] DÉRIVE Z=S₀.  Le lock n'est PAS supposé : il
+    est PRODUIT par `extension_force_egalite` en déchargeant ses hyps (Z,φ₁)∈𝔉 et
+    ((S₀,φ₀),(Z,φ₁))∈Γ𝔉 par STEP 2/3.  Reste `element_maximal(Γ𝔉,𝔉,(S₀,φ₀))` honnête
+    (fourni par `frame_a_maximal` + réalisation du maximal en (S₀,φ₀)) + les résidus
+    géométriques.  Conclusion = (reunion(S₀,U)=S₀) PROUVÉE, jamais assumée.
+    theorie=22 ; non vacuous."""
+    from bourbaki.cardinaux.ensembles_frame_extension_finale import extension_force_egalite
+    from bourbaki.cardinaux.ensembles_hessenberg_hard import frame_pair, frame_ordre
+    vphi0, vpsi, vS, vU, vE = _t(phi0), _t(psi), _t(S), _t(U), _t(E_set)
+    Z = E.reunion(vS, vU)
+    phi1 = E.reunion(vphi0, vpsi)
+    p = E.couple(vS, vphi0)
+    q = E.couple(Z, phi1)
+    q_in = appartient(q, frame_pair(vE))                    # (Z,φ₁)∈𝔉
+    pq_in = appartient(E.couple(p, q), frame_ordre(vE))     # ((S₀,φ₀),(Z,φ₁))∈Γ𝔉
+
+    efe = extension_force_egalite(E_set, phi0, psi, S, U)   # {max,(Z,φ₁)∈𝔉,ordre} ⊢ Z=S₀
+    assert q_in in efe.hypotheses and pq_in in efe.hypotheses
+
+    step2 = extension_dans_frame_chainee(E_set, phi0, psi, S, U)   # ⊢ (Z,φ₁)∈𝔉
+    step3 = extension_ordre_chainee(E_set, phi0, psi, S, U)        # ⊢ ((S₀,φ₀),(Z,φ₁))∈Γ𝔉
+    res = N.modus_ponens(step2, N.loi_deduction(q_in, efe))       # (Z,φ₁)∈𝔉 déchargée
+    res = N.modus_ponens(step3, N.loi_deduction(pq_in, res))      # ordre déchargé
+
+    assert res.conclusion == egal(Z, vS), \
+        f"STEP4 : conclusion inattendue\n{res.conclusion}\nvs\n{egal(Z, vS)}"
+    # le lock est la CONCLUSION (prouvée), pas une hypothèse :
+    assert egal(Z, vS) not in res.hypotheses, "STEP4 : LOCK supposé (vacuous) !"
+    return res
+
+
+# ════════════════════════════════════════════════════════════════════════════
+#  STEP 5 — ABSURDITÉ : Z=S₀ DÉRIVÉ (STEP 4) + u∈U + U∩S₀=∅ ⇒ ⊥ (¬(u∈U)).
+# ════════════════════════════════════════════════════════════════════════════
+def extension_absurde_chainee(E_set="E", phi0="phi0", psi="psi", S="S0", U="Ucadre",
+                              u="uwit"):
+    """{ u∈U,  (∀z)(z∈U⇒¬z∈S₀)  [U∩S₀=∅],  … [STEP 4, dont element_maximal] }
+        ⊢ ¬(u∈U)   — i.e. CONTRADICTION (u∈U ∧ ¬(u∈U)).
+
+    🎯 STEP 5 — la CONTRADICTION FINALE de Bourbaki (E.III.48), avec le lock Z=S₀
+    GENUINEMENT DÉRIVÉ (STEP 4) et NON supposé.  `extension_absurde` conclut ¬(u∈U)
+    sous {Z=S₀, u∈U, U∩S₀=∅} ; STEP 4 DÉCHARGE Z=S₀ (le force par maximalité).  On
+    obtient alors ¬(u∈U) sous {u∈U, U∩S₀=∅} + les résidus honnêtes de STEP 4
+    (element_maximal, bijections, géométrie) — le témoin u∈U et ¬(u∈U) ensemble = ⊥.
+
+    ⚠️ Le lock `reunion(S₀,U)=S₀` n'est JAMAIS une hypothèse (ACCEPTANCE) : il est
+    PROUVÉ par STEP 4 et consommé.  Ce qui RESTE sont les U-data honnêtes (u∈U,
+    U∩S₀=∅, qui dans l'argument complet proviennent de 𝔟<a + complement_grand) et les
+    résidus géométriques/maximalité — tous SATISFIABLES.  theorie=22 ; non vacuous."""
+    from bourbaki.cardinaux.ensembles_frame_extension_finale import extension_absurde
+    vS, vU = _t(S), _t(U)
+    Z = E.reunion(vS, vU)
+    h_Zlock = egal(Z, vS)
+
+    ea = extension_absurde(E_set, phi0, psi, S, U, u)      # {Z=S₀,u∈U,U∩S₀=∅} ⊢ ¬(u∈U)
+    assert h_Zlock in ea.hypotheses, "STEP5 : hyp Z=S₀ absente de extension_absurde"
+    step4 = extension_force_egalite_chainee(E_set, phi0, psi, S, U)   # ⊢ Z=S₀
+    res = N.modus_ponens(step4, N.loi_deduction(h_Zlock, ea))         # Z=S₀ DÉCHARGÉE
+
+    assert res.conclusion == non(appartient(var(u), vU)), \
+        f"STEP5 : conclusion inattendue\n{res.conclusion}"
+    # ACCEPTANCE : le lock n'est PAS une hypothèse (il a été dérivé puis consommé).
+    assert h_Zlock not in res.hypotheses, "STEP5 : LOCK supposé (vacuous) !"
+    # le témoin u∈U est présent → avec ¬(u∈U) c'est bien la contradiction.
+    assert appartient(var(u), vU) in res.hypotheses, "STEP5 : témoin u∈U absent"
+    return res
+
+
 __all__ = [
     "phi1_bijection_derivee",
     "extension_dans_frame_chainee",
     "extension_ordre_chainee",
+    "extension_force_egalite_chainee",
+    "extension_absurde_chainee",
 ]

@@ -4,10 +4,13 @@ import bourbaki.ensembles.ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de
 from bourbaki.ensembles.ensembles_abrege import theorie_ensembles
 from bourbaki.cardinaux.ensembles_hessenberg_hard import frame_pair, frame_ordre
+from bourbaki.logique.formule import non, appartient
 from bourbaki.cardinaux.ensembles_hessenberg_chaine_vraie import (
     phi1_bijection_derivee,
     extension_dans_frame_chainee,
     extension_ordre_chainee,
+    extension_force_egalite_chainee,
+    extension_absurde_chainee,
 )
 
 
@@ -52,6 +55,28 @@ def test_step3_ordre():
     assert r.conclusion.tag == "in"        # ((S₀,φ₀),(Z,φ₁))∈Γ𝔉(E)
     assert _lock() not in r.hypotheses
     assert r.conclusion not in r.hypotheses
+
+
+def test_step4_lock_derive_pas_suppose():
+    """STEP 4 : Z=S₀ est la CONCLUSION (prouvée par maximalité), PAS une hypothèse."""
+    r = extension_force_egalite_chainee()
+    assert r.conclusion == _lock()             # le lock est PROUVÉ
+    assert _lock() not in r.hypotheses         # et JAMAIS supposé
+    # la maximalité (element_maximal-data) est bien présente comme hyp honnête :
+    # (S₀,φ₀)∈𝔉 figure parmi les hypothèses (composant de element_maximal).
+    p_in = appartient(E.couple(var("S0"), var("phi0")),
+                      frame_pair(var("E")))
+    assert p_in in r.hypotheses
+
+
+def test_step5_contradiction_lock_absent():
+    """STEP 5 ACCEPTANCE : ⊥ dérivé, lock ABSENT, pas de trio contradictoire du lock."""
+    r = extension_absurde_chainee()
+    u, U, S = var("uwit"), var("Ucadre"), var("S0")
+    assert r.conclusion == non(appartient(u, U))   # ¬(u∈U)
+    assert appartient(u, U) in r.hypotheses        # u∈U → contradiction réelle
+    # LOCK ABSENT (le test décisif de non-vacuité) :
+    assert _lock() not in r.hypotheses
 
 
 def test_theorie_inchangee():
