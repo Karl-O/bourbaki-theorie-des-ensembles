@@ -431,3 +431,218 @@ def triple_ghat_dans_applications(vg, va0, vs, vd, va):
 
 
 __all__ = ["support_monotone_exposant", "exposant_monotone_exposant"]
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+#  INJECTIVITÉ de Ψ  :  ĝ₁ = ĝ₂  ⇒  g₁ = g₂.
+#    ĝᵢ coïncide avec graphe_de(gᵢ) sur S (valeur_reunion_gauche) ; ĝ₁=ĝ₂ ⇒
+#    ∀s∈S g₁(s)=g₂(s) ⇒ (application_egale_par_valeurs) g₁=g₂.
+# ═══════════════════════════════════════════════════════════════════════════════
+def _ghat_coincide_S(vg, va0, vs, vd, va, s_nom):
+    """{ g∈𝓕(S;A), a₀∈A, s∈S } ⊢ valeur(ĝ, s) = valeur(graphe_de g, s)  (binder «y»).
+
+    valeur_reunion_gauche(grg, R, s) sous {func grg, func R, disj, s∈dom grg} ; déchargé
+    par _struct_g (func, dom grg=S ⇒ s∈dom grg de s∈S) et R_fonctionnel et la disjonction."""
+    from bourbaki.ensembles.fonctions.ensembles_recollement_bijection import valeur_reunion_gauche
+    grg = graphe_de(vg)
+    R = R_terme(va0, vs, vd)
+    vs_pt = var(s_nom)
+    _incl, g_func, g_dom = _struct_g(vg, vs, va)
+    r_func = R_fonctionnel(va0, vs, vd)
+    disj = _cut(_ghat_disjonction(vg, vs, va0, vd), [(egal(E.dom(grg), vs), g_dom)])
+    disj_form = pourtout("u", non(et(appartient(var("u"), E.dom(grg)),
+                                     appartient(var("u"), E.dom(R)))))
+    # s∈dom grg  (de s∈S et dom grg=S)
+    h_s = N.assume(appartient(vs_pt, vs))
+    s_in_domgrg = N.modus_ponens(h_s, equivalence_avant(N.modus_ponens(
+        N.modus_ponens(g_dom, symetrie(E.dom(grg), vs)),
+        N.s6(vs, E.dom(grg), "w", appartient(vs_pt, var("w"))))))   # s∈dom grg
+    vr = valeur_reunion_gauche(grg, R, vs_pt)   # {func grg, func R, disj, s∈dom grg}⊢ val(ĝ,s)=val(grg,s)
+    return _cut(vr, [(E.est_fonctionnel(grg), g_func),
+                     (E.est_fonctionnel(R), r_func),
+                     (disj_form, disj),
+                     (appartient(vs_pt, E.dom(grg)), s_in_domgrg)])
+
+
+def _g_egalite_valeurs_ext(vg1, vg2, va0, vs, vd, va):
+    """{ g₁,g₂∈𝓕(S;A), a₀∈A, ĝ₁=ĝ₂ }
+       ⊢ (∀x)(x∈S ⇒ valeur(graphe_de g₁,x)=valeur(graphe_de g₂,x)).
+
+    val(ĝ₁,s)=val(grg₁,s), val(ĝ₂,s)=val(grg₂,s) (_ghat_coincide_S) ; ĝ₁=ĝ₂ ⇒
+    val(ĝ₁,s)=val(ĝ₂,s) (congruence) ; donc val(grg₁,s)=val(grg₂,s)."""
+    g1hat = _ghat(vg1, va0, vs, vd)
+    g2hat = _ghat(vg2, va0, vs, vd)
+    grg1, grg2 = graphe_de(vg1), graphe_de(vg2)
+    vs_pt = var("s")
+    # val(ĝ₁,s)=val(grg₁,s) , val(ĝ₂,s)=val(grg₂,s)
+    co1 = _ghat_coincide_S(vg1, va0, vs, vd, va, "s")   # {g₁∈𝓕,a₀∈A,s∈S}
+    co2 = _ghat_coincide_S(vg2, va0, vs, vd, va, "s")   # {g₂∈𝓕,a₀∈A,s∈S}
+    g1hat_s = E.valeur(g1hat, vs_pt)
+    g2hat_s = E.valeur(g2hat, vs_pt)
+    grg1_s = E.valeur(grg1, vs_pt)
+    grg2_s = E.valeur(grg2, vs_pt)
+    # ĝ₁=ĝ₂ ⇒ val(ĝ₁,s)=val(ĝ₂,s)
+    h_eq = N.assume(egal(g1hat, g2hat))
+    ghat_s_eq = N.modus_ponens(h_eq, congruence_terme(g1hat, g2hat, E.valeur(var("w"), vs_pt)))
+    # val(grg₁,s) = val(ĝ₁,s) = val(ĝ₂,s) = val(grg₂,s)
+    grg1_eq_g1hat = N.modus_ponens(co1, symetrie(g1hat_s, grg1_s))   # val(grg₁,s)=val(ĝ₁,s)
+    chain = composer_egalites(composer_egalites(grg1_eq_g1hat, ghat_s_eq), co2)  # val(grg₁,s)=val(grg₂,s)
+    imp = N.loi_deduction(appartient(vs_pt, vs), chain)
+    raw = N.generalisation("s", imp)
+    inst = instancie(raw, var("x"))
+    return N.generalisation("x", inst)
+
+
+def psi_injective_sous_appartenance(g1, g2, va0, vs, vd, va):
+    """{ g₁,g₂∈𝓕(S;A), a₀∈A, ĝ₁=ĝ₂ } ⊢ g₁ = g₂."""
+    from bourbaki.ensembles.fonctions.ensembles_application_valeur import (
+        application_egale_par_valeurs, egalite_valeurs_application)
+    vg1, vg2 = _t(g1), _t(g2)
+    eva = _g_egalite_valeurs_ext(vg1, vg2, va0, vs, vd, va)
+    base = application_egale_par_valeurs(vg1, vg2, vs, va)
+    target_eva = egalite_valeurs_application(vg1, vg2, vs)
+    assert eva.conclusion == target_eva, "egalite_valeurs ext != attendu"
+    return _cut(base, [(target_eva, eva)])
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+#  L'INJECTION  Ψ : 𝓕(S;A) ↪ 𝓕(D;A),  témoin W = graphe de Ψ (graphe_terme).
+#    Ψ(g) := ((ĝ,D),A),  W := graphe_terme( 𝓕(S;A) , Ψ(g) , «g» ).
+# ═══════════════════════════════════════════════════════════════════════════════
+def _source_ext(s, a):
+    return E.applications(_t(s), _t(a))
+
+
+def _but_ext(d, a):
+    return E.applications(_t(d), _t(a))
+
+
+def _psi_valeur(g, va0, vs, vd, va):
+    """Ψ(g) := ((ĝ,D),A)."""
+    return E.couple(E.couple(_ghat(g, va0, vs, vd), _t(vd)), _t(va))
+
+
+def W_psi(va0, vs, vd, va):
+    return E.graphe_terme(_source_ext(vs, va), _psi_valeur(var(_POINT), va0, vs, vd, va), _POINT)
+
+
+def W_psi_fonctionnel(va0, vs, vd, va):
+    from bourbaki.ensembles.fonctions.ensembles_fonction_terme import graphe_terme_fonctionnel
+    return graphe_terme_fonctionnel(_source_ext(vs, va), _psi_valeur(var(_POINT), va0, vs, vd, va), _POINT, "y")
+
+
+def W_psi_domaine(va0, vs, vd, va):
+    from bourbaki.cardinaux.ensembles_cantor import graphe_terme_domaine
+    return graphe_terme_domaine(_source_ext(vs, va), _psi_valeur(var(_POINT), va0, vs, vd, va), _POINT, "y", "z")
+
+
+def W_psi_valeur(point_nom, va0, vs, vd, va):
+    """{g ∈ 𝓕(S;A)} ⊢ W(g) = Ψ(g)."""
+    from bourbaki.cardinaux.ensembles_cantor import graphe_terme_valeur
+    return graphe_terme_valeur(_source_ext(vs, va), _psi_valeur(var(_POINT), va0, vs, vd, va),
+                               point_nom, _POINT, "y")
+
+
+def _psi_cod_en_point(va0, vs, vd, va, vg, g_in_thm):
+    """{g∈𝓕(S;A), S⊆D, a₀∈A} ⊢ Ψ(g) ∈ 𝓕(D;A)."""
+    base = triple_ghat_dans_applications(var(_POINT), va0, vs, vd, va)   # {pt∈𝓕(S;A),S⊆D,a₀∈A}
+    base_imp = N.loi_deduction(appartient(var(_POINT), _source_ext(vs, va)), base)
+    gen = N.generalisation(_POINT, base_imp)
+    inst = instancie(gen, vg)
+    return N.modus_ponens(g_in_thm, inst)
+
+
+def W_psi_image_incluse(va0, vs, vd, va):
+    """{ S⊆D, a₀∈A } ⊢ image(W, 𝓕(S;A)) ⊂ 𝓕(D;A).   (BIEN-DÉFINITION.)"""
+    from bourbaki.ensembles.fonctions.ensembles_fonction_terme import membre_graphe_terme
+    dom = _source_ext(vs, va)
+    cod = _but_ext(vd, va)
+    W = W_psi(va0, vs, vd, va)
+    PSI = _psi_valeur(var(_POINT), va0, vs, vd, va)
+    vz, vk = var("z"), var("t")
+
+    ax_img = N.axiome(E.theorie_ensembles(), E.AXIOME_IMAGE)
+    img0 = instancie(instancie(instancie(ax_img, W), dom), vz)
+    impl_LtoEX = img0.conclusion.sous[0].sous[0].sous[0]
+    rhs_ex = impl_LtoEX.sous[1]
+    assert rhs_ex.tag == "exists"
+    nom = rhs_ex.lieur
+    inner = et(appartient(var(nom), dom), appartient(E.couple(var(nom), vz), W))
+    ren = alpha_existe(nom, "t", inner)
+    img_car = equivalence_transitivite(img0, ren)
+
+    mem = membre_graphe_terme(dom, PSI, "t", "z", _POINT, "y")
+    Psi_t = subst_t(vk, _POINT, PSI)
+    body = et(appartient(vk, dom), appartient(E.couple(vk, vz), W))
+    hb = N.assume(body)
+    t_in = conjonction_elim_gauche(hb)
+    tz_in = conjonction_elim_droite(hb)
+    cond = N.modus_ponens(tz_in, equivalence_avant(mem))
+    z_eq = conjonction_elim_droite(cond)
+    psi_t_in = _psi_cod_en_point(va0, vs, vd, va, vk, t_in)
+    z_in_cod = N.modus_ponens(psi_t_in, equivalence_arriere(N.modus_ponens(
+        z_eq, N.s6(vz, Psi_t, "w", appartient(var("w"), cod)))))
+    ex_imp = existe_elimination(N.loi_deduction(body, z_in_cod), "t")
+    h_z = N.assume(appartient(vz, E.image(W, dom)))
+    ex = N.modus_ponens(h_z, equivalence_avant(img_car))
+    z_in = N.modus_ponens(ex, ex_imp)
+    return N.generalisation("z", N.loi_deduction(appartient(vz, E.image(W, dom)), z_in))
+
+
+def _psi_egal_donne_ghat(vg1, vg2, va0, vs, vd, va):
+    """{ Ψ(g₁)=Ψ(g₂) } ⊢ ĝ₁=ĝ₂."""
+    from bourbaki.ensembles.base.ensembles_couples import couple_egal_implique_composantes
+    g1hat, g2hat = _ghat(vg1, va0, vs, vd), _ghat(vg2, va0, vs, vd)
+    L1, L2 = _psi_valeur(vg1, va0, vs, vd, va), _psi_valeur(vg2, va0, vs, vd, va)
+    inner1, inner2 = E.couple(g1hat, vd), E.couple(g2hat, vd)
+    h = N.assume(egal(L1, L2))
+    comp1 = N.modus_ponens(h, couple_egal_implique_composantes(inner1, va, inner2, va))
+    inner_eq = conjonction_elim_gauche(comp1)
+    comp2 = N.modus_ponens(inner_eq, couple_egal_implique_composantes(g1hat, vd, g2hat, vd))
+    return conjonction_elim_gauche(comp2)
+
+
+def W_psi_injective(va0, vs, vd, va):
+    """{ a₀∈A, S⊆D } ⊢ injective_dans(W, 𝓕(S;A))."""
+    dom = _source_ext(vs, va)
+    Wt = W_psi(va0, vs, vd, va)
+    vg1, vg2 = var("g1"), var("g2")
+    L1, L2 = _psi_valeur(vg1, va0, vs, vd, va), _psi_valeur(vg2, va0, vs, vd, va)
+    g1hat, g2hat = _ghat(vg1, va0, vs, vd), _ghat(vg2, va0, vs, vd)
+
+    hyp = et(et(appartient(vg1, dom), appartient(vg2, dom)),
+             egal(E.valeur(Wt, vg1), E.valeur(Wt, vg2)))
+    h = N.assume(hyp)
+    g1_in = conjonction_elim_gauche(conjonction_elim_gauche(h))
+    g2_in = conjonction_elim_droite(conjonction_elim_gauche(h))
+    W_eq = conjonction_elim_droite(h)
+    Wg1 = _cut(W_psi_valeur("g1", va0, vs, vd, va), [(appartient(vg1, dom), g1_in)])
+    Wg2 = _cut(W_psi_valeur("g2", va0, vs, vd, va), [(appartient(vg2, dom), g2_in)])
+    psi_eq = composer_egalites(composer_egalites(
+        N.modus_ponens(Wg1, symetrie(E.valeur(Wt, vg1), L1)), W_eq), Wg2)   # Ψ(g₁)=Ψ(g₂)
+    ghat_eq = _cut(_psi_egal_donne_ghat(vg1, vg2, va0, vs, vd, va), [(egal(L1, L2), psi_eq)])
+    g_eq = psi_injective_sous_appartenance("g1", "g2", va0, vs, vd, va)
+    g_eq = _cut(g_eq, [(appartient(vg1, dom), g1_in),
+                       (appartient(vg2, dom), g2_in),
+                       (egal(g1hat, g2hat), ghat_eq)])
+    inner = N.loi_deduction(hyp, g_eq)
+    raw = N.generalisation("g1", N.generalisation("g2", inner))
+    inst = instancie(instancie(raw, var("u")), var("up"))
+    return N.generalisation("u", N.generalisation("up", inst))
+
+
+def W_psi_est_injection(va0, vs, vd, va):
+    """{ a₀∈A, S⊆D } ⊢ est_injection_de(W, 𝓕(S;A), 𝓕(D;A))."""
+    return conjonction_intro(conjonction_intro(conjonction_intro(
+        W_psi_fonctionnel(va0, vs, vd, va), W_psi_domaine(va0, vs, vd, va)),
+        W_psi_injective(va0, vs, vd, va)), W_psi_image_incluse(va0, vs, vd, va))
+
+
+def support_extension_domaine(s="S", d="D", a0="a0", a="A"):
+    """{ S⊆D, a₀∈A } ⊢ inf_egal_card(𝓕(S;A), 𝓕(D;A))."""
+    vs, vd, va0, va = _t(s), _t(d), _t(a0), _t(a)
+    dom = _source_ext(vs, va)
+    cod = _but_ext(vd, va)
+    Wt = W_psi(va0, vs, vd, va)
+    inj = W_psi_est_injection(va0, vs, vd, va)
+    return N.modus_ponens(inj, N.s5(est_injection_de(var("F"), dom, cod), Wt, "F"))
