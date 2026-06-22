@@ -43,7 +43,7 @@ from bourbaki.ensembles.ensembles_theoremes import egalite_par_extension
 from bourbaki.ensembles.ensembles_algebre_booleenne import (
     _instance_inter, distributivite_intersection_reunion,
 )
-from bourbaki.cardinaux.ensembles_cardinaux import cardinal
+from bourbaki.cardinaux.ensembles_cardinaux import cardinal, est_cardinal
 
 
 def _t(x):
@@ -261,6 +261,154 @@ def cadre_plat_blocs_disjoints_cible(S="S0", U="Ucadre"):
 
 
 # ════════════════════════════════════════════════════════════════════════════
+#  P2 — Card(F_plain) = Card S₀ = 𝔟  (3𝔟 = 𝔟), miroir PLAT de cadre_card_trois_b.
+# ════════════════════════════════════════════════════════════════════════════
+def _card_reunion_de_somme(A, B, ca, cb, disj_thm):
+    """{ Card A = ca, Card B = cb } ∪ ⟨disj_thm ⊢ A∩B=∅⟩
+        ⊢ Card(A∪B) = somme_cardinale_binaire(ca, cb).
+
+    Pont RÉUNION DISJOINTE → SOMME CARDINALE.  Sous A∩B=∅ : Eq(A∪B, A⊔B)
+    (_eq_reunion_disjointe_somme_t) ⇒ Card(A∪B)=Card(A⊔B) (_prop1_direct_tt) ; puis
+    Card(A⊔B)=ca+cb (_somme_disjointe_cardinal_t sous Card A=ca, Card B=cb).  Tout
+    capture-safe (helpers _t).  `disj_thm` ⊢ A∩B=∅ est CONSOMMÉ (modus ponens)."""
+    from bourbaki.cardinaux.ensembles_prop13_complement import (
+        _eq_reunion_disjointe_somme_t, _prop1_direct_tt, _somme_disjointe_cardinal_t,
+    )
+    from bourbaki.ensembles.familles.ensembles_somme_disjointe import (
+        somme_disjointe, somme_cardinale_binaire,
+    )
+    vA, vB, vca, vcb = _t(A), _t(B), _t(ca), _t(cb)
+    AuB = E.reunion(vA, vB)
+    AsB = somme_disjointe(vA, vB)
+    # Eq(A∪B, A⊔B) sous A∩B=∅
+    eq_us = N.modus_ponens(disj_thm, _eq_reunion_disjointe_somme_t(vA, vB))   # Eq(A∪B,A⊔B)
+    card_eq = N.modus_ponens(eq_us, _prop1_direct_tt(AuB, AsB))               # Card(A∪B)=Card(A⊔B)
+    # Card(A⊔B) = ca+cb  sous Card A=ca, Card B=cb
+    sdc = _somme_disjointe_cardinal_t(vA, vB, vca, vcb)
+    h_cA = N.assume(egal(cardinal(vA), vca))
+    h_cB = N.assume(egal(cardinal(vB), vcb))
+    card_s = N.modus_ponens(conjonction_intro(h_cA, h_cB), sdc)               # Card(A⊔B)=ca+cb
+    res = composer_egalites(card_eq, card_s)                                  # Card(A∪B)=ca+cb
+    assert res.conclusion == egal(cardinal(AuB), somme_cardinale_binaire(vca, vcb))
+    return res, h_cA.conclusion, h_cB.conclusion
+
+
+def cadre_plat_cardinal(S="S0", U="Ucadre"):
+    """{ Card S₀ = Card U,  𝔟·𝔟 = 𝔟,  est_cardinal(𝔟),  est_infini(𝔟),  U∩S₀ = ∅ }
+        ⊢ Card(F_plain) = Card S₀,   𝔟 := Card S₀,
+        F_plain = (S₀×U) ∪ ((U×S₀) ∪ (U×U)).               [hyps HONNÊTES].
+
+    🎯 P2 : le cadre PLAT a pour cardinal 3𝔟 = 𝔟 (E.III.48).  Miroir EXACT de
+    `cadre_card_trois_b` mais sur des RÉUNIONS PLATES (au lieu de sommes disjointes ⊔) :
+    la disjointness des blocs (P1, sous U∩S₀=∅) permet de remplacer chaque ∪ par un ⊔
+    au niveau des cardinaux (`_card_reunion_de_somme`).  Card(S₀×U)=Card(U×S₀)=
+    Card(U×U)=𝔟 (`_card_produit_egal_b`) ; Card((U×S₀)∪(U×U))=𝔟+𝔟 ; Card(F_plain)=
+    𝔟+(𝔟+𝔟)=3𝔟=𝔟 (`trois_b_egal_b_inconditionnel` + pont bien-déf, repris VERBATIM de
+    cadre_card_trois_b).  theorie=22 ; conclusion ∉ hyps."""
+    from bourbaki.cardinaux.ensembles_frame_extension_finale import _card_produit_egal_b
+    from bourbaki.cardinaux.arithmetique.ensembles_arith_cardinale import (
+        produit_cardinal_binaire,
+    )
+    from bourbaki.ensembles.familles.ensembles_somme_disjointe import (
+        somme_disjointe, somme_cardinale_binaire,
+    )
+    from bourbaki.cardinaux.ensembles_descentes_inconditionnelles import (
+        trois_b_egal_b_inconditionnel, _bien_definie_t,
+    )
+    from bourbaki.cardinaux.ensembles_cardinaux_theoremes import equipotent_son_cardinal
+    from bourbaki.cardinaux.ensembles_equipotence_retrait import equipotence_reflexive_pour
+    from bourbaki.entiers.ensembles_infinis import est_infini
+
+    vS, vU = _t(S), _t(U)
+    b = cardinal(vS)                                        # 𝔟 = Card S₀
+    cU = cardinal(vU)
+    bb = produit_cardinal_binaire(b, b)                     # 𝔟·𝔟
+    SxU, UxS, UxU = E.produit(vS, vU), E.produit(vU, vS), E.produit(vU, vU)
+    UxS_UxU = E.reunion(UxS, UxU)                           # (U×S₀)∪(U×U)
+    Fp = E.reunion(SxU, UxS_UxU)                            # F_plain
+    cible = egal(cardinal(Fp), b)
+
+    # ── hyps honnêtes ───────────────────────────────────────────────────────────
+    h_cardU = N.assume(egal(b, cU))                         # Card S₀ = Card U
+    h_bb = N.assume(egal(bb, b))                            # 𝔟·𝔟 = 𝔟
+    h_card_b = N.assume(est_cardinal(b))                    # est_cardinal(𝔟)
+    h_inf_b = N.assume(est_infini(b))                       # est_infini(𝔟)
+    h_disjUS = N.assume(E.sont_disjoints(vU, vS))           # U∩S₀ = ∅
+
+    cU_eq_b = N.modus_ponens(h_cardU, symetrie(b, cU))      # Card U = 𝔟
+    cS_eq_b = N.reflexivite(b)                              # Card S₀ = 𝔟
+
+    # ── blocs disjoints (P1) ────────────────────────────────────────────────────
+    blocs = N.modus_ponens(h_disjUS, N.loi_deduction(
+        E.sont_disjoints(vU, vS), cadre_plat_blocs_disjoints(S, U)))
+    # blocs = (a et b et c et tete) ; on extrait (c) et (tête).
+    disj_c = conjonction_elim_droite(conjonction_elim_gauche(blocs))    # (U×S₀)∩(U×U)=∅
+    disj_tete = conjonction_elim_droite(blocs)                          # (S₀×U)∩((U×S₀)∪(U×U))=∅
+
+    # ── Card de chaque facteur = 𝔟  (déchargeant les 3 hyps de _card_produit_egal_b) ──
+    card_SxU = _card_produit_egal_b(vS, vU, b)
+    card_SxU = N.modus_ponens(cS_eq_b, N.loi_deduction(egal(cardinal(vS), b), card_SxU))
+    card_SxU = N.modus_ponens(cU_eq_b, N.loi_deduction(egal(cU, b), card_SxU))
+    card_SxU = N.modus_ponens(h_bb, N.loi_deduction(egal(bb, b), card_SxU))
+    assert card_SxU.conclusion == egal(cardinal(SxU), b)
+
+    card_UxS = _card_produit_egal_b(vU, vS, b)
+    card_UxS = N.modus_ponens(cU_eq_b, N.loi_deduction(egal(cU, b), card_UxS))
+    card_UxS = N.modus_ponens(cS_eq_b, N.loi_deduction(egal(cardinal(vS), b), card_UxS))
+    card_UxS = N.modus_ponens(h_bb, N.loi_deduction(egal(bb, b), card_UxS))
+    assert card_UxS.conclusion == egal(cardinal(UxS), b)
+
+    card_UxU = _card_produit_egal_b(vU, vU, b)
+    card_UxU = N.modus_ponens(cU_eq_b, N.loi_deduction(egal(cU, b), card_UxU))
+    card_UxU = N.modus_ponens(cU_eq_b, N.loi_deduction(egal(cU, b), card_UxU))
+    card_UxU = N.modus_ponens(h_bb, N.loi_deduction(egal(bb, b), card_UxU))
+    assert card_UxU.conclusion == egal(cardinal(UxU), b)
+
+    # ── Card((U×S₀)∪(U×U)) = 𝔟+𝔟  (réunion disjointe (c)) ────────────────────────
+    bplusb = somme_cardinale_binaire(b, b)
+    inner_thm, need_cUxS, need_cUxU = _card_reunion_de_somme(UxS, UxU, b, b, disj_c)
+    card_inner = N.modus_ponens(card_UxS, N.loi_deduction(need_cUxS,
+                  N.modus_ponens(card_UxU, N.loi_deduction(need_cUxU, inner_thm))))
+    assert card_inner.conclusion == egal(cardinal(UxS_UxU), bplusb)
+
+    # ── Card(F_plain) = 𝔟+(𝔟+𝔟)  (réunion disjointe tête) ───────────────────────
+    threeb = somme_cardinale_binaire(b, bplusb)
+    tete_thm, need_cSxU, need_cInner = _card_reunion_de_somme(SxU, UxS_UxU, b, bplusb, disj_tete)
+    card_F = N.modus_ponens(card_SxU, N.loi_deduction(need_cSxU,
+              N.modus_ponens(card_inner, N.loi_deduction(need_cInner, tete_thm))))
+    assert card_F.conclusion == egal(cardinal(Fp), threeb)
+
+    # ── 3𝔟 = 𝔟  (VERBATIM de cadre_card_trois_b : trois_b + pont bien-déf) ──────
+    t3_var = trois_b_egal_b_inconditionnel("b3incond")
+    t3 = instancie(N.generalisation("b3incond", t3_var), b)
+    t3_app = N.modus_ponens(conjonction_intro(conjonction_intro(
+        h_card_b, h_inf_b), h_bb), t3)                     # somme_cardinale_binaire(𝔟,𝔟⊔𝔟)=𝔟
+    bb_set = somme_disjointe(b, b)                         # 𝔟⊔𝔟
+    threeb_set = somme_cardinale_binaire(b, bb_set)
+    assert t3_app.conclusion == egal(threeb_set, b)
+
+    eq_set_card = instancie(N.generalisation("X", equipotent_son_cardinal("X")), bb_set)
+    assert bplusb == cardinal(bb_set), "cadre_plat_cardinal : 𝔟+𝔟 ≠ Card(𝔟⊔𝔟) littéral"
+    eq_bb = equipotence_reflexive_pour(b)
+    bd = _bien_definie_t(b, bb_set, b, bplusb)
+    bridge = N.modus_ponens(conjonction_intro(eq_bb, eq_set_card), bd)
+    assert bridge.conclusion == egal(threeb_set, threeb)
+    threeb_eq_set = N.modus_ponens(bridge, symetrie(threeb_set, threeb))   # threeb=threeb_set
+    threeb_eq_b = composer_egalites(threeb_eq_set, t3_app)                 # threeb=𝔟
+
+    res = composer_egalites(card_F, threeb_eq_b)
+    assert res.conclusion == cible, f"{res.conclusion}\nvs\n{cible}"
+    assert res.conclusion not in res.hypotheses, "cadre_plat_cardinal : VACUOUS"
+    return res
+
+
+def cadre_plat_cardinal_cible(S="S0", U="Ucadre"):
+    """ÉNONCÉ-cible (test miroir)."""
+    vS = _t(S)
+    return egal(cardinal(cadre_plat(S, U)), cardinal(vS))
+
+
+# ════════════════════════════════════════════════════════════════════════════
 #  Le CADRE PLAT  F_plain = (S₀×U) ∪ ( (U×S₀) ∪ (U×U) ).
 # ════════════════════════════════════════════════════════════════════════════
 def cadre_plat(S="S0", U="Ucadre"):
@@ -272,5 +420,6 @@ def cadre_plat(S="S0", U="Ucadre"):
 
 __all__ = [
     "cadre_plat_blocs_disjoints", "cadre_plat_blocs_disjoints_cible",
+    "cadre_plat_cardinal", "cadre_plat_cardinal_cible",
     "cadre_plat", "commutativite_intersection_t",
 ]
