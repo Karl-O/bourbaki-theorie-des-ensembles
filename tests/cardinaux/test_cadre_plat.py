@@ -49,3 +49,26 @@ def test_P3_bijection():
     assert t.conclusion not in t.hypotheses
     # mêmes 5 gardes honnêtes que P2 (Card S0=Card U notamment).
     assert len(t.hypotheses) == 5
+
+
+def test_P4_phi_etendue_plat_decharge_hyp2():
+    """P4 (cœur) : la set-identity domaine S0²∪F_plain=Z² est DÉCHARGÉE par s0sq."""
+    base = m.phi_etendue_bijection_plat()
+    hyp2 = m._s0sq_set_identity_hyp()
+    assert hyp2 in base.hypotheses           # hyp[2] présente AVANT décharge
+    d = m.phi_etendue_bijection_plat_dechargee()
+    assert hyp2 not in d.hypotheses          # hyp[2] DÉCHARGÉE par s0sq (CLOS)
+    assert len(d.hypotheses) == len(base.hypotheses) - 1
+    assert d.conclusion == base.conclusion
+
+
+def test_P4_chaine_falsum_plat_reduit_hyps():
+    """P4 : FALSUM PLAT avec hyp[2] gone — 11 hyps vs 12 originales, lock absent."""
+    from bourbaki.cardinaux.ensembles_hessenberg_stepb import chaine_falsum_sous_temoins
+    plat = m.chaine_falsum_plat()
+    orig = chaine_falsum_sous_temoins()
+    assert len(orig.hypotheses) == 12
+    assert len(plat.hypotheses) == 11        # réduction 12 -> 11 (hyp[2] gone)
+    assert m._s0sq_set_identity_hyp() not in plat.hypotheses
+    # lock reunion(S0,U)=S0 absent (vérifié aussi en interne par chaine_falsum_plat)
+    assert egal(E.reunion(var("S0"), var("Ucadre")), var("S0")) not in plat.hypotheses

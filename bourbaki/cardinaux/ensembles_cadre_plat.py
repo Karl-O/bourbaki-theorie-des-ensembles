@@ -458,9 +458,287 @@ def cadre_plat(S="S0", U="Ucadre"):
                      E.reunion(E.produit(vU, vS), E.produit(vU, vU)))
 
 
+# ════════════════════════════════════════════════════════════════════════════
+#  P4 — recâblage PLAT de φ_étendue : Fcadre := F_plain (réunion), pour que la
+#  set-identity domaine `S₀²∪F_plain = Z×Z` soit DÉCHARGÉE par s0sq (CLOS 0-hyp).
+# ════════════════════════════════════════════════════════════════════════════
+def phi_etendue_bijection_plat(phi0="phi0", psi="psi", S="S0", U="Ucadre"):
+    """Variante PLATE de `phi_etendue_bijection` : Fcadre := F_plain (cadre_plat, en
+    RÉUNION) au lieu de cadre_ensemble (somme disjointe taguée).  IDENTIQUE par
+    ailleurs.  La set-identity domaine résiduelle devient `S₀²∪F_plain = Z×Z`, qui
+    est `s0sq_cadre_reunion_egale_carre` (CLOS 0-hyp) — donc DÉCHARGEABLE.
+
+    ⊢ est_bijection_de(φ₀∪ψ, Z×Z, Z), Z=S₀∪U, sous les MÊMES hyps mécaniques que
+    l'original mais avec dom ψ = F_plain (et non Fcadre tagué)."""
+    from bourbaki.ensembles.fonctions.ensembles_restriction_somme import (
+        reunion_graphes_fonctionnelle, dom_reunion_graphes,
+    )
+    from bourbaki.ensembles.fonctions.ensembles_recollement_bijection import (
+        reunion_graphes_injective,
+    )
+    from bourbaki.ensembles.fonctions.ensembles_dom_image_reunion import (
+        dom_reunion_egale_cible, image_reunion_egale_cible,
+    )
+    from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de
+    vphi0, vpsi = _t(phi0), _t(psi)
+    vS, vU = _t(S), _t(U)
+    Z = E.reunion(vS, vU)
+    ZxZ = E.produit(Z, Z)
+    phi1 = E.reunion(vphi0, vpsi)
+
+    func = reunion_graphes_fonctionnelle(vphi0, vpsi)
+    assert func.conclusion == E.est_fonctionnel(phi1)
+    inj = reunion_graphes_injective(vphi0, vpsi)
+    domR = E.reunion(E.dom(vphi0), E.dom(vpsi))
+    assert inj.conclusion == E.injective_dans(phi1, domR)
+
+    Fcadre = cadre_plat(S, U)                               # 🎯 F_plain (réunion PLATE)
+    SxS = E.produit(vS, vS)
+    domG, domH = E.dom(vphi0), E.dom(vpsi)
+    imgG, imgH = E.image(vphi0, domG), E.image(vpsi, domH)
+    h_dom = dom_reunion_egale_cible(vphi0, vpsi, SxS, Fcadre, ZxZ)
+    assert h_dom.conclusion == egal(E.dom(phi1), ZxZ)
+    h_img_domR = image_reunion_egale_cible(vphi0, vpsi, imgG, imgH, Z)
+    assert h_img_domR.conclusion == egal(E.image(phi1, domR), Z)
+    domR_eq_ZxZ_for_img = composer_egalites(
+        N.modus_ponens(dom_reunion_graphes(vphi0, vpsi), symetrie(E.dom(phi1), domR)),
+        h_dom)
+    s6img = N.s6(domR, ZxZ, "wimg", egal(E.image(phi1, var("wimg")), Z))
+    h_img = N.modus_ponens(h_img_domR, equivalence_avant(
+        N.modus_ponens(domR_eq_ZxZ_for_img, s6img)))
+    assert h_img.conclusion == egal(E.image(phi1, ZxZ), Z)
+    dom_rg = dom_reunion_graphes(vphi0, vpsi)
+    assert dom_rg.conclusion == egal(E.dom(phi1), domR)
+    domR_eq_dom2 = N.modus_ponens(dom_rg, symetrie(E.dom(phi1), domR))
+    domR_eq_ZxZ = composer_egalites(domR_eq_dom2, h_dom)
+    s6inj = N.s6(domR, ZxZ, "winj", E.injective_dans(phi1, var("winj")))
+    inj_ZxZ = N.modus_ponens(inj, equivalence_avant(N.modus_ponens(domR_eq_ZxZ, s6inj)))
+    assert inj_ZxZ.conclusion == E.injective_dans(phi1, ZxZ)
+
+    gauche = conjonction_intro(func, h_dom)
+    droite = conjonction_intro(inj_ZxZ, h_img)
+    res = conjonction_intro(gauche, droite)
+    cible = est_bijection_de(phi1, ZxZ, Z)
+    assert res.conclusion == cible, \
+        f"phi_etendue_bijection_plat : conclusion inattendue\n{res.conclusion}\nvs\n{cible}"
+    assert res.conclusion not in res.hypotheses, "phi_etendue_bijection_plat : VACUOUS"
+    return res
+
+
+def _s0sq_set_identity_hyp(S="S0", U="Ucadre"):
+    """La set-identity domaine PLATE résiduelle : S₀²∪F_plain = Z×Z (= hyp[2] PLATE)."""
+    vS, vU = _t(S), _t(U)
+    SxS = E.produit(vS, vS)
+    Z = E.reunion(vS, vU)
+    return egal(E.reunion(SxS, cadre_plat(S, U)), E.produit(Z, Z))
+
+
+def phi_etendue_bijection_plat_dechargee(phi0="phi0", psi="psi", S="S0", U="Ucadre"):
+    """`phi_etendue_bijection_plat` avec la set-identity domaine `S₀²∪F_plain = Z×Z`
+    DÉCHARGÉE par `s0sq_cadre_reunion_egale_carre` (CLOS 0-hyp).  🎯 hyp[2] DISPARAÎT.
+
+    ⊢ est_bijection_de(φ₀∪ψ, Z×Z, Z) sous les hyps mécaniques restantes (sans la
+    set-identity domaine, qui est désormais un THÉORÈME).  theorie=22."""
+    from bourbaki.cardinaux.ensembles_produit_union_carre import (
+        s0sq_cadre_reunion_egale_carre,
+    )
+    base = phi_etendue_bijection_plat(phi0, psi, S, U)
+    hyp2 = _s0sq_set_identity_hyp(S, U)
+    assert hyp2 in base.hypotheses, \
+        f"phi_etendue_plat_dechargee : set-identity domaine ABSENTE\n{hyp2}"
+    s0sq = s0sq_cadre_reunion_egale_carre(S, U)            # ⊢ S₀²∪F_plain = Z×Z  [CLOS]
+    assert s0sq.conclusion == hyp2, \
+        f"phi_etendue_plat_dechargee : s0sq ≠ hyp[2]\n{s0sq.conclusion}\nvs\n{hyp2}"
+    res = N.modus_ponens(s0sq, N.loi_deduction(hyp2, base))
+    assert res.conclusion == base.conclusion
+    assert hyp2 not in res.hypotheses, "phi_etendue_plat_dechargee : hyp[2] PAS déchargée !"
+    return res
+
+
+def phi1_bijection_derivee_plat(E_set="E", phi0="phi0", psi="psi", S="S0", U="Ucadre"):
+    """Miroir PLAT de `phi1_bijection_derivee` : décharge les hyps mécaniques de
+    `phi_etendue_bijection_plat_dechargee` depuis les DEUX bijections honnêtes
+    bij(φ₀,S₀²,S₀) et bij(ψ, F_plain, U) (cette dernière = P3 réalisée).  hyp[2]
+    (set-identity domaine) DÉJÀ déchargée par s0sq.
+
+    ⊢ est_bijection_de(φ₀∪ψ, Z×Z, Z) sous résidus géométriques HONNÊTES (S₀²∩F_plain=∅,
+    imgφ₀∪imgψ=Z, imgφ₀∩imgψ=∅, S₀∪U=Z, S₀∩U=∅) — la set-identity domaine n'EN FAIT
+    PLUS PARTIE.  Lock ABSENT.  theorie=22."""
+    from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de
+    vE, vphi0, vpsi = _t(E_set), _t(phi0), _t(psi)
+    vS, vU = _t(S), _t(U)
+    SxS = E.produit(vS, vS)
+    F = cadre_plat(S, U)                                    # F_plain
+
+    base = phi_etendue_bijection_plat_dechargee(phi0, psi, S, U)   # hyp[2] déjà déchargée
+
+    bij0 = N.assume(est_bijection_de(vphi0, SxS, vS))       # φ₀ : S₀² → S₀     [maximal]
+    bijp = N.assume(est_bijection_de(vpsi, F, vU))          # ψ  : F_plain → U  [P3]
+
+    func0 = conjonction_elim_gauche(conjonction_elim_gauche(bij0))
+    dom0 = conjonction_elim_droite(conjonction_elim_gauche(bij0))
+    inj0_SxS = conjonction_elim_gauche(conjonction_elim_droite(bij0))
+    img0 = conjonction_elim_droite(conjonction_elim_droite(bij0))
+
+    funcp = conjonction_elim_gauche(conjonction_elim_gauche(bijp))
+    domp = conjonction_elim_droite(conjonction_elim_gauche(bijp))
+    injp_F = conjonction_elim_gauche(conjonction_elim_droite(bijp))
+    imgp = conjonction_elim_droite(conjonction_elim_droite(bijp))
+
+    dom0_sym = N.modus_ponens(dom0, symetrie(E.dom(vphi0), SxS))
+    s6i0 = N.s6(SxS, E.dom(vphi0), "wi0", E.injective_dans(vphi0, var("wi0")))
+    inj0 = N.modus_ponens(inj0_SxS, equivalence_avant(N.modus_ponens(dom0_sym, s6i0)))
+    domp_sym = N.modus_ponens(domp, symetrie(E.dom(vpsi), F))
+    s6ip = N.s6(F, E.dom(vpsi), "wip", E.injective_dans(vpsi, var("wip")))
+    injp = N.modus_ponens(injp_F, equivalence_avant(N.modus_ponens(domp_sym, s6ip)))
+
+    fd0 = conjonction_elim_gauche(bij0)
+    fdp = conjonction_elim_gauche(bijp)
+    refl_img0 = N.reflexivite(E.image(vphi0, E.dom(vphi0)))
+    refl_imgp = N.reflexivite(E.image(vpsi, E.dom(vpsi)))
+
+    cur = base
+    for thm in (func0, funcp, inj0, injp, dom0, domp, fd0, fdp, refl_img0, refl_imgp):
+        c = thm.conclusion
+        if c in cur.hypotheses:
+            cur = N.modus_ponens(thm, N.loi_deduction(c, cur))
+
+    Z = E.reunion(vS, vU)
+    ZxZ = E.produit(Z, Z)
+    phi1 = E.reunion(vphi0, vpsi)
+    cible = est_bijection_de(phi1, ZxZ, Z)
+    assert cur.conclusion == cible, \
+        f"phi1_bijection_derivee_plat : conclusion inattendue\n{cur.conclusion}\nvs\n{cible}"
+    lock = egal(Z, vS)
+    assert lock not in cur.hypotheses, "phi1_bijection_derivee_plat : LOCK présent !"
+    assert _s0sq_set_identity_hyp(S, U) not in cur.hypotheses, \
+        "phi1_bijection_derivee_plat : set-identity domaine PAS déchargée !"
+    assert cur.conclusion not in cur.hypotheses, "phi1_bijection_derivee_plat : VACUOUS"
+    return cur
+
+
+def extension_dans_frame_chainee_plat(E_set="E", phi0="phi0", psi="psi", S="S0", U="Ucadre"):
+    """Miroir PLAT de `extension_dans_frame_chainee` : STEP1 plat décharge la bijection."""
+    from bourbaki.cardinaux.ensembles_frame_extension_finale import extension_dans_frame
+    from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de
+    vphi0, vpsi, vS, vU = _t(phi0), _t(psi), _t(S), _t(U)
+    Z = E.reunion(vS, vU)
+    bij = est_bijection_de(E.reunion(vphi0, vpsi), E.produit(Z, Z), Z)
+    edf = extension_dans_frame(E_set, phi0, psi, S, U)
+    assert bij in edf.hypotheses
+    step1 = phi1_bijection_derivee_plat(E_set, phi0, psi, S, U)
+    res = N.modus_ponens(step1, N.loi_deduction(bij, edf))
+    assert egal(Z, vS) not in res.hypotheses
+    assert res.conclusion == edf.conclusion
+    return res
+
+
+def extension_ordre_chainee_plat(E_set="E", phi0="phi0", psi="psi", S="S0", U="Ucadre"):
+    """Miroir PLAT de `extension_ordre_chainee`."""
+    from bourbaki.cardinaux.ensembles_frame_extension_finale import extension_ordre
+    from bourbaki.cardinaux.ensembles_hessenberg_hard import frame_pair
+    from bourbaki.cardinaux.ensembles_hessenberg_chaine_vraie import (
+        _inclusion_reunion_gauche_t,
+    )
+    vphi0, vpsi, vS, vU, vE = _t(phi0), _t(psi), _t(S), _t(U), _t(E_set)
+    Z = E.reunion(vS, vU)
+    phi1 = E.reunion(vphi0, vpsi)
+    q = E.couple(Z, phi1)
+    q_in = appartient(q, frame_pair(vE))
+    eo = extension_ordre(E_set, phi0, psi, S, U)
+    assert q_in in eo.hypotheses
+    step2 = extension_dans_frame_chainee_plat(E_set, phi0, psi, S, U)
+    res = N.modus_ponens(step2, N.loi_deduction(q_in, eo))
+    for (a, b) in ((vS, vU), (vphi0, vpsi)):
+        thm = _inclusion_reunion_gauche_t(a, b)
+        c = thm.conclusion
+        if c in res.hypotheses:
+            res = N.modus_ponens(thm, N.loi_deduction(c, res))
+    assert egal(Z, vS) not in res.hypotheses
+    assert res.conclusion == eo.conclusion
+    return res
+
+
+def extension_force_egalite_chainee_plat(E_set="E", phi0="phi0", psi="psi", S="S0", U="Ucadre"):
+    """Miroir PLAT de `extension_force_egalite_chainee` : DÉRIVE Z=S₀ par maximalité."""
+    from bourbaki.cardinaux.ensembles_frame_extension_finale import extension_force_egalite
+    from bourbaki.cardinaux.ensembles_hessenberg_hard import frame_pair, frame_ordre
+    vphi0, vpsi, vS, vU, vE = _t(phi0), _t(psi), _t(S), _t(U), _t(E_set)
+    Z = E.reunion(vS, vU)
+    phi1 = E.reunion(vphi0, vpsi)
+    p = E.couple(vS, vphi0)
+    q = E.couple(Z, phi1)
+    q_in = appartient(q, frame_pair(vE))
+    pq_in = appartient(E.couple(p, q), frame_ordre(vE))
+    efe = extension_force_egalite(E_set, phi0, psi, S, U)
+    assert q_in in efe.hypotheses and pq_in in efe.hypotheses
+    step2 = extension_dans_frame_chainee_plat(E_set, phi0, psi, S, U)
+    step3 = extension_ordre_chainee_plat(E_set, phi0, psi, S, U)
+    res = N.modus_ponens(step2, N.loi_deduction(q_in, efe))
+    res = N.modus_ponens(step3, N.loi_deduction(pq_in, res))
+    assert res.conclusion == egal(Z, vS)
+    assert egal(Z, vS) not in res.hypotheses
+    return res
+
+
+def extension_absurde_chainee_plat(E_set="E", phi0="phi0", psi="psi", S="S0",
+                                   U="Ucadre", u="uwit"):
+    """Miroir PLAT de `extension_absurde_chainee` : ⊢ ¬(u∈U) sous {u∈U, U∩S₀=∅, …},
+    le lock Z=S₀ DÉRIVÉ (STEP4 plat) et hyp[2] ABSENTE."""
+    from bourbaki.cardinaux.ensembles_frame_extension_finale import extension_absurde
+    vS, vU = _t(S), _t(U)
+    Z = E.reunion(vS, vU)
+    h_Zlock = egal(Z, vS)
+    ea = extension_absurde(E_set, phi0, psi, S, U, u)
+    assert h_Zlock in ea.hypotheses
+    step4 = extension_force_egalite_chainee_plat(E_set, phi0, psi, S, U)
+    res = N.modus_ponens(step4, N.loi_deduction(h_Zlock, ea))
+    assert res.conclusion == non(appartient(var(u), vU))
+    assert h_Zlock not in res.hypotheses
+    assert appartient(var(u), vU) in res.hypotheses
+    assert _s0sq_set_identity_hyp(S, U) not in res.hypotheses, \
+        "extension_absurde_chainee_plat : set-identity domaine PAS déchargée !"
+    return res
+
+
+def chaine_falsum_plat(E_set="E", phi0="phi0", S="S0", U="Ucadre", psi="psi", u="uwit"):
+    """🎯 P4 — FALSUM PLAT : la contradiction de Hessenberg avec hyp[2] (set-identity
+    domaine) DÉCHARGÉE par s0sq.  Miroir de `chaine_falsum_sous_temoins` mais sur le
+    cadre PLAT.  ⊢ ¬(u∈U) sous un témoin u∈U (= ⊥), avec STRICTEMENT MOINS d'hyps que
+    les 12 originales (hyp[2] GONE) et le lock reunion(S₀,U)=S₀ ABSENT."""
+    from bourbaki.logique.formule import libres_f
+    from bourbaki.cardinaux.ensembles_hessenberg_structural_discharge import U_disjoint_S0
+    vU, vu = _t(U), _t(u)
+    u_in_U = appartient(vu, vU)
+    base = extension_absurde_chainee_plat(E_set, phi0, psi, S, U, u)
+    assert base.conclusion == non(u_in_U)
+    disj = U_disjoint_S0(E_set, S, U, u)
+    disj_concl = disj.conclusion
+    if disj_concl in base.hypotheses:
+        base = N.modus_ponens(disj, N.loi_deduction(disj_concl, base))
+    autorises = {(E_set if isinstance(E_set, str) else E_set.nom),
+                 (phi0 if isinstance(phi0, str) else phi0.nom),
+                 (S if isinstance(S, str) else S.nom),
+                 (U if isinstance(U, str) else U.nom),
+                 (psi if isinstance(psi, str) else psi.nom),
+                 (u if isinstance(u, str) else u.nom)}
+    for h in base.hypotheses:
+        intrus = sorted(set(libres_f(h)) - autorises)
+        assert not intrus, f"chaine_falsum_plat : témoin(s) non autorisé(s) {intrus}\n{h}"
+    assert egal(E.reunion(_t(S), vU), _t(S)) not in base.hypotheses, "LOCK présent !"
+    assert u_in_U in base.hypotheses
+    assert _s0sq_set_identity_hyp(S, U) not in base.hypotheses, "hyp[2] présente !"
+    return base
+
+
 __all__ = [
     "cadre_plat_blocs_disjoints", "cadre_plat_blocs_disjoints_cible",
     "cadre_plat_cardinal", "cadre_plat_cardinal_cible",
     "cadre_plat_bijection", "cadre_plat_bijection_cible",
     "cadre_plat", "commutativite_intersection_t",
+    "phi_etendue_bijection_plat", "phi_etendue_bijection_plat_dechargee",
+    "phi1_bijection_derivee_plat",
+    "extension_dans_frame_chainee_plat", "extension_ordre_chainee_plat",
+    "extension_force_egalite_chainee_plat", "extension_absurde_chainee_plat",
+    "chaine_falsum_plat", "_s0sq_set_identity_hyp",
 ]
