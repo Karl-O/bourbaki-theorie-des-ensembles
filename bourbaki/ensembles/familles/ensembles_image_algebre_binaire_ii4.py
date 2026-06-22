@@ -245,8 +245,117 @@ def image_reciproque_inter_binaire(f="f", b="B", y="Y"):
     return N.loi_deduction(E.est_fonctionnel(vf), eq)
 
 
+from bourbaki.logique.tactiques.tactiques_abrege2 import contraposition
+
+
+# ════════════════════════════════════════════════════════════════════════════
+#  3. IMAGE RÉCIPROQUE D'UNE DIFFÉRENCE — CONDITIONNEL  (E.II.27, Prop. 6).
+#     est_fonctionnel(f) ⇒ f⁻¹⟨B∖Y⟩ = f⁻¹⟨B⟩ ∖ f⁻¹⟨Y⟩
+# ════════════════════════════════════════════════════════════════════════════
+def cible_image_reciproque_difference(f="f", b="B", y="Y"):
+    vf, vb, vy = _t(f), _t(b), _t(y)
+    lhs = E.image(E.reciproque(vf), E.difference(vb, vy))
+    rhs = E.difference(E.image(E.reciproque(vf), vb),
+                       E.image(E.reciproque(vf), vy))
+    return impl(E.est_fonctionnel(vf), egal(lhs, rhs))
+
+
+def image_reciproque_difference(f="f", b="B", y="Y"):
+    """⊢ est_fonctionnel(f) ⇒ f⁻¹⟨B∖Y⟩ = f⁻¹⟨B⟩ ∖ f⁻¹⟨Y⟩.   (E.II.27 ; CLOS, 0 hyp.)
+
+    ⊇ inconditionnel ; ⊆ via UNIVALENCE (si x∉Y mais a∈f⁻¹⟨Y⟩ via x', alors x=x'∈Y)."""
+    vf, vb, vy = _t(f), _t(b), _t(y)
+    va, vx, vxp = var("z"), var("x"), var("xp")
+    diff = E.difference(vb, vy)
+    fB = E.image(E.reciproque(vf), vb)
+    fY = E.image(E.reciproque(vf), vy)
+    lhs = E.image(E.reciproque(vf), diff)
+    rhs = E.difference(fB, fY)
+
+    hfunc = N.assume(E.est_fonctionnel(vf))
+    cpl = lambda u: appartient(E.couple(u, va), E.reciproque(vf))   # (u,a)∈f⁻¹
+    bodyB = lambda u: et(appartient(u, vb), cpl(u))
+    bodyY = lambda u: et(appartient(u, vy), cpl(u))
+    bodyD = lambda u: et(appartient(u, diff), cpl(u))
+
+    mem_lhs = membre_image_reciproque(vf, diff, va)    # a∈f⁻¹⟨B∖Y⟩ ⇔ (∃x)bodyD(x)
+    mem_B = membre_image_reciproque(vf, vb, va)        # a∈f⁻¹⟨B⟩   ⇔ (∃x)bodyB(x)
+    mem_Y = membre_image_reciproque(vf, vy, va)        # a∈f⁻¹⟨Y⟩   ⇔ (∃x)bodyY(x)
+    inst_rhs = _instance_diff(fB, fY, va)              # a∈rhs ⇔ (a∈f⁻¹⟨B⟩ et ¬a∈f⁻¹⟨Y⟩)
+    aB_f = appartient(va, fB)
+    aY_f = appartient(va, fY)
+
+    # Sous-lemme commun : (a∈f⁻¹⟨Y⟩) ⇒ (x∈Y), VALIDE sous (x,a)∈f⁻¹ fixé + univalence.
+    #   a∈f⁻¹⟨Y⟩ ⇒ (∃x')bodyY(x') ; sous x' : (x',a)∈f⁻¹, x'∈Y ; univalence x=x' ; x∈Y.
+    def aY_implique_xinY(x_cpl):
+        h_aY = N.assume(aY_f)
+        ex_Yp0 = N.modus_ponens(h_aY, equivalence_avant(mem_Y))     # (∃x)bodyY(x)
+        ex_Yp = N.modus_ponens(ex_Yp0, equivalence_avant(alpha_existe("x", "xp", bodyY(vx))))
+        hbY = N.assume(bodyY(vxp))
+        xp_in_Y = conjonction_elim_gauche(hbY)
+        xp_cpl = conjonction_elim_droite(hbY)                       # (x',a)∈f⁻¹
+        ax_f = N.modus_ponens(x_cpl, equivalence_avant(couple_reciproque(vf, vx, va)))    # (a,x)∈f
+        axp_f = N.modus_ponens(xp_cpl, equivalence_avant(couple_reciproque(vf, vxp, va))) # (a,x')∈f
+        x_eq_xp = N.modus_ponens(conjonction_intro(ax_f, axp_f),
+                                 _univalence(vf, hfunc, va, vx, vxp))   # x=x'
+        x_in_Y = N.modus_ponens(xp_in_Y, equivalence_arriere(
+            N.modus_ponens(x_eq_xp, N.s6(vx, vxp, "w", appartient(var("w"), vy)))))  # (x∈Y⇔x'∈Y); ← : x'∈Y⇒x∈Y
+        imp = existe_elimination(N.loi_deduction(bodyY(vxp), x_in_Y), "xp")
+        return N.loi_deduction(aY_f, N.modus_ponens(ex_Yp, imp))    # ⊢ a∈f⁻¹⟨Y⟩ ⇒ x∈Y
+
+    # ── ⊆ : a∈lhs ⇒ a∈rhs  (UNIVALENCE) ───────────────────────────────────────
+    h_lhs = N.assume(appartient(va, lhs))
+    ex_D = N.modus_ponens(h_lhs, equivalence_avant(mem_lhs))        # (∃x)bodyD(x)
+    hbD = N.assume(bodyD(vx))
+    x_in_diff = conjonction_elim_gauche(hbD)
+    x_cpl = conjonction_elim_droite(hbD)                            # (x,a)∈f⁻¹
+    x_in_B = conjonction_elim_gauche(N.modus_ponens(
+        x_in_diff, equivalence_avant(_instance_diff(vb, vy, vx))))  # x∈B
+    x_not_Y = conjonction_elim_droite(N.modus_ponens(
+        x_in_diff, equivalence_avant(_instance_diff(vb, vy, vx))))  # ¬x∈Y
+    aB = N.modus_ponens(N.modus_ponens(conjonction_intro(x_in_B, x_cpl),
+                                       N.s5(bodyB(vx), vx, "x")),
+                        equivalence_arriere(mem_B))                 # a∈f⁻¹⟨B⟩
+    # ¬(a∈f⁻¹⟨Y⟩) par contraposition de (a∈f⁻¹⟨Y⟩⇒x∈Y) avec ¬x∈Y
+    not_aY = N.modus_ponens(x_not_Y, contraposition(aY_implique_xinY(x_cpl)))  # ¬a∈f⁻¹⟨Y⟩
+    rhs_mem = N.modus_ponens(conjonction_intro(aB, not_aY), equivalence_arriere(inst_rhs))
+    incl_LR = N.generalisation("z", N.loi_deduction(
+        appartient(va, lhs),
+        N.modus_ponens(ex_D, existe_elimination(N.loi_deduction(bodyD(vx), rhs_mem), "x"))))
+
+    # ── ⊇ : a∈rhs ⇒ a∈lhs  (inconditionnel) ───────────────────────────────────
+    h_rhs = N.assume(appartient(va, rhs))
+    and_rhs = N.modus_ponens(h_rhs, equivalence_avant(inst_rhs))
+    aB2 = conjonction_elim_gauche(and_rhs)                          # a∈f⁻¹⟨B⟩
+    not_aY2 = conjonction_elim_droite(and_rhs)                      # ¬a∈f⁻¹⟨Y⟩
+    ex_B = N.modus_ponens(aB2, equivalence_avant(mem_B))            # (∃x)bodyB(x)
+    hbB = N.assume(bodyB(vx))
+    x_in_B2 = conjonction_elim_gauche(hbB)
+    x_cpl2 = conjonction_elim_droite(hbB)                           # (x,a)∈f⁻¹
+    # ¬x∈Y : si x∈Y alors a∈f⁻¹⟨Y⟩ (témoin x), contredit not_aY2.
+    h_xY = N.assume(appartient(vx, vy))
+    aY_from_x = N.modus_ponens(N.modus_ponens(conjonction_intro(h_xY, x_cpl2),
+                                              N.s5(bodyY(vx), vx, "x")),
+                               equivalence_arriere(mem_Y))          # a∈f⁻¹⟨Y⟩
+    x_not_Y2 = N.modus_ponens(not_aY2, contraposition(
+        N.loi_deduction(appartient(vx, vy), aY_from_x)))            # ¬x∈Y
+    x_in_diff2 = N.modus_ponens(conjonction_intro(x_in_B2, x_not_Y2),
+                                equivalence_arriere(_instance_diff(vb, vy, vx)))
+    aD = N.modus_ponens(N.modus_ponens(conjonction_intro(x_in_diff2, x_cpl2),
+                                       N.s5(bodyD(vx), vx, "x")),
+                        equivalence_arriere(mem_lhs))               # a∈lhs
+    incl_RL = N.generalisation("z", N.loi_deduction(
+        appartient(va, rhs),
+        N.modus_ponens(ex_B, existe_elimination(N.loi_deduction(bodyB(vx), aD), "x"))))
+
+    eq = N.modus_ponens(conjonction_intro(incl_LR, incl_RL),
+                        extensionnalite_appliquee(lhs, rhs))
+    return N.loi_deduction(E.est_fonctionnel(vf), eq)
+
+
 __all__ = [
     "membre_image", "membre_image_reciproque",
     "image_reunion_binaire", "cible_image_reunion_binaire",
     "image_reciproque_inter_binaire", "cible_image_reciproque_inter_binaire",
+    "image_reciproque_difference", "cible_image_reciproque_difference",
 ]
