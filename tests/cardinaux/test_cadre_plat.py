@@ -40,3 +40,12 @@ def test_P2_cardinal():
     }
     assert set(t.hypotheses) == expected
     assert t.conclusion not in t.hypotheses
+
+
+def test_P3_bijection():
+    """P3 : (∃ψ) bij(ψ, F_plain, U) sous les 5 hyps honnêtes."""
+    t = m.cadre_plat_bijection()
+    assert t.conclusion == m.cadre_plat_bijection_cible()
+    assert t.conclusion not in t.hypotheses
+    # mêmes 5 gardes honnêtes que P2 (Card S0=Card U notamment).
+    assert len(t.hypotheses) == 5

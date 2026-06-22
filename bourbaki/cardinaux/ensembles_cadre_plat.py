@@ -409,6 +409,46 @@ def cadre_plat_cardinal_cible(S="S0", U="Ucadre"):
 
 
 # ════════════════════════════════════════════════════════════════════════════
+#  P3 — (∃ψ) bij(ψ, F_plain, U)  depuis Card(F_plain)=Card U.
+# ════════════════════════════════════════════════════════════════════════════
+def cadre_plat_bijection(S="S0", U="Ucadre"):
+    """{ Card S₀ = Card U,  𝔟·𝔟 = 𝔟,  est_cardinal(𝔟),  est_infini(𝔟),  U∩S₀ = ∅ }
+        ⊢ (∃ψ) est_bijection_de(ψ, F_plain, U),  F_plain=(S₀×U)∪((U×S₀)∪(U×U)).
+                                                            [hyps HONNÊTES].
+
+    🎯 P3 : du cardinal du cadre PLAT (P2, Card F_plain=Card S₀) et de Card S₀=Card U,
+    on tire Card F_plain=Card U, d'où une BIJECTION ψ:F_plain→U (`cadre_bijection`, Prop 1
+    réciproque).  Mêmes 5 gardes honnêtes que P2.  theorie=22 ; conclusion ∉ hyps."""
+    from bourbaki.cardinaux.ensembles_frame_extension_finale import cadre_bijection
+    from bourbaki.cardinaux.ensembles_cardinaux import equipotent
+    vS, vU = _t(S), _t(U)
+    Fp = cadre_plat(S, U)
+    b, cU = cardinal(vS), cardinal(vU)
+
+    # Card(F_plain) = Card S₀   (P2)
+    card_F = cadre_plat_cardinal(S, U)                      # Card F_plain = 𝔟
+    # Card S₀ = Card U  (hyp honnête, déjà parmi les hyps de card_F)
+    h_cardU = N.assume(egal(b, cU))                         # Card S₀ = Card U
+    # Card(F_plain) = Card U
+    card_F_eq_cU = composer_egalites(card_F, h_cardU)       # Card F_plain = Card U
+    assert card_F_eq_cU.conclusion == egal(cardinal(Fp), cU)
+
+    # cadre_bijection(F_plain, U) : (Card F_plain=Card U) ⇒ (∃ψ)bij(ψ,F_plain,U)
+    cb = cadre_bijection(Fp, vU)
+    res = N.modus_ponens(card_F_eq_cU, cb)                  # (∃ψ)bij(ψ,F_plain,U)
+    assert res.conclusion == equipotent(Fp, vU), \
+        f"cadre_plat_bijection : conclusion inattendue\n{res.conclusion}"
+    assert res.conclusion not in res.hypotheses, "cadre_plat_bijection : VACUOUS"
+    return res
+
+
+def cadre_plat_bijection_cible(S="S0", U="Ucadre"):
+    """ÉNONCÉ-cible (test miroir) : equipotent(F_plain, U) = (∃ψ)bij(ψ,F_plain,U)."""
+    from bourbaki.cardinaux.ensembles_cardinaux import equipotent
+    return equipotent(cadre_plat(S, U), _t(U))
+
+
+# ════════════════════════════════════════════════════════════════════════════
 #  Le CADRE PLAT  F_plain = (S₀×U) ∪ ( (U×S₀) ∪ (U×U) ).
 # ════════════════════════════════════════════════════════════════════════════
 def cadre_plat(S="S0", U="Ucadre"):
@@ -421,5 +461,6 @@ def cadre_plat(S="S0", U="Ucadre"):
 __all__ = [
     "cadre_plat_blocs_disjoints", "cadre_plat_blocs_disjoints_cible",
     "cadre_plat_cardinal", "cadre_plat_cardinal_cible",
+    "cadre_plat_bijection", "cadre_plat_bijection_cible",
     "cadre_plat", "commutativite_intersection_t",
 ]
