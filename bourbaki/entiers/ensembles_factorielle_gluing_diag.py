@@ -165,11 +165,13 @@ def diagnostiquer_capture():
     class _Stop(Exception):
         pass
 
-    def _patched(u="u", v="v", f="F"):
+    def _patched(u="u", v="v", f="F", y="y"):
+        # post-paramétrisation : antecedent_dans_domaine prend un 4e arg y (binder S5).
+        # Le chemin DÉFAUT passe y="y" → capture inchangée ; on threade y pour fidélité.
         vu, vv, vf = RS._t(u), RS._t(v), RS._t(f)
-        body = appartient(E.couple(vu, var("y")), vf)         # (u,y)∈F
+        body = appartient(E.couple(vu, var(y)), vf)           # (u,y)∈F
         huv = N.assume(appartient(E.couple(vu, vv), vf))      # mineure (u,v)∈F
-        ante = subst_f(vv, "y", body)                         # antécédent S5
+        ante = subst_f(vv, y, body)                           # antécédent S5
         if ante != huv.conclusion:
             div = _premiere_div(huv.conclusion, ante)
             rapport["site"] = ("ensembles_restriction_somme.antecedent_dans_domaine "
@@ -180,7 +182,7 @@ def diagnostiquer_capture():
             # le binder collisionnant = celui qui devient '@0' = 'v'
             rapport["binder_collision"] = "v"
             raise _Stop
-        return orig(u, v, f)
+        return orig(u, v, f, y)
 
     RS.antecedent_dans_domaine = _patched
     try:
