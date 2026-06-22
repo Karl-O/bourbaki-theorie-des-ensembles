@@ -1,6 +1,15 @@
 """§III.6.3 — Théorème 2 (HESSENBERG, E.III.48-49) : l'EXTENSION FINALE du maximal,
 « CLAIM : Card(S₀)=Card(E) ⇒ a²=a ».
 
+🔴🔴 AVERTISSEMENT VACUITÉ (audit 2026-06-22) : `hessenberg_a_carre_egal_a` est VACUUX —
+ses hypothèses contiennent le TRIO CONTRADICTOIRE { reunion(S₀,U)=S₀ , u∈U ,
+∀z(z∈U⇒¬z∈S₀) } (insatisfiable) ⇒ NE PROUVE RIEN sur a²=a (le lock S₀∪U=S₀ est ASSUMÉ,
+pas dérivé par maximalité). Les LEMMES-PIÈCES de ce module (cadre_card_trois_b,
+cadre_bijection, phi_etendue_bijection, extension_dans_frame, extension_ordre,
+extension_force_egalite, extension_absurde, card_S0_egal_card_E) sont individuellement
+SAINS (hyps satisfiables) ; seul leur MONTAGE final est vacuux. Cf. mémoire
+hessenberg-vacuite-correction.
+
 CONTEXTE (lu sur le PDF source, E.III.48).  L'argument de Zorn fournit un couple
 MAXIMAL (S₀,φ₀)∈𝔉(E), φ₀ : S₀×S₀ → S₀ BIJECTIVE (⇒ 𝔟²=𝔟, 𝔟:=Card S₀,
 `maximal_carre_egal`).  Bourbaki conclut Card(S₀)=Card(E)=𝔞 par CONTRADICTION :

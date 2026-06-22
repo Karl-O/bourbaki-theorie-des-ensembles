@@ -1,6 +1,14 @@
 """§III.6.3 — Théorème 2 (HESSENBERG, E.III.48-49) : ASSEMBLAGE FINAL de la
 CONTRADICTION d'extension du maximal, « ¬(𝔟<a) », puis (si clos) a²=a inconditionnel.
 
+🔴🔴 AVERTISSEMENT VACUITÉ (audit 2026-06-22) : `hessenberg_a_carre_egal_a_inconditionnel`
+et `negation_b_inf_strict_a` sont VACUUX — leurs hypothèses contiennent le TRIO
+CONTRADICTOIRE { reunion(S₀,U)=S₀ , u∈U , ∀z(z∈U⇒¬z∈S₀) } (insatisfiable). La conclusion
+== enonce_hessenberg LITTÉRALEMENT mais sous des prémisses jamais toutes vraies ⇒ NE PROUVE
+RIEN. a²=a N'EST PAS prouvé. Le lock `S₀∪U=S₀` est ASSUMÉ au lieu d'être DÉRIVÉ par
+`extension_force_egalite` (maximalité). NE PAS COMPTER COMME ACQUIS. Cf. mémoire
+hessenberg-vacuite-correction.
+
 CONTEXTE (E.III.48).  Le maximal (S₀,φ₀)∈𝔉(E) (φ₀ : S₀×S₀→S₀ bijective ⇒ 𝔟²=𝔟,
 𝔟:=Card S₀) ne peut vérifier 𝔟<a:=Card E.  Sinon le complément E∖S₀ est « grand »
 (`complement_grand`), on y loge U⊂E∖S₀ équipotent à S₀
