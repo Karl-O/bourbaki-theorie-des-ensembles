@@ -707,3 +707,39 @@ def support_monotone_exposant(c="C", d="D", a="A"):
     concl = _cut(concl_cd, [(le_cd, conjonction_elim_gauche(h)),
                             (non(egal(va, E.VIDE)), conjonction_elim_droite(h))])
     return N.loi_deduction(hyp, concl)                  # (C≤D et A≠∅) ⇒ 𝓕(C;A)≤𝓕(D;A)
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+#  FINAL — monotonie en l'EXPOSANT au niveau des CARDINAUX (INCONDITIONNEL) :
+#      (c ≤ d  et  a ≠ 0)  ⇒  (a^c ≤ a^d),   a^c := exposant_cardinal_binaire(a,c)
+#                                                  = Card(𝓕(c;a)).
+#  Le « a ≠ 0 » est ¬(a=∅) : la valeur-défaut a₀∈a impose a non vide (cas Bourbaki
+#  a ≠ 0 ; ici a joue le rôle du BUT A de l'exponentiation a^c=Card 𝓕(c;a)).
+# ═══════════════════════════════════════════════════════════════════════════════
+def exposant_monotone_exposant(a="a", c="c", d="d"):
+    """⊢ (c ≤ d  et  a ≠ 0)  ⇒  (a^c ≤ a^d).   (a^c = exposant_cardinal_binaire(a,c)
+    = Card(𝓕(c;a)) ; a ≠ 0 := ¬(a=∅).)   INCONDITIONNEL, AUCUNE hyp de support.
+
+    Chaîne (cf. exposant_monotone_base) :
+      support_monotone_exposant(c,d,a) : (c≤d et a≠∅) ⇒ (𝓕(c;a) ≤ 𝓕(d;a))
+      inf_egal_transporte_cardinal     : (𝓕(c;a)≤𝓕(d;a)) ⇒ (Card 𝓕(c;a) ≤ Card 𝓕(d;a))
+    et Card 𝓕(c;a) = exposant_cardinal_binaire(a,c) (DÉFINITION 4)."""
+    from bourbaki.cardinaux.arithmetique.ensembles_arith_cardinale_props_exposant_monotone import (
+        inf_egal_transporte_cardinal)
+    va, vc, vd = _t(a), _t(c), _t(d)
+    Fca = E.applications(vc, va)             # 𝓕(c;a)
+    Fda = E.applications(vd, va)             # 𝓕(d;a)
+    # support sur NOMS FRAIS (C,D,A ≠ binders internes), généralisé puis instancié aux TERMES
+    sm = support_monotone_exposant("C", "D", "A")   # (C≤D et A≠∅) ⇒ (𝓕(C;A)≤𝓕(D;A))
+    sm_gen = N.generalisation("C", N.generalisation("D", N.generalisation("A", sm)))
+    sm_t = instancie(instancie(instancie(sm_gen, vc), vd), va)  # (c≤d et a≠∅) ⇒ (𝓕(c;a)≤𝓕(d;a))
+    # transport (0) instancié aux supports
+    transp_all = N.generalisation("X", N.generalisation("Y",
+        inf_egal_transporte_cardinal("X", "Y")))
+    transp = instancie(instancie(transp_all, Fca), Fda)  # (𝓕(c;a)≤𝓕(d;a)) ⇒ (a^c ≤ a^d)
+    # chaîne sous (c≤d et a≠0)
+    hyp = et(inf_egal_card(vc, vd), non(egal(va, E.VIDE)))
+    h = N.assume(hyp)
+    sup = N.modus_ponens(h, sm_t)                  # 𝓕(c;a)≤𝓕(d;a)
+    exp_le = N.modus_ponens(sup, transp)           # a^c ≤ a^d
+    return N.loi_deduction(hyp, exp_le)
