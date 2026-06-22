@@ -56,3 +56,16 @@ def test_carre_reunion_S0_U_clos():
 
 def test_theorie_22():
     assert len(list(E.theorie_ensembles().axiomes)) == 22
+
+
+def test_s0sq_cadre_reunion_egale_carre_clos():
+    from bourbaki.cardinaux.ensembles_produit_union_carre import s0sq_cadre_reunion_egale_carre
+    from bourbaki.logique.formule import var, egal
+    r = s0sq_cadre_reunion_egale_carre()
+    assert not r.hypotheses
+    vS, vU = var("S0"), var("Ucadre")
+    Z = E.reunion(vS, vU)
+    SS = E.produit(vS, vS)
+    F = E.reunion(E.produit(vS, vU),
+                  E.reunion(E.produit(vU, vS), E.produit(vU, vU)))
+    assert r.conclusion == egal(E.reunion(SS, F), E.produit(Z, Z))

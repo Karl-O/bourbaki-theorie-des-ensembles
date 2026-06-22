@@ -309,10 +309,35 @@ def carre_reunion_S0_U(S="S0", U="Ucadre", z="z"):
     return produit_union_carre(S, U, z)
 
 
+def s0sq_cadre_reunion_egale_carre(S="S0", U="Ucadre", z="z"):
+    """⊢ (S₀×S₀) ∪ ((S₀×U)∪((U×S₀)∪(U×U)))  =  (S₀∪U)×(S₀∪U).   [CLOS, 0 hyp].
+
+    🎯 TASK B — la SET-IDENTITY DOMAINE `S₀²∪F = Z²` dans sa forme RÉUNION-FRAME
+    (F = (S₀×U)∪((U×S₀)∪(U×U)) en RÉUNION, NON somme-disjointe), 0 hyp, par
+    symétrie de `carre_reunion_S0_U`.
+
+    ⚠️ BLOCKER (honnête) : ce N'EST PAS la résiduelle hyp 2 effective de
+    `phi1_bijection_derivee`, qui utilise `cadre_ensemble = (S₀×U)⊔((U×S₀)⊔(U×U))`
+    en SOMME-DISJOINTE (tags ×{0}/×{1}, `ensembles_somme_disjointe`).  Comme
+    somme_disjointe(A,B)=(A×{0})∪(B×{1}) ≠ reunion(A,B), la résiduelle effective
+    `(S₀×S₀)∪cadre⊔ = Z²` est un TERME DISTINCT, non égal à Z² (Z² a des éléments
+    NON tagués).  Décharger hyp 2 demande de RE-CÂBLER ψ pour qu'elle ait pour
+    domaine la frame en RÉUNION (pas en ⊔) — changement d'architecture de
+    `phi_etendue_bijection`/`cadre_ensemble`, hors scope mécanique de TASK B."""
+    from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie
+    cr = carre_reunion_S0_U(S, U, z)
+    lhs, rhs = cr.conclusion.termes                         # Z² = S₀²∪F
+    res = N.modus_ponens(cr, symetrie(lhs, rhs))            # S₀²∪F = Z²
+    assert res.conclusion == egal(rhs, lhs)
+    assert not res.hypotheses, "s0sq_cadre_reunion_egale_carre : NON clos !"
+    return res
+
+
 __all__ = [
     "existe_ou",
     "produit_union_gauche",
     "produit_union_droite",
     "produit_union_carre",
     "carre_reunion_S0_U",
+    "s0sq_cadre_reunion_egale_carre",
 ]
