@@ -244,6 +244,77 @@ def negation_strict_sous_temoins_UF(E_set="E", phi0="phi0", psi="psi", S="S0",
     return cur
 
 
+# ════════════════════════════════════════════════════════════════════════════
+#  B2 — VERDICT MÉCANIQUE : élimination de Ucadre BLOQUÉE au MUR disjoint-sum.
+# ════════════════════════════════════════════════════════════════════════════
+def b2_blocker_classification():
+    """Classifie MÉCANIQUEMENT les 9 hyps de B1 mentionnant Ucadre, par leur
+    déchargeabilité depuis le corps de `existe_sous_ensemble_cardinal_transporte`
+    (U⊂E∖S₀ ∧ Card U=Card S₀).  SOURCE DE VÉRITÉ du verdict B2.
+
+    VERDICT.  4 hyps sont le MUR ARCHITECTURAL IRRÉDUCTIBLE (identités d'ensembles sur
+    le cadre SOMME-DISJOINTE `cadre_ensemble = somme_disjointe(...)`, tagué `paire(∅,∅)`) :
+      • S₀²∪cadre⊔ = Z²              (set-identity domaine, FAUSSE au niveau ensembliste —
+                                      Z² a des éléments non tagués ; vraie seulement au
+                                      niveau équipotence/cardinal) ;
+      • S₀²∩cadre⊔ = ∅  (dom-disj ψ-free, `(∀u)¬(u∈domφ₀ ∧ u∈cadre⊔)`) ;
+      • ¬(∃X)… non-extension de Z (×2, dom(F)∈{cadre⊔, Z}).
+    Ces 4 N'ÉTANT PAS dérivables de {U⊂E∖S₀, Card U=Card S₀}, et MENTIONNANT Ucadre,
+    `existe_elimination(·,"Ucadre")` est IMPOSSIBLE (Ucadre libre dans Γ) ⇒ B2 BLOQUÉ.
+
+    Les 5 autres hyps Ucadre SONT en principe déchargeables (img-disj/cov ψ-free via
+    image(φ₀,domφ₀)=S₀ de la maximal-data ; Card F=Card U via `cadre_card_trois_b` ;
+    Z⊂E via U⊂E∖S₀+S₀⊂E ; U⊂E∖S₀ = le corps du transport) — mais cela NE SUFFIT PAS :
+    tant que les 4 hyps-mur mentionnent Ucadre, l'élimination échoue.
+
+    🔓 DÉBLOCAGE (HORS scope mécanique, documenté `ensembles_hessenberg_stepb` / classify) :
+    RE-CÂBLER `cadre_ensemble` somme_disjointe → RÉUNION (`s0sq_cadre_reunion_egale_carre`
+    CLOS donne alors S₀²∪F_reunion=Z² VRAIE et closeable) — changement d'architecture de
+    `phi_etendue_bijection`/`cadre_ensemble`.  Tant qu'il n'est pas fait, B2/B3/B4 restent
+    bloqués ; B1 (ψ,uwit éliminés) est l'avancée nette de ce round.
+
+    Retourne (b1, table) ; table = liste {free, label, dischargeable:bool}."""
+    b1 = negation_strict_sous_temoins_UF()
+    uc = [h for h in b1.hypotheses if "Ucadre" in libres_f(h)]
+    assert len(uc) == 9, f"b2_blocker : {len(uc)} hyps Ucadre (attendu 9)"
+    from bourbaki.logique.formule import afficher_f as af
+    table = []
+    nb_mur = 0
+    for h in sorted(uc, key=lambda x: str(x)):
+        s = af(h)
+        if s.startswith("(inter(image(phi0"):
+            lab, disch = "img-disj ψ-free (→ S₀∩U=∅)", True
+        elif s.startswith("(reunion(image(phi0"):
+            lab, disch = "img-cov ψ-free (→ S₀∪U=Z)", True
+        elif s.startswith("(reunion(produit(S0, S0)"):
+            lab, disch = "S₀²∪cadre⊔ = Z²  [MUR disjoint-sum]", False
+        elif s.startswith("(τZ"):
+            lab, disch = "Card F = Card U (→ cadre_card_trois_b)", True
+        elif s.startswith("¬(τZ"):
+            lab, disch = "¬(∃X) non-extension [dom F=cadre⊔]  [MUR]", False
+        elif s.startswith("(∀u) ¬((u ∈ dom(phi0))"):
+            lab, disch = "S₀²∩cadre⊔ = ∅ (dom-disj ψ-free)  [MUR]", False
+        elif s.startswith("(∀z) ((z ∈ reunion(S0, Ucadre)) ⇒ (z ∈ E))"):
+            lab, disch = "Z ⊂ E (→ U⊂E∖S₀ + S₀⊂E)", True
+        elif s.startswith("(∀z) ((z ∈ Ucadre) ⇒ (z ∈ difference(E, S0)))"):
+            lab, disch = "U ⊂ E∖S₀ (= corps du transport)", True
+        elif s.startswith("¬((∃X)"):
+            lab, disch = "¬(∃X) non-extension [dom F=Z]  [MUR]", False
+        else:
+            lab, disch = "??? non classé", False
+        if not disch:
+            nb_mur += 1
+        table.append({"free": sorted(libres_f(h)), "label": lab, "dischargeable": disch})
+    assert nb_mur == 4, f"b2_blocker : {nb_mur} hyps-mur (attendu 4) — re-analyser"
+    return b1, table
+
+
+__all__ = [
+    "negation_strict_sous_temoins_UF",
+    "b2_blocker_classification",
+]
+
+
 def _remplacer_terme(formule, ancien, nouveau):
     """Remplace toutes les occurrences du TERME `ancien` par `nouveau` dans `formule`
     (substitution structurelle, capture-naïve : usage interne réécriture S6 sur termes

@@ -4,7 +4,7 @@ from bourbaki.ensembles import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import cardinal
 from bourbaki.cardinaux.ensembles_frame_extension_finale import cadre_ensemble
 from bourbaki.cardinaux.ensembles_hessenberg_stepb2 import (
-    negation_strict_sous_temoins_UF,
+    negation_strict_sous_temoins_UF, b2_blocker_classification,
 )
 
 
@@ -28,3 +28,14 @@ def test_b1_psi_uwit_elimines():
     assert non(egal(cardinal(var("Ucadre")), cardinal(E.VIDE))) in b1.hypotheses
     # conclusion = marqueur falsum
     assert b1.conclusion == non(egal(var("E"), var("E")))
+
+
+def test_b2_blocker_classification():
+    """B2 : verdict mécanique — 4 hyps Ucadre sont le MUR disjoint-sum irréductible."""
+    b1, table = b2_blocker_classification()
+    assert len(table) == 9
+    mur = [t for t in table if not t["dischargeable"]]
+    assert len(mur) == 4, f"attendu 4 hyps-mur, vu {len(mur)}"
+    # toutes les hyps-mur mentionnent Ucadre ⇒ existe_elimination(Ucadre) impossible
+    for t in mur:
+        assert "Ucadre" in t["free"]
