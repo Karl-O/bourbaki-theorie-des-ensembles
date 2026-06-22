@@ -326,4 +326,108 @@ def _S_union_compl_D(s, d):
     return N.modus_ponens(conjonction_intro(fwd, bwd), ext)   # S∪(D∖S)=D
 
 
+# ── ĝ : fonctionnel, dom = D, ĝ ⊂ D×A  (sous {g∈𝓕(S;A), S⊆D, a₀∈A}) ───────────
+def _ghat_fonctionnel(vg, va0, vs, vd, va):
+    """{ g∈𝓕(S;A), a₀∈A } ⊢ est_fonctionnel(ĝ).   (recollement de graphes
+    fonctionnels à domaines disjoints.)"""
+    from bourbaki.ensembles.fonctions.ensembles_restriction_somme import reunion_graphes_fonctionnelle
+    grg = R_graphes_g = graphe_de(vg)
+    R = R_terme(va0, vs, vd)
+    _incl, g_func, g_dom = _struct_g(vg, vs, va)          # graphe_de(g) fonctionnel, dom=S
+    r_func = R_fonctionnel(va0, vs, vd)                   # R fonctionnel
+    disj = _ghat_disjonction(vg, vs, va0, vd)            # (∀u)¬(u∈dom grg et u∈dom R)  [dom grg=S]
+    disj = _cut(disj, [(egal(E.dom(grg), vs), g_dom)])   # décharge dom grg=S
+    base = reunion_graphes_fonctionnelle(grg, R)         # {func grg, func R, disj} ⊢ func(grg∪R)
+    disj_form = pourtout("u", non(et(appartient(var("u"), E.dom(grg)),
+                                     appartient(var("u"), E.dom(R)))))
+    return _cut(base, [(E.est_fonctionnel(grg), g_func),
+                       (E.est_fonctionnel(R), r_func),
+                       (disj_form, disj)])
+
+
+def _ghat_domaine(vg, va0, vs, vd, va):
+    """{ g∈𝓕(S;A), S⊆D } ⊢ dom(ĝ) = D.
+
+    dom(grg∪R)=dom grg ∪ dom R (dom_reunion_graphes) = S ∪ (D∖S) (dom grg=S, dom R=D∖S)
+    = D (_S_union_compl_D, sous S⊆D)."""
+    from bourbaki.ensembles.fonctions.ensembles_restriction_somme import dom_reunion_graphes
+    grg = graphe_de(vg)
+    R = R_terme(va0, vs, vd)
+    DmS = _compl(vs, vd)
+    _incl, _func, g_dom = _struct_g(vg, vs, va)          # dom grg=S
+    r_dom = R_domaine(va0, vs, vd)                       # dom R=D∖S
+    domGuH = E.dom(E.reunion(grg, R))
+    dom_un = dom_reunion_graphes(grg, R)                 # dom(grg∪R)=dom grg ∪ dom R
+    # réécrire dom grg→S  (Leibniz sur le 1ᵉʳ membre de la réunion-image)
+    step1 = N.modus_ponens(dom_un, equivalence_avant(N.modus_ponens(g_dom,
+        N.s6(E.dom(grg), vs, "w", egal(domGuH, E.reunion(var("w"), E.dom(R)))))))   # =S∪dom R
+    # réécrire dom R→D∖S
+    step2 = N.modus_ponens(step1, equivalence_avant(N.modus_ponens(r_dom,
+        N.s6(E.dom(R), DmS, "w", egal(domGuH, E.reunion(vs, var("w")))))))          # =S∪(D∖S)
+    # S∪(D∖S)=D  (sous S⊆D) ; chaîner
+    su = _S_union_compl_D(vs, vd)                        # S∪(D∖S)=D
+    return composer_egalites(step2, su)                  # dom(grg∪R)=D
+
+
+def _produit_mono_gauche(s, d, a):
+    """{ S⊆D } ⊢ S×A ⊂ D×A.   (produit_inclusion_facile avec A⊂A réflexif.)"""
+    from bourbaki.ensembles.familles.ensembles_produit import produit_inclusion_facile
+    vs, vd, va = _t(s), _t(d), _t(a)
+    # produit_inclusion_facile : ((S⊂D) et (A⊂A)) ⇒ S×A⊂D×A
+    pif = produit_inclusion_facile("A", "B", "Ap", "Bp")
+    pif = instancie(instancie(instancie(instancie(N.generalisation("A",
+        N.generalisation("B", N.generalisation("Ap", N.generalisation("Bp", pif)))),
+        vd), va), vs), va)                              # ((S⊂D) et (A⊂A)) ⇒ S×A⊂D×A
+    refl_AA = _inclus_reflexif(va)                      # A⊂A
+    h_sub = N.assume(inclus(vs, vd))
+    return N.modus_ponens(conjonction_intro(h_sub, refl_AA), pif)   # S×A⊂D×A  [S⊆D]
+
+
+def _inclus_reflexif(a):
+    """⊢ A ⊂ A."""
+    va = _t(a)
+    vz = var("z")
+    return N.generalisation("z", N.loi_deduction(appartient(vz, va), N.assume(appartient(vz, va))))
+
+
+def _ghat_inclus(vg, va0, vs, vd, va):
+    """{ g∈𝓕(S;A), S⊆D, a₀∈A } ⊢ ĝ ⊂ D×A.
+
+    z∈grg∪R ⇒ z∈grg (⊂S×A⊂D×A) ou z∈R (⊂D×A)."""
+    from bourbaki.ensembles.fonctions.ensembles_restriction_somme import membre_reunion_graphes
+    grg = graphe_de(vg)
+    R = R_terme(va0, vs, vd)
+    GuH = E.reunion(grg, R)
+    DA = E.produit(vd, va)
+    vz = var("z")
+    g_incl, _func, _dom = _struct_g(vg, vs, va)          # grg⊂S×A
+    sa_da = _produit_mono_gauche(vs, vd, va)            # S×A⊂D×A  [S⊆D]
+    grg_inDA = N.generalisation("z", N.loi_deduction(appartient(vz, grg),
+        N.modus_ponens(N.modus_ponens(N.assume(appartient(vz, grg)), instancie(g_incl, vz)),
+                       instancie(sa_da, vz))))           # grg⊂D×A  [g∈𝓕,S⊆D]
+    r_incl = _R_inclus(va0, vs, vd, va)                 # R⊂D×A  [a₀∈A]
+    car = membre_reunion_graphes(grg, R, vz)            # z∈grg∪R ⇔ (z∈grg ou z∈R)
+    h_z = N.assume(appartient(vz, GuH))
+    disj = N.modus_ponens(h_z, equivalence_avant(car))  # z∈grg ou z∈R
+    brG = N.loi_deduction(appartient(vz, grg),
+        N.modus_ponens(N.assume(appartient(vz, grg)), instancie(grg_inDA, vz)))
+    brR = N.loi_deduction(appartient(vz, R),
+        N.modus_ponens(N.assume(appartient(vz, R)), instancie(r_incl, vz)))
+    z_inDA = cas(disj, brG, brR)
+    return N.generalisation("z", N.loi_deduction(appartient(vz, GuH), z_inDA))   # ĝ⊂D×A
+
+
+# ── ((ĝ,D),A) ∈ 𝓕(D;A)  (BIEN-DÉFINITION) ────────────────────────────────────
+def triple_ghat_dans_applications(vg, va0, vs, vd, va):
+    """{ g∈𝓕(S;A), S⊆D, a₀∈A } ⊢ ((ĝ,D),A) ∈ 𝓕(D;A)."""
+    from bourbaki.cardinaux.ensembles_eq_exposant_invariant import (
+        _dans_exposant, _triple_dans_applications)
+    RG = _ghat(vg, va0, vs, vd)
+    in_exp = _dans_exposant(va, vd, RG,
+        _ghat_inclus(vg, va0, vs, vd, va),
+        _ghat_fonctionnel(vg, va0, vs, vd, va),
+        _ghat_domaine(vg, va0, vs, vd, va))
+    return _triple_dans_applications(va, vd, RG, in_exp)
+
+
 __all__ = ["support_monotone_exposant", "exposant_monotone_exposant"]
