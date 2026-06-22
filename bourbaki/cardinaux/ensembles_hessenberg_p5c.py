@@ -686,18 +686,17 @@ def hessenberg_a_carre_egal_a_REEL(E_set="E"):
     """🎯🎯 THÉORÈME 2 (HESSENBERG) : ⊢ est_infini(Card E) ⇒ Card E·Card E = Card E,
     conclusion E-SEULE (5ᵉ grand théorème).
 
-    🔴 ÉTAT (2026-06-22, branche hessenberg-p5d) : NON CLOS — `_unpack_maximal_meq` lève
-    `ValueError: 'phimx' libre dans une hypothèse` lors de l'élimination de φ₀.  P5b
-    (`negation_strict_sous_maximal`, Ucadre éliminé) est GREEN et commité (c63c6b3), MAIS
-    il laisse 3 RÉSIDUS frame-cardinal S₀-only NON déchargés par `derive` :
-      • un τZ-membership  τZ((∃F)…dom(F)=produit(τZ_S0,…)…) ;
-      • ¬((∃X))(τZ_S0 = τZ_X …)   (non-extension cardinale) ;
-      • (∃X)(τZ_S0 = τZ_X …)      (extension cardinale).
-    Ce sont les encodages Card(S₀×S₀)/frame issus du CHAÎNAGE d'extension de P5a (pièces
-    `extension_dans_frame`/`extension_ordre`), TRUE sous la maximal-data mais non fournis
-    par {bij φ₀, (S₀,φ₀)∈𝔉, element_maximal, S₀⊂E, S₀ infini, 𝔟·𝔟=𝔟}.  Tant qu'ils
-    mentionnent le binder frais φ₀(=phimx), `existe_elimination(phimx)` refuse.  GAP RESTANT :
-    dériver ces 3 résidus depuis la maximal-data (frame_membre/extension closes).
+    ✅ ÉTAT (2026-06-22, branche hessenberg-p5d, vérifié indépendamment) : CLOS.
+    `hessenberg_a_carre_egal_a_REEL("E")` renvoie conclusion == enonce_hessenberg("E")
+    avec EXACTEMENT 2 hypothèses résiduelles = les 2 résidus de Zorn de `frame_a_maximal` :
+      • (∃x)(x ∈ 𝔉(E))                          — 𝔉(E)≠∅ (base de Zorn) ;
+      • (∀C)((⋃₁C, ⋃₂C-cadre) ∈ 𝔉(E))           — m_dans_frame_universel (inductivité).
+    Variables libres des 2 hyps ⊆ {E} ; AUCUN témoin (Ucadre/ψ/uwit/S₀/φ₀/Smx/phimx/mmx)
+    libre ; lock S₀∪U=S₀ ABSENT ; theorie=22.  Ces 2 résidus sont satisfiables (VRAIS dans
+    l'argument de Bourbaki E.III.48) et E-niveau ⇒ a²=a GÉNUINEMENT PROUVÉ (5ᵉ grand
+    théorème).  L'élimination du binder frais φ₀(=phimx) passe car `_unpack_maximal_meq`
+    fournit à `derive` l'égalité m_eq:mmx=(S₀,φ₀) qui permet de décharger les résidus
+    frame-membership/element_maximal de P5b vers le maximal.
 
     `derive` (sous le corps du maximal (S₀,φ₀)) :
       • P5b `negation_strict_sous_maximal` ⊢ ¬(Card S₀<Card E) ;
