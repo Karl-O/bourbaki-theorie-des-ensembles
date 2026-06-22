@@ -646,3 +646,64 @@ def support_extension_domaine(s="S", d="D", a0="a0", a="A"):
     Wt = W_psi(va0, vs, vd, va)
     inj = W_psi_est_injection(va0, vs, vd, va)
     return N.modus_ponens(inj, N.s5(est_injection_de(var("F"), dom, cod), Wt, "F"))
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+#  CHAÎNE Paliers 1+2  ⇒  support_monotone_exposant.
+# ═══════════════════════════════════════════════════════════════════════════════
+def _support_sous_kappa_a0(vc, vd, va, vk, va0):
+    """{ est_injection_de(κ,C,D), a₀∈A } ⊢ inf_egal_card(𝓕(C;A), 𝓕(D;A)).
+
+    Palier 1 (κ⁻¹ pré-comp) : 𝓕(C;A) ≤ 𝓕(κ⟨C⟩;A) ; Palier 2 (prolongement, S:=κ⟨C⟩
+    avec κ⟨C⟩⊆D du 4ᵉ conjoint de l'injection) : 𝓕(κ⟨C⟩;A) ≤ 𝓕(D;A) ; transitivité."""
+    from bourbaki.cardinaux.ensembles_cardinaux_ordre import inf_egal_transitive
+    imgC = E.image(vk, vc)
+    FCA = E.applications(vc, va)
+    FimgA = E.applications(imgC, va)
+    FDA = E.applications(vd, va)
+    # Palier 1
+    p1 = support_le_image(vk, vc, vd)                 # {inj(κ,C,D)} ⊢ 𝓕(C;A)≤𝓕(κ⟨C⟩;A)
+    # κ⟨C⟩⊆D  (4ᵉ conjoint de est_injection_de)
+    h_inj = N.assume(est_injection_de(vk, vc, vd))
+    img_incl = conjonction_elim_droite(h_inj)         # image(κ,C)⊆D
+    # Palier 2 : support_extension_domaine(S=κ⟨C⟩, D, a0, A) sous {κ⟨C⟩⊆D, a0∈A}
+    p2 = support_extension_domaine(imgC, vd, va0, va)  # {κ⟨C⟩⊆D, a0∈A} ⊢ 𝓕(κ⟨C⟩;A)≤𝓕(D;A)
+    p2 = _cut(p2, [(inclus(imgC, vd), img_incl)])     # {inj(κ,C,D), a0∈A} ⊢ 𝓕(κ⟨C⟩;A)≤𝓕(D;A)
+    # transitivité : (𝓕(C;A)≤𝓕(κ⟨C⟩;A) et 𝓕(κ⟨C⟩;A)≤𝓕(D;A)) ⇒ 𝓕(C;A)≤𝓕(D;A)
+    trans = inf_egal_transitive("F", "G", "X", "Y", "Z")
+    trans = instancie(instancie(instancie(N.generalisation("X", N.generalisation("Y",
+        N.generalisation("Z", trans))), FCA), FimgA), FDA)   # version TERME
+    return N.modus_ponens(conjonction_intro(p1, p2), trans)   # 𝓕(C;A)≤𝓕(D;A)
+
+
+def support_monotone_exposant(c="C", d="D", a="A"):
+    """⊢ (C ≤ D  et  A ≠ ∅)  ⇒  (𝓕(C;A) ≤ 𝓕(D;A)).   (INCONDITIONNEL.)
+
+    Décharge le témoin κ de C≤D=(∃F)inj(F,C,D) et le témoin a₀∈A de A≠∅
+    (non_vide_ssi_element)."""
+    from bourbaki.ensembles.base.ensembles_vide import non_vide_ssi_element
+    vc, vd, va = _t(c), _t(d), _t(a)
+    vk, va0 = var("kappa"), var("a0")
+    inj_body = est_injection_de(vk, vc, vd)
+    a0_body = appartient(va0, va)
+    base = _support_sous_kappa_a0(vc, vd, va, vk, va0)   # {inj(κ,C,D), a0∈A} ⊢ 𝓕(C;A)≤𝓕(D;A)
+    # décharger a0 : (∃a0)(a0∈A) ⇒ 𝓕(C;A)≤𝓕(D;A)
+    imp_a0 = existe_elimination(N.loi_deduction(a0_body, base), "a0")   # (∃a0)(a0∈A) ⇒ … [inj]
+    # A≠∅ ⇒ (∃z)(z∈A) ; α-renommer z→a0
+    nve = non_vide_ssi_element(va)                      # ¬(A=∅) ⇔ (∃z)(z∈A)
+    ex_z = N.modus_ponens(N.assume(non(egal(va, E.VIDE))), equivalence_avant(nve))  # (∃z)(z∈A)
+    ren = alpha_existe("z", "a0", appartient(var("z"), va))   # (∃z)(z∈A) ⇔ (∃a0)(a0∈A)
+    ex_a0 = N.modus_ponens(ex_z, equivalence_avant(ren))      # (∃a0)(a0∈A)  [A≠∅]
+    concl_inj = N.modus_ponens(ex_a0, imp_a0)               # 𝓕(C;A)≤𝓕(D;A)  [inj, A≠∅]
+    # décharger κ : (∃κ)inj(κ,C,D)=C≤D ⇒ …
+    imp_k = existe_elimination(N.loi_deduction(inj_body, concl_inj), "kappa")  # C≤D ⇒ … [A≠∅]
+    le_cd = inf_egal_card(vc, vd)                       # (∃F)inj(F,C,D)
+    ren_k = alpha_existe("kappa", "F", est_injection_de(vk, vc, vd))  # (∃κ)inj ⇔ (∃F)inj
+    concl_cd = N.modus_ponens(N.modus_ponens(N.assume(le_cd),
+        equivalence_arriere(ren_k)), imp_k)             # 𝓕(C;A)≤𝓕(D;A)  [C≤D, A≠∅]
+    # rassembler en (C≤D et A≠∅) ⇒ …
+    hyp = et(le_cd, non(egal(va, E.VIDE)))
+    h = N.assume(hyp)
+    concl = _cut(concl_cd, [(le_cd, conjonction_elim_gauche(h)),
+                            (non(egal(va, E.VIDE)), conjonction_elim_droite(h))])
+    return N.loi_deduction(hyp, concl)                  # (C≤D et A≠∅) ⇒ 𝓕(C;A)≤𝓕(D;A)
