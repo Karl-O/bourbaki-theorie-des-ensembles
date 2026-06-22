@@ -139,6 +139,74 @@ def phi1_bijection_derivee(E_set="E", phi0="phi0", psi="psi", S="S0", U="Ucadre"
     return cur
 
 
+def _inclusion_reunion_gauche_t(ta, tb):
+    """⊢ a ⊂ (a∪b)  pour des TERMES a,b (capture-safe via généralisation/instanciation)."""
+    from bourbaki.ensembles.ensembles_theoremes import inclusion_reunion_gauche
+    base = inclusion_reunion_gauche("ar", "br")
+    gen = N.generalisation("ar", N.generalisation("br", base))
+    return instancie(instancie(gen, _t(ta)), _t(tb))
+
+
+# ════════════════════════════════════════════════════════════════════════════
+#  STEP 2 — (Z,φ₁) ∈ 𝔉(E).   STEP 1 décharge la bijection ; Z⊂E, Z infini honnêtes.
+# ════════════════════════════════════════════════════════════════════════════
+def extension_dans_frame_chainee(E_set="E", phi0="phi0", psi="psi", S="S0", U="Ucadre"):
+    """{ 2 bijections + géométrie [STEP 1],  Z⊂E,  Z infini } ⊢ (Z,φ₁)∈𝔉(E).
+
+    🎯 STEP 2 : chaîne STEP 1 (`phi1_bijection_derivee`, ⊢ bij(φ₁,Z²,Z)) dans
+    `extension_dans_frame` en DÉCHARGEANT son hyp-bijection.  Restent Z⊂E et Z infini
+    (honnêtes, dérivables de S₀⊂E+U⊂E∖S₀ et S₀⊂Z+S₀ infini ; portées en prémisses),
+    plus les 6 résidus de STEP 1.  Le lock reste ABSENT.  theorie=22 ; non vacuous."""
+    from bourbaki.cardinaux.ensembles_frame_extension_finale import extension_dans_frame
+    vphi0, vpsi, vS, vU = _t(phi0), _t(psi), _t(S), _t(U)
+    Z = E.reunion(vS, vU)
+    bij = est_bijection_de(E.reunion(vphi0, vpsi), E.produit(Z, Z), Z)
+    edf = extension_dans_frame(E_set, phi0, psi, S, U)      # {bij,Z⊂E,Z∞} ⊢ (Z,φ₁)∈𝔉
+    assert bij in edf.hypotheses, "STEP2 : hyp bijection absente de extension_dans_frame"
+    step1 = phi1_bijection_derivee(E_set, phi0, psi, S, U)  # ⊢ bij
+    res = N.modus_ponens(step1, N.loi_deduction(bij, edf))  # bijection déchargée
+    assert egal(Z, vS) not in res.hypotheses, "STEP2 : LOCK présent !"
+    assert res.conclusion == edf.conclusion
+    assert res.conclusion not in res.hypotheses, "STEP2 : VACUOUS"
+    return res
+
+
+# ════════════════════════════════════════════════════════════════════════════
+#  STEP 3 — ordre.  STEP 2 décharge (Z,φ₁)∈𝔉 ; (S₀,φ₀)∈𝔉, S₀⊂Z, φ₀⊂φ₁ honnêtes.
+# ════════════════════════════════════════════════════════════════════════════
+def extension_ordre_chainee(E_set="E", phi0="phi0", psi="psi", S="S0", U="Ucadre"):
+    """{ … [STEP 2], (S₀,φ₀)∈𝔉, S₀⊂Z, φ₀⊂φ₁ } ⊢ ((S₀,φ₀),(Z,φ₁))∈Γ𝔉(E).
+
+    🎯 STEP 3 : chaîne STEP 2 (⊢ (Z,φ₁)∈𝔉) dans `extension_ordre` en DÉCHARGEANT son
+    hyp-membership (Z,φ₁)∈𝔉.  Restent (S₀,φ₀)∈𝔉, S₀⊂Z, φ₀⊂φ₁ (honnêtes : la première
+    = maximal-data, les deux inclusions = prolongement géométrique S₀⊂S₀∪U, φ₀⊂φ₀∪ψ).
+    Le lock reste ABSENT.  theorie=22 ; non vacuous."""
+    from bourbaki.cardinaux.ensembles_frame_extension_finale import extension_ordre
+    from bourbaki.cardinaux.ensembles_hessenberg_hard import frame_pair
+    vphi0, vpsi, vS, vU, vE = _t(phi0), _t(psi), _t(S), _t(U), _t(E_set)
+    Z = E.reunion(vS, vU)
+    phi1 = E.reunion(vphi0, vpsi)
+    q = E.couple(Z, phi1)
+    q_in = appartient(q, frame_pair(vE))
+    eo = extension_ordre(E_set, phi0, psi, S, U)            # {(Z,φ₁)∈𝔉,(S₀,φ₀)∈𝔉,…} ⊢ ordre
+    assert q_in in eo.hypotheses, "STEP3 : hyp (Z,φ₁)∈𝔉 absente"
+    step2 = extension_dans_frame_chainee(E_set, phi0, psi, S, U)  # ⊢ (Z,φ₁)∈𝔉
+    res = N.modus_ponens(step2, N.loi_deduction(q_in, eo))
+    # décharge les deux INCLUSIONS de prolongement S₀⊂Z et φ₀⊂φ₁ (A⊂A∪B, trivial).
+    inclL = _inclusion_reunion_gauche_t
+    for (a, b) in ((vS, vU), (vphi0, vpsi)):
+        thm = inclL(a, b)                                   # ⊢ a⊂(a∪b)
+        c = thm.conclusion
+        if c in res.hypotheses:
+            res = N.modus_ponens(thm, N.loi_deduction(c, res))
+    assert egal(Z, vS) not in res.hypotheses, "STEP3 : LOCK présent !"
+    assert res.conclusion == eo.conclusion
+    assert res.conclusion not in res.hypotheses, "STEP3 : VACUOUS"
+    return res
+
+
 __all__ = [
     "phi1_bijection_derivee",
+    "extension_dans_frame_chainee",
+    "extension_ordre_chainee",
 ]
