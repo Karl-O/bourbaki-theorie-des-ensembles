@@ -7,9 +7,12 @@ INCONDITIONNELLES (correspondance f quelconque) :
   • image_reunion_binaire        ⊢ f⟨B∪Y⟩ = f⟨B⟩ ∪ f⟨Y⟩          (Prop. 3, 1re formule)
 
 CONDITIONNELLES (honnête hyp `est_fonctionnel(f)`, i.e. f application) :
-  • image_inter_binaire          ⊢ est_fonctionnel(f) ⇒ f⟨B∩Y⟩ = f⟨B⟩ ∩ f⟨Y⟩
   • image_reciproque_inter_binaire ⊢ est_fonctionnel(f) ⇒ f⁻¹⟨B∩Y⟩ = f⁻¹⟨B⟩ ∩ f⁻¹⟨Y⟩
   • image_reciproque_difference  ⊢ est_fonctionnel(f) ⇒ f⁻¹⟨B∖Y⟩ = f⁻¹⟨B⟩ ∖ f⁻¹⟨Y⟩
+
+INCLUSION HONNÊTE (image DIRECTE ∩ : l'ÉGALITÉ exige f INJECTIVE, pas seulement
+fonctionnelle — cf. E.II.25 — donc on ne livre que l'inclusion inconditionnelle) :
+  • image_inter_inclusion        ⊢ f⟨B∩Y⟩ ⊂ f⟨B⟩ ∩ f⟨Y⟩
 
 Pour l'image RÉCIPROQUE, Bourbaki (E.II.27) écrit f⁻¹⟨A∩B⟩=f⁻¹⟨A⟩∩f⁻¹⟨B⟩
 « en vertu de la prop. 4 », i.e. pour une APPLICATION f.  Le sens ⊆ est toujours
@@ -249,6 +252,67 @@ from bourbaki.logique.tactiques.tactiques_abrege2 import contraposition
 
 
 # ════════════════════════════════════════════════════════════════════════════
+#  4. IMAGE DIRECTE D'UNE INTERSECTION — INCLUSION INCONDITIONNELLE  (E.II.25).
+#     f⟨B∩Y⟩ ⊂ f⟨B⟩ ∩ f⟨Y⟩
+#
+#  ⚠ HONNÊTETÉ : l'ÉGALITÉ f⟨B∩Y⟩ = f⟨B⟩∩f⟨Y⟩ N'EST PAS vraie pour f seulement
+#  `est_fonctionnel` (= application).  Bourbaki E.II.25 : l'inclusion ⊂ vaut
+#  toujours, mais l'égalité exige f INJECTIVE (deux antécédents distincts x∈B,
+#  x'∈Y de la même valeur a ne donnent PAS d'antécédent commun dans B∩Y).
+#  est_fonctionnel contraint la VALEUR par antécédent, pas l'ANTÉCÉDENT par valeur.
+#  On livre donc honnêtement l'INCLUSION inconditionnelle, sans postuler l'égalité.
+#  (La version-égalité demanderait l'hyp `est_fonctionnel(reciproque(f))`, i.e.
+#   l'injectivité de f, symétrique du lemme réciproque ci-dessus.)
+# ════════════════════════════════════════════════════════════════════════════
+def cible_image_inter_inclusion(f="f", b="B", y="Y"):
+    vf, vb, vy = _t(f), _t(b), _t(y)
+    lhs = E.image(vf, E.intersection(vb, vy))
+    rhs = E.intersection(E.image(vf, vb), E.image(vf, vy))
+    return E.inclus(lhs, rhs)
+
+
+def image_inter_inclusion(f="f", b="B", y="Y"):
+    """⊢ f⟨B∩Y⟩ ⊂ f⟨B⟩ ∩ f⟨Y⟩.   (E.II.25 — CLOS, 0 hyp, INCONDITIONNEL.)
+
+    L'inclusion vaut pour f QUELCONQUE.  L'égalité réciproque exigerait f injective
+    (cf. note du module) — NON livrée pour rester honnête."""
+    vf, vb, vy = _t(f), _t(b), _t(y)
+    va, vx = var("z"), var("x")
+    inter = E.intersection(vb, vy)
+    fB = E.image(vf, vb)
+    fY = E.image(vf, vy)
+    lhs = E.image(vf, inter)
+    rhs = E.intersection(fB, fY)
+
+    cpl = lambda u: appartient(E.couple(u, va), vf)        # (u,a)∈f
+    bodyB = lambda u: et(appartient(u, vb), cpl(u))
+    bodyY = lambda u: et(appartient(u, vy), cpl(u))
+    bodyI = lambda u: et(appartient(u, inter), cpl(u))
+
+    mem_lhs = membre_image(vf, inter, va)                  # a∈f⟨B∩Y⟩ ⇔ (∃x)bodyI(x)
+    mem_B = membre_image(vf, vb, va)
+    mem_Y = membre_image(vf, vy, va)
+    inst_rhs = _instance_inter(fB, fY, va)
+
+    h_lhs = N.assume(appartient(va, lhs))
+    ex_I = N.modus_ponens(h_lhs, equivalence_avant(mem_lhs))
+    hbI = N.assume(bodyI(vx))
+    x_in_inter = conjonction_elim_gauche(hbI)
+    x_cpl = conjonction_elim_droite(hbI)
+    inter_eq = N.modus_ponens(x_in_inter, equivalence_avant(_instance_inter(vb, vy, vx)))
+    x_in_B = conjonction_elim_gauche(inter_eq)
+    x_in_Y = conjonction_elim_droite(inter_eq)
+    aB = N.modus_ponens(N.modus_ponens(conjonction_intro(x_in_B, x_cpl),
+                                       N.s5(bodyB(vx), vx, "x")), equivalence_arriere(mem_B))
+    aY = N.modus_ponens(N.modus_ponens(conjonction_intro(x_in_Y, x_cpl),
+                                       N.s5(bodyY(vx), vx, "x")), equivalence_arriere(mem_Y))
+    rhs_mem = N.modus_ponens(conjonction_intro(aB, aY), equivalence_arriere(inst_rhs))
+    return N.generalisation("z", N.loi_deduction(
+        appartient(va, lhs),
+        N.modus_ponens(ex_I, existe_elimination(N.loi_deduction(bodyI(vx), rhs_mem), "x"))))
+
+
+# ════════════════════════════════════════════════════════════════════════════
 #  3. IMAGE RÉCIPROQUE D'UNE DIFFÉRENCE — CONDITIONNEL  (E.II.27, Prop. 6).
 #     est_fonctionnel(f) ⇒ f⁻¹⟨B∖Y⟩ = f⁻¹⟨B⟩ ∖ f⁻¹⟨Y⟩
 # ════════════════════════════════════════════════════════════════════════════
@@ -358,4 +422,5 @@ __all__ = [
     "image_reunion_binaire", "cible_image_reunion_binaire",
     "image_reciproque_inter_binaire", "cible_image_reciproque_inter_binaire",
     "image_reciproque_difference", "cible_image_reciproque_difference",
+    "image_inter_inclusion", "cible_image_inter_inclusion",
 ]
