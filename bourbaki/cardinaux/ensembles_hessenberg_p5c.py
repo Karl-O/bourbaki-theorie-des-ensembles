@@ -357,16 +357,6 @@ def negation_strict_sous_maximal(E_set="E", phi0="phi0", S="S0", U="Ucadre"):
     discharge[S0_inf] = h_S0inf
     discharge[hyp5] = ecc_S
 
-    # DIAGNOSTIC : toute hyp de P5a mentionnant Ucadre DOIT être une clé de discharge.
-    p5a_U_hyps = [h for h in p5a.hypotheses if U in libres_f(h)]
-    import sys as _sys
-    for h in p5a_U_hyps:
-        if h not in discharge and h != corps:
-            print("P5b DIAG : hyp Ucadre NON couverte :", file=_sys.stderr)
-            from bourbaki.logique.formule import libres_f as _lf
-            print("   free=", sorted(_lf(h)), file=_sys.stderr)
-            print("   repr=", repr(h)[:400], file=_sys.stderr)
-
     for hypf, pr in discharge.items():
         if hypf in cur.hypotheses:
             assert pr.conclusion == hypf, \
@@ -625,11 +615,89 @@ def negation_strict_sous_maximal_cible(E_set="E", S="S0"):
 
 
 # ════════════════════════════════════════════════════════════════════════════
-#  P5c — ASSEMBLAGE FINAL a²=a, conclusion E-seule via unpack_maximal.
+#  unpack_maximal AVEC m_eq — variante locale qui passe l'égalité mmx=(S,φ) à derive
+#  (nécessaire pour décharger les résidus frame-membership/element_maximal de P5b,
+#  exprimés sur (S₀,φ₀) et non sur le binder mmx).  Miroir EXACT de
+#  ensembles_hessenberg_vrai_final.unpack_maximal, signature derive étendue.
+# ════════════════════════════════════════════════════════════════════════════
+def _unpack_maximal_meq(E_set, derive, mfresh="mmx", Sf="Smx", phif="phimx"):
+    """Comme unpack_maximal, mais `derive(bij0,S_inc,S_inf,h_max,m_eq,vS0,vphi0)` reçoit
+    EN PLUS m_eq ⊢ mmx=(S₀,φ₀) (1er conjoint du corps), pour réécrire les résidus
+    frame-membership / element_maximal de (S₀,φ₀) vers mmx (déchargés par h_max)."""
+    from bourbaki.entiers.ensembles_infinis import est_infini_ensemble
+    from bourbaki.cardinaux.ensembles_hessenberg_hard import (
+        frame_pair, frame_ordre, axiome_frame, theorie_frame,
+    )
+    from bourbaki.ordre.ensembles_ordre_relation import element_maximal
+    from bourbaki.cardinaux.ensembles_frame_a_maximal import frame_a_maximal
+    from bourbaki.cardinaux.ensembles_hessenberg_vrai_final import (
+        _frame_membre_t, _frame_membre_t_named, _frame_a_maximal_binder,
+    )
+    vE = _t(E_set)
+    Gam, Fr = frame_ordre(vE), frame_pair(vE)
+    vm = var(mfresh)
+    vS0, vphi0 = var(Sf), var(phif)
+    SxS = E.produit(vS0, vS0)
+
+    frame_a_maximal(E_set)                                   # (force la construction / résidus)
+    max_m = element_maximal(Gam, Fr, vm, "x")
+    h_max = N.assume(max_m)
+    m_in_Fr = conjonction_elim_gauche(h_max)
+    assert m_in_Fr.conclusion == appartient(vm, Fr)
+
+    body_fresh = (
+        et(et(et(egal(vm, E.couple(vS0, vphi0)), inclus(vS0, vE)),
+              est_infini_ensemble(vS0)),
+           est_bijection_de(vphi0, SxS, vS0)))
+
+    def inner(b):
+        hh = N.assume(b)
+        bij0 = conjonction_elim_droite(hh)
+        S_inf = conjonction_elim_droite(conjonction_elim_gauche(hh))
+        left = conjonction_elim_gauche(conjonction_elim_gauche(hh))
+        S_inc = conjonction_elim_droite(left)
+        m_eq = conjonction_elim_gauche(left)                 # mmx = (S₀,φ₀)
+        res_C = derive(bij0, S_inc, S_inf, h_max, m_eq, vS0, vphi0)
+        C = res_C.conclusion
+        for bad in (Sf, phif, mfresh):
+            assert bad not in libres_f(C), \
+                f"_unpack_maximal_meq : variable {bad!r} LIBRE dans la conclusion {C}"
+        return N.loi_deduction(b, res_C)
+
+    imp_C = inner(body_fresh)
+    imp_exphi = existe_elimination(imp_C, phif)
+    imp_exS = existe_elimination(imp_exphi, Sf)
+    decl2 = N.modus_ponens(m_in_Fr,
+                           equivalence_avant(_frame_membre_t_named(vE, vm, Sf, phif)))
+    C_thm = N.modus_ponens(decl2, imp_exS)
+    imp_max = N.loi_deduction(max_m, C_thm)
+    imp_exm = existe_elimination(imp_max, mfresh)
+    fam_aligned = _frame_a_maximal_binder(E_set, mfresh)
+    res = N.modus_ponens(fam_aligned, imp_exm)
+    assert res.conclusion == C_thm.conclusion
+    assert res.conclusion not in res.hypotheses, "_unpack_maximal_meq : VACUOUS"
+    return res
+
+
+# ════════════════════════════════════════════════════════════════════════════
+#  P5c — ASSEMBLAGE FINAL a²=a, conclusion E-seule via _unpack_maximal_meq.
 # ════════════════════════════════════════════════════════════════════════════
 def hessenberg_a_carre_egal_a_REEL(E_set="E"):
     """🎯🎯 THÉORÈME 2 (HESSENBERG) : ⊢ est_infini(Card E) ⇒ Card E·Card E = Card E,
     conclusion E-SEULE (5ᵉ grand théorème).
+
+    🔴 ÉTAT (2026-06-22, branche hessenberg-p5d) : NON CLOS — `_unpack_maximal_meq` lève
+    `ValueError: 'phimx' libre dans une hypothèse` lors de l'élimination de φ₀.  P5b
+    (`negation_strict_sous_maximal`, Ucadre éliminé) est GREEN et commité (c63c6b3), MAIS
+    il laisse 3 RÉSIDUS frame-cardinal S₀-only NON déchargés par `derive` :
+      • un τZ-membership  τZ((∃F)…dom(F)=produit(τZ_S0,…)…) ;
+      • ¬((∃X))(τZ_S0 = τZ_X …)   (non-extension cardinale) ;
+      • (∃X)(τZ_S0 = τZ_X …)      (extension cardinale).
+    Ce sont les encodages Card(S₀×S₀)/frame issus du CHAÎNAGE d'extension de P5a (pièces
+    `extension_dans_frame`/`extension_ordre`), TRUE sous la maximal-data mais non fournis
+    par {bij φ₀, (S₀,φ₀)∈𝔉, element_maximal, S₀⊂E, S₀ infini, 𝔟·𝔟=𝔟}.  Tant qu'ils
+    mentionnent le binder frais φ₀(=phimx), `existe_elimination(phimx)` refuse.  GAP RESTANT :
+    dériver ces 3 résidus depuis la maximal-data (frame_membre/extension closes).
 
     `derive` (sous le corps du maximal (S₀,φ₀)) :
       • P5b `negation_strict_sous_maximal` ⊢ ¬(Card S₀<Card E) ;
@@ -638,7 +706,6 @@ def hessenberg_a_carre_egal_a_REEL(E_set="E"):
       • `maximal_carre_egal`(bij φ₀) ⊢ Card(S₀×S₀)=Card S₀ ;
       • `hessenberg_a_carre_egal_a` (discharge ses 3 hyps) ⇒ enonce_hessenberg(E).
     `unpack_maximal(E, derive)` élimine S₀,φ₀,m.  theorie=22."""
-    from bourbaki.cardinaux.ensembles_hessenberg_vrai_final import unpack_maximal
     from bourbaki.cardinaux.ensembles_frame_extension_finale import (
         card_S0_egal_card_E, hessenberg_a_carre_egal_a,
     )
@@ -647,12 +714,19 @@ def hessenberg_a_carre_egal_a_REEL(E_set="E"):
         card_inclus_inf_egal,
     )
     from bourbaki.cardinaux.ensembles_hessenberg import enonce_hessenberg
+    from bourbaki.cardinaux.ensembles_hessenberg_hard import frame_pair, frame_ordre
+    from bourbaki.ordre.ensembles_ordre_relation import element_maximal
 
-    def derive(bij0, S0_inclus, S0_infini, maximal_hyp, vS0, vphi0):
+    def derive(bij0, S0_inclus, S0_infini, maximal_hyp, m_eq, vS0, vphi0):
         Sn = vS0.nom
         phin = vphi0.nom
         cS, cE = cardinal(vS0), cardinal(_t(E_set))
         SxS = E.produit(vS0, vS0)
+        vE = _t(E_set)
+        vm = m_eq.conclusion.termes[0]                         # mmx (LHS de mmx=(S₀,φ₀))
+        p_couple = E.couple(vS0, vphi0)                        # (S₀,φ₀)
+        assert m_eq.conclusion == egal(vm, p_couple), \
+            f"derive : m_eq inattendu\n{m_eq.conclusion}"
 
         # ¬(Card S₀ < Card E)  (P5b)
         neg_lt = negation_strict_sous_maximal(E_set, phin, Sn)
@@ -688,9 +762,57 @@ def hessenberg_a_carre_egal_a_REEL(E_set="E"):
             N.loi_deduction(egal(cardinal(SxS), cS), haa))
         assert haa.conclusion == enonce_hessenberg(E_set), \
             f"derive : conclusion inattendue\n{haa.conclusion}"
+
+        # ── DÉCHARGE des résidus mentionnant Sn/phin (sinon ∃-élim de Smx échoue) ──
+        from bourbaki.cardinaux.arithmetique.ensembles_arith_cardinale import (
+            produit_cardinal_binaire, produit_cardinal_bien_defini,
+        )
+        from bourbaki.entiers.ensembles_infinis import est_infini_ensemble
+        Gam, Fr = frame_ordre(vE), frame_pair(vE)
+        # element_maximal(.,(S₀,φ₀))  [= résidu P5b [13]]  :  réécrire mmx → (S₀,φ₀) dans
+        #   maximal_hyp (element_maximal about mmx) via m_eq.
+        R_max = element_maximal(Gam, Fr, var("wmx"), "x")      # contexte R(w)=elem_max(.,w)
+        s6_max = N.s6(vm, p_couple, "wmx", R_max)              # (mmx=(S₀,φ₀))⇒(R[mmx]⇔R[(S₀,φ₀)])
+        max_couple = N.modus_ponens(maximal_hyp,
+            equivalence_avant(N.modus_ponens(m_eq, s6_max)))   # element_maximal(.,(S₀,φ₀))
+        # frame-membership (S₀,φ₀)∈𝔉  [= résidu P5b [6]]  : 1er conjoint de element_maximal(.,(S₀,φ₀)).
+        frame_mem = conjonction_elim_gauche(max_couple)        # (S₀,φ₀)∈𝔉
+        # 𝔟·𝔟=𝔟 : Card(Card S₀ × Card S₀)=Card S₀  via bien-déf + maximal_carre_egal.
+        #   produit_cardinal_binaire(cS,cS)=Card(cS×cS) ; bien-déf : (Card S₀=Card S₀ ∧
+        #   Card S₀=Card S₀)⇒Card(cS×cS)=Card(S₀×S₀) ; or Card(S₀×S₀)=Card S₀ (carre).
+        bb = produit_cardinal_binaire(cS, cS)                  # = Card(Card S₀×Card S₀)
+        bd_var = produit_cardinal_bien_defini("XXp", "YYp", "AAp", "BBp")
+        bd_gen = N.generalisation("XXp", N.generalisation("YYp",
+            N.generalisation("AAp", N.generalisation("BBp", bd_var))))
+        # X=Y=Card S₀, A=B=Card S₀ : (Card(Card S₀)=Card S₀ ∧ …)⇒Card(cS×cS)=Card S₀·Card S₀
+        # Plutôt : X=Y=S₀, A=B=Card S₀ : (Card S₀=Card S₀)²⇒Card(S₀×S₀)=cS·cS  (= bb).
+        bd = instancie(instancie(instancie(instancie(bd_gen, vS0), vS0), cS), cS)
+        ant_bd = et(egal(cS, cS), egal(cS, cS))
+        assert bd.conclusion == impl(ant_bd, egal(cardinal(SxS), bb)), \
+            f"derive : bien-def forme inattendue\n{bd.conclusion}"
+        refl_cS = N.reflexivite(cS)
+        card_SxS_eq_bb = N.modus_ponens(conjonction_intro(refl_cS, refl_cS), bd)  # Card(S₀×S₀)=bb
+        # bb = Card(S₀×S₀) (sym) ; Card(S₀×S₀)=Card S₀ (carre) ⇒ bb=Card S₀.
+        bb_eq_SxS = N.modus_ponens(card_SxS_eq_bb, symetrie(cardinal(SxS), bb))   # bb=Card(S₀×S₀)
+        bb_eq_cS = composer_egalites(bb_eq_SxS, carre)         # bb=Card S₀  (= hyp3)
+        assert bb_eq_cS.conclusion == egal(bb, cS)
+
+        # est_cardinal(Card S₀)  [CLOS]
+        ecc = _est_cardinal_de_cardinal_t(vS0)
+
+        provers = [bij0, S0_inclus, S0_infini, frame_mem, max_couple,
+                   bb_eq_cS, ecc]
+        changed = True
+        while changed:
+            changed = False
+            for pr in provers:
+                c = pr.conclusion
+                if c in haa.hypotheses:
+                    haa = N.modus_ponens(pr, N.loi_deduction(c, haa))
+                    changed = True
         return haa
 
-    res = unpack_maximal(E_set, derive)
+    res = _unpack_maximal_meq(E_set, derive)
     cible = enonce_hessenberg(E_set)
     assert res.conclusion == cible, \
         f"hessenberg_a_carre_egal_a_REEL : conclusion inattendue\n{res.conclusion}\nvs\n{cible}"
