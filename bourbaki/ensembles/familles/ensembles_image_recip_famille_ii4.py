@@ -620,6 +620,59 @@ def image_inter_egal_si_injective(g="G", fam="X", i="I", a="alpha"):
                            N.loi_deduction(appartient(valpha, vI), eqt))
 
 
+# ══════════════════════════════════════════════════════════════════════════════
+# Prop. 4 (E.II.25) — IMAGE RÉCIPROQUE d'une RÉUNION de famille.
+#   f⁻¹⟨⋃_ι Y_ι⟩ = ⋃_ι f⁻¹⟨Y_ι⟩       (INCONDITIONNELLE).
+# ══════════════════════════════════════════════════════════════════════════════
+def cible_image_recip_reunion(g="f", fam="Y", i="I"):
+    """Énoncé-cible : f⁻¹⟨⋃_ι Y_ι⟩ = ⋃_ι f⁻¹⟨Y_ι⟩."""
+    vg, vfam, vI = _t(g), _t(fam), _t(i)
+    reun = E.reunion_famille(vfam, vI)
+    fam_r = famille_image_recip(vg, vfam)
+    return egal(image_recip(vg, reun), E.reunion_famille(fam_r, vI))
+
+
+def image_recip_reunion_egal(g="f", fam="Y", i="I"):
+    """⊢ f⁻¹⟨⋃_ι Y_ι⟩ = ⋃_ι f⁻¹⟨Y_ι⟩.   (E.II.25, Prop. 4, 1re formule — INCONDITIONNELLE.)
+
+    L'univalence n'est PAS requise (contrairement à f⁻¹⟨⋂⟩).  Miroir EXACT de
+    `image_reunion_egal` côté image réciproque.  theorie_ensembles() inchangée (22 ax.).
+
+    a∈f⁻¹⟨⋃Y⟩ ⇔ (∃x)(x∈⋃Y et (a,x)∈f) ⇔ (∃x)((∃i)(i∈I et x∈Y_i) et (a,x)∈f) ;
+    on commute ∃x∃i, réassocie, et tire (∃i)(i∈I et (∃x)(x∈Y_i et (a,x)∈f))
+        = (∃i)(i∈I et a∈f⁻¹⟨Y_i⟩) = caractérisation de ⋃f⁻¹⟨Y·⟩."""
+    from bourbaki.logique.tactiques.tactiques_abrege_quantif import (
+        et_existe_gauche, existe_commute, et_existe_droite)
+    vg, vfam, vI = _t(g), _t(fam), _t(i)
+    va, vx, vi = var("a"), var("x"), var("i")
+    Yi = E.valeur_famille(vfam, vi)
+    reun = E.reunion_famille(vfam, vI)
+    fam_r = famille_image_recip(vg, vfam)
+    axc = appartient(E.couple(va, vx), vg)              # (a,x)∈f
+
+    # ── membre gauche ─────────────────────────────────────────────────────────
+    L = membre_image_recip(vg, reun, va)               # ⇔ (∃x)(x∈⋃Y et (a,x)∈f)
+    reun_x = _inst_reunion(vfam, vI, vx)               # x∈⋃Y ⇔ (∃i)(i∈I et x∈Y_i)
+    L2 = etr(L, congruence_existe(et_congruence_gauche(reun_x, axc), "x"))
+    Pi = et(appartient(vi, vI), appartient(vx, Yi))
+    L3 = etr(L2, congruence_existe(et_existe_gauche("i", Pi, axc), "x"))
+    L4 = etr(L3, existe_commute("x", "i", et(Pi, axc)))   # ⇔ (∃i)(∃x)(Pi et (a,x)∈f)
+    rearr = _assoc_et_droite(appartient(vi, vI), appartient(vx, Yi), axc)
+    inner_S = et(appartient(vx, Yi), axc)
+    pull_x = esym(et_existe_droite(appartient(vi, vI), "x", inner_S))
+    L5 = etr(L4, congruence_existe(etr(congruence_existe(rearr, "x"), pull_x), "i"))
+    char_L = N.generalisation("a", L5)
+
+    # ── membre droit ──────────────────────────────────────────────────────────
+    R = _inst_reunion(fam_r, vI, va)                   # ⇔ (∃i)(i∈I et a∈(f⁻¹⟨Y·⟩)_i)
+    membre_i = _membre_fam_recip(vg, vfam, vi, va)     # a∈(…)_i ⇔ (∃x)(x∈Y_i et (a,x)∈f)
+    R2 = etr(R, congruence_existe(et_congruence_droite(appartient(vi, vI), membre_i), "i"))
+    char_R = N.generalisation("a", R2)
+
+    return egalite_par_extension(char_L, char_R, image_recip(vg, reun),
+                                 E.reunion_famille(fam_r, vI))
+
+
 __all__ = [
     "fonctionnelle", "injective", "membre_image_recip", "image_recip",
     "famille_image_recip", "famille_image",
@@ -627,4 +680,5 @@ __all__ = [
     "image_recip_inter_incluse", "image_recip_inter_arriere", "image_recip_inter_egal",
     "image_reunion_egal", "image_inter_incluse",
     "image_inter_arriere_si_inj", "image_inter_egal_si_injective",
+    "image_recip_reunion_egal", "cible_image_recip_reunion",
 ]

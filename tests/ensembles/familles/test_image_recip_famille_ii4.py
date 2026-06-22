@@ -85,6 +85,14 @@ def test_cor_egalite_si_injective():
     assert inner.sous[1] == egal(L, R)
 
 
+# ── Prop. 4 (E.II.25) — image réciproque d'une RÉUNION (inconditionnelle) ─────
+def test_prop4_reunion_egal_inconditionnel():
+    t = M.image_recip_reunion_egal()
+    assert t.est_clos and len(t.hypotheses) == 0
+    assert t.conclusion == M.cible_image_recip_reunion()
+    assert len(E.theorie_ensembles().axiomes) == 22
+
+
 if __name__ == "__main__":
     for n in list(globals()):
         if n.startswith("test_"):
