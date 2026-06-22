@@ -45,7 +45,7 @@ from bourbaki.logique.formule import Terme, var, egal, et, impl
 from bourbaki.logique import noyau_abrege as N
 from bourbaki.logique.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite, instancie,
-    equivalence_arriere,
+    equivalence_arriere, equivalence_avant,
 )
 from bourbaki.logique.tactiques.tactiques_abrege_egalite import (
     symetrie, composer_egalites, congruence_terme,
@@ -188,4 +188,146 @@ def puissance_succ_eq(a="Apse", n="Npse"):
     return out
 
 
-__all__ = ["exposant_invariance_enonce", "puissance_succ_eq"]
+# ══════════════════════════════════════════════════════════════════════════════
+#  BASE CASE BRIDGE (B0) — même nature que (B), à l'exposant 0
+# ══════════════════════════════════════════════════════════════════════════════
+def exposant_invariance_zero_enonce(a="Aexi0"):
+    """L'ÉNONCÉ (formule) du pont à l'exposant 0 :
+
+        Card(𝓕(0; a)) = Card(𝓕(∅; a)),     i.e.  a^0 = Card(𝓕(∅; a)).
+
+    0 := ZERO = Card(∅).  Même nature que (B) : a^0 = Card(𝓕(ZERO;a)) avec ZERO=Card∅
+    ≠ ∅ littéral, donc (B0) = exponent-invariance à l'exposant 0 — instance de
+    `eq_exposant_invariant` en X=ZERO, Y=∅ (Eq(Card∅,∅)).  Composé à
+    `exposant_zero_egale_un` (Card(𝓕(∅;a))=Card({∅})=1, CLOS) il donne a^0=1=Fini."""
+    va = _t(a)
+    lhs = exposant_cardinal_binaire(va, ZERO)        # a^0 = Card(𝓕(0;a))
+    rhs = cardinal(E.applications(E.VIDE, va))        # Card(𝓕(∅;a))
+    return egal(lhs, rhs)
+
+
+def _puissance_P(a):
+    va = _t(a)
+    return lambda b: est_fini(exposant_cardinal_binaire(va, _t(b)))
+
+
+def _preuve_P0_puissance(a, hfa, hB0):
+    """{ Fini a [hfa], B0 [hB0] } ⊢ Fini(a^0).
+
+    a^0 =[B0] Card(𝓕(∅;a)) =[exposant_zero_egale_un] Card({∅}) = 1 ; Fini(1)."""
+    from bourbaki.cardinaux.arithmetique.ensembles_exposant_cardinal import (
+        exposant_zero_egale_un,
+    )
+    from bourbaki.entiers.ensembles_fini_un import fini_un, un_egale_card_singleton
+    from bourbaki.entiers.ensembles_entiers import UN
+    va = _t(a)
+    a0 = exposant_cardinal_binaire(va, ZERO)          # a^0
+    eqz = exposant_zero_egale_un(va)                  # Card(𝓕(∅;a)) = Card({∅})
+    # a^0 = Card(𝓕(∅;a)) = Card({∅})
+    a0_eq_un = composer_egalites(hB0, eqz)            # a^0 = Card({∅})
+    un = E.singleton(E.VIDE)
+    card_un = cardinal(un)                             # Card({∅}) = 1
+    # Fini(1) avec 1 = UN = successeur(0) ; on transporte Fini(UN) → Fini(Card({∅}))
+    # via un_egale_card_singleton : UN = Card({∅}).
+    fini_UN = fini_un()                               # Fini(UN)
+    assert fini_UN.conclusion == est_fini(UN), "fini_un : forme inattendue"
+    un_eq = un_egale_card_singleton()                 # UN = Card({∅})
+    leib_un = N.s6(UN, card_un, "wfiniun", est_fini(var("wfiniun")))  # (UN=Card{∅})⇒(Fini UN⇔Fini Card{∅})
+    fini_1 = N.modus_ponens(fini_UN, equivalence_avant(N.modus_ponens(un_eq, leib_un)))  # Fini(Card({∅}))
+    assert fini_1.conclusion == est_fini(card_un), "Fini(Card{∅}) : forme inattendue"
+    # Leibniz : a^0 = Card({∅}) ⇒ (Fini(a^0) ⇔ Fini(Card{∅}))
+    leib = N.s6(a0, card_un, "wp0pu", est_fini(var("wp0pu")))
+    eqv = N.modus_ponens(a0_eq_un, leib)
+    return N.modus_ponens(fini_1, equivalence_arriere(eqv))   # Fini(a^0)
+
+
+def _preuve_step_puissance(a, hfa, hBuniv, n="npu"):
+    """{ Fini a [hfa], (∀m)B [hBuniv] } ⊢ (∀n)( (Fini n et Fini(a^n)) ⇒ Fini(a^(n+1)) )."""
+    from bourbaki.logique.formule import pourtout
+    va = _t(a)
+    vn = var(n)
+    ca = conjonction_elim_gauche(hfa)                 # est_cardinal a
+    pow_an = exposant_cardinal_binaire(va, vn)        # a^n
+    prod_an_a = produit_cardinal_binaire(pow_an, va)  # a^n · a
+    hstep = N.assume(et(est_fini(vn), est_fini(pow_an)))
+    fini_n = conjonction_elim_gauche(hstep)           # Fini n
+    fini_an = conjonction_elim_droite(hstep)          # Fini(a^n)
+    cn = conjonction_elim_gauche(fini_n)              # est_cardinal n
+    # (B) à l'instance n :  Card(𝓕(n+1;a)) = Card(𝓕(n⊔{∅};a))
+    Bn = instancie(hBuniv, vn)                        # exposant_invariance_enonce(a, n)
+    # maillon : B(n) ⇒ ((card a et card n) ⇒ a^(n+1)=a^n·a)
+    mse = puissance_succ_eq(va, vn)
+    a_n1_eq = N.modus_ponens(conjonction_intro(ca, cn),
+                             N.modus_ponens(Bn, mse))  # a^(n+1) = a^n·a
+    # Fini(a^n) et Fini a ⇒ Fini(a^n · a)   (G1 = produit_binaire_entier, REUTILISÉ)
+    pbe = _produit_binaire_entier_t(pow_an, va)       # (Fini(a^n) et Fini a)⇒Fini(a^n·a)
+    fini_prod = N.modus_ponens(conjonction_intro(fini_an, hfa), pbe)  # Fini(a^n·a)
+    # Leibniz : a^(n+1)=a^n·a ⇒ (Fini(a^(n+1)) ⇔ Fini(a^n·a))
+    lhs = exposant_cardinal_binaire(va, successeur(vn))   # a^(n+1)
+    leib = N.s6(lhs, prod_an_a, "wpstpu", est_fini(var("wpstpu")))
+    eqv = N.modus_ponens(a_n1_eq, leib)
+    fini_a_n1 = N.modus_ponens(fini_prod, equivalence_arriere(eqv))   # Fini(a^(n+1))
+    body = N.loi_deduction(et(est_fini(vn), est_fini(pow_an)), fini_a_n1)
+    return N.generalisation(n, body)
+
+
+def _produit_binaire_entier_t(x, y):
+    """produit_binaire_entier version TERME capture-safe."""
+    gen = N.generalisation("xpbet", N.generalisation("ypbet",
+            produit_binaire_entier("xpbet", "ypbet")))
+    return instancie(instancie(gen, _t(x)), _t(y))
+
+
+def puissance_entiers_ferme(a="apuf", b="bpuf", n="npuf", k="kpuf"):
+    """🎯 G2 — ⊢ ( B0(a) et (∀m) B(a,m) ) ⇒ ( (Fini a et Fini b) ⇒ Fini(a^b) ).
+
+    PROPOSITION (Cor. 3, §III.5.1) : la PUISSANCE de deux entiers est un entier,
+    CERTIFIÉE sous les SEULES hypothèses de support (B0)+(B) (exponent-invariance,
+    non circulaires).  Récurrence C61 sur b avec P[b]:=Fini(a^b) :
+        • P[0]   : a^0=1 fini           [_preuve_P0_puissance, sous B0] ;
+        • P[n]⇒P[n+1] : a^(n+1)=a^n·a    [puissance_succ_eq, sous B(n)] ; Fini par G1.
+    theorie=22.  La décharge de (B0)+(B) = keystone `eq_exposant_invariant` (REPORTÉ).
+    """
+    from bourbaki.logique.formule import pourtout
+    va, vb = _t(a), _t(b)
+    P = _puissance_P(va)
+
+    B0_form = exposant_invariance_zero_enonce(va)
+    Buniv_form = pourtout("mPpu", exposant_invariance_enonce(va, "mPpu"))
+
+    hfa = N.assume(est_fini(va))
+    hB0 = N.assume(B0_form)
+    hBuniv = N.assume(Buniv_form)
+
+    p0 = _preuve_P0_puissance(va, hfa, hB0)            # Fini(a^0)   [Fini a, B0]
+    step = _preuve_step_puissance(va, hfa, hBuniv, n)  # (∀n)(...)   [Fini a, (∀m)B]
+    assert p0.conclusion == P(ZERO), "P[0] puissance mal formé"
+    from bourbaki.entiers.ensembles_recurrence_C61 import _fini_et_P_implique_succ
+    assert step.conclusion == _fini_et_P_implique_succ(P, n), "pas puissance mal formé"
+
+    princ_imp = principe_recurrence_preuve(P, n, k=k)
+    pfu = predecesseur_fini_universel(k=k)
+    assert pfu in princ_imp.hypotheses, "predecesseur_fini_universel absent"
+    princ_imp = _cut(princ_imp, pfu, predecesseur_fini_universel_preuve(k=k))
+
+    ante = conjonction_intro(p0, step)
+    fini_implique_Pb = N.modus_ponens(ante, princ_imp)   # (∀b)(Fini b ⇒ Fini(a^b))  [Fini a,B0,(∀m)B]
+
+    hconj = N.assume(et(est_fini(va), est_fini(vb)))
+    fa = conjonction_elim_gauche(hconj)
+    fb = conjonction_elim_droite(hconj)
+    fini_impl_Pb_2 = _cut(fini_implique_Pb, est_fini(va), fa)
+    Pb2 = N.modus_ponens(fb, instancie(fini_impl_Pb_2, vb))    # Fini(a^b)  [B0,(∀m)B,Fini a et Fini b]
+    sous_finis = N.loi_deduction(et(est_fini(va), est_fini(vb)), Pb2)
+    # décharge B0 puis (∀m)B  (et Fini a déjà absorbé via fa)
+    out_B = N.loi_deduction(Buniv_form, sous_finis)
+    out = N.loi_deduction(B0_form, out_B)
+    cible = impl(B0_form, impl(Buniv_form,
+                impl(et(est_fini(va), est_fini(vb)),
+                     est_fini(exposant_cardinal_binaire(va, vb)))))
+    assert out.conclusion == cible, "puissance_entiers_ferme : conclusion inattendue"
+    return out
+
+
+__all__ = ["exposant_invariance_enonce", "exposant_invariance_zero_enonce",
+           "puissance_succ_eq", "puissance_entiers_ferme"]
