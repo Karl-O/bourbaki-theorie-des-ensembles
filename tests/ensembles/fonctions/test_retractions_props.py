@@ -1,6 +1,6 @@
 """Tests §II.3.8 — Prop. 8 (dual surjectif), Théorème 1 (a–f), Corollaire.
 
-Module testé : bourbaki.ensembles.fonctions.ensembles_retractions_props.
+Module testé : bourbaki.ensembles.fonctions.ii_3_8_retractions_sections.ensembles_retractions_props.
 Chaque théorème est vérifié sur sa CONCLUSION EXACTE (== cible construite
 indépendamment) et sur .est_clos.  Les théorèmes CONDITIONNELS (Théorème 1 a/c)
 sont en outre contrôlés sur l'ENSEMBLE EXACT de leurs hypothèses structurelles
@@ -8,7 +8,7 @@ sont en outre contrôlés sur l'ENSEMBLE EXACT de leurs hypothèses structurelle
 """
 from bourbaki.logique.formule import var, egal, et, appartient, impl, pourtout, existe
 from bourbaki.ensembles import ensembles_abrege as E
-from bourbaki.ensembles.fonctions import ensembles_retractions_props as RP
+from bourbaki.ensembles.fonctions.ii_3_8_retractions_sections import ensembles_retractions_props as RP
 
 
 # ── Proposition 8 — sens direct, CAS SURJECTIF (dual de retraction⇒injective) ──

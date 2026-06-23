@@ -470,13 +470,13 @@ def phi_etendue_bijection_plat(phi0="phi0", psi="psi", S="S0", U="Ucadre"):
 
     ⊢ est_bijection_de(φ₀∪ψ, Z×Z, Z), Z=S₀∪U, sous les MÊMES hyps mécaniques que
     l'original mais avec dom ψ = F_plain (et non Fcadre tagué)."""
-    from bourbaki.ensembles.fonctions.ensembles_restriction_somme import (
+    from bourbaki.ensembles.fonctions.hors_ii_3.iii_3_recollement.ensembles_restriction_somme import (
         reunion_graphes_fonctionnelle, dom_reunion_graphes,
     )
-    from bourbaki.ensembles.fonctions.ensembles_recollement_bijection import (
+    from bourbaki.ensembles.fonctions.hors_ii_3.iii_3_recollement.ensembles_recollement_bijection import (
         reunion_graphes_injective,
     )
-    from bourbaki.ensembles.fonctions.ensembles_dom_image_reunion import (
+    from bourbaki.ensembles.fonctions.hors_ii_3.iii_3_recollement.ensembles_dom_image_reunion import (
         dom_reunion_egale_cible, image_reunion_egale_cible,
     )
     from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de

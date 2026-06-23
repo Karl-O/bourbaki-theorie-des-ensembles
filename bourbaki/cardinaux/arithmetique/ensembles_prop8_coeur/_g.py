@@ -25,8 +25,8 @@ from bourbaki.logique.tactiques.tactiques_abrege2 import (conjonction_intro,
 from bourbaki.logique.tactiques.tactiques_abrege_egalite import (symetrie,
                                           composer_egalites, congruence_terme)
 from bourbaki.logique.tactiques.tactiques_abrege_quantif import existe_elimination
-from bourbaki.ensembles.fonctions.ensembles_restrictions import restriction_incluse
-from bourbaki.ensembles.fonctions.ensembles_fonctions import valeur_dans_graphe
+from bourbaki.ensembles.fonctions.ii_3_5_restrictions_prolongements.ensembles_restrictions import restriction_incluse
+from bourbaki.ensembles.fonctions.ii_3_4_fonctions_valeur.ensembles_fonctions import valeur_dans_graphe
 from bourbaki.ensembles.base.ensembles_couples import couple_egal_implique_composantes
 from bourbaki.ensembles.familles.ensembles_somme_disjointe import ZERO
 
@@ -172,7 +172,7 @@ def g_egale_h(a, point, h=_H):
     (point,h(point))∈h (point∈dom h via A×{0}⊂dom h) ; donc (point,h(point))∈g
     (couple_g_si) ; g fonctionnel + (point,h(point))∈g ⇒ g(point)=h(point), càd
     h(point)=g(point)  — via valeur_caracterisation appliquée à g."""
-    from bourbaki.ensembles.fonctions.ensembles_fonctions import valeur_caracterisation
+    from bourbaki.ensembles.fonctions.ii_3_4_fonctions_valeur.ensembles_fonctions import valeur_caracterisation
     vh = var(h)
     pt = _t(point)
     g = G_RESTR(a, h)

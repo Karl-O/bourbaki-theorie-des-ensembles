@@ -12,7 +12,7 @@ Pourquoi PARAMÉTRER ?  Une espèce de structure Σ est un PARAMÈTRE MÉTA (sch
 d'échelon + relation transportable), et σ{x,y,s,t} un terme générique POSTULÉ
 vérifier (MO_I)/(MO_II)/(MO_III).  σ, Σ ne sont pas des termes du fragment objet.
 On suit donc EXACTEMENT la convention déjà retenue dans
-`bourbaki.ensembles.fonctions.ensembles_morphismes` (cas relationnel concret) et
+`bourbaki.ensembles.fonctions.hors_ii_3.iv_structures.ensembles_morphismes` (cas relationnel concret) et
 `ensembles_applications_universelles` : on représente
 
   • une « structure d'espèce Σ sur E » par un terme `s` (opaque) accompagné de son

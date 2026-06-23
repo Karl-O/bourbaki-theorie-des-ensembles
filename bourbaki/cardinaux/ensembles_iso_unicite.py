@@ -53,7 +53,7 @@ from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie
 from bourbaki.cardinaux.ensembles_lemme4_croissante import (
     lemme_4, _val, _R_de, _antisym_de_bo, _f_dans_E,
 )
-from bourbaki.ensembles.fonctions.ensembles_application_valeur import (
+from bourbaki.ensembles.fonctions.hors_ii_3.ii_5_produit_famille.ensembles_application_valeur import (
     application_egale_par_valeurs,
 )
 from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de

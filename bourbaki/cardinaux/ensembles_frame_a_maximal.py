@@ -45,7 +45,7 @@ from bourbaki.logique.tactiques.tactiques_abrege_egalite import (
 )
 from bourbaki.logique.tactiques.tactiques_abrege_quantif import existe_elimination
 from bourbaki.logique.tactiques.ensembles_alpha_bridge import alpha_bridge
-from bourbaki.ensembles.fonctions.ensembles_projections import projection_premiere
+from bourbaki.ensembles.fonctions.hors_ii_3.ii_2_projections.ensembles_projections import projection_premiere
 
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import est_fini_ensemble
 from bourbaki.entiers.iii_6_infinis.iii_6_3_infinis_denombrables.ensembles_infinis import est_infini_ensemble

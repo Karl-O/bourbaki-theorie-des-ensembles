@@ -55,7 +55,7 @@ from bourbaki.cardinaux.arithmetique.ensembles_copie_marquee import (
 from bourbaki.ensembles.familles.ensembles_somme_disjointe import (somme_disjointe,
                                ZERO, UN, injection_gauche_dans_somme,
                                injection_droite_dans_somme)
-from bourbaki.ensembles.fonctions.ensembles_fonction_terme import membre_graphe_terme
+from bourbaki.ensembles.fonctions.ii_3_6_fonction_terme.ensembles_fonction_terme import membre_graphe_terme
 from bourbaki.ensembles.familles.ensembles_produit import produit_inclusion_facile
 from bourbaki.ensembles.base.ensembles_vide import non_vide_ssi_element
 

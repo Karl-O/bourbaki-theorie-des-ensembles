@@ -5,7 +5,7 @@ théorème certifié par le noyau abrégé.
 """
 from bourbaki.logique.formule import var, equiv, et, impl, appartient, egal, subst_t, alpha_egal
 from bourbaki.ensembles import ensembles_abrege as E
-from bourbaki.ensembles.fonctions import ensembles_fonction_terme as FT
+from bourbaki.ensembles.fonctions.ii_3_6_fonction_terme import ensembles_fonction_terme as FT
 
 
 # Quelques termes-tests T(x) variés.

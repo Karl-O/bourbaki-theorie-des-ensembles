@@ -6,7 +6,7 @@ from bourbaki.logique.formule import (var, egal, et, ou, non, impl, appartient,
                                        pourtout)
 from bourbaki.ensembles import ensembles_abrege as E
 from bourbaki.ensembles.familles.ensembles_somme_disjointe import ZERO, UN
-from bourbaki.ensembles.fonctions.ensembles_restriction_somme import (
+from bourbaki.ensembles.fonctions.hors_ii_3.iii_3_recollement.ensembles_restriction_somme import (
     recollement, membre_reunion_graphes, antecedent_dans_domaine,
     reunion_graphes_fonctionnelle, dom_reunion_graphes,
     domaines_disjoints_si_marques)

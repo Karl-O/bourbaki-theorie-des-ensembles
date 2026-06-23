@@ -62,7 +62,7 @@ from bourbaki.logique.tactiques.tactiques_abrege_egalite import (
     symetrie, composer_egalites)
 from bourbaki.ensembles.base.ensembles_couples import (
     couple_egal_implique_composantes)
-from bourbaki.ensembles.fonctions.ensembles_fonction_terme import (
+from bourbaki.ensembles.fonctions.ii_3_6_fonction_terme.ensembles_fonction_terme import (
     graphe_terme_fonctionnel)
 from bourbaki.cardinaux.ensembles_cantor import (
     graphe_terme_domaine, graphe_terme_valeur)

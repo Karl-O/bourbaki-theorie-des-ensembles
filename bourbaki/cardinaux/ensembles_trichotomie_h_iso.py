@@ -80,7 +80,7 @@ from bourbaki.logique.tactiques.tactiques_abrege2 import (
     equivalence_avant, equivalence_arriere, instancie,
 )
 from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie, composer_egalites
-from bourbaki.ensembles.fonctions.ensembles_fonctions import (
+from bourbaki.ensembles.fonctions.ii_3_4_fonctions_valeur.ensembles_fonctions import (
     valeur_dans_graphe, valeur_caracterisation,
 )
 from bourbaki.cardinaux import ensembles_trichotomie_scaffold as TS

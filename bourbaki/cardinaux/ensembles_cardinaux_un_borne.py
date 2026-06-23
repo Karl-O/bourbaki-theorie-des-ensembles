@@ -53,7 +53,7 @@ from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie, compos
 from bourbaki.logique.tactiques.tactiques_abrege_quantif import (existe_elimination, alpha_existe)
 from bourbaki.ensembles.base.ensembles_couples import singleton_membre
 from bourbaki.ensembles.base.ensembles_vide import non_vide_ssi_element
-from bourbaki.ensembles.fonctions.ensembles_fonction_terme import (graphe_terme_fonctionnel,
+from bourbaki.ensembles.fonctions.ii_3_6_fonction_terme.ensembles_fonction_terme import (graphe_terme_fonctionnel,
                                membre_graphe_terme)
 from bourbaki.cardinaux.ensembles_cantor import graphe_terme_domaine
 from bourbaki.cardinaux.ensembles_cardinaux import est_injection_de, inf_egal_card, cardinal

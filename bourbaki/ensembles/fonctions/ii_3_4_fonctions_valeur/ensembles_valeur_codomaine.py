@@ -26,7 +26,7 @@ from bourbaki.logique import noyau_abrege as N
 from bourbaki.ensembles import ensembles_abrege as E
 from bourbaki.logique.tactiques.tactiques_abrege2 import (
     conjonction_elim_droite, equivalence_avant, equivalence_arriere, instancie)
-from bourbaki.ensembles.fonctions.ensembles_fonctions import valeur_dans_graphe
+from bourbaki.ensembles.fonctions.ii_3_4_fonctions_valeur.ensembles_fonctions import valeur_dans_graphe
 
 
 def _t(v):

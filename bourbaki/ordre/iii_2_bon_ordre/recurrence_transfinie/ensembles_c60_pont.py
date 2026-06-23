@@ -47,8 +47,8 @@ from bourbaki.logique.tactiques.tactiques_abrege_quantif import (
 )
 from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie, composer_egalites
 
-from bourbaki.ensembles.fonctions.ensembles_fonctions import valeur_dans_graphe
-from bourbaki.ensembles.fonctions.ensembles_restriction_somme import antecedent_dans_domaine
+from bourbaki.ensembles.fonctions.ii_3_4_fonctions_valeur.ensembles_fonctions import valeur_dans_graphe
+from bourbaki.ensembles.fonctions.hors_ii_3.iii_3_recollement.ensembles_restriction_somme import antecedent_dans_domaine
 from bourbaki.ensembles.familles.ensembles_produit import couple_dans_produit_ssi
 from bourbaki.ensembles.familles.ensembles_produit_famille import _inst_parties
 

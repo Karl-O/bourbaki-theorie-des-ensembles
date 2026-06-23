@@ -1,7 +1,7 @@
 """Test — Proposition 4 (E.II.42) : associativité de la composée de graphes."""
 from bourbaki.logique.formule import var, egal
 from bourbaki.ensembles import ensembles_abrege as E
-from bourbaki.ensembles.fonctions.ensembles_composee_assoc import composee_associative
+from bourbaki.ensembles.fonctions.ii_3_4_fonctions_valeur.ensembles_composee_assoc import composee_associative
 
 
 def test_composee_associative():

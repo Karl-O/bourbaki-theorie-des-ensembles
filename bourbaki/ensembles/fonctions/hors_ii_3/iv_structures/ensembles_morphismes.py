@@ -49,7 +49,7 @@ from bourbaki.logique.tactiques.tactiques_abrege2 import (conjonction_intro, con
 from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie as eg_symetrie
 from bourbaki.cardinaux.ensembles_equipotence import (diagonale_fonctionnelle, diagonale_domaine,
                                     diagonale_valeur)
-from bourbaki.ensembles.fonctions.ensembles_fonctions_composee import composition_valeur
+from bourbaki.ensembles.fonctions.ii_3_7_composee_fonctions.ensembles_fonctions_composee import composition_valeur
 
 
 # ── relation relationnelle générique par défaut ───────────────────────────────

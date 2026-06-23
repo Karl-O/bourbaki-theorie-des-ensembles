@@ -5,7 +5,7 @@ certifié par le noyau abrégé.
 """
 from bourbaki.logique.formule import var, et, impl, appartient, pourtout, subst_t, inclus
 from bourbaki.ensembles import ensembles_abrege as E
-from bourbaki.ensembles.fonctions import ensembles_projections_terme as P
+from bourbaki.ensembles.fonctions.ii_3_6_fonction_terme import ensembles_projections_terme as P
 
 
 _X = var("x")

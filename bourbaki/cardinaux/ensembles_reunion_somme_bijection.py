@@ -45,10 +45,10 @@ from bourbaki.cardinaux.arithmetique.ensembles_copie_marquee import (
     _copie_graphe, copie_graphe_fonctionnel, copie_graphe_domaine,
     copie_graphe_injective, copie_graphe_image,
 )
-from bourbaki.ensembles.fonctions.ensembles_restriction_somme import (
+from bourbaki.ensembles.fonctions.hors_ii_3.iii_3_recollement.ensembles_restriction_somme import (
     reunion_graphes_fonctionnelle, dom_reunion_graphes,
 )
-from bourbaki.ensembles.fonctions.ensembles_recollement_bijection import (
+from bourbaki.ensembles.fonctions.hors_ii_3.iii_3_recollement.ensembles_recollement_bijection import (
     image_reunion_graphes, reunion_graphes_injective,
 )
 from bourbaki.ensembles.familles.ensembles_recollement_props import (

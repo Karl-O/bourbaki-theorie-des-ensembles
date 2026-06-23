@@ -46,7 +46,7 @@ from bourbaki.logique.tactiques.tactiques_abrege2 import (conjonction_intro,
                                instancie, equivalence_avant, equivalence_arriere)
 from bourbaki.logique.tactiques.tactiques_abrege_egalite import (symetrie,
                                composer_egalites, congruence_terme)
-from bourbaki.ensembles.fonctions.ensembles_composee_valeurs import composition_valeur_t
+from bourbaki.ensembles.fonctions.ii_3_8_retractions_sections.ensembles_composee_valeurs import composition_valeur_t
 
 
 def _T(v):
@@ -299,7 +299,7 @@ def corollaire_f_injective(g="G", f="F", a="A"):
     Si g∘f = Id_A (matriciel : (∀x∈A) g(f(x))=x), alors g est une rétraction de f,
     donc f est injective (Prop. 8 direct).  On RÉUTILISE retraction_implique_injective
     (l'hypothèse est_retraction(G,F,A) EST « g∘f=Id_A » au sens du projet)."""
-    from bourbaki.ensembles.fonctions.ensembles_retractions import retraction_implique_injective
+    from bourbaki.ensembles.fonctions.ii_3_8_retractions_sections.ensembles_retractions import retraction_implique_injective
     return retraction_implique_injective(g, f, a)
 
 
@@ -309,7 +309,7 @@ def corollaire_g_injective(g="G", f="F", b="B"):
     Symétriquement : si f∘g = Id_B (matriciel : (∀y∈B) f(g(y))=y), f est une
     rétraction de g, donc g est injective.  On instancie retraction_implique_injective
     avec (rétraction := f, fonction := g) : est_retraction(F,G,B) ⇒ injective_dans(G,B)."""
-    from bourbaki.ensembles.fonctions.ensembles_retractions import retraction_implique_injective
+    from bourbaki.ensembles.fonctions.ii_3_8_retractions_sections.ensembles_retractions import retraction_implique_injective
     return retraction_implique_injective(f, g, b)
 
 

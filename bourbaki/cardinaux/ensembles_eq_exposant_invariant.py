@@ -150,7 +150,7 @@ def K_g(g, t, m):
 
 def K_g_fonctionnelle(g, t, m):
     """⊢ est_fonctionnel(K_g).   (graphe-terme toujours fonctionnel, C54.)"""
-    from bourbaki.ensembles.fonctions.ensembles_fonction_terme import graphe_terme_fonctionnel
+    from bourbaki.ensembles.fonctions.ii_3_6_fonction_terme.ensembles_fonction_terme import graphe_terme_fonctionnel
     return graphe_terme_fonctionnel(_t(t), _val_K(g, m), _PT, "y")
 
 
@@ -316,7 +316,7 @@ def triple_K_sous_appartenance(g, s, t, m):
 
     BIEN-DÉFINITION COMPLÈTE de Λ : les hyps structurelles sur graphe_de(g) sont
     déchargées par g∈𝓕(S;A) (décomposition générique, témoin G éliminé)."""
-    from bourbaki.ensembles.fonctions.ensembles_application_valeur import (
+    from bourbaki.ensembles.fonctions.hors_ii_3.ii_5_produit_famille.ensembles_application_valeur import (
         _conjoints_application, _exposant_conjoints, _graphe_de_f_egal_G)
     vg, vs, vt, vm = _t(g), _t(s), _t(t), _t(m)
     va = var("A")
@@ -378,7 +378,7 @@ def W_lambda(s, t, m):
 
 def W_lambda_fonctionnel(s, t, m):
     """⊢ est_fonctionnel(W)."""
-    from bourbaki.ensembles.fonctions.ensembles_fonction_terme import graphe_terme_fonctionnel
+    from bourbaki.ensembles.fonctions.ii_3_6_fonction_terme.ensembles_fonction_terme import graphe_terme_fonctionnel
     vs, vt, vm = _t(s), _t(t), _t(m)
     return graphe_terme_fonctionnel(_source(vs), _lambda_valeur(var(_POINT), vt, vm), _POINT, "y")
 
@@ -417,7 +417,7 @@ def W_lambda_image_incluse(s, t, m):
     W = W_lambda(vs, vt, vm)
     LAM = _lambda_valeur(var(_POINT), vt, vm)             # Λ(g), point g
     vz, vk = var("z"), var("t")
-    from bourbaki.ensembles.fonctions.ensembles_fonction_terme import membre_graphe_terme
+    from bourbaki.ensembles.fonctions.ii_3_6_fonction_terme.ensembles_fonction_terme import membre_graphe_terme
 
     ax_img = N.axiome(E.theorie_ensembles(), E.AXIOME_IMAGE)
     img0 = instancie(instancie(instancie(ax_img, W), dom), vz)
@@ -589,7 +589,7 @@ def lambda_injective_sous_appartenance(g1, g2, s, t, m):
 
     Cœur INJECTIVITÉ.  Mêmes valeurs sur S (_g_egalite_valeurs, via surjectivité de m)
     ⇒ application_egale_par_valeurs ⊢ g₁=g₂."""
-    from bourbaki.ensembles.fonctions.ensembles_application_valeur import (
+    from bourbaki.ensembles.fonctions.hors_ii_3.ii_5_produit_famille.ensembles_application_valeur import (
         application_egale_par_valeurs, egalite_valeurs_application)
     vg1, vg2, vs, vt, vm = _t(g1), _t(g2), _t(s), _t(t), _t(m)
     eva = _g_egalite_valeurs(vg1, vg2, vs, vt, vm)         # {Keq,bij} ⊢ (∀x)(x∈S⇒…)

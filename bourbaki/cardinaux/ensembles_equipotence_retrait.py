@@ -55,7 +55,7 @@ from bourbaki.logique.tactiques.tactiques_abrege_egalite import (
     symetrie, composer_egalites, congruence_terme)
 from bourbaki.logique.tactiques.tactiques_abrege_quantif import (
     existe_elimination, alpha_existe)
-from bourbaki.ensembles.fonctions.ensembles_fonctions import (
+from bourbaki.ensembles.fonctions.ii_3_4_fonctions_valeur.ensembles_fonctions import (
     valeur_dans_graphe, valeur_caracterisation)
 from bourbaki.ensembles.base.ensembles_couples import singleton_membre
 from bourbaki.cardinaux.ensembles_cardinaux import (
@@ -412,7 +412,7 @@ def _valeur_dans_codomaine_image(f, x, y, a):
 
     (a,F(a))∈F (couple_valeur_dans_graphe, a∈dom F=X) ⇒ F(a)∈F⟨X⟩ (AXIOME_IMAGE,
     témoin a∈X) ⇒ F(a)∈Y (réécriture image(F,X)=Y, surjectivité)."""
-    from bourbaki.ensembles.fonctions.ensembles_valeur_codomaine import couple_valeur_dans_graphe
+    from bourbaki.ensembles.fonctions.ii_3_4_fonctions_valeur.ensembles_valeur_codomaine import couple_valeur_dans_graphe
     vF, vX, vY, va = _t(f), _t(x), _t(y), _t(a)
     Fa = E.valeur(vF, va)
     hbij = N.assume(est_bijection_de(vF, vX, vY))

@@ -54,7 +54,7 @@ from bourbaki.cardinaux.ensembles_segments_construction import seg as _seg
 from bourbaki.cardinaux import ensembles_trichotomie_extension_iso as EXT
 from bourbaki.cardinaux import ensembles_trichotomie_scaffold as TS
 from bourbaki.cardinaux import ensembles_trichotomie_scaffold_maximalite as M
-from bourbaki.ensembles.fonctions.ensembles_valeur_codomaine import valeur_dans_codomaine
+from bourbaki.ensembles.fonctions.ii_3_4_fonctions_valeur.ensembles_valeur_codomaine import valeur_dans_codomaine
 
 
 def _t(t):

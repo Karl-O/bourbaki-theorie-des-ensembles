@@ -28,8 +28,8 @@ from bourbaki.logique.tactiques.tactiques_abrege2 import (
     conjonction_elim_gauche, conjonction_elim_droite,
 )
 from bourbaki.ordre.iii_1_relations_ordre.isomorphismes_ordre.ensembles_valeur_bridge import valeur_j_egal_y
-from bourbaki.ensembles.fonctions.ensembles_valeur_codomaine import valeur_dans_codomaine
-from bourbaki.ensembles.fonctions.ensembles_fonctions_composee import composition_valeur
+from bourbaki.ensembles.fonctions.ii_3_4_fonctions_valeur.ensembles_valeur_codomaine import valeur_dans_codomaine
+from bourbaki.ensembles.fonctions.ii_3_7_composee_fonctions.ensembles_fonctions_composee import composition_valeur
 
 
 def _t(x):
@@ -124,7 +124,7 @@ def composee_dans_S_t(g, f, S, T, t="t"):
     (g∘f) fonctionnel EXPLICITE en plus."""
     from bourbaki.logique.formule import existe
     from bourbaki.logique.tactiques.tactiques_abrege2 import equivalence_arriere
-    from bourbaki.ensembles.fonctions.ensembles_composee_valeurs import composition_valeur_t
+    from bourbaki.ensembles.fonctions.ii_3_8_retractions_sections.ensembles_composee_valeurs import composition_valeur_t
     vg, vf, vS, vT, vt, vy = _t(g), _t(f), _t(S), _t(T), var(t), var("y")
     comp = E.composee(vg, vf)
     ft_y = E.valeur(vf, vt)               # f(t)[y]
@@ -162,9 +162,9 @@ def retraction_phi(phi="phi", S="S", T="T", x="x"):
     from bourbaki.logique.formule import existe
     from bourbaki.logique.tactiques.tactiques_abrege2 import equivalence_arriere
     from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie
-    from bourbaki.ensembles.fonctions.ensembles_fonctions import (
+    from bourbaki.ensembles.fonctions.ii_3_4_fonctions_valeur.ensembles_fonctions import (
         valeur_dans_graphe, valeur_caracterisation)
-    from bourbaki.ensembles.fonctions.ensembles_reciproque import couple_reciproque
+    from bourbaki.ensembles.fonctions.ii_3_2_reciproque.ensembles_reciproque import couple_reciproque
     from bourbaki.ordre.iii_1_relations_ordre.isomorphismes_ordre.ensembles_valeur_bridge import valeur_y_egal_j
     vphi, vS, vT, vx, vy = var(phi), var(S), var(T), var(x), var("y")
     Phinv = E.reciproque(vphi)
@@ -226,7 +226,7 @@ def raccord_phip(phi="phi", phip="phip", S="S", T="T", u="u"):
     from bourbaki.logique.tactiques.tactiques_abrege2 import equivalence_arriere
     from bourbaki.logique.tactiques.tactiques_abrege_egalite import composer_egalites
     from bourbaki.cardinaux.ensembles_iso_ordre_reciproque import section_reciproque
-    from bourbaki.ensembles.fonctions.ensembles_composee_valeurs import composition_valeur_t
+    from bourbaki.ensembles.fonctions.ii_3_8_retractions_sections.ensembles_composee_valeurs import composition_valeur_t
     vphi, vphip, vS, vT, vu, vy = _t(phi), _t(phip), _t(S), _t(T), var(u), var("y")
     Phinv = E.reciproque(vphip)               # φ'⁻¹
     c = E.composee(Phinv, vphi)               # c = φ'⁻¹∘φ
@@ -318,7 +318,7 @@ def retraction_kc(phi="phi", phip="phip", S="S", T="T", x="x"):
     from bourbaki.logique.tactiques.tactiques_abrege_egalite import composer_egalites
     from bourbaki.logique.tactiques.tactiques_abrege2 import equivalence_arriere
     from bourbaki.cardinaux.ensembles_iso_ordre_reciproque import section_reciproque
-    from bourbaki.ensembles.fonctions.ensembles_composee_valeurs import composition_valeur_t
+    from bourbaki.ensembles.fonctions.ii_3_8_retractions_sections.ensembles_composee_valeurs import composition_valeur_t
     from bourbaki.ordre.iii_1_relations_ordre.isomorphismes_ordre.ensembles_valeur_bridge import valeur_y_egal_j
     vphi, vphip, vS, vT, vx, vy = _t(phi), _t(phip), _t(S), _t(T), var(x), var("y")
     PhiInv = E.reciproque(vphi)               # φ⁻¹

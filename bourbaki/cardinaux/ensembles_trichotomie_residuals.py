@@ -91,7 +91,7 @@ from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie, compos
 from bourbaki.ensembles.base.ensembles_correspondances import (
     image_croissante, _inst_image,
 )
-from bourbaki.ensembles.fonctions.ensembles_valeur_codomaine import couple_valeur_dans_graphe
+from bourbaki.ensembles.fonctions.ii_3_4_fonctions_valeur.ensembles_valeur_codomaine import couple_valeur_dans_graphe
 from bourbaki.ordre.iii_1_relations_ordre.isomorphismes_ordre.ensembles_valeur_bridge import valeur_y_egal_j
 from bourbaki.cardinaux.ensembles_coincidence_univ_app import _premisse_liste
 from bourbaki.cardinaux.ensembles_fusion_depuis_coincidence_app import _DISCHARGEABLE
@@ -355,7 +355,7 @@ def restriction_inclus_produit_image(phi="phi", X="X"):
     témoin (p,q) : p∈X et q∈image(φ,X) (témoin x:=p, AXIOME_IMAGE) donc
     (p,q)∈X×image(φ,X) (couple_dans_produit_ssi) ; z=(p,q) ⇒ z∈X×image(φ,X) (Leibniz).
     « Le graphe restreint à X tombe dans X × φ⟨X⟩ »  (son codomaine EFFECTIF)."""
-    from bourbaki.ensembles.fonctions.ensembles_restrictions import _inst_restriction
+    from bourbaki.ensembles.fonctions.ii_3_5_restrictions_prolongements.ensembles_restrictions import _inst_restriction
     from bourbaki.ensembles.familles.ensembles_produit import couple_dans_produit_ssi
     vphi, vX = _t(phi), _t(X)
     img = E.image(vphi, vX)

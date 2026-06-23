@@ -52,7 +52,7 @@ from bourbaki.logique.tactiques.tactiques_abrege2 import (
     instancie, conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
     equivalence_avant)
 from bourbaki.cardinaux.arithmetique.ensembles_graphe_de import graphe_de
-from bourbaki.ensembles.fonctions.ensembles_application_valeur import (
+from bourbaki.ensembles.fonctions.hors_ii_3.ii_5_produit_famille.ensembles_application_valeur import (
     valeur_application_dans_but, application_egale_par_valeurs,
     egalite_valeurs_application)
 from bourbaki.ensembles.familles.ensembles_extensionnalite_produit import (

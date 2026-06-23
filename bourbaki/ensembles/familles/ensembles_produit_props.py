@@ -47,7 +47,7 @@ from bourbaki.logique.formule import (Terme, var, app, egal, et, impl, non, equi
                                        appartient, existe, inclus, pourtout)
 from bourbaki.logique import noyau_abrege as N
 from bourbaki.ensembles import ensembles_abrege as E
-from bourbaki.ensembles.fonctions.ensembles_composee import image_composee
+from bourbaki.ensembles.fonctions.ii_3_3_composee_graphes.ensembles_composee import image_composee
 from bourbaki.ensembles.familles.ensembles_produit_famille import membre_parties
 from bourbaki.logique.tactiques.tactiques_abrege2 import (instancie, equivalence_avant,
                                equivalence_arriere, conjonction_intro,

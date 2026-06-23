@@ -17,7 +17,7 @@ from bourbaki.logique.tactiques.tactiques_abrege2 import (conjonction_intro, con
 from bourbaki.logique.tactiques.tactiques_abrege_quantif import (monotonie_existe, existe_elimination,
                                       alpha_pour_tout, alpha_existe)
 from bourbaki.logique.tactiques.tactiques_abrege_egalite import composer_egalites, congruence_terme
-from bourbaki.ensembles.fonctions.ensembles_projections import projection_premiere, projection_seconde
+from bourbaki.ensembles.fonctions.hors_ii_3.ii_2_projections.ensembles_projections import projection_premiere, projection_seconde
 from bourbaki.ensembles.base.ensembles_vide import vide_ssi_sans_element, non_vide_ssi_element
 
 

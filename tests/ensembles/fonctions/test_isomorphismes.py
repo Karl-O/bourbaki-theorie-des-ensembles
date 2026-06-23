@@ -4,7 +4,7 @@ Chaque théorème : conclusion == cible EXACTE et démonstration CLOSE (certifi�
 par le noyau).  Les définitions sont vérifiées bien formées."""
 from bourbaki.logique.formule import var, appartient, equiv, et, existe
 from bourbaki.ensembles import ensembles_abrege as E
-from bourbaki.ensembles.fonctions import ensembles_isomorphismes as I
+from bourbaki.ensembles.fonctions.hors_ii_3.iv_structures import ensembles_isomorphismes as I
 from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de
 
 

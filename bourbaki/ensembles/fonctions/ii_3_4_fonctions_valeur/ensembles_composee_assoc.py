@@ -26,7 +26,7 @@ from bourbaki.logique.tactiques.tactiques_abrege2 import (equivalence_transitivi
                                et_congruence_gauche, assoc_et, instancie)
 from bourbaki.logique.tactiques.tactiques_abrege_quantif import (congruence_existe, et_existe_droite,
                                       et_existe_gauche, existe_commute, alpha_existe)
-from bourbaki.ensembles.fonctions.ensembles_composee import couple_composee, _inst_composee
+from bourbaki.ensembles.fonctions.ii_3_3_composee_graphes.ensembles_composee import couple_composee, _inst_composee
 from bourbaki.ensembles.ensembles_theoremes import egalite_par_extension
 
 

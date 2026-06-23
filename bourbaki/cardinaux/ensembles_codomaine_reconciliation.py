@@ -468,7 +468,7 @@ def codomaine_egal_image(phi1="phi1", phi2="phi2", S1="S1", T1="T1", S2="S2",
     from bourbaki.cardinaux.ensembles_restriction_iso_pieces import (
         restriction_fonctionnelle_piece, restriction_domaine_piece,
     )
-    from bourbaki.ensembles.fonctions.ensembles_fonctions_composee import composee_fonctionnelle
+    from bourbaki.ensembles.fonctions.ii_3_7_composee_fonctions.ensembles_fonctions_composee import composee_fonctionnelle
     from bourbaki.cardinaux.ensembles_segment_comparabilite_abstrait import (
         segments_abstraits_comparables,
     )

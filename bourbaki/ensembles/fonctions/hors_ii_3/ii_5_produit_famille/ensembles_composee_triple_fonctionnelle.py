@@ -25,7 +25,7 @@ from bourbaki.ensembles import ensembles_abrege as E
 from bourbaki.logique.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite, instancie,
 )
-from bourbaki.ensembles.fonctions.ensembles_fonctions_composee import composee_fonctionnelle
+from bourbaki.ensembles.fonctions.ii_3_7_composee_fonctions.ensembles_fonctions_composee import composee_fonctionnelle
 
 
 def _t(v):

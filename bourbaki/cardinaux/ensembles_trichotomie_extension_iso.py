@@ -88,10 +88,10 @@ from bourbaki.logique.tactiques.tactiques_abrege_egalite import (
     symetrie, composer_egalites,
 )
 from bourbaki.ensembles.base.ensembles_couples import singleton_membre
-from bourbaki.ensembles.fonctions.ensembles_restriction_somme import (
+from bourbaki.ensembles.fonctions.hors_ii_3.iii_3_recollement.ensembles_restriction_somme import (
     membre_reunion_graphes,
 )
-from bourbaki.ensembles.fonctions.ensembles_recollement_bijection import (
+from bourbaki.ensembles.fonctions.hors_ii_3.iii_3_recollement.ensembles_recollement_bijection import (
     reunion_graphes_injective, image_reunion_graphes,
 )
 from bourbaki.cardinaux.ensembles_segments_construction import seg as _seg

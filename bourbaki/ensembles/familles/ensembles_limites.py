@@ -48,7 +48,7 @@ from bourbaki.logique.tactiques.tactiques_abrege2 import (instancie, conjonction
                                conjonction_elim_droite, equivalence_avant,
                                equivalence_arriere)
 from bourbaki.logique.tactiques.tactiques_abrege_egalite import composer_egalites, congruence_terme, symetrie
-from bourbaki.ensembles.fonctions.ensembles_composee_valeurs import composition_valeur_t
+from bourbaki.ensembles.fonctions.ii_3_8_retractions_sections.ensembles_composee_valeurs import composition_valeur_t
 
 
 # ════════════════════════════════════════════════════════════════════════════

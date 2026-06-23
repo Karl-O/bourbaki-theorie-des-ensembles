@@ -43,8 +43,8 @@ from bourbaki.logique.tactiques.tactiques_abrege_egalite import (symetrie, symet
                                       composer_egalites)
 from bourbaki.logique.tactiques.tactiques_abrege_quantif import existe_elimination, congruence_existe, alpha_existe
 from bourbaki.ensembles.ensembles_theoremes import egalite_par_extension
-from bourbaki.ensembles.fonctions.ensembles_fonction_terme import membre_graphe_terme, graphe_terme_fonctionnel
-from bourbaki.ensembles.fonctions.ensembles_fonctions import valeur_caracterisation
+from bourbaki.ensembles.fonctions.ii_3_6_fonction_terme.ensembles_fonction_terme import membre_graphe_terme, graphe_terme_fonctionnel
+from bourbaki.ensembles.fonctions.ii_3_4_fonctions_valeur.ensembles_fonctions import valeur_caracterisation
 from bourbaki.ensembles.base.ensembles_couples import singleton_injectif
 from bourbaki.ensembles.familles.ensembles_produit_famille import membre_parties
 from bourbaki.cardinaux.ensembles_cardinaux import est_injection_de

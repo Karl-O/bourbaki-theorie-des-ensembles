@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from bourbaki.logique.formule import var, equiv, egal, appartient
 from bourbaki.ensembles.ensembles_abrege import couple, reciproque, dom, img, produit
-from bourbaki.ensembles.fonctions.ensembles_reciproque import (couple_reciproque, pr1_reciproque,
+from bourbaki.ensembles.fonctions.ii_3_2_reciproque.ensembles_reciproque import (couple_reciproque, pr1_reciproque,
                                   pr2_reciproque, reciproque_produit)
 
 

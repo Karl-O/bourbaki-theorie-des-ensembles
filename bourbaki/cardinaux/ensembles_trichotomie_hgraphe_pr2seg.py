@@ -64,7 +64,7 @@ from bourbaki.ensembles.base.ensembles_correspondances import _inst_image, _inst
 from bourbaki.ensembles.familles.ensembles_produit import (
     _instance_produit, couple_dans_produit_ssi,
 )
-from bourbaki.ensembles.fonctions.ensembles_valeur_codomaine import couple_valeur_dans_graphe
+from bourbaki.ensembles.fonctions.ii_3_4_fonctions_valeur.ensembles_valeur_codomaine import couple_valeur_dans_graphe
 from bourbaki.ordre.iii_1_relations_ordre.isomorphismes_ordre.ensembles_valeur_bridge import valeur_y_egal_j
 from bourbaki.cardinaux import ensembles_trichotomie_scaffold as TS
 from bourbaki.cardinaux import ensembles_trichotomie_scaffold_maximalite as M

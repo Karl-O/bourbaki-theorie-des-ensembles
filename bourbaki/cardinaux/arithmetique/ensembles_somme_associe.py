@@ -46,7 +46,7 @@ from bourbaki.logique.tactiques.tactiques_abrege2 import (conjonction_intro, con
                                instancie, cas)
 from bourbaki.logique.tactiques.tactiques_abrege_egalite import (symetrie, composer_egalites, congruence_terme)
 from bourbaki.logique.tactiques.tactiques_abrege_quantif import (existe_elimination, alpha_existe)
-from bourbaki.ensembles.fonctions.ensembles_fonction_terme import (membre_graphe_terme, graphe_terme_fonctionnel)
+from bourbaki.ensembles.fonctions.ii_3_6_fonction_terme.ensembles_fonction_terme import (membre_graphe_terme, graphe_terme_fonctionnel)
 from bourbaki.cardinaux.ensembles_cantor import (graphe_terme_domaine, graphe_terme_valeur)
 from bourbaki.ensembles.familles.ensembles_somme_disjointe import (somme_disjointe, ZERO, UN,
                                        injection_gauche_dans_somme,
@@ -54,7 +54,7 @@ from bourbaki.ensembles.familles.ensembles_somme_disjointe import (somme_disjoin
                                        membre_somme_caracterise, _ou_congruence)
 from bourbaki.cardinaux.arithmetique.ensembles_produit_commute import (_projection_premiere_ab, _projection_seconde_ab)
 from bourbaki.cardinaux.ensembles_vide_singleton import vide_distinct_singleton
-from bourbaki.ensembles.fonctions.ensembles_fonctions import valeur_caracterisation
+from bourbaki.ensembles.fonctions.ii_3_4_fonctions_valeur.ensembles_fonctions import valeur_caracterisation
 from bourbaki.ensembles.base.ensembles_couples import couple_egal_implique_composantes
 from bourbaki.cardinaux.arithmetique.ensembles_somme_equipotence import _neg_un_egal_zero
 

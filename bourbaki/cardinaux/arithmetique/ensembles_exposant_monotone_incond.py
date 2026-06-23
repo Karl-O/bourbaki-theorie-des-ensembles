@@ -85,7 +85,7 @@ def K_g(g, c, iota):
 
 
 def K_g_fonctionnelle(g, c, iota):
-    from bourbaki.ensembles.fonctions.ensembles_fonction_terme import graphe_terme_fonctionnel
+    from bourbaki.ensembles.fonctions.ii_3_6_fonction_terme.ensembles_fonction_terme import graphe_terme_fonctionnel
     return graphe_terme_fonctionnel(_t(c), _val_K(g, iota), _PT, "y")
 
 
@@ -191,7 +191,7 @@ def triple_K_sous_appartenance(g, a, b, c, iota):
     """{ g ∈ 𝓕(C;A), est_injection_de(ι,A,B) } ⊢ ((K_g,C),B) ∈ 𝓕(C;B).
 
     Décharge les hyps structurelles sur graphe_de(g) via g∈𝓕(C;A) (témoin G éliminé)."""
-    from bourbaki.ensembles.fonctions.ensembles_application_valeur import (
+    from bourbaki.ensembles.fonctions.hors_ii_3.ii_5_produit_famille.ensembles_application_valeur import (
         _exposant_conjoints, _graphe_de_f_egal_G)
     vg, va, vb, vc, viota = _t(g), _t(a), _t(b), _t(c), _t(iota)
     vG = var("G")
@@ -246,7 +246,7 @@ def W_phi(a, b, c, iota):
 
 
 def W_phi_fonctionnel(a, b, c, iota):
-    from bourbaki.ensembles.fonctions.ensembles_fonction_terme import graphe_terme_fonctionnel
+    from bourbaki.ensembles.fonctions.ii_3_6_fonction_terme.ensembles_fonction_terme import graphe_terme_fonctionnel
     va, vb, vc, viota = _t(a), _t(b), _t(c), _t(iota)
     return graphe_terme_fonctionnel(_source(va, vc), _phi_valeur(var(_POINT), vb, vc, viota), _POINT, "y")
 
@@ -284,7 +284,7 @@ def W_phi_image_incluse(a, b, c, iota):
     W = W_phi(va, vb, vc, viota)
     PHI = _phi_valeur(var(_POINT), vb, vc, viota)            # Φ(g), point g
     vz = var("z")
-    from bourbaki.ensembles.fonctions.ensembles_fonction_terme import membre_graphe_terme
+    from bourbaki.ensembles.fonctions.ii_3_6_fonction_terme.ensembles_fonction_terme import membre_graphe_terme
 
     ax_img = N.axiome(E.theorie_ensembles(), E.AXIOME_IMAGE)
     img0 = instancie(instancie(instancie(ax_img, W), dom), vz)
@@ -390,7 +390,7 @@ def _gc_dans_A(vg, va, vc, vc_pt):
     """{ g∈𝓕(C;A), c∈C } ⊢ valeur(graphe_de g, c, «r») ∈ A.
 
     décharge graphe_de(g)⊂C×A, dom graphe_de(g)=C via g∈𝓕(C;A) (témoin G), puis PONT."""
-    from bourbaki.ensembles.fonctions.ensembles_application_valeur import (
+    from bourbaki.ensembles.fonctions.hors_ii_3.ii_5_produit_famille.ensembles_application_valeur import (
         _exposant_conjoints, _graphe_de_f_egal_G)
     G = graphe_de(vg)
     gc = E.valeur(G, vc_pt, _VBO)
@@ -440,7 +440,7 @@ def _g_egalite_valeurs(vg1, vg2, va, vb, vc, viota):
 
 def phi_injective_sous_appartenance(g1, g2, a, b, c, iota):
     """{ g₁,g₂∈𝓕(C;A), inj, K_g₁=K_g₂ } ⊢ g₁ = g₂."""
-    from bourbaki.ensembles.fonctions.ensembles_application_valeur import (
+    from bourbaki.ensembles.fonctions.hors_ii_3.ii_5_produit_famille.ensembles_application_valeur import (
         application_egale_par_valeurs, egalite_valeurs_application)
     vg1, vg2, va, vb, vc, viota = _t(g1), _t(g2), _t(a), _t(b), _t(c), _t(iota)
     eva = _g_egalite_valeurs(vg1, vg2, va, vb, vc, viota)

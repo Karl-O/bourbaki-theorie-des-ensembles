@@ -38,7 +38,7 @@ from bourbaki.logique.tactiques.tactiques_abrege_egalite import (
 )
 from bourbaki.logique.tactiques.tactiques_abrege_quantif import existe_elimination
 from bourbaki.ensembles.ensembles_theoremes import extensionnalite_appliquee
-from bourbaki.ensembles.fonctions.ensembles_projections import (
+from bourbaki.ensembles.fonctions.hors_ii_3.ii_2_projections.ensembles_projections import (
     projection_premiere, projection_seconde,
 )
 

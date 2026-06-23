@@ -47,10 +47,10 @@ from bourbaki.ensembles.ensembles_theoremes import (egalite_par_extension,
 # socle 2-élément (0=∅, 1={∅}) — RÉUTILISÉ, jamais redéfini :
 from bourbaki.ensembles.familles.ensembles_somme_disjointe import ZERO, UN
 # infra réunion de graphes (recollement) — RÉUTILISÉE :
-from bourbaki.ensembles.fonctions.ensembles_restriction_somme import (
+from bourbaki.ensembles.fonctions.hors_ii_3.iii_3_recollement.ensembles_restriction_somme import (
     membre_reunion_graphes, _ex_falso)
 # infra graphe-terme — RÉUTILISÉE :
-from bourbaki.ensembles.fonctions.ensembles_fonction_terme import membre_graphe_terme
+from bourbaki.ensembles.fonctions.ii_3_6_fonction_terme.ensembles_fonction_terme import membre_graphe_terme
 # ── ACQUIS round 25/26 (χ_Y graphe fonctionnel X→{0,1}) — RÉUTILISÉS ──
 from bourbaki.cardinaux.arithmetique.ensembles_prop12_powerset import (
     chi, _chi_gauche, _chi_droite, chi_fonctionnel, chi_est_graphe, chi_domaine,

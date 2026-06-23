@@ -59,11 +59,11 @@ from bourbaki.cardinaux.arithmetique.ensembles_prop9_close import (
 from bourbaki.cardinaux.arithmetique.ensembles_prop9_exp_somme import (
     cible_prop9_exp_somme)
 
-from bourbaki.ensembles.fonctions.ensembles_application_valeur import (
+from bourbaki.ensembles.fonctions.hors_ii_3.ii_5_produit_famille.ensembles_application_valeur import (
     application_egale_par_valeurs, egalite_valeurs_application)
-from bourbaki.ensembles.fonctions.ensembles_recollement_bijection import (
+from bourbaki.ensembles.fonctions.hors_ii_3.iii_3_recollement.ensembles_recollement_bijection import (
     valeur_reunion_gauche, valeur_reunion_droite)
-from bourbaki.ensembles.fonctions.ensembles_restriction_somme import (
+from bourbaki.ensembles.fonctions.hors_ii_3.iii_3_recollement.ensembles_restriction_somme import (
     domaines_disjoints_si_marques)
 from bourbaki.ensembles.familles.ensembles_produit import couple_dans_produit_ssi
 from bourbaki.cardinaux.arithmetique.ensembles_produit_commute import (

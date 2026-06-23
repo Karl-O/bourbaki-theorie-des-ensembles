@@ -23,8 +23,8 @@ from bourbaki.ensembles import ensembles_abrege as E
 from bourbaki.logique.tactiques.tactiques_abrege2 import (instancie, equivalence_transitivite,
                                et_congruence_droite, et_congruence_gauche, comm_et)
 from bourbaki.logique.tactiques.tactiques_abrege_quantif import congruence_existe, alpha_existe
-from bourbaki.ensembles.fonctions.ensembles_composee import couple_composee
-from bourbaki.ensembles.fonctions.ensembles_reciproque import couple_reciproque
+from bourbaki.ensembles.fonctions.ii_3_3_composee_graphes.ensembles_composee import couple_composee
+from bourbaki.ensembles.fonctions.ii_3_2_reciproque.ensembles_reciproque import couple_reciproque
 from bourbaki.ensembles.ensembles_theoremes import egalite_par_extension
 
 

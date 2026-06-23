@@ -8,7 +8,7 @@ from bourbaki.ensembles import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de, equipotent
 from bourbaki.ensembles.familles.ensembles_somme_disjointe import (
     somme_disjointe, ZERO, UN)
-from bourbaki.ensembles.fonctions.ensembles_restriction_somme import (
+from bourbaki.ensembles.fonctions.hors_ii_3.iii_3_recollement.ensembles_restriction_somme import (
     reunion_graphes_fonctionnelle)
 
 from bourbaki.ensembles.familles.ensembles_recollement_props import (

@@ -96,7 +96,7 @@ def reciproque_inclusion_monotone(g="G", h="H"):
 
     z∈G⁻¹ ⇔ (∃p,q)(z=(p,q) et (q,p)∈G)  [AXIOME_RECIP] ; de (q,p)∈G et G⊂H on tire
     (q,p)∈H, donc z∈H⁻¹.  INCONDITIONNEL.  CLOSE (forme implicative)."""
-    from bourbaki.ensembles.fonctions.ensembles_reciproque import _inst_recip_z
+    from bourbaki.ensembles.fonctions.ii_3_2_reciproque.ensembles_reciproque import _inst_recip_z
     vG, vH = _t(g), _t(h)
     vz, vp, vq = var("z"), var("p"), var("q")
     Hsub = N.assume(inclus(vG, vH))                                # G ⊂ H
@@ -125,7 +125,7 @@ def reciproque_inclus_produit_miroir(g, A, B):
     G⊂A×B ⇒ G⁻¹⊂(A×B)⁻¹ (reciproque_inclusion_monotone) ; (A×B)⁻¹=B×A
     (reciproque_produit, E.II.41) ; Leibniz S6 réécrit le codomaine.  CONDITIONNEL
     à la seule inclusion forward G⊂A×B."""
-    from bourbaki.ensembles.fonctions.ensembles_reciproque import reciproque_produit
+    from bourbaki.ensembles.fonctions.ii_3_2_reciproque.ensembles_reciproque import reciproque_produit
     vG, vA, vB = _t(g), _t(A), _t(B)
     Hsub = N.assume(inclus(vG, E.produit(vA, vB)))                  # G ⊂ A×B
     mono = reciproque_inclusion_monotone(vG, E.produit(vA, vB))     # (G⊂A×B)⇒(G⁻¹⊂(A×B)⁻¹)
@@ -160,7 +160,7 @@ def coincidence_univ_app_point(phi1="phi1", phi2="phi2", S1="S1", T1="T1",
         restriction_fonctionnelle_piece, restriction_domaine_piece,
     )
     from bourbaki.cardinaux.ensembles_bijection import reciproque_fonctionnelle
-    from bourbaki.ensembles.fonctions.ensembles_fonctions_composee import (
+    from bourbaki.ensembles.fonctions.ii_3_7_composee_fonctions.ensembles_fonctions_composee import (
         composee_fonctionnelle,
     )
 

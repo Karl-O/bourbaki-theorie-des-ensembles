@@ -44,7 +44,7 @@ from bourbaki.logique.tactiques.tactiques_abrege2 import (conjonction_elim_gauch
                                equivalence_avant, equivalence_arriere,
                                equivalence_transitivite, instancie)
 from bourbaki.logique.tactiques.tactiques_abrege_quantif import existe_elimination, alpha_existe
-from bourbaki.ensembles.fonctions.ensembles_fonction_terme import membre_graphe_terme
+from bourbaki.ensembles.fonctions.ii_3_6_fonction_terme.ensembles_fonction_terme import membre_graphe_terme
 # réexports §3.6
 from bourbaki.cardinaux.ensembles_cantor import (graphe_terme_domaine, graphe_terme_couple_dans,
                               graphe_terme_valeur)

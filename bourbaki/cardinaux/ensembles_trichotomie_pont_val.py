@@ -70,7 +70,7 @@ from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis import ensembles_ordre_
 from bourbaki.logique.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite, instancie,
 )
-from bourbaki.ensembles.fonctions.ensembles_valeur_codomaine import valeur_dans_codomaine
+from bourbaki.ensembles.fonctions.ii_3_4_fonctions_valeur.ensembles_valeur_codomaine import valeur_dans_codomaine
 
 
 def _t(t):

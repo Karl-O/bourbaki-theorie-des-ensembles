@@ -26,7 +26,7 @@ from bourbaki.logique.tactiques.tactiques_abrege_quantif import existe_eliminati
 from bourbaki.ensembles.ensembles_theoremes import egalite_par_extension
 from bourbaki.ensembles.base.ensembles_couples import (singleton_membre, membre_paire_gauche,
                                   singleton_injectif, couple_egal_implique_composantes)
-from bourbaki.ensembles.fonctions.ensembles_fonction_terme import (membre_graphe_terme,
+from bourbaki.ensembles.fonctions.ii_3_6_fonction_terme.ensembles_fonction_terme import (membre_graphe_terme,
                                        graphe_terme_fonctionnel)
 from bourbaki.cardinaux.ensembles_cantor import (graphe_terme_domaine, graphe_terme_valeur,
                             graphe_terme_couple_dans)
@@ -121,7 +121,7 @@ def gv_inclus_produit(v="c", a="A"):
     # Mais z∈G_v est quelconque ; on a besoin de la forme couple. membre_graphe_terme
     # est sur (u,y).  On utilise donc l'axiome du graphe-terme sur z directement :
     #   z∈G_v ⇔ (∃u)(∃y)(z=(u,y) et u∈{∅} et y=v).
-    from bourbaki.ensembles.fonctions.ensembles_fonction_terme import _inst_axiome
+    from bourbaki.ensembles.fonctions.ii_3_6_fonction_terme.ensembles_fonction_terme import _inst_axiome
     inst = _inst_axiome(one, vv, vz, "u", "y")        # z∈G_v ⇔ (∃u)(∃y)(z=(u,y) et u∈{∅} et y=v)
     body = et(et(egal(vz, E.couple(vu, vy)), appartient(vu, one)), egal(vy, vv))
     h_vA = N.assume(appartient(vv, vA))               # v∈A
@@ -315,7 +315,7 @@ def gv_membre(v="c", z="z", cu="cu", cy="cy"):
     one = UN_SOURCE()
     G = _gv(v)
     vcu, vcy = var(cu), var(cy)
-    from bourbaki.ensembles.fonctions.ensembles_fonction_terme import _inst_axiome
+    from bourbaki.ensembles.fonctions.ii_3_6_fonction_terme.ensembles_fonction_terme import _inst_axiome
     inst = _inst_axiome(one, vv, vz, cu, cy)    # z∈G_v ⇔ (∃cu)(∃cy)(z=(cu,cy) et cu∈{∅} et cy=v)
     body = et(et(egal(vz, E.couple(vcu, vcy)), appartient(vcu, one)), egal(vcy, vv))
     z_eq = egal(vz, E.couple(E.VIDE, vv))       # z=(∅,v)

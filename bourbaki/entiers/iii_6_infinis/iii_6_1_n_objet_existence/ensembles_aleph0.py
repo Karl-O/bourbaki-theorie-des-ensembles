@@ -80,7 +80,7 @@ from bourbaki.ensembles.base.ensembles_couples import singleton_membre
 from bourbaki.ensembles.ensembles_theoremes import extensionnalite_appliquee
 
 # ── infra GRAPHE D'UN TERME (lemmes de base ; on RECONSTRUIT les dérivés capture-safe) ──
-from bourbaki.ensembles.fonctions.ensembles_fonction_terme import membre_graphe_terme
+from bourbaki.ensembles.fonctions.ii_3_6_fonction_terme.ensembles_fonction_terme import membre_graphe_terme
 
 # ── briques CLOSES réutilisées ───────────────────────────────────────────────
 from bourbaki.entiers.iii_6_infinis.iii_6_1_n_objet_existence.ensembles_ensemble_NN import (

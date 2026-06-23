@@ -227,7 +227,7 @@ def temoin_majore_membre(E_set="E", C="Cch", p="pmemb"):
     p∈𝔉(E) (membre du poset — vrai car C⊂𝔉, non déchargé ici pour C abstraite),
     m∈𝔉(E) (= `union_chaine_dans_frame`, sous SES propres hyps honnêtes pour C
     abstraite).  Conclusion ∉ hyps ; theorie=22."""
-    from bourbaki.ensembles.fonctions.ensembles_projections import (
+    from bourbaki.ensembles.fonctions.hors_ii_3.ii_2_projections.ensembles_projections import (
         projection_premiere, projection_seconde,
     )
     from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie

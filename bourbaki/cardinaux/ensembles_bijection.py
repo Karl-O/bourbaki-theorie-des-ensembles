@@ -19,10 +19,10 @@ from bourbaki.logique.tactiques.tactiques_abrege2 import (conjonction_intro, con
 from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie, composer_egalites, congruence_terme
 from bourbaki.logique.tactiques.tactiques_abrege_quantif import (congruence_existe, existe_elimination, alpha_existe,
                                       et_existe_droite, existe_commute)
-from bourbaki.ensembles.fonctions.ensembles_reciproque import couple_reciproque
-from bourbaki.ensembles.fonctions.ensembles_fonctions import valeur_caracterisation, valeur_dans_graphe
-from bourbaki.ensembles.fonctions.ensembles_fonctions_composee import composee_fonctionnelle, composition_valeur
-from bourbaki.ensembles.fonctions.ensembles_composee import couple_composee, image_composee
+from bourbaki.ensembles.fonctions.ii_3_2_reciproque.ensembles_reciproque import couple_reciproque
+from bourbaki.ensembles.fonctions.ii_3_4_fonctions_valeur.ensembles_fonctions import valeur_caracterisation, valeur_dans_graphe
+from bourbaki.ensembles.fonctions.ii_3_7_composee_fonctions.ensembles_fonctions_composee import composee_fonctionnelle, composition_valeur
+from bourbaki.ensembles.fonctions.ii_3_3_composee_graphes.ensembles_composee import couple_composee, image_composee
 from bourbaki.ensembles.ensembles_theoremes import egalite_par_extension
 from bourbaki.logique.formule import Terme
 

@@ -643,7 +643,7 @@ def couverture_segment_realise(vh, e="E", G="G", x="x0", V="Vval", y="ytf",
     # z∈dom(p) ⇒ (∃y)((z,y)∈p) ⇒ (z, valeur(p,z))∈p
     car_dom_pc = instancie(instancie(ax_dom, vpc), vz)                 # z∈dom p ⇔ (∃y)((z,y)∈p)
     ex_y_pc = N.modus_ponens(z_in_dpc, equivalence_avant(car_dom_pc))  # (∃y)((z,y)∈p)
-    from bourbaki.ensembles.fonctions.ensembles_fonctions import valeur_dans_graphe
+    from bourbaki.ensembles.fonctions.ii_3_4_fonctions_valeur.ensembles_fonctions import valeur_dans_graphe
     zvz_in_pc = N.modus_ponens(ex_y_pc, N.loi_deduction(
         existe("y", appartient(E.couple(vz, var("y")), vpc)),
         valeur_dans_graphe(vpc, vz)))                                  # (z,valeur(p,z))∈p

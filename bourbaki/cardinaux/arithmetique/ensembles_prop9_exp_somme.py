@@ -63,12 +63,12 @@ from bourbaki.cardinaux.ensembles_cardinaux import cardinal
 from bourbaki.ensembles.familles.ensembles_somme_disjointe import (
     somme_disjointe, ZERO, UN)
 # Infra restriction par GRAPHE-TERME (C54) :
-from bourbaki.ensembles.fonctions.ensembles_fonction_terme import (
+from bourbaki.ensembles.fonctions.ii_3_6_fonction_terme.ensembles_fonction_terme import (
     graphe_terme_fonctionnel)
 from bourbaki.cardinaux.ensembles_cantor import (
     graphe_terme_domaine, graphe_terme_valeur)
 # Infra RECOLLEMENT (round 25) :
-from bourbaki.ensembles.fonctions.ensembles_restriction_somme import (
+from bourbaki.ensembles.fonctions.hors_ii_3.iii_3_recollement.ensembles_restriction_somme import (
     recollement, reunion_graphes_fonctionnelle, domaines_disjoints_si_marques)
 
 

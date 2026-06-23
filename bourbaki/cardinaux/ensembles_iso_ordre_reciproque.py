@@ -50,8 +50,8 @@ from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis.ensembles_ordre_vocab i
     isomorphisme_ordre_est_bijection, isomorphisme_ordre_compatible)
 from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de
 from bourbaki.cardinaux.ensembles_bijection import reciproque_est_bijection
-from bourbaki.ensembles.fonctions.ensembles_reciproque import couple_reciproque
-from bourbaki.ensembles.fonctions.ensembles_fonctions import valeur_dans_graphe
+from bourbaki.ensembles.fonctions.ii_3_2_reciproque.ensembles_reciproque import couple_reciproque
+from bourbaki.ensembles.fonctions.ii_3_4_fonctions_valeur.ensembles_fonctions import valeur_dans_graphe
 from bourbaki.ordre.iii_1_relations_ordre.isomorphismes_ordre.ensembles_valeur_bridge import valeur_j_egal_y, valeur_y_egal_j
 
 

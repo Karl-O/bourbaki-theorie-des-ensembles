@@ -4,7 +4,7 @@ from __future__ import annotations
 from bourbaki.logique.formule import var, egal, et, impl, appartient, existe, pourtout
 from bourbaki.ensembles.ensembles_abrege import (est_fonctionnel, est_un_graphe,
                                                  dom, valeur, couple)
-from bourbaki.ensembles.fonctions.ensembles_extensionnalite import (
+from bourbaki.ensembles.fonctions.ii_3_general.ensembles_extensionnalite import (
     couple_dans_dom, egalite_valeurs, graphe_egal_par_valeurs)
 
 

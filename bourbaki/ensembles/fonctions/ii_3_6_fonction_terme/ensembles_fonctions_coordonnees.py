@@ -31,7 +31,7 @@ from __future__ import annotations
 
 from bourbaki.logique.formule import var
 from bourbaki.ensembles import ensembles_abrege as E
-from bourbaki.ensembles.fonctions.ensembles_fonction_terme import (
+from bourbaki.ensembles.fonctions.ii_3_6_fonction_terme.ensembles_fonction_terme import (
     graphe_terme_fonctionnel)
 
 

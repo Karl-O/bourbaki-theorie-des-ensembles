@@ -3,7 +3,7 @@ from __future__ import annotations
 
 from bourbaki.logique.formule import var, equiv, egal, et, appartient, existe
 from bourbaki.ensembles.ensembles_abrege import couple, composee, image
-from bourbaki.ensembles.fonctions.ensembles_composee import couple_composee, image_composee
+from bourbaki.ensembles.fonctions.ii_3_3_composee_graphes.ensembles_composee import couple_composee, image_composee
 
 
 def test_couple_composee():

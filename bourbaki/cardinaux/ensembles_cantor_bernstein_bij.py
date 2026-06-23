@@ -63,8 +63,8 @@ from bourbaki.logique.tactiques.tactiques_abrege2 import (
 from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie, composer_egalites
 from bourbaki.logique.tactiques.tactiques_abrege_quantif import (
     existe_elimination, congruence_existe, alpha_existe, et_existe_droite)
-from bourbaki.ensembles.fonctions.ensembles_restrictions import couple_restriction
-from bourbaki.ensembles.fonctions.ensembles_fonctions import (
+from bourbaki.ensembles.fonctions.ii_3_5_restrictions_prolongements.ensembles_restrictions import couple_restriction
+from bourbaki.ensembles.fonctions.ii_3_4_fonctions_valeur.ensembles_fonctions import (
     valeur_caracterisation, valeur_dans_graphe)
 from bourbaki.ensembles.ensembles_theoremes import egalite_par_extension
 
@@ -332,7 +332,7 @@ def morceau_fD(a="A", b="B", f="f", g="g"):
 
 def _restriction_incluse_terme(f, x):
     """⊢ f|X ⊂ F  pour des TERMES f, x quelconques."""
-    from bourbaki.ensembles.fonctions.ensembles_restrictions import restriction_incluse
+    from bourbaki.ensembles.fonctions.ii_3_5_restrictions_prolongements.ensembles_restrictions import restriction_incluse
     th = restriction_incluse("F", "X")            # clos : ⊢ f|X⊂F
     th = instancie(N.generalisation("F", th), _t(f))
     th = instancie(N.generalisation("X", th), _t(x))

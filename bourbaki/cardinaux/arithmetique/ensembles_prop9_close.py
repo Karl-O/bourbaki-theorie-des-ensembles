@@ -65,13 +65,13 @@ from bourbaki.cardinaux.ensembles_cardinaux import (
     cardinal, est_injection_de, inf_egal_card, equipotent)
 from bourbaki.cardinaux.arithmetique.ensembles_graphe_de import (
     graphe_de, graphe_de_triple)
-from bourbaki.ensembles.fonctions.ensembles_valeur_codomaine import (
+from bourbaki.ensembles.fonctions.ii_3_4_fonctions_valeur.ensembles_valeur_codomaine import (
     couple_valeur_dans_graphe, valeur_dans_codomaine)
 from bourbaki.ensembles.familles.ensembles_somme_disjointe import (
     somme_disjointe, ZERO, UN,
     injection_gauche_dans_somme, injection_droite_dans_somme,
     membre_somme_caracterise)
-from bourbaki.ensembles.fonctions.ensembles_fonction_terme import (
+from bourbaki.ensembles.fonctions.ii_3_6_fonction_terme.ensembles_fonction_terme import (
     graphe_terme_fonctionnel, membre_graphe_terme)
 from bourbaki.cardinaux.ensembles_cantor import (
     graphe_terme_domaine, graphe_terme_valeur)
@@ -811,7 +811,7 @@ def _graphe_de_egal(vf1, vf2, va, vb, vc):
     (_phi_egal_donne_restrictions) ⇒ valeurs de Gᵢ coïncident sur B⊔C
     (_valeurs_coincident_sur_somme) ; Gᵢ fonctionnel/graphe, dom Gᵢ=B⊔C
     (_graphe_de_proprietes) ; graphe_egal_par_valeurs conclut G₁=G₂."""
-    from bourbaki.ensembles.fonctions.ensembles_extensionnalite import graphe_egal_par_valeurs
+    from bourbaki.ensembles.fonctions.ii_3_general.ensembles_extensionnalite import graphe_egal_par_valeurs
     G1, G2 = graphe_de(vf1), graphe_de(vf2)
     BC = somme_disjointe(vb, vc)
     # RG/RD coïncident, puis valeurs coïncident sur B⊔C
@@ -848,7 +848,7 @@ def _graphe_de_egal(vf1, vf2, va, vb, vc):
 
 def _egalite_valeurs(vf, vg, x="x"):
     """(∀x)(x∈dom F ⇒ F(x)=G(x))  — réexposé de extensionnalite.egalite_valeurs."""
-    from bourbaki.ensembles.fonctions.ensembles_extensionnalite import egalite_valeurs
+    from bourbaki.ensembles.fonctions.ii_3_general.ensembles_extensionnalite import egalite_valeurs
     return egalite_valeurs(vf, vg, x)
 
 
@@ -1070,7 +1070,7 @@ def K_fonctionnelle(g="g", h="h", b="B", c="C"):
     reunion_graphes_fonctionnelle (PIVOT) sous {K_g func, K_h func, (∀u)¬(u∈dom K_g
     et u∈dom K_h)} ; la disjonction vient de domaines_disjoints_si_marques car
     dom K_g=B×{0}, dom K_h=C×{1} (équivaut à inclusion)."""
-    from bourbaki.ensembles.fonctions.ensembles_restriction_somme import (
+    from bourbaki.ensembles.fonctions.hors_ii_3.iii_3_recollement.ensembles_restriction_somme import (
         reunion_graphes_fonctionnelle, domaines_disjoints_si_marques)
     vg, vh, vb, vc = _t(g), _t(h), _t(b), _t(c)
     Kg, Kh = K_gauche(vg, vb), K_droite(vh, vc)
@@ -1092,7 +1092,7 @@ def K_fonctionnelle(g="g", h="h", b="B", c="C"):
 
 def K_domaine(g="g", h="h", b="B", c="C"):
     """⊢ dom(K) = B⊔C.   dom K = dom K_g ∪ dom K_h = B×{0} ∪ C×{1} = B⊔C."""
-    from bourbaki.ensembles.fonctions.ensembles_restriction_somme import dom_reunion_graphes
+    from bourbaki.ensembles.fonctions.hors_ii_3.iii_3_recollement.ensembles_restriction_somme import dom_reunion_graphes
     vg, vh, vb, vc = _t(g), _t(h), _t(b), _t(c)
     Kg, Kh = K_gauche(vg, vb), K_droite(vh, vc)
     BC = somme_disjointe(vb, vc)
@@ -1223,7 +1223,7 @@ def K_droite_inclus(h="h", a="A", b="B", c="C"):
 def K_inclus(g="g", h="h", a="A", b="B", c="C"):
     """{ graphe_de(g)⊂B×A, dom graphe_de(g)=B, graphe_de(h)⊂C×A, dom graphe_de(h)=C }
         ⊢ K ⊂ (B⊔C)×A.    (z∈K_g∪K_h ⇒ z∈K_g ou z∈K_h ⇒ z∈(B⊔C)×A.)"""
-    from bourbaki.ensembles.fonctions.ensembles_restriction_somme import membre_reunion_graphes
+    from bourbaki.ensembles.fonctions.hors_ii_3.iii_3_recollement.ensembles_restriction_somme import membre_reunion_graphes
     vg, vh, va, vb, vc = _t(g), _t(h), _t(a), _t(b), _t(c)
     Kg, Kh = K_gauche(vg, vb), K_droite(vh, vc)
     K = E.reunion(Kg, Kh)
@@ -1270,7 +1270,7 @@ def _graphe_de_facteur_props(vg, va, vD):
     membre_applications_b(D,A) : g∈𝓕(D;A) ⇔ (∃G)(g=((G,D),A) et G∈A^D) ; axiome_exposant
     déplie G∈A^D en (G⊂D×A et G fonct et dom G=D) ; graphe_de_triple+Leibniz ⇒
     graphe_de(g)=G ; transport des deux propriétés à graphe_de(g)."""
-    from bourbaki.ensembles.fonctions.ensembles_fonction_terme import graphe_terme_fonctionnel  # noqa
+    from bourbaki.ensembles.fonctions.ii_3_6_fonction_terme.ensembles_fonction_terme import graphe_terme_fonctionnel  # noqa
     vG = var("G")
     triple = E.couple(E.couple(vG, vD), va)
     in_exp = appartient(vG, E.exposant(vD, va))

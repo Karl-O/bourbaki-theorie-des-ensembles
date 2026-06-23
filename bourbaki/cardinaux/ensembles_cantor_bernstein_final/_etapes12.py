@@ -42,7 +42,7 @@ from bourbaki.logique.tactiques.tactiques_abrege_egalite import (
     symetrie, composer_egalites, congruence_terme)
 from bourbaki.logique.tactiques.tactiques_abrege_quantif import (
     existe_elimination, congruence_existe, alpha_existe)
-from bourbaki.ensembles.fonctions.ensembles_reciproque import couple_reciproque
+from bourbaki.ensembles.fonctions.ii_3_2_reciproque.ensembles_reciproque import couple_reciproque
 from bourbaki.ensembles.ensembles_theoremes import egalite_par_extension
 from bourbaki.cardinaux import ensembles_cantor_bernstein as CB
 from bourbaki.cardinaux.ensembles_cardinaux import (est_injection_de,
@@ -86,7 +86,7 @@ def image_reciproque_image(g="g", a="A", b="B", s="S"):
       ⇐ : u∈S ⇒ (u,g(u))∈g, g(u)∈g⟨S⟩, (g(u),u)∈g⁻¹ ⇒ u∈g⁻¹⟨g⟨S⟩⟩.
     """
     from bourbaki.cardinaux.ensembles_bijection import reciproque_fonctionnelle
-    from bourbaki.ensembles.fonctions.ensembles_fonctions import valeur_dans_graphe
+    from bourbaki.ensembles.fonctions.ii_3_4_fonctions_valeur.ensembles_fonctions import valeur_dans_graphe
     vg, vA, vB, vS = _t(g), _t(a), _t(b), _t(s)
     grec = E.reciproque(vg)
     gS = E.image(vg, vS)                      # g⟨S⟩
@@ -199,7 +199,7 @@ def _reciproque_injective_sur(g, w):
 
     Pour u,u'∈W⊂dom g⁻¹ : (u,g⁻¹(u))∈g⁻¹ → (g⁻¹(u),u)∈g (couple_reciproque) ; idem u' ;
     de g⁻¹(u)=g⁻¹(u') et g fonctionnel (même 1ère coord g⁻¹(u)) ⇒ u=u'."""
-    from bourbaki.ensembles.fonctions.ensembles_fonctions import valeur_dans_graphe
+    from bourbaki.ensembles.fonctions.ii_3_4_fonctions_valeur.ensembles_fonctions import valeur_dans_graphe
     vg, vW = _t(g), _t(w)
     grec = E.reciproque(vg)
     vu, vup = var("u"), var("up")
@@ -293,7 +293,7 @@ def morceau_gI(a="A", b="B", f="f", g="g"):
                       (E.injective_dans(vg, vB), g_injB)])  # ⊢ est_fonctionnel(g⁻¹)
 
     # A∖D ⊂ dom g⁻¹ : A∖D = g⟨B∖f⟨D⟩⟩ (pivot) ⊂ pr₂(g) = dom(g⁻¹) (image_dans_img + pr1_reciproque)
-    from bourbaki.ensembles.fonctions.ensembles_reciproque import pr1_reciproque
+    from bourbaki.ensembles.fonctions.ii_3_2_reciproque.ensembles_reciproque import pr1_reciproque
     piv = _cut(pivot_AmoinsD(a, b, f, g), [(est_injection_de(vg, vB, vA), hinj)])  # A∖D = g⟨B∖f⟨D⟩⟩
     gBfD = E.image(vg, BmfD)                            # g⟨B∖f⟨D⟩⟩
     sub_gBfD_img = _image_dans_img_terme(vg, BmfD)      # g⟨B∖f⟨D⟩⟩ ⊂ pr₂(g)

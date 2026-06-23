@@ -385,7 +385,7 @@ def sous_graphe_fonctionnel(f="F", g="G"):
 def restriction_fonctionnelle(f="F", x="X"):
     """⊢ est_fonctionnel(F) ⇒ est_fonctionnel(f|X).   (toute restriction d'une
     fonction est une fonction : f|X ⊂ F (restriction_incluse) + sous_graphe.)"""
-    from bourbaki.ensembles.fonctions.ensembles_restrictions import restriction_incluse
+    from bourbaki.ensembles.fonctions.ii_3_5_restrictions_prolongements.ensembles_restrictions import restriction_incluse
     vF, vX = _t(f), _t(x)
     fX = E.restriction(vF, vX)
     sgf = sous_graphe_fonctionnel(vF, fX)                       # (func F et f|X⊂F) ⇒ func f|X

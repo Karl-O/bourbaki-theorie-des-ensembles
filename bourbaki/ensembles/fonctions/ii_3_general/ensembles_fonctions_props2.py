@@ -56,8 +56,8 @@ from bourbaki.logique.tactiques.tactiques_abrege_quantif import (congruence_exis
                                existe_elimination)
 from bourbaki.ensembles.base.ensembles_correspondances import _inst_image
 from bourbaki.ensembles.base.ensembles_couples import membre_paire_gauche, singleton_membre
-from bourbaki.ensembles.fonctions.ensembles_composee import couple_composee
-from bourbaki.ensembles.fonctions.ensembles_fonctions import valeur_caracterisation
+from bourbaki.ensembles.fonctions.ii_3_3_composee_graphes.ensembles_composee import couple_composee
+from bourbaki.ensembles.fonctions.ii_3_4_fonctions_valeur.ensembles_fonctions import valeur_caracterisation
 
 
 def _T(v):

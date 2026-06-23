@@ -1,7 +1,7 @@
 """Tests — GAP A : corollaires dom/image set-equality d'une réunion de graphes."""
 from bourbaki.ensembles import ensembles_abrege as E
 from bourbaki.logique.formule import egal, var
-from bourbaki.ensembles.fonctions.ensembles_dom_image_reunion import (
+from bourbaki.ensembles.fonctions.hors_ii_3.iii_3_recollement.ensembles_dom_image_reunion import (
     dom_reunion_graphes, image_reunion_graphes,
     dom_reunion_egale_cible, dom_reunion_egale_cible_enonce,
     image_reunion_egale_cible, image_reunion_egale_cible_enonce,

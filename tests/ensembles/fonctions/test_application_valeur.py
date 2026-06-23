@@ -14,7 +14,7 @@ conditionnelles : .hypotheses non vide, donc PAS .est_clos).
 from bourbaki.logique.formule import var, egal, et, impl, appartient, pourtout
 from bourbaki.ensembles import ensembles_abrege as E
 from bourbaki.cardinaux.arithmetique.ensembles_graphe_de import graphe_de
-from bourbaki.ensembles.fonctions import ensembles_application_valeur as M
+from bourbaki.ensembles.fonctions.hors_ii_3.ii_5_produit_famille import ensembles_application_valeur as M
 
 
 def _F(e, f):

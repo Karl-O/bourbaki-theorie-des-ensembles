@@ -21,7 +21,7 @@ from bourbaki.logique.tactiques.tactiques_abrege_egalite import (
     symetrie, composer_egalites)
 from bourbaki.logique.tactiques.tactiques_abrege2 import (
     equivalence_avant, instancie)
-from bourbaki.ensembles.fonctions.ensembles_fonctions import valeur_dans_graphe
+from bourbaki.ensembles.fonctions.ii_3_4_fonctions_valeur.ensembles_fonctions import valeur_dans_graphe
 from bourbaki.cardinaux.arithmetique.ensembles_transposition._membre import (
     transpo, transpo_membre)
 from bourbaki.cardinaux.arithmetique.ensembles_transposition._bijection import (

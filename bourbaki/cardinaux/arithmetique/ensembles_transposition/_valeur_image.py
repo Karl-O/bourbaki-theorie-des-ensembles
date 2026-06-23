@@ -23,7 +23,7 @@ from bourbaki.logique.tactiques.tactiques_abrege2 import (
 from bourbaki.logique.tactiques.tactiques_abrege_egalite import (
     symetrie, composer_egalites)
 from bourbaki.logique.tactiques.tactiques_abrege_quantif import existe_elimination
-from bourbaki.ensembles.fonctions.ensembles_fonctions import valeur_caracterisation
+from bourbaki.ensembles.fonctions.ii_3_4_fonctions_valeur.ensembles_fonctions import valeur_caracterisation
 from bourbaki.ensembles.ensembles_theoremes import egalite_par_extension
 from bourbaki.cardinaux.arithmetique.ensembles_transposition._membre import (
     transpo, transpo_membre)

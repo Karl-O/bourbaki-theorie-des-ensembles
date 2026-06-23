@@ -294,10 +294,10 @@ def phi_etendue_bijection(phi0="phi0", psi="psi", S="S0", U="Ucadre"):
     sont portés en HYPOTHÈSES HONNÊTES (pont couple→égalité-d'ensembles absent du dépôt
     pour S₀²⊔F=Z² et S₀∪U=Z ; jamais postulées vraies).  Conclusion ∉ hyps ; theorie=22.
     """
-    from bourbaki.ensembles.fonctions.ensembles_restriction_somme import (
+    from bourbaki.ensembles.fonctions.hors_ii_3.iii_3_recollement.ensembles_restriction_somme import (
         reunion_graphes_fonctionnelle,
     )
-    from bourbaki.ensembles.fonctions.ensembles_recollement_bijection import (
+    from bourbaki.ensembles.fonctions.hors_ii_3.iii_3_recollement.ensembles_recollement_bijection import (
         reunion_graphes_injective,
     )
     vphi0, vpsi = _t(phi0), _t(psi)
@@ -321,10 +321,10 @@ def phi_etendue_bijection(phi0="phi0", psi="psi", S="S0", U="Ucadre"):
     #   GLOBAL est ainsi FERMÉ (lemmes généraux clos) ; ne subsistent que ces hyps
     #   structurelles (dom/image des bijections-témoins, identités géométriques),
     #   genuinement honnêtes (fournies par l'argument de Zorn E.III.48).
-    from bourbaki.ensembles.fonctions.ensembles_dom_image_reunion import (
+    from bourbaki.ensembles.fonctions.hors_ii_3.iii_3_recollement.ensembles_dom_image_reunion import (
         dom_reunion_egale_cible, image_reunion_egale_cible,
     )
-    from bourbaki.ensembles.fonctions.ensembles_restriction_somme import dom_reunion_graphes
+    from bourbaki.ensembles.fonctions.hors_ii_3.iii_3_recollement.ensembles_restriction_somme import dom_reunion_graphes
     Fcadre = cadre_ensemble(S, U)                           # F = cadre Z²∖S₀²
     SxS = E.produit(vS, vS)
     domG, domH = E.dom(vphi0), E.dom(vpsi)
@@ -440,7 +440,7 @@ def extension_ordre(E_set="E", phi0="phi0", psi="psi", S="S0", U="Ucadre"):
     from bourbaki.cardinaux.ensembles_frame_ordre_axiome import (
         theorie_frame_ordre, axiome_frame_ordre,
     )
-    from bourbaki.ensembles.fonctions.ensembles_projections import (
+    from bourbaki.ensembles.fonctions.hors_ii_3.ii_2_projections.ensembles_projections import (
         projection_premiere, projection_seconde,
     )
     vE, vphi0, vpsi = _t(E_set), _t(phi0), _t(psi)
@@ -488,7 +488,7 @@ def extension_ordre(E_set="E", phi0="phi0", psi="psi", S="S0", U="Ucadre"):
 
 def projection_premiere_t(ta, tb):
     """⊢ pr₁((a,b)) = a  pour TERMES a,b (généralise projection_premiere aux termes)."""
-    from bourbaki.ensembles.fonctions.ensembles_projections import projection_premiere
+    from bourbaki.ensembles.fonctions.hors_ii_3.ii_2_projections.ensembles_projections import projection_premiere
     base = projection_premiere("apr", "bpr")               # pr₁((apr,bpr))=apr
     gen = N.generalisation("apr", N.generalisation("bpr", base))
     return instancie(instancie(gen, _t(ta)), _t(tb))
@@ -496,7 +496,7 @@ def projection_premiere_t(ta, tb):
 
 def projection_seconde_t(ta, tb):
     """⊢ pr₂((a,b)) = b  pour TERMES a,b."""
-    from bourbaki.ensembles.fonctions.ensembles_projections import projection_seconde
+    from bourbaki.ensembles.fonctions.hors_ii_3.ii_2_projections.ensembles_projections import projection_seconde
     base = projection_seconde("apr", "bpr")
     gen = N.generalisation("apr", N.generalisation("bpr", base))
     return instancie(instancie(gen, _t(ta)), _t(tb))

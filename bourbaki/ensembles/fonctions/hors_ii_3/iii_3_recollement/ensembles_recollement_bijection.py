@@ -32,9 +32,9 @@ from bourbaki.logique.tactiques.tactiques_abrege2 import (
     equivalence_avant, equivalence_arriere, instancie, cas)
 from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie, composer_egalites
 from bourbaki.logique.tactiques.tactiques_abrege_quantif import existe_elimination
-from bourbaki.ensembles.fonctions.ensembles_fonctions import (
+from bourbaki.ensembles.fonctions.ii_3_4_fonctions_valeur.ensembles_fonctions import (
     valeur_caracterisation, valeur_dans_graphe)
-from bourbaki.ensembles.fonctions.ensembles_restriction_somme import (
+from bourbaki.ensembles.fonctions.hors_ii_3.iii_3_recollement.ensembles_restriction_somme import (
     membre_reunion_graphes, reunion_graphes_fonctionnelle)
 
 
@@ -157,7 +157,7 @@ def image_reunion_graphes(g="G", h="H"):
     Double inclusion (membre à membre) via AXIOME_IMAGE + membre_reunion_graphes
     (domaine ET graphe).  Inconditionnel (pur calcul de réunion) : un (x,v)∈G a
     x∈domG (antecedent_dans_domaine), donc les termes croisés se résorbent."""
-    from bourbaki.ensembles.fonctions.ensembles_restriction_somme import antecedent_dans_domaine
+    from bourbaki.ensembles.fonctions.hors_ii_3.iii_3_recollement.ensembles_restriction_somme import antecedent_dans_domaine
     vg, vh = _t(g), _t(h)
     vv, vx = var("z"), var("x")     # élément « z » (= liant de inclus/A1), antécédent « x »
     GuH = E.reunion(vg, vh)
@@ -262,7 +262,7 @@ def reunion_graphes_injective(g="G", h="H"):
     Pour u,u'∈domG∪domH avec (G∪H)(u)=(G∪H)(u'), cas sur domG/domH : même côté ⇒
     (G∪H) coïncide avec G (ou H) + injectivité du côté ⇒ u=u' ; côtés différents ⇒
     valeur commune dans image(G,domG)∩image(H,domH)=∅ ⇒ ex falso."""
-    from bourbaki.ensembles.fonctions.ensembles_restriction_somme import antecedent_dans_domaine
+    from bourbaki.ensembles.fonctions.hors_ii_3.iii_3_recollement.ensembles_restriction_somme import antecedent_dans_domaine
     vg, vh = _t(g), _t(h)
     vu, vup = var("u"), var("up")
     GuH = E.reunion(vg, vh)

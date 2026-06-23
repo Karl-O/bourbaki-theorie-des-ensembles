@@ -75,10 +75,10 @@ from bourbaki.cardinaux.ensembles_segments_construction import seg as _seg
 from bourbaki.ensembles.base.ensembles_couples import (
     singleton_membre, membre_paire_gauche, couple_egal_implique_composantes,
 )
-from bourbaki.ensembles.fonctions.ensembles_restriction_somme import (
+from bourbaki.ensembles.fonctions.hors_ii_3.iii_3_recollement.ensembles_restriction_somme import (
     membre_reunion_graphes, reunion_graphes_fonctionnelle, antecedent_dans_domaine,
 )
-from bourbaki.ensembles.fonctions.ensembles_recollement_bijection import (
+from bourbaki.ensembles.fonctions.hors_ii_3.iii_3_recollement.ensembles_recollement_bijection import (
     valeur_reunion_gauche, valeur_reunion_droite,
 )
 
@@ -496,7 +496,7 @@ def valeur_temoin_en_a_sous_a_hors(E_set="E", R="R", F_set="F", Rp="Rp", a="a", 
 
 def _valeur_graphe_point_en_a(a, b):
     """⊢ valeur( {(a,b)}, a ) = b.   ({(a,b)} fonctionnel, (a,a-value)=b par unicité.)"""
-    from bourbaki.ensembles.fonctions.ensembles_fonctions import (
+    from bourbaki.ensembles.fonctions.ii_3_4_fonctions_valeur.ensembles_fonctions import (
         valeur_caracterisation, valeur_dans_graphe)
     from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie
     va, vb = _t(a), _t(b)

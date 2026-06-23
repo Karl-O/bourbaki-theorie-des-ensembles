@@ -177,7 +177,7 @@ def rho_fonctionnel(x="X"):
 
     Le sens facile est une vraie FONCTION : à chaque f∈𝓕(X;2) il associe UNE partie
     Pre(f)=f⁻¹(1).  Fonctionnalité automatique du graphe-terme (graphe_terme_fonctionnel)."""
-    from bourbaki.ensembles.fonctions.ensembles_fonction_terme import graphe_terme_fonctionnel
+    from bourbaki.ensembles.fonctions.ii_3_6_fonction_terme.ensembles_fonction_terme import graphe_terme_fonctionnel
     vX = _t(x)
     return graphe_terme_fonctionnel(_SOURCE(vX), preimage_un(var("f"), vX), "f", "y")
 

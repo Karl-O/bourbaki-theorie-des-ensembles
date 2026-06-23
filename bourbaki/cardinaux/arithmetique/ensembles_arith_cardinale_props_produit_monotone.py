@@ -47,7 +47,7 @@ from bourbaki.logique.tactiques.tactiques_abrege2 import (conjonction_intro,
                                equivalence_transitivite, instancie)
 from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie
 from bourbaki.logique.tactiques.tactiques_abrege_quantif import (existe_elimination, alpha_existe)
-from bourbaki.ensembles.fonctions.ensembles_fonction_terme import membre_graphe_terme
+from bourbaki.ensembles.fonctions.ii_3_6_fonction_terme.ensembles_fonction_terme import membre_graphe_terme
 from bourbaki.ensembles.familles.ensembles_produit import couple_dans_produit_ssi
 from bourbaki.cardinaux.arithmetique.ensembles_produit_commute import (_membre_produit_pr1_ab,
                                        _membre_produit_pr2_ab)

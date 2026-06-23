@@ -64,7 +64,7 @@ from bourbaki.logique.tactiques.tactiques_abrege_quantif import existe_eliminati
 from bourbaki.ensembles.familles.ensembles_somme_disjointe import ZERO, UN, somme_disjointe
 from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de, equipotent
 from bourbaki.cardinaux.ensembles_composee_bijection import composee_bijection
-from bourbaki.ensembles.fonctions.ensembles_composee_valeurs import composition_valeur_t
+from bourbaki.ensembles.fonctions.ii_3_8_retractions_sections.ensembles_composee_valeurs import composition_valeur_t
 from bourbaki.cardinaux.arithmetique.ensembles_prop8_coeur import eq_cas_fixe_implique_eq
 from bourbaki.cardinaux.arithmetique.ensembles_prop8_coeur._marqueurs import m_dans_AS
 from bourbaki.cardinaux.arithmetique.ensembles_copie_marquee import (
@@ -186,7 +186,7 @@ def h2_fixe_le_marqueur(a="A", b="B", h=_H, tau=_TAU):
     trois hypothèses (les deux domaines depuis dom h=A⊔{∅}, image h=B⊔{∅}, dom τ=
     B⊔{∅} ; la fonctionnalité de τ∘h depuis h,τ fonctionnels par composee_fonctionnelle),
     puis τ(h(*))=* (HT) réécrit le membre droit en *."""
-    from bourbaki.ensembles.fonctions.ensembles_fonctions_composee import composee_fonctionnelle
+    from bourbaki.ensembles.fonctions.ii_3_7_composee_fonctions.ensembles_fonctions_composee import composee_fonctionnelle
     vh, vtau = _t(h), _t(tau)
     AS, BS = _AS(a), _BS(b)
     hstar = E.valeur(vh, _STAR)

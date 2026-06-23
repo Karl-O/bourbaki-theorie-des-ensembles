@@ -30,9 +30,9 @@ from bourbaki.cardinaux.ensembles_cardinaux import (est_injection_de,
 from bourbaki.cardinaux.ensembles_cantor_bernstein_bij import morceau_fD
 from bourbaki.cardinaux.ensembles_cantor_bernstein_fin import (
     partie_disjoint_complement, partie_reunion_complement)
-from bourbaki.ensembles.fonctions.ensembles_restriction_somme import (
+from bourbaki.ensembles.fonctions.hors_ii_3.iii_3_recollement.ensembles_restriction_somme import (
     dom_reunion_graphes, reunion_graphes_fonctionnelle)
-from bourbaki.ensembles.fonctions.ensembles_recollement_bijection import (
+from bourbaki.ensembles.fonctions.hors_ii_3.iii_3_recollement.ensembles_recollement_bijection import (
     image_reunion_graphes, reunion_graphes_injective)
 from ._etapes12 import morceau_gI
 

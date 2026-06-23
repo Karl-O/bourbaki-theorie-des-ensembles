@@ -42,7 +42,7 @@ from bourbaki.ensembles.base.ensembles_couples import (singleton_membre, membre_
                                   couple_egal_implique_composantes)
 from bourbaki.ensembles.familles.ensembles_produit import (_instance_produit,
                                   couple_dans_produit_ssi)
-from bourbaki.ensembles.fonctions.ensembles_fonctions import valeur_dans_graphe
+from bourbaki.ensembles.fonctions.ii_3_4_fonctions_valeur.ensembles_fonctions import valeur_dans_graphe
 from bourbaki.cardinaux.ensembles_cardinaux import cardinal
 
 

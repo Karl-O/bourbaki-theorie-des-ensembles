@@ -35,10 +35,10 @@ from bourbaki.logique.tactiques.tactiques_abrege_egalite import (
 )
 
 # ré-export des lemmes généraux (un seul point d'import pour l'appelant)
-from bourbaki.ensembles.fonctions.ensembles_restriction_somme import (
+from bourbaki.ensembles.fonctions.hors_ii_3.iii_3_recollement.ensembles_restriction_somme import (
     dom_reunion_graphes,
 )
-from bourbaki.ensembles.fonctions.ensembles_recollement_bijection import (
+from bourbaki.ensembles.fonctions.hors_ii_3.iii_3_recollement.ensembles_recollement_bijection import (
     image_reunion_graphes,
 )
 

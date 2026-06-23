@@ -56,9 +56,9 @@ from bourbaki.logique.tactiques.tactiques_abrege_quantif import existe_eliminati
 
 from bourbaki.ensembles.ensembles_theoremes import egalite_par_extension
 from bourbaki.ensembles.base.ensembles_couples import couple_egal_implique_composantes
-from bourbaki.ensembles.fonctions.ensembles_fonction_terme import (
+from bourbaki.ensembles.fonctions.ii_3_6_fonction_terme.ensembles_fonction_terme import (
     membre_graphe_terme, graphe_terme_fonctionnel)
-from bourbaki.ensembles.fonctions.ensembles_fonctions import valeur_caracterisation
+from bourbaki.ensembles.fonctions.ii_3_4_fonctions_valeur.ensembles_fonctions import valeur_caracterisation
 
 from bourbaki.cardinaux.ensembles_cardinaux import (
     cardinal, inf_egal_card, est_injection_de)

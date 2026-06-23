@@ -56,14 +56,14 @@ from bourbaki.logique.tactiques.tactiques_abrege2 import (conjonction_intro, con
                                instancie, cas)
 from bourbaki.logique.tactiques.tactiques_abrege_egalite import (symetrie, composer_egalites, congruence_terme)
 from bourbaki.logique.tactiques.tactiques_abrege_quantif import (existe_elimination, alpha_existe)
-from bourbaki.ensembles.fonctions.ensembles_fonction_terme import membre_graphe_terme, graphe_terme_fonctionnel
+from bourbaki.ensembles.fonctions.ii_3_6_fonction_terme.ensembles_fonction_terme import membre_graphe_terme, graphe_terme_fonctionnel
 from bourbaki.cardinaux.ensembles_cantor import (graphe_terme_domaine, graphe_terme_valeur)
 from bourbaki.ensembles.familles.ensembles_somme_disjointe import (somme_disjointe, ZERO, UN,
                                        injection_gauche_dans_somme,
                                        injection_droite_dans_somme)
 from bourbaki.cardinaux.arithmetique.ensembles_produit_commute import (_projection_premiere_ab, _projection_seconde_ab)
 from bourbaki.cardinaux.ensembles_vide_singleton import vide_distinct_singleton
-from bourbaki.ensembles.fonctions.ensembles_fonctions import valeur_caracterisation
+from bourbaki.ensembles.fonctions.ii_3_4_fonctions_valeur.ensembles_fonctions import valeur_caracterisation
 from bourbaki.ensembles.base.ensembles_couples import couple_egal_implique_composantes
 
 
@@ -204,7 +204,7 @@ def _selecteur_valeur(f, g, w, gauche=True):
     # (∀c)(cond0 ⇔ (c=val))  → τc(cond0) = τc(c=val) = val
     gen = N.generalisation("c", chain)
     tau_eq = N.modus_ponens(gen, N.s7(cond0, cible_eq, "c"))   # τc(cond0)=τc(c=val)
-    from bourbaki.ensembles.fonctions.ensembles_projections import tau_egal
+    from bourbaki.ensembles.fonctions.hors_ii_3.ii_2_projections.ensembles_projections import tau_egal
     tau_val = N.modus_ponens(
         N.modus_ponens(N.reflexivite(val), N.s5(egal(vc, val), val, "c")),
         N.existe_temoin(egal(vc, val), "c"))                  # τc(c=val)=val
@@ -540,7 +540,7 @@ def _somme_image_backward(f, g, a, b, a1, b1, vz, K, AB, A1B1, T,
     from bourbaki.ensembles.familles.ensembles_somme_disjointe import (membre_somme_caracterise, _ou_congruence,
                                            injection_gauche_dans_somme,
                                            injection_droite_dans_somme)
-    from bourbaki.ensembles.fonctions.ensembles_fonctions import valeur_caracterisation
+    from bourbaki.ensembles.fonctions.ii_3_4_fonctions_valeur.ensembles_fonctions import valeur_caracterisation
     from bourbaki.logique.tactiques.tactiques_abrege_quantif import alpha_existe as _ax
     vF, vG = _t(f), _t(g)
     va, vb, va1, vb1 = _t(a), _t(b), _t(a1), _t(b1)
@@ -672,7 +672,7 @@ def somme_graphe_image(f="F", g="G", a="A", b="B", a1="A1", b1="B1"):
         K((a,0))=(F(a),0)=(c,0)=z ; symétrique pour z=(d,1)∈B₁ copie."""
     from bourbaki.cardinaux.arithmetique.ensembles_produit_equipotence import _valeur_dans_image, _antecedent_image
     from bourbaki.ensembles.familles.ensembles_somme_disjointe import membre_somme_caracterise, _ou_congruence
-    from bourbaki.ensembles.fonctions.ensembles_fonctions import valeur_caracterisation
+    from bourbaki.ensembles.fonctions.ii_3_4_fonctions_valeur.ensembles_fonctions import valeur_caracterisation
     from bourbaki.logique.tactiques.tactiques_abrege_quantif import alpha_existe as _ax
     vF, vG = _t(f), _t(g)
     va, vb, va1, vb1 = _t(a), _t(b), _t(a1), _t(b1)

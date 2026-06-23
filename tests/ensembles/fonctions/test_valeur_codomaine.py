@@ -3,7 +3,7 @@
 Généralisation à (x, E, F) quelconques des lemmes ∅-spécialisés de a^1=a.  On vérifie
 clôture conditionnelle (hypothèses exactes) et conclusions Bourbaki exactes.
 """
-from bourbaki.ensembles.fonctions.ensembles_valeur_codomaine import (
+from bourbaki.ensembles.fonctions.ii_3_4_fonctions_valeur.ensembles_valeur_codomaine import (
     couple_valeur_dans_graphe, valeur_dans_codomaine)
 from bourbaki.logique.formule import var, egal, appartient, inclus
 import bourbaki.ensembles.ensembles_abrege as E

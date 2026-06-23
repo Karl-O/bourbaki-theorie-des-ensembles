@@ -50,7 +50,7 @@ from bourbaki.logique.tactiques.tactiques_abrege2 import (conjonction_intro, con
 from bourbaki.logique.tactiques.tactiques_abrege_egalite import (symetrie, composer_egalites, congruence_terme)
 from bourbaki.logique.tactiques.tactiques_abrege_quantif import (existe_elimination, congruence_existe,
                                       alpha_existe)
-from bourbaki.ensembles.fonctions.ensembles_fonction_terme import membre_graphe_terme, graphe_terme_fonctionnel
+from bourbaki.ensembles.fonctions.ii_3_6_fonction_terme.ensembles_fonction_terme import membre_graphe_terme, graphe_terme_fonctionnel
 from bourbaki.cardinaux.ensembles_cantor import (graphe_terme_couple_dans, graphe_terme_domaine,
                               graphe_terme_valeur)
 from bourbaki.ensembles.ensembles_theoremes import egalite_par_extension
@@ -61,7 +61,7 @@ from bourbaki.cardinaux.arithmetique.ensembles_produit_commute import (_membre_p
                                        _couple_dans_produit_t, _inst_produit,
                                        _projection_premiere_ab, _projection_seconde_ab)
 from bourbaki.ensembles.base.ensembles_correspondances import _inst_image
-from bourbaki.ensembles.fonctions.ensembles_fonctions import valeur_dans_graphe, valeur_caracterisation
+from bourbaki.ensembles.fonctions.ii_3_4_fonctions_valeur.ensembles_fonctions import valeur_dans_graphe, valeur_caracterisation
 from bourbaki.logique.tactiques.tactiques_abrege import syllogisme as _syll
 
 

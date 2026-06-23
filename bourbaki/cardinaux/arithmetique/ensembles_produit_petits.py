@@ -42,10 +42,10 @@ from bourbaki.logique.tactiques.tactiques_abrege_quantif import (existe_eliminat
                                       congruence_existe, alpha_existe)
 from bourbaki.ensembles.base.ensembles_couples import (couple_egal_implique_composantes,
                                  singleton_membre)
-from bourbaki.ensembles.fonctions.ensembles_fonction_terme import (membre_graphe_terme,
+from bourbaki.ensembles.fonctions.ii_3_6_fonction_terme.ensembles_fonction_terme import (membre_graphe_terme,
                                           graphe_terme_fonctionnel)
 from bourbaki.cardinaux.ensembles_cantor import graphe_terme_couple_dans, graphe_terme_domaine
-from bourbaki.ensembles.fonctions.ensembles_fonctions import valeur_caracterisation
+from bourbaki.ensembles.fonctions.ii_3_4_fonctions_valeur.ensembles_fonctions import valeur_caracterisation
 from bourbaki.ensembles.ensembles_theoremes import egalite_par_extension
 from bourbaki.ensembles.familles.ensembles_produit import (couple_dans_produit_ssi,
                                     produit_vide_si)

@@ -56,8 +56,8 @@ from bourbaki.ensembles import ensembles_abrege as E
 from bourbaki.logique.tactiques.tactiques_abrege2 import instancie
 from bourbaki.logique.tactiques.tactiques_abrege_egalite import (
     symetrie, composer_egalites, congruence_terme)
-from bourbaki.ensembles.fonctions.ensembles_composee_valeurs import composition_valeur_t
-from bourbaki.ensembles.fonctions.ensembles_application_valeur import (
+from bourbaki.ensembles.fonctions.ii_3_8_retractions_sections.ensembles_composee_valeurs import composition_valeur_t
+from bourbaki.ensembles.fonctions.hors_ii_3.ii_5_produit_famille.ensembles_application_valeur import (
     application_egale_par_valeurs, egalite_valeurs_application)
 from bourbaki.cardinaux.arithmetique.ensembles_graphe_de import graphe_de
 

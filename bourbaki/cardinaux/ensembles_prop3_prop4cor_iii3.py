@@ -42,7 +42,7 @@ from bourbaki.logique import noyau_abrege as N
 from bourbaki.ensembles import ensembles_abrege as E
 from bourbaki.logique.tactiques.tactiques_abrege2 import conjonction_intro
 from bourbaki.cardinaux.ensembles_cardinaux import est_injection_de, inf_egal_card
-from bourbaki.ensembles.fonctions.ensembles_retractions import retraction_implique_injective
+from bourbaki.ensembles.fonctions.ii_3_8_retractions_sections.ensembles_retractions import retraction_implique_injective
 
 
 def _T(v):

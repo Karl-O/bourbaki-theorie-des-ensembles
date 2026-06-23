@@ -5,7 +5,7 @@ noyau abrégé.  Lemmes GÉNÉRAUX (réutilisables : Cantor–Bernstein ET Prop 
 """
 from bourbaki.logique.formule import (var, egal, et, non, appartient, pourtout)
 from bourbaki.ensembles import ensembles_abrege as E
-from bourbaki.ensembles.fonctions.ensembles_recollement_bijection import (
+from bourbaki.ensembles.fonctions.hors_ii_3.iii_3_recollement.ensembles_recollement_bijection import (
     valeur_reunion_gauche, valeur_reunion_droite,
     image_reunion_graphes, reunion_graphes_injective)
 

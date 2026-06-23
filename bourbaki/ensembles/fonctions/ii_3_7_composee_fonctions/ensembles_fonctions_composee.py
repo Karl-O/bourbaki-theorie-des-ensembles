@@ -14,8 +14,8 @@ from bourbaki.logique.tactiques.tactiques_abrege2 import (conjonction_intro, con
                                equivalence_transitivite, instancie)
 from bourbaki.logique.tactiques.tactiques_abrege_quantif import existe_elimination, alpha_existe
 from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie
-from bourbaki.ensembles.fonctions.ensembles_composee import couple_composee, _inst_composee
-from bourbaki.ensembles.fonctions.ensembles_fonctions import valeur_dans_graphe, valeur_caracterisation
+from bourbaki.ensembles.fonctions.ii_3_3_composee_graphes.ensembles_composee import couple_composee, _inst_composee
+from bourbaki.ensembles.fonctions.ii_3_4_fonctions_valeur.ensembles_fonctions import valeur_dans_graphe, valeur_caracterisation
 
 
 def _tc(t):

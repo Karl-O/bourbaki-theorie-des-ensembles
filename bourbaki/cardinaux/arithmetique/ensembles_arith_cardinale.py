@@ -201,7 +201,7 @@ def reassoc_graphe_fonctionnel(x="X", y="Y", z="Z"):
 
     Application directe de graphe_terme_fonctionnel : le graphe d'une fonction
     définie par un terme est toujours fonctionnel (E.II.46)."""
-    from bourbaki.ensembles.fonctions.ensembles_fonction_terme import graphe_terme_fonctionnel
+    from bourbaki.ensembles.fonctions.ii_3_6_fonction_terme.ensembles_fonction_terme import graphe_terme_fonctionnel
     A = E.produit(E.produit(_t(x), _t(y)), _t(z))
     return graphe_terme_fonctionnel(A, _reassoc_terme("k"), "k", "y")
 
@@ -224,7 +224,7 @@ def reassoc_graphe_valeur(x="X", y="Y", z="Z", u="u"):
     swap_graphe_valeur (graphe_terme_valeur ré-implémentée localement avec les
     liants a,b/c,d de _reassoc_terme)."""
     from bourbaki.cardinaux.ensembles_cantor import graphe_terme_couple_dans
-    from bourbaki.ensembles.fonctions.ensembles_fonctions import valeur_caracterisation
+    from bourbaki.ensembles.fonctions.ii_3_4_fonctions_valeur.ensembles_fonctions import valeur_caracterisation
     A = E.produit(E.produit(_t(x), _t(y)), _t(z))
     T = _reassoc_terme("k")
     xb = "k"
@@ -337,7 +337,7 @@ def reassoc_graphe_image(x="X", y="Y", z="Z"):
         _membre_produit_pr2_ab, _projection_premiere_ab, _projection_seconde_ab,
         _couple_dans_produit_t, _inst_produit)
     from bourbaki.ensembles.base.ensembles_couples import couple_egal_implique_composantes
-    from bourbaki.ensembles.fonctions.ensembles_fonction_terme import membre_graphe_terme
+    from bourbaki.ensembles.fonctions.ii_3_6_fonction_terme.ensembles_fonction_terme import membre_graphe_terme
     from bourbaki.ensembles.ensembles_theoremes import egalite_par_extension
     vX, vY, vZ = _t(x), _t(y), _t(z)
     XY = E.produit(vX, vY)

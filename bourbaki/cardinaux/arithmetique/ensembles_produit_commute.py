@@ -52,11 +52,11 @@ from bourbaki.logique.tactiques.tactiques_abrege2 import (conjonction_intro, con
 from bourbaki.logique.tactiques.tactiques_abrege_egalite import (symetrie, composer_egalites, congruence_terme)
 from bourbaki.logique.tactiques.tactiques_abrege_quantif import (existe_elimination, congruence_existe,
                                       alpha_existe)
-from bourbaki.ensembles.fonctions.ensembles_projections import projection_premiere, projection_seconde
+from bourbaki.ensembles.fonctions.hors_ii_3.ii_2_projections.ensembles_projections import projection_premiere, projection_seconde
 from bourbaki.ensembles.base.ensembles_couples import couple_egal_implique_composantes
-from bourbaki.ensembles.fonctions.ensembles_fonction_terme import membre_graphe_terme, graphe_terme_fonctionnel
+from bourbaki.ensembles.fonctions.ii_3_6_fonction_terme.ensembles_fonction_terme import membre_graphe_terme, graphe_terme_fonctionnel
 from bourbaki.cardinaux.ensembles_cantor import graphe_terme_couple_dans
-from bourbaki.ensembles.fonctions.ensembles_fonctions import valeur_caracterisation
+from bourbaki.ensembles.fonctions.ii_3_4_fonctions_valeur.ensembles_fonctions import valeur_caracterisation
 from bourbaki.ensembles.ensembles_theoremes import egalite_par_extension
 from bourbaki.ensembles.familles.ensembles_produit import couple_dans_produit, couple_dans_produit_ssi
 from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de, equipotent

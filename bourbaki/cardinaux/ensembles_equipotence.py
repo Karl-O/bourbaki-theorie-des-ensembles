@@ -210,7 +210,7 @@ def diagonale_image(x="X"):
 # ── Δ_X(u) = u  (valeur de l'application identique) ───────────────────────────
 def diagonale_valeur(x="X", u="u"):
     """{u ∈ X} ⊢ Δ_X(u) = u.   (l'application identique vaut u en u, pour u∈X.)"""
-    from bourbaki.ensembles.fonctions.ensembles_fonctions import valeur_caracterisation
+    from bourbaki.ensembles.fonctions.ii_3_4_fonctions_valeur.ensembles_fonctions import valeur_caracterisation
     vX, vu, vy = var(x), var(u), var("y")
     DX = E.diagonale(vX)
     h_inX = N.assume(appartient(vu, vX))

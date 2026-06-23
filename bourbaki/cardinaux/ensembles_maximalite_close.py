@@ -86,8 +86,8 @@ from bourbaki.cardinaux.ensembles_segments_construction import seg as _seg, memb
 from bourbaki.ensembles.base.ensembles_couples import (
     singleton_membre, couple_egal_implique_composantes,
 )
-from bourbaki.ensembles.fonctions.ensembles_restriction_somme import membre_reunion_graphes
-from bourbaki.ensembles.fonctions.ensembles_valeur_codomaine import couple_valeur_dans_graphe
+from bourbaki.ensembles.fonctions.hors_ii_3.iii_3_recollement.ensembles_restriction_somme import membre_reunion_graphes
+from bourbaki.ensembles.fonctions.ii_3_4_fonctions_valeur.ensembles_valeur_codomaine import couple_valeur_dans_graphe
 from bourbaki.ensembles.familles.ensembles_produit import couple_dans_produit_ssi
 from bourbaki.ensembles.ensembles_theoremes import egalite_par_extension
 
@@ -469,7 +469,7 @@ def _SxT_inclus_SaA_TbB(R, E_set, Rp, F_set, a, b):
     Monotonie du produit : seg a ⊂ ]←,a], seg b ⊂ ]←,b] (injection gauche de la
     réunion-adjoint), z=(p,q) transporté."""
     from bourbaki.ensembles.familles.ensembles_produit import _instance_produit
-    from bourbaki.ensembles.fonctions.ensembles_restriction_somme import membre_reunion_graphes
+    from bourbaki.ensembles.fonctions.hors_ii_3.iii_3_recollement.ensembles_restriction_somme import membre_reunion_graphes
     va, vb = _t(a), _t(b)
     S = _seg(R, E_set, a)
     T = _seg(Rp, F_set, b)
@@ -507,7 +507,7 @@ def _hplus_inclus_produit_derive(E_set, R, F_set, Rp, a, b):
       • z∈h : z∈dom h×pr₂h (h graphe) = seg a×seg b (dom h=seg, pr₂h=seg)
               ⊂ ]←,a]×]←,b] (monotonie produit) ;
       • z=(a,b) : (a,b)∈]←,a]×]←,b] (a∈{a}⊂]←,a], b∈{b}⊂]←,b])."""
-    from bourbaki.ensembles.fonctions.ensembles_restriction_somme import membre_reunion_graphes
+    from bourbaki.ensembles.fonctions.hors_ii_3.iii_3_recollement.ensembles_restriction_somme import membre_reunion_graphes
     from bourbaki.ensembles.familles.ensembles_produit import couple_dans_produit_ssi
     va, vb = _t(a), _t(b)
     h = TS.h_iso_max(E_set, R, F_set, Rp)

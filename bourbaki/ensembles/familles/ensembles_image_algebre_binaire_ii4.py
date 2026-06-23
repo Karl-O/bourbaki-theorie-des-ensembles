@@ -134,7 +134,7 @@ def image_reunion_binaire(f="f", b="B", y="Y"):
 from bourbaki.logique.formule import pourtout, subst_f
 from bourbaki.logique.tactiques.tactiques_abrege2 import syllogisme
 from bourbaki.logique.tactiques.tactiques_abrege_quantif import existe_elimination, alpha_existe
-from bourbaki.ensembles.fonctions.ensembles_reciproque import couple_reciproque
+from bourbaki.ensembles.fonctions.ii_3_2_reciproque.ensembles_reciproque import couple_reciproque
 from bourbaki.ensembles.ensembles_theoremes import extensionnalite_appliquee
 
 

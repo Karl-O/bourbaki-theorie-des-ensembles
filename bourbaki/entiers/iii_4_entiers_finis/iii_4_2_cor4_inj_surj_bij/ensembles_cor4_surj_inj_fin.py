@@ -71,7 +71,7 @@ from bourbaki.logique.tactiques.tactiques_abrege2 import (
 )
 
 # briques CLOSES réutilisées
-from bourbaki.ensembles.fonctions.ensembles_retractions import (
+from bourbaki.ensembles.fonctions.ii_3_8_retractions_sections.ensembles_retractions import (
     retraction_implique_injective,
 )
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_2_cor4_inj_surj_bij.ensembles_cor4_surj_inj_iii4 import (

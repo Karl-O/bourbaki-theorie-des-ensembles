@@ -1205,7 +1205,7 @@ def _injective_dans_de_graphe(g, X, hdomX, Hfg, Hig, u="u", up="up"):
     injective_dans(g,X) = (∀u∀u')((u∈X et u'∈X et g(u)=g(u')) ⇒ u=u').  u,u'∈X=dom g
     ⇒ (u,g(u))∈g et (u',g(u'))∈g (valeur_dans_graphe) ; g(u)=g(u') ⇒ (u',g(u))∈g
     (Leibniz), donc graphe_injectif(g) donne u=u'."""
-    from bourbaki.ensembles.fonctions.ensembles_fonctions import valeur_dans_graphe
+    from bourbaki.ensembles.fonctions.ii_3_4_fonctions_valeur.ensembles_fonctions import valeur_dans_graphe
     vg, vX = _terme(g), _terme(X)
     vu, vup = var(u), var(up)
     gu, gup = E.valeur(vg, vu), E.valeur(vg, vup)
@@ -1304,7 +1304,7 @@ def reciproque_inj_partielle(X="X", Y="Y", g="g", a="a", b="b", ap="ap", c="c"):
     g⁻¹⊂Y×X : (X×Y)⁻¹=Y×X et g⊂X×Y ⇒ g⁻¹⊂(X×Y)⁻¹=Y×X.  g⁻¹ fonctionnel ⇐ g
     injectif (graphe).  g⁻¹ injectif (graphe) ⇐ g fonctionnel.  (Échange exact des
     rôles fonctionnel/injectif par la réciproque.)"""
-    from bourbaki.ensembles.fonctions.ensembles_reciproque import couple_reciproque, reciproque_produit
+    from bourbaki.ensembles.fonctions.ii_3_2_reciproque.ensembles_reciproque import couple_reciproque, reciproque_produit
     from bourbaki.logique.tactiques.tactiques_abrege2 import _peler_pourtout
     vX, vY, vg = _terme(X), _terme(Y), _terme(g)
     grec = E.reciproque(vg)
@@ -1375,7 +1375,7 @@ def reciproque_inj_partielle(X="X", Y="Y", g="g", a="a", b="b", ap="ap", c="c"):
 
 def dom_reciproque_eq_Y(X="X", Y="Y", g="g"):
     """⊢ { img g=Y } ⊢ dom(g⁻¹) = Y.   (pr₁(g⁻¹)=pr₂g=img g=Y.)"""
-    from bourbaki.ensembles.fonctions.ensembles_reciproque import pr1_reciproque
+    from bourbaki.ensembles.fonctions.ii_3_2_reciproque.ensembles_reciproque import pr1_reciproque
     from bourbaki.logique.tactiques.tactiques_abrege_egalite import composer_egalites
     vX, vY, vg = _terme(X), _terme(Y), _terme(g)
     HimgY = N.assume(egal(E.img(vg), vY))                 # img g=Y  (= pr₂g=Y)

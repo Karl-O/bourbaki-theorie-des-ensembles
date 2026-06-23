@@ -49,7 +49,7 @@ from bourbaki.logique.tactiques.tactiques_abrege2 import (
     equivalence_avant, instancie)
 from bourbaki.logique.tactiques.tactiques_abrege_egalite import (
     symetrie, composer_egalites)
-from bourbaki.ensembles.fonctions.ensembles_extensionnalite import (
+from bourbaki.ensembles.fonctions.ii_3_general.ensembles_extensionnalite import (
     graphe_egal_par_valeurs)
 
 

@@ -21,7 +21,7 @@ from bourbaki.logique.tactiques.tactiques_abrege_quantif import existe_eliminati
 from bourbaki.ensembles.ensembles_theoremes import egalite_par_extension
 from bourbaki.ensembles.base.ensembles_couples import (singleton_membre, membre_paire_gauche,
                                   couple_egal_implique_composantes)
-from bourbaki.ensembles.fonctions.ensembles_fonction_terme import membre_graphe_terme
+from bourbaki.ensembles.fonctions.ii_3_6_fonction_terme.ensembles_fonction_terme import membre_graphe_terme
 from bourbaki.cardinaux.arithmetique.ensembles_exposant_un._gv import (
     _t, UN_SOURCE, _gv, gv_dans_exposant, gv_membre,
     _eta_triple_A, _eta, eta_fonctionnel, eta_domaine, eta_valeur, eta_injective)
@@ -65,7 +65,7 @@ def exposant_couple_dans(g="G", a="A"):
     dom_car = instancie(instancie(ax_dom, vG), E.VIDE)          # ∅∈dom G ⇔ (∃y)((∅,y)∈G)
     ex_y = N.modus_ponens(vide_in_dom, equivalence_avant(dom_car))   # (∃y)((∅,y)∈G)
     # (∅, G(∅))∈G  via valeur_dans_graphe (décharger l'hyp domaine)
-    from bourbaki.ensembles.fonctions.ensembles_fonctions import valeur_dans_graphe
+    from bourbaki.ensembles.fonctions.ii_3_4_fonctions_valeur.ensembles_fonctions import valeur_dans_graphe
     cpl = valeur_dans_graphe(vG, E.VIDE)        # {(∃y)((∅,y)∈G)} ⊢ (∅, G(∅))∈G
     return N.modus_ponens(ex_y,
         N.loi_deduction(existe("y", appartient(E.couple(E.VIDE, vy), vG)), cpl))

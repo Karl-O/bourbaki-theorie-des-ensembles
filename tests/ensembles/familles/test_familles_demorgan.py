@@ -2,7 +2,7 @@
 from bourbaki.logique.formule import var, egal, impl, existe, appartient
 from bourbaki.ensembles import ensembles_abrege as E
 from bourbaki.ensembles.familles import ensembles_familles_demorgan as M
-from bourbaki.ensembles.fonctions import ensembles_composee_valeurs as CV
+from bourbaki.ensembles.fonctions.ii_3_8_retractions_sections import ensembles_composee_valeurs as CV
 
 
 # ── (A) De Morgan des familles ───────────────────────────────────────────────

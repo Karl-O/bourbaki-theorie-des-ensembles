@@ -44,9 +44,9 @@ from bourbaki.logique.tactiques.tactiques_abrege_quantif import (alpha_existe, e
                                       congruence_existe)
 from bourbaki.cardinaux.ensembles_cardinaux import (est_bijection_de, equipotent, est_injection_de,
                                  inf_egal_card)
-from bourbaki.ensembles.fonctions.ensembles_fonctions import valeur_dans_graphe
-from bourbaki.ensembles.fonctions.ensembles_fonctions_composee import composee_fonctionnelle, composition_valeur
-from bourbaki.ensembles.fonctions.ensembles_composee import couple_composee, image_composee
+from bourbaki.ensembles.fonctions.ii_3_4_fonctions_valeur.ensembles_fonctions import valeur_dans_graphe
+from bourbaki.ensembles.fonctions.ii_3_7_composee_fonctions.ensembles_fonctions_composee import composee_fonctionnelle, composition_valeur
+from bourbaki.ensembles.fonctions.ii_3_3_composee_graphes.ensembles_composee import couple_composee, image_composee
 from bourbaki.ensembles.ensembles_theoremes import egalite_par_extension
 from bourbaki.cardinaux.ensembles_bijection import _cut, _premier_dans_X
 

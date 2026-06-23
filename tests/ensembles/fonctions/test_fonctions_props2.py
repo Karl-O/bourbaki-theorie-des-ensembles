@@ -1,6 +1,6 @@
 """Tests §II.3 — composition : propositions restantes (mission II3-fonctions-restant).
 
-Module testé : bourbaki.ensembles.fonctions.ensembles_fonctions_props2.
+Module testé : bourbaki.ensembles.fonctions.ii_3_general.ensembles_fonctions_props2.
 Chaque théorème est vérifié sur sa CONCLUSION EXACTE (== cible construite
 indépendamment).  Les théorèmes INCONDITIONNELS sont contrôlés sur `.est_clos` ;
 les théorèmes CONDITIONNELS (composée surjective/bijective, valeur 2 arg.) le sont
@@ -8,7 +8,7 @@ sur l'ENSEMBLE EXACT de leurs hypothèses (jamais postulées).
 """
 from bourbaki.logique.formule import var, egal, et, impl, appartient, existe, equiv
 from bourbaki.ensembles import ensembles_abrege as E
-from bourbaki.ensembles.fonctions import ensembles_fonctions_props2 as P2
+from bourbaki.ensembles.fonctions.ii_3_general import ensembles_fonctions_props2 as P2
 
 
 # ── THÉORÈME 1 b) — composée de deux surjections est une surjection ────────────

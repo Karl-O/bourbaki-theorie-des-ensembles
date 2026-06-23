@@ -130,7 +130,7 @@ def test_iso_unicite_finale_porte_les_hyps_geometriques():
     assert est_strictement_croissante(vR, vR, vh, vEp, vEp) in hyps
     assert est_strictement_croissante(vR, vR, vk, vEp, vEp) in hyps
     # ET les hypothèses d'extensionnalité (f,g applications + mêmes valeurs)
-    from bourbaki.ensembles.fonctions.ensembles_application_valeur import (
+    from bourbaki.ensembles.fonctions.hors_ii_3.ii_5_produit_famille.ensembles_application_valeur import (
         application_egale_par_valeurs,
     )
     ext = application_egale_par_valeurs("f", "g", "Ep", "E")

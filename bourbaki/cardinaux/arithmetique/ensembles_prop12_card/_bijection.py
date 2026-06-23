@@ -27,7 +27,7 @@ from bourbaki.logique.tactiques.tactiques_abrege_egalite import (symetrie,
 from bourbaki.logique.tactiques.tactiques_abrege_quantif import (existe_elimination,
                                alpha_existe)
 from bourbaki.ensembles.ensembles_theoremes import egalite_par_extension
-from bourbaki.ensembles.fonctions.ensembles_fonction_terme import (
+from bourbaki.ensembles.fonctions.ii_3_6_fonction_terme.ensembles_fonction_terme import (
     graphe_terme_fonctionnel, membre_graphe_terme)
 from bourbaki.cardinaux.ensembles_cantor import (graphe_terme_domaine,
                                graphe_terme_valeur)

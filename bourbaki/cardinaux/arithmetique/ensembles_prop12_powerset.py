@@ -59,11 +59,11 @@ from bourbaki.logique.tactiques.tactiques_abrege_egalite import (symetrie,
 # socle 2-élément (0=∅, 1={∅}) — RÉUTILISÉ, jamais redéfini :
 from bourbaki.ensembles.familles.ensembles_somme_disjointe import ZERO, UN
 # infra round 25 (recollement) — RÉUTILISÉE, jamais redéfinie :
-from bourbaki.ensembles.fonctions.ensembles_restriction_somme import (
+from bourbaki.ensembles.fonctions.hors_ii_3.iii_3_recollement.ensembles_restriction_somme import (
     recollement, reunion_graphes_fonctionnelle, dom_reunion_graphes,
     membre_reunion_graphes, _ex_falso)
 # infra graphe-terme (constante) — RÉUTILISÉE, jamais redéfinie :
-from bourbaki.ensembles.fonctions.ensembles_fonction_terme import (
+from bourbaki.ensembles.fonctions.ii_3_6_fonction_terme.ensembles_fonction_terme import (
     graphe_terme_fonctionnel, membre_graphe_terme)
 from bourbaki.cardinaux.ensembles_cantor import (
     graphe_terme_domaine, graphe_terme_couple_dans)
@@ -197,7 +197,7 @@ def _graphe_terme_est_graphe(a, t, z="z"):
     vA, vz = _t(a), var(z)
     F = E.graphe_terme(vA, t, "x")
     # axiome C54 sur w=z : (z∈F) ⇔ (∃x)(∃y)(z=(x,y) et x∈A et y=T)
-    from bourbaki.ensembles.fonctions.ensembles_fonction_terme import _inst_axiome
+    from bourbaki.ensembles.fonctions.ii_3_6_fonction_terme.ensembles_fonction_terme import _inst_axiome
     inst = _inst_axiome(vA, t, vz, "x", "y")                         # (z∈F)⇔(∃x∃y)(z=(x,y) et …)
     # corps ⇒ (∃x)(∃y)(z=(x,y)) = est_un_couple(z)
     from bourbaki.logique.tactiques.tactiques_abrege_quantif import existe_elimination

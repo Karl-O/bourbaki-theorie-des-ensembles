@@ -284,7 +284,7 @@ def valeur_union_famille(D="Df", p="pcf", u="u", q="qcf"):
     ⚠️ TROIS hypothèses HONNÊTES (theorie=22), déchargées par loi_deduction :
       famille_compatible(𝔇) (cohérence), p∈𝔇 (p est un essai de la famille), u∈dom p
       (u est dans le domaine de cet essai).  Conclusion ∉ hypothèses (non vacuous)."""
-    from bourbaki.ensembles.fonctions.ensembles_fonctions import (
+    from bourbaki.ensembles.fonctions.ii_3_4_fonctions_valeur.ensembles_fonctions import (
         valeur_dans_graphe, valeur_caracterisation,
     )
     from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie

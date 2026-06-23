@@ -225,7 +225,7 @@ def reunion_essais_fonctionnelle(g="G", h="H"):
     Utile pour la moitié EXISTENCE (la réunion ⋃essais est fonctionnelle car les
     essais coïncident sur les recouvrements — lemme (a) — donc, après réindexation à
     domaines disjoints, ce pivot s'applique)."""
-    from bourbaki.ensembles.fonctions.ensembles_restriction_somme import (
+    from bourbaki.ensembles.fonctions.hors_ii_3.iii_3_recollement.ensembles_restriction_somme import (
         reunion_graphes_fonctionnelle,
     )
     return reunion_graphes_fonctionnelle(_t(g), _t(h))
@@ -316,7 +316,7 @@ def valeur_essai_reunion(g="G", h="H", u="u"):
     sur le domaine de G, avec G.  Donc si G(u)=h(u,G|seg) (équation de l'essai G),
     alors (G∪H)(u)=h(u,…) aussi — l'équation de récursion PASSE À LA RÉUNION.
     Délègue à `valeur_reunion_gauche` (infra recollement).  4 hyps honnêtes."""
-    from bourbaki.ensembles.fonctions.ensembles_recollement_bijection import (
+    from bourbaki.ensembles.fonctions.hors_ii_3.iii_3_recollement.ensembles_recollement_bijection import (
         valeur_reunion_gauche,
     )
     return valeur_reunion_gauche(_t(g), _t(h), _t(u))

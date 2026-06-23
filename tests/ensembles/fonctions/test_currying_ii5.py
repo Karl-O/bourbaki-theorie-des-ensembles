@@ -1,7 +1,7 @@
 """Tests §II.5 — Proposition 3 (currying ensembliste) et Proposition 2."""
 from bourbaki.ensembles import ensembles_abrege as E
 import bourbaki.cardinaux.ensembles_cardinaux as C
-from bourbaki.ensembles.fonctions.ensembles_currying_ii5 import (
+from bourbaki.ensembles.fonctions.hors_ii_3.ii_5_produit_famille.ensembles_currying_ii5 import (
     prop3_currying_bijection, source, but)
 
 

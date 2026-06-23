@@ -4,7 +4,7 @@ Définitions fidèles + propriétés cheap closes (miroir du prolongement).
 theorie_ensembles() = 22 axiomes ; aucune définition vacuux/inventée."""
 from bourbaki.logique.formule import var, et, impl, inclus, appartient, pourtout
 from bourbaki.ensembles import ensembles_abrege as E
-from bourbaki.ensembles.fonctions import ensembles_sous_famille as SF
+from bourbaki.ensembles.fonctions.ii_3_5_restrictions_prolongements import ensembles_sous_famille as SF
 
 
 # ── DÉFINITIONS ───────────────────────────────────────────────────────────────

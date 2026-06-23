@@ -100,7 +100,7 @@ from bourbaki.ensembles.base.ensembles_couples import (
     singleton_membre, couple_egal_implique_composantes,
 )
 from bourbaki.ensembles.ensembles_theoremes import extensionnalite_appliquee
-from bourbaki.ensembles.fonctions.ensembles_restriction_somme import (
+from bourbaki.ensembles.fonctions.hors_ii_3.iii_3_recollement.ensembles_restriction_somme import (
     reunion_graphes_fonctionnelle,
 )
 

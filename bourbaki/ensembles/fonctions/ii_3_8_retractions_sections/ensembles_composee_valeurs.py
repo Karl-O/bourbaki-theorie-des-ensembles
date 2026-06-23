@@ -26,8 +26,8 @@ from bourbaki.logique import noyau_abrege as N
 from bourbaki.ensembles import ensembles_abrege as E
 from bourbaki.logique.tactiques.tactiques_abrege2 import instancie, equivalence_avant
 from bourbaki.logique.tactiques.tactiques_abrege_egalite import composer_egalites, congruence_terme, symetrie
-from bourbaki.ensembles.fonctions.ensembles_fonctions import valeur_dans_graphe, valeur_caracterisation
-from bourbaki.ensembles.fonctions.ensembles_fonctions_composee import composee_intro
+from bourbaki.ensembles.fonctions.ii_3_4_fonctions_valeur.ensembles_fonctions import valeur_dans_graphe, valeur_caracterisation
+from bourbaki.ensembles.fonctions.ii_3_7_composee_fonctions.ensembles_fonctions_composee import composee_intro
 
 
 def _t(v):

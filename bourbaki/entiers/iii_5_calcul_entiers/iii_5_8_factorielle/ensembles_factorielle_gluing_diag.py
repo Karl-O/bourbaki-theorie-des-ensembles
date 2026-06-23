@@ -134,7 +134,7 @@ def diagnostiquer_capture():
 
     Renvoie un dict : {site, binder_collision, occurrences_v_vs_db}.  N'altère rien
     de durable (monkey-patch local restauré)."""
-    import bourbaki.ensembles.fonctions.ensembles_restriction_somme as RS
+    import bourbaki.ensembles.fonctions.hors_ii_3.iii_3_recollement.ensembles_restriction_somme as RS
     from bourbaki.entiers.iii_5_calcul_entiers.iii_5_8_factorielle.ensembles_factorielle_existence import (
         factorielle_essais_existe,
     )

@@ -72,7 +72,7 @@ def _Gx(x, b):
 
 
 def _Gx_fonctionnel(x, b):
-    from bourbaki.ensembles.fonctions.ensembles_fonction_terme import graphe_terme_fonctionnel
+    from bourbaki.ensembles.fonctions.ii_3_6_fonction_terme.ensembles_fonction_terme import graphe_terme_fonctionnel
     return graphe_terme_fonctionnel(_t(b), _t(x), _DV, "y")
 
 
@@ -142,7 +142,7 @@ def W_phi(b, a):
 
 
 def W_phi_fonctionnel(b, a):
-    from bourbaki.ensembles.fonctions.ensembles_fonction_terme import graphe_terme_fonctionnel
+    from bourbaki.ensembles.fonctions.ii_3_6_fonction_terme.ensembles_fonction_terme import graphe_terme_fonctionnel
     return graphe_terme_fonctionnel(_t(a), _const(var(_PV), b, a), _PV, "y")
 
 
@@ -169,7 +169,7 @@ def _const_cod_en_point(b, a, vx, x_in_thm):
 def W_phi_image_incluse(b, a):
     """⊢ image(W, A) ⊂ 𝓕(B;A).   (BIEN-DÉFINITION ; la garde x∈A est l'appartenance
     au domaine A elle-même, fournie par l'axiome image — INCONDITIONNEL.)"""
-    from bourbaki.ensembles.fonctions.ensembles_fonction_terme import membre_graphe_terme
+    from bourbaki.ensembles.fonctions.ii_3_6_fonction_terme.ensembles_fonction_terme import membre_graphe_terme
     va = _t(a)
     cod = _but(b, a)
     W = W_phi(b, a)

@@ -10,7 +10,7 @@ fixe.  Les théorèmes prouvés valent quel que soit le contenu de ces prédicat
 """
 from bourbaki.logique.formule import var, egal, et, impl, existe, pourtout, appartient
 from bourbaki.ensembles import ensembles_abrege as E
-from bourbaki.ensembles.fonctions import ensembles_applications_universelles as U
+from bourbaki.ensembles.fonctions.hors_ii_3.iv_structures import ensembles_applications_universelles as U
 
 
 # ── prédicats de test ─────────────────────────────────────────────────────────

@@ -3,7 +3,7 @@ from __future__ import annotations
 
 from bourbaki.logique.formule import var, egal, tau
 from bourbaki.ensembles.ensembles_abrege import couple, pr1, pr2
-from bourbaki.ensembles.fonctions.ensembles_projections import tau_egal, projection_premiere, projection_seconde
+from bourbaki.ensembles.fonctions.hors_ii_3.ii_2_projections.ensembles_projections import tau_egal, projection_premiere, projection_seconde
 
 
 def test_tau_egal():

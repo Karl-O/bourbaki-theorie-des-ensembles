@@ -45,8 +45,8 @@ from bourbaki.logique.tactiques.tactiques_abrege_egalite import (
 from bourbaki.logique.tactiques.tactiques_abrege_quantif import existe_elimination
 from bourbaki.cardinaux.arithmetique.ensembles_graphe_de import (
     graphe_de, graphe_de_triple)
-from bourbaki.ensembles.fonctions.ensembles_valeur_codomaine import valeur_dans_codomaine
-from bourbaki.ensembles.fonctions.ensembles_extensionnalite import graphe_egal_par_valeurs
+from bourbaki.ensembles.fonctions.ii_3_4_fonctions_valeur.ensembles_valeur_codomaine import valeur_dans_codomaine
+from bourbaki.ensembles.fonctions.ii_3_general.ensembles_extensionnalite import graphe_egal_par_valeurs
 
 
 def _t(v):

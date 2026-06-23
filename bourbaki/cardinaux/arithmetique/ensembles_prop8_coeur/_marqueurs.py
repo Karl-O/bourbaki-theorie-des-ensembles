@@ -41,7 +41,7 @@ def mm_dans_h(a_somme, h="h"):
     Le marqueur *, fixé par h (h(*)=*) et dans le domaine, produit le couple
     diagonal (*,*) : (*,h(*))∈h (valeur_dans_graphe sous *∈dom h) puis h(*)=* le
     réécrit en (*,*).  `a_somme` = le terme A⊔{∅} (= dom h)."""
-    from bourbaki.ensembles.fonctions.ensembles_fonctions import valeur_dans_graphe
+    from bourbaki.ensembles.fonctions.ii_3_4_fonctions_valeur.ensembles_fonctions import valeur_dans_graphe
     vh = var(h)
     AS = a_somme
     m = _STAR

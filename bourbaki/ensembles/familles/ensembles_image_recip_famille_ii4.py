@@ -53,7 +53,7 @@ from bourbaki.logique.tactiques.tactiques_abrege2 import (
 from bourbaki.logique.tactiques.tactiques_abrege_quantif import (
     congruence_existe, existe_elimination, monotonie_existe)
 from bourbaki.ensembles.ensembles_theoremes import egalite_par_extension
-from bourbaki.ensembles.fonctions.ensembles_reciproque import couple_reciproque
+from bourbaki.ensembles.fonctions.ii_3_2_reciproque.ensembles_reciproque import couple_reciproque
 
 
 def _t(v):

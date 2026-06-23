@@ -63,10 +63,10 @@ from bourbaki.cardinaux.arithmetique.ensembles_produit_commute import (_membre_p
                                        _projection_seconde_ab,
                                        _couple_dans_produit_t, _inst_produit)
 from bourbaki.ensembles.base.ensembles_couples import couple_egal_implique_composantes
-from bourbaki.ensembles.fonctions.ensembles_fonction_terme import membre_graphe_terme, graphe_terme_fonctionnel
+from bourbaki.ensembles.fonctions.ii_3_6_fonction_terme.ensembles_fonction_terme import membre_graphe_terme, graphe_terme_fonctionnel
 from bourbaki.cardinaux.ensembles_cantor import (graphe_terme_domaine, graphe_terme_valeur,
                               graphe_terme_couple_dans)
-from bourbaki.ensembles.fonctions.ensembles_fonctions import valeur_caracterisation
+from bourbaki.ensembles.fonctions.ii_3_4_fonctions_valeur.ensembles_fonctions import valeur_caracterisation
 from bourbaki.cardinaux.ensembles_vide_singleton import vide_distinct_singleton
 from bourbaki.ensembles.ensembles_theoremes import egalite_par_extension
 

@@ -195,7 +195,7 @@ def recollement_binaire_fonctionnel(g="G", h="H"):
     EXISTENCE du recollement au rang binaire.)  Ré-export de reunion_graphes_
     fonctionnelle : la réunion de deux graphes fonctionnels à domaines disjoints
     est fonctionnelle, donc G∪H EST une fonction définie sur dom G ∪ dom H."""
-    from bourbaki.ensembles.fonctions.ensembles_restriction_somme import (
+    from bourbaki.ensembles.fonctions.hors_ii_3.iii_3_recollement.ensembles_restriction_somme import (
         reunion_graphes_fonctionnelle)
     return reunion_graphes_fonctionnelle(g, h)
 
@@ -204,7 +204,7 @@ def recollement_binaire_prolonge_gauche(g="G", h="H"):
     """⊢ G ⊂ G∪H.   (G∪H PROLONGE G : tout couple de G est dans G∪H — E.II.4, Prop.
     7.2/8 : « le recollement prolonge chaque fonction ».)"""
     vg, vh, vz = _t(g), _t(h), var("z")
-    from bourbaki.ensembles.fonctions.ensembles_restriction_somme import membre_reunion_graphes
+    from bourbaki.ensembles.fonctions.hors_ii_3.iii_3_recollement.ensembles_restriction_somme import membre_reunion_graphes
     car = membre_reunion_graphes(vg, vh, vz)               # z∈G∪H ⇔ (z∈G ou z∈H)
     hz = N.assume(appartient(vz, vg))                      # z∈G
     inGuH = N.modus_ponens(N.modus_ponens(hz,
@@ -216,7 +216,7 @@ def recollement_binaire_prolonge_gauche(g="G", h="H"):
 def recollement_binaire_prolonge_droite(g="G", h="H"):
     """⊢ H ⊂ G∪H.   (G∪H prolonge aussi H — symétrique.)"""
     vg, vh, vz = _t(g), _t(h), var("z")
-    from bourbaki.ensembles.fonctions.ensembles_restriction_somme import membre_reunion_graphes
+    from bourbaki.ensembles.fonctions.hors_ii_3.iii_3_recollement.ensembles_restriction_somme import membre_reunion_graphes
     car = membre_reunion_graphes(vg, vh, vz)               # z∈G∪H ⇔ (z∈G ou z∈H)
     hz = N.assume(appartient(vz, vh))                      # z∈H
     inGuH = N.modus_ponens(N.modus_ponens(N.modus_ponens(hz,
@@ -229,14 +229,14 @@ def recollement_binaire_prolonge_droite(g="G", h="H"):
 def recollement_binaire_valeur_gauche(g="G", h="H", u="u"):
     """{func G, func H, dom disjoints, u∈dom G} ⊢ (G∪H)(u) = G(u).   (le recollement
     coïncide PAR VALEUR avec G sur dom G — ré-export valeur_reunion_gauche.)"""
-    from bourbaki.ensembles.fonctions.ensembles_recollement_bijection import (
+    from bourbaki.ensembles.fonctions.hors_ii_3.iii_3_recollement.ensembles_recollement_bijection import (
         valeur_reunion_gauche)
     return valeur_reunion_gauche(g, h, u)
 
 
 def recollement_binaire_valeur_droite(g="G", h="H", u="u"):
     """{func G, func H, dom disjoints, u∈dom H} ⊢ (G∪H)(u) = H(u).   (idem côté H.)"""
-    from bourbaki.ensembles.fonctions.ensembles_recollement_bijection import (
+    from bourbaki.ensembles.fonctions.hors_ii_3.iii_3_recollement.ensembles_recollement_bijection import (
         valeur_reunion_droite)
     return valeur_reunion_droite(g, h, u)
 
@@ -246,7 +246,7 @@ def recollement_binaire_unicite(p="P", q="Q"):
     Prop. 7.2/8 : « il existe une fonction et une seule … » — deux recollements de
     MÊME graphe coïncident dans leur ensemble de définition.)  Délégué à
     coincidence_meme_graphe : si deux graphes sont égaux, les valeurs coïncident."""
-    from bourbaki.ensembles.fonctions.ensembles_restrictions import coincidence_meme_graphe
+    from bourbaki.ensembles.fonctions.ii_3_5_restrictions_prolongements.ensembles_restrictions import coincidence_meme_graphe
     return coincidence_meme_graphe(p, q)
 
 
@@ -262,7 +262,7 @@ def reunion_disjointe_binaire_disjoints(a="A", b="B"):
     ¬(z∈inter) pour tout z, puis inter=∅ par vide_ssi_sans_element."""
     from bourbaki.cardinaux.ensembles_vide_singleton import vide_distinct_singleton
     from bourbaki.ensembles.base.ensembles_vide import vide_ssi_sans_element
-    from bourbaki.ensembles.fonctions.ensembles_restriction_somme import (
+    from bourbaki.ensembles.fonctions.hors_ii_3.iii_3_recollement.ensembles_restriction_somme import (
         _seconde_coord_marquee, _zero_egal_un_de_temoins)
     from bourbaki.logique.tactiques.tactiques_abrege2 import contraposition
     va, vb = _t(a), _t(b)
@@ -305,7 +305,7 @@ def bijection_canonique_reunion_somme(a="A", b="B"):
     """W := graphe(a↦(a,0) sur A) ∪ graphe(b↦(b,1) sur B)   (le RECOLLEMENT des deux
     injections canoniques).   C'est le témoin de bijection naturel A∪B → A⊔B :
     chaque a∈A va sur sa copie marquée (a,0), chaque b∈B sur (b,1)."""
-    from bourbaki.ensembles.fonctions.ensembles_restriction_somme import recollement
+    from bourbaki.ensembles.fonctions.hors_ii_3.iii_3_recollement.ensembles_restriction_somme import recollement
     va, vb = _t(a), _t(b)
     gA = E.graphe_terme(va, E.couple(var("x"), ZERO))     # {(a,(a,0)) | a∈A}
     gB = E.graphe_terme(vb, E.couple(var("x"), UN))       # {(b,(b,1)) | b∈B}

@@ -10,7 +10,7 @@ from bourbaki.ensembles import ensembles_abrege as E
 from bourbaki.ensembles.base.ensembles_fondations_notions import (
     correspondance, est_application,
 )
-from bourbaki.ensembles.fonctions import ensembles_fonctions_complements as C
+from bourbaki.ensembles.fonctions.ii_3_general import ensembles_fonctions_complements as C
 
 
 def test_coupe_terme():

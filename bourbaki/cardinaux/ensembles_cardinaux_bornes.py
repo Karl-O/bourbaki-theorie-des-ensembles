@@ -53,9 +53,9 @@ from bourbaki.cardinaux.arithmetique.ensembles_exposant_cardinal import (
 from bourbaki.cardinaux.ensembles_vide_singleton import image_sur_vide
 from bourbaki.ensembles.familles.ensembles_somme_disjointe import (somme_disjointe, ZERO,
                                injection_gauche_dans_somme)
-from bourbaki.ensembles.fonctions.ensembles_fonction_terme import (graphe_terme_fonctionnel,
+from bourbaki.ensembles.fonctions.ii_3_6_fonction_terme.ensembles_fonction_terme import (graphe_terme_fonctionnel,
                                _inst_axiome)
-from bourbaki.ensembles.fonctions.ensembles_fonctions import valeur_caracterisation
+from bourbaki.ensembles.fonctions.ii_3_4_fonctions_valeur.ensembles_fonctions import valeur_caracterisation
 
 
 def _t(v):

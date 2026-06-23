@@ -260,7 +260,7 @@ def _Tbb(Rp, F_set, b):
 def _a_dans_Saa(R="R", E_set="E", a="a"):
     """⊢ a ∈ ]←,a] = seg(R,E,a)∪{a}.   (INCONDITIONNEL : a∈{a} ⇒ a∈seg∪{a}.)"""
     from bourbaki.ensembles.base.ensembles_couples import singleton_membre
-    from bourbaki.ensembles.fonctions.ensembles_restriction_somme import membre_reunion_graphes
+    from bourbaki.ensembles.fonctions.hors_ii_3.iii_3_recollement.ensembles_restriction_somme import membre_reunion_graphes
     va = _t(a)
     Sa = _seg(R, E_set, a)
     SaA = _Saa(R, E_set, a)
@@ -301,7 +301,7 @@ def _dom_hplus_eq_Saa(E_set, R, F_set, Rp, a, b):
     dom(h⁺)=dom(h∪{(a,b)})=dom h ∪ dom{(a,b)} (dom_reunion_graphes) ; dom{(a,b)}={a}
     (ADJ.dom_singleton_couple) ; sous dom h=seg(R,E,a) (Prop 1), réécriture Leibniz
     ⇒ dom(h⁺)=seg(R,E,a)∪{a}=]←,a].  DÉRIVE le RÉSIDU (9) de la donnée Prop 1."""
-    from bourbaki.ensembles.fonctions.ensembles_restriction_somme import dom_reunion_graphes
+    from bourbaki.ensembles.fonctions.hors_ii_3.iii_3_recollement.ensembles_restriction_somme import dom_reunion_graphes
     va, vb = _t(a), _t(b)
     h = TS.h_iso_max(E_set, R, F_set, Rp)
     G = ADJ.graphe_point(va, vb)

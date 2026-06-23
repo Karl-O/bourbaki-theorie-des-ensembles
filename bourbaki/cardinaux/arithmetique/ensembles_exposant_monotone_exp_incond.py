@@ -133,7 +133,7 @@ def R_terme(a0, s, d):
 
 
 def R_fonctionnel(a0, s, d):
-    from bourbaki.ensembles.fonctions.ensembles_fonction_terme import graphe_terme_fonctionnel
+    from bourbaki.ensembles.fonctions.ii_3_6_fonction_terme.ensembles_fonction_terme import graphe_terme_fonctionnel
     return graphe_terme_fonctionnel(_compl(s, d), _t(a0), _RPT, "y")
 
 
@@ -146,7 +146,7 @@ def _R_inclus(a0, s, d, a):
     """{ a₀ ∈ A } ⊢ R ⊂ D×A.
 
     z∈R ⇒ z=(d,y), d∈D∖S, y=a₀ ; d∈D∖S ⇒ d∈D (difference⊂D) ; a₀∈A ⇒ y∈A ; (d,y)∈D×A."""
-    from bourbaki.ensembles.fonctions.ensembles_fonction_terme import membre_graphe_terme
+    from bourbaki.ensembles.fonctions.ii_3_6_fonction_terme.ensembles_fonction_terme import membre_graphe_terme
     from bourbaki.ensembles.familles.ensembles_produit import couple_dans_produit_ssi
     va0, vs, vd, va = _t(a0), _t(s), _t(d), _t(a)
     DmS = _compl(vs, vd)
@@ -218,7 +218,7 @@ def _struct_g(vg, vs, va):
     """{ g ∈ 𝓕(S;A) } ⊢ (graphe_de(g)⊂S×A, est_fonctionnel(graphe_de g), dom graphe_de(g)=S).
 
     Décompose g∈𝓕(S;A) (témoin G éliminé) en les 3 faits structurels du graphe."""
-    from bourbaki.ensembles.fonctions.ensembles_application_valeur import (
+    from bourbaki.ensembles.fonctions.hors_ii_3.ii_5_produit_famille.ensembles_application_valeur import (
         _exposant_conjoints, _graphe_de_f_egal_G)
     vG = var("G")
     triple_g = E.couple(E.couple(vG, vs), va)
@@ -330,7 +330,7 @@ def _S_union_compl_D(s, d):
 def _ghat_fonctionnel(vg, va0, vs, vd, va):
     """{ g∈𝓕(S;A), a₀∈A } ⊢ est_fonctionnel(ĝ).   (recollement de graphes
     fonctionnels à domaines disjoints.)"""
-    from bourbaki.ensembles.fonctions.ensembles_restriction_somme import reunion_graphes_fonctionnelle
+    from bourbaki.ensembles.fonctions.hors_ii_3.iii_3_recollement.ensembles_restriction_somme import reunion_graphes_fonctionnelle
     grg = R_graphes_g = graphe_de(vg)
     R = R_terme(va0, vs, vd)
     _incl, g_func, g_dom = _struct_g(vg, vs, va)          # graphe_de(g) fonctionnel, dom=S
@@ -350,7 +350,7 @@ def _ghat_domaine(vg, va0, vs, vd, va):
 
     dom(grg∪R)=dom grg ∪ dom R (dom_reunion_graphes) = S ∪ (D∖S) (dom grg=S, dom R=D∖S)
     = D (_S_union_compl_D, sous S⊆D)."""
-    from bourbaki.ensembles.fonctions.ensembles_restriction_somme import dom_reunion_graphes
+    from bourbaki.ensembles.fonctions.hors_ii_3.iii_3_recollement.ensembles_restriction_somme import dom_reunion_graphes
     grg = graphe_de(vg)
     R = R_terme(va0, vs, vd)
     DmS = _compl(vs, vd)
@@ -394,7 +394,7 @@ def _ghat_inclus(vg, va0, vs, vd, va):
     """{ g∈𝓕(S;A), S⊆D, a₀∈A } ⊢ ĝ ⊂ D×A.
 
     z∈grg∪R ⇒ z∈grg (⊂S×A⊂D×A) ou z∈R (⊂D×A)."""
-    from bourbaki.ensembles.fonctions.ensembles_restriction_somme import membre_reunion_graphes
+    from bourbaki.ensembles.fonctions.hors_ii_3.iii_3_recollement.ensembles_restriction_somme import membre_reunion_graphes
     grg = graphe_de(vg)
     R = R_terme(va0, vs, vd)
     GuH = E.reunion(grg, R)
@@ -443,7 +443,7 @@ def _ghat_coincide_S(vg, va0, vs, vd, va, s_nom):
 
     valeur_reunion_gauche(grg, R, s) sous {func grg, func R, disj, s∈dom grg} ; déchargé
     par _struct_g (func, dom grg=S ⇒ s∈dom grg de s∈S) et R_fonctionnel et la disjonction."""
-    from bourbaki.ensembles.fonctions.ensembles_recollement_bijection import valeur_reunion_gauche
+    from bourbaki.ensembles.fonctions.hors_ii_3.iii_3_recollement.ensembles_recollement_bijection import valeur_reunion_gauche
     grg = graphe_de(vg)
     R = R_terme(va0, vs, vd)
     vs_pt = var(s_nom)
@@ -495,7 +495,7 @@ def _g_egalite_valeurs_ext(vg1, vg2, va0, vs, vd, va):
 
 def psi_injective_sous_appartenance(g1, g2, va0, vs, vd, va):
     """{ g₁,g₂∈𝓕(S;A), a₀∈A, ĝ₁=ĝ₂ } ⊢ g₁ = g₂."""
-    from bourbaki.ensembles.fonctions.ensembles_application_valeur import (
+    from bourbaki.ensembles.fonctions.hors_ii_3.ii_5_produit_famille.ensembles_application_valeur import (
         application_egale_par_valeurs, egalite_valeurs_application)
     vg1, vg2 = _t(g1), _t(g2)
     eva = _g_egalite_valeurs_ext(vg1, vg2, va0, vs, vd, va)
@@ -527,7 +527,7 @@ def W_psi(va0, vs, vd, va):
 
 
 def W_psi_fonctionnel(va0, vs, vd, va):
-    from bourbaki.ensembles.fonctions.ensembles_fonction_terme import graphe_terme_fonctionnel
+    from bourbaki.ensembles.fonctions.ii_3_6_fonction_terme.ensembles_fonction_terme import graphe_terme_fonctionnel
     return graphe_terme_fonctionnel(_source_ext(vs, va), _psi_valeur(var(_POINT), va0, vs, vd, va), _POINT, "y")
 
 
@@ -554,7 +554,7 @@ def _psi_cod_en_point(va0, vs, vd, va, vg, g_in_thm):
 
 def W_psi_image_incluse(va0, vs, vd, va):
     """{ S⊆D, a₀∈A } ⊢ image(W, 𝓕(S;A)) ⊂ 𝓕(D;A).   (BIEN-DÉFINITION.)"""
-    from bourbaki.ensembles.fonctions.ensembles_fonction_terme import membre_graphe_terme
+    from bourbaki.ensembles.fonctions.ii_3_6_fonction_terme.ensembles_fonction_terme import membre_graphe_terme
     dom = _source_ext(vs, va)
     cod = _but_ext(vd, va)
     W = W_psi(va0, vs, vd, va)

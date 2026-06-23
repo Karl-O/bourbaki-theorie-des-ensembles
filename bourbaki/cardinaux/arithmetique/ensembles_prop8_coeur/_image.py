@@ -32,7 +32,7 @@ from bourbaki.logique.tactiques.tactiques_abrege_egalite import (symetrie,
 from bourbaki.logique.tactiques.tactiques_abrege_quantif import existe_elimination, alpha_existe
 from bourbaki.ensembles.ensembles_theoremes import egalite_par_extension
 from bourbaki.ensembles.familles.ensembles_somme_disjointe import ZERO, UN, somme_disjointe
-from bourbaki.ensembles.fonctions.ensembles_fonctions import valeur_caracterisation, valeur_dans_graphe
+from bourbaki.ensembles.fonctions.ii_3_4_fonctions_valeur.ensembles_fonctions import valeur_caracterisation, valeur_dans_graphe
 from bourbaki.cardinaux.arithmetique.ensembles_prop8_plus_point import somme_un_plus_point
 from bourbaki.cardinaux.arithmetique.ensembles_prop8_coeur._g import (
     A0_terme, G_RESTR, membre_g_ssi_t, _cut)
