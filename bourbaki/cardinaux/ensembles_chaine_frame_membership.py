@@ -45,7 +45,7 @@ from bourbaki.logique.tactiques.tactiques_abrege2 import (
 )
 
 from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de
-from bourbaki.entiers.ensembles_infinis import est_infini_ensemble
+from bourbaki.entiers.iii_6_infinis.iii_6_3_infinis_denombrables.ensembles_infinis import est_infini_ensemble
 from bourbaki.ordre.iii_2_bon_ordre.recurrence_transfinie.ensembles_c60_coeur import union_famille
 from bourbaki.cardinaux.ensembles_union_chaine_bijection import (
     union_chaine_bijection_graphe,

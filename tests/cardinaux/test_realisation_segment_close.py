@@ -20,7 +20,7 @@ from bourbaki.ensembles import ensembles_abrege as E
 import bourbaki.cardinaux.ensembles_realisation_segment_close as M
 import bourbaki.cardinaux.ensembles_hyp_transport_ordinal_preuve as HTP
 from bourbaki.cardinaux.ensembles_ordinal_cardinal_correspondance import bon_ordre_intervalle
-from bourbaki.entiers.ensembles_recurrence_C61 import cardinaux_bien_ordonnes
+from bourbaki.entiers.iii_4_entiers_finis.iii_4_recurrence_c61_existence_n.ensembles_recurrence_C61 import cardinaux_bien_ordonnes
 
 
 # ─────────────────────────────────────────────────────────────────────────────

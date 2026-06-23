@@ -28,9 +28,9 @@ from bourbaki.cardinaux.arithmetique.ensembles_exposant_cardinal import (
 from bourbaki.cardinaux.ensembles_puissance_entiers_inconditionnel import (
     puissance_entiers_ferme_inconditionnel,
 )
-from bourbaki.entiers.ensembles_entiers import est_fini, DEUX, TROIS
-from bourbaki.entiers.ensembles_fini_deux import fini_deux
-from bourbaki.entiers.ensembles_fini_trois_quatre import fini_trois
+from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import est_fini, DEUX, TROIS
+from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_fini_deux import fini_deux
+from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_fini_trois_quatre import fini_trois
 
 
 def _t(v):

@@ -47,8 +47,8 @@ from bourbaki.logique.tactiques.tactiques_abrege2 import (
 )
 from bourbaki.logique.tactiques.tactiques_abrege_quantif import existe_elimination
 
-from bourbaki.entiers.ensembles_entiers import est_fini_ensemble
-from bourbaki.entiers.ensembles_recurrence_finie import recurrence_finie
+from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import est_fini_ensemble
+from bourbaki.entiers.iii_5_calcul_entiers.iii_5_1_somme_produit_entiers.ensembles_recurrence_finie import recurrence_finie
 
 from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis.ensembles_ordre_relation import totalement_ordonne
 from bourbaki.ordre.iii_2_bon_ordre.zorn_zermelo.ensembles_zorn_theoreme import Union, _inst_Union
@@ -433,7 +433,7 @@ def Tukey_theoreme_complet(S="S", m="m", T="Tchain", x="x", y="y", z="z",
     ⚠ Résidu restant : `chaines_non_vides` (la chaîne vide, majorée hors
     récurrence) + de_caractère_fini + 𝔖≠∅.  Le CŒUR combinatoire (récurrence
     finie) est, lui, entièrement PROUVÉ (sous_lemme_preuve)."""
-    from bourbaki.entiers.ensembles_entiers import de_caractere_fini
+    from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import de_caractere_fini
     from bourbaki.ordre.iii_2_bon_ordre.zorn_zermelo.ensembles_zorn import enonce_non_vide
 
     vS = var(S)

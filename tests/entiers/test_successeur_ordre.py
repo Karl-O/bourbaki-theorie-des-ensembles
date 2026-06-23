@@ -1,5 +1,5 @@
 """Tests de (∗) ordre & successeur (§III.4-5) :  x ≤ b+1 ⟺ (x≤b ou x=b+1)."""
-from bourbaki.entiers.ensembles_successeur_ordre import (
+from bourbaki.entiers.iii_5_calcul_entiers.iii_5_2_inegalites_ordre_soustraction.ensembles_successeur_ordre import (
     successeur_ordre, successeur_ordre_enonce,
     successeur_ordre_reciproque,
     succ_pas_inf_egal, succ_pas_inf_egal_enonce,

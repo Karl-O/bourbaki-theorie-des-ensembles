@@ -47,9 +47,9 @@ from bourbaki.logique.tactiques.tactiques_abrege_quantif import existe_eliminati
 from bourbaki.logique.tactiques.ensembles_alpha_bridge import alpha_bridge
 from bourbaki.ensembles.fonctions.ensembles_projections import projection_premiere
 
-from bourbaki.entiers.ensembles_entiers import est_fini_ensemble
-from bourbaki.entiers.ensembles_infinis import est_infini_ensemble
-from bourbaki.entiers.ensembles_prop6_bien_ordonne_iii5 import partie_finie_est_finie
+from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import est_fini_ensemble
+from bourbaki.entiers.iii_6_infinis.iii_6_3_infinis_denombrables.ensembles_infinis import est_infini_ensemble
+from bourbaki.entiers.iii_5_calcul_entiers.iii_5_intervalles_comptage.ensembles_prop6_bien_ordonne_iii5 import partie_finie_est_finie
 
 from bourbaki.cardinaux.ensembles_hessenberg_hard import (
     frame_pair, frame_ordre, frame_membre,
@@ -167,7 +167,7 @@ def est_infini_union_chaine(E_set="E", C="Cch", p="pmemb"):
     fini_pr1 = N.modus_ponens(conjonction_intro(incl, h_H), pfe)   # Fini(pr₁p)  [sous H, p∈C]
 
     # _refuter : {H ⊢ Q=Fini(pr₁p)} et {⊢ ¬Q=inf_pr1} ⟹ ⊢ ¬H = est_infini_ensemble(⋃S)
-    from bourbaki.entiers.ensembles_infinis_props import _refuter
+    from bourbaki.entiers.iii_6_infinis.iii_6_3_infinis_denombrables.ensembles_infinis_props import _refuter
     res = _refuter(H, fini_pr1, inf_pr1)                   # ¬Fini(⋃S) = est_infini_ensemble(⋃S)
 
     assert res.conclusion == cible, "est_infini_union_chaine : ≠ est_infini_ensemble(⋃S)"

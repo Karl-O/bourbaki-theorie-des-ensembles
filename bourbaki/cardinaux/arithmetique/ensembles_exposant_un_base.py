@@ -378,7 +378,7 @@ def eq_applications_un_base_singleton(a="A"):
     NB : le paramètre A ne doit PAS être nommé « F » — la relation Eq(·,·) lie
     elle-même « F » (Eq(X,Y) := (∃F)bij).  Le défaut « A » et tout nom ≠ F,x,y,z
     conviennent."""
-    from bourbaki.entiers.ensembles_zero_plus_un import eq_singletons
+    from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_zero_plus_un import eq_singletons
     from bourbaki.cardinaux.ensembles_cardinaux import equipotent
     vA = _t(a)
     one = UN_BUT()

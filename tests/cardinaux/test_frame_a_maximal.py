@@ -9,7 +9,7 @@ theorie_ensembles() reste = 22 ; noyau INTACT ; aucune conclusion vacuous.
 """
 from bourbaki.logique.formule import var, appartient, existe
 from bourbaki.ensembles import ensembles_abrege as E
-from bourbaki.entiers.ensembles_infinis import est_infini_ensemble
+from bourbaki.entiers.iii_6_infinis.iii_6_3_infinis_denombrables.ensembles_infinis import est_infini_ensemble
 from bourbaki.cardinaux.ensembles_hessenberg_hard import frame_pair, frame_ordre
 from bourbaki.cardinaux.ensembles_chaine_temoin_abstrait import union_premiere
 from bourbaki.cardinaux.ensembles_frame_inductif_assemblage import m_dans_frame_universel

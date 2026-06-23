@@ -13,7 +13,7 @@ from bourbaki.ensembles import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import (
     cardinal, inf_egal_card, est_injection_de)
 from bourbaki.cardinaux.arithmetique.ensembles_arith_cardinale import produit_cardinal_binaire
-from bourbaki.entiers.ensembles_infinis import est_infini
+from bourbaki.entiers.iii_6_infinis.iii_6_3_infinis_denombrables.ensembles_infinis import est_infini
 from bourbaki.cardinaux import ensembles_hessenberg as H
 
 

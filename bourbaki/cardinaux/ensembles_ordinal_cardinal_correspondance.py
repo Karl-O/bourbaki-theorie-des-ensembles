@@ -61,7 +61,7 @@ from bourbaki.logique.tactiques.tactiques_abrege2 import (
 )
 from bourbaki.logique.tactiques.tactiques_abrege_quantif import monotonie_existe
 from bourbaki.cardinaux.ensembles_cardinaux import inf_egal_card
-from bourbaki.entiers.ensembles_entiers import ZERO
+from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import ZERO
 from bourbaki.cardinaux.ensembles_ordinal_cardinal_bon_ordre import (
     clause_plus_petit, plus_petit_de_bon_ordre,
 )

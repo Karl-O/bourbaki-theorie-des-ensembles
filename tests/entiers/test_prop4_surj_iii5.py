@@ -1,6 +1,6 @@
 """Tests — §III.5 Prop 4 SURJECTIVITÉ de la translation x↦a+x : [0,b]→[a,a+b]."""
 from bourbaki.ensembles.ensembles_abrege import theorie_ensembles
-from bourbaki.entiers.ensembles_prop4_surj_iii5 import (
+from bourbaki.entiers.iii_5_calcul_entiers.iii_5_2_inegalites_ordre_soustraction.ensembles_prop4_surj_iii5 import (
     existe_complement_somme_cardinal, existe_complement_somme_cardinal_enonce,
     additive_order_cancel, additive_order_cancel_enonce,
     prop4_surjective, prop4_surjective_enonce,

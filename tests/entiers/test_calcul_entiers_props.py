@@ -1,4 +1,4 @@
-"""Tests miroir de bourbaki.entiers.ensembles_calcul_entiers_props (§III.5).
+"""Tests miroir de bourbaki.entiers.iii_5_calcul_entiers.iii_5_1_somme_produit_entiers.ensembles_calcul_entiers_props (§III.5).
 
 Vérifie que chaque THÉORÈME inconditionnel est CLOS (est_clos, 0 hypothèse), que sa
 CONCLUSION est EXACTEMENT la cible visée (anti-affaibli : pas de tautologie déguisée),
@@ -13,7 +13,7 @@ from bourbaki.cardinaux.ensembles_cardinaux import (
 from bourbaki.ensembles.familles.ensembles_somme_disjointe import somme_cardinale_binaire
 from bourbaki.cardinaux.arithmetique.ensembles_arith_cardinale import produit_cardinal_binaire
 
-import bourbaki.entiers.ensembles_calcul_entiers_props as M
+import bourbaki.entiers.iii_5_calcul_entiers.iii_5_1_somme_produit_entiers.ensembles_calcul_entiers_props as M
 
 
 A, B, C, D = var("a"), var("b"), var("c"), var("d")
@@ -120,7 +120,7 @@ def test_inf_egal_produit_binaire_clos_et_cible():
 #  ÉNONCÉS-CIBLES REPORTÉS / CONDITIONNELS — formules bien formées, NON postulées
 # ════════════════════════════════════════════════════════════════════════════
 def test_report_cibles_bien_formees():
-    from bourbaki.entiers.ensembles_entiers import est_fini
+    from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import est_fini
 
     f1 = M.somme_binaire_entier_cible()
     assert f1 == impl(et(est_fini(A), est_fini(B)),

@@ -6,7 +6,7 @@ import pytest
 
 from bourbaki.ensembles.ensembles_abrege import theorie_ensembles
 from bourbaki.logique.formule import alpha_egal
-import bourbaki.entiers.ensembles_n_bien_ordonne as M
+import bourbaki.entiers.iii_6_infinis.iii_6_1_n_objet_existence.ensembles_n_bien_ordonne as M
 
 
 def _n_axiomes():

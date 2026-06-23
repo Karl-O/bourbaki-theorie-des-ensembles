@@ -14,7 +14,7 @@ import pytest
 from bourbaki.logique import noyau_abrege as N
 from bourbaki.logique.formule import var, tau, egal
 import bourbaki.ensembles.ensembles_abrege as E
-from bourbaki.entiers.ensembles_recursion_hygienic import (
+from bourbaki.entiers.iii_6_infinis.iii_6_2_recursion_c62.ensembles_recursion_hygienic import (
     antecedent_dans_domaine_hygienic,
 )
 
@@ -51,7 +51,7 @@ def test_value_class_irreductible():
 def test_factorielle_reste_bloquee_O3():
     """La factorielle bute TOUJOURS sur O3 (gluing déposé lève la τ-capture) :
     sa collision est de classe-VALEUR, hors de portée de l'α-hygiène wrapper."""
-    from bourbaki.entiers.ensembles_factorielle_existence import (
+    from bourbaki.entiers.iii_5_calcul_entiers.iii_5_8_factorielle.ensembles_factorielle_existence import (
         factorielle_essais_existe,
     )
     with pytest.raises(ValueError):

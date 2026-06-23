@@ -13,7 +13,7 @@ from bourbaki.logique.formule import (var, et, non, impl, inclus, appartient,
                                        existe, egal)
 from bourbaki.ensembles import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import est_injection_de, inf_egal_card
-from bourbaki.entiers.ensembles_retrait_surgery import (
+from bourbaki.entiers.iii_4_entiers_finis.iii_4_2_pigeonhole_surgery.ensembles_retrait_surgery import (
     image_evite_inclus_diff,
     injection_evite_implique_inf_egal_diff,
     non_surjective_donne_point_rate,
@@ -27,7 +27,7 @@ from bourbaki.entiers.ensembles_retrait_surgery import (
     retrait_point_hyp_mod_general,
     cardinal_pas_entre_mod_general,
 )
-from bourbaki.entiers.ensembles_retrait_point import retrait_surgery_hyp
+from bourbaki.entiers.iii_4_entiers_finis.iii_4_2_pigeonhole_surgery.ensembles_retrait_point import retrait_surgery_hyp
 
 
 # ── theorie_ensembles INTANGIBLE = 22 axiomes ─────────────────────────────────
@@ -110,7 +110,7 @@ def test_retrait_surgery_mod_general_clos():
 
 # ── CAPSTONE : retrait_point_hyp et LEMME N modulo (est_cardinal(b) et GEN) ────
 def test_retrait_point_hyp_mod_general_clos():
-    from bourbaki.entiers.ensembles_cardinal_pas_entre import retrait_point_hyp
+    from bourbaki.entiers.iii_4_entiers_finis.iii_4_recurrence_c61_existence_n.ensembles_cardinal_pas_entre import retrait_point_hyp
     th = retrait_point_hyp_mod_general("b", "c", "F")
     assert th.est_clos and len(th.hypotheses) == 0
     GEN = equipotence_retrait_un_point_general()
@@ -119,7 +119,7 @@ def test_retrait_point_hyp_mod_general_clos():
 
 def test_cardinal_pas_entre_mod_general_clos():
     from bourbaki.cardinaux.ensembles_cardinaux import est_cardinal, inf_egal_card
-    from bourbaki.entiers.ensembles_entiers import successeur
+    from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import successeur
     from bourbaki.logique.formule import ou
     from bourbaki.logique.tactiques.tactiques_abrege import antecedent_consequent
     th = cardinal_pas_entre_mod_general("b", "c", "F")

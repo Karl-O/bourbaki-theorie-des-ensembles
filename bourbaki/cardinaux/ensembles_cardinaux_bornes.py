@@ -136,7 +136,7 @@ def cardinal_zero_inf_egal(a="A"):
     On généralise ∅ ≤ A en (∀A)(∅ ≤ A) puis on INSTANCIE au TERME Card(A), ce qui
     donne ∅ ≤ Card(A) ; comme Card(∅) = ∅ (cardinal_vide_egale_vide), on réécrit le
     membre GAUCHE ∅ ↦ Card(∅) par Leibniz (S6), d'où Card(∅) ≤ Card(A) = « 0 ≤ a »."""
-    from bourbaki.entiers.ensembles_fini_zero import cardinal_vide_egale_vide
+    from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_fini_zero import cardinal_vide_egale_vide
     vA = _t(a)
     cardA = cardinal(vA)
     zero_all = N.generalisation("A", zero_inf_egal("A"))         # (∀A)(∅ ≤ A)

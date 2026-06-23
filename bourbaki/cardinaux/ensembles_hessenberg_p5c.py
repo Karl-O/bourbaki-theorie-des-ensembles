@@ -72,7 +72,7 @@ def _t(v):
 # ════════════════════════════════════════════════════════════════════════════
 def _est_cardinal_de_cardinal_t(t):
     """⊢ est_cardinal(Card t)  pour un TERME t (CLOS)."""
-    from bourbaki.entiers.ensembles_chap3_props_restantes import est_cardinal_de_cardinal
+    from bourbaki.entiers.iii_4_entiers_finis.iii_4_2_finis_props.ensembles_chap3_props_restantes import est_cardinal_de_cardinal
     gen = N.generalisation("Xecc", est_cardinal_de_cardinal("Xecc"))
     return instancie(gen, _t(t))
 
@@ -158,11 +158,11 @@ def _infini_ensemble_de_inclus(E_set, S, tU):
     (Card S₀ ≤ Card Z ∧ Fini Z ⇒ Fini S₀) DÉCHARGÉ via `fini_downward_garde_thm` +
     `predecesseur_fini_universel_preuve` (Prop 2, CLOS) + est_cardinal(Card S₀).  Renvoie
     le théorème sous les deux hyps honnêtes ci-dessus."""
-    from bourbaki.entiers.ensembles_infinis_props import infini_ensemble_monotone_cond
-    from bourbaki.entiers.ensembles_infinis import est_infini_ensemble, est_infini
-    from bourbaki.entiers.ensembles_N_collectivise import fini_downward
-    from bourbaki.entiers.ensembles_recurrence_vraie import fini_downward_garde_thm
-    from bourbaki.entiers.ensembles_predecesseur_prop2 import (
+    from bourbaki.entiers.iii_6_infinis.iii_6_3_infinis_denombrables.ensembles_infinis_props import infini_ensemble_monotone_cond
+    from bourbaki.entiers.iii_6_infinis.iii_6_3_infinis_denombrables.ensembles_infinis import est_infini_ensemble, est_infini
+    from bourbaki.entiers.iii_6_infinis.iii_6_1_n_objet_existence.ensembles_N_collectivise import fini_downward
+    from bourbaki.entiers.iii_4_entiers_finis.iii_4_recurrence_c61_existence_n.ensembles_recurrence_vraie import fini_downward_garde_thm
+    from bourbaki.entiers.iii_4_entiers_finis.iii_4_recurrence_c61_existence_n.ensembles_predecesseur_prop2 import (
         predecesseur_fini_universel_preuve, predecesseur_fini_universel,
     )
     vS = _t(S)
@@ -230,7 +230,7 @@ def negation_strict_sous_maximal(E_set="E", phi0="phi0", S="S0", U="Ucadre"):
     from bourbaki.cardinaux.ensembles_transport_sous_ensemble import (
         existe_sous_ensemble_cardinal_transporte,
     )
-    from bourbaki.entiers.ensembles_infinis import est_infini_ensemble, est_infini
+    from bourbaki.entiers.iii_6_infinis.iii_6_3_infinis_denombrables.ensembles_infinis import est_infini_ensemble, est_infini
     from bourbaki.cardinaux.arithmetique.ensembles_arith_cardinale import (
         produit_cardinal_binaire,
     )
@@ -440,9 +440,9 @@ def _infini_non_nul_under(h_inf_S, b):
 
     est_infini_ensemble(S₀)=¬Fini(Card S₀) ; Fini(Card∅) (fini_zero) ; si Card S₀=Card∅,
     réécrire Fini(Card∅)→Fini(Card S₀), contredire ⇒ Card S₀≠Card∅."""
-    from bourbaki.entiers.ensembles_fini_zero import fini_zero
-    from bourbaki.entiers.ensembles_entiers import est_fini
-    from bourbaki.entiers.ensembles_infinis import est_infini_ensemble
+    from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_fini_zero import fini_zero
+    from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import est_fini
+    from bourbaki.entiers.iii_6_infinis.iii_6_3_infinis_denombrables.ensembles_infinis import est_infini_ensemble
     c0 = cardinal(E.VIDE)
     fz = fini_zero()                                       # ⊢ Fini(Card∅)
     assert fz.conclusion == est_fini(c0)
@@ -624,7 +624,7 @@ def _unpack_maximal_meq(E_set, derive, mfresh="mmx", Sf="Smx", phif="phimx"):
     """Comme unpack_maximal, mais `derive(bij0,S_inc,S_inf,h_max,m_eq,vS0,vphi0)` reçoit
     EN PLUS m_eq ⊢ mmx=(S₀,φ₀) (1er conjoint du corps), pour réécrire les résidus
     frame-membership / element_maximal de (S₀,φ₀) vers mmx (déchargés par h_max)."""
-    from bourbaki.entiers.ensembles_infinis import est_infini_ensemble
+    from bourbaki.entiers.iii_6_infinis.iii_6_3_infinis_denombrables.ensembles_infinis import est_infini_ensemble
     from bourbaki.cardinaux.ensembles_hessenberg_hard import (
         frame_pair, frame_ordre, axiome_frame, theorie_frame,
     )
@@ -766,7 +766,7 @@ def hessenberg_a_carre_egal_a_REEL(E_set="E"):
         from bourbaki.cardinaux.arithmetique.ensembles_arith_cardinale import (
             produit_cardinal_binaire, produit_cardinal_bien_defini,
         )
-        from bourbaki.entiers.ensembles_infinis import est_infini_ensemble
+        from bourbaki.entiers.iii_6_infinis.iii_6_3_infinis_denombrables.ensembles_infinis import est_infini_ensemble
         Gam, Fr = frame_ordre(vE), frame_pair(vE)
         # element_maximal(.,(S₀,φ₀))  [= résidu P5b [13]]  :  réécrire mmx → (S₀,φ₀) dans
         #   maximal_hyp (element_maximal about mmx) via m_eq.

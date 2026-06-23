@@ -10,14 +10,14 @@ Vérifie :
 from __future__ import annotations
 
 from bourbaki.logique.formule import var, egal, et, impl, equiv, non, inclus
-from bourbaki.entiers.ensembles_entiers import est_fini, successeur
+from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import est_fini, successeur
 from bourbaki.cardinaux.ensembles_cardinaux import est_cardinal, cardinal, inf_egal_card
-from bourbaki.entiers.ensembles_infinis import (
+from bourbaki.entiers.iii_6_infinis.iii_6_3_infinis_denombrables.ensembles_infinis import (
     est_infini, est_infini_ensemble, est_denombrable, aleph0,
 )
-from bourbaki.entiers.ensembles_N_collectivise import fini_downward
+from bourbaki.entiers.iii_6_infinis.iii_6_1_n_objet_existence.ensembles_N_collectivise import fini_downward
 from bourbaki.ensembles.ensembles_abrege import theorie_ensembles
-import bourbaki.entiers.ensembles_infinis_props as P
+import bourbaki.entiers.iii_6_infinis.iii_6_3_infinis_denombrables.ensembles_infinis_props as P
 
 
 def _est_clos(thm):
@@ -106,7 +106,7 @@ def test_infini_ensemble_monotone_cond_clos_et_forme():
 def _le_AB_exact():
     """A ≤ B (ensembles) tel que produit par partie_inf_egal_card — forme exacte."""
     from bourbaki.logique import noyau_abrege as N
-    from bourbaki.entiers.ensembles_finis_props import partie_inf_egal_card
+    from bourbaki.entiers.iii_4_entiers_finis.iii_4_2_finis_props.ensembles_finis_props import partie_inf_egal_card
     vA, vB = var("A"), var("B")
     h = N.assume(inclus(vA, vB))
     return N.modus_ponens(h, partie_inf_egal_card("A", "B")).conclusion

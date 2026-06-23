@@ -1,7 +1,7 @@
 """Tests §III.5 combinatoire (1ère vague) : Prop. 1 binaire (somme/produit entiers)."""
 from bourbaki.logique.formule import egal, impl, et, var
 from bourbaki.cardinaux.ensembles_cardinaux import est_cardinal
-from bourbaki.entiers.ensembles_entiers import successeur, est_fini
+from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import successeur, est_fini
 from bourbaki.ensembles.familles.ensembles_somme_disjointe import somme_cardinale_binaire
 from bourbaki.ensembles.ensembles_abrege import theorie_ensembles
 
@@ -11,7 +11,7 @@ def test_theorie_inchangee():
 
 
 def test_somme_succ_distribue_close():
-    from bourbaki.entiers.ensembles_combinatoire_iii5 import somme_succ_distribue
+    from bourbaki.entiers.iii_5_calcul_entiers.iii_5_1_somme_produit_entiers.ensembles_combinatoire_iii5 import somme_succ_distribue
     a, b = var("Asd"), var("Bsd")
     cible = impl(et(est_cardinal(a), est_cardinal(b)),
                  egal(somme_cardinale_binaire(a, successeur(b)),
@@ -22,7 +22,7 @@ def test_somme_succ_distribue_close():
 
 
 def test_somme_zero_neutre_droite_close():
-    from bourbaki.entiers.ensembles_combinatoire_iii5 import somme_zero_neutre_droite
+    from bourbaki.entiers.iii_5_calcul_entiers.iii_5_1_somme_produit_entiers.ensembles_combinatoire_iii5 import somme_zero_neutre_droite
     from bourbaki.cardinaux.ensembles_cardinaux import cardinal
     from bourbaki.ensembles.ensembles_abrege import VIDE
     a = var("Asz")
@@ -34,7 +34,7 @@ def test_somme_zero_neutre_droite_close():
 
 
 def test_somme_binaire_entier_close():
-    from bourbaki.entiers.ensembles_combinatoire_iii5 import somme_binaire_entier
+    from bourbaki.entiers.iii_5_calcul_entiers.iii_5_1_somme_produit_entiers.ensembles_combinatoire_iii5 import somme_binaire_entier
     a, b = var("asbe"), var("bsbe")
     cible = impl(et(est_fini(a), est_fini(b)),
                  est_fini(somme_cardinale_binaire(a, b)))

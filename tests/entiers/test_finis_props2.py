@@ -1,6 +1,6 @@
 """Tests — §III.4.2 ENSEMBLES FINIS, propositions SUPPLÉMENTAIRES (module NEUF).
 
-Module testé : bourbaki.entiers.ensembles_finis_props2.
+Module testé : bourbaki.entiers.iii_4_entiers_finis.iii_4_2_finis_props.ensembles_finis_props2.
 
 On vérifie pour chaque théorème INCONDITIONNEL qu'il est CLOS (aucune hypothèse
 résiduelle) et que sa CONCLUSION est EXACTEMENT l'énoncé attendu (anti-affaibli /
@@ -13,12 +13,12 @@ from bourbaki.ensembles import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import (
     cardinal, equipotent, inf_egal_card, inf_strict_card, est_bijection_de,
 )
-from bourbaki.entiers.ensembles_entiers import est_fini, est_fini_ensemble
+from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import est_fini, est_fini_ensemble
 from bourbaki.ensembles.familles.ensembles_somme_disjointe import somme_disjointe
 from bourbaki.ensembles.familles.ensembles_recollement_props import (
     bijection_canonique_reunion_somme,
 )
-from bourbaki.entiers.ensembles_finis_props2 import (
+from bourbaki.entiers.iii_4_entiers_finis.iii_4_2_finis_props.ensembles_finis_props2 import (
     equipotent_implique_fini_cardinal,
     equipotent_implique_fini_ensemble,
     equipotent_ssi_fini_ensemble,

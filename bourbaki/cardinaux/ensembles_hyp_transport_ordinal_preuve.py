@@ -224,7 +224,7 @@ def _inclus_S_interv(a, S, t):
 
 def _c_le_a(a, c, h_c_interv):
     """De ⊢ c∈[0,a] [h_c_interv] déduit ⊢ c ≤ a  (intervalle_implique_borne_sup, [0,a])."""
-    from bourbaki.entiers.ensembles_entiers_theoremes import intervalle_implique_borne_sup
+    from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers_theoremes import intervalle_implique_borne_sup
     from bourbaki.cardinaux.ensembles_ordinal_cardinal_correspondance import ZERO
     # intervalle_implique_borne_sup(0,a,c) : c∈[0,a] ⇒ c ≤ a, généralisé puis instancié.
     gen = N.generalisation("Xb", N.generalisation("Yb", N.generalisation("xb",

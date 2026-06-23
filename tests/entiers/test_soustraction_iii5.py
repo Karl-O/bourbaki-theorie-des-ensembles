@@ -1,5 +1,5 @@
 """Tests — §III.5.2 soustraction des entiers (Cor. 4 Prop. 3, E.III.37)."""
-from bourbaki.entiers.ensembles_soustraction_iii5 import (
+from bourbaki.entiers.iii_5_calcul_entiers.iii_5_2_inegalites_ordre_soustraction.ensembles_soustraction_iii5 import (
     existe_complement_somme, existe_complement_somme_enonce,
     soustraction_caracterisation, soustraction_caracterisation_enonce,
     soustraction_unicite, soustraction_unicite_enonce,

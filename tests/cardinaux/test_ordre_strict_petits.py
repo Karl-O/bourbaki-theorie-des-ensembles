@@ -8,7 +8,7 @@ certifiée par le noyau EST EXACTEMENT la cible Bourbaki (inf_strict_card / inf_
 from bourbaki.logique.formule import egal, non
 from bourbaki.cardinaux import ensembles_ordre_strict_petits as S
 from bourbaki.cardinaux.ensembles_cardinaux import (inf_egal_card, inf_strict_card)
-from bourbaki.entiers.ensembles_entiers import ZERO, UN, DEUX, successeur
+from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import ZERO, UN, DEUX, successeur
 from bourbaki.ensembles.familles.ensembles_somme_disjointe import somme_disjointe
 from bourbaki.ensembles import ensembles_abrege as E
 

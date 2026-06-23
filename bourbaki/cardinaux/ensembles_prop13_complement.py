@@ -80,7 +80,7 @@ from bourbaki.cardinaux.arithmetique.ensembles_copie_marquee import _eq_sym_t
 from bourbaki.cardinaux.ensembles_cardinaux_props_restantes_ordre import (
     _cardinal_est_son_cardinal,
 )
-from bourbaki.entiers.ensembles_predecesseur_prop2 import eq_reunion_disjointe_somme
+from bourbaki.entiers.iii_4_entiers_finis.iii_4_recurrence_c61_existence_n.ensembles_predecesseur_prop2 import eq_reunion_disjointe_somme
 from bourbaki.cardinaux.ensembles_cantor_bernstein_fin import (
     partie_reunion_complement, partie_disjoint_complement,
 )

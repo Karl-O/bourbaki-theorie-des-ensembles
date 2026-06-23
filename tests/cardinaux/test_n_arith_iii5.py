@@ -7,7 +7,7 @@ theorie=22, kernel intact.
 """
 from bourbaki.logique.formule import var, egal, et, impl, pourtout
 from bourbaki.ensembles import ensembles_abrege as E
-from bourbaki.entiers.ensembles_entiers import est_fini, successeur, ZERO
+from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import est_fini, successeur, ZERO
 from bourbaki.cardinaux.ensembles_cardinaux import est_cardinal, cardinal
 from bourbaki.cardinaux.arithmetique.ensembles_exposant_cardinal import (
     exposant_cardinal_binaire,

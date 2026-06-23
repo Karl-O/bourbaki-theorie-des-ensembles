@@ -21,9 +21,9 @@ from bourbaki.logique.tactiques.tactiques_abrege import antecedent_consequent
 from bourbaki.cardinaux.ensembles_cardinaux import (
     equipotent, cardinal, inf_egal_card, est_injection_de,
 )
-from bourbaki.entiers.ensembles_entiers import successeur
-from bourbaki.entiers.ensembles_cardinal_pas_entre import retrait_point_hyp as REPORT
-from bourbaki.entiers import ensembles_retrait_point as R
+from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import successeur
+from bourbaki.entiers.iii_4_entiers_finis.iii_4_recurrence_c61_existence_n.ensembles_cardinal_pas_entre import retrait_point_hyp as REPORT
+from bourbaki.entiers.iii_4_entiers_finis.iii_4_2_pigeonhole_surgery import ensembles_retrait_point as R
 
 
 # ── INVARIANT : theorie_ensembles() intangible = 22 ──────────────────────────

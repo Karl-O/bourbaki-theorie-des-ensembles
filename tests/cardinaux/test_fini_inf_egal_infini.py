@@ -8,8 +8,8 @@ theorie=22, noyau intact.
 from bourbaki.logique.formule import var, et, impl
 from bourbaki.ensembles.ensembles_abrege import theorie_ensembles
 from bourbaki.cardinaux.ensembles_cardinaux import inf_egal_card, est_cardinal
-from bourbaki.entiers.ensembles_infinis import est_infini
-from bourbaki.entiers.ensembles_entiers import DEUX, TROIS
+from bourbaki.entiers.iii_6_infinis.iii_6_3_infinis_denombrables.ensembles_infinis import est_infini
+from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import DEUX, TROIS
 
 from bourbaki.cardinaux.ensembles_fini_inf_egal_infini import (
     fini_inf_egal_infini, fini_inf_egal_infini_enonce,

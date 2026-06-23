@@ -5,7 +5,7 @@ Ces tests NE dérivent aucun théorème : ils VÉRIFIENT le diagnostic exécutab
 et que le noyau reste à 22 axiomes.
 """
 import bourbaki.ensembles.ensembles_abrege as E
-from bourbaki.entiers.ensembles_factorielle_gluing_diag import (
+from bourbaki.entiers.iii_5_calcul_entiers.iii_5_8_factorielle.ensembles_factorielle_gluing_diag import (
     binders_arithmetique_cardinale, diagnostiquer_capture,
 )
 

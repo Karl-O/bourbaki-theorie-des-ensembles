@@ -4,7 +4,7 @@ Voir la note de source dans ensembles_prop9_bergers_iii5 : la « Prop 9 §III.5 
 demandée n'existe pas (la Prop 9 du livre = exponentiation §III.3.5, déjà close ;
 le principe fibres→produit = Prop 6 Cor 2 §III.3, famille indexée NON close).  On
 certifie ici le CŒUR BINAIRE (I de cardinal 2)."""
-from bourbaki.entiers.ensembles_prop9_bergers_iii5 import (
+from bourbaki.entiers.iii_5_calcul_entiers.iii_5_5_caracteristique_combinatoire.ensembles_prop9_bergers_iii5 import (
     bergers_binaire_fibres, bergers_binaire_somme)
 from bourbaki.ensembles import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import cardinal

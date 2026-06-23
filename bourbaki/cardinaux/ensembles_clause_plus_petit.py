@@ -45,7 +45,7 @@ from bourbaki.logique.tactiques.tactiques_abrege2 import (
 )
 from bourbaki.logique.tactiques.tactiques_abrege_quantif import existe_elimination
 from bourbaki.cardinaux.ensembles_cardinaux import inf_egal_card, cardinal
-from bourbaki.entiers.ensembles_entiers import ZERO
+from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import ZERO
 from bourbaki.cardinaux.ensembles_clause_plus_petit_correspondance import (
     seg_terme, hyp_surjection, hyp_bon_ordre_seg, card_le_de_seg_inclus,
 )

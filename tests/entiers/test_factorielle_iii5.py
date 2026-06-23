@@ -1,11 +1,11 @@
 """Tests §III.5.8 — FACTORIELLE (E III.41, Déf. 2) : caractérisation récursive."""
 from bourbaki.logique.formule import app, var, egal, impl, pourtout
 from bourbaki.ensembles.ensembles_abrege import theorie_ensembles
-from bourbaki.entiers.ensembles_entiers import est_fini, successeur, ZERO, UN
+from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import est_fini, successeur, ZERO, UN
 from bourbaki.cardinaux.arithmetique.ensembles_arith_cardinale import (
     produit_cardinal_binaire,
 )
-from bourbaki.entiers.ensembles_factorielle_iii5 import (
+from bourbaki.entiers.iii_5_calcul_entiers.iii_5_8_factorielle.ensembles_factorielle_iii5 import (
     factorielle_zero_relation, factorielle_succ_relation, factorielle_entier_de,
 )
 

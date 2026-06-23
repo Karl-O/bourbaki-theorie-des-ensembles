@@ -67,7 +67,7 @@ from bourbaki.cardinaux.ensembles_cardinaux import est_cardinal
 from bourbaki.cardinaux.ensembles_equipotence_retrait import (
     cardinal_pas_entre_inconditionnel,
 )
-from bourbaki.entiers.ensembles_recurrence_C61 import cardinal_pas_entre
+from bourbaki.entiers.iii_4_entiers_finis.iii_4_recurrence_c61_existence_n.ensembles_recurrence_C61 import cardinal_pas_entre
 
 
 def cardinal_pas_entre_garde(b="b", c="c"):

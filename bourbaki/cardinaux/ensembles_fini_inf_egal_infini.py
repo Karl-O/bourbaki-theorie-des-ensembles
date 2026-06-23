@@ -29,14 +29,14 @@ from bourbaki.logique.formule import Terme, var, egal, et, ou, non, impl
 from bourbaki.logique import noyau_abrege as N
 
 from bourbaki.cardinaux.ensembles_cardinaux import inf_egal_card, est_cardinal
-from bourbaki.entiers.ensembles_entiers import est_fini
-from bourbaki.entiers.ensembles_infinis import est_infini
+from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import est_fini
+from bourbaki.entiers.iii_6_infinis.iii_6_3_infinis_denombrables.ensembles_infinis import est_infini
 
-from bourbaki.entiers.ensembles_recurrence_vraie import fini_downward_garde_thm
-from bourbaki.entiers.ensembles_predecesseur_prop2 import (
+from bourbaki.entiers.iii_4_entiers_finis.iii_4_recurrence_c61_existence_n.ensembles_recurrence_vraie import fini_downward_garde_thm
+from bourbaki.entiers.iii_4_entiers_finis.iii_4_recurrence_c61_existence_n.ensembles_predecesseur_prop2 import (
     predecesseur_fini_universel_preuve,
 )
-from bourbaki.entiers.ensembles_N_collectivise import fini_downward
+from bourbaki.entiers.iii_6_infinis.iii_6_1_n_objet_existence.ensembles_N_collectivise import fini_downward
 from bourbaki.cardinaux.ensembles_comparabilite import comparabilite_cardinaux
 
 from bourbaki.logique.tactiques.tactiques_abrege2 import (
@@ -173,15 +173,15 @@ def _instance_n(fini_n_thm, valeur_terme, b="b"):
 
 def deux_inf_egal_infini(b="b"):
     """🎯 ⊢ ( est_cardinal(𝔟) et est_infini(𝔟) ) ⇒ 2 ≤ 𝔟.   (n=2, Fini(2).)"""
-    from bourbaki.entiers.ensembles_fini_deux import fini_deux
-    from bourbaki.entiers.ensembles_entiers import DEUX
+    from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_fini_deux import fini_deux
+    from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import DEUX
     return _instance_n(fini_deux(), DEUX, b)
 
 
 def trois_inf_egal_infini(b="b"):
     """🎯 ⊢ ( est_cardinal(𝔟) et est_infini(𝔟) ) ⇒ 3 ≤ 𝔟.   (n=3, Fini(3).)"""
-    from bourbaki.entiers.ensembles_fini_trois_quatre import fini_trois
-    from bourbaki.entiers.ensembles_entiers import TROIS
+    from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_fini_trois_quatre import fini_trois
+    from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import TROIS
     return _instance_n(fini_trois(), TROIS, b)
 
 

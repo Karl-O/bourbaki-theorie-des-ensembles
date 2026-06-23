@@ -5,14 +5,14 @@ Vérifie : (1) les DÉFINITIONS se construisent (clos, sans gonflement) ;
 """
 from bourbaki.logique.formule import var, egal, et, non, impl
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.entiers import ensembles_entiers as Ent
+from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers import ensembles_entiers as Ent
 from bourbaki.cardinaux.ensembles_cardinaux import cardinal, est_cardinal
-from bourbaki.entiers.ensembles_entiers_theoremes import (
+from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers_theoremes import (
     card_est_un_cardinal,
     fini_implique_cardinal, fini_implique_distinct_successeur,
     caracterisation_fini, fini_implique_non_infini,
     ensemble_fini_card_est_cardinal, ensemble_fini_card_distinct_successeur)
-from bourbaki.entiers import ensembles_infinis as Inf
+from bourbaki.entiers.iii_6_infinis.iii_6_3_infinis_denombrables import ensembles_infinis as Inf
 
 
 def test_definitions_se_construisent():

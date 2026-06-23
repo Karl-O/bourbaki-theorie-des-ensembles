@@ -268,7 +268,7 @@ def un_inf_egal_exposant_conditionnel(a="a", b="b"):
     REPORTÉ : la DÉCHARGE de l'hypothèse (1 ↪ 𝓕(b;a), i.e. 𝓕(b;a) ≠ ∅, qui résulte
     de l'existence d'au moins une application — VRAI dès que a≠0, construction
     « valeur d'application »).  Conditionnel ici."""
-    from bourbaki.entiers.ensembles_entiers import UN
+    from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import UN
     vA, vB = _t(a), _t(b)
     Fba = E.applications(vB, vA)                     # 𝓕(b;a)  (support)
     # (X ≤ Y) ⇒ (Card X ≤ Card Y)  au TERME (1, 𝓕(b;a))

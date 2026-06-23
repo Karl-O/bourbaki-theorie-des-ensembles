@@ -8,7 +8,7 @@ Module NEUF.  Il PROUVE le Théorème 1 §III.4 (E.III.35) :
 DÉFINITION 2 (E.III.34, §III.4.5, lue VERBATIM dans le PDF source) :
     𝔖 (⊂ 𝔓(E)) est de caractère fini  :⇔  (∀X)( X∈𝔖 ⇔ « toute partie finie de
     X appartient à 𝔖 » ).
-(prédicat `de_caractere_fini` de bourbaki.entiers.ensembles_entiers, LU verbatim.)
+(prédicat `de_caractere_fini` de bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers, LU verbatim.)
 
 ROUTE (Bourbaki E.III.35, par ZORN — que NOUS AVONS, `zorn_theoreme`) :
   • On ordonne 𝔖 par l'INCLUSION : graphe Incl(𝔖) := { (X,Y) | X∈𝔖 ∧ Y∈𝔖 ∧ X⊂Y }
@@ -58,7 +58,7 @@ from bourbaki.ordre.iii_2_bon_ordre.zorn_zermelo.ensembles_zorn import (
 from bourbaki.ordre.iii_2_bon_ordre.zorn_zermelo.ensembles_zorn_theoreme import (
     Union, _inst_Union, zorn_theoreme,
 )
-from bourbaki.entiers.ensembles_entiers import de_caractere_fini, est_fini_ensemble
+from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import de_caractere_fini, est_fini_ensemble
 
 
 def _terme(t):

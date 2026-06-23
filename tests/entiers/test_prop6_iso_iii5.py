@@ -6,7 +6,7 @@ Vérifie la VÉRITÉ HONNÊTE de l'assemblage :
   • NON vacueux (conclusion ∉ hypothèses) ;
   • theorie=22 (noyau intact).
 """
-from bourbaki.entiers import ensembles_prop6_iso_iii5 as P
+from bourbaki.entiers.iii_5_calcul_entiers.iii_5_intervalles_comptage import ensembles_prop6_iso_iii5 as P
 from bourbaki.ensembles import ensembles_abrege as E
 
 

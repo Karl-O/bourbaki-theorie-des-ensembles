@@ -13,7 +13,7 @@ from bourbaki.cardinaux.ensembles_cardinaux import est_cardinal
 from bourbaki.cardinaux.arithmetique.ensembles_arith_cardinale import (
     produit_cardinal_binaire as _pcb,
 )
-from bourbaki.entiers.ensembles_infinis import est_infini
+from bourbaki.entiers.iii_6_infinis.iii_6_3_infinis_denombrables.ensembles_infinis import est_infini
 from bourbaki.ensembles.familles.ensembles_somme_disjointe import (
     somme_cardinale_binaire, somme_disjointe,
 )

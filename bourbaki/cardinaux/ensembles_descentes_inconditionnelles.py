@@ -52,8 +52,8 @@ from bourbaki.ensembles import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import (
     cardinal, inf_egal_card, est_cardinal, equipotent,
 )
-from bourbaki.entiers.ensembles_entiers import UN, DEUX, TROIS, est_fini
-from bourbaki.entiers.ensembles_infinis import est_infini
+from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import UN, DEUX, TROIS, est_fini
+from bourbaki.entiers.iii_6_infinis.iii_6_3_infinis_denombrables.ensembles_infinis import est_infini
 from bourbaki.ensembles.familles.ensembles_somme_disjointe import (
     somme_disjointe, somme_cardinale_binaire,
 )
@@ -67,21 +67,21 @@ from bourbaki.cardinaux.arithmetique.ensembles_produit_petits import produit_car
 from bourbaki.cardinaux.arithmetique.ensembles_somme_equipotence import (
     somme_cardinale_bien_definie,
 )
-from bourbaki.entiers.ensembles_combinatoire_iii5 import _sdc
+from bourbaki.entiers.iii_5_calcul_entiers.iii_5_1_somme_produit_entiers.ensembles_combinatoire_iii5 import _sdc
 from bourbaki.cardinaux.ensembles_cardinal_ordre_props import (
     produit_cardinale_monotone_droite,
 )
 from bourbaki.cardinaux.ensembles_cardinaux_props_restantes_ordre import (
     _cardinal_est_son_cardinal,
 )
-from bourbaki.entiers.ensembles_chap3_props_restantes import est_cardinal_de_cardinal
+from bourbaki.entiers.iii_4_entiers_finis.iii_4_2_finis_props.ensembles_chap3_props_restantes import est_cardinal_de_cardinal
 from bourbaki.cardinaux.ensembles_cardinaux_theoremes import equipotent_son_cardinal
 from bourbaki.cardinaux.ensembles_cardinaux_ordre import (
     equipotence_implique_inf_egal, inf_egal_transitive,
 )
 from bourbaki.cardinaux.ensembles_equipotence_retrait import equipotence_reflexive_pour
-from bourbaki.entiers.ensembles_fini_un import un_egale_card_singleton
-from bourbaki.entiers.ensembles_fini_deux import fini_deux
+from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_fini_un import un_egale_card_singleton
+from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_fini_deux import fini_deux
 from bourbaki.cardinaux.ensembles_fini_inf_egal_infini import fini_inf_egal_infini
 
 from bourbaki.cardinaux.ensembles_hessenberg_2b3b import deux_b_egal_b, trois_b_egal_b
@@ -260,7 +260,7 @@ def _deuxs_inf_egal_infini(b="b"):
 
 def _troiss_inf_egal_infini(b="b"):
     """⊢ ( est_cardinal(𝔟) et est_infini(𝔟) ) ⇒ TROISS ≤ 𝔟.   (TROISS = {∅}⊔({∅}⊔{∅}), |·|=3.)"""
-    from bourbaki.entiers.ensembles_fini_trois_quatre import fini_trois
+    from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_fini_trois_quatre import fini_trois
     return _set_inf_egal_infini(TROISS, TROIS, fini_trois(), _card_troiss_egale_trois(), b)
 
 

@@ -18,9 +18,9 @@ from bourbaki.logique.formule import (
 from bourbaki.logique import noyau_abrege as N
 from bourbaki.ensembles import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import inf_egal_card
-from bourbaki.entiers.ensembles_entiers import est_fini, ZERO, successeur
-from bourbaki.entiers.ensembles_N_collectivise import fini_downward
-from bourbaki.entiers import ensembles_recurrence_C61 as C
+from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import est_fini, ZERO, successeur
+from bourbaki.entiers.iii_6_infinis.iii_6_1_n_objet_existence.ensembles_N_collectivise import fini_downward
+from bourbaki.entiers.iii_4_entiers_finis.iii_4_recurrence_c61_existence_n import ensembles_recurrence_C61 as C
 
 
 # ── INVARIANT : theorie_ensembles() intangible = 22 ──────────────────────────

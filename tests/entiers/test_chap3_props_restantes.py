@@ -17,8 +17,8 @@ from bourbaki.cardinaux.ensembles_cardinaux import (
 )
 from bourbaki.cardinaux.arithmetique.ensembles_exposant_cardinal import exposant_cardinal_binaire
 from bourbaki.cardinaux.arithmetique.ensembles_powerset_exp import deux
-from bourbaki.entiers.ensembles_infinis import NN, aleph0, puissance_continu, est_denombrable_card
-import bourbaki.entiers.ensembles_chap3_props_restantes as P
+from bourbaki.entiers.iii_6_infinis.iii_6_3_infinis_denombrables.ensembles_infinis import NN, aleph0, puissance_continu, est_denombrable_card
+import bourbaki.entiers.iii_4_entiers_finis.iii_4_2_finis_props.ensembles_chap3_props_restantes as P
 
 
 def _est_clos(thm):

@@ -1,7 +1,7 @@
 """Tests — PRINCIPE DE RÉCURRENCE SUR LES ENSEMBLES FINIS (recurrence_finie)."""
 from bourbaki.logique.formule import var, appartient
 from bourbaki.ensembles import ensembles_abrege as E
-from bourbaki.entiers.ensembles_recurrence_finie import (
+from bourbaki.entiers.iii_5_calcul_entiers.iii_5_1_somme_produit_entiers.ensembles_recurrence_finie import (
     recurrence_finie, recurrence_finie_enonce, _preuve_Q0, _preuve_step,
     _pas_ensemble, _Q,
 )
@@ -17,7 +17,7 @@ def test_Q0_sous_P_vide():
     hP0 = N.assume(_P(E.VIDE))
     q0 = _preuve_Q0(_P, hP0)
     assert q0.conclusion == _Q(_P, "XQ")(__import__(
-        "bourbaki.entiers.ensembles_entiers", fromlist=["ZERO"]).ZERO)
+        "bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers", fromlist=["ZERO"]).ZERO)
 
 
 def test_step_sous_pas():

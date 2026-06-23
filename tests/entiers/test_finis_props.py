@@ -1,6 +1,6 @@
 """Tests — §III.4.2 PROPOSITIONS sur les ENSEMBLES FINIS (atteignables sans récurrence).
 
-Module testé : bourbaki.entiers.ensembles_finis_props.
+Module testé : bourbaki.entiers.iii_4_entiers_finis.iii_4_2_finis_props.ensembles_finis_props.
 
 On vérifie pour chaque théorème INCONDITIONNEL qu'il est CLOS (aucune hypothèse
 résiduelle) et que sa CONCLUSION est EXACTEMENT l'énoncé attendu (le noyau certifie ;
@@ -12,8 +12,8 @@ from bourbaki.logique.formule import var, egal, et, ou, non, impl, inclus
 from bourbaki.cardinaux.ensembles_cardinaux import (
     inf_egal_card, inf_strict_card, est_cardinal, cardinal,
 )
-from bourbaki.entiers.ensembles_entiers import est_fini
-from bourbaki.entiers.ensembles_finis_props import (
+from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import est_fini
+from bourbaki.entiers.iii_4_entiers_finis.iii_4_2_finis_props.ensembles_finis_props import (
     fini_implique_inf_egal_reflexif,
     antisymetrie_card_egal,
     antisymetrie_cardinaux,

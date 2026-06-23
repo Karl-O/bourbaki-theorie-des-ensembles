@@ -17,7 +17,7 @@ from bourbaki.logique.tactiques.tactiques_abrege2 import conjonction_intro
 import bourbaki.logique.noyau_abrege as N
 
 from bourbaki.cardinaux.ensembles_cardinaux import inf_egal_card
-from bourbaki.entiers.ensembles_recurrence_C61 import cardinaux_bien_ordonnes
+from bourbaki.entiers.iii_4_entiers_finis.iii_4_recurrence_c61_existence_n.ensembles_recurrence_C61 import cardinaux_bien_ordonnes
 
 from bourbaki.cardinaux.ensembles_ordinal_cardinal_bon_ordre import (
     clause_plus_petit, bon_ordre_donne_clause_plus_petit, plus_petit_de_bon_ordre,

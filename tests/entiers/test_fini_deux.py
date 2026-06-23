@@ -4,11 +4,11 @@ Fini(2) = (2 cardinal) ∧ (2 ≠ 2+1).  Le 2ᵉ conjoint (2 ≠ 3) repose sur l
 PROPOSITION 8 désormais entière (injectivité du successeur, CAS 2 fermé par la
 transposition construite).  On certifie chaque brique + le jalon Fini(2).
 """
-from bourbaki.entiers.ensembles_fini_deux import (card_un_egale_un,
+from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_fini_deux import (card_un_egale_un,
                                                   card_deux_egale_deux,
                                                   deux_distinct_successeur_deux,
                                                   deux_est_un_cardinal, fini_deux)
-from bourbaki.entiers.ensembles_entiers import UN, DEUX, successeur, est_fini, est_cardinal
+from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import UN, DEUX, successeur, est_fini, est_cardinal
 from bourbaki.cardinaux.ensembles_cardinaux import cardinal
 from bourbaki.logique.formule import egal, non
 

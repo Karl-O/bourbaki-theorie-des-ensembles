@@ -1,6 +1,6 @@
 """Tests du sous-lemme de la pigeonhole (Cor. 2 §III.4)."""
 import bourbaki.ensembles.ensembles_abrege as E
-from bourbaki.entiers.ensembles_pigeonhole_sous_lemme import (
+from bourbaki.entiers.iii_4_entiers_finis.iii_4_2_pigeonhole_surgery.ensembles_pigeonhole_sous_lemme import (
     partie_egal_cardinal_egal, partie_egal_cardinal_egal_enonce,
     cor2_partie_propre_inf_strict, cor2_partie_propre_inf_strict_enonce,
 )

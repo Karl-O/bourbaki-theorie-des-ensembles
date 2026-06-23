@@ -10,7 +10,7 @@ import pytest
 
 from bourbaki.logique.formule import var, Terme
 from bourbaki.ensembles.ensembles_abrege import theorie_ensembles
-from bourbaki.entiers.ensembles_factorielle_existence import (
+from bourbaki.entiers.iii_5_calcul_entiers.iii_5_8_factorielle.ensembles_factorielle_existence import (
     regle_factorielle, factorielle_essais_existe,
 )
 

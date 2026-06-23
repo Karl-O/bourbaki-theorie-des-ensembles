@@ -64,12 +64,12 @@ from bourbaki.cardinaux.arithmetique.ensembles_prop9_final_close import prop9_cl
 from bourbaki.cardinaux.arithmetique.ensembles_exposant_un._bijection import (
     exposant_un_egale,
 )
-from bourbaki.entiers.ensembles_entiers import est_fini, successeur, ZERO
-from bourbaki.entiers.ensembles_prop3_produit_entier_iii5 import produit_binaire_entier
-from bourbaki.entiers.ensembles_principe_recurrence_preuve import (
+from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import est_fini, successeur, ZERO
+from bourbaki.entiers.iii_5_calcul_entiers.iii_5_1_somme_produit_entiers.ensembles_prop3_produit_entier_iii5 import produit_binaire_entier
+from bourbaki.entiers.iii_4_entiers_finis.iii_4_recurrence_c61_existence_n.ensembles_principe_recurrence_preuve import (
     principe_recurrence_preuve, predecesseur_fini_universel,
 )
-from bourbaki.entiers.ensembles_predecesseur_prop2 import (
+from bourbaki.entiers.iii_4_entiers_finis.iii_4_recurrence_c61_existence_n.ensembles_predecesseur_prop2 import (
     predecesseur_fini_universel_preuve,
 )
 
@@ -164,7 +164,7 @@ def puissance_succ_eq(a="Apse", n="Npse"):
     prod_an_carda = produit_cardinal_binaire(an, card_a)
 
     # (4)  a^n · Card a = a^n · a   (congruence : Card a = a sous est_cardinal a)
-    from bourbaki.entiers.ensembles_fini_successeur import cardinal_de_cardinal
+    from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_fini_successeur import cardinal_de_cardinal
     ca = conjonction_elim_gauche(hcard)               # est_cardinal a
     gen_cdc = N.generalisation("xcdc", cardinal_de_cardinal("xcdc"))
     cdc = instancie(gen_cdc, va)                      # est_cardinal a ⇒ Card a = a
@@ -218,8 +218,8 @@ def _preuve_P0_puissance(a, hfa, hB0):
     from bourbaki.cardinaux.arithmetique.ensembles_exposant_cardinal import (
         exposant_zero_egale_un,
     )
-    from bourbaki.entiers.ensembles_fini_un import fini_un, un_egale_card_singleton
-    from bourbaki.entiers.ensembles_entiers import UN
+    from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_fini_un import fini_un, un_egale_card_singleton
+    from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import UN
     va = _t(a)
     a0 = exposant_cardinal_binaire(va, ZERO)          # a^0
     eqz = exposant_zero_egale_un(va)                  # Card(𝓕(∅;a)) = Card({∅})
@@ -302,7 +302,7 @@ def puissance_entiers_ferme(a="apuf", b="bpuf", n="npuf", k="kpuf"):
     p0 = _preuve_P0_puissance(va, hfa, hB0)            # Fini(a^0)   [Fini a, B0]
     step = _preuve_step_puissance(va, hfa, hBuniv, n)  # (∀n)(...)   [Fini a, (∀m)B]
     assert p0.conclusion == P(ZERO), "P[0] puissance mal formé"
-    from bourbaki.entiers.ensembles_recurrence_C61 import _fini_et_P_implique_succ
+    from bourbaki.entiers.iii_4_entiers_finis.iii_4_recurrence_c61_existence_n.ensembles_recurrence_C61 import _fini_et_P_implique_succ
     assert step.conclusion == _fini_et_P_implique_succ(P, n), "pas puissance mal formé"
 
     princ_imp = principe_recurrence_preuve(P, n, k=k)

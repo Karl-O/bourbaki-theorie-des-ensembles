@@ -1,7 +1,7 @@
 """Tests — Cor. 4 §III.4, volet surj ⇒ inj (assemblage structurel)."""
 import pytest
 
-from bourbaki.entiers.ensembles_cor4_surj_inj_fin import (
+from bourbaki.entiers.iii_4_entiers_finis.iii_4_2_cor4_inj_surj_bij.ensembles_cor4_surj_inj_fin import (
     cor4_surj_implique_inj,
     cor4_surj_implique_inj_enonce,
 )

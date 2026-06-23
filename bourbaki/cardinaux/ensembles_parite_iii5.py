@@ -41,27 +41,27 @@ from bourbaki.cardinaux.arithmetique.ensembles_arith_cardinale import (
     produit_cardinal_binaire,
 )
 from bourbaki.cardinaux.arithmetique.ensembles_arith_somme import somme_cardinale_binaire
-from bourbaki.entiers.ensembles_entiers import est_fini, successeur, ZERO, UN, DEUX
+from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import est_fini, successeur, ZERO, UN, DEUX
 
-from bourbaki.entiers.ensembles_prop3_produit_entier_iii5 import produit_succ_distribue
-from bourbaki.entiers.ensembles_combinatoire_iii5 import (
+from bourbaki.entiers.iii_5_calcul_entiers.iii_5_1_somme_produit_entiers.ensembles_prop3_produit_entier_iii5 import produit_succ_distribue
+from bourbaki.entiers.iii_5_calcul_entiers.iii_5_1_somme_produit_entiers.ensembles_combinatoire_iii5 import (
     somme_succ_distribue, somme_zero_neutre_droite,
 )
 from bourbaki.cardinaux.arithmetique.ensembles_produit_petits import produit_cardinal_zero
-from bourbaki.entiers.ensembles_entiers_theoremes import card_est_un_cardinal
-from bourbaki.entiers.ensembles_fini_zero import zero_est_un_cardinal, fini_zero
-from bourbaki.entiers.ensembles_fini_un import un_est_un_cardinal
-from bourbaki.entiers.ensembles_fini_deux import deux_est_un_cardinal
-from bourbaki.entiers.ensembles_fini_successeur import (
+from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers_theoremes import card_est_un_cardinal
+from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_fini_zero import zero_est_un_cardinal, fini_zero
+from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_fini_un import un_est_un_cardinal
+from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_fini_deux import deux_est_un_cardinal
+from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_fini_successeur import (
     cardinal_de_cardinal, fini_implique_fini_successeur,
 )
-from bourbaki.entiers.ensembles_principe_recurrence_preuve import (
+from bourbaki.entiers.iii_4_entiers_finis.iii_4_recurrence_c61_existence_n.ensembles_principe_recurrence_preuve import (
     principe_recurrence_preuve, predecesseur_fini_universel,
 )
-from bourbaki.entiers.ensembles_predecesseur_prop2 import (
+from bourbaki.entiers.iii_4_entiers_finis.iii_4_recurrence_c61_existence_n.ensembles_predecesseur_prop2 import (
     predecesseur_fini_universel_preuve,
 )
-from bourbaki.entiers.ensembles_recurrence_C61 import _fini_et_P_implique_succ
+from bourbaki.entiers.iii_4_entiers_finis.iii_4_recurrence_c61_existence_n.ensembles_recurrence_C61 import _fini_et_P_implique_succ
 
 from bourbaki.cardinaux.ensembles_divisibilite_propre import (
     divise_propre, est_pair_propre, est_impair_propre,
@@ -509,7 +509,7 @@ def _succ_inj_cardinaux(eq_succ, tA, tB):
 
 def _succ_non_nul_t(tk):
     """⊢ ¬(successeur(k) = 0)  (version TERME)."""
-    from bourbaki.entiers.ensembles_aleph0 import successeur_non_nul
+    from bourbaki.entiers.iii_6_infinis.iii_6_1_n_objet_existence.ensembles_aleph0 import successeur_non_nul
     g = N.generalisation("jsnn", successeur_non_nul("jsnn"))
     return instancie(g, _t(tk))
 
@@ -554,11 +554,11 @@ def _pni_P0():
 
 def _pni_step(a="apni"):
     """⊢ (∀a)( (Fini a et Q[a]) ⇒ Q[a+1] ).   (cf. en-tête du module.)"""
-    from bourbaki.entiers.ensembles_fini_successeur import (
+    from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_fini_successeur import (
         cardinal_de_cardinal, fini_successeur_implique_fini,
     )
-    from bourbaki.entiers.ensembles_principe_recurrence_preuve import predecesseur_fini
-    from bourbaki.entiers.ensembles_predecesseur_prop2 import (
+    from bourbaki.entiers.iii_4_entiers_finis.iii_4_recurrence_c61_existence_n.ensembles_principe_recurrence_preuve import predecesseur_fini
+    from bourbaki.entiers.iii_4_entiers_finis.iii_4_recurrence_c61_existence_n.ensembles_predecesseur_prop2 import (
         predecesseur_fini_universel_preuve,
     )
     va = var(a)
@@ -775,7 +775,7 @@ def un_impair():
 
     1 = UN = succ(0) = succ(2·0)  (2·0 = 0).  deux_k_plus_un_impair(0) ⊢
     ¬(2 | succ(2·0)) ; Fini 0 ; Leibniz succ(2·0)=1 transporte en ¬(2|1)."""
-    from bourbaki.entiers.ensembles_fini_zero import fini_zero
+    from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_fini_zero import fini_zero
     dki = N.modus_ponens(fini_zero(), deux_k_plus_un_impair(ZERO))   # ¬(2 | succ(2·0))
     # succ(2·0) = succ(0) = UN   (2·0 = 0 ⇒ succ(2·0)=succ(0)=1)
     eq20 = _deux_fois_zero_eq()                         # 2·0 = 0
@@ -815,7 +815,7 @@ def _distrib_droite_t(ta, td, tc):
 
     Réutilise _distrib_droite (prop3_strict_mono) qui exige les preuves est_cardinal ;
     on les fournit depuis Fini (conjonction_elim_gauche)."""
-    from bourbaki.entiers.ensembles_prop3_strict_mono_iii5 import _distrib_droite
+    from bourbaki.entiers.iii_5_calcul_entiers.iii_5_2_inegalites_ordre_soustraction.ensembles_prop3_strict_mono_iii5 import _distrib_droite
     va, vd, vc = _t(ta), _t(td), _t(tc)
     ha = N.assume(et(et(est_fini(va), est_fini(vd)), est_fini(vc)))
     fa = conjonction_elim_gauche(conjonction_elim_gauche(ha))
@@ -951,7 +951,7 @@ def _deux_distrib(x, y):
     two_xy = deux_fois(xy)                          # 2·(x+y)
     xy_two = produit_cardinal_binaire(xy, DEUX)     # (x+y)·2
     # (x+y)·2 = x·2 + y·2   (_distrib_droite(x,y,2) sous Fini x,y,2)
-    from bourbaki.entiers.ensembles_fini_deux import fini_deux
+    from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_fini_deux import fini_deux
     dd = _distrib_droite_t(vx, vy, DEUX)            # (Fini x et Fini y et Fini 2)⇒ (x+y)·2 = x·2+y·2
     dd2 = N.modus_ponens(conjonction_intro(conjonction_intro(fx, fy), fini_deux()), dd)
     x2 = produit_cardinal_binaire(vx, DEUX)         # x·2
@@ -985,14 +985,14 @@ def _produit_succ_distribue_t2(ta, tn):
 
 
 def _somme_binaire_entier_t(x, y):
-    from bourbaki.entiers.ensembles_combinatoire_iii5 import somme_binaire_entier
+    from bourbaki.entiers.iii_5_calcul_entiers.iii_5_1_somme_produit_entiers.ensembles_combinatoire_iii5 import somme_binaire_entier
     g = N.generalisation("xsbe2", N.generalisation("ysbe2",
             somme_binaire_entier("xsbe2", "ysbe2")))
     return instancie(instancie(g, _t(x)), _t(y))
 
 
 def _produit_binaire_entier_t(x, y):
-    from bourbaki.entiers.ensembles_prop3_produit_entier_iii5 import produit_binaire_entier
+    from bourbaki.entiers.iii_5_calcul_entiers.iii_5_1_somme_produit_entiers.ensembles_prop3_produit_entier_iii5 import produit_binaire_entier
     g = N.generalisation("xpbe2", N.generalisation("ypbe2",
             produit_binaire_entier("xpbe2", "ypbe2")))
     return instancie(instancie(g, _t(x)), _t(y))

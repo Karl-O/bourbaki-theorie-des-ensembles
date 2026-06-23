@@ -66,11 +66,11 @@ from bourbaki.cardinaux.ensembles_cardinaux import est_cardinal, inf_egal_card
 from bourbaki.cardinaux.ensembles_cardinaux_theoremes import inf_egal_reflexif
 from bourbaki.cardinaux.ensembles_cardinaux_ordre import inf_egal_transitive
 from bourbaki.cardinaux.ensembles_comparabilite import comparabilite_cardinaux
-from bourbaki.entiers.ensembles_entiers import ZERO
-from bourbaki.entiers.ensembles_entiers_theoremes import (
+from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import ZERO
+from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers_theoremes import (
     membre_intervalle_entiers, intervalle_implique_cardinal,
 )
-from bourbaki.entiers.ensembles_N_collectivise import zero_inf_egal_cardinal
+from bourbaki.entiers.iii_6_infinis.iii_6_1_n_objet_existence.ensembles_N_collectivise import zero_inf_egal_cardinal
 from bourbaki.cardinaux.ensembles_ordinal_cardinal_correspondance import intervalle_0a
 from bourbaki.cardinaux.ensembles_gate_onto_top import cardinaux_bien_ordonnes_close
 

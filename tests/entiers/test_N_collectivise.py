@@ -11,9 +11,9 @@ from bourbaki.logique.formule import (
 )
 from bourbaki.logique import noyau_abrege as N
 from bourbaki.ensembles import ensembles_abrege as E
-from bourbaki.entiers.ensembles_entiers import est_fini, ZERO
+from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import est_fini, ZERO
 from bourbaki.cardinaux.ensembles_cardinaux import inf_egal_card
-from bourbaki.entiers import ensembles_N_collectivise as M
+from bourbaki.entiers.iii_6_infinis.iii_6_1_n_objet_existence import ensembles_N_collectivise as M
 
 
 # ── INVARIANT : theorie_ensembles() intangible = 22 ──────────────────────────

@@ -23,9 +23,9 @@ from bourbaki.cardinaux.ensembles_cardinaux import (
     est_cardinal, est_injection_de, est_bijection_de, equipotent, cardinal,
     inf_egal_card,
 )
-from bourbaki.entiers.ensembles_entiers import successeur
-from bourbaki.entiers.ensembles_recurrence_C61 import cardinal_pas_entre
-from bourbaki.entiers import ensembles_cardinal_pas_entre as L
+from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import successeur
+from bourbaki.entiers.iii_4_entiers_finis.iii_4_recurrence_c61_existence_n.ensembles_recurrence_C61 import cardinal_pas_entre
+from bourbaki.entiers.iii_4_entiers_finis.iii_4_recurrence_c61_existence_n import ensembles_cardinal_pas_entre as L
 
 
 # ── INVARIANT : theorie_ensembles() intangible = 22 ──────────────────────────

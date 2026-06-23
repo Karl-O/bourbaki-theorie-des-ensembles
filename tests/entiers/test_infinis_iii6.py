@@ -21,12 +21,12 @@ import pytest
 from bourbaki.logique.formule import var, egal, equiv, existe, inclus
 from bourbaki.ensembles import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import est_cardinal, inf_egal_card, equipotent, cardinal
-from bourbaki.entiers.ensembles_entiers import successeur
-from bourbaki.entiers.ensembles_ensemble_NN import ensemble_NN
-from bourbaki.entiers.ensembles_aleph0 import aleph_0
-from bourbaki.entiers.ensembles_infinis import est_infini, est_infini_ensemble
+from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import successeur
+from bourbaki.entiers.iii_6_infinis.iii_6_1_n_objet_existence.ensembles_ensemble_NN import ensemble_NN
+from bourbaki.entiers.iii_6_infinis.iii_6_1_n_objet_existence.ensembles_aleph0 import aleph_0
+from bourbaki.entiers.iii_6_infinis.iii_6_3_infinis_denombrables.ensembles_infinis import est_infini, est_infini_ensemble
 
-from bourbaki.entiers.ensembles_infinis_iii6 import (
+from bourbaki.entiers.iii_6_infinis.iii_6_3_infinis_denombrables.ensembles_infinis_iii6 import (
     aleph0_est_cardinal, aleph0_inf_egal_reflexif, NN_denombrable,
     aleph0_plus_un_egal, aleph0_est_infini, NN_est_infini_ensemble,
     dedekind_aleph0, existe_cardinal_infini_concret,

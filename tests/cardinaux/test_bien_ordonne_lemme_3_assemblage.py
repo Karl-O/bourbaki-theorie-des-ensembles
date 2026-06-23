@@ -15,7 +15,7 @@ import bourbaki.cardinaux.ensembles_bien_ordonne_lemme_3_assemblage as L4M
 from bourbaki.cardinaux.ensembles_ordinal_cardinal_correspondance import (
     cardinaux_bien_ordonnes_de_bon_ordre, bon_ordre_intervalle,
 )
-from bourbaki.entiers.ensembles_recurrence_C61 import cardinaux_bien_ordonnes
+from bourbaki.entiers.iii_4_entiers_finis.iii_4_recurrence_c61_existence_n.ensembles_recurrence_C61 import cardinaux_bien_ordonnes
 
 
 # ─────────────────────────────────────────────────────────────────────────────

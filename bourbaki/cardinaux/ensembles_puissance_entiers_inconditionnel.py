@@ -41,7 +41,7 @@ from bourbaki.cardinaux.arithmetique.ensembles_exposant_cardinal import (
     exposant_cardinal_binaire,
 )
 from bourbaki.ensembles.familles.ensembles_somme_disjointe import somme_disjointe
-from bourbaki.entiers.ensembles_entiers import successeur, ZERO, est_fini
+from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import successeur, ZERO, est_fini
 from bourbaki.cardinaux.ensembles_n_arith_iii5 import (
     exposant_invariance_enonce, exposant_invariance_zero_enonce,
     puissance_entiers_ferme,

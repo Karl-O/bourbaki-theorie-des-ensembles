@@ -50,7 +50,7 @@ from bourbaki.cardinaux.ensembles_cardinaux_theoremes import inf_egal_reflexif
 from bourbaki.cardinaux.ensembles_cardinaux_props_restantes_ordre import (
     inf_egal_antisymetrique_card, _cardinal_est_son_cardinal,
 )
-from bourbaki.entiers.ensembles_chap3_props_restantes import est_cardinal_de_cardinal
+from bourbaki.entiers.iii_4_entiers_finis.iii_4_2_finis_props.ensembles_chap3_props_restantes import est_cardinal_de_cardinal
 
 from bourbaki.logique.tactiques.tactiques_abrege2 import (
     instancie, conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,

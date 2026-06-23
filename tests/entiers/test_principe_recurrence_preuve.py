@@ -16,9 +16,9 @@ import pytest
 
 from bourbaki.logique.formule import var, pourtout, impl, et, non, appartient, egal, inclus
 from bourbaki.ensembles import ensembles_abrege as E
-from bourbaki.entiers.ensembles_entiers import ZERO, est_fini, successeur
-from bourbaki.entiers import ensembles_recurrence_C61 as C
-import bourbaki.entiers.ensembles_principe_recurrence_preuve as M
+from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import ZERO, est_fini, successeur
+from bourbaki.entiers.iii_4_entiers_finis.iii_4_recurrence_c61_existence_n import ensembles_recurrence_C61 as C
+import bourbaki.entiers.iii_4_entiers_finis.iii_4_recurrence_c61_existence_n.ensembles_principe_recurrence_preuve as M
 
 
 # ── invariant THÉORIE = 22 ────────────────────────────────────────────────────
@@ -95,7 +95,7 @@ def test_report1_discharge_elimine_principe():
     # report #1 ÉLIMINÉ
     assert princ not in disc.hypotheses
     # conclusion = coll(x, Fini x)  (ℕ existe)
-    from bourbaki.entiers.ensembles_N_collectivise import _coll_fini
+    from bourbaki.entiers.iii_6_infinis.iii_6_1_n_objet_existence.ensembles_N_collectivise import _coll_fini
     assert disc.conclusion == _coll_fini("x")
 
 

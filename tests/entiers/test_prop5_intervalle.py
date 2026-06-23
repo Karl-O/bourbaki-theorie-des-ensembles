@@ -2,7 +2,7 @@
 
 Le COEUR pointwise (la décomposition de membre via (∗)) est CLOS.  Le passage à
 l'égalité littérale d'ensembles via A1 est un résidu de τ-hygiène (voir module)."""
-from bourbaki.entiers.ensembles_prop5_intervalle import (
+from bourbaki.entiers.iii_5_calcul_entiers.iii_5_intervalles_comptage.ensembles_prop5_intervalle import (
     _membre_equivalence, membre_equivalence_enonce, _membre_union,
 )
 from bourbaki.ensembles.ensembles_abrege import theorie_ensembles

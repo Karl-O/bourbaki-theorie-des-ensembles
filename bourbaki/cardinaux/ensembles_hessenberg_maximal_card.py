@@ -56,7 +56,7 @@ from bourbaki.cardinaux.ensembles_cardinaux_theoremes import inf_egal_reflexif
 from bourbaki.cardinaux.ensembles_hessenberg import (
     enonce_hard_aa_inf_egal_a, hessenberg_depuis_hard, enonce_hessenberg,
 )
-from bourbaki.entiers.ensembles_infinis import est_infini
+from bourbaki.entiers.iii_6_infinis.iii_6_3_infinis_denombrables.ensembles_infinis import est_infini
 from bourbaki.logique.tactiques.tactiques_abrege2 import (
     instancie, conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
 )

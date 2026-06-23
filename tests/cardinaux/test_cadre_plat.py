@@ -3,7 +3,7 @@ from bourbaki.ensembles import ensembles_abrege as E
 from bourbaki.logique.formule import var, egal
 from bourbaki.cardinaux.ensembles_cardinaux import cardinal, est_cardinal
 from bourbaki.cardinaux.arithmetique.ensembles_arith_cardinale import produit_cardinal_binaire
-from bourbaki.entiers.ensembles_infinis import est_infini
+from bourbaki.entiers.iii_6_infinis.iii_6_3_infinis_denombrables.ensembles_infinis import est_infini
 import bourbaki.cardinaux.ensembles_cadre_plat as m
 
 

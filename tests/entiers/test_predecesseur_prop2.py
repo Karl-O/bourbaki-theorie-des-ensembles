@@ -10,12 +10,12 @@ from bourbaki.logique.formule import var, egal, et, impl, non, existe, pourtout,
 from bourbaki.ensembles import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import est_cardinal, cardinal
 
-from bourbaki.entiers.ensembles_principe_recurrence_preuve import (
+from bourbaki.entiers.iii_4_entiers_finis.iii_4_recurrence_c61_existence_n.ensembles_principe_recurrence_preuve import (
     predecesseur_fini, predecesseur_fini_universel,
 )
-from bourbaki.entiers.ensembles_N_collectivise import _coll_fini
+from bourbaki.entiers.iii_6_infinis.iii_6_1_n_objet_existence.ensembles_N_collectivise import _coll_fini
 
-import bourbaki.entiers.ensembles_predecesseur_prop2 as P
+import bourbaki.entiers.iii_4_entiers_finis.iii_4_recurrence_c61_existence_n.ensembles_predecesseur_prop2 as P
 from bourbaki.cardinaux.ensembles_reunion_somme_bijection import eq_reunion_somme
 
 

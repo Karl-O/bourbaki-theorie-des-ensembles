@@ -77,7 +77,7 @@ from bourbaki.cardinaux.ensembles_ordinal_cardinal_correspondance import (
 from bourbaki.cardinaux.ensembles_ordinal_cardinal_ordre import (
     relation_ordre_dans_intervalle,
 )
-from bourbaki.entiers.ensembles_recurrence_C61 import cardinaux_bien_ordonnes
+from bourbaki.entiers.iii_4_entiers_finis.iii_4_recurrence_c61_existence_n.ensembles_recurrence_C61 import cardinaux_bien_ordonnes
 
 import bourbaki.cardinaux.ensembles_hyp_transport_ordinal_preuve as HTP
 import bourbaki.cardinaux.ensembles_bon_ordre_intervalle_ordinal as BOIO

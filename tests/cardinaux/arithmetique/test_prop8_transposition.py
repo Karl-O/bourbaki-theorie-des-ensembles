@@ -13,7 +13,7 @@ concrète de τ (échange ponctuel dans B⊔{∅}) reste à fournir.
 from bourbaki.logique.formule import var, egal, et, impl, appartient, afficher_f
 from bourbaki.ensembles import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de, equipotent, cardinal
-from bourbaki.entiers import ensembles_entiers as Ent
+from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers import ensembles_entiers as Ent
 from bourbaki.cardinaux.arithmetique import ensembles_prop8_transposition as T
 from bourbaki.cardinaux.arithmetique.ensembles_prop8_assemblage import (
     cas2_hypothese, prop8_successeur_injectif_mod_cas2)

@@ -12,7 +12,7 @@ de G⊂E×E) ; la clause SUBSTANTIELLE « plus petit » est, elle, INCONDITIONNE
 import pytest
 
 from bourbaki.ensembles.ensembles_abrege import theorie_ensembles
-from bourbaki.entiers.ensembles_prop6_bien_ordonne_iii5 import (
+from bourbaki.entiers.iii_5_calcul_entiers.iii_5_intervalles_comptage.ensembles_prop6_bien_ordonne_iii5 import (
     partie_finie_est_finie, partie_finie_est_finie_enonce,
     clause_plus_petit_fini_total, _petit_clause,
     fini_total_est_bien_ordonne, fini_total_est_bien_ordonne_enonce,
@@ -29,7 +29,7 @@ def test_partie_finie_est_finie_close():
 def test_clause_plus_petit_close():
     from bourbaki.logique.formule import et, impl
     from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis.ensembles_ordre_relation import totalement_ordonne
-    from bourbaki.entiers.ensembles_entiers import est_fini_ensemble
+    from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import est_fini_ensemble
     from bourbaki.logique.formule import var
     t = clause_plus_petit_fini_total("Gbo", "Ebo")
     assert t.est_clos

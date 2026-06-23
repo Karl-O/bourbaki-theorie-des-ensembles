@@ -9,9 +9,9 @@ L'existence/unicité de l'isomorphisme f : [1,n] → I (Prop. 6) repose sur la r
 """
 from bourbaki.logique.formule import var, egal, impl, inclus, libres_f
 from bourbaki.ensembles import ensembles_abrege as E
-from bourbaki.entiers.ensembles_entiers import (UN, longueur_suite, intervalle_entiers)
-from bourbaki.entiers.ensembles_infinis import NN
-from bourbaki.entiers import ensembles_entiers_notions_suites as S
+from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import (UN, longueur_suite, intervalle_entiers)
+from bourbaki.entiers.iii_6_infinis.iii_6_3_infinis_denombrables.ensembles_infinis import NN
+from bourbaki.entiers.iii_5_calcul_entiers.iii_5_notions_complementaires import ensembles_entiers_notions_suites as S
 
 
 # ── (1) DÉFINITIONS NEUVES se construisent ────────────────────────────────────

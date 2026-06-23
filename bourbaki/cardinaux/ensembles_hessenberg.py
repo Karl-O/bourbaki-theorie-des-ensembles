@@ -65,7 +65,7 @@ from bourbaki.cardinaux.ensembles_cardinaux import (
 from bourbaki.cardinaux.arithmetique.ensembles_arith_cardinale import (
     produit_cardinal_binaire, _prop1_direct_t)
 from bourbaki.cardinaux.ensembles_cantor_bernstein_final._recollement import cantor_bernstein
-from bourbaki.entiers.ensembles_infinis import est_infini
+from bourbaki.entiers.iii_6_infinis.iii_6_3_infinis_denombrables.ensembles_infinis import est_infini
 
 
 def _t(v):

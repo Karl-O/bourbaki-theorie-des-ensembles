@@ -29,7 +29,7 @@ from bourbaki.cardinaux.arithmetique.ensembles_exposant_cardinal import (
     exposant_cardinal_binaire,
 )
 from bourbaki.cardinaux.arithmetique.ensembles_arith_cardinale import produit_cardinal_binaire
-from bourbaki.entiers.ensembles_entiers import est_fini, est_entier, successeur, ZERO, DEUX, TROIS
+from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import est_fini, est_entier, successeur, ZERO, DEUX, TROIS
 
 
 def _t(v):
@@ -107,7 +107,7 @@ def _congr_succ(eq_thm):
 
 def _card_est_cardinal_t(tX):
     """⊢ est_cardinal(Card X)  (version TERME)."""
-    from bourbaki.entiers.ensembles_entiers_theoremes import card_est_un_cardinal
+    from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers_theoremes import card_est_un_cardinal
     gen = N.generalisation("Xcuc3", card_est_un_cardinal("Xcuc3", lieur="X"))
     return instancie(gen, _t(tX))
 
@@ -129,9 +129,9 @@ def trois_impair():
         deux_k_plus_un_impair, deux_fois, deux_succ_eq, _deux_fois_zero_eq,
     )
     from bourbaki.cardinaux.ensembles_divisibilite_propre import est_impair_propre
-    from bourbaki.entiers.ensembles_entiers import UN
-    from bourbaki.entiers.ensembles_fini_zero import zero_est_un_cardinal, fini_zero
-    from bourbaki.entiers.ensembles_fini_un import fini_un
+    from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import UN
+    from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_fini_zero import zero_est_un_cardinal, fini_zero
+    from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_fini_un import fini_un
 
     # 2·1 = 2 :  deux_succ_eq(0) : card 0 ⇒ 2·(0+1) = succ(succ(2·0))
     #   0+1 = succ(0) = UN (literal) ; 2·0 = 0 ; succ(succ(0)) = succ(1) = 2 = DEUX (literal).
@@ -171,9 +171,9 @@ def _trois_puiss_impair_P0():
     )
     from bourbaki.cardinaux.ensembles_parite_iii5 import un_impair
     from bourbaki.cardinaux.ensembles_divisibilite_propre import est_impair_propre
-    from bourbaki.entiers.ensembles_fini_un import un_egale_card_singleton
-    from bourbaki.entiers.ensembles_fini_zero import cardinal_vide_egale_vide
-    from bourbaki.entiers.ensembles_entiers import UN
+    from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_fini_un import un_egale_card_singleton
+    from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_fini_zero import cardinal_vide_egale_vide
+    from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import UN
     # CIBLE : impair( Card(𝓕(ZERO; 3)) )  où ZERO = Card(∅) (≠ ∅ structurellement).
     # `exposant_cardinal_zero_egale_un` donne Card(𝓕(∅; 3)) = Card({∅}) (exposant ∅).
     # On PONTE ZERO → ∅ par `cardinal_vide_egale_vide` (⊢ Card(∅)=∅, i.e. ZERO=∅) +
@@ -214,14 +214,14 @@ def _trois_puiss_impair_step(n="ntpis"):
     from bourbaki.cardinaux.ensembles_parite_iii5 import impair_fois_impair
     from bourbaki.cardinaux.ensembles_divisibilite_propre import est_impair_propre
     from bourbaki.cardinaux.ensembles_puissance_deux_trois_NN import trois_puissance_dans_NN
-    from bourbaki.entiers.ensembles_fini_trois_quatre import fini_trois
+    from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_fini_trois_quatre import fini_trois
     vn = var(n)
     succ_n = successeur(vn)
     e3n = exposant_cardinal_binaire(TROIS, vn)           # 3^n
     e3n1 = exposant_cardinal_binaire(TROIS, succ_n)      # 3^(n+1)
     prod = produit_cardinal_binaire(e3n, TROIS)          # 3^n·3
 
-    from bourbaki.entiers.ensembles_fini_trois_quatre import trois_est_un_cardinal
+    from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_fini_trois_quatre import trois_est_un_cardinal
     hstep = N.assume(et(est_fini(vn), _P_trois_impair(vn)))
     fini_n = conjonction_elim_gauche(hstep)              # Fini n
     Pn = conjonction_elim_droite(hstep)                  # impair(3^n)
@@ -254,11 +254,11 @@ def trois_puiss_impair(n="ntpi", k="ktpi"):
 
     Récurrence C61 sur n : base 3^0=1 impair (un_impair) ; pas 3^(n+1)=3^n·3
     (step1) impair·impair impair (3 impair, impair_fois_impair)."""
-    from bourbaki.entiers.ensembles_recurrence_C61 import _fini_et_P_implique_succ
-    from bourbaki.entiers.ensembles_principe_recurrence_preuve import (
+    from bourbaki.entiers.iii_4_entiers_finis.iii_4_recurrence_c61_existence_n.ensembles_recurrence_C61 import _fini_et_P_implique_succ
+    from bourbaki.entiers.iii_4_entiers_finis.iii_4_recurrence_c61_existence_n.ensembles_principe_recurrence_preuve import (
         principe_recurrence_preuve, predecesseur_fini_universel,
     )
-    from bourbaki.entiers.ensembles_predecesseur_prop2 import (
+    from bourbaki.entiers.iii_4_entiers_finis.iii_4_recurrence_c61_existence_n.ensembles_predecesseur_prop2 import (
         predecesseur_fini_universel_preuve,
     )
     vn = _t(n)
@@ -301,13 +301,13 @@ def deux_puiss_pair(k="kdpp"):
     from bourbaki.cardinaux.ensembles_divisibilite_propre import est_pair_propre
     from bourbaki.cardinaux.ensembles_parite_iii5 import _comm_prod_t
     from bourbaki.cardinaux.ensembles_puissance_deux_trois_NN import deux_puissance_dans_NN
-    from bourbaki.entiers.ensembles_fini_deux import deux_est_un_cardinal
-    from bourbaki.entiers.ensembles_principe_recurrence_preuve import predecesseur_fini
-    from bourbaki.entiers.ensembles_predecesseur_prop2 import (
+    from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_fini_deux import deux_est_un_cardinal
+    from bourbaki.entiers.iii_4_entiers_finis.iii_4_recurrence_c61_existence_n.ensembles_principe_recurrence_preuve import predecesseur_fini
+    from bourbaki.entiers.iii_4_entiers_finis.iii_4_recurrence_c61_existence_n.ensembles_predecesseur_prop2 import (
         predecesseur_fini_universel_preuve,
     )
     from bourbaki.cardinaux.ensembles_cardinaux import inf_strict_card
-    from bourbaki.entiers.ensembles_fini_successeur import fini_successeur_implique_fini
+    from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_fini_successeur import fini_successeur_implique_fini
     vk = _t(k)
     e2k = exposant_cardinal_binaire(DEUX, vk)            # 2^k
     h = N.assume(et(est_fini(vk), non(egal(vk, ZERO))))
@@ -378,8 +378,8 @@ def simplification_multiplicative(a="asm", b="bsm", c="csm", d="dsm"):
 
     Trichotomie (a<b ou a=b ou b<a) ; produit_strict_monotone : a<b⇒a·c<b·c (⇒ a·c≠b·c),
     contredit a·c=b·c ; b<a symétrique ; donc a=b."""
-    from bourbaki.entiers.ensembles_finis_props import trichotomie_finis
-    from bourbaki.entiers.ensembles_prop3_strict_mono_iii5 import produit_strict_monotone
+    from bourbaki.entiers.iii_4_entiers_finis.iii_4_2_finis_props.ensembles_finis_props import trichotomie_finis
+    from bourbaki.entiers.iii_5_calcul_entiers.iii_5_2_inegalites_ordre_soustraction.ensembles_prop3_strict_mono_iii5 import produit_strict_monotone
     from bourbaki.cardinaux.ensembles_cardinaux import inf_strict_card
     from bourbaki.logique.tactiques.tactiques_abrege2 import cas
     va, vb, vc = _t(a), _t(b), _t(c)

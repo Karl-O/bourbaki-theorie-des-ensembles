@@ -46,7 +46,7 @@ from bourbaki.ensembles import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import (
     cardinal, est_cardinal, inf_egal_card, inf_strict_card,
 )
-from bourbaki.entiers.ensembles_infinis import est_infini
+from bourbaki.entiers.iii_6_infinis.iii_6_3_infinis_denombrables.ensembles_infinis import est_infini
 
 from bourbaki.logique.tactiques.tactiques_abrege2 import (
     instancie, conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
@@ -223,8 +223,8 @@ def _infini_non_nul(b, h_inf):
 
     est_infini(𝔟)=¬Fini(𝔟) ; or Fini(Card∅) (`fini_zero`).  Si 𝔟=Card∅, on réécrit
     Fini(Card∅)→Fini(𝔟), contredisant ¬Fini(𝔟) ⇒ ⊥ ⇒ 𝔟≠Card∅."""
-    from bourbaki.entiers.ensembles_fini_zero import fini_zero
-    from bourbaki.entiers.ensembles_entiers import est_fini
+    from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_fini_zero import fini_zero
+    from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import est_fini
     c0 = cardinal(E.VIDE)
     fz = fini_zero()                                       # ⊢ Fini(Card∅)
     assert fz.conclusion == est_fini(c0), \

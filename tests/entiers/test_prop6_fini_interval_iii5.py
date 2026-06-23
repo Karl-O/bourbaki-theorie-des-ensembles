@@ -1,5 +1,5 @@
 """Tests §III.5 Prop 6 socle — partie « plus petit élément » (bien ordonné)."""
-from bourbaki.entiers.ensembles_prop6_fini_interval_iii5 import (
+from bourbaki.entiers.iii_5_calcul_entiers.iii_5_intervalles_comptage.ensembles_prop6_fini_interval_iii5 import (
     prop3_total_min, prop3_total_min_enonce,
     cor1_total_min, cor1_total_min_enonce,
 )

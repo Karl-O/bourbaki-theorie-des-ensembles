@@ -181,10 +181,10 @@ def transitif_intervalle(a="a", x="xo", y="yo", z="zo"):
 def _est_card_de_intervalle(a, t):
     """⊢ ( t ∈ [0,a] ) ⇒ est_cardinal(t)  pour un TERME t   (intervalle_implique_cardinal
     généralisé-instancié au terme t, avec a:=0, b:=a)."""
-    from bourbaki.entiers.ensembles_entiers_theoremes import intervalle_implique_cardinal
+    from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers_theoremes import intervalle_implique_cardinal
     gen = N.generalisation("ia", N.generalisation("ib", N.generalisation("ix",
         intervalle_implique_cardinal("ia", "ib", "ix"))))     # (∀ia,ib,ix)(ix∈[ia,ib]⇒card ix)
-    from bourbaki.entiers.ensembles_entiers import ZERO
+    from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import ZERO
     return instancie(instancie(instancie(gen, ZERO), _t(a)), _t(t))   # t∈[0,a] ⇒ card t
 
 

@@ -8,7 +8,7 @@ from bourbaki.ensembles.familles.ensembles_somme_disjointe import (
 )
 from bourbaki.logique.formule import var, egal
 from bourbaki.logique.tactiques.tactiques_abrege import antecedent_consequent
-from bourbaki.entiers.ensembles_prop7_caracteristique_iii5 import (
+from bourbaki.entiers.iii_5_calcul_entiers.iii_5_5_caracteristique_combinatoire.ensembles_prop7_caracteristique_iii5 import (
     carac_intersection, carac_complement, carac_union, phi,
 )
 
@@ -68,5 +68,5 @@ def test_carac_union_close():
 
 
 def UN_CARD():
-    from bourbaki.entiers.ensembles_entiers import UN
+    from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import UN
     return UN

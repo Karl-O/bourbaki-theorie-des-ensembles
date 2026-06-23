@@ -69,8 +69,8 @@ from bourbaki.cardinaux.ensembles_cardinaux_ordre import inf_egal_transitive
 from bourbaki.cardinaux.ensembles_cardinaux_props_restantes_ordre import (
     inf_egal_antisymetrique_card,
 )
-from bourbaki.entiers.ensembles_entiers_theoremes import intervalle_implique_cardinal
-from bourbaki.entiers.ensembles_entiers import ZERO
+from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers_theoremes import intervalle_implique_cardinal
+from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import ZERO
 from bourbaki.ensembles import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_ordinal_cardinal_correspondance import (
     ordre_induit_intervalle, intervalle_0a,

@@ -7,7 +7,7 @@
 
 ⚠️ Chaque preuve invoque la récurrence C61 sur a (τ-cardinaux imbriqués) ~5-6 min.
 """
-from bourbaki.entiers.ensembles_simplification_additive import (
+from bourbaki.entiers.iii_5_calcul_entiers.iii_5_1_somme_produit_entiers.ensembles_simplification_additive import (
     simplification_additive_finie, simplification_additive_finie_enonce,
     soustraction_unicite_close, soustraction_unicite_close_enonce,
 )

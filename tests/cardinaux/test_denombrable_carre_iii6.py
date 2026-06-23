@@ -2,7 +2,7 @@
 from bourbaki.logique.formule import egal, non
 from bourbaki.ensembles import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import inf_egal_card, equipotent
-from bourbaki.entiers.ensembles_ensemble_NN import ensemble_NN
+from bourbaki.entiers.iii_6_infinis.iii_6_1_n_objet_existence.ensembles_ensemble_NN import ensemble_NN
 from bourbaki.cardinaux.ensembles_denombrable_carre_iii6 import (
     NN_non_vide, NN_inf_egal_NN_carre, denombrable_carre,
     denombrable_carre_de_injection_dure,

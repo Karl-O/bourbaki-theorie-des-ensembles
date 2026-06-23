@@ -2,7 +2,7 @@
 
 Prop 5 (E III.38) forme a=0 : est_entier(b) ⇒ Card([0,b]) = successeur(b).
 Cœur τ-hygiène : decomp_zero [0,b+1]=[0,b]∪{b+1} CLOS (corrige le résidu déposé)."""
-import bourbaki.entiers.ensembles_prop5_prop4_iii5 as M
+import bourbaki.entiers.iii_5_calcul_entiers.iii_5_intervalles_comptage.ensembles_prop5_prop4_iii5 as M
 from bourbaki.ensembles.ensembles_abrege import theorie_ensembles
 
 

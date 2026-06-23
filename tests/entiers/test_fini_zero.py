@@ -14,8 +14,8 @@ from bourbaki.logique.formule import var, egal, non, et
 from bourbaki.ensembles import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import cardinal, est_cardinal
 from bourbaki.ensembles.familles.ensembles_somme_disjointe import somme_disjointe, somme_cardinale_binaire
-from bourbaki.entiers import ensembles_entiers as Ent
-from bourbaki.entiers.ensembles_fini_zero import (cardinal_vide_egale_vide, successeur_zero_egale_un,
+from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers import ensembles_entiers as Ent
+from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_fini_zero import (cardinal_vide_egale_vide, successeur_zero_egale_un,
                                  zero_distinct_successeur_zero, zero_est_un_cardinal,
                                  fini_zero)
 

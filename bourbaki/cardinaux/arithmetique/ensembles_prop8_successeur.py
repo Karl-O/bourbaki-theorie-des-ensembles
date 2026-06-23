@@ -79,7 +79,7 @@ from bourbaki.cardinaux.ensembles_equipotence import equipotence_reflexive
 from bourbaki.cardinaux.arithmetique.ensembles_arith_cardinale import _prop1_direct_t
 from bourbaki.cardinaux.arithmetique.ensembles_somme_equipotence import eq_somme_invariant
 from bourbaki.ensembles.familles.ensembles_somme_disjointe import somme_disjointe
-from bourbaki.entiers import ensembles_entiers as Ent
+from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers import ensembles_entiers as Ent
 from bourbaki.logique.tactiques.tactiques_abrege2 import instancie, conjonction_intro
 from bourbaki.logique.tactiques.tactiques_abrege import syllogisme
 

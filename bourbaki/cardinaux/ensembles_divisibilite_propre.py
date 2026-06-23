@@ -44,9 +44,9 @@ from bourbaki.cardinaux.arithmetique.ensembles_arith_cardinale import (
 from bourbaki.cardinaux.arithmetique.ensembles_produit_petits import (
     produit_cardinal_un,
 )
-from bourbaki.entiers.ensembles_entiers import est_fini, DEUX, UN
-from bourbaki.entiers.ensembles_fini_un import fini_un, un_egale_card_singleton
-from bourbaki.entiers.ensembles_fini_successeur import cardinal_de_cardinal
+from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import est_fini, DEUX, UN
+from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_fini_un import fini_un, un_egale_card_singleton
+from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_fini_successeur import cardinal_de_cardinal
 
 
 def _t(v):

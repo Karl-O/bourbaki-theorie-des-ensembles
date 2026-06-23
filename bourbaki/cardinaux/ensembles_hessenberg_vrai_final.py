@@ -76,7 +76,7 @@ def unpack_maximal(E_set, derive, mfresh="mmx", Sf="Smx", phif="phimx"):
        derive  →  loi_deduction sur les 4 hyps fraîches  →  3 existe_elimination
        (φ, puis S, puis m)  →  modus_ponens contre frame_a_maximal.
     """
-    from bourbaki.entiers.ensembles_infinis import est_infini_ensemble
+    from bourbaki.entiers.iii_6_infinis.iii_6_3_infinis_denombrables.ensembles_infinis import est_infini_ensemble
 
     vE = _t(E_set)
     Gam, Fr = frame_ordre(vE), frame_pair(vE)

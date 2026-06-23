@@ -62,7 +62,7 @@ from bourbaki.ensembles import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import (
     cardinal, est_cardinal, inf_egal_card, inf_strict_card,
 )
-from bourbaki.entiers.ensembles_infinis import est_infini
+from bourbaki.entiers.iii_6_infinis.iii_6_3_infinis_denombrables.ensembles_infinis import est_infini
 from bourbaki.cardinaux.ensembles_hessenberg_extension import complement_grand
 from bourbaki.cardinaux.ensembles_descentes_inconditionnelles import (
     deux_b_egal_b_inconditionnel,
@@ -70,7 +70,7 @@ from bourbaki.cardinaux.ensembles_descentes_inconditionnelles import (
 from bourbaki.cardinaux.ensembles_cardinaux_props_restantes_ordre import (
     inf_egal_total_general,
 )
-from bourbaki.entiers.ensembles_chap3_props_restantes import est_cardinal_de_cardinal
+from bourbaki.entiers.iii_4_entiers_finis.iii_4_2_finis_props.ensembles_chap3_props_restantes import est_cardinal_de_cardinal
 
 from bourbaki.logique.tactiques.tactiques_abrege2 import (
     instancie, conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,

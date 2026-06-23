@@ -6,7 +6,7 @@ des témoins FRAIS, (2) que la theorie reste 22, (3) que le site résiduel est b
 l'appel à témoins par défaut dans le gluing C60 déposé.
 """
 import bourbaki.ensembles.ensembles_abrege as E
-from bourbaki.entiers.ensembles_factorielle_existence_vrai import (
+from bourbaki.entiers.iii_5_calcul_entiers.iii_5_8_factorielle.ensembles_factorielle_existence_vrai import (
     pivot_factorielle_frais_ok, site_residuel_exact,
 )
 

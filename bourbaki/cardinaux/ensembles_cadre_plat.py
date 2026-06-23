@@ -317,7 +317,7 @@ def cadre_plat_cardinal(S="S0", U="Ucadre"):
     )
     from bourbaki.cardinaux.ensembles_cardinaux_theoremes import equipotent_son_cardinal
     from bourbaki.cardinaux.ensembles_equipotence_retrait import equipotence_reflexive_pour
-    from bourbaki.entiers.ensembles_infinis import est_infini
+    from bourbaki.entiers.iii_6_infinis.iii_6_3_infinis_denombrables.ensembles_infinis import est_infini
 
     vS, vU = _t(S), _t(U)
     b = cardinal(vS)                                        # 𝔟 = Card S₀

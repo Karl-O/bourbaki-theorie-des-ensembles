@@ -14,7 +14,7 @@ from bourbaki.logique.formule import var, egal, impl
 from bourbaki.ensembles import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import cardinal, equipotent
 from bourbaki.ensembles.familles.ensembles_somme_disjointe import somme_disjointe
-from bourbaki.entiers import ensembles_entiers as Ent
+from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers import ensembles_entiers as Ent
 from bourbaki.cardinaux.arithmetique import ensembles_prop8_successeur as P8
 
 

@@ -91,10 +91,10 @@ def test_gen_universel_clos():
 def test_gen_interchangeable_avec_surgery():
     """La GEN canonique, instanciée aux termes de la surgery (c+1, C⊔{∅}, q, *), donne
     EXACTEMENT la même instance que la GEN-littéral de ensembles_retrait_surgery."""
-    from bourbaki.entiers.ensembles_retrait_surgery import (
+    from bourbaki.entiers.iii_4_entiers_finis.iii_4_2_pigeonhole_surgery.ensembles_retrait_surgery import (
         equipotence_retrait_un_point_general as SURG_GEN)
-    from bourbaki.entiers.ensembles_retrait_point import _S, _STAR
-    from bourbaki.entiers.ensembles_entiers import successeur
+    from bourbaki.entiers.iii_4_entiers_finis.iii_4_2_pigeonhole_surgery.ensembles_retrait_point import _S, _STAR
+    from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import successeur
     from bourbaki.logique import noyau_abrege as N
     from bourbaki.logique.tactiques.tactiques_abrege2 import instancie
     vc, vq = var("c"), var("q")
@@ -111,7 +111,7 @@ def test_gen_interchangeable_avec_surgery():
 
 def test_cardinal_pas_entre_inconditionnel():
     """⊢ est_cardinal(b) ⇒ cardinal_pas_entre(b,c)  (LEMME N, GEN DÉCHARGÉE, clos)."""
-    from bourbaki.entiers.ensembles_retrait_surgery import cardinal_pas_entre_mod_general
+    from bourbaki.entiers.iii_4_entiers_finis.iii_4_2_pigeonhole_surgery.ensembles_retrait_surgery import cardinal_pas_entre_mod_general
     t = cardinal_pas_entre_inconditionnel()
     assert t.est_clos
     assert len(set(t.hypotheses)) == 0

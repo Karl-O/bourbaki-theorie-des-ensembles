@@ -16,9 +16,9 @@ from bourbaki.logique.formule import (
     var, tau, equiv, impl, appartient, pourtout, libres_t,
 )
 from bourbaki.ensembles import ensembles_abrege as E
-from bourbaki.entiers.ensembles_entiers import est_fini, successeur, ZERO
+from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import est_fini, successeur, ZERO
 
-import bourbaki.entiers.ensembles_ensemble_NN as M
+import bourbaki.entiers.iii_6_infinis.iii_6_1_n_objet_existence.ensembles_ensemble_NN as M
 
 
 # ────────────────────────────────────────────────────────────────────────────
@@ -90,7 +90,7 @@ def test_appartenance_NN_conclusion_exacte(ap, NN):
 def test_appartenance_NN_derivee_de_N_existe(ap):
     """La caractérisation est DÉRIVÉE de N_existe (coll), PAS supposée : elle utilise
     l'axiome-τ existe_temoin dont l'antécédent est EXACTEMENT coll(x, Fini x)."""
-    from bourbaki.entiers.ensembles_N_collectivise import _coll_fini
+    from bourbaki.entiers.iii_6_infinis.iii_6_1_n_objet_existence.ensembles_N_collectivise import _coll_fini
     from bourbaki.logique import noyau_abrege as N
     R = _coll_fini("x").sous[0]
     ax_tau = N.existe_temoin(R, "y")                       # (∃y)R ⇒ (τy R | y)R

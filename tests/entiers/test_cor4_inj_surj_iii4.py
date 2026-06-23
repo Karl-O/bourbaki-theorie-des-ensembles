@@ -1,5 +1,5 @@
 """Tests — Cor. 4 §III.4, direction inj ⇒ surj (cor4_inj_implique_surj)."""
-from bourbaki.entiers.ensembles_cor4_inj_surj_iii4 import (
+from bourbaki.entiers.iii_4_entiers_finis.iii_4_2_cor4_inj_surj_bij.ensembles_cor4_inj_surj_iii4 import (
     cor4_inj_implique_surj, cor4_inj_implique_surj_enonce,
 )
 from bourbaki.ensembles.ensembles_abrege import theorie_ensembles

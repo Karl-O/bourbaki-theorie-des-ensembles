@@ -1,6 +1,6 @@
 """Tests — §III.5 Prop 5 GÉNÉRALE : Card([a,b]) = (b−a)+1  (E III.38)."""
 from bourbaki.ensembles.ensembles_abrege import theorie_ensembles
-from bourbaki.entiers.ensembles_prop5_general_iii5 import (
+from bourbaki.entiers.iii_5_calcul_entiers.iii_5_intervalles_comptage.ensembles_prop5_general_iii5 import (
     prop5_intervalle_general, prop5_intervalle_general_enonce,
     somme_diff_egale_grand,
 )

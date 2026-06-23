@@ -6,9 +6,9 @@ hypothèse), conformément à la discipline LCF stricte du projet.
 """
 from bourbaki.logique.formule import var, egal, et, non, impl, equiv, existe, inclus
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.entiers import ensembles_infinis as I
-from bourbaki.entiers import ensembles_infinis_theoremes as T
-from bourbaki.entiers.ensembles_entiers import est_fini_ensemble
+from bourbaki.entiers.iii_6_infinis.iii_6_3_infinis_denombrables import ensembles_infinis as I
+from bourbaki.entiers.iii_6_infinis.iii_6_3_infinis_denombrables import ensembles_infinis_theoremes as T
+from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import est_fini_ensemble
 
 
 # ── A4 : axiome de l'infini ───────────────────────────────────────────────────
@@ -57,7 +57,7 @@ def test_est_infini_ensemble_est_negation_de_fini():
 # ── Déf. 1 (niveau cardinal) : 𝔞 infini ⇔ ¬Fini(𝔞) ───────────────────────────
 def test_cardinal_infini_ssi_non_fini():
     """⊢ (𝔞 infini) ⇔ ¬Fini(𝔞)  (Déf. 1 §III.6.1, niveau cardinal, A⇔A) — clos."""
-    from bourbaki.entiers.ensembles_entiers import est_fini
+    from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import est_fini
     a = var("a")
     thm = T.cardinal_infini_ssi_non_fini("a")
     assert thm.est_clos
@@ -68,7 +68,7 @@ def test_cardinal_infini_ssi_non_fini():
 
 def test_fini_implique_cardinal_non_infini():
     """⊢ Fini(𝔞) ⇒ ¬(𝔞 infini)  (un cardinal fini n'est pas infini) — clos."""
-    from bourbaki.entiers.ensembles_entiers import est_fini
+    from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import est_fini
     a = var("a")
     thm = T.fini_implique_cardinal_non_infini("a")
     assert thm.est_clos

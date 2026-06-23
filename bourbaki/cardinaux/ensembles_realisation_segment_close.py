@@ -113,19 +113,19 @@ from bourbaki.cardinaux.ensembles_cardinaux import (
     est_bijection_de, equipotent, est_injection_de, inf_egal_card, cardinal, est_cardinal,
 )
 from bourbaki.cardinaux.ensembles_segments_construction import seg
-from bourbaki.entiers.ensembles_cardinal_pas_entre import bijection_implique_equipotent
+from bourbaki.entiers.iii_4_entiers_finis.iii_4_recurrence_c61_existence_n.ensembles_cardinal_pas_entre import bijection_implique_equipotent
 from bourbaki.cardinaux.ensembles_cardinaux_theoremes import cardinal_egal_si_equipotent
 from bourbaki.cardinaux.ensembles_cardinaux_props_restantes_ordre import (
     _cardinal_est_son_cardinal,
 )
-from bourbaki.entiers.ensembles_entiers_theoremes import intervalle_implique_cardinal
+from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers_theoremes import intervalle_implique_cardinal
 from bourbaki.cardinaux.ensembles_ordinal_cardinal_correspondance import (
     ZERO, intervalle_0a, bon_ordre_intervalle, cardinaux_bien_ordonnes_de_bon_ordre,
 )
 from bourbaki.cardinaux.ensembles_ordinal_cardinal_ordre import (
     relation_ordre_dans_intervalle,
 )
-from bourbaki.entiers.ensembles_recurrence_C61 import cardinaux_bien_ordonnes
+from bourbaki.entiers.iii_4_entiers_finis.iii_4_recurrence_c61_existence_n.ensembles_recurrence_C61 import cardinaux_bien_ordonnes
 
 import bourbaki.cardinaux.ensembles_hyp_transport_ordinal_preuve as HTP
 import bourbaki.cardinaux.ensembles_bon_ordre_intervalle_ordinal as BOIO

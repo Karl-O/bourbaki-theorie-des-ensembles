@@ -307,7 +307,7 @@ def eq_applications_vide_singleton(f="B"):
     « F » (Eq(X,Y) := (∃F)bij), donc un ensemble nommé F serait capturé par ce liant.
     Idem pour eq_singletons (témoin var(\"F\")).  Le défaut « B » et tout nom ≠ F,x,y,z
     conviennent (le résultat est valable pour TOUT ensemble, indépendamment du nom)."""
-    from bourbaki.entiers.ensembles_zero_plus_un import eq_singletons
+    from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_zero_plus_un import eq_singletons
     from bourbaki.cardinaux.ensembles_cardinaux import equipotent
     vF = _t(f)
     omega = E.application_vide(vF)                      # ω

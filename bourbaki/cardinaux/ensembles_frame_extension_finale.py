@@ -62,7 +62,7 @@ from bourbaki.cardinaux.ensembles_prop13_complement import (
 from bourbaki.cardinaux.ensembles_descentes_inconditionnelles import (
     trois_b_egal_b_inconditionnel,
 )
-from bourbaki.entiers.ensembles_infinis import est_infini
+from bourbaki.entiers.iii_6_infinis.iii_6_3_infinis_denombrables.ensembles_infinis import est_infini
 from bourbaki.logique.tactiques.tactiques_abrege2 import (
     instancie, conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
     equivalence_avant, equivalence_arriere,
@@ -377,7 +377,7 @@ def extension_dans_frame(E_set="E", phi0="phi0", psi="psi", S="S0", U="Ucadre"):
     par S:=Z, φ:=φ₁ (double existe-intro S5).  Quatre conjoints du témoin :
     p=(Z,φ₁) [réflexivité], Z⊂E [hyp honnête], Z infini [hyp honnête], φ₁ bij. Z×Z→Z
     [= `phi_etendue_bijection`].  Puis frame_membre ⇐.  Jamais postulé ; theorie=22."""
-    from bourbaki.entiers.ensembles_infinis import est_infini_ensemble
+    from bourbaki.entiers.iii_6_infinis.iii_6_3_infinis_denombrables.ensembles_infinis import est_infini_ensemble
     from bourbaki.cardinaux.ensembles_hessenberg_hard import (
         frame_pair, theorie_frame, axiome_frame,
     )

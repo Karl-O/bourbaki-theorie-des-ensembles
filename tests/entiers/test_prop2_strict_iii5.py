@@ -1,5 +1,5 @@
 """Tests — PROPOSITION 2 §III.5.2 (E III.36) : a < b ⟺ ∃c>0, b=a+c."""
-from bourbaki.entiers.ensembles_prop2_strict_iii5 import (
+from bourbaki.entiers.iii_5_calcul_entiers.iii_5_2_inegalites_ordre_soustraction.ensembles_prop2_strict_iii5 import (
     prop2_strict_forward, prop2_strict_backward,
     prop2_strict_equivalence, prop2_strict_equivalence_enonce,
 )
@@ -8,7 +8,7 @@ from bourbaki.logique.formule import (
     var, egal, non, et, impl, existe, equiv,
 )
 from bourbaki.cardinaux.ensembles_cardinaux import inf_strict_card
-from bourbaki.entiers.ensembles_entiers import est_entier, ZERO
+from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import est_entier, ZERO
 from bourbaki.ensembles.familles.ensembles_somme_disjointe import somme_cardinale_binaire
 
 

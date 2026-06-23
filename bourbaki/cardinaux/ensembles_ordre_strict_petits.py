@@ -50,11 +50,11 @@ from bourbaki.cardinaux.ensembles_cardinaux_bornes import zero_inf_egal, inf_ega
 from bourbaki.cardinaux.ensembles_cardinaux_theoremes import equipotent_son_cardinal
 from bourbaki.cardinaux.ensembles_cardinaux_ordre import (equipotence_implique_inf_egal,
                                inf_egal_transitive)
-from bourbaki.entiers import ensembles_entiers as Ent
-from bourbaki.entiers.ensembles_entiers import ZERO, UN, DEUX
-from bourbaki.entiers.ensembles_fini_zero import (cardinal_vide_egale_vide,
+from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers import ensembles_entiers as Ent
+from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import ZERO, UN, DEUX
+from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_fini_zero import (cardinal_vide_egale_vide,
                                zero_distinct_successeur_zero)
-from bourbaki.entiers.ensembles_fini_un import un_distinct_successeur_un
+from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_fini_un import un_distinct_successeur_un
 from bourbaki.ensembles.familles.ensembles_somme_disjointe import somme_disjointe
 
 

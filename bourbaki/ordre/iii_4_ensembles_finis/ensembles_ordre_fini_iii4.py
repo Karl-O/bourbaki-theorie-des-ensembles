@@ -48,10 +48,10 @@ from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis.ensembles_ordre_relatio
     est_ordre, totalement_ordonne, plus_grand_element, majorant,
     element_maximal, _couple_dans,
 )
-from bourbaki.entiers.ensembles_recurrence_finie import (
+from bourbaki.entiers.iii_5_calcul_entiers.iii_5_1_somme_produit_entiers.ensembles_recurrence_finie import (
     recurrence_finie, recurrence_finie_enonce,
 )
-from bourbaki.entiers.ensembles_entiers import est_fini_ensemble
+from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import est_fini_ensemble
 from bourbaki.ensembles.ensembles_theoremes import _instance_reunion
 from bourbaki.ensembles.base.ensembles_couples import singleton_membre
 
@@ -157,7 +157,7 @@ def _preuve_pas_total(G, E_set, htot, P, X="Xrec", x="xrec", z="zpgT", m="m_pgf"
 
     P(X) := (X⊂E et ¬(X=∅)) ⇒ (∃m)(plus_grand_element(G,X,m)).
     Le pas : (Fini-ens X et ¬(x∈X) et P(X)) ⇒ P(X∪{x})."""
-    from bourbaki.entiers.ensembles_recurrence_finie import _pas_ensemble
+    from bourbaki.entiers.iii_5_calcul_entiers.iii_5_1_somme_produit_entiers.ensembles_recurrence_finie import _pas_ensemble
     vE = _t(E_set)
     vX, vx, vz = var(X), var(x), var(z)
     Xux = E.reunion(vX, E.singleton(vx))
@@ -432,7 +432,7 @@ def prop3_filtrant_enonce(G, E_set, X="Xmjt", m="m_mjf"):
 
 def _preuve_pas_filtrant(G, E_set, hord, hfilt, P, X="Xrec", x="xrec", m="m_mjf"):
     """{ hord, hfilt } ⊢ _pas_ensemble(P)  pour P = _P_majorant(G,E)."""
-    from bourbaki.entiers.ensembles_recurrence_finie import _pas_ensemble
+    from bourbaki.entiers.iii_5_calcul_entiers.iii_5_1_somme_produit_entiers.ensembles_recurrence_finie import _pas_ensemble
     vE = _t(E_set)
     vX, vx = var(X), var(x)
     Xux = E.reunion(vX, E.singleton(vx))
@@ -614,7 +614,7 @@ def _emax_de_pourtout(G, A, m_in, corps_gen):
 def _preuve_pas_maximal(G, E_set, hord, P, X="Xrec", x="xrec",
                         m="m_emf", a="a_emf"):
     """{ hord:est_ordre(G,E) } ⊢ _pas_ensemble(P)  pour P = _P_maximal(G,E)."""
-    from bourbaki.entiers.ensembles_recurrence_finie import _pas_ensemble
+    from bourbaki.entiers.iii_5_calcul_entiers.iii_5_1_somme_produit_entiers.ensembles_recurrence_finie import _pas_ensemble
     from bourbaki.logique.tactiques.tactiques_abrege2 import tiers_exclu, dne, dni
     vE = _t(E_set)
     vX, vx = var(X), var(x)

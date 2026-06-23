@@ -16,7 +16,7 @@ from bourbaki.logique.formule import var, impl, pourtout
 from bourbaki.logique.tactiques.tactiques_abrege import antecedent_consequent
 from bourbaki.ensembles import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import est_cardinal
-from bourbaki.entiers.ensembles_recurrence_C61 import cardinal_pas_entre
+from bourbaki.entiers.iii_4_entiers_finis.iii_4_recurrence_c61_existence_n.ensembles_recurrence_C61 import cardinal_pas_entre
 from bourbaki.cardinaux.ensembles_cardinal_pas_entre_univ import (
     cardinal_pas_entre_garde, cardinal_pas_entre_univ,
     cible_cardinal_pas_entre_univ, cible_bare_universel,
@@ -73,7 +73,7 @@ def test_non_vacuite():
 def test_le_bare_universel_est_la_forme_attendue_en_aval():
     """Le bare (∀c)(∀b)cardinal_pas_entre(b,c) que nous N'apportons PAS est EXACTEMENT
     la formule assumée par ensembles_recurrence_C61._preuve_step (report #2)."""
-    from bourbaki.entiers import ensembles_recurrence_C61 as C61
+    from bourbaki.entiers.iii_4_entiers_finis.iii_4_recurrence_c61_existence_n import ensembles_recurrence_C61 as C61
     attendu_aval = pourtout("c", pourtout("b",
                             C61.cardinal_pas_entre(var("b"), var("c"))))
     assert cible_bare_universel() == attendu_aval

@@ -551,8 +551,8 @@ def _hd_depuis_gen(b="b", c="c", q="q"):
     GEN prouvée en X:=c+1, Y:=C⊔{∅}, x:=q, y:=*.  L'instanciation à ces termes (sans
     « y » libre) donne EXACTEMENT l'instance attendue (vérifié : == à l'instance de la
     GEN-littéral de surgery)."""
-    from bourbaki.entiers.ensembles_retrait_point import _S, _STAR, eq_succ_ensemble
-    from bourbaki.entiers.ensembles_entiers import successeur
+    from bourbaki.entiers.iii_4_entiers_finis.iii_4_2_pigeonhole_surgery.ensembles_retrait_point import _S, _STAR, eq_succ_ensemble
+    from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import successeur
     from bourbaki.cardinaux.arithmetique.ensembles_prop8_plus_point import marqueur_dans_somme
     vc, vq = _t(c), _t(q)
     succ_c = successeur(vc)                                  # c+1 = Card(C⊔{∅})
@@ -586,10 +586,10 @@ def cardinal_pas_entre_inconditionnel(b="b", c="c", f="F", q="q"):
         généralisation F         ⊢ (∀F)retrait_point_hyp(b,c,F)
         cardinal_pas_entre_conditionnel ⊢ (est_cardinal(b) et (∀F)rp) ⇒ cardinal_pas_entre.
     Conclusion == cardinal_pas_entre(b,c) sous est_cardinal(b) SEUL.  theorie=22."""
-    from bourbaki.entiers.ensembles_retrait_surgery import (
+    from bourbaki.entiers.iii_4_entiers_finis.iii_4_2_pigeonhole_surgery.ensembles_retrait_surgery import (
         retrait_surgery_mod_HD, retrait_un_point_hypothese)
-    from bourbaki.entiers.ensembles_retrait_point import retrait_point_hyp_mod_surgery
-    from bourbaki.entiers.ensembles_cardinal_pas_entre import (
+    from bourbaki.entiers.iii_4_entiers_finis.iii_4_2_pigeonhole_surgery.ensembles_retrait_point import retrait_point_hyp_mod_surgery
+    from bourbaki.entiers.iii_4_entiers_finis.iii_4_recurrence_c61_existence_n.ensembles_cardinal_pas_entre import (
         cardinal_pas_entre_conditionnel, retrait_point_hyp_universel)
     from bourbaki.cardinaux.ensembles_cardinaux import est_cardinal
     vb = _t(b)

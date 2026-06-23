@@ -12,7 +12,7 @@ from bourbaki.logique.formule import var, egal, et, ou, non, existe
 from bourbaki.ensembles import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import (
     inf_egal_card, inf_strict_card, est_cardinal, cardinal)
-from bourbaki.entiers.ensembles_entiers import UN
+from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import UN
 from bourbaki.cardinaux.ensembles_cardinaux_consequences import (
     strict_implique_inf_egal, strict_irreflexif,
     cantor_strict_existe, aucun_plus_grand_cardinal,

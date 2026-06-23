@@ -15,7 +15,7 @@ import bourbaki.cardinaux.ensembles_gate_onto_top as M
 from bourbaki.cardinaux.ensembles_ordinal_cardinal_correspondance import (
     bon_ordre_intervalle, intervalle_0a,
 )
-from bourbaki.entiers.ensembles_recurrence_C61 import cardinaux_bien_ordonnes
+from bourbaki.entiers.iii_4_entiers_finis.iii_4_recurrence_c61_existence_n.ensembles_recurrence_C61 import cardinaux_bien_ordonnes
 
 
 # ─────────────────────────────────────────────────────────────────────────────

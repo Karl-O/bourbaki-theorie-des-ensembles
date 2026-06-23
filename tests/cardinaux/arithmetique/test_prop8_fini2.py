@@ -12,7 +12,7 @@ from bourbaki.cardinaux.arithmetique.ensembles_prop8_fini2 import (
 from bourbaki.cardinaux.arithmetique.ensembles_prop8_assemblage import cas2_hypothese
 from bourbaki.cardinaux.arithmetique.ensembles_prop8_transposition import (
     transposition_hypothese)
-from bourbaki.entiers.ensembles_entiers import successeur
+from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import successeur
 from bourbaki.cardinaux.ensembles_cardinaux import cardinal
 from bourbaki.logique.formule import var, egal
 import bourbaki.ensembles.ensembles_abrege as E
