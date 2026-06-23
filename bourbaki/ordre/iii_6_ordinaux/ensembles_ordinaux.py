@@ -68,7 +68,7 @@ from bourbaki.logique.i_1_termes_relations.formule import (
 )
 from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.cardinaux import ensembles_cardinaux as C
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux import ensembles_cardinaux as C
 from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis import ensembles_ordre_vocab as V
 from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import a_implique_a
 from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (

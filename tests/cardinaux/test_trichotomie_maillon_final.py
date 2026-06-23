@@ -6,7 +6,7 @@ de la maximalité (D=E ou I=F) et des deux segments, on conclut la trichotomie S
 """
 from bourbaki.logique.i_1_termes_relations.formule import var, egal, ou, appartient
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.cardinaux import ensembles_trichotomie_maillon_final as MF
+from bourbaki.cardinaux.iii_2_trichotomie_ordinaux.assemblage import ensembles_trichotomie_maillon_final as MF
 from bourbaki.ordre.iii_1_relations_ordre.isomorphismes_ordre import ensembles_iso_ordre_canon as C
 
 
@@ -50,8 +50,8 @@ def test_maillon_final_h_chaine_les_pieces_commitees():
     assert t.conclusion == MF.maillon_final_cible()
     assert t.conclusion not in t.hypotheses
     # les 2 hypothèses d'iso (h, h⁻¹) ne sont PLUS là (déchargées sur les pièces commitées)
-    import bourbaki.cardinaux.ensembles_trichotomie_scaffold as TS
-    from bourbaki.cardinaux.ensembles_trichotomie_maillon_final import _R_de
+    import bourbaki.cardinaux.iii_2_trichotomie_ordinaux.assemblage.ensembles_trichotomie_scaffold as TS
+    from bourbaki.cardinaux.iii_2_trichotomie_ordinaux.assemblage.ensembles_trichotomie_maillon_final import _R_de
     from bourbaki.ordre.iii_1_relations_ordre.isomorphismes_ordre import ensembles_iso_ordre_canon as C
     h = TS.h_iso_max("E", "R", "F", "Rp")
     Rf, Rpf = _R_de("R"), _R_de("Rp")
@@ -64,8 +64,8 @@ def test_maillon_final_h_plus_resserre_au_coeur():
     (CLOS) et les égalités réflexives déchargées.  Il ne reste que les 6 hypothèses
     SUBSTANTIELLES — dont le CŒUR DUR (compatibilite_inverse_h, compatibilite_ordre_h
     = Lemme 1 §III.2)."""
-    import bourbaki.cardinaux.ensembles_trichotomie_h_iso as HI
-    import bourbaki.cardinaux.ensembles_trichotomie_coherences as COH
+    import bourbaki.cardinaux.iii_2_trichotomie_ordinaux.h_coherences.ensembles_trichotomie_h_iso as HI
+    import bourbaki.cardinaux.iii_2_trichotomie_ordinaux.h_coherences.ensembles_trichotomie_coherences as COH
     t = MF.maillon_final_h_plus()
     assert not t.est_clos
     assert t.conclusion == MF.maillon_final_cible()
@@ -82,7 +82,7 @@ def test_maillon_final_h_plus2_reduit_au_lemme1():
     """maillon_final_h_plus2 : les cohérences (compatibilite_inverse_h/ordre_h) sont
     déchargées sur les TÉMOINS COMMUNS (= Lemme 1 §III.2).  La trichotomie (saine) est
     réduite à ses hypothèses IRRÉDUCTIBLES : Lemme 1 + maximalité + segments (+func)."""
-    import bourbaki.cardinaux.ensembles_trichotomie_h_iso as HI
+    import bourbaki.cardinaux.iii_2_trichotomie_ordinaux.h_coherences.ensembles_trichotomie_h_iso as HI
     t = MF.maillon_final_h_plus2()
     assert not t.est_clos
     assert t.conclusion == MF.maillon_final_cible()

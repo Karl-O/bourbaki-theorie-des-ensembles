@@ -44,12 +44,12 @@ from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import (couple_eg
                                  singleton_membre)
 from bourbaki.ensembles.fonctions.ii_3_6_fonction_terme.ensembles_fonction_terme import (membre_graphe_terme,
                                           graphe_terme_fonctionnel)
-from bourbaki.cardinaux.ensembles_cantor import graphe_terme_couple_dans, graphe_terme_domaine
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.cantor.ensembles_cantor import graphe_terme_couple_dans, graphe_terme_domaine
 from bourbaki.ensembles.fonctions.ii_3_4_fonctions_valeur.ensembles_fonctions import valeur_caracterisation
 from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import egalite_par_extension
 from bourbaki.ensembles.familles.ii_2_produit_deux_ensembles.ensembles_produit import (couple_dans_produit_ssi,
                                     produit_vide_si)
-from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de, equipotent, cardinal
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import est_bijection_de, equipotent, cardinal
 from bourbaki.cardinaux.arithmetique.iii_3_3_produit.ensembles_arith_cardinale import _prop1_direct_t
 from bourbaki.cardinaux.arithmetique.iii_3_3_produit.ensembles_produit_commute import (
     _membre_produit_egal_couple_ab, _membre_produit_pr1_ab, _membre_produit_pr2_ab,

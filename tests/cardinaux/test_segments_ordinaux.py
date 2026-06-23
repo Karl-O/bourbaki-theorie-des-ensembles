@@ -10,8 +10,8 @@ from bourbaki.logique.i_1_termes_relations.formule import (
 )
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 
-import bourbaki.cardinaux.ensembles_segments_ordinaux as SO
-from bourbaki.cardinaux.ensembles_clause_plus_petit_correspondance import (
+import bourbaki.cardinaux.iii_4_ordinal_cardinal.ordinal_cardinal_correspondance.ensembles_segments_ordinaux as SO
+from bourbaki.cardinaux.iii_4_ordinal_cardinal.bon_ordre_intervalle.ensembles_clause_plus_petit_correspondance import (
     hyp_bon_ordre_seg, hyp_surjection,
 )
 

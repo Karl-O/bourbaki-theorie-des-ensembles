@@ -20,10 +20,10 @@ Points VÉRIFIÉS (honnêteté LCF stricte) :
 from bourbaki.logique.i_1_termes_relations.formule import var, appartient, inclus, libres_f
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis import ensembles_ordre_vocab as V
-from bourbaki.cardinaux.ensembles_coincidence_pont import (
+from bourbaki.cardinaux.iii_2_trichotomie_ordinaux.coincidence_fusion.ensembles_coincidence_pont import (
     coincidence_depuis_isos_compat,
 )
-from bourbaki.cardinaux import ensembles_coincidence_univ as U
+from bourbaki.cardinaux.iii_2_trichotomie_ordinaux.coincidence_fusion import ensembles_coincidence_univ as U
 
 
 def _Rgraphe(nom):

@@ -9,7 +9,7 @@ contrôle la formule-cible ; pour les formes CONDITIONNELLES, l'implication repo
 conclusion.
 """
 from bourbaki.logique.i_1_termes_relations.formule import var, egal, et, ou, non, impl, inclus
-from bourbaki.cardinaux.ensembles_cardinaux import (
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import (
     inf_egal_card, inf_strict_card, est_cardinal, cardinal,
 )
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import est_fini

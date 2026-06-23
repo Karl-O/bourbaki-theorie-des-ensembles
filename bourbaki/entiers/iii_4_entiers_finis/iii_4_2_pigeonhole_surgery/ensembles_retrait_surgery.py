@@ -47,7 +47,7 @@ from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
     equivalence_avant, equivalence_arriere, instancie, dne, contraposition)
 
-from bourbaki.cardinaux.ensembles_cardinaux import (
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import (
     est_injection_de, inf_egal_card,
 )
 from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import singleton_membre
@@ -298,7 +298,7 @@ def retrait_un_point_hypothese(b="b", c="c", q="q"):
     RÉSIDU PROPRE de la surgery : « retirer un point quelconque du (c+1)-cardinal
     donne un ensemble équipotent à (C⊔{∅})∖{*} ».  Brique CONCRÈTE (échange ponctuel
     via la transposition DÉJÀ construite), à fournir/décharger — jamais postulée."""
-    from bourbaki.cardinaux.ensembles_cardinaux import equipotent
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import equipotent
     vc, vq = _t(c), _t(q)
     succ_c = _succ(c)                                        # c+1
     diff_q = E.difference(succ_c, E.singleton(vq))          # (c+1)∖{q}
@@ -420,7 +420,7 @@ def equipotence_retrait_un_point_general(x="X", y="Y", xp="x", yp="y"):
     clos) : pour une bijection β : X→Y, on amène β(x) sur y par τ_{Y,y,β(x)}, puis on
     restreint β (resp. τ∘β) à X∖{x} (bijection sur Y∖{y}).  À fournir/décharger —
     jamais postulée."""
-    from bourbaki.cardinaux.ensembles_cardinaux import equipotent
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import equipotent
     vX, vY, vx, vy = _t(x), _t(y), _t(xp), _t(yp)
     diffX = E.difference(vX, E.singleton(vx))               # X∖{x}
     diffY = E.difference(vY, E.singleton(vy))               # Y∖{y}
@@ -530,7 +530,7 @@ def cardinal_pas_entre_mod_general(b="b", c="c", f="F", q="q"):
     rien postulé, theorie=22."""
     from bourbaki.entiers.iii_4_entiers_finis.iii_4_recurrence_c61_existence_n.ensembles_cardinal_pas_entre import (
         cardinal_pas_entre_conditionnel, retrait_point_hyp_universel)
-    from bourbaki.cardinaux.ensembles_cardinaux import est_cardinal
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import est_cardinal
     vb = _t(b)
     nomf = f if isinstance(f, str) else f.nom
     GEN = equipotence_retrait_un_point_general()

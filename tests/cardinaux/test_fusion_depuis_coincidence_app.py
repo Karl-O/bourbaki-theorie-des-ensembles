@@ -13,9 +13,9 @@ et seg(Tg,Rp,F), TOUS DEUX portés par les CŒURS.  Il ne reste QUE les deux bon
 non tautologique ; theorie=22.
 """
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.cardinaux import ensembles_fusion_depuis_coincidence_app as FDA
-from bourbaki.cardinaux import ensembles_fusion_assemblage as FA
-from bourbaki.cardinaux import ensembles_temoin_deux_couples as T2
+from bourbaki.cardinaux.iii_2_trichotomie_ordinaux.coincidence_fusion import ensembles_fusion_depuis_coincidence_app as FDA
+from bourbaki.cardinaux.iii_2_trichotomie_ordinaux.coincidence_fusion import ensembles_fusion_assemblage as FA
+from bourbaki.cardinaux.iii_2_trichotomie_ordinaux.temoins_comparabilite import ensembles_temoin_deux_couples as T2
 
 
 def test_conclusion_est_fusion_hyp_litteralement():
@@ -78,7 +78,7 @@ def test_residu_strictement_plus_faible_que_coincidence_univ():
     """Le résidu ne porte AUCUNE égalité de valeurs (≠ coïncidence) : son CONSÉQUENT est
     seulement (segment image et inclusion de graphe-restriction)."""
     from bourbaki.logique.i_1_termes_relations.formule import egal
-    from bourbaki.cardinaux.ensembles_coincidence_univ_app import _premisse_liste
+    from bourbaki.cardinaux.iii_2_trichotomie_ordinaux.coincidence_fusion.ensembles_coincidence_univ_app import _premisse_liste
     res = FDA.residu_univ_app()
     # descendre sous les 6 ∀ jusqu'à l'implication ANT ⇒ CONS
     cur = res

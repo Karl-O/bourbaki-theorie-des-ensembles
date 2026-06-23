@@ -64,9 +64,9 @@ from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import (
     couple_egal_implique_composantes)
 from bourbaki.ensembles.fonctions.ii_3_6_fonction_terme.ensembles_fonction_terme import (
     graphe_terme_fonctionnel)
-from bourbaki.cardinaux.ensembles_cantor import (
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.cantor.ensembles_cantor import (
     graphe_terme_domaine, graphe_terme_valeur)
-from bourbaki.cardinaux.ensembles_cardinaux import (
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import (
     cardinal, equipotent, est_bijection_de)
 from bourbaki.cardinaux.arithmetique.iii_3_3_produit.ensembles_arith_cardinale import _prop1_direct_t
 from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import somme_disjointe

@@ -15,8 +15,8 @@ from __future__ import annotations
 from bourbaki.logique.i_1_termes_relations.formule import var, et, appartient, impl
 from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import antecedent_consequent
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de, equipotent, est_cardinal
-from bourbaki.cardinaux.ensembles_equipotence_retrait import (
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import est_bijection_de, equipotent, est_cardinal
+from bourbaki.cardinaux.iii_4_ordinal_cardinal.equipotence_retrait.ensembles_equipotence_retrait import (
     image_diff, eq_retrait_via_bijection, eq_retrait_meme_ensemble,
     gen_corps, equipotence_retrait_un_point_general,
     cardinal_pas_entre_inconditionnel)

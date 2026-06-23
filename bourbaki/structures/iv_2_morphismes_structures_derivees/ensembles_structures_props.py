@@ -240,11 +240,11 @@ def moins_fine_preordre(e="E", s1="S1", s2="S2", s3="S3", morph=None):
 # ════════════════════════════════════════════════════════════════════════════
 #  3.  IDENTITÉ EST UN ISOMORPHISME  (niveau ESPÈCE Σ, IV.1.5)
 # ════════════════════════════════════════════════════════════════════════════
-from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de
-from bourbaki.cardinaux.ensembles_equipotence import (
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import est_bijection_de
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.equipotence.ensembles_equipotence import (
     diagonale_fonctionnelle, diagonale_domaine, diagonale_injective,
     diagonale_image)
-from bourbaki.cardinaux.ensembles_composee_bijection import composee_bijection
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.equipotence.ensembles_composee_bijection import composee_bijection
 from bourbaki.structures.iv_1_structures_isomorphismes.ensembles_especes import (
     est_isomorphisme, structure_transportee)
 

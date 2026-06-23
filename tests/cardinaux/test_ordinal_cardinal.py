@@ -16,22 +16,22 @@ from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import conjonction_intro
 import bourbaki.logique.i_2_criteres_C.noyau.noyau_abrege as N
 
-from bourbaki.cardinaux.ensembles_cardinaux import inf_egal_card
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import inf_egal_card
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_recurrence_c61_existence_n.ensembles_recurrence_C61 import cardinaux_bien_ordonnes
 
-from bourbaki.cardinaux.ensembles_ordinal_cardinal_bon_ordre import (
+from bourbaki.cardinaux.iii_4_ordinal_cardinal.ordinal_cardinal_correspondance.ensembles_ordinal_cardinal_bon_ordre import (
     clause_plus_petit, bon_ordre_donne_clause_plus_petit, plus_petit_de_bon_ordre,
 )
-from bourbaki.cardinaux.ensembles_ordinal_cardinal_correspondance import (
+from bourbaki.cardinaux.iii_4_ordinal_cardinal.ordinal_cardinal_correspondance.ensembles_ordinal_cardinal_correspondance import (
     intervalle_0a, ordre_induit_intervalle, bon_ordre_intervalle,
     plus_petit_induit_donne_bare, clause_induite_donne_bare,
     cardinaux_bien_ordonnes_de_bon_ordre,
 )
-from bourbaki.cardinaux.ensembles_ordinal_cardinal_ordre import (
+from bourbaki.cardinaux.iii_4_ordinal_cardinal.bon_ordre_intervalle.ensembles_ordinal_cardinal_ordre import (
     reflexive_dans_intervalle, reflexif_implicite_intervalle,
     transitif_intervalle, antisymetrie_intervalle, relation_ordre_dans_intervalle,
 )
-from bourbaki.cardinaux.ensembles_ordinal_cardinal import (
+from bourbaki.cardinaux.iii_4_ordinal_cardinal.ordinal_cardinal_correspondance.ensembles_ordinal_cardinal import (
     report_clause_plus_petit, cardinaux_bien_ordonnes_de_clause,
 )
 

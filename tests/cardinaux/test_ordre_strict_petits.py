@@ -6,8 +6,8 @@ certifiée par le noyau EST EXACTEMENT la cible Bourbaki (inf_strict_card / inf_
 / ¬(·=·)), et la clôture (théorème inconditionnel : aucune hypothèse).
 """
 from bourbaki.logique.i_1_termes_relations.formule import egal, non
-from bourbaki.cardinaux import ensembles_ordre_strict_petits as S
-from bourbaki.cardinaux.ensembles_cardinaux import (inf_egal_card, inf_strict_card)
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.ordre_cardinaux import ensembles_ordre_strict_petits as S
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import (inf_egal_card, inf_strict_card)
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import ZERO, UN, DEUX, successeur
 from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import somme_disjointe
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E

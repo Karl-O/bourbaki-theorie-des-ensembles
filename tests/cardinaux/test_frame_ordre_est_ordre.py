@@ -4,8 +4,8 @@ from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis.ensembles_ordre_relation import (
     reflexivite_sur, antisymetrie, transitivite_rel, est_ordre,
 )
-from bourbaki.cardinaux.ensembles_hessenberg_hard import frame_pair, frame_ordre
-from bourbaki.cardinaux.ensembles_frame_ordre_est_ordre import (
+from bourbaki.cardinaux.iii_6_infinis.hessenberg.coeur.ensembles_hessenberg_hard import frame_pair, frame_ordre
+from bourbaki.cardinaux.iii_6_infinis.frame_zorn.ensembles_frame_ordre_est_ordre import (
     frame_ordre_reflexive, frame_ordre_antisymetrique, frame_ordre_transitive,
     frame_ordre_est_ordre,
 )

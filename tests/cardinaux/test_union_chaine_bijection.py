@@ -3,10 +3,10 @@ from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege import theorie_ensembles
 from bourbaki.ordre.iii_2_bon_ordre.recurrence_transfinie.ensembles_c60_coeur import union_famille, famille_compatible
-from bourbaki.cardinaux.ensembles_recollement_famille_injectif import (
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.somme_produit_bornes.ensembles_recollement_famille_injectif import (
     injectif_graphe, famille_dirigee, membres_injectifs,
 )
-from bourbaki.cardinaux.ensembles_union_chaine_bijection import (
+from bourbaki.cardinaux.iii_6_infinis.chaine_recollement.ensembles_union_chaine_bijection import (
     union_chaine_injective, union_chaine_bijection_graphe,
 )
 

@@ -13,14 +13,14 @@ from bourbaki.logique.i_1_termes_relations.formule import impl
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import composantes_conjonction
 
-import bourbaki.cardinaux.ensembles_bien_ordonne_lemme_2_ordre_clause as L3M
-from bourbaki.cardinaux.ensembles_ordinal_cardinal_correspondance import (
+import bourbaki.cardinaux.iii_4_ordinal_cardinal.bon_ordre_intervalle.ensembles_bien_ordonne_lemme_2_ordre_clause as L3M
+from bourbaki.cardinaux.iii_4_ordinal_cardinal.ordinal_cardinal_correspondance.ensembles_ordinal_cardinal_correspondance import (
     bon_ordre_intervalle,
 )
-from bourbaki.cardinaux.ensembles_ordinal_cardinal_ordre import (
+from bourbaki.cardinaux.iii_4_ordinal_cardinal.bon_ordre_intervalle.ensembles_ordinal_cardinal_ordre import (
     relation_ordre_dans_intervalle,
 )
-from bourbaki.cardinaux.ensembles_ordinal_cardinal import (
+from bourbaki.cardinaux.iii_4_ordinal_cardinal.ordinal_cardinal_correspondance.ensembles_ordinal_cardinal import (
     report_clause_plus_petit,
 )
 

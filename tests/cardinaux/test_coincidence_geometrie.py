@@ -5,7 +5,7 @@ Honnêteté LCF : conditionnel propre (hyps structurelles f⊂S×T/dom/func + g�
 conclusion == cible fidèle, NON vacueux (concl ∉ hyps), theorie = 22.
 """
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-import bourbaki.cardinaux.ensembles_coincidence_geometrie as G
+import bourbaki.cardinaux.iii_2_trichotomie_ordinaux.coincidence_fusion.ensembles_coincidence_geometrie as G
 
 
 def test_composee_dans_S_conclusion():

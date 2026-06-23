@@ -1,9 +1,9 @@
 """Tests §III.6 — ℵ₀·ℵ₀ = ℵ₀ (carré dénombrable, Lemme 2 E.III.48)."""
 from bourbaki.logique.i_1_termes_relations.formule import egal, non
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.cardinaux.ensembles_cardinaux import inf_egal_card, equipotent
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import inf_egal_card, equipotent
 from bourbaki.entiers.iii_6_infinis.iii_6_1_n_objet_existence.ensembles_ensemble_NN import ensemble_NN
-from bourbaki.cardinaux.ensembles_denombrable_carre_iii6 import (
+from bourbaki.cardinaux.iii_6_infinis.denombrable.ensembles_denombrable_carre_iii6 import (
     NN_non_vide, NN_inf_egal_NN_carre, denombrable_carre,
     denombrable_carre_de_injection_dure,
 )

@@ -7,8 +7,8 @@
 Conclusion == T2.fusion_hyp LITTÉRALEMENT ; non tautologique ; theorie=22.
 """
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.cardinaux import ensembles_fusion_assemblage as FA
-from bourbaki.cardinaux import ensembles_temoin_deux_couples as T2
+from bourbaki.cardinaux.iii_2_trichotomie_ordinaux.coincidence_fusion import ensembles_fusion_assemblage as FA
+from bourbaki.cardinaux.iii_2_trichotomie_ordinaux.temoins_comparabilite import ensembles_temoin_deux_couples as T2
 
 
 def test_fusion_depuis_coincidence():
@@ -45,7 +45,7 @@ def test_conclusion_est_bien_fusion_hyp():
 
 def test_swap_temoin_commun_clos():
     """Le SWAP des antécédents est CLOS et inconditionnel."""
-    from bourbaki.cardinaux import ensembles_trichotomie_coherences as COH
+    from bourbaki.cardinaux.iii_2_trichotomie_ordinaux.h_coherences import ensembles_trichotomie_coherences as COH
     from bourbaki.logique.i_1_termes_relations.formule import impl
     sw = FA._swap_temoin_commun("E", "R", "F", "Rp", "u", "v", "up", "vp")
     assert sw.est_clos

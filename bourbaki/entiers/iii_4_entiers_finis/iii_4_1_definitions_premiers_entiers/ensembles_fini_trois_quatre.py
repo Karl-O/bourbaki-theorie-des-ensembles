@@ -44,7 +44,7 @@ from __future__ import annotations
 from bourbaki.logique.i_1_termes_relations.formule import var, egal, non
 from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.cardinaux.ensembles_cardinaux import cardinal, est_cardinal
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import cardinal, est_cardinal
 from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (instancie, contraposition,
                                                           conjonction_intro)
 from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import (symetrie,

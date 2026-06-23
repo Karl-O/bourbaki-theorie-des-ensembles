@@ -4,8 +4,8 @@
 """
 from bourbaki.logique.i_1_termes_relations.formule import var, egal, et, impl
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de
-from bourbaki.cardinaux.ensembles_composee_bijection import (
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import est_bijection_de
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.equipotence.ensembles_composee_bijection import (
     composee_bijection, composee_bijection_conjoints)
 
 

@@ -50,7 +50,7 @@ from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import (
     symetrie, composer_egalites, congruence_terme,
 )
 
-from bourbaki.cardinaux.ensembles_cardinaux import (
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import (
     est_cardinal, cardinal, inf_strict_card,
 )
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
@@ -75,7 +75,7 @@ from bourbaki.entiers.iii_5_calcul_entiers.iii_5_1_somme_produit_entiers.ensembl
 from bourbaki.entiers.iii_5_calcul_entiers.iii_5_1_somme_produit_entiers.ensembles_prop3_produit_entier_iii5 import (
     produit_binaire_entier,
 )
-from bourbaki.cardinaux.ensembles_cardinaux_props_restantes_prop7 import (
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.props_restantes.ensembles_cardinaux_props_restantes_prop7 import (
     prop7_produit_non_nul,
 )
 from bourbaki.entiers.iii_5_calcul_entiers.iii_5_2_inegalites_ordre_soustraction.ensembles_prop2_strict_iii5 import (

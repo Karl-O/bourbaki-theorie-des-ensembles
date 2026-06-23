@@ -51,12 +51,12 @@ from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 
 from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import conjonction_intro, instancie
-from bourbaki.cardinaux.ensembles_cardinaux import cardinal, equipotent
-from bourbaki.cardinaux.ensembles_cardinaux_theoremes import equipotent_si_cardinal_egal
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import cardinal, equipotent
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux_theoremes import equipotent_si_cardinal_egal
 from bourbaki.ordre.iii_1_relations_ordre.isomorphismes_ordre.ensembles_iso_ordre_canon import (
     sont_isomorphes_ordre_canon, trichotomie_ordinaux_canon,
 )
-from bourbaki.cardinaux import ensembles_h_est_graphe as HG
+from bourbaki.cardinaux.iii_2_trichotomie_ordinaux.h_coherences import ensembles_h_est_graphe as HG
 
 
 # Noms ambiants CANONIQUES exigés par Th 3 (close_v3) : E, F, R, Rp.

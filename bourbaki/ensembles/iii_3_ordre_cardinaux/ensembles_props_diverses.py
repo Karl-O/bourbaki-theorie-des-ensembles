@@ -53,10 +53,10 @@ from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import syllogisme
 from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (conjonction_intro,
                                conjonction_elim_gauche, conjonction_elim_droite)
-from bourbaki.cardinaux.ensembles_cardinaux import inf_egal_card, equipotent
-from bourbaki.cardinaux.ensembles_cardinaux_ordre import (equipotence_implique_inf_egal,
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import inf_egal_card, equipotent
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.ordre_cardinaux.ensembles_cardinaux_ordre import (equipotence_implique_inf_egal,
                                inf_egal_transitive)
-from bourbaki.cardinaux.ensembles_bijection import equipotence_symetrique
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.equipotence.ensembles_bijection import equipotence_symetrique
 
 
 # ═══════════════════════════════════════════════════════════════════════════════

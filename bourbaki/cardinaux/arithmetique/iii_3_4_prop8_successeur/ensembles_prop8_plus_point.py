@@ -69,7 +69,7 @@ from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recolle
                                        _dans_singleton)
 from bourbaki.ensembles.familles.ii_2_produit_deux_ensembles.ensembles_produit import couple_dans_produit_ssi
 from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import singleton_membre
-from bourbaki.cardinaux.ensembles_vide_singleton import vide_distinct_singleton
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.equipotence.ensembles_vide_singleton import vide_distinct_singleton
 
 
 def _t(v):

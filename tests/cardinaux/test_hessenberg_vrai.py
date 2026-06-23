@@ -8,9 +8,9 @@ from bourbaki.logique.i_1_termes_relations.formule import (
     var, egal, non, impl, pourtout, appartient, inclus, tau,
 )
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.cardinaux.ensembles_cardinaux import cardinal
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import cardinal
 
-from bourbaki.cardinaux.ensembles_hessenberg_vrai import (
+from bourbaki.cardinaux.iii_6_infinis.hessenberg.assemblage_vrai.ensembles_hessenberg_vrai import (
     realiser_U, U_disjoint_derive, U_non_vide_derive, u_dans_U_derive,
     negation_b_inf_strict_a_vrai, negation_b_inf_strict_a_vrai_cible,
     _temoin_U, _temoin_u,
@@ -68,5 +68,5 @@ def test_negation_vrai_clos_et_non_vacueux():
 
 
 def _lt():
-    from bourbaki.cardinaux.ensembles_cardinaux import inf_strict_card
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import inf_strict_card
     return inf_strict_card(cardinal(var("S0")), cardinal(var("E")))

@@ -15,9 +15,9 @@ theorie_ensembles() reste = 22 ; rien postulé ; conclusions non tautologiques (
 """
 from bourbaki.logique.i_1_termes_relations.formule import var, egal, appartient, Formule
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.cardinaux import ensembles_trichotomie_scaffold as TS
-from bourbaki.cardinaux import ensembles_trichotomie_h_iso as H
-from bourbaki.cardinaux import ensembles_trichotomie_coherences as C
+from bourbaki.cardinaux.iii_2_trichotomie_ordinaux.assemblage import ensembles_trichotomie_scaffold as TS
+from bourbaki.cardinaux.iii_2_trichotomie_ordinaux.h_coherences import ensembles_trichotomie_h_iso as H
+from bourbaki.cardinaux.iii_2_trichotomie_ordinaux.h_coherences import ensembles_trichotomie_coherences as C
 
 
 _h = TS.h_iso_max("E", "R", "F", "Rp")

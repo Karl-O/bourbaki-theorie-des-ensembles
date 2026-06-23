@@ -8,7 +8,7 @@ from __future__ import annotations
 
 from bourbaki.logique.i_1_termes_relations.formule import var, egal, et, appartient
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de, equipotent
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import est_bijection_de, equipotent
 from bourbaki.cardinaux.arithmetique.iii_3_3_produit.ensembles_produit_commute import (
     membre_produit_pr1, membre_produit_pr2, membre_produit_egal_couple,
     swap_graphe_fonctionnel, swap_graphe_domaine, swap_graphe_valeur,

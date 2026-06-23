@@ -44,8 +44,8 @@ from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import (
     existe_elimination, congruence_existe, alpha_existe)
 from bourbaki.ensembles.fonctions.ii_3_2_reciproque.ensembles_reciproque import couple_reciproque
 from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import egalite_par_extension
-from bourbaki.cardinaux import ensembles_cantor_bernstein as CB
-from bourbaki.cardinaux.ensembles_cardinaux import (est_injection_de,
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.cantor_bernstein import ensembles_cantor_bernstein as CB
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import (est_injection_de,
                                                     est_bijection_de, equipotent,
                                                     inf_egal_card)
 
@@ -85,7 +85,7 @@ def image_reciproque_image(g="g", a="A", b="B", s="S"):
       ⇒ : de (u,y)∈g et (z,y)∈g, g⁻¹ fonctionnel (g inj) donne u=z, donc z=u∈S.
       ⇐ : u∈S ⇒ (u,g(u))∈g, g(u)∈g⟨S⟩, (g(u),u)∈g⁻¹ ⇒ u∈g⁻¹⟨g⟨S⟩⟩.
     """
-    from bourbaki.cardinaux.ensembles_bijection import reciproque_fonctionnelle
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.equipotence.ensembles_bijection import reciproque_fonctionnelle
     from bourbaki.ensembles.fonctions.ii_3_4_fonctions_valeur.ensembles_fonctions import valeur_dans_graphe
     vg, vA, vB, vS = _t(g), _t(a), _t(b), _t(s)
     grec = E.reciproque(vg)
@@ -269,11 +269,11 @@ def morceau_gI(a="A", b="B", f="f", g="g"):
       • injective_dans(gI,A∖D) (restriction_injective : g⁻¹ inj sur A∖D⊂dom g⁻¹) ;
       • image(gI,A∖D)=B∖f⟨D⟩  (restriction_image + pivot + ÉTAPE 1, S=B∖f⟨D⟩⊂b).
     """
-    from bourbaki.cardinaux.ensembles_bijection import reciproque_fonctionnelle
-    from bourbaki.cardinaux.ensembles_cantor_bernstein_bij import (
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.equipotence.ensembles_bijection import reciproque_fonctionnelle
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.cantor_bernstein.ensembles_cantor_bernstein_bij import (
         restriction_dom_sous_inclusion, restriction_injective,
         restriction_image_egale_image, _restriction_fonctionnelle_terme)
-    from bourbaki.cardinaux.ensembles_cantor_bernstein_fin import pivot_AmoinsD
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.cantor_bernstein.ensembles_cantor_bernstein_fin import pivot_AmoinsD
     vA, vB, vf, vg = _t(a), _t(b), _t(f), _t(g)
     grec = E.reciproque(vg)
     dterm = CB.D(vA, vB, vf, vg)
@@ -340,7 +340,7 @@ def morceau_gI(a="A", b="B", f="f", g="g"):
 
 def _diff_inclus_terme(e, x):
     """⊢ (E∖X) ⊂ E  pour des TERMES e, x."""
-    from bourbaki.cardinaux.ensembles_cantor_bernstein_fin import _diff_inclus
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.cantor_bernstein.ensembles_cantor_bernstein_fin import _diff_inclus
     vE, vX = _t(e), _t(x)
     th = _diff_inclus("E", "X")
     th = instancie(N.generalisation("E", th), vE)

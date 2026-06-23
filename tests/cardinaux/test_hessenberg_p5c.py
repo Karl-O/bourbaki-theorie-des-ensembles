@@ -15,7 +15,7 @@ def test_theorie_22():
 
 
 def test_p5b_ucadre_elimine():
-    from bourbaki.cardinaux.ensembles_hessenberg_p5c import (
+    from bourbaki.cardinaux.iii_6_infinis.hessenberg.step_b_prop5.ensembles_hessenberg_p5c import (
         negation_strict_sous_maximal, negation_strict_sous_maximal_cible,
     )
     t = negation_strict_sous_maximal()
@@ -31,10 +31,10 @@ def test_p5b_ucadre_elimine():
 
 
 def test_p5c_hessenberg_reel():
-    from bourbaki.cardinaux.ensembles_hessenberg_p5c import (
+    from bourbaki.cardinaux.iii_6_infinis.hessenberg.step_b_prop5.ensembles_hessenberg_p5c import (
         hessenberg_a_carre_egal_a_REEL, hessenberg_a_carre_egal_a_REEL_cible,
     )
-    from bourbaki.cardinaux.ensembles_hessenberg import enonce_hessenberg
+    from bourbaki.cardinaux.iii_6_infinis.hessenberg.coeur.ensembles_hessenberg import enonce_hessenberg
     t = hessenberg_a_carre_egal_a_REEL()
     # conclusion LITTÉRALE = enonce_hessenberg(E), E-seule
     assert t.conclusion == enonce_hessenberg("E")

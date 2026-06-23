@@ -34,8 +34,8 @@ from bourbaki.logique.i_1_termes_relations.formule import (Terme, var, egal, et,
                      subst_t, subst_f)
 from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.cardinaux.ensembles_cardinaux import cardinal
-from bourbaki.cardinaux.ensembles_cardinaux_theoremes import (equipotent_son_cardinal,
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import cardinal
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux_theoremes import (equipotent_son_cardinal,
                                            cardinal_egal_si_equipotent)
 from bourbaki.cardinaux.arithmetique.iii_3_3_produit.ensembles_produit_equipotence import eq_produit_invariant
 from bourbaki.cardinaux.arithmetique.iii_3_3_produit.ensembles_produit_commute import eq_produit_commute
@@ -47,7 +47,7 @@ from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import a_impliqu
 from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import symetrie, composer_egalites, congruence_terme
 from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import (existe_elimination, alpha_existe,
                                       congruence_existe)
-from bourbaki.cardinaux.ensembles_cardinaux import equipotent, est_bijection_de
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import equipotent, est_bijection_de
 
 
 def _t(v):
@@ -210,7 +210,7 @@ def reassoc_graphe_domaine(x="X", y="Y", z="Z"):
     """⊢ dom(R) = (X×Y)×Z.   (la réassociation est définie sur tout (X×Y)×Z ; CLOS.)
 
     Application directe de graphe_terme_domaine au terme de réassociation."""
-    from bourbaki.cardinaux.ensembles_cantor import graphe_terme_domaine
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.cantor.ensembles_cantor import graphe_terme_domaine
     A = E.produit(E.produit(_t(x), _t(y)), _t(z))
     return graphe_terme_domaine(A, _reassoc_terme("k"), "k", "y", "z")
 
@@ -223,7 +223,7 @@ def reassoc_graphe_valeur(x="X", y="Y", z="Z", u="u"):
     « R fonctionnel ») donne T[u]=R(u) ; symétrie conclut.  Même recette que
     swap_graphe_valeur (graphe_terme_valeur ré-implémentée localement avec les
     liants a,b/c,d de _reassoc_terme)."""
-    from bourbaki.cardinaux.ensembles_cantor import graphe_terme_couple_dans
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.cantor.ensembles_cantor import graphe_terme_couple_dans
     from bourbaki.ensembles.fonctions.ii_3_4_fonctions_valeur.ensembles_fonctions import valeur_caracterisation
     A = E.produit(E.produit(_t(x), _t(y)), _t(z))
     T = _reassoc_terme("k")

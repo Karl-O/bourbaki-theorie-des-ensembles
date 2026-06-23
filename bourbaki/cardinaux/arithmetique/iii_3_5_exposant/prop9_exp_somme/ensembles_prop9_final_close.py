@@ -39,12 +39,12 @@ from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
 from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import (
     symetrie, composer_egalites, congruence_terme)
 
-from bourbaki.cardinaux.ensembles_cardinaux import (
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import (
     est_injection_de, inf_egal_card)
 from bourbaki.cardinaux.arithmetique.fondations.ensembles_graphe_de import graphe_de
 from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import (
     somme_disjointe, ZERO, UN)
-from bourbaki.cardinaux.ensembles_cantor import graphe_terme_valeur
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.cantor.ensembles_cantor import graphe_terme_valeur
 
 from bourbaki.cardinaux.arithmetique.iii_3_5_exposant.prop9_exp_somme.ensembles_prop9_close import (
     domaine_phi, codomaine_phi,

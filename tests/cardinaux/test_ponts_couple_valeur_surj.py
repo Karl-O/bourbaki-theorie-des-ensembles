@@ -1,7 +1,7 @@
 """Tests — ponts couple→égalité-d'ensembles (surjectivité/domaine du recollement)."""
 from bourbaki.logique.i_1_termes_relations.formule import var, egal, inclus
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.cardinaux.ensembles_ponts_couple_valeur_surj import (
+from bourbaki.cardinaux.iii_6_infinis.chaine_recollement.ensembles_ponts_couple_valeur_surj import (
     surjectif_couple_riche, domaine_couple,
     couple_surjectif_implique_image_egale, couple_domaine_implique_dom_egale,
 )

@@ -1,5 +1,5 @@
 """Tests — §III.6.3 surjectivité/domaine couple-natifs du recollement de chaîne."""
-from bourbaki.cardinaux.ensembles_chaine_surjective_frame import (
+from bourbaki.cardinaux.iii_6_infinis.chaine_recollement.ensembles_chaine_surjective_frame import (
     recollement_surjectif, recollement_domaine,
     union_chaine_surjective, union_chaine_dom,
 )

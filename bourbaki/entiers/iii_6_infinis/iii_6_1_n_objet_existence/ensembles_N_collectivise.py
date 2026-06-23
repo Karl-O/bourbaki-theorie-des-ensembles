@@ -55,7 +55,7 @@ from bourbaki.logique.i_1_termes_relations.formule import (
 )
 from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.cardinaux.ensembles_cardinaux import (
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import (
     est_cardinal, cardinal, inf_egal_card,
 )
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import est_fini, ZERO
@@ -164,7 +164,7 @@ def cardinal_infini_existe(a="a", X="X"):
 # ════════════════════════════════════════════════════════════════════════════
 def _comparabilite_terme(n, a):
     """⊢ (n ≤ a)  OU  (a ≤ n)   (comparabilité des cardinaux instanciée aux TERMES n, a)."""
-    from bourbaki.cardinaux.ensembles_comparabilite import comparabilite_cardinaux
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.ordre_cardinaux.ensembles_comparabilite import comparabilite_cardinaux
     th = comparabilite_cardinaux("X", "Y")                   # CLOS, binders X,Y
     th = N.generalisation("X", N.generalisation("Y", th))    # (∀Y∀X)( … )
     th = instancie(th, _t(n))                                # X := n
@@ -209,7 +209,7 @@ def zero_inf_egal_cardinal(x="x", Xw="Xw"):
 
     De est_cardinal(x) = (∃X)(x = Card X), on extrait un témoin X ; cardinal_zero_inf_egal(X)
     donne 0 ≤ Card X = ZERO ≤ Card X ; Leibniz réécrit Card X ↦ x (via x = Card X)."""
-    from bourbaki.cardinaux.ensembles_cardinaux_bornes import cardinal_zero_inf_egal
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.ordre_cardinaux.ensembles_cardinaux_bornes import cardinal_zero_inf_egal
     from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import symetrie
     from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import alpha_existe
     vx = _t(x)

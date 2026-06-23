@@ -9,8 +9,8 @@ Chaque test vérifie que la conclusion certifiée par le noyau EST EXACTEMENT la
 cible Bourbaki, et la clôture.
 """
 from bourbaki.logique.i_1_termes_relations.formule import var, non, egal
-from bourbaki.cardinaux import ensembles_cardinaux_bornes_somme as B
-from bourbaki.cardinaux.ensembles_cardinaux import (inf_egal_card, cardinal,
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.somme_produit_bornes import ensembles_cardinaux_bornes_somme as B
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import (inf_egal_card, cardinal,
                                est_injection_de)
 from bourbaki.cardinaux.arithmetique.iii_3_4_prop8_successeur.ensembles_copie_marquee import _copie_graphe
 from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import somme_disjointe, ZERO, UN

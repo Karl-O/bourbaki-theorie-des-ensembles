@@ -47,7 +47,7 @@ from bourbaki.logique.i_1_termes_relations.formule import (var, app, egal, et, i
                                        pourtout, non, appartient, inclus)
 from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.cardinaux.ensembles_cardinaux import (cardinal, est_cardinal,
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import (cardinal, est_cardinal,
                                                     inf_egal_card)
 from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite)

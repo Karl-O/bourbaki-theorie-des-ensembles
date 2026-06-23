@@ -62,7 +62,7 @@ from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
 )
 from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import symetrie, composer_egalites
 
-from bourbaki.cardinaux.ensembles_cardinaux import est_cardinal, inf_egal_card, cardinal
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import est_cardinal, inf_egal_card, cardinal
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import successeur, ZERO, est_fini, est_entier
 
 from bourbaki.entiers.iii_5_calcul_entiers.iii_5_2_inegalites_ordre_soustraction.ensembles_successeur_ordre import (
@@ -73,7 +73,7 @@ from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.e
 )
 from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import singleton_membre
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_fini_successeur import successeur_est_un_cardinal
-from bourbaki.cardinaux.ensembles_cardinaux_theoremes import inf_egal_reflexif
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux_theoremes import inf_egal_reflexif
 from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import (
     extensionnalite_appliquee, _instance_reunion,
 )
@@ -296,7 +296,7 @@ def _decomp_generique(a="adec", b="bdec"):
 def _zero_inf_egal_card(a):
     """⊢ ZERO ≤ a   (= Card(∅) ≤ a)  pour un TERME a."""
     from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_fini_zero import cardinal_vide_egale_vide
-    from bourbaki.cardinaux.ensembles_cardinaux_bornes import zero_inf_egal
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.ordre_cardinaux.ensembles_cardinaux_bornes import zero_inf_egal
     va = _t(a)
     le_vide = zero_inf_egal(va)                                # ∅ ≤ a
     card_vide_eq = cardinal_vide_egale_vide()                  # Card(∅) = ∅
@@ -343,7 +343,7 @@ def _intervalle_aa_abstrait(a="aiaa"):
     a = VARIABLE FRAÎCHE (AUCUN τ) → extensionnalité A1 au binder « z » SANS
     collision.  z∈[a,a] ⟺ (z card et a≤z et z≤a) ; antisymétrie (a≤z et z≤a, avec
     card(a), card(z)) ⇒ z=a ; réciproquement z=a ⇒ (a card, a≤a, a≤a)."""
-    from bourbaki.cardinaux.ensembles_cardinaux_props_restantes_ordre import (
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.ordre_cardinaux.ensembles_cardinaux_props_restantes_ordre import (
         inf_egal_antisymetrique_card,
     )
     from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import egalite_par_extension

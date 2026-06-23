@@ -23,8 +23,8 @@ theorie_ensembles() reste = 22 ; rien postulé ; conclusions non tautologiques.
 """
 from bourbaki.logique.i_1_termes_relations.formule import var, egal, appartient, non, Formule
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.cardinaux import ensembles_trichotomie_scaffold as TS
-from bourbaki.cardinaux import ensembles_trichotomie_temoin_adjonction as A
+from bourbaki.cardinaux.iii_2_trichotomie_ordinaux.assemblage import ensembles_trichotomie_scaffold as TS
+from bourbaki.cardinaux.iii_2_trichotomie_ordinaux.assemblage import ensembles_trichotomie_temoin_adjonction as A
 
 
 _h = TS.h_iso_max("E", "R", "F", "Rp")
@@ -149,7 +149,7 @@ def test_report_est_un_enonce_non_prouve():
     assert isinstance(enonce, Formule)                    # un énoncé, PAS un théorème
     # c'est bien est_isomorphisme_ordre(h⁺, ]←,a], ]←,b], ≤'_a, ≤'_b)
     from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis import ensembles_ordre_vocab as V
-    from bourbaki.cardinaux.ensembles_segments_construction import seg as _seg
+    from bourbaki.cardinaux.iii_2_trichotomie_ordinaux.lemme4_segments.ensembles_segments_construction import seg as _seg
     def Rf(x, y): return appartient(E.couple(x, y), var("R"))
     def Rpf(x, y): return appartient(E.couple(x, y), var("Rp"))
     Sa, Sb = _seg("R", "E", "a"), _seg("Rp", "F", "b")

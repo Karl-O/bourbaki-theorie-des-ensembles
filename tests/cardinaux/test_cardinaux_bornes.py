@@ -6,8 +6,8 @@ tout cardinal x ≠ 0. »  On certifie ici 0 ≤ a (application vide) et a ≤ a
 certifiée par le noyau EST EXACTEMENT la cible Bourbaki, et la clôture.
 """
 from bourbaki.logique.i_1_termes_relations.formule import var, egal, inclus, impl, appartient
-from bourbaki.cardinaux import ensembles_cardinaux_bornes as B
-from bourbaki.cardinaux.ensembles_cardinaux import inf_egal_card, cardinal
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.ordre_cardinaux import ensembles_cardinaux_bornes as B
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import inf_egal_card, cardinal
 from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import somme_disjointe
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 

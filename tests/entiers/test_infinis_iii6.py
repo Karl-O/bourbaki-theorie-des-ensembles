@@ -20,7 +20,7 @@ import pytest
 
 from bourbaki.logique.i_1_termes_relations.formule import var, egal, equiv, existe, inclus
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.cardinaux.ensembles_cardinaux import est_cardinal, inf_egal_card, equipotent, cardinal
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import est_cardinal, inf_egal_card, equipotent, cardinal
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import successeur
 from bourbaki.entiers.iii_6_infinis.iii_6_1_n_objet_existence.ensembles_ensemble_NN import ensemble_NN
 from bourbaki.entiers.iii_6_infinis.iii_6_1_n_objet_existence.ensembles_aleph0 import aleph_0
@@ -32,7 +32,7 @@ from bourbaki.entiers.iii_6_infinis.iii_6_3_infinis_denombrables.ensembles_infin
     dedekind_aleph0, existe_cardinal_infini_concret,
     aleph0_strict_continu_concret, continu_non_denombrable_concret,
 )
-from bourbaki.cardinaux.ensembles_cardinaux import inf_strict_card
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import inf_strict_card
 
 
 def test_theorie_22():

@@ -321,7 +321,7 @@ def eta_bijection(a="A"):
 
     Les 4 conjoints : eta_fonctionnel, eta_domaine (dom η=A), eta_injective
     (injective_dans(η,A)), eta_image (image(η,A)=𝓕({∅};A))."""
-    from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import est_bijection_de
     vA = _t(a)
     func = eta_fonctionnel(a)                  # est_fonctionnel(η)
     dom = eta_domaine(a)                        # dom η=A
@@ -334,7 +334,7 @@ def eta_bijection(a="A"):
 def eq_A_applications(a="A"):
     """⊢ Eq(A, 𝓕({∅}; A)).   (A est équipotent à l'ensemble des applications {∅}→A,
     via la bijection η = v ↦ ((G_v,{∅}),A).)"""
-    from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de, equipotent
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import est_bijection_de, equipotent
     vA = _t(a)
     one = UN_SOURCE()
     eta = _eta(a)
@@ -345,7 +345,7 @@ def eq_A_applications(a="A"):
 
 def eq_applications_A(a="A"):
     """⊢ Eq(𝓕({∅}; A), A).   (symétrie de eq_A_applications via F⁻¹.)"""
-    from bourbaki.cardinaux.ensembles_bijection import equipotence_symetrique
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.equipotence.ensembles_bijection import equipotence_symetrique
     vA = _t(a)
     one = UN_SOURCE()
     AF = E.applications(one, vA)

@@ -8,7 +8,7 @@ import pytest
 
 from bourbaki.logique.i_1_termes_relations.formule import var, egal, et, impl, non, existe, pourtout, appartient
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.cardinaux.ensembles_cardinaux import est_cardinal, cardinal
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import est_cardinal, cardinal
 
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_recurrence_c61_existence_n.ensembles_principe_recurrence_preuve import (
     predecesseur_fini, predecesseur_fini_universel,
@@ -16,7 +16,7 @@ from bourbaki.entiers.iii_4_entiers_finis.iii_4_recurrence_c61_existence_n.ensem
 from bourbaki.entiers.iii_6_infinis.iii_6_1_n_objet_existence.ensembles_N_collectivise import _coll_fini
 
 import bourbaki.entiers.iii_4_entiers_finis.iii_4_recurrence_c61_existence_n.ensembles_predecesseur_prop2 as P
-from bourbaki.cardinaux.ensembles_reunion_somme_bijection import eq_reunion_somme
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.equipotence.ensembles_reunion_somme_bijection import eq_reunion_somme
 
 
 # ────────────────────────────────────────────────────────────────────────────

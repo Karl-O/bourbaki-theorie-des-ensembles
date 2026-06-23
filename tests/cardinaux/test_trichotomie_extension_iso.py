@@ -25,8 +25,8 @@ version CORRECTE (capture-free, binders xa/ya), qui est l'INTENTION du report.
 """
 from bourbaki.logique.i_1_termes_relations.formule import var, egal, appartient, non, Formule
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.cardinaux import ensembles_trichotomie_scaffold as TS
-from bourbaki.cardinaux import ensembles_trichotomie_extension_iso as X
+from bourbaki.cardinaux.iii_2_trichotomie_ordinaux.assemblage import ensembles_trichotomie_scaffold as TS
+from bourbaki.cardinaux.iii_2_trichotomie_ordinaux.maximalite import ensembles_trichotomie_extension_iso as X
 
 
 _hg = TS.h_iso_max("E", "R", "F", "Rp")

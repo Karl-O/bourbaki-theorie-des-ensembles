@@ -66,7 +66,7 @@ from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     equivalence_avant, equivalence_arriere, equivalence_symetrie,
     equivalence_transitivite, instancie)
 from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import existe_elimination
-from bourbaki.cardinaux.ensembles_equivalence import classe_membre
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.equipotence.ensembles_equivalence import classe_membre
 from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import extensionnalite_appliquee
 
 

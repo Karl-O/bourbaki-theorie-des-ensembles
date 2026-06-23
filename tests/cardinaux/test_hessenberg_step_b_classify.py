@@ -6,7 +6,7 @@ inchangé, conclusion préservée), et que theorie=22.  AUCUNE clôture truquée
 le résidu irréductible est EXPOSÉ.
 """
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.cardinaux.ensembles_hessenberg_step_b_classify import (
+from bourbaki.cardinaux.iii_6_infinis.hessenberg.step_b_prop5.ensembles_hessenberg_step_b_classify import (
     classification, discharge_u_disjoint,
 )
 

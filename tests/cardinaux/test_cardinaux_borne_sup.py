@@ -4,8 +4,8 @@ cheap clos.   theorie=22 ; collectivisation/existence (Th.1, Prop 2) reportées.
 from bourbaki.logique.i_1_termes_relations.formule import (var, app, egal, et, impl, equiv, pourtout,
                                        appartient)
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.cardinaux.ensembles_cardinaux import est_cardinal, inf_egal_card
-from bourbaki.cardinaux import ensembles_cardinaux_borne_sup as BS
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import est_cardinal, inf_egal_card
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.ordre_cardinaux import ensembles_cardinaux_borne_sup as BS
 
 
 # ── §III.3.2 (Remarque) — ENSEMBLE DES CARDINAUX ≤ a ──────────────────────────

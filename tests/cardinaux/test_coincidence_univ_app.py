@@ -6,7 +6,7 @@ que la conclusion est la cible, que theorie=22, et que le séquent est non vacue
 """
 from bourbaki.logique.i_1_termes_relations.formule import afficher_f
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.cardinaux.ensembles_coincidence_univ_app import (
+from bourbaki.cardinaux.iii_2_trichotomie_ordinaux.coincidence_fusion.ensembles_coincidence_univ_app import (
     coincidence_univ_app,
     coincidence_univ_app_cible,
     coincidence_univ_app_point,

@@ -9,7 +9,7 @@ from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ensembles.familles.ii_5_produit_famille.ii_5_4_projection_partielle import ensembles_produit_props_projection as P
 from bourbaki.ensembles.familles.ii_5_produit_famille.ii_5_1_extension_canonique import ensembles_extension_canonique as X
-from bourbaki.cardinaux.ensembles_cardinaux_un_borne import temoin_dans
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.ordre_cardinaux.ensembles_cardinaux_un_borne import temoin_dans
 
 
 # ── §5.4 — Prop. 6 : choix-τ dans un facteur non vide ────────────────────────

@@ -15,7 +15,7 @@ Vérifie (conclusions EXACTES + clos) les paliers de la bijection a↦(a,m), gra
 """
 from bourbaki.logique.i_1_termes_relations.formule import var, egal, impl
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.cardinaux.ensembles_cardinaux import equipotent, est_bijection_de
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import equipotent, est_bijection_de
 from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import ZERO, UN
 from bourbaki.cardinaux.arithmetique.iii_3_4_prop8_successeur import ensembles_copie_marquee as C
 

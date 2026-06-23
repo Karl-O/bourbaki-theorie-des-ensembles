@@ -1,4 +1,4 @@
-"""Tests de bourbaki.cardinaux.ensembles_hessenberg_vrai_final (Hessenberg a²=a).
+"""Tests de bourbaki.cardinaux.iii_6_infinis.hessenberg.assemblage_vrai.ensembles_hessenberg_vrai_final (Hessenberg a²=a).
 
 STEP A (`unpack_maximal`) : squelette d'élimination existentielle imbriquée du maximal,
 CLOS (2 résidus = ceux de frame_a_maximal).  hessenberg_vrai : endgame a²=a sous l'unique
@@ -6,11 +6,11 @@ hyp honnête Card S₀=Card E (« CLAIM » de Bourbaki ; STEP B ouvert, rapport�
 """
 from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.logique.i_1_termes_relations.formule import var, egal, libres_f
-from bourbaki.cardinaux.ensembles_cardinaux import cardinal
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import cardinal
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege import theorie_ensembles
-from bourbaki.cardinaux.ensembles_hessenberg import enonce_hessenberg
-from bourbaki.cardinaux.ensembles_hessenberg_vrai_final import (
+from bourbaki.cardinaux.iii_6_infinis.hessenberg.coeur.ensembles_hessenberg import enonce_hessenberg
+from bourbaki.cardinaux.iii_6_infinis.hessenberg.assemblage_vrai.ensembles_hessenberg_vrai_final import (
     unpack_maximal, hessenberg_vrai,
 )
 

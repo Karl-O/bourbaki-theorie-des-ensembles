@@ -8,7 +8,7 @@ Anti-tautologie : la conclusion n'est aucune de ses hypothèses.
 Hypothèses EXACTES contrôlées (test miroir).
 """
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-import bourbaki.cardinaux.ensembles_ordre_induit_sousensemble as OI
+import bourbaki.cardinaux.iii_2_trichotomie_ordinaux.lemme4_segments.ensembles_ordre_induit_sousensemble as OI
 
 
 def test_theorie_ensembles_22():
@@ -40,7 +40,7 @@ def test_membre_graphe_induit_forme():
     # (u,v)∈graphe_induit(Ro,B) ⇔ ((u,v)∈Ro et (u∈B et v∈B)) — instance d'axiome (clos)
     eqv = OI.membre_graphe_induit()
     from bourbaki.logique.i_1_termes_relations.formule import equiv, appartient, et
-    from bourbaki.cardinaux.ensembles_segments_construction import _R_de
+    from bourbaki.cardinaux.iii_2_trichotomie_ordinaux.lemme4_segments.ensembles_segments_construction import _R_de
     Rof = _R_de("Ro")
     u, v, B = E.var("ui"), E.var("vi"), E.var("B")
     cible = equiv(appartient(E.couple(u, v), OI.graphe_induit("Ro", "B")),

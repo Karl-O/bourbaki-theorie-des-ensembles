@@ -12,7 +12,7 @@ from __future__ import annotations
 from bourbaki.logique.i_1_termes_relations.formule import (var, et, non, impl, inclus, appartient,
                                        existe, egal)
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.cardinaux.ensembles_cardinaux import est_injection_de, inf_egal_card
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import est_injection_de, inf_egal_card
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_2_pigeonhole_surgery.ensembles_retrait_surgery import (
     image_evite_inclus_diff,
     injection_evite_implique_inf_egal_diff,
@@ -118,7 +118,7 @@ def test_retrait_point_hyp_mod_general_clos():
 
 
 def test_cardinal_pas_entre_mod_general_clos():
-    from bourbaki.cardinaux.ensembles_cardinaux import est_cardinal, inf_egal_card
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import est_cardinal, inf_egal_card
     from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import successeur
     from bourbaki.logique.i_1_termes_relations.formule import ou
     from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import antecedent_consequent

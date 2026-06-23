@@ -12,7 +12,7 @@ Vérifie pour chaque critère certifié dans `ensembles_cst_criteres_suite` :
 """
 from bourbaki.logique.i_1_termes_relations.formule import var, egal, et, equiv
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import est_bijection_de
 from bourbaki.structures.iv_1_structures_isomorphismes.ensembles_especes import (
     Espece, est_isomorphisme, structure_transportee)
 from bourbaki.structures.iv_1_structures_isomorphismes.ensembles_especes_echelon import Schema, schema_parties

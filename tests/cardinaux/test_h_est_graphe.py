@@ -11,10 +11,10 @@ VÉRIFIE (theorie_ensembles=22, rien postulé du but, NON vacueux) :
   • `trichotomie_ordinaux_canon_close_v3` : trichotomie_ordinaux_canon SOUS
     {bo(R,E), bo(Rp,F)} (est_un_graphe(h) ET residu_univ_app DÉCHARGÉS) = Théorème 3 CLOS.
 """
-from bourbaki.cardinaux import ensembles_h_est_graphe as HGr
-from bourbaki.cardinaux import ensembles_trichotomie_scaffold as TS
-from bourbaki.cardinaux import ensembles_trichotomie_hgraphe_pr2seg as HG
-from bourbaki.cardinaux import ensembles_fusion_depuis_coincidence_app as FDA
+from bourbaki.cardinaux.iii_2_trichotomie_ordinaux.h_coherences import ensembles_h_est_graphe as HGr
+from bourbaki.cardinaux.iii_2_trichotomie_ordinaux.assemblage import ensembles_trichotomie_scaffold as TS
+from bourbaki.cardinaux.iii_2_trichotomie_ordinaux.h_coherences import ensembles_trichotomie_hgraphe_pr2seg as HG
+from bourbaki.cardinaux.iii_2_trichotomie_ordinaux.coincidence_fusion import ensembles_fusion_depuis_coincidence_app as FDA
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.i_1_termes_relations.formule import appartient, var
 

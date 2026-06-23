@@ -29,10 +29,10 @@ from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (conjonc
 from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import (symetrie, composer_egalites, congruence_terme)
 from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import (existe_elimination, alpha_existe)
 from bourbaki.ensembles.fonctions.ii_3_6_fonction_terme.ensembles_fonction_terme import (membre_graphe_terme, graphe_terme_fonctionnel)
-from bourbaki.cardinaux.ensembles_cantor import (graphe_terme_domaine, graphe_terme_valeur)
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.cantor.ensembles_cantor import (graphe_terme_domaine, graphe_terme_valeur)
 from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import couple_egal_implique_composantes
 from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import egalite_par_extension
-from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de, equipotent, cardinal
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import est_bijection_de, equipotent, cardinal
 from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import (somme_disjointe, ZERO, UN,
                                        injection_droite_dans_somme,
                                        membre_somme_caracterise, _ou_congruence)
@@ -214,7 +214,7 @@ def eq_somme_zero_neutre(b="B"):
     bij = neutre_est_bijection(b)              # est_bijection_de(K, B, ∅⊔B)
     eqB = N.modus_ponens(bij, N.s5(est_bijection_de(var("F"), vb, AB), K, "F"))  # Eq(B, ∅⊔B)
     # Eq(∅⊔B, B)  par symétrie de l'équipotence : Eq(B,∅⊔B) ⇒ Eq(∅⊔B,B)
-    from bourbaki.cardinaux.ensembles_bijection import equipotence_symetrique
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.equipotence.ensembles_bijection import equipotence_symetrique
     sym = equipotence_symetrique("F", vb, AB)  # Eq(B, ∅⊔B) ⇒ Eq(∅⊔B, B)
     return N.modus_ponens(eqB, sym)            # Eq(∅⊔B, B)
 

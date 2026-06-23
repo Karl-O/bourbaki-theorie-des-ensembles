@@ -9,9 +9,9 @@ noyau (PROUVE == certifie) :
 """
 from bourbaki.logique.i_1_termes_relations.formule import var, egal, et, impl, inclus
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.cardinaux import ensembles_cantor_bernstein as CB
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.cantor_bernstein import ensembles_cantor_bernstein as CB
 from bourbaki.cardinaux import ensembles_cantor_bernstein_final as CBF
-from bourbaki.cardinaux.ensembles_cardinaux import (est_injection_de,
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import (est_injection_de,
                                                     est_bijection_de, equipotent,
                                                     inf_egal_card)
 

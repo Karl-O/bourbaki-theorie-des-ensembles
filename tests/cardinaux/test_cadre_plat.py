@@ -1,10 +1,10 @@
 """Tests du CADRE PLAT (déverrouillage hyp[2] de Hessenberg a²=a)."""
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.i_1_termes_relations.formule import var, egal
-from bourbaki.cardinaux.ensembles_cardinaux import cardinal, est_cardinal
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import cardinal, est_cardinal
 from bourbaki.cardinaux.arithmetique.iii_3_3_produit.ensembles_arith_cardinale import produit_cardinal_binaire
 from bourbaki.entiers.iii_6_infinis.iii_6_3_infinis_denombrables.ensembles_infinis import est_infini
-import bourbaki.cardinaux.ensembles_cadre_plat as m
+import bourbaki.cardinaux.iii_6_infinis.hessenberg.coeur.ensembles_cadre_plat as m
 
 
 def test_theorie_inchangee():
@@ -64,7 +64,7 @@ def test_P4_phi_etendue_plat_decharge_hyp2():
 
 def test_P4_chaine_falsum_plat_reduit_hyps():
     """P4 : FALSUM PLAT avec hyp[2] gone — 11 hyps vs 12 originales, lock absent."""
-    from bourbaki.cardinaux.ensembles_hessenberg_stepb import chaine_falsum_sous_temoins
+    from bourbaki.cardinaux.iii_6_infinis.hessenberg.step_b_prop5.ensembles_hessenberg_stepb import chaine_falsum_sous_temoins
     plat = m.chaine_falsum_plat()
     orig = chaine_falsum_sous_temoins()
     assert len(orig.hypotheses) == 12

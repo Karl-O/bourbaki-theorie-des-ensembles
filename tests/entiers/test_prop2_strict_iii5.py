@@ -7,7 +7,7 @@ from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege import theorie_ens
 from bourbaki.logique.i_1_termes_relations.formule import (
     var, egal, non, et, impl, existe, equiv,
 )
-from bourbaki.cardinaux.ensembles_cardinaux import inf_strict_card
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import inf_strict_card
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import est_entier, ZERO
 from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import somme_cardinale_binaire
 

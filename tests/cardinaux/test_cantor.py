@@ -6,8 +6,8 @@ hypothèses attendues.
 """
 from bourbaki.logique.i_1_termes_relations.formule import (var, egal, et, impl, non, appartient, inclus, equiv)
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.cardinaux import ensembles_cantor as C
-from bourbaki.cardinaux.ensembles_cardinaux import (est_injection_de, inf_egal_card, est_bijection_de,
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.cantor import ensembles_cantor as C
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import (est_injection_de, inf_egal_card, est_bijection_de,
                                  equipotent, inf_strict_card)
 
 

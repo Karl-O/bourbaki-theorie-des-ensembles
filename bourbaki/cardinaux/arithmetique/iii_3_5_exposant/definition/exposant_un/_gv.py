@@ -28,9 +28,9 @@ from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import (singleton
                                   singleton_injectif, couple_egal_implique_composantes)
 from bourbaki.ensembles.fonctions.ii_3_6_fonction_terme.ensembles_fonction_terme import (membre_graphe_terme,
                                        graphe_terme_fonctionnel)
-from bourbaki.cardinaux.ensembles_cantor import (graphe_terme_domaine, graphe_terme_valeur,
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.cantor.ensembles_cantor import (graphe_terme_domaine, graphe_terme_valeur,
                             graphe_terme_couple_dans)
-from bourbaki.cardinaux.ensembles_cardinaux import cardinal
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import cardinal
 
 
 

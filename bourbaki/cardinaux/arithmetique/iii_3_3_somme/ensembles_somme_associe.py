@@ -47,13 +47,13 @@ from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (conjonc
 from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import (symetrie, composer_egalites, congruence_terme)
 from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import (existe_elimination, alpha_existe)
 from bourbaki.ensembles.fonctions.ii_3_6_fonction_terme.ensembles_fonction_terme import (membre_graphe_terme, graphe_terme_fonctionnel)
-from bourbaki.cardinaux.ensembles_cantor import (graphe_terme_domaine, graphe_terme_valeur)
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.cantor.ensembles_cantor import (graphe_terme_domaine, graphe_terme_valeur)
 from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import (somme_disjointe, ZERO, UN,
                                        injection_gauche_dans_somme,
                                        injection_droite_dans_somme,
                                        membre_somme_caracterise, _ou_congruence)
 from bourbaki.cardinaux.arithmetique.iii_3_3_produit.ensembles_produit_commute import (_projection_premiere_ab, _projection_seconde_ab)
-from bourbaki.cardinaux.ensembles_vide_singleton import vide_distinct_singleton
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.equipotence.ensembles_vide_singleton import vide_distinct_singleton
 from bourbaki.ensembles.fonctions.ii_3_4_fonctions_valeur.ensembles_fonctions import valeur_caracterisation
 from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import couple_egal_implique_composantes
 from bourbaki.cardinaux.arithmetique.iii_3_3_somme.ensembles_somme_equipotence import _neg_un_egal_zero
@@ -1308,7 +1308,7 @@ def assoc_est_bijection(a="A", b="B", c="C"):
 
 def eq_somme_associatif(a="A", b="B", c="C"):
     """⊢ Eq((A⊔B)⊔C, A⊔(B⊔C)).   (ASSOCIATIVITÉ de la somme à équipotence près, §III.3.3.)"""
-    from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import est_bijection_de
     va, vb, vc = _t(a), _t(b), _t(c)
     ABC = _ABC_gauche(a, b, c)
     ABCd = _ABC_droite(a, b, c)

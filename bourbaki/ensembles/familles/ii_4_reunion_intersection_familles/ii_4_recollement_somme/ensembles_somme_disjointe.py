@@ -222,7 +222,7 @@ def somme_cardinale_binaire(a, b):
     binaire ab := Card(A×B).  Sa BIEN-DÉFINITION (Card(A⊔B)=Card(A₁⊔B₁) dès que
     Eq(A,A₁) et Eq(B,B₁)) suit de l'invariance de la somme par équipotence
     (REPORTÉE), via proposition_1_cardinaux."""
-    from bourbaki.cardinaux.ensembles_cardinaux import cardinal
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import cardinal
     return cardinal(somme_disjointe(_t(a), _t(b)))
 
 

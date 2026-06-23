@@ -10,11 +10,11 @@ Aucun théorème faux ; theorie_ensembles() = 22 (rien postulé).
 """
 from bourbaki.logique.i_1_termes_relations.formule import var, egal, et, impl
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.cardinaux.ensembles_cardinaux import (
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import (
     cardinal, inf_egal_card, est_injection_de)
 from bourbaki.cardinaux.arithmetique.iii_3_3_produit.ensembles_arith_cardinale import produit_cardinal_binaire
 from bourbaki.entiers.iii_6_infinis.iii_6_3_infinis_denombrables.ensembles_infinis import est_infini
-from bourbaki.cardinaux import ensembles_hessenberg as H
+from bourbaki.cardinaux.iii_6_infinis.hessenberg.coeur import ensembles_hessenberg as H
 
 
 # ════════════════════════════════════════════════════════════════════════════

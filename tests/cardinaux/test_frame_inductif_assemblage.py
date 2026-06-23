@@ -5,9 +5,9 @@ sous l'UNIQUE résidu honnête `(∀C) (⋃S(C),⋃φ(C))∈𝔉(E)` (frame-memb
 recollement).  `frame_inductif_inconditionnel` ⊢ est_inductif(Γ𝔉,𝔉) sous ce résidu
 + est_ordre(Γ𝔉,𝔉).  theorie_ensembles() reste = 22.
 """
-from bourbaki.cardinaux import ensembles_frame_inductif_assemblage as M
-from bourbaki.cardinaux.ensembles_hessenberg_inductivite import enonce_chaine_majoree
-from bourbaki.cardinaux.ensembles_hessenberg_hard import frame_pair, frame_ordre
+from bourbaki.cardinaux.iii_6_infinis.frame_zorn import ensembles_frame_inductif_assemblage as M
+from bourbaki.cardinaux.iii_6_infinis.hessenberg.coeur.ensembles_hessenberg_inductivite import enonce_chaine_majoree
+from bourbaki.cardinaux.iii_6_infinis.hessenberg.coeur.ensembles_hessenberg_hard import frame_pair, frame_ordre
 from bourbaki.ordre.iii_2_bon_ordre.zorn_zermelo.ensembles_zorn import est_inductif
 from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis.ensembles_ordre_relation import est_ordre
 from bourbaki.logique.i_1_termes_relations.formule import var

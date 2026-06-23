@@ -12,7 +12,7 @@ ou ; on teste donc l'ÉGALITÉ STRUCTURELLE contre les énoncés-cibles (et non 
 """
 from bourbaki.logique.i_1_termes_relations.formule import impl, equiv, non
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.cardinaux.ensembles_hessenberg_hard import (
+from bourbaki.cardinaux.iii_6_infinis.hessenberg.coeur.ensembles_hessenberg_hard import (
     frame_membre, maximal_pair_existe, hessenberg_carre,
     enonce_hard_aa_inf_egal_a, enonce_hessenberg,
 )

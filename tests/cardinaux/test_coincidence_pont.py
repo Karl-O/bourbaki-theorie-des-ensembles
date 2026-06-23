@@ -20,10 +20,10 @@ from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis.ensembles_ordre_vocab i
     compatible_ordre, est_isomorphisme_ordre,
 )
 from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis.ensembles_ordre_monotone import est_strictement_croissante
-from bourbaki.cardinaux.ensembles_iso_unicite_finale import _compat_yv, _inj_hyp
-from bourbaki.cardinaux.ensembles_lemme4_croissante import _R_de
-from bourbaki.cardinaux import ensembles_coincidence_pont as P
-from bourbaki.cardinaux.ensembles_coincidence_decharge import (
+from bourbaki.cardinaux.iii_2_trichotomie_ordinaux.iso_ordre.ensembles_iso_unicite_finale import _compat_yv, _inj_hyp
+from bourbaki.cardinaux.iii_2_trichotomie_ordinaux.lemme4_segments.ensembles_lemme4_croissante import _R_de
+from bourbaki.cardinaux.iii_2_trichotomie_ordinaux.coincidence_fusion import ensembles_coincidence_pont as P
+from bourbaki.cardinaux.iii_2_trichotomie_ordinaux.coincidence_fusion.ensembles_coincidence_decharge import (
     coincidence_depuis_isos, coincidence_depuis_isos_cible,
 )
 

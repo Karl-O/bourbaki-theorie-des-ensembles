@@ -25,7 +25,7 @@ from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (conjonction_intro,
                                conjonction_elim_gauche, conjonction_elim_droite)
 from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import UN, somme_disjointe
-from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de, equipotent
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import est_bijection_de, equipotent
 from bourbaki.cardinaux.arithmetique.iii_3_4_prop8_successeur.prop8_coeur._g import (
     A0_terme, G_RESTR, g_fonctionnel, g_injective, _cut)
 from bourbaki.cardinaux.arithmetique.iii_3_4_prop8_successeur.prop8_coeur._domaine import g_domaine

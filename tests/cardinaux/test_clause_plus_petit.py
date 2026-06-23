@@ -12,11 +12,11 @@ from bourbaki.logique.i_1_termes_relations.formule import (
     var, inclus, impl, egal, et, appartient, existe, pourtout,
 )
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.cardinaux.ensembles_cardinaux import inf_egal_card, cardinal
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import inf_egal_card, cardinal
 
-import bourbaki.cardinaux.ensembles_clause_plus_petit_monotonie as MONO
-import bourbaki.cardinaux.ensembles_clause_plus_petit_correspondance as CORR
-import bourbaki.cardinaux.ensembles_clause_plus_petit as CPP
+import bourbaki.cardinaux.iii_4_ordinal_cardinal.bon_ordre_intervalle.ensembles_clause_plus_petit_monotonie as MONO
+import bourbaki.cardinaux.iii_4_ordinal_cardinal.bon_ordre_intervalle.ensembles_clause_plus_petit_correspondance as CORR
+import bourbaki.cardinaux.iii_4_ordinal_cardinal.bon_ordre_intervalle.ensembles_clause_plus_petit as CPP
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_recurrence_c61_existence_n.ensembles_recurrence_C61 import cardinaux_bien_ordonnes
 
 

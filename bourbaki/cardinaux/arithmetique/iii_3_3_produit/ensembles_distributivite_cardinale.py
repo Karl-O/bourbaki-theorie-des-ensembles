@@ -64,10 +64,10 @@ from bourbaki.cardinaux.arithmetique.iii_3_3_produit.ensembles_produit_commute i
                                        _couple_dans_produit_t, _inst_produit)
 from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import couple_egal_implique_composantes
 from bourbaki.ensembles.fonctions.ii_3_6_fonction_terme.ensembles_fonction_terme import membre_graphe_terme, graphe_terme_fonctionnel
-from bourbaki.cardinaux.ensembles_cantor import (graphe_terme_domaine, graphe_terme_valeur,
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.cantor.ensembles_cantor import (graphe_terme_domaine, graphe_terme_valeur,
                               graphe_terme_couple_dans)
 from bourbaki.ensembles.fonctions.ii_3_4_fonctions_valeur.ensembles_fonctions import valeur_caracterisation
-from bourbaki.cardinaux.ensembles_vide_singleton import vide_distinct_singleton
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.equipotence.ensembles_vide_singleton import vide_distinct_singleton
 from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import egalite_par_extension
 
 
@@ -660,7 +660,7 @@ def eq_distributivite(a="A", b="B", c="C"):
 
     Témoin = le graphe distributif D ; S5 sur est_bijection_de(F,·,·) donne
     (∃F)bij = Eq(A×(B⊔C), (A×B)⊔(A×C))."""
-    from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import est_bijection_de
     va, vb, vc = _t(a), _t(b), _t(c)
     Dom = E.produit(va, somme_disjointe(vb, vc))
     AB, AC = E.produit(va, vb), E.produit(va, vc)

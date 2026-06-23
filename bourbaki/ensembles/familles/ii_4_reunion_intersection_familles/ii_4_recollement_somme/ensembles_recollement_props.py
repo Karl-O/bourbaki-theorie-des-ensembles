@@ -79,7 +79,7 @@ from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import existe_elim
 
 from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import (
     somme_disjointe, ZERO, UN)
-from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import est_bijection_de
 
 
 def _t(v):
@@ -260,7 +260,7 @@ def reunion_disjointe_binaire_disjoints(a="A", b="B"):
     Toute z∈(A×{0})∩(B×{1}) aurait 2ᵉ coordonnée = 0 (copie gauche) ET = 1 (copie
     droite), d'où 0=1, contredisant 0≠1 (vide_distinct_singleton).  On prouve
     ¬(z∈inter) pour tout z, puis inter=∅ par vide_ssi_sans_element."""
-    from bourbaki.cardinaux.ensembles_vide_singleton import vide_distinct_singleton
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.equipotence.ensembles_vide_singleton import vide_distinct_singleton
     from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_vide import vide_ssi_sans_element
     from bourbaki.ensembles.fonctions.hors_ii_3.iii_3_recollement.ensembles_restriction_somme import (
         _seconde_coord_marquee, _zero_egal_un_de_temoins)

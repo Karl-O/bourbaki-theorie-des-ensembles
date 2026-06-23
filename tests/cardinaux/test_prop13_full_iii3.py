@@ -1,5 +1,5 @@
 """Tests — PROPOSITION 13 §III.3.6 ÉQUIVALENCE COMPLÈTE (a ≥ b ⟺ (∃c) a = b+c)."""
-from bourbaki.cardinaux.ensembles_prop13_full_iii3 import (
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.props_restantes.ensembles_prop13_full_iii3 import (
     prop13_forward_card, prop13_forward_card_enonce,
     prop13_backward_card, prop13_backward_card_enonce,
     prop13_equivalence, prop13_equivalence_enonce,

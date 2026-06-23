@@ -45,7 +45,7 @@ from __future__ import annotations
 
 from bourbaki.logique.i_1_termes_relations.formule import Terme, var, egal
 from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
-from bourbaki.cardinaux.ensembles_cardinaux import cardinal
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import cardinal
 from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import (
     somme_disjointe, somme_cardinale_binaire)
 from bourbaki.cardinaux.arithmetique.iii_3_3_somme.ensembles_arith_somme import somme_disjointe_cardinal

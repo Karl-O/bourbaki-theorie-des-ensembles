@@ -5,10 +5,10 @@ B2  un_inf_egal_exposant    ⊢ (a≠0) ⇒ (1 ≤ a^b),  1 = Card{∅}
 """
 from bourbaki.logique.i_1_termes_relations.formule import var, egal, non, impl
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.cardinaux.ensembles_cardinaux import inf_egal_card, cardinal
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import inf_egal_card, cardinal
 from bourbaki.cardinaux.arithmetique.iii_3_5_exposant.definition.ensembles_exposant_cardinal import (
     exposant_cardinal_binaire)
-from bourbaki.cardinaux.ensembles_bornes_exposant import (
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.somme_produit_bornes.ensembles_bornes_exposant import (
     support_base_exposant, base_inf_egal_exposant, un_inf_egal_exposant)
 
 UN = E.singleton(E.VIDE)          # 1 = Card{∅} (la valeur SET)

@@ -11,7 +11,7 @@ Vérifie, pour chacun des six théorèmes :
 """
 from bourbaki.logique.i_1_termes_relations.formule import var, egal
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import est_bijection_de
 from bourbaki.structures.iv_1_structures_isomorphismes.ensembles_especes import (
     Espece, structure_transportee, est_isomorphisme, sont_isomorphes,
     est_automorphisme)

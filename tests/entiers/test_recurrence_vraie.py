@@ -3,7 +3,7 @@ résidu honnête `predecesseur_fini_universel` (report #2 FAUX éliminé)."""
 import pytest
 
 from bourbaki.logique.i_1_termes_relations.formule import var, et, impl, non, pourtout, existe
-from bourbaki.cardinaux.ensembles_cardinaux import est_cardinal, inf_egal_card
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import est_cardinal, inf_egal_card
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import est_fini, ZERO, successeur
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 
@@ -107,7 +107,7 @@ def test_N_collectivise_vrai_pas_dans_theorie():
 # ────────────────────────────────────────────────────────────────────────────
 def test_dichotomie_gardee_pas_nue():
     # cardinal_pas_entre_univ est gardé par est_cardinal(b) : la forme NUE serait FAUSSE.
-    from bourbaki.cardinaux.ensembles_cardinal_pas_entre_univ import (
+    from bourbaki.cardinaux.iii_4_ordinal_cardinal.ordinal_cardinal_correspondance.ensembles_cardinal_pas_entre_univ import (
         cardinal_pas_entre_univ, cible_bare_universel, cible_cardinal_pas_entre_univ,
     )
     t = cardinal_pas_entre_univ("b", "c")

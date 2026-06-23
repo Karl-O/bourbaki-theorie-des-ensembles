@@ -47,8 +47,8 @@ from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (conjonc
                                conjonction_elim_droite, equivalence_transitivite,
                                instancie)
 from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import symetrie as eg_symetrie
-from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de
-from bourbaki.cardinaux.ensembles_equipotence import (diagonale_fonctionnelle, diagonale_domaine,
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import est_bijection_de
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.equipotence.ensembles_equipotence import (diagonale_fonctionnelle, diagonale_domaine,
                                     diagonale_injective, diagonale_image,
                                     diagonale_valeur)
 

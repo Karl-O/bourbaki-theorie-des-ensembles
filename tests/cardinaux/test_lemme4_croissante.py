@@ -7,7 +7,7 @@ strictement croissante), conclusion fidèle, non tautologique.
 """
 from bourbaki.logique.i_1_termes_relations.formule import var, egal
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.cardinaux import ensembles_lemme4_croissante as L
+from bourbaki.cardinaux.iii_2_trichotomie_ordinaux.lemme4_segments import ensembles_lemme4_croissante as L
 from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis.ensembles_ordre_monotone import est_strictement_croissante
 
 

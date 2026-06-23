@@ -2,8 +2,8 @@
 abstraite (union des projections ⋃S=⋃pr₁(C), ⋃φ=⋃pr₂(C))."""
 from bourbaki.logique.i_1_termes_relations.formule import egal, et, existe, pourtout, appartient, impl, equiv, inclus, var
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.cardinaux.ensembles_hessenberg_hard import frame_pair, frame_ordre
-from bourbaki.cardinaux.ensembles_chaine_temoin_abstrait import (
+from bourbaki.cardinaux.iii_6_infinis.hessenberg.coeur.ensembles_hessenberg_hard import frame_pair, frame_ordre
+from bourbaki.cardinaux.iii_6_infinis.chaine_recollement.ensembles_chaine_temoin_abstrait import (
     union_premiere, union_seconde,
     membre_union_premiere, membre_union_seconde,
     membre_donne_inclus_premiere, membre_donne_inclus_seconde,

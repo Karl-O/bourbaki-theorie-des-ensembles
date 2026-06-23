@@ -29,7 +29,7 @@ from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import (existe_eli
 from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import egalite_par_extension
 from bourbaki.ensembles.fonctions.ii_3_6_fonction_terme.ensembles_fonction_terme import (
     graphe_terme_fonctionnel, membre_graphe_terme)
-from bourbaki.cardinaux.ensembles_cantor import (graphe_terme_domaine,
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.cantor.ensembles_cantor import (graphe_terme_domaine,
                                graphe_terme_valeur)
 from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import couple_egal_implique_composantes
 # socle 2-élément :
@@ -40,7 +40,7 @@ from bourbaki.cardinaux.arithmetique.iii_3_5_exposant.prop12_powerset.ensembles_
 from bourbaki.cardinaux.arithmetique.iii_3_5_exposant.prop12_powerset.ensembles_prop12_fin import (
     chi_appli, chi_dans_applications)
 from bourbaki.cardinaux.arithmetique.iii_3_5_exposant.prop12_powerset.ensembles_prop12_powerset import chi
-from bourbaki.cardinaux.ensembles_cardinaux import (cardinal, equipotent,
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import (cardinal, equipotent,
                                est_bijection_de, inf_strict_card)
 from bourbaki.cardinaux.arithmetique.iii_3_3_produit.ensembles_arith_cardinale import _prop1_direct_t
 from bourbaki.cardinaux.arithmetique.iii_3_5_exposant.definition.ensembles_exposant_cardinal import (
@@ -167,7 +167,7 @@ def _couple_dans_W(vS, vX):
     graphe_terme_couple_dans n'accepte qu'un NOM de point ; on prouve pour le nom
     « s » (≠ liant « Y » de W), généralise puis instancie au terme S — l'instanciation
     α-renomme les liants internes (pas de capture même si S = preimage_un(G,X))."""
-    from bourbaki.cardinaux.ensembles_cantor import graphe_terme_couple_dans
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.cantor.ensembles_cantor import graphe_terme_couple_dans
     base = graphe_terme_couple_dans(E.parties(vX), chi_appli(var("Y"), vX), "s", "Y", "y")
     imp = N.loi_deduction(appartient(var("s"), E.parties(vX)), base)   # s∈𝔓X ⇒ (s,chi_appli(s))∈W
     return instancie(N.generalisation("s", imp), vS)     # S∈𝔓X ⇒ (S,chi_appli(S))∈W

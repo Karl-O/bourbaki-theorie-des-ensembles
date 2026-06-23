@@ -7,7 +7,7 @@ certifie ici le CŒUR BINAIRE (I de cardinal 2)."""
 from bourbaki.entiers.iii_5_calcul_entiers.iii_5_5_caracteristique_combinatoire.ensembles_prop9_bergers_iii5 import (
     bergers_binaire_fibres, bergers_binaire_somme)
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.cardinaux.ensembles_cardinaux import cardinal
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import cardinal
 from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import (
     somme_disjointe, somme_cardinale_binaire)
 from bourbaki.logique.i_1_termes_relations.formule import var, egal, et

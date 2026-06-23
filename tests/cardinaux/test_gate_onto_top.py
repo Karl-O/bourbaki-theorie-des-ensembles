@@ -11,8 +11,8 @@ Anti-tautologie : aucune conclusion close ne peut être l'une de ses hypothèses
 from bourbaki.logique.i_1_termes_relations.formule import var, appartient, inclus, egal, et, impl, non, pourtout, existe
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 
-import bourbaki.cardinaux.ensembles_gate_onto_top as M
-from bourbaki.cardinaux.ensembles_ordinal_cardinal_correspondance import (
+import bourbaki.cardinaux.iii_4_ordinal_cardinal.realisation_segment.ensembles_gate_onto_top as M
+from bourbaki.cardinaux.iii_4_ordinal_cardinal.ordinal_cardinal_correspondance.ensembles_ordinal_cardinal_correspondance import (
     bon_ordre_intervalle, intervalle_0a,
 )
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_recurrence_c61_existence_n.ensembles_recurrence_C61 import cardinaux_bien_ordonnes
@@ -42,7 +42,7 @@ def test_realisation_garde_clean_une_seule_hyp_bo():
 
 def test_realisation_garde_clean_garde_par_non_Eq():
     # la garde EST `est_cardinal(c) et ¬Eq(c,Card a)` (le TOP exclu) — pas la fausse garde nue.
-    from bourbaki.cardinaux.ensembles_cardinaux import est_cardinal, equipotent, cardinal
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import est_cardinal, equipotent, cardinal
     t = M.realisation_segment_garde_clean("Ro", "a", "cgate")
     # c'est un (∀cgate)( (est_cardinal ∧ ¬Eq(·,Card a)) ⇒ realisation )
     assert t.tag == "non" and t.sous[0].tag == "exists"          # pourtout = ¬∃¬

@@ -31,7 +31,7 @@ from bourbaki.logique.i_1_termes_relations.formule import Terme, var, egal, et, 
 from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 
-from bourbaki.cardinaux.ensembles_cardinaux import (
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import (
     est_injection_de, cardinal,
 )
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import est_fini_ensemble
@@ -44,10 +44,10 @@ from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import (
 )
 
 # ── briques CLOSES réutilisées ────────────────────────────────────────────────
-from bourbaki.cardinaux.ensembles_realisation_segment_close import (
+from bourbaki.cardinaux.iii_4_ordinal_cardinal.realisation_segment.ensembles_realisation_segment_close import (
     injection_donne_equipotent_image,
 )
-from bourbaki.cardinaux.ensembles_cardinaux_theoremes import (
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux_theoremes import (
     cardinal_egal_si_equipotent,
 )
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_2_pigeonhole_surgery.ensembles_pigeonhole_sous_lemme import partie_egal_cardinal_egal
@@ -100,7 +100,7 @@ def cor4_inj_implique_surj(f="f4", Eens="E4", Fens="F4"):
 
     # ── Eq(E, f⟨E⟩) ─────────────────────────────────────────────────────────
     eq_E_img = N.modus_ponens(h_inj, injection_donne_equipotent_image(vf, vE, vF))
-    from bourbaki.cardinaux.ensembles_cardinaux import equipotent
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import equipotent
     assert eq_E_img.conclusion == equipotent(vE, img), "eq_E_img ≠ Eq(E,f⟨E⟩)"
 
     # ── Card E = Card(f⟨E⟩)  (Prop 1, sens direct, version terme) ────────────

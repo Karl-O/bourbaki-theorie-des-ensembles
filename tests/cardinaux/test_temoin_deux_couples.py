@@ -6,7 +6,7 @@ coïncidence) sont CONSTRUITS via h_membre_donne_temoin (CLOS, iso px,pw) + temo
 depuis_iso.  Conclusions == cibles COH ; non tautologiques ; theorie=22.
 """
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.cardinaux import ensembles_temoin_deux_couples as T2
+from bourbaki.cardinaux.iii_2_trichotomie_ordinaux.temoins_comparabilite import ensembles_temoin_deux_couples as T2
 
 
 def test_temoin_diagonal_depuis_h():

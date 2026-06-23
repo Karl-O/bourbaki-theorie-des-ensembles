@@ -22,12 +22,12 @@ import pytest
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ordre.iii_1_relations_ordre.isomorphismes_ordre import ensembles_iso_ordre_canon as C
 from bourbaki.logique.i_1_termes_relations.formule import var, appartient
-from bourbaki.cardinaux import ensembles_trichotomie_assemble as TA
-from bourbaki.cardinaux import ensembles_maillon_coherences_prouvees as MCP
-from bourbaki.cardinaux import ensembles_trichotomie_maillon_final as MF
-from bourbaki.cardinaux import ensembles_fusion_depuis_coincidence_app as FDA
-import bourbaki.cardinaux.ensembles_trichotomie_dom_segment as DS
-import bourbaki.cardinaux.ensembles_maximalite_close as MAX
+from bourbaki.cardinaux.iii_2_trichotomie_ordinaux.assemblage import ensembles_trichotomie_assemble as TA
+from bourbaki.cardinaux.iii_2_trichotomie_ordinaux.assemblage import ensembles_maillon_coherences_prouvees as MCP
+from bourbaki.cardinaux.iii_2_trichotomie_ordinaux.assemblage import ensembles_trichotomie_maillon_final as MF
+from bourbaki.cardinaux.iii_2_trichotomie_ordinaux.coincidence_fusion import ensembles_fusion_depuis_coincidence_app as FDA
+import bourbaki.cardinaux.iii_2_trichotomie_ordinaux.assemblage.ensembles_trichotomie_dom_segment as DS
+import bourbaki.cardinaux.iii_2_trichotomie_ordinaux.maximalite.ensembles_maximalite_close as MAX
 
 
 def _R_de(R):

@@ -60,7 +60,7 @@ from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import (
     symetrie, composer_egalites, congruence_terme,
 )
 
-from bourbaki.cardinaux.ensembles_cardinaux import (
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import (
     est_cardinal, equipotent, cardinal, inf_egal_card, inf_strict_card,
     est_bijection_de,
 )
@@ -71,7 +71,7 @@ from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.e
     fini_implique_cardinal, card_est_un_cardinal,
 )
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_fini_successeur import cardinal_de_cardinal
-from bourbaki.cardinaux.ensembles_cardinaux_bornes import cardinal_inf_egal_successeur
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.ordre_cardinaux.ensembles_cardinaux_bornes import cardinal_inf_egal_successeur
 from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_vide import non_vide_ssi_element
 from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import singleton_membre
 from bourbaki.cardinaux.arithmetique.iii_3_4_prop8_successeur.ensembles_prop8_successeur import (
@@ -79,10 +79,10 @@ from bourbaki.cardinaux.arithmetique.iii_3_4_prop8_successeur.ensembles_prop8_su
 )
 from bourbaki.cardinaux.arithmetique.iii_3_3_somme.ensembles_somme_equipotence import eq_somme_invariant
 from bourbaki.cardinaux.arithmetique.iii_3_3_produit.ensembles_arith_cardinale import _prop1_direct_t
-from bourbaki.cardinaux.ensembles_equipotence import equipotence_reflexive
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.equipotence.ensembles_equipotence import equipotence_reflexive
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_zero_plus_un import eq_singletons
 from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import somme_disjointe
-from bourbaki.cardinaux.ensembles_cantor_bernstein_fin import partie_reunion_complement
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.cantor_bernstein.ensembles_cantor_bernstein_fin import partie_reunion_complement
 from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import commutativite_reunion
 
 # énoncé EXACT à fermer
@@ -133,7 +133,7 @@ def _comm_reunion_t(ta, tb):
 
 def _eq_son_cardinal(tX):
     """⊢ Eq(T, Card T)  pour un TERME T."""
-    from bourbaki.cardinaux.ensembles_cardinaux_props_restantes import _eq_son_cardinal_t
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.props_restantes.ensembles_cardinaux_props_restantes import _eq_son_cardinal_t
     return _eq_son_cardinal_t(_t(tX))
 
 
@@ -159,7 +159,7 @@ def _disjoint_diff_singleton(x, x0):
 
     partie_disjoint_complement(X, {x0}) ⊢ {x0} ∩ (X∖{x0}) = ∅ ; commutativité de ∩
     (version terme) réécrit en (X∖{x0}) ∩ {x0} = ∅."""
-    from bourbaki.cardinaux.ensembles_cantor_bernstein_fin import partie_disjoint_complement
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.cantor_bernstein.ensembles_cantor_bernstein_fin import partie_disjoint_complement
     from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import commutativite_intersection
     vX, vx0 = _t(x), _t(x0)
     sing = E.singleton(vx0)
@@ -178,7 +178,7 @@ def eq_reunion_disjointe_somme(a, b):
     où la bijectivité INCONDITIONNELLE du recollement canonique W (sous A∩B=∅) est
     PROUVÉE (les 4 conjoints assemblés depuis les copies marquées + l'infra recollement,
     toutes closes)."""
-    from bourbaki.cardinaux.ensembles_reunion_somme_bijection import eq_reunion_somme
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.equipotence.ensembles_reunion_somme_bijection import eq_reunion_somme
     return eq_reunion_somme(_t(a), _t(b))                  # (A∩B=∅) ⇒ Eq(A∪B, A⊔B)  CLOS
 
 
@@ -324,9 +324,9 @@ def _inf_egal_k_successeur(k_term):
     Patron de un_inf_egal_deux : inf_egal_successeur(k) ⇒ k ≤ k⊔{∅} [SET] ;
     Eq(k⊔{∅}, Card(k⊔{∅})) (equipotent_son_cardinal) ⇒ (k⊔{∅}) ≤ Card(k⊔{∅})
     (equipotence_implique_inf_egal) ; transitivité ⇒ k ≤ Card(k⊔{∅}) = successeur(k)."""
-    from bourbaki.cardinaux.ensembles_cardinaux_bornes import inf_egal_successeur
-    from bourbaki.cardinaux.ensembles_cardinaux_theoremes import equipotent_son_cardinal
-    from bourbaki.cardinaux.ensembles_cardinaux_ordre import (
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.ordre_cardinaux.ensembles_cardinaux_bornes import inf_egal_successeur
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux_theoremes import equipotent_son_cardinal
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.ordre_cardinaux.ensembles_cardinaux_ordre import (
         equipotence_implique_inf_egal, inf_egal_transitive,
     )
     vk = _t(k_term)

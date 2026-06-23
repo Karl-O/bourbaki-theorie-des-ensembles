@@ -1,11 +1,11 @@
 """Tests de la CHAÎNE D'EXTENSION VRAIE de Hessenberg (NON vacuous)."""
 from bourbaki.logique.i_1_termes_relations.formule import egal, var
 import bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege as E
-from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import est_bijection_de
 from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege import theorie_ensembles
-from bourbaki.cardinaux.ensembles_hessenberg_hard import frame_pair, frame_ordre
+from bourbaki.cardinaux.iii_6_infinis.hessenberg.coeur.ensembles_hessenberg_hard import frame_pair, frame_ordre
 from bourbaki.logique.i_1_termes_relations.formule import non, appartient
-from bourbaki.cardinaux.ensembles_hessenberg_chaine_vraie import (
+from bourbaki.cardinaux.iii_6_infinis.hessenberg.assemblage_vrai.ensembles_hessenberg_chaine_vraie import (
     phi1_bijection_derivee,
     extension_dans_frame_chainee,
     extension_ordre_chainee,

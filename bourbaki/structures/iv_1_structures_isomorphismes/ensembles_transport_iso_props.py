@@ -77,8 +77,8 @@ from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
     equivalence_avant, equivalence_arriere)
-from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de
-from bourbaki.cardinaux.ensembles_equipotence import (
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import est_bijection_de
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.equipotence.ensembles_equipotence import (
     diagonale_fonctionnelle, diagonale_domaine, diagonale_injective,
     diagonale_image)
 from bourbaki.structures.iv_1_structures_isomorphismes.ensembles_especes import (

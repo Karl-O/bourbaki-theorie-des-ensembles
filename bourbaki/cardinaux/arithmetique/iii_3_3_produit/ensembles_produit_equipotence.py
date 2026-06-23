@@ -51,7 +51,7 @@ from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import (symetrie,
 from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import (existe_elimination, congruence_existe,
                                       alpha_existe)
 from bourbaki.ensembles.fonctions.ii_3_6_fonction_terme.ensembles_fonction_terme import membre_graphe_terme, graphe_terme_fonctionnel
-from bourbaki.cardinaux.ensembles_cantor import (graphe_terme_couple_dans, graphe_terme_domaine,
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.cantor.ensembles_cantor import (graphe_terme_couple_dans, graphe_terme_domaine,
                               graphe_terme_valeur)
 from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import egalite_par_extension
 from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import couple_egal_implique_composantes
@@ -457,7 +457,7 @@ def produit_est_bijection(f="F", g="G", x="X", y="Y", x1="X1", y1="Y1"):
     paliers 1a/1/3/4 ; on coupe leurs hypothèses (injectivité, fonctionnalité,
     domaines, images de F et G) par les conjoints de est_bijection_de(F,X,X₁) et
     est_bijection_de(G,Y,Y₁)."""
-    from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import est_bijection_de
     vF, vG = _t(f), _t(g)
     vX, vY, vX1, vY1 = _t(x), _t(y), _t(x1), _t(y1)
     hF = N.assume(est_bijection_de(vF, vX, vX1))
@@ -489,7 +489,7 @@ def eq_produit_invariant(f="F", g="G", x="X", y="Y", x1="X1", y1="Y1"):
     Témoin = le graphe produit H ; S5 sur est_bijection_de(F',X×Y,X₁×Y₁) donne
     (∃F')bij = Eq(X×Y, X₁×Y₁), sous les bijections F:X→X₁, G:Y→Y₁ extraites de
     Eq(X,X₁), Eq(Y,Y₁) par élimination des deux témoins existentiels."""
-    from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de, equipotent
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import est_bijection_de, equipotent
     from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import alpha_existe as _alpha
     vF, vG = _t(f), _t(g)
     vX, vY, vX1, vY1 = _t(x), _t(y), _t(x1), _t(y1)

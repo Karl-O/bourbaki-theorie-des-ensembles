@@ -53,7 +53,7 @@ from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import (
 from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import (
     symetrie, composer_egalites, congruence_terme)
 
-from bourbaki.cardinaux.ensembles_cardinaux import (
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import (
     est_injection_de, est_bijection_de, inf_egal_card, equipotent)
 
 
@@ -94,8 +94,8 @@ def support_le_image(kappa="kappa", c="C", d="D"):
     κ⁻¹ : κ⟨C⟩ → C bijection (reciproque_est_bijection sur la bijection C→κ⟨C⟩) ;
     le BUILDER d'invariance injection_via_pointmap(C, κ⟨C⟩, κ⁻¹) (pré-composition
     g↦g∘κ⁻¹) donne 𝓕(C;A) ≤ 𝓕(κ⟨C⟩;A)."""
-    from bourbaki.cardinaux.ensembles_eq_exposant_invariant import injection_via_pointmap
-    from bourbaki.cardinaux.ensembles_bijection import reciproque_est_bijection
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.somme_produit_bornes.ensembles_eq_exposant_invariant import injection_via_pointmap
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.equipotence.ensembles_bijection import reciproque_est_bijection
     vk, vc, vd = _t(kappa), _t(c), _t(d)
     imgC = E.image(vk, vc)
     Kinv = E.reciproque(vk)
@@ -138,7 +138,7 @@ def R_fonctionnel(a0, s, d):
 
 
 def R_domaine(a0, s, d):
-    from bourbaki.cardinaux.ensembles_cantor import graphe_terme_domaine
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.cantor.ensembles_cantor import graphe_terme_domaine
     return graphe_terme_domaine(_compl(s, d), _t(a0), _RPT, "y", "z")
 
 
@@ -154,7 +154,7 @@ def _R_inclus(a0, s, d, a):
     DA = E.produit(vd, va)
     vdp, vy, vz = var(_RPT), var("y"), var("z")
 
-    from bourbaki.cardinaux.ensembles_eq_exposant_invariant import _membre_graphe_terme_z
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.somme_produit_bornes.ensembles_eq_exposant_invariant import _membre_graphe_terme_z
     h_a0 = N.assume(appartient(va0, va))                       # a₀∈A
     # z∈R ⇔ (∃d)(∃y)(z=(d,y) et d∈D∖S et y=a₀)
     car = _membre_graphe_terme_z(DmS, va0, _RPT, "z", "y")
@@ -420,7 +420,7 @@ def _ghat_inclus(vg, va0, vs, vd, va):
 # ── ((ĝ,D),A) ∈ 𝓕(D;A)  (BIEN-DÉFINITION) ────────────────────────────────────
 def triple_ghat_dans_applications(vg, va0, vs, vd, va):
     """{ g∈𝓕(S;A), S⊆D, a₀∈A } ⊢ ((ĝ,D),A) ∈ 𝓕(D;A)."""
-    from bourbaki.cardinaux.ensembles_eq_exposant_invariant import (
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.somme_produit_bornes.ensembles_eq_exposant_invariant import (
         _dans_exposant, _triple_dans_applications)
     RG = _ghat(vg, va0, vs, vd)
     in_exp = _dans_exposant(va, vd, RG,
@@ -532,13 +532,13 @@ def W_psi_fonctionnel(va0, vs, vd, va):
 
 
 def W_psi_domaine(va0, vs, vd, va):
-    from bourbaki.cardinaux.ensembles_cantor import graphe_terme_domaine
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.cantor.ensembles_cantor import graphe_terme_domaine
     return graphe_terme_domaine(_source_ext(vs, va), _psi_valeur(var(_POINT), va0, vs, vd, va), _POINT, "y", "z")
 
 
 def W_psi_valeur(point_nom, va0, vs, vd, va):
     """{g ∈ 𝓕(S;A)} ⊢ W(g) = Ψ(g)."""
-    from bourbaki.cardinaux.ensembles_cantor import graphe_terme_valeur
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.cantor.ensembles_cantor import graphe_terme_valeur
     return graphe_terme_valeur(_source_ext(vs, va), _psi_valeur(var(_POINT), va0, vs, vd, va),
                                point_nom, _POINT, "y")
 
@@ -656,7 +656,7 @@ def _support_sous_kappa_a0(vc, vd, va, vk, va0):
 
     Palier 1 (κ⁻¹ pré-comp) : 𝓕(C;A) ≤ 𝓕(κ⟨C⟩;A) ; Palier 2 (prolongement, S:=κ⟨C⟩
     avec κ⟨C⟩⊆D du 4ᵉ conjoint de l'injection) : 𝓕(κ⟨C⟩;A) ≤ 𝓕(D;A) ; transitivité."""
-    from bourbaki.cardinaux.ensembles_cardinaux_ordre import inf_egal_transitive
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.ordre_cardinaux.ensembles_cardinaux_ordre import inf_egal_transitive
     imgC = E.image(vk, vc)
     FCA = E.applications(vc, va)
     FimgA = E.applications(imgC, va)

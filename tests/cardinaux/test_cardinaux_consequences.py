@@ -10,10 +10,10 @@ from __future__ import annotations
 
 from bourbaki.logique.i_1_termes_relations.formule import var, egal, et, ou, non, existe
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.cardinaux.ensembles_cardinaux import (
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import (
     inf_egal_card, inf_strict_card, est_cardinal, cardinal)
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import UN
-from bourbaki.cardinaux.ensembles_cardinaux_consequences import (
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux_consequences import (
     strict_implique_inf_egal, strict_irreflexif,
     cantor_strict_existe, aucun_plus_grand_cardinal,
     inf_egal_strict_compose, strict_inf_egal_compose, strict_transitive,

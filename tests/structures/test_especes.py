@@ -4,7 +4,7 @@ définitions ; LEMMES DIRECTS clos pour transport_egalite / transport_donne_isom
 Fidèle aux énoncés VERBATIM de IV.1.4–IV.1.5 ; theorie_ensembles() = 22 axiomes."""
 from bourbaki.logique.i_1_termes_relations.formule import var, egal, et, existe, appartient
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import est_bijection_de
 from bourbaki.structures.iv_1_structures_isomorphismes import ensembles_especes_echelon as Ech
 from bourbaki.structures.iv_1_structures_isomorphismes import ensembles_especes as Sp
 

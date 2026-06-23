@@ -44,7 +44,7 @@ from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import (symetrie,
                                composer_egalites, congruence_terme)
 from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import _instance_paire
 from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import singleton_membre
-from bourbaki.cardinaux.ensembles_cardinaux import cardinal
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import cardinal
 from bourbaki.cardinaux.arithmetique.iii_3_5_exposant.definition.ensembles_exposant_cardinal import exposant_cardinal_binaire
 
 

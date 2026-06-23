@@ -5,7 +5,7 @@ hypothèse résiduelle, sauf indication contraire) et que sa CONCLUSION est exac
 l'énoncé attendu (le noyau certifie ; on contrôle la forme).
 """
 from bourbaki.logique.i_1_termes_relations.formule import var, egal, non, et, impl, equiv
-from bourbaki.cardinaux.ensembles_cardinaux import cardinal, est_cardinal
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import cardinal, est_cardinal
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import successeur, est_fini
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_fini_successeur import (
     cardinal_de_cardinal, successeur_est_un_cardinal,

@@ -15,9 +15,9 @@ from __future__ import annotations
 from bourbaki.logique.i_1_termes_relations.formule import var, impl, pourtout
 from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import antecedent_consequent
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.cardinaux.ensembles_cardinaux import est_cardinal
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import est_cardinal
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_recurrence_c61_existence_n.ensembles_recurrence_C61 import cardinal_pas_entre
-from bourbaki.cardinaux.ensembles_cardinal_pas_entre_univ import (
+from bourbaki.cardinaux.iii_4_ordinal_cardinal.ordinal_cardinal_correspondance.ensembles_cardinal_pas_entre_univ import (
     cardinal_pas_entre_garde, cardinal_pas_entre_univ,
     cible_cardinal_pas_entre_univ, cible_bare_universel,
 )

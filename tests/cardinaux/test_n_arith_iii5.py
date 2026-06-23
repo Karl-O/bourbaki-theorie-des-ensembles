@@ -8,14 +8,14 @@ theorie=22, kernel intact.
 from bourbaki.logique.i_1_termes_relations.formule import var, egal, et, impl, pourtout
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import est_fini, successeur, ZERO
-from bourbaki.cardinaux.ensembles_cardinaux import est_cardinal, cardinal
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import est_cardinal, cardinal
 from bourbaki.cardinaux.arithmetique.iii_3_5_exposant.definition.ensembles_exposant_cardinal import (
     exposant_cardinal_binaire,
 )
 from bourbaki.cardinaux.arithmetique.iii_3_3_produit.ensembles_arith_cardinale import (
     produit_cardinal_binaire,
 )
-from bourbaki.cardinaux.ensembles_n_arith_iii5 import (
+from bourbaki.cardinaux.iii_5_entiers.ensembles_n_arith_iii5 import (
     exposant_invariance_enonce, exposant_invariance_zero_enonce,
     puissance_succ_eq, puissance_entiers_ferme,
 )

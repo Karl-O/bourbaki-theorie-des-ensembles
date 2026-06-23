@@ -9,7 +9,7 @@ from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.e
                                                   deux_distinct_successeur_deux,
                                                   deux_est_un_cardinal, fini_deux)
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import UN, DEUX, successeur, est_fini, est_cardinal
-from bourbaki.cardinaux.ensembles_cardinaux import cardinal
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import cardinal
 from bourbaki.logique.i_1_termes_relations.formule import egal, non
 
 

@@ -16,8 +16,8 @@ iso_unicite_extensionnel, lemme_4 et l'axiome de la paire/vide pour la glue).
 """
 from bourbaki.logique.i_1_termes_relations.formule import var, egal, et, non, impl, appartient, pourtout, equiv
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.cardinaux import ensembles_iso_unicite_finale as F
-from bourbaki.cardinaux.ensembles_lemme4_croissante import _R_de, _val, _f_dans_E
+from bourbaki.cardinaux.iii_2_trichotomie_ordinaux.iso_ordre import ensembles_iso_unicite_finale as F
+from bourbaki.cardinaux.iii_2_trichotomie_ordinaux.lemme4_segments.ensembles_lemme4_croissante import _R_de, _val, _f_dans_E
 from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis.ensembles_ordre_monotone import est_strictement_croissante
 from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis.ensembles_ordre_vocab import compatible_ordre
 

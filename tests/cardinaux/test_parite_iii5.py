@@ -1,6 +1,6 @@
 """Tests §III.5 — parité / division par deux (ensembles_parite_iii5)."""
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.cardinaux import ensembles_parite_iii5 as M
+from bourbaki.cardinaux.iii_5_entiers import ensembles_parite_iii5 as M
 
 
 def test_theorie_intacte():

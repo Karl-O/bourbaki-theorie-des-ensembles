@@ -49,14 +49,14 @@ from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
 )
 from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import existe_elimination
 
-from bourbaki.cardinaux.ensembles_cardinaux import inf_egal_card
-from bourbaki.cardinaux.ensembles_cardinaux_theoremes import inf_egal_reflexif
-from bourbaki.cardinaux.ensembles_cardinaux_ordre import inf_egal_transitive
-from bourbaki.cardinaux.ensembles_cardinaux_props_restantes_ordre import (
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import inf_egal_card
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux_theoremes import inf_egal_reflexif
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.ordre_cardinaux.ensembles_cardinaux_ordre import inf_egal_transitive
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.ordre_cardinaux.ensembles_cardinaux_props_restantes_ordre import (
     inf_egal_antisymetrique_card,
 )
-from bourbaki.cardinaux.ensembles_comparabilite import comparabilite_cardinaux
-from bourbaki.cardinaux.ensembles_ordinal_cardinal_correspondance import intervalle_0a
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.ordre_cardinaux.ensembles_comparabilite import comparabilite_cardinaux
+from bourbaki.cardinaux.iii_4_ordinal_cardinal.ordinal_cardinal_correspondance.ensembles_ordinal_cardinal_correspondance import intervalle_0a
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import ZERO
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers_theoremes import (
     fini_implique_cardinal, intervalle_implique_borne_sup, membre_intervalle_entiers,
@@ -212,11 +212,11 @@ def relation_ordre_dans_NN():
 #
 #  Réduit au bon ordre BORNÉ déposé bon_ordre_intervalle_close(a₀) via B=A∩[0,a₀].
 # ════════════════════════════════════════════════════════════════════════════
-from bourbaki.cardinaux.ensembles_cardinaux import est_cardinal
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import est_cardinal
 from bourbaki.entiers.iii_6_infinis.iii_6_1_n_objet_existence.ensembles_N_collectivise import zero_inf_egal_cardinal
-from bourbaki.cardinaux.ensembles_gate_onto_top import bon_ordre_intervalle_close
-from bourbaki.cardinaux.ensembles_ordinal_cardinal_correspondance import ordre_induit_intervalle
-from bourbaki.cardinaux.ensembles_ordinal_cardinal_bon_ordre import bon_ordre_donne_clause_plus_petit
+from bourbaki.cardinaux.iii_4_ordinal_cardinal.realisation_segment.ensembles_gate_onto_top import bon_ordre_intervalle_close
+from bourbaki.cardinaux.iii_4_ordinal_cardinal.ordinal_cardinal_correspondance.ensembles_ordinal_cardinal_correspondance import ordre_induit_intervalle
+from bourbaki.cardinaux.iii_4_ordinal_cardinal.ordinal_cardinal_correspondance.ensembles_ordinal_cardinal_bon_ordre import bon_ordre_donne_clause_plus_petit
 from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_vide import non_vide_ssi_element
 
 

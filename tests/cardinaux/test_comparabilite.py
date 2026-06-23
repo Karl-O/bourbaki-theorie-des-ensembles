@@ -9,8 +9,8 @@ from bourbaki.logique.i_1_termes_relations.formule import var, ou, egal, inclus,
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis.ensembles_ordre_relation import est_ordre, element_maximal
 from bourbaki.ordre.iii_2_bon_ordre.zorn_zermelo.ensembles_zorn import est_inductif
-from bourbaki.cardinaux.ensembles_cardinaux import inf_egal_card
-from bourbaki.cardinaux import ensembles_comparabilite as C
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import inf_egal_card
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.ordre_cardinaux import ensembles_comparabilite as C
 
 
 # ── ÉTAPE 1 — poset des injections partielles ────────────────────────────────

@@ -25,7 +25,7 @@ from __future__ import annotations
 from bourbaki.logique.i_1_termes_relations.formule import Terme, var, egal, et, ou, impl, appartient, pourtout, inclus
 from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.cardinaux.ensembles_equipotence import diagonale_membre
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.equipotence.ensembles_equipotence import diagonale_membre
 from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import a_implique_a, syllogisme
 from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,

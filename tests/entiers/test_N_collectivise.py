@@ -12,7 +12,7 @@ from bourbaki.logique.i_1_termes_relations.formule import (
 from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import est_fini, ZERO
-from bourbaki.cardinaux.ensembles_cardinaux import inf_egal_card
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import inf_egal_card
 from bourbaki.entiers.iii_6_infinis.iii_6_1_n_objet_existence import ensembles_N_collectivise as M
 
 
@@ -48,7 +48,7 @@ def test_entier_inf_egal_a_conclusion():
 # ── borne 0 : 0 ≤ x pour x cardinal ──────────────────────────────────────────
 def test_zero_inf_egal_cardinal():
     """⊢ { est_cardinal(x) } ⊢ 0 ≤ x."""
-    from bourbaki.cardinaux.ensembles_cardinaux import est_cardinal
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import est_cardinal
     vx = var("x")
     thm = M.zero_inf_egal_cardinal("x")
     assert thm.conclusion == inf_egal_card(ZERO, vx)

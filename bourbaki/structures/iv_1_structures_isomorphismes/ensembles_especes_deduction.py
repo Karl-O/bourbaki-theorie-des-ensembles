@@ -37,7 +37,7 @@ from typing import Callable, Sequence, Optional
 from bourbaki.logique.i_1_termes_relations.formule import var, egal, et, impl, appartient
 from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import est_bijection_de
 from bourbaki.structures.iv_1_structures_isomorphismes.ensembles_especes_echelon import (
     Schema, echelon, extension_canonique)
 from bourbaki.structures.iv_1_structures_isomorphismes.ensembles_especes import (

@@ -4,10 +4,10 @@ from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.e
 from bourbaki.cardinaux.arithmetique.iii_3_5_exposant.definition.ensembles_exposant_cardinal import (
     exposant_cardinal_binaire,
 )
-from bourbaki.cardinaux.ensembles_n_arith_iii5 import (
+from bourbaki.cardinaux.iii_5_entiers.ensembles_n_arith_iii5 import (
     exposant_invariance_zero_enonce, exposant_invariance_enonce,
 )
-from bourbaki.cardinaux.ensembles_puissance_entiers_inconditionnel import (
+from bourbaki.cardinaux.iii_5_entiers.ensembles_puissance_entiers_inconditionnel import (
     B0_preuve, B_preuve, puissance_entiers_ferme_inconditionnel,
 )
 from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege import theorie_ensembles

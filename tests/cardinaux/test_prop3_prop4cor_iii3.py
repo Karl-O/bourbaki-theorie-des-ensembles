@@ -1,9 +1,9 @@
 """Tests — §III.3 Proposition 3 (surjection ⇒ Card≤) et Corollaire de la Prop 4
 (Card(⋃E_ι) ≤ ∑ Card(E_ι))."""
-from bourbaki.cardinaux.ensembles_prop3_prop4cor_iii3 import (
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.props_restantes.ensembles_prop3_prop4cor_iii3 import (
     prop3_surjection_inf_egal, cible_prop3_surjection_inf_egal,
     prop4cor_card_reunion_inf_egal_somme, cible_prop4cor_card_reunion_inf_egal_somme)
-from bourbaki.cardinaux.ensembles_cardinaux import somme_cardinale, cardinal
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import somme_cardinale, cardinal
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 
 

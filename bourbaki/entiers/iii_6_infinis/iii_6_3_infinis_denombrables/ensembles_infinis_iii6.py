@@ -51,7 +51,7 @@ from bourbaki.logique.i_1_termes_relations.formule import (Terme, var, egal, et,
 from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 
-from bourbaki.cardinaux.ensembles_cardinaux import (
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import (
     est_cardinal, cardinal, equipotent, inf_egal_card,
 )
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import est_fini, successeur
@@ -175,7 +175,7 @@ def aleph0_inf_egal_reflexif():
     ℵ₀ ≤ ℵ₀ par réflexivité de ≤ (inf_egal_reflexif, l'identité Δ injecte tout cardinal
     en lui-même), instancié au TERME ℵ₀.  C'est la forme cardinale de « ℕ est dénombrable »
     (est_denombrable_card(ℕ) = Card ℕ ≤ ℵ₀ = ℵ₀ ≤ ℵ₀).  theorie = 22."""
-    from bourbaki.cardinaux.ensembles_cardinaux_theoremes import inf_egal_reflexif
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux_theoremes import inf_egal_reflexif
     a0 = aleph_0()
     refl_all = N.generalisation("X", inf_egal_reflexif("X"))   # (∀X)(X ≤ X)
     res = instancie(refl_all, a0)                              # ℵ₀ ≤ ℵ₀
@@ -198,7 +198,7 @@ def NN_denombrable(y="Y"):
     la conclusion est donc (∃Y)(Y⊂ℕ_concret et Eq(ℕ_concret,Y)), forme fidèle de la
     dénombrabilité pour le ℕ effectivement construit.  Liant existentiel Y FRAIS (≠ liants
     internes de ℕ).  theorie = 22."""
-    from bourbaki.cardinaux.ensembles_equipotence import equipotence_reflexive
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.equipotence.ensembles_equipotence import equipotence_reflexive
     NN = ensemble_NN()
     vY = var(y)
     # corps R(Y) = ( Y ⊂ ℕ et Eq(ℕ, Y) )   — liant Y
@@ -259,7 +259,7 @@ def aleph0_strict_continu_concret():
     le N opaque app("N") de ensembles_chap3_props_restantes).  N'invoque PAS N_existe
     (Cantor est indépendant de la collectivisation).  theorie = 22."""
     from bourbaki.entiers.iii_4_entiers_finis.iii_4_2_finis_props.ensembles_chap3_props_restantes import cantor_strict_cardinal
-    from bourbaki.cardinaux.ensembles_cardinaux import inf_strict_card
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import inf_strict_card
     NN = ensemble_NN()
     # Cantor est bâti en NOM SYMBOLIQUE « X » (sa machinerie interne — graphe x↦{x},
     # argument diagonal — emploie des liants génériques qui collisionneraient avec les
@@ -287,7 +287,7 @@ def continu_non_denombrable_concret():
     theorie = 22."""
     from bourbaki.entiers.iii_4_entiers_finis.iii_4_2_finis_props.ensembles_chap3_props_restantes import est_cardinal_de_cardinal
     from bourbaki.entiers.iii_4_entiers_finis.iii_4_2_finis_props.ensembles_finis_props import inf_strict_exclut_reciproque
-    from bourbaki.cardinaux.ensembles_cardinaux import inf_egal_card
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import inf_egal_card
     NN = ensemble_NN()
     PN = E.parties(NN)
     cN = cardinal(NN)                                         # ℵ₀ = Card ℕ

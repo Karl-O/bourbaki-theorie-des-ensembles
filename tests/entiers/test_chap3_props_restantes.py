@@ -12,7 +12,7 @@ from __future__ import annotations
 from bourbaki.logique.i_1_termes_relations.formule import var, egal, non
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege import theorie_ensembles
-from bourbaki.cardinaux.ensembles_cardinaux import (
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import (
     cardinal, inf_egal_card, inf_strict_card, est_cardinal,
 )
 from bourbaki.cardinaux.arithmetique.iii_3_5_exposant.definition.ensembles_exposant_cardinal import exposant_cardinal_binaire

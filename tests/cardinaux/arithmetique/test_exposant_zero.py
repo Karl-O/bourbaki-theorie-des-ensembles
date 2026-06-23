@@ -12,7 +12,7 @@ VOIE FIDÈLE (rien postulé ; DÉRIVÉ depuis les axiomes de DÉFINITION de F^E 
 """
 from bourbaki.logique.i_1_termes_relations.formule import var, egal, et, non, impl, appartient, inclus
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.cardinaux.ensembles_cardinaux import cardinal
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import cardinal
 from bourbaki.cardinaux.arithmetique.iii_3_5_exposant.definition import ensembles_exposant_zero as Z
 
 

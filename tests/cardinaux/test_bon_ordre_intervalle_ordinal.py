@@ -9,11 +9,11 @@ from bourbaki.logique.i_1_termes_relations.formule import var, appartient, inclu
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis import ensembles_ordre_vocab as V
 
-import bourbaki.cardinaux.ensembles_bon_ordre_intervalle_ordinal as M
-import bourbaki.cardinaux.ensembles_ordinaux_bien_ordonnes as OBO
-from bourbaki.cardinaux.ensembles_segments_construction import seg, _R_de
-from bourbaki.cardinaux.ensembles_cardinaux import inf_egal_card, cardinal
-from bourbaki.cardinaux.ensembles_ordinal_cardinal_correspondance import (
+import bourbaki.cardinaux.iii_4_ordinal_cardinal.bon_ordre_intervalle.ensembles_bon_ordre_intervalle_ordinal as M
+import bourbaki.cardinaux.iii_4_ordinal_cardinal.bon_ordre_intervalle.ensembles_ordinaux_bien_ordonnes as OBO
+from bourbaki.cardinaux.iii_2_trichotomie_ordinaux.lemme4_segments.ensembles_segments_construction import seg, _R_de
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import inf_egal_card, cardinal
+from bourbaki.cardinaux.iii_4_ordinal_cardinal.ordinal_cardinal_correspondance.ensembles_ordinal_cardinal_correspondance import (
     bon_ordre_intervalle, intervalle_0a,
 )
 

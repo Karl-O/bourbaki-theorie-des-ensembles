@@ -12,7 +12,7 @@ Vérifie les maillons SÛRS de la Proposition 8 (conclusions exactes + closdes) 
 """
 from bourbaki.logique.i_1_termes_relations.formule import var, egal, impl
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.cardinaux.ensembles_cardinaux import cardinal, equipotent
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import cardinal, equipotent
 from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import somme_disjointe
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers import ensembles_entiers as Ent
 from bourbaki.cardinaux.arithmetique.iii_3_4_prop8_successeur import ensembles_prop8_successeur as P8

@@ -68,14 +68,14 @@ from __future__ import annotations
 from bourbaki.logique.i_1_termes_relations.formule import (Terme, var, egal, et, ou, non, impl, inclus)
 from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 
-from bourbaki.cardinaux.ensembles_cardinaux import (
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import (
     est_cardinal, cardinal, inf_egal_card, inf_strict_card,
 )
-from bourbaki.cardinaux.ensembles_cardinaux_theoremes import inf_egal_reflexif
-from bourbaki.cardinaux.ensembles_cardinaux_ordre import inf_egal_transitive
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux_theoremes import inf_egal_reflexif
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.ordre_cardinaux.ensembles_cardinaux_ordre import inf_egal_transitive
 from bourbaki.cardinaux.ensembles_cantor_bernstein_final._recollement import cantor_bernstein
-from bourbaki.cardinaux.ensembles_comparabilite import comparabilite_cardinaux
-from bourbaki.cardinaux.ensembles_clause_plus_petit_monotonie import inf_egal_card_de_inclus_terme
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.ordre_cardinaux.ensembles_comparabilite import comparabilite_cardinaux
+from bourbaki.cardinaux.iii_4_ordinal_cardinal.bon_ordre_intervalle.ensembles_clause_plus_petit_monotonie import inf_egal_card_de_inclus_terme
 from bourbaki.cardinaux.arithmetique.iii_3_3_produit.ensembles_arith_cardinale import _prop1_direct_t
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import est_fini
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_fini_successeur import cardinal_de_cardinal
@@ -443,9 +443,9 @@ def _pont_inf_egal_card(tX, tE):
     Card X ≤ X ≤ E ≤ Card E.  Tout INCONDITIONNEL (réflexivité/transitivité de ≤ +
     Prop. 1 §III.3).  Sert de pont pour appliquer fini_downward (sur cardinaux) à une
     inclusion d'ensembles."""
-    from bourbaki.cardinaux.ensembles_cardinaux_theoremes import equipotent_son_cardinal
-    from bourbaki.cardinaux.ensembles_cardinaux_ordre import equipotence_implique_inf_egal
-    from bourbaki.cardinaux.ensembles_bijection import equipotence_symetrique
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux_theoremes import equipotent_son_cardinal
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.ordre_cardinaux.ensembles_cardinaux_ordre import equipotence_implique_inf_egal
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.equipotence.ensembles_bijection import equipotence_symetrique
     cX, cE = cardinal(tX), cardinal(tE)
     # Eq(X, Card X) → Eq(Card X, X) → Card X ≤ X
     eq_X_cX = N.generalisation("X", equipotent_son_cardinal("X"))     # (∀X) Eq(X, Card X)

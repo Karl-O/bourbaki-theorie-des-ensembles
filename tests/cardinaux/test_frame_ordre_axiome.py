@@ -2,8 +2,8 @@
 from bourbaki.logique.i_1_termes_relations.formule import var, appartient, equiv
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege import theorie_ensembles
-from bourbaki.cardinaux.ensembles_hessenberg_hard import frame_ordre
-from bourbaki.cardinaux.ensembles_frame_ordre_axiome import (
+from bourbaki.cardinaux.iii_6_infinis.hessenberg.coeur.ensembles_hessenberg_hard import frame_ordre
+from bourbaki.cardinaux.iii_6_infinis.frame_zorn.ensembles_frame_ordre_axiome import (
     frame_ordre_membre, frame_ordre_membre_t, theorie_frame_ordre,
     _corps_frame_ordre,
 )

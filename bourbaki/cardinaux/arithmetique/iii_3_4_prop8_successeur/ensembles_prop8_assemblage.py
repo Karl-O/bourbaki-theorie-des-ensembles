@@ -55,7 +55,7 @@ from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import symetrie
 from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import (existe_elimination,
                                                                   alpha_existe)
 from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import ZERO, UN, somme_disjointe
-from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de, equipotent
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import est_bijection_de, equipotent
 from bourbaki.cardinaux.arithmetique.iii_3_4_prop8_successeur.ensembles_copie_marquee import eq_copies_gauches_implique_eq
 from bourbaki.cardinaux.arithmetique.iii_3_4_prop8_successeur.prop8_coeur import eq_copies_cas_fixe
 from bourbaki.cardinaux.arithmetique.iii_3_4_prop8_successeur.prop8_coeur._marqueurs import m_dans_AS

@@ -5,7 +5,7 @@ les hypothèses EXACTES attendues.  Invariant permanent : theorie_ensembles() = 
 """
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.i_1_termes_relations.formule import var, egal, inclus, appartient
-import bourbaki.cardinaux.ensembles_restriction_iso_pieces as P
+import bourbaki.cardinaux.iii_2_trichotomie_ordinaux.iso_ordre.ensembles_restriction_iso_pieces as P
 
 
 def test_theorie_22_axiomes():
@@ -52,7 +52,7 @@ def test_piece4_compatible_ordre():
     thm = P.restriction_compatible_ordre_piece()
     assert thm.conclusion == P.restriction_compatible_ordre_piece_cible()
     assert thm.conclusion not in thm.hypotheses
-    from bourbaki.cardinaux.ensembles_lemme4_croissante import _R_de
+    from bourbaki.cardinaux.iii_2_trichotomie_ordinaux.lemme4_segments.ensembles_lemme4_croissante import _R_de
     from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis import ensembles_ordre_vocab as V
     vphi, vS1, vS2 = var("phi"), var("S1"), var("S2")
     Rf, Rpf = _R_de("R"), _R_de("Rp")

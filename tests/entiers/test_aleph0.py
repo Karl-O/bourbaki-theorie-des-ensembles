@@ -26,7 +26,7 @@ from bourbaki.logique.i_1_termes_relations.formule import var, egal, non
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import successeur, ZERO, est_fini
 from bourbaki.entiers.iii_6_infinis.iii_6_1_n_objet_existence.ensembles_ensemble_NN import ensemble_NN
-from bourbaki.cardinaux.ensembles_cardinaux import inf_egal_card, equipotent
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import inf_egal_card, equipotent
 from bourbaki.entiers.iii_6_infinis.iii_6_1_n_objet_existence.ensembles_aleph0 import (
     successeur_non_nul, inf_egal_NN_diff, _NN_sans_zero, s_injective_safe, _s,
     _dom_s_egal_NN, _image_s_incluse, inf_egal_NN, NN_eq_NN_sans_zero,

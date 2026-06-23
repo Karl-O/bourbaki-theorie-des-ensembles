@@ -3,7 +3,7 @@ import pytest
 
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.i_1_termes_relations.formule import libres_f
-from bourbaki.cardinaux.ensembles_frame_maximal_clos import (
+from bourbaki.cardinaux.iii_6_infinis.frame_zorn.ensembles_frame_maximal_clos import (
     residu_H1, residu_H2, residus_honnetes,
     frame_a_maximal_clos, hessenberg_a_carre_egal_a_0hyp,
 )
@@ -31,7 +31,7 @@ def test_frame_a_maximal_clos():
 @pytest.mark.slow
 def test_hessenberg_a_carre_egal_a_0hyp():
     """a²=a (enonce_hessenberg) sous EXACTEMENT les 2 résidus de Zorn.  LENT (~10min)."""
-    from bourbaki.cardinaux.ensembles_hessenberg import enonce_hessenberg
+    from bourbaki.cardinaux.iii_6_infinis.hessenberg.coeur.ensembles_hessenberg import enonce_hessenberg
     res = hessenberg_a_carre_egal_a_0hyp("E")
     assert res.conclusion == enonce_hessenberg("E")
     assert set(res.hypotheses) == {residu_H1("E"), residu_H2("E")}

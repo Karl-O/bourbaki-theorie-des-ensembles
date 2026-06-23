@@ -56,7 +56,7 @@ from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import (
     composer_egalites, congruence_terme)
 from bourbaki.ensembles.fonctions.ii_3_6_fonction_terme.ensembles_fonction_terme import (
     graphe_terme_fonctionnel)
-from bourbaki.cardinaux.ensembles_cantor import graphe_terme_domaine
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.cantor.ensembles_cantor import graphe_terme_domaine
 from bourbaki.ensembles.familles.ii_2_produit_deux_ensembles.ensembles_produit import couple_dans_produit
 from bourbaki.ensembles.fonctions.ii_3_4_fonctions_valeur.ensembles_valeur_codomaine import (
     valeur_dans_codomaine)

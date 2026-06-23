@@ -54,7 +54,7 @@ from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import (symetrie,
 from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import (existe_elimination, alpha_existe)
 from bourbaki.ensembles.fonctions.ii_3_6_fonction_terme.ensembles_fonction_terme import (membre_graphe_terme,
                                           graphe_terme_fonctionnel)
-from bourbaki.cardinaux.ensembles_cantor import (graphe_terme_domaine, graphe_terme_valeur)
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.cantor.ensembles_cantor import (graphe_terme_domaine, graphe_terme_valeur)
 from bourbaki.ensembles.familles.ii_2_produit_deux_ensembles.ensembles_produit import couple_dans_produit_ssi
 from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import ZERO, UN, _dans_singleton
 from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import couple_egal_implique_composantes
@@ -224,7 +224,7 @@ def copie_est_bijection(a_set="A", m=ZERO):
     Les 4 conjoints — fonctionnel (palier 1), domaine (palier 2), injectif (palier 4),
     image (palier 5) — sont tous INCONDITIONNELS pour un graphe de terme (aucune
     hypothèse à couper), d'où la conjonction directe."""
-    from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de  # noqa: F401 (doc)
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import est_bijection_de  # noqa: F401 (doc)
     c1 = copie_graphe_fonctionnel(a_set, m)
     c2 = copie_graphe_domaine(a_set, m)
     c3 = copie_graphe_injective(a_set, m)
@@ -237,7 +237,7 @@ def eq_copie_marquee(a_set="A", m=ZERO):
 
     Témoin = le graphe de copie Δ_m ; S5 sur est_bijection_de(F,A,A×{m}) donne
     (∃F)bij = Eq(A, A×{m})."""
-    from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import est_bijection_de
     va, vm = _t(a_set), _t(m)
     DX = _copie_graphe(a_set, m)
     AM = E.produit(va, E.singleton(vm))
@@ -262,14 +262,14 @@ def _eq_sym_t(tX, tY):
 
     equipotence_symetrique n'accepte que des NOMS ; on la généralise en X, Y puis on
     instancie aux termes (robuste, renommage déterministe), comme _prop1_direct_t."""
-    from bourbaki.cardinaux.ensembles_bijection import equipotence_symetrique
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.equipotence.ensembles_bijection import equipotence_symetrique
     gen = N.generalisation("X", N.generalisation("Y", equipotence_symetrique("F", "X", "Y")))
     return instancie(instancie(gen, _t(tX)), _t(tY))
 
 
 def _eq_trans_t(tX, tY, tZ):
     """⊢ (Eq(X,Y) et Eq(Y,Z)) ⇒ Eq(X,Z)  pour des TERMES X, Y, Z.   (transitivité de Eq.)"""
-    from bourbaki.cardinaux.ensembles_bijection import equipotence_transitive
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.equipotence.ensembles_bijection import equipotence_transitive
     gen = N.generalisation("X", N.generalisation("Y", N.generalisation("Z",
         equipotence_transitive("F", "G", "X", "Y", "Z"))))
     return instancie(instancie(instancie(gen, _t(tX)), _t(tY)), _t(tZ))
@@ -292,7 +292,7 @@ def eq_copies_gauches_implique_eq(a_set="A", b_set="B"):
     il ne reste, pour finir le CAS 1, qu'à établir l'hypothèse Eq(A×{0}, B×{0}) à
     partir de Eq(A⊔{∅}, B⊔{∅}) ∧ (h fixe le marqueur) — la restriction de h aux
     copies de gauche, REPORTÉE (cf. note finale)."""
-    from bourbaki.cardinaux.ensembles_cardinaux import equipotent
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import equipotent
     va, vb = _t(a_set), _t(b_set)
     A0 = E.produit(va, E.singleton(ZERO))          # A×{0}
     B0 = E.produit(vb, E.singleton(ZERO))          # B×{0}

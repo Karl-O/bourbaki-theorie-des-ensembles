@@ -85,7 +85,7 @@ def composee_surjections(f="F", g="G", x="X", y="Y", z="Z"):
 
     NB : `composee_image(g,f,x,y,z)` suit composee(G,F)=G∘F, donc la composée
     surjective y est E.composee(G,F) de X vers Z (f:X→Y puis g:Y→Z)."""
-    from bourbaki.cardinaux.ensembles_bijection import composee_image
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.equipotence.ensembles_bijection import composee_image
     vF, vG, vX, vY, vZ = _T(f), _T(g), _T(x), _T(y), _T(z)
     surjF = E.est_surjective(vF, vX, vY)          # image(F,X) = Y
     surjG = E.est_surjective(vG, vY, vZ)          # image(G,Y) = Z
@@ -121,7 +121,7 @@ def composee_bijectives(f="F", g="G", x="X", y="Y", z="Z"):
     f':Y→Z applications » du Théorème 1, requises par `composee_injective`) : F,G
     fonctionnels, dom F=X, dom G=Y.  (image(F,X)=Y est la surjectivité de F, donc PAS
     répétée.)"""
-    from bourbaki.cardinaux.ensembles_bijection import composee_injective
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.equipotence.ensembles_bijection import composee_injective
     vF, vG, vX, vY, vZ = _T(f), _T(g), _T(x), _T(y), _T(z)
     comp = E.composee(vG, vF)
     bijF = E.est_bijective(vF, vX, vY)            # inj/X ∧ image(F,X)=Y

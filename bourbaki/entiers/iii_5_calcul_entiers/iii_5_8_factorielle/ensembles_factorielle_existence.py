@@ -85,7 +85,7 @@ from bourbaki.logique.i_1_termes_relations.formule import Terme, var, egal, et, 
 import bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege as E
 
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import successeur, ZERO, UN
-from bourbaki.cardinaux.ensembles_cardinaux import cardinal
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import cardinal
 from bourbaki.cardinaux.arithmetique.iii_3_3_produit.ensembles_arith_cardinale import (
     produit_cardinal_binaire,
 )

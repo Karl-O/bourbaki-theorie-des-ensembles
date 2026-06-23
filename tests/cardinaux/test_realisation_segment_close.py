@@ -17,9 +17,9 @@ Hypothèses EXACTES contrôlées (test miroir).
 """
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 
-import bourbaki.cardinaux.ensembles_realisation_segment_close as M
-import bourbaki.cardinaux.ensembles_hyp_transport_ordinal_preuve as HTP
-from bourbaki.cardinaux.ensembles_ordinal_cardinal_correspondance import bon_ordre_intervalle
+import bourbaki.cardinaux.iii_4_ordinal_cardinal.realisation_segment.ensembles_realisation_segment_close as M
+import bourbaki.cardinaux.iii_4_ordinal_cardinal.realisation_segment.ensembles_hyp_transport_ordinal_preuve as HTP
+from bourbaki.cardinaux.iii_4_ordinal_cardinal.ordinal_cardinal_correspondance.ensembles_ordinal_cardinal_correspondance import bon_ordre_intervalle
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_recurrence_c61_existence_n.ensembles_recurrence_C61 import cardinaux_bien_ordonnes
 
 

@@ -54,17 +54,17 @@ from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
 )
 from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import symetrie
 
-from bourbaki.cardinaux.ensembles_cardinaux import (
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import (
     est_cardinal, inf_egal_card, inf_strict_card,
 )
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import successeur, est_fini
 
 # ── briques CLOSES réutilisées ───────────────────────────────────────────────
-from bourbaki.cardinaux.ensembles_cardinal_pas_entre_univ import cardinal_pas_entre_garde
+from bourbaki.cardinaux.iii_4_ordinal_cardinal.ordinal_cardinal_correspondance.ensembles_cardinal_pas_entre_univ import cardinal_pas_entre_garde
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_recurrence_c61_existence_n.ensembles_recurrence_C61 import cardinal_pas_entre
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_recurrence_c61_existence_n.ensembles_predecesseur_prop2 import _inf_egal_k_successeur
-from bourbaki.cardinaux.ensembles_cardinaux_ordre import inf_egal_transitive
-from bourbaki.cardinaux.ensembles_cardinaux_theoremes import inf_egal_reflexif
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.ordre_cardinaux.ensembles_cardinaux_ordre import inf_egal_transitive
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux_theoremes import inf_egal_reflexif
 
 
 def _t(t):
@@ -194,7 +194,7 @@ def succ_pas_inf_egal(b="b"):
         fini_implique_distinct_successeur, fini_implique_cardinal,
     )
     from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_fini_successeur import successeur_est_un_cardinal
-    from bourbaki.cardinaux.ensembles_cardinaux_props_restantes_ordre import (
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.ordre_cardinaux.ensembles_cardinaux_props_restantes_ordre import (
         inf_egal_antisymetrique_card,
     )
     vb = _t(b)

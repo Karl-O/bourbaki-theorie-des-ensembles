@@ -71,7 +71,7 @@ from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
 from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import symetrie, composer_egalites
 from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import existe_elimination
 
-from bourbaki.cardinaux.ensembles_cardinaux import (
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import (
     est_cardinal, cardinal, inf_egal_card, est_injection_de, est_bijection_de,
     equipotent,
 )

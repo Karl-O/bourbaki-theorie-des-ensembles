@@ -80,7 +80,7 @@ def test_somme_disjointe_termes():
 def test_somme_cardinale_binaire_forme():
     """a + b := Card(A⊔B) : la somme cardinale binaire est le cardinal de la somme
     disjointe (miroir de ab := Card(A×B)) ; forme exacte."""
-    from bourbaki.cardinaux.ensembles_cardinaux import cardinal
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import cardinal
     t = S.somme_cardinale_binaire("A", "B")
     assert t == cardinal(S.somme_disjointe(var("A"), var("B")))
 

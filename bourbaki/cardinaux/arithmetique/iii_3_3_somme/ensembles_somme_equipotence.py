@@ -57,12 +57,12 @@ from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (conjonc
 from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import (symetrie, composer_egalites, congruence_terme)
 from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import (existe_elimination, alpha_existe)
 from bourbaki.ensembles.fonctions.ii_3_6_fonction_terme.ensembles_fonction_terme import membre_graphe_terme, graphe_terme_fonctionnel
-from bourbaki.cardinaux.ensembles_cantor import (graphe_terme_domaine, graphe_terme_valeur)
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.cantor.ensembles_cantor import (graphe_terme_domaine, graphe_terme_valeur)
 from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import (somme_disjointe, ZERO, UN,
                                        injection_gauche_dans_somme,
                                        injection_droite_dans_somme)
 from bourbaki.cardinaux.arithmetique.iii_3_3_produit.ensembles_produit_commute import (_projection_premiere_ab, _projection_seconde_ab)
-from bourbaki.cardinaux.ensembles_vide_singleton import vide_distinct_singleton
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.equipotence.ensembles_vide_singleton import vide_distinct_singleton
 from bourbaki.ensembles.fonctions.ii_3_4_fonctions_valeur.ensembles_fonctions import valeur_caracterisation
 from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import couple_egal_implique_composantes
 
@@ -852,7 +852,7 @@ def somme_est_bijection(f="F", g="G", a="A", b="B", a1="A1", b1="B1"):
     NB : le palier injectif a pour conclusion injective_dans(K,A⊔B) avec liants s,sp
     (≠ u,up internes de membre_somme_caracterise) — α-équivalent à la forme défaut ;
     on l'aligne sur la forme défaut u,up de est_bijection_de via alpha (canon_f)."""
-    from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import est_bijection_de
     vF, vG = _t(f), _t(g)
     va, vb, va1, vb1 = _t(a), _t(b), _t(a1), _t(b1)
     AB = somme_disjointe(va, vb)
@@ -888,7 +888,7 @@ def eq_somme_invariant(f="F", g="G", a="A", b="B", a1="A1", b1="B1"):
     Témoin = le graphe somme K ; S5 sur est_bijection_de(F',A⊔B,A₁⊔B₁) donne
     (∃F')bij = Eq(A⊔B, A₁⊔B₁), sous les bijections F:A→A₁, G:B→B₁ extraites de
     Eq(A,A₁), Eq(B,B₁) par élimination des deux témoins existentiels."""
-    from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de, equipotent
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import est_bijection_de, equipotent
     from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import alpha_existe as _alpha
     vF, vG = _t(f), _t(g)
     va, vb, va1, vb1 = _t(a), _t(b), _t(a1), _t(b1)
@@ -922,7 +922,7 @@ def somme_cardinale_bien_definie(a="A", b="B", a1="A1", b1="B1"):
     des cardinaux Card A, Card B (pas des représentants A, B)."""
     from bourbaki.cardinaux.arithmetique.iii_3_3_produit.ensembles_arith_cardinale import _prop1_direct_t
     va, vb, va1, vb1 = _t(a), _t(b), _t(a1), _t(b1)
-    from bourbaki.cardinaux.ensembles_cardinaux import equipotent
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import equipotent
     AB = somme_disjointe(va, vb)
     A1B1 = somme_disjointe(va1, vb1)
     hyp = et(equipotent(va, va1), equipotent(vb, vb1))

@@ -1,8 +1,8 @@
 """Tests TASK B-finish / C — assemblage HAUT Hessenberg « vrai » (non vacuous)."""
 from bourbaki.logique.i_1_termes_relations.formule import var, egal
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de
-from bourbaki.cardinaux.ensembles_hessenberg_vrai_haut import phi1_bijection_moins
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import est_bijection_de
+from bourbaki.cardinaux.iii_6_infinis.hessenberg.assemblage_vrai.ensembles_hessenberg_vrai_haut import phi1_bijection_moins
 
 
 def test_phi1_bijection_moins_conclusion_et_lock_absent():

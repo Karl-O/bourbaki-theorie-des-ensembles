@@ -8,11 +8,11 @@ Hypothèses EXACTES contrôlées.
 from bourbaki.logique.i_1_termes_relations.formule import var, appartient, inclus, egal, et, impl, non, pourtout, existe
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 
-import bourbaki.cardinaux.ensembles_hyp_transport_ordinal_preuve as P
-import bourbaki.cardinaux.ensembles_bon_ordre_intervalle_ordinal as BOIO
-from bourbaki.cardinaux.ensembles_segments_construction import seg
-from bourbaki.cardinaux.ensembles_cardinaux import cardinal, inf_egal_card
-from bourbaki.cardinaux.ensembles_ordinal_cardinal_correspondance import intervalle_0a
+import bourbaki.cardinaux.iii_4_ordinal_cardinal.realisation_segment.ensembles_hyp_transport_ordinal_preuve as P
+import bourbaki.cardinaux.iii_4_ordinal_cardinal.bon_ordre_intervalle.ensembles_bon_ordre_intervalle_ordinal as BOIO
+from bourbaki.cardinaux.iii_2_trichotomie_ordinaux.lemme4_segments.ensembles_segments_construction import seg
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import cardinal, inf_egal_card
+from bourbaki.cardinaux.iii_4_ordinal_cardinal.ordinal_cardinal_correspondance.ensembles_ordinal_cardinal_correspondance import intervalle_0a
 
 
 # ─────────────────────────────────────────────────────────────────────────────

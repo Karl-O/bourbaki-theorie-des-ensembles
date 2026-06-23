@@ -8,8 +8,8 @@ RÉUTILISE application_egale_par_valeurs).  theorie_ensembles() reste = 22.
 """
 from bourbaki.logique.i_1_termes_relations.formule import var, egal, impl, appartient, pourtout
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.cardinaux import ensembles_iso_unicite as U
-from bourbaki.cardinaux.ensembles_lemme4_croissante import _R_de, _val, _f_dans_E
+from bourbaki.cardinaux.iii_2_trichotomie_ordinaux.iso_ordre import ensembles_iso_unicite as U
+from bourbaki.cardinaux.iii_2_trichotomie_ordinaux.lemme4_segments.ensembles_lemme4_croissante import _R_de, _val, _f_dans_E
 from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis.ensembles_ordre_monotone import est_strictement_croissante
 
 
@@ -63,7 +63,7 @@ def test_iso_unicite_extensionnel():
 
 def test_reciproque_bijection_role():
     """⊢ bij(g,E,E') ⇒ bij(g⁻¹,E',E)  (g⁻¹ joue le rôle d'inverse — Prop. 7)."""
-    from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import est_bijection_de
     rr = U.reciproque_bijection_role()
     assert rr.est_clos
     vg = var("g")
@@ -82,7 +82,7 @@ def test_compose_bijection_automorphisme():
     assert cb.conclusion == U.compose_bijection_automorphisme_cible()
     assert cb.conclusion not in cb.hypotheses
     # les 2 hypothèses sont bien les bijectivités de k et f
-    from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import est_bijection_de
     hyps = set(cb.hypotheses)
     assert est_bijection_de(var("k"), var("Ep"), var("E")) in hyps
     assert est_bijection_de(var("f"), var("E"), var("Ep")) in hyps

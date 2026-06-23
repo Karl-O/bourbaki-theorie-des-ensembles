@@ -11,11 +11,11 @@ LITTÉRALEMENT le report `existe_complement_cardinal`.
 """
 from bourbaki.logique.i_1_termes_relations.formule import var, egal, existe, impl, et
 from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import antecedent_consequent
-from bourbaki.cardinaux import ensembles_prop13_complement as P13
-from bourbaki.cardinaux.ensembles_cardinaux_props_restantes import (
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.props_restantes import ensembles_prop13_complement as P13
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.props_restantes.ensembles_cardinaux_props_restantes import (
     existe_complement_cardinal,
 )
-from bourbaki.cardinaux.ensembles_cardinaux import (
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import (
     est_cardinal, inf_egal_card, cardinal,
 )
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E

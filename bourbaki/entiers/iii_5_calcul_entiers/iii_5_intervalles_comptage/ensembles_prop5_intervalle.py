@@ -60,7 +60,7 @@ from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
 )
 from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import symetrie
 
-from bourbaki.cardinaux.ensembles_cardinaux import est_cardinal, inf_egal_card
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import est_cardinal, inf_egal_card
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import successeur, ZERO
 
 from bourbaki.entiers.iii_5_calcul_entiers.iii_5_2_inegalites_ordre_soustraction.ensembles_successeur_ordre import (
@@ -68,9 +68,9 @@ from bourbaki.entiers.iii_5_calcul_entiers.iii_5_2_inegalites_ordre_soustraction
 )
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers_theoremes import membre_intervalle_entiers
 from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import singleton_membre
-from bourbaki.cardinaux.ensembles_cardinaux_bornes import zero_inf_egal
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.ordre_cardinaux.ensembles_cardinaux_bornes import zero_inf_egal
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_fini_successeur import successeur_est_un_cardinal
-from bourbaki.cardinaux.ensembles_cardinaux_theoremes import inf_egal_reflexif
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux_theoremes import inf_egal_reflexif
 from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import egalite_par_extension
 
 
@@ -84,7 +84,7 @@ def _zero_inf_egal_card(a):
     zero_inf_egal(a) ⊢ ∅ ≤ a ; cardinal_vide_egale_vide ⊢ Card(∅)=∅, symétrisé ∅=Card(∅) ;
     Leibniz ∅ ↦ Card(∅) (=ZERO) dans (∅ ≤ a)."""
     from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_fini_zero import cardinal_vide_egale_vide
-    from bourbaki.cardinaux.ensembles_cardinaux import cardinal
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import cardinal
     va = _t(a)
     le_vide = zero_inf_egal(va)                          # ∅ ≤ a
     card_vide_eq = cardinal_vide_egale_vide()            # Card(∅) = ∅

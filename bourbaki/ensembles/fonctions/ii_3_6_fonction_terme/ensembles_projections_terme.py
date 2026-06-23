@@ -46,7 +46,7 @@ from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (conjonc
 from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import existe_elimination, alpha_existe
 from bourbaki.ensembles.fonctions.ii_3_6_fonction_terme.ensembles_fonction_terme import membre_graphe_terme
 # réexports §3.6
-from bourbaki.cardinaux.ensembles_cantor import (graphe_terme_domaine, graphe_terme_couple_dans,
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.cantor.ensembles_cantor import (graphe_terme_domaine, graphe_terme_couple_dans,
                               graphe_terme_valeur)
 
 

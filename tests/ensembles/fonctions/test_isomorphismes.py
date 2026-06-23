@@ -5,7 +5,7 @@ par le noyau).  Les définitions sont vérifiées bien formées."""
 from bourbaki.logique.i_1_termes_relations.formule import var, appartient, equiv, et, existe
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ensembles.fonctions.hors_ii_3.iv_structures import ensembles_isomorphismes as I
-from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import est_bijection_de
 
 
 def _G_relation():

@@ -49,8 +49,8 @@ from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import a_impliqu
 from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
     equivalence_avant, equivalence_arriere, equivalence_transitivite, instancie)
-from bourbaki.cardinaux.ensembles_cardinaux import cardinal, equipotent
-from bourbaki.cardinaux.ensembles_cardinaux_theoremes import equipotent_son_cardinal
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import cardinal, equipotent
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux_theoremes import equipotent_son_cardinal
 from bourbaki.cardinaux.arithmetique.iii_3_3_produit.ensembles_arith_cardinale import _prop1_direct_t
 
 

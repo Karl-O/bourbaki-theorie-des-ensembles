@@ -283,7 +283,7 @@ def domaines_disjoints_si_marques(g="G", h="H", b="B", c="C", u="u"):
     (puis brancher reunion_graphes_fonctionnelle) est immédiat — laissé à
     l'appelant qui maîtrise la fraîcheur de u dans son contexte."""
     from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import ZERO, UN
-    from bourbaki.cardinaux.ensembles_vide_singleton import vide_distinct_singleton
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.equipotence.ensembles_vide_singleton import vide_distinct_singleton
     from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import contraposition
     vg, vh, vb, vc = _t(g), _t(h), _t(b), _t(c)
     vu = _t(u)

@@ -1,6 +1,6 @@
 """Tests : divisibilité / parité « propres » sur le vrai produit cardinal."""
 from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
-from bourbaki.cardinaux.ensembles_divisibilite_propre import (
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.props_restantes.ensembles_divisibilite_propre import (
     divise_propre_reflexif, divise_propre_reflexif_cible,
     pair_ou_impair, pair_ou_impair_cible,
     deux_divise_double, deux_divise_double_cible,

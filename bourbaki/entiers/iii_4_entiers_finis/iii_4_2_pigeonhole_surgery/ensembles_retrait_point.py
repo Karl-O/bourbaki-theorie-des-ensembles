@@ -65,12 +65,12 @@ from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     equivalence_avant, equivalence_arriere, instancie)
 from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import symetrie, composer_egalites
 
-from bourbaki.cardinaux.ensembles_cardinaux import (
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import (
     est_injection_de, equipotent, cardinal, inf_egal_card,
 )
-from bourbaki.cardinaux.ensembles_cardinaux_theoremes import equipotent_son_cardinal
-from bourbaki.cardinaux.ensembles_cardinaux_ordre import equipotence_implique_inf_egal
-from bourbaki.cardinaux.ensembles_cardinaux_props_restantes import (
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux_theoremes import equipotent_son_cardinal
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.ordre_cardinaux.ensembles_cardinaux_ordre import equipotence_implique_inf_egal
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.props_restantes.ensembles_cardinaux_props_restantes import (
     _inf_egal_transitive_t, _eq_implique_inf_egal_t, _eq_son_cardinal_t)
 from bourbaki.cardinaux.arithmetique.iii_3_4_prop8_successeur.ensembles_copie_marquee import (
     eq_copie_gauche, _eq_sym_t, _eq_trans_t)

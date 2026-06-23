@@ -7,7 +7,7 @@ theorie_ensembles() reste à 22 axiomes (INTANGIBLE).
 """
 from bourbaki.logique.i_1_termes_relations.formule import (var, egal, et, impl, non, existe, libres_f)
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.cardinaux.ensembles_cardinaux import (
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import (
     est_cardinal, cardinal, inf_egal_card, inf_strict_card,
 )
 from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import somme_cardinale_binaire

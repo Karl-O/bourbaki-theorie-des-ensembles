@@ -17,11 +17,11 @@ INVARIANT : theorie_ensembles() = 22.  Rien postulé.  Conclusions NON vacueuses
 from bourbaki.logique.i_1_termes_relations.formule import var, egal, ou, non, appartient, Formule
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis import ensembles_ordre_vocab as V
-from bourbaki.cardinaux import ensembles_trichotomie_scaffold as TS
-from bourbaki.cardinaux import ensembles_trichotomie_h_iso as HI
-from bourbaki.cardinaux import ensembles_trichotomie_scaffold_maximalite as M
-from bourbaki.cardinaux import ensembles_fusion_depuis_coincidence_app as FDA
-from bourbaki.cardinaux import ensembles_maximalite_substantielle as MS
+from bourbaki.cardinaux.iii_2_trichotomie_ordinaux.assemblage import ensembles_trichotomie_scaffold as TS
+from bourbaki.cardinaux.iii_2_trichotomie_ordinaux.h_coherences import ensembles_trichotomie_h_iso as HI
+from bourbaki.cardinaux.iii_2_trichotomie_ordinaux.maximalite import ensembles_trichotomie_scaffold_maximalite as M
+from bourbaki.cardinaux.iii_2_trichotomie_ordinaux.coincidence_fusion import ensembles_fusion_depuis_coincidence_app as FDA
+from bourbaki.cardinaux.iii_2_trichotomie_ordinaux.maximalite import ensembles_maximalite_substantielle as MS
 
 
 def _R_de(R):
@@ -135,11 +135,11 @@ def test_maximalite_residu_est_le_gap_precis():
     # le 3ᵉ résidu EST l'iso (R,Rp) de h⁺* sur les segments fermés ]←,a*]≅]←,b*]
     h = TS.h_iso_max("E", "R", "F", "Rp")
     Rf, Rpf = _R_de("R"), _R_de("Rp")
-    from bourbaki.cardinaux import ensembles_trichotomie_temoin_adjonction as ADJ
+    from bourbaki.cardinaux.iii_2_trichotomie_ordinaux.assemblage import ensembles_trichotomie_temoin_adjonction as ADJ
     from bourbaki.logique.i_1_termes_relations.formule import tau, et as _et, pourtout, impl
     # τ-témoins (reconstruits comme dans la preuve)
     domh, imgh = E.dom(h), E.img(h)
-    from bourbaki.cardinaux.ensembles_segments_construction import seg as _seg
+    from bourbaki.cardinaux.iii_2_trichotomie_ordinaux.lemme4_segments.ensembles_segments_construction import seg as _seg
     def _tau(R_, e_, d_):
         ve, vd = var(e_), d_
         DmD = E.difference(ve, vd)

@@ -31,7 +31,7 @@ from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     et_congruence_gauche, comm_et, et_ou_distrib, ou_congruence)
 from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import congruence_existe
 from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import egalite_par_extension
-from bourbaki.cardinaux.ensembles_produit_union_carre import existe_ou
+from bourbaki.cardinaux.iii_5_entiers.ensembles_produit_union_carre import existe_ou
 
 
 def _t(v):

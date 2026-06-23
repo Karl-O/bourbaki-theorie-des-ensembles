@@ -10,8 +10,8 @@ import pytest
 from bourbaki.logique.i_1_termes_relations.formule import (var, app, egal, et, impl, equiv, pourtout,
                                        appartient, non, inclus)
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.cardinaux.ensembles_cardinaux import est_cardinal, inf_egal_card
-from bourbaki.cardinaux import ensembles_sup_cardinal as SUP
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import est_cardinal, inf_egal_card
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.ordre_cardinaux import ensembles_sup_cardinal as SUP
 
 
 # ── notions (formes) ──────────────────────────────────────────────────────────

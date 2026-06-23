@@ -12,9 +12,9 @@ NON vacuité ; theorie_ensembles=22.
 import pytest
 
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.cardinaux import ensembles_h_bien_defini as HBD
+from bourbaki.cardinaux.iii_2_trichotomie_ordinaux.h_coherences import ensembles_h_bien_defini as HBD
 # FORMULE-builders importés depuis le module d'origine (source de vérité des cibles)
-from bourbaki.cardinaux.ensembles_trichotomie_h_iso import (
+from bourbaki.cardinaux.iii_2_trichotomie_ordinaux.h_coherences.ensembles_trichotomie_h_iso import (
     compatibilite_inverse_h, compatibilite_ordre_h,
 )
 

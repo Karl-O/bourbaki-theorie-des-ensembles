@@ -59,8 +59,8 @@ from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recolle
 from bourbaki.cardinaux.arithmetique.iii_3_3_somme import ensembles_somme_equipotence as S
 from bourbaki.cardinaux.arithmetique.iii_3_3_produit.ensembles_produit_equipotence import (_valeur_dans_image,
                                _valeur_cy)
-from bourbaki.cardinaux.ensembles_cardinaux import (est_injection_de, inf_egal_card, cardinal)
-from bourbaki.cardinaux.ensembles_cardinaux_theoremes import inf_egal_reflexif
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import (est_injection_de, inf_egal_card, cardinal)
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux_theoremes import inf_egal_reflexif
 
 
 def _t(v):

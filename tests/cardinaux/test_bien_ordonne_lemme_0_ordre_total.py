@@ -12,10 +12,10 @@ INVARIANT vérifié : theorie_ensembles() = 22 ; aucune tautologie/affaibli (la
 conclusion est une CONJONCTION stricte des 4 prédicats d'ordre, pas une hypothèse).
 """
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.cardinaux.ensembles_ordinal_cardinal_correspondance import (
+from bourbaki.cardinaux.iii_4_ordinal_cardinal.ordinal_cardinal_correspondance.ensembles_ordinal_cardinal_correspondance import (
     ordre_induit_intervalle, intervalle_0a, bon_ordre_intervalle,
 )
-import bourbaki.cardinaux.ensembles_bien_ordonne_lemme_0_ordre_total as L0M
+import bourbaki.cardinaux.iii_4_ordinal_cardinal.bon_ordre_intervalle.ensembles_bien_ordonne_lemme_0_ordre_total as L0M
 
 
 # ─────────────────────────────────────────────────────────────────────────────

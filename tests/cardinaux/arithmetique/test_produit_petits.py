@@ -2,7 +2,7 @@
 from bourbaki.logique.i_1_termes_relations.formule import var, egal, et, appartient
 from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.cardinaux.ensembles_cardinaux import cardinal, equipotent, est_bijection_de
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import cardinal, equipotent, est_bijection_de
 from bourbaki.cardinaux.arithmetique.iii_3_3_produit.ensembles_produit_petits import (
     produit_vide_droit, produit_cardinal_zero,
     proj_graphe_fonctionnel, proj_graphe_domaine, proj_graphe_valeur,

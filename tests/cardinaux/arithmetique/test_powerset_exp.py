@@ -12,7 +12,7 @@ précise (cf. bijection_caracteristique_REPORTE) ; on verrouille ici :
 """
 from bourbaki.logique.i_1_termes_relations.formule import var, egal, et, non, ou, appartient
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.cardinaux.ensembles_cardinaux import cardinal
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import cardinal
 from bourbaki.cardinaux.arithmetique.iii_3_5_exposant.definition.ensembles_exposant_cardinal import exposant_cardinal_binaire
 from bourbaki.cardinaux.arithmetique.iii_3_5_exposant.prop12_powerset import ensembles_powerset_exp as P
 

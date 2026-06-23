@@ -38,13 +38,13 @@ from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (conjonc
 from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import (symetrie, composer_egalites, congruence_terme)
 from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import (existe_elimination, alpha_existe)
 from bourbaki.ensembles.fonctions.ii_3_6_fonction_terme.ensembles_fonction_terme import (membre_graphe_terme, graphe_terme_fonctionnel)
-from bourbaki.cardinaux.ensembles_cantor import (graphe_terme_domaine, graphe_terme_valeur)
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.cantor.ensembles_cantor import (graphe_terme_domaine, graphe_terme_valeur)
 from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import (somme_disjointe, ZERO, UN,
                                        injection_gauche_dans_somme,
                                        injection_droite_dans_somme,
                                        membre_somme_caracterise, _ou_congruence)
 from bourbaki.cardinaux.arithmetique.iii_3_3_produit.ensembles_produit_commute import (_projection_premiere_ab, _projection_seconde_ab)
-from bourbaki.cardinaux.ensembles_vide_singleton import vide_distinct_singleton
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.equipotence.ensembles_vide_singleton import vide_distinct_singleton
 from bourbaki.ensembles.fonctions.ii_3_4_fonctions_valeur.ensembles_fonctions import valeur_caracterisation
 from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import couple_egal_implique_composantes
 from bourbaki.cardinaux.arithmetique.iii_3_3_somme.ensembles_somme_equipotence import (_garde_disjonction, _neg_un_egal_zero,
@@ -588,7 +588,7 @@ def commute_est_bijection(a="A", b="B"):
 
     Les 4 conjoints (fonctionnel, domaine, injectif, image) sont fournis par les
     paliers 1/2/4/5.  Tous CLOS (pas d'hypothèse, contrairement au cas F,G)."""
-    from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import est_bijection_de
     c1 = commute_graphe_fonctionnel(a, b)                  # K fonctionnel
     c2 = commute_graphe_domaine(a, b)                      # dom K = A⊔B
     c3 = _renomme_injective(commute_graphe_injective(a, b))  # inj K (liants u,up)
@@ -601,7 +601,7 @@ def eq_somme_commute(a="A", b="B"):
 
     Témoin = le graphe d'échange des copies K ; S5 sur est_bijection_de(F,·,·)
     donne (∃F)bij = Eq(A⊔B, B⊔A)."""
-    from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import est_bijection_de
     va, vb = _t(a), _t(b)
     AB = somme_disjointe(va, vb)
     BA = somme_disjointe(vb, va)

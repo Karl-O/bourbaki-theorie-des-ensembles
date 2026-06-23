@@ -11,7 +11,7 @@ from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.e
     trois_est_un_cardinal, quatre_est_un_cardinal,
     fini_trois, fini_quatre)
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import TROIS, QUATRE, successeur, est_fini, est_cardinal
-from bourbaki.cardinaux.ensembles_cardinaux import cardinal
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import cardinal
 from bourbaki.logique.i_1_termes_relations.formule import egal, non
 
 

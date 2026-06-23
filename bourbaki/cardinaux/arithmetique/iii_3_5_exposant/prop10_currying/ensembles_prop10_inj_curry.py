@@ -48,9 +48,9 @@ from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import (
     couple_egal_implique_composantes)
 from bourbaki.ensembles.fonctions.ii_3_6_fonction_terme.ensembles_fonction_terme import (
     graphe_terme_fonctionnel, membre_graphe_terme)
-from bourbaki.cardinaux.ensembles_cantor import (
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.cantor.ensembles_cantor import (
     graphe_terme_domaine, graphe_terme_valeur)
-from bourbaki.cardinaux.ensembles_cardinaux import (
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import (
     est_injection_de, inf_egal_card)
 from bourbaki.cardinaux.arithmetique.fondations.ensembles_graphe_de import graphe_de
 from bourbaki.ensembles.fonctions.hors_ii_3.ii_5_produit_famille.ensembles_application_valeur import (

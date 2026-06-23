@@ -62,7 +62,7 @@ from bourbaki.logique.i_1_termes_relations.formule import (
 )
 from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.cardinaux.ensembles_cardinaux import est_cardinal, inf_egal_card, cardinal
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import est_cardinal, inf_egal_card, cardinal
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import est_fini, successeur, ZERO
 
 from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
@@ -80,8 +80,8 @@ from bourbaki.entiers.iii_4_entiers_finis.iii_4_recurrence_c61_existence_n.ensem
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_recurrence_c61_existence_n.ensembles_principe_recurrence_preuve import (
     principe_recurrence_preuve, predecesseur_fini_universel,
 )
-from bourbaki.cardinaux.ensembles_cardinal_pas_entre_univ import cardinal_pas_entre_univ
-from bourbaki.cardinaux.ensembles_cardinaux_theoremes import inf_egal_reflexif
+from bourbaki.cardinaux.iii_4_ordinal_cardinal.ordinal_cardinal_correspondance.ensembles_cardinal_pas_entre_univ import cardinal_pas_entre_univ
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux_theoremes import inf_egal_reflexif
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_fini_successeur import (
     fini_implique_fini_successeur, cardinal_de_cardinal,
 )

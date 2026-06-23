@@ -38,7 +38,7 @@ from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ensembles.familles.ii_5_produit_famille.ii_5_1_extension_canonique.ensembles_extension_canonique import (
     axiome_extension_produit, theorie_extension_produit)
-from bourbaki.cardinaux.ensembles_cantor import graphe_terme_valeur
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.cantor.ensembles_cantor import graphe_terme_valeur
 from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (instancie, equivalence_avant,
                                equivalence_arriere, conjonction_intro,
                                conjonction_elim_gauche, conjonction_elim_droite)

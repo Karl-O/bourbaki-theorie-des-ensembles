@@ -44,7 +44,7 @@ from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import (
     symetrie, composer_egalites,
 )
 
-from bourbaki.cardinaux.ensembles_cardinaux import (
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import (
     est_cardinal, cardinal, inf_egal_card, equipotent,
 )
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import est_entier, est_fini, ZERO
@@ -59,15 +59,15 @@ from bourbaki.entiers.iii_5_calcul_entiers.iii_5_2_inegalites_ordre_soustraction
 from bourbaki.cardinaux.arithmetique.iii_3_3_somme.ensembles_somme_equipotence import (
     somme_cardinale_bien_definie,
 )
-from bourbaki.cardinaux.ensembles_cardinaux_theoremes import equipotent_son_cardinal
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux_theoremes import equipotent_son_cardinal
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers_theoremes import (
     card_est_un_cardinal, fini_implique_cardinal,
 )
-from bourbaki.cardinaux.ensembles_equipotence_retrait import equipotence_reflexive_pour
-from bourbaki.cardinaux.ensembles_cardinaux_props_restantes_ordre import (
+from bourbaki.cardinaux.iii_4_ordinal_cardinal.equipotence_retrait.ensembles_equipotence_retrait import equipotence_reflexive_pour
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.ordre_cardinaux.ensembles_cardinaux_props_restantes_ordre import (
     inf_egal_total_general, inf_egal_antisymetrique_card,
 )
-from bourbaki.cardinaux.ensembles_cardinaux_theoremes import inf_egal_reflexif
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux_theoremes import inf_egal_reflexif
 from bourbaki.entiers.iii_5_calcul_entiers.iii_5_2_inegalites_ordre_soustraction.ensembles_prop4_strict_iii5 import (
     prop4_translation_injective,
 )
@@ -336,7 +336,7 @@ def prop4_surjective(a="aP4surj", b="bP4surj", y="yP4surj", u="uP4surj"):
 #   quatre composantes est un théorème CLOS ré-employé.)
 # ════════════════════════════════════════════════════════════════════════════
 def _strict_card(a, x, xp):
-    from bourbaki.cardinaux.ensembles_cardinaux import inf_strict_card
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import inf_strict_card
     va, vx, vxp = _t(a), _t(x), _t(xp)
     return impl(inf_strict_card(vx, vxp),
                 inf_strict_card(somme_cardinale_binaire(va, vx),

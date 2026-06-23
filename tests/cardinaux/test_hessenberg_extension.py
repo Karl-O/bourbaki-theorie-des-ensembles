@@ -1,6 +1,6 @@
 """Tests — pièces cardinal-arith de l'extension du maximal (Hessenberg, §III.6.3)."""
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.cardinaux.ensembles_hessenberg_extension import (
+from bourbaki.cardinaux.iii_6_infinis.hessenberg.coeur.ensembles_hessenberg_extension import (
     complement_grand, complement_grand_cible,
     existe_sous_ensemble_cardinal_dans_card,
     existe_sous_ensemble_cardinal_dans_card_cible,
@@ -19,7 +19,7 @@ def test_complement_grand_clos_et_cible():
     assert thm.conclusion not in thm.hypotheses
     # 3 hyps honnêtes
     from bourbaki.logique.i_1_termes_relations.formule import egal, inclus, var
-    from bourbaki.cardinaux.ensembles_cardinaux import (
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import (
         cardinal, inf_strict_card,
     )
     from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import somme_cardinale_binaire
@@ -42,5 +42,5 @@ def test_existe_sous_ensemble_cardinal_conditionnel():
     assert thm.conclusion == existe_sous_ensemble_cardinal_cible()
     assert thm.conclusion not in thm.hypotheses
     # exactement 1 hyp honnête : le transport
-    from bourbaki.cardinaux.ensembles_hessenberg_extension import _transport_sous_ensemble_hyp
+    from bourbaki.cardinaux.iii_6_infinis.hessenberg.coeur.ensembles_hessenberg_extension import _transport_sous_ensemble_hyp
     assert _transport_sous_ensemble_hyp("cE", "AE", "UE", "VE") in thm.hypotheses

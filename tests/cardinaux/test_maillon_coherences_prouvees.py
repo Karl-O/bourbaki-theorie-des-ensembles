@@ -16,11 +16,11 @@ theorie_ensembles() = 22 (rien postulé).
 import pytest
 
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.cardinaux import ensembles_maillon_coherences_prouvees as M
-from bourbaki.cardinaux import ensembles_fusion_depuis_coincidence_app as FDA
-from bourbaki.cardinaux import ensembles_trichotomie_scaffold as TS
-from bourbaki.cardinaux import ensembles_trichotomie_coherences as COH
-import bourbaki.cardinaux.ensembles_trichotomie_h_iso as HI
+from bourbaki.cardinaux.iii_2_trichotomie_ordinaux.assemblage import ensembles_maillon_coherences_prouvees as M
+from bourbaki.cardinaux.iii_2_trichotomie_ordinaux.coincidence_fusion import ensembles_fusion_depuis_coincidence_app as FDA
+from bourbaki.cardinaux.iii_2_trichotomie_ordinaux.assemblage import ensembles_trichotomie_scaffold as TS
+from bourbaki.cardinaux.iii_2_trichotomie_ordinaux.h_coherences import ensembles_trichotomie_coherences as COH
+import bourbaki.cardinaux.iii_2_trichotomie_ordinaux.h_coherences.ensembles_trichotomie_h_iso as HI
 
 
 def test_theorie_ensembles_inchangee():

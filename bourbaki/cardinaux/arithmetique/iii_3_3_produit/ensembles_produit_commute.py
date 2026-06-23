@@ -55,11 +55,11 @@ from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import (existe_eli
 from bourbaki.ensembles.fonctions.hors_ii_3.ii_2_projections.ensembles_projections import projection_premiere, projection_seconde
 from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import couple_egal_implique_composantes
 from bourbaki.ensembles.fonctions.ii_3_6_fonction_terme.ensembles_fonction_terme import membre_graphe_terme, graphe_terme_fonctionnel
-from bourbaki.cardinaux.ensembles_cantor import graphe_terme_couple_dans
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.cantor.ensembles_cantor import graphe_terme_couple_dans
 from bourbaki.ensembles.fonctions.ii_3_4_fonctions_valeur.ensembles_fonctions import valeur_caracterisation
 from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import egalite_par_extension
 from bourbaki.ensembles.familles.ii_2_produit_deux_ensembles.ensembles_produit import couple_dans_produit, couple_dans_produit_ssi
-from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de, equipotent
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import est_bijection_de, equipotent
 
 
 def _t(v):

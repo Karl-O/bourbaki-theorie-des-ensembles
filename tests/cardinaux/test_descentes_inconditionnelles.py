@@ -9,7 +9,7 @@ noyau reste à theorie_ensembles() == 22.
 """
 from bourbaki.logique.i_1_termes_relations.formule import var, egal, et, impl
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.cardinaux.ensembles_cardinaux import est_cardinal
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import est_cardinal
 from bourbaki.cardinaux.arithmetique.iii_3_3_produit.ensembles_arith_cardinale import (
     produit_cardinal_binaire as _pcb,
 )
@@ -18,7 +18,7 @@ from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recolle
     somme_cardinale_binaire, somme_disjointe,
 )
 
-from bourbaki.cardinaux.ensembles_descentes_inconditionnelles import (
+from bourbaki.cardinaux.iii_6_infinis.hessenberg.coeur.ensembles_descentes_inconditionnelles import (
     deux_b_egal_b_inconditionnel, trois_b_egal_b_inconditionnel,
 )
 

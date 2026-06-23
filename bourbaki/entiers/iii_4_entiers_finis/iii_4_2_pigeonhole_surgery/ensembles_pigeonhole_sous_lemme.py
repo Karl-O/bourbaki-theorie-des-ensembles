@@ -27,7 +27,7 @@ from bourbaki.logique.i_1_termes_relations.formule import Terme, var, egal, et
 from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 
-from bourbaki.cardinaux.ensembles_cardinaux import est_cardinal, cardinal, inf_strict_card
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import est_cardinal, cardinal, inf_strict_card
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import est_fini_ensemble, est_entier, ZERO
 from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import (
     somme_disjointe, somme_cardinale_binaire,
@@ -42,14 +42,14 @@ from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import (
 )
 
 # ── briques CLOSES réutilisées ────────────────────────────────────────────────
-from bourbaki.cardinaux.ensembles_cantor_bernstein_fin import (
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.cantor_bernstein.ensembles_cantor_bernstein_fin import (
     partie_reunion_complement, partie_disjoint_complement,
 )
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_recurrence_c61_existence_n.ensembles_predecesseur_prop2 import eq_reunion_disjointe_somme
 from bourbaki.cardinaux.arithmetique.iii_3_3_somme.ensembles_arith_somme import _prop1_direct_t
 from bourbaki.entiers.iii_5_calcul_entiers.iii_5_1_somme_produit_entiers.ensembles_combinatoire_iii5 import somme_zero_neutre_droite, _sdc
 from bourbaki.entiers.iii_5_calcul_entiers.iii_5_1_somme_produit_entiers.ensembles_simplification_additive import simplification_additive_finie
-from bourbaki.cardinaux.ensembles_cardinaux_props_restantes_prop7 import (
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.props_restantes.ensembles_cardinaux_props_restantes_prop7 import (
     cardinal_egal_zero_ssi_vide,
 )
 from bourbaki.entiers.iii_5_calcul_entiers.iii_5_intervalles_comptage.ensembles_prop6_bien_ordonne_iii5 import partie_finie_est_finie
@@ -74,7 +74,7 @@ def _diff_inclus(tE, tX, w="z"):
         from bourbaki.logique.i_1_termes_relations.formule import _fraiche
         w = _fraiche(libres_t(EmX) | libres_t(tE))
     vw = var(w)
-    from bourbaki.cardinaux.ensembles_cantor_bernstein_fin import _inst_diff
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.cantor_bernstein.ensembles_cantor_bernstein_fin import _inst_diff
     carD = _inst_diff(tE, tX, vw)                          # z∈E∖X ⇔ (z∈E et ¬z∈X)
     br = syllogisme(equivalence_avant(carD),
                     projection_gauche(appartient(vw, tE), non(appartient(vw, tX))))  # z∈E∖X ⇒ z∈E
@@ -300,7 +300,7 @@ def cor2_partie_propre_inf_strict(X="Xpe", Eens="Epe"):
 
 
 def _inf_egal(x, y):
-    from bourbaki.cardinaux.ensembles_cardinaux import inf_egal_card
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import inf_egal_card
     return inf_egal_card(x, y)
 
 

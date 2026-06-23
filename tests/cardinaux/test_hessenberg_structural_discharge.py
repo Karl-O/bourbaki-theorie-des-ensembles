@@ -3,10 +3,10 @@ from bourbaki.logique.i_1_termes_relations.formule import (
     var, egal, et, non, impl, pourtout, appartient, inclus, equiv,
 )
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.cardinaux.ensembles_cardinaux import (
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import (
     cardinal, est_bijection_de, inf_egal_card,
 )
-import bourbaki.cardinaux.ensembles_hessenberg_structural_discharge as M
+import bourbaki.cardinaux.iii_6_infinis.hessenberg.coeur.ensembles_hessenberg_structural_discharge as M
 
 
 def test_theorie_inchangee():

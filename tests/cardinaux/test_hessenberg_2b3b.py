@@ -6,11 +6,11 @@ REPORTÉ).  Le ≥ est inconditionnel et clos ; rien postulé ; theorie=22.
 """
 from bourbaki.logique.i_1_termes_relations.formule import var, egal, et
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.cardinaux.ensembles_cardinaux import cardinal, inf_egal_card, est_cardinal
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import cardinal, inf_egal_card, est_cardinal
 from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import (
     somme_disjointe, somme_cardinale_binaire,
 )
-from bourbaki.cardinaux.ensembles_hessenberg_2b3b import deux_b_egal_b, trois_b_egal_b
+from bourbaki.cardinaux.iii_6_infinis.hessenberg.coeur.ensembles_hessenberg_2b3b import deux_b_egal_b, trois_b_egal_b
 
 
 def test_theorie_ensembles_inchangee_22():

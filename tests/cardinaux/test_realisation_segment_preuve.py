@@ -12,10 +12,10 @@ Hypothèses EXACTES contrôlées (test miroir).
 from bourbaki.logique.i_1_termes_relations.formule import var, pourtout, libres_f
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 
-import bourbaki.cardinaux.ensembles_realisation_segment_preuve as RSP
-import bourbaki.cardinaux.ensembles_hyp_transport_ordinal_preuve as HTP
-import bourbaki.cardinaux.ensembles_bon_ordre_intervalle_ordinal as BOIO
-from bourbaki.cardinaux.ensembles_ordinal_cardinal_correspondance import (
+import bourbaki.cardinaux.iii_4_ordinal_cardinal.realisation_segment.ensembles_realisation_segment_preuve as RSP
+import bourbaki.cardinaux.iii_4_ordinal_cardinal.realisation_segment.ensembles_hyp_transport_ordinal_preuve as HTP
+import bourbaki.cardinaux.iii_4_ordinal_cardinal.bon_ordre_intervalle.ensembles_bon_ordre_intervalle_ordinal as BOIO
+from bourbaki.cardinaux.iii_4_ordinal_cardinal.ordinal_cardinal_correspondance.ensembles_ordinal_cardinal_correspondance import (
     bon_ordre_intervalle, cardinaux_bien_ordonnes_de_bon_ordre,
 )
 

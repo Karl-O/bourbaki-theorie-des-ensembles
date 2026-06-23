@@ -43,7 +43,7 @@ from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import (singleton
 from bourbaki.ensembles.familles.ii_2_produit_deux_ensembles.ensembles_produit import (_instance_produit,
                                   couple_dans_produit_ssi)
 from bourbaki.ensembles.fonctions.ii_3_4_fonctions_valeur.ensembles_fonctions import valeur_dans_graphe
-from bourbaki.cardinaux.ensembles_cardinaux import cardinal
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import cardinal
 
 
 def _t(v):
@@ -379,7 +379,7 @@ def eq_applications_un_base_singleton(a="A"):
     elle-même « F » (Eq(X,Y) := (∃F)bij).  Le défaut « A » et tout nom ≠ F,x,y,z
     conviennent."""
     from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_zero_plus_un import eq_singletons
-    from bourbaki.cardinaux.ensembles_cardinaux import equipotent
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import equipotent
     vA = _t(a)
     one = UN_BUT()
     omega = _omega(a)

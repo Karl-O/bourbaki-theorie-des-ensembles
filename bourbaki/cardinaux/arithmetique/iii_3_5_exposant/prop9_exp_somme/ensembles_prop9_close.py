@@ -61,7 +61,7 @@ from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import existe_elim
 from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import (
     symetrie, composer_egalites, congruence_terme)
 
-from bourbaki.cardinaux.ensembles_cardinaux import (
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import (
     cardinal, est_injection_de, inf_egal_card, equipotent)
 from bourbaki.cardinaux.arithmetique.fondations.ensembles_graphe_de import (
     graphe_de, graphe_de_triple)
@@ -73,7 +73,7 @@ from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recolle
     membre_somme_caracterise)
 from bourbaki.ensembles.fonctions.ii_3_6_fonction_terme.ensembles_fonction_terme import (
     graphe_terme_fonctionnel, membre_graphe_terme)
-from bourbaki.cardinaux.ensembles_cantor import (
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.cantor.ensembles_cantor import (
     graphe_terme_domaine, graphe_terme_valeur)
 from bourbaki.cardinaux.arithmetique.iii_3_5_exposant.prop9_exp_somme.ensembles_exposant_somme import (
     membre_exposant_somme, membre_applications_somme, membre_applications_b,

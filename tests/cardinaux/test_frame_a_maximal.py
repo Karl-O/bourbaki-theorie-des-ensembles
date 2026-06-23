@@ -10,12 +10,12 @@ theorie_ensembles() reste = 22 ; noyau INTACT ; aucune conclusion vacuous.
 from bourbaki.logique.i_1_termes_relations.formule import var, appartient, existe
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.entiers.iii_6_infinis.iii_6_3_infinis_denombrables.ensembles_infinis import est_infini_ensemble
-from bourbaki.cardinaux.ensembles_hessenberg_hard import frame_pair, frame_ordre
-from bourbaki.cardinaux.ensembles_chaine_temoin_abstrait import union_premiere
-from bourbaki.cardinaux.ensembles_frame_inductif_assemblage import m_dans_frame_universel
+from bourbaki.cardinaux.iii_6_infinis.hessenberg.coeur.ensembles_hessenberg_hard import frame_pair, frame_ordre
+from bourbaki.cardinaux.iii_6_infinis.chaine_recollement.ensembles_chaine_temoin_abstrait import union_premiere
+from bourbaki.cardinaux.iii_6_infinis.frame_zorn.ensembles_frame_inductif_assemblage import m_dans_frame_universel
 from bourbaki.ordre.iii_2_bon_ordre.zorn_zermelo.ensembles_zorn import est_inductif, enonce_non_vide
 from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis.ensembles_ordre_relation import element_maximal, est_ordre
-from bourbaki.cardinaux.ensembles_frame_a_maximal import (
+from bourbaki.cardinaux.iii_6_infinis.frame_zorn.ensembles_frame_a_maximal import (
     est_infini_union_chaine, frame_inductif_clean, frame_a_maximal,
 )
 

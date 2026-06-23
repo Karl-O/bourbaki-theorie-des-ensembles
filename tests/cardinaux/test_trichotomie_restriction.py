@@ -18,9 +18,9 @@ Aucune conclusion n'est tautologie / postulée ; theorie=22 ; rien de modifié a
 from bourbaki.logique.i_1_termes_relations.formule import appartient, var, inclus, ou, egal, impl, et
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis import ensembles_ordre_vocab as V
-from bourbaki.cardinaux import ensembles_trichotomie_restriction as Rstr
-from bourbaki.cardinaux.ensembles_iso_unicite_finale import auto_iso_est_identite
-from bourbaki.cardinaux.ensembles_iso_unicite_sous_domaine import (
+from bourbaki.cardinaux.iii_2_trichotomie_ordinaux.h_coherences import ensembles_trichotomie_restriction as Rstr
+from bourbaki.cardinaux.iii_2_trichotomie_ordinaux.iso_ordre.ensembles_iso_unicite_finale import auto_iso_est_identite
+from bourbaki.cardinaux.iii_2_trichotomie_ordinaux.iso_ordre.ensembles_iso_unicite_sous_domaine import (
     auto_iso_est_identite_sous_domaine,
 )
 

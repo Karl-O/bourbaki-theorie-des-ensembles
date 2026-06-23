@@ -17,9 +17,9 @@ theorie_ensembles() reste = 22 ; rien postulé ; conclusions non tautologiques (
 """
 from bourbaki.logique.i_1_termes_relations.formule import Formule, appartient
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.cardinaux import ensembles_trichotomie_scaffold as TS
-from bourbaki.cardinaux import ensembles_trichotomie_coherences as COH
-from bourbaki.cardinaux import ensembles_temoin_commun as TC
+from bourbaki.cardinaux.iii_2_trichotomie_ordinaux.assemblage import ensembles_trichotomie_scaffold as TS
+from bourbaki.cardinaux.iii_2_trichotomie_ordinaux.h_coherences import ensembles_trichotomie_coherences as COH
+from bourbaki.cardinaux.iii_2_trichotomie_ordinaux.temoins_comparabilite import ensembles_temoin_commun as TC
 
 
 _h = TS.h_iso_max("E", "R", "F", "Rp")
@@ -118,7 +118,7 @@ def test_temoin_fonc_depuis_couples():
 #  NON-CIRCULARITÉ : le témoin commun ≠ les cohérences (A)/(B)/func qu'il dérive.
 # ════════════════════════════════════════════════════════════════════════════
 def test_temoins_non_circulaires():
-    import bourbaki.cardinaux.ensembles_trichotomie_h_iso as H
+    import bourbaki.cardinaux.iii_2_trichotomie_ordinaux.h_coherences.ensembles_trichotomie_h_iso as H
     assert COH.temoin_commun_h() != H.compatibilite_ordre_h()
     assert COH.temoin_commun_inv_h() != H.compatibilite_inverse_h()
     assert COH.temoin_commun_fonc_h() != E.est_fonctionnel(_h)

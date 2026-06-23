@@ -2,8 +2,8 @@
 from bourbaki.logique.i_1_termes_relations.formule import var, egal, et, equiv, appartient
 from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.cardinaux import ensembles_cardinaux as C
-from bourbaki.cardinaux import ensembles_equipotence as EQ
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux import ensembles_cardinaux as C
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.equipotence import ensembles_equipotence as EQ
 
 
 # ── Définitions (E.III.3.1) bien formées et closes ────────────────────────────

@@ -5,7 +5,7 @@ from bourbaki.cardinaux.arithmetique.iii_3_5_exposant.definition.ensembles_expos
     exposant_cardinal_binaire,
 )
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import est_fini, DEUX, TROIS
-from bourbaki.cardinaux.ensembles_puissance_deux_trois_NN import (
+from bourbaki.cardinaux.iii_5_entiers.ensembles_puissance_deux_trois_NN import (
     deux_puissance_dans_NN, trois_puissance_dans_NN,
 )
 

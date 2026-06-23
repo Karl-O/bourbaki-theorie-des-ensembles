@@ -12,8 +12,8 @@ from bourbaki.logique.i_1_termes_relations.formule import var
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ordre.iii_2_bon_ordre.zorn_zermelo.ensembles_zorn import est_inductif
 from bourbaki.ordre.iii_2_bon_ordre.recurrence_transfinie.ensembles_c60_coeur import union_famille, famille_compatible
-from bourbaki.cardinaux.ensembles_hessenberg_hard import frame_pair, frame_ordre
-from bourbaki.cardinaux.ensembles_hessenberg_inductivite import (
+from bourbaki.cardinaux.iii_6_infinis.hessenberg.coeur.ensembles_hessenberg_hard import frame_pair, frame_ordre
+from bourbaki.cardinaux.iii_6_infinis.hessenberg.coeur.ensembles_hessenberg_inductivite import (
     union_chaine_fonctionnelle, union_chaine_valeur,
     enonce_chaine_majoree, frame_inductif,
 )

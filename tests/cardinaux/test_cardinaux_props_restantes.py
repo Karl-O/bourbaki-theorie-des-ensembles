@@ -10,8 +10,8 @@ Chaque test vérifie que la conclusion certifiée EST EXACTEMENT la cible Bourba
 et la clôture (.est_clos), avec hypothèses résiduelles vides (sauf hyp explicite).
 """
 from bourbaki.logique.i_1_termes_relations.formule import var, egal, existe, impl, et
-from bourbaki.cardinaux import ensembles_cardinaux_props_restantes as P
-from bourbaki.cardinaux.ensembles_cardinaux import inf_egal_card, cardinal
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.props_restantes import ensembles_cardinaux_props_restantes as P
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import inf_egal_card, cardinal
 from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import somme_cardinale_binaire
 
 

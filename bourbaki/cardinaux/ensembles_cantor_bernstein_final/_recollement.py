@@ -23,12 +23,12 @@ from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import (
     symetrie, composer_egalites, congruence_terme)
 from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import (
     existe_elimination, alpha_existe)
-from bourbaki.cardinaux import ensembles_cantor_bernstein as CB
-from bourbaki.cardinaux.ensembles_cardinaux import (est_injection_de,
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.cantor_bernstein import ensembles_cantor_bernstein as CB
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import (est_injection_de,
                                                     est_bijection_de, equipotent,
                                                     inf_egal_card)
-from bourbaki.cardinaux.ensembles_cantor_bernstein_bij import morceau_fD
-from bourbaki.cardinaux.ensembles_cantor_bernstein_fin import (
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.cantor_bernstein.ensembles_cantor_bernstein_bij import morceau_fD
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.cantor_bernstein.ensembles_cantor_bernstein_fin import (
     partie_disjoint_complement, partie_reunion_complement)
 from bourbaki.ensembles.fonctions.hors_ii_3.iii_3_recollement.ensembles_restriction_somme import (
     dom_reunion_graphes, reunion_graphes_fonctionnelle)
@@ -68,14 +68,14 @@ def _disjoint_to_forall(x, y, u="u"):
         N.s2(non(appartient(vu, E.VIDE)), non(et(appartient(vu, vX), appartient(vu, vY))))))
     inner = N.loi_deduction(et(appartient(vu, vX), appartient(vu, vY)), n_commun)
     # inner : (u∈X et u∈Y) ⇒ ¬(u∈X et u∈Y) ; or (P⇒¬P)⇒¬P → ¬(u∈X et u∈Y)
-    from bourbaki.cardinaux.ensembles_cantor_bernstein_fin import _absorption_neg
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.cantor_bernstein.ensembles_cantor_bernstein_fin import _absorption_neg
     n_and = N.modus_ponens(inner, _absorption_neg(et(appartient(vu, vX), appartient(vu, vY))))
     return N.loi_deduction(egal(E.intersection(vX, vY), E.VIDE), N.generalisation(u, n_and))
 
 
 def _D_inclus_a_terme(a, b, f, g):
     """⊢ D ⊂ a   pour des TERMES a,b,f,g."""
-    from bourbaki.cardinaux.ensembles_cantor_bernstein import D_inclus_A
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.cantor_bernstein.ensembles_cantor_bernstein import D_inclus_A
     th = D_inclus_A("A", "B", "f", "g")
     for nm, tm in (("A", _t(a)), ("B", _t(b)), ("f", _t(f)), ("g", _t(g))):
         th = instancie(N.generalisation(nm, th), tm)
@@ -86,7 +86,7 @@ def _image_dans_b(a, b, f, g):
     """{est_injection_de(f,a,b)} ⊢ f⟨D⟩ ⊂ b.
 
     f⟨D⟩ ⊂ f⟨a⟩ (image croissante, D⊂a) ⊂ b (4e conjoint image(f,a)⊂b)."""
-    from bourbaki.cardinaux.ensembles_cantor_bernstein_fin import (
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.cantor_bernstein.ensembles_cantor_bernstein_fin import (
         _img_croiss, inclusion_transitive_terme)
     vA, vB, vf, vg = _t(a), _t(b), _t(f), _t(g)
     dterm = CB.D(vA, vB, vf, vg)

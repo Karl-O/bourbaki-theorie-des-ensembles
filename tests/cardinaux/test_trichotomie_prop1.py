@@ -10,7 +10,7 @@ theorie=22.
 """
 from bourbaki.logique.i_1_termes_relations.formule import non, egal, var, impl, et
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.cardinaux import ensembles_trichotomie_prop1 as P
+from bourbaki.cardinaux.iii_2_trichotomie_ordinaux.temoins_comparabilite import ensembles_trichotomie_prop1 as P
 
 
 def _R_de(R="R"):

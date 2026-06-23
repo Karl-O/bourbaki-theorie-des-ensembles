@@ -51,7 +51,7 @@ from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (conjonc
                                equivalence_transitivite, instancie)
 from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import (symetrie,
                                composer_egalites, congruence_terme)
-from bourbaki.cardinaux.ensembles_cardinaux import cardinal
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import cardinal
 # Socle 2-élément + pivot 2^a = Card(𝓕(X;2))  (RÉUTILISÉS, jamais redéfinis) :
 from bourbaki.cardinaux.arithmetique.iii_3_5_exposant.prop12_powerset.ensembles_powerset_exp import (
     deux, deux_membre, exposant_deux_base, cible_powerset_exp)
@@ -184,7 +184,7 @@ def rho_fonctionnel(x="X"):
 
 def rho_domaine(x="X"):
     """⊢ dom(ρ) = 𝓕(X; {0,1}).   (le sens facile f↦f⁻¹(1) est défini sur TOUT 𝓕(X;2).)"""
-    from bourbaki.cardinaux.ensembles_cantor import graphe_terme_domaine
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.cantor.ensembles_cantor import graphe_terme_domaine
     vX = _t(x)
     return graphe_terme_domaine(_SOURCE(vX), preimage_un(var("f"), vX), "f", "y", "z")
 
@@ -195,7 +195,7 @@ def rho_valeur(x="X", g="g"):
     ⚠️ le point d'évaluation « g » doit DIFFÉRER du liant de fonction « f » de ρ
     (sinon la valeur Pre(g) capturerait le liant « f ») : la valeur de ρ en g est
     Pre(g)=T[f:=g], obtenue en substituant g au liant f dans le terme-valeur Pre(f)."""
-    from bourbaki.cardinaux.ensembles_cantor import graphe_terme_valeur
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.cantor.ensembles_cantor import graphe_terme_valeur
     vX = _t(x)
     if (isinstance(g, str) and g == "f") or g == var("f"):
         raise ValueError("le point d'évaluation de ρ doit différer du liant « f »")

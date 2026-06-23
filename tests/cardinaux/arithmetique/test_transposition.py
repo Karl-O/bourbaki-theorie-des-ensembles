@@ -9,7 +9,7 @@ from bourbaki.cardinaux.arithmetique.iii_3_4_prop8_successeur.transposition impo
     transpo, transpo_membre, transpo_fonctionnel, transpo_domaine,
     transpo_injective, transpo_image, transpo_valeur_q, transposition_existe)
 from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege import injective_dans, image, valeur
-from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import est_bijection_de
 from bourbaki.logique.i_1_termes_relations.formule import var, egal, et
 from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import antecedent_consequent
 import bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege as E

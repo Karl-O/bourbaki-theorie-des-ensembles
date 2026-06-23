@@ -8,7 +8,7 @@ certification par le noyau des LEMMES logiques directs (extraction des condition
 from bourbaki.logique.i_1_termes_relations.formule import (var, et, impl, equiv, existe, pourtout,
                                        appartient, inclus, egal, app, alpha_egal)
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.cardinaux.ensembles_cardinaux import (cardinal, est_cardinal,
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import (cardinal, est_cardinal,
                                                     inf_egal_card)
 from bourbaki.structures import ensembles_structures_complements as C
 

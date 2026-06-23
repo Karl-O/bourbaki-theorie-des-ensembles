@@ -12,7 +12,7 @@ Vérifie les pièces de l'argument « CLAIM : Card(S₀)=Card(E) ⇒ a²=a » :
 INVARIANT : theorie_ensembles() == 22 ; conclusion ∉ hyps (non vacuous).
 """
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.cardinaux.ensembles_frame_extension_finale import (
+from bourbaki.cardinaux.iii_6_infinis.frame_zorn.ensembles_frame_extension_finale import (
     cadre_bijection, cadre_bijection_cible,
     cadre_card_trois_b, cadre_card_trois_b_cible,
     phi_etendue_bijection, extension_dans_frame, extension_ordre,
@@ -20,7 +20,7 @@ from bourbaki.cardinaux.ensembles_frame_extension_finale import (
     card_S0_egal_card_E, card_S0_egal_card_E_cible,
     hessenberg_a_carre_egal_a,
 )
-from bourbaki.cardinaux.ensembles_hessenberg import enonce_hessenberg
+from bourbaki.cardinaux.iii_6_infinis.hessenberg.coeur.ensembles_hessenberg import enonce_hessenberg
 
 
 def test_theorie_inchangee():

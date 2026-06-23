@@ -5,7 +5,7 @@ M1 (base) : (a ≤ b) ⇒ (a^c ≤ b^c), sans aucune hypothèse de support.
 from bourbaki.logique.i_1_termes_relations.formule import var, impl
 import bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege as E
 from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege import theorie_ensembles
-from bourbaki.cardinaux.ensembles_cardinaux import inf_egal_card, est_injection_de
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import inf_egal_card, est_injection_de
 from bourbaki.cardinaux.arithmetique.iii_3_5_exposant.definition.ensembles_exposant_cardinal import exposant_cardinal_binaire
 from bourbaki.cardinaux.arithmetique.iii_3_2_monotonie.ensembles_exposant_monotone_incond import (
     injection_post_composition, support_monotone_base, exposant_monotone_base)

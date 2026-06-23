@@ -4,11 +4,11 @@ Vérifie : theorie_ensembles()==22 ; conclusions == cibles miroir ; conclusion �
 liste les hypothèses honnêtes exactes de chaque lemme."""
 from bourbaki.logique.i_1_termes_relations.formule import egal, inclus, et, non, var
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.cardinaux.ensembles_cardinaux import (
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import (
     cardinal, est_cardinal, inf_egal_card, inf_strict_card,
 )
 from bourbaki.entiers.iii_6_infinis.iii_6_3_infinis_denombrables.ensembles_infinis import est_infini
-from bourbaki.cardinaux import ensembles_hessenberg_recollement_final as M
+from bourbaki.cardinaux.iii_6_infinis.hessenberg.assemblage_vrai import ensembles_hessenberg_recollement_final as M
 
 
 def test_theorie_inchangee():

@@ -49,7 +49,7 @@ from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import (
     symetrie, composer_egalites,
 )
 
-from bourbaki.cardinaux.ensembles_cardinaux import (
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import (
     est_cardinal, cardinal, inf_egal_card, inf_strict_card,
 )
 from bourbaki.cardinaux.arithmetique.iii_3_2_monotonie.ensembles_arith_cardinale_props_exposant_monotone import (
@@ -58,17 +58,17 @@ from bourbaki.cardinaux.arithmetique.iii_3_2_monotonie.ensembles_arith_cardinale
 from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import (
     somme_disjointe, somme_cardinale_binaire,
 )
-from bourbaki.cardinaux.ensembles_cardinaux_bornes_somme import (
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.somme_produit_bornes.ensembles_cardinaux_bornes_somme import (
     inf_egal_somme_droite, inf_egal_somme_gauche,
 )
 
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import est_entier, est_fini, ZERO
-from bourbaki.cardinaux.ensembles_cardinaux_props_restantes_ordre import (
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.ordre_cardinaux.ensembles_cardinaux_props_restantes_ordre import (
     _cardinal_est_son_cardinal,
 )
 
 # briques CLOSES — Prop 13, simplification additive, downward-closure
-from bourbaki.cardinaux.ensembles_prop13_full_iii3 import prop13_equivalence
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.props_restantes.ensembles_prop13_full_iii3 import prop13_equivalence
 from bourbaki.entiers.iii_5_calcul_entiers.iii_5_1_somme_produit_entiers.ensembles_simplification_additive import (
     simplification_additive_finie,
 )

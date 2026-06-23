@@ -17,7 +17,7 @@ fini) ⇒ la condition de branche ¬(pr₂h'=a) (= « B n'épuise pas a ») est 
 le contenu honnête restant.  Cf. RAPPORT.
 """
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-import bourbaki.cardinaux.ensembles_subset_realise_close as M
+import bourbaki.cardinaux.iii_4_ordinal_cardinal.realisation_segment.ensembles_subset_realise_close as M
 
 
 def test_theorie_ensembles_22():
@@ -26,7 +26,7 @@ def test_theorie_ensembles_22():
 
 # ── les 5 briques h-niveau instanciées ────────────────────────────────────────
 def _bo_Ro_a():
-    from bourbaki.cardinaux.ensembles_segments_construction import _R_de
+    from bourbaki.cardinaux.iii_2_trichotomie_ordinaux.lemme4_segments.ensembles_segments_construction import _R_de
     return E.est_bien_ordonne(_R_de("Ro"), E.var("asr"))
 
 
@@ -113,7 +113,7 @@ def test_equipotent_implique_inf_egal_clos():
 # ── pr₂h'=a ⇒ Eq(B,a) (Cantor-Bernstein) ─────────────────────────────────────
 def test_pr2_eq_a_donne_eq_B_a():
     from bourbaki.logique.i_1_termes_relations.formule import egal
-    from bourbaki.cardinaux.ensembles_cardinaux import equipotent
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import equipotent
     t = M.pr2_eq_a_donne_eq_B_a()
     assert t.conclusion == equipotent(E.var("Bsr"), E.var("asr"))   # Eq(B,a)
     assert t.conclusion not in set(t.hypotheses)
@@ -125,7 +125,7 @@ def test_pr2_eq_a_donne_eq_B_a():
 # ── FORME PROPRE : ¬Eq(B,a) ⇒ ∃t(t∈a et Eq(B,seg)) ───────────────────────────
 def test_realise_segment_pour_B_clean_3_hyps():
     from bourbaki.logique.i_1_termes_relations.formule import non
-    from bourbaki.cardinaux.ensembles_cardinaux import equipotent
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import equipotent
     t = M.realise_segment_pour_B_clean()
     assert t.conclusion == M.realise_segment_pour_B_clean_cible()
     assert t.conclusion not in set(t.hypotheses)

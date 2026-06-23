@@ -3,7 +3,7 @@ from bourbaki.cardinaux.arithmetique.iii_3_5_exposant.prop10_currying.ensembles_
     W_Lambda_fonctionnel, W_Lambda_domaine, W_Lambda_image_incluse,
     W_Lambda_injective, W_Lambda_est_injection, inf_egal_curry,
 )
-from bourbaki.cardinaux.ensembles_cardinaux import est_injection_de, inf_egal_card
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import est_injection_de, inf_egal_card
 from bourbaki.cardinaux.arithmetique.iii_3_5_exposant.prop10_currying.ensembles_prop10_inj_curry import W_Lambda
 from bourbaki.cardinaux.arithmetique.iii_3_5_exposant.prop10_currying.ensembles_prop10_currying import (
     domaine_lambda, codomaine_lambda)

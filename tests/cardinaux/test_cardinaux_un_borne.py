@@ -6,8 +6,8 @@ certifie ¬(X=∅) ⇒ ({∅} ≤ X) (1 = Card{∅}), via l'injection CONSTANTE 
 """
 from bourbaki.logique.i_1_termes_relations.formule import var, egal, non, impl, appartient, inclus
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.cardinaux.ensembles_cardinaux import inf_egal_card, cardinal
-from bourbaki.cardinaux import ensembles_cardinaux_un_borne as M
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import inf_egal_card, cardinal
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.ordre_cardinaux import ensembles_cardinaux_un_borne as M
 
 
 def _G():

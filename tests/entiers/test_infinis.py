@@ -95,7 +95,7 @@ def test_suite_infinie_indices_infinis():
 # ── Définitions : bonne construction (clôture, structure attendue) ────────────
 def test_denombrable_verbatim():
     """est_denombrable(E) = (∃Y)(Y⊂N et Eq(E,Y))  (Déf. 3 verbatim)."""
-    from bourbaki.cardinaux.ensembles_cardinaux import equipotent
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import equipotent
     vY = var("Y")
     cible = existe("Y", et(inclus(vY, I.NN), equipotent(var("E"), vY)))
     assert I.est_denombrable("E") == cible
@@ -103,7 +103,7 @@ def test_denombrable_verbatim():
 
 def test_puissance_continu_verbatim():
     """a_puissance_continu(E) = Eq(E, P(N))  (Déf. 4 verbatim)."""
-    from bourbaki.cardinaux.ensembles_cardinaux import equipotent
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import equipotent
     from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
     assert I.a_puissance_continu("E") == equipotent(var("E"), E.parties(I.NN))
 
@@ -117,5 +117,5 @@ def test_stationnaire_est_clos_et_existentiel():
 
 def test_aleph0_est_card_de_N():
     """ℵ₀ = Card(N)."""
-    from bourbaki.cardinaux.ensembles_cardinaux import cardinal
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import cardinal
     assert I.aleph0() == cardinal(I.NN)

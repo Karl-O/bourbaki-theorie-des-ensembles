@@ -11,7 +11,7 @@ from bourbaki.logique.i_1_termes_relations.formule import (
 )
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 
-import bourbaki.cardinaux.ensembles_bien_ordonne_lemme_1_segments as L1
+import bourbaki.cardinaux.iii_2_trichotomie_ordinaux.lemme4_segments.ensembles_bien_ordonne_lemme_1_segments as L1
 
 
 def _Rf():

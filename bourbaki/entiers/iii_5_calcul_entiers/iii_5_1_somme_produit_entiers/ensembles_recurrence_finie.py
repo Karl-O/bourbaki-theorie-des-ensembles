@@ -36,7 +36,7 @@ from bourbaki.logique.i_1_termes_relations.formule import (
 from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 
-from bourbaki.cardinaux.ensembles_cardinaux import est_cardinal, cardinal
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import est_cardinal, cardinal
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import (
     est_fini, est_fini_ensemble, successeur, ZERO,
 )
@@ -64,13 +64,13 @@ from bourbaki.entiers.iii_6_infinis.iii_6_1_n_objet_existence.ensembles_aleph0 i
 from bourbaki.cardinaux.arithmetique.iii_3_4_prop8_successeur.ensembles_prop8_fini2 import (
     prop8_successeur_injectif,
 )
-from bourbaki.cardinaux.ensembles_cardinaux_props_restantes_prop7 import (
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.props_restantes.ensembles_cardinaux_props_restantes_prop7 import (
     cardinal_egal_zero_ssi_vide,
 )
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_fini_successeur import cardinal_de_cardinal
 from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_vide import non_vide_ssi_element
 from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import singleton_membre
-from bourbaki.cardinaux.ensembles_cantor_bernstein_fin import (
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.cantor_bernstein.ensembles_cantor_bernstein_fin import (
     partie_reunion_complement,
 )
 from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import commutativite_reunion

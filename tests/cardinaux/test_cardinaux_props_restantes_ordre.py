@@ -9,8 +9,8 @@ NB : comparabilité (Zorn) et Cantor–Bernstein (point fixe) sont coûteux ; ce
 tests sont volontairement peu nombreux et ciblés.
 """
 from bourbaki.logique.i_1_termes_relations.formule import var, egal, et, ou, impl, pourtout
-from bourbaki.cardinaux import ensembles_cardinaux_props_restantes_ordre as O
-from bourbaki.cardinaux.ensembles_cardinaux import inf_egal_card, est_cardinal, cardinal
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.ordre_cardinaux import ensembles_cardinaux_props_restantes_ordre as O
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import inf_egal_card, est_cardinal, cardinal
 
 
 def test_inf_egal_reflexif_general():

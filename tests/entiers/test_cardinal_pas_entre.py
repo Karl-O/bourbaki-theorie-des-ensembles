@@ -19,7 +19,7 @@ PALIERS :
 from bourbaki.logique.i_1_termes_relations.formule import var, egal, et, ou, impl, non, pourtout
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import antecedent_consequent
-from bourbaki.cardinaux.ensembles_cardinaux import (
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import (
     est_cardinal, est_injection_de, est_bijection_de, equipotent, cardinal,
     inf_egal_card,
 )

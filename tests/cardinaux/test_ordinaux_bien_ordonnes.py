@@ -10,8 +10,8 @@ from bourbaki.logique.i_1_termes_relations.formule import (
 )
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 
-import bourbaki.cardinaux.ensembles_ordinaux_bien_ordonnes as OBO
-from bourbaki.cardinaux.ensembles_segments_construction import seg, _R_de
+import bourbaki.cardinaux.iii_4_ordinal_cardinal.bon_ordre_intervalle.ensembles_ordinaux_bien_ordonnes as OBO
+from bourbaki.cardinaux.iii_2_trichotomie_ordinaux.lemme4_segments.ensembles_segments_construction import seg, _R_de
 
 
 def _Rf(R="Ro"):

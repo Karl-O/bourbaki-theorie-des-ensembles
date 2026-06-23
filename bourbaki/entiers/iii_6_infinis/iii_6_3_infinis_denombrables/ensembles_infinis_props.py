@@ -47,7 +47,7 @@ from __future__ import annotations
 from bourbaki.logique.i_1_termes_relations.formule import (Terme, var, egal, et, ou, non, impl, equiv)
 from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 
-from bourbaki.cardinaux.ensembles_cardinaux import est_cardinal, cardinal, inf_egal_card
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import est_cardinal, cardinal, inf_egal_card
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import est_fini, est_fini_ensemble, successeur
 from bourbaki.entiers.iii_6_infinis.iii_6_3_infinis_denombrables.ensembles_infinis import (
     est_infini, est_infini_ensemble, est_denombrable, NN, aleph0,

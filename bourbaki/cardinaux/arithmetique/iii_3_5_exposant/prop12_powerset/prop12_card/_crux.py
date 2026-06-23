@@ -66,7 +66,7 @@ from bourbaki.cardinaux.arithmetique.iii_3_5_exposant.prop12_powerset.ensembles_
 from bourbaki.cardinaux.arithmetique.iii_3_5_exposant.prop12_powerset.ensembles_powerset_exp import (
     deux, deux_membre, deux_elements_distincts, zero_dans_deux, un_dans_deux,
     exposant_deux_base, cible_powerset_exp)
-from bourbaki.cardinaux.ensembles_cardinaux import (cardinal, equipotent,
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import (cardinal, equipotent,
                                est_bijection_de)
 from bourbaki.cardinaux.arithmetique.iii_3_3_produit.ensembles_arith_cardinale import _prop1_direct_t
 from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import couple_egal_implique_composantes

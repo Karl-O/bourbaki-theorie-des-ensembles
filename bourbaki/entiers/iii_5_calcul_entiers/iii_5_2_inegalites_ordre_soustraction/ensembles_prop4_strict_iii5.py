@@ -24,7 +24,7 @@ from bourbaki.logique.i_1_termes_relations.formule import (
 )
 from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 
-from bourbaki.cardinaux.ensembles_cardinaux import (
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import (
     est_cardinal, inf_egal_card, inf_strict_card,
 )
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import est_entier

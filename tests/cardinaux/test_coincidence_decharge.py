@@ -19,8 +19,8 @@ from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis.ensembles_ordre_vocab import (
     est_isomorphisme_ordre, compatible_ordre,
 )
-from bourbaki.cardinaux import ensembles_coincidence_decharge as D
-from bourbaki.cardinaux.ensembles_trichotomie_restriction import (
+from bourbaki.cardinaux.iii_2_trichotomie_ordinaux.coincidence_fusion import ensembles_coincidence_decharge as D
+from bourbaki.cardinaux.iii_2_trichotomie_ordinaux.h_coherences.ensembles_trichotomie_restriction import (
     coincidence_sur_chevauchement,
 )
 

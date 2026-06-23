@@ -63,16 +63,16 @@ from bourbaki.logique.i_1_termes_relations.formule import (Terme, var, egal, et,
 from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 
-from bourbaki.cardinaux.ensembles_cardinaux import (
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import (
     est_cardinal, cardinal, inf_egal_card,
 )
-from bourbaki.cardinaux.ensembles_cardinaux_theoremes import (
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux_theoremes import (
     equipotent_son_cardinal, inf_egal_reflexif,
 )
-from bourbaki.cardinaux.ensembles_cardinaux_ordre import (
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.ordre_cardinaux.ensembles_cardinaux_ordre import (
     equipotence_implique_inf_egal,
 )
-from bourbaki.cardinaux.ensembles_bijection import equipotence_symetrique
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.equipotence.ensembles_bijection import equipotence_symetrique
 from bourbaki.cardinaux.arithmetique.iii_3_3_produit.ensembles_arith_cardinale import (
     produit_cardinal_binaire,
 )
@@ -112,7 +112,7 @@ def _trans_le(tA, tB, tC):
     """⊢ (A ≤ B et B ≤ C) ⇒ (A ≤ C)  pour des TERMES (transitivité de ≤, version terme).
 
     inf_egal_transitive(F,G,X,Y,Z) généralisée en X,Y,Z puis instanciée aux termes."""
-    from bourbaki.cardinaux.ensembles_cardinaux_ordre import inf_egal_transitive
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.ordre_cardinaux.ensembles_cardinaux_ordre import inf_egal_transitive
     trans = inf_egal_transitive("F", "G", "X", "Y", "Z")
     gen = N.generalisation("X", N.generalisation("Y", N.generalisation("Z", trans)))
     return instancie(instancie(instancie(gen, tA), tB), tC)
@@ -225,7 +225,7 @@ def inf_egal_somme_gauche_binaire(a="a", b="b"):
     u↦(u,0), inf_egal_somme_gauche) ; le pont le_ens_implique_le_card donne
     Card a ≤ Card(a⊔b) = a+b.  Sous est_cardinal a (Card a = a) c'est « a ≤ a+b ».
     SOCLE du sens (⇐) de la Proposition 2 (b = a+c ⇒ a ≤ b)."""
-    from bourbaki.cardinaux.ensembles_cardinaux_bornes_somme import inf_egal_somme_gauche
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.somme_produit_bornes.ensembles_cardinaux_bornes_somme import inf_egal_somme_gauche
     va, vb = _t(a), _t(b)
     ab = somme_disjointe(va, vb)
     le_ens = inf_egal_somme_gauche(va, vb)                      # a ≤ a⊔b   (clos)
@@ -237,7 +237,7 @@ def inf_egal_somme_droite_binaire(a="a", b="b"):
 
     b ≤ a⊔b (injection droite v↦(v,1), inf_egal_somme_droite) ; le pont donne
     Card b ≤ Card(a⊔b) = a+b.  Sous est_cardinal b c'est « b ≤ a+b »."""
-    from bourbaki.cardinaux.ensembles_cardinaux_bornes_somme import inf_egal_somme_droite
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.somme_produit_bornes.ensembles_cardinaux_bornes_somme import inf_egal_somme_droite
     va, vb = _t(a), _t(b)
     ab = somme_disjointe(va, vb)
     le_ens = inf_egal_somme_droite(va, vb)                      # b ≤ a⊔b   (clos)
@@ -305,7 +305,7 @@ def inf_egal_produit_binaire(a="a", b="b"):
     # cardinal_inf_egal_produit(A,B) : ¬(B=∅) ⇒ (Card A ≤ Card(A)×B) ; on l'instancie en
     # termes a, b — mais sa conclusion vise Card(A)×B, pas a×b.  On reconstruit donc
     # proprement via la version ENSEMBLE inf_egal_produit + le pont.
-    from bourbaki.cardinaux.ensembles_cardinaux_bornes_somme import inf_egal_produit
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.somme_produit_bornes.ensembles_cardinaux_bornes_somme import inf_egal_produit
     ab = E.produit(va, vb)
     h_ne = N.assume(non(egal(vb, E.VIDE)))                      # b ≠ ∅
     le_ens = N.modus_ponens(h_ne, inf_egal_produit(va, vb))     # a ≤ a×b   [sous b≠∅]
@@ -354,7 +354,7 @@ def prop3_somme_stricte_cible(a="a", b="b", c="c", d="d"):
     croît strictement. »  ⚠ REPORTÉ : la stricte monotonie exige le lemme
     cardinal_pas_entre (rien entre c et c+1) et/ou la différence → REPORTÉE.  Énoncé-cible."""
     va, vb, vc, vd = _t(a), _t(b), _t(c), _t(d)
-    from bourbaki.cardinaux.ensembles_cardinaux import inf_strict_card
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import inf_strict_card
     ac = somme_cardinale_binaire(va, vc)
     bd = somme_cardinale_binaire(vb, vd)
     return impl(et(inf_egal_card(va, vb), inf_strict_card(vc, vd)), inf_strict_card(ac, bd))

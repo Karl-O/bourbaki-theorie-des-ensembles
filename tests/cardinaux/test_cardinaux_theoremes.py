@@ -1,8 +1,8 @@
 """Tests §III.3 — Eq(X,Card X) et Proposition 1 (sens direct)."""
 from bourbaki.logique.i_1_termes_relations.formule import var, egal, impl
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.cardinaux.ensembles_cardinaux import equipotent, cardinal
-from bourbaki.cardinaux.ensembles_cardinaux_theoremes import equipotent_son_cardinal, cardinal_egal_si_equipotent
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import equipotent, cardinal
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux_theoremes import equipotent_son_cardinal, cardinal_egal_si_equipotent
 
 
 def test_equipotent_son_cardinal():
@@ -19,7 +19,7 @@ def test_cardinal_egal_si_equipotent():
 
 
 def test_equipotent_si_cardinal_egal():
-    from bourbaki.cardinaux.ensembles_cardinaux_theoremes import equipotent_si_cardinal_egal
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux_theoremes import equipotent_si_cardinal_egal
     vX, vY = var("X"), var("Y")
     t = equipotent_si_cardinal_egal("X", "Y")
     assert t.conclusion == impl(egal(cardinal(vX), cardinal(vY)), equipotent(vX, vY))
@@ -28,7 +28,7 @@ def test_equipotent_si_cardinal_egal():
 
 def test_proposition_1_cardinaux():
     from bourbaki.logique.i_1_termes_relations.formule import equiv
-    from bourbaki.cardinaux.ensembles_cardinaux_theoremes import proposition_1_cardinaux
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux_theoremes import proposition_1_cardinaux
     vX, vY = var("X"), var("Y")
     t = proposition_1_cardinaux("X", "Y")
     assert t.conclusion == equiv(equipotent(vX, vY), egal(cardinal(vX), cardinal(vY)))
@@ -36,8 +36,8 @@ def test_proposition_1_cardinaux():
 
 
 def test_inf_egal_reflexif():
-    from bourbaki.cardinaux.ensembles_cardinaux import inf_egal_card
-    from bourbaki.cardinaux.ensembles_cardinaux_theoremes import inf_egal_reflexif, cardinal_inf_egal_reflexif
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import inf_egal_card
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux_theoremes import inf_egal_reflexif, cardinal_inf_egal_reflexif
     vX = var("X")
     assert inf_egal_reflexif("X").conclusion == inf_egal_card(vX, vX)
     assert inf_egal_reflexif("X").est_clos

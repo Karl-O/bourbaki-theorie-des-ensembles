@@ -65,7 +65,7 @@ from bourbaki.ensembles.fonctions.hors_ii_3.iii_3_recollement.ensembles_restrict
 # infra graphe-terme (constante) — RÉUTILISÉE, jamais redéfinie :
 from bourbaki.ensembles.fonctions.ii_3_6_fonction_terme.ensembles_fonction_terme import (
     graphe_terme_fonctionnel, membre_graphe_terme)
-from bourbaki.cardinaux.ensembles_cantor import (
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.cantor.ensembles_cantor import (
     graphe_terme_domaine, graphe_terme_couple_dans)
 
 

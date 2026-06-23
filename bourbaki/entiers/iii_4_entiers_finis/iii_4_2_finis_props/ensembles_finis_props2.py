@@ -79,13 +79,13 @@ from bourbaki.logique.i_1_termes_relations.formule import (Terme, var, egal, et,
 from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 
-from bourbaki.cardinaux.ensembles_cardinaux import (
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import (
     est_cardinal, cardinal, equipotent, inf_egal_card, inf_strict_card,
     est_bijection_de,
 )
-from bourbaki.cardinaux.ensembles_cardinaux_props_restantes_ordre import _prop1_direct_t
-from bourbaki.cardinaux.ensembles_bijection import equipotence_symetrique
-from bourbaki.cardinaux.ensembles_clause_plus_petit_monotonie import inf_egal_card_de_inclus_terme
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.ordre_cardinaux.ensembles_cardinaux_props_restantes_ordre import _prop1_direct_t
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.equipotence.ensembles_bijection import equipotence_symetrique
+from bourbaki.cardinaux.iii_4_ordinal_cardinal.bon_ordre_intervalle.ensembles_clause_plus_petit_monotonie import inf_egal_card_de_inclus_terme
 
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import est_fini, est_fini_ensemble
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_2_finis_props.ensembles_finis_props import partie_inf_egal_card

@@ -51,13 +51,13 @@ from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
 )
 from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import symetrie
 
-from bourbaki.cardinaux.ensembles_cardinaux import (
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import (
     est_cardinal, cardinal, inf_egal_card,
 )
 from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import (
     somme_cardinale_binaire,
 )
-from bourbaki.cardinaux.ensembles_prop13_complement import (
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.props_restantes.ensembles_prop13_complement import (
     prop13_forward_ferme, prop13_forward_ferme_cible,
 )
 
@@ -136,7 +136,7 @@ def _renomme_est_cardinal(thm_card, va):
     est_cardinal(V) = (∃X) V = Card X.  On élimine le témoin X (existe_temoin donne
     V = Card τX(...)), puis S5 le réintroduit sous le binder « Xa »."""
     # est_cardinal(va) = (∃X) va = Card X  ; body avec X
-    from bourbaki.cardinaux.ensembles_cardinaux import est_cardinal as _ec
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import est_cardinal as _ec
     forme = thm_card.conclusion                    # (∃X) va = Card X
     x_bind = forme.lieur                           # « X »
     body = forme.sous[0]                           # va = Card X   (X libre dedans)

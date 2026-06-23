@@ -64,7 +64,7 @@ from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import (
     existe_elimination, alpha_existe, congruence_existe, alpha_pour_tout,
 )
 
-from bourbaki.cardinaux.ensembles_cardinaux import (
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import (
     est_cardinal, equipotent, cardinal, est_bijection_de, inf_egal_card,
     inf_strict_card, est_injection_de,
 )
@@ -96,20 +96,20 @@ from bourbaki.cardinaux.arithmetique.iii_3_4_prop8_successeur.ensembles_prop8_su
     successeur_egale_card_somme,
 )
 from bourbaki.cardinaux.arithmetique.iii_3_3_produit.ensembles_arith_cardinale import _prop1_direct_t
-from bourbaki.cardinaux.ensembles_equipotence import equipotence_reflexive
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.equipotence.ensembles_equipotence import equipotence_reflexive
 from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import (
     somme_disjointe, injection_droite_dans_somme, _dans_singleton, UN as _UN_MARQUEUR,
 )
 from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import conjonction_intro as _conj_intro
 
 # ── briques pour « successeur ≠ 0 » (NN-indépendantes, rapides) ────────────────
-from bourbaki.cardinaux.ensembles_cardinaux_props_restantes_prop7 import (
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.props_restantes.ensembles_cardinaux_props_restantes_prop7 import (
     cardinal_egal_zero_ssi_vide,
 )
 from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_vide import non_vide_ssi_element
 
 # ── briques pour les inégalités cardinales (NN ∖ {0} ↔ NN) ─────────────────────
-from bourbaki.cardinaux.ensembles_clause_plus_petit_monotonie import (
+from bourbaki.cardinaux.iii_4_ordinal_cardinal.bon_ordre_intervalle.ensembles_clause_plus_petit_monotonie import (
     inf_egal_card_de_inclus_terme,
 )
 

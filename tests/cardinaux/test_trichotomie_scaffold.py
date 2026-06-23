@@ -12,8 +12,8 @@ theorie_ensembles() reste = 22 ; rien postulé ; conclusions non tautologiques.
 from bourbaki.logique.i_1_termes_relations.formule import var, et, appartient, egal, Formule
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis import ensembles_ordre_vocab as V
-from bourbaki.cardinaux import ensembles_trichotomie_scaffold as TS
-from bourbaki.cardinaux import ensembles_trichotomie_scaffold_maximalite as M
+from bourbaki.cardinaux.iii_2_trichotomie_ordinaux.assemblage import ensembles_trichotomie_scaffold as TS
+from bourbaki.cardinaux.iii_2_trichotomie_ordinaux.maximalite import ensembles_trichotomie_scaffold_maximalite as M
 
 
 # ════════════════════════════════════════════════════════════════════════════

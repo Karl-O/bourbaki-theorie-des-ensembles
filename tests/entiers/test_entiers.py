@@ -6,7 +6,7 @@ Vérifie : (1) les DÉFINITIONS se construisent (clos, sans gonflement) ;
 from bourbaki.logique.i_1_termes_relations.formule import var, egal, et, non, impl
 from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers import ensembles_entiers as Ent
-from bourbaki.cardinaux.ensembles_cardinaux import cardinal, est_cardinal
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import cardinal, est_cardinal
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers_theoremes import (
     card_est_un_cardinal,
     fini_implique_cardinal, fini_implique_distinct_successeur,

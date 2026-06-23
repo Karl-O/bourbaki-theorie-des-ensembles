@@ -41,13 +41,13 @@ from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import (
 from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import (
     symetrie, composer_egalites, congruence_terme)
 
-from bourbaki.cardinaux.ensembles_cardinaux import (
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import (
     est_injection_de, inf_egal_card, equipotent)
 from bourbaki.cardinaux.arithmetique.fondations.ensembles_graphe_de import (
     graphe_de, graphe_de_triple)
 
 # helpers réutilisés du module d'invariance (versions capture-safe à binder paramétré)
-from bourbaki.cardinaux.ensembles_eq_exposant_invariant import (
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.somme_produit_bornes.ensembles_eq_exposant_invariant import (
     _couple_valeur_q, _valeur_codomaine_q, _membre_graphe_terme_z,
     _membre_produit, _cut, _dans_exposant, _triple_dans_applications)
 
@@ -90,7 +90,7 @@ def K_g_fonctionnelle(g, c, iota):
 
 
 def K_g_domaine(g, c, iota):
-    from bourbaki.cardinaux.ensembles_cantor import graphe_terme_domaine
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.cantor.ensembles_cantor import graphe_terme_domaine
     return graphe_terme_domaine(_t(c), _val_K(g, iota), _PT, "y", "z")
 
 
@@ -252,14 +252,14 @@ def W_phi_fonctionnel(a, b, c, iota):
 
 
 def W_phi_domaine(a, b, c, iota):
-    from bourbaki.cardinaux.ensembles_cantor import graphe_terme_domaine
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.cantor.ensembles_cantor import graphe_terme_domaine
     va, vb, vc, viota = _t(a), _t(b), _t(c), _t(iota)
     return graphe_terme_domaine(_source(va, vc), _phi_valeur(var(_POINT), vb, vc, viota), _POINT, "y", "z")
 
 
 def W_phi_valeur(point_nom, a, b, c, iota):
     """{g ∈ 𝓕(C;A)} ⊢ W(g) = Φ(g).   (point d'évaluation = NOM.)"""
-    from bourbaki.cardinaux.ensembles_cantor import graphe_terme_valeur
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.cantor.ensembles_cantor import graphe_terme_valeur
     if not isinstance(point_nom, str):
         raise ValueError("W_phi_valeur : point = NOM")
     va, vb, vc, viota = _t(a), _t(b), _t(c), _t(iota)
@@ -322,7 +322,7 @@ def W_phi_image_incluse(a, b, c, iota):
 # ═══════════════════════════════════════════════════════════════════════════════
 def _Kg_valeur_egal(g, c, iota, c_nom):
     """{ u∈C } ⊢ K_g(u) = ι(g(u)),   point u_nom NOM."""
-    from bourbaki.cardinaux.ensembles_cantor import graphe_terme_valeur
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.cantor.ensembles_cantor import graphe_terme_valeur
     vc = _t(c)
     return graphe_terme_valeur(vc, _val_K(g, iota), c_nom, _PT, "y")
 

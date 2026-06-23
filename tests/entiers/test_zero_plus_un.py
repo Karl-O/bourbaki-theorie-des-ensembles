@@ -9,7 +9,7 @@ Vérifie (conclusion EXACTE + est_clos) :
 """
 from bourbaki.logique.i_1_termes_relations.formule import var, egal
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.cardinaux.ensembles_cardinaux import equipotent, cardinal, est_bijection_de
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import equipotent, cardinal, est_bijection_de
 from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import somme_disjointe, somme_cardinale_binaire, UN
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_zero_plus_un import (
     const_graphe_fonctionnel, const_graphe_domaine, const_graphe_valeur,

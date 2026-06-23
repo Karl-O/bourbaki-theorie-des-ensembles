@@ -91,7 +91,7 @@ def test_somme_graphe_image():
 # ── PALIER 6 : assemblage bijection + INVARIANCE ──────────────────────────────
 def test_somme_est_bijection():
     """{F bij A→A₁, G bij B→B₁} ⊢ est_bijection_de(K, A⊔B, A₁⊔B₁) : EXACTE + hyps."""
-    from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import est_bijection_de
     thm = S.somme_est_bijection()
     AB = S.somme_disjointe(var("A"), var("B"))
     A1B1 = S.somme_disjointe(var("A1"), var("B1"))
@@ -103,7 +103,7 @@ def test_somme_est_bijection():
 
 def test_eq_somme_invariant_clos():
     """⊢ (Eq(A,A₁) et Eq(B,B₁)) ⇒ Eq(A⊔B, A₁⊔B₁) : INVARIANCE de la somme, CLOS."""
-    from bourbaki.cardinaux.ensembles_cardinaux import equipotent
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import equipotent
     from bourbaki.logique.i_1_termes_relations.formule import impl, et
     thm = S.eq_somme_invariant()
     AB = S.somme_disjointe(var("A"), var("B"))
@@ -127,7 +127,7 @@ def test_somme_cardinale_bien_definie_clos():
     """⊢ (Eq(A,A₁) et Eq(B,B₁)) ⇒ Card(A⊔B)=Card(A₁⊔B₁) : BIEN-DÉFINITION, CLOS.
 
     La somme cardinale a+b := Card(A⊔B) ne dépend que de Card A, Card B."""
-    from bourbaki.cardinaux.ensembles_cardinaux import equipotent, cardinal
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import equipotent, cardinal
     from bourbaki.logique.i_1_termes_relations.formule import impl, et
     thm = S.somme_cardinale_bien_definie()
     AB = S.somme_disjointe(var("A"), var("B"))
@@ -140,7 +140,7 @@ def test_somme_cardinale_bien_definie_clos():
 
 def test_eq_somme_invariant_termes():
     """L'invariance tient sur des TERMES composés (ex. A = Card U)."""
-    from bourbaki.cardinaux.ensembles_cardinaux import equipotent
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import equipotent
     from bourbaki.logique.i_1_termes_relations.formule import impl, et
     CU = E.app("card", var("U"))
     thm = S.eq_somme_invariant("F", "G", CU, "B", "A1", "B1")

@@ -8,7 +8,7 @@ def test_theorie_22():
 
 
 def test_p5a_psi_uwit_elimines():
-    from bourbaki.cardinaux.ensembles_hessenberg_p5 import (
+    from bourbaki.cardinaux.iii_6_infinis.hessenberg.step_b_prop5.ensembles_hessenberg_p5 import (
         negation_strict_sous_temoins_UF_plat,
     )
     t = negation_strict_sous_temoins_UF_plat()

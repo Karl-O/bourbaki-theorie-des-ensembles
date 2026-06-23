@@ -45,7 +45,7 @@ from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     conjonction_intro, instancie)
 
-from bourbaki.cardinaux.ensembles_cardinaux import equipotent
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import equipotent
 from bourbaki.cardinaux.arithmetique.iii_3_5_exposant.prop10_currying.ensembles_prop10_currying import (
     domaine_lambda, codomaine_lambda)
 from bourbaki.cardinaux.arithmetique.iii_3_5_exposant.prop10_currying.ensembles_prop10_inj_curry import inf_egal_curry

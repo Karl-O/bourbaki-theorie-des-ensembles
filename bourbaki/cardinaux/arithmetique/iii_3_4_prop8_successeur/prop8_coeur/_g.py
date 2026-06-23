@@ -216,7 +216,7 @@ def g_egale_h(a, point, h=_H):
 #     ⊢ injective_dans(g, A×{0})
 def g_injective(a, b_somme, h=_H):
     """Hérite l'injectivité de h sur la restriction g.   `b_somme` = A⊔{∅}."""
-    from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de  # noqa
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import est_bijection_de  # noqa
     vh = var(h)
     va = _t(a)
     A0 = A0_terme(a)

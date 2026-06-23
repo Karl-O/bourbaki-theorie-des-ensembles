@@ -2,10 +2,10 @@
 from bourbaki.logique.i_1_termes_relations.formule import libres_f, var, egal, appartient, inclus
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege import theorie_ensembles
-from bourbaki.cardinaux.ensembles_hessenberg_stepb import (
+from bourbaki.cardinaux.iii_6_infinis.hessenberg.step_b_prop5.ensembles_hessenberg_stepb import (
     chaine_falsum_sous_temoins,
 )
-from bourbaki.cardinaux.ensembles_hessenberg_structural_discharge import (
+from bourbaki.cardinaux.iii_6_infinis.hessenberg.coeur.ensembles_hessenberg_structural_discharge import (
     U_disjoint_S0,
 )
 

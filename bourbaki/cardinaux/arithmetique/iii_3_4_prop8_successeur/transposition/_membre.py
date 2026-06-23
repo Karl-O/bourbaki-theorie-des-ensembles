@@ -25,7 +25,7 @@ from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import (
     symetrie, composer_egalites, congruence_terme)
 from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import (
     couple_egal_implique_composantes, membre_paire_gauche, membre_paire_droite)
-from bourbaki.cardinaux.ensembles_equipotence import diagonale_membre
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.equipotence.ensembles_equipotence import diagonale_membre
 
 
 def _t(v):

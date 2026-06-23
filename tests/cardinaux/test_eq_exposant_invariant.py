@@ -1,10 +1,10 @@
 """Tests — eq_exposant_invariant : Eq(X,Y) ⇒ Eq(𝓕(X;A), 𝓕(Y;A))."""
 from bourbaki.logique.i_1_termes_relations.formule import var, impl
 import bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege as E
-from bourbaki.cardinaux.ensembles_cardinaux import equipotent
-from bourbaki.cardinaux.ensembles_eq_exposant_invariant import (
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import equipotent
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.somme_produit_bornes.ensembles_eq_exposant_invariant import (
     eq_exposant_invariant, injection_via_pointmap, _source, _but)
-from bourbaki.cardinaux.ensembles_cardinaux import inf_egal_card
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import inf_egal_card
 from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege import theorie_ensembles
 
 

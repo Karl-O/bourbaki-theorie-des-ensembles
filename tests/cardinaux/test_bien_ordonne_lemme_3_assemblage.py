@@ -11,8 +11,8 @@ hypothèse résiduelle de L4 est la pièce ordinale L3 = bon_ordre_intervalle(a)
 from bourbaki.logique.i_1_termes_relations.formule import impl
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 
-import bourbaki.cardinaux.ensembles_bien_ordonne_lemme_3_assemblage as L4M
-from bourbaki.cardinaux.ensembles_ordinal_cardinal_correspondance import (
+import bourbaki.cardinaux.iii_4_ordinal_cardinal.bon_ordre_intervalle.ensembles_bien_ordonne_lemme_3_assemblage as L4M
+from bourbaki.cardinaux.iii_4_ordinal_cardinal.ordinal_cardinal_correspondance.ensembles_ordinal_cardinal_correspondance import (
     cardinaux_bien_ordonnes_de_bon_ordre, bon_ordre_intervalle,
 )
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_recurrence_c61_existence_n.ensembles_recurrence_C61 import cardinaux_bien_ordonnes

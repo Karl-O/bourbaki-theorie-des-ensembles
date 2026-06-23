@@ -7,11 +7,11 @@ from __future__ import annotations
 from bourbaki.logique.i_1_termes_relations.formule import egal, var
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege import theorie_ensembles
-from bourbaki.cardinaux.ensembles_cardinaux import cardinal, est_bijection_de
-from bourbaki.cardinaux.ensembles_hessenberg import (
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import cardinal, est_bijection_de
+from bourbaki.cardinaux.iii_6_infinis.hessenberg.coeur.ensembles_hessenberg import (
     enonce_hard_aa_inf_egal_a, enonce_hessenberg,
 )
-from bourbaki.cardinaux.ensembles_hessenberg_maximal_card import (
+from bourbaki.cardinaux.iii_6_infinis.hessenberg.coeur.ensembles_hessenberg_maximal_card import (
     maximal_carre_egal, hessenberg_a_carre_inf_egal, hessenberg_aa_egal_de_maximal,
 )
 

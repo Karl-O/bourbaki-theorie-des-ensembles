@@ -1,5 +1,5 @@
 """Tests — union_famille_injective (recollement-injectif version FAMILLE dirigée)."""
-from bourbaki.cardinaux.ensembles_recollement_famille_injectif import (
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.somme_produit_bornes.ensembles_recollement_famille_injectif import (
     union_famille_injective, famille_dirigee, membres_injectifs, injectif_graphe,
 )
 from bourbaki.ordre.iii_2_bon_ordre.recurrence_transfinie.ensembles_c60_coeur import union_famille

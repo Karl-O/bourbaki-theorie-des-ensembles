@@ -7,7 +7,7 @@ image, assemblage bijection, et l'équipotence finale.
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.arithmetique.iii_3_3_somme import ensembles_somme_commute as C
 from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import somme_disjointe, ZERO, UN
-from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de, equipotent
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import est_bijection_de, equipotent
 from bourbaki.logique.i_1_termes_relations.formule import var, egal, appartient
 
 

@@ -4,8 +4,8 @@ Chaque test vérifie que la conclusion certifiée par le noyau EST EXACTEMENT la
 cible Bourbaki, et que le théorème est CLOS (aucune hypothèse).
 """
 from bourbaki.logique.i_1_termes_relations.formule import var, impl, et
-from bourbaki.cardinaux import ensembles_cardinaux_ordre as O
-from bourbaki.cardinaux.ensembles_cardinaux import equipotent, inf_egal_card
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.ordre_cardinaux import ensembles_cardinaux_ordre as O
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import equipotent, inf_egal_card
 
 
 def test_equipotence_implique_inf_egal():

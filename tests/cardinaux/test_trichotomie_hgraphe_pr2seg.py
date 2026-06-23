@@ -10,10 +10,10 @@ VÉRIFIE (theorie=22, rien postulé, NON vacueux) :
   • `trichotomie_ordinaux_canon_close_v2` : trichotomie_ordinaux_canon SOUS
     {bo(R,E), bo(Rp,F), est_un_graphe(h)} (== maillon_final_cible).
 """
-from bourbaki.cardinaux import ensembles_trichotomie_hgraphe_pr2seg as HG
-from bourbaki.cardinaux import ensembles_maximalite_close as MAX
-from bourbaki.cardinaux import ensembles_fusion_depuis_coincidence_app as FDA
-from bourbaki.cardinaux import ensembles_trichotomie_scaffold as TS
+from bourbaki.cardinaux.iii_2_trichotomie_ordinaux.h_coherences import ensembles_trichotomie_hgraphe_pr2seg as HG
+from bourbaki.cardinaux.iii_2_trichotomie_ordinaux.maximalite import ensembles_maximalite_close as MAX
+from bourbaki.cardinaux.iii_2_trichotomie_ordinaux.coincidence_fusion import ensembles_fusion_depuis_coincidence_app as FDA
+from bourbaki.cardinaux.iii_2_trichotomie_ordinaux.assemblage import ensembles_trichotomie_scaffold as TS
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.i_1_termes_relations.formule import appartient, var
 

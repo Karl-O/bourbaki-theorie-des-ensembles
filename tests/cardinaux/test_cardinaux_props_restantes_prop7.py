@@ -7,8 +7,8 @@ nul ») et le lemme-clé Card X = 0 ⟺ X = ∅.  Chaque test vérifie la conclu
 EXACTE et la clôture.
 """
 from bourbaki.logique.i_1_termes_relations.formule import var, egal, ou, non, et, equiv, impl
-from bourbaki.cardinaux import ensembles_cardinaux_props_restantes_prop7 as P7
-from bourbaki.cardinaux.ensembles_cardinaux import cardinal, equipotent
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.props_restantes import ensembles_cardinaux_props_restantes_prop7 as P7
+from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import cardinal, equipotent
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 
 

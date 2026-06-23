@@ -187,7 +187,7 @@ def theoreme1_a_injective(fp="Fp", f="F", a="A", b="B"):
     sous le nom `composee_injective` (E.II.46) : on le ré-expose ici comme
     Théorème 1 a (les 7 hyps structurelles sont celles de « f:A→B, f':B→C inj »).
     """
-    from bourbaki.cardinaux.ensembles_bijection import composee_injective
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.equipotence.ensembles_bijection import composee_injective
     return composee_injective(fp, f, a, b)
 
 
