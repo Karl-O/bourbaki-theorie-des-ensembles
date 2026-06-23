@@ -392,7 +392,90 @@ def division_par_deux(n="nd2", k="kpd2"):
     return res
 
 
+# ══════════════════════════════════════════════════════════════════════════════
+#  (2) IMPAIR DÉCOMPOSE — n impair ⇒ (∃k)( n = 2·k+1 )
+# ══════════════════════════════════════════════════════════════════════════════
+def _decomp_impair(n):
+    """(∃k)( est_fini(k) et n = 2·k+1 )   ( 2·k+1 := succ(2·k) )."""
+    vn = _t(n)
+    vk = var("kid")
+    return existe("kid", et(est_fini(vk), egal(vn, successeur(deux_fois(vk)))))
+
+
+def impair_decompose_cible(n="nid"):
+    vn = _t(n)
+    return impl(et(est_fini(vn), est_impair_propre(vn)), _decomp_impair(vn))
+
+
+def impair_decompose(n="nid"):
+    """🎯 ⊢ ( est_fini(n) et est_impair_propre(n) ) ⇒ (∃k)( Fini k et n = 2·k+1 ).
+
+    De division_par_deux : n=2k ou n=succ(2k).  La branche n=2k contredit
+    est_impair_propre(n) = ¬divise_propre(2,n) : deux_divise_double(k) ⊢
+    est_pair_propre(2k) = divise_propre(2,2k), et n=2k transporte en divise_propre(2,n)
+    (Leibniz).  Donc seule la branche n=succ(2k) survit : témoin k."""
+    from bourbaki.cardinaux.ensembles_divisibilite_propre import deux_divise_double
+    vn = _t(n)
+
+    hyp = N.assume(et(est_fini(vn), est_impair_propre(vn)))
+    fini_n = conjonction_elim_gauche(hyp)
+    impair_n = conjonction_elim_droite(hyp)            # ¬divise_propre(2,n)
+
+    # division_par_deux(n) ⇒ P[n]
+    dpd = N.modus_ponens(fini_n, division_par_deux(n))   # (∃k)(Fini k et (n=2k ou n=succ 2k))
+
+    vk = var("kd2")
+    corps = et(est_fini(vk),
+               ou(egal(vn, deux_fois(vk)), egal(vn, successeur(deux_fois(vk)))))
+    hK = N.assume(corps)
+    fini_k = conjonction_elim_gauche(hK)
+    card_k = conjonction_elim_gauche(fini_k)
+    disj = conjonction_elim_droite(hK)
+
+    cible = _decomp_impair(vn)
+
+    # CAS A : n = 2k  → contradiction avec impair
+    hA = N.assume(egal(vn, deux_fois(vk)))             # n = 2k
+    # deux_divise_double(k) : Fini k ⇒ est_pair_propre(2k) = divise_propre(2,2k)
+    twok = deux_fois(vk)
+    ddd = instancie(N.generalisation("ydd_g",
+                    deux_divise_double("ydd_g")), vk)   # Fini k ⇒ est_pair_propre(2k)
+    pair_2k = N.modus_ponens(fini_k, ddd)               # est_pair_propre(2k) = divise_propre(2,2k)
+    leib = N.modus_ponens(N.modus_ponens(hA, symetrie(vn, twok)),
+                          N.s6(twok, vn, "wid", est_pair_propre(var("wid"))))  # (2k=n)⇒(pair 2k⇔pair n)
+    pair_n = N.modus_ponens(pair_2k, equivalence_avant(leib))   # divise_propre(2,n)
+    # contradiction pair_n ∧ impair_n ⇒ cible (ex falso)
+    PA = _ex_falso(pair_n, impair_n, cible)
+    impA = N.loi_deduction(egal(vn, twok), PA)
+
+    # CAS B : n = succ 2k  → témoin k
+    hB = N.assume(egal(vn, successeur(twok)))          # n = succ 2k
+    conjB = conjonction_intro(fini_k, hB)
+    s5B = N.s5(et(est_fini(var("kid")), egal(vn, successeur(deux_fois(var("kid"))))),
+               vk, "kid")
+    PB = N.modus_ponens(conjB, s5B)                    # (∃k)(Fini k et n=2k+1)
+    assert PB.conclusion == cible, "cas B impair_decompose mal formé"
+    impB = N.loi_deduction(egal(vn, successeur(twok)), PB)
+
+    Pn_underK = cas(disj, impA, impB)                  # cible
+    imp_k = N.loi_deduction(corps, Pn_underK)
+    ex_imp = existe_elimination(imp_k, "kd2")
+    out_body = N.modus_ponens(dpd, ex_imp)             # cible
+    res = N.loi_deduction(et(est_fini(vn), est_impair_propre(vn)), out_body)
+    assert res.conclusion == impair_decompose_cible(n), \
+        f"impair_decompose : conclusion inattendue\n{res.conclusion}\n{impair_decompose_cible(n)}"
+    return res
+
+
+def _ex_falso(thm_a, thm_na, cible):
+    """De ⊢ A et ⊢ ¬A, déduit ⊢ cible."""
+    a = thm_a.conclusion
+    imp = N.modus_ponens(thm_na, N.s2(non(a), cible))
+    return N.modus_ponens(thm_a, imp)
+
+
 __all__ = [
     "deux_fois", "deux_fois_plus_un", "deux_succ_eq",
     "division_par_deux", "division_par_deux_cible",
+    "impair_decompose", "impair_decompose_cible",
 ]
