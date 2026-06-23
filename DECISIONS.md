@@ -97,7 +97,25 @@ iii_2/3/4/5/6_*, __init__). **Gate 3005/1 partout.** TOUTE la structure de `bour
 le livre, ≤10 entrées/dossier.
 - Vérif runtime lancée : `pytest --timeout=1200` plein dépôt (20 min/test : Hessenberg ~16 min passe, le
   test qui pendait 1h20 sera tué → cible ÉTAPE D). Tâche `bbkjszyow`.
-- **RESTE pour finir ÉTAPE A** : (1) confirmer le run runtime ; (2) **mirroring `tests/`** — les fichiers
+- ## 2026-06-23 — tests/ mirrorés + dossiers-trous : ÉTAPE A quasi finie
+
+- **`tests/` mirroré** (outil `outils_ia/mirror_tests.py`, transactionnel ; cible déduite par résolution
+  sur disque du module importé, formes contiguë + `from PKG import mod`) : structures, cardinaux (178),
+  ensembles (74), entiers (56), ordre (34). **Tout `tests/` ≤10.**
+- **`pytest.ini` ajouté : `--import-mode=importlib`** — INDISPENSABLE au mirroring : sinon, créer des
+  `__init__.py` dans des sous-dossiers de test alors que `tests/<pkg>/` n'en a pas casse la résolution de
+  paquet (`No module named 'iii_7_limites.test_cofinal'`). importlib ignore les `__init__` et tolère les
+  basenames dupliqués. Baseline confirmée 3005/1 avec ce mode.
+- **16 dossiers-trous créés** (TODO `__init__.py` par résultat manquant). 2 d'entre eux (II.3.1 graphes,
+  II.3.9) débordaient `fonctions/` (10→12) → retirés, documentés dans `fonctions/ii_3_general/__init__.py`.
+- ⚠️ **≤10 RESTE À CORRIGER : `bourbaki/ensembles/` = 11** (pré-existant de la migration ensembles, raté
+  car gaté seulement à la collecte). Entrées : base, familles, fonctions, relations, ii_1, ii_2, ii_3,
+  ii_4, ii_6, iii_3_ordre_cardinaux, __init__. Fix prévu : nester `relations/` sous `ii_3_correspondances/`
+  (les deux = II.3) via une entrée synthétique dans reorg_moves + migration_arbre ; et/ou déplacer
+  `iii_3_ordre_cardinaux/` (III.3 mal placé dans chap II) vers `cardinaux/` (cross-package). LEÇON : gater
+  AUSSI le ≤10 après chaque migration, pas seulement la collecte.
+
+**RESTE pour finir ÉTAPE A** : (0) corriger `ensembles/`=11 ; (1) confirmer le run runtime ; (2) **mirroring `tests/`** — les fichiers
   `tests/<paquet>/test_X.py` sont encore À PLAT (≤10 non satisfait côté tests) ; les ranger dans le
   sous-dossier miroir de leur module (déduire le sous-dossier depuis les imports `from bourbaki.<pkg>...`
   réécrits du test) ; (3) créer les **16 dossiers-trous** (normaliser les chemins, certains mal préfixés).
