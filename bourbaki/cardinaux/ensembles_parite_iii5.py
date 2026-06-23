@@ -474,8 +474,326 @@ def _ex_falso(thm_a, thm_na, cible):
     return N.modus_ponens(thm_a, imp)
 
 
+def _refute_self(thm_P_imp_notP):
+    """De ⊢ (P ⇒ ¬P) déduit ⊢ ¬P."""
+    from bourbaki.logique.tactiques.tactiques_abrege2 import antecedent_consequent
+    P, notP = antecedent_consequent(thm_P_imp_notP.conclusion)
+    return N.modus_ponens(thm_P_imp_notP, N.s1(notP))
+
+
+# ══════════════════════════════════════════════════════════════════════════════
+#  (3a) PARITÉ DISJOINTE — 2·a ≠ 2·b+1   (« pair ≠ impair »), par récurrence sur a.
+# ══════════════════════════════════════════════════════════════════════════════
+def _deux_succ_eq_t(tk):
+    """deux_succ_eq capture-safe : ⊢ card k ⇒ 2·(k+1) = succ(succ(2·k))."""
+    g = N.generalisation("kdset", deux_succ_eq("kdset"))
+    return instancie(g, _t(tk))
+
+
+def _prop8_t(tA, tB):
+    """prop8_successeur_injectif capture-safe : ⊢ (succ A=succ B) ⇒ (Card A=Card B)."""
+    from bourbaki.cardinaux.arithmetique.ensembles_prop8_fini2 import prop8_successeur_injectif
+    g = N.generalisation("A", N.generalisation("B",
+            prop8_successeur_injectif("A", "B")))
+    return instancie(instancie(g, _t(tA)), _t(tB))
+
+
+def _succ_inj_cardinaux(eq_succ, tA, tB):
+    """De ⊢ (succ A = succ B), A et B cardinaux (preuves cA, cB), déduit ⊢ A = B.
+
+    prop8 ⇒ Card A=Card B ; cardinal_de_cardinal sur A et B ⇒ A=B."""
+    vA, vB = _t(tA), _t(tB)
+    cardA_eq_cardB = N.modus_ponens(eq_succ, _prop8_t(vA, vB))   # Card A = Card B
+    return cardA_eq_cardB   # caller composes with Card=id
+
+
+def _succ_non_nul_t(tk):
+    """⊢ ¬(successeur(k) = 0)  (version TERME)."""
+    from bourbaki.entiers.ensembles_aleph0 import successeur_non_nul
+    g = N.generalisation("jsnn", successeur_non_nul("jsnn"))
+    return instancie(g, _t(tk))
+
+
+def _Qpni(a):
+    """Q[a] := (∀b)( Fini b ⇒ ¬( 2·a = 2·b+1 ) )   ( 2·b+1 := succ(2·b) )."""
+    va = _t(a)
+    vb = var("bpni")
+    return pourtout("bpni", impl(est_fini(vb),
+                non(egal(deux_fois(va), successeur(deux_fois(vb))))))
+
+
+def _pni_P0():
+    """⊢ Q[0]   : (∀b)( Fini b ⇒ ¬(2·0 = succ(2·b)) ).
+
+    2·0 = 0 ; succ(2·b) ≠ 0 (successeur_non_nul) ⇒ 0 ≠ succ(2·b)."""
+    vb = var("bpni")
+    twob = deux_fois(vb)
+    h = N.assume(est_fini(vb))
+    # 2·0 = 0
+    eq20 = _deux_fois_zero_eq()                        # 2·0 = ZERO
+    # ¬(succ(2b) = 0)  ⇒ ¬(0 = succ 2b) ⇒ ¬(2·0 = succ 2b)
+    snn = _succ_non_nul_t(twob)                        # ¬(succ 2b = 0)
+    # ¬(succ 2b = 0) ⇒ ¬(0 = succ 2b)  (symétrie de l'égalité sous ¬)
+    # build: assume 0 = succ 2b ; symétrie ⇒ succ 2b = 0 ; contradiction
+    h0 = N.assume(egal(ZERO, successeur(twob)))        # 0 = succ 2b
+    sb0 = N.modus_ponens(h0, symetrie(ZERO, successeur(twob)))   # succ 2b = 0
+    contra = _ex_falso(sb0, snn, non(egal(ZERO, successeur(twob))))
+    n0_ne = _refute_self(N.loi_deduction(egal(ZERO, successeur(twob)), contra))  # ¬(0=succ 2b)
+    # transporte 2·0 = 0 :  ¬(0=succ 2b) ⇒ ¬(2·0 = succ 2b)  (Leibniz 0=2·0)
+    zero_eq_20 = N.modus_ponens(eq20, symetrie(deux_fois(ZERO), ZERO))   # 0 = 2·0
+    leib = N.modus_ponens(zero_eq_20,
+        N.s6(ZERO, deux_fois(ZERO), "wpni0",
+             non(egal(var("wpni0"), successeur(twob)))))   # (0=2·0)⇒(¬(0=succ2b)⇔¬(2·0=succ2b))
+    res_ne = N.modus_ponens(n0_ne, equivalence_avant(leib))   # ¬(2·0 = succ 2b)
+    body = N.loi_deduction(est_fini(vb), res_ne)
+    out = N.generalisation("bpni", body)
+    assert out.conclusion == _Qpni(ZERO), \
+        f"Q[0] pni mal formé\n{out.conclusion}\n{_Qpni(ZERO)}"
+    return out
+
+
+def _pni_step(a="apni"):
+    """⊢ (∀a)( (Fini a et Q[a]) ⇒ Q[a+1] ).   (cf. en-tête du module.)"""
+    from bourbaki.entiers.ensembles_fini_successeur import (
+        cardinal_de_cardinal, fini_successeur_implique_fini,
+    )
+    from bourbaki.entiers.ensembles_principe_recurrence_preuve import predecesseur_fini
+    from bourbaki.entiers.ensembles_predecesseur_prop2 import (
+        predecesseur_fini_universel_preuve,
+    )
+    va = var(a)
+    hstep = N.assume(et(est_fini(va), _Qpni(va)))
+    fini_a = conjonction_elim_gauche(hstep)
+    Qa = conjonction_elim_droite(hstep)
+    card_a = conjonction_elim_gauche(fini_a)           # est_cardinal a
+
+    succ_a = successeur(va)
+    twoa = deux_fois(va)                               # 2·a
+
+    # Q[a+1] : fixe b, Fini b, assume 2·(a+1) = succ(2b), dérive ⊥.
+    vb = var("bpni")
+    twob = deux_fois(vb)
+    hfb = N.assume(est_fini(vb))
+    card_b = conjonction_elim_gauche(hfb)
+    habs = N.assume(egal(deux_fois(succ_a), successeur(twob)))   # 2·(a+1) = succ 2b
+
+    # 2·(a+1) = succ(succ 2a)   (deux_succ_eq, card a)
+    dse = N.modus_ponens(card_a, _deux_succ_eq_t(va))  # 2·(a+1) = succ(succ 2a)
+    succss2a_eq_succ2b = composer_egalites(
+        N.modus_ponens(dse, symetrie(deux_fois(succ_a), successeur(successeur(twoa)))),
+        habs)                                          # succ(succ 2a) = succ 2b
+    # prop8 : Card(succ 2a) = Card(2b)  ⇒  succ 2a = 2b  (cardinaux)
+    cc = _succ_inj_cardinaux(succss2a_eq_succ2b, successeur(twoa), twob)  # Card(succ 2a)=Card(2b)
+    # Card(succ 2a) = succ 2a ; Card(2b) = 2b
+    card_succ2a = _est_cardinal_succ(twoa)             # est_cardinal(succ 2a)
+    card_2b = _est_cardinal_produit(DEUX, vb)          # est_cardinal(2b)
+    eq_Cs2a = N.modus_ponens(card_succ2a, _card_de_card_t(successeur(twoa)))  # Card(succ2a)=succ2a
+    eq_C2b = N.modus_ponens(card_2b, _card_de_card_t(twob))                   # Card(2b)=2b
+    succ2a_eq_2b = composer_egalites(
+        composer_egalites(N.modus_ponens(eq_Cs2a, symetrie(cardinal(successeur(twoa)), successeur(twoa))), cc),
+        eq_C2b)                                        # succ 2a = 2b
+
+    # ── sous-cas sur b : b=0 ou b=succ(b') ────────────────────────────────────
+    cible = non(egal(deux_fois(succ_a), successeur(twob)))   # but Q[a+1] body : we derive ⊥→ce
+    # On va dériver ⊥ (i.e. n'importe quoi) ; cible finale = ¬(2(a+1)=succ 2b).
+    falso_target = non(egal(deux_fois(succ_a), successeur(twob)))
+
+    # CAS b = 0 : 2b = 2·0 = 0, succ 2a ≠ 0.
+    h_b0 = N.assume(egal(vb, ZERO))                    # b = 0
+    # 2b = 2·0 (Leibniz b=0 sur deux_fois) puis 2·0=0
+    eq_2b_2zero = _congr_deuxfois(h_b0)                # 2b = 2·0
+    eq_2b_zero = composer_egalites(eq_2b_2zero, _deux_fois_zero_eq())   # 2b = 0
+    # succ 2a = 2b = 0  ⇒  succ 2a = 0, contredit successeur_non_nul
+    succ2a_eq_0 = composer_egalites(succ2a_eq_2b, eq_2b_zero)   # succ 2a = 0
+    contra0 = _ex_falso(succ2a_eq_0, _succ_non_nul_t(twoa), falso_target)
+    imp_b0 = N.loi_deduction(egal(vb, ZERO), contra0)  # (b=0) ⇒ falso_target
+
+    # CAS b ≠ 0 : prédécesseur b = succ(b'), Fini b', 2b = succ(succ 2b'),
+    #   ⇒ succ 2a = succ(succ 2b') ⇒ 2a = succ 2b', contredit Q[a] à b'.
+    h_bne = N.assume(non(egal(vb, ZERO)))
+    pred_b = N.modus_ponens(conjonction_intro(hfb, h_bne),
+        instancie(predecesseur_fini_universel_preuve(), vb))   # (∃k)(b=succ k et card k et k<b)
+    vk = var("kpred")
+    corps_k = predecesseur_fini(vb).sous[0]            # body of ∃kpred
+    # rebuild corps_k explicitly to assume it
+    from bourbaki.cardinaux.ensembles_cardinaux import inf_strict_card
+    corps_k = et(et(egal(vb, successeur(vk)), est_cardinal(vk)), inf_strict_card(vk, vb))
+    hK = N.assume(corps_k)
+    b_eq_succk = conjonction_elim_gauche(conjonction_elim_gauche(hK))   # b = succ k
+    card_k = conjonction_elim_droite(conjonction_elim_gauche(hK))       # est_cardinal k
+    # Fini k : b=succ k ⇒ Fini(succ k) ; card k ⇒ (Fini(succ k)⇒Fini k)
+    fini_succk = N.modus_ponens(b_eq_succk,
+        N.s6(vb, successeur(vk), "wfk", est_fini(var("wfk"))))   # Fini b ⇔ Fini(succ k)
+    fini_succk2 = N.modus_ponens(hfb, equivalence_avant(fini_succk))   # Fini(succ k)
+    fsif = instancie(N.generalisation("afsk", fini_successeur_implique_fini("afsk")), vk)
+    fini_k = N.modus_ponens(fini_succk2, N.modus_ponens(card_k, fsif))   # Fini k
+    # 2b = 2·(succ k) (Leibniz b=succ k) = succ(succ 2k) (deux_succ_eq, card k)
+    eq_2b_2succk = _congr_deuxfois(b_eq_succk)         # 2b = 2·(succ k)
+    dse_k = N.modus_ponens(card_k, _deux_succ_eq_t(vk))   # 2·(succ k) = succ(succ 2k)
+    eq_2b_succss2k = composer_egalites(eq_2b_2succk, dse_k)   # 2b = succ(succ 2k)
+    twok = deux_fois(vk)
+    # succ 2a = 2b = succ(succ 2k)  ⇒ prop8 ⇒ Card(2a)=Card(succ 2k) ⇒ 2a = succ 2k
+    succ2a_eq_succss2k = composer_egalites(succ2a_eq_2b, eq_2b_succss2k)   # succ 2a = succ(succ 2k)
+    cc2 = _succ_inj_cardinaux(succ2a_eq_succss2k, twoa, successeur(twok))   # Card(2a)=Card(succ 2k)
+    card_2a = _est_cardinal_produit(DEUX, va)
+    card_succ2k = _est_cardinal_succ(twok)
+    eq_C2a = N.modus_ponens(card_2a, _card_de_card_t(twoa))
+    eq_Cs2k = N.modus_ponens(card_succ2k, _card_de_card_t(successeur(twok)))
+    twoa_eq_succ2k = composer_egalites(
+        composer_egalites(N.modus_ponens(eq_C2a, symetrie(cardinal(twoa), twoa)), cc2),
+        eq_Cs2k)                                       # 2a = succ 2k
+    # Q[a] à k : Fini k ⇒ ¬(2a = succ 2k)
+    Qa_k = N.modus_ponens(fini_k, instancie(Qa, vk))   # ¬(2a = succ 2k)
+    contraK = _ex_falso(twoa_eq_succ2k, Qa_k, falso_target)
+    imp_corps_k = N.loi_deduction(corps_k, contraK)
+    ex_imp = existe_elimination(imp_corps_k, "kpred")
+    contra_bne = N.modus_ponens(pred_b, ex_imp)        # falso_target
+    imp_bne = N.loi_deduction(non(egal(vb, ZERO)), contra_bne)
+
+    # tiers exclu sur (b=0) : combine imp_b0 et imp_bne
+    from bourbaki.logique.tactiques.tactiques_abrege2 import tiers_exclu
+    te = tiers_exclu(egal(vb, ZERO))                   # (b=0) ou ¬(b=0)
+    res_ne = cas(te, imp_b0, imp_bne)                  # falso_target = ¬(2(a+1)=succ 2b)
+
+    # mais res_ne a été dérivé SOUS habs (2(a+1)=succ 2b). On a en fait une contradiction :
+    # _ex_falso a produit falso_target = ¬(2(a+1)=succ 2b) sous habs. Donc habs ⇒ ¬habs ⇒ ¬habs.
+    imp_self = N.loi_deduction(egal(deux_fois(succ_a), successeur(twob)), res_ne)
+    final_ne = _refute_self(imp_self)                  # ¬(2(a+1) = succ 2b)
+    body_b = N.loi_deduction(est_fini(vb), final_ne)
+    Qa1 = N.generalisation("bpni", body_b)             # Q[a+1]
+    assert Qa1.conclusion == _Qpni(succ_a), f"Q[a+1] pni mal formé"
+    step_body = N.loi_deduction(et(est_fini(va), _Qpni(va)), Qa1)
+    return N.generalisation(a, step_body)
+
+
+def _congr_deuxfois(eq_thm):
+    """De ⊢ (u = v) déduit ⊢ ( 2·u = 2·v )  (congruence de deux_fois)."""
+    u, v = eq_thm.conclusion.termes
+    leib = N.s6(u, v, "wcd", egal(deux_fois(u), deux_fois(var("wcd"))))
+    eqv = N.modus_ponens(eq_thm, leib)
+    refl = N.reflexivite(deux_fois(u))
+    return N.modus_ponens(refl, equivalence_avant(eqv))
+
+
+def _est_cardinal_succ(tk):
+    """⊢ est_cardinal(successeur(k))   (successeur(k)=Card(k⊔{∅}))."""
+    from bourbaki.ensembles.familles.ensembles_somme_disjointe import somme_disjointe
+    return _card_est_cardinal_t(somme_disjointe(_t(tk), E.singleton(E.VIDE)))
+
+
+def pair_neq_impair_cible(a="apni", b="bpni2"):
+    va, vb = _t(a), _t(b)
+    return impl(et(est_fini(va), est_fini(vb)),
+                non(egal(deux_fois(va), successeur(deux_fois(vb)))))
+
+
+def pair_neq_impair(a="apni", b="bpni2", k="kpni"):
+    """🎯 ⊢ (Fini a et Fini b) ⇒ ¬( 2·a = 2·b+1 ).   ( « pair ≠ impair ». )
+
+    Récurrence C61 sur a (Q[a] := ∀b(Fini b ⇒ 2a ≠ succ 2b)) ; base 2·0=0≠succ ;
+    pas via prédécesseur de b + successeur injectif (Prop. 8).  theorie=22, 0 hyp."""
+    va, vb = _t(a), _t(b)
+    P = _Qpni
+    p0 = _pni_P0()
+    step = _pni_step("apni")
+    assert p0.conclusion == P(ZERO), "Q[0] mal formé"
+    assert step.conclusion == _fini_et_P_implique_succ(P, "apni"), "pas pni mal formé"
+
+    princ_imp = principe_recurrence_preuve(P, "apni", k=k)
+    pfu = predecesseur_fini_universel(k=k)
+    assert pfu in princ_imp.hypotheses, "pfu absent"
+    princ_imp = _cut(princ_imp, pfu, predecesseur_fini_universel_preuve(k=k))
+    ante = conjonction_intro(p0, step)
+    fini_implique_Qa = N.modus_ponens(ante, princ_imp)   # (∀a)(Fini a ⇒ Q[a])
+
+    hc = N.assume(et(est_fini(va), est_fini(vb)))
+    fa = conjonction_elim_gauche(hc)
+    fb = conjonction_elim_droite(hc)
+    Qa = N.modus_ponens(fa, instancie(fini_implique_Qa, va))   # Q[a]
+    ne = N.modus_ponens(fb, instancie(Qa, vb))                 # ¬(2a=succ 2b)
+    res = N.loi_deduction(et(est_fini(va), est_fini(vb)), ne)
+    cible = pair_neq_impair_cible(a, b)
+    assert res.conclusion == cible, \
+        f"pair_neq_impair : conclusion inattendue\n{res.conclusion}\n{cible}"
+    return res
+
+
+# ══════════════════════════════════════════════════════════════════════════════
+#  (3b) « 2k+1 EST IMPAIR » — ¬( 2 | (2k+1) )   et le cas k=0 : ¬( 2 | 1 ).
+# ══════════════════════════════════════════════════════════════════════════════
+def _pair_neq_impair_t(ta, tb):
+    """pair_neq_impair capture-safe : ⊢ (Fini a et Fini b) ⇒ ¬(2·a = succ(2·b))."""
+    g = N.generalisation("apnit", N.generalisation("bpnit",
+            pair_neq_impair("apnit", "bpnit")))
+    return instancie(instancie(g, _t(ta)), _t(tb))
+
+
+def deux_k_plus_un_impair_cible(k="kdki"):
+    vk = _t(k)
+    return impl(est_fini(vk), est_impair_propre(successeur(deux_fois(vk))))
+
+
+def deux_k_plus_un_impair(k="kdki"):
+    """🎯 ⊢ est_fini(k) ⇒ ¬( 2 | (2·k+1) ).   ( 2·k+1 := succ(2·k) est IMPAIR. )
+
+    est_impair_propre(succ 2k) = ¬divise_propre(2, succ 2k) = ¬(∃q)(Fini q et succ 2k = 2q).
+    Pour un tel q : pair_neq_impair(q, k) ⊢ ¬(2q = succ 2k) ; or succ 2k = 2q (symétrie)
+    contredit.  Donc aucun q : ¬divise_propre."""
+    vk = _t(k)
+    twok = deux_fois(vk)
+    succ2k = successeur(twok)
+
+    hfk = N.assume(est_fini(vk))
+
+    # divise_propre(2, succ 2k) = (∃q)(Fini q et succ 2k = produit_cardinal_binaire(2,q))
+    vq = var("qdiv")
+    corps_q = et(est_fini(vq), egal(succ2k, deux_fois(vq)))
+    hq = N.assume(corps_q)
+    fini_q = conjonction_elim_gauche(hq)
+    eq_q = conjonction_elim_droite(hq)                 # succ 2k = 2q
+    # 2q = succ 2k  (symétrie)
+    twoq_eq = N.modus_ponens(eq_q, symetrie(succ2k, deux_fois(vq)))   # 2q = succ 2k
+    # pair_neq_impair(q,k) : (Fini q et Fini k) ⇒ ¬(2q = succ 2k)
+    pni = _pair_neq_impair_t(vq, vk)
+    ne = N.modus_ponens(conjonction_intro(fini_q, hfk), pni)   # ¬(2q = succ 2k)
+    # contradiction : 2q=succ2k et ¬(2q=succ2k) ⇒ ⊥ ⇒ ¬corps_q
+    E = existe("qdiv", corps_q)                        # (∃q)corps_q = divise_propre(2, succ 2k)
+    # sous corps_q : contradiction (2q=succ2k vs ¬(2q=succ2k)) ⇒ ¬E
+    contra = _ex_falso(twoq_eq, ne, non(E))            # ¬E   [corps_q, Fini k]
+    imp = N.loi_deduction(corps_q, contra)             # corps_q ⇒ ¬E
+    ex_imp = existe_elimination(imp, "qdiv")           # E ⇒ ¬E
+    not_exists = _refute_self(ex_imp)                  # ¬E = est_impair_propre(succ 2k)
+    res = N.loi_deduction(est_fini(vk), not_exists)
+    cible = deux_k_plus_un_impair_cible(k)
+    assert res.conclusion == cible, \
+        f"deux_k_plus_un_impair : conclusion inattendue\n{res.conclusion}\n{cible}"
+    return res
+
+
+def un_impair():
+    """🎯 ⊢ est_impair_propre(1).   ( ¬( 2 | 1 ). )
+
+    1 = UN = succ(0) = succ(2·0)  (2·0 = 0).  deux_k_plus_un_impair(0) ⊢
+    ¬(2 | succ(2·0)) ; Fini 0 ; Leibniz succ(2·0)=1 transporte en ¬(2|1)."""
+    from bourbaki.entiers.ensembles_fini_zero import fini_zero
+    dki = N.modus_ponens(fini_zero(), deux_k_plus_un_impair(ZERO))   # ¬(2 | succ(2·0))
+    # succ(2·0) = succ(0) = UN   (2·0 = 0 ⇒ succ(2·0)=succ(0)=1)
+    eq20 = _deux_fois_zero_eq()                         # 2·0 = 0
+    eq_succ = _congr_succ(eq20)                         # succ(2·0) = succ(0) = UN
+    #   successeur(ZERO) == UN littéralement.
+    # transporte : ¬(2|succ 2·0) ⇒ ¬(2|UN)  (Leibniz succ(2·0)=UN sur est_impair_propre)
+    leib = N.modus_ponens(eq_succ,
+        N.s6(successeur(deux_fois(ZERO)), UN, "wui", est_impair_propre(var("wui"))))
+    res = N.modus_ponens(dki, equivalence_avant(leib))  # est_impair_propre(UN)
+    assert res.conclusion == est_impair_propre(UN), \
+        f"un_impair : conclusion inattendue\n{res.conclusion}\n{est_impair_propre(UN)}"
+    return res
+
+
 __all__ = [
     "deux_fois", "deux_fois_plus_un", "deux_succ_eq",
     "division_par_deux", "division_par_deux_cible",
     "impair_decompose", "impair_decompose_cible",
+    "pair_neq_impair", "pair_neq_impair_cible",
+    "deux_k_plus_un_impair", "deux_k_plus_un_impair_cible", "un_impair",
 ]

@@ -34,7 +34,7 @@ def test_deux_k_plus_un_impair_clos():
     assert len(t.hypotheses) == 0
 
 
-def test_impair_fois_impair_clos():
-    t = M.impair_fois_impair()
-    assert len(t.hypotheses) == 0
-    assert t.conclusion == M.impair_fois_impair_cible()
+def test_pair_neq_impair_clos():
+    t = M.pair_neq_impair()
+    assert t.est_clos and len(t.hypotheses) == 0
+    assert t.conclusion == M.pair_neq_impair_cible()
