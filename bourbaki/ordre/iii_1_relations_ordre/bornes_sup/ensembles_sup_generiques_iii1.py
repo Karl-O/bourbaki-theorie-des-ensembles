@@ -42,7 +42,7 @@ from bourbaki.logique.formule import (
     Terme, var, egal, et, impl, appartient, existe, pourtout, inclus,
 )
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
     instancie,
@@ -246,7 +246,7 @@ def majorant_reunion_iff(G="G", A="A", B="B", E_set="E", m="m", x="x"):
 
     [Le passage de ce lemme à l'égalité sup(A∪B)=sup{supA,supB} demande la borne sup
     d'une PAIRE {supA,supB} : voir RAPPORT — résiduel honnête.]"""
-    from bourbaki.ensembles.ensembles_theoremes import _instance_reunion
+    from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import _instance_reunion
     from bourbaki.logique.formule import ou as _ou
     from bourbaki.logique.tactiques.tactiques_abrege2 import (
         equivalence_arriere as _ea, equivalence_avant as _ev, cas as _cas,

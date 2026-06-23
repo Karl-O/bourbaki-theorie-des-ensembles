@@ -3,7 +3,7 @@
 Vérifie : theorie_ensembles()==22 ; conclusions == cibles miroir ; conclusion ∉ hyps ;
 liste les hypothèses honnêtes exactes de chaque lemme."""
 from bourbaki.logique.formule import egal, inclus, et, non, var
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import (
     cardinal, est_cardinal, inf_egal_card, inf_strict_card,
 )

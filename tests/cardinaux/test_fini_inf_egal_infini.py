@@ -6,7 +6,7 @@
 theorie=22, noyau intact.
 """
 from bourbaki.logique.formule import var, et, impl
-from bourbaki.ensembles.ensembles_abrege import theorie_ensembles
+from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege import theorie_ensembles
 from bourbaki.cardinaux.ensembles_cardinaux import inf_egal_card, est_cardinal
 from bourbaki.entiers.iii_6_infinis.iii_6_3_infinis_denombrables.ensembles_infinis import est_infini
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import DEUX, TROIS

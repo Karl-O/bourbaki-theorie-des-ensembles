@@ -1,6 +1,6 @@
 """Tests — PRINCIPE DE RÉCURRENCE SUR LES ENSEMBLES FINIS (recurrence_finie)."""
 from bourbaki.logique.formule import var, appartient
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.entiers.iii_5_calcul_entiers.iii_5_1_somme_produit_entiers.ensembles_recurrence_finie import (
     recurrence_finie, recurrence_finie_enonce, _preuve_Q0, _preuve_step,
     _pas_ensemble, _Q,

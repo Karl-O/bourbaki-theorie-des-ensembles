@@ -7,7 +7,7 @@ sont en outre contrôlés sur l'ENSEMBLE EXACT de leurs hypothèses structurelle
 (jamais postulées : ce sont les données « f:A→B, f':B→C » du Théorème 1).
 """
 from bourbaki.logique.formule import var, egal, et, appartient, impl, pourtout, existe
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ensembles.fonctions.ii_3_8_retractions_sections import ensembles_retractions_props as RP
 
 

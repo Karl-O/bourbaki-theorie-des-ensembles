@@ -30,7 +30,7 @@ from __future__ import annotations
 from bourbaki.logique.formule import Terme, var, pourtout, impl, et
 from bourbaki.logique import noyau_abrege as N
 from bourbaki.logique.tactiques.tactiques_abrege2 import instancie
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 
 from bourbaki.cardinaux.ensembles_cardinaux import cardinal
 from bourbaki.cardinaux.ensembles_cardinaux_theoremes import equipotent_son_cardinal
@@ -40,7 +40,7 @@ from bourbaki.cardinaux.arithmetique.ensembles_arith_cardinale import _prop1_dir
 from bourbaki.cardinaux.arithmetique.ensembles_exposant_cardinal import (
     exposant_cardinal_binaire,
 )
-from bourbaki.ensembles.familles.ensembles_somme_disjointe import somme_disjointe
+from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import somme_disjointe
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import successeur, ZERO, est_fini
 from bourbaki.cardinaux.ensembles_n_arith_iii5 import (
     exposant_invariance_enonce, exposant_invariance_zero_enonce,

@@ -88,7 +88,7 @@ from bourbaki.logique.formule import (
     inclus,
 )
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import (
     est_cardinal, inf_egal_card, inf_strict_card,
 )
@@ -107,7 +107,7 @@ from bourbaki.logique.tactiques.tactiques_abrege2 import ou_congruence
 
 from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie
 
-from bourbaki.ensembles.base.ensembles_vide import non_vide_ssi_element
+from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_vide import non_vide_ssi_element
 from bourbaki.ordre.iii_1_relations_ordre.isomorphismes_ordre.ensembles_pont_binder import reecrire
 
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_recurrence_c61_existence_n.ensembles_recurrence_C61 import (

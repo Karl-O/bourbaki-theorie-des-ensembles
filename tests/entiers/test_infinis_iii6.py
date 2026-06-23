@@ -19,7 +19,7 @@ et NON vacuous (conclusion ≠ une hypothèse).  Travaillent sur le ℵ₀ CONCR
 import pytest
 
 from bourbaki.logique.formule import var, egal, equiv, existe, inclus
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import est_cardinal, inf_egal_card, equipotent, cardinal
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import successeur
 from bourbaki.entiers.iii_6_infinis.iii_6_1_n_objet_existence.ensembles_ensemble_NN import ensemble_NN

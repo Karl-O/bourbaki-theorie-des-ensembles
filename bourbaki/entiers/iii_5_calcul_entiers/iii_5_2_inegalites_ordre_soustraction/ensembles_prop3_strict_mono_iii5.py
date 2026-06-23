@@ -53,8 +53,8 @@ from bourbaki.logique.tactiques.tactiques_abrege_egalite import (
 from bourbaki.cardinaux.ensembles_cardinaux import (
     est_cardinal, cardinal, inf_strict_card,
 )
-from bourbaki.ensembles import ensembles_abrege as E
-from bourbaki.ensembles.familles.ensembles_somme_disjointe import (
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
+from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import (
     somme_disjointe, somme_cardinale_binaire,
 )
 from bourbaki.cardinaux.arithmetique.ensembles_arith_cardinale import (

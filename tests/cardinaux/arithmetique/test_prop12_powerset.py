@@ -22,8 +22,8 @@ triple χ_Y∈𝓕(X;2) + alignement graphe/triple entre χ et le ρ du round 24
 """
 from bourbaki.logique.formule import (var, egal, et, non, ou, impl, equiv,
                                        appartient, inclus, pourtout)
-from bourbaki.ensembles import ensembles_abrege as E
-from bourbaki.ensembles.familles.ensembles_somme_disjointe import ZERO, UN
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
+from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import ZERO, UN
 from bourbaki.cardinaux.arithmetique import ensembles_prop12_powerset as P
 
 

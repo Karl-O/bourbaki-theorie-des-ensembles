@@ -35,7 +35,7 @@ from bourbaki.logique.tactiques.tactiques_abrege_egalite import (
     symetrie, composer_egalites, congruence_terme,
 )
 
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import est_cardinal, cardinal
 from bourbaki.cardinaux.arithmetique.ensembles_arith_cardinale import (
     produit_cardinal_binaire,
@@ -677,7 +677,7 @@ def _congr_deuxfois(eq_thm):
 
 def _est_cardinal_succ(tk):
     """⊢ est_cardinal(successeur(k))   (successeur(k)=Card(k⊔{∅}))."""
-    from bourbaki.ensembles.familles.ensembles_somme_disjointe import somme_disjointe
+    from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import somme_disjointe
     return _card_est_cardinal_t(somme_disjointe(_t(tk), E.singleton(E.VIDE)))
 
 

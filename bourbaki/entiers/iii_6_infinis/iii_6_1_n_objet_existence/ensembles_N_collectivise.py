@@ -54,7 +54,7 @@ from bourbaki.logique.formule import (
     subst_f,
 )
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import (
     est_cardinal, cardinal, inf_egal_card,
 )

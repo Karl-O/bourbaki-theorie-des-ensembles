@@ -4,7 +4,7 @@ Chaque théorème : conclusion EXACTE (== cible) et clôture (.est_clos).
 """
 from bourbaki.logique.formule import (var, egal, et, appartient, existe, inclus, impl, pourtout,
                      equiv)
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ensembles.fonctions.ii_3_5_restrictions_prolongements import ensembles_restrictions as R
 
 

@@ -90,7 +90,7 @@ from bourbaki.logique.formule import (
     Terme, var, app, egal, et, impl, equiv, appartient, existe, pourtout,
 )
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 
 from bourbaki.logique.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,

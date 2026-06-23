@@ -5,7 +5,7 @@ que la clause d'antisymétrie est EXACTEMENT antisymetrie_sur_produit (relativis
 reproduisent celles du préordre.  theorie_ensembles() reste à 22.
 """
 from bourbaki.logique.formule import var, egal, et, impl, appartient, pourtout
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis import ensembles_ordre_vocab as V
 from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis import ensembles_ordre_produit_antisym as A
 

@@ -8,7 +8,7 @@ Hypothèses EXACTES contrôlées.
 from bourbaki.logique.formule import (
     var, appartient, inclus, egal, et, impl, non, pourtout, existe,
 )
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 
 import bourbaki.cardinaux.ensembles_ordinaux_bien_ordonnes as OBO
 from bourbaki.cardinaux.ensembles_segments_construction import seg, _R_de

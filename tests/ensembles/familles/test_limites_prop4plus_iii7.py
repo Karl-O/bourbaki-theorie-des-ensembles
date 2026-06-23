@@ -2,8 +2,8 @@
 
 Vérifie : preuves valides au noyau, theorie=22, hypothèses HONNÊTES & SATISFIABLES
 (aucune paire contradictoire), conclusion NEUVE (∉ hypothèses)."""
-from bourbaki.ensembles import ensembles_abrege as E
-from bourbaki.ensembles.familles import ensembles_limites_prop4plus_iii7 as M
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
+from bourbaki.ensembles.familles.iii_7_limites import ensembles_limites_prop4plus_iii7 as M
 
 
 def test_theorie_inchangee():

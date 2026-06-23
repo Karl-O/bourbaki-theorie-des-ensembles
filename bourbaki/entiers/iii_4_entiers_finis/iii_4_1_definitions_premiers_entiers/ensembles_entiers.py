@@ -47,10 +47,10 @@ from __future__ import annotations
 
 from bourbaki.logique.formule import (Terme, var, app, egal, et, non, impl, existe, pourtout, equiv,
                      inclus, appartient)
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import (cardinal, est_cardinal, CARD_VIDE,
                                  inf_egal_card, inf_strict_card)
-from bourbaki.ensembles.familles.ensembles_somme_disjointe import somme_cardinale_binaire
+from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import somme_cardinale_binaire
 
 
 def _t(t):

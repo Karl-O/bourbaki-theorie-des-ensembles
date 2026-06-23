@@ -2,8 +2,8 @@
 from __future__ import annotations
 
 from bourbaki.logique.formule import var, egal, non, appartient, pourtout, equiv
-from bourbaki.ensembles.ensembles_abrege import VIDE
-from bourbaki.ensembles.base.ensembles_vide import vide_ssi_sans_element
+from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege import VIDE
+from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_vide import vide_ssi_sans_element
 
 
 def test_vide_ssi_sans_element():

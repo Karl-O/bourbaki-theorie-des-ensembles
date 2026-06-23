@@ -4,8 +4,8 @@ Honnêteté LCF : chaque théorème est CLOS (0 hyp), sa conclusion est l'ÉGALI
 littérale annoncée, les deux membres DIFFÈRENT (non trivial), theorie = 22.
 """
 from bourbaki.logique.formule import var, egal
-from bourbaki.ensembles import ensembles_abrege as E
-import bourbaki.ensembles.ensembles_algebre_booleenne as M
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
+import bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_algebre_booleenne as M
 
 A, B, C, Ev = var("A"), var("B"), var("C"), var("E")
 U, I, D = E.reunion, E.intersection, E.difference

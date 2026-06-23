@@ -11,9 +11,9 @@ Vérifie les maillons SÛRS de la Proposition 8 (conclusions exactes + closdes) 
                                       MODULO le seul cœur back-and-forth reporté).
 """
 from bourbaki.logique.formule import var, egal, impl
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import cardinal, equipotent
-from bourbaki.ensembles.familles.ensembles_somme_disjointe import somme_disjointe
+from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import somme_disjointe
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers import ensembles_entiers as Ent
 from bourbaki.cardinaux.arithmetique import ensembles_prop8_successeur as P8
 

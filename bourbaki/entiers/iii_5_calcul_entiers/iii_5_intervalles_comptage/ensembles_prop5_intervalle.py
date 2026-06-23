@@ -50,7 +50,7 @@ from bourbaki.logique.formule import (
     Terme, var, egal, et, ou, non, impl, equiv, appartient, inclus, pourtout,
 )
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 
 from bourbaki.logique.tactiques.tactiques_abrege import syllogisme, a_implique_a
 from bourbaki.logique.tactiques.tactiques_abrege2 import (
@@ -67,11 +67,11 @@ from bourbaki.entiers.iii_5_calcul_entiers.iii_5_2_inegalites_ordre_soustraction
     successeur_ordre_t, _inf_egal_monotone_successeur,
 )
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers_theoremes import membre_intervalle_entiers
-from bourbaki.ensembles.base.ensembles_couples import singleton_membre
+from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import singleton_membre
 from bourbaki.cardinaux.ensembles_cardinaux_bornes import zero_inf_egal
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_fini_successeur import successeur_est_un_cardinal
 from bourbaki.cardinaux.ensembles_cardinaux_theoremes import inf_egal_reflexif
-from bourbaki.ensembles.ensembles_theoremes import egalite_par_extension
+from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import egalite_par_extension
 
 
 def _t(t):
@@ -120,7 +120,7 @@ def _membre_union(b, z):
 
     AXIOME_REUNION : z∈A∪B ⇔ (z∈A ou z∈B) ; singleton_membre : z∈{b+1} ⇔ z=b+1 ;
     congruence du « ou » sur le 2ᵉ disjoint."""
-    from bourbaki.ensembles.ensembles_theoremes import _instance_reunion
+    from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import _instance_reunion
     from bourbaki.logique.tactiques.tactiques_abrege2 import ou_congruence
     vb, vz = _t(b), _t(z)
     sb = successeur(vb)
@@ -252,7 +252,7 @@ def intervalle_successeur(b="b"):
     vz = var(z)
 
     from bourbaki.logique.formule import inclus
-    from bourbaki.ensembles.ensembles_theoremes import extensionnalite_appliquee
+    from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import extensionnalite_appliquee
 
     h_card = N.assume(est_cardinal(vb))                 # est_cardinal(b)
     eqv = N.modus_ponens(h_card, _membre_equivalence(vb, vz))   # zz∈[0,b+1] ⇔ zz∈union

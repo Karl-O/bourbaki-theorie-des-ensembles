@@ -10,7 +10,7 @@ from __future__ import annotations
 from bourbaki.logique.formule import (Terme, var, egal, et, non, ou, impl, appartient,
                      existe, pourtout, inclus, subst_t, subst_f)
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.tactiques.tactiques_abrege import a_implique_a, syllogisme
 from bourbaki.logique.tactiques.tactiques_abrege2 import (conjonction_intro, conjonction_elim_gauche,
                                conjonction_elim_droite, equivalence_avant,
@@ -18,8 +18,8 @@ from bourbaki.logique.tactiques.tactiques_abrege2 import (conjonction_intro, con
                                instancie)
 from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie, composer_egalites, congruence_terme
 from bourbaki.logique.tactiques.tactiques_abrege_quantif import existe_elimination, alpha_existe
-from bourbaki.ensembles.ensembles_theoremes import egalite_par_extension
-from bourbaki.ensembles.base.ensembles_couples import (singleton_membre, membre_paire_gauche,
+from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import egalite_par_extension
+from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import (singleton_membre, membre_paire_gauche,
                                   couple_egal_implique_composantes)
 from bourbaki.ensembles.fonctions.ii_3_6_fonction_terme.ensembles_fonction_terme import membre_graphe_terme
 from bourbaki.cardinaux.arithmetique.ensembles_exposant_un._gv import (
@@ -76,7 +76,7 @@ def exposant_valeur_dans_A(g="G", a="A"):
 
     (∅, G(∅))∈G (exposant_couple_dans) et G⊂{∅}×A donnent (∅,G(∅))∈{∅}×A,
     d'où G(∅)∈A par couple_dans_produit_ssi (2ᵉ projection)."""
-    from bourbaki.ensembles.familles.ensembles_produit import couple_dans_produit_ssi
+    from bourbaki.ensembles.familles.ii_2_produit_deux_ensembles.ensembles_produit import couple_dans_produit_ssi
     vG, vA = _t(g), _t(a)
     one = UN_SOURCE()
     fvide = E.valeur(vG, E.VIDE)                # G(∅)
@@ -99,7 +99,7 @@ def exposant_membre_implique_couple(g="G", a="A"):
     z∈G ⊂{∅}×A ⇒ (∃p)(∃q)(z=(p,q) et p∈{∅} et q∈A) ; p=∅ ; z=(∅,q) ; (∅,q)∈G
     (Leibniz) ; (∅,G(∅))∈G (exposant_couple_dans) ; FONCTIONNALITÉ ⇒ q=G(∅) ;
     donc z=(∅,q)=(∅,G(∅))."""
-    from bourbaki.ensembles.familles.ensembles_produit import _instance_produit
+    from bourbaki.ensembles.familles.ii_2_produit_deux_ensembles.ensembles_produit import _instance_produit
     vG, vA = _t(g), _t(a)
     one = UN_SOURCE()
     fvide = E.valeur(vG, E.VIDE)                # G(∅)

@@ -7,15 +7,15 @@ from __future__ import annotations
 
 from bourbaki.logique.formule import var, egal, et, appartient, existe, subst_f, Terme
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.tactiques.tactiques_abrege2 import (conjonction_intro, conjonction_elim_gauche,
                                conjonction_elim_droite, equivalence_avant,
                                equivalence_arriere, equivalence_transitivite, instancie)
 from bourbaki.logique.tactiques.tactiques_abrege_egalite import composer_egalites, congruence_terme
 from bourbaki.logique.tactiques.tactiques_abrege_quantif import (existe_elimination, congruence_existe,
                                       alpha_existe)
-from bourbaki.ensembles.base.ensembles_couples import couple_egal_implique_composantes
-from bourbaki.ensembles.ensembles_theoremes import egalite_par_extension
+from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import couple_egal_implique_composantes
+from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import egalite_par_extension
 
 
 def _T(v):
@@ -141,7 +141,7 @@ def reciproque_produit(x="X", y="Y"):
     from bourbaki.logique.formule import et
     from bourbaki.logique.tactiques.tactiques_abrege2 import (equivalence_symetrie, comm_et, assoc_et,
                                    et_congruence_droite)
-    from bourbaki.ensembles.familles.ensembles_produit import couple_dans_produit_ssi
+    from bourbaki.ensembles.familles.ii_2_produit_deux_ensembles.ensembles_produit import couple_dans_produit_ssi
     vX, vY = _T(x), _T(y)
     vz, va, vb = var("z"), var("a"), var("b")
     Grec = E.reciproque(E.produit(vX, vY))

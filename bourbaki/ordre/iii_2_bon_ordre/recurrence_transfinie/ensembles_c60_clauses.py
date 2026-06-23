@@ -32,7 +32,7 @@ from bourbaki.logique.formule import (
     Terme, var, egal, et, impl, equiv, appartient, existe, pourtout,
 )
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 
 from bourbaki.logique.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
@@ -42,7 +42,7 @@ from bourbaki.logique.tactiques.tactiques_abrege_quantif import (
     existe_elimination, alpha_existe, alpha_pour_tout,
 )
 from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie, composer_egalites
-from bourbaki.ensembles.base.ensembles_couples import singleton_membre
+from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import singleton_membre
 
 from bourbaki.ordre.iii_2_bon_ordre.recurrence_transfinie.ensembles_recurrence_transfinie import _graphe_R
 from bourbaki.ordre.iii_2_bon_ordre.recurrence_transfinie.ensembles_c60_existence_close import est_essai, couvert_essai, dom_essai
@@ -353,7 +353,7 @@ def _couverture_membre(vh, e, G, x, V, z, p="pcf", yD="yD", zb="zess"):
     sx = E.singleton(vz)
     z_in_sx = N.modus_ponens(N.reflexivite(vz), equivalence_arriere(singleton_membre(vz, vz)))  # z∈{z}
     # z∈seg(z)∪{z}  (côté droit de la réunion)
-    from bourbaki.ensembles.ensembles_theoremes import _instance_reunion
+    from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import _instance_reunion
     segz = E.segment_extremite(R, ve, vz)
     # z∈{z} ⇒ (z∈{z} ou z∈segz) [s2] ⇒ (z∈segz ou z∈{z}) [s3]
     Bz, Az = appartient(vz, sx), appartient(vz, segz)
@@ -496,9 +496,9 @@ def couverture_segment_realise(vh, e="E", G="G", x="x0", V="Vval", y="ytf",
     ⚠️ UNE hypothèse HONNÊTE : est_bien_ordonne(R,E) (le bon ordre, pour la transitivité
     et l'antisymétrie de ⊆).  L'antécédent ambiant (⊇) est l'ANTÉCÉDENT de la clause.
     Conclusion == clause_P3_ambiant."""
-    from bourbaki.ensembles.ensembles_theoremes import extensionnalite_appliquee
+    from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import extensionnalite_appliquee
     from bourbaki.logique.formule import inclus, non, ou
-    from bourbaki.ensembles.ensembles_theoremes import _instance_reunion
+    from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import _instance_reunion
     from bourbaki.logique.tactiques.tactiques_abrege2 import cas, antecedent_consequent
     R = _graphe_R(G)
     ve, vx = _t(e), var(x)

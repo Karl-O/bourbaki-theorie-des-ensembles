@@ -11,7 +11,7 @@ des théorèmes) ; a^0 = 1 (Prop. 11) est DÉRIVÉ, pas postulé :
   • exposant_cardinal_zero_egale_un : exposant_cardinal_binaire(a,0) = Card({∅}).
 """
 from bourbaki.logique.formule import var, egal, et, impl, appartient
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import cardinal, equipotent
 from bourbaki.cardinaux.arithmetique import ensembles_exposant_cardinal as X
 

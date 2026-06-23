@@ -5,7 +5,7 @@ import pytest
 from bourbaki.logique.formule import var, et, impl, non, pourtout, existe
 from bourbaki.cardinaux.ensembles_cardinaux import est_cardinal, inf_egal_card
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import est_fini, ZERO, successeur
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_recurrence_c61_existence_n.ensembles_recurrence_vraie import (
     preuve_P0_vrai, preuve_step_vrai, recurrence_fini_implique_P_vrai,

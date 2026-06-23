@@ -20,7 +20,7 @@ from bourbaki.logique.formule import (
     Terme, var, egal, et, ou, existe, appartient,
 )
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 
 from bourbaki.logique.tactiques.tactiques_abrege import syllogisme
 from bourbaki.logique.tactiques.tactiques_abrege2 import (
@@ -31,8 +31,8 @@ from bourbaki.logique.tactiques.tactiques_abrege2 import (
 from bourbaki.logique.tactiques.tactiques_abrege_quantif import (
     monotonie_existe, existe_elimination, congruence_existe,
 )
-from bourbaki.ensembles.familles.ensembles_produit import _instance_produit
-from bourbaki.ensembles.ensembles_theoremes import (
+from bourbaki.ensembles.familles.ii_2_produit_deux_ensembles.ensembles_produit import _instance_produit
+from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import (
     _instance_reunion, egalite_par_extension,
 )
 
@@ -269,7 +269,7 @@ def produit_union_droite(a="A", b="B", c="C", z="z"):
 def produit_union_carre(a="A", b="B", z="z"):
     """⊢ (A∪B)×(A∪B) = (A×A)∪((A×B)∪((B×A)∪(B×B))).   [CLOS, 0 hyp]."""
     from bourbaki.logique.tactiques.tactiques_abrege_egalite import congruence_terme, composer_egalites
-    from bourbaki.ensembles.ensembles_algebre_booleenne import associativite_reunion
+    from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_algebre_booleenne import associativite_reunion
     vA, vB = _t(a), _t(b)
     AB = E.reunion(vA, vB)
     AA, AxB, BxA, BB = (E.produit(vA, vA), E.produit(vA, vB),

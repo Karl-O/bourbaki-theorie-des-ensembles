@@ -26,7 +26,7 @@ from bourbaki.logique.formule import (
     Terme, var, egal, et, non, impl, existe, appartient,
 )
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 
 from bourbaki.logique.tactiques.tactiques_abrege import syllogisme
 from bourbaki.logique.tactiques.tactiques_abrege2 import (
@@ -37,10 +37,10 @@ from bourbaki.logique.tactiques.tactiques_abrege_quantif import existe_eliminati
 from bourbaki.logique.tactiques.tactiques_abrege_egalite import (
     symetrie, composer_egalites,
 )
-from bourbaki.ensembles.familles.ensembles_produit import _instance_produit
-from bourbaki.ensembles.base.ensembles_couples import couple_egal_implique_composantes
-from bourbaki.ensembles.ensembles_theoremes import egalite_par_extension
-from bourbaki.ensembles.ensembles_algebre_booleenne import (
+from bourbaki.ensembles.familles.ii_2_produit_deux_ensembles.ensembles_produit import _instance_produit
+from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import couple_egal_implique_composantes
+from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import egalite_par_extension
+from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_algebre_booleenne import (
     _instance_inter, distributivite_intersection_reunion,
 )
 from bourbaki.cardinaux.ensembles_cardinaux import cardinal, est_cardinal
@@ -143,7 +143,7 @@ def _couple_in_produit(tu, tv, ta, tb):
     `couple_dans_produit_ssi` interdit que les composantes u,v soient nommées p,q (ses
     binders internes).  On la construit donc sur des NOMS FRAIS (uu,vv,AA,BB), on
     GÉNÉRALISE, puis on INSTANCIE aux TERMES — robuste même pour u=p, v=q (motif _t)."""
-    from bourbaki.ensembles.familles.ensembles_produit import couple_dans_produit_ssi
+    from bourbaki.ensembles.familles.ii_2_produit_deux_ensembles.ensembles_produit import couple_dans_produit_ssi
     base = couple_dans_produit_ssi("uu", "vv", "AA", "BB")   # ssi CLOS, noms ≠ p,q
     av = equivalence_avant(base)                             # (uu,vv)∈AA×BB ⇒ (uu∈AA et vv∈BB)
     gen = N.generalisation("uu", N.generalisation("vv",
@@ -215,7 +215,7 @@ def cadre_plat_blocs_disjoints(S="S0", U="Ucadre"):
         egal(E.intersection(SxU, UxS_UxU), E.reunion(E.VIDE, var("wb")))))
     step_b = N.modus_ponens(step_a, equivalence_avant(rw_b))    # = ∅∪∅
     # ∅∪∅=∅
-    from bourbaki.ensembles.ensembles_vide_identites import reunion_vide_neutre
+    from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_vide_identites import reunion_vide_neutre
     vide_union = reunion_vide_neutre(E.VIDE)                    # ∅∪∅=∅
     bloc_tete = composer_egalites(step_b, vide_union)           # SxU∩(UxS∪UxU)=∅
     assert bloc_tete.conclusion == egal(E.intersection(SxU, UxS_UxU), E.VIDE)
@@ -233,7 +233,7 @@ def cadre_plat_blocs_disjoints(S="S0", U="Ucadre"):
 
 def _sym_disjoint(X, Y):
     """⊢ (X∩Y=∅) ⇒ (Y∩X=∅).   (commutativité de ∩ transportée à l'égalité au vide.)"""
-    from bourbaki.ensembles.ensembles_theoremes import commutativite_intersection
+    from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import commutativite_intersection
     vX, vY = _t(X), _t(Y)
     h = N.assume(E.sont_disjoints(vX, vY))                  # X∩Y=∅
     comm = commutativite_intersection_t(vY, vX)             # Y∩X = X∩Y
@@ -243,7 +243,7 @@ def _sym_disjoint(X, Y):
 
 def commutativite_intersection_t(ta, tb):
     """⊢ A∩B = B∩A  pour des TERMES (généralise commutativite_intersection)."""
-    from bourbaki.ensembles.ensembles_theoremes import commutativite_intersection
+    from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import commutativite_intersection
     base = commutativite_intersection("Aci", "Bci")
     gen = N.generalisation("Aci", N.generalisation("Bci", base))
     return instancie(instancie(gen, _t(ta)), _t(tb))
@@ -274,7 +274,7 @@ def _card_reunion_de_somme(A, B, ca, cb, disj_thm):
     from bourbaki.cardinaux.ensembles_prop13_complement import (
         _eq_reunion_disjointe_somme_t, _prop1_direct_tt, _somme_disjointe_cardinal_t,
     )
-    from bourbaki.ensembles.familles.ensembles_somme_disjointe import (
+    from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import (
         somme_disjointe, somme_cardinale_binaire,
     )
     vA, vB, vca, vcb = _t(A), _t(B), _t(ca), _t(cb)
@@ -309,7 +309,7 @@ def cadre_plat_cardinal(S="S0", U="Ucadre"):
     from bourbaki.cardinaux.arithmetique.ensembles_arith_cardinale import (
         produit_cardinal_binaire,
     )
-    from bourbaki.ensembles.familles.ensembles_somme_disjointe import (
+    from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import (
         somme_disjointe, somme_cardinale_binaire,
     )
     from bourbaki.cardinaux.ensembles_descentes_inconditionnelles import (

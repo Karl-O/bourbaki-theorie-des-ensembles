@@ -9,7 +9,7 @@ Vérifie le module `bourbaki.ordre.iii_2_bon_ordre.recurrence_transfinie.ensembl
 INVARIANT vérifié partout : theorie_ensembles() = 22.
 """
 from bourbaki.logique.formule import var, egal
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 import bourbaki.ordre.iii_2_bon_ordre.recurrence_transfinie.ensembles_c60_coeur as C
 from bourbaki.ordre.iii_2_bon_ordre.recurrence_transfinie.ensembles_recurrence_transfinie import _graphe_R
 

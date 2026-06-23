@@ -9,7 +9,7 @@ from __future__ import annotations
 
 from bourbaki.logique.formule import var, egal, et, appartient, existe
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.tactiques.tactiques_abrege import a_implique_a, syllogisme
 from bourbaki.logique.tactiques.tactiques_abrege2 import (conjonction_intro, conjonction_elim_gauche,
                                conjonction_elim_droite, equivalence_avant,
@@ -23,7 +23,7 @@ from bourbaki.ensembles.fonctions.ii_3_2_reciproque.ensembles_reciproque import 
 from bourbaki.ensembles.fonctions.ii_3_4_fonctions_valeur.ensembles_fonctions import valeur_caracterisation, valeur_dans_graphe
 from bourbaki.ensembles.fonctions.ii_3_7_composee_fonctions.ensembles_fonctions_composee import composee_fonctionnelle, composition_valeur
 from bourbaki.ensembles.fonctions.ii_3_3_composee_graphes.ensembles_composee import couple_composee, image_composee
-from bourbaki.ensembles.ensembles_theoremes import egalite_par_extension
+from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import egalite_par_extension
 from bourbaki.logique.formule import Terme
 
 

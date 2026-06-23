@@ -1,6 +1,6 @@
 """Tests §II.4 — algèbre binaire image directe / réciproque (E.II.25–27)."""
-from bourbaki.ensembles import ensembles_abrege as E
-from bourbaki.ensembles.familles.ensembles_image_algebre_binaire_ii4 import (
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
+from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_image_famille.ensembles_image_algebre_binaire_ii4 import (
     image_reunion_binaire, cible_image_reunion_binaire,
     image_reciproque_inter_binaire, cible_image_reciproque_inter_binaire,
     image_reciproque_difference, cible_image_reciproque_difference,

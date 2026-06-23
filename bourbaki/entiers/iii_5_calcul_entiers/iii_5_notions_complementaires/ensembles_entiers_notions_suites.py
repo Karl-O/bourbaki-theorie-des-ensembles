@@ -37,7 +37,7 @@ from __future__ import annotations
 from bourbaki.logique.formule import (Terme, var, app, egal, et, non, impl, existe,
                                        pourtout, appartient, inclus)
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import (UN, longueur_suite, est_suite_finie,
                                                 est_entier, intervalle_entiers)
 from bourbaki.entiers.iii_6_infinis.iii_6_3_infinis_denombrables.ensembles_infinis import NN

@@ -6,7 +6,7 @@ CLOS, et que sa conclusion a la FORME exacte attendue (définitions / caractéri
 membership / réduction à l'équipotence)."""
 from bourbaki.logique.formule import var, egal, et, impl, equiv, inclus, appartient, existe
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import cardinal, equipotent
 from bourbaki.cardinaux.arithmetique import ensembles_exposant_produit as XP
 

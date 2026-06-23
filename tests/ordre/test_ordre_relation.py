@@ -4,7 +4,7 @@ Chaque test vérifie la conclusion EXACTE produite par le noyau abrégé ET que 
 théorème est CLOS (aucune hypothèse résiduelle).
 """
 from bourbaki.logique.formule import var, egal, et, ou, impl, appartient, inclus
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis import ensembles_ordre_relation as O
 
 

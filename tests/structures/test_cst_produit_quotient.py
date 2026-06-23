@@ -7,8 +7,8 @@ Vérifie pour CHAQUE critère :
   • theorie_ensembles() reste à 22 axiomes (aucun axiome créé).
 """
 from bourbaki.logique.formule import egal, equiv
-from bourbaki.ensembles import ensembles_abrege as E
-from bourbaki.ensembles.ensembles_abrege import theorie_ensembles
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege import theorie_ensembles
 from bourbaki.structures.iv_2_morphismes_structures_derivees.ensembles_universel_morphismes import est_morphisme, _t
 from bourbaki.structures.iv_2_morphismes_structures_derivees.cst_criteres.ensembles_cst_produit_quotient import (
     cst16_famille_morphismes_produit, cst15_imrec_produit_egales,

@@ -18,7 +18,7 @@ from __future__ import annotations
 
 from bourbaki.logique.formule import Terme, var, et, equiv, impl, appartient
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.tactiques.tactiques_abrege2 import equivalence_avant, instancie
 from bourbaki.ordre.iii_1_relations_ordre.isomorphismes_ordre.ensembles_valeur_bridge import valeur_j_egal_y, valeur_y_egal_j
 

@@ -26,7 +26,7 @@ graphe_de_triple, C54.  Rien postulé.  Reste REPORTÉ : injectivité complète 
 surjectivité à deux niveaux (back-and-forth d'extensionnalité fonctionnelle).
 """
 from bourbaki.logique.formule import var, egal, impl, appartient, inclus
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.arithmetique import ensembles_prop10_close as P
 
 

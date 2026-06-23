@@ -7,7 +7,7 @@ On certifie que :
   (4) theorie=22 (aucun axiome ajouté ; ce ne sont que des INSTANCES des notions).
 """
 from bourbaki.logique.formule import var, appartient
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis import ensembles_ordre_vocab as V
 from bourbaki.ordre.iii_6_ordinaux import ensembles_ordinaux as O
 from bourbaki.ordre.iii_1_relations_ordre.isomorphismes_ordre import ensembles_iso_ordre_canon as C

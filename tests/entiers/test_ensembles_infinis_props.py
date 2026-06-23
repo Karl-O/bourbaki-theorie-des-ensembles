@@ -16,7 +16,7 @@ from bourbaki.entiers.iii_6_infinis.iii_6_3_infinis_denombrables.ensembles_infin
     est_infini, est_infini_ensemble, est_denombrable, aleph0,
 )
 from bourbaki.entiers.iii_6_infinis.iii_6_1_n_objet_existence.ensembles_N_collectivise import fini_downward
-from bourbaki.ensembles.ensembles_abrege import theorie_ensembles
+from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege import theorie_ensembles
 import bourbaki.entiers.iii_6_infinis.iii_6_3_infinis_denombrables.ensembles_infinis_props as P
 
 

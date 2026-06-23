@@ -23,7 +23,7 @@ from __future__ import annotations
 
 from bourbaki.logique.formule import Terme, var, egal, et, appartient, existe, inclus
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.tactiques.tactiques_abrege2 import (
     conjonction_elim_droite, equivalence_avant, equivalence_arriere, instancie)
 from bourbaki.ensembles.fonctions.ii_3_4_fonctions_valeur.ensembles_fonctions import valeur_dans_graphe
@@ -62,7 +62,7 @@ def valeur_dans_codomaine(g="G", e="E", f="F", x="x"):
     de couple_dans_produit_ssi donne G(x)∈F.  Généralise exposant_valeur_dans_A
     (qui le faisait pour x=∅, E={∅}, F=A) : c'est « le graphe total fonctionnel prend
     ses valeurs dans son but »."""
-    from bourbaki.ensembles.familles.ensembles_produit import couple_dans_produit_ssi
+    from bourbaki.ensembles.familles.ii_2_produit_deux_ensembles.ensembles_produit import couple_dans_produit_ssi
     vG, vE, vF, vx = _t(g), _t(e), _t(f), _t(x)
     fx = E.valeur(vG, vx)                            # G(x)
     h_incl = N.assume(inclus(vG, E.produit(vE, vF)))  # G ⊂ E×F   (= (∀z)(z∈G ⇒ z∈E×F))

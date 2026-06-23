@@ -19,7 +19,7 @@ from __future__ import annotations
 from bourbaki.logique.formule import (Terme, var, egal, et, ou, non, appartient,
                                        existe, pourtout)
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.tactiques.tactiques_abrege import a_implique_a, syllogisme
 from bourbaki.logique.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
@@ -219,7 +219,7 @@ def transpo_domaine(s="S", p="p", q="q"):
     z∈dom τ ⇔ (∃y)((z,y)∈τ) ⇔ z∈S.  ⇐ : z∈S a une image (z=p↦q, z=q↦p, sinon z↦z) ;
     ⇒ : (z,y)∈τ donne FIX (z∈S direct) ou ECH (z=p ou z=q, ∈S car p,q∈S).  Par
     extension (egalite_par_extension)."""
-    from bourbaki.ensembles.ensembles_theoremes import egalite_par_extension
+    from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import egalite_par_extension
     from bourbaki.logique.tactiques.tactiques_abrege2 import tiers_exclu
     from bourbaki.logique.tactiques.tactiques_abrege_quantif import existe_elimination
     vS, vp, vq = _t(s), _t(p), _t(q)

@@ -5,7 +5,7 @@ que le seul échange latéral honnête (`discharge_u_disjoint`) ne FAUSSE rien (
 inchangé, conclusion préservée), et que theorie=22.  AUCUNE clôture truquée n'est testée :
 le résidu irréductible est EXPOSÉ.
 """
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_hessenberg_step_b_classify import (
     classification, discharge_u_disjoint,
 )

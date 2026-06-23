@@ -1,5 +1,5 @@
 """Tests — GAP B : transport d'un sous-ensemble réalisant un cardinal DANS A."""
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_transport_sous_ensemble import (
     existe_sous_ensemble_cardinal_transporte,
     existe_sous_ensemble_cardinal_transporte_cible,

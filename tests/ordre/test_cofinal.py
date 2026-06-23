@@ -10,8 +10,8 @@ from bourbaki.logique.formule import (
     Formule, var, app, egal, appartient, et, ou, impl, non, pourtout, existe, inclus,
 )
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
-from bourbaki.ensembles.familles import ensembles_limites as L
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
+from bourbaki.ensembles.familles.iii_7_limites import ensembles_limites as L
 from bourbaki.ordre.iii_7_limites import ensembles_cofinal as C
 
 

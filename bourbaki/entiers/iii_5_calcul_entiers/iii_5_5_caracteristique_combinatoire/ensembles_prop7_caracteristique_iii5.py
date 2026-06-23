@@ -35,13 +35,13 @@ from bourbaki.logique.formule import (
     Terme, var, egal, et, non, ou, impl, appartient, pourtout, subst_t,
 )
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import ZERO, UN, fonction_caracteristique
 from bourbaki.cardinaux.arithmetique.ensembles_arith_cardinale import (
     produit_cardinal_binaire,
 )
-from bourbaki.ensembles.familles.ensembles_somme_disjointe import (
+from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import (
     somme_cardinale_binaire,
 )
 

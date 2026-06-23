@@ -41,7 +41,7 @@ from __future__ import annotations
 
 from bourbaki.logique.formule import var, egal, non, et
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.tactiques.tactiques_abrege2 import (conjonction_intro, instancie,
                                equivalence_avant)
 from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie
@@ -55,7 +55,7 @@ from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.e
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_fini_zero import (cardinal_vide_egale_vide,
                                zero_distinct_successeur_zero)
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_fini_un import un_distinct_successeur_un
-from bourbaki.ensembles.familles.ensembles_somme_disjointe import somme_disjointe
+from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import somme_disjointe
 
 
 # ── Objets : 0 = Card(∅), 1 = successeur(0), 2 = successeur(1) = Card(1 ⊔ {∅}) ──

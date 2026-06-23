@@ -31,7 +31,7 @@ from dataclasses import dataclass
 from typing import Sequence, Tuple
 
 from bourbaki.logique.formule import app
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 
 
 # ─────────────────────────────────────────────────────────────────────────────

@@ -39,7 +39,7 @@ from bourbaki.logique.formule import (
     Terme, var, egal, et, ou, non, impl, appartient, existe, pourtout, inclus,
 )
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 
 from bourbaki.logique.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
@@ -231,7 +231,7 @@ def fini_total_est_bien_ordonne_enonce(G, E_set, x="x", y="y", z="z", X="Sbo", a
     NB : le facteur ORDRE est_relation_ordre_dans(R_G,E) est en hypothèse (cf. note
     d'honnêteté du module : non dérivable de totalement_ordonne seul).  La clause
     « plus petit » est, elle, prouvée INCONDITIONNELLEMENT."""
-    from bourbaki.ensembles.ensembles_abrege import est_relation_ordre_dans
+    from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege import est_relation_ordre_dans
     vG, vE = _t(G), _t(E_set)
     R = R_de(vG)
     hyp = et(et(est_relation_ordre_dans(R, vE, x, y, z), totalement_ordonne(G, E_set)),
@@ -247,7 +247,7 @@ def fini_total_est_bien_ordonne(G="Gbo", E_set="Ebo",
     « Tout ensemble fini totalement ordonné est bien ordonné » (Prop. 6 §III.5,
     moitié bien-ordonné).  est_bien_ordonne_graphe = est_relation_ordre_dans(R_G,E)
     [HYP] ∧ clause-plus-petit [prouvée via clause_plus_petit_fini_total]."""
-    from bourbaki.ensembles.ensembles_abrege import est_relation_ordre_dans
+    from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege import est_relation_ordre_dans
     vG, vE = _t(G), _t(E_set)
     R = R_de(vG)
 

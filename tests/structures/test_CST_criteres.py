@@ -6,7 +6,7 @@ hypothèses EXACTEMENT attendues (= axiomes-schémas (IN)/(FI)/(AU)/(MO) instanc
 et que la conclusion est bien la formule fidèle visée — JAMAIS une tautologie P⇒P.
 """
 from bourbaki.logique.formule import (var, egal, et, impl, app, non, alpha_egal)
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.structures.iv_2_morphismes_structures_derivees.cst_criteres import ensembles_CST_criteres as C
 from bourbaki.structures.iv_2_morphismes_structures_derivees import ensembles_universel_morphismes as M
 from bourbaki.structures.iv_2_morphismes_structures_derivees import ensembles_universel_finale as F

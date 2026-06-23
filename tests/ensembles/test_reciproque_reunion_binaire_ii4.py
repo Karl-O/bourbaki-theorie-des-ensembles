@@ -1,7 +1,7 @@
 """Tests §II.4 — f⁻¹⟨B∪Y⟩ = f⁻¹⟨B⟩ ∪ f⁻¹⟨Y⟩ (binaire, inconditionnel)."""
-from bourbaki.ensembles.familles.ensembles_reciproque_reunion_binaire_ii4 import (
+from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_image_famille.ensembles_reciproque_reunion_binaire_ii4 import (
     image_reciproque_reunion_binaire, cible_image_reciproque_reunion_binaire)
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 
 
 def test_clos_0_hyp():

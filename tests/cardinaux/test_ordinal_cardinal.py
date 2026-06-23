@@ -12,7 +12,7 @@ Vérifie le SALVAGE FORT GRADUÉ du bottleneck #1 (vers ℕ inconditionnel) :
 theorie_ensembles() = 22 partout, conclusions == cibles Bourbaki LITTÉRALEMENT.
 """
 from bourbaki.logique.formule import var, appartient, et, non, egal, existe, pourtout, inclus
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.tactiques.tactiques_abrege2 import conjonction_intro
 import bourbaki.logique.noyau_abrege as N
 

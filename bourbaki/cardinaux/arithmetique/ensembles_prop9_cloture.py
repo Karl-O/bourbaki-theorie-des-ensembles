@@ -40,7 +40,7 @@ from __future__ import annotations
 
 from bourbaki.logique.formule import Terme, var, egal, et, appartient
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.tactiques.tactiques_abrege2 import conjonction_intro
 from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de
 from bourbaki.cardinaux.arithmetique.ensembles_prop9_final import (

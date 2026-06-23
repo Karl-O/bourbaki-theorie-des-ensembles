@@ -6,8 +6,8 @@ theorie_ensembles() reste à 22 axiomes (aucun axiome neuf en théorie principal
 """
 from bourbaki.logique.formule import (var, egal, et, impl, appartient, existe,
                                        pourtout, inclus)
-from bourbaki.ensembles import ensembles_abrege as E
-from bourbaki.ensembles.familles import ensembles_familles_algebre as A
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
+from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_1_definitions_algebre import ensembles_familles_algebre as A
 from bourbaki.ensembles.familles.ensembles_familles_reunion_props import (
     famille_reciproque)
 

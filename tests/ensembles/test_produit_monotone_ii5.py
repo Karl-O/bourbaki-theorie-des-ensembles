@@ -1,6 +1,6 @@
 """Tests §II.5 Prop.10 (sens direct) : monotonie du produit ∏Xⱼ ⊂ ∏Yⱼ."""
-from bourbaki.ensembles.familles import ensembles_produit_monotone_ii5 as M
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.familles.ii_5_produit_famille.ii_5_6_7_algebre_produit import ensembles_produit_monotone_ii5 as M
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 
 
 def test_produit_monotone_close():

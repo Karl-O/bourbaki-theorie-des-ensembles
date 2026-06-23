@@ -5,7 +5,7 @@ Vérifie que coincidence_univ_close_isos est ramené à EXACTEMENT la prémisse 
 que la conclusion est la cible, que theorie=22, et que le séquent est non vacueux.
 """
 from bourbaki.logique.formule import afficher_f
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_coincidence_univ_app import (
     coincidence_univ_app,
     coincidence_univ_app_cible,

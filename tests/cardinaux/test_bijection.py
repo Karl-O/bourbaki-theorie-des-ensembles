@@ -1,6 +1,6 @@
 """Test §II.3.7/§III.3 — F⁻¹ fonctionnel quand F est une application injective (Prop. 7)."""
 from bourbaki.logique.formule import var, egal
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_bijection import reciproque_fonctionnelle
 
 

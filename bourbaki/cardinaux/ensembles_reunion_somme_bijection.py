@@ -27,7 +27,7 @@ from __future__ import annotations
 from bourbaki.logique.formule import (Terme, var, egal, et, non, appartient,
                                        existe, pourtout, inclus)
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.tactiques.tactiques_abrege import a_implique_a
 from bourbaki.logique.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
@@ -37,7 +37,7 @@ from bourbaki.logique.tactiques.tactiques_abrege_egalite import (
     symetrie, composer_egalites,
 )
 
-from bourbaki.ensembles.familles.ensembles_somme_disjointe import (
+from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import (
     somme_disjointe, ZERO, UN,
 )
 from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de, equipotent
@@ -51,7 +51,7 @@ from bourbaki.ensembles.fonctions.hors_ii_3.iii_3_recollement.ensembles_restrict
 from bourbaki.ensembles.fonctions.hors_ii_3.iii_3_recollement.ensembles_recollement_bijection import (
     image_reunion_graphes, reunion_graphes_injective,
 )
-from bourbaki.ensembles.familles.ensembles_recollement_props import (
+from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_recollement_props import (
     reunion_disjointe_binaire_disjoints,
 )
 

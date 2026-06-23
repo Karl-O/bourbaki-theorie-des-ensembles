@@ -3,8 +3,8 @@
 Honnêteté LCF : CLOS (0 hyp), conclusion == égalité fidèle, membres distincts, theorie = 22.
 """
 from bourbaki.logique.formule import var, egal
-from bourbaki.ensembles import ensembles_abrege as E
-import bourbaki.ensembles.ensembles_difference_identites as M
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
+import bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_difference_identites as M
 
 A, B, C = var("A"), var("B"), var("C")
 I, D, U = E.intersection, E.difference, E.reunion

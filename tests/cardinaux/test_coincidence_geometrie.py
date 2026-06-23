@@ -4,7 +4,7 @@ BRIQUE 1 — `composee_dans_S` : c=g∘f : S→S (codomaine de la composée).
 Honnêteté LCF : conditionnel propre (hyps structurelles f⊂S×T/dom/func + g⊂T×S/dom/func),
 conclusion == cible fidèle, NON vacueux (concl ∉ hyps), theorie = 22.
 """
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 import bourbaki.cardinaux.ensembles_coincidence_geometrie as G
 
 

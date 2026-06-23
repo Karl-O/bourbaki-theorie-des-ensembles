@@ -15,7 +15,7 @@ INVARIANT vérifié partout : theorie_ensembles() = 22.
 Anti-tautologie : aucune conclusion n'est l'une de ses hypothèses.
 Hypothèses EXACTES contrôlées (test miroir).
 """
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 
 import bourbaki.cardinaux.ensembles_realisation_segment_close as M
 import bourbaki.cardinaux.ensembles_hyp_transport_ordinal_preuve as HTP

@@ -2,7 +2,7 @@
 (applications z↦pr₁z, z↦pr₂z ; notion auparavant ABSENTE au niveau application).
 Définitions fidèles + fonctionnalité du graphe (C54) close.  theorie=22."""
 from bourbaki.logique.formule import var
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ensembles.fonctions.ii_3_6_fonction_terme import ensembles_fonctions_coordonnees as FC
 
 

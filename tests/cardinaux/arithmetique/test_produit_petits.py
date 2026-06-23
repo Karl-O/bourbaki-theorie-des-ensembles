@@ -1,7 +1,7 @@
 """Tests — identités du produit cardinal avec 0 et 1 (a·1=a, a·0=0, §III.3.3)."""
 from bourbaki.logique.formule import var, egal, et, appartient
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import cardinal, equipotent, est_bijection_de
 from bourbaki.cardinaux.arithmetique.ensembles_produit_petits import (
     produit_vide_droit, produit_cardinal_zero,

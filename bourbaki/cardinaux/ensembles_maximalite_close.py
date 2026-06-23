@@ -60,7 +60,7 @@ from bourbaki.logique.formule import (
     Terme, var, egal, et, ou, non, impl, equiv, appartient, existe, pourtout, inclus,
 )
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis import ensembles_ordre_vocab as V
 from bourbaki.logique.tactiques.tactiques_abrege import syllogisme, a_implique_a
 from bourbaki.logique.tactiques.tactiques_abrege2 import (
@@ -83,13 +83,13 @@ from bourbaki.cardinaux import ensembles_trichotomie_extension_iso as EXT
 from bourbaki.cardinaux import ensembles_trichotomie_maximalite_preuve as MP
 from bourbaki.cardinaux import ensembles_trichotomie_temoin_adjonction as ADJ
 from bourbaki.cardinaux.ensembles_segments_construction import seg as _seg, membre_segment
-from bourbaki.ensembles.base.ensembles_couples import (
+from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import (
     singleton_membre, couple_egal_implique_composantes,
 )
 from bourbaki.ensembles.fonctions.hors_ii_3.iii_3_recollement.ensembles_restriction_somme import membre_reunion_graphes
 from bourbaki.ensembles.fonctions.ii_3_4_fonctions_valeur.ensembles_valeur_codomaine import couple_valeur_dans_graphe
-from bourbaki.ensembles.familles.ensembles_produit import couple_dans_produit_ssi
-from bourbaki.ensembles.ensembles_theoremes import egalite_par_extension
+from bourbaki.ensembles.familles.ii_2_produit_deux_ensembles.ensembles_produit import couple_dans_produit_ssi
+from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import egalite_par_extension
 
 
 def _t(t):
@@ -468,7 +468,7 @@ def _SxT_inclus_SaA_TbB(R, E_set, Rp, F_set, a, b):
 
     Monotonie du produit : seg a ⊂ ]←,a], seg b ⊂ ]←,b] (injection gauche de la
     réunion-adjoint), z=(p,q) transporté."""
-    from bourbaki.ensembles.familles.ensembles_produit import _instance_produit
+    from bourbaki.ensembles.familles.ii_2_produit_deux_ensembles.ensembles_produit import _instance_produit
     from bourbaki.ensembles.fonctions.hors_ii_3.iii_3_recollement.ensembles_restriction_somme import membre_reunion_graphes
     va, vb = _t(a), _t(b)
     S = _seg(R, E_set, a)
@@ -508,7 +508,7 @@ def _hplus_inclus_produit_derive(E_set, R, F_set, Rp, a, b):
               ⊂ ]←,a]×]←,b] (monotonie produit) ;
       • z=(a,b) : (a,b)∈]←,a]×]←,b] (a∈{a}⊂]←,a], b∈{b}⊂]←,b])."""
     from bourbaki.ensembles.fonctions.hors_ii_3.iii_3_recollement.ensembles_restriction_somme import membre_reunion_graphes
-    from bourbaki.ensembles.familles.ensembles_produit import couple_dans_produit_ssi
+    from bourbaki.ensembles.familles.ii_2_produit_deux_ensembles.ensembles_produit import couple_dans_produit_ssi
     va, vb = _t(a), _t(b)
     h = TS.h_iso_max(E_set, R, F_set, Rp)
     domh, imgh = E.dom(h), E.img(h)

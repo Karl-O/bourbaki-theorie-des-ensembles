@@ -1,7 +1,7 @@
 """Test §II.4 — propriété universelle (inf) de l'intersection d'une famille."""
-from bourbaki.ensembles.familles.ensembles_inter_inf_univ_ii4 import (
+from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_1_definitions_algebre.ensembles_inter_inf_univ_ii4 import (
     inter_inf_universelle, cible_inter_inf_universelle)
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 
 
 def test_inter_inf_universelle_close():

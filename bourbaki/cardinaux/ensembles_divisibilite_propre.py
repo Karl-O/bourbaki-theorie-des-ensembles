@@ -36,7 +36,7 @@ from bourbaki.logique.tactiques.tactiques_abrege2 import (
 from bourbaki.logique.tactiques.tactiques_abrege_egalite import (
     symetrie, composer_egalites,
 )
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import est_cardinal, cardinal
 from bourbaki.cardinaux.arithmetique.ensembles_arith_cardinale import (
     produit_cardinal_binaire, produit_cardinal_bien_defini,

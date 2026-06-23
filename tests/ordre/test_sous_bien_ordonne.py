@@ -8,7 +8,7 @@ non-vacuité, les hypothèses exactes, et l'invariant theorie_ensembles = 22 axi
 from __future__ import annotations
 
 from bourbaki.logique.formule import var, appartient, inclus
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ordre.iii_2_bon_ordre.bon_ordre_segments import ensembles_sous_bien_ordonne as SBO
 
 

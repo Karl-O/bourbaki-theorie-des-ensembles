@@ -17,7 +17,7 @@ from __future__ import annotations
 
 from bourbaki.logique.formule import (Terme, var, egal, et, appartient, existe, inclus, subst_f)
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.tactiques.tactiques_abrege2 import (conjonction_intro,
                                conjonction_elim_gauche, conjonction_elim_droite,
                                equivalence_avant, equivalence_arriere,
@@ -27,8 +27,8 @@ from bourbaki.logique.tactiques.tactiques_abrege_egalite import (symetrie,
 from bourbaki.logique.tactiques.tactiques_abrege_quantif import existe_elimination
 from bourbaki.ensembles.fonctions.ii_3_5_restrictions_prolongements.ensembles_restrictions import restriction_incluse
 from bourbaki.ensembles.fonctions.ii_3_4_fonctions_valeur.ensembles_fonctions import valeur_dans_graphe
-from bourbaki.ensembles.base.ensembles_couples import couple_egal_implique_composantes
-from bourbaki.ensembles.familles.ensembles_somme_disjointe import ZERO
+from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import couple_egal_implique_composantes
+from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import ZERO
 
 
 def _t(v):

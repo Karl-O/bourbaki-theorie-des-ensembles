@@ -10,7 +10,7 @@ Vérifie :
 INVARIANT vérifié partout : theorie_ensembles() = 22 ; conclusions non vacuous.
 """
 from bourbaki.logique.formule import var, egal, appartient
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 import bourbaki.ordre.iii_2_bon_ordre.recurrence_transfinie.ensembles_c60_final as F
 from bourbaki.ordre.iii_2_bon_ordre.recurrence_transfinie.ensembles_c60_coeur import famille_compatible, union_famille
 from bourbaki.ordre.iii_2_bon_ordre.recurrence_transfinie.ensembles_recurrence_transfinie import _graphe_R

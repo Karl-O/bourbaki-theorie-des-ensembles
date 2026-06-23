@@ -2,8 +2,8 @@
 from __future__ import annotations
 
 from bourbaki.logique.formule import var, egal, et, non, appartient, equiv
-from bourbaki.ensembles.ensembles_abrege import difference, reunion, intersection
-from bourbaki.ensembles.base.ensembles_difference import de_morgan_reunion, de_morgan_inter
+from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege import difference, reunion, intersection
+from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_difference import de_morgan_reunion, de_morgan_inter
 from bourbaki.logique.tactiques.tactiques_abrege2 import demorgan_ou, demorgan_et, et_ou_distrib
 
 

@@ -13,11 +13,11 @@ from __future__ import annotations
 
 from bourbaki.logique.formule import (var, egal, et, non, appartient, existe)
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.tactiques.tactiques_abrege2 import (conjonction_intro,
                                equivalence_avant, equivalence_arriere, instancie)
 from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie, congruence_terme
-from bourbaki.ensembles.familles.ensembles_somme_disjointe import UN
+from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import UN
 from bourbaki.cardinaux.arithmetique.ensembles_prop8_plus_point import (
     marqueur, marqueur_dans_somme, marqueur_hors_copie_gauche)
 

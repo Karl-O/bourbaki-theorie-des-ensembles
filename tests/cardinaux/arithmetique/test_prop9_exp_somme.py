@@ -9,9 +9,9 @@ axiomes de DÉFINITION — rien postulé.
 """
 import pytest
 from bourbaki.logique.formule import var, egal, et, impl, appartient, inclus
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import cardinal
-from bourbaki.ensembles.familles.ensembles_somme_disjointe import (
+from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import (
     somme_disjointe, ZERO, UN)
 from bourbaki.cardinaux.arithmetique import ensembles_prop9_exp_somme as P
 

@@ -19,7 +19,7 @@ dom h, pr₂ h, R, Rp) atteignables (étape d.3-d.4 du blueprint) :
 theorie_ensembles() reste = 22 ; rien postulé ; conclusions non tautologiques.
 """
 from bourbaki.logique.formule import var, egal, appartient, Formule
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux import ensembles_trichotomie_scaffold as TS
 from bourbaki.cardinaux import ensembles_trichotomie_h_iso as H
 

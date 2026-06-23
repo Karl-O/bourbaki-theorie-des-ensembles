@@ -6,7 +6,7 @@ JAMAIS postulée comme théorème.  theorie_ensembles() reste = 22 ; conclusions
 tautologiques (y∈dom h / est_segment ∉ hypothèses).
 """
 from bourbaki.logique.formule import var, et, appartient, Formule
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux import ensembles_trichotomie_dom_segment as DS
 
 

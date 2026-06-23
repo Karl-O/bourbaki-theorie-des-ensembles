@@ -63,7 +63,7 @@ from bourbaki.logique.formule import (
     Terme, var, egal, et, impl, existe, pourtout, appartient, equiv, inclus,
 )
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.tactiques.tactiques_abrege2 import instancie
 
 from bourbaki.cardinaux.ensembles_cardinaux import (

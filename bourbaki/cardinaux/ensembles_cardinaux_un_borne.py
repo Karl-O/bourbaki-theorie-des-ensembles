@@ -43,7 +43,7 @@ from __future__ import annotations
 from bourbaki.logique.formule import (Terme, var, tau, egal, et, non, impl, appartient,
                                        existe, inclus, subst_t)
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.tactiques.tactiques_abrege import syllogisme
 from bourbaki.logique.tactiques.tactiques_abrege2 import (conjonction_intro,
                                conjonction_elim_gauche, conjonction_elim_droite,
@@ -51,8 +51,8 @@ from bourbaki.logique.tactiques.tactiques_abrege2 import (conjonction_intro,
                                equivalence_transitivite, instancie)
 from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie, composer_egalites
 from bourbaki.logique.tactiques.tactiques_abrege_quantif import (existe_elimination, alpha_existe)
-from bourbaki.ensembles.base.ensembles_couples import singleton_membre
-from bourbaki.ensembles.base.ensembles_vide import non_vide_ssi_element
+from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import singleton_membre
+from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_vide import non_vide_ssi_element
 from bourbaki.ensembles.fonctions.ii_3_6_fonction_terme.ensembles_fonction_terme import (graphe_terme_fonctionnel,
                                membre_graphe_terme)
 from bourbaki.cardinaux.ensembles_cantor import graphe_terme_domaine

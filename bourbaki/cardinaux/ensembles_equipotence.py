@@ -32,7 +32,7 @@ from __future__ import annotations
 
 from bourbaki.logique.formule import var, egal, et, appartient, existe, pourtout
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.tactiques.tactiques_abrege import syllogisme
 from bourbaki.logique.tactiques.tactiques_abrege2 import (conjonction_intro, conjonction_elim_gauche,
                                conjonction_elim_droite, equivalence_avant,
@@ -40,7 +40,7 @@ from bourbaki.logique.tactiques.tactiques_abrege2 import (conjonction_intro, con
                                equivalence_symetrie, instancie)
 from bourbaki.logique.tactiques.tactiques_abrege_quantif import existe_elimination
 from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie as eg_symetrie, composer_egalites
-from bourbaki.ensembles.ensembles_theoremes import egalite_par_extension
+from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import egalite_par_extension
 
 
 def _inst_diag(x, z):
@@ -68,7 +68,7 @@ def diagonale_membre(x="X", u="u", v="v"):
     d0_in = conjonction_elim_gauche(hb)                        # d0∈X
     cpl_eq = conjonction_elim_droite(hb)                       # (u,v)=(d0,d0)
     # Proposition 1 (couples) : (u,v)=(d0,d0) ⇒ (u=d0 et v=d0)
-    from bourbaki.ensembles.base.ensembles_couples import couple_egal_implique_composantes
+    from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import couple_egal_implique_composantes
     comp = couple_egal_implique_composantes(u, v, "d0", "d0")  # ⇒ (u=d0 et v=d0)
     uv_eq = N.modus_ponens(cpl_eq, comp)
     u_eq_d0 = conjonction_elim_gauche(uv_eq)                   # u=d0

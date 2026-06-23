@@ -3,7 +3,7 @@ cardinaux (notions auparavant ABSENTES).   Définitions fidèles + 2 lemmes dire
 cheap clos.   theorie=22 ; collectivisation/existence (Th.1, Prop 2) reportées."""
 from bourbaki.logique.formule import (var, app, egal, et, impl, equiv, pourtout,
                                        appartient)
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import est_cardinal, inf_egal_card
 from bourbaki.cardinaux import ensembles_cardinaux_borne_sup as BS
 

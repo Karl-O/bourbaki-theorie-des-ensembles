@@ -71,7 +71,7 @@ from bourbaki.logique.formule import (
     Terme, var, egal, et, non, impl, appartient, existe, pourtout, inclus, equiv,
 )
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
     equivalence_avant, equivalence_arriere, instancie,
@@ -296,7 +296,7 @@ def pullback_non_vide(a="a", Ro="Ro", S="S", c=BOIO._BC, t=BOIO._BX):
     🎯 Le conjoint « PB≠∅ » réduit au maillon RÉALISATION.  S≠∅ fournit c∈S
     (non_vide_ssi_element) ; ONTO réalise c par un t∈PB, donc PB=∅ donnerait t∈∅
     (ex falso) — contradiction, donc PB≠∅.  theorie=22, NON vacueux."""
-    from bourbaki.ensembles.base.ensembles_vide import non_vide_ssi_element
+    from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_vide import non_vide_ssi_element
     cn = c if isinstance(c, str) else c.nom
     tn = t if isinstance(t, str) else t.nom
     vc, vt = var(cn), var(tn)

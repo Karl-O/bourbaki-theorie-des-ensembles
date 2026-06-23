@@ -3,7 +3,7 @@ from bourbaki.cardinaux.ensembles_chaine_surjective_frame import (
     recollement_surjectif, recollement_domaine,
     union_chaine_surjective, union_chaine_dom,
 )
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 
 
 def _theorie22():

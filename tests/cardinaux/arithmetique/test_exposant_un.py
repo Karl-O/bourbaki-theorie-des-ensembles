@@ -12,7 +12,7 @@ PALIERS :
   (4) bijection η ⇒ Eq(A,𝓕)/Eq(𝓕,A) ⇒ a^1=a (Proposition 1).
 """
 from bourbaki.logique.formule import var, egal, et, impl, appartient, existe, inclus
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import cardinal, equipotent, est_bijection_de
 from bourbaki.cardinaux.arithmetique import ensembles_exposant_un as M
 

@@ -9,8 +9,8 @@ Vérifie (noyau LCF strict) :
 """
 from __future__ import annotations
 
-import bourbaki.ensembles.ensembles_quotient_props as M
-from bourbaki.ensembles import ensembles_abrege as E
+import bourbaki.ensembles.ii_6_equivalence.ensembles_quotient_props_graphe as M
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.formule import var, egal, et, impl, equiv, appartient, existe
 
 

@@ -1,5 +1,5 @@
 """Tests du CADRE PLAT (déverrouillage hyp[2] de Hessenberg a²=a)."""
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.formule import var, egal
 from bourbaki.cardinaux.ensembles_cardinaux import cardinal, est_cardinal
 from bourbaki.cardinaux.arithmetique.ensembles_arith_cardinale import produit_cardinal_binaire

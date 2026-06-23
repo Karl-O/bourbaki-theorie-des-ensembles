@@ -13,13 +13,13 @@ from __future__ import annotations
 
 from bourbaki.logique.formule import (var, egal, et, appartient, existe, inclus)
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.tactiques.tactiques_abrege import a_implique_a, syllogisme
 from bourbaki.logique.tactiques.tactiques_abrege2 import (conjonction_intro,
                                conjonction_elim_gauche, conjonction_elim_droite,
                                equivalence_avant, equivalence_arriere, instancie)
 from bourbaki.logique.tactiques.tactiques_abrege_quantif import existe_elimination
-from bourbaki.ensembles.ensembles_theoremes import egalite_par_extension
+from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import egalite_par_extension
 from bourbaki.cardinaux.arithmetique.ensembles_prop8_coeur._g import (
     A0_terme, G_RESTR, membre_g_ssi_t, _H)
 

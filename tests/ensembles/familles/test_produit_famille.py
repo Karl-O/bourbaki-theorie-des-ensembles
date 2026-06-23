@@ -3,8 +3,8 @@
 Chaque test vérifie la conclusion EXACTE (== cible reconstruite) et est_clos.
 """
 from bourbaki.logique.formule import (var, egal, et, impl, non, appartient, inclus, pourtout, equiv)
-from bourbaki.ensembles import ensembles_abrege as E
-from bourbaki.ensembles.familles import ensembles_produit_famille as P
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
+from bourbaki.ensembles.familles.ii_5_produit_famille.ii_5_definitions import ensembles_produit_famille as P
 
 
 def test_membre_parties():

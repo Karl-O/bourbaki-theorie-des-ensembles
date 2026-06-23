@@ -7,7 +7,7 @@ présent dans l'ensemble des hypothèses (les deux faits dangereux sont DÉRIVÉ
 from bourbaki.logique.formule import (
     var, egal, non, impl, pourtout, appartient, inclus, tau,
 )
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import cardinal
 
 from bourbaki.cardinaux.ensembles_hessenberg_vrai import (

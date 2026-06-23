@@ -17,7 +17,7 @@ PALIERS :
        cardinal_pas_entre_conditionnel (CLOS 0 hyp : les 2 reports en antécédent explicite).
 """
 from bourbaki.logique.formule import var, egal, et, ou, impl, non, pourtout
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.tactiques.tactiques_abrege import antecedent_consequent
 from bourbaki.cardinaux.ensembles_cardinaux import (
     est_cardinal, est_injection_de, est_bijection_de, equipotent, cardinal,

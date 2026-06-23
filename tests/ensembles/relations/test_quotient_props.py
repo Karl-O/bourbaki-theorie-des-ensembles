@@ -7,9 +7,9 @@ tautologie vide, jamais postulé) des théorèmes de `ensembles_quotient_props`.
 from __future__ import annotations
 
 from bourbaki.logique.formule import (var, egal, et, impl, appartient, pourtout)
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.arithmetique.ensembles_graphe_de import graphe_de
-from bourbaki.ensembles.relations import ensembles_quotient_props as Q
+from bourbaki.ensembles.ii_6_equivalence import ensembles_quotient_props as Q
 
 
 # ════════════════════════════════════════════════════════════════════════════

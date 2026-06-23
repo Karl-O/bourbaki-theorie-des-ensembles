@@ -18,7 +18,7 @@ from __future__ import annotations
 
 from bourbaki.logique.formule import Terme, var, appartient, egal
 from bourbaki.logique.noyau_abrege import alpha_tau
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 
 J = "j"   # liant-valeur de est_strictement_croissante / _val
 Y = "y"   # liant-valeur défaut de E.valeur (compatible_ordre)

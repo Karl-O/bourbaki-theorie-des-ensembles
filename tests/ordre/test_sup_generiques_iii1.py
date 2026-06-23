@@ -7,7 +7,7 @@ vacuité), et que theorie_ensembles reste = 22 axiomes (rien postulé)."""
 from __future__ import annotations
 
 import bourbaki.ordre.iii_1_relations_ordre.bornes_sup.ensembles_sup_generiques_iii1 as M
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 
 
 def test_theorie_inchangee_22():

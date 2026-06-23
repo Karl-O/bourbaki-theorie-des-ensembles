@@ -41,7 +41,7 @@ from bourbaki.logique import noyau_abrege as N
 
 from bourbaki.cardinaux.ensembles_cardinaux import est_cardinal, cardinal
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import est_fini, est_entier, successeur, ZERO
-from bourbaki.ensembles.familles.ensembles_somme_disjointe import (
+from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import (
     somme_cardinale_binaire,
 )
 
@@ -103,7 +103,7 @@ def _P(C="cSA", Cp="cpSA"):
 def _card_somme_eq(va, vc):
     """⊢ Card(a+c) = a+c   (a+c = Card(a⊔c) est un cardinal)."""
     ac = somme_cardinale_binaire(va, vc)                 # = Card(a⊔c)
-    from bourbaki.ensembles.familles.ensembles_somme_disjointe import somme_disjointe
+    from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import somme_disjointe
     aXc = somme_disjointe(va, vc)
     is_card = card_est_un_cardinal(aXc, est_cardinal(ac).lieur)   # est_cardinal(a+c), binder aligné
     return N.modus_ponens(is_card, cardinal_de_cardinal(ac))   # Card(a+c) = a+c
@@ -210,8 +210,8 @@ def _zero_plus(vc, card_c):
     from bourbaki.cardinaux.arithmetique.ensembles_arith_somme import (
         somme_cardinale_zero_neutre,
     )
-    from bourbaki.ensembles.familles.ensembles_somme_disjointe import somme_disjointe
-    from bourbaki.ensembles import ensembles_abrege as E
+    from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import somme_disjointe
+    from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
     zc = somme_cardinale_binaire(ZERO, vc)               # 0+c = Card(∅⊔c)
     c0 = somme_cardinale_binaire(vc, ZERO)               # c+0 = Card(c⊔∅)... mais 0=Card∅
 

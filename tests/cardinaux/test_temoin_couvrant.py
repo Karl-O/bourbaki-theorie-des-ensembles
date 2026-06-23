@@ -1,5 +1,5 @@
 """Test §III.2 — construction couvrante (cœur de l'assemblage de fusion_hyp, Lemme 1)."""
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux import ensembles_temoin_couvrant as TCV
 
 

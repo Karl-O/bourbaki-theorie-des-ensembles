@@ -10,8 +10,8 @@ Vérifie :
 from __future__ import annotations
 
 from bourbaki.logique.formule import var, egal, non
-from bourbaki.ensembles import ensembles_abrege as E
-from bourbaki.ensembles.ensembles_abrege import theorie_ensembles
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege import theorie_ensembles
 from bourbaki.cardinaux.ensembles_cardinaux import (
     cardinal, inf_egal_card, inf_strict_card, est_cardinal,
 )

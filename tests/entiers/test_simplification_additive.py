@@ -11,7 +11,7 @@ from bourbaki.entiers.iii_5_calcul_entiers.iii_5_1_somme_produit_entiers.ensembl
     simplification_additive_finie, simplification_additive_finie_enonce,
     soustraction_unicite_close, soustraction_unicite_close_enonce,
 )
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 
 
 def test_simplification_additive_finie_close():

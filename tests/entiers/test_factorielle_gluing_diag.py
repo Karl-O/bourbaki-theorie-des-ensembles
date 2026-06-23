@@ -4,7 +4,7 @@ Ces tests NE dérivent aucun théorème : ils VÉRIFIENT le diagnostic exécutab
 (corrige la docstring antérieure qui blâmait « y » : le binder collisionnant est « v »)
 et que le noyau reste à 22 axiomes.
 """
-import bourbaki.ensembles.ensembles_abrege as E
+import bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege as E
 from bourbaki.entiers.iii_5_calcul_entiers.iii_5_8_factorielle.ensembles_factorielle_gluing_diag import (
     binders_arithmetique_cardinale, diagnostiquer_capture,
 )

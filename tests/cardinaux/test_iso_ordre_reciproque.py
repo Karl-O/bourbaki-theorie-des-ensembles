@@ -9,7 +9,7 @@ Binders SAINS x,w (le second binder « y » empoisonnerait fy=valeur(φ,var y) p
 auto-capture τ_y) — forme fidèle non poisonnée de la définition E.III.1.3.
 """
 from bourbaki.logique.formule import var, egal, appartient
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis.ensembles_ordre_vocab import (
     est_isomorphisme_ordre, compatible_ordre)
 from bourbaki.cardinaux.ensembles_iso_ordre_reciproque import (

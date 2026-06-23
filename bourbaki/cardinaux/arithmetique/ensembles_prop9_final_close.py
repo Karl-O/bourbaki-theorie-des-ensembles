@@ -32,7 +32,7 @@ from __future__ import annotations
 from bourbaki.logique.formule import (Terme, var, egal, et, appartient,
                                        existe, pourtout, inclus, subst_t)
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
     equivalence_avant, equivalence_arriere, instancie)
@@ -42,7 +42,7 @@ from bourbaki.logique.tactiques.tactiques_abrege_egalite import (
 from bourbaki.cardinaux.ensembles_cardinaux import (
     est_injection_de, inf_egal_card)
 from bourbaki.cardinaux.arithmetique.ensembles_graphe_de import graphe_de
-from bourbaki.ensembles.familles.ensembles_somme_disjointe import (
+from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import (
     somme_disjointe, ZERO, UN)
 from bourbaki.cardinaux.ensembles_cantor import graphe_terme_valeur
 
@@ -65,7 +65,7 @@ from bourbaki.ensembles.fonctions.hors_ii_3.iii_3_recollement.ensembles_recollem
     valeur_reunion_gauche, valeur_reunion_droite)
 from bourbaki.ensembles.fonctions.hors_ii_3.iii_3_recollement.ensembles_restriction_somme import (
     domaines_disjoints_si_marques)
-from bourbaki.ensembles.familles.ensembles_produit import couple_dans_produit_ssi
+from bourbaki.ensembles.familles.ii_2_produit_deux_ensembles.ensembles_produit import couple_dans_produit_ssi
 from bourbaki.cardinaux.arithmetique.ensembles_produit_commute import (
     _projection_premiere_ab, _membre_produit_pr1_ab, _membre_produit_pr2_ab,
     _membre_produit_egal_couple_ab)
@@ -159,7 +159,7 @@ def _K_valeur_copie(vg, vh, va, vb, vc, vD, vu, marker, gauche):
     pr1_um = E.pr1(um, "a", "b")                       # pr₁((u,marker))
 
     # (1) (u,marker) ∈ D×{marker} = dom Km
-    from bourbaki.ensembles.base.ensembles_couples import singleton_membre
+    from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import singleton_membre
     mk_in_sing = N.modus_ponens(N.reflexivite(marker),
         equivalence_arriere(singleton_membre(marker, marker)))   # marker∈{marker}
     h_uD = N.assume(appartient(vu, vD))                # u∈D
@@ -252,7 +252,7 @@ def _facteur_valeurs_coincident(vg1, vh1, vg2, vh2, va, vb, vc, gauche):
 # ═══════════════════════════════════════════════════════════════════════════════
 def _strip_triple(triple_eq, g1, mid, top, g2):
     """De ⊢ ((g₁,mid),top)=((g₂,mid),top), tire ⊢ g₁=g₂.  (deux décompos de couples.)"""
-    from bourbaki.ensembles.base.ensembles_couples import couple_egal_implique_composantes
+    from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import couple_egal_implique_composantes
     inner1 = E.couple(g1, mid)
     inner2 = E.couple(g2, mid)
     comp1 = N.modus_ponens(triple_eq,

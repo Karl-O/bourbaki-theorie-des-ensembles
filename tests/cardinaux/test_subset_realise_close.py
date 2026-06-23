@@ -16,7 +16,7 @@ le cardinal TOP Card(a)), un segment PROPRE seg(Ro,a,t) n'est pas équipotent à
 fini) ⇒ la condition de branche ¬(pr₂h'=a) (= « B n'épuise pas a ») est précisément
 le contenu honnête restant.  Cf. RAPPORT.
 """
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 import bourbaki.cardinaux.ensembles_subset_realise_close as M
 
 

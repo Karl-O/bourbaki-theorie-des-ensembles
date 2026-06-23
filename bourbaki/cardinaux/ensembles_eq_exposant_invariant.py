@@ -32,7 +32,7 @@ from __future__ import annotations
 from bourbaki.logique.formule import (Terme, var, egal, et, non, ou, impl,
                      appartient, existe, pourtout, inclus, subst_t, subst_f)
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
     equivalence_avant, equivalence_arriere, equivalence_transitivite, instancie,
@@ -75,7 +75,7 @@ def _cut(thm, paires):
 
 def _membre_produit(u, v, a, b):
     """⊢ ((u,v) ∈ A×B) ⇔ (u∈A et v∈B)."""
-    from bourbaki.ensembles.familles.ensembles_produit import couple_dans_produit_ssi
+    from bourbaki.ensembles.familles.ii_2_produit_deux_ensembles.ensembles_produit import couple_dans_produit_ssi
     return couple_dans_produit_ssi(_t(u), _t(v), _t(a), _t(b))
 
 
@@ -106,7 +106,7 @@ def _couple_valeur_q(g, e, x, binder=_VBI):
 
 def _valeur_codomaine_q(g, e, f, x, binder=_VBI):
     """{G ⊂ E×F, dom G = E, x ∈ E} ⊢ G(x) ∈ F,  G(x) = valeur(G,x,binder)."""
-    from bourbaki.ensembles.familles.ensembles_produit import couple_dans_produit_ssi
+    from bourbaki.ensembles.familles.ii_2_produit_deux_ensembles.ensembles_produit import couple_dans_produit_ssi
     vG, vE, vF, vx = _t(g), _t(e), _t(f), _t(x)
     fx = E.valeur(vG, vx, binder)
     h_incl = N.assume(inclus(vG, E.produit(vE, vF)))
@@ -601,7 +601,7 @@ def lambda_injective_sous_appartenance(g1, g2, s, t, m):
 
 def _lambda_egal_donne_K(vg1, vg2, vt, vm):
     """{ Λ(g₁)=Λ(g₂) } ⊢ K_g₁=K_g₂.   (deux décompos de couples : ((K,T),A).)"""
-    from bourbaki.ensembles.base.ensembles_couples import couple_egal_implique_composantes
+    from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import couple_egal_implique_composantes
     Kg1, Kg2 = K_g(vg1, vt, vm), K_g(vg2, vt, vm)
     va = var("A")
     L1, L2 = _lambda_valeur(vg1, vt, vm), _lambda_valeur(vg2, vt, vm)

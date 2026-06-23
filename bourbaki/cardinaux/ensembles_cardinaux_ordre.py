@@ -32,7 +32,7 @@ from __future__ import annotations
 
 from bourbaki.logique.formule import var, egal, et, appartient, existe, inclus, Terme
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.tactiques.tactiques_abrege import inclusion_reflexive, syllogisme
 from bourbaki.logique.tactiques.tactiques_abrege2 import (conjonction_intro, conjonction_elim_gauche,
                                conjonction_elim_droite, equivalence_avant,
@@ -47,7 +47,7 @@ from bourbaki.cardinaux.ensembles_cardinaux import (est_bijection_de, equipotent
 from bourbaki.ensembles.fonctions.ii_3_4_fonctions_valeur.ensembles_fonctions import valeur_dans_graphe
 from bourbaki.ensembles.fonctions.ii_3_7_composee_fonctions.ensembles_fonctions_composee import composee_fonctionnelle, composition_valeur
 from bourbaki.ensembles.fonctions.ii_3_3_composee_graphes.ensembles_composee import couple_composee, image_composee
-from bourbaki.ensembles.ensembles_theoremes import egalite_par_extension
+from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import egalite_par_extension
 from bourbaki.cardinaux.ensembles_bijection import _cut, _premier_dans_X
 
 
@@ -227,7 +227,7 @@ def composee_image_incl(g="G", f="F", x="X", y="Y", z="Z"):
     image(G∘F,X) = G⟨F⟨X⟩⟩ (image_composee).  F⟨X⟩⊂Y donne G⟨F⟨X⟩⟩⊂G⟨Y⟩ (monotonie
     de l'image directe, image_croissante appliquée aux TERMES F⟨X⟩,Y via
     instance-terme), et G⟨Y⟩⊂Z ; transitivité de ⊂ conclut."""
-    from bourbaki.ensembles.base.ensembles_correspondances import image_croissante
+    from bourbaki.ensembles.ii_3_correspondances.ensembles_correspondances import image_croissante
     vG, vF, vX, vY, vZ = var(g), var(f), var(x), var(y), var(z)
     comp = E.composee(vG, vF)
     fimg = E.image(vF, vX)                                   # F⟨X⟩

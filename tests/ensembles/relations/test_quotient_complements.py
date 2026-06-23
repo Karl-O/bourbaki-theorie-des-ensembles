@@ -9,8 +9,8 @@ from __future__ import annotations
 
 from bourbaki.logique.formule import (var, app, egal, et, impl, equiv,
                                        appartient, existe, pourtout, tau)
-from bourbaki.ensembles import ensembles_abrege as E
-from bourbaki.ensembles.relations import ensembles_quotient_complements as Q
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
+from bourbaki.ensembles.ii_6_equivalence import ensembles_quotient_complements as Q
 
 
 # ════════════════════════════════════════════════════════════════════════════

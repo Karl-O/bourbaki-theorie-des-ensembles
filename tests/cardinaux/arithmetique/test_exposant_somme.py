@@ -4,11 +4,11 @@ PALIERS SÛRS (caractérisation membership + formes), DÉRIVÉS des axiomes de
 DÉFINITION (rien postulé) ; la bijection restriction Φ (cœur) est REPORTÉE.
 """
 from bourbaki.logique.formule import var, egal, et, impl, appartient, existe, inclus
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import cardinal
 from bourbaki.cardinaux.arithmetique.ensembles_exposant_cardinal import exposant_cardinal_binaire
 from bourbaki.cardinaux.arithmetique.ensembles_arith_cardinale import produit_cardinal_binaire
-from bourbaki.ensembles.familles.ensembles_somme_disjointe import somme_disjointe
+from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import somme_disjointe
 from bourbaki.cardinaux.arithmetique import ensembles_exposant_somme as S
 
 

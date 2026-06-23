@@ -16,7 +16,7 @@ PALIERS :
        retrait_point_hyp_mod_surgery (CLOS 0 hyp : la surgery en antécédent explicite).
 """
 from bourbaki.logique.formule import var, egal, et, impl, non
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.tactiques.tactiques_abrege import antecedent_consequent
 from bourbaki.cardinaux.ensembles_cardinaux import (
     equipotent, cardinal, inf_egal_card, est_injection_de,

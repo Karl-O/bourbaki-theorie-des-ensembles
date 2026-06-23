@@ -25,11 +25,11 @@ from __future__ import annotations
 
 from bourbaki.logique.formule import Terme, var, egal, et
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 
 from bourbaki.cardinaux.ensembles_cardinaux import est_cardinal, cardinal, inf_strict_card
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import est_fini_ensemble, est_entier, ZERO
-from bourbaki.ensembles.familles.ensembles_somme_disjointe import (
+from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import (
     somme_disjointe, somme_cardinale_binaire,
 )
 
@@ -53,7 +53,7 @@ from bourbaki.cardinaux.ensembles_cardinaux_props_restantes_prop7 import (
     cardinal_egal_zero_ssi_vide,
 )
 from bourbaki.entiers.iii_5_calcul_entiers.iii_5_intervalles_comptage.ensembles_prop6_bien_ordonne_iii5 import partie_finie_est_finie
-from bourbaki.ensembles.ensembles_vide_identites import reunion_vide_neutre
+from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_vide_identites import reunion_vide_neutre
 
 
 def _t(t):

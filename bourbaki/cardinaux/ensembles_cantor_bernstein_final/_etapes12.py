@@ -30,7 +30,7 @@ from __future__ import annotations
 from bourbaki.logique.formule import (Terme, var, egal, et, ou, non, impl,
                                        appartient, existe, pourtout, inclus)
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.tactiques.tactiques_abrege import syllogisme
 from bourbaki.logique.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
@@ -43,7 +43,7 @@ from bourbaki.logique.tactiques.tactiques_abrege_egalite import (
 from bourbaki.logique.tactiques.tactiques_abrege_quantif import (
     existe_elimination, congruence_existe, alpha_existe)
 from bourbaki.ensembles.fonctions.ii_3_2_reciproque.ensembles_reciproque import couple_reciproque
-from bourbaki.ensembles.ensembles_theoremes import egalite_par_extension
+from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import egalite_par_extension
 from bourbaki.cardinaux import ensembles_cantor_bernstein as CB
 from bourbaki.cardinaux.ensembles_cardinaux import (est_injection_de,
                                                     est_bijection_de, equipotent,
@@ -240,7 +240,7 @@ def _reciproque_injective_sur(g, w):
 
 def _img_croiss(g, x, y):
     """⊢ (X ⊂ Y) ⇒ (g⟨X⟩ ⊂ g⟨Y⟩)  pour des TERMES g,x,y."""
-    from bourbaki.ensembles.base.ensembles_correspondances import image_croissante
+    from bourbaki.ensembles.ii_3_correspondances.ensembles_correspondances import image_croissante
     th = image_croissante("G", "X", "Y")
     th = instancie(N.generalisation("G", th), _t(g))
     th = instancie(N.generalisation("X", th), _t(x))
@@ -250,7 +250,7 @@ def _img_croiss(g, x, y):
 
 def _image_dans_img_terme(g, x):
     """⊢ g⟨X⟩ ⊂ pr₂(g) = dom(g⁻¹)  pour des TERMES g, x."""
-    from bourbaki.ensembles.base.ensembles_correspondances import image_dans_img
+    from bourbaki.ensembles.ii_3_correspondances.ensembles_correspondances import image_dans_img
     th = image_dans_img("G", "X")
     th = instancie(N.generalisation("G", th), _t(g))
     th = instancie(N.generalisation("X", th), _t(x))

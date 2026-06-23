@@ -57,8 +57,8 @@ from __future__ import annotations
 
 from bourbaki.logique.formule import var, Terme, egal, non, et, impl, equiv
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
-from bourbaki.ensembles.familles.ensembles_somme_disjointe import somme_disjointe
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
+from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import somme_disjointe
 from bourbaki.cardinaux.ensembles_cardinaux import cardinal, est_cardinal
 from bourbaki.cardinaux.ensembles_cardinaux_theoremes import (equipotent_son_cardinal,
                                           cardinal_egal_si_equipotent)

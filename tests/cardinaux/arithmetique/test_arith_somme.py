@@ -6,9 +6,9 @@
   • somme_cardinale_associative  : (a+b)+c = a+(b+c)  (Card((A⊔B)⊔C)=Card(A⊔(B⊔C))).
 """
 from bourbaki.logique.formule import var, egal, et, impl, subst_t
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import cardinal, est_bijection_de, equipotent
-from bourbaki.ensembles.familles.ensembles_somme_disjointe import somme_disjointe, somme_cardinale_binaire, ZERO
+from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import somme_disjointe, somme_cardinale_binaire, ZERO
 from bourbaki.cardinaux.arithmetique import ensembles_arith_somme as S
 
 

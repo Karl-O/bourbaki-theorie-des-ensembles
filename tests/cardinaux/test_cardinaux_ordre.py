@@ -33,7 +33,7 @@ def test_composee_domaine_incl():
     """⊢_{dom F=X, image(F,X)⊂Y, dom G=Y}  dom(G∘F) = X."""
     t = O.composee_domaine_incl("G", "F", "X", "Y")
     from bourbaki.logique.formule import egal
-    from bourbaki.ensembles import ensembles_abrege as E
+    from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
     assert t.conclusion == egal(E.dom(E.composee(var("G"), var("F"))), var("X"))
 
 
@@ -41,7 +41,7 @@ def test_composee_image_incl():
     """⊢_{image(F,X)⊂Y, image(G,Y)⊂Z}  image(G∘F, X) ⊂ Z."""
     t = O.composee_image_incl("G", "F", "X", "Y", "Z")
     from bourbaki.logique.formule import inclus
-    from bourbaki.ensembles import ensembles_abrege as E
+    from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
     assert t.conclusion == inclus(E.image(E.composee(var("G"), var("F")), var("X")),
                                   var("Z"))
 
@@ -49,5 +49,5 @@ def test_composee_image_incl():
 def test_composee_injective_incl():
     """⊢ injective_dans(G∘F, X)  (sous les hyps F,G fonctionnels/inj, dom, image⊂)."""
     t = O.composee_injective_incl("G", "F", "X", "Y")
-    from bourbaki.ensembles import ensembles_abrege as E
+    from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
     assert t.conclusion == E.injective_dans(E.composee(var("G"), var("F")), var("X"))

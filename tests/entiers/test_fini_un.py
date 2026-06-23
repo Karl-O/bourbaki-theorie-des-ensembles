@@ -10,9 +10,9 @@ Vérifie (conclusion EXACTE + est_clos) :
   • fini_un                       ⊢ Fini(1)                 (1 EST UN ENTIER NATUREL).
 """
 from bourbaki.logique.formule import var, egal, non, et
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import cardinal, est_cardinal, equipotent
-from bourbaki.ensembles.familles.ensembles_somme_disjointe import somme_disjointe
+from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import somme_disjointe
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers import ensembles_entiers as Ent
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_fini_un import (pigeonhole_un_deux, un_egale_card_singleton,
                                eq_un_singleton, successeur_un_egale_card_deux,

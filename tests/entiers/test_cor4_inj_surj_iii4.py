@@ -2,7 +2,7 @@
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_2_cor4_inj_surj_bij.ensembles_cor4_inj_surj_iii4 import (
     cor4_inj_implique_surj, cor4_inj_implique_surj_enonce,
 )
-from bourbaki.ensembles.ensembles_abrege import theorie_ensembles
+from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege import theorie_ensembles
 
 
 def test_cor4_inj_implique_surj_close():

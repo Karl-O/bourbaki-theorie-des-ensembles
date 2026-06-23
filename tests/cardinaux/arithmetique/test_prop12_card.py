@@ -7,14 +7,14 @@ crux χ∘ρ = id (chi_eq_graphe : χ_{Pre(G)} = G) et ρ∘χ = id (Pre(χ_Y)=Y
 import pytest
 from bourbaki.logique.formule import (var, egal, et, non, ou, impl, equiv,
                                        appartient, inclus, pourtout, existe)
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.arithmetique import ensembles_prop12_card as P
 from bourbaki.cardinaux.arithmetique.ensembles_prop12_card import _bijection as B
 from bourbaki.cardinaux.arithmetique.ensembles_powerset_exp import deux
 from bourbaki.cardinaux.arithmetique.ensembles_powerset_deux import preimage_un
 from bourbaki.cardinaux.ensembles_cardinaux import (cardinal, equipotent,
                                est_bijection_de)
-from bourbaki.ensembles.ensembles_abrege import injective_dans
+from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege import injective_dans
 from bourbaki.cardinaux.arithmetique.ensembles_exposant_cardinal import exposant_cardinal_binaire
 
 

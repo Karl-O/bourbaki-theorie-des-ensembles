@@ -63,7 +63,7 @@ from bourbaki.logique.formule import (
     existe, pourtout, inclus,
 )
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis import ensembles_ordre_vocab as V
 from bourbaki.logique.tactiques.tactiques_abrege import syllogisme, a_implique_a
 from bourbaki.logique.tactiques.tactiques_abrege2 import (
@@ -72,7 +72,7 @@ from bourbaki.logique.tactiques.tactiques_abrege2 import (
 )
 from bourbaki.cardinaux import ensembles_trichotomie_scaffold as TS
 from bourbaki.cardinaux.ensembles_segments_construction import seg as _seg
-from bourbaki.ensembles.base.ensembles_couples import (
+from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import (
     singleton_membre, membre_paire_gauche, couple_egal_implique_composantes,
 )
 from bourbaki.ensembles.fonctions.hors_ii_3.iii_3_recollement.ensembles_restriction_somme import (
@@ -331,7 +331,7 @@ def dom_singleton_couple(a="a", b="b", u="u", y="y"):
     ⇐ : u∈{a} ⇒ u=a ⇒ (u,b)=(a,b) ⇒ (u,b)∈{(a,b)} ⇒ u∈dom{(a,b)} (témoin y:=b)."""
     from bourbaki.logique.tactiques.tactiques_abrege_quantif import existe_elimination
     from bourbaki.logique.tactiques.tactiques_abrege_egalite import congruence_terme
-    from bourbaki.ensembles.ensembles_theoremes import couple_egal_si_composantes
+    from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import couple_egal_si_composantes
     va, vb = _t(a), _t(b)
     ab = E.couple(va, vb)
     G = graphe_point(va, vb)

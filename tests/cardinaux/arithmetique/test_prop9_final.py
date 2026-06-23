@@ -7,7 +7,7 @@ Vérifient (noyau strict, PROUVE == certifie) :
 """
 from bourbaki.logique.formule import var, egal, et
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de
 from bourbaki.cardinaux.arithmetique.ensembles_prop9_exp_somme import (
     cible_prop9_exp_somme, restriction_gauche, restriction_droite)

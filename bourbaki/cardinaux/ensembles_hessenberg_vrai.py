@@ -41,7 +41,7 @@ from bourbaki.logique.formule import (
     Terme, var, egal, et, ou, non, impl, existe, pourtout, appartient, inclus, tau,
 )
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 
 from bourbaki.cardinaux.ensembles_cardinaux import (
     cardinal, est_cardinal, inf_egal_card, inf_strict_card,
@@ -101,7 +101,7 @@ def _U_disjoint_impl_t(E_set, S, tU):
 
 def _non_vide_ssi_element_t(tU):
     """⊢ ¬(U=∅) ⇔ (∃z)(z∈U)  pour un TERME U quelconque (capture-safe)."""
-    from bourbaki.ensembles.base.ensembles_vide import non_vide_ssi_element
+    from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_vide import non_vide_ssi_element
     vF = var(_FRESH)
     equiv = non_vide_ssi_element(vF)                       # ⊢ ¬(F=∅) ⇔ (∃z)(z∈F)
     gen = N.generalisation(_FRESH, equiv)

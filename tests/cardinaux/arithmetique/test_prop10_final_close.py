@@ -5,7 +5,7 @@
 from bourbaki.cardinaux.arithmetique.ensembles_prop10_final_close import prop10_close
 from bourbaki.cardinaux.arithmetique.ensembles_prop10_currying import cible_prop10
 from bourbaki.logique.formule import var
-import bourbaki.ensembles.ensembles_abrege as E
+import bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege as E
 
 
 def test_prop10_close_inconditionnel():

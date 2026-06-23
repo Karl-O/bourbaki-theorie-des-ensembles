@@ -45,7 +45,7 @@ from bourbaki.logique.formule import (
     Terme, var, egal, et, non, impl, existe, pourtout, appartient, inclus,
 )
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 
 from bourbaki.logique.tactiques.tactiques_abrege import a_implique_a, syllogisme
 from bourbaki.logique.tactiques.tactiques_abrege2 import (
@@ -72,8 +72,8 @@ from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.e
 )
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_fini_successeur import cardinal_de_cardinal
 from bourbaki.cardinaux.ensembles_cardinaux_bornes import cardinal_inf_egal_successeur
-from bourbaki.ensembles.base.ensembles_vide import non_vide_ssi_element
-from bourbaki.ensembles.base.ensembles_couples import singleton_membre
+from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_vide import non_vide_ssi_element
+from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import singleton_membre
 from bourbaki.cardinaux.arithmetique.ensembles_prop8_successeur import (
     successeur_egale_card_somme,
 )
@@ -81,9 +81,9 @@ from bourbaki.cardinaux.arithmetique.ensembles_somme_equipotence import eq_somme
 from bourbaki.cardinaux.arithmetique.ensembles_arith_cardinale import _prop1_direct_t
 from bourbaki.cardinaux.ensembles_equipotence import equipotence_reflexive
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_zero_plus_un import eq_singletons
-from bourbaki.ensembles.familles.ensembles_somme_disjointe import somme_disjointe
+from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import somme_disjointe
 from bourbaki.cardinaux.ensembles_cantor_bernstein_fin import partie_reunion_complement
-from bourbaki.ensembles.ensembles_theoremes import commutativite_reunion
+from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import commutativite_reunion
 
 # énoncé EXACT à fermer
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_recurrence_c61_existence_n.ensembles_principe_recurrence_preuve import (
@@ -160,7 +160,7 @@ def _disjoint_diff_singleton(x, x0):
     partie_disjoint_complement(X, {x0}) ⊢ {x0} ∩ (X∖{x0}) = ∅ ; commutativité de ∩
     (version terme) réécrit en (X∖{x0}) ∩ {x0} = ∅."""
     from bourbaki.cardinaux.ensembles_cantor_bernstein_fin import partie_disjoint_complement
-    from bourbaki.ensembles.ensembles_theoremes import commutativite_intersection
+    from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import commutativite_intersection
     vX, vx0 = _t(x), _t(x0)
     sing = E.singleton(vx0)
     D = E.difference(vX, sing)                             # D = X∖{x0}

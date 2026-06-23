@@ -24,7 +24,7 @@ les binders PAR DÉFAUT x='x', y='y', or compatible_ordre y forme valeur(f,y)=τ
 version CORRECTE (capture-free, binders xa/ya), qui est l'INTENTION du report.
 """
 from bourbaki.logique.formule import var, egal, appartient, non, Formule
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux import ensembles_trichotomie_scaffold as TS
 from bourbaki.cardinaux import ensembles_trichotomie_extension_iso as X
 

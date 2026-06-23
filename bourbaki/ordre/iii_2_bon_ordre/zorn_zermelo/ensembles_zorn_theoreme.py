@@ -32,7 +32,7 @@ from bourbaki.logique.formule import (
     Terme, var, egal, et, ou, non, impl, equiv, appartient, existe, pourtout, inclus, tau,
 )
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.tactiques.tactiques_abrege import syllogisme, a_implique_a
 from bourbaki.logique.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
@@ -229,7 +229,7 @@ def Gamma_antisymetrique(G="G", E_set="E", C="x", D="y"):
 
     (C,D)∈Γ ⇒ C⊂D ; (D,C)∈Γ ⇒ D⊂C ; l'antisymétrie de ⊂ (A1) donne C=D.  Binders
     par défaut « x,y » pour matcher antisymetrie(Γ)."""
-    from bourbaki.ensembles.ensembles_theoremes import extensionnalite_appliquee
+    from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import extensionnalite_appliquee
     vG, vE, vC, vD = var(G), var(E_set), var(C), var(D)
     hyp = et(_gle(vC, vD, vG, vE), _gle(vD, vC, vG, vE))
     h = N.assume(hyp)
@@ -734,7 +734,7 @@ def _membre_ajoute(C, t, z):
     vC, vt, vz = _terme(C), _terme(t), _terme(z)
     ax = N.axiome(E.theorie_ensembles(), E.AXIOME_REUNION)   # (∀x∀y∀z)(z∈x∪y ⇔ (z∈x ou z∈y))
     inst = instancie(instancie(instancie(ax, vC), E.singleton(vt)), vz)  # z∈C∪{t} ⇔ (z∈C ou z∈{t})
-    from bourbaki.ensembles.base.ensembles_couples import singleton_membre
+    from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import singleton_membre
     sm = singleton_membre(vz, vt)                            # z∈{t} ⇔ z=t
     from bourbaki.logique.tactiques.tactiques_abrege2 import (
         ou_congruence, equivalence_transitivite,

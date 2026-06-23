@@ -10,7 +10,7 @@ INVARIANT vérifié : theorie_ensembles() = 22 ; aucune tautologie/affaibli ; L3
 bon_ordre_intervalle(a) == la conjonction stricte de ses deux moitiés.
 """
 from bourbaki.logique.formule import impl
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.tactiques.tactiques_abrege2 import composantes_conjonction
 
 import bourbaki.cardinaux.ensembles_bien_ordonne_lemme_2_ordre_clause as L3M

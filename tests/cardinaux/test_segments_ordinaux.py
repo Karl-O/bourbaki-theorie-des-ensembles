@@ -8,7 +8,7 @@ NON vacueux ; existence Zermelo CLOSE.
 from bourbaki.logique.formule import (
     var, non, egal, appartient, libres_f,
 )
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 
 import bourbaki.cardinaux.ensembles_segments_ordinaux as SO
 from bourbaki.cardinaux.ensembles_clause_plus_petit_correspondance import (

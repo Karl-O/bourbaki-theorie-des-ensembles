@@ -8,7 +8,7 @@ inclus(S,E), JAMAIS bo(R,S)), conclusion fidèle (= cible), non tautologique ;
 auto_iso_est_identite_sous_domaine en miroir ; theorie_ensembles() reste = 22.
 """
 from bourbaki.logique.formule import var, egal, impl, appartient, pourtout, inclus
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux import ensembles_iso_unicite_sous_domaine as U
 from bourbaki.cardinaux.ensembles_lemme4_croissante import _R_de, _val
 from bourbaki.cardinaux.ensembles_lemme4_sous_domaine import _f_dans_S

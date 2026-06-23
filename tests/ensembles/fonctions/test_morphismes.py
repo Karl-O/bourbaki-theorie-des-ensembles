@@ -5,7 +5,7 @@ EXACTEMENT la cible visée (et qu'il est clos pour les théorèmes inconditionne
 ou que ses hypothèses sont les conditions attendues pour les conditionnels).
 """
 from bourbaki.logique.formule import var, et, impl, appartient, alpha_egal
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ensembles.fonctions.hors_ii_3.iv_structures import ensembles_morphismes as M
 
 

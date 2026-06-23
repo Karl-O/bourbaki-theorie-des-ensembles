@@ -35,8 +35,8 @@ Lemmes DIRECTS (sans nouvel axiome)
 from __future__ import annotations
 
 from bourbaki.logique.formule import Terme, var, egal, et, impl, appartient, existe, pourtout, inclus
-from bourbaki.ensembles import ensembles_abrege as E
-from bourbaki.ensembles.base.ensembles_fondations_notions import (
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
+from bourbaki.ensembles.ii_3_correspondances.ensembles_fondations_notions import (
     correspondance, est_une_correspondance, est_application,
 )
 
@@ -65,7 +65,7 @@ def coupe_caracterisation(g="G", a="a"):
     est donnée par `coupe_membre` (déjà prouvé, sans nouvel axiome).  L'élément est
     nommé « a » (et non « x ») pour ne pas entrer en collision avec la variable liée
     interne « x » de l'existentielle de `coupe_membre` (capture)."""
-    from bourbaki.ensembles.base.ensembles_correspondances import coupe_membre
+    from bourbaki.ensembles.ii_3_correspondances.ensembles_correspondances import coupe_membre
     return coupe_membre(g, a)
 
 

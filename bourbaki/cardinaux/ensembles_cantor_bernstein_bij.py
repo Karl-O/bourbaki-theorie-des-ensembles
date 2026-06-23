@@ -53,7 +53,7 @@ from __future__ import annotations
 from bourbaki.logique.formule import (Terme, var, egal, et, ou, non, impl,
                                        appartient, existe, pourtout, inclus)
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.tactiques.tactiques_abrege import syllogisme
 from bourbaki.logique.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
@@ -66,7 +66,7 @@ from bourbaki.logique.tactiques.tactiques_abrege_quantif import (
 from bourbaki.ensembles.fonctions.ii_3_5_restrictions_prolongements.ensembles_restrictions import couple_restriction
 from bourbaki.ensembles.fonctions.ii_3_4_fonctions_valeur.ensembles_fonctions import (
     valeur_caracterisation, valeur_dans_graphe)
-from bourbaki.ensembles.ensembles_theoremes import egalite_par_extension
+from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import egalite_par_extension
 
 
 def _t(v):

@@ -3,9 +3,9 @@ et la couche égalitaire abrégée (symétrie, transitivité, congruence C44).""
 from __future__ import annotations
 
 from bourbaki.logique.formule import var, egal, et, impl, equiv, app, tau, existe, afficher_f
-from bourbaki.ensembles.ensembles_abrege import couple, pr1, pr2, paire, singleton
-from bourbaki.ensembles.ensembles_theoremes import couple_egal_si_composantes
-from bourbaki.ensembles.base.ensembles_couples import (singleton_membre, singleton_injectif,
+from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege import couple, pr1, pr2, paire, singleton
+from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import couple_egal_si_composantes
+from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import (singleton_membre, singleton_injectif,
                                singleton_egale_paire, membre_paire_gauche,
                                membre_paire_droite, paire_cancellation,
                                couple_egal_implique_composantes, proposition_1)

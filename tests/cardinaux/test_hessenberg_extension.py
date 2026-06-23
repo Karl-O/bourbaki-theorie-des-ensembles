@@ -1,5 +1,5 @@
 """Tests — pièces cardinal-arith de l'extension du maximal (Hessenberg, §III.6.3)."""
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_hessenberg_extension import (
     complement_grand, complement_grand_cible,
     existe_sous_ensemble_cardinal_dans_card,
@@ -22,7 +22,7 @@ def test_complement_grand_clos_et_cible():
     from bourbaki.cardinaux.ensembles_cardinaux import (
         cardinal, inf_strict_card,
     )
-    from bourbaki.ensembles.familles.ensembles_somme_disjointe import somme_cardinale_binaire
+    from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import somme_cardinale_binaire
     vE, vS = var("E"), var("S0")
     cS, cE = cardinal(vS), cardinal(vE)
     assert inclus(vS, vE) in thm.hypotheses

@@ -7,7 +7,7 @@ Vérifie la VÉRITÉ HONNÊTE de l'assemblage :
   • theorie=22 (noyau intact).
 """
 from bourbaki.entiers.iii_5_calcul_entiers.iii_5_intervalles_comptage import ensembles_prop6_iso_iii5 as P
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 
 
 def test_prop6_iso_existe_conclusion_est_cible():

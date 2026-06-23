@@ -51,7 +51,7 @@ from __future__ import annotations
 from bourbaki.logique.formule import (Terme, var, egal, et, non, ou, impl,
                      appartient, existe, pourtout, inclus, subst_t, subst_f)
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.tactiques.tactiques_abrege import a_implique_a, syllogisme
 from bourbaki.logique.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
@@ -67,7 +67,7 @@ from bourbaki.cardinaux.arithmetique.ensembles_graphe_de import (
     graphe_de, graphe_de_triple)
 from bourbaki.ensembles.fonctions.ii_3_4_fonctions_valeur.ensembles_valeur_codomaine import (
     couple_valeur_dans_graphe, valeur_dans_codomaine)
-from bourbaki.ensembles.familles.ensembles_somme_disjointe import (
+from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import (
     somme_disjointe, ZERO, UN,
     injection_gauche_dans_somme, injection_droite_dans_somme,
     membre_somme_caracterise)
@@ -159,7 +159,7 @@ def restriction_droite_domaine(f="f", c="C"):
 # ═══════════════════════════════════════════════════════════════════════════════
 def _membre_produit(u, v, a, b):
     """⊢ ((u,v) ∈ A×B) ⇔ (u∈A et v∈B)   pour des TERMES (couple_dans_produit_ssi)."""
-    from bourbaki.ensembles.familles.ensembles_produit import couple_dans_produit_ssi
+    from bourbaki.ensembles.familles.ii_2_produit_deux_ensembles.ensembles_produit import couple_dans_produit_ssi
     return couple_dans_produit_ssi(_t(u), _t(v), _t(a), _t(b))
 
 
@@ -193,7 +193,7 @@ def _valeur_codomaine_q(g, e, f, x):
     """{G ⊂ E×F, dom G = E, x ∈ E} ⊢ G(x) ∈ F,  G(x) = valeur(G,x,« q »).
 
     Miroir de valeur_dans_codomaine avec le liant « q » (apparié au graphe_terme)."""
-    from bourbaki.ensembles.familles.ensembles_produit import couple_dans_produit_ssi
+    from bourbaki.ensembles.familles.ii_2_produit_deux_ensembles.ensembles_produit import couple_dans_produit_ssi
     vG, vE, vF, vx = _t(g), _t(e), _t(f), _t(x)
     fx = E.valeur(vG, vx, _VB)                        # G(x)  (binder q)
     h_incl = N.assume(inclus(vG, E.produit(vE, vF)))  # G ⊂ E×F
@@ -581,7 +581,7 @@ def _restriction_valeurs_coincident(va, vb, T1, T2, RG1, RG2, u_nom):
 # ── Φ(f₁)=Φ(f₂)  ⟹  RG₁=RG₂  et  RD₁=RD₂  (décomposition couple + triple) ──────
 def _strip_triple(triple_eq, g1, mid, top, g2):
     """De ⊢ ((g₁,mid),top)=((g₂,mid),top), tire ⊢ g₁=g₂.  (deux décompos de couples.)"""
-    from bourbaki.ensembles.base.ensembles_couples import couple_egal_implique_composantes
+    from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import couple_egal_implique_composantes
     inner1 = E.couple(g1, mid)
     inner2 = E.couple(g2, mid)
     comp1 = N.modus_ponens(triple_eq,
@@ -597,7 +597,7 @@ def _phi_egal_donne_restrictions(vf1, vf2, va, vb, vc):
 
     Φ(fᵢ)=(((fᵢ|B,B),A),((fᵢ|C,C),A)) ; couple_egal_implique_composantes (3×) extrait
     f₁|B=f₂|B et f₁|C=f₂|C."""
-    from bourbaki.ensembles.base.ensembles_couples import couple_egal_implique_composantes
+    from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import couple_egal_implique_composantes
     RG1, RG2 = restriction_gauche(vf1, vb), restriction_gauche(vf2, vb)
     RD1, RD2 = restriction_droite(vf1, vc), restriction_droite(vf2, vc)
     TG1 = E.couple(E.couple(RG1, vb), va)
@@ -662,7 +662,7 @@ def _valeurs_coincident_sur_somme(vf1, vf2, va, vb, vc):
     val_eq = egal(E.valeur(G1, vx, "y"), E.valeur(G2, vx, "y"))   # cible G₁(x)=G₂(x)
 
     from bourbaki.logique.tactiques.tactiques_abrege_quantif import alpha_existe
-    from bourbaki.ensembles.familles.ensembles_somme_disjointe import _ou_congruence
+    from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import _ou_congruence
     car0 = membre_somme_caracterise(vb, vc, vx)  # x∈B⊔C ⇔ ((∃u)(u∈B et x=(u,0)) ou (∃v)(v∈C et x=(v,1)))
     # α-renommer les DEUX liants : GAUCHE « u »→« s », DROIT « v »→« t » (points sûrs,
     # ≠ liants internes de graphe_terme_valeur ET ≠ variables-fonction u,up de l'appelant)
@@ -704,7 +704,7 @@ def _valeurs_coincident_sur_somme(vf1, vf2, va, vb, vc):
 # ── G ⊂ E×F  ⟹  est_un_graphe(G)  (tout élément d'un produit est un couple) ─────
 def _inclus_produit_est_graphe(vG, vE, vF):
     """{ G ⊂ E×F } ⊢ est_un_graphe(G).   (z∈G ⇒ z∈E×F ⇒ z=(p,q) couple.)"""
-    from bourbaki.ensembles.familles.ensembles_produit import _instance_produit
+    from bourbaki.ensembles.familles.ii_2_produit_deux_ensembles.ensembles_produit import _instance_produit
     vz = var("z")
     h_incl = N.assume(inclus(vG, E.produit(vE, vF)))   # G⊂E×F = (∀z)(z∈G⇒z∈E×F)
     z_in_prod_imp = instancie(h_incl, vz)              # z∈G ⇒ z∈E×F
@@ -1115,7 +1115,7 @@ def _copie_dans_somme(vk, vb, vc, marker, gauche):
 
     B⊔C = (B×{0})∪(C×{1}) ; injection de la copie marquée dans la réunion
     (membre_somme_reunion, sens ⇐ via S2/S3)."""
-    from bourbaki.ensembles.familles.ensembles_somme_disjointe import membre_somme_reunion
+    from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import membre_somme_reunion
     Dm = E.produit(vb if gauche else vc, E.singleton(marker))
     B0 = E.produit(vb, E.singleton(ZERO))
     C1 = E.produit(vc, E.singleton(UN))
@@ -1135,7 +1135,7 @@ def _pr1_dans_facteur(vk, vb, marker, marker_name):
 
     k∈B×{marker} ⇔ (∃u)(u∈B et k=(u,marker)) (_membre_produit_singleton) ; sous le
     témoin u, pr₁(k)=pr₁((u,marker))=u (projection_premiere) et u∈B, d'où pr₁(k)∈B."""
-    from bourbaki.ensembles.familles.ensembles_somme_disjointe import _membre_produit_singleton
+    from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import _membre_produit_singleton
     from bourbaki.cardinaux.arithmetique.ensembles_produit_commute import _projection_premiere_ab
     pr1k = E.pr1(vk, "a", "b")
     car = _membre_produit_singleton(vb, marker, vk, "u")   # k∈B×{marker} ⇔ (∃u)(u∈B et k=(u,marker))

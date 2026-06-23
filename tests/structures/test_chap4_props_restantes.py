@@ -10,7 +10,7 @@ aux sous-structures), CST20 (passage aux quotients).  On certifie :
   • theorie_ensembles() reste à 22 axiomes (rien postulé).
 """
 from bourbaki.logique.formule import var, egal, et, equiv
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.structures.iv_2_morphismes_structures_derivees.cst_criteres import ensembles_chap4_props_restantes as M
 from bourbaki.structures.iv_2_morphismes_structures_derivees.ensembles_universel_morphismes import est_morphisme
 

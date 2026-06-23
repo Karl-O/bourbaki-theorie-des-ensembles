@@ -4,14 +4,14 @@ Vérifie pour chaque théorème : statut (.est_clos / nombre d'hypothèses) ET f
 EXACTE de la conclusion (énoncé VERBATIM).  theorie_ensembles reste à 22 axiomes.
 """
 from bourbaki.logique.formule import var, et, egal, inclus, impl, appartient, pourtout
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de, equipotent
-from bourbaki.ensembles.familles.ensembles_somme_disjointe import (
+from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import (
     somme_disjointe, ZERO, UN)
 from bourbaki.ensembles.fonctions.hors_ii_3.iii_3_recollement.ensembles_restriction_somme import (
     reunion_graphes_fonctionnelle)
 
-from bourbaki.ensembles.familles.ensembles_recollement_props import (
+from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_recollement_props import (
     recollement_recouvrement_valeur, recollement_recouvrement,
     recollement_binaire_fonctionnel,
     recollement_binaire_prolonge_gauche, recollement_binaire_prolonge_droite,

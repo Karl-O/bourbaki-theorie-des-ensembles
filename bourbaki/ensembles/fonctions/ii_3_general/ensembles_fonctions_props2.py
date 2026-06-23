@@ -45,7 +45,7 @@ from __future__ import annotations
 from bourbaki.logique.formule import (Terme, var, egal, et, impl, appartient,
                                        existe, equiv)
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.tactiques.tactiques_abrege2 import (conjonction_intro,
                                conjonction_elim_gauche, conjonction_elim_droite,
                                equivalence_transitivite, equivalence_symetrie,
@@ -54,8 +54,8 @@ from bourbaki.logique.tactiques.tactiques_abrege2 import (conjonction_intro,
 from bourbaki.logique.tactiques.tactiques_abrege_quantif import (congruence_existe,
                                et_existe_droite, et_existe_gauche, existe_commute,
                                existe_elimination)
-from bourbaki.ensembles.base.ensembles_correspondances import _inst_image
-from bourbaki.ensembles.base.ensembles_couples import membre_paire_gauche, singleton_membre
+from bourbaki.ensembles.ii_3_correspondances.ensembles_correspondances import _inst_image
+from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import membre_paire_gauche, singleton_membre
 from bourbaki.ensembles.fonctions.ii_3_3_composee_graphes.ensembles_composee import couple_composee
 from bourbaki.ensembles.fonctions.ii_3_4_fonctions_valeur.ensembles_fonctions import valeur_caracterisation
 

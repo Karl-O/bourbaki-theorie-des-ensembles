@@ -9,7 +9,7 @@ EXACTE et la clôture.
 from bourbaki.logique.formule import var, egal, ou, non, et, equiv, impl
 from bourbaki.cardinaux import ensembles_cardinaux_props_restantes_prop7 as P7
 from bourbaki.cardinaux.ensembles_cardinaux import cardinal, equipotent
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 
 
 def test_equipotent_vide_implique_vide():

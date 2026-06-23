@@ -6,7 +6,7 @@ Anti-tautologie : aucune conclusion n'est l'une de ses hypothèses.
 Hypothèses EXACTES contrôlées.
 """
 from bourbaki.logique.formule import var, appartient, inclus, egal, et, impl, non, pourtout, existe
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 
 import bourbaki.cardinaux.ensembles_hyp_transport_ordinal_preuve as P
 import bourbaki.cardinaux.ensembles_bon_ordre_intervalle_ordinal as BOIO

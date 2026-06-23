@@ -10,7 +10,7 @@ from bourbaki.logique.formule import (
     var, tau, existe, pourtout, appartient, egal, et, impl, alpha_egal,
 )
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.tactiques.tactiques_abrege import a_implique_a
 from bourbaki.logique.tactiques.ensembles_alpha_bridge import alpha_bridge, bridge_equiv
 

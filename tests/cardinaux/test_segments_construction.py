@@ -9,7 +9,7 @@ JAMAIS l'une des hypothèses.  Hypothèses EXACTES contrôlées.
 from bourbaki.logique.formule import (
     var, appartient, inclus, egal, et, impl, non, pourtout, libres_f,
 )
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 
 import bourbaki.cardinaux.ensembles_segments_construction as SC
 from bourbaki.cardinaux.ensembles_cardinaux import cardinal

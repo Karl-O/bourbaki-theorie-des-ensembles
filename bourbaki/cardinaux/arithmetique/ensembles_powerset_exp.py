@@ -34,7 +34,7 @@ from __future__ import annotations
 from bourbaki.logique.formule import (Terme, var, egal, et, non, ou, impl, equiv,
                      appartient, existe, pourtout, inclus)
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.tactiques.tactiques_abrege import a_implique_a, syllogisme
 from bourbaki.logique.tactiques.tactiques_abrege2 import (conjonction_intro,
                                conjonction_elim_gauche, conjonction_elim_droite,
@@ -42,8 +42,8 @@ from bourbaki.logique.tactiques.tactiques_abrege2 import (conjonction_intro,
                                equivalence_transitivite, instancie)
 from bourbaki.logique.tactiques.tactiques_abrege_egalite import (symetrie,
                                composer_egalites, congruence_terme)
-from bourbaki.ensembles.ensembles_theoremes import _instance_paire
-from bourbaki.ensembles.base.ensembles_couples import singleton_membre
+from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import _instance_paire
+from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import singleton_membre
 from bourbaki.cardinaux.ensembles_cardinaux import cardinal
 from bourbaki.cardinaux.arithmetique.ensembles_exposant_cardinal import exposant_cardinal_binaire
 
@@ -77,13 +77,13 @@ def deux_membre(z="z"):
 # ═══════════════════════════════════════════════════════════════════════════════
 def zero_dans_deux():
     """⊢ ∅ ∈ 2.   (0 = ∅ est élément gauche de la paire {∅, {∅}}.)"""
-    from bourbaki.ensembles.base.ensembles_couples import membre_paire_gauche
+    from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import membre_paire_gauche
     return membre_paire_gauche(E.VIDE, E.singleton(E.VIDE))
 
 
 def un_dans_deux():
     """⊢ {∅} ∈ 2.   (1 = {∅} est élément droit de la paire {∅, {∅}}.)"""
-    from bourbaki.ensembles.base.ensembles_couples import membre_paire_droite
+    from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import membre_paire_droite
     return membre_paire_droite(E.VIDE, E.singleton(E.VIDE))
 
 

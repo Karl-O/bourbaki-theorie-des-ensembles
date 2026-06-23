@@ -46,7 +46,7 @@ from bourbaki.logique.formule import (
     Terme, var, egal, et, ou, non, impl, appartient, existe, pourtout, inclus, tau,
 )
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.tactiques.tactiques_abrege import a_implique_a
 from bourbaki.logique.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite, instancie,
@@ -300,7 +300,7 @@ def _bo_alpha_equiv(Rname, e, setb, elemb, compb):
     from bourbaki.logique.tactiques.tactiques_abrege2 import (
         et_congruence_droite, equivalence_transitivite, ou_congruence,
     )
-    from bourbaki.ensembles.ensembles_abrege import est_relation_ordre_dans
+    from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege import est_relation_ordre_dans
     Rf = _R_de(Rname)
     ve = _t(e)
     vS = var("S")
@@ -697,7 +697,7 @@ def clause_min_top_only(Ro="Ro", a="a", S="S", c0="c0", c="x", topb=_CFRESH):
     le ≤-MAX, EST son propre (et l'unique) min ici.  Le liant de ¬S_top est `topb`='cgate'
     (= celui de _S_top, pour matcher le case-split de clause_pour_S_clean).  theorie=22,
     PROUVÉ (réflexivité), JAMAIS postulé."""
-    from bourbaki.ensembles.base.ensembles_vide import non_vide_ssi_element
+    from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_vide import non_vide_ssi_element
     from bourbaki.cardinaux.ensembles_cardinaux_theoremes import inf_egal_reflexif
     va, vS = _t(a), _t(S)
     c0n = c0 if isinstance(c0, str) else c0.nom

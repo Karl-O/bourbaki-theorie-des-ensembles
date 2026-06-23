@@ -41,7 +41,7 @@ from bourbaki.logique.formule import (
     Terme, var, egal, et, ou, non, impl, equiv, appartient, existe, pourtout, inclus,
 )
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.tactiques.tactiques_abrege import a_implique_a, inclusion_reflexive
 from bourbaki.logique.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
@@ -167,7 +167,7 @@ def Incl_reflexive_sur(S="S", X="x"):
 
 def Incl_antisymetrique(S="S", X="x", Y="y"):
     """⊢ antisymetrie(Incl).  = (∀x∀y)( ((x,y)∈Incl et (y,x)∈Incl) ⇒ x=y )."""
-    from bourbaki.ensembles.ensembles_theoremes import extensionnalite_appliquee
+    from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import extensionnalite_appliquee
     vS, vX, vY = var(S), var(X), var(Y)
     hyp = et(_ile(vX, vY, vS), _ile(vY, vX, vS))
     h = N.assume(hyp)

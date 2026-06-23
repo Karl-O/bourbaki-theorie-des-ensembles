@@ -7,8 +7,8 @@ conclusion est la bonne, la conclusion n'est PAS une hypothèse (anti-tautologie
 theorie_ensembles() reste à 22.
 """
 from bourbaki.logique.formule import var, egal
-from bourbaki.ensembles import ensembles_abrege as E
-from bourbaki.ensembles.familles import ensembles_limites_prop2_3_iii7 as P
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
+from bourbaki.ensembles.familles.iii_7_limites import ensembles_limites_prop2_3_iii7 as P
 
 
 def test_theorie_inchangee_22():

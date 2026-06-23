@@ -39,7 +39,7 @@ from __future__ import annotations
 from bourbaki.logique.formule import (Terme, var, egal, et, non, appartient, existe,
                                        inclus, subst_t)
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.tactiques.tactiques_abrege import syllogisme, a_implique_a
 from bourbaki.logique.tactiques.tactiques_abrege2 import (conjonction_intro,
                                conjonction_elim_gauche, conjonction_elim_droite,
@@ -52,12 +52,12 @@ from bourbaki.cardinaux.arithmetique.ensembles_copie_marquee import (
                                _copie_graphe, _copie_terme, _BND,
                                copie_graphe_fonctionnel, copie_graphe_domaine,
                                copie_graphe_injective, copie_graphe_image)
-from bourbaki.ensembles.familles.ensembles_somme_disjointe import (somme_disjointe,
+from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import (somme_disjointe,
                                ZERO, UN, injection_gauche_dans_somme,
                                injection_droite_dans_somme)
 from bourbaki.ensembles.fonctions.ii_3_6_fonction_terme.ensembles_fonction_terme import membre_graphe_terme
-from bourbaki.ensembles.familles.ensembles_produit import produit_inclusion_facile
-from bourbaki.ensembles.base.ensembles_vide import non_vide_ssi_element
+from bourbaki.ensembles.familles.ii_2_produit_deux_ensembles.ensembles_produit import produit_inclusion_facile
+from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_vide import non_vide_ssi_element
 
 
 def _t(v):
@@ -189,7 +189,7 @@ def _produit_inclusion_singleton(a_set, e_pt, b_set):
     vz = var("z")
     ax_p = N.axiome(E.theorie_ensembles(), E.AXIOME_PAIRE)
     car_z = instancie(instancie(instancie(ax_p, ve), ve), vz)   # z∈{e,e} ⇔ (z=e ou z=e)
-    from bourbaki.ensembles.familles.ensembles_somme_disjointe import _ou_idem
+    from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import _ou_idem
     hz = N.assume(appartient(vz, E.singleton(ve)))             # z∈{e}
     z_eq_e = _ou_idem(N.modus_ponens(hz, equivalence_avant(car_z)), egal(vz, ve))  # z=e
     he = N.assume(appartient(ve, vb))                          # e∈B

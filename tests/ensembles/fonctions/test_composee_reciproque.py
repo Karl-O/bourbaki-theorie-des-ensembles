@@ -2,7 +2,7 @@
 from __future__ import annotations
 
 from bourbaki.logique.formule import var, egal
-from bourbaki.ensembles.ensembles_abrege import composee, reciproque
+from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege import composee, reciproque
 from bourbaki.ensembles.fonctions.ii_3_3_composee_graphes.ensembles_composee_reciproque import reciproque_composee
 
 

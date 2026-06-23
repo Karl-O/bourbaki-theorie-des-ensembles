@@ -26,7 +26,7 @@ from bourbaki.logique.formule import (
     Terme, var, egal, et, non, impl, pourtout, appartient, inclus,
 )
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 
 from bourbaki.cardinaux.ensembles_cardinaux import (
     cardinal, est_bijection_de,
@@ -141,7 +141,7 @@ def phi1_bijection_derivee(E_set="E", phi0="phi0", psi="psi", S="S0", U="Ucadre"
 
 def _inclusion_reunion_gauche_t(ta, tb):
     """⊢ a ⊂ (a∪b)  pour des TERMES a,b (capture-safe via généralisation/instanciation)."""
-    from bourbaki.ensembles.ensembles_theoremes import inclusion_reunion_gauche
+    from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import inclusion_reunion_gauche
     base = inclusion_reunion_gauche("ar", "br")
     gen = N.generalisation("ar", N.generalisation("br", base))
     return instancie(instancie(gen, _t(ta)), _t(tb))

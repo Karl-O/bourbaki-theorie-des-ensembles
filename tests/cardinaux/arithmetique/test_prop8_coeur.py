@@ -13,8 +13,8 @@ la réduction finale du CAS 1 :
   • eq_cas_fixe_implique_eq : ⊢ bij(h,A⊔{∅},B⊔{∅}) ⇒ (h(*)=* ⇒ Eq(A,B)).
 """
 from bourbaki.logique.formule import var, egal, impl
-from bourbaki.ensembles import ensembles_abrege as E
-from bourbaki.ensembles.familles.ensembles_somme_disjointe import UN, ZERO, somme_disjointe
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
+from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import UN, ZERO, somme_disjointe
 from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de, equipotent
 from bourbaki.cardinaux.arithmetique import ensembles_prop8_coeur as C
 

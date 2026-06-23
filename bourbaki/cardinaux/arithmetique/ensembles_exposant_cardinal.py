@@ -29,7 +29,7 @@ from __future__ import annotations
 from bourbaki.logique.formule import (Terme, var, egal, et, non, ou, impl, appartient,
                      existe, pourtout, inclus, subst_t, subst_f)
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.tactiques.tactiques_abrege import a_implique_a, syllogisme
 from bourbaki.logique.tactiques.tactiques_abrege2 import (conjonction_intro, conjonction_elim_gauche,
                                conjonction_elim_droite, equivalence_avant,
@@ -37,8 +37,8 @@ from bourbaki.logique.tactiques.tactiques_abrege2 import (conjonction_intro, con
                                instancie, projection_gauche, projection_droite)
 from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie, composer_egalites, congruence_terme
 from bourbaki.logique.tactiques.tactiques_abrege_quantif import existe_elimination, alpha_existe
-from bourbaki.ensembles.ensembles_theoremes import egalite_par_extension, vide_sans_element
-from bourbaki.ensembles.base.ensembles_couples import singleton_membre, membre_paire_gauche
+from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import egalite_par_extension, vide_sans_element
+from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import singleton_membre, membre_paire_gauche
 from bourbaki.cardinaux.ensembles_cardinaux import cardinal
 
 
@@ -212,7 +212,7 @@ def inclus_vide_implique_egal_vide(g="G", z="z"):
     h_incl = N.assume(inclus(vG, E.VIDE))               # G⊂∅
     incl_back = vide_inclus(vG)                         # ∅⊂G
     # A1 appliqué : (G⊂∅ et ∅⊂G) ⇒ G=∅
-    from bourbaki.ensembles.ensembles_theoremes import extensionnalite_appliquee
+    from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import extensionnalite_appliquee
     ext = extensionnalite_appliquee(vG, E.VIDE)         # (G⊂∅ et ∅⊂G) ⇒ G=∅
     g_eq = N.modus_ponens(conjonction_intro(h_incl, incl_back), ext)   # G=∅  [sous G⊂∅]
     return N.loi_deduction(inclus(vG, E.VIDE), g_eq)    # (G⊂∅) ⇒ (G=∅)

@@ -7,7 +7,7 @@ Puis N_existe ⊢ coll(x, Fini x) à 0 hyp : ℕ EXISTE, INCONDITIONNEL."""
 import pytest
 
 from bourbaki.logique.formule import var, egal, et, impl, non, existe, pourtout, appartient
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import est_cardinal, cardinal
 
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_recurrence_c61_existence_n.ensembles_principe_recurrence_preuve import (

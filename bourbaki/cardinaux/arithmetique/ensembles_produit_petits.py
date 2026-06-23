@@ -30,7 +30,7 @@ from __future__ import annotations
 from bourbaki.logique.formule import (Terme, var, egal, et, ou, appartient, existe,
                      subst_t, subst_f)
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.tactiques.tactiques_abrege import a_implique_a, syllogisme
 from bourbaki.logique.tactiques.tactiques_abrege2 import (conjonction_intro, conjonction_elim_gauche,
                                conjonction_elim_droite, equivalence_avant,
@@ -40,14 +40,14 @@ from bourbaki.logique.tactiques.tactiques_abrege_egalite import (symetrie, compo
                                       congruence_terme)
 from bourbaki.logique.tactiques.tactiques_abrege_quantif import (existe_elimination,
                                       congruence_existe, alpha_existe)
-from bourbaki.ensembles.base.ensembles_couples import (couple_egal_implique_composantes,
+from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import (couple_egal_implique_composantes,
                                  singleton_membre)
 from bourbaki.ensembles.fonctions.ii_3_6_fonction_terme.ensembles_fonction_terme import (membre_graphe_terme,
                                           graphe_terme_fonctionnel)
 from bourbaki.cardinaux.ensembles_cantor import graphe_terme_couple_dans, graphe_terme_domaine
 from bourbaki.ensembles.fonctions.ii_3_4_fonctions_valeur.ensembles_fonctions import valeur_caracterisation
-from bourbaki.ensembles.ensembles_theoremes import egalite_par_extension
-from bourbaki.ensembles.familles.ensembles_produit import (couple_dans_produit_ssi,
+from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import egalite_par_extension
+from bourbaki.ensembles.familles.ii_2_produit_deux_ensembles.ensembles_produit import (couple_dans_produit_ssi,
                                     produit_vide_si)
 from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de, equipotent, cardinal
 from bourbaki.cardinaux.arithmetique.ensembles_arith_cardinale import _prop1_direct_t
@@ -220,7 +220,7 @@ def proj_graphe_image(a="A"):
                 (∃t)(t∈A×{∅} et z=T[t]), T[t]=pr₁t.
     ⇒ : pr₁t∈A (_membre_produit_pr1_ab) donc z=pr₁t∈A.
     ⇐ : tout z∈A a l'antécédent t₀=(z,∅)∈A×{∅} avec T[t₀]=pr₁(z,∅)=z."""
-    from bourbaki.ensembles.ensembles_theoremes import egalite_par_extension as _ext
+    from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import egalite_par_extension as _ext
     vA = _t(a)
     sing = E.singleton(E.VIDE)
     A1 = E.produit(vA, sing)             # A×{∅}

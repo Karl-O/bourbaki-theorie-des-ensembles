@@ -15,7 +15,7 @@ from __future__ import annotations
 from bourbaki.logique.formule import (Terme, var, egal, et, non, ou, impl, appartient,
                      existe, pourtout, inclus, subst_t, subst_f)
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.tactiques.tactiques_abrege import a_implique_a, syllogisme
 from bourbaki.logique.tactiques.tactiques_abrege2 import (conjonction_intro, conjonction_elim_gauche,
                                conjonction_elim_droite, equivalence_avant,
@@ -23,8 +23,8 @@ from bourbaki.logique.tactiques.tactiques_abrege2 import (conjonction_intro, con
                                instancie, projection_gauche, projection_droite)
 from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie, composer_egalites, congruence_terme
 from bourbaki.logique.tactiques.tactiques_abrege_quantif import existe_elimination, alpha_existe
-from bourbaki.ensembles.ensembles_theoremes import egalite_par_extension
-from bourbaki.ensembles.base.ensembles_couples import (singleton_membre, membre_paire_gauche,
+from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import egalite_par_extension
+from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import (singleton_membre, membre_paire_gauche,
                                   singleton_injectif, couple_egal_implique_composantes)
 from bourbaki.ensembles.fonctions.ii_3_6_fonction_terme.ensembles_fonction_terme import (membre_graphe_terme,
                                        graphe_terme_fonctionnel)
@@ -126,7 +126,7 @@ def gv_inclus_produit(v="c", a="A"):
     body = et(et(egal(vz, E.couple(vu, vy)), appartient(vu, one)), egal(vy, vv))
     h_vA = N.assume(appartient(vv, vA))               # v∈A
     # corps ⇒ z∈{∅}×A : de z=(u,y), u∈{∅}, y=v∈A → (u,y)∈{∅}×A → z∈{∅}×A
-    from bourbaki.ensembles.familles.ensembles_produit import couple_dans_produit
+    from bourbaki.ensembles.familles.ii_2_produit_deux_ensembles.ensembles_produit import couple_dans_produit
     hb = N.assume(body)
     z_uy = conjonction_elim_gauche(conjonction_elim_gauche(hb))   # z=(u,y)
     u_in = conjonction_elim_droite(conjonction_elim_gauche(hb))   # u∈{∅}
@@ -151,7 +151,7 @@ def _couple_dans_produit_t(u, v, a, b):
     """⊢ (u∈A et v∈B) ⇒ ((u,v)∈A×B), version TERMES (u,v,a,b termes), appliquée :
     renvoie le théorème (u,v)∈A×B sous l'hypothèse déjà fournie en conjonction."""
     # implémentation directe (évite la dépendance aux noms de couple_dans_produit)
-    from bourbaki.ensembles.familles.ensembles_produit import _instance_produit
+    from bourbaki.ensembles.familles.ii_2_produit_deux_ensembles.ensembles_produit import _instance_produit
     vu, vv, vA, vB = _t(u), _t(v), _t(a), _t(b)
     inst = _instance_produit(vA, vB, E.couple(vu, vv))
     pinner = et(et(egal(E.couple(vu, vv), E.couple(var("p"), var("q"))),

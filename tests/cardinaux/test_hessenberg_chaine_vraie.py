@@ -1,8 +1,8 @@
 """Tests de la CHAÎNE D'EXTENSION VRAIE de Hessenberg (NON vacuous)."""
 from bourbaki.logique.formule import egal, var
-import bourbaki.ensembles.ensembles_abrege as E
+import bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de
-from bourbaki.ensembles.ensembles_abrege import theorie_ensembles
+from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege import theorie_ensembles
 from bourbaki.cardinaux.ensembles_hessenberg_hard import frame_pair, frame_ordre
 from bourbaki.logique.formule import non, appartient
 from bourbaki.cardinaux.ensembles_hessenberg_chaine_vraie import (

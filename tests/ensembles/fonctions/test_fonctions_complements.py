@@ -6,8 +6,8 @@ l'assemblage fidèle attendu ; le seul lemme prouvé (coupe_caracterisation) est
 vérifié sur sa conclusion ET sa clôture. theorie_ensembles() reste à 22 axiomes.
 """
 from bourbaki.logique.formule import var, egal, et, appartient, inclus, equiv
-from bourbaki.ensembles import ensembles_abrege as E
-from bourbaki.ensembles.base.ensembles_fondations_notions import (
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
+from bourbaki.ensembles.ii_3_correspondances.ensembles_fondations_notions import (
     correspondance, est_application,
 )
 from bourbaki.ensembles.fonctions.ii_3_general import ensembles_fonctions_complements as C

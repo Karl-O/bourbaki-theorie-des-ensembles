@@ -52,7 +52,7 @@ from bourbaki.logique.formule import (
     Terme, var, egal, et, ou, non, impl, equiv, appartient, pourtout,
 )
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 
 from bourbaki.logique.tactiques.tactiques_abrege import a_implique_a, syllogisme
 from bourbaki.logique.tactiques.tactiques_abrege2 import (
@@ -71,10 +71,10 @@ from bourbaki.entiers.iii_5_calcul_entiers.iii_5_2_inegalites_ordre_soustraction
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers_theoremes import (
     membre_intervalle_entiers, fini_implique_cardinal,
 )
-from bourbaki.ensembles.base.ensembles_couples import singleton_membre
+from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import singleton_membre
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_fini_successeur import successeur_est_un_cardinal
 from bourbaki.cardinaux.ensembles_cardinaux_theoremes import inf_egal_reflexif
-from bourbaki.ensembles.ensembles_theoremes import (
+from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import (
     extensionnalite_appliquee, _instance_reunion,
 )
 from bourbaki.entiers.iii_6_infinis.iii_6_1_n_objet_existence.ensembles_aleph0 import card_egal_succ_card_diff
@@ -346,7 +346,7 @@ def _intervalle_aa_abstrait(a="aiaa"):
     from bourbaki.cardinaux.ensembles_cardinaux_props_restantes_ordre import (
         inf_egal_antisymetrique_card,
     )
-    from bourbaki.ensembles.ensembles_theoremes import egalite_par_extension
+    from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import egalite_par_extension
     va = _t(a)
     seg = E.intervalle_entiers(va, va)
     sing = E.singleton(va)
@@ -411,7 +411,7 @@ def _singleton_diff_self_abstrait(a="asds"):
 
     a = VARIABLE FRAÎCHE.  z∈{a}∖{a} ⟺ (z∈{a} et z∉{a}) — contradictoire — d'où
     {a}∖{a} et ∅ ont les mêmes membres (aucun)."""
-    from bourbaki.ensembles.ensembles_theoremes import egalite_par_extension, vide_sans_element
+    from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import egalite_par_extension, vide_sans_element
     va = _t(a)
     sing = E.singleton(va)
     diff = E.difference(sing, sing)
@@ -502,7 +502,7 @@ def _union_singleton_diff_abstrait(a="auds", x="xuds"):
 
     A, x VARIABLES FRAÎCHES (τ-libres).  z∈(A∪{x})∖{x} ⟺ ((z∈A ou z=x) et z≠x)
     ⟺ z∈A (sous x∉A : si z∈A alors z≠x ; et z∈A donne le ou).  R := z∈A τ-libre."""
-    from bourbaki.ensembles.ensembles_theoremes import egalite_par_extension
+    from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import egalite_par_extension
     va, vx = _t(a), _t(x)
     sing = E.singleton(vx)
     union = E.reunion(va, sing)
@@ -752,7 +752,7 @@ def prop5_intervalle_zero(b="b"):
 def prop4_translation_bien_definie_enonce(a="a", b="b", x="x"):
     """Formule : ( est_cardinal(a) et x∈[0,b] ) ⇒ ( a+x ∈ [a, a+b] )."""
     va, vb, vx = _t(a), _t(b), _t(x)
-    from bourbaki.ensembles.familles.ensembles_somme_disjointe import somme_cardinale_binaire
+    from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import somme_cardinale_binaire
     ax = somme_cardinale_binaire(va, vx)
     ab = somme_cardinale_binaire(va, vb)
     return impl(et(est_cardinal(va), appartient(vx, E.intervalle_entiers(ZERO, vb))),
@@ -768,7 +768,7 @@ def prop4_translation_bien_definie(a="a", b="b", x="x"):
       • a ≤ a+x : Card a ≤ a+x (inf_egal_somme_gauche_binaire) et Card a = a
         (cardinal_de_cardinal sous est_cardinal a) ;
       • a+x ≤ a+b : de x≤b (borne sup. de [0,b]) via somme_binaire_monotone_droite."""
-    from bourbaki.ensembles.familles.ensembles_somme_disjointe import (
+    from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import (
         somme_cardinale_binaire, somme_disjointe,
     )
     from bourbaki.entiers.iii_5_calcul_entiers.iii_5_1_somme_produit_entiers.ensembles_calcul_entiers_props import (
@@ -815,7 +815,7 @@ def prop4_translation_bien_definie(a="a", b="b", x="x"):
 
 def prop4_translation_croissante_enonce(a="a", x="x", x2="xp"):
     """Formule : ( x ≤ x' ) ⇒ ( a+x ≤ a+x' )   (croissance LARGE)."""
-    from bourbaki.ensembles.familles.ensembles_somme_disjointe import somme_cardinale_binaire
+    from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import somme_cardinale_binaire
     va, vx, vx2 = _t(a), _t(x), _t(x2)
     return impl(inf_egal_card(vx, vx2),
                 inf_egal_card(somme_cardinale_binaire(va, vx),

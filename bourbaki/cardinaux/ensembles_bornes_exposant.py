@@ -31,7 +31,7 @@ from __future__ import annotations
 from bourbaki.logique.formule import (Terme, var, tau, egal, et, ou, non, impl,
                      appartient, existe, pourtout, inclus, subst_t)
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.tactiques.tactiques_abrege import syllogisme
 from bourbaki.logique.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
@@ -86,7 +86,7 @@ def _Gx_inclus(x, b, a):
 
     z∈Gx ⇔ (∃d)(∃y)(z=(d,y) et d∈B et y=x) ; d∈B, y=x∈A ⇒ (d,y)∈B×A ; donc z∈B×A."""
     from bourbaki.cardinaux.ensembles_eq_exposant_invariant import _membre_graphe_terme_z
-    from bourbaki.ensembles.familles.ensembles_produit import couple_dans_produit_ssi
+    from bourbaki.ensembles.familles.ii_2_produit_deux_ensembles.ensembles_produit import couple_dans_produit_ssi
     vx, vb, va = _t(x), _t(b), _t(a)
     Gx = _Gx(vx, vb)
     BA = E.produit(vb, va)
@@ -212,7 +212,7 @@ def _temoin_B(b):
 
 def _const_egal_donne_Gx(vx1, vx2, b, a):
     """{ const_x₁ = const_x₂ } ⊢ Gx₁ = Gx₂."""
-    from bourbaki.ensembles.base.ensembles_couples import couple_egal_implique_composantes
+    from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import couple_egal_implique_composantes
     vb, va = _t(b), _t(a)
     Gx1, Gx2 = _Gx(vx1, vb), _Gx(vx2, vb)
     L1, L2 = _const(vx1, vb, va), _const(vx2, vb, va)
@@ -244,7 +244,7 @@ def W_phi_injective(b, a):
 
     const_x=const_x' ⇒ Gx=Gx' ; en b₀∈B : Gx(b₀)=x, Gx'(b₀)=x' (constante) ⇒ x=x'.
     L'hypothèse b₀∈B est ensuite déchargée par B≠∅ (témoin canonique)."""
-    from bourbaki.ensembles.base.ensembles_vide import non_vide_ssi_element
+    from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_vide import non_vide_ssi_element
     va, vb = _t(a), _t(b)
     Wt = W_phi(b, a)
     vx1, vx2 = var("x1"), var("x2")
@@ -345,7 +345,7 @@ def _Fba_non_vide_a(a="a", b="b"):
 
     x := τ_w(w∈a)∈a (a≠0) ; const_x ∈ 𝓕(b;a) (witness) ⇒ 𝓕(b;a)≠∅ ⇒ {∅}≤𝓕(b;a)
     par un_inf_egal (la borne 1≤y pour y≠0)."""
-    from bourbaki.ensembles.base.ensembles_vide import non_vide_ssi_element
+    from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_vide import non_vide_ssi_element
     from bourbaki.cardinaux.ensembles_cardinaux_un_borne import un_inf_egal
     va, vb = _t(a), _t(b)
     Fba = E.applications(vb, va)

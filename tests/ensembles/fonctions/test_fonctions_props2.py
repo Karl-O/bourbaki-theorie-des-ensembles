@@ -7,7 +7,7 @@ les théorèmes CONDITIONNELS (composée surjective/bijective, valeur 2 arg.) le
 sur l'ENSEMBLE EXACT de leurs hypothèses (jamais postulées).
 """
 from bourbaki.logique.formule import var, egal, et, impl, appartient, existe, equiv
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ensembles.fonctions.ii_3_general import ensembles_fonctions_props2 as P2
 
 

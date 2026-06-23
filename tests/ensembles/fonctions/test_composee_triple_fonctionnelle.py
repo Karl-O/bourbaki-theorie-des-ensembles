@@ -1,5 +1,5 @@
 """Tests §II.5 Prop 2 (cœur) — fonctionnalité de la composée de trois fonctions."""
-from bourbaki.ensembles.ensembles_abrege import theorie_ensembles
+from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege import theorie_ensembles
 from bourbaki.ensembles.fonctions.hors_ii_3.ii_5_produit_famille.ensembles_composee_triple_fonctionnelle import (
     composee_triple_fonctionnelle, composee_triple_fonctionnelle_cible,
 )

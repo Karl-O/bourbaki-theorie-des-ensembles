@@ -6,9 +6,9 @@ conclusion ne figure JAMAIS dans les hypothèses).  theorie_ensembles() reste à
 """
 from bourbaki.logique.formule import var, egal, et, impl, appartient, pourtout
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
-from bourbaki.ensembles.familles import ensembles_limites as L
-from bourbaki.ensembles.familles import ensembles_limites_iii7 as I7
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
+from bourbaki.ensembles.familles.iii_7_limites import ensembles_limites as L
+from bourbaki.ensembles.familles.iii_7_limites import ensembles_limites_iii7 as I7
 
 
 def _leq():

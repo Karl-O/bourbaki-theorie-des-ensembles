@@ -10,7 +10,7 @@ from bourbaki.cardinaux.ensembles_n_arith_iii5 import (
 from bourbaki.cardinaux.ensembles_puissance_entiers_inconditionnel import (
     B0_preuve, B_preuve, puissance_entiers_ferme_inconditionnel,
 )
-from bourbaki.ensembles.ensembles_abrege import theorie_ensembles
+from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege import theorie_ensembles
 
 
 def test_B0_decharge():

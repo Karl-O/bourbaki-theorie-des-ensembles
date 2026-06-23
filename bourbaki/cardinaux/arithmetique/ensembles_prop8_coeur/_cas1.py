@@ -21,10 +21,10 @@ from __future__ import annotations
 
 from bourbaki.logique.formule import var, egal, impl
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.tactiques.tactiques_abrege2 import (conjonction_intro,
                                conjonction_elim_gauche, conjonction_elim_droite)
-from bourbaki.ensembles.familles.ensembles_somme_disjointe import UN, somme_disjointe
+from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import UN, somme_disjointe
 from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de, equipotent
 from bourbaki.cardinaux.arithmetique.ensembles_prop8_coeur._g import (
     A0_terme, G_RESTR, g_fonctionnel, g_injective, _cut)
@@ -100,7 +100,7 @@ def eq_copies_cas_fixe(a="A", b="B", h=_H):
     BS = somme_disjointe(vb, E.singleton(E.VIDE))
     A0 = A0_terme(a)
     B0 = E.produit(vb, E.singleton(__import__(
-        "bourbaki.ensembles.familles.ensembles_somme_disjointe", fromlist=["ZERO"]).ZERO))
+        "bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe", fromlist=["ZERO"]).ZERO))
     g = G_RESTR(a, h)
     bijg = cas_fixe_bijection(a, b, h)        # {bij(h), h(*)=*} ⊢ bij(g, A0, B0)
     # Eq(A×{0}, B×{0}) via S5 (témoin g)

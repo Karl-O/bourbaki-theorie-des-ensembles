@@ -43,7 +43,7 @@ from __future__ import annotations
 
 from bourbaki.logique.formule import var, egal, non
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import cardinal, est_cardinal
 from bourbaki.logique.tactiques.tactiques_abrege2 import (instancie, contraposition,
                                                           conjonction_intro)
@@ -56,7 +56,7 @@ from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.e
                                                   deux_distinct_successeur_deux)
 from bourbaki.cardinaux.arithmetique.ensembles_prop8_fini2 import (
     prop8_successeur_injectif)
-from bourbaki.ensembles.familles.ensembles_somme_disjointe import somme_disjointe
+from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import somme_disjointe
 
 
 _SING = E.singleton(E.VIDE)                  # {∅}  (= 1 comme marqueur)

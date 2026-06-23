@@ -4,7 +4,7 @@ from bourbaki.entiers.iii_5_calcul_entiers.iii_5_2_inegalites_ordre_soustraction
     soustraction_caracterisation, soustraction_caracterisation_enonce,
     soustraction_unicite, soustraction_unicite_enonce,
 )
-from bourbaki.ensembles.ensembles_abrege import theorie_ensembles
+from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege import theorie_ensembles
 
 
 def test_existence_clos():

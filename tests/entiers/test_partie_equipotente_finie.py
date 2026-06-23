@@ -1,5 +1,5 @@
 """Tests — §III.4-5 pigeonhole forme équipotente (partie_equipotente_egale)."""
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_2_pigeonhole_surgery.ensembles_partie_equipotente_finie import (
     partie_equipotente_egale, partie_equipotente_egale_enonce,
 )

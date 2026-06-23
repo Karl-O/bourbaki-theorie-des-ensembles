@@ -3,13 +3,13 @@ from bourbaki.entiers.iii_5_calcul_entiers.iii_5_2_inegalites_ordre_soustraction
     prop2_strict_forward, prop2_strict_backward,
     prop2_strict_equivalence, prop2_strict_equivalence_enonce,
 )
-from bourbaki.ensembles.ensembles_abrege import theorie_ensembles
+from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege import theorie_ensembles
 from bourbaki.logique.formule import (
     var, egal, non, et, impl, existe, equiv,
 )
 from bourbaki.cardinaux.ensembles_cardinaux import inf_strict_card
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import est_entier, ZERO
-from bourbaki.ensembles.familles.ensembles_somme_disjointe import somme_cardinale_binaire
+from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import somme_cardinale_binaire
 
 
 def test_theorie_inchangee():

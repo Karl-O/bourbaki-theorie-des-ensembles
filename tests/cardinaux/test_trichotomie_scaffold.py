@@ -10,7 +10,7 @@ On certifie le scaffolding inconditionnel de l'étape (d) du blueprint :
 theorie_ensembles() reste = 22 ; rien postulé ; conclusions non tautologiques.
 """
 from bourbaki.logique.formule import var, et, appartient, egal, Formule
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis import ensembles_ordre_vocab as V
 from bourbaki.cardinaux import ensembles_trichotomie_scaffold as TS
 from bourbaki.cardinaux import ensembles_trichotomie_scaffold_maximalite as M

@@ -15,7 +15,7 @@ from bourbaki.cardinaux.arithmetique.ensembles_prop8_transposition import (
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import successeur
 from bourbaki.cardinaux.ensembles_cardinaux import cardinal
 from bourbaki.logique.formule import var, egal
-import bourbaki.ensembles.ensembles_abrege as E
+import bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege as E
 from bourbaki.logique.tactiques.tactiques_abrege2 import antecedent_consequent
 
 

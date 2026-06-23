@@ -13,7 +13,7 @@ On certifie (ensembles_trichotomie_maximalite_preuve) :
 theorie_ensembles() reste = 22 ; rien postulé ; conclusions non tautologiques.
 """
 from bourbaki.logique.formule import var, egal, appartient, non, Formule
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux import ensembles_trichotomie_scaffold as TS
 from bourbaki.cardinaux import ensembles_trichotomie_scaffold_maximalite as M
 from bourbaki.cardinaux import ensembles_trichotomie_maximalite_preuve as P

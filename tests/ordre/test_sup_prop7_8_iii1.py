@@ -1,7 +1,7 @@
 """Tests — PROPOSITION 7 (sup par recouvrement, cœur binaire) §III.1 (E.III.11)."""
 from bourbaki.logique import noyau_abrege as N
 from bourbaki.logique.formule import var
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis.ensembles_ordre_relation import borne_superieure, majorant
 from bourbaki.ordre.iii_1_relations_ordre.bornes_sup.ensembles_sup_prop7_8_iii1 import (
     borne_sup_reunion_iff,
@@ -10,7 +10,7 @@ from bourbaki.ordre.iii_1_relations_ordre.bornes_sup.ensembles_sup_prop7_8_iii1 
 
 
 def test_theorie_intangible():
-    from bourbaki.ensembles.ensembles_abrege import theorie_ensembles
+    from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege import theorie_ensembles
     assert len(theorie_ensembles().axiomes) == 22
 
 

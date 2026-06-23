@@ -5,7 +5,7 @@ Les cibles sont construites indépendamment (par les définitions de ensembles_a
 ou par le mécanisme de substitution canonique), pas extraites de la preuve.
 """
 from bourbaki.logique.formule import var, egal, et, appartient, impl, pourtout, existe
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ensembles.fonctions.ii_3_8_retractions_sections import ensembles_retractions as RS
 
 

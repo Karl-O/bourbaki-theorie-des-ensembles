@@ -33,7 +33,7 @@ from bourbaki.logique.formule import (
     Terme, var, egal, et, impl, ou, existe, appartient,
 )
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 
 from bourbaki.logique.tactiques.tactiques_abrege import a_implique_a
 from bourbaki.logique.tactiques.tactiques_abrege2 import (
@@ -48,7 +48,7 @@ from bourbaki.cardinaux.ensembles_cardinaux import (
     est_cardinal, cardinal, inf_egal_card, equipotent,
 )
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import est_entier, est_fini, ZERO
-from bourbaki.ensembles.familles.ensembles_somme_disjointe import (
+from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import (
     somme_cardinale_binaire, somme_disjointe,
 )
 

@@ -7,8 +7,8 @@ from __future__ import annotations
 
 from bourbaki.logique.formule import (var, app, egal, et, impl, equiv,
                                        appartient, existe, pourtout)
-from bourbaki.ensembles import ensembles_abrege as E
-from bourbaki.ensembles.relations import ensembles_decomposition_quotient as D
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
+from bourbaki.ensembles.ii_6_equivalence import ensembles_decomposition_quotient as D
 
 
 # ════════════════════════════════════════════════════════════════════════════

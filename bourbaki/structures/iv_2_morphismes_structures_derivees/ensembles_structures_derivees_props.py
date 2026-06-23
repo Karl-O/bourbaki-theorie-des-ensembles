@@ -68,7 +68,7 @@ from __future__ import annotations
 
 from bourbaki.logique.formule import (var, egal, et, impl, equiv, pourtout, app)
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.tactiques.tactiques_abrege import antecedent_consequent
 from bourbaki.logique.tactiques.tactiques_abrege2 import (
     conjonction_intro, equivalence_avant, equivalence_arriere,

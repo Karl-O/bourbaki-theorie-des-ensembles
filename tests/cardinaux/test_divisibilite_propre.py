@@ -8,7 +8,7 @@ from bourbaki.cardinaux.ensembles_divisibilite_propre import (
 
 
 def _theorie_intacte():
-    from bourbaki.ensembles.ensembles_abrege import theorie_ensembles
+    from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege import theorie_ensembles
     assert len(theorie_ensembles().axiomes) == 22
 
 

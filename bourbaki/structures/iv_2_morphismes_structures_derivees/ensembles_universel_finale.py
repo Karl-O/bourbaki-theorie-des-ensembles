@@ -20,7 +20,7 @@ from __future__ import annotations
 from bourbaki.logique.formule import (var, et, impl, equiv, pourtout, appartient,
                                        app)
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.tactiques.tactiques_abrege2 import (
     equivalence_avant, instancie)
 from bourbaki.structures.iv_2_morphismes_structures_derivees.ensembles_universel_morphismes import (

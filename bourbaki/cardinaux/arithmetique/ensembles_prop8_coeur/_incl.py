@@ -9,12 +9,12 @@ from __future__ import annotations
 
 from bourbaki.logique.formule import var, egal, appartient, inclus, impl
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.tactiques.tactiques_abrege import syllogisme
 from bourbaki.logique.tactiques.tactiques_abrege2 import (equivalence_avant,
                                equivalence_arriere, instancie)
 from bourbaki.logique.tactiques.tactiques_abrege_egalite import congruence_terme
-from bourbaki.ensembles.familles.ensembles_somme_disjointe import ZERO, UN, somme_disjointe
+from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import ZERO, UN, somme_disjointe
 from bourbaki.cardinaux.arithmetique.ensembles_prop8_coeur._g import A0_terme
 
 

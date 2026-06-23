@@ -8,8 +8,8 @@ certifiée par le noyau EST EXACTEMENT la cible Bourbaki, et la clôture.
 from bourbaki.logique.formule import var, egal, inclus, impl, appartient
 from bourbaki.cardinaux import ensembles_cardinaux_bornes as B
 from bourbaki.cardinaux.ensembles_cardinaux import inf_egal_card, cardinal
-from bourbaki.ensembles.familles.ensembles_somme_disjointe import somme_disjointe
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import somme_disjointe
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 
 
 # ── (1)  0 ≤ a  : l'application vide injecte ∅ dans A ─────────────────────────

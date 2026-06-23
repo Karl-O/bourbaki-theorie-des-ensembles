@@ -2,7 +2,7 @@
 from bourbaki.logique.formule import (
     var, egal, et, non, impl, pourtout, appartient, inclus, equiv,
 )
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import (
     cardinal, est_bijection_de, inf_egal_card,
 )

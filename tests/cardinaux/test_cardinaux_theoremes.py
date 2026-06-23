@@ -1,6 +1,6 @@
 """Tests §III.3 — Eq(X,Card X) et Proposition 1 (sens direct)."""
 from bourbaki.logique.formule import var, egal, impl
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import equipotent, cardinal
 from bourbaki.cardinaux.ensembles_cardinaux_theoremes import equipotent_son_cardinal, cardinal_egal_si_equipotent
 

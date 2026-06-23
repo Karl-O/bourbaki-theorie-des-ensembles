@@ -32,7 +32,7 @@ from __future__ import annotations
 from bourbaki.logique.formule import (Terme, var, egal, et, non, ou, impl, equiv,
                      appartient, existe, pourtout, inclus, subst_t)
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.tactiques.tactiques_abrege import a_implique_a, syllogisme
 from bourbaki.logique.tactiques.tactiques_abrege2 import (conjonction_intro,
                                conjonction_elim_gauche, conjonction_elim_droite,
@@ -42,10 +42,10 @@ from bourbaki.logique.tactiques.tactiques_abrege2 import (conjonction_intro,
 from bourbaki.logique.tactiques.tactiques_abrege_egalite import (symetrie,
                                composer_egalites, congruence_terme)
 from bourbaki.logique.tactiques.tactiques_abrege_quantif import existe_elimination
-from bourbaki.ensembles.ensembles_theoremes import (egalite_par_extension,
+from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import (egalite_par_extension,
                                extensionnalite_appliquee)
 # socle 2-élément (0=∅, 1={∅}) — RÉUTILISÉ, jamais redéfini :
-from bourbaki.ensembles.familles.ensembles_somme_disjointe import ZERO, UN
+from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import ZERO, UN
 # infra réunion de graphes (recollement) — RÉUTILISÉE :
 from bourbaki.ensembles.fonctions.hors_ii_3.iii_3_recollement.ensembles_restriction_somme import (
     membre_reunion_graphes, _ex_falso)
@@ -69,7 +69,7 @@ from bourbaki.cardinaux.arithmetique.ensembles_powerset_exp import (
 from bourbaki.cardinaux.ensembles_cardinaux import (cardinal, equipotent,
                                est_bijection_de)
 from bourbaki.cardinaux.arithmetique.ensembles_arith_cardinale import _prop1_direct_t
-from bourbaki.ensembles.base.ensembles_couples import couple_egal_implique_composantes
+from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import couple_egal_implique_composantes
 
 
 def _t(v):
@@ -116,7 +116,7 @@ def _couple_dans_G_imp(vz, vv, vG, vincl, vX, deux_ens):
     """{G⊂X×2} ⊢ ((z,v)∈G) ⇒ (z∈X et v∈2).   (typage des couples d'un graphe ⊂ X×2.)
 
     vincl : Γ ⊢ G⊂X×2.  couple (z,v)∈G ⇒ (z,v)∈X×2 ⇒ (z∈X et v∈2)."""
-    from bourbaki.ensembles.familles.ensembles_produit import couple_dans_produit_ssi
+    from bourbaki.ensembles.familles.ii_2_produit_deux_ensembles.ensembles_produit import couple_dans_produit_ssi
     cpl = E.couple(vz, vv)
     h = N.assume(appartient(cpl, vG))                   # (z,v)∈G
     in_prod = N.modus_ponens(h, instancie(vincl, cpl))  # (z,v)∈X×2
@@ -289,7 +289,7 @@ def _G_inclus_chi(Y, vX, vG, incl, fonct, domeq):
 
     w∈G⊂X×2 ⇒ w=(z,v), z∈X, v∈2 ⇒ v=0 ∨ v=1.  v=1 : (z,1)∈G ⇒ z∈Pre(G) ⇒ (z,1)∈χ_Y ;
     v=0 : (z,0)∈G ⇒ z∉Pre(G) (sinon (z,1)∈G + fonct ⇒ 1=0) ⇒ z∈X∖Y ⇒ (z,0)∈χ_Y."""
-    from bourbaki.ensembles.familles.ensembles_produit import _instance_produit
+    from bourbaki.ensembles.familles.ii_2_produit_deux_ensembles.ensembles_produit import _instance_produit
     chiY = chi(Y, vX)
     diff = E.difference(vX, Y)
     deux_ens = deux()

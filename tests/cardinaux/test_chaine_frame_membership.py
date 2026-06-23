@@ -1,6 +1,6 @@
 """Tests — assemblage bijection-recollement de chaîne + frame-membership (§III.6.3)."""
 from bourbaki.logique.formule import var, appartient, et
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de
 from bourbaki.ordre.iii_2_bon_ordre.recurrence_transfinie.ensembles_c60_coeur import union_famille
 from bourbaki.cardinaux.ensembles_hessenberg_hard import frame_pair
@@ -38,5 +38,5 @@ def test_frame_inductif_chaine():
 
 
 def test_theorie_inchangee():
-    from bourbaki.ensembles.ensembles_abrege import theorie_ensembles
+    from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege import theorie_ensembles
     assert len(theorie_ensembles().axiomes) == 22

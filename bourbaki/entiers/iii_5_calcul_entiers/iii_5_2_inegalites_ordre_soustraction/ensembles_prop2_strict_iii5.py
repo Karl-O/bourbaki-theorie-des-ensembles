@@ -55,7 +55,7 @@ from bourbaki.cardinaux.ensembles_cardinaux import (
 from bourbaki.cardinaux.arithmetique.ensembles_arith_cardinale_props_exposant_monotone import (
     inf_egal_transporte_cardinal,
 )
-from bourbaki.ensembles.familles.ensembles_somme_disjointe import (
+from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import (
     somme_disjointe, somme_cardinale_binaire,
 )
 from bourbaki.cardinaux.ensembles_cardinaux_bornes_somme import (

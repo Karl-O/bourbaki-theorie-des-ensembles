@@ -11,7 +11,7 @@ Vérifie les pièces de l'argument « CLAIM : Card(S₀)=Card(E) ⇒ a²=a » :
 
 INVARIANT : theorie_ensembles() == 22 ; conclusion ∉ hyps (non vacuous).
 """
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_frame_extension_finale import (
     cadre_bijection, cadre_bijection_cible,
     cadre_card_trois_b, cadre_card_trois_b_cible,

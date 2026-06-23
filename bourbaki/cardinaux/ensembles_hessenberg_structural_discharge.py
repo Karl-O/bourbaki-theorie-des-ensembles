@@ -21,7 +21,7 @@ from bourbaki.logique.formule import (
     Terme, var, egal, et, ou, non, impl, existe, pourtout, appartient, inclus,
 )
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 
 from bourbaki.cardinaux.ensembles_cardinaux import (
     cardinal, est_cardinal, inf_egal_card, est_bijection_de,
@@ -152,7 +152,7 @@ def U_disjoint_S0(E_set="E", S="S0", U="Ucadre", z="z"):
 
     ⚠️ binder « z » (binder par défaut de ⊂) pour que U⊂E∖S₀ s'instancie sans
     capture (l'hyp porte exactement (∀z)(z∈U ⇒ z∈E∖S₀))."""
-    from bourbaki.ensembles.base.ensembles_difference import _inst_diff
+    from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_difference import _inst_diff
     vE, vS, vU = _t(E_set), _t(S), _t(U)
     vz = var(z)
     DiffES = E.difference(vE, vS)
@@ -280,8 +280,8 @@ def couple_dans_produit_reunion_gauche(u="u", v="v", a="A", b="B", c="C"):
     couple_dans_produit_distributif_reunion.  Brique réutilisable vers
     (S₀∪U)²=S₀²∪(S₀×U)∪(U×S₀)∪U² (l'égalité ensembliste pleine reste à lever par
     extensionnalité)."""
-    from bourbaki.ensembles.familles.ensembles_produit import couple_dans_produit_ssi
-    from bourbaki.ensembles.ensembles_theoremes import _instance_reunion
+    from bourbaki.ensembles.familles.ii_2_produit_deux_ensembles.ensembles_produit import couple_dans_produit_ssi
+    from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import _instance_reunion
     from bourbaki.logique.tactiques.tactiques_abrege2 import (
         et_congruence_gauche, et_ou_distrib, ou_congruence, comm_et,
         equivalence_symetrie, equivalence_transitivite,

@@ -41,7 +41,7 @@ from __future__ import annotations
 
 from bourbaki.logique.formule import (Terme, var, egal, et, appartient, existe, subst_t, subst_f)
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.tactiques.tactiques_abrege import a_implique_a, syllogisme
 from bourbaki.logique.tactiques.tactiques_abrege2 import (conjonction_intro, conjonction_elim_gauche,
                                conjonction_elim_droite, equivalence_avant,
@@ -53,14 +53,14 @@ from bourbaki.logique.tactiques.tactiques_abrege_quantif import (existe_eliminat
 from bourbaki.ensembles.fonctions.ii_3_6_fonction_terme.ensembles_fonction_terme import membre_graphe_terme, graphe_terme_fonctionnel
 from bourbaki.cardinaux.ensembles_cantor import (graphe_terme_couple_dans, graphe_terme_domaine,
                               graphe_terme_valeur)
-from bourbaki.ensembles.ensembles_theoremes import egalite_par_extension
-from bourbaki.ensembles.base.ensembles_couples import couple_egal_implique_composantes
-from bourbaki.ensembles.familles.ensembles_produit import couple_dans_produit_ssi
+from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import egalite_par_extension
+from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import couple_egal_implique_composantes
+from bourbaki.ensembles.familles.ii_2_produit_deux_ensembles.ensembles_produit import couple_dans_produit_ssi
 from bourbaki.cardinaux.arithmetique.ensembles_produit_commute import (_membre_produit_egal_couple_ab,
                                        _membre_produit_pr1_ab, _membre_produit_pr2_ab,
                                        _couple_dans_produit_t, _inst_produit,
                                        _projection_premiere_ab, _projection_seconde_ab)
-from bourbaki.ensembles.base.ensembles_correspondances import _inst_image
+from bourbaki.ensembles.ii_3_correspondances.ensembles_correspondances import _inst_image
 from bourbaki.ensembles.fonctions.ii_3_4_fonctions_valeur.ensembles_fonctions import valeur_dans_graphe, valeur_caracterisation
 from bourbaki.logique.tactiques.tactiques_abrege import syllogisme as _syll
 

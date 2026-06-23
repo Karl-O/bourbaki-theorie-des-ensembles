@@ -7,7 +7,7 @@ from __future__ import annotations
 
 from bourbaki.logique.formule import (var, egal, et, impl, equiv, appartient, pourtout, existe,
                      afficher_f)
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux import ensembles_equivalence as Q
 
 

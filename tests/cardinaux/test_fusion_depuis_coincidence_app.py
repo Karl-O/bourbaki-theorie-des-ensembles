@@ -12,7 +12,7 @@ et seg(Tg,Rp,F), TOUS DEUX portés par les CŒURS.  Il ne reste QUE les deux bon
 = la prémisse propre du Théorème 3 §III.2.  Conclusion == T2.fusion_hyp LITTÉRALEMENT ;
 non tautologique ; theorie=22.
 """
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux import ensembles_fusion_depuis_coincidence_app as FDA
 from bourbaki.cardinaux import ensembles_fusion_assemblage as FA
 from bourbaki.cardinaux import ensembles_temoin_deux_couples as T2

@@ -6,7 +6,7 @@ U : 𝓕(C; 𝓕(B;A)) ↪ 𝓕(B×C; A),  g ↦ ( (b,c) ↦ g(c)(b) ).  Bien-d�
 valeur_application_dans_but ; injectivité = back-and-forth REDOUBLÉ (deux niveaux).
 """
 from bourbaki.logique.formule import var, egal, et, appartient, inclus
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import est_injection_de, inf_egal_card
 from bourbaki.cardinaux.arithmetique import ensembles_prop10_inj_uncurry as U
 

@@ -43,7 +43,7 @@ from bourbaki.logique.formule import (
     Terme, var, egal, et, ou, non, impl, equiv, appartient, existe, pourtout, inclus,
 )
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis import ensembles_ordre_vocab as V
 from bourbaki.logique.tactiques.tactiques_abrege import syllogisme
 from bourbaki.logique.tactiques.tactiques_abrege2 import (
@@ -259,7 +259,7 @@ def _Tbb(Rp, F_set, b):
 # ── PIÈCES PROUVÉES du couple-iso-dans-h pour le témoin h⁺ (génériques a,b) ──
 def _a_dans_Saa(R="R", E_set="E", a="a"):
     """⊢ a ∈ ]←,a] = seg(R,E,a)∪{a}.   (INCONDITIONNEL : a∈{a} ⇒ a∈seg∪{a}.)"""
-    from bourbaki.ensembles.base.ensembles_couples import singleton_membre
+    from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import singleton_membre
     from bourbaki.ensembles.fonctions.hors_ii_3.iii_3_recollement.ensembles_restriction_somme import membre_reunion_graphes
     va = _t(a)
     Sa = _seg(R, E_set, a)

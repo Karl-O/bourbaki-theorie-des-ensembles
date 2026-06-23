@@ -7,7 +7,7 @@ La bijection somme K : A⊔B → A₁⊔B₁ agit selon le marqueur :
 (u,0)↦(F(u),0) et (v,1)↦(G(v),1).  On vérifie ses paliers : fonctionnel,
 domaine, valeur sur chaque copie (puis injectif/image/assemblage si atteints).
 """
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.arithmetique import ensembles_somme_equipotence as S
 from bourbaki.logique.formule import var, egal, appartient, subst_t
 

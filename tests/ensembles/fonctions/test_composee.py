@@ -2,7 +2,7 @@
 from __future__ import annotations
 
 from bourbaki.logique.formule import var, equiv, egal, et, appartient, existe
-from bourbaki.ensembles.ensembles_abrege import couple, composee, image
+from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege import couple, composee, image
 from bourbaki.ensembles.fonctions.ii_3_3_composee_graphes.ensembles_composee import couple_composee, image_composee
 
 

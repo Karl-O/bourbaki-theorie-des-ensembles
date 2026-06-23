@@ -6,7 +6,7 @@ lemme_4_sous_domaine à 4 hypothèses STRUCTURELLES (bon ordre AMBIANT bo(R,E) +
 JAMAIS bo(R,S) n'apparaît en hypothèse (le tout l'enjeu de la généralisation).
 """
 from bourbaki.logique.formule import var, egal, inclus
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux import ensembles_lemme4_sous_domaine as L
 from bourbaki.cardinaux.ensembles_lemme4_croissante import _R_de
 from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis.ensembles_ordre_monotone import est_strictement_croissante

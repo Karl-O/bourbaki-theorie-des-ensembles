@@ -2,8 +2,8 @@
 from __future__ import annotations
 
 from bourbaki.logique.formule import var, egal, inclus, et, impl, ou, non, appartient, equiv, pourtout, afficher_f
-from bourbaki.ensembles.ensembles_abrege import paire, singleton, VIDE, reunion, intersection
-from bourbaki.ensembles.ensembles_theoremes import (extensionnalite_appliquee, existence_paire,
+from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege import paire, singleton, VIDE, reunion, intersection
+from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import (extensionnalite_appliquee, existence_paire,
                                  unicite_par_extension, unicite_paire,
                                  appartient_paire_gauche, appartient_paire_droite,
                                  appartient_singleton, vide_sans_element,

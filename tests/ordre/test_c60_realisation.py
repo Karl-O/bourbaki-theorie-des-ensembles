@@ -13,7 +13,7 @@ INVARIANT vérifié partout : theorie_ensembles() = 22 ; conclusions non vacuous
 résidu est EXACTEMENT (P2)+(P3)+(P4) (et le bon ordre pour l'existence).
 """
 from bourbaki.logique.formule import var, egal, appartient
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 import bourbaki.ordre.iii_2_bon_ordre.recurrence_transfinie.ensembles_c60_realisation as Rz
 from bourbaki.ordre.iii_2_bon_ordre.recurrence_transfinie.ensembles_c60_final import (
     membres_fonctionnels, equation_au_point, realisation_famille,

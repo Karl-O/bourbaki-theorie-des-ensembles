@@ -18,8 +18,8 @@ from bourbaki.cardinaux.ensembles_cardinaux_props_restantes import (
 from bourbaki.cardinaux.ensembles_cardinaux import (
     est_cardinal, inf_egal_card, cardinal,
 )
-from bourbaki.ensembles import ensembles_abrege as E
-from bourbaki.ensembles.familles.ensembles_somme_disjointe import somme_cardinale_binaire
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
+from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import somme_cardinale_binaire
 
 
 def test_theorie_inchangee():

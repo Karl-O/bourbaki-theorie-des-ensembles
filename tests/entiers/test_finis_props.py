@@ -168,5 +168,5 @@ def test_cor2_partie_stricte_card_strict_enonce():
 #  GARDE-FOU GLOBAL — theorie_ensembles() reste à 22 axiomes (intangible)
 # ══════════════════════════════════════════════════════════════════════════════
 def test_theorie_ensembles_reste_22():
-    from bourbaki.ensembles import ensembles_abrege as E
+    from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
     assert len(E.theorie_ensembles().axiomes) == 22

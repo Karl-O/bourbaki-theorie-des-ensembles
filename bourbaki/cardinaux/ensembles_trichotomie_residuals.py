@@ -78,7 +78,7 @@ from bourbaki.logique.formule import (
     Terme, var, egal, et, ou, non, impl, equiv, appartient, existe, pourtout, inclus,
 )
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis import ensembles_ordre_vocab as V
 from bourbaki.logique.tactiques.tactiques_abrege import syllogisme
 from bourbaki.logique.tactiques.tactiques_abrege2 import (
@@ -88,7 +88,7 @@ from bourbaki.logique.tactiques.tactiques_abrege2 import (
 from bourbaki.cardinaux.ensembles_cantor_bernstein import inclusion_transitive_terme
 from bourbaki.logique.tactiques.tactiques_abrege_quantif import existe_elimination
 from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie, composer_egalites
-from bourbaki.ensembles.base.ensembles_correspondances import (
+from bourbaki.ensembles.ii_3_correspondances.ensembles_correspondances import (
     image_croissante, _inst_image,
 )
 from bourbaki.ensembles.fonctions.ii_3_4_fonctions_valeur.ensembles_valeur_codomaine import couple_valeur_dans_graphe
@@ -356,7 +356,7 @@ def restriction_inclus_produit_image(phi="phi", X="X"):
     (p,q)∈X×image(φ,X) (couple_dans_produit_ssi) ; z=(p,q) ⇒ z∈X×image(φ,X) (Leibniz).
     « Le graphe restreint à X tombe dans X × φ⟨X⟩ »  (son codomaine EFFECTIF)."""
     from bourbaki.ensembles.fonctions.ii_3_5_restrictions_prolongements.ensembles_restrictions import _inst_restriction
-    from bourbaki.ensembles.familles.ensembles_produit import couple_dans_produit_ssi
+    from bourbaki.ensembles.familles.ii_2_produit_deux_ensembles.ensembles_produit import couple_dans_produit_ssi
     vphi, vX = _t(phi), _t(X)
     img = E.image(vphi, vX)
     prod = E.produit(vX, img)

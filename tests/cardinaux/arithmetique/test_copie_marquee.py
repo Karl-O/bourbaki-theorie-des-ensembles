@@ -14,9 +14,9 @@ Vérifie (conclusions EXACTES + clos) les paliers de la bijection a↦(a,m), gra
   • eq_copies_gauches_implique_eq : Eq(A×{0}, B×{0}) ⇒ Eq(A, B)  (transport CAS 1).
 """
 from bourbaki.logique.formule import var, egal, impl
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import equipotent, est_bijection_de
-from bourbaki.ensembles.familles.ensembles_somme_disjointe import ZERO, UN
+from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import ZERO, UN
 from bourbaki.cardinaux.arithmetique import ensembles_copie_marquee as C
 
 

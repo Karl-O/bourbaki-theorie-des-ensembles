@@ -11,7 +11,7 @@ VOIE FIDÈLE (rien postulé ; DÉRIVÉ depuis les axiomes de DÉFINITION de F^E 
   • exposant_cardinal_zero_base   : ¬(A=∅) ⇒ exposant_cardinal_binaire(∅,A)=Card(∅).
 """
 from bourbaki.logique.formule import var, egal, et, non, impl, appartient, inclus
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import cardinal
 from bourbaki.cardinaux.arithmetique import ensembles_exposant_zero as Z
 

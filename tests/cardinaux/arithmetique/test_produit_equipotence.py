@@ -9,7 +9,7 @@ Le graphe produit  H = graphe_terme(X×Y, (F(pr₁k), G(pr₂k)))  est fonctionn
 domaine X×Y, de valeur (F(pr₁u),G(pr₂u)), injectif (sous F,G injectives) et
 d'image X₁×Y₁ (sous F,G surjectives) ; l'assemblage donne la bijection produit.
 """
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.arithmetique import ensembles_produit_equipotence as PE
 from bourbaki.logique.formule import var, egal, et, subst_t
 from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de, equipotent

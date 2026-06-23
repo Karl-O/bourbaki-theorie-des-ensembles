@@ -52,8 +52,8 @@ from bourbaki.logique.formule import (
     Terme, var, egal, et, impl, equiv, appartient, existe, pourtout, subst_f,
 )
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
-from bourbaki.ensembles.base.ensembles_couples import couple_egal_implique_composantes
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
+from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import couple_egal_implique_composantes
 from bourbaki.logique.tactiques.tactiques_abrege import syllogisme
 from bourbaki.logique.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,

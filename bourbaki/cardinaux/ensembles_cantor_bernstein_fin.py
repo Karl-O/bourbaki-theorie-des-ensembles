@@ -33,7 +33,7 @@ from __future__ import annotations
 from bourbaki.logique.formule import (var, egal, et, ou, non, impl, appartient,
                                        existe, pourtout, inclus, Terme)
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.tactiques.tactiques_abrege import syllogisme
 from bourbaki.logique.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
@@ -41,8 +41,8 @@ from bourbaki.logique.tactiques.tactiques_abrege2 import (
     equivalence_avant, equivalence_arriere, instancie, instanciation_en_x,
     inclusion_transitive, cas, tiers_exclu)
 from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie, composer_egalites
-from bourbaki.ensembles.base.ensembles_correspondances import image_croissante
-from bourbaki.ensembles.ensembles_theoremes import egalite_par_extension
+from bourbaki.ensembles.ii_3_correspondances.ensembles_correspondances import image_croissante
+from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import egalite_par_extension
 from bourbaki.cardinaux import ensembles_cantor_bernstein as CB
 from bourbaki.cardinaux.ensembles_cardinaux import est_injection_de
 

@@ -3,7 +3,7 @@
 Chaque pièce : conclusion == cible (test miroir), non-vacuité (concl ∉ hyps), et
 les hypothèses EXACTES attendues.  Invariant permanent : theorie_ensembles() = 22.
 """
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.formule import var, egal, inclus, appartient
 import bourbaki.cardinaux.ensembles_restriction_iso_pieces as P
 

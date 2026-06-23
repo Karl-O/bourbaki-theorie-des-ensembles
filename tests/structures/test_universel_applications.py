@@ -5,7 +5,7 @@ logiques directs (critère (AU) ⟺ (AU_I′)+(AU_II′)).
 """
 from bourbaki.logique.formule import (var, et, ou, non, impl, equiv, pourtout,
                                        existe, appartient, egal, app, alpha_egal)
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.structures import ensembles_universel_applications as U
 
 

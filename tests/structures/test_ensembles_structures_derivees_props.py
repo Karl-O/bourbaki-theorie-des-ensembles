@@ -13,7 +13,7 @@ Pour chaque théorème on vérifie :
   • theorie_ensembles() reste à 22 axiomes (aucun axiome créé).
 """
 from bourbaki.logique.formule import var, egal, equiv
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.structures.iv_2_morphismes_structures_derivees.ensembles_universel_morphismes import (
     plus_fine, est_morphisme, _morph_defaut)
 import bourbaki.structures.iv_2_morphismes_structures_derivees.ensembles_structures_derivees_props as P

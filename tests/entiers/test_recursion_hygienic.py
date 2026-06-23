@@ -13,7 +13,7 @@ import pytest
 
 from bourbaki.logique import noyau_abrege as N
 from bourbaki.logique.formule import var, tau, egal
-import bourbaki.ensembles.ensembles_abrege as E
+import bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege as E
 from bourbaki.entiers.iii_6_infinis.iii_6_2_recursion_c62.ensembles_recursion_hygienic import (
     antecedent_dans_domaine_hygienic,
 )

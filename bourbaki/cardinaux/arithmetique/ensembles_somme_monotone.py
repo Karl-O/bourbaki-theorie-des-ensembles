@@ -43,7 +43,7 @@ from __future__ import annotations
 
 from bourbaki.logique.formule import (Terme, var, egal, et, appartient, existe, inclus, subst_t)
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.tactiques.tactiques_abrege import syllogisme
 from bourbaki.logique.tactiques.tactiques_abrege2 import (conjonction_intro,
                                conjonction_elim_gauche, conjonction_elim_droite,
@@ -53,7 +53,7 @@ from bourbaki.logique.tactiques.tactiques_abrege_egalite import (symetrie, compo
                                congruence_terme)
 from bourbaki.logique.tactiques.tactiques_abrege_quantif import (existe_elimination, alpha_existe)
 from bourbaki.ensembles.fonctions.ii_3_6_fonction_terme.ensembles_fonction_terme import membre_graphe_terme
-from bourbaki.ensembles.familles.ensembles_somme_disjointe import (somme_disjointe, ZERO, UN,
+from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import (somme_disjointe, ZERO, UN,
                                injection_gauche_dans_somme, injection_droite_dans_somme,
                                membre_somme_caracterise, _ou_congruence)
 from bourbaki.cardinaux.arithmetique import ensembles_somme_equipotence as S

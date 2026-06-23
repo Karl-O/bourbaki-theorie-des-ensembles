@@ -49,10 +49,10 @@ from __future__ import annotations
 from bourbaki.logique.formule import Terme, var, egal, non
 from bourbaki.logique import noyau_abrege as N
 
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import inf_egal_card, equipotent
 from bourbaki.entiers.iii_6_infinis.iii_6_1_n_objet_existence.ensembles_ensemble_NN import ensemble_NN, zero_dans_NN
-from bourbaki.ensembles.base.ensembles_vide import non_vide_ssi_element
+from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_vide import non_vide_ssi_element
 from bourbaki.cardinaux.ensembles_cardinaux_bornes_somme import inf_egal_produit
 from bourbaki.logique.tactiques.tactiques_abrege2 import instancie
 

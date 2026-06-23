@@ -49,7 +49,7 @@ from bourbaki.logique.formule import (
     Terme, var, egal, et, ou, non, impl, equiv, appartient, existe, pourtout, inclus,
 )
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis import ensembles_ordre_vocab as V
 from bourbaki.logique.tactiques.tactiques_abrege import syllogisme
 from bourbaki.logique.tactiques.tactiques_abrege2 import (
@@ -60,8 +60,8 @@ from bourbaki.logique.tactiques.tactiques_abrege_quantif import (
     existe_elimination, alpha_existe,
 )
 from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie, composer_egalites
-from bourbaki.ensembles.base.ensembles_correspondances import _inst_image, _inst_img
-from bourbaki.ensembles.familles.ensembles_produit import (
+from bourbaki.ensembles.ii_3_correspondances.ensembles_correspondances import _inst_image, _inst_img
+from bourbaki.ensembles.familles.ii_2_produit_deux_ensembles.ensembles_produit import (
     _instance_produit, couple_dans_produit_ssi,
 )
 from bourbaki.ensembles.fonctions.ii_3_4_fonctions_valeur.ensembles_valeur_codomaine import couple_valeur_dans_graphe

@@ -1,5 +1,5 @@
 """Tests — §III.2 coincidence_point_app : consommation de coincidence_univ_app (CLOSE)."""
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_fusion_app import (
     coincidence_point_app, coincidence_point_app_cible,
 )

@@ -33,7 +33,7 @@ from __future__ import annotations
 from bourbaki.logique.formule import (Terme, var, egal, et, non, equiv, appartient,
                      existe, subst_t)
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.tactiques.tactiques_abrege import a_implique_a
 from bourbaki.logique.tactiques.tactiques_abrege2 import (conjonction_intro, conjonction_elim_gauche,
                                conjonction_elim_droite, equivalence_avant,
@@ -42,11 +42,11 @@ from bourbaki.logique.tactiques.tactiques_abrege2 import (conjonction_intro, con
 from bourbaki.logique.tactiques.tactiques_abrege_egalite import (symetrie, symetrie as eg_symetrie,
                                       composer_egalites)
 from bourbaki.logique.tactiques.tactiques_abrege_quantif import existe_elimination, congruence_existe, alpha_existe
-from bourbaki.ensembles.ensembles_theoremes import egalite_par_extension
+from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import egalite_par_extension
 from bourbaki.ensembles.fonctions.ii_3_6_fonction_terme.ensembles_fonction_terme import membre_graphe_terme, graphe_terme_fonctionnel
 from bourbaki.ensembles.fonctions.ii_3_4_fonctions_valeur.ensembles_fonctions import valeur_caracterisation
-from bourbaki.ensembles.base.ensembles_couples import singleton_injectif
-from bourbaki.ensembles.familles.ensembles_produit_famille import membre_parties
+from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import singleton_injectif
+from bourbaki.ensembles.familles.ii_5_produit_famille.ii_5_definitions.ensembles_produit_famille import membre_parties
 from bourbaki.cardinaux.ensembles_cardinaux import est_injection_de
 
 
@@ -189,7 +189,7 @@ def singleton_inclus(u="u", x="X"):
 
     {u}⊂X = (∀z)(z∈{u} ⇒ z∈X).  z∈{u} ⇔ z=u (singleton_membre) ; z=u et u∈X
     donnent z∈X par Leibniz."""
-    from bourbaki.ensembles.base.ensembles_couples import singleton_membre
+    from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import singleton_membre
     vX, vu, vz = _t(x), var(u), var("z")
     su = E.singleton(vu)
     h_inX = N.assume(appartient(vu, vX))

@@ -7,8 +7,8 @@ from __future__ import annotations
 
 from bourbaki.logique.formule import var, et, impl, equiv
 from bourbaki.cardinaux.ensembles_cardinaux import inf_egal_card, equipotent
-from bourbaki.ensembles.ensembles_abrege import theorie_ensembles
-from bourbaki.ensembles.ensembles_props_diverses import (
+from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege import theorie_ensembles
+from bourbaki.ensembles.iii_3_ordre_cardinaux.ensembles_props_diverses import (
     equipotence_implique_inf_egal_inverse,
     equipotents_mutuellement_inf_egal,
     inf_egal_invariant_gauche,

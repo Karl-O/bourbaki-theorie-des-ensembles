@@ -1,7 +1,7 @@
 """Tests §III.6.3 — recollement de CHAÎNE : injectivité + assemblage graphe-niveau."""
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
-from bourbaki.ensembles.ensembles_abrege import theorie_ensembles
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege import theorie_ensembles
 from bourbaki.ordre.iii_2_bon_ordre.recurrence_transfinie.ensembles_c60_coeur import union_famille, famille_compatible
 from bourbaki.cardinaux.ensembles_recollement_famille_injectif import (
     injectif_graphe, famille_dirigee, membres_injectifs,

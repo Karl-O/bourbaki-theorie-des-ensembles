@@ -22,9 +22,9 @@ from __future__ import annotations
 
 from bourbaki.logique.formule import var, egal, et, appartient
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.tactiques.tactiques_abrege2 import (conjonction_intro, equivalence_arriere, instancie)
-from bourbaki.ensembles.base.ensembles_correspondances import coupe_membre
+from bourbaki.ensembles.ii_3_correspondances.ensembles_correspondances import coupe_membre
 
 
 # ── Réflexivité partielle d'une relation d'équivalence (E.II.6.1) ──────────────

@@ -3,7 +3,7 @@ from bourbaki.entiers.iii_5_calcul_entiers.iii_5_2_inegalites_ordre_soustraction
     prop4_translation_injective, prop4_translation_injective_enonce,
     prop4_translation_stricte, prop4_translation_stricte_enonce,
 )
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 
 
 def test_injective_close():

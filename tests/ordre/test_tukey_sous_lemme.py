@@ -4,7 +4,7 @@ from bourbaki.ordre.iii_4_ensembles_finis.ensembles_tukey_iii4 import (
     sous_lemme_partie_finie_dans_membre, Incl,
 )
 from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis.ensembles_ordre_relation import totalement_ordonne
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.formule import var, existe, appartient
 
 

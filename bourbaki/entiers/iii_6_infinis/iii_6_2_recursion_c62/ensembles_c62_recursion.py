@@ -76,7 +76,7 @@ from bourbaki.ordre.iii_2_bon_ordre.recurrence_transfinie.ensembles_c60_pont imp
 )
 from bourbaki.ordre.iii_2_bon_ordre.recurrence_transfinie.ensembles_recurrence_transfinie import _graphe_R
 from bourbaki.ordre.iii_2_bon_ordre.recurrence_transfinie.ensembles_c60_existence_close import est_essai
-import bourbaki.ensembles.ensembles_abrege as E
+import bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege as E
 
 
 def _t(t):

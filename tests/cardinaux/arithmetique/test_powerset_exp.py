@@ -11,7 +11,7 @@ précise (cf. bijection_caracteristique_REPORTE) ; on verrouille ici :
   • cible_powerset_exp       : l'énoncé exact Card(𝔓(X)) = 2^Card X.
 """
 from bourbaki.logique.formule import var, egal, et, non, ou, appartient
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import cardinal
 from bourbaki.cardinaux.arithmetique.ensembles_exposant_cardinal import exposant_cardinal_binaire
 from bourbaki.cardinaux.arithmetique import ensembles_powerset_exp as P

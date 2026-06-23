@@ -23,7 +23,7 @@ CLOS (vérifiés est_clos, 0 hyp, conclusion exacte, theorie=22) :
 import pytest
 
 from bourbaki.logique.formule import var, egal, non
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import successeur, ZERO, est_fini
 from bourbaki.entiers.iii_6_infinis.iii_6_1_n_objet_existence.ensembles_ensemble_NN import ensemble_NN
 from bourbaki.cardinaux.ensembles_cardinaux import inf_egal_card, equipotent

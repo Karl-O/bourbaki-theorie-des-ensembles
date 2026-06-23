@@ -3,8 +3,8 @@
 M1 (base) : (a ≤ b) ⇒ (a^c ≤ b^c), sans aucune hypothèse de support.
 """
 from bourbaki.logique.formule import var, impl
-import bourbaki.ensembles.ensembles_abrege as E
-from bourbaki.ensembles.ensembles_abrege import theorie_ensembles
+import bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege import theorie_ensembles
 from bourbaki.cardinaux.ensembles_cardinaux import inf_egal_card, est_injection_de
 from bourbaki.cardinaux.arithmetique.ensembles_exposant_cardinal import exposant_cardinal_binaire
 from bourbaki.cardinaux.arithmetique.ensembles_exposant_monotone_incond import (

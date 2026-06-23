@@ -2,8 +2,8 @@
 from bourbaki.logique.formule import egal, impl, et, var
 from bourbaki.cardinaux.ensembles_cardinaux import est_cardinal
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import successeur, est_fini
-from bourbaki.ensembles.familles.ensembles_somme_disjointe import somme_cardinale_binaire
-from bourbaki.ensembles.ensembles_abrege import theorie_ensembles
+from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import somme_cardinale_binaire
+from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege import theorie_ensembles
 
 
 def test_theorie_inchangee():
@@ -24,7 +24,7 @@ def test_somme_succ_distribue_close():
 def test_somme_zero_neutre_droite_close():
     from bourbaki.entiers.iii_5_calcul_entiers.iii_5_1_somme_produit_entiers.ensembles_combinatoire_iii5 import somme_zero_neutre_droite
     from bourbaki.cardinaux.ensembles_cardinaux import cardinal
-    from bourbaki.ensembles.ensembles_abrege import VIDE
+    from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege import VIDE
     a = var("Asz")
     cible = impl(est_cardinal(a),
                  egal(somme_cardinale_binaire(a, cardinal(VIDE)), a))

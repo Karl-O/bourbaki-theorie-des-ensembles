@@ -5,7 +5,7 @@ et le cas GÉNÉRAL (deux couples, conditionnel à l'hypothèse géométrique d'
 coïncidence) sont CONSTRUITS via h_membre_donne_temoin (CLOS, iso px,pw) + temoin_commun_
 depuis_iso.  Conclusions == cibles COH ; non tautologiques ; theorie=22.
 """
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux import ensembles_temoin_deux_couples as T2
 
 

@@ -8,8 +8,8 @@ ni plus, ni moins) ET que la conclusion est la cible (anti-tautologie : conclusi
 ≠ hypothèses).  theorie_ensembles() == 22 (intangible).
 """
 from bourbaki.logique.formule import var, et, impl, equiv, pourtout, appartient
-from bourbaki.ensembles import ensembles_abrege as E
-from bourbaki.ensembles.ensembles_quotient_produit_restant import (
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
+from bourbaki.ensembles.ii_6_equivalence.ensembles_quotient_produit_restant import (
     relation_produit_couples, _relation_induite,
     produit_symetrique, produit_transitive, produit_relation_equivalence,
     induite_transitive, induite_reflexive_dans, induite_relation_equivalence,

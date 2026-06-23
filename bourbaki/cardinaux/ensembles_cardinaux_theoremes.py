@@ -9,7 +9,7 @@ from __future__ import annotations
 
 from bourbaki.logique.formule import var, egal
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.tactiques.tactiques_abrege2 import (conjonction_intro, equivalence_avant, instancie)
 from bourbaki.cardinaux.ensembles_cardinaux import equipotent, cardinal, est_injection_de, inf_egal_card
 from bourbaki.cardinaux.ensembles_equipotence import (equipotence_reflexive, diagonale_fonctionnelle,

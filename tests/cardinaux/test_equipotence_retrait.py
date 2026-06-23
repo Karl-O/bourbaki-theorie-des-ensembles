@@ -14,7 +14,7 @@ from __future__ import annotations
 
 from bourbaki.logique.formule import var, et, appartient, impl
 from bourbaki.logique.tactiques.tactiques_abrege import antecedent_consequent
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de, equipotent, est_cardinal
 from bourbaki.cardinaux.ensembles_equipotence_retrait import (
     image_diff, eq_retrait_via_bijection, eq_retrait_meme_ensemble,

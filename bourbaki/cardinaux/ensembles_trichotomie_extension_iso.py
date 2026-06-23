@@ -76,7 +76,7 @@ from bourbaki.logique.formule import (
     existe, pourtout, inclus,
 )
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis import ensembles_ordre_vocab as V
 from bourbaki.ordre.iii_1_relations_ordre.isomorphismes_ordre.ensembles_pont_binder import pont_compatible
 from bourbaki.logique.tactiques.tactiques_abrege import syllogisme, a_implique_a
@@ -87,7 +87,7 @@ from bourbaki.logique.tactiques.tactiques_abrege2 import (
 from bourbaki.logique.tactiques.tactiques_abrege_egalite import (
     symetrie, composer_egalites,
 )
-from bourbaki.ensembles.base.ensembles_couples import singleton_membre
+from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import singleton_membre
 from bourbaki.ensembles.fonctions.hors_ii_3.iii_3_recollement.ensembles_restriction_somme import (
     membre_reunion_graphes,
 )
@@ -675,7 +675,7 @@ def image_point_graphe(a="a", b="b", y="z"):
       y∈image({(a,b)},{a}) ⇔ (∃x)(x∈{a} et (x,y)∈{(a,b)}) ⇔ y=b ⇔ y∈{b}.
     Double inclusion + extensionnalité A1.  INCONDITIONNEL, theorie=22.  NON vacueux."""
     from bourbaki.logique.tactiques.tactiques_abrege_quantif import existe_elimination
-    from bourbaki.ensembles.base.ensembles_couples import couple_egal_implique_composantes
+    from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import couple_egal_implique_composantes
     from bourbaki.logique.tactiques.tactiques_abrege_egalite import congruence_terme
     va, vb = _t(a), _t(b)
     ab = E.couple(va, vb)

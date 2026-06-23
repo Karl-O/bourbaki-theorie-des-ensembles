@@ -14,7 +14,7 @@ from __future__ import annotations
 
 from bourbaki.logique.formule import var, impl, pourtout
 from bourbaki.logique.tactiques.tactiques_abrege import antecedent_consequent
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import est_cardinal
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_recurrence_c61_existence_n.ensembles_recurrence_C61 import cardinal_pas_entre
 from bourbaki.cardinaux.ensembles_cardinal_pas_entre_univ import (

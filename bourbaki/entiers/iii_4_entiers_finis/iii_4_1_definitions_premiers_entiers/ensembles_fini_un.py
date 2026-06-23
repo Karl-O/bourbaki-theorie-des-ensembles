@@ -60,7 +60,7 @@ from __future__ import annotations
 
 from bourbaki.logique.formule import var, egal, non, et, appartient, existe
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import (est_bijection_de, cardinal, equipotent)
 from bourbaki.cardinaux.ensembles_cardinaux_theoremes import (equipotent_si_cardinal_egal,
                                        equipotence_symetrique)
@@ -72,10 +72,10 @@ from bourbaki.cardinaux.arithmetique.ensembles_somme_equipotence import eq_somme
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_fini_zero import successeur_zero_egale_un, fini_zero
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers_theoremes import card_est_un_cardinal
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers import ensembles_entiers as Ent
-from bourbaki.ensembles.familles.ensembles_somme_disjointe import (somme_disjointe, ZERO, UN as MARQUEUR_UN,
+from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import (somme_disjointe, ZERO, UN as MARQUEUR_UN,
                                        injection_gauche_dans_somme,
                                        injection_droite_dans_somme)
-from bourbaki.ensembles.base.ensembles_couples import (couple_egal_implique_composantes,
+from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import (couple_egal_implique_composantes,
                                   singleton_membre, membre_paire_gauche)
 from bourbaki.logique.tactiques.tactiques_abrege2 import (conjonction_intro, conjonction_elim_gauche,
                                conjonction_elim_droite, equivalence_avant, instancie)

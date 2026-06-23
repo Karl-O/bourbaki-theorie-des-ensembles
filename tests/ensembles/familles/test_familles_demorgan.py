@@ -1,7 +1,7 @@
 """Tests — De Morgan des familles (§II.4 Prop. 5) et identités de composition-valeur."""
 from bourbaki.logique.formule import var, egal, impl, existe, appartient
-from bourbaki.ensembles import ensembles_abrege as E
-from bourbaki.ensembles.familles import ensembles_familles_demorgan as M
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
+from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_demorgan import ensembles_familles_demorgan as M
 from bourbaki.ensembles.fonctions.ii_3_8_retractions_sections import ensembles_composee_valeurs as CV
 
 

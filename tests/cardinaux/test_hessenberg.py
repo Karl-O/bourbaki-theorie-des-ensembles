@@ -9,7 +9,7 @@
 Aucun théorème faux ; theorie_ensembles() = 22 (rien postulé).
 """
 from bourbaki.logique.formule import var, egal, et, impl
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import (
     cardinal, inf_egal_card, est_injection_de)
 from bourbaki.cardinaux.arithmetique.ensembles_arith_cardinale import produit_cardinal_binaire

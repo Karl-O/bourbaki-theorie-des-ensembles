@@ -32,7 +32,7 @@ from __future__ import annotations
 from bourbaki.logique.formule import (Terme, var, egal, et, ou, non, equiv,
                                        appartient)
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
     equivalence_avant, equivalence_arriere, equivalence_transitivite,
@@ -47,7 +47,7 @@ from bourbaki.cardinaux.ensembles_cardinaux_theoremes import (
 from bourbaki.cardinaux.ensembles_bijection import equipotence_symetrique
 from bourbaki.cardinaux.ensembles_vide_singleton import image_sur_vide
 from bourbaki.cardinaux.arithmetique.ensembles_arith_cardinale import _eq_son_cardinal_terme
-from bourbaki.ensembles.familles.ensembles_produit import produit_vide
+from bourbaki.ensembles.familles.ii_2_produit_deux_ensembles.ensembles_produit import produit_vide
 
 
 def _t(v):

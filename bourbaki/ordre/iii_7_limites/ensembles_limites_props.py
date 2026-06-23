@@ -5,7 +5,7 @@ Ce module NEUF prouve les CONTENUS ATTEIGNABLES des Propositions 1–10 et de le
 corollaires, là où la machinerie est disponible — SANS jamais modifier un fichier
 existant, SANS rien postuler (theorie_ensembles() reste à 22 axiomes).  Il réutilise
 (import seul) :
-  • `bourbaki.ensembles.familles.ensembles_limites`        (L : lim←, appl_proj/ind, …)
+  • `bourbaki.ensembles.familles.iii_7_limites.ensembles_limites`        (L : lim←, appl_proj/ind, …)
   • `bourbaki.ordre.iii_7_limites.ensembles_limites_canoniques`          (C : sys. proj./ind. d'appl.,
     application canonique, restriction à J, relation de cohérence, …)
   • `bourbaki.ordre.iii_7_limites.ensembles_cofinal`                     (cofinal, filtrant, image
@@ -48,8 +48,8 @@ from bourbaki.logique.formule import (
     Terme, var, app, egal, et, ou, impl, non, appartient, existe, pourtout, inclus,
 )
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
-from bourbaki.ensembles.familles import ensembles_limites as L
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
+from bourbaki.ensembles.familles.iii_7_limites import ensembles_limites as L
 from bourbaki.ordre.iii_7_limites import ensembles_limites_canoniques as C
 from bourbaki.logique.tactiques.tactiques_abrege2 import (
     instancie, conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,

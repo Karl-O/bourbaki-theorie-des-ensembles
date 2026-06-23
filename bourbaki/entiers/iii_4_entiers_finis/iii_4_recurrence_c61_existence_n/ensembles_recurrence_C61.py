@@ -57,7 +57,7 @@ from bourbaki.logique.formule import (
     subst_f,
 )
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import (
     est_cardinal, cardinal, inf_egal_card, inf_strict_card,
 )
@@ -163,7 +163,7 @@ def _injection_dans_vide_domaine_vide(F, b, z="z", y="y"):
 
 def _n_in_vide(t):
     """⊢ ¬(t ∈ ∅)   (AXIOME_VIDE instancié)."""
-    from bourbaki.ensembles.ensembles_theoremes import vide_sans_element
+    from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import vide_sans_element
     ax = N.generalisation("a", vide_sans_element("a"))      # (∀a)¬(a∈∅)
     return instancie(ax, _t(t))
 
@@ -177,7 +177,7 @@ def b_le_0_implique_egal_0(b="b", F="F"):
     sous-ensemble du vide est vide) ; et ∅ = 0, donc b = 0."""
     from bourbaki.cardinaux.ensembles_cardinaux import est_injection_de
     from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_fini_zero import cardinal_vide_egale_vide
-    from bourbaki.ensembles.ensembles_theoremes import extensionnalite_appliquee
+    from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import extensionnalite_appliquee
     from bourbaki.cardinaux.arithmetique.ensembles_exposant_cardinal import (
         inclus_vide_implique_egal_vide,
     )

@@ -6,8 +6,8 @@ Aucun fichier existant n'est modifié ; theorie_ensembles() reste à 22 axiomes.
 from bourbaki.logique.formule import (var, app, egal, et, impl, non, appartient,
                                        existe, inclus, pourtout, equiv)
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
-from bourbaki.ensembles.familles import ensembles_produit_props2 as P
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
+from bourbaki.ensembles.familles.ii_5_produit_famille.ii_5_6_7_algebre_produit import ensembles_produit_props2 as P
 
 
 # ── §5.4 — Cor. 3 (Prop. 6) : monotonie du produit  X_ι⊂Y_ι ⇒ ∏X⊂∏Y ──────────

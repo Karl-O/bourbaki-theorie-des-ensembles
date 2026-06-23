@@ -5,7 +5,7 @@ Les briques de restriction (image/dom/valeur/injective) sont GÉNÉRALES ; morce
 assemble le premier morceau de la bijection (f|D : D → f⟨D⟩).
 """
 from bourbaki.logique.formule import var, egal, impl, inclus, appartient
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux import ensembles_cantor_bernstein as CB
 from bourbaki.cardinaux import ensembles_cantor_bernstein_bij as B
 from bourbaki.cardinaux.ensembles_cardinaux import est_injection_de, est_bijection_de

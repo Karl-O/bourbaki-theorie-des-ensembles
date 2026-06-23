@@ -4,8 +4,8 @@ Honnêteté LCF : CLOS (0 hyp), conclusion == l'ÉQUIVALENCE fidèle (inclus ⇔
 les deux membres DIFFÈRENT, theorie = 22.
 """
 from bourbaki.logique.formule import var, equiv, inclus, egal
-from bourbaki.ensembles import ensembles_abrege as E
-import bourbaki.ensembles.ensembles_inclusion_treillis as M
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
+import bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_inclusion_treillis as M
 
 A, B = var("A"), var("B")
 

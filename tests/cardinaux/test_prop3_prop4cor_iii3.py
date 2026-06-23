@@ -4,7 +4,7 @@ from bourbaki.cardinaux.ensembles_prop3_prop4cor_iii3 import (
     prop3_surjection_inf_egal, cible_prop3_surjection_inf_egal,
     prop4cor_card_reunion_inf_egal_somme, cible_prop4cor_card_reunion_inf_egal_somme)
 from bourbaki.cardinaux.ensembles_cardinaux import somme_cardinale, cardinal
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 
 
 def _hyps_set(thm):

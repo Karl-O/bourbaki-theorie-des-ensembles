@@ -9,7 +9,7 @@ sont CLOS (ou gardent exactement les hypothèses attendues).
 from bourbaki.logique.formule import (
     var, app, egal, et, ou, impl, non, equiv, appartient, existe, pourtout, inclus,
 )
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis import ensembles_ordre_vocab as V
 
 

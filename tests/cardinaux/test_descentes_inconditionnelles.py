@@ -8,13 +8,13 @@ loi_deduction), de conclusion exactement l'énoncé attendu, non vacueux, et que
 noyau reste à theorie_ensembles() == 22.
 """
 from bourbaki.logique.formule import var, egal, et, impl
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import est_cardinal
 from bourbaki.cardinaux.arithmetique.ensembles_arith_cardinale import (
     produit_cardinal_binaire as _pcb,
 )
 from bourbaki.entiers.iii_6_infinis.iii_6_3_infinis_denombrables.ensembles_infinis import est_infini
-from bourbaki.ensembles.familles.ensembles_somme_disjointe import (
+from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import (
     somme_cardinale_binaire, somme_disjointe,
 )
 

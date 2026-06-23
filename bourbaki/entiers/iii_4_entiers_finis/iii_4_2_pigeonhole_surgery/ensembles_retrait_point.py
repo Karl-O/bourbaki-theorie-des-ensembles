@@ -58,7 +58,7 @@ from __future__ import annotations
 from bourbaki.logique.formule import (Terme, var, egal, et, non, impl, existe,
                                        inclus, appartient)
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.tactiques.tactiques_abrege import syllogisme
 from bourbaki.logique.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
@@ -75,8 +75,8 @@ from bourbaki.cardinaux.ensembles_cardinaux_props_restantes import (
 from bourbaki.cardinaux.arithmetique.ensembles_copie_marquee import (
     eq_copie_gauche, _eq_sym_t, _eq_trans_t)
 from bourbaki.cardinaux.arithmetique.ensembles_prop8_plus_point import somme_un_plus_point
-from bourbaki.ensembles.familles.ensembles_somme_disjointe import somme_disjointe, ZERO, UN
-from bourbaki.ensembles.ensembles_theoremes import egalite_par_extension
+from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import somme_disjointe, ZERO, UN
+from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import egalite_par_extension
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import successeur
 
 
@@ -153,7 +153,7 @@ def _dans_singleton_star_ssi(z):
     ax_p = N.axiome(E.theorie_ensembles(), E.AXIOME_PAIRE)
     car = instancie(instancie(instancie(ax_p, _STAR), _STAR), vz)   # z∈{*,*} ⇔ (z=* ou z=*)
     # (z=* ou z=*) ⇔ z=*   (idempotence du « ou »)
-    from bourbaki.ensembles.familles.ensembles_somme_disjointe import _ou_idem
+    from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import _ou_idem
     from bourbaki.logique.tactiques.tactiques_abrege import a_implique_a
     from bourbaki.logique.formule import ou
     h_or = N.assume(ou(egal(vz, _STAR), egal(vz, _STAR)))

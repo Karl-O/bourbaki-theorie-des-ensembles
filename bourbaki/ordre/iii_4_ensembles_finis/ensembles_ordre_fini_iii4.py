@@ -29,7 +29,7 @@ from bourbaki.logique.formule import (
     Terme, var, egal, et, ou, non, impl, appartient, existe, pourtout, inclus,
 )
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 
 from bourbaki.logique.tactiques.tactiques_abrege import a_implique_a, syllogisme
 from bourbaki.logique.tactiques.tactiques_abrege2 import (
@@ -52,8 +52,8 @@ from bourbaki.entiers.iii_5_calcul_entiers.iii_5_1_somme_produit_entiers.ensembl
     recurrence_finie, recurrence_finie_enonce,
 )
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import est_fini_ensemble
-from bourbaki.ensembles.ensembles_theoremes import _instance_reunion
-from bourbaki.ensembles.base.ensembles_couples import singleton_membre
+from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import _instance_reunion
+from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import singleton_membre
 
 
 def _t(t):
@@ -318,7 +318,7 @@ def prop3_total(G="Gpgt", E_set="Epgt", X="Xpgt", m="m_pgf"):
     hP0_ante = N.assume(et(inclus(E.VIDE, vE), non(egal(E.VIDE, E.VIDE))))
     n_refl = conjonction_elim_droite(hP0_ante)           # ¬(∅=∅)
     refl0 = N.reflexivite(E.VIDE)                        # ∅=∅
-    from bourbaki.ensembles import ensembles_abrege as _E
+    from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as _E
     concl0 = existe(m, _pge(G, E.VIDE, var(m)))
     falso0 = N.modus_ponens(refl0, N.modus_ponens(n_refl, N.s2(non(egal(E.VIDE, E.VIDE)), concl0)))
     P0 = N.loi_deduction(et(inclus(E.VIDE, vE), non(egal(E.VIDE, E.VIDE))), falso0)   # P(∅)
@@ -921,7 +921,7 @@ def cor2_maximal(G="Gemf", E_set="Eemf", X="Xemf", m="m_emf"):
     forall_a = N.modus_ponens(E_sub_E, PE)               # (∀a)(a∈E ⇒ ∃m(m∈E et (a,m)∈G et emax(G,E,m)))
 
     # ── non-vide : (∃z)(z∈E) ────────────────────────────────────────────────
-    from bourbaki.ensembles.base.ensembles_vide import non_vide_ssi_element
+    from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_vide import non_vide_ssi_element
     ex_z = N.modus_ponens(hnv, equivalence_avant(non_vide_ssi_element(vE)))   # (∃z)(z∈E)
     vz = var("z")
     hz = N.assume(appartient(vz, vE))

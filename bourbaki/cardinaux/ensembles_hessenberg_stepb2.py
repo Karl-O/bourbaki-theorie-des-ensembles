@@ -37,7 +37,7 @@ from bourbaki.logique.formule import (
     libres_f, subst_f,
 )
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 
 from bourbaki.logique.tactiques.tactiques_abrege2 import (
     instancie, conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
@@ -163,7 +163,7 @@ def _non_vide_existe_element(vU, u):
 
     `non_vide_ssi_element(U)` donne ¬(U=∅) ⇔ (∃z)(z∈U) (binder z) ; on prend le sens
     avant et on α-renomme (∃z)→(∃u) pour matcher le témoin uwit."""
-    from bourbaki.ensembles.base.ensembles_vide import non_vide_ssi_element
+    from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_vide import non_vide_ssi_element
     from bourbaki.logique.tactiques.tactiques_abrege_quantif import alpha_existe
     eqv = non_vide_ssi_element(vU)                       # ¬(U=∅) ⇔ (∃z)(z∈U)
     avant = equivalence_avant(eqv)                       # ¬(U=∅) ⇒ (∃z)(z∈U)

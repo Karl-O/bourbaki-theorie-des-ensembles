@@ -33,7 +33,7 @@ from __future__ import annotations
 from bourbaki.logique.formule import (Terme, var, egal, et, impl, appartient, existe,
                      subst_t, subst_f)
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import cardinal
 from bourbaki.cardinaux.ensembles_cardinaux_theoremes import (equipotent_son_cardinal,
                                            cardinal_egal_si_equipotent)
@@ -257,7 +257,7 @@ def reassoc_graphe_injective(x="X", y="Y", z="Z"):
     congruences sur pr₁u puis sur u donnent u=u'.  UNIFORME en liants a,b/c,d."""
     from bourbaki.cardinaux.arithmetique.ensembles_produit_commute import (_membre_produit_egal_couple_ab,
                                            _membre_produit_pr1_ab)
-    from bourbaki.ensembles.base.ensembles_couples import couple_egal_implique_composantes
+    from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import couple_egal_implique_composantes
     vX, vY, vZ = _t(x), _t(y), _t(z)
     XY = E.produit(vX, vY)
     A = E.produit(XY, vZ)
@@ -336,9 +336,9 @@ def reassoc_graphe_image(x="X", y="Y", z="Z"):
     from bourbaki.cardinaux.arithmetique.ensembles_produit_commute import (_membre_produit_pr1_ab,
         _membre_produit_pr2_ab, _projection_premiere_ab, _projection_seconde_ab,
         _couple_dans_produit_t, _inst_produit)
-    from bourbaki.ensembles.base.ensembles_couples import couple_egal_implique_composantes
+    from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import couple_egal_implique_composantes
     from bourbaki.ensembles.fonctions.ii_3_6_fonction_terme.ensembles_fonction_terme import membre_graphe_terme
-    from bourbaki.ensembles.ensembles_theoremes import egalite_par_extension
+    from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import egalite_par_extension
     vX, vY, vZ = _t(x), _t(y), _t(z)
     XY = E.produit(vX, vY)
     A = E.produit(XY, vZ)               # (X×Y)×Z

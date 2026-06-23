@@ -1,6 +1,6 @@
 """Tests §III.6.3 — échelle finale Hessenberg a²=a (P5a/P5b/P5c)."""
 from bourbaki.logique.formule import libres_f, non, egal, var
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 
 
 def test_theorie_22():

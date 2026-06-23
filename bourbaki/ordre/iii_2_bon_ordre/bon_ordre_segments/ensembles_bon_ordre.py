@@ -20,13 +20,13 @@ from __future__ import annotations
 
 from bourbaki.logique.formule import Terme, var, et, ou, appartient
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.tactiques.tactiques_abrege import syllogisme
 from bourbaki.logique.tactiques.tactiques_abrege2 import (instancie, conjonction_intro,
                                conjonction_elim_gauche, conjonction_elim_droite,
                                projection_gauche, projection_droite,
                                equivalence_avant, equivalence_arriere)
-from bourbaki.ensembles.ensembles_theoremes import _instance_reunion, _instance_intersection
+from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import _instance_reunion, _instance_intersection
 
 
 def _terme(t):

@@ -19,7 +19,7 @@ from __future__ import annotations
 
 from bourbaki.logique.formule import Terme, var, egal, et, appartient, inclus, existe
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis import ensembles_ordre_vocab as V
 from bourbaki.logique.tactiques.tactiques_abrege2 import conjonction_intro, instancie
 from bourbaki.cardinaux.ensembles_trichotomie_coherences import _temoin_commun_coeur

@@ -24,7 +24,7 @@ from __future__ import annotations
 
 from bourbaki.logique.formule import Terme, var, egal, et, ou, impl, appartient, pourtout, inclus
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_equipotence import diagonale_membre
 from bourbaki.logique.tactiques.tactiques_abrege import a_implique_a, syllogisme
 from bourbaki.logique.tactiques.tactiques_abrege2 import (
@@ -272,7 +272,7 @@ def inclusion_antisymetrique(a="a", b="b", z="z"):
 
     Forme conjonctive (« antisymétrie ») de l'extensionnalité appliquée."""
     va, vb = _terme(a), _terme(b)
-    from bourbaki.ensembles.ensembles_theoremes import extensionnalite_appliquee
+    from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import extensionnalite_appliquee
     return extensionnalite_appliquee(va, vb)              # ((a⊂b) et (b⊂a)) ⇒ a=b
 
 

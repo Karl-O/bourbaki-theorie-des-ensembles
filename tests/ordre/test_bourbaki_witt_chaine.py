@@ -13,7 +13,7 @@ INVARIANT : theorie_ensembles() reste = 22 (axiomes de M_c/Cext en théories DÉ
 Rien n'est postulé : M chaîne et le point fixe sont DÉMONTRÉS (.est_clos vérifié).
 """
 from bourbaki.logique.formule import var
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis.ensembles_ordre_relation import totalement_ordonne
 from bourbaki.ordre.iii_2_bon_ordre.zorn_zermelo.ensembles_bourbaki_witt import (
     M, est_tour, M_est_une_chaine as ENONCE_CHAINE, bourbaki_witt as ENONCE_BW,

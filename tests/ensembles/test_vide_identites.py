@@ -4,8 +4,8 @@ Honnêteté LCF : chaque théorème est CLOS (0 hyp), conclusion == l'ÉGALITÉ 
 littérale, membres distincts, theorie = 22.
 """
 from bourbaki.logique.formule import var, egal
-from bourbaki.ensembles import ensembles_abrege as E
-import bourbaki.ensembles.ensembles_vide_identites as M
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
+import bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_vide_identites as M
 
 A, V = var("A"), E.VIDE
 U, I, D = E.reunion, E.intersection, E.difference

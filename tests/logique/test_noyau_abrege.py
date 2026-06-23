@@ -8,7 +8,7 @@ import pytest
 from bourbaki.logique.formule import (var, egal, appartient, ou, impl, equiv, pourtout, existe,
                      tau, subst_f)
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 
 A = egal(var("a"), var("b"))
 B = egal(var("b"), var("c"))

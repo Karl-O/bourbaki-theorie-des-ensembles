@@ -4,7 +4,7 @@ Chaque test vérifie la CONCLUSION EXACTE et les HYPOTHÈSES du théorème via l
 noyau abrégé.  Lemmes GÉNÉRAUX (réutilisables : Cantor–Bernstein ET Prop 9).
 """
 from bourbaki.logique.formule import (var, egal, et, non, appartient, pourtout)
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ensembles.fonctions.hors_ii_3.iii_3_recollement.ensembles_recollement_bijection import (
     valeur_reunion_gauche, valeur_reunion_droite,
     image_reunion_graphes, reunion_graphes_injective)

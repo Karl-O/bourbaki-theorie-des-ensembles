@@ -12,7 +12,7 @@ PALIERS :
   (4) Card(𝓕(A;{∅})) = Card({∅}) = 1 (Proposition 1 + équipotence des singletons).
 """
 from bourbaki.logique.formule import var, egal, et, impl, equiv, appartient, existe, inclus
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import cardinal, equipotent
 from bourbaki.cardinaux.arithmetique import ensembles_exposant_un_base as M
 

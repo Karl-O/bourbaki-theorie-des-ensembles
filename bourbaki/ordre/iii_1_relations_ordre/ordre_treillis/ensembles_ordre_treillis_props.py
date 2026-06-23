@@ -48,7 +48,7 @@ from bourbaki.logique.formule import (
     Terme, var, app, egal, et, ou, impl, non, equiv, appartient, existe, pourtout, inclus,
 )
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.tactiques.tactiques_abrege import syllogisme
 from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie
 from bourbaki.logique.tactiques.tactiques_abrege2 import (
@@ -502,7 +502,7 @@ def intervalle_ferme_non_vide_si_a_inf_b(G="G", e="E", a="a", b="b", x="x", z="z
     r = appartient(var(z), ens)
     ex_z = N.modus_ponens(a_dans, N.s5(r, va, z))         # (∃z)(z∈[a,b])
     # ¬([a,b]=∅) ⇔ (∃z)(z∈[a,b])  → backward
-    from bourbaki.ensembles.base.ensembles_vide import non_vide_ssi_element
+    from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_vide import non_vide_ssi_element
     nv = non_vide_ssi_element(ens)                        # ¬(ens=∅) ⇔ (∃z)(z∈ens)
     return N.modus_ponens(ex_z, equivalence_arriere(nv))  # ¬([a,b]=∅)
 

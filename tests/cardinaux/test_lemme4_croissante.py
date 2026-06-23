@@ -6,7 +6,7 @@ et Lemme 4 lui-même à 3 hypothèses STRUCTURELLES (bon ordre canonique + f:E�
 strictement croissante), conclusion fidèle, non tautologique.
 """
 from bourbaki.logique.formule import var, egal
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux import ensembles_lemme4_croissante as L
 from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis.ensembles_ordre_monotone import est_strictement_croissante
 

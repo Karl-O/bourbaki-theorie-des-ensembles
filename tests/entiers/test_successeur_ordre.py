@@ -5,7 +5,7 @@ from bourbaki.entiers.iii_5_calcul_entiers.iii_5_2_inegalites_ordre_soustraction
     succ_pas_inf_egal, succ_pas_inf_egal_enonce,
     successeur_ordre_strict, successeur_ordre_strict_enonce_fini,
 )
-from bourbaki.ensembles.ensembles_abrege import theorie_ensembles
+from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege import theorie_ensembles
 
 
 def test_successeur_ordre_clos():

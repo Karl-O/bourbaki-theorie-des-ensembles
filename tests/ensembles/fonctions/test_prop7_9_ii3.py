@@ -1,6 +1,6 @@
 """Tests §II.3 — Proposition 7 (réciproque fonction ⟺ injective) et
 Proposition 9 (factorisation), module ensembles_prop7_9_ii3."""
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ensembles.fonctions.ii_3_general.ensembles_prop7_9_ii3 import (
     reciproque_fonctionnel_ssi_injectif, cible_reciproque_fonctionnel_ssi_injectif,
     reciproque_fonctionnel_implique_injectif, injectif_implique_reciproque_fonctionnel,

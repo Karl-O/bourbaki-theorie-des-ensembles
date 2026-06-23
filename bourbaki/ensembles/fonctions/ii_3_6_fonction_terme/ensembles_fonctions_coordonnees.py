@@ -30,7 +30,7 @@ theorie_ensembles() inchangée (22 axiomes) ; noyau intact.
 from __future__ import annotations
 
 from bourbaki.logique.formule import var
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ensembles.fonctions.ii_3_6_fonction_terme.ensembles_fonction_terme import (
     graphe_terme_fonctionnel)
 

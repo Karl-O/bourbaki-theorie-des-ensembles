@@ -88,7 +88,7 @@ from __future__ import annotations
 
 from bourbaki.logique.formule import var, subst_f, appartient
 import bourbaki.logique.noyau_abrege as N
-import bourbaki.ensembles.ensembles_abrege as E
+import bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege as E
 
 
 def _binders(t, acc):

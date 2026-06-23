@@ -54,7 +54,7 @@ from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie
 from bourbaki.cardinaux.ensembles_cardinaux import (
     est_cardinal, cardinal, inf_egal_card,
 )
-from bourbaki.ensembles.familles.ensembles_somme_disjointe import (
+from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import (
     somme_cardinale_binaire,
 )
 from bourbaki.cardinaux.ensembles_prop13_complement import (

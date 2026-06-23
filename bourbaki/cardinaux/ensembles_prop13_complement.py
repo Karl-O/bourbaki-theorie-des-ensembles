@@ -52,7 +52,7 @@ from bourbaki.logique.formule import (
     Terme, var, egal, et, non, impl, existe, pourtout, appartient, inclus, tau,
 )
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite, instancie,
     equivalence_avant,
@@ -65,7 +65,7 @@ from bourbaki.logique.tactiques.tactiques_abrege_egalite import (
 from bourbaki.cardinaux.ensembles_cardinaux import (
     est_cardinal, equipotent, cardinal, inf_egal_card, est_injection_de,
 )
-from bourbaki.ensembles.familles.ensembles_somme_disjointe import (
+from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import (
     somme_disjointe, somme_cardinale_binaire,
 )
 

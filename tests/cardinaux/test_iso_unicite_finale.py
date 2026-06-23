@@ -15,7 +15,7 @@ theorie_ensembles() reste = 22 (rien postulé : RÉUTILISE point_fixe_automorphi
 iso_unicite_extensionnel, lemme_4 et l'axiome de la paire/vide pour la glue).
 """
 from bourbaki.logique.formule import var, egal, et, non, impl, appartient, pourtout, equiv
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux import ensembles_iso_unicite_finale as F
 from bourbaki.cardinaux.ensembles_lemme4_croissante import _R_de, _val, _f_dans_E
 from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis.ensembles_ordre_monotone import est_strictement_croissante

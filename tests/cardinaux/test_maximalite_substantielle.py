@@ -15,7 +15,7 @@ On certifie (ensembles_maximalite_substantielle) :
 INVARIANT : theorie_ensembles() = 22.  Rien postulé.  Conclusions NON vacueuses.
 """
 from bourbaki.logique.formule import var, egal, ou, non, appartient, Formule
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis import ensembles_ordre_vocab as V
 from bourbaki.cardinaux import ensembles_trichotomie_scaffold as TS
 from bourbaki.cardinaux import ensembles_trichotomie_h_iso as HI

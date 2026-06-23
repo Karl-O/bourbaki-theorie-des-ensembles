@@ -29,7 +29,7 @@ from __future__ import annotations
 
 from bourbaki.logique.formule import (Terme, var, egal, et, appartient, existe, inclus)
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.tactiques.tactiques_abrege import a_implique_a, syllogisme
 from bourbaki.logique.tactiques.tactiques_abrege2 import (conjonction_intro, conjonction_elim_gauche,
                                conjonction_elim_droite, equivalence_avant,
@@ -37,10 +37,10 @@ from bourbaki.logique.tactiques.tactiques_abrege2 import (conjonction_intro, con
                                instancie)
 from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie, composer_egalites, congruence_terme
 from bourbaki.logique.tactiques.tactiques_abrege_quantif import existe_elimination, alpha_existe
-from bourbaki.ensembles.ensembles_theoremes import egalite_par_extension
-from bourbaki.ensembles.base.ensembles_couples import (singleton_membre, membre_paire_gauche,
+from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import egalite_par_extension
+from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import (singleton_membre, membre_paire_gauche,
                                   couple_egal_implique_composantes)
-from bourbaki.ensembles.familles.ensembles_produit import (_instance_produit,
+from bourbaki.ensembles.familles.ii_2_produit_deux_ensembles.ensembles_produit import (_instance_produit,
                                   couple_dans_produit_ssi)
 from bourbaki.ensembles.fonctions.ii_3_4_fonctions_valeur.ensembles_fonctions import valeur_dans_graphe
 from bourbaki.cardinaux.ensembles_cardinaux import cardinal

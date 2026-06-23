@@ -37,7 +37,7 @@ from bourbaki.logique.formule import (
     Terme, var, egal, et, ou, non, impl, equiv, appartient, existe, pourtout, inclus,
 )
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.tactiques.tactiques_abrege import (
     a_implique_a, inclusion_reflexive,
 )
@@ -83,7 +83,7 @@ def _reunion_membre(A, B, z):
 
 def _singleton_membre(z, c):
     """⊢ ( z ∈ {c} ) ⇔ ( z = c )   (TERMES)."""
-    from bourbaki.ensembles.base.ensembles_couples import singleton_membre
+    from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import singleton_membre
     return singleton_membre(_t(z), _t(c))
 
 

@@ -34,7 +34,7 @@ from __future__ import annotations
 from bourbaki.logique.formule import (Terme, var, egal, et, impl, non, ou,
                      appartient, existe, pourtout, inclus, subst_t, subst_f)
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
     equivalence_avant, equivalence_arriere, equivalence_transitivite, instancie)
@@ -48,7 +48,7 @@ from bourbaki.ensembles.fonctions.ii_3_6_fonction_terme.ensembles_fonction_terme
     graphe_terme_fonctionnel, membre_graphe_terme)
 from bourbaki.cardinaux.ensembles_cantor import (
     graphe_terme_domaine, graphe_terme_valeur)
-from bourbaki.ensembles.familles.ensembles_produit import couple_dans_produit_ssi
+from bourbaki.ensembles.familles.ii_2_produit_deux_ensembles.ensembles_produit import couple_dans_produit_ssi
 from bourbaki.ensembles.fonctions.hors_ii_3.ii_5_produit_famille.ensembles_application_valeur import (
     valeur_application_dans_but, application_egale_par_valeurs,
     egalite_valeurs_application)
@@ -547,7 +547,7 @@ def _gval_egal_niv0(vg1, vg2, va, vb, vc, vv):
 
 def _strip_triple(triple_eq, g1, mid, top, g2):
     """De ⊢ ((g₁,mid),top)=((g₂,mid),top), tire ⊢ g₁=g₂.  (deux décompos de couples.)"""
-    from bourbaki.ensembles.base.ensembles_couples import couple_egal_implique_composantes
+    from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import couple_egal_implique_composantes
     inner1 = E.couple(g1, mid)
     inner2 = E.couple(g2, mid)
     comp1 = N.modus_ponens(triple_eq,

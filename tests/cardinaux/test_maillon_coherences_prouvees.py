@@ -15,7 +15,7 @@ theorie_ensembles() = 22 (rien postulé).
 """
 import pytest
 
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux import ensembles_maillon_coherences_prouvees as M
 from bourbaki.cardinaux import ensembles_fusion_depuis_coincidence_app as FDA
 from bourbaki.cardinaux import ensembles_trichotomie_scaffold as TS

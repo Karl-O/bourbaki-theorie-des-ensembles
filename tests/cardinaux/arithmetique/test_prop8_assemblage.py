@@ -13,8 +13,8 @@ H2(A,B) = (∀h)((bij(h,A⊔{∅},B⊔{∅}) et h(*)∈B×{0}) ⇒ Eq(A×{0},B×
 lemme reporté (le CAS 2, échange a₀↦b₀) ; tout le reste est certifié.
 """
 from bourbaki.logique.formule import var, egal, impl, appartient
-from bourbaki.ensembles import ensembles_abrege as E
-from bourbaki.ensembles.familles.ensembles_somme_disjointe import ZERO, UN, somme_disjointe
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
+from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import ZERO, UN, somme_disjointe
 from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de, equipotent, cardinal
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers import ensembles_entiers as Ent
 from bourbaki.cardinaux.arithmetique import ensembles_prop8_assemblage as A

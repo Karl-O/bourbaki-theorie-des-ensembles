@@ -5,7 +5,7 @@ théorèmes clos, est_clos ; pour les lemmes conditionnels, l'ensemble des
 hypothèses attendues.
 """
 from bourbaki.logique.formule import (var, egal, et, impl, non, appartient, inclus, equiv)
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux import ensembles_cantor as C
 from bourbaki.cardinaux.ensembles_cardinaux import (est_injection_de, inf_egal_card, est_bijection_de,
                                  equipotent, inf_strict_card)

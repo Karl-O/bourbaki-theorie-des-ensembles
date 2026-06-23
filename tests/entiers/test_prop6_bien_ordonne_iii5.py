@@ -11,7 +11,7 @@ de G⊂E×E) ; la clause SUBSTANTIELLE « plus petit » est, elle, INCONDITIONNE
 """
 import pytest
 
-from bourbaki.ensembles.ensembles_abrege import theorie_ensembles
+from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege import theorie_ensembles
 from bourbaki.entiers.iii_5_calcul_entiers.iii_5_intervalles_comptage.ensembles_prop6_bien_ordonne_iii5 import (
     partie_finie_est_finie, partie_finie_est_finie_enonce,
     clause_plus_petit_fini_total, _petit_clause,

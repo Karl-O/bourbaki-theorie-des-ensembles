@@ -57,7 +57,7 @@ from bourbaki.logique.formule import (
     Terme, var, egal, et, ou, non, impl, existe, pourtout, appartient, inclus,
 )
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 
 from bourbaki.cardinaux.ensembles_cardinaux import (
     cardinal, est_cardinal, inf_egal_card, inf_strict_card,
@@ -163,7 +163,7 @@ def produit_b(b):
 
 
 def somme_b(b):
-    from bourbaki.ensembles.familles.ensembles_somme_disjointe import (
+    from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import (
         somme_cardinale_binaire,
     )
     return somme_cardinale_binaire(b, b)

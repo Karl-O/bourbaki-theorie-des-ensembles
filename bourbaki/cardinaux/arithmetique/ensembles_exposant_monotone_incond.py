@@ -31,7 +31,7 @@ from __future__ import annotations
 from bourbaki.logique.formule import (Terme, var, egal, et, non, ou, impl,
                      appartient, existe, pourtout, inclus, subst_t, subst_f)
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
     equivalence_avant, equivalence_arriere, equivalence_transitivite, instancie,
@@ -452,7 +452,7 @@ def phi_injective_sous_appartenance(g1, g2, a, b, c, iota):
 
 def _phi_egal_donne_K(vg1, vg2, vb, vc, viota):
     """{ Φ(g₁)=Φ(g₂) } ⊢ K_g₁=K_g₂."""
-    from bourbaki.ensembles.base.ensembles_couples import couple_egal_implique_composantes
+    from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import couple_egal_implique_composantes
     Kg1, Kg2 = K_g(vg1, vc, viota), K_g(vg2, vc, viota)
     L1, L2 = _phi_valeur(vg1, vb, vc, viota), _phi_valeur(vg2, vb, vc, viota)
     inner1, inner2 = E.couple(Kg1, vc), E.couple(Kg2, vc)

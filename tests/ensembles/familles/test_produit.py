@@ -2,8 +2,8 @@
 from __future__ import annotations
 
 from bourbaki.logique.formule import var, et, ou, impl, appartient, existe, egal, inclus, equiv, afficher_f
-from bourbaki.ensembles.ensembles_abrege import produit, couple, est_un_couple, pr1, pr2, VIDE
-from bourbaki.ensembles.familles.ensembles_produit import (produit_inclusion_facile, couple_dans_produit,
+from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege import produit, couple, est_un_couple, pr1, pr2, VIDE
+from bourbaki.ensembles.familles.ii_2_produit_deux_ensembles.ensembles_produit import (produit_inclusion_facile, couple_dans_produit,
                                couple_dans_produit_ssi,
                                produit_projections, produit_vide_si,
                                produit_vide_dur, produit_vide,

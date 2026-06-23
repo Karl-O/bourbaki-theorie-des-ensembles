@@ -11,7 +11,7 @@ Vérifie pour chaque critère certifié dans `ensembles_cst_criteres_suite` :
   • theorie_ensembles() reste à 22 axiomes (aucun axiome créé).
 """
 from bourbaki.logique.formule import var, egal, et, equiv
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de
 from bourbaki.structures.iv_1_structures_isomorphismes.ensembles_especes import (
     Espece, est_isomorphisme, structure_transportee)

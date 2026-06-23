@@ -4,7 +4,7 @@
   • produit_cardinal_commutatif  : a·b = b·a  (Card(X×Y) = Card(Y×X)).
 """
 from bourbaki.logique.formule import var, egal, et, impl, subst_t
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import cardinal, est_bijection_de, equipotent
 from bourbaki.cardinaux.arithmetique import ensembles_arith_cardinale as A
 

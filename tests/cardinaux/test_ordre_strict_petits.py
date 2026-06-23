@@ -9,8 +9,8 @@ from bourbaki.logique.formule import egal, non
 from bourbaki.cardinaux import ensembles_ordre_strict_petits as S
 from bourbaki.cardinaux.ensembles_cardinaux import (inf_egal_card, inf_strict_card)
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import ZERO, UN, DEUX, successeur
-from bourbaki.ensembles.familles.ensembles_somme_disjointe import somme_disjointe
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import somme_disjointe
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 
 
 _UNSOMME = somme_disjointe(UN, E.singleton(E.VIDE))   # 1 ⊔ {∅}   ;   2 = Card(1 ⊔ {∅})

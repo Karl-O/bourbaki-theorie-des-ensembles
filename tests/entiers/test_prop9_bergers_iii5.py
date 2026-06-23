@@ -6,9 +6,9 @@ le principe fibres→produit = Prop 6 Cor 2 §III.3, famille indexée NON close)
 certifie ici le CŒUR BINAIRE (I de cardinal 2)."""
 from bourbaki.entiers.iii_5_calcul_entiers.iii_5_5_caracteristique_combinatoire.ensembles_prop9_bergers_iii5 import (
     bergers_binaire_fibres, bergers_binaire_somme)
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import cardinal
-from bourbaki.ensembles.familles.ensembles_somme_disjointe import (
+from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import (
     somme_disjointe, somme_cardinale_binaire)
 from bourbaki.logique.formule import var, egal, et
 

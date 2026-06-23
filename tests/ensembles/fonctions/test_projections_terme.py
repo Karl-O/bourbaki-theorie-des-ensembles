@@ -4,7 +4,7 @@ Vérifie la conclusion EXACTE (== cible) et les hypothèses de chaque théorème
 certifié par le noyau abrégé.
 """
 from bourbaki.logique.formule import var, et, impl, appartient, pourtout, subst_t, inclus
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ensembles.fonctions.ii_3_6_fonction_terme import ensembles_projections_terme as P
 
 

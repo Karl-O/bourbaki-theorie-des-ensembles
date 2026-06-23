@@ -7,8 +7,8 @@ hyp honnête Card S₀=Card E (« CLAIM » de Bourbaki ; STEP B ouvert, rapport�
 from bourbaki.logique import noyau_abrege as N
 from bourbaki.logique.formule import var, egal, libres_f
 from bourbaki.cardinaux.ensembles_cardinaux import cardinal
-from bourbaki.ensembles import ensembles_abrege as E
-from bourbaki.ensembles.ensembles_abrege import theorie_ensembles
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege import theorie_ensembles
 from bourbaki.cardinaux.ensembles_hessenberg import enonce_hessenberg
 from bourbaki.cardinaux.ensembles_hessenberg_vrai_final import (
     unpack_maximal, hessenberg_vrai,

@@ -3,7 +3,7 @@ INCONDITIONNEL (la comparabilité, hypothèse de seg_reflechit_ordre, est décha
 la totalité du bon ordre).  theorie=22, anti-tautologie.
 """
 from bourbaki.logique.formule import var, ou, impl, appartient
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux import ensembles_bien_ordonne_seg_iso as S
 from bourbaki.cardinaux.ensembles_bien_ordonne_lemme_1_segments import (
     seg, comparables_dans,

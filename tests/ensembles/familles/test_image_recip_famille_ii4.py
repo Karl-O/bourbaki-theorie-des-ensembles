@@ -1,8 +1,8 @@
 """Tests §II.4 — image / image réciproque d'une famille (Prop. 3/4/6, E.II.25-27)."""
 from bourbaki.logique.formule import egal, var
 from bourbaki.logique.formule import libres_f
-from bourbaki.ensembles import ensembles_abrege as E
-from bourbaki.ensembles.familles import ensembles_image_recip_famille_ii4 as M
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
+from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_image_famille import ensembles_image_recip_famille_ii4 as M
 
 
 def test_theorie_inchangee():

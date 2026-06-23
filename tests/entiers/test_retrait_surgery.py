@@ -11,7 +11,7 @@ from __future__ import annotations
 
 from bourbaki.logique.formule import (var, et, non, impl, inclus, appartient,
                                        existe, egal)
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import est_injection_de, inf_egal_card
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_2_pigeonhole_surgery.ensembles_retrait_surgery import (
     image_evite_inclus_diff,

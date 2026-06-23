@@ -37,14 +37,14 @@ from __future__ import annotations
 from bourbaki.logique.formule import (Terme, var, egal, et, appartient, inclus,
                                        pourtout, impl, subst_t)
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
     equivalence_avant, equivalence_arriere, equivalence_transitivite, instancie)
 from bourbaki.logique.tactiques.tactiques_abrege_quantif import existe_elimination
 from bourbaki.logique.tactiques.tactiques_abrege_egalite import (
     symetrie, composer_egalites, congruence_terme)
-from bourbaki.ensembles.base.ensembles_couples import (
+from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import (
     couple_egal_implique_composantes)
 from bourbaki.ensembles.fonctions.ii_3_6_fonction_terme.ensembles_fonction_terme import (
     graphe_terme_fonctionnel, membre_graphe_terme)
@@ -312,7 +312,7 @@ def _valeurs_coincident_sur_produit(vf1, vf2, va, vb, vc):
     via _slice_egal_en_point) ; niveau 0 (tranche0 égaux ⇒ Gᵢ((b,c)) égaux via
     _Gval_egal_en_couple) ; Leibniz w=(b,c).  C'est l'hypothèse des valeurs de
     application_egale_par_valeurs(f₁,f₂,B×C,A)."""
-    from bourbaki.ensembles.familles.ensembles_produit import _instance_produit
+    from bourbaki.ensembles.familles.ii_2_produit_deux_ensembles.ensembles_produit import _instance_produit
     G1, G2 = graphe_de(vf1), graphe_de(vf2)
     BC = E.produit(vb, vc)
     cu1, cu2 = curry0(vf1, va, vb, vc), curry0(vf2, va, vb, vc)

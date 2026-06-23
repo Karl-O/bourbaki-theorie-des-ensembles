@@ -20,14 +20,14 @@ from __future__ import annotations
 
 from bourbaki.logique.formule import var, egal, et, appartient, existe
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.tactiques.tactiques_abrege2 import (equivalence_transitivite, equivalence_avant,
                                antecedent_consequent, et_congruence_droite,
                                et_congruence_gauche, assoc_et, instancie)
 from bourbaki.logique.tactiques.tactiques_abrege_quantif import (congruence_existe, et_existe_droite,
                                       et_existe_gauche, existe_commute, alpha_existe)
 from bourbaki.ensembles.fonctions.ii_3_3_composee_graphes.ensembles_composee import couple_composee, _inst_composee
-from bourbaki.ensembles.ensembles_theoremes import egalite_par_extension
+from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import egalite_par_extension
 
 
 def _expand_mid(gpn, gn, t1, t2, mid):

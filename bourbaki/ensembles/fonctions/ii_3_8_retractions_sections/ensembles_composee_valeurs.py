@@ -23,7 +23,7 @@ from __future__ import annotations
 
 from bourbaki.logique.formule import Terme, var, egal, existe, appartient
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.tactiques.tactiques_abrege2 import instancie, equivalence_avant
 from bourbaki.logique.tactiques.tactiques_abrege_egalite import composer_egalites, congruence_terme, symetrie
 from bourbaki.ensembles.fonctions.ii_3_4_fonctions_valeur.ensembles_fonctions import valeur_dans_graphe, valeur_caracterisation

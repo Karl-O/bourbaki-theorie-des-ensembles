@@ -23,7 +23,7 @@ from bourbaki.logique.tactiques.tactiques_abrege_egalite import (
     symetrie, composer_egalites, congruence_terme,
 )
 
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import est_cardinal, cardinal, inf_strict_card
 from bourbaki.cardinaux.arithmetique.ensembles_exposant_cardinal import (
     exposant_cardinal_binaire,

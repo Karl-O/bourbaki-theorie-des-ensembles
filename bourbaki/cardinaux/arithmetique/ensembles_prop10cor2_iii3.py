@@ -63,13 +63,13 @@ from __future__ import annotations
 from bourbaki.logique.formule import (Terme, var, egal, et, impl, appartient,
                                        pourtout, subst_t)
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.tactiques.tactiques_abrege2 import instancie
 
 from bourbaki.cardinaux.ensembles_cardinaux import cardinal, equipotent
 from bourbaki.cardinaux.ensembles_cardinaux_theoremes import equipotent_son_cardinal
 from bourbaki.cardinaux.arithmetique.ensembles_arith_cardinale import _prop1_direct_t
-from bourbaki.ensembles.familles.ensembles_produit_famille import membre_produit_famille
+from bourbaki.ensembles.familles.ii_5_produit_famille.ii_5_definitions.ensembles_produit_famille import membre_produit_famille
 
 
 def _t(v):

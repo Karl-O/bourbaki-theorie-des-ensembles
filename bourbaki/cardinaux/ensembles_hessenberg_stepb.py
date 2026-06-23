@@ -33,7 +33,7 @@ from bourbaki.logique.formule import (
     Terme, var, egal, et, non, impl, appartient, inclus, pourtout, libres_f,
 )
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 
 from bourbaki.cardinaux.ensembles_hessenberg_chaine_vraie import (
     extension_absurde_chainee,

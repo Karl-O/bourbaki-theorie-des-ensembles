@@ -27,7 +27,7 @@ from __future__ import annotations
 from bourbaki.logique.formule import (Terme, var, egal, et, ou, non, impl,
                                        appartient, existe, pourtout, subst_f)
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.tactiques.tactiques_abrege import syllogisme, antecedent_consequent
 from bourbaki.logique.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
@@ -187,7 +187,7 @@ def dom_reunion_graphes(g="G", h="H"):
     u∈dom(G∪H) ⇔ (∃y)((u,y)∈G∪H) ⇔ (∃y)((u,y)∈G ou (u,y)∈H)
               ⇔ ((∃y)(u,y)∈G ou (∃y)(u,y)∈H) ⇔ (u∈dom G ou u∈dom H) ⇔ u∈domG∪domH.
     """
-    from bourbaki.ensembles.ensembles_theoremes import extensionnalite_appliquee
+    from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import extensionnalite_appliquee
     vg, vh = _t(g), _t(h)
     # variable courante = "z" (= liant de inclus, pour s'apparier à A1/extensionnalité)
     vu, vy = var("z"), var("y")
@@ -282,7 +282,7 @@ def domaines_disjoints_si_marques(g="G", h="H", b="B", c="C", u="u"):
     NB : la conclusion est instanciée à un u quelconque ; généraliser sur u
     (puis brancher reunion_graphes_fonctionnelle) est immédiat — laissé à
     l'appelant qui maîtrise la fraîcheur de u dans son contexte."""
-    from bourbaki.ensembles.familles.ensembles_somme_disjointe import ZERO, UN
+    from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import ZERO, UN
     from bourbaki.cardinaux.ensembles_vide_singleton import vide_distinct_singleton
     from bourbaki.logique.tactiques.tactiques_abrege2 import contraposition
     vg, vh, vb, vc = _t(g), _t(h), _t(b), _t(c)
@@ -355,11 +355,11 @@ def _zero_egal_un_de_temoins(u, exB, exC):
     coordonnée 0=1 (couple_egal_implique_composantes), via ∃-élimination.  Les deux
     existentielles ont le même liant 'p' ; on renomme celui de exC en 'pp'
     (alpha_existe) pour que les deux témoins soient distincts."""
-    from bourbaki.ensembles.familles.ensembles_somme_disjointe import ZERO, UN
+    from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import ZERO, UN
     from bourbaki.logique.tactiques.tactiques_abrege_egalite import (symetrie,
                                                                      composer_egalites)
     from bourbaki.logique.tactiques.tactiques_abrege_quantif import alpha_existe
-    from bourbaki.ensembles.base.ensembles_couples import couple_egal_implique_composantes
+    from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import couple_egal_implique_composantes
     vu = _t(u)
     vp, vpp = var("p"), var("pp")
     # renommage du liant de exC : (∃p)(u=(p,1)) → (∃pp)(u=(pp,1))

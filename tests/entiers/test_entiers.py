@@ -40,7 +40,7 @@ def test_card_est_un_cardinal():
 
 def test_card_vide_est_un_cardinal():
     """0 = Card(∅) est un cardinal (cas particulier X := ∅, terme passé directement)."""
-    from bourbaki.ensembles import ensembles_abrege as E
+    from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
     thm = card_est_un_cardinal(E.VIDE, "X'")
     cible = est_cardinal(cardinal(E.VIDE), "X'")
     assert thm.conclusion == cible

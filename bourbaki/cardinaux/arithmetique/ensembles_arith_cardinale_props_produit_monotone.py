@@ -39,7 +39,7 @@ from __future__ import annotations
 
 from bourbaki.logique.formule import (Terme, var, egal, et, appartient, existe, inclus, subst_t)
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.tactiques.tactiques_abrege import a_implique_a, syllogisme
 from bourbaki.logique.tactiques.tactiques_abrege2 import (conjonction_intro,
                                conjonction_elim_gauche, conjonction_elim_droite,
@@ -48,7 +48,7 @@ from bourbaki.logique.tactiques.tactiques_abrege2 import (conjonction_intro,
 from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie
 from bourbaki.logique.tactiques.tactiques_abrege_quantif import (existe_elimination, alpha_existe)
 from bourbaki.ensembles.fonctions.ii_3_6_fonction_terme.ensembles_fonction_terme import membre_graphe_terme
-from bourbaki.ensembles.familles.ensembles_produit import couple_dans_produit_ssi
+from bourbaki.ensembles.familles.ii_2_produit_deux_ensembles.ensembles_produit import couple_dans_produit_ssi
 from bourbaki.cardinaux.arithmetique.ensembles_produit_commute import (_membre_produit_pr1_ab,
                                        _membre_produit_pr2_ab)
 from bourbaki.cardinaux.arithmetique.ensembles_produit_equipotence import (

@@ -5,8 +5,8 @@ theorie_ensembles() reste à 22 axiomes (aucun axiome neuf en théorie principal
 """
 from bourbaki.logique.formule import (var, egal, et, impl, appartient, existe,
                                        pourtout, inclus)
-from bourbaki.ensembles import ensembles_abrege as E
-from bourbaki.ensembles import ensembles_chap2_props_restantes as P
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
+from bourbaki.ensembles.ii_4_reunion_intersection import ensembles_chap2_props_restantes as P
 
 
 def test_theorie_22():

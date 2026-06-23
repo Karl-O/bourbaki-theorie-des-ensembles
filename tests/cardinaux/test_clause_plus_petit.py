@@ -11,7 +11,7 @@ ordinales reportées sont les SEULES hypothèses résiduelles.
 from bourbaki.logique.formule import (
     var, inclus, impl, egal, et, appartient, existe, pourtout,
 )
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import inf_egal_card, cardinal
 
 import bourbaki.cardinaux.ensembles_clause_plus_petit_monotonie as MONO

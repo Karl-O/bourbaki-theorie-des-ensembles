@@ -7,7 +7,7 @@ hypothétiques réellement prouvés par le noyau."""
 from __future__ import annotations
 
 from bourbaki.logique.formule import var, egal, et, appartient
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de, equipotent
 from bourbaki.cardinaux.arithmetique.ensembles_produit_commute import (
     membre_produit_pr1, membre_produit_pr2, membre_produit_egal_couple,

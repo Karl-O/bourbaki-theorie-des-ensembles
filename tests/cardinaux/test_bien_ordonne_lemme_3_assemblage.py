@@ -9,7 +9,7 @@ INVARIANT vérifié : theorie_ensembles() = 22 ; aucune tautologie/affaibli ; la
 hypothèse résiduelle de L4 est la pièce ordinale L3 = bon_ordre_intervalle(a).
 """
 from bourbaki.logique.formule import impl
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 
 import bourbaki.cardinaux.ensembles_bien_ordonne_lemme_3_assemblage as L4M
 from bourbaki.cardinaux.ensembles_ordinal_cardinal_correspondance import (

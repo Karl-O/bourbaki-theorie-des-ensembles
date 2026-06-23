@@ -7,7 +7,7 @@ C62 avec la règle d'itération T_{S,a}.  theorie=22, conclusion non vacuous.
 import pytest
 
 from bourbaki.logique.formule import var, egal, impl, appartient, pourtout, existe
-from bourbaki.ensembles.ensembles_abrege import theorie_ensembles, est_bien_ordonne
+from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege import theorie_ensembles, est_bien_ordonne
 from bourbaki.ordre.iii_2_bon_ordre.recurrence_transfinie.ensembles_c60_pont import essais_bien_formes, rule_codomain
 from bourbaki.ordre.iii_2_bon_ordre.recurrence_transfinie.ensembles_recurrence_transfinie import _graphe_R
 from bourbaki.entiers.iii_6_infinis.iii_6_2_recursion_c62.ensembles_c62_recursion import (

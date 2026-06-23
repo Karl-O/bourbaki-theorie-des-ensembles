@@ -6,11 +6,11 @@ que les ÉNONCÉS-CIBLES reportés sont des formules bien formées (non postulé
 theorie_ensembles() reste à 22 axiomes (INTANGIBLE).
 """
 from bourbaki.logique.formule import (var, egal, et, impl, non, existe, libres_f)
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import (
     est_cardinal, cardinal, inf_egal_card, inf_strict_card,
 )
-from bourbaki.ensembles.familles.ensembles_somme_disjointe import somme_cardinale_binaire
+from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import somme_cardinale_binaire
 from bourbaki.cardinaux.arithmetique.ensembles_arith_cardinale import produit_cardinal_binaire
 
 import bourbaki.entiers.iii_5_calcul_entiers.iii_5_1_somme_produit_entiers.ensembles_calcul_entiers_props as M

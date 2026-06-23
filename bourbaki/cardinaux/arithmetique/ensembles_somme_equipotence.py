@@ -48,7 +48,7 @@ from __future__ import annotations
 from bourbaki.logique.formule import (Terme, var, egal, et, ou, non, appartient, existe,
                      subst_t, subst_f)
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.tactiques.tactiques_abrege import a_implique_a, syllogisme
 from bourbaki.logique.tactiques.tactiques_abrege2 import (conjonction_intro, conjonction_elim_gauche,
                                conjonction_elim_droite, equivalence_avant,
@@ -58,13 +58,13 @@ from bourbaki.logique.tactiques.tactiques_abrege_egalite import (symetrie, compo
 from bourbaki.logique.tactiques.tactiques_abrege_quantif import (existe_elimination, alpha_existe)
 from bourbaki.ensembles.fonctions.ii_3_6_fonction_terme.ensembles_fonction_terme import membre_graphe_terme, graphe_terme_fonctionnel
 from bourbaki.cardinaux.ensembles_cantor import (graphe_terme_domaine, graphe_terme_valeur)
-from bourbaki.ensembles.familles.ensembles_somme_disjointe import (somme_disjointe, ZERO, UN,
+from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import (somme_disjointe, ZERO, UN,
                                        injection_gauche_dans_somme,
                                        injection_droite_dans_somme)
 from bourbaki.cardinaux.arithmetique.ensembles_produit_commute import (_projection_premiere_ab, _projection_seconde_ab)
 from bourbaki.cardinaux.ensembles_vide_singleton import vide_distinct_singleton
 from bourbaki.ensembles.fonctions.ii_3_4_fonctions_valeur.ensembles_fonctions import valeur_caracterisation
-from bourbaki.ensembles.base.ensembles_couples import couple_egal_implique_composantes
+from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import couple_egal_implique_composantes
 
 
 def _t(v):
@@ -379,8 +379,8 @@ def somme_graphe_injective(f="F", g="G", a="A", b="B"):
     val_eq = conjonction_elim_droite(h)                            # K(s)=K(s')
     cible = egal(vu, vup)
 
-    from bourbaki.ensembles.familles.ensembles_somme_disjointe import membre_somme_caracterise
-    from bourbaki.ensembles.familles.ensembles_somme_disjointe import _ou_congruence
+    from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import membre_somme_caracterise
+    from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import _ou_congruence
     from bourbaki.logique.tactiques.tactiques_abrege_quantif import alpha_existe as _ax
     # décomposition de s : (∃p)(p∈A et s=(p,0)) ou (∃q)(q∈B et s=(q,1))  (renommer u→p, v→q)
     dec_u0 = N.modus_ponens(uinAB, equivalence_avant(membre_somme_caracterise(a, b, vu)))
@@ -537,7 +537,7 @@ def _somme_image_backward(f, g, a, b, a1, b1, vz, K, AB, A1B1, T,
     z=(c,0)∈A₁⊔B₁ (c∈A₁=F⟨A⟩) → antécédent a∈A, (a,c)∈F → F(a)=c (F func, a∈dom F) ;
     t:=(a,0)∈A⊔B, K((a,0))=(F(a),0)=(c,0)=z → (t,z)∈K → z∈K⟨AB⟩.  Symétrique à droite."""
     from bourbaki.cardinaux.arithmetique.ensembles_produit_equipotence import _antecedent_image, _valeur_cy
-    from bourbaki.ensembles.familles.ensembles_somme_disjointe import (membre_somme_caracterise, _ou_congruence,
+    from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import (membre_somme_caracterise, _ou_congruence,
                                            injection_gauche_dans_somme,
                                            injection_droite_dans_somme)
     from bourbaki.ensembles.fonctions.ii_3_4_fonctions_valeur.ensembles_fonctions import valeur_caracterisation
@@ -671,7 +671,7 @@ def somme_graphe_image(f="F", g="G", a="A", b="B", a1="A1", b1="B1"):
     ⇐ : z=(c,0)∈A₁⊔B₁ (c∈A₁=F⟨A⟩) ⇒ antécédent a∈A, F(a)=c ; t:=(a,0)∈A⊔B,
         K((a,0))=(F(a),0)=(c,0)=z ; symétrique pour z=(d,1)∈B₁ copie."""
     from bourbaki.cardinaux.arithmetique.ensembles_produit_equipotence import _valeur_dans_image, _antecedent_image
-    from bourbaki.ensembles.familles.ensembles_somme_disjointe import membre_somme_caracterise, _ou_congruence
+    from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import membre_somme_caracterise, _ou_congruence
     from bourbaki.ensembles.fonctions.ii_3_4_fonctions_valeur.ensembles_fonctions import valeur_caracterisation
     from bourbaki.logique.tactiques.tactiques_abrege_quantif import alpha_existe as _ax
     vF, vG = _t(f), _t(g)
@@ -809,7 +809,7 @@ def somme_graphe_image(f="F", g="G", a="A", b="B", a1="A1", b1="B1"):
     char_u = N.generalisation("z", equiv_z)
     selfYX = N.generalisation("z", conjonction_intro(
         a_implique_a(appartient(vz, A1B1)), a_implique_a(appartient(vz, A1B1))))
-    from bourbaki.ensembles.ensembles_theoremes import egalite_par_extension
+    from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import egalite_par_extension
     return egalite_par_extension(char_u, selfYX, E.image(K, AB), A1B1, "z")
 
 

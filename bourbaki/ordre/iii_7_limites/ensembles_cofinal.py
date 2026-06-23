@@ -6,10 +6,10 @@ AUDIT FINAL de complétude.  Ce module NEUF n'introduit QUE des notions qui
 n'étaient PAS encore couvertes — il ne duplique RIEN.  Couvertes ailleurs (et
 réutilisées ici, AUCUNE modification d'un fichier existant) :
 
-  • `bourbaki.ensembles.ensembles_abrege` : est_cofinale, est_coinitiale,
+  • `bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege` : est_cofinale, est_coinitiale,
     est_filtrant_droite, est_filtrant_gauche, est_relation_ordre_dans,
     est_relation_preordre, ordre_induit, est_plus_grand_element / petit ;
-  • `bourbaki.ensembles.familles.ensembles_limites` : est_systeme_projectif,
+  • `bourbaki.ensembles.familles.iii_7_limites.ensembles_limites` : est_systeme_projectif,
     est_systeme_inductif, appl_proj, appl_ind, lim_proj ;
   • `bourbaki.ordre.iii_7_limites.ensembles_limites_canoniques` : est_systeme_projectif_parties,
     est_systeme_inductif_parties, M_indice, u_indice, lim_proj_parties, etc.
@@ -66,8 +66,8 @@ from bourbaki.logique.formule import (
     Terme, var, app, egal, et, ou, impl, non, appartient, existe, pourtout, inclus,
 )
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
-from bourbaki.ensembles.familles import ensembles_limites as L
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
+from bourbaki.ensembles.familles.iii_7_limites import ensembles_limites as L
 from bourbaki.logique.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite, instancie,
 )

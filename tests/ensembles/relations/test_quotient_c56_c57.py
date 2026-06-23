@@ -5,9 +5,9 @@ On vérifie que les deux lemmes se construisent, ont EXACTEMENT les hypothèses
 HONNÊTES documentées (P/f compatible, t non vide + membres R-liés, C55), que la
 conclusion N'EST PAS dans les hypothèses (non-vacuité), et que theorie_ensembles
 reste à 22 axiomes (aucun axiome neuf)."""
-from bourbaki.ensembles.relations.ensembles_quotient_c56_c57 import (
+from bourbaki.ensembles.ii_6_equivalence.ensembles_quotient_c56_c57 import (
     c56_quotient_existe_ssi_pourtout, c57_bien_definie, membres_t_R_lies)
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.formule import var, egal, equiv, existe, appartient
 
 

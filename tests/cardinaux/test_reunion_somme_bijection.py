@@ -5,9 +5,9 @@ de A∪B sur A⊔B — le « dernier mille » jadis laissé à un round dédié,
 import pytest
 
 from bourbaki.logique.formule import var, egal
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de, equipotent
-from bourbaki.ensembles.familles.ensembles_somme_disjointe import somme_disjointe
+from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import somme_disjointe
 
 import bourbaki.cardinaux.ensembles_reunion_somme_bijection as R
 

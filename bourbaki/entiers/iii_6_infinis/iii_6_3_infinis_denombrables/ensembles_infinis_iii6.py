@@ -49,7 +49,7 @@ from __future__ import annotations
 from bourbaki.logique.formule import (Terme, var, egal, et, non, equiv, impl,
                                        inclus, appartient)
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 
 from bourbaki.cardinaux.ensembles_cardinaux import (
     est_cardinal, cardinal, equipotent, inf_egal_card,

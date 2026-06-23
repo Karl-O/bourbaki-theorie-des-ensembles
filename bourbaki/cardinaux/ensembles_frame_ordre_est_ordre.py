@@ -26,7 +26,7 @@ from __future__ import annotations
 
 from bourbaki.logique.formule import Terme, var, egal, et, appartient, inclus
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 
 from bourbaki.logique.tactiques.tactiques_abrege import inclusion_reflexive
 from bourbaki.logique.tactiques.tactiques_abrege2 import (
@@ -37,7 +37,7 @@ from bourbaki.logique.tactiques.tactiques_abrege_egalite import (
     symetrie, composer_egalites, congruence_terme,
 )
 from bourbaki.logique.tactiques.tactiques_abrege_quantif import existe_elimination
-from bourbaki.ensembles.ensembles_theoremes import extensionnalite_appliquee
+from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import extensionnalite_appliquee
 from bourbaki.ensembles.fonctions.hors_ii_3.ii_2_projections.ensembles_projections import (
     projection_premiere, projection_seconde,
 )

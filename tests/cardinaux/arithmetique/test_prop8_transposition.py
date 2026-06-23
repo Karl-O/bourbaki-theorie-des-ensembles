@@ -11,7 +11,7 @@ où HT_glob(A,B) := (∀h)(∃τ)(bij(τ,B⊔{∅},B⊔{∅}) et τ(h(*))=*).  L
 concrète de τ (échange ponctuel dans B⊔{∅}) reste à fournir.
 """
 from bourbaki.logique.formule import var, egal, et, impl, appartient, afficher_f
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de, equipotent, cardinal
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers import ensembles_entiers as Ent
 from bourbaki.cardinaux.arithmetique import ensembles_prop8_transposition as T

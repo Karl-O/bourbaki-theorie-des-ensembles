@@ -11,7 +11,7 @@ On vérifie :
 from bourbaki.logique.formule import (
     var, egal, et, impl, appartient, pourtout, inclus,
 )
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis import ensembles_ordre_relation as O
 from bourbaki.ordre.iii_2_bon_ordre.zorn_zermelo.ensembles_zorn import chaine, zorn
 from bourbaki.ordre.iii_2_bon_ordre.zorn_zermelo import ensembles_bourbaki_witt as BW

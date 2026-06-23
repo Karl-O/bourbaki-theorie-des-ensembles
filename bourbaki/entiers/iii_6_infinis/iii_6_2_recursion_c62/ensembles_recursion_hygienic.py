@@ -71,8 +71,8 @@ from bourbaki.logique.tactiques.tactiques_abrege2 import (
 from bourbaki.logique.tactiques.ensembles_alpha_bridge import (
     alpha_bridge, _fraiche_totale,
 )
-import bourbaki.ensembles.ensembles_abrege as E
-from bourbaki.ensembles.ensembles_abrege import appartient
+import bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege import appartient
 
 
 def _t(t):

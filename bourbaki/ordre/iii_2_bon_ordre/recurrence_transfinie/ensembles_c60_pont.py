@@ -36,7 +36,7 @@ from bourbaki.logique.formule import (
     Terme, var, egal, et, impl, appartient, existe, pourtout, inclus, subst_f,
 )
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 
 from bourbaki.logique.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
@@ -49,8 +49,8 @@ from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie, compos
 
 from bourbaki.ensembles.fonctions.ii_3_4_fonctions_valeur.ensembles_fonctions import valeur_dans_graphe
 from bourbaki.ensembles.fonctions.hors_ii_3.iii_3_recollement.ensembles_restriction_somme import antecedent_dans_domaine
-from bourbaki.ensembles.familles.ensembles_produit import couple_dans_produit_ssi
-from bourbaki.ensembles.familles.ensembles_produit_famille import _inst_parties
+from bourbaki.ensembles.familles.ii_2_produit_deux_ensembles.ensembles_produit import couple_dans_produit_ssi
+from bourbaki.ensembles.familles.ii_5_produit_famille.ii_5_definitions.ensembles_produit_famille import _inst_parties
 
 from bourbaki.ordre.iii_2_bon_ordre.recurrence_transfinie.ensembles_recurrence_transfinie import _graphe_R
 from bourbaki.ordre.iii_2_bon_ordre.recurrence_transfinie.ensembles_c60_existence_close import est_essai

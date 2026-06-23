@@ -48,7 +48,7 @@ from __future__ import annotations
 from bourbaki.logique.formule import (Terme, var, egal, et, non, ou, impl,
                      appartient, existe, pourtout, inclus, subst_t)
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.tactiques.tactiques_abrege import a_implique_a, syllogisme
 from bourbaki.logique.tactiques.tactiques_abrege2 import (conjonction_intro,
                                conjonction_elim_gauche, conjonction_elim_droite,
@@ -57,7 +57,7 @@ from bourbaki.logique.tactiques.tactiques_abrege2 import (conjonction_intro,
 from bourbaki.logique.tactiques.tactiques_abrege_egalite import (symetrie,
                                composer_egalites, congruence_terme)
 # socle 2-élément (0=∅, 1={∅}) — RÉUTILISÉ, jamais redéfini :
-from bourbaki.ensembles.familles.ensembles_somme_disjointe import ZERO, UN
+from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import ZERO, UN
 # infra round 25 (recollement) — RÉUTILISÉE, jamais redéfinie :
 from bourbaki.ensembles.fonctions.hors_ii_3.iii_3_recollement.ensembles_restriction_somme import (
     recollement, reunion_graphes_fonctionnelle, dom_reunion_graphes,
@@ -287,7 +287,7 @@ def reunion_Y_diff_egale_X(y="Y", x="X"):
       ⊂ : z∈Y∪(X∖Y) ⇒ (z∈Y ⇒ z∈X par Y⊂X ; z∈X∖Y ⇒ z∈X par AXIOME_DIFF) ;
       ⊃ : z∈X ⇒ (z∈Y ou ¬z∈Y ; si z∈Y alors z∈Y∪… ; si ¬z∈Y alors z∈X∖Y donc ∈…).
     """
-    from bourbaki.ensembles.ensembles_theoremes import extensionnalite_appliquee
+    from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import extensionnalite_appliquee
     from bourbaki.logique.tactiques.tactiques_abrege2 import cas, tiers_exclu
     vy, vx = _t(y), _t(x)
     vz = var("z")

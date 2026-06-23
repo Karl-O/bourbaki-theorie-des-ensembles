@@ -5,7 +5,7 @@ théorème logique direct (sens facile de (FI)).
 """
 from bourbaki.logique.formule import (var, et, impl, equiv, pourtout, appartient,
                                        app, alpha_egal)
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.structures.iv_2_morphismes_structures_derivees import ensembles_universel_finale as Fi
 from bourbaki.structures.iv_2_morphismes_structures_derivees import ensembles_universel_morphismes as M
 

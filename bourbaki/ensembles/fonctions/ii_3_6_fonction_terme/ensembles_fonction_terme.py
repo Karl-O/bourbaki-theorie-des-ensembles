@@ -19,7 +19,7 @@ from __future__ import annotations
 
 from bourbaki.logique.formule import var, egal, et, appartient, existe, subst_t, libres_t, libres_f
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.tactiques.tactiques_abrege import syllogisme
 from bourbaki.logique.tactiques.tactiques_abrege2 import (conjonction_intro, conjonction_elim_gauche,
                                conjonction_elim_droite, equivalence_avant,
@@ -27,7 +27,7 @@ from bourbaki.logique.tactiques.tactiques_abrege2 import (conjonction_intro, con
                                instancie, instanciation_en_x)
 from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie, composer_egalites, congruence_terme
 from bourbaki.logique.tactiques.tactiques_abrege_quantif import existe_elimination
-from bourbaki.ensembles.base.ensembles_couples import couple_egal_implique_composantes
+from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import couple_egal_implique_composantes
 
 
 def _inst_axiome(a, t, w, x="x", y="y"):

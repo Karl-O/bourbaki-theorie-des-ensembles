@@ -5,8 +5,8 @@ l'implication (x∈∏ et y∈∏ et graphe x et graphe y et (∀ι∈I) pr_ι x
 NON vacuous (x=y n'est pas dans l'antécédent).  theorie_ensembles() reste à 22.
 """
 from bourbaki.logique.formule import var, egal, et, impl, appartient, pourtout
-from bourbaki.ensembles import ensembles_abrege as E
-from bourbaki.ensembles.familles import ensembles_extensionnalite_produit as X
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
+from bourbaki.ensembles.familles.ii_5_produit_famille.ii_5_definitions import ensembles_extensionnalite_produit as X
 
 
 def test_theorie_inchangee_22():

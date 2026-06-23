@@ -5,7 +5,7 @@ theorie_ensembles() = 22 axiomes ; aucune définition vacuux/inventée."""
 import pytest
 
 from bourbaki.logique.formule import var, app, egal, et, impl, appartient
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.structures.iv_1_structures_isomorphismes import ensembles_especes_echelon as Ech
 from bourbaki.structures.iv_1_structures_isomorphismes import ensembles_especes as Sp
 from bourbaki.structures.iv_1_structures_isomorphismes import ensembles_especes_deduction as Ded

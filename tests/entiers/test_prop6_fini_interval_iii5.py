@@ -3,7 +3,7 @@ from bourbaki.entiers.iii_5_calcul_entiers.iii_5_intervalles_comptage.ensembles_
     prop3_total_min, prop3_total_min_enonce,
     cor1_total_min, cor1_total_min_enonce,
 )
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 
 
 def test_prop3_total_min_close():

@@ -47,7 +47,7 @@ from __future__ import annotations
 
 from bourbaki.logique.formule import (Terme, var, egal, et, appartient, inclus)
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
     equivalence_avant, equivalence_arriere, instancie)
@@ -57,7 +57,7 @@ from bourbaki.logique.tactiques.tactiques_abrege_egalite import (
 from bourbaki.ensembles.fonctions.ii_3_6_fonction_terme.ensembles_fonction_terme import (
     graphe_terme_fonctionnel)
 from bourbaki.cardinaux.ensembles_cantor import graphe_terme_domaine
-from bourbaki.ensembles.familles.ensembles_produit import couple_dans_produit
+from bourbaki.ensembles.familles.ii_2_produit_deux_ensembles.ensembles_produit import couple_dans_produit
 from bourbaki.ensembles.fonctions.ii_3_4_fonctions_valeur.ensembles_valeur_codomaine import (
     valeur_dans_codomaine)
 from bourbaki.cardinaux.arithmetique.ensembles_graphe_de import (

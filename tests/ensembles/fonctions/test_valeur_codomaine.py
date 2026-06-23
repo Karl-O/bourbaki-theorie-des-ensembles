@@ -6,7 +6,7 @@ clôture conditionnelle (hypothèses exactes) et conclusions Bourbaki exactes.
 from bourbaki.ensembles.fonctions.ii_3_4_fonctions_valeur.ensembles_valeur_codomaine import (
     couple_valeur_dans_graphe, valeur_dans_codomaine)
 from bourbaki.logique.formule import var, egal, appartient, inclus
-import bourbaki.ensembles.ensembles_abrege as E
+import bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege as E
 
 
 def test_couple_valeur_dans_graphe():

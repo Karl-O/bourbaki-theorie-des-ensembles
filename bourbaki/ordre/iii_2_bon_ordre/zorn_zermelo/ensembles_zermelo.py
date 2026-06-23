@@ -39,7 +39,7 @@ from bourbaki.logique.formule import (
     Terme, var, egal, et, ou, non, impl, equiv, appartient, existe, pourtout, inclus, tau,
 )
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.tactiques.tactiques_abrege import a_implique_a, syllogisme
 from bourbaki.logique.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
@@ -416,7 +416,7 @@ def Theta_antisymetrique(X="X", G="x", H="y"):
     """⊢ antisymetrie(Θ).   = (∀x∀y)( ((x,y)∈Θ et (y,x)∈Θ) ⇒ x=y ).
 
     (G,H)∈Θ ⇒ G⊂H ; (H,G)∈Θ ⇒ H⊂G ; A1 donne G=H.  (seg_initial non requis.)"""
-    from bourbaki.ensembles.ensembles_theoremes import extensionnalite_appliquee
+    from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import extensionnalite_appliquee
     vX, vG, vH = var(X), var(G), var(H)
     hyp = et(_tle(vG, vH, vX), _tle(vH, vG, vX))
     h = N.assume(hyp)
@@ -548,7 +548,7 @@ def _leib_transport(a, b, h_ab, phi_fun, h_phi_a):
 
 def _paire_membre(u, v, z):
     """⊢ (z∈{u,v}) ⇔ (z=u ou z=v)."""
-    from bourbaki.ensembles.ensembles_theoremes import _instance_paire
+    from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import _instance_paire
     return _instance_paire(_terme(u), _terme(v), _terme(z))
 
 
@@ -582,7 +582,7 @@ def _doubleton_inclus_champ(X, H, u, v, hu, hv, z="zd"):
 
 def _doubleton_non_vide(u, v):
     """⊢ ¬({u,v}=∅).   (u∈{u,v} mais u∉∅ si {u,v}=∅ ⇒ contradiction.)"""
-    from bourbaki.ensembles.ensembles_theoremes import appartient_paire_gauche, vide_sans_element
+    from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import appartient_paire_gauche, vide_sans_element
     from bourbaki.ordre.iii_2_bon_ordre.zorn_zermelo.ensembles_bourbaki_witt_chaine import _ex_falso, _refute_self
     vu, vv = _terme(u), _terme(v)
     u_in = appartient_paire_gauche_t(vu, vv)                  # u∈{u,v}
@@ -596,7 +596,7 @@ def _doubleton_non_vide(u, v):
 
 def appartient_paire_gauche_t(u, v):
     """⊢ u∈{u,v}  pour des TERMES u,v."""
-    from bourbaki.ensembles.ensembles_theoremes import _instance_paire
+    from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import _instance_paire
     vu, vv = _terme(u), _terme(v)
     c = _instance_paire(vu, vv, vu)                          # u∈{u,v} ⇔ (u=u ∨ u=v)
     oraa = N.modus_ponens(N.reflexivite(vu), N.s2(egal(vu, vu), egal(vu, vv)))
@@ -605,7 +605,7 @@ def appartient_paire_gauche_t(u, v):
 
 def appartient_paire_droite_t(u, v):
     """⊢ v∈{u,v}  pour des TERMES u,v."""
-    from bourbaki.ensembles.ensembles_theoremes import _instance_paire
+    from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import _instance_paire
     vu, vv = _terme(u), _terme(v)
     c = _instance_paire(vu, vv, vv)                          # v∈{u,v} ⇔ (v=u ∨ v=v)
     bb = N.modus_ponens(N.reflexivite(vv), N.s2(egal(vv, vv), egal(vv, vu)))
@@ -1253,7 +1253,7 @@ def _least_inter_champ(X, D, S, G, GW, s0, hs0_inter, a="am", w="wm"):
     # S∩champ G ⊂ champ G
     sub = _inter_inclus_droite(vS, AG)                          # S∩champ G ⊂ champ G
     # ¬(S∩champ G = ∅) : s₀∈S∩champ G ⇒ non vide
-    from bourbaki.ensembles.base.ensembles_vide import non_vide_ssi_element
+    from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_vide import non_vide_ssi_element
     ex_z = N.modus_ponens(hs0_inter, N.s5(appartient(var("z"), Inter), _terme(s0), "z"))  # (∃z)(z∈Inter)
     nv = N.modus_ponens(ex_z, equivalence_arriere(non_vide_ssi_element(Inter)))  # ¬(Inter=∅)
     moindre = _moindre_de_W(vX, vG, GW)                         # (∀S')((S'⊂champ G et ≠∅)⇒(∃a)…)
@@ -1337,7 +1337,7 @@ def Union_bien_ordonne_corps(X="X", D="D", S="S", aa="ae", ww="we", s0="s0", G="
     🎯 LE CŒUR DUR.  S≠∅ → témoin s₀∈S∩champ G pour un membre G∈𝔇 ; S∩champ G a un
     plus petit élt m (R_G bien ordonne champ G) ; m est le plus petit de TOUT S par
     END-EXTENSION (_ms_dans_union)."""
-    from bourbaki.ensembles.base.ensembles_vide import non_vide_ssi_element
+    from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_vide import non_vide_ssi_element
     vX, vD, vS = var(X), var(D), var(S)
     Ut = Union(vX, vD)
     AU = champ(Ut)
@@ -1640,7 +1640,7 @@ def _vide_rel_ordre_dans():
     transitif/antisym/refl_impl : prémisses « (·,·)∈∅ » fausses → vacuous ;
     reflexive_dans : (x,x)∈∅ ⇔ x∈champ∅ — les DEUX côtés faux (vide_sans_element /
     _champ_vide_sans_element)."""
-    from bourbaki.ensembles.ensembles_abrege import (
+    from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege import (
         ordre_transitif, ordre_antisymetrique, ordre_reflexif_implicite,
         est_reflexive_dans_ordre,
     )
@@ -1677,7 +1677,7 @@ def _vide_bien_ordonne():
 
     Le « plus petit élément » est VACUE : S⊂champ∅ et S≠∅ ⇒ ∃s∈S, s∈champ∅ — or
     champ∅ est vide (_champ_vide_sans_element), contradiction."""
-    from bourbaki.ensembles.base.ensembles_vide import non_vide_ssi_element
+    from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_vide import non_vide_ssi_element
     from bourbaki.ordre.iii_2_bon_ordre.zorn_zermelo.ensembles_bourbaki_witt_chaine import _ex_falso
     A0 = champ(E.VIDE)
     rod = _vide_rel_ordre_dans()                          # est_relation_ordre_dans(R_∅,champ∅)
@@ -1882,7 +1882,7 @@ def _M_ne_Ext(X, M, x0, Hx0nd):
 # ── champ M ⊂ X  (depuis M⊂X×X : dom M⊂X et img M⊂X) ──────────────────────────
 def _prod_couple(u, v, A, B):
     """⊢ ((u,v)∈A×B) ⇔ (u∈A et v∈B)."""
-    from bourbaki.ensembles.familles.ensembles_produit import couple_dans_produit_ssi
+    from bourbaki.ensembles.familles.ii_2_produit_deux_ensembles.ensembles_produit import couple_dans_produit_ssi
     return couple_dans_produit_ssi(_terme(u), _terme(v), _terme(A), _terme(B))
 
 
@@ -1975,7 +1975,7 @@ def Ext_seg_initial(X, M, x0, Hx0nd, p="p", q="q"):
     = (∀p∀q)((p∈champ M et (q,p)∈M') ⇒ q∈champ M).  (q,p)∈M' : soit (q,p)∈M
     (⇒ q∈champ M), soit (q,p)=(y,x₀) ⇒ p=x₀ ; mais p∈champ M et p=x₀ ⇒ x₀∈champ M,
     contredit x₀∉champ M (le cas sommet est IMPOSSIBLE)."""
-    from bourbaki.ensembles.base.ensembles_couples import couple_egal_implique_composantes
+    from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import couple_egal_implique_composantes
     from bourbaki.ordre.iii_2_bon_ordre.zorn_zermelo.ensembles_bourbaki_witt_chaine import _ex_falso
     vX, vM, vx0 = _terme(X), _terme(M), _terme(x0)
     Mp = Ext(vX, vM, vx0)
@@ -2008,7 +2008,7 @@ def Ext_seg_initial(X, M, x0, Hx0nd, p="p", q="q"):
 def _sous_propre_temoin(A, B, hAB, hAneB, z="zp"):
     """{ A⊂B [hAB], A≠B [hAneB] } ⊢ (∃z)(z∈B et z∉A)."""
     from bourbaki.logique.tactiques.tactiques_abrege2 import dne
-    from bourbaki.ensembles.ensembles_theoremes import extensionnalite_appliquee
+    from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import extensionnalite_appliquee
     from bourbaki.ordre.iii_2_bon_ordre.zorn_zermelo.ensembles_bourbaki_witt_chaine import _ex_falso, _refute_self, _neg_impl_equiv
     from bourbaki.logique.tactiques.tactiques_abrege_quantif import congruence_existe
     vA, vB = _terme(A), _terme(B)
@@ -2104,7 +2104,7 @@ def _ext_top_comps(X, M, x0, u, v, htop):
        ⊢ ( v=x₀ et (u∈champ M ou u=x₀) ).
 
     Le couple (u,v) étant (y,x₀) : u=y, v=x₀ ; donc v=x₀ et (u∈champ M ou u=x₀)."""
-    from bourbaki.ensembles.base.ensembles_couples import couple_egal_implique_composantes
+    from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import couple_egal_implique_composantes
     vM, vx0, vu, vv = _terme(M), _terme(x0), _terme(u), _terme(v)
     AM = champ(vM)
     vy = var("ye")
@@ -2442,7 +2442,7 @@ def _Ext_bien_ordonne_corps(X, M, x0, GW, Hx0nd, S="S", aa="a", ww="w", s0="s0",
     Tiers exclu sur S∩champ M=∅ : si ≠∅, plus petit élt m de S∩champ M (M bien
     ordonne champ M) = plus petit de S (x₀ au-dessus) ; si =∅, S⊂{x₀}, x₀∈S est le
     plus petit."""
-    from bourbaki.ensembles.base.ensembles_vide import non_vide_ssi_element
+    from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_vide import non_vide_ssi_element
     from bourbaki.ordre.iii_2_bon_ordre.zorn_zermelo.ensembles_bourbaki_witt_chaine import _ex_falso
     vX, vM, vx0 = _terme(X), _terme(M), _terme(x0)
     vS = var(S)

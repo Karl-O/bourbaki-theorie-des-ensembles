@@ -7,9 +7,9 @@
 Chaque test vérifie la conclusion EXACTE + clôture.
 """
 from bourbaki.logique.formule import var, egal, et, inclus, impl
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import inf_egal_card, cardinal
-from bourbaki.ensembles.familles.ensembles_somme_disjointe import somme_disjointe
+from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import somme_disjointe
 from bourbaki.cardinaux.arithmetique import ensembles_somme_monotone as M
 from bourbaki.cardinaux.arithmetique import ensembles_somme_equipotence as S
 

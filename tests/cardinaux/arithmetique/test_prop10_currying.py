@@ -10,7 +10,7 @@ import pytest
 
 from bourbaki.logique.formule import var, egal, et, appartient, equiv, existe, inclus
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de, equipotent, cardinal
 from bourbaki.cardinaux.arithmetique.ensembles_prop10_currying import (
     espace_BA, domaine_lambda, codomaine_lambda, cible_prop10,

@@ -1,7 +1,7 @@
 """Tests — §III.6.3 frame_a_maximal_clos : exposé des 2 résidus honnêtes de Zorn."""
 import pytest
 
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.formule import libres_f
 from bourbaki.cardinaux.ensembles_frame_maximal_clos import (
     residu_H1, residu_H2, residus_honnetes,

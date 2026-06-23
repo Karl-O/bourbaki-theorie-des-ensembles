@@ -2,7 +2,7 @@
 
 Ce module INTRODUIT (définitions fidèles, prédicats/termes au niveau abrégé) les
 notions de §III.7 qui n'étaient PAS encore couvertes par
-`bourbaki.ensembles.familles.ensembles_limites` (lequel pose déjà : système
+`bourbaki.ensembles.familles.iii_7_limites.ensembles_limites` (lequel pose déjà : système
 projectif/inductif (LP_I/LP_II/LI_I/LI_II), terme `lim_proj` + son axiome (1),
 cocycle/identité au niveau des valeurs, appartenance à lim←).  Il RÉUTILISE ce
 module (import, AUCUNE modification) et en suit les conventions :
@@ -54,8 +54,8 @@ from bourbaki.logique.formule import (
     Terme, var, egal, et, impl, appartient, existe, pourtout, inclus, app,
 )
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
-from bourbaki.ensembles.familles import ensembles_limites as L
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
+from bourbaki.ensembles.familles.iii_7_limites import ensembles_limites as L
 from bourbaki.logique.tactiques.tactiques_abrege2 import (
     instancie, conjonction_elim_gauche, conjonction_elim_droite,
     equivalence_avant, equivalence_arriere,

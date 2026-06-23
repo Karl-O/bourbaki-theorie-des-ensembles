@@ -36,7 +36,7 @@ from __future__ import annotations
 from bourbaki.logique.formule import (Terme, var, egal, et, impl, appartient,
                                        existe, pourtout, inclus, subst_f)
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
     equivalence_avant, instancie)
@@ -166,7 +166,7 @@ def _inclus_produit_est_graphe(vG, vE, vF):
     z∈G ⊂ E×F ⇒ z∈E×F ⇒ (∃p)(∃q)(z=(p,q) et …) [AXIOME_PRODUIT, binders p,q] ⇒ z=(p,q)
     ⇒ (∃x)(∃y)(z=(x,y)) = est_un_couple(z) (témoins x:=p, y:=q ; binders x,y de
     est_un_couple).  ∃-élim de p,q (la conclusion est_un_couple(z) ne contient pas p,q)."""
-    from bourbaki.ensembles.familles.ensembles_produit import _instance_produit
+    from bourbaki.ensembles.familles.ii_2_produit_deux_ensembles.ensembles_produit import _instance_produit
     vz = var("z")
     h_incl = N.assume(inclus(vG, E.produit(vE, vF)))   # G⊂E×F = (∀z)(z∈G⇒z∈E×F)
     z_in_prod_imp = instancie(h_incl, vz)              # z∈G ⇒ z∈E×F

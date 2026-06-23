@@ -2,9 +2,9 @@
 from __future__ import annotations
 
 from bourbaki.logique.formule import var, egal, impl, equiv, appartient, existe, pourtout, non, inclus as inclus_
-from bourbaki.ensembles.ensembles_abrege import (est_un_graphe, dom, img, image, couple, singleton,
+from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege import (est_un_graphe, dom, img, image, couple, singleton,
                               VIDE, est_un_couple)
-from bourbaki.ensembles.base.ensembles_correspondances import (image_croissante, image_dans_img, image_vide,
+from bourbaki.ensembles.ii_3_correspondances.ensembles_correspondances import (image_croissante, image_dans_img, image_vide,
                                        coupe_membre)
 
 

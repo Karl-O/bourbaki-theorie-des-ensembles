@@ -27,7 +27,7 @@ from __future__ import annotations
 from bourbaki.logique.formule import (Terme, var, egal, et, non, ou, impl, appartient,
                      existe, pourtout, inclus, subst_t, subst_f)
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.tactiques.tactiques_abrege import a_implique_a, syllogisme
 from bourbaki.logique.tactiques.tactiques_abrege2 import (conjonction_intro, conjonction_elim_gauche,
                                conjonction_elim_droite, equivalence_avant,
@@ -36,7 +36,7 @@ from bourbaki.logique.tactiques.tactiques_abrege2 import (conjonction_intro, con
 from bourbaki.logique.tactiques.tactiques_abrege_egalite import (symetrie, composer_egalites,
                                congruence_terme)
 from bourbaki.logique.tactiques.tactiques_abrege_quantif import existe_elimination, alpha_existe
-from bourbaki.ensembles.ensembles_theoremes import egalite_par_extension, vide_sans_element
+from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import egalite_par_extension, vide_sans_element
 from bourbaki.cardinaux.ensembles_cardinaux import cardinal
 
 # réutilisation des paliers vide déjà clos dans le module a^0=1

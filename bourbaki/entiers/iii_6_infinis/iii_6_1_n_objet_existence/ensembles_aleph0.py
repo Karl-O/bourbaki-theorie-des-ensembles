@@ -50,7 +50,7 @@ from bourbaki.logique.formule import (
     subst_t, subst_f,
 )
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.tactiques.tactiques_abrege import a_implique_a, syllogisme
 from bourbaki.logique.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
@@ -76,8 +76,8 @@ from bourbaki.logique.tactiques.ensembles_alpha_bridge import (
     alpha_bridge, _alpha_existe_exact,
 )
 from bourbaki.logique.tactiques.tactiques_abrege2 import et_congruence_droite
-from bourbaki.ensembles.base.ensembles_couples import singleton_membre
-from bourbaki.ensembles.ensembles_theoremes import extensionnalite_appliquee
+from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import singleton_membre
+from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import extensionnalite_appliquee
 
 # ── infra GRAPHE D'UN TERME (lemmes de base ; on RECONSTRUIT les dérivés capture-safe) ──
 from bourbaki.ensembles.fonctions.ii_3_6_fonction_terme.ensembles_fonction_terme import membre_graphe_terme
@@ -97,7 +97,7 @@ from bourbaki.cardinaux.arithmetique.ensembles_prop8_successeur import (
 )
 from bourbaki.cardinaux.arithmetique.ensembles_arith_cardinale import _prop1_direct_t
 from bourbaki.cardinaux.ensembles_equipotence import equipotence_reflexive
-from bourbaki.ensembles.familles.ensembles_somme_disjointe import (
+from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import (
     somme_disjointe, injection_droite_dans_somme, _dans_singleton, UN as _UN_MARQUEUR,
 )
 from bourbaki.logique.tactiques.tactiques_abrege2 import conjonction_intro as _conj_intro
@@ -106,7 +106,7 @@ from bourbaki.logique.tactiques.tactiques_abrege2 import conjonction_intro as _c
 from bourbaki.cardinaux.ensembles_cardinaux_props_restantes_prop7 import (
     cardinal_egal_zero_ssi_vide,
 )
-from bourbaki.ensembles.base.ensembles_vide import non_vide_ssi_element
+from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_vide import non_vide_ssi_element
 
 # ── briques pour les inégalités cardinales (NN ∖ {0} ↔ NN) ─────────────────────
 from bourbaki.cardinaux.ensembles_clause_plus_petit_monotonie import (

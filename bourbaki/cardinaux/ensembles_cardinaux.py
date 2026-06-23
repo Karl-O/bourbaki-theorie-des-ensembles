@@ -29,7 +29,7 @@ from __future__ import annotations
 
 from bourbaki.logique.formule import (Terme, var, app, tau, egal, et, non, impl, existe, pourtout,
                      appartient, inclus)
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 
 
 # ── Déf. 1 : « F est le graphe d'une bijection de X sur Y » ────────────────────

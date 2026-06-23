@@ -43,7 +43,7 @@ from __future__ import annotations
 from bourbaki.logique.formule import (Terme, var, egal, et, non, ou, impl,
                      appartient, existe, pourtout, inclus, subst_t, subst_f)
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
     equivalence_avant, equivalence_arriere, equivalence_transitivite, instancie,
@@ -147,7 +147,7 @@ def _R_inclus(a0, s, d, a):
 
     z∈R ⇒ z=(d,y), d∈D∖S, y=a₀ ; d∈D∖S ⇒ d∈D (difference⊂D) ; a₀∈A ⇒ y∈A ; (d,y)∈D×A."""
     from bourbaki.ensembles.fonctions.ii_3_6_fonction_terme.ensembles_fonction_terme import membre_graphe_terme
-    from bourbaki.ensembles.familles.ensembles_produit import couple_dans_produit_ssi
+    from bourbaki.ensembles.familles.ii_2_produit_deux_ensembles.ensembles_produit import couple_dans_produit_ssi
     va0, vs, vd, va = _t(a0), _t(s), _t(d), _t(a)
     DmS = _compl(vs, vd)
     R = R_terme(va0, vs, vd)
@@ -282,7 +282,7 @@ def _S_union_compl_D(s, d):
 
     z∈S∪(D∖S) ⇔ (z∈S ou (z∈D et ¬z∈S)) ; ⇒ : z∈S⇒z∈D (S⊆D), sinon z∈D directement ;
     ⇐ : z∈D ; soit z∈S (gauche), soit ¬z∈S et alors z∈D∖S (droite)."""
-    from bourbaki.ensembles.ensembles_theoremes import extensionnalite_appliquee
+    from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import extensionnalite_appliquee
     vs, vd = _t(s), _t(d)
     DmS = _compl(vs, vd)
     U = E.reunion(vs, DmS)
@@ -371,7 +371,7 @@ def _ghat_domaine(vg, va0, vs, vd, va):
 
 def _produit_mono_gauche(s, d, a):
     """{ S⊆D } ⊢ S×A ⊂ D×A.   (produit_inclusion_facile avec A⊂A réflexif.)"""
-    from bourbaki.ensembles.familles.ensembles_produit import produit_inclusion_facile
+    from bourbaki.ensembles.familles.ii_2_produit_deux_ensembles.ensembles_produit import produit_inclusion_facile
     vs, vd, va = _t(s), _t(d), _t(a)
     # produit_inclusion_facile : ((S⊂D) et (A⊂A)) ⇒ S×A⊂D×A
     pif = produit_inclusion_facile("A", "B", "Ap", "Bp")
@@ -591,7 +591,7 @@ def W_psi_image_incluse(va0, vs, vd, va):
 
 def _psi_egal_donne_ghat(vg1, vg2, va0, vs, vd, va):
     """{ Ψ(g₁)=Ψ(g₂) } ⊢ ĝ₁=ĝ₂."""
-    from bourbaki.ensembles.base.ensembles_couples import couple_egal_implique_composantes
+    from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import couple_egal_implique_composantes
     g1hat, g2hat = _ghat(vg1, va0, vs, vd), _ghat(vg2, va0, vs, vd)
     L1, L2 = _psi_valeur(vg1, va0, vs, vd, va), _psi_valeur(vg2, va0, vs, vd, va)
     inner1, inner2 = E.couple(g1hat, vd), E.couple(g2hat, vd)
@@ -681,7 +681,7 @@ def support_monotone_exposant(c="C", d="D", a="A"):
 
     Décharge le témoin κ de C≤D=(∃F)inj(F,C,D) et le témoin a₀∈A de A≠∅
     (non_vide_ssi_element)."""
-    from bourbaki.ensembles.base.ensembles_vide import non_vide_ssi_element
+    from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_vide import non_vide_ssi_element
     vc, vd, va = _t(c), _t(d), _t(a)
     vk, va0 = var("kappa"), var("a0")
     inj_body = est_injection_de(vk, vc, vd)

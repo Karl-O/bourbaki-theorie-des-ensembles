@@ -5,8 +5,8 @@ hessenberg_aa_egal_de_maximal (a²=a sous 2 hyps honnêtes).  theorie=22, non va
 from __future__ import annotations
 
 from bourbaki.logique.formule import egal, var
-from bourbaki.ensembles import ensembles_abrege as E
-from bourbaki.ensembles.ensembles_abrege import theorie_ensembles
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege import theorie_ensembles
 from bourbaki.cardinaux.ensembles_cardinaux import cardinal, est_bijection_de
 from bourbaki.cardinaux.ensembles_hessenberg import (
     enonce_hard_aa_inf_egal_a, enonce_hessenberg,

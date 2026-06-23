@@ -34,7 +34,7 @@ from bourbaki.logique.formule import (
     Terme, var, egal, et, non, impl, appartient, existe, pourtout,
 )
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 
 from bourbaki.cardinaux.ensembles_cardinaux import est_cardinal, cardinal
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import (
@@ -68,12 +68,12 @@ from bourbaki.cardinaux.ensembles_cardinaux_props_restantes_prop7 import (
     cardinal_egal_zero_ssi_vide,
 )
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_fini_successeur import cardinal_de_cardinal
-from bourbaki.ensembles.base.ensembles_vide import non_vide_ssi_element
-from bourbaki.ensembles.base.ensembles_couples import singleton_membre
+from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_vide import non_vide_ssi_element
+from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import singleton_membre
 from bourbaki.cardinaux.ensembles_cantor_bernstein_fin import (
     partie_reunion_complement,
 )
-from bourbaki.ensembles.ensembles_theoremes import commutativite_reunion
+from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import commutativite_reunion
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers_theoremes import (
     fini_implique_cardinal, card_est_un_cardinal,
 )

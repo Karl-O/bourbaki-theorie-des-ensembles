@@ -1,5 +1,5 @@
 """Tests §III.5 — parité / division par deux (ensembles_parite_iii5)."""
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux import ensembles_parite_iii5 as M
 
 

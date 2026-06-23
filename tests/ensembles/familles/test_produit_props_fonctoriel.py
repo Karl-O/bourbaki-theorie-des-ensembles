@@ -6,9 +6,9 @@ Aucun fichier existant n'est modifié ; theorie_ensembles() reste à 22 axiomes.
 from bourbaki.logique.formule import (var, egal, et, impl, non, appartient, existe,
                                        inclus, pourtout, equiv)
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
-from bourbaki.ensembles.familles import ensembles_produit_props_fonctoriel as F
-from bourbaki.ensembles.familles import ensembles_extension_canonique as X
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
+from bourbaki.ensembles.familles.ii_5_produit_famille.ii_5_1_extension_canonique import ensembles_produit_props_fonctoriel as F
+from bourbaki.ensembles.familles.ii_5_produit_famille.ii_5_1_extension_canonique import ensembles_extension_canonique as X
 
 
 # ── 1. Caractérisation graphe du foncteur ∏ g_ι ──────────────────────────────

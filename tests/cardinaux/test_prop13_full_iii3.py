@@ -4,7 +4,7 @@ from bourbaki.cardinaux.ensembles_prop13_full_iii3 import (
     prop13_backward_card, prop13_backward_card_enonce,
     prop13_equivalence, prop13_equivalence_enonce,
 )
-from bourbaki.ensembles.ensembles_abrege import theorie_ensembles
+from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege import theorie_ensembles
 
 
 def test_prop13_backward_card():

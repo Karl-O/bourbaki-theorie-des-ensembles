@@ -9,9 +9,9 @@ On certifie ici tout le THÉORÈME, ASSEMBLAGE COMPLET :
   • image(K, (A⊔B)⊔C) = A⊔(B⊔C) (surjectivité, 3 antécédents) ;
   • est_bijection_de, Eq((A⊔B)⊔C, A⊔(B⊔C)), Card((A⊔B)⊔C)=Card(A⊔(B⊔C)).
 """
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.arithmetique import ensembles_somme_associe as A
-from bourbaki.ensembles.familles.ensembles_somme_disjointe import somme_disjointe, ZERO, UN
+from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import somme_disjointe, ZERO, UN
 from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de, equipotent, cardinal
 from bourbaki.logique.formule import var, egal, appartient, et, ou, existe, equiv
 

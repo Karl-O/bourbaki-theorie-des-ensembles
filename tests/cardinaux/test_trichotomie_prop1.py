@@ -9,7 +9,7 @@ que la forme close décharge les 3 hypothèses, et que rien n'est tautologie/pos
 theorie=22.
 """
 from bourbaki.logique.formule import non, egal, var, impl, et
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux import ensembles_trichotomie_prop1 as P
 
 

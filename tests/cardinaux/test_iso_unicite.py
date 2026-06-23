@@ -7,7 +7,7 @@ fidèle, non tautologique) ; et le pas final extensionnel f=g (iso_unicite_exten
 RÉUTILISE application_egale_par_valeurs).  theorie_ensembles() reste = 22.
 """
 from bourbaki.logique.formule import var, egal, impl, appartient, pourtout
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux import ensembles_iso_unicite as U
 from bourbaki.cardinaux.ensembles_lemme4_croissante import _R_de, _val, _f_dans_E
 from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis.ensembles_ordre_monotone import est_strictement_croissante

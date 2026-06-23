@@ -6,7 +6,7 @@
   • coincidence_univ       (la SEULE coïncidence géométrique reportée, Lemme 1).
 Conclusion == T2.fusion_hyp LITTÉRALEMENT ; non tautologique ; theorie=22.
 """
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux import ensembles_fusion_assemblage as FA
 from bourbaki.cardinaux import ensembles_temoin_deux_couples as T2
 

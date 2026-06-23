@@ -15,7 +15,7 @@ Le CRUX (bijection caractéristique complète χ : 𝔓(X) ⇄ 𝓕(X;{0,1})) re
   • cible_powerset_deux       : l'énoncé exact Card(𝔓(X)) = 2^Card X.
 """
 from bourbaki.logique.formule import var, egal, et, non, ou, equiv, appartient, inclus
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import cardinal
 from bourbaki.cardinaux.arithmetique.ensembles_exposant_cardinal import exposant_cardinal_binaire
 from bourbaki.cardinaux.arithmetique import ensembles_powerset_deux as P

@@ -6,7 +6,7 @@
 INVARIANT : theorie_ensembles() reste = 22 (P/Γ/Union en théories dédiées).
 """
 from bourbaki.logique.formule import var, appartient, equiv, inclus
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ordre.iii_2_bon_ordre.zorn_zermelo import ensembles_zorn_theoreme as Z
 
 

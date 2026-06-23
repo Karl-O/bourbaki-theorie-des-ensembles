@@ -58,9 +58,9 @@ from __future__ import annotations
 
 from bourbaki.logique.formule import Terme, var, egal, et, impl
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.tactiques.tactiques_abrege2 import (conjonction_intro, instancie)
-from bourbaki.ensembles.familles.ensembles_somme_disjointe import somme_disjointe
+from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import somme_disjointe
 from bourbaki.cardinaux.ensembles_cardinaux import inf_egal_card, cardinal
 from bourbaki.cardinaux.ensembles_cardinaux_theoremes import inf_egal_reflexif
 from bourbaki.cardinaux.arithmetique.ensembles_arith_cardinale_props_exposant_monotone import (

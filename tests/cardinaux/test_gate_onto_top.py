@@ -9,7 +9,7 @@ INVARIANT vérifié partout : theorie_ensembles() = 22.
 Anti-tautologie : aucune conclusion close ne peut être l'une de ses hypothèses (il n'y en a pas).
 """
 from bourbaki.logique.formule import var, appartient, inclus, egal, et, impl, non, pourtout, existe
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 
 import bourbaki.cardinaux.ensembles_gate_onto_top as M
 from bourbaki.cardinaux.ensembles_ordinal_cardinal_correspondance import (

@@ -3,8 +3,8 @@
 Vérifie la conclusion EXACTE (== cible) et .est_clos de chaque théorème certifié.
 """
 from bourbaki.logique.formule import (var, egal, et, impl, appartient, existe, pourtout, inclus, equiv)
-from bourbaki.ensembles import ensembles_abrege as E
-from bourbaki.ensembles.familles import ensembles_familles as F
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
+from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_1_definitions_algebre import ensembles_familles as F
 
 
 def test_membre_reunion_famille():

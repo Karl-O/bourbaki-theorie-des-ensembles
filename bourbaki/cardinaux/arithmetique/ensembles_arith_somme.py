@@ -35,11 +35,11 @@ from __future__ import annotations
 
 from bourbaki.logique.formule import (Terme, var, egal, et, impl, appartient, existe, subst_t)
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import cardinal
 from bourbaki.cardinaux.ensembles_cardinaux_theoremes import (equipotent_son_cardinal,
                                            cardinal_egal_si_equipotent)
-from bourbaki.ensembles.familles.ensembles_somme_disjointe import somme_disjointe, somme_cardinale_binaire
+from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import somme_disjointe, somme_cardinale_binaire
 from bourbaki.cardinaux.arithmetique.ensembles_somme_equipotence import eq_somme_invariant
 from bourbaki.cardinaux.arithmetique.ensembles_somme_commute import eq_somme_commute
 from bourbaki.logique.tactiques.tactiques_abrege2 import (conjonction_intro, conjonction_elim_gauche,

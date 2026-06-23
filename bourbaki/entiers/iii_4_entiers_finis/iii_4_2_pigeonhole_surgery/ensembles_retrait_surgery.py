@@ -42,7 +42,7 @@ from __future__ import annotations
 from bourbaki.logique.formule import (Terme, var, egal, et, non, impl, existe,
                                        inclus, appartient, pourtout)
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
     equivalence_avant, equivalence_arriere, instancie, dne, contraposition)
@@ -50,7 +50,7 @@ from bourbaki.logique.tactiques.tactiques_abrege2 import (
 from bourbaki.cardinaux.ensembles_cardinaux import (
     est_injection_de, inf_egal_card,
 )
-from bourbaki.ensembles.base.ensembles_couples import singleton_membre
+from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import singleton_membre
 
 
 def _t(t):

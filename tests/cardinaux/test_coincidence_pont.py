@@ -15,7 +15,7 @@ Certifie que `ensembles_coincidence_pont` livre :
 Aucune conclusion n'est tautologie / postulée ; theorie=22 ; aucun fichier modifié.
 """
 from bourbaki.logique.formule import var, egal, appartient, libres_f
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis.ensembles_ordre_vocab import (
     compatible_ordre, est_isomorphisme_ordre,
 )

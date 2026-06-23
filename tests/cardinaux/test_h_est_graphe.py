@@ -15,7 +15,7 @@ from bourbaki.cardinaux import ensembles_h_est_graphe as HGr
 from bourbaki.cardinaux import ensembles_trichotomie_scaffold as TS
 from bourbaki.cardinaux import ensembles_trichotomie_hgraphe_pr2seg as HG
 from bourbaki.cardinaux import ensembles_fusion_depuis_coincidence_app as FDA
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.formule import appartient, var
 
 

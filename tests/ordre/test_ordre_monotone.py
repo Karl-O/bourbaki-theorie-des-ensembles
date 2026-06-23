@@ -6,7 +6,7 @@ Pour chaque LEMME : on v√©rifie la conclusion EXACTE et le statut clos / hypoth√
 from bourbaki.logique.formule import (
     var, egal, et, ou, impl, non, appartient, existe, pourtout,
 )
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis import ensembles_ordre_monotone as M
 from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis.ensembles_ordre_relation import (
     est_ordre, borne_superieure, borne_inferieure,

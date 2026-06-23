@@ -44,7 +44,7 @@ from bourbaki.logique.formule import (
     libres_f,
 )
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 
 from bourbaki.logique.tactiques.tactiques_abrege import syllogisme
 from bourbaki.logique.tactiques.tactiques_abrege2 import (
@@ -104,7 +104,7 @@ def _inter_vide_de_forall(tU, tS, z="zz"):
 
     Extensionnalité : z∈U∩S₀ ⇒ z∈U ∧ z∈S₀ ⇒ (¬z∈S₀) ∧ z∈S₀ ⇒ ⊥ ⇒ z∈∅ ; et z∈∅⇒z∈U∩S₀
     (ex falso).  Capture-safe : binder « zz » (≠ binders internes des axiomes)."""
-    from bourbaki.ensembles.ensembles_theoremes import egalite_par_extension
+    from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import egalite_par_extension
     vU, vS = _t(tU), _t(tS)
     vz = var(z)
     inter = E.intersection(vU, vS)
@@ -411,7 +411,7 @@ def negation_strict_sous_maximal(E_set="E", phi0="phi0", S="S0", U="Ucadre"):
 # ── helpers locaux supplémentaires ────────────────────────────────────────────
 def _inter_vide_de_forall_under(forall_thm, tU, tS, z="zz"):
     """Comme _inter_vide_de_forall mais le ∀ est FOURNI (forall_thm) au lieu d'assumé."""
-    from bourbaki.ensembles.ensembles_theoremes import egalite_par_extension
+    from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import egalite_par_extension
     vU, vS = _t(tU), _t(tS)
     vz = var(z)
     inter = E.intersection(vU, vS)
@@ -497,7 +497,7 @@ def _z_inclus(vS, vU, z="z"):
 
 def _inclus_diff_inclus(h_sub, vE, vS, vU, z="z"):
     """{ U ⊂ E∖S₀ } ⊢ U ⊂ E.   (E∖S₀ ⊂ E, transitivité de l'inclusion.)"""
-    from bourbaki.ensembles.base.ensembles_difference import _inst_diff
+    from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_difference import _inst_diff
     vz = var(z)
     Diff = E.difference(vE, vS)
     h_z = N.assume(appartient(vz, vU))                     # z∈U
@@ -545,7 +545,7 @@ def _prouver_dom_disj(vphi0, vS, vU, dom0, inter_SU, inter_US):
     from bourbaki.cardinaux.ensembles_cadre_plat import (
         _bloc_produit_disjoint, _n_commun_de_disjoint, commutativite_intersection_t,
     )
-    from bourbaki.ensembles.ensembles_algebre_booleenne import (
+    from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_algebre_booleenne import (
         distributivite_intersection_reunion,
     )
     from bourbaki.cardinaux.ensembles_cantor_bernstein_final._recollement import (
@@ -579,7 +579,7 @@ def _prouver_dom_disj(vphi0, vS, vU, dom0, inter_SU, inter_US):
     rw_c = N.modus_ponens(blocC, N.s6(E.intersection(SxS, UxU), E.VIDE, "wc",
         egal(E.intersection(SxS, UxS_UxU), E.reunion(E.VIDE, var("wc")))))
     step_c = N.modus_ponens(step_b, equivalence_avant(rw_c))    # =∅∪∅
-    from bourbaki.ensembles.ensembles_vide_identites import reunion_vide_neutre
+    from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_vide_identites import reunion_vide_neutre
     vunion = reunion_vide_neutre(E.VIDE)                        # ∅∪∅=∅
     inter_inner = ce(step_c, vunion)                           # S²∩(UxS∪UxU)=∅
 

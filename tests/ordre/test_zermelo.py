@@ -13,7 +13,7 @@ INVARIANT : theorie_ensembles() reste = 22 (axiomes de W/Θ/Union en théories
 DÉDIÉES).  🚫 JAMAIS postuler le bon ordre : il est CONSTRUIT.
 """
 from bourbaki.logique.formule import var
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis.ensembles_ordre_relation import est_ordre, transitivite_rel
 from bourbaki.ordre.iii_2_bon_ordre.zorn_zermelo import ensembles_zermelo as Z
 
@@ -68,7 +68,7 @@ def test_Union_inclus_produit():
 
 
 def test_Union_transitif():
-    from bourbaki.ensembles.ensembles_abrege import ordre_transitif
+    from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege import ordre_transitif
     th = Z.Union_transitif("X", "D")
     assert th.conclusion == ordre_transitif(Z.R_de(Z.Union(X, var("D"))), "a", "b", "c")
     assert len(th.hypotheses) == 2

@@ -17,7 +17,7 @@ from __future__ import annotations
 from bourbaki.logique.formule import (Terme, var, egal, et, non, ou, impl, equiv,
                      appartient, existe, pourtout, inclus, subst_t)
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.tactiques.tactiques_abrege2 import (conjonction_intro,
                                conjonction_elim_gauche, conjonction_elim_droite,
                                equivalence_avant, equivalence_arriere,
@@ -26,12 +26,12 @@ from bourbaki.logique.tactiques.tactiques_abrege_egalite import (symetrie,
                                composer_egalites, congruence_terme)
 from bourbaki.logique.tactiques.tactiques_abrege_quantif import (existe_elimination,
                                alpha_existe)
-from bourbaki.ensembles.ensembles_theoremes import egalite_par_extension
+from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import egalite_par_extension
 from bourbaki.ensembles.fonctions.ii_3_6_fonction_terme.ensembles_fonction_terme import (
     graphe_terme_fonctionnel, membre_graphe_terme)
 from bourbaki.cardinaux.ensembles_cantor import (graphe_terme_domaine,
                                graphe_terme_valeur)
-from bourbaki.ensembles.base.ensembles_couples import couple_egal_implique_composantes
+from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import couple_egal_implique_composantes
 # socle 2-élément :
 from bourbaki.cardinaux.arithmetique.ensembles_powerset_exp import (
     deux, exposant_deux_base, cible_powerset_exp)
@@ -191,7 +191,7 @@ def W_image_egale_applications(x="X"):
     ⊃ : t∈𝓕(X;2) ⇒ t=((G,X),2), G∈2^X ; poser S:=Pre(G)⊂X∈𝔓X ; chi_appli(S) =
         ((χ_{Pre(G)},X),2) = ((G,X),2) = t  (crux chi_eq_graphe) ; donc (S,t)∈W,
         S∈𝔓X ⇒ t∈img(W,𝔓X)."""
-    from bourbaki.ensembles.ensembles_theoremes import extensionnalite_appliquee
+    from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import extensionnalite_appliquee
     vX, vt = _t(x), var("z")        # élément générique = « z » (binder par défaut de `inclus`)
     W = _W(vX)
     PX = E.parties(vX)

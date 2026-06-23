@@ -5,7 +5,7 @@ on vérifie (1) que le pivot PARAMÉTRÉ construit sur le graphe τ-lourd factor
 des témoins FRAIS, (2) que la theorie reste 22, (3) que le site résiduel est bien
 l'appel à témoins par défaut dans le gluing C60 déposé.
 """
-import bourbaki.ensembles.ensembles_abrege as E
+import bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege as E
 from bourbaki.entiers.iii_5_calcul_entiers.iii_5_8_factorielle.ensembles_factorielle_existence_vrai import (
     pivot_factorielle_frais_ok, site_residuel_exact,
 )

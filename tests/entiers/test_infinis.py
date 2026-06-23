@@ -104,7 +104,7 @@ def test_denombrable_verbatim():
 def test_puissance_continu_verbatim():
     """a_puissance_continu(E) = Eq(E, P(N))  (Déf. 4 verbatim)."""
     from bourbaki.cardinaux.ensembles_cardinaux import equipotent
-    from bourbaki.ensembles import ensembles_abrege as E
+    from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
     assert I.a_puissance_continu("E") == equipotent(var("E"), E.parties(I.NN))
 
 

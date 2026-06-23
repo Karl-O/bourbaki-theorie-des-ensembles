@@ -9,7 +9,7 @@ EXACTES contrôlées.
 from bourbaki.logique.formule import (
     var, appartient, inclus, egal, et, non, ou, impl, pourtout,
 )
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 
 import bourbaki.cardinaux.ensembles_bien_ordonne_lemme_1_segments as L1
 

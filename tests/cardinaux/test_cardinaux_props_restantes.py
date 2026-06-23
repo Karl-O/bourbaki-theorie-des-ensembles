@@ -12,7 +12,7 @@ et la clôture (.est_clos), avec hypothèses résiduelles vides (sauf hyp explic
 from bourbaki.logique.formule import var, egal, existe, impl, et
 from bourbaki.cardinaux import ensembles_cardinaux_props_restantes as P
 from bourbaki.cardinaux.ensembles_cardinaux import inf_egal_card, cardinal
-from bourbaki.ensembles.familles.ensembles_somme_disjointe import somme_cardinale_binaire
+from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import somme_cardinale_binaire
 
 
 # ── b ≤ b+c  (brique du sens ⇐) ────────────────────────────────────────────────

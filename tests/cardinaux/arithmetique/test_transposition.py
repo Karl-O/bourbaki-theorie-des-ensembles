@@ -8,11 +8,11 @@ la transposition : injectif, image, valeur(q)=p, et l'EXISTENCE comme bijection
 from bourbaki.cardinaux.arithmetique.ensembles_transposition import (
     transpo, transpo_membre, transpo_fonctionnel, transpo_domaine,
     transpo_injective, transpo_image, transpo_valeur_q, transposition_existe)
-from bourbaki.ensembles.ensembles_abrege import injective_dans, image, valeur
+from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege import injective_dans, image, valeur
 from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de
 from bourbaki.logique.formule import var, egal, et
 from bourbaki.logique.tactiques.tactiques_abrege2 import antecedent_consequent
-import bourbaki.ensembles.ensembles_abrege as E
+import bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege as E
 
 
 def test_transpo_terme():

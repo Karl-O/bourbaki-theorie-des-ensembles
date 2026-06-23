@@ -53,7 +53,7 @@ from bourbaki.logique.formule import (
     inclus,
 )
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.tactiques.tactiques_abrege import a_implique_a, syllogisme
 from bourbaki.logique.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite, instancie,
@@ -262,7 +262,7 @@ def majorants_non_vide(F="Fsup", a="a"):
     """⊢ { est_cardinal(a),  F⊂[0,a] }  ⊢  ¬( U = ∅ )   où U=ensemble_majorants(F,a).
 
     a∈U (a_dans_majorants) ⇒ (∃z) z∈U ⇒ U≠∅ (non_vide_ssi_element)."""
-    from bourbaki.ensembles.base.ensembles_vide import non_vide_ssi_element
+    from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_vide import non_vide_ssi_element
     vF, va = _t(F), _t(a)
     U = ensemble_majorants(vF, va)
     a_in_U = a_dans_majorants(F, a)                             # a∈U

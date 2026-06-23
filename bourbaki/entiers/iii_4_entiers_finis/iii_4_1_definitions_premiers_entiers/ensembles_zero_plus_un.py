@@ -53,7 +53,7 @@ from __future__ import annotations
 
 from bourbaki.logique.formule import (Terme, var, egal, et, non, appartient, existe, subst_t, subst_f)
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.tactiques.tactiques_abrege import a_implique_a, syllogisme
 from bourbaki.logique.tactiques.tactiques_abrege2 import (conjonction_intro, conjonction_elim_gauche,
                                conjonction_elim_droite, equivalence_avant,
@@ -63,8 +63,8 @@ from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie, compos
 from bourbaki.logique.tactiques.tactiques_abrege_quantif import existe_elimination, alpha_existe
 from bourbaki.ensembles.fonctions.ii_3_6_fonction_terme.ensembles_fonction_terme import membre_graphe_terme, graphe_terme_fonctionnel
 from bourbaki.cardinaux.ensembles_cantor import graphe_terme_domaine, graphe_terme_valeur
-from bourbaki.ensembles.base.ensembles_couples import singleton_membre
-from bourbaki.ensembles.ensembles_theoremes import egalite_par_extension
+from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import singleton_membre
+from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import egalite_par_extension
 from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de, equipotent, cardinal
 
 
@@ -158,7 +158,7 @@ def const_graphe_image(a="a", b="b"):
     z_b = conjonction_elim_droite(conjonction_elim_droite(hf))     # z=b
     fwd = existe_elimination(N.loi_deduction(full, z_b), "t")      # (∃t)full ⇒ z=b
     # ⇐ : z=b ⇒ (∃t)full  via témoin t:=a (a∈{a} par réflexivité)
-    from bourbaki.ensembles.base.ensembles_couples import membre_paire_gauche
+    from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import membre_paire_gauche
     a_in_sa = membre_paire_gauche(va, va)                         # a∈{a,a}={a}
     hzb = N.assume(z_eq_b)
     wit = conjonction_intro(a_in_sa, conjonction_intro(a_in_sa, hzb))  # (a|t)full
@@ -213,7 +213,7 @@ def somme_zero_un_egale_singleton():
     impossible, AXIOME_VIDE).  Le disjoint DROIT (∃v)(v∈{∅} et z=(v,1)) équivaut à
     z=(∅,1) : v∈{∅} ⇔ v=∅ (singleton_membre), d'où z=(v,1)=(∅,1) ; réciproquement
     le témoin v:=∅.  Donc z∈∅⊔{∅} ⇔ z=(∅,1) ⇔ z∈{(∅,1)}."""
-    from bourbaki.ensembles.familles.ensembles_somme_disjointe import (somme_disjointe, membre_somme_caracterise,
+    from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import (somme_disjointe, membre_somme_caracterise,
                                            ZERO, UN)
     vide = E.VIDE
     sing = E.singleton(vide)                 # {∅} = 1 (marqueur ensembliste)
@@ -278,7 +278,7 @@ def _disj_droite_intro(thm_right, left, right):
 
 def membre_singleton_vide():
     """⊢ ∅ ∈ {∅}.   (l'élément ∅ appartient à son singleton, réflexivité.)"""
-    from bourbaki.ensembles.base.ensembles_couples import membre_paire_gauche
+    from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import membre_paire_gauche
     return membre_paire_gauche(E.VIDE, E.VIDE)                  # ∅∈{∅,∅}={∅}
 
 
@@ -289,7 +289,7 @@ def eq_somme_zero_un():
     ∅⊔{∅} = {(∅,1)} (somme_zero_un_egale_singleton) ; Eq({(∅,1)}, {∅}) (eq_singletons,
     deux singletons équipotents) ; on transporte le 1ᵉʳ argument de Eq par l'égalité
     d'ensembles via S6 (Leibniz)."""
-    from bourbaki.ensembles.familles.ensembles_somme_disjointe import somme_disjointe, UN
+    from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import somme_disjointe, UN
     vide = E.VIDE
     sing = E.singleton(vide)                 # {∅}
     AB = somme_disjointe(vide, sing)         # ∅ ⊔ {∅}
@@ -310,7 +310,7 @@ def card_somme_zero_un():
     Card(∅⊔{∅}) = somme_cardinale_binaire(∅, {∅}) = « 0 + 1 », et Card({∅}) = « 1 ».
     Eq(∅⊔{∅}, {∅}) (eq_somme_zero_un) ; la Proposition 1 (sens direct, version TERME
     _prop1_direct_t) conclut Card(∅⊔{∅}) = Card({∅})."""
-    from bourbaki.ensembles.familles.ensembles_somme_disjointe import somme_disjointe
+    from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import somme_disjointe
     from bourbaki.cardinaux.arithmetique.ensembles_arith_cardinale import _prop1_direct_t
     vide = E.VIDE
     sing = E.singleton(vide)                 # {∅}

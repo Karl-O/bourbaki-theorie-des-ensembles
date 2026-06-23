@@ -55,13 +55,13 @@ from __future__ import annotations
 from bourbaki.logique.formule import (Terme, var, egal, et, appartient,
                                        existe, pourtout)
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.tactiques.tactiques_abrege2 import (instancie,
                                conjonction_intro, conjonction_elim_gauche,
                                conjonction_elim_droite, equivalence_avant)
 from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie, composer_egalites
 from bourbaki.logique.tactiques.tactiques_abrege_quantif import existe_elimination
-from bourbaki.ensembles.familles.ensembles_somme_disjointe import ZERO, UN, somme_disjointe
+from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import ZERO, UN, somme_disjointe
 from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de, equipotent
 from bourbaki.cardinaux.ensembles_composee_bijection import composee_bijection
 from bourbaki.ensembles.fonctions.ii_3_8_retractions_sections.ensembles_composee_valeurs import composition_valeur_t

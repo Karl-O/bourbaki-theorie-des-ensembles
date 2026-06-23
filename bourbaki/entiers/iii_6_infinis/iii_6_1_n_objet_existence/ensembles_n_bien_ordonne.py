@@ -42,7 +42,7 @@ from bourbaki.logique.formule import (
     Terme, var, egal, et, non, ou, impl, appartient, existe, pourtout, inclus,
 )
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
     equivalence_avant, equivalence_arriere, instancie,
@@ -217,7 +217,7 @@ from bourbaki.entiers.iii_6_infinis.iii_6_1_n_objet_existence.ensembles_N_collec
 from bourbaki.cardinaux.ensembles_gate_onto_top import bon_ordre_intervalle_close
 from bourbaki.cardinaux.ensembles_ordinal_cardinal_correspondance import ordre_induit_intervalle
 from bourbaki.cardinaux.ensembles_ordinal_cardinal_bon_ordre import bon_ordre_donne_clause_plus_petit
-from bourbaki.ensembles.base.ensembles_vide import non_vide_ssi_element
+from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_vide import non_vide_ssi_element
 
 
 def _membre_interv_at(b, x):

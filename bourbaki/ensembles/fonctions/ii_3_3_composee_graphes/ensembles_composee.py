@@ -7,7 +7,7 @@ from __future__ import annotations
 
 from bourbaki.logique.formule import var, egal, et, appartient, existe, subst_f, Terme
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.tactiques.tactiques_abrege2 import (conjonction_intro, conjonction_elim_gauche,
                                conjonction_elim_droite, equivalence_avant,
                                equivalence_transitivite, equivalence_symetrie,
@@ -16,9 +16,9 @@ from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie
 from bourbaki.logique.tactiques.tactiques_abrege_quantif import (existe_elimination, congruence_existe,
                                       et_existe_droite, et_existe_gauche, existe_commute,
                                       alpha_existe)
-from bourbaki.ensembles.base.ensembles_couples import couple_egal_implique_composantes
-from bourbaki.ensembles.base.ensembles_correspondances import _inst_image
-from bourbaki.ensembles.ensembles_theoremes import egalite_par_extension
+from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import couple_egal_implique_composantes
+from bourbaki.ensembles.ii_3_correspondances.ensembles_correspondances import _inst_image
+from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import egalite_par_extension
 
 
 def _inst_composee(gp, g, w):

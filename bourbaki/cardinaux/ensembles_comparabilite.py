@@ -38,7 +38,7 @@ from bourbaki.logique.formule import (
     Terme, var, egal, et, ou, non, impl, equiv, appartient, existe, pourtout, inclus, tau,
 )
 from bourbaki.logique import noyau_abrege as N
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.tactiques.tactiques_abrege import a_implique_a, syllogisme
 from bourbaki.logique.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
@@ -251,7 +251,7 @@ def Gamma_reflexive_sur(X="X", Y="Y", G="x"):
 
 def Gamma_antisymetrique(X="X", Y="Y", G="x", H="y"):
     """⊢ antisymetrie(ΓI).   = (∀x∀y)( ((x,y)∈ΓI et (y,x)∈ΓI) ⇒ x=y )."""
-    from bourbaki.ensembles.ensembles_theoremes import extensionnalite_appliquee
+    from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import extensionnalite_appliquee
     vX, vY, vG, vH = var(X), var(Y), var(G), var(H)
     hyp = et(_gle(vG, vH, vX, vY), _gle(vH, vG, vX, vY))
     h = N.assume(hyp)
@@ -719,7 +719,7 @@ def _inst_img(g, y):
 
 def _prod_couple(u, v, A, B):
     """⊢ ((u,v)∈A×B) ⇔ (u∈A et v∈B)."""
-    from bourbaki.ensembles.familles.ensembles_produit import couple_dans_produit_ssi
+    from bourbaki.ensembles.familles.ii_2_produit_deux_ensembles.ensembles_produit import couple_dans_produit_ssi
     return couple_dans_produit_ssi(_terme(u), _terme(v), _terme(A), _terme(B))
 
 
@@ -780,7 +780,7 @@ def _sous_propre_temoin(A, B, hAB, hAneB, z="z"):
     Si B⊂A, alors (A⊂B et B⊂A) ⇒ A=B (A1), contredisant A≠B ; donc ¬(B⊂A) =
     ¬(∀z)(z∈B⇒z∈A), d'où (∃z)¬(z∈B⇒z∈A) ⇔ (∃z)(z∈B et z∉A)."""
     from bourbaki.logique.tactiques.tactiques_abrege2 import dne
-    from bourbaki.ensembles.ensembles_theoremes import extensionnalite_appliquee
+    from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import extensionnalite_appliquee
     from bourbaki.ordre.iii_2_bon_ordre.zorn_zermelo.ensembles_bourbaki_witt_chaine import _ex_falso, _refute_self, _neg_impl_equiv
     vA, vB = _terme(A), _terme(B)
     vz = var(z)
@@ -807,7 +807,7 @@ def _ext(g, x0, y0):
 
 def _membre_ext(g, x0, y0, c):
     """⊢ ( c ∈ g∪{(x₀,y₀)} ) ⇔ ( c∈g ou c=(x₀,y₀) )  (axiome réunion + singleton)."""
-    from bourbaki.ensembles.base.ensembles_couples import singleton_membre
+    from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import singleton_membre
     from bourbaki.logique.tactiques.tactiques_abrege2 import ou_congruence
     vg, c0 = _terme(g), E.couple(_terme(x0), _terme(y0))
     vc = _terme(c)
@@ -869,7 +869,7 @@ def _pas_dans_img(g, x0, y0, a="xa"):
 # ── helpers Leibniz/couples pour les cas « mixtes » ──────────────────────────
 def _couple_comps(p, q, x0, y0, hc_eq):
     """De ⊢ (p,q)=(x₀,y₀) [hc_eq] déduit ⊢ (p=x₀ et q=y₀)."""
-    from bourbaki.ensembles.base.ensembles_couples import couple_egal_implique_composantes
+    from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import couple_egal_implique_composantes
     return N.modus_ponens(hc_eq, couple_egal_implique_composantes(
         _terme(p), _terme(q), _terme(x0), _terme(y0)))
 

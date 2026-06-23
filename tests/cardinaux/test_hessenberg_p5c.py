@@ -7,7 +7,7 @@ conclusion E-SEULE, aucun témoin (S0/Ucadre/phi0/psi/uwit/Smx/phimx/mmx) libre 
 seules hypothèses résiduelles sont les 2 résidus E-niveau de frame_a_maximal (Zorn).
 """
 from bourbaki.logique.formule import libres_f, non, egal, var
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 
 
 def test_theorie_22():

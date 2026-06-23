@@ -8,8 +8,8 @@ from __future__ import annotations
 
 from bourbaki.logique.formule import (var, egal, et, appartient, inclus, pourtout,
                                        libres_f, afficher_f)
-from bourbaki.ensembles import ensembles_abrege as E
-from bourbaki.ensembles.base import ensembles_fondations_notions as F
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
+from bourbaki.ensembles.ii_3_correspondances import ensembles_fondations_notions as F
 
 
 _A, _B, _G, _X = var("A"), var("B"), var("G"), var("X")

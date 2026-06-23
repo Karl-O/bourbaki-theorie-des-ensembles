@@ -1,6 +1,6 @@
 """TASK A — distribution ensembliste pleine produit/réunion + (A∪B)²."""
 from bourbaki.logique.formule import var, egal
-from bourbaki.ensembles import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_produit_union_carre import (
     existe_ou, produit_union_gauche, produit_union_droite,
     produit_union_carre, carre_reunion_S0_U,
