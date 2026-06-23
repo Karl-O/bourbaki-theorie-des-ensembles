@@ -19,7 +19,7 @@ Format : `## [ ] <nom>` a cocher `## [x]` APRES commit. Verifier l'existence des
 - lemmes: C:/Users/KARL/OneDrive/Bureau/Apprendre/Livre/Bourbakie/Theorie_des_ensembles/V9/bourbaki/ensembles/fonctions/ii_3_8_retractions_sections/ensembles_retractions.py (retraction_implique_injective — à réinstancier) ; .../ensembles_retractions_props.py (section_implique_surjective_valeur, et corollaire_g_injective comme modèle de réétiquetage sain) ; bourbaki/ensembles/ii_1_axiomes_algebre/ensembles_abrege.py (est_retraction, est_section, injective_dans)
 - fichier: bourbaki/ensembles/fonctions/ii_3_8_retractions_sections/ensembles_retractions.py
 
-## [ ] inter_incluse_sous_indices  (faible/facile)
+## [x] inter_incluse_sous_indices  (faible/facile)
 - secteur: II.4  | E.II.4.2 (premier paragraphe, monotonie en l'indice ⋂)
 - statut: MANQUANT (le dual réunion reunion_incluse_sous_indices EST fait dans ensembles_familles_algebre.py ; le dual décroissant intersection ⋂_{ι∈I} ⊂ ⋂_{ι∈J} sous J⊂I n'existe pas : grep inter_incluse_sous_indices = 0 hit. Bourbaki l'énonce verbatim au début de §4.2 : « si J⊂I, on a (si J≠∅) ⋂_{ι∈I}X_ι ⊂ ⋂_{ι∈J}X_ι ».)
 - enonce: {J ⊂ I} ⊢ ⋂_{ι∈I} X_ι ⊂ ⋂_{ι∈J} X_ι. (Conclusion = inclusion ; hypothèse = exactement J⊂I, chargée par loi_deduction. NB : l'inclusion va de I vers J — l'intersection sur le PLUS GROS ensemble d'indices est la PLUS PETITE. Bourbaki ajoute J≠∅ mais ce n'est requis que pour comparer aux familles non-parties ; ici l'énoncé J⊂I ⊢ ⋂_I ⊂ ⋂_J est valide inconditionnellement avec l'axiome ⋂ Déf. 2, car z∈⋂_I ⇒ (∀i)(i∈I⇒z∈X_i) et J⊂I restreint le quantificateur.)
