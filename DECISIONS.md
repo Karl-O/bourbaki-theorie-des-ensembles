@@ -67,3 +67,24 @@ Migrés + commités (gate collecte vert, 1 erreur connue tolérée) :
 - **Restent** : `cardinaux/arithmetique`, puis `cardinaux` (fix `hessenberg/assemblage_vrai` 11→≤10 dans
   `reorg_moves.json` AVANT apply), avec run de suite complète (avec `--timeout`, cf. test lent pré-existant
   dans entiers/ensembles — cible ÉTAPE D).
+
+## 2026-06-23 — `cardinaux/arithmetique` migré (8/9) — paquet le plus retors
+
+Le move-map d'arithmetique était d'un format différent (chemins relatifs au paquet + **déplacements de
+DOSSIERS**, 4 sous-paquets renommés `ensembles_X` → `X`). Trois bugs successifs de l'outil, chacun corrigé
++ revalidé (rollback transactionnel à chaque fois, 0 dégât) :
+1. **format** : chemins non V9-root → crash `rsplit('.')`. Fix : normalisation + validation de format
+   (erreur claire). + `reorg_moves` : `hessenberg/assemblage_vrai` 11→6+6 (`step_b_prop5`).
+2. **renommages de PAQUETS** : `from PKG import nom_reexporté` non suivi (68 erreurs). Fix : champ
+   `renommages_paquets` + chemin pointé du paquet ajouté à rmap (motif A). 68→3.
+3. **forme parenthésée** `from PKG import (\n module)` : motif B élargi `\(?\s*`. 3→1.
+- **Limite connue de l'outil** (corrigée à la main pour 3 tests) : `from PARENT import OLDLEAF as X` quand
+  le PAQUET est **renommé** (leaf change) n'est pas auto-réécrit (faudrait `from NEWPARENT import NEWLEAF
+  as X`). Marchait par fallback namespace-package des dossiers vides ; exposé par `find -empty -delete`.
+  → 3 tests arithmetique corrigés explicitement. **À surveiller pour `cardinaux`** : vérifier ses
+  `renommages_paquets` et les imports `from cardinaux import <pkg>`.
+- **Nettoyage** : `find -type d -empty -delete` retire les dossiers source vidés — mais expose les imports
+  de paquets-namespace fantômes ; le faire AVANT le gate final, pas après le commit.
+
+**RESTE** : `cardinaux` (140 fichiers, dernier). Puis suite complète `--timeout=120`, mirroring `tests/`,
+dossiers-trous.
