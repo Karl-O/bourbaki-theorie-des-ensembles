@@ -1,0 +1,2357 @@
+{
+ "bourbaki/logique": {
+  "nb": 24,
+  "deplacements": [
+   {
+    "de": "bourbaki/logique/__init__.py",
+    "vers": "bourbaki/logique/__init__.py"
+   },
+   {
+    "de": "bourbaki/logique/formule.py",
+    "vers": "bourbaki/logique/i_1_termes_relations/formule.py"
+   },
+   {
+    "de": "bourbaki/logique/lecture.py",
+    "vers": "bourbaki/logique/i_1_termes_relations/lecture.py"
+   },
+   {
+    "de": "bourbaki/logique/notation.py",
+    "vers": "bourbaki/logique/i_1_termes_relations/notation.py"
+   },
+   {
+    "de": "bourbaki/logique/propositions.py",
+    "vers": "bourbaki/logique/i_1_termes_relations/propositions.py"
+   },
+   {
+    "de": "bourbaki/logique/criteres/criteres_CS.py",
+    "vers": "bourbaki/logique/i_1_termes_relations/criteres_CS.py"
+   },
+   {
+    "de": "bourbaki/logique/criteres/criteres_CF.py",
+    "vers": "bourbaki/logique/i_1_termes_relations/criteres_CF.py"
+   },
+   {
+    "de": "bourbaki/logique/noyau.py",
+    "vers": "bourbaki/logique/i_2_criteres_C/noyau/noyau.py"
+   },
+   {
+    "de": "bourbaki/logique/noyau_abrege.py",
+    "vers": "bourbaki/logique/i_2_criteres_C/noyau/noyau_abrege.py"
+   },
+   {
+    "de": "bourbaki/logique/criteres/criteres_C.py",
+    "vers": "bourbaki/logique/i_2_criteres_C/criteres/criteres_C.py"
+   },
+   {
+    "de": "bourbaki/logique/criteres/criteres_C_suite.py",
+    "vers": "bourbaki/logique/i_2_criteres_C/criteres/criteres_C_suite.py"
+   },
+   {
+    "de": "bourbaki/logique/criteres/criteres_C_suite2.py",
+    "vers": "bourbaki/logique/i_2_criteres_C/criteres/criteres_C_suite2.py"
+   },
+   {
+    "de": "bourbaki/logique/tactiques/tactiques.py",
+    "vers": "bourbaki/logique/i_2_criteres_C/tactiques/tactiques.py"
+   },
+   {
+    "de": "bourbaki/logique/tactiques/tactiques_prop.py",
+    "vers": "bourbaki/logique/i_2_criteres_C/tactiques/tactiques_prop.py"
+   },
+   {
+    "de": "bourbaki/logique/tactiques/tactiques_abrege.py",
+    "vers": "bourbaki/logique/i_2_criteres_C/tactiques/tactiques_abrege.py"
+   },
+   {
+    "de": "bourbaki/logique/tactiques/tactiques_abrege2.py",
+    "vers": "bourbaki/logique/i_2_criteres_C/tactiques/tactiques_abrege2.py"
+   },
+   {
+    "de": "bourbaki/logique/congruence_quantif.py",
+    "vers": "bourbaki/logique/i_3_quantifies/congruence_quantif.py"
+   },
+   {
+    "de": "bourbaki/logique/criteres/criteres_quantif2.py",
+    "vers": "bourbaki/logique/i_3_quantifies/criteres_quantif2.py"
+   },
+   {
+    "de": "bourbaki/logique/tactiques/tactiques_abrege_quantif.py",
+    "vers": "bourbaki/logique/i_3_quantifies/tactiques_abrege_quantif.py"
+   },
+   {
+    "de": "bourbaki/logique/tactiques/ensembles_alpha_bridge.py",
+    "vers": "bourbaki/logique/i_3_quantifies/ensembles_alpha_bridge.py"
+   },
+   {
+    "de": "bourbaki/logique/tactiques/tactiques_egalite.py",
+    "vers": "bourbaki/logique/i_4_egalitaires/tactiques_egalite.py"
+   },
+   {
+    "de": "bourbaki/logique/tactiques/tactiques_abrege_egalite.py",
+    "vers": "bourbaki/logique/i_4_egalitaires/tactiques_abrege_egalite.py"
+   },
+   {
+    "de": "bourbaki/logique/verificateur_preuve.py",
+    "vers": "bourbaki/logique/verification/verificateur_preuve.py"
+   },
+   {
+    "de": "bourbaki/logique/criteres/__init__.py",
+    "vers": "bourbaki/logique/i_2_criteres_C/criteres/__init__.py"
+   },
+   {
+    "de": "bourbaki/logique/tactiques/__init__.py",
+    "vers": "bourbaki/logique/i_2_criteres_C/tactiques/__init__.py"
+   }
+  ],
+  "dossiers_vides": [],
+  "arbre": [
+   {
+    "dossier": "",
+    "section": "I (racine du paquet)",
+    "count": 6
+   },
+   {
+    "dossier": "i_1_termes_relations",
+    "section": "I.1",
+    "count": 7
+   },
+   {
+    "dossier": "i_2_criteres_C",
+    "section": "I.2",
+    "count": 4
+   },
+   {
+    "dossier": "i_2_criteres_C/noyau",
+    "section": "I.2",
+    "count": 3
+   },
+   {
+    "dossier": "i_2_criteres_C/criteres",
+    "section": "I.2",
+    "count": 4
+   },
+   {
+    "dossier": "i_2_criteres_C/tactiques",
+    "section": "I.2",
+    "count": 5
+   },
+   {
+    "dossier": "i_3_quantifies",
+    "section": "I.3",
+    "count": 5
+   },
+   {
+    "dossier": "i_4_egalitaires",
+    "section": "I.4",
+    "count": 3
+   },
+   {
+    "dossier": "verification",
+    "section": "I (couche outillage)",
+    "count": 2
+   }
+  ]
+ },
+ "bourbaki/ensembles": {
+  "nb": 25,
+  "deplacements": [
+   {
+    "de": "bourbaki/ensembles/ensembles_abrege.py",
+    "vers": "bourbaki/ensembles/ii_1_axiomes_algebre/ensembles_abrege.py"
+   },
+   {
+    "de": "bourbaki/ensembles/ensembles_theoremes.py",
+    "vers": "bourbaki/ensembles/ii_1_axiomes_algebre/ensembles_theoremes.py"
+   },
+   {
+    "de": "bourbaki/ensembles/ensembles_algebre_booleenne.py",
+    "vers": "bourbaki/ensembles/ii_1_axiomes_algebre/ensembles_algebre_booleenne.py"
+   },
+   {
+    "de": "bourbaki/ensembles/ensembles_inclusion_treillis.py",
+    "vers": "bourbaki/ensembles/ii_1_axiomes_algebre/ensembles_inclusion_treillis.py"
+   },
+   {
+    "de": "bourbaki/ensembles/ensembles_vide_identites.py",
+    "vers": "bourbaki/ensembles/ii_1_axiomes_algebre/ensembles_vide_identites.py"
+   },
+   {
+    "de": "bourbaki/ensembles/ensembles_difference_identites.py",
+    "vers": "bourbaki/ensembles/ii_1_axiomes_algebre/ensembles_difference_identites.py"
+   },
+   {
+    "de": "bourbaki/ensembles/base/ensembles_vide.py",
+    "vers": "bourbaki/ensembles/ii_1_axiomes_algebre/ensembles_vide.py"
+   },
+   {
+    "de": "bourbaki/ensembles/base/ensembles_difference.py",
+    "vers": "bourbaki/ensembles/ii_1_axiomes_algebre/ensembles_difference.py"
+   },
+   {
+    "de": "bourbaki/ensembles/base/ensembles_couples.py",
+    "vers": "bourbaki/ensembles/ii_2_couples_produit/ensembles_couples.py"
+   },
+   {
+    "de": "bourbaki/ensembles/ensembles_produit_distributif.py",
+    "vers": "bourbaki/ensembles/ii_2_couples_produit/ensembles_produit_distributif.py"
+   },
+   {
+    "de": "bourbaki/ensembles/base/ensembles_fondations_notions.py",
+    "vers": "bourbaki/ensembles/ii_3_correspondances/ensembles_fondations_notions.py"
+   },
+   {
+    "de": "bourbaki/ensembles/base/ensembles_correspondances.py",
+    "vers": "bourbaki/ensembles/ii_3_correspondances/ensembles_correspondances.py"
+   },
+   {
+    "de": "bourbaki/ensembles/ensembles_chap2_props_restantes.py",
+    "vers": "bourbaki/ensembles/ii_4_reunion_intersection/ensembles_chap2_props_restantes.py"
+   },
+   {
+    "de": "bourbaki/ensembles/ensembles_quotient_props.py",
+    "vers": "bourbaki/ensembles/ii_6_equivalence/ensembles_quotient_props_graphe.py"
+   },
+   {
+    "de": "bourbaki/ensembles/ensembles_quotient_produit_restant.py",
+    "vers": "bourbaki/ensembles/ii_6_equivalence/ensembles_quotient_produit_restant.py"
+   },
+   {
+    "de": "bourbaki/ensembles/relations/ensembles_quotient_props.py",
+    "vers": "bourbaki/ensembles/ii_6_equivalence/ensembles_quotient_props.py"
+   },
+   {
+    "de": "bourbaki/ensembles/relations/ensembles_quotient_complements.py",
+    "vers": "bourbaki/ensembles/ii_6_equivalence/ensembles_quotient_complements.py"
+   },
+   {
+    "de": "bourbaki/ensembles/relations/ensembles_quotient_c56_c57.py",
+    "vers": "bourbaki/ensembles/ii_6_equivalence/ensembles_quotient_c56_c57.py"
+   },
+   {
+    "de": "bourbaki/ensembles/relations/ensembles_decomposition_quotient.py",
+    "vers": "bourbaki/ensembles/ii_6_equivalence/ensembles_decomposition_quotient.py"
+   },
+   {
+    "de": "bourbaki/ensembles/relations/ensembles_decomposition_effective.py",
+    "vers": "bourbaki/ensembles/ii_6_equivalence/ensembles_decomposition_effective.py"
+   },
+   {
+    "de": "bourbaki/ensembles/ensembles_props_diverses.py",
+    "vers": "bourbaki/ensembles/iii_3_ordre_cardinaux/ensembles_props_diverses.py"
+   },
+   {
+    "de": "bourbaki/ensembles/theorie_ensembles.py",
+    "vers": "bourbaki/ensembles/ii_1_axiomes_algebre/theorie_ensembles.py"
+   }
+  ],
+  "dossiers_vides": [
+   {
+    "dossier": "ii_2_couples_produit/ii_2_5_graphe_produit",
+    "section_livre": "II.2.5",
+    "raison": "II.2 a une sous-section sur le graphe d'un produit / produit cartesien comme ensemble (egalites ensemblistes A x (B u C) = ...) non encore formalisee : seul le coeur appartenance-couple (produit_distributif) et l'injectivite des paires (couples) sont prouves ; l'egalite ensembliste pleine est reportee."
+   },
+   {
+    "dossier": "ii_3_correspondances/ii_3_reciproque_composee",
+    "section_livre": "II.3.2-3.3",
+    "raison": "II.3 correspondance reciproque et composition des correspondances (graphes) ne sont pas couvertes dans ce paquet (dom/img/image directe seuls presents) ; les correspondances reciproque/composee relevent du sous-paquet fonctions (autre agent) mais le trou cote 'graphe de correspondance' reste visible ici."
+   }
+  ],
+  "arbre": [
+   {
+    "dossier": "",
+    "section": "II",
+    "count": 7
+   },
+   {
+    "dossier": "ii_1_axiomes_algebre",
+    "section": "II.1",
+    "count": 9
+   },
+   {
+    "dossier": "ii_2_couples_produit",
+    "section": "II.2",
+    "count": 3
+   },
+   {
+    "dossier": "ii_3_correspondances",
+    "section": "II.3",
+    "count": 3
+   },
+   {
+    "dossier": "ii_4_reunion_intersection",
+    "section": "II.4",
+    "count": 2
+   },
+   {
+    "dossier": "ii_6_equivalence",
+    "section": "II.6",
+    "count": 8
+   },
+   {
+    "dossier": "iii_3_ordre_cardinaux",
+    "section": "III.3",
+    "count": 2
+   }
+  ]
+ },
+ "bourbaki/ensembles/fonctions": {
+  "nb": 30,
+  "deplacements": [
+   {
+    "de": "bourbaki/ensembles/fonctions/ensembles_reciproque.py",
+    "vers": "bourbaki/ensembles/fonctions/ii_3_2_reciproque/ensembles_reciproque.py"
+   },
+   {
+    "de": "bourbaki/ensembles/fonctions/ensembles_composee.py",
+    "vers": "bourbaki/ensembles/fonctions/ii_3_3_composee_graphes/ensembles_composee.py"
+   },
+   {
+    "de": "bourbaki/ensembles/fonctions/ensembles_composee_reciproque.py",
+    "vers": "bourbaki/ensembles/fonctions/ii_3_3_composee_graphes/ensembles_composee_reciproque.py"
+   },
+   {
+    "de": "bourbaki/ensembles/fonctions/ensembles_fonctions.py",
+    "vers": "bourbaki/ensembles/fonctions/ii_3_4_fonctions_valeur/ensembles_fonctions.py"
+   },
+   {
+    "de": "bourbaki/ensembles/fonctions/ensembles_valeur_codomaine.py",
+    "vers": "bourbaki/ensembles/fonctions/ii_3_4_fonctions_valeur/ensembles_valeur_codomaine.py"
+   },
+   {
+    "de": "bourbaki/ensembles/fonctions/ensembles_composee_assoc.py",
+    "vers": "bourbaki/ensembles/fonctions/ii_3_4_fonctions_valeur/ensembles_composee_assoc.py"
+   },
+   {
+    "de": "bourbaki/ensembles/fonctions/ensembles_extensionnalite.py",
+    "vers": "bourbaki/ensembles/fonctions/ii_3_general/ensembles_extensionnalite.py"
+   },
+   {
+    "de": "bourbaki/ensembles/fonctions/ensembles_fonctions_complements.py",
+    "vers": "bourbaki/ensembles/fonctions/ii_3_general/ensembles_fonctions_complements.py"
+   },
+   {
+    "de": "bourbaki/ensembles/fonctions/ensembles_fonctions_props2.py",
+    "vers": "bourbaki/ensembles/fonctions/ii_3_general/ensembles_fonctions_props2.py"
+   },
+   {
+    "de": "bourbaki/ensembles/fonctions/ensembles_prop7_9_ii3.py",
+    "vers": "bourbaki/ensembles/fonctions/ii_3_general/ensembles_prop7_9_ii3.py"
+   },
+   {
+    "de": "bourbaki/ensembles/fonctions/ensembles_restrictions.py",
+    "vers": "bourbaki/ensembles/fonctions/ii_3_5_restrictions_prolongements/ensembles_restrictions.py"
+   },
+   {
+    "de": "bourbaki/ensembles/fonctions/ensembles_sous_famille.py",
+    "vers": "bourbaki/ensembles/fonctions/ii_3_5_restrictions_prolongements/ensembles_sous_famille.py"
+   },
+   {
+    "de": "bourbaki/ensembles/fonctions/ensembles_fonction_terme.py",
+    "vers": "bourbaki/ensembles/fonctions/ii_3_6_fonction_terme/ensembles_fonction_terme.py"
+   },
+   {
+    "de": "bourbaki/ensembles/fonctions/ensembles_fonctions_coordonnees.py",
+    "vers": "bourbaki/ensembles/fonctions/ii_3_6_fonction_terme/ensembles_fonctions_coordonnees.py"
+   },
+   {
+    "de": "bourbaki/ensembles/fonctions/ensembles_projections_terme.py",
+    "vers": "bourbaki/ensembles/fonctions/ii_3_6_fonction_terme/ensembles_projections_terme.py"
+   },
+   {
+    "de": "bourbaki/ensembles/fonctions/ensembles_fonctions_composee.py",
+    "vers": "bourbaki/ensembles/fonctions/ii_3_7_composee_fonctions/ensembles_fonctions_composee.py"
+   },
+   {
+    "de": "bourbaki/ensembles/fonctions/ensembles_retractions.py",
+    "vers": "bourbaki/ensembles/fonctions/ii_3_8_retractions_sections/ensembles_retractions.py"
+   },
+   {
+    "de": "bourbaki/ensembles/fonctions/ensembles_retractions_props.py",
+    "vers": "bourbaki/ensembles/fonctions/ii_3_8_retractions_sections/ensembles_retractions_props.py"
+   },
+   {
+    "de": "bourbaki/ensembles/fonctions/ensembles_composee_valeurs.py",
+    "vers": "bourbaki/ensembles/fonctions/ii_3_8_retractions_sections/ensembles_composee_valeurs.py"
+   },
+   {
+    "de": "bourbaki/ensembles/fonctions/ensembles_projections.py",
+    "vers": "bourbaki/ensembles/fonctions/hors_ii_3/ii_2_projections/ensembles_projections.py"
+   },
+   {
+    "de": "bourbaki/ensembles/fonctions/ensembles_application_valeur.py",
+    "vers": "bourbaki/ensembles/fonctions/hors_ii_3/ii_5_produit_famille/ensembles_application_valeur.py"
+   },
+   {
+    "de": "bourbaki/ensembles/fonctions/ensembles_composee_triple_fonctionnelle.py",
+    "vers": "bourbaki/ensembles/fonctions/hors_ii_3/ii_5_produit_famille/ensembles_composee_triple_fonctionnelle.py"
+   },
+   {
+    "de": "bourbaki/ensembles/fonctions/ensembles_currying_ii5.py",
+    "vers": "bourbaki/ensembles/fonctions/hors_ii_3/ii_5_produit_famille/ensembles_currying_ii5.py"
+   },
+   {
+    "de": "bourbaki/ensembles/fonctions/ensembles_recollement_bijection.py",
+    "vers": "bourbaki/ensembles/fonctions/hors_ii_3/iii_3_recollement/ensembles_recollement_bijection.py"
+   },
+   {
+    "de": "bourbaki/ensembles/fonctions/ensembles_restriction_somme.py",
+    "vers": "bourbaki/ensembles/fonctions/hors_ii_3/iii_3_recollement/ensembles_restriction_somme.py"
+   },
+   {
+    "de": "bourbaki/ensembles/fonctions/ensembles_dom_image_reunion.py",
+    "vers": "bourbaki/ensembles/fonctions/hors_ii_3/iii_3_recollement/ensembles_dom_image_reunion.py"
+   },
+   {
+    "de": "bourbaki/ensembles/fonctions/ensembles_isomorphismes.py",
+    "vers": "bourbaki/ensembles/fonctions/hors_ii_3/iv_structures/ensembles_isomorphismes.py"
+   },
+   {
+    "de": "bourbaki/ensembles/fonctions/ensembles_morphismes.py",
+    "vers": "bourbaki/ensembles/fonctions/hors_ii_3/iv_structures/ensembles_morphismes.py"
+   },
+   {
+    "de": "bourbaki/ensembles/fonctions/ensembles_applications_universelles.py",
+    "vers": "bourbaki/ensembles/fonctions/hors_ii_3/iv_structures/ensembles_applications_universelles.py"
+   },
+   {
+    "de": "bourbaki/ensembles/fonctions/__init__.py",
+    "vers": "bourbaki/ensembles/fonctions/__init__.py"
+   }
+  ],
+  "dossiers_vides": [
+   {
+    "dossier": "ii_3_1_graphes",
+    "section_livre": "II.3.1",
+    "raison": "Sous-section II.3.1 (notion de graphe / correspondance) : aucun fichier dedie dans ce paquet (la composee/reciproque de graphes sont en II.3.2-II.3.3). Dossier vide pour rendre le trou visible."
+   },
+   {
+    "dossier": "ii_3_9_fonctions_deux_variables",
+    "section_livre": "II.3.9",
+    "raison": "Sous-section II.3.9 (fonctions de deux variables / coupes partielles) : aucun fichier dans ce paquet. Dossier vide pour signaler le trou de couverture."
+   }
+  ],
+  "arbre": [
+   {
+    "dossier": "",
+    "section": "II.3",
+    "count": 10
+   },
+   {
+    "dossier": "ii_3_2_reciproque",
+    "section": "II.3.2",
+    "count": 1
+   },
+   {
+    "dossier": "ii_3_3_composee_graphes",
+    "section": "II.3.3",
+    "count": 2
+   },
+   {
+    "dossier": "ii_3_4_fonctions_valeur",
+    "section": "II.3.4",
+    "count": 3
+   },
+   {
+    "dossier": "ii_3_general",
+    "section": "II.3",
+    "count": 4
+   },
+   {
+    "dossier": "ii_3_5_restrictions_prolongements",
+    "section": "II.3.5",
+    "count": 2
+   },
+   {
+    "dossier": "ii_3_6_fonction_terme",
+    "section": "II.3.6",
+    "count": 3
+   },
+   {
+    "dossier": "ii_3_7_composee_fonctions",
+    "section": "II.3.7",
+    "count": 1
+   },
+   {
+    "dossier": "ii_3_8_retractions_sections",
+    "section": "II.3.8",
+    "count": 3
+   },
+   {
+    "dossier": "hors_ii_3",
+    "section": "II.2/II.5/III.3/IV",
+    "count": 4
+   },
+   {
+    "dossier": "hors_ii_3/ii_2_projections",
+    "section": "II.2",
+    "count": 1
+   },
+   {
+    "dossier": "hors_ii_3/ii_5_produit_famille",
+    "section": "II.5",
+    "count": 3
+   },
+   {
+    "dossier": "hors_ii_3/iii_3_recollement",
+    "section": "III.3",
+    "count": 3
+   },
+   {
+    "dossier": "hors_ii_3/iv_structures",
+    "section": "IV.1/IV.2/IV.3",
+    "count": 3
+   }
+  ]
+ },
+ "bourbaki/ensembles/familles": {
+  "nb": 28,
+  "deplacements": [
+   {
+    "de": "bourbaki/ensembles/familles/ensembles_familles.py",
+    "vers": "bourbaki/ensembles/familles/ii_4_reunion_intersection_familles/ii_4_1_definitions_algebre/ensembles_familles.py"
+   },
+   {
+    "de": "bourbaki/ensembles/familles/ensembles_familles_algebre.py",
+    "vers": "bourbaki/ensembles/familles/ii_4_reunion_intersection_familles/ii_4_1_definitions_algebre/ensembles_familles_algebre.py"
+   },
+   {
+    "de": "bourbaki/ensembles/familles/ensembles_reunion_sup_univ_ii4.py",
+    "vers": "bourbaki/ensembles/familles/ii_4_reunion_intersection_familles/ii_4_1_definitions_algebre/ensembles_reunion_sup_univ_ii4.py"
+   },
+   {
+    "de": "bourbaki/ensembles/familles/ensembles_inter_inf_univ_ii4.py",
+    "vers": "bourbaki/ensembles/familles/ii_4_reunion_intersection_familles/ii_4_1_definitions_algebre/ensembles_inter_inf_univ_ii4.py"
+   },
+   {
+    "de": "bourbaki/ensembles/familles/ensembles_reparam_inter_ii4.py",
+    "vers": "bourbaki/ensembles/familles/ii_4_reunion_intersection_familles/ii_4_1_definitions_algebre/ensembles_reparam_inter_ii4.py"
+   },
+   {
+    "de": "bourbaki/ensembles/familles/ensembles_familles_demorgan.py",
+    "vers": "bourbaki/ensembles/familles/ii_4_reunion_intersection_familles/ii_4_demorgan/ensembles_familles_demorgan.py"
+   },
+   {
+    "de": "bourbaki/ensembles/familles/ensembles_image_recip_famille_ii4.py",
+    "vers": "bourbaki/ensembles/familles/ii_4_reunion_intersection_familles/ii_4_image_famille/ensembles_image_recip_famille_ii4.py"
+   },
+   {
+    "de": "bourbaki/ensembles/familles/ensembles_reciproque_reunion_binaire_ii4.py",
+    "vers": "bourbaki/ensembles/familles/ii_4_reunion_intersection_familles/ii_4_image_famille/ensembles_reciproque_reunion_binaire_ii4.py"
+   },
+   {
+    "de": "bourbaki/ensembles/familles/ensembles_image_algebre_binaire_ii4.py",
+    "vers": "bourbaki/ensembles/familles/ii_4_reunion_intersection_familles/ii_4_image_famille/ensembles_image_algebre_binaire_ii4.py"
+   },
+   {
+    "de": "bourbaki/ensembles/familles/ensembles_recollement_props.py",
+    "vers": "bourbaki/ensembles/familles/ii_4_reunion_intersection_familles/ii_4_recollement_somme/ensembles_recollement_props.py"
+   },
+   {
+    "de": "bourbaki/ensembles/familles/ensembles_somme_disjointe.py",
+    "vers": "bourbaki/ensembles/familles/ii_4_reunion_intersection_familles/ii_4_recollement_somme/ensembles_somme_disjointe.py"
+   },
+   {
+    "de": "bourbaki/ensembles/familles/ensembles_produit_famille.py",
+    "vers": "bourbaki/ensembles/familles/ii_5_produit_famille/ii_5_definitions/ensembles_produit_famille.py"
+   },
+   {
+    "de": "bourbaki/ensembles/familles/ensembles_extensionnalite_produit.py",
+    "vers": "bourbaki/ensembles/familles/ii_5_produit_famille/ii_5_definitions/ensembles_extensionnalite_produit.py"
+   },
+   {
+    "de": "bourbaki/ensembles/familles/ensembles_extension_canonique.py",
+    "vers": "bourbaki/ensembles/familles/ii_5_produit_famille/ii_5_1_extension_canonique/ensembles_extension_canonique.py"
+   },
+   {
+    "de": "bourbaki/ensembles/familles/ensembles_produit_props.py",
+    "vers": "bourbaki/ensembles/familles/ii_5_produit_famille/ii_5_1_extension_canonique/ensembles_produit_props.py"
+   },
+   {
+    "de": "bourbaki/ensembles/familles/ensembles_produit_props_fonctoriel.py",
+    "vers": "bourbaki/ensembles/familles/ii_5_produit_famille/ii_5_1_extension_canonique/ensembles_produit_props_fonctoriel.py"
+   },
+   {
+    "de": "bourbaki/ensembles/familles/ensembles_produit_props_projection.py",
+    "vers": "bourbaki/ensembles/familles/ii_5_produit_famille/ii_5_4_projection_partielle/ensembles_produit_props_projection.py"
+   },
+   {
+    "de": "bourbaki/ensembles/familles/ensembles_produit_props2.py",
+    "vers": "bourbaki/ensembles/familles/ii_5_produit_famille/ii_5_6_7_algebre_produit/ensembles_produit_props2.py"
+   },
+   {
+    "de": "bourbaki/ensembles/familles/ensembles_produit_monotone_ii5.py",
+    "vers": "bourbaki/ensembles/familles/ii_5_produit_famille/ii_5_6_7_algebre_produit/ensembles_produit_monotone_ii5.py"
+   },
+   {
+    "de": "bourbaki/ensembles/familles/ensembles_produit_egal_facteurs_ii5.py",
+    "vers": "bourbaki/ensembles/familles/ii_5_produit_famille/ii_5_6_7_algebre_produit/ensembles_produit_egal_facteurs_ii5.py"
+   },
+   {
+    "de": "bourbaki/ensembles/familles/ensembles_produit_inter_ii5.py",
+    "vers": "bourbaki/ensembles/familles/ii_5_produit_famille/ii_5_6_7_algebre_produit/ensembles_produit_inter_ii5.py"
+   },
+   {
+    "de": "bourbaki/ensembles/familles/ensembles_produit.py",
+    "vers": "bourbaki/ensembles/familles/ii_2_produit_deux_ensembles/ensembles_produit.py"
+   },
+   {
+    "de": "bourbaki/ensembles/familles/ensembles_limites.py",
+    "vers": "bourbaki/ensembles/familles/iii_7_limites/ensembles_limites.py"
+   },
+   {
+    "de": "bourbaki/ensembles/familles/ensembles_limites_iii7.py",
+    "vers": "bourbaki/ensembles/familles/iii_7_limites/ensembles_limites_iii7.py"
+   },
+   {
+    "de": "bourbaki/ensembles/familles/ensembles_cone_unicite.py",
+    "vers": "bourbaki/ensembles/familles/iii_7_limites/ensembles_cone_unicite.py"
+   },
+   {
+    "de": "bourbaki/ensembles/familles/ensembles_limites_prop2_3_iii7.py",
+    "vers": "bourbaki/ensembles/familles/iii_7_limites/ensembles_limites_prop2_3_iii7.py"
+   },
+   {
+    "de": "bourbaki/ensembles/familles/ensembles_limites_prop4plus_iii7.py",
+    "vers": "bourbaki/ensembles/familles/iii_7_limites/ensembles_limites_prop4plus_iii7.py"
+   },
+   {
+    "de": "bourbaki/ensembles/familles/__init__.py",
+    "vers": "bourbaki/ensembles/familles/__init__.py"
+   }
+  ],
+  "dossiers_vides": [
+   {
+    "dossier": "bourbaki/ensembles/familles/ii_5_produit_famille/ii_5_2_diagonale",
+    "section_livre": "II.5.2-5.3",
+    "raison": "Application diagonale et diagonale Delta du produit E^I (mentionnees comme notions dans ensembles_extension_canonique mais pas de module/propositions propres deposes)."
+   }
+  ],
+  "arbre": [
+   {
+    "dossier": ".",
+    "section": "II.4 / II.5 (+ II.2, III.7 résidents)",
+    "count": 5
+   },
+   {
+    "dossier": "ii_4_reunion_intersection_familles",
+    "section": "II.4",
+    "count": 4
+   },
+   {
+    "dossier": "ii_4_reunion_intersection_familles/ii_4_1_definitions_algebre",
+    "section": "II.4.1",
+    "count": 5
+   },
+   {
+    "dossier": "ii_4_reunion_intersection_familles/ii_4_demorgan",
+    "section": "II.4 (Prop. 5)",
+    "count": 1
+   },
+   {
+    "dossier": "ii_4_reunion_intersection_familles/ii_4_image_famille",
+    "section": "II.4 (E.II.25-27, Prop. 3/4/6)",
+    "count": 3
+   },
+   {
+    "dossier": "ii_4_reunion_intersection_familles/ii_4_recollement_somme",
+    "section": "II.4.8 (Prop. 7-10, somme)",
+    "count": 2
+   },
+   {
+    "dossier": "ii_5_produit_famille",
+    "section": "II.5",
+    "count": 4
+   },
+   {
+    "dossier": "ii_5_produit_famille/ii_5_definitions",
+    "section": "II.5.1 / II.5.3",
+    "count": 2
+   },
+   {
+    "dossier": "ii_5_produit_famille/ii_5_1_extension_canonique",
+    "section": "II.5.1 / II.5.7",
+    "count": 3
+   },
+   {
+    "dossier": "ii_5_produit_famille/ii_5_4_projection_partielle",
+    "section": "II.5.4",
+    "count": 1
+   },
+   {
+    "dossier": "ii_5_produit_famille/ii_5_6_7_algebre_produit",
+    "section": "II.5.4-5.7",
+    "count": 4
+   },
+   {
+    "dossier": "ii_2_produit_deux_ensembles",
+    "section": "II.2.2",
+    "count": 1
+   },
+   {
+    "dossier": "iii_7_limites",
+    "section": "III.7",
+    "count": 5
+   }
+  ]
+ },
+ "bourbaki/ordre": {
+  "nb": 36,
+  "deplacements": [
+   {
+    "de": "bourbaki/ordre/__init__.py",
+    "vers": "bourbaki/ordre/__init__.py"
+   },
+   {
+    "de": "bourbaki/ordre/ensembles_ordre.py",
+    "vers": "bourbaki/ordre/iii_1_relations_ordre/ordre_treillis/ensembles_ordre.py"
+   },
+   {
+    "de": "bourbaki/ordre/ensembles_ordre_relation.py",
+    "vers": "bourbaki/ordre/iii_1_relations_ordre/ordre_treillis/ensembles_ordre_relation.py"
+   },
+   {
+    "de": "bourbaki/ordre/ensembles_ordre_vocab.py",
+    "vers": "bourbaki/ordre/iii_1_relations_ordre/ordre_treillis/ensembles_ordre_vocab.py"
+   },
+   {
+    "de": "bourbaki/ordre/ensembles_iii1_ordre_props.py",
+    "vers": "bourbaki/ordre/iii_1_relations_ordre/ordre_treillis/ensembles_iii1_ordre_props.py"
+   },
+   {
+    "de": "bourbaki/ordre/ensembles_ordre_produit_antisym.py",
+    "vers": "bourbaki/ordre/iii_1_relations_ordre/ordre_treillis/ensembles_ordre_produit_antisym.py"
+   },
+   {
+    "de": "bourbaki/ordre/ensembles_ordre_monotone.py",
+    "vers": "bourbaki/ordre/iii_1_relations_ordre/ordre_treillis/ensembles_ordre_monotone.py"
+   },
+   {
+    "de": "bourbaki/ordre/ensembles_ordre_treillis_props.py",
+    "vers": "bourbaki/ordre/iii_1_relations_ordre/ordre_treillis/ensembles_ordre_treillis_props.py"
+   },
+   {
+    "de": "bourbaki/ordre/ensembles_sup_generiques_iii1.py",
+    "vers": "bourbaki/ordre/iii_1_relations_ordre/bornes_sup/ensembles_sup_generiques_iii1.py"
+   },
+   {
+    "de": "bourbaki/ordre/ensembles_sup_prop7_8_iii1.py",
+    "vers": "bourbaki/ordre/iii_1_relations_ordre/bornes_sup/ensembles_sup_prop7_8_iii1.py"
+   },
+   {
+    "de": "bourbaki/ordre/ensembles_iso_ordre_canon.py",
+    "vers": "bourbaki/ordre/iii_1_relations_ordre/isomorphismes_ordre/ensembles_iso_ordre_canon.py"
+   },
+   {
+    "de": "bourbaki/ordre/ensembles_valeur_bridge.py",
+    "vers": "bourbaki/ordre/iii_1_relations_ordre/isomorphismes_ordre/ensembles_valeur_bridge.py"
+   },
+   {
+    "de": "bourbaki/ordre/ensembles_pont_binder.py",
+    "vers": "bourbaki/ordre/iii_1_relations_ordre/isomorphismes_ordre/ensembles_pont_binder.py"
+   },
+   {
+    "de": "bourbaki/ordre/ensembles_bon_ordre.py",
+    "vers": "bourbaki/ordre/iii_2_bon_ordre/bon_ordre_segments/ensembles_bon_ordre.py"
+   },
+   {
+    "de": "bourbaki/ordre/ensembles_sous_bien_ordonne.py",
+    "vers": "bourbaki/ordre/iii_2_bon_ordre/bon_ordre_segments/ensembles_sous_bien_ordonne.py"
+   },
+   {
+    "de": "bourbaki/ordre/ensembles_zorn.py",
+    "vers": "bourbaki/ordre/iii_2_bon_ordre/zorn_zermelo/ensembles_zorn.py"
+   },
+   {
+    "de": "bourbaki/ordre/ensembles_zorn_theoreme.py",
+    "vers": "bourbaki/ordre/iii_2_bon_ordre/zorn_zermelo/ensembles_zorn_theoreme.py"
+   },
+   {
+    "de": "bourbaki/ordre/ensembles_zermelo.py",
+    "vers": "bourbaki/ordre/iii_2_bon_ordre/zorn_zermelo/ensembles_zermelo.py"
+   },
+   {
+    "de": "bourbaki/ordre/ensembles_bourbaki_witt.py",
+    "vers": "bourbaki/ordre/iii_2_bon_ordre/zorn_zermelo/ensembles_bourbaki_witt.py"
+   },
+   {
+    "de": "bourbaki/ordre/ensembles_bourbaki_witt_chaine.py",
+    "vers": "bourbaki/ordre/iii_2_bon_ordre/zorn_zermelo/ensembles_bourbaki_witt_chaine.py"
+   },
+   {
+    "de": "bourbaki/ordre/ensembles_recurrence_transfinie.py",
+    "vers": "bourbaki/ordre/iii_2_bon_ordre/recurrence_transfinie/ensembles_recurrence_transfinie.py"
+   },
+   {
+    "de": "bourbaki/ordre/ensembles_recursion_transfinie_existence.py",
+    "vers": "bourbaki/ordre/iii_2_bon_ordre/recurrence_transfinie/ensembles_recursion_transfinie_existence.py"
+   },
+   {
+    "de": "bourbaki/ordre/ensembles_c60_existence_close.py",
+    "vers": "bourbaki/ordre/iii_2_bon_ordre/recurrence_transfinie/ensembles_c60_existence_close.py"
+   },
+   {
+    "de": "bourbaki/ordre/ensembles_c60_realisation.py",
+    "vers": "bourbaki/ordre/iii_2_bon_ordre/recurrence_transfinie/ensembles_c60_realisation.py"
+   },
+   {
+    "de": "bourbaki/ordre/ensembles_c60_clauses.py",
+    "vers": "bourbaki/ordre/iii_2_bon_ordre/recurrence_transfinie/ensembles_c60_clauses.py"
+   },
+   {
+    "de": "bourbaki/ordre/ensembles_c60_coeur.py",
+    "vers": "bourbaki/ordre/iii_2_bon_ordre/recurrence_transfinie/ensembles_c60_coeur.py"
+   },
+   {
+    "de": "bourbaki/ordre/ensembles_c60_final.py",
+    "vers": "bourbaki/ordre/iii_2_bon_ordre/recurrence_transfinie/ensembles_c60_final.py"
+   },
+   {
+    "de": "bourbaki/ordre/ensembles_c60_pont.py",
+    "vers": "bourbaki/ordre/iii_2_bon_ordre/recurrence_transfinie/ensembles_c60_pont.py"
+   },
+   {
+    "de": "bourbaki/ordre/ensembles_tukey_iii4.py",
+    "vers": "bourbaki/ordre/iii_4_ensembles_finis/ensembles_tukey_iii4.py"
+   },
+   {
+    "de": "bourbaki/ordre/ensembles_tukey_sous_lemme.py",
+    "vers": "bourbaki/ordre/iii_4_ensembles_finis/ensembles_tukey_sous_lemme.py"
+   },
+   {
+    "de": "bourbaki/ordre/ensembles_ordre_fini_iii4.py",
+    "vers": "bourbaki/ordre/iii_4_ensembles_finis/ensembles_ordre_fini_iii4.py"
+   },
+   {
+    "de": "bourbaki/ordre/ensembles_ordinaux.py",
+    "vers": "bourbaki/ordre/iii_6_ordinaux/ensembles_ordinaux.py"
+   },
+   {
+    "de": "bourbaki/ordre/ensembles_limites_canoniques.py",
+    "vers": "bourbaki/ordre/iii_7_limites/ensembles_limites_canoniques.py"
+   },
+   {
+    "de": "bourbaki/ordre/ensembles_cofinal.py",
+    "vers": "bourbaki/ordre/iii_7_limites/ensembles_cofinal.py"
+   },
+   {
+    "de": "bourbaki/ordre/ensembles_limites_props.py",
+    "vers": "bourbaki/ordre/iii_7_limites/ensembles_limites_props.py"
+   },
+   {
+    "de": "bourbaki/ordre/ensembles_limites_props2.py",
+    "vers": "bourbaki/ordre/iii_7_limites/ensembles_limites_props2.py"
+   }
+  ],
+  "dossiers_vides": [
+   {
+    "dossier": "iii_1_relations_ordre/iii_1_8_filtrants",
+    "section_livre": "III.1.8",
+    "raison": "La notion d'ensemble filtrant / partie filtrante (E.III.1.8) du perimetre III.1 n'a pas de fichier dedie dans bourbaki/ordre : elle est couverte ailleurs (ensembles_abrege est_filtrant_*, et ensembles_cofinal cote III.7). Dossier vide pour rendre visible le trou de couverture propre a III.1.8 dans ce paquet."
+   }
+  ],
+  "arbre": [
+   {
+    "dossier": ".",
+    "section": "III.1-III.7",
+    "count": 6
+   },
+   {
+    "dossier": "iii_1_relations_ordre",
+    "section": "III.1",
+    "count": 3
+   },
+   {
+    "dossier": "iii_1_relations_ordre/ordre_treillis",
+    "section": "III.1.1-III.1.5/1.11",
+    "count": 7
+   },
+   {
+    "dossier": "iii_1_relations_ordre/bornes_sup",
+    "section": "III.1.9-III.1.12 (Prop 5-9)",
+    "count": 2
+   },
+   {
+    "dossier": "iii_1_relations_ordre/isomorphismes_ordre",
+    "section": "III.1.3 (iso d'ordre)",
+    "count": 3
+   },
+   {
+    "dossier": "iii_2_bon_ordre",
+    "section": "III.2",
+    "count": 3
+   },
+   {
+    "dossier": "iii_2_bon_ordre/bon_ordre_segments",
+    "section": "III.2.1 (bon ordre, segments)",
+    "count": 2
+   },
+   {
+    "dossier": "iii_2_bon_ordre/zorn_zermelo",
+    "section": "III.2 (Th.1 Zermelo, Th.2 Zorn, Bourbaki-Witt)",
+    "count": 5
+   },
+   {
+    "dossier": "iii_2_bon_ordre/recurrence_transfinie",
+    "section": "III.2 (C59 recurrence, C60 recursion)",
+    "count": 8
+   },
+   {
+    "dossier": "iii_4_ensembles_finis",
+    "section": "III.4 (Prop 3, Th.1 Tukey)",
+    "count": 3
+   },
+   {
+    "dossier": "iii_6_ordinaux",
+    "section": "III.6 (Exercices, ordinaux)",
+    "count": 1
+   },
+   {
+    "dossier": "iii_7_limites",
+    "section": "III.7 (limites proj./induct.)",
+    "count": 4
+   }
+  ]
+ },
+ "bourbaki/cardinaux": {
+  "nb": 140,
+  "deplacements": [
+   {
+    "de": "bourbaki/cardinaux/ensembles_iso_ordre_composee.py",
+    "vers": "bourbaki/cardinaux/iii_2_trichotomie_ordinaux/iso_ordre/ensembles_iso_ordre_composee.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_iso_ordre_reciproque.py",
+    "vers": "bourbaki/cardinaux/iii_2_trichotomie_ordinaux/iso_ordre/ensembles_iso_ordre_reciproque.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_iso_unicite.py",
+    "vers": "bourbaki/cardinaux/iii_2_trichotomie_ordinaux/iso_ordre/ensembles_iso_unicite.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_iso_unicite_finale.py",
+    "vers": "bourbaki/cardinaux/iii_2_trichotomie_ordinaux/iso_ordre/ensembles_iso_unicite_finale.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_iso_unicite_sous_domaine.py",
+    "vers": "bourbaki/cardinaux/iii_2_trichotomie_ordinaux/iso_ordre/ensembles_iso_unicite_sous_domaine.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_restriction_iso_pieces.py",
+    "vers": "bourbaki/cardinaux/iii_2_trichotomie_ordinaux/iso_ordre/ensembles_restriction_iso_pieces.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_lemme4_croissante.py",
+    "vers": "bourbaki/cardinaux/iii_2_trichotomie_ordinaux/lemme4_segments/ensembles_lemme4_croissante.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_lemme4_sous_domaine.py",
+    "vers": "bourbaki/cardinaux/iii_2_trichotomie_ordinaux/lemme4_segments/ensembles_lemme4_sous_domaine.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_bien_ordonne_lemme_1_segments.py",
+    "vers": "bourbaki/cardinaux/iii_2_trichotomie_ordinaux/lemme4_segments/ensembles_bien_ordonne_lemme_1_segments.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_bien_ordonne_seg_iso.py",
+    "vers": "bourbaki/cardinaux/iii_2_trichotomie_ordinaux/lemme4_segments/ensembles_bien_ordonne_seg_iso.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_bien_ordonne_total.py",
+    "vers": "bourbaki/cardinaux/iii_2_trichotomie_ordinaux/lemme4_segments/ensembles_bien_ordonne_total.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_segments_construction.py",
+    "vers": "bourbaki/cardinaux/iii_2_trichotomie_ordinaux/lemme4_segments/ensembles_segments_construction.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_segment_comparabilite_abstrait.py",
+    "vers": "bourbaki/cardinaux/iii_2_trichotomie_ordinaux/lemme4_segments/ensembles_segment_comparabilite_abstrait.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_ordre_induit_sousensemble.py",
+    "vers": "bourbaki/cardinaux/iii_2_trichotomie_ordinaux/lemme4_segments/ensembles_ordre_induit_sousensemble.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_temoin_commun.py",
+    "vers": "bourbaki/cardinaux/iii_2_trichotomie_ordinaux/temoins_comparabilite/ensembles_temoin_commun.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_temoin_couvrant.py",
+    "vers": "bourbaki/cardinaux/iii_2_trichotomie_ordinaux/temoins_comparabilite/ensembles_temoin_couvrant.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_temoin_deux_couples.py",
+    "vers": "bourbaki/cardinaux/iii_2_trichotomie_ordinaux/temoins_comparabilite/ensembles_temoin_deux_couples.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_trichotomie_prop1.py",
+    "vers": "bourbaki/cardinaux/iii_2_trichotomie_ordinaux/temoins_comparabilite/ensembles_trichotomie_prop1.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_codomaine_reconciliation.py",
+    "vers": "bourbaki/cardinaux/iii_2_trichotomie_ordinaux/temoins_comparabilite/ensembles_codomaine_reconciliation.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_coincidence_decharge.py",
+    "vers": "bourbaki/cardinaux/iii_2_trichotomie_ordinaux/coincidence_fusion/ensembles_coincidence_decharge.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_coincidence_geometrie.py",
+    "vers": "bourbaki/cardinaux/iii_2_trichotomie_ordinaux/coincidence_fusion/ensembles_coincidence_geometrie.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_coincidence_pont.py",
+    "vers": "bourbaki/cardinaux/iii_2_trichotomie_ordinaux/coincidence_fusion/ensembles_coincidence_pont.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_coincidence_univ.py",
+    "vers": "bourbaki/cardinaux/iii_2_trichotomie_ordinaux/coincidence_fusion/ensembles_coincidence_univ.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_coincidence_univ_app.py",
+    "vers": "bourbaki/cardinaux/iii_2_trichotomie_ordinaux/coincidence_fusion/ensembles_coincidence_univ_app.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_fusion_app.py",
+    "vers": "bourbaki/cardinaux/iii_2_trichotomie_ordinaux/coincidence_fusion/ensembles_fusion_app.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_fusion_assemblage.py",
+    "vers": "bourbaki/cardinaux/iii_2_trichotomie_ordinaux/coincidence_fusion/ensembles_fusion_assemblage.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_fusion_depuis_coincidence_app.py",
+    "vers": "bourbaki/cardinaux/iii_2_trichotomie_ordinaux/coincidence_fusion/ensembles_fusion_depuis_coincidence_app.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_h_bien_defini.py",
+    "vers": "bourbaki/cardinaux/iii_2_trichotomie_ordinaux/h_coherences/ensembles_h_bien_defini.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_h_est_graphe.py",
+    "vers": "bourbaki/cardinaux/iii_2_trichotomie_ordinaux/h_coherences/ensembles_h_est_graphe.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_trichotomie_coherences.py",
+    "vers": "bourbaki/cardinaux/iii_2_trichotomie_ordinaux/h_coherences/ensembles_trichotomie_coherences.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_trichotomie_h_iso.py",
+    "vers": "bourbaki/cardinaux/iii_2_trichotomie_ordinaux/h_coherences/ensembles_trichotomie_h_iso.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_trichotomie_hgraphe_pr2seg.py",
+    "vers": "bourbaki/cardinaux/iii_2_trichotomie_ordinaux/h_coherences/ensembles_trichotomie_hgraphe_pr2seg.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_trichotomie_restriction.py",
+    "vers": "bourbaki/cardinaux/iii_2_trichotomie_ordinaux/h_coherences/ensembles_trichotomie_restriction.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_maximalite_adjoint_bridge.py",
+    "vers": "bourbaki/cardinaux/iii_2_trichotomie_ordinaux/maximalite/ensembles_maximalite_adjoint_bridge.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_maximalite_close.py",
+    "vers": "bourbaki/cardinaux/iii_2_trichotomie_ordinaux/maximalite/ensembles_maximalite_close.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_maximalite_substantielle.py",
+    "vers": "bourbaki/cardinaux/iii_2_trichotomie_ordinaux/maximalite/ensembles_maximalite_substantielle.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_trichotomie_maximalite_preuve.py",
+    "vers": "bourbaki/cardinaux/iii_2_trichotomie_ordinaux/maximalite/ensembles_trichotomie_maximalite_preuve.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_trichotomie_scaffold_maximalite.py",
+    "vers": "bourbaki/cardinaux/iii_2_trichotomie_ordinaux/maximalite/ensembles_trichotomie_scaffold_maximalite.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_trichotomie_extension_iso.py",
+    "vers": "bourbaki/cardinaux/iii_2_trichotomie_ordinaux/maximalite/ensembles_trichotomie_extension_iso.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_trichotomie_assemble.py",
+    "vers": "bourbaki/cardinaux/iii_2_trichotomie_ordinaux/assemblage/ensembles_trichotomie_assemble.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_trichotomie_maillon_final.py",
+    "vers": "bourbaki/cardinaux/iii_2_trichotomie_ordinaux/assemblage/ensembles_trichotomie_maillon_final.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_trichotomie_pont_val.py",
+    "vers": "bourbaki/cardinaux/iii_2_trichotomie_ordinaux/assemblage/ensembles_trichotomie_pont_val.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_trichotomie_residuals.py",
+    "vers": "bourbaki/cardinaux/iii_2_trichotomie_ordinaux/assemblage/ensembles_trichotomie_residuals.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_trichotomie_scaffold.py",
+    "vers": "bourbaki/cardinaux/iii_2_trichotomie_ordinaux/assemblage/ensembles_trichotomie_scaffold.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_trichotomie_dom_segment.py",
+    "vers": "bourbaki/cardinaux/iii_2_trichotomie_ordinaux/assemblage/ensembles_trichotomie_dom_segment.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_trichotomie_temoin_adjonction.py",
+    "vers": "bourbaki/cardinaux/iii_2_trichotomie_ordinaux/assemblage/ensembles_trichotomie_temoin_adjonction.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_maillon_coherences_prouvees.py",
+    "vers": "bourbaki/cardinaux/iii_2_trichotomie_ordinaux/assemblage/ensembles_maillon_coherences_prouvees.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_equipotence.py",
+    "vers": "bourbaki/cardinaux/iii_3_equipotence_cardinaux/equipotence/ensembles_equipotence.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_equivalence.py",
+    "vers": "bourbaki/cardinaux/iii_3_equipotence_cardinaux/equipotence/ensembles_equivalence.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_bijection.py",
+    "vers": "bourbaki/cardinaux/iii_3_equipotence_cardinaux/equipotence/ensembles_bijection.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_composee_bijection.py",
+    "vers": "bourbaki/cardinaux/iii_3_equipotence_cardinaux/equipotence/ensembles_composee_bijection.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_vide_singleton.py",
+    "vers": "bourbaki/cardinaux/iii_3_equipotence_cardinaux/equipotence/ensembles_vide_singleton.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_reunion_somme_bijection.py",
+    "vers": "bourbaki/cardinaux/iii_3_equipotence_cardinaux/equipotence/ensembles_reunion_somme_bijection.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_cantor.py",
+    "vers": "bourbaki/cardinaux/iii_3_equipotence_cardinaux/cantor/ensembles_cantor.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_cantor_bernstein.py",
+    "vers": "bourbaki/cardinaux/iii_3_equipotence_cardinaux/cantor_bernstein/ensembles_cantor_bernstein.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_cantor_bernstein_bij.py",
+    "vers": "bourbaki/cardinaux/iii_3_equipotence_cardinaux/cantor_bernstein/ensembles_cantor_bernstein_bij.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_cantor_bernstein_fin.py",
+    "vers": "bourbaki/cardinaux/iii_3_equipotence_cardinaux/cantor_bernstein/ensembles_cantor_bernstein_fin.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_cardinaux.py",
+    "vers": "bourbaki/cardinaux/iii_3_equipotence_cardinaux/definitions_cardinaux/ensembles_cardinaux.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_cardinaux_theoremes.py",
+    "vers": "bourbaki/cardinaux/iii_3_equipotence_cardinaux/definitions_cardinaux/ensembles_cardinaux_theoremes.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_cardinaux_consequences.py",
+    "vers": "bourbaki/cardinaux/iii_3_equipotence_cardinaux/definitions_cardinaux/ensembles_cardinaux_consequences.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_cardinaux_ordre.py",
+    "vers": "bourbaki/cardinaux/iii_3_equipotence_cardinaux/ordre_cardinaux/ensembles_cardinaux_ordre.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_cardinaux_props_restantes_ordre.py",
+    "vers": "bourbaki/cardinaux/iii_3_equipotence_cardinaux/ordre_cardinaux/ensembles_cardinaux_props_restantes_ordre.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_cardinal_ordre_props.py",
+    "vers": "bourbaki/cardinaux/iii_3_equipotence_cardinaux/ordre_cardinaux/ensembles_cardinal_ordre_props.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_comparabilite.py",
+    "vers": "bourbaki/cardinaux/iii_3_equipotence_cardinaux/ordre_cardinaux/ensembles_comparabilite.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_cardinaux_bornes.py",
+    "vers": "bourbaki/cardinaux/iii_3_equipotence_cardinaux/ordre_cardinaux/ensembles_cardinaux_bornes.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_cardinaux_un_borne.py",
+    "vers": "bourbaki/cardinaux/iii_3_equipotence_cardinaux/ordre_cardinaux/ensembles_cardinaux_un_borne.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_ordre_strict_petits.py",
+    "vers": "bourbaki/cardinaux/iii_3_equipotence_cardinaux/ordre_cardinaux/ensembles_ordre_strict_petits.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_sup_cardinal.py",
+    "vers": "bourbaki/cardinaux/iii_3_equipotence_cardinaux/ordre_cardinaux/ensembles_sup_cardinal.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_cardinaux_borne_sup.py",
+    "vers": "bourbaki/cardinaux/iii_3_equipotence_cardinaux/ordre_cardinaux/ensembles_cardinaux_borne_sup.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_cardinaux_bornes_somme.py",
+    "vers": "bourbaki/cardinaux/iii_3_equipotence_cardinaux/somme_produit_bornes/ensembles_cardinaux_bornes_somme.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_bornes_exposant.py",
+    "vers": "bourbaki/cardinaux/iii_3_equipotence_cardinaux/somme_produit_bornes/ensembles_bornes_exposant.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_eq_exposant_invariant.py",
+    "vers": "bourbaki/cardinaux/iii_3_equipotence_cardinaux/somme_produit_bornes/ensembles_eq_exposant_invariant.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_injectif_graphe_pont.py",
+    "vers": "bourbaki/cardinaux/iii_3_equipotence_cardinaux/somme_produit_bornes/ensembles_injectif_graphe_pont.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_recollement_famille_injectif.py",
+    "vers": "bourbaki/cardinaux/iii_3_equipotence_cardinaux/somme_produit_bornes/ensembles_recollement_famille_injectif.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_cardinaux_props_restantes.py",
+    "vers": "bourbaki/cardinaux/iii_3_equipotence_cardinaux/props_restantes/ensembles_cardinaux_props_restantes.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_cardinaux_props_restantes_prop7.py",
+    "vers": "bourbaki/cardinaux/iii_3_equipotence_cardinaux/props_restantes/ensembles_cardinaux_props_restantes_prop7.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_prop3_prop4cor_iii3.py",
+    "vers": "bourbaki/cardinaux/iii_3_equipotence_cardinaux/props_restantes/ensembles_prop3_prop4cor_iii3.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_prop13_complement.py",
+    "vers": "bourbaki/cardinaux/iii_3_equipotence_cardinaux/props_restantes/ensembles_prop13_complement.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_prop13_full_iii3.py",
+    "vers": "bourbaki/cardinaux/iii_3_equipotence_cardinaux/props_restantes/ensembles_prop13_full_iii3.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_divisibilite_propre.py",
+    "vers": "bourbaki/cardinaux/iii_3_equipotence_cardinaux/props_restantes/ensembles_divisibilite_propre.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_bon_ordre_intervalle_ordinal.py",
+    "vers": "bourbaki/cardinaux/iii_4_ordinal_cardinal/bon_ordre_intervalle/ensembles_bon_ordre_intervalle_ordinal.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_clause_plus_petit.py",
+    "vers": "bourbaki/cardinaux/iii_4_ordinal_cardinal/bon_ordre_intervalle/ensembles_clause_plus_petit.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_clause_plus_petit_correspondance.py",
+    "vers": "bourbaki/cardinaux/iii_4_ordinal_cardinal/bon_ordre_intervalle/ensembles_clause_plus_petit_correspondance.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_clause_plus_petit_monotonie.py",
+    "vers": "bourbaki/cardinaux/iii_4_ordinal_cardinal/bon_ordre_intervalle/ensembles_clause_plus_petit_monotonie.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_bien_ordonne_lemme_0_ordre_total.py",
+    "vers": "bourbaki/cardinaux/iii_4_ordinal_cardinal/bon_ordre_intervalle/ensembles_bien_ordonne_lemme_0_ordre_total.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_bien_ordonne_lemme_2_ordre_clause.py",
+    "vers": "bourbaki/cardinaux/iii_4_ordinal_cardinal/bon_ordre_intervalle/ensembles_bien_ordonne_lemme_2_ordre_clause.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_bien_ordonne_lemme_3_assemblage.py",
+    "vers": "bourbaki/cardinaux/iii_4_ordinal_cardinal/bon_ordre_intervalle/ensembles_bien_ordonne_lemme_3_assemblage.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_ordinal_cardinal_ordre.py",
+    "vers": "bourbaki/cardinaux/iii_4_ordinal_cardinal/bon_ordre_intervalle/ensembles_ordinal_cardinal_ordre.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_ordinaux_bien_ordonnes.py",
+    "vers": "bourbaki/cardinaux/iii_4_ordinal_cardinal/bon_ordre_intervalle/ensembles_ordinaux_bien_ordonnes.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_ordinal_cardinal.py",
+    "vers": "bourbaki/cardinaux/iii_4_ordinal_cardinal/ordinal_cardinal_correspondance/ensembles_ordinal_cardinal.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_ordinal_cardinal_bon_ordre.py",
+    "vers": "bourbaki/cardinaux/iii_4_ordinal_cardinal/ordinal_cardinal_correspondance/ensembles_ordinal_cardinal_bon_ordre.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_ordinal_cardinal_correspondance.py",
+    "vers": "bourbaki/cardinaux/iii_4_ordinal_cardinal/ordinal_cardinal_correspondance/ensembles_ordinal_cardinal_correspondance.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_segments_ordinaux.py",
+    "vers": "bourbaki/cardinaux/iii_4_ordinal_cardinal/ordinal_cardinal_correspondance/ensembles_segments_ordinaux.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_cardinal_pas_entre_univ.py",
+    "vers": "bourbaki/cardinaux/iii_4_ordinal_cardinal/ordinal_cardinal_correspondance/ensembles_cardinal_pas_entre_univ.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_realisation_segment_close.py",
+    "vers": "bourbaki/cardinaux/iii_4_ordinal_cardinal/realisation_segment/ensembles_realisation_segment_close.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_realisation_segment_preuve.py",
+    "vers": "bourbaki/cardinaux/iii_4_ordinal_cardinal/realisation_segment/ensembles_realisation_segment_preuve.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_subset_realise_close.py",
+    "vers": "bourbaki/cardinaux/iii_4_ordinal_cardinal/realisation_segment/ensembles_subset_realise_close.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_transport_sous_ensemble.py",
+    "vers": "bourbaki/cardinaux/iii_4_ordinal_cardinal/realisation_segment/ensembles_transport_sous_ensemble.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_hyp_transport_ordinal_preuve.py",
+    "vers": "bourbaki/cardinaux/iii_4_ordinal_cardinal/realisation_segment/ensembles_hyp_transport_ordinal_preuve.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_gate_onto_top.py",
+    "vers": "bourbaki/cardinaux/iii_4_ordinal_cardinal/realisation_segment/ensembles_gate_onto_top.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_equipotence_retrait.py",
+    "vers": "bourbaki/cardinaux/iii_4_ordinal_cardinal/equipotence_retrait/ensembles_equipotence_retrait.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_n_arith_iii5.py",
+    "vers": "bourbaki/cardinaux/iii_5_entiers/ensembles_n_arith_iii5.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_parite_iii5.py",
+    "vers": "bourbaki/cardinaux/iii_5_entiers/ensembles_parite_iii5.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_puissance_deux_trois_NN.py",
+    "vers": "bourbaki/cardinaux/iii_5_entiers/ensembles_puissance_deux_trois_NN.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_puissance_entiers_inconditionnel.py",
+    "vers": "bourbaki/cardinaux/iii_5_entiers/ensembles_puissance_entiers_inconditionnel.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_produit_union_carre.py",
+    "vers": "bourbaki/cardinaux/iii_5_entiers/ensembles_produit_union_carre.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_hessenberg.py",
+    "vers": "bourbaki/cardinaux/iii_6_infinis/hessenberg/coeur/ensembles_hessenberg.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_hessenberg_hard.py",
+    "vers": "bourbaki/cardinaux/iii_6_infinis/hessenberg/coeur/ensembles_hessenberg_hard.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_hessenberg_inductivite.py",
+    "vers": "bourbaki/cardinaux/iii_6_infinis/hessenberg/coeur/ensembles_hessenberg_inductivite.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_hessenberg_maximal_card.py",
+    "vers": "bourbaki/cardinaux/iii_6_infinis/hessenberg/coeur/ensembles_hessenberg_maximal_card.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_hessenberg_extension.py",
+    "vers": "bourbaki/cardinaux/iii_6_infinis/hessenberg/coeur/ensembles_hessenberg_extension.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_hessenberg_2b3b.py",
+    "vers": "bourbaki/cardinaux/iii_6_infinis/hessenberg/coeur/ensembles_hessenberg_2b3b.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_hessenberg_structural_discharge.py",
+    "vers": "bourbaki/cardinaux/iii_6_infinis/hessenberg/coeur/ensembles_hessenberg_structural_discharge.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_cadre_plat.py",
+    "vers": "bourbaki/cardinaux/iii_6_infinis/hessenberg/coeur/ensembles_cadre_plat.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_descentes_inconditionnelles.py",
+    "vers": "bourbaki/cardinaux/iii_6_infinis/hessenberg/coeur/ensembles_descentes_inconditionnelles.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_hessenberg_chaine_vraie.py",
+    "vers": "bourbaki/cardinaux/iii_6_infinis/hessenberg/assemblage_vrai/ensembles_hessenberg_chaine_vraie.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_hessenberg_stepb.py",
+    "vers": "bourbaki/cardinaux/iii_6_infinis/hessenberg/assemblage_vrai/ensembles_hessenberg_stepb.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_hessenberg_stepb2.py",
+    "vers": "bourbaki/cardinaux/iii_6_infinis/hessenberg/assemblage_vrai/ensembles_hessenberg_stepb2.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_hessenberg_step_b_classify.py",
+    "vers": "bourbaki/cardinaux/iii_6_infinis/hessenberg/assemblage_vrai/ensembles_hessenberg_step_b_classify.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_hessenberg_p5.py",
+    "vers": "bourbaki/cardinaux/iii_6_infinis/hessenberg/assemblage_vrai/ensembles_hessenberg_p5.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_hessenberg_p5c.py",
+    "vers": "bourbaki/cardinaux/iii_6_infinis/hessenberg/assemblage_vrai/ensembles_hessenberg_p5c.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_hessenberg_vrai.py",
+    "vers": "bourbaki/cardinaux/iii_6_infinis/hessenberg/assemblage_vrai/ensembles_hessenberg_vrai.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_hessenberg_vrai_final.py",
+    "vers": "bourbaki/cardinaux/iii_6_infinis/hessenberg/assemblage_vrai/ensembles_hessenberg_vrai_final.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_hessenberg_vrai_haut.py",
+    "vers": "bourbaki/cardinaux/iii_6_infinis/hessenberg/assemblage_vrai/ensembles_hessenberg_vrai_haut.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_hessenberg_recollement_final.py",
+    "vers": "bourbaki/cardinaux/iii_6_infinis/hessenberg/assemblage_vrai/ensembles_hessenberg_recollement_final.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_frame_a_maximal.py",
+    "vers": "bourbaki/cardinaux/iii_6_infinis/frame_zorn/ensembles_frame_a_maximal.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_frame_extension_finale.py",
+    "vers": "bourbaki/cardinaux/iii_6_infinis/frame_zorn/ensembles_frame_extension_finale.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_frame_inductif_assemblage.py",
+    "vers": "bourbaki/cardinaux/iii_6_infinis/frame_zorn/ensembles_frame_inductif_assemblage.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_frame_maximal_clos.py",
+    "vers": "bourbaki/cardinaux/iii_6_infinis/frame_zorn/ensembles_frame_maximal_clos.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_frame_ordre_axiome.py",
+    "vers": "bourbaki/cardinaux/iii_6_infinis/frame_zorn/ensembles_frame_ordre_axiome.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_frame_ordre_est_ordre.py",
+    "vers": "bourbaki/cardinaux/iii_6_infinis/frame_zorn/ensembles_frame_ordre_est_ordre.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_chaine_frame_membership.py",
+    "vers": "bourbaki/cardinaux/iii_6_infinis/chaine_recollement/ensembles_chaine_frame_membership.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_chaine_surjective_frame.py",
+    "vers": "bourbaki/cardinaux/iii_6_infinis/chaine_recollement/ensembles_chaine_surjective_frame.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_chaine_temoin_abstrait.py",
+    "vers": "bourbaki/cardinaux/iii_6_infinis/chaine_recollement/ensembles_chaine_temoin_abstrait.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_union_chaine_bijection.py",
+    "vers": "bourbaki/cardinaux/iii_6_infinis/chaine_recollement/ensembles_union_chaine_bijection.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_ponts_couple_valeur_surj.py",
+    "vers": "bourbaki/cardinaux/iii_6_infinis/chaine_recollement/ensembles_ponts_couple_valeur_surj.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_denombrable_carre_iii6.py",
+    "vers": "bourbaki/cardinaux/iii_6_infinis/denombrable/ensembles_denombrable_carre_iii6.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_denombrable_injection_iii6.py",
+    "vers": "bourbaki/cardinaux/iii_6_infinis/denombrable/ensembles_denombrable_injection_iii6.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/ensembles_fini_inf_egal_infini.py",
+    "vers": "bourbaki/cardinaux/iii_6_infinis/infinis_descentes/ensembles_fini_inf_egal_infini.py"
+   }
+  ],
+  "dossiers_vides": [
+   {
+    "dossier": "iii_3_equipotence_cardinaux/iii_3_3_definition_ordre",
+    "section_livre": "III.3.3",
+    "raison": "III.3.3 (≤ pour cardinaux, définition de l'ordre via injection) n'a pas de fichier dédié distinct — la matière est dispersée dans ordre_cardinaux ; dossier vide pour matérialiser la sous-section."
+   },
+   {
+    "dossier": "iii_6_infinis/iii_6_1_definition_infini",
+    "section_livre": "III.6.1",
+    "raison": "III.6.1 (définition cardinal infini) : seul fini_inf_egal_infini touche la remarque Déf.1 ; aucun fichier ne couvre la définition propre de l'infini / ℵ0 — trou à rendre visible."
+   },
+   {
+    "dossier": "iii_6_infinis/iii_6_2_proprietes_infinis",
+    "section_livre": "III.6.2",
+    "raison": "III.6.2 (propriétés des ensembles infinis, partie inférieure infinie) non couverte par un fichier dédié."
+   },
+   {
+    "dossier": "iii_7_limites_proj_induct",
+    "section_livre": "III.7",
+    "raison": "III.7 (limites projectives et inductives) entièrement absente du paquet cardinaux — trou de couverture du livre."
+   }
+  ],
+  "arbre": [
+   {
+    "dossier": "",
+    "section": "III.2-III.6 (racine paquet)",
+    "count": 8
+   },
+   {
+    "dossier": "iii_2_trichotomie_ordinaux",
+    "section": "III.2",
+    "count": 7
+   },
+   {
+    "dossier": "iii_2_trichotomie_ordinaux/iso_ordre",
+    "section": "III.2 (Cor.1 / III.1.3)",
+    "count": 6
+   },
+   {
+    "dossier": "iii_2_trichotomie_ordinaux/lemme4_segments",
+    "section": "III.2 (Lemme 4, segments)",
+    "count": 8
+   },
+   {
+    "dossier": "iii_2_trichotomie_ordinaux/temoins_comparabilite",
+    "section": "III.2 (Lemme 1, témoins / Prop.1)",
+    "count": 5
+   },
+   {
+    "dossier": "iii_2_trichotomie_ordinaux/coincidence_fusion",
+    "section": "III.2 (Lemme 1, coïncidence/fusion)",
+    "count": 8
+   },
+   {
+    "dossier": "iii_2_trichotomie_ordinaux/h_coherences",
+    "section": "III.2 (Th.3, cohérences de h)",
+    "count": 6
+   },
+   {
+    "dossier": "iii_2_trichotomie_ordinaux/maximalite",
+    "section": "III.2 (Th.3, maximalité de h)",
+    "count": 6
+   },
+   {
+    "dossier": "iii_2_trichotomie_ordinaux/assemblage",
+    "section": "III.2 (Th.3, assemblage final)",
+    "count": 8
+   },
+   {
+    "dossier": "iii_3_equipotence_cardinaux",
+    "section": "III.3",
+    "count": 7
+   },
+   {
+    "dossier": "iii_3_equipotence_cardinaux/equipotence",
+    "section": "III.3.1",
+    "count": 6
+   },
+   {
+    "dossier": "iii_3_equipotence_cardinaux/cantor",
+    "section": "III.3",
+    "count": 1
+   },
+   {
+    "dossier": "iii_3_equipotence_cardinaux/cantor_bernstein",
+    "section": "III.3.2",
+    "count": 3
+   },
+   {
+    "dossier": "iii_3_equipotence_cardinaux/definitions_cardinaux",
+    "section": "III.3",
+    "count": 3
+   },
+   {
+    "dossier": "iii_3_equipotence_cardinaux/ordre_cardinaux",
+    "section": "III.3.2",
+    "count": 9
+   },
+   {
+    "dossier": "iii_3_equipotence_cardinaux/somme_produit_bornes",
+    "section": "III.3.2-3.5",
+    "count": 5
+   },
+   {
+    "dossier": "iii_3_equipotence_cardinaux/props_restantes",
+    "section": "III.3 / III.3.6",
+    "count": 6
+   },
+   {
+    "dossier": "iii_4_ordinal_cardinal",
+    "section": "III.4",
+    "count": 4
+   },
+   {
+    "dossier": "iii_4_ordinal_cardinal/bon_ordre_intervalle",
+    "section": "III.4 (gate ℕ, clause/bon-ordre)",
+    "count": 9
+   },
+   {
+    "dossier": "iii_4_ordinal_cardinal/ordinal_cardinal_correspondance",
+    "section": "III.4",
+    "count": 5
+   },
+   {
+    "dossier": "iii_4_ordinal_cardinal/realisation_segment",
+    "section": "III.4 (réalisation segment)",
+    "count": 6
+   },
+   {
+    "dossier": "iii_4_ordinal_cardinal/equipotence_retrait",
+    "section": "III.4",
+    "count": 1
+   },
+   {
+    "dossier": "iii_5_entiers",
+    "section": "III.5",
+    "count": 5
+   },
+   {
+    "dossier": "iii_6_infinis",
+    "section": "III.6",
+    "count": 5
+   },
+   {
+    "dossier": "iii_6_infinis/hessenberg",
+    "section": "III.6.3 (Th.2 Hessenberg)",
+    "count": 2
+   },
+   {
+    "dossier": "iii_6_infinis/hessenberg/coeur",
+    "section": "III.6.3",
+    "count": 9
+   },
+   {
+    "dossier": "iii_6_infinis/hessenberg/assemblage_vrai",
+    "section": "III.6.3 (assemblage non-vacuous)",
+    "count": 10
+   },
+   {
+    "dossier": "iii_6_infinis/frame_zorn",
+    "section": "III.6.3 (poset 𝔉 de Zorn)",
+    "count": 6
+   },
+   {
+    "dossier": "iii_6_infinis/chaine_recollement",
+    "section": "III.6.3 (recollement de chaîne)",
+    "count": 5
+   },
+   {
+    "dossier": "iii_6_infinis/denombrable",
+    "section": "III.6 (Lemme 2, dénombrable)",
+    "count": 2
+   },
+   {
+    "dossier": "iii_6_infinis/infinis_descentes",
+    "section": "III.6.1",
+    "count": 1
+   }
+  ]
+ },
+ "bourbaki/cardinaux/arithmetique": {
+  "nb": 42,
+  "deplacements": [
+   {
+    "de": "ensembles_graphe_de.py",
+    "vers": "fondations/ensembles_graphe_de.py"
+   },
+   {
+    "de": "ensembles_somme_monotone.py",
+    "vers": "iii_3_2_monotonie/ensembles_somme_monotone.py"
+   },
+   {
+    "de": "ensembles_arith_cardinale_props_produit_monotone.py",
+    "vers": "iii_3_2_monotonie/ensembles_arith_cardinale_props_produit_monotone.py"
+   },
+   {
+    "de": "ensembles_arith_cardinale_props_exposant_monotone.py",
+    "vers": "iii_3_2_monotonie/ensembles_arith_cardinale_props_exposant_monotone.py"
+   },
+   {
+    "de": "ensembles_exposant_monotone_exp_incond.py",
+    "vers": "iii_3_2_monotonie/ensembles_exposant_monotone_exp_incond.py"
+   },
+   {
+    "de": "ensembles_exposant_monotone_incond.py",
+    "vers": "iii_3_2_monotonie/ensembles_exposant_monotone_incond.py"
+   },
+   {
+    "de": "ensembles_arith_somme.py",
+    "vers": "iii_3_3_somme/ensembles_arith_somme.py"
+   },
+   {
+    "de": "ensembles_somme_equipotence.py",
+    "vers": "iii_3_3_somme/ensembles_somme_equipotence.py"
+   },
+   {
+    "de": "ensembles_somme_commute.py",
+    "vers": "iii_3_3_somme/ensembles_somme_commute.py"
+   },
+   {
+    "de": "ensembles_somme_associe.py",
+    "vers": "iii_3_3_somme/ensembles_somme_associe.py"
+   },
+   {
+    "de": "ensembles_somme_zero.py",
+    "vers": "iii_3_3_somme/ensembles_somme_zero.py"
+   },
+   {
+    "de": "ensembles_arith_cardinale.py",
+    "vers": "iii_3_3_produit/ensembles_arith_cardinale.py"
+   },
+   {
+    "de": "ensembles_produit_equipotence.py",
+    "vers": "iii_3_3_produit/ensembles_produit_equipotence.py"
+   },
+   {
+    "de": "ensembles_produit_commute.py",
+    "vers": "iii_3_3_produit/ensembles_produit_commute.py"
+   },
+   {
+    "de": "ensembles_produit_petits.py",
+    "vers": "iii_3_3_produit/ensembles_produit_petits.py"
+   },
+   {
+    "de": "ensembles_distributivite_cardinale.py",
+    "vers": "iii_3_3_produit/ensembles_distributivite_cardinale.py"
+   },
+   {
+    "de": "ensembles_prop8_successeur.py",
+    "vers": "iii_3_4_prop8_successeur/ensembles_prop8_successeur.py"
+   },
+   {
+    "de": "ensembles_prop8_plus_point.py",
+    "vers": "iii_3_4_prop8_successeur/ensembles_prop8_plus_point.py"
+   },
+   {
+    "de": "ensembles_prop8_assemblage.py",
+    "vers": "iii_3_4_prop8_successeur/ensembles_prop8_assemblage.py"
+   },
+   {
+    "de": "ensembles_prop8_transposition.py",
+    "vers": "iii_3_4_prop8_successeur/ensembles_prop8_transposition.py"
+   },
+   {
+    "de": "ensembles_prop8_fini2.py",
+    "vers": "iii_3_4_prop8_successeur/ensembles_prop8_fini2.py"
+   },
+   {
+    "de": "ensembles_copie_marquee.py",
+    "vers": "iii_3_4_prop8_successeur/ensembles_copie_marquee.py"
+   },
+   {
+    "de": "ensembles_prop8_coeur/",
+    "vers": "iii_3_4_prop8_successeur/prop8_coeur/"
+   },
+   {
+    "de": "ensembles_transposition/",
+    "vers": "iii_3_4_prop8_successeur/transposition/"
+   },
+   {
+    "de": "ensembles_exposant_cardinal.py",
+    "vers": "iii_3_5_exposant/definition/ensembles_exposant_cardinal.py"
+   },
+   {
+    "de": "ensembles_exposant_un_base.py",
+    "vers": "iii_3_5_exposant/definition/ensembles_exposant_un_base.py"
+   },
+   {
+    "de": "ensembles_exposant_zero.py",
+    "vers": "iii_3_5_exposant/definition/ensembles_exposant_zero.py"
+   },
+   {
+    "de": "ensembles_exposant_un/",
+    "vers": "iii_3_5_exposant/definition/exposant_un/"
+   },
+   {
+    "de": "ensembles_exposant_somme.py",
+    "vers": "iii_3_5_exposant/prop9_exp_somme/ensembles_exposant_somme.py"
+   },
+   {
+    "de": "ensembles_prop9_exp_somme.py",
+    "vers": "iii_3_5_exposant/prop9_exp_somme/ensembles_prop9_exp_somme.py"
+   },
+   {
+    "de": "ensembles_prop9_final.py",
+    "vers": "iii_3_5_exposant/prop9_exp_somme/ensembles_prop9_final.py"
+   },
+   {
+    "de": "ensembles_prop9_final_close.py",
+    "vers": "iii_3_5_exposant/prop9_exp_somme/ensembles_prop9_final_close.py"
+   },
+   {
+    "de": "ensembles_prop9_close.py",
+    "vers": "iii_3_5_exposant/prop9_exp_somme/ensembles_prop9_close.py"
+   },
+   {
+    "de": "ensembles_prop9_cloture.py",
+    "vers": "iii_3_5_exposant/prop9_exp_somme/ensembles_prop9_cloture.py"
+   },
+   {
+    "de": "ensembles_exposant_produit.py",
+    "vers": "iii_3_5_exposant/prop10_currying/ensembles_exposant_produit.py"
+   },
+   {
+    "de": "ensembles_prop10_currying.py",
+    "vers": "iii_3_5_exposant/prop10_currying/ensembles_prop10_currying.py"
+   },
+   {
+    "de": "ensembles_prop10_inj_curry.py",
+    "vers": "iii_3_5_exposant/prop10_currying/ensembles_prop10_inj_curry.py"
+   },
+   {
+    "de": "ensembles_prop10_inj_uncurry.py",
+    "vers": "iii_3_5_exposant/prop10_currying/ensembles_prop10_inj_uncurry.py"
+   },
+   {
+    "de": "ensembles_prop10_close.py",
+    "vers": "iii_3_5_exposant/prop10_currying/ensembles_prop10_close.py"
+   },
+   {
+    "de": "ensembles_prop10_final_close.py",
+    "vers": "iii_3_5_exposant/prop10_currying/ensembles_prop10_final_close.py"
+   },
+   {
+    "de": "ensembles_prop10cor2_iii3.py",
+    "vers": "iii_3_5_exposant/prop10_currying/ensembles_prop10cor2_iii3.py"
+   },
+   {
+    "de": "ensembles_powerset_exp.py",
+    "vers": "iii_3_5_exposant/prop12_powerset/ensembles_powerset_exp.py"
+   },
+   {
+    "de": "ensembles_powerset_deux.py",
+    "vers": "iii_3_5_exposant/prop12_powerset/ensembles_powerset_deux.py"
+   },
+   {
+    "de": "ensembles_prop12_powerset.py",
+    "vers": "iii_3_5_exposant/prop12_powerset/ensembles_prop12_powerset.py"
+   },
+   {
+    "de": "ensembles_prop12_fin.py",
+    "vers": "iii_3_5_exposant/prop12_powerset/ensembles_prop12_fin.py"
+   },
+   {
+    "de": "ensembles_prop12_card/",
+    "vers": "iii_3_5_exposant/prop12_powerset/prop12_card/"
+   }
+  ],
+  "dossiers_vides": [
+   {
+    "dossier": "iii_3_5_exposant/prop11_petits_cas",
+    "section_livre": "III.3.5",
+    "raison": "Proposition 11 (1^a=1, 0^a=0, a^1=a, a^0=1) — actuellement absorbée dans definition/ ; un dossier dedie la rendrait visible comme sous-section distincte de la Definition 4. Optionnel : non cree ici car les 3 fichiers exposant_un_base/exposant_zero/exposant_un couvrent deja la matiere et tiennent dans definition/."
+   },
+   {
+    "dossier": "iii_3_6_familles",
+    "section_livre": "III.3.6",
+    "raison": "Somme/produit d'une FAMILLE de cardinaux (∑_ι a_ι, ∏_ι a_ι, au-dela du cas binaire) — aucun fichier du paquet ne traite le cas indexe general ; trou de couverture a rendre visible."
+   },
+   {
+    "dossier": "iii_3_7_inegalites",
+    "section_livre": "III.3.7",
+    "raison": "Inegalites sur somme/produit de familles et theoreme de Konig — aucun fichier present ; trou de couverture."
+   }
+  ],
+  "arbre": [
+   {
+    "dossier": "",
+    "section": "III.3",
+    "count": 7
+   },
+   {
+    "dossier": "fondations",
+    "section": "II.3.1",
+    "count": 1
+   },
+   {
+    "dossier": "iii_3_2_monotonie",
+    "section": "III.3.2",
+    "count": 5
+   },
+   {
+    "dossier": "iii_3_3_somme",
+    "section": "III.3.3",
+    "count": 5
+   },
+   {
+    "dossier": "iii_3_3_produit",
+    "section": "III.3.3",
+    "count": 5
+   },
+   {
+    "dossier": "iii_3_4_prop8_successeur",
+    "section": "III.3.4",
+    "count": 8
+   },
+   {
+    "dossier": "iii_3_5_exposant",
+    "section": "III.3.5",
+    "count": 4
+   },
+   {
+    "dossier": "iii_3_5_exposant/definition",
+    "section": "III.3.5",
+    "count": 4
+   },
+   {
+    "dossier": "iii_3_5_exposant/prop9_exp_somme",
+    "section": "III.3.5",
+    "count": 6
+   },
+   {
+    "dossier": "iii_3_5_exposant/prop10_currying",
+    "section": "III.3.5",
+    "count": 7
+   },
+   {
+    "dossier": "iii_3_5_exposant/prop12_powerset",
+    "section": "III.3.5",
+    "count": 5
+   }
+  ]
+ },
+ "bourbaki/entiers": {
+  "nb": 59,
+  "deplacements": [
+   {
+    "de": "bourbaki/entiers/ensembles_entiers.py",
+    "vers": "bourbaki/entiers/iii_4_entiers_finis/iii_4_1_definitions_premiers_entiers/ensembles_entiers.py"
+   },
+   {
+    "de": "bourbaki/entiers/ensembles_zero_plus_un.py",
+    "vers": "bourbaki/entiers/iii_4_entiers_finis/iii_4_1_definitions_premiers_entiers/ensembles_zero_plus_un.py"
+   },
+   {
+    "de": "bourbaki/entiers/ensembles_fini_successeur.py",
+    "vers": "bourbaki/entiers/iii_4_entiers_finis/iii_4_1_definitions_premiers_entiers/ensembles_fini_successeur.py"
+   },
+   {
+    "de": "bourbaki/entiers/ensembles_fini_zero.py",
+    "vers": "bourbaki/entiers/iii_4_entiers_finis/iii_4_1_definitions_premiers_entiers/ensembles_fini_zero.py"
+   },
+   {
+    "de": "bourbaki/entiers/ensembles_fini_un.py",
+    "vers": "bourbaki/entiers/iii_4_entiers_finis/iii_4_1_definitions_premiers_entiers/ensembles_fini_un.py"
+   },
+   {
+    "de": "bourbaki/entiers/ensembles_fini_deux.py",
+    "vers": "bourbaki/entiers/iii_4_entiers_finis/iii_4_1_definitions_premiers_entiers/ensembles_fini_deux.py"
+   },
+   {
+    "de": "bourbaki/entiers/ensembles_fini_trois_quatre.py",
+    "vers": "bourbaki/entiers/iii_4_entiers_finis/iii_4_1_definitions_premiers_entiers/ensembles_fini_trois_quatre.py"
+   },
+   {
+    "de": "bourbaki/entiers/ensembles_entiers_theoremes.py",
+    "vers": "bourbaki/entiers/iii_4_entiers_finis/iii_4_1_definitions_premiers_entiers/ensembles_entiers_theoremes.py"
+   },
+   {
+    "de": "bourbaki/entiers/ensembles_recurrence_C61.py",
+    "vers": "bourbaki/entiers/iii_4_entiers_finis/iii_4_recurrence_c61_existence_n/ensembles_recurrence_C61.py"
+   },
+   {
+    "de": "bourbaki/entiers/ensembles_principe_recurrence_preuve.py",
+    "vers": "bourbaki/entiers/iii_4_entiers_finis/iii_4_recurrence_c61_existence_n/ensembles_principe_recurrence_preuve.py"
+   },
+   {
+    "de": "bourbaki/entiers/ensembles_recurrence_vraie.py",
+    "vers": "bourbaki/entiers/iii_4_entiers_finis/iii_4_recurrence_c61_existence_n/ensembles_recurrence_vraie.py"
+   },
+   {
+    "de": "bourbaki/entiers/ensembles_predecesseur_prop2.py",
+    "vers": "bourbaki/entiers/iii_4_entiers_finis/iii_4_recurrence_c61_existence_n/ensembles_predecesseur_prop2.py"
+   },
+   {
+    "de": "bourbaki/entiers/ensembles_cardinal_pas_entre.py",
+    "vers": "bourbaki/entiers/iii_4_entiers_finis/iii_4_recurrence_c61_existence_n/ensembles_cardinal_pas_entre.py"
+   },
+   {
+    "de": "bourbaki/entiers/ensembles_pigeonhole_sous_lemme.py",
+    "vers": "bourbaki/entiers/iii_4_entiers_finis/iii_4_2_pigeonhole_surgery/ensembles_pigeonhole_sous_lemme.py"
+   },
+   {
+    "de": "bourbaki/entiers/ensembles_partie_equipotente_finie.py",
+    "vers": "bourbaki/entiers/iii_4_entiers_finis/iii_4_2_pigeonhole_surgery/ensembles_partie_equipotente_finie.py"
+   },
+   {
+    "de": "bourbaki/entiers/ensembles_retrait_point.py",
+    "vers": "bourbaki/entiers/iii_4_entiers_finis/iii_4_2_pigeonhole_surgery/ensembles_retrait_point.py"
+   },
+   {
+    "de": "bourbaki/entiers/ensembles_retrait_surgery.py",
+    "vers": "bourbaki/entiers/iii_4_entiers_finis/iii_4_2_pigeonhole_surgery/ensembles_retrait_surgery.py"
+   },
+   {
+    "de": "bourbaki/entiers/ensembles_cor4_inj_surj_iii4.py",
+    "vers": "bourbaki/entiers/iii_4_entiers_finis/iii_4_2_cor4_inj_surj_bij/ensembles_cor4_inj_surj_iii4.py"
+   },
+   {
+    "de": "bourbaki/entiers/ensembles_cor4_surj_inj_iii4.py",
+    "vers": "bourbaki/entiers/iii_4_entiers_finis/iii_4_2_cor4_inj_surj_bij/ensembles_cor4_surj_inj_iii4.py"
+   },
+   {
+    "de": "bourbaki/entiers/ensembles_cor4_surj_inj_fin.py",
+    "vers": "bourbaki/entiers/iii_4_entiers_finis/iii_4_2_cor4_inj_surj_bij/ensembles_cor4_surj_inj_fin.py"
+   },
+   {
+    "de": "bourbaki/entiers/ensembles_finis_props.py",
+    "vers": "bourbaki/entiers/iii_4_entiers_finis/iii_4_2_finis_props/ensembles_finis_props.py"
+   },
+   {
+    "de": "bourbaki/entiers/ensembles_finis_props2.py",
+    "vers": "bourbaki/entiers/iii_4_entiers_finis/iii_4_2_finis_props/ensembles_finis_props2.py"
+   },
+   {
+    "de": "bourbaki/entiers/ensembles_chap3_props_restantes.py",
+    "vers": "bourbaki/entiers/iii_4_entiers_finis/iii_4_2_finis_props/ensembles_chap3_props_restantes.py"
+   },
+   {
+    "de": "bourbaki/entiers/ensembles_combinatoire_iii5.py",
+    "vers": "bourbaki/entiers/iii_5_calcul_entiers/iii_5_1_somme_produit_entiers/ensembles_combinatoire_iii5.py"
+   },
+   {
+    "de": "bourbaki/entiers/ensembles_prop3_produit_entier_iii5.py",
+    "vers": "bourbaki/entiers/iii_5_calcul_entiers/iii_5_1_somme_produit_entiers/ensembles_prop3_produit_entier_iii5.py"
+   },
+   {
+    "de": "bourbaki/entiers/ensembles_calcul_entiers_props.py",
+    "vers": "bourbaki/entiers/iii_5_calcul_entiers/iii_5_1_somme_produit_entiers/ensembles_calcul_entiers_props.py"
+   },
+   {
+    "de": "bourbaki/entiers/ensembles_simplification_additive.py",
+    "vers": "bourbaki/entiers/iii_5_calcul_entiers/iii_5_1_somme_produit_entiers/ensembles_simplification_additive.py"
+   },
+   {
+    "de": "bourbaki/entiers/ensembles_recurrence_finie.py",
+    "vers": "bourbaki/entiers/iii_5_calcul_entiers/iii_5_1_somme_produit_entiers/ensembles_recurrence_finie.py"
+   },
+   {
+    "de": "bourbaki/entiers/ensembles_prop2_strict_iii5.py",
+    "vers": "bourbaki/entiers/iii_5_calcul_entiers/iii_5_2_inegalites_ordre_soustraction/ensembles_prop2_strict_iii5.py"
+   },
+   {
+    "de": "bourbaki/entiers/ensembles_prop3_strict_mono_iii5.py",
+    "vers": "bourbaki/entiers/iii_5_calcul_entiers/iii_5_2_inegalites_ordre_soustraction/ensembles_prop3_strict_mono_iii5.py"
+   },
+   {
+    "de": "bourbaki/entiers/ensembles_successeur_ordre.py",
+    "vers": "bourbaki/entiers/iii_5_calcul_entiers/iii_5_2_inegalites_ordre_soustraction/ensembles_successeur_ordre.py"
+   },
+   {
+    "de": "bourbaki/entiers/ensembles_prop4_strict_iii5.py",
+    "vers": "bourbaki/entiers/iii_5_calcul_entiers/iii_5_2_inegalites_ordre_soustraction/ensembles_prop4_strict_iii5.py"
+   },
+   {
+    "de": "bourbaki/entiers/ensembles_prop4_surj_iii5.py",
+    "vers": "bourbaki/entiers/iii_5_calcul_entiers/iii_5_2_inegalites_ordre_soustraction/ensembles_prop4_surj_iii5.py"
+   },
+   {
+    "de": "bourbaki/entiers/ensembles_soustraction_iii5.py",
+    "vers": "bourbaki/entiers/iii_5_calcul_entiers/iii_5_2_inegalites_ordre_soustraction/ensembles_soustraction_iii5.py"
+   },
+   {
+    "de": "bourbaki/entiers/ensembles_prop5_intervalle.py",
+    "vers": "bourbaki/entiers/iii_5_calcul_entiers/iii_5_intervalles_comptage/ensembles_prop5_intervalle.py"
+   },
+   {
+    "de": "bourbaki/entiers/ensembles_prop5_prop4_iii5.py",
+    "vers": "bourbaki/entiers/iii_5_calcul_entiers/iii_5_intervalles_comptage/ensembles_prop5_prop4_iii5.py"
+   },
+   {
+    "de": "bourbaki/entiers/ensembles_prop5_general_iii5.py",
+    "vers": "bourbaki/entiers/iii_5_calcul_entiers/iii_5_intervalles_comptage/ensembles_prop5_general_iii5.py"
+   },
+   {
+    "de": "bourbaki/entiers/ensembles_prop6_bien_ordonne_iii5.py",
+    "vers": "bourbaki/entiers/iii_5_calcul_entiers/iii_5_intervalles_comptage/ensembles_prop6_bien_ordonne_iii5.py"
+   },
+   {
+    "de": "bourbaki/entiers/ensembles_prop6_fini_interval_iii5.py",
+    "vers": "bourbaki/entiers/iii_5_calcul_entiers/iii_5_intervalles_comptage/ensembles_prop6_fini_interval_iii5.py"
+   },
+   {
+    "de": "bourbaki/entiers/ensembles_prop6_iso_iii5.py",
+    "vers": "bourbaki/entiers/iii_5_calcul_entiers/iii_5_intervalles_comptage/ensembles_prop6_iso_iii5.py"
+   },
+   {
+    "de": "bourbaki/entiers/ensembles_prop7_caracteristique_iii5.py",
+    "vers": "bourbaki/entiers/iii_5_calcul_entiers/iii_5_5_caracteristique_combinatoire/ensembles_prop7_caracteristique_iii5.py"
+   },
+   {
+    "de": "bourbaki/entiers/ensembles_prop9_bergers_iii5.py",
+    "vers": "bourbaki/entiers/iii_5_calcul_entiers/iii_5_5_caracteristique_combinatoire/ensembles_prop9_bergers_iii5.py"
+   },
+   {
+    "de": "bourbaki/entiers/ensembles_factorielle_iii5.py",
+    "vers": "bourbaki/entiers/iii_5_calcul_entiers/iii_5_8_factorielle/ensembles_factorielle_iii5.py"
+   },
+   {
+    "de": "bourbaki/entiers/ensembles_factorielle_existence.py",
+    "vers": "bourbaki/entiers/iii_5_calcul_entiers/iii_5_8_factorielle/ensembles_factorielle_existence.py"
+   },
+   {
+    "de": "bourbaki/entiers/ensembles_factorielle_existence_vrai.py",
+    "vers": "bourbaki/entiers/iii_5_calcul_entiers/iii_5_8_factorielle/ensembles_factorielle_existence_vrai.py"
+   },
+   {
+    "de": "bourbaki/entiers/ensembles_factorielle_gluing_diag.py",
+    "vers": "bourbaki/entiers/iii_5_calcul_entiers/iii_5_8_factorielle/ensembles_factorielle_gluing_diag.py"
+   },
+   {
+    "de": "bourbaki/entiers/ensembles_entiers_notions_arith.py",
+    "vers": "bourbaki/entiers/iii_5_calcul_entiers/iii_5_notions_complementaires/ensembles_entiers_notions_arith.py"
+   },
+   {
+    "de": "bourbaki/entiers/ensembles_entiers_notions_suites.py",
+    "vers": "bourbaki/entiers/iii_5_calcul_entiers/iii_5_notions_complementaires/ensembles_entiers_notions_suites.py"
+   },
+   {
+    "de": "bourbaki/entiers/ensembles_N_collectivise.py",
+    "vers": "bourbaki/entiers/iii_6_infinis/iii_6_1_n_objet_existence/ensembles_N_collectivise.py"
+   },
+   {
+    "de": "bourbaki/entiers/ensembles_ensemble_NN.py",
+    "vers": "bourbaki/entiers/iii_6_infinis/iii_6_1_n_objet_existence/ensembles_ensemble_NN.py"
+   },
+   {
+    "de": "bourbaki/entiers/ensembles_n_bien_ordonne.py",
+    "vers": "bourbaki/entiers/iii_6_infinis/iii_6_1_n_objet_existence/ensembles_n_bien_ordonne.py"
+   },
+   {
+    "de": "bourbaki/entiers/ensembles_aleph0.py",
+    "vers": "bourbaki/entiers/iii_6_infinis/iii_6_1_n_objet_existence/ensembles_aleph0.py"
+   },
+   {
+    "de": "bourbaki/entiers/ensembles_c62_recursion.py",
+    "vers": "bourbaki/entiers/iii_6_infinis/iii_6_2_recursion_c62/ensembles_c62_recursion.py"
+   },
+   {
+    "de": "bourbaki/entiers/ensembles_recursion_hygienic.py",
+    "vers": "bourbaki/entiers/iii_6_infinis/iii_6_2_recursion_c62/ensembles_recursion_hygienic.py"
+   },
+   {
+    "de": "bourbaki/entiers/ensembles_infinis.py",
+    "vers": "bourbaki/entiers/iii_6_infinis/iii_6_3_infinis_denombrables/ensembles_infinis.py"
+   },
+   {
+    "de": "bourbaki/entiers/ensembles_infinis_iii6.py",
+    "vers": "bourbaki/entiers/iii_6_infinis/iii_6_3_infinis_denombrables/ensembles_infinis_iii6.py"
+   },
+   {
+    "de": "bourbaki/entiers/ensembles_infinis_props.py",
+    "vers": "bourbaki/entiers/iii_6_infinis/iii_6_3_infinis_denombrables/ensembles_infinis_props.py"
+   },
+   {
+    "de": "bourbaki/entiers/ensembles_infinis_theoremes.py",
+    "vers": "bourbaki/entiers/iii_6_infinis/iii_6_3_infinis_denombrables/ensembles_infinis_theoremes.py"
+   }
+  ],
+  "dossiers_vides": [
+   {
+    "dossier": "iii_5_calcul_entiers/iii_5_6_divisibilite_division_euclidienne",
+    "section_livre": "III.5.6",
+    "raison": "Definition 1 de III.5.6 (multiple, diviseur, quotient a/b, division euclidienne) n'a aucun fichier dedie : les notions sont seulement esquissees dans ensembles_entiers_notions_arith (range en notions_complementaires) et dans ensembles_entiers.py. Aucune proposition propre a III.5.6 close. Dossier vide pour rendre visible le trou."
+   },
+   {
+    "dossier": "iii_5_calcul_entiers/iii_5_7_developpement_base_b",
+    "section_livre": "III.5.7",
+    "raison": "Le developpement de base b (chiffre, symbole numerique) de III.5.7 n'a aucun module propre : seulement evoque dans ensembles_entiers_notions_arith. Aucune proposition close. Dossier vide pour signaler le trou de couverture."
+   },
+   {
+    "dossier": "iii_6_infinis/iii_6_4_limites_proj_induct",
+    "section_livre": "III.7",
+    "raison": "Note : la limite projective/inductive est III.7 dans la table cible, hors perimetre entiers ; aucun fichier ici. Ce dossier vide n'est PROPOSE qu'a titre indicatif si l'on veut materialiser le voisinage III.7 sous le paquet ; sinon a ignorer. Aucun trou interne a III.4-III.6 n'existe par ailleurs."
+   }
+  ],
+  "arbre": [
+   {
+    "dossier": "",
+    "section": "III.4-III.6",
+    "count": 4
+   },
+   {
+    "dossier": "iii_4_entiers_finis",
+    "section": "III.4",
+    "count": 5
+   },
+   {
+    "dossier": "iii_4_entiers_finis/iii_4_1_definitions_premiers_entiers",
+    "section": "III.4.1",
+    "count": 8
+   },
+   {
+    "dossier": "iii_4_entiers_finis/iii_4_recurrence_c61_existence_n",
+    "section": "III.4.2",
+    "count": 5
+   },
+   {
+    "dossier": "iii_4_entiers_finis/iii_4_2_pigeonhole_surgery",
+    "section": "III.4.2",
+    "count": 4
+   },
+   {
+    "dossier": "iii_4_entiers_finis/iii_4_2_cor4_inj_surj_bij",
+    "section": "III.4.2",
+    "count": 3
+   },
+   {
+    "dossier": "iii_4_entiers_finis/iii_4_2_finis_props",
+    "section": "III.4.2",
+    "count": 3
+   },
+   {
+    "dossier": "iii_5_calcul_entiers",
+    "section": "III.5",
+    "count": 6
+   },
+   {
+    "dossier": "iii_5_calcul_entiers/iii_5_1_somme_produit_entiers",
+    "section": "III.5.1",
+    "count": 5
+   },
+   {
+    "dossier": "iii_5_calcul_entiers/iii_5_2_inegalites_ordre_soustraction",
+    "section": "III.5.2",
+    "count": 6
+   },
+   {
+    "dossier": "iii_5_calcul_entiers/iii_5_intervalles_comptage",
+    "section": "III.5.3",
+    "count": 6
+   },
+   {
+    "dossier": "iii_5_calcul_entiers/iii_5_5_caracteristique_combinatoire",
+    "section": "III.5.5",
+    "count": 2
+   },
+   {
+    "dossier": "iii_5_calcul_entiers/iii_5_8_factorielle",
+    "section": "III.5.8",
+    "count": 4
+   },
+   {
+    "dossier": "iii_5_calcul_entiers/iii_5_notions_complementaires",
+    "section": "III.5.4-III.5.7",
+    "count": 2
+   },
+   {
+    "dossier": "iii_6_infinis",
+    "section": "III.6",
+    "count": 3
+   },
+   {
+    "dossier": "iii_6_infinis/iii_6_1_n_objet_existence",
+    "section": "III.6.1",
+    "count": 4
+   },
+   {
+    "dossier": "iii_6_infinis/iii_6_2_recursion_c62",
+    "section": "III.6.2",
+    "count": 2
+   },
+   {
+    "dossier": "iii_6_infinis/iii_6_3_infinis_denombrables",
+    "section": "III.6",
+    "count": 4
+   }
+  ]
+ },
+ "bourbaki/structures": {
+  "nb": 17,
+  "deplacements": [
+   {
+    "de": "bourbaki/structures/ensembles_especes_echelon.py",
+    "vers": "bourbaki/structures/iv_1_structures_isomorphismes/ensembles_especes_echelon.py"
+   },
+   {
+    "de": "bourbaki/structures/ensembles_especes_typification.py",
+    "vers": "bourbaki/structures/iv_1_structures_isomorphismes/ensembles_especes_typification.py"
+   },
+   {
+    "de": "bourbaki/structures/ensembles_especes.py",
+    "vers": "bourbaki/structures/iv_1_structures_isomorphismes/ensembles_especes.py"
+   },
+   {
+    "de": "bourbaki/structures/ensembles_especes_deduction.py",
+    "vers": "bourbaki/structures/iv_1_structures_isomorphismes/ensembles_especes_deduction.py"
+   },
+   {
+    "de": "bourbaki/structures/ensembles_transport_iso_props.py",
+    "vers": "bourbaki/structures/iv_1_structures_isomorphismes/ensembles_transport_iso_props.py"
+   },
+   {
+    "de": "bourbaki/structures/ensembles_universel_morphismes.py",
+    "vers": "bourbaki/structures/iv_2_morphismes_structures_derivees/ensembles_universel_morphismes.py"
+   },
+   {
+    "de": "bourbaki/structures/ensembles_universel_finale.py",
+    "vers": "bourbaki/structures/iv_2_morphismes_structures_derivees/ensembles_universel_finale.py"
+   },
+   {
+    "de": "bourbaki/structures/ensembles_structures_props.py",
+    "vers": "bourbaki/structures/iv_2_morphismes_structures_derivees/ensembles_structures_props.py"
+   },
+   {
+    "de": "bourbaki/structures/ensembles_structures_derivees_props.py",
+    "vers": "bourbaki/structures/iv_2_morphismes_structures_derivees/ensembles_structures_derivees_props.py"
+   },
+   {
+    "de": "bourbaki/structures/ensembles_structures_residus.py",
+    "vers": "bourbaki/structures/iv_2_morphismes_structures_derivees/ensembles_structures_residus.py"
+   },
+   {
+    "de": "bourbaki/structures/ensembles_CST_criteres.py",
+    "vers": "bourbaki/structures/iv_2_morphismes_structures_derivees/cst_criteres/ensembles_CST_criteres.py"
+   },
+   {
+    "de": "bourbaki/structures/ensembles_chap4_props_restantes.py",
+    "vers": "bourbaki/structures/iv_2_morphismes_structures_derivees/cst_criteres/ensembles_chap4_props_restantes.py"
+   },
+   {
+    "de": "bourbaki/structures/ensembles_cst_criteres_suite.py",
+    "vers": "bourbaki/structures/iv_2_morphismes_structures_derivees/cst_criteres/ensembles_cst_criteres_suite.py"
+   },
+   {
+    "de": "bourbaki/structures/ensembles_cst_produit_quotient.py",
+    "vers": "bourbaki/structures/iv_2_morphismes_structures_derivees/cst_criteres/ensembles_cst_produit_quotient.py"
+   },
+   {
+    "de": "bourbaki/structures/__init__.py",
+    "vers": "bourbaki/structures/__init__.py"
+   }
+  ],
+  "dossiers_vides": [],
+  "arbre": [
+   {
+    "dossier": "",
+    "section": "IV",
+    "count": 4
+   },
+   {
+    "dossier": "iv_1_structures_isomorphismes",
+    "section": "IV.1",
+    "count": 5
+   },
+   {
+    "dossier": "iv_2_morphismes_structures_derivees",
+    "section": "IV.2",
+    "count": 6
+   },
+   {
+    "dossier": "iv_2_morphismes_structures_derivees/cst_criteres",
+    "section": "IV.1-IV.2",
+    "count": 4
+   },
+   {
+    "dossier": "iv_3_applications_universelles",
+    "section": "IV.3",
+    "count": 2
+   }
+  ]
+ }
+}
