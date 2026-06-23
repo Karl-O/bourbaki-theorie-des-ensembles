@@ -97,7 +97,9 @@ def _build_patterns(moves, pkg_renames=()):
             rmap[od] = nd
     pats = [(re.compile(r"(?<![\w.])" + re.escape(o) + r"(?![\w])"), n)
             for o, n in sorted(rmap.items(), key=lambda kv: -len(kv[0]))]
-    pats += [(re.compile(r"(?m)^(\s*from\s+)" + re.escape(op) + r"(\s+import\s+)"
+    #   `\(?\s*` après `import` : couvre aussi la forme parenthésée mono-sous-module
+    #   `from PKG import (\n    NAME as X)`. (Multi-sous-modules parenthésés : absents du dépôt.)
+    pats += [(re.compile(r"(?m)^(\s*from\s+)" + re.escape(op) + r"(\s+import\s+\(?\s*)"
                          + re.escape(name) + r"(?![\w])"), r"\1" + np_ + r"\2" + name)
              for (op, name), np_ in fmap.items()]
     return rmap, fmap, pats
