@@ -32,7 +32,7 @@ from bourbaki.logique.tactiques.tactiques_abrege2 import (
 )
 from bourbaki.logique.tactiques.tactiques_abrege_quantif import existe_elimination
 from bourbaki.logique.tactiques.tactiques_abrege_egalite import (
-    symetrie, composer_egalites,
+    symetrie, composer_egalites, congruence_terme,
 )
 
 from bourbaki.ensembles import ensembles_abrege as E
@@ -790,10 +790,365 @@ def un_impair():
     return res
 
 
+# ══════════════════════════════════════════════════════════════════════════════
+#  (3c) PRODUIT DE DEUX IMPAIRS EST IMPAIR.
+#       a=succ(2i), b=succ(2j) ⇒ a·b = succ( 2·(a·j + i) ), donc impair.
+# ══════════════════════════════════════════════════════════════════════════════
+def _comm_prod_t(tx, ty):
+    """⊢ Card(x×y) = Card(y×x)   (= x·y = y·x au niveau cardinaux), capture-safe."""
+    from bourbaki.cardinaux.arithmetique.ensembles_arith_cardinale import (
+        produit_cardinal_commutatif,
+    )
+    g = produit_cardinal_commutatif("Xcpt", "Ycpt")
+    gen = N.generalisation("Xcpt", N.generalisation("Ycpt", g))
+    return instancie(instancie(gen, _t(tx)), _t(ty))
+
+
+def _produit_cardinal_un_t2(ta):
+    from bourbaki.cardinaux.arithmetique.ensembles_produit_petits import produit_cardinal_un
+    gen = N.generalisation("Apcu2", produit_cardinal_un("Apcu2"))
+    return instancie(gen, _t(ta))
+
+
+def _distrib_droite_t(ta, td, tc):
+    """⊢ (Fini a et Fini d et Fini c) ⇒ (a+d)·c = a·c + d·c   (capture-safe).
+
+    Réutilise _distrib_droite (prop3_strict_mono) qui exige les preuves est_cardinal ;
+    on les fournit depuis Fini (conjonction_elim_gauche)."""
+    from bourbaki.entiers.ensembles_prop3_strict_mono_iii5 import _distrib_droite
+    va, vd, vc = _t(ta), _t(td), _t(tc)
+    ha = N.assume(et(et(est_fini(va), est_fini(vd)), est_fini(vc)))
+    fa = conjonction_elim_gauche(conjonction_elim_gauche(ha))
+    fd = conjonction_elim_droite(conjonction_elim_gauche(ha))
+    fc = conjonction_elim_droite(ha)
+    ca = conjonction_elim_gauche(fa)
+    cd = conjonction_elim_gauche(fd)
+    cc = conjonction_elim_gauche(fc)
+    dd = _distrib_droite(va, vd, vc, ca, cd, cc)   # (a+d)·c = a·c + d·c
+    return N.loi_deduction(et(et(est_fini(va), est_fini(vd)), est_fini(vc)), dd)
+
+
+def _prod_assoc_t(tx, ty, tz):
+    """⊢ Card((x×y)×z) = Card(x×(y×z))   capture-safe."""
+    from bourbaki.cardinaux.arithmetique.ensembles_arith_cardinale import (
+        produit_cardinal_associatif,
+    )
+    g = produit_cardinal_associatif("Xpat", "Ypat", "Zpat")
+    gen = N.generalisation("Xpat", N.generalisation("Ypat",
+          N.generalisation("Zpat", g)))
+    return instancie(instancie(instancie(gen, _t(tx)), _t(ty)), _t(tz))
+
+
+def _pcbd_t(tX, tY, ta, tb):
+    """produit_cardinal_bien_defini capture-safe :
+       ⊢ (Card X=a et Card Y=b) ⇒ Card(X×Y) = produit_cardinal_binaire(a,b)."""
+    from bourbaki.cardinaux.arithmetique.ensembles_arith_cardinale import (
+        produit_cardinal_bien_defini,
+    )
+    g = produit_cardinal_bien_defini("Xpcb", "Ypcb", "apcb", "bpcb")
+    gen = N.generalisation("Xpcb", N.generalisation("Ypcb",
+          N.generalisation("apcb", N.generalisation("bpcb", g))))
+    return instancie(instancie(instancie(instancie(gen, _t(tX)), _t(tY)),
+                     _t(ta)), _t(tb))
+
+
+def _a_2j_eq_2_aj(a, j):
+    """⊢ (Fini a et Fini j) ⇒ a·(2·j) = 2·(a·j).
+
+    Chaîne (cardinaux, invariance ponts) :
+      a·(2j) = Card(a×(2×j))        [pont : 2j=Card(2×j), bien_defini]
+             = Card((a×2)×j)        [associativité symétrisée]
+             = (a·2)·j              [pont : a·2=Card(a×2), j=Card(j) ; bien_defini]
+      a·2 = 2·a (commut) ⇒ (a·2)·j = (2·a)·j   [congruence à gauche du produit]
+      (2·a)·j = 2·(a·j) : symétrique du même schéma (assoc + ponts) avec (2,a,j)."""
+    va, vj = _t(a), _t(j)
+    hfin = N.assume(et(est_fini(va), est_fini(vj)))
+    fa = conjonction_elim_gauche(hfin)
+    fj = conjonction_elim_droite(hfin)
+    ca = conjonction_elim_gauche(fa)               # card a
+    cj = conjonction_elim_gauche(fj)               # card j
+    card_a = N.modus_ponens(ca, _card_de_card_t(va))   # Card a = a
+    card_j = N.modus_ponens(cj, _card_de_card_t(vj))   # Card j = j
+
+    twoj = deux_fois(vj)                            # 2·j = Card(2×j)
+    twoa = deux_fois(va)                            # 2·a = Card(2×a)
+    a2 = produit_cardinal_binaire(va, DEUX)         # a·2 = Card(a×2)
+    aj = produit_cardinal_binaire(va, vj)           # a·j
+
+    # ── a·(2j) = Card(a×(2×j)) ──────────────────────────────────────────────
+    # bien_defini(a, 2×j, a, 2j) : (Card a=a et Card(2×j)=2j) ⇒ Card(a×(2×j))=a·(2j)
+    set_2j = E.produit(DEUX, vj)                    # 2×j
+    refl_2j = N.reflexivite(twoj)                   # Card(2×j) = 2j  (twoj == Card(2×j))
+    bd1 = _pcbd_t(va, set_2j, va, twoj)
+    eq1 = N.modus_ponens(conjonction_intro(card_a, refl_2j), bd1)   # Card(a×(2×j)) = a·(2j)
+    a_2j = produit_cardinal_binaire(va, twoj)       # a·(2j)
+    Card_a_2j = cardinal(E.produit(va, set_2j))
+    eq1s = N.modus_ponens(eq1, symetrie(Card_a_2j, a_2j))   # a·(2j) = Card(a×(2×j))
+
+    # ── Card(a×(2×j)) = Card((a×2)×j)  (assoc symétrisée) ───────────────────
+    assoc = _prod_assoc_t(va, DEUX, vj)             # Card((a×2)×j) = Card(a×(2×j))
+    set_a2 = E.produit(va, DEUX)
+    Card_a2_j = cardinal(E.produit(set_a2, vj))
+    assoc_s = N.modus_ponens(assoc, symetrie(Card_a2_j, Card_a_2j))  # Card(a×(2×j))=Card((a×2)×j)
+
+    # ── Card((a×2)×j) = (a·2)·j  (bien_defini : Card(a×2)=a·2, Card j=j) ─────
+    refl_a2 = N.reflexivite(a2)                     # Card(a×2)=a·2  (a2==Card(a×2))
+    bd2 = _pcbd_t(set_a2, vj, a2, vj)
+    eq3 = N.modus_ponens(conjonction_intro(refl_a2, card_j), bd2)   # Card((a×2)×j) = (a·2)·j
+
+    # a·(2j) = Card(a×(2×j)) = Card((a×2)×j) = (a·2)·j
+    chainL = composer_egalites(composer_egalites(eq1s, assoc_s), eq3)   # a·(2j) = (a·2)·j
+
+    # ── (a·2)·j = (2·a)·j  : a·2 = 2·a (commut) congruence à gauche ─────────
+    comm_a2 = _comm_prod_t(va, DEUX)                # Card(a×2)=Card(2×a)  = a·2 = 2·a
+    #   a·2 == Card(a×2) ; 2·a == Card(2×a)  (déf)
+    a2j = produit_cardinal_binaire(a2, vj)          # (a·2)·j
+    twoa_j = produit_cardinal_binaire(twoa, vj)     # (2·a)·j
+    leibG = N.modus_ponens(comm_a2,
+        N.s6(a2, twoa, "wfg", egal(a2j, produit_cardinal_binaire(var("wfg"), vj))))
+    eqG = N.modus_ponens(N.reflexivite(a2j), equivalence_avant(leibG))   # (a·2)·j = (2·a)·j
+
+    # ── (2·a)·j = 2·(a·j)  : assoc (2,a,j) + ponts (miroir) ─────────────────
+    # Card((2×a)×j) = Card(2×(a×j)) ; (2·a)·j = Card((2×a)×j) [bien_defini], 2·(a·j) = Card(2×(a×j))
+    set_2a = E.produit(DEUX, va)
+    refl_2a = N.reflexivite(twoa)                   # Card(2×a)=2·a
+    bd3 = _pcbd_t(set_2a, vj, twoa, vj)
+    eq4 = N.modus_ponens(conjonction_intro(refl_2a, card_j), bd3)   # Card((2×a)×j) = (2·a)·j
+    Card_2a_j = cardinal(E.produit(set_2a, vj))
+    eq4s = N.modus_ponens(eq4, symetrie(Card_2a_j, twoa_j))         # (2·a)·j = Card((2×a)×j)
+    assoc2 = _prod_assoc_t(DEUX, va, vj)            # Card((2×a)×j) = Card(2×(a×j))
+    # Card(2×(a×j)) = 2·(a·j)  (bien_defini : Card 2=2, Card(a×j)=a·j)
+    card_2 = N.modus_ponens(deux_est_un_cardinal(), _card_de_card_t(DEUX))   # Card 2 = 2
+    refl_aj = N.reflexivite(aj)                     # Card(a×j) = a·j
+    set_aj = E.produit(va, vj)
+    bd4 = _pcbd_t(DEUX, set_aj, DEUX, aj)
+    eq5 = N.modus_ponens(conjonction_intro(card_2, refl_aj), bd4)   # Card(2×(a×j)) = 2·(a·j)
+    chainR = composer_egalites(composer_egalites(eq4s, assoc2), eq5)   # (2·a)·j = 2·(a·j)
+
+    # ── ASSEMBLAGE : a·(2j) = (a·2)·j = (2·a)·j = 2·(a·j) ───────────────────
+    final = composer_egalites(composer_egalites(chainL, eqG), chainR)   # a·(2j) = 2·(a·j)
+    return N.loi_deduction(et(est_fini(va), est_fini(vj)), final)
+
+
+def _deux_distrib(x, y):
+    """⊢ (Fini x et Fini y) ⇒ 2·(x+y) = 2·x + 2·y.
+
+    2·(x+y) = (x+y)·2  [commut]
+            = x·2 + y·2  [_distrib_droite(x,y,2)]
+            = 2·x + 2·y  [commut × 2]."""
+    vx, vy = _t(x), _t(y)
+    hfin = N.assume(et(est_fini(vx), est_fini(vy)))
+    fx = conjonction_elim_gauche(hfin)
+    fy = conjonction_elim_droite(hfin)
+    cx = conjonction_elim_gauche(fx)
+    cy = conjonction_elim_gauche(fy)
+    card_x = N.modus_ponens(cx, _card_de_card_t(vx))
+    card_y = N.modus_ponens(cy, _card_de_card_t(vy))
+
+    xy = somme_cardinale_binaire(vx, vy)            # x+y
+    # 2·(x+y) = (x+y)·2   (commut produit ; déf : 2·(x+y)=Card(2×(x+y)), (x+y)·2=Card((x+y)×2))
+    comm0 = _comm_prod_t(DEUX, xy)                  # Card(2×(x+y)) = Card((x+y)×2)  = 2·(x+y)=(x+y)·2
+    two_xy = deux_fois(xy)                          # 2·(x+y)
+    xy_two = produit_cardinal_binaire(xy, DEUX)     # (x+y)·2
+    # (x+y)·2 = x·2 + y·2   (_distrib_droite(x,y,2) sous Fini x,y,2)
+    from bourbaki.entiers.ensembles_fini_deux import fini_deux
+    dd = _distrib_droite_t(vx, vy, DEUX)            # (Fini x et Fini y et Fini 2)⇒ (x+y)·2 = x·2+y·2
+    dd2 = N.modus_ponens(conjonction_intro(conjonction_intro(fx, fy), fini_deux()), dd)
+    x2 = produit_cardinal_binaire(vx, DEUX)         # x·2
+    y2 = produit_cardinal_binaire(vy, DEUX)         # y·2
+    # x·2 = 2·x, y·2 = 2·y  (commut)
+    comm_x = _comm_prod_t(vx, DEUX)                 # Card(x×2)=Card(2×x) = x·2=2·x
+    comm_y = _comm_prod_t(vy, DEUX)                 # y·2=2·y
+    twox = deux_fois(vx)
+    twoy = deux_fois(vy)
+    # remplacer x·2 -> 2·x dans (w + y·2)
+    Vl = somme_cardinale_binaire(var("wddl"), y2)
+    sx = N.modus_ponens(comm_x, congruence_terme(x2, twox, Vl, w="wddl"))   # x·2+y·2 = 2·x+y·2
+    Vr = somme_cardinale_binaire(twox, var("wddr"))
+    sy = N.modus_ponens(comm_y, congruence_terme(y2, twoy, Vr, w="wddr"))   # 2·x+y·2 = 2·x+2·y
+    sxy = composer_egalites(sx, sy)                 # x·2+y·2 = 2·x+2·y
+    # 2·(x+y) = (x+y)·2 = x·2+y·2 = 2·x+2·y
+    chain = composer_egalites(composer_egalites(comm0, dd2), sxy)
+    return N.loi_deduction(et(est_fini(vx), est_fini(vy)), chain)
+
+
+def _somme_succ_distribue_t2(ta, tb):
+    g = somme_succ_distribue("assd2", "bssd2")
+    gen = N.generalisation("assd2", N.generalisation("bssd2", g))
+    return instancie(instancie(gen, _t(ta)), _t(tb))
+
+
+def _produit_succ_distribue_t2(ta, tn):
+    g = produit_succ_distribue("apsd2", "npsd2")
+    gen = N.generalisation("apsd2", N.generalisation("npsd2", g))
+    return instancie(instancie(gen, _t(ta)), _t(tn))
+
+
+def _somme_binaire_entier_t(x, y):
+    from bourbaki.entiers.ensembles_combinatoire_iii5 import somme_binaire_entier
+    g = N.generalisation("xsbe2", N.generalisation("ysbe2",
+            somme_binaire_entier("xsbe2", "ysbe2")))
+    return instancie(instancie(g, _t(x)), _t(y))
+
+
+def _produit_binaire_entier_t(x, y):
+    from bourbaki.entiers.ensembles_prop3_produit_entier_iii5 import produit_binaire_entier
+    g = N.generalisation("xpbe2", N.generalisation("ypbe2",
+            produit_binaire_entier("xpbe2", "ypbe2")))
+    return instancie(instancie(g, _t(x)), _t(y))
+
+
+def impair_fois_impair_cible(a="aifi", b="bifi"):
+    va, vb = _t(a), _t(b)
+    return impl(et(et(est_fini(va), est_fini(vb)),
+                   et(est_impair_propre(va), est_impair_propre(vb))),
+                est_impair_propre(produit_cardinal_binaire(va, vb)))
+
+
+def _afi_eq_succ2M(va, vi, vj, fa, fi, fj, a_eq, b_eq):
+    """De preuves { Fini a [fa], Fini i [fi], Fini j [fj], a=succ(2i) [a_eq],
+       b=succ(2j) [b_eq] } déduit  ⊢ a·b = succ( 2·(a·j + i) ).   (b = succ(2j).)"""
+    twoi = deux_fois(vi)
+    twoj = deux_fois(vj)
+    aj = produit_cardinal_binaire(va, vj)           # a·j
+    a_2j = produit_cardinal_binaire(va, twoj)       # a·(2j)
+    ca = conjonction_elim_gauche(fa)                # card a
+
+    # a·b : b = succ(2j) ⇒ a·b = a·succ(2j)  (Leibniz b→succ 2j sur a·•)
+    vb_term = successeur(twoj)                       # succ(2j) (= b)
+    # a·succ(2j) = a·(2j) + a   (produit_succ_distribue(a,2j) ; card a, card 2j)
+    card_2j = _est_cardinal_produit(DEUX, vj)
+    psd = N.modus_ponens(conjonction_intro(ca, card_2j), _produit_succ_distribue_t2(va, twoj))
+    #   psd : a·succ(2j) = a·(2j) + a
+    # transporte b→succ 2j : a·b = a·succ(2j).  On part de psd, réécrit a·succ(2j) en a·b.
+    # b_eq : a is fixed; need b=succ(2j) to write a·b = a·succ(2j). On garde la forme succ(2j)
+    # et substitue à la FIN (a·b apparait via Leibniz sur b). On travaille en succ(2j) puis
+    # remplace par b.
+    sum_a2j_a = somme_cardinale_binaire(a_2j, va)   # a·(2j)+a
+
+    # a·(2j)+a = a·(2j)+succ(2i)   (a=succ(2i) ⇒ remplace a par succ(2i) à droite de +)
+    Vrep = somme_cardinale_binaire(a_2j, var("wifa"))
+    rep_a = N.modus_ponens(a_eq, congruence_terme(va, successeur(twoi), Vrep, w="wifa"))
+    #   rep_a : a·(2j)+a = a·(2j)+succ(2i)
+    sum_a2j_succ2i = somme_cardinale_binaire(a_2j, successeur(twoi))
+
+    # a·(2j)+succ(2i) = succ( a·(2j)+2i )   (somme_succ_distribue(a·2j, 2i) ; card a2j, card 2i)
+    card_a2j = _est_cardinal_produit(va, twoj)
+    card_2i = _est_cardinal_produit(DEUX, vi)
+    ssd = N.modus_ponens(conjonction_intro(card_a2j, card_2i),
+                         _somme_succ_distribue_t2(a_2j, twoi))
+    #   ssd : a·(2j)+succ(2i) = succ( a·(2j)+2i )
+
+    # a·(2j) = 2·(a·j)  (H1) ⇒ remplace dans succ( w + 2i )
+    h1 = N.modus_ponens(conjonction_intro(fa, fj), _a_2j_eq_2_aj(va, vj))   # a·(2j)=2·(a·j)
+    two_aj = deux_fois(aj)                           # 2·(a·j)
+    Vh1 = successeur(somme_cardinale_binaire(var("wh1"), twoi))
+    rep_h1 = N.modus_ponens(h1, congruence_terme(a_2j, two_aj, Vh1, w="wh1"))
+    #   rep_h1 : succ(a·(2j)+2i) = succ(2·(a·j)+2i)
+    succ_2aj_2i = successeur(somme_cardinale_binaire(two_aj, twoi))
+
+    # 2·(a·j)+2·i = 2·(a·j+i)  (H2 _deux_distrib(a·j, i)) ⇒ remplace dans succ(•)
+    fini_aj = N.modus_ponens(conjonction_intro(fa, fj), _produit_binaire_entier_t(va, vj))  # Fini(a·j)
+    h2_raw = N.modus_ponens(conjonction_intro(fini_aj, fi), _deux_distrib(aj, vi))   # 2·(aj+i) = 2·(aj)+2·i
+    aj_i = somme_cardinale_binaire(aj, vi)          # a·j + i
+    two_ajpi = deux_fois(aj_i)                       # 2·(a·j+i)
+    sum_2aj_2i = somme_cardinale_binaire(two_aj, twoi)   # 2·(aj)+2·i
+    h2 = N.modus_ponens(h2_raw, symetrie(two_ajpi, sum_2aj_2i))   # 2·(aj)+2·i = 2·(aj+i)
+    Vh2 = successeur(var("wh2"))
+    rep_h2 = N.modus_ponens(h2, congruence_terme(sum_2aj_2i, two_ajpi, Vh2, w="wh2"))
+    #   rep_h2 : succ(2·(a·j)+2·i) = succ(2·(a·j+i))
+
+    # ASSEMBLAGE : a·succ(2j) = a·(2j)+a = a·(2j)+succ(2i) = succ(a·2j+2i)
+    #            = succ(2·(a·j)+2i) = succ(2·(a·j+i))
+    chain = composer_egalites(
+              composer_egalites(
+                composer_egalites(composer_egalites(psd, rep_a), ssd),
+                rep_h1),
+              rep_h2)                                # a·succ(2j) = succ(2·(a·j+i))
+    return chain, aj_i      # chain : a·succ(2j) = succ(2·(a·j+i)) ;  M = a·j+i
+
+
+def impair_fois_impair(a="aifi", b="bifi"):
+    """🎯 ⊢ (Fini a et Fini b et impair a et impair b) ⇒ impair( a·b ).
+
+    a=succ(2i), b=succ(2j) (impair_decompose) ; a·b = succ(2·(a·j+i)) =: succ(2·M),
+    M = a·j+i fini ; deux_k_plus_un_impair(M) ⊢ impair(succ 2M) = impair(a·b)."""
+    va, vb = _t(a), _t(b)
+    hyp = N.assume(et(et(est_fini(va), est_fini(vb)),
+                      et(est_impair_propre(va), est_impair_propre(vb))))
+    fab = conjonction_elim_gauche(hyp)
+    fa = conjonction_elim_gauche(fab)
+    fb = conjonction_elim_droite(fab)
+    imp = conjonction_elim_droite(hyp)
+    impa = conjonction_elim_gauche(imp)
+    impb = conjonction_elim_droite(imp)
+
+    cible = est_impair_propre(produit_cardinal_binaire(va, vb))
+
+    # impair_decompose(a) ⇒ ∃kid (Fini kid et a=succ 2kid) ; idem b. α-renomme kid→iifi/jifi.
+    from bourbaki.logique.tactiques.tactiques_abrege_quantif import alpha_existe
+    deca0 = N.modus_ponens(conjonction_intro(fa, impa), impair_decompose(a))
+    decb0 = N.modus_ponens(conjonction_intro(fb, impb), impair_decompose(b))
+    body_a = et(est_fini(var("kid")), egal(va, successeur(deux_fois(var("kid")))))
+    body_b = et(est_fini(var("kid")), egal(vb, successeur(deux_fois(var("kid")))))
+    deca = N.modus_ponens(deca0, equivalence_avant(alpha_existe("kid", "iifi", body_a)))
+    decb = N.modus_ponens(decb0, equivalence_avant(alpha_existe("kid", "jifi", body_b)))
+
+    vi = var("iifi")
+    vj = var("jifi")
+    corps_i = et(est_fini(vi), egal(va, successeur(deux_fois(vi))))
+    corps_j = et(est_fini(vj), egal(vb, successeur(deux_fois(vj))))
+    hI = N.assume(corps_i)
+    fi = conjonction_elim_gauche(hI)
+    a_eq = conjonction_elim_droite(hI)              # a = succ(2i)
+    hJ = N.assume(corps_j)
+    fj = conjonction_elim_gauche(hJ)
+    b_eq = conjonction_elim_droite(hJ)              # b = succ(2j)
+
+    chain, M = _afi_eq_succ2M(va, vi, vj, fa, fi, fj, a_eq, b_eq)
+    #   chain : a·succ(2j) = succ(2·M)
+
+    # a·b = a·succ(2j)  (b = succ 2j ⇒ Leibniz sur 2e arg du produit)
+    Vab = produit_cardinal_binaire(va, var("wab"))
+    ab_eq = N.modus_ponens(b_eq, congruence_terme(vb, successeur(deux_fois(vj)), Vab, w="wab"))
+    #   ab_eq : a·b = a·succ(2j)
+    ab_eq_succ2M = composer_egalites(ab_eq, chain)   # a·b = succ(2·M)
+
+    # M = a·j + i fini : Fini(a·j) (produit) + Fini i ⇒ Fini(a·j+i)
+    fini_aj = N.modus_ponens(conjonction_intro(fa, fj), _produit_binaire_entier_t(va, vj))
+    fini_M = N.modus_ponens(conjonction_intro(fini_aj, fi), _somme_binaire_entier_t(
+        produit_cardinal_binaire(va, vj), vi))       # Fini(a·j+i) = Fini M
+    # deux_k_plus_un_impair(M) : Fini M ⇒ impair(succ 2M)
+    dki = instancie(N.generalisation("kdki_g", deux_k_plus_un_impair("kdki_g")), M)
+    impair_succ2M = N.modus_ponens(fini_M, dki)      # impair(succ 2M)
+    # transporte succ 2M → a·b  (a·b = succ 2M ⇒ Leibniz)
+    succ2M = successeur(deux_fois(M))
+    ab_term = produit_cardinal_binaire(va, vb)
+    succ2M_eq_ab = N.modus_ponens(ab_eq_succ2M, symetrie(ab_term, succ2M))   # succ 2M = a·b
+    leib = N.modus_ponens(succ2M_eq_ab,
+        N.s6(succ2M, ab_term, "wfi", est_impair_propre(var("wfi"))))   # (succ2M=a·b)⇒(imp(succ2M)⇔imp(a·b))
+    impair_ab = N.modus_ponens(impair_succ2M, equivalence_avant(leib))   # impair(a·b)
+
+    # élimine j puis i
+    imp_j = N.loi_deduction(corps_j, impair_ab)
+    ex_j = existe_elimination(imp_j, "jifi")         # (∃j corps_j) ⇒ impair(a·b)
+    impair_ab_i = N.modus_ponens(decb, ex_j)         # impair(a·b)   [corps_i, ...]
+    imp_i = N.loi_deduction(corps_i, impair_ab_i)
+    ex_i = existe_elimination(imp_i, "iifi")
+    impair_ab_final = N.modus_ponens(deca, ex_i)     # impair(a·b)
+    res = N.loi_deduction(et(et(est_fini(va), est_fini(vb)),
+                             et(est_impair_propre(va), est_impair_propre(vb))),
+                          impair_ab_final)
+    assert res.conclusion == impair_fois_impair_cible(a, b), \
+        f"impair_fois_impair : conclusion inattendue\n{res.conclusion}\n{impair_fois_impair_cible(a,b)}"
+    return res
+
+
 __all__ = [
     "deux_fois", "deux_fois_plus_un", "deux_succ_eq",
     "division_par_deux", "division_par_deux_cible",
     "impair_decompose", "impair_decompose_cible",
     "pair_neq_impair", "pair_neq_impair_cible",
     "deux_k_plus_un_impair", "deux_k_plus_un_impair_cible", "un_impair",
+    "impair_fois_impair", "impair_fois_impair_cible",
 ]
