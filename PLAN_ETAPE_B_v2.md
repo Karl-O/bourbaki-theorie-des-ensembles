@@ -84,7 +84,7 @@ Priorise: perf_risque faible + difficulte facile d abord. [ ] = a faire, [x] = f
 - lemmes: bourbaki.ensembles.ii_6_equivalence.ensembles_quotient_props_graphe:projection_valeur_classe, bourbaki.ensembles.ii_6_equivalence.ensembles_quotient_props_graphe:relation_ssi_classe_egale, bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2:equivalence_transitivite, bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2:equivalence_symetrie
 - fichier: bourbaki/ensembles/ii_6_equivalence/ensembles_projection_c55.py (NOUVEAU fichier ; le dossier ii_6_equivalence a 7 .py + __init__ + __pycache__ = sous la limite de 10)
 
-## [ ] Proposition 4 — inf A ≤ sup A (cas A non vide)  (faible/facile)
+## [x] Proposition 4 — inf A ≤ sup A (cas A non vide)  (faible/facile)
 - secteur: III.1 relations d'ordre (bourb | E.III.1.9, Borne supérieure, borne inférieure — Proposition 4
 - statut: MANQUANT : aucune fonction dans bornes_sup/ ni ordre_treillis/ ne prouve inf A ≤ sup A. Les prédicats borne_inferieure / borne_superieure existent (ensembles_ordre_relation.py), mais le lien inf≤sup (
 - enonce: Soient E un ensemble ordonné de graphe G, A une partie de E admettant à la fois une borne inférieure i = inf A et une borne supérieure s = sup A dans E. Si A ≠ ∅, alors inf A ≤ sup A, i.e. (i,s) ∈ G. Cible close : { transitivite_rel(G), ¬(A=∅) [sous forme (∃z)(z∈A)], borne_inferieure(G,A,i,E), borne
