@@ -11,6 +11,8 @@ et ∃ reste un NŒUD (jamais τ-substitué) → AUCUN gonflement exponentiel.
 """
 from __future__ import annotations
 
+import functools
+
 from bourbaki.assemblage import assemblage as A
 
 
@@ -185,7 +187,14 @@ def _fraiche(eviter: set) -> str:
         k += 1
 
 
-# ── Substitution capture-évitante (T|x) ───────────────────────────────────────
+# ── Substitution capture-évitante (T|x) — MÉMOÏSÉE ────────────────────────────
+# PERF (cf. CLAUDE.md §Performance + échec Lemme 2 III.6) : subst_t/subst_f sont des
+# fonctions PURES DÉTERMINISTES (les fraîches @k sont déterministes) sur des Terme/
+# Formule IMMUABLES HASHABLES → la mémoïsation est sûre (sémantique INCHANGÉE, seule la
+# vitesse change). Sans elle, une récurrence C61 imbriquant des substitutions recalcule
+# en cascade des sous-arbres partagés (mesuré : trois_impair ~551 s ; trois_puiss_impair
+# > 55 min). Les résultats sont des objets immuables partageables (cache => même objet).
+@functools.lru_cache(maxsize=None)
 def subst_t(tval: Terme, x: str, t: Terme) -> Terme:
     if t.tag == "var":
         return tval if t.nom == x else t
@@ -200,6 +209,7 @@ def subst_t(tval: Terme, x: str, t: Terme) -> Terme:
     return Terme("app", nom=t.nom, args=tuple(subst_t(tval, x, a) for a in t.args))
 
 
+@functools.lru_cache(maxsize=None)
 def subst_f(tval: Terme, x: str, f: Formule) -> Formule:
     if f.tag == "exists":
         y, corps = f.lieur, f.sous[0]
