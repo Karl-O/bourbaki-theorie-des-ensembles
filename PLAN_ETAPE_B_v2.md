@@ -210,7 +210,7 @@ Priorise: perf_risque faible + difficulte facile d abord. [ ] = a faire, [x] = f
 - lemmes: bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege:sature, bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege:est_saturee, bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege:est_compatible, bourbaki.ensembles.ii_6_equivalence.ensembles_quotient_produit_restant:saturee_implique_classe_incluse, bourbaki.ensembles.ii_6_equivalence.ensembles_quotient_props_graphe:relation_implique_classe_egale, bourbaki.ensembles.ii_6_equivalence.ensembles_quotient_props_graphe:projection_valeur_classe, bourbaki.ensembles.fonctions.ii_3_2_reciproque.ensembles_reciproque:couple_reciproque
 - fichier: bourbaki/ensembles/ii_6_equivalence/ensembles_sature_partie.py (NOUVEAU ; reste sous 10 entrées/dossier)
 
-## [ ] produit_inclus_reciproque — Cor 3 (réciproque) : ∏X_ι ⊂ ∏Y_ι et X_ι≠∅ ⇒ X_ι ⊂ Y_ι  (moyen/moyen)
+## [x] produit_inclus_reciproque — Cor 3 (réciproque) : ∏X_ι ⊂ ∏Y_ι et X_ι≠∅ ⇒ X_ι ⊂ Y_ι  (moyen/moyen)
 - secteur: II.5 — Produit d'une famille d | E.II.5.4, Corollaire 3 (réciproque de la monotonie du produit)
 - statut: PARTIEL — le SENS DIRECT (Prop.10/Cor.3 : (∀ι)(X_ι⊂Y_ι) ⇒ ∏X⊂∏Y) est FAIT (produit_monotone dans ii_5_6_7_algebre_produit/ensembles_produit_monotone_ii5.py). La RÉCIPROQUE (∏X⊂∏Y et tous X_ι≠∅ ⇒ X_ι⊂Y
 - enonce: Soient (X_ι), (Y_ι) deux familles sur I. Si ∏_{ι∈I}X_ι ⊂ ∏_{ι∈I}Y_ι et si X_ι≠∅ pour tout ι, alors X_ι⊂Y_ι pour tout ι. Forme conditionnelle fidèle (hypothèse = un témoin/élément du produit, exactement Cor.1) : ⊢ ( ∏X ⊂ ∏Y et α∈I et F∈∏X et a∈X_α ) ⇒ ( a ∈ Y_α ) — version pointwise ; plus la général
