@@ -9,7 +9,7 @@ ni plus, ni moins) ET que la conclusion est la cible (anti-tautologie : conclusi
 """
 from bourbaki.logique.i_1_termes_relations.formule import var, et, impl, equiv, pourtout, appartient
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.ensembles.ii_6_equivalence.ensembles_quotient_produit_restant import (
+from bourbaki.ensembles.ii_6_equivalence.ii_6_4_saturees.ensembles_quotient_produit_restant import (
     relation_produit_couples, _relation_induite,
     produit_symetrique, produit_transitive, produit_relation_equivalence,
     induite_transitive, induite_reflexive_dans, induite_relation_equivalence,
