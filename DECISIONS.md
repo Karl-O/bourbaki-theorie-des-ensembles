@@ -32,3 +32,18 @@ Décisions prises sans solliciter l'utilisateur (cf. CLAUDE.md). Une ligne par d
 - **tests/ mirroring — À FAIRE** : `reorg_moves.json` ne couvre que `bourbaki/`. Chaque `tests/<paquet>`
   sera réorganisé en miroir (chaque `test_*.py` dans le sous-dossier de son module). `tests/structures`
   reste à plat (≤10 non encore satisfait côté tests) tant que non mirroré — prochain sous-pas.
+- **Stratégie de vérification adoptée** : la migration ne fait que déplacer des fichiers + réécrire des
+  chemins d'import (code des preuves byte-identique). Empiriquement confirmé : `ordre` 372 tests verts,
+  `structures` 167 verts APRÈS déplacement. Donc **gate par paquet = `pytest --co` (collecte, ~8–30 s)**
+  qui attrape toute casse d'import ; **vérif runtime aux jalons** (run des tests des paquets concernés) ;
+  **suite complète** avant `cardinaux` et en fin d'ÉTAPE A. Baseline d'erreurs tolérée = 1
+  (`familles_algebre`, cf. ANOMALIES).
+
+## 2026-06-23 — Migration : 6/9 paquets faits
+
+Migrés + commités (gate collecte vert, 1 erreur connue tolérée) :
+`structures` (IV), `ordre` (III.1/2), `entiers` (III.4/5/6), `ensembles/fonctions` (II.3),
+`ensembles/familles` (II.4/5), `ensembles` base/relations (II.1/2/3/6).
+**Restent** : `logique` (le plus transverse — 400+ imports `noyau_abrege`/`ensembles_abrege`),
+`cardinaux/arithmetique`, `cardinaux` (140 fichiers + fix du dossier `hessenberg/assemblage_vrai` à 11,
++ tests lourds ~16 min). À traiter avec un run de suite complète.
