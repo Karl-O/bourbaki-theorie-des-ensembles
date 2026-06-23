@@ -186,7 +186,7 @@ Priorise: perf_risque faible + difficulte facile d abord. [ ] = a faire, [x] = f
 - lemmes: bourbaki.ensembles.fonctions.ii_3_2_reciproque.ensembles_reciproque:couple_reciproque, bourbaki.ensembles.fonctions.ii_3_3_composee_graphes.ensembles_composee:couple_composee, bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege:rel_graphe, bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege:est_symetrique, bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege:est_transitive, bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege:est_relation_equivalence, bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2:conjonction_intro, equivalence_avant, equivalence_arriere, instancie (+ noyau_abrege.assume/modus_ponens/loi_deduction/generalisation/s6/s5)
 - fichier: bourbaki/ensembles/ii_6_equivalence/ensembles_proposition1_gamma.py (NOUVEAU ; reste sous 10 entrées/dossier)
 
-## [ ] segment_du_plus_petit_est_vide (S_α = ∅ pour α = min E)  (faible/moyen)
+## [x] segment_du_plus_petit_est_vide (S_α = ∅ pour α = min E)  (faible/moyen)
 - secteur: III.2 ensembles bien ordonnés  | §III.2.1 — « si E est bien ordonné et n'est pas vide, il a un plus petit élément α, et par suite S_α est aussi l'intervalle semi-ouvert [α,α[ » (S_α = ∅)
 - statut: MANQUANT — grep "seg_min_vide / segment_minimum / seg du min" → 0 occurrence. La Prop 1 (prop1_segment_propre, clos) traite le segment propre général mais PAS le cas dégénéré du minimum.
 - enonce: ⊢ { est_bien_ordonne(R,E),  est_plus_petit_element(R,E,α) }  ⊢  seg(R,E,α) = ∅.  Le segment d'extrémité du plus petit élément est vide : aucun u ne peut vérifier (u∈E et R{u,α} et u≠α), car α minore E donne R{α,u}, et avec R{u,α} l'antisymétrie force u=α. Énoncé purement order/ensembliste (extension
