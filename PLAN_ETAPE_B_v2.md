@@ -123,7 +123,7 @@ Priorise: perf_risque faible + difficulte facile d abord. [ ] = a faire, [x] = f
 - lemmes: bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege:est_segment (prédicat, ligne 711), bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2:inclusion_transitive, bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2:instancie / conjonction_intro / conjonction_elim_gauche / conjonction_elim_droite, bourbaki.logique.i_2_criteres_C.noyau.noyau_abrege:assume / loi_deduction / modus_ponens / generalisation, motif _force_premisse de bourbaki/ordre/iii_2_bon_ordre/bon_ordre_segments/ensembles_bon_ordre.py (à recopier en local)
 - fichier: C:/Users/KARL/OneDrive/Bureau/Apprendre/Livre/Bourbakie/Theorie_des_ensembles/V9/bourbaki/ordre/iii_2_bon_ordre/bon_ordre_segments/ensembles_segment_transitif.py (NOUVEAU 4e fichier du dossier ; le do
 
-## [ ] element_hors_de_son_segment + seg_strict_propre (x∉S_x et x<y ⟹ S_x ⊊ S_y)  (faible/facile)
+## [x] element_hors_de_son_segment + seg_strict_propre (x∉S_x et x<y ⟹ S_x ⊊ S_y)  (faible/facile)
 - secteur: III.2 ensembles bien ordonnés  | §III.2.1, Proposition 2 — « x<y entraîne S_x ⊊ S_y » (préliminaire de la bijection croissante x↦S_x)
 - statut: PARTIEL — la monotonie NON STRICTE S_x⊂S_y est faite (seg_strict_monotone, ensembles_segments_construction.py). Le cœur de l'inclusion STRICTE (x∈S_y mais x∉S_x) est MANQUANT : grep "x_not_in_seg / x∉
 - enonce: Deux lemmes : (L-a) ⊢ x∉seg(R,E,x), i.e. ¬( x ∈ S_x )  [INCONDITIONNEL, par l'axiome de segment : u∈S_x ⇔ ((u∈E et R{u,x}) et u≠x), donc x∈S_x forcerait x≠x]. (L-b) ⊢ { est_relation_ordre(R), x∈E, R{x,y}, x≠y } ⊢ ( x ∈ seg(R,E,y)  et  ¬(x ∈ seg(R,E,x)) ) — le témoin x certifie S_x ⊊ S_y (S_x⊂S_y déj
