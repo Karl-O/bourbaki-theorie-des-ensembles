@@ -12,7 +12,10 @@ from ._bijection import (
     W_fonctionnel, W_domaine, W_valeur, W_injective,
     W_image_egale_applications, chi_bijection,
     powerset_equipotent_applications,
-    card_parties_egale_deux_exp, cantor_deux_exp,
+    card_parties_egale_deux_exp,
+)
+from ._cantor import (
+    cantor_face_inf_egal, cantor_face_non_egal, cantor_deux_exp,
 )
 
 __all__ = [
@@ -20,5 +23,6 @@ __all__ = [
     "W_fonctionnel", "W_domaine", "W_valeur", "W_injective",
     "W_image_egale_applications", "chi_bijection",
     "powerset_equipotent_applications",
-    "card_parties_egale_deux_exp", "cantor_deux_exp",
+    "card_parties_egale_deux_exp",
+    "cantor_face_inf_egal", "cantor_face_non_egal", "cantor_deux_exp",
 ]

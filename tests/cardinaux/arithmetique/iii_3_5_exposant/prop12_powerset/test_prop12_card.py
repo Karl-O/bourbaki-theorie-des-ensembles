@@ -4,7 +4,6 @@ Verrouille la bijection caractéristique χ : 𝔓(X) → 𝓕(X;2) (Y ↦ ((χ_
 l'égalité de cardinaux Card(𝔓X) = 2^Card X (Proposition 12), assemblées depuis le
 crux χ∘ρ = id (chi_eq_graphe : χ_{Pre(G)} = G) et ρ∘χ = id (Pre(χ_Y)=Y, round 27).
 """
-import pytest
 from bourbaki.logique.i_1_termes_relations.formule import (var, egal, et, non, ou, impl, equiv,
                                        appartient, inclus, pourtout, existe)
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
@@ -13,7 +12,7 @@ from bourbaki.cardinaux.arithmetique.iii_3_5_exposant.prop12_powerset.prop12_car
 from bourbaki.cardinaux.arithmetique.iii_3_5_exposant.prop12_powerset.ensembles_powerset_exp import deux
 from bourbaki.cardinaux.arithmetique.iii_3_5_exposant.prop12_powerset.ensembles_powerset_deux import preimage_un
 from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import (cardinal, equipotent,
-                               est_bijection_de)
+                               est_bijection_de, inf_egal_card, inf_strict_card)
 from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege import injective_dans
 from bourbaki.cardinaux.arithmetique.iii_3_5_exposant.definition.ensembles_exposant_cardinal import exposant_cardinal_binaire
 
@@ -108,9 +107,43 @@ def test_card_parties_egale_deux_exp():
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
-# BONUS Cantor (REPORTÉ — pont SET→CARDINAL non disponible)
+# THÉORÈME 2 de Cantor au niveau CARDINAL : Card X < 2^Card X  (pont set→cardinal)
 # ═══════════════════════════════════════════════════════════════════════════════
-def test_cantor_deux_exp_reporte():
-    """Cantor restaté 2^Card X > Card X : explicitement REPORTÉ (pont set→cardinal)."""
-    with pytest.raises(NotImplementedError):
-        P.cantor_deux_exp("X")
+def test_cantor_face_inf_egal():
+    """⊢ Card X ≤ 2^Card X, CLOS  (FACE A : chaîne Card X ≤ X ≤ 𝔓X ≤ Card 𝔓X = 2^Card X)."""
+    vX = var("X")
+    t = P.cantor_face_inf_egal("X")
+    attendu = inf_egal_card(cardinal(vX), exposant_cardinal_binaire(deux(), vX))
+    assert t.conclusion == attendu
+    assert t.est_clos
+
+
+def test_cantor_face_non_egal():
+    """⊢ ¬(Card X = 2^Card X), CLOS  (FACE B : ¬Eq(X,𝔓X) + Prop 1 réciproque contraposée)."""
+    vX = var("X")
+    t = P.cantor_face_non_egal("X")
+    attendu = non(egal(cardinal(vX), exposant_cardinal_binaire(deux(), vX)))
+    assert t.conclusion == attendu
+    assert t.est_clos
+
+
+def test_cantor_deux_exp():
+    """⊢ Card X < 2^Card X, CLOS  (THÉORÈME 2 de Cantor au niveau CARDINAL, E.III.3 : 2^a > a).
+
+    Conclusion EXACTE inf_strict_card(Card X, exposant_cardinal_binaire(2, X)) =
+    (Card X ≤ 2^Card X) et (Card X ≠ 2^Card X) ; CLOS (0 hyp résiduelle) ; theorie=22."""
+    vX = var("X")
+    t = P.cantor_deux_exp("X")
+    attendu = inf_strict_card(cardinal(vX), exposant_cardinal_binaire(deux(), vX))
+    assert t.conclusion == attendu
+    assert t.est_clos
+    assert len(E.theorie_ensembles().axiomes) == 22
+
+
+def test_cantor_deux_exp_via_bijection():
+    """La délégation _bijection.cantor_deux_exp → _cantor donne le même Theoreme CLOS."""
+    vX = var("X")
+    t = B.cantor_deux_exp("X")
+    attendu = inf_strict_card(cardinal(vX), exposant_cardinal_binaire(deux(), vX))
+    assert t.conclusion == attendu
+    assert t.est_clos

@@ -326,14 +326,12 @@ def card_parties_egale_deux_exp(x="X"):
 
 
 def cantor_deux_exp(x="X"):
-    """⊢ Card X < 2^Card X.   (THÉORÈME 2 de Cantor restaté, E.III.3.6 : 2^a > a.)
+    """⊢ Card X < 2^Card X.   (THÉORÈME 2 de Cantor restaté, E.III.3 : 2^a > a.)
 
-    cantor_strict ⊢ X < P(X) (= inf_strict_card(X, P(X))).  REPORTÉ tel quel : le
-    pont « X < P(X) (au sens des INJECTIONS de SETS) ⇒ Card X < 2^Card X (au sens
-    de l'ORDRE des CARDINAUX) » exige inf_strict_card(Card X, Card P(X)) — la
-    monotonie de Card pour ≤ et la fidélité ≠ — non encore disponible (voir REPORTE)."""
-    raise NotImplementedError(
-        "Cantor restaté 2^Card X > Card X reporté : cantor_strict donne X<P(X) au "
-        "niveau des SETS (inf_strict_card(X,P(X))) ; le pont vers inf_strict_card("
-        "Card X, 2^Card X) (ordre des CARDINAUX) demande la monotonie de Card pour "
-        "≤ + Card(𝔓X)=2^Card X (card_parties_egale_deux_exp, CLOS).")
+    DÉLÉGUÉ au module `._cantor` (helpers set→cardinal + sous-lemmes FACE A/B) : le
+    pont set→cardinal est ENTIÈREMENT outillé.  FACE A : Card X ≤ X ≤ 𝔓X ≤ Card 𝔓X =
+    2^Card X (chaîne de transitivité + cP12) ; FACE B : ¬Eq(X,𝔓X) (argument
+    diagonal) + Proposition 1 réciproque contraposée + cP12 ⇒ Card X ≠ 2^Card X.
+    Conclusion : inf_strict_card(Card X, 2^Card X), CLOS ; theorie=22."""
+    from ._cantor import cantor_deux_exp as _cantor_deux_exp
+    return _cantor_deux_exp(x)
