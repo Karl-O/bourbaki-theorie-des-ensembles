@@ -1381,23 +1381,23 @@
    },
    {
     "de": "bourbaki/cardinaux/ensembles_hessenberg_stepb.py",
-    "vers": "bourbaki/cardinaux/iii_6_infinis/hessenberg/assemblage_vrai/ensembles_hessenberg_stepb.py"
+    "vers": "bourbaki/cardinaux/iii_6_infinis/hessenberg/step_b_prop5/ensembles_hessenberg_stepb.py"
    },
    {
     "de": "bourbaki/cardinaux/ensembles_hessenberg_stepb2.py",
-    "vers": "bourbaki/cardinaux/iii_6_infinis/hessenberg/assemblage_vrai/ensembles_hessenberg_stepb2.py"
+    "vers": "bourbaki/cardinaux/iii_6_infinis/hessenberg/step_b_prop5/ensembles_hessenberg_stepb2.py"
    },
    {
     "de": "bourbaki/cardinaux/ensembles_hessenberg_step_b_classify.py",
-    "vers": "bourbaki/cardinaux/iii_6_infinis/hessenberg/assemblage_vrai/ensembles_hessenberg_step_b_classify.py"
+    "vers": "bourbaki/cardinaux/iii_6_infinis/hessenberg/step_b_prop5/ensembles_hessenberg_step_b_classify.py"
    },
    {
     "de": "bourbaki/cardinaux/ensembles_hessenberg_p5.py",
-    "vers": "bourbaki/cardinaux/iii_6_infinis/hessenberg/assemblage_vrai/ensembles_hessenberg_p5.py"
+    "vers": "bourbaki/cardinaux/iii_6_infinis/hessenberg/step_b_prop5/ensembles_hessenberg_p5.py"
    },
    {
     "de": "bourbaki/cardinaux/ensembles_hessenberg_p5c.py",
-    "vers": "bourbaki/cardinaux/iii_6_infinis/hessenberg/assemblage_vrai/ensembles_hessenberg_p5c.py"
+    "vers": "bourbaki/cardinaux/iii_6_infinis/hessenberg/step_b_prop5/ensembles_hessenberg_p5c.py"
    },
    {
     "de": "bourbaki/cardinaux/ensembles_hessenberg_vrai.py",
