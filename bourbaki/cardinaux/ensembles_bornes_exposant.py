@@ -43,7 +43,7 @@ from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import (
 
 from bourbaki.cardinaux.ensembles_cardinaux import (
     est_injection_de, inf_egal_card, cardinal)
-from bourbaki.cardinaux.arithmetique.ensembles_exposant_cardinal import (
+from bourbaki.cardinaux.arithmetique.iii_3_5_exposant.definition.ensembles_exposant_cardinal import (
     exposant_cardinal_binaire)
 
 
@@ -316,7 +316,7 @@ def base_inf_egal_exposant(a="a", b="b"):
     a^b = Card(𝓕(b;a)).  La constante A↪𝓕(B;A) donne a≤𝓕(b;a) (support_base_exposant,
     sous b≠0=¬(b=∅)) ; le PONT inf_egal_transporte_cardinal transporte au niveau des
     cardinaux : Card a ≤ Card 𝓕(b;a) = a^b.  INCONDITIONNEL hormis la garde b≠0."""
-    from bourbaki.cardinaux.arithmetique.ensembles_arith_cardinale_props_exposant_monotone import (
+    from bourbaki.cardinaux.arithmetique.iii_3_2_monotonie.ensembles_arith_cardinale_props_exposant_monotone import (
         inf_egal_transporte_cardinal)
     va, vb = _t(a), _t(b)
     Fba = E.applications(vb, va)                              # 𝓕(b;a)
@@ -378,7 +378,7 @@ def un_inf_egal_exposant(a="a", b="b"):
     a^b = Card(𝓕(b;a)).  Pour a≠0, 𝓕(b;a)≠∅ (la constante const_x, x∈a, l'habite),
     donc 1={∅}≤𝓕(b;a) ; le PONT inf_egal_transporte_cardinal donne Card{∅}≤Card 𝓕(b;a)
     = 1 ≤ a^b (Card{∅}=1).  La condition a≠0 est HONNÊTE (Bourbaki : a^b=0 ssi a=0,b≠0)."""
-    from bourbaki.cardinaux.arithmetique.ensembles_arith_cardinale_props_exposant_monotone import (
+    from bourbaki.cardinaux.arithmetique.iii_3_2_monotonie.ensembles_arith_cardinale_props_exposant_monotone import (
         inf_egal_transporte_cardinal)
     va, vb = _t(a), _t(b)
     Fba = E.applications(vb, va)

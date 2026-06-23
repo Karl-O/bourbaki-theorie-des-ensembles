@@ -1,5 +1,5 @@
 """Tests — gr(f)=pr₁(pr₁ f), extraction du graphe d'une application-triple (§II.3.1)."""
-from bourbaki.cardinaux.arithmetique.ensembles_graphe_de import graphe_de, graphe_de_triple
+from bourbaki.cardinaux.arithmetique.fondations.ensembles_graphe_de import graphe_de, graphe_de_triple
 from bourbaki.logique.i_1_termes_relations.formule import var, egal
 import bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege as E
 

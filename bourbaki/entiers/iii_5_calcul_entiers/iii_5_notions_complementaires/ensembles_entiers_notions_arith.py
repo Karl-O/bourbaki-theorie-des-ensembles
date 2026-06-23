@@ -52,7 +52,7 @@ from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import (cardinal, est_cardinal,
                                                     inf_egal_card, inf_strict_card)
-from bourbaki.cardinaux.arithmetique.ensembles_exposant_cardinal import (
+from bourbaki.cardinaux.arithmetique.iii_3_5_exposant.definition.ensembles_exposant_cardinal import (
     exposant_cardinal_binaire)
 # NE PAS dupliquer : on RÉ-IMPORTE les notions DÉJÀ posées dans ensembles_entiers.
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import (divise, quotient_division,

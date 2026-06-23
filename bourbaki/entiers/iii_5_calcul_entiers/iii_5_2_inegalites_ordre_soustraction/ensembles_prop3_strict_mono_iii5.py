@@ -57,13 +57,13 @@ from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import (
     somme_disjointe, somme_cardinale_binaire,
 )
-from bourbaki.cardinaux.arithmetique.ensembles_arith_cardinale import (
+from bourbaki.cardinaux.arithmetique.iii_3_3_produit.ensembles_arith_cardinale import (
     produit_cardinal_binaire,
 )
-from bourbaki.cardinaux.arithmetique.ensembles_arith_somme import (
+from bourbaki.cardinaux.arithmetique.iii_3_3_somme.ensembles_arith_somme import (
     somme_cardinale_commutative, somme_cardinale_associative,
 )
-from bourbaki.cardinaux.arithmetique.ensembles_distributivite_cardinale import (
+from bourbaki.cardinaux.arithmetique.iii_3_3_produit.ensembles_distributivite_cardinale import (
     distributivite_cardinale,
 )
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import est_entier, ZERO
@@ -478,7 +478,7 @@ def _distrib_droite(a, d, c, ca, cd, cc):
                 = a·c + d·c            [commutativité produit × 2, commutativité somme]
     On expose plutôt la chaîne au niveau des CARDINAUX, pont sdc."""
     va, vd, vc = _t(a), _t(d), _t(c)
-    from bourbaki.cardinaux.arithmetique.ensembles_arith_cardinale import (
+    from bourbaki.cardinaux.arithmetique.iii_3_3_produit.ensembles_arith_cardinale import (
         produit_cardinal_commutatif,
     )
 

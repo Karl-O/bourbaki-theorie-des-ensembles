@@ -126,7 +126,7 @@ def _est_cardinal_de_interv(a, c):
 
 def _transporte_card(u, v):
     """⊢ ( u ≤ v ) ⇒ ( Card u ≤ Card v )  aux TERMES u,v  (inf_egal_transporte_cardinal)."""
-    from bourbaki.cardinaux.arithmetique.ensembles_arith_cardinale_props_exposant_monotone import (
+    from bourbaki.cardinaux.arithmetique.iii_3_2_monotonie.ensembles_arith_cardinale_props_exposant_monotone import (
         inf_egal_transporte_cardinal,
     )
     gen = N.generalisation("Xtc", N.generalisation("Ytc",

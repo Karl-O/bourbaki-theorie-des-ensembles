@@ -57,14 +57,14 @@ from bourbaki.entiers.iii_6_infinis.iii_6_3_infinis_denombrables.ensembles_infin
 from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import (
     somme_disjointe, somme_cardinale_binaire,
 )
-from bourbaki.cardinaux.arithmetique.ensembles_arith_cardinale import (
+from bourbaki.cardinaux.arithmetique.iii_3_3_produit.ensembles_arith_cardinale import (
     produit_cardinal_binaire,
 )
-from bourbaki.cardinaux.arithmetique.ensembles_distributivite_cardinale import (
+from bourbaki.cardinaux.arithmetique.iii_3_3_produit.ensembles_distributivite_cardinale import (
     distributivite_cardinale,
 )
-from bourbaki.cardinaux.arithmetique.ensembles_produit_petits import produit_cardinal_un
-from bourbaki.cardinaux.arithmetique.ensembles_somme_equipotence import (
+from bourbaki.cardinaux.arithmetique.iii_3_3_produit.ensembles_produit_petits import produit_cardinal_un
+from bourbaki.cardinaux.arithmetique.iii_3_3_somme.ensembles_somme_equipotence import (
     somme_cardinale_bien_definie,
 )
 from bourbaki.entiers.iii_5_calcul_entiers.iii_5_1_somme_produit_entiers.ensembles_combinatoire_iii5 import _sdc
@@ -163,7 +163,7 @@ def _card_troiss_egale_trois():
     3 = Card(2⊔{∅}) (TROIS = successeur(2)).  Bien-définition à (A={∅}⊔{∅},B={∅},
     A₁=2,B₁={∅}) sous Eq({∅}⊔{∅},2) (de Card({∅}⊔{∅})=2 + Eq(·,Card·)) et Eq({∅},{∅})
     donne Card(({∅}⊔{∅})⊔{∅}) = Card(2⊔{∅}) = 3 ; commutativité ⇒ Card({∅}⊔({∅}⊔{∅}))."""
-    from bourbaki.cardinaux.arithmetique.ensembles_arith_somme import (
+    from bourbaki.cardinaux.arithmetique.iii_3_3_somme.ensembles_arith_somme import (
         somme_cardinale_commutative,
     )
     # Eq(DEUXS, 2)  :  Eq(DEUXS, Card DEUXS) puis réécriture Card DEUXS → 2

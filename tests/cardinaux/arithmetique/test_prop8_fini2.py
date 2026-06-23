@@ -5,12 +5,12 @@ CONDITIONNELLE (ht_glob_conditionnel), SUFFISANTE pour le CAS 2 (qui ne consomme
 que sous bij(h) et h(*)∈B×{0}).  On certifie : HT conditionnelle close, H2 prouvé,
 Prop 8 inconditionnelle close.
 """
-from bourbaki.cardinaux.arithmetique.ensembles_transposition._ht_glob import (
+from bourbaki.cardinaux.arithmetique.iii_3_4_prop8_successeur.transposition._ht_glob import (
     ht_de_copie_gauche, ht_glob_conditionnel)
-from bourbaki.cardinaux.arithmetique.ensembles_prop8_fini2 import (
+from bourbaki.cardinaux.arithmetique.iii_3_4_prop8_successeur.ensembles_prop8_fini2 import (
     cas2_h2, prop8_successeur_injectif)
-from bourbaki.cardinaux.arithmetique.ensembles_prop8_assemblage import cas2_hypothese
-from bourbaki.cardinaux.arithmetique.ensembles_prop8_transposition import (
+from bourbaki.cardinaux.arithmetique.iii_3_4_prop8_successeur.ensembles_prop8_assemblage import cas2_hypothese
+from bourbaki.cardinaux.arithmetique.iii_3_4_prop8_successeur.ensembles_prop8_transposition import (
     transposition_hypothese)
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import successeur
 from bourbaki.cardinaux.ensembles_cardinaux import cardinal

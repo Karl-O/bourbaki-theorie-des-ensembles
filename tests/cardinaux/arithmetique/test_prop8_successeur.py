@@ -15,7 +15,7 @@ from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import cardinal, equipotent
 from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import somme_disjointe
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers import ensembles_entiers as Ent
-from bourbaki.cardinaux.arithmetique import ensembles_prop8_successeur as P8
+from bourbaki.cardinaux.arithmetique.iii_3_4_prop8_successeur import ensembles_prop8_successeur as P8
 
 
 _SING = E.singleton(E.VIDE)

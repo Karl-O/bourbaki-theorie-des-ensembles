@@ -56,7 +56,7 @@ from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recolle
 from bourbaki.entiers.iii_5_calcul_entiers.iii_5_2_inegalites_ordre_soustraction.ensembles_soustraction_iii5 import (
     existe_complement_somme, diff_somme,
 )
-from bourbaki.cardinaux.arithmetique.ensembles_somme_equipotence import (
+from bourbaki.cardinaux.arithmetique.iii_3_3_somme.ensembles_somme_equipotence import (
     somme_cardinale_bien_definie,
 )
 from bourbaki.cardinaux.ensembles_cardinaux_theoremes import equipotent_son_cardinal

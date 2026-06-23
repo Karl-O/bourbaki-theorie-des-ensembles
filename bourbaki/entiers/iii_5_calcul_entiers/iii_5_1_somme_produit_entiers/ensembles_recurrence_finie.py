@@ -61,7 +61,7 @@ from bourbaki.entiers.iii_4_entiers_finis.iii_4_recurrence_c61_existence_n.ensem
     predecesseur_fini_universel_preuve, singleton_inclus,
 )
 from bourbaki.entiers.iii_6_infinis.iii_6_1_n_objet_existence.ensembles_aleph0 import card_egal_succ_card_diff
-from bourbaki.cardinaux.arithmetique.ensembles_prop8_fini2 import (
+from bourbaki.cardinaux.arithmetique.iii_3_4_prop8_successeur.ensembles_prop8_fini2 import (
     prop8_successeur_injectif,
 )
 from bourbaki.cardinaux.ensembles_cardinaux_props_restantes_prop7 import (

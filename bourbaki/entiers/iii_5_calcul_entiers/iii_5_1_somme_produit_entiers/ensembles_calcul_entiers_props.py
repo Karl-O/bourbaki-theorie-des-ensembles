@@ -73,13 +73,13 @@ from bourbaki.cardinaux.ensembles_cardinaux_ordre import (
     equipotence_implique_inf_egal,
 )
 from bourbaki.cardinaux.ensembles_bijection import equipotence_symetrique
-from bourbaki.cardinaux.arithmetique.ensembles_arith_cardinale import (
+from bourbaki.cardinaux.arithmetique.iii_3_3_produit.ensembles_arith_cardinale import (
     produit_cardinal_binaire,
 )
 from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import (
     somme_disjointe, somme_cardinale_binaire,
 )
-from bourbaki.cardinaux.arithmetique.ensembles_somme_monotone import (
+from bourbaki.cardinaux.arithmetique.iii_3_2_monotonie.ensembles_somme_monotone import (
     inf_egal_somme_invariant,
 )
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import est_fini

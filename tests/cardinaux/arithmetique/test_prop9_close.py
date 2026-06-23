@@ -15,8 +15,8 @@ from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import (
     inf_egal_card, est_injection_de, equipotent, cardinal)
 from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import somme_disjointe
-from bourbaki.cardinaux.arithmetique.ensembles_prop9_exp_somme import cible_prop9_exp_somme
-import bourbaki.cardinaux.arithmetique.ensembles_prop9_close as P
+from bourbaki.cardinaux.arithmetique.iii_3_5_exposant.prop9_exp_somme.ensembles_prop9_exp_somme import cible_prop9_exp_somme
+import bourbaki.cardinaux.arithmetique.iii_3_5_exposant.prop9_exp_somme.ensembles_prop9_close as P
 
 
 # ── PALIER restrictions : fonctionnelle / domaine (C54) ───────────────────────

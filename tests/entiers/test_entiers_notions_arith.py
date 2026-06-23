@@ -11,7 +11,7 @@ binaire et/ou la récurrence (NON disponibles) → REPORTÉ (cf. docstrings du m
 from bourbaki.logique.i_1_termes_relations.formule import var, egal, impl, libres_f
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers import ensembles_entiers as Ent
-from bourbaki.cardinaux.arithmetique.ensembles_exposant_cardinal import (
+from bourbaki.cardinaux.arithmetique.iii_3_5_exposant.definition.ensembles_exposant_cardinal import (
     exposant_cardinal_binaire)
 from bourbaki.entiers.iii_5_calcul_entiers.iii_5_notions_complementaires import ensembles_entiers_notions_arith as A
 

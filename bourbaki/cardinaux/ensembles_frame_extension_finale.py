@@ -53,7 +53,7 @@ from bourbaki.cardinaux.ensembles_cardinaux_theoremes import (
 from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import (
     somme_disjointe, somme_cardinale_binaire,
 )
-from bourbaki.cardinaux.arithmetique.ensembles_arith_cardinale import (
+from bourbaki.cardinaux.arithmetique.iii_3_3_produit.ensembles_arith_cardinale import (
     produit_cardinal_binaire, produit_cardinal_bien_defini,
 )
 from bourbaki.cardinaux.ensembles_prop13_complement import (

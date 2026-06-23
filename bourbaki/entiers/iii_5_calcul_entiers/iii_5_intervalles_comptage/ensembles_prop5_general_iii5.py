@@ -49,7 +49,7 @@ from bourbaki.entiers.iii_5_calcul_entiers.iii_5_2_inegalites_ordre_soustraction
     diff_somme, soustraction_caracterisation,
 )
 from bourbaki.entiers.iii_5_calcul_entiers.iii_5_intervalles_comptage.ensembles_prop5_prop4_iii5 import prop5_intervalle_zero
-from bourbaki.cardinaux.arithmetique.ensembles_arith_cardinale import _prop1_direct_t
+from bourbaki.cardinaux.arithmetique.iii_3_3_produit.ensembles_arith_cardinale import _prop1_direct_t
 
 
 def _t(t):

@@ -6,7 +6,7 @@
 from bourbaki.logique.i_1_termes_relations.formule import var, egal, et, impl, subst_t
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import cardinal, est_bijection_de, equipotent
-from bourbaki.cardinaux.arithmetique import ensembles_arith_cardinale as A
+from bourbaki.cardinaux.arithmetique.iii_3_3_produit import ensembles_arith_cardinale as A
 
 
 def test_produit_cardinal_binaire_def():

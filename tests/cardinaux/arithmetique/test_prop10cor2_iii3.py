@@ -2,7 +2,7 @@
 from bourbaki.logique.i_1_termes_relations.formule import impl, egal
 from bourbaki.cardinaux.ensembles_cardinaux import cardinal, equipotent
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.cardinaux.arithmetique.ensembles_prop10cor2_iii3 import (
+from bourbaki.cardinaux.arithmetique.iii_3_5_exposant.prop10_currying.ensembles_prop10cor2_iii3 import (
     membre_source, membre_but, source, but,
     eq_source_son_cardinal, eq_but_son_cardinal,
     cor2_via_eq,

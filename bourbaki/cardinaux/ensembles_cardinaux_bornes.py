@@ -48,7 +48,7 @@ from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import existe_elim
 from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import egalite_par_extension
 from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import couple_egal_implique_composantes
 from bourbaki.cardinaux.ensembles_cardinaux import (est_injection_de, inf_egal_card, cardinal)
-from bourbaki.cardinaux.arithmetique.ensembles_exposant_cardinal import (
+from bourbaki.cardinaux.arithmetique.iii_3_5_exposant.definition.ensembles_exposant_cardinal import (
     vide_est_fonctionnel, dom_vide_egale_vide, vide_inclus)
 from bourbaki.cardinaux.ensembles_vide_singleton import image_sur_vide
 from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import (somme_disjointe, ZERO,

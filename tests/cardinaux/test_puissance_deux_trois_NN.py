@@ -1,7 +1,7 @@
 """Tests — 2^n et 3^n sont des entiers (prérequis Lemme 2 §III.6)."""
 from bourbaki.logique.i_1_termes_relations.formule import var, impl
 from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege import theorie_ensembles
-from bourbaki.cardinaux.arithmetique.ensembles_exposant_cardinal import (
+from bourbaki.cardinaux.arithmetique.iii_3_5_exposant.definition.ensembles_exposant_cardinal import (
     exposant_cardinal_binaire,
 )
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import est_fini, DEUX, TROIS

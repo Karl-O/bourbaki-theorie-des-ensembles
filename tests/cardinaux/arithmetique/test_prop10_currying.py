@@ -12,7 +12,7 @@ from bourbaki.logique.i_1_termes_relations.formule import var, egal, et, apparti
 from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de, equipotent, cardinal
-from bourbaki.cardinaux.arithmetique.ensembles_prop10_currying import (
+from bourbaki.cardinaux.arithmetique.iii_3_5_exposant.prop10_currying.ensembles_prop10_currying import (
     espace_BA, domaine_lambda, codomaine_lambda, cible_prop10,
     membership_BCA, membership_BA, membership_C_BA, exposant_BA,
     tranche, slice_appli, curry, lambda_val, W,

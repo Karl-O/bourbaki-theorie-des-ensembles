@@ -444,7 +444,7 @@ def retrait_un_point_depuis_general(b="b", c="c", q="q"):
       • d'où Eq((c+1)∖{q}, (C⊔{∅})∖{*}) sous la seule hyp q∈c+1.
     Généralisation en q ⇒ HD.  Aucune hypothèse résiduelle hors GEN."""
     from bourbaki.entiers.iii_4_entiers_finis.iii_4_2_pigeonhole_surgery.ensembles_retrait_point import _S, _STAR, eq_succ_ensemble
-    from bourbaki.cardinaux.arithmetique.ensembles_prop8_plus_point import marqueur_dans_somme
+    from bourbaki.cardinaux.arithmetique.iii_3_4_prop8_successeur.ensembles_prop8_plus_point import marqueur_dans_somme
     vc, vq = _t(c), _t(q)
     succ_c = _succ(c)                                        # c+1 = Card(C⊔{∅})
     S = _S(c)                                                # C⊔{∅}

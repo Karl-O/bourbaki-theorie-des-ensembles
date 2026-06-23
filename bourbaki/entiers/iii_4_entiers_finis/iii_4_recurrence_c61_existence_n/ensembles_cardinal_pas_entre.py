@@ -75,7 +75,7 @@ from bourbaki.cardinaux.ensembles_cardinaux import (
     est_cardinal, cardinal, inf_egal_card, est_injection_de, est_bijection_de,
     equipotent,
 )
-from bourbaki.cardinaux.arithmetique.ensembles_arith_cardinale import _prop1_direct_t
+from bourbaki.cardinaux.arithmetique.iii_3_3_produit.ensembles_arith_cardinale import _prop1_direct_t
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import successeur
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_fini_successeur import (
     successeur_est_un_cardinal, cardinal_de_cardinal,

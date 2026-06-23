@@ -109,7 +109,7 @@ def binders_arithmetique_cardinale():
     (qui doit employer successeur et produit) heurte le gluing."""
     from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import successeur
     from bourbaki.cardinaux.ensembles_cardinaux import cardinal
-    from bourbaki.cardinaux.arithmetique.ensembles_arith_cardinale import (
+    from bourbaki.cardinaux.arithmetique.iii_3_3_produit.ensembles_arith_cardinale import (
         produit_cardinal_binaire,
     )
     out = {}

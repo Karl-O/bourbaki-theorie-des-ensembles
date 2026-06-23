@@ -48,7 +48,7 @@ from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.cardinaux.ensembles_cardinaux import cardinal
 from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import (
     somme_disjointe, somme_cardinale_binaire)
-from bourbaki.cardinaux.arithmetique.ensembles_arith_somme import somme_disjointe_cardinal
+from bourbaki.cardinaux.arithmetique.iii_3_3_somme.ensembles_arith_somme import somme_disjointe_cardinal
 from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import instancie
 
 

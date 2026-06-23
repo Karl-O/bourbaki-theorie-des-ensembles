@@ -9,7 +9,7 @@ from bourbaki.logique.i_1_termes_relations.formule import var, egal, et, impl, s
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import cardinal, est_bijection_de, equipotent
 from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import somme_disjointe, somme_cardinale_binaire, ZERO
-from bourbaki.cardinaux.arithmetique import ensembles_arith_somme as S
+from bourbaki.cardinaux.arithmetique.iii_3_3_somme import ensembles_arith_somme as S
 
 
 def test_somme_cardinale_binaire_def():

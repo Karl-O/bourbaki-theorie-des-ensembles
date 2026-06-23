@@ -10,8 +10,8 @@ from bourbaki.logique.i_1_termes_relations.formule import var, egal, et, inclus,
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import inf_egal_card, cardinal
 from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import somme_disjointe
-from bourbaki.cardinaux.arithmetique import ensembles_somme_monotone as M
-from bourbaki.cardinaux.arithmetique import ensembles_somme_equipotence as S
+from bourbaki.cardinaux.arithmetique.iii_3_2_monotonie import ensembles_somme_monotone as M
+from bourbaki.cardinaux.arithmetique.iii_3_3_somme import ensembles_somme_equipotence as S
 
 
 def _K():

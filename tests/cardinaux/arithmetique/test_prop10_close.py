@@ -27,7 +27,7 @@ surjectivité à deux niveaux (back-and-forth d'extensionnalité fonctionnelle).
 """
 from bourbaki.logique.i_1_termes_relations.formule import var, egal, impl, appartient, inclus
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.cardinaux.arithmetique import ensembles_prop10_close as P
+from bourbaki.cardinaux.arithmetique.iii_3_5_exposant.prop10_currying import ensembles_prop10_close as P
 
 
 def _ctx(f="f", c="c", a="A", b="B", cc="C"):

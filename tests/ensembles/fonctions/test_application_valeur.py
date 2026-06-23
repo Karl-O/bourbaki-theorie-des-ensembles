@@ -13,7 +13,7 @@ conditionnelles : .hypotheses non vide, donc PAS .est_clos).
 """
 from bourbaki.logique.i_1_termes_relations.formule import var, egal, et, impl, appartient, pourtout
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.cardinaux.arithmetique.ensembles_graphe_de import graphe_de
+from bourbaki.cardinaux.arithmetique.fondations.ensembles_graphe_de import graphe_de
 from bourbaki.ensembles.fonctions.hors_ii_3.ii_5_produit_famille import ensembles_application_valeur as M
 
 

@@ -311,7 +311,7 @@ def card_somme_zero_un():
     Eq(∅⊔{∅}, {∅}) (eq_somme_zero_un) ; la Proposition 1 (sens direct, version TERME
     _prop1_direct_t) conclut Card(∅⊔{∅}) = Card({∅})."""
     from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import somme_disjointe
-    from bourbaki.cardinaux.arithmetique.ensembles_arith_cardinale import _prop1_direct_t
+    from bourbaki.cardinaux.arithmetique.iii_3_3_produit.ensembles_arith_cardinale import _prop1_direct_t
     vide = E.VIDE
     sing = E.singleton(vide)                 # {∅}
     AB = somme_disjointe(vide, sing)         # ∅ ⊔ {∅}

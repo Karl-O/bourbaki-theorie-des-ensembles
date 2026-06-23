@@ -49,10 +49,10 @@ from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import (
 )
 
 # ── briques CLOSES réutilisées ──────────────────────────────────────────────────
-from bourbaki.cardinaux.arithmetique.ensembles_arith_somme import (
+from bourbaki.cardinaux.arithmetique.iii_3_3_somme.ensembles_arith_somme import (
     somme_disjointe_cardinal, somme_cardinale_associative,
 )
-from bourbaki.cardinaux.arithmetique.ensembles_prop8_successeur import (
+from bourbaki.cardinaux.arithmetique.iii_3_4_prop8_successeur.ensembles_prop8_successeur import (
     successeur_egale_card_somme,
 )
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_fini_successeur import (
@@ -187,7 +187,7 @@ def somme_zero_neutre_droite(a="Asz"):
     a+0 = Card(a⊔∅)  [sdc(a,∅,a,Card∅) ; Card a=a, Card∅=Card∅, 0=Card∅ DÉF]
         = Card(∅⊔a)  [commutativité]
         = Card a = a [zéro neutre + Card a=a]."""
-    from bourbaki.cardinaux.arithmetique.ensembles_arith_somme import (
+    from bourbaki.cardinaux.arithmetique.iii_3_3_somme.ensembles_arith_somme import (
         somme_cardinale_commutative, somme_cardinale_zero_neutre,
     )
     va = _t(a)

@@ -92,10 +92,10 @@ from bourbaki.entiers.iii_6_infinis.iii_6_1_n_objet_existence.ensembles_ensemble
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_recurrence_c61_existence_n.ensembles_predecesseur_prop2 import (
     eq_retire_ajoute, _eq_sym_t, _eq_son_cardinal, _eq_somme_invariant_t,
 )
-from bourbaki.cardinaux.arithmetique.ensembles_prop8_successeur import (
+from bourbaki.cardinaux.arithmetique.iii_3_4_prop8_successeur.ensembles_prop8_successeur import (
     successeur_egale_card_somme,
 )
-from bourbaki.cardinaux.arithmetique.ensembles_arith_cardinale import _prop1_direct_t
+from bourbaki.cardinaux.arithmetique.iii_3_3_produit.ensembles_arith_cardinale import _prop1_direct_t
 from bourbaki.cardinaux.ensembles_equipotence import equipotence_reflexive
 from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import (
     somme_disjointe, injection_droite_dans_somme, _dans_singleton, UN as _UN_MARQUEUR,
@@ -390,7 +390,7 @@ def _valeur_s_reduit(uname):
 @lru_cache(maxsize=None)
 def _prop8_general():
     """⊢ (∀A)(∀B)((succ A = succ B) ⇒ (Card A = Card B))  [PROP 8 généralisée, MÉMOÏSÉE]."""
-    from bourbaki.cardinaux.arithmetique.ensembles_prop8_fini2 import prop8_successeur_injectif
+    from bourbaki.cardinaux.arithmetique.iii_3_4_prop8_successeur.ensembles_prop8_fini2 import prop8_successeur_injectif
     return N.generalisation("A", N.generalisation("B", prop8_successeur_injectif()))
 
 

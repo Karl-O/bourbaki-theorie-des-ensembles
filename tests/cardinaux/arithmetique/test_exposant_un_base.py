@@ -14,7 +14,7 @@ PALIERS :
 from bourbaki.logique.i_1_termes_relations.formule import var, egal, et, impl, equiv, appartient, existe, inclus
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import cardinal, equipotent
-from bourbaki.cardinaux.arithmetique import ensembles_exposant_un_base as M
+from bourbaki.cardinaux.arithmetique.iii_3_5_exposant.definition import ensembles_exposant_un_base as M
 
 
 def _one():

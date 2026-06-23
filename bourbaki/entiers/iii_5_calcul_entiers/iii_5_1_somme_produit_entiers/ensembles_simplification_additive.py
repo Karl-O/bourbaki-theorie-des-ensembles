@@ -55,10 +55,10 @@ from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import (
 
 # ── briques CLOSES réutilisées ────────────────────────────────────────────────
 from bourbaki.entiers.iii_5_calcul_entiers.iii_5_1_somme_produit_entiers.ensembles_combinatoire_iii5 import somme_succ_distribue
-from bourbaki.cardinaux.arithmetique.ensembles_arith_somme import (
+from bourbaki.cardinaux.arithmetique.iii_3_3_somme.ensembles_arith_somme import (
     somme_cardinale_commutative,
 )
-from bourbaki.cardinaux.arithmetique.ensembles_prop8_fini2 import (
+from bourbaki.cardinaux.arithmetique.iii_3_4_prop8_successeur.ensembles_prop8_fini2 import (
     prop8_successeur_injectif,
 )
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_fini_successeur import cardinal_de_cardinal
@@ -207,7 +207,7 @@ def _zero_plus(vc, card_c):
     """{ est_cardinal c } ⊢ somme_cardinale_binaire(0, c) = c.   (0+c = c.)
 
     0+c = c+0 [commute] ; c+0 = c [somme_cardinale_zero_neutre symétrisé : a+0=a]."""
-    from bourbaki.cardinaux.arithmetique.ensembles_arith_somme import (
+    from bourbaki.cardinaux.arithmetique.iii_3_3_somme.ensembles_arith_somme import (
         somme_cardinale_zero_neutre,
     )
     from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import somme_disjointe

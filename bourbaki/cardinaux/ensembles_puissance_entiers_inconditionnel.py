@@ -36,8 +36,8 @@ from bourbaki.cardinaux.ensembles_cardinaux import cardinal
 from bourbaki.cardinaux.ensembles_cardinaux_theoremes import equipotent_son_cardinal
 from bourbaki.cardinaux.ensembles_bijection import equipotence_symetrique
 from bourbaki.cardinaux.ensembles_eq_exposant_invariant import eq_exposant_invariant
-from bourbaki.cardinaux.arithmetique.ensembles_arith_cardinale import _prop1_direct_t
-from bourbaki.cardinaux.arithmetique.ensembles_exposant_cardinal import (
+from bourbaki.cardinaux.arithmetique.iii_3_3_produit.ensembles_arith_cardinale import _prop1_direct_t
+from bourbaki.cardinaux.arithmetique.iii_3_5_exposant.definition.ensembles_exposant_cardinal import (
     exposant_cardinal_binaire,
 )
 from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import somme_disjointe

@@ -8,7 +8,7 @@ La bijection somme K : A⊔B → A₁⊔B₁ agit selon le marqueur :
 domaine, valeur sur chaque copie (puis injectif/image/assemblage si atteints).
 """
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.cardinaux.arithmetique import ensembles_somme_equipotence as S
+from bourbaki.cardinaux.arithmetique.iii_3_3_somme import ensembles_somme_equipotence as S
 from bourbaki.logique.i_1_termes_relations.formule import var, egal, appartient, subst_t
 
 

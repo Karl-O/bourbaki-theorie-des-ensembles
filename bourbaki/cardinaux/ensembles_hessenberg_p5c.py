@@ -231,7 +231,7 @@ def negation_strict_sous_maximal(E_set="E", phi0="phi0", S="S0", U="Ucadre"):
         existe_sous_ensemble_cardinal_transporte,
     )
     from bourbaki.entiers.iii_6_infinis.iii_6_3_infinis_denombrables.ensembles_infinis import est_infini_ensemble, est_infini
-    from bourbaki.cardinaux.arithmetique.ensembles_arith_cardinale import (
+    from bourbaki.cardinaux.arithmetique.iii_3_3_produit.ensembles_arith_cardinale import (
         produit_cardinal_binaire,
     )
 
@@ -763,7 +763,7 @@ def hessenberg_a_carre_egal_a_REEL(E_set="E"):
             f"derive : conclusion inattendue\n{haa.conclusion}"
 
         # ── DÉCHARGE des résidus mentionnant Sn/phin (sinon ∃-élim de Smx échoue) ──
-        from bourbaki.cardinaux.arithmetique.ensembles_arith_cardinale import (
+        from bourbaki.cardinaux.arithmetique.iii_3_3_produit.ensembles_arith_cardinale import (
             produit_cardinal_binaire, produit_cardinal_bien_defini,
         )
         from bourbaki.entiers.iii_6_infinis.iii_6_3_infinis_denombrables.ensembles_infinis import est_infini_ensemble

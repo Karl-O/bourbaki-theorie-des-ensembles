@@ -74,11 +74,11 @@ from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.e
 from bourbaki.cardinaux.ensembles_cardinaux_bornes import cardinal_inf_egal_successeur
 from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_vide import non_vide_ssi_element
 from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import singleton_membre
-from bourbaki.cardinaux.arithmetique.ensembles_prop8_successeur import (
+from bourbaki.cardinaux.arithmetique.iii_3_4_prop8_successeur.ensembles_prop8_successeur import (
     successeur_egale_card_somme,
 )
-from bourbaki.cardinaux.arithmetique.ensembles_somme_equipotence import eq_somme_invariant
-from bourbaki.cardinaux.arithmetique.ensembles_arith_cardinale import _prop1_direct_t
+from bourbaki.cardinaux.arithmetique.iii_3_3_somme.ensembles_somme_equipotence import eq_somme_invariant
+from bourbaki.cardinaux.arithmetique.iii_3_3_produit.ensembles_arith_cardinale import _prop1_direct_t
 from bourbaki.cardinaux.ensembles_equipotence import equipotence_reflexive
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_zero_plus_un import eq_singletons
 from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import somme_disjointe
@@ -115,13 +115,13 @@ def _refute_self(thm_P_imp_notP):
 
 def _eq_sym_t(tx, ty):
     """⊢ Eq(X, Y) ⇒ Eq(Y, X)  pour des TERMES X, Y."""
-    from bourbaki.cardinaux.arithmetique.ensembles_copie_marquee import _eq_sym_t as _s
+    from bourbaki.cardinaux.arithmetique.iii_3_4_prop8_successeur.ensembles_copie_marquee import _eq_sym_t as _s
     return _s(_t(tx), _t(ty))
 
 
 def _eq_trans_t(tx, ty, tz):
     """⊢ (Eq(X,Y) et Eq(Y,Z)) ⇒ Eq(X,Z)  pour des TERMES X, Y, Z."""
-    from bourbaki.cardinaux.arithmetique.ensembles_copie_marquee import _eq_trans_t as _tr
+    from bourbaki.cardinaux.arithmetique.iii_3_4_prop8_successeur.ensembles_copie_marquee import _eq_trans_t as _tr
     return _tr(_t(tx), _t(ty), _t(tz))
 
 

@@ -46,7 +46,7 @@ from bourbaki.cardinaux.ensembles_cardinaux_theoremes import (
     cardinal_egal_si_equipotent, equipotent_si_cardinal_egal)
 from bourbaki.cardinaux.ensembles_bijection import equipotence_symetrique
 from bourbaki.cardinaux.ensembles_vide_singleton import image_sur_vide
-from bourbaki.cardinaux.arithmetique.ensembles_arith_cardinale import _eq_son_cardinal_terme
+from bourbaki.cardinaux.arithmetique.iii_3_3_produit.ensembles_arith_cardinale import _eq_son_cardinal_terme
 from bourbaki.ensembles.familles.ii_2_produit_deux_ensembles.ensembles_produit import produit_vide
 
 

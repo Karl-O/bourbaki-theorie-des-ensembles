@@ -37,17 +37,17 @@ from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import (
 
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import est_cardinal, cardinal
-from bourbaki.cardinaux.arithmetique.ensembles_arith_cardinale import (
+from bourbaki.cardinaux.arithmetique.iii_3_3_produit.ensembles_arith_cardinale import (
     produit_cardinal_binaire,
 )
-from bourbaki.cardinaux.arithmetique.ensembles_arith_somme import somme_cardinale_binaire
+from bourbaki.cardinaux.arithmetique.iii_3_3_somme.ensembles_arith_somme import somme_cardinale_binaire
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import est_fini, successeur, ZERO, UN, DEUX
 
 from bourbaki.entiers.iii_5_calcul_entiers.iii_5_1_somme_produit_entiers.ensembles_prop3_produit_entier_iii5 import produit_succ_distribue
 from bourbaki.entiers.iii_5_calcul_entiers.iii_5_1_somme_produit_entiers.ensembles_combinatoire_iii5 import (
     somme_succ_distribue, somme_zero_neutre_droite,
 )
-from bourbaki.cardinaux.arithmetique.ensembles_produit_petits import produit_cardinal_zero
+from bourbaki.cardinaux.arithmetique.iii_3_3_produit.ensembles_produit_petits import produit_cardinal_zero
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers_theoremes import card_est_un_cardinal
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_fini_zero import zero_est_un_cardinal, fini_zero
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_fini_un import un_est_un_cardinal
@@ -253,7 +253,7 @@ def _deux_fois_zero_eq():
 
     Miroir de _preuve_P0_produit : a·0 = Card(a×∅) = Card∅ = ZERO, via
     produit_cardinal_bien_defini(2, ∅, 2, 0)."""
-    from bourbaki.cardinaux.arithmetique.ensembles_arith_cardinale import (
+    from bourbaki.cardinaux.arithmetique.iii_3_3_produit.ensembles_arith_cardinale import (
         produit_cardinal_bien_defini,
     )
     va = DEUX
@@ -492,7 +492,7 @@ def _deux_succ_eq_t(tk):
 
 def _prop8_t(tA, tB):
     """prop8_successeur_injectif capture-safe : ⊢ (succ A=succ B) ⇒ (Card A=Card B)."""
-    from bourbaki.cardinaux.arithmetique.ensembles_prop8_fini2 import prop8_successeur_injectif
+    from bourbaki.cardinaux.arithmetique.iii_3_4_prop8_successeur.ensembles_prop8_fini2 import prop8_successeur_injectif
     g = N.generalisation("A", N.generalisation("B",
             prop8_successeur_injectif("A", "B")))
     return instancie(instancie(g, _t(tA)), _t(tB))
@@ -796,7 +796,7 @@ def un_impair():
 # ══════════════════════════════════════════════════════════════════════════════
 def _comm_prod_t(tx, ty):
     """⊢ Card(x×y) = Card(y×x)   (= x·y = y·x au niveau cardinaux), capture-safe."""
-    from bourbaki.cardinaux.arithmetique.ensembles_arith_cardinale import (
+    from bourbaki.cardinaux.arithmetique.iii_3_3_produit.ensembles_arith_cardinale import (
         produit_cardinal_commutatif,
     )
     g = produit_cardinal_commutatif("Xcpt", "Ycpt")
@@ -805,7 +805,7 @@ def _comm_prod_t(tx, ty):
 
 
 def _produit_cardinal_un_t2(ta):
-    from bourbaki.cardinaux.arithmetique.ensembles_produit_petits import produit_cardinal_un
+    from bourbaki.cardinaux.arithmetique.iii_3_3_produit.ensembles_produit_petits import produit_cardinal_un
     gen = N.generalisation("Apcu2", produit_cardinal_un("Apcu2"))
     return instancie(gen, _t(ta))
 
@@ -830,7 +830,7 @@ def _distrib_droite_t(ta, td, tc):
 
 def _prod_assoc_t(tx, ty, tz):
     """⊢ Card((x×y)×z) = Card(x×(y×z))   capture-safe."""
-    from bourbaki.cardinaux.arithmetique.ensembles_arith_cardinale import (
+    from bourbaki.cardinaux.arithmetique.iii_3_3_produit.ensembles_arith_cardinale import (
         produit_cardinal_associatif,
     )
     g = produit_cardinal_associatif("Xpat", "Ypat", "Zpat")
@@ -842,7 +842,7 @@ def _prod_assoc_t(tx, ty, tz):
 def _pcbd_t(tX, tY, ta, tb):
     """produit_cardinal_bien_defini capture-safe :
        ⊢ (Card X=a et Card Y=b) ⇒ Card(X×Y) = produit_cardinal_binaire(a,b)."""
-    from bourbaki.cardinaux.arithmetique.ensembles_arith_cardinale import (
+    from bourbaki.cardinaux.arithmetique.iii_3_3_produit.ensembles_arith_cardinale import (
         produit_cardinal_bien_defini,
     )
     g = produit_cardinal_bien_defini("Xpcb", "Ypcb", "apcb", "bpcb")

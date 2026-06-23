@@ -156,7 +156,7 @@ def _b_le_complement(E_set="E", S="S0"):
 
 
 def produit_b(b):
-    from bourbaki.cardinaux.arithmetique.ensembles_arith_cardinale import (
+    from bourbaki.cardinaux.arithmetique.iii_3_3_produit.ensembles_arith_cardinale import (
         produit_cardinal_binaire,
     )
     return produit_cardinal_binaire(b, b)

@@ -48,7 +48,7 @@ from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import symetrie
 from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import existe_elimination
 from bourbaki.cardinaux.ensembles_cardinaux import (est_injection_de, inf_egal_card,
                                cardinal)
-from bourbaki.cardinaux.arithmetique.ensembles_copie_marquee import (
+from bourbaki.cardinaux.arithmetique.iii_3_4_prop8_successeur.ensembles_copie_marquee import (
                                _copie_graphe, _copie_terme, _BND,
                                copie_graphe_fonctionnel, copie_graphe_domaine,
                                copie_graphe_injective, copie_graphe_image)

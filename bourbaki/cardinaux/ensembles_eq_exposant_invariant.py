@@ -44,7 +44,7 @@ from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import (
 
 from bourbaki.cardinaux.ensembles_cardinaux import (
     est_injection_de, inf_egal_card, equipotent, est_bijection_de)
-from bourbaki.cardinaux.arithmetique.ensembles_graphe_de import (
+from bourbaki.cardinaux.arithmetique.fondations.ensembles_graphe_de import (
     graphe_de, graphe_de_triple)
 
 
@@ -506,7 +506,7 @@ def _g_values_at_s(vg1, vg2, vs, vt, vm, s_nom):
     s∈S=image(m,T) ⇒ témoin e∈T avec (e,s)∈m ; K_gᵢ(e)=gᵢ(m(e)) (graphe_terme_valeur,
     sous e∈T) ; K_g₁=K_g₂ ⇒ K_g₁(e)=K_g₂(e) ⇒ g₁(m(e))=g₂(m(e)) ; m(e)=s
     (_valeur_eq_de_couple, m fonct) ⇒ g₁(s)=g₂(s)."""
-    from bourbaki.cardinaux.arithmetique.ensembles_produit_equipotence import _antecedent_image
+    from bourbaki.cardinaux.arithmetique.iii_3_3_produit.ensembles_produit_equipotence import _antecedent_image
     vs_pt = var(s_nom)
     Kg1, Kg2 = K_g(vg1, vt, vm), K_g(vg2, vt, vm)
     ve = var("d")          # témoin-antécédent (≠ _PT=«e», point interne de K_g)

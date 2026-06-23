@@ -62,7 +62,7 @@ from bourbaki.cardinaux.ensembles_prop13_complement import (
     _eq_reunion_disjointe_somme_t, _somme_disjointe_cardinal_t,
 )
 from bourbaki.cardinaux.ensembles_cardinaux_bornes_somme import inf_egal_somme_gauche
-from bourbaki.cardinaux.arithmetique.ensembles_arith_cardinale_props_exposant_monotone import (
+from bourbaki.cardinaux.arithmetique.iii_3_2_monotonie.ensembles_arith_cardinale_props_exposant_monotone import (
     inf_egal_transporte_cardinal,
 )
 from bourbaki.cardinaux.ensembles_cardinaux_props_restantes_ordre import (

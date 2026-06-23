@@ -9,13 +9,13 @@ from bourbaki.logique.i_1_termes_relations.formule import (var, egal, et, non, o
                                        appartient, inclus, pourtout, existe)
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.arithmetique import ensembles_prop12_card as P
-from bourbaki.cardinaux.arithmetique.ensembles_prop12_card import _bijection as B
-from bourbaki.cardinaux.arithmetique.ensembles_powerset_exp import deux
-from bourbaki.cardinaux.arithmetique.ensembles_powerset_deux import preimage_un
+from bourbaki.cardinaux.arithmetique.iii_3_5_exposant.prop12_powerset.prop12_card import _bijection as B
+from bourbaki.cardinaux.arithmetique.iii_3_5_exposant.prop12_powerset.ensembles_powerset_exp import deux
+from bourbaki.cardinaux.arithmetique.iii_3_5_exposant.prop12_powerset.ensembles_powerset_deux import preimage_un
 from bourbaki.cardinaux.ensembles_cardinaux import (cardinal, equipotent,
                                est_bijection_de)
 from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege import injective_dans
-from bourbaki.cardinaux.arithmetique.ensembles_exposant_cardinal import exposant_cardinal_binaire
+from bourbaki.cardinaux.arithmetique.iii_3_5_exposant.definition.ensembles_exposant_cardinal import exposant_cardinal_binaire
 
 
 def _W(x="X"):

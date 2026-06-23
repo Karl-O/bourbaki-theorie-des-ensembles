@@ -52,7 +52,7 @@ from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import (
 from bourbaki.cardinaux.ensembles_cardinaux import (
     est_cardinal, cardinal, inf_egal_card, inf_strict_card,
 )
-from bourbaki.cardinaux.arithmetique.ensembles_arith_cardinale_props_exposant_monotone import (
+from bourbaki.cardinaux.arithmetique.iii_3_2_monotonie.ensembles_arith_cardinale_props_exposant_monotone import (
     inf_egal_transporte_cardinal,
 )
 from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import (

@@ -4,11 +4,11 @@
 Le dernier pas : ψ-injectivité ⇒ inf_egal_psi ⇒ prop9_close (Cantor–Bernstein)."""
 from bourbaki.logique.i_1_termes_relations.formule import var, appartient, egal
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.cardinaux.arithmetique.ensembles_prop9_exp_somme import (
+from bourbaki.cardinaux.arithmetique.iii_3_5_exposant.prop9_exp_somme.ensembles_prop9_exp_somme import (
     cible_prop9_exp_somme)
-from bourbaki.cardinaux.arithmetique.ensembles_prop9_close import (
+from bourbaki.cardinaux.arithmetique.iii_3_5_exposant.prop9_exp_somme.ensembles_prop9_close import (
     codomaine_phi, psi_valeur)
-from bourbaki.cardinaux.arithmetique import ensembles_prop9_final_close as M
+from bourbaki.cardinaux.arithmetique.iii_3_5_exposant.prop9_exp_somme import ensembles_prop9_final_close as M
 
 
 def test_W_psi_valeur():

@@ -227,7 +227,7 @@ def _cardinal_idempotent_t(tX):
     Eq(Card X, Card(Card X)) ⇒ Card(Card X)=Card(Card(Card X)) n'est pas ce qu'on
     veut.  On utilise : Eq(X, Card X) (equipotent_son_cardinal) et la Proposition 1
     sens direct sur (X, Card X) : Card X = Card(Card X) ; symétrie conclut."""
-    from bourbaki.cardinaux.arithmetique.ensembles_arith_cardinale import _prop1_direct_t
+    from bourbaki.cardinaux.arithmetique.iii_3_3_produit.ensembles_arith_cardinale import _prop1_direct_t
     vX = _t(tX)
     cX = cardinal(vX)
     eq = _eq_son_cardinal_t(vX)                        # Eq(X, Card X)

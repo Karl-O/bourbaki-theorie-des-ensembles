@@ -9,9 +9,9 @@ from bourbaki.logique.i_1_termes_relations.formule import var, egal, et
 from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de
-from bourbaki.cardinaux.arithmetique.ensembles_prop9_exp_somme import (
+from bourbaki.cardinaux.arithmetique.iii_3_5_exposant.prop9_exp_somme.ensembles_prop9_exp_somme import (
     cible_prop9_exp_somme, restriction_gauche, restriction_droite)
-from bourbaki.cardinaux.arithmetique.ensembles_prop9_final import (
+from bourbaki.cardinaux.arithmetique.iii_3_5_exposant.prop9_exp_somme.ensembles_prop9_final import (
     phi_valeur, domaine_phi, codomaine_phi, W,
     W_fonctionnel, W_domaine, W_valeur,
     W_injective_restrictions_coincident,

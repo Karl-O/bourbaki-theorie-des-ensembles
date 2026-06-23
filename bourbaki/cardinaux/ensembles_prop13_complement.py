@@ -73,10 +73,10 @@ from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recolle
 from bourbaki.cardinaux.ensembles_realisation_segment_close import (
     injection_donne_equipotent_image,
 )
-from bourbaki.cardinaux.arithmetique.ensembles_arith_somme import (
+from bourbaki.cardinaux.arithmetique.iii_3_3_somme.ensembles_arith_somme import (
     somme_disjointe_cardinal, _prop1_direct_t,
 )
-from bourbaki.cardinaux.arithmetique.ensembles_copie_marquee import _eq_sym_t
+from bourbaki.cardinaux.arithmetique.iii_3_4_prop8_successeur.ensembles_copie_marquee import _eq_sym_t
 from bourbaki.cardinaux.ensembles_cardinaux_props_restantes_ordre import (
     _cardinal_est_son_cardinal,
 )

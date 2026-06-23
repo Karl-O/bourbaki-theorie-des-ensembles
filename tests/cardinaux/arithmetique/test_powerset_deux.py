@@ -17,8 +17,8 @@ Le CRUX (bijection caractéristique complète χ : 𝔓(X) ⇄ 𝓕(X;{0,1})) re
 from bourbaki.logique.i_1_termes_relations.formule import var, egal, et, non, ou, equiv, appartient, inclus
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import cardinal
-from bourbaki.cardinaux.arithmetique.ensembles_exposant_cardinal import exposant_cardinal_binaire
-from bourbaki.cardinaux.arithmetique import ensembles_powerset_deux as P
+from bourbaki.cardinaux.arithmetique.iii_3_5_exposant.definition.ensembles_exposant_cardinal import exposant_cardinal_binaire
+from bourbaki.cardinaux.arithmetique.iii_3_5_exposant.prop12_powerset import ensembles_powerset_deux as P
 
 
 def _deux():

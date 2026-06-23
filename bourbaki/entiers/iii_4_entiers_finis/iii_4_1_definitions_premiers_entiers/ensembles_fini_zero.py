@@ -39,7 +39,7 @@ from bourbaki.cardinaux.ensembles_cardinaux import (est_bijection_de, cardinal, 
 from bourbaki.cardinaux.ensembles_vide_singleton import (image_sur_vide,
                                       vide_non_equipotent_singleton)
 from bourbaki.cardinaux.ensembles_cardinaux_theoremes import equipotent_si_cardinal_egal
-from bourbaki.cardinaux.arithmetique.ensembles_arith_cardinale import _eq_son_cardinal_terme
+from bourbaki.cardinaux.arithmetique.iii_3_3_produit.ensembles_arith_cardinale import _eq_son_cardinal_terme
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_zero_plus_un import card_somme_zero_un
 from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import somme_disjointe
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers_theoremes import card_est_un_cardinal

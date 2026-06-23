@@ -72,9 +72,9 @@ from bourbaki.cardinaux.ensembles_cardinaux_theoremes import equipotent_son_card
 from bourbaki.cardinaux.ensembles_cardinaux_ordre import equipotence_implique_inf_egal
 from bourbaki.cardinaux.ensembles_cardinaux_props_restantes import (
     _inf_egal_transitive_t, _eq_implique_inf_egal_t, _eq_son_cardinal_t)
-from bourbaki.cardinaux.arithmetique.ensembles_copie_marquee import (
+from bourbaki.cardinaux.arithmetique.iii_3_4_prop8_successeur.ensembles_copie_marquee import (
     eq_copie_gauche, _eq_sym_t, _eq_trans_t)
-from bourbaki.cardinaux.arithmetique.ensembles_prop8_plus_point import somme_un_plus_point
+from bourbaki.cardinaux.arithmetique.iii_3_4_prop8_successeur.ensembles_prop8_plus_point import somme_un_plus_point
 from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import somme_disjointe, ZERO, UN
 from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import egalite_par_extension
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import successeur
@@ -222,7 +222,7 @@ def diff_marqueur_egal_copie(c="c"):
     in_disj = N.modus_ponens(h_c0, N.s2(z_in_C0, z_eq_star))         # z∈C×{0} ou z=*
     z_in_S2 = N.modus_ponens(in_disj, equivalence_arriere(sup))     # z∈S
     # ¬(z=*)  : si z=*, alors *=z∈C×{0} ; or ¬(*∈C×{0}) (marqueur_hors_copie_gauche)
-    from bourbaki.cardinaux.arithmetique.ensembles_prop8_plus_point import marqueur_hors_copie_gauche
+    from bourbaki.cardinaux.arithmetique.iii_3_4_prop8_successeur.ensembles_prop8_plus_point import marqueur_hors_copie_gauche
     n_star_in_C0 = marqueur_hors_copie_gauche(c)                     # ¬(*∈C×{0})
     h_zstar = N.assume(z_eq_star)
     star_in_C0 = N.modus_ponens(h_c0, equivalence_avant(N.modus_ponens(

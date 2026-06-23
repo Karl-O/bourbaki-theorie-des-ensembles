@@ -306,7 +306,7 @@ def cadre_plat_cardinal(S="S0", U="Ucadre"):
     𝔟+(𝔟+𝔟)=3𝔟=𝔟 (`trois_b_egal_b_inconditionnel` + pont bien-déf, repris VERBATIM de
     cadre_card_trois_b).  theorie=22 ; conclusion ∉ hyps."""
     from bourbaki.cardinaux.ensembles_frame_extension_finale import _card_produit_egal_b
-    from bourbaki.cardinaux.arithmetique.ensembles_arith_cardinale import (
+    from bourbaki.cardinaux.arithmetique.iii_3_3_produit.ensembles_arith_cardinale import (
         produit_cardinal_binaire,
     )
     from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import (

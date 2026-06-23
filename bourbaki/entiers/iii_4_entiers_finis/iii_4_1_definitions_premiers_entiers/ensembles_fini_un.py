@@ -66,9 +66,9 @@ from bourbaki.cardinaux.ensembles_cardinaux_theoremes import (equipotent_si_card
                                        equipotence_symetrique)
 from bourbaki.cardinaux.ensembles_equipotence import equipotence_reflexive
 from bourbaki.cardinaux.ensembles_vide_singleton import vide_distinct_singleton
-from bourbaki.cardinaux.arithmetique.ensembles_arith_cardinale import (_eq_son_cardinal_terme,
+from bourbaki.cardinaux.arithmetique.iii_3_3_produit.ensembles_arith_cardinale import (_eq_son_cardinal_terme,
                                             _prop1_direct_t)
-from bourbaki.cardinaux.arithmetique.ensembles_somme_equipotence import eq_somme_invariant
+from bourbaki.cardinaux.arithmetique.iii_3_3_somme.ensembles_somme_equipotence import eq_somme_invariant
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_fini_zero import successeur_zero_egale_un, fini_zero
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers_theoremes import card_est_un_cardinal
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers import ensembles_entiers as Ent

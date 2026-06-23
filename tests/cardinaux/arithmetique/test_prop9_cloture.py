@@ -16,11 +16,11 @@ from bourbaki.logique.i_1_termes_relations.formule import var, egal, et, apparti
 from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de
-from bourbaki.cardinaux.arithmetique.ensembles_prop9_final import (
+from bourbaki.cardinaux.arithmetique.iii_3_5_exposant.prop9_exp_somme.ensembles_prop9_final import (
     W, domaine_phi, codomaine_phi, W_fonctionnel, W_domaine)
-from bourbaki.cardinaux.arithmetique.ensembles_prop9_exp_somme import (
+from bourbaki.cardinaux.arithmetique.iii_3_5_exposant.prop9_exp_somme.ensembles_prop9_exp_somme import (
     cible_prop9_exp_somme)
-from bourbaki.cardinaux.arithmetique.ensembles_prop9_cloture import (
+from bourbaki.cardinaux.arithmetique.iii_3_5_exposant.prop9_exp_somme.ensembles_prop9_cloture import (
     bijection_de_conjoints, W_injective_hyp, W_image_hyp,
     prop9_si_conjoints_durs, prop9_cible_conditionnelle, conjoints_durs_REPORTE)
 

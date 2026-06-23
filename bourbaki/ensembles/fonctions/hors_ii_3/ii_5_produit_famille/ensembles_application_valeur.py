@@ -43,7 +43,7 @@ from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
 from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import (
     symetrie, composer_egalites, congruence_terme)
 from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import existe_elimination
-from bourbaki.cardinaux.arithmetique.ensembles_graphe_de import (
+from bourbaki.cardinaux.arithmetique.fondations.ensembles_graphe_de import (
     graphe_de, graphe_de_triple)
 from bourbaki.ensembles.fonctions.ii_3_4_fonctions_valeur.ensembles_valeur_codomaine import valeur_dans_codomaine
 from bourbaki.ensembles.fonctions.ii_3_general.ensembles_extensionnalite import graphe_egal_par_valeurs

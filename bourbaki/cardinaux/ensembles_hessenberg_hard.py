@@ -69,7 +69,7 @@ from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import instanci
 from bourbaki.cardinaux.ensembles_cardinaux import (
     cardinal, inf_egal_card, est_bijection_de, equipotent,
 )
-from bourbaki.cardinaux.arithmetique.ensembles_arith_cardinale import (
+from bourbaki.cardinaux.arithmetique.iii_3_3_produit.ensembles_arith_cardinale import (
     produit_cardinal_binaire,
 )
 from bourbaki.entiers.iii_6_infinis.iii_6_3_infinis_denombrables.ensembles_infinis import est_infini, est_infini_ensemble

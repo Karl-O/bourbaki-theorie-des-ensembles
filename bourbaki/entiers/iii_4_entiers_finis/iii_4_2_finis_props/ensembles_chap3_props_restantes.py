@@ -62,7 +62,7 @@ from bourbaki.cardinaux.ensembles_cardinaux import (
 from bourbaki.cardinaux.ensembles_cantor import (
     cantor_non_equipotent, inf_egal_parties,
 )
-from bourbaki.cardinaux.arithmetique.ensembles_prop8_successeur import prop1_reciproque_t
+from bourbaki.cardinaux.arithmetique.iii_3_4_prop8_successeur.ensembles_prop8_successeur import prop1_reciproque_t
 from bourbaki.entiers.iii_5_calcul_entiers.iii_5_1_somme_produit_entiers.ensembles_calcul_entiers_props import le_ens_implique_le_card
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_2_finis_props.ensembles_finis_props import inf_strict_exclut_reciproque
 from bourbaki.entiers.iii_6_infinis.iii_6_3_infinis_denombrables.ensembles_infinis import NN, aleph0, puissance_continu
@@ -145,7 +145,7 @@ def cantor_strict_cardinal(x="X"):
 # ════════════════════════════════════════════════════════════════════════════
 def _card_parties_egale_deux_exp_t(vX):
     """⊢ Card P(X) = 2^Card X  pour un TERME X (Prop. 12 généralisée+instanciée)."""
-    from bourbaki.cardinaux.arithmetique.ensembles_prop12_card import card_parties_egale_deux_exp
+    from bourbaki.cardinaux.arithmetique.iii_3_5_exposant.prop12_powerset.prop12_card import card_parties_egale_deux_exp
     gen = N.generalisation("X", card_parties_egale_deux_exp("X"))
     return instancie(gen, vX)
 
@@ -158,8 +158,8 @@ def cantor_deux_exp(x="X"):
     Proposition 12 (card_parties_egale_deux_exp) ⊢ Card P(X) = 2^Card X ; on réécrit le
     majorant Card P(X) ↦ 2^Card X (S6 sur le 2ᵉ argument de inf_strict_card), via
     equivalence_avant.  2^Card X = exposant_cardinal_binaire(2, X)."""
-    from bourbaki.cardinaux.arithmetique.ensembles_exposant_cardinal import exposant_cardinal_binaire
-    from bourbaki.cardinaux.arithmetique.ensembles_powerset_exp import deux
+    from bourbaki.cardinaux.arithmetique.iii_3_5_exposant.definition.ensembles_exposant_cardinal import exposant_cardinal_binaire
+    from bourbaki.cardinaux.arithmetique.iii_3_5_exposant.prop12_powerset.ensembles_powerset_exp import deux
     from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import equivalence_avant
     vX = _t(x)
     PX = E.parties(vX)

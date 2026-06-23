@@ -333,7 +333,7 @@ def eq_retrait_meme_ensemble(y="Y", p="p", yy="yy"):
         eq_retrait_via_bijection(σ,Y,Y,p) ⇒ Eq(Y∖{p}, Y∖{σ(p)}) = Eq(Y∖{p}, Y∖{yy})
         (réécriture σ(p)=yy)."""
     from bourbaki.cardinaux.ensembles_equipotence import equipotence_reflexive
-    from bourbaki.cardinaux.arithmetique.ensembles_transposition import transposition_existe
+    from bourbaki.cardinaux.arithmetique.iii_3_4_prop8_successeur.transposition import transposition_existe
     from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import tiers_exclu
     vY, vp, vyy = _t(y), _t(p), _t(yy)
     Ymp = E.difference(vY, E.singleton(vp))            # Y∖{p}
@@ -553,7 +553,7 @@ def _hd_depuis_gen(b="b", c="c", q="q"):
     GEN-littéral de surgery)."""
     from bourbaki.entiers.iii_4_entiers_finis.iii_4_2_pigeonhole_surgery.ensembles_retrait_point import _S, _STAR, eq_succ_ensemble
     from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import successeur
-    from bourbaki.cardinaux.arithmetique.ensembles_prop8_plus_point import marqueur_dans_somme
+    from bourbaki.cardinaux.arithmetique.iii_3_4_prop8_successeur.ensembles_prop8_plus_point import marqueur_dans_somme
     vc, vq = _t(c), _t(q)
     succ_c = successeur(vc)                                  # c+1 = Card(C⊔{∅})
     S = _S(vc)                                               # C⊔{∅}

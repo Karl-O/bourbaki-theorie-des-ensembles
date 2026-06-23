@@ -54,7 +54,7 @@ from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.e
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_fini_deux import (_card_idempotent_t,
                                                   card_deux_egale_deux,
                                                   deux_distinct_successeur_deux)
-from bourbaki.cardinaux.arithmetique.ensembles_prop8_fini2 import (
+from bourbaki.cardinaux.arithmetique.iii_3_4_prop8_successeur.ensembles_prop8_fini2 import (
     prop8_successeur_injectif)
 from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import somme_disjointe
 

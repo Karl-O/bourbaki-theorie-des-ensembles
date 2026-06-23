@@ -71,7 +71,7 @@ from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import (symetrie,
 from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import existe_elimination
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import successeur, est_fini
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers_theoremes import card_est_un_cardinal
-from bourbaki.cardinaux.arithmetique.ensembles_prop8_fini2 import prop8_successeur_injectif
+from bourbaki.cardinaux.arithmetique.iii_3_4_prop8_successeur.ensembles_prop8_fini2 import prop8_successeur_injectif
 
 
 def _t(t):

@@ -35,13 +35,13 @@ from bourbaki.cardinaux.ensembles_cardinaux import est_cardinal, cardinal
 from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import (
     somme_disjointe, somme_cardinale_binaire,
 )
-from bourbaki.cardinaux.arithmetique.ensembles_arith_cardinale import (
+from bourbaki.cardinaux.arithmetique.iii_3_3_produit.ensembles_arith_cardinale import (
     produit_cardinal_binaire, produit_cardinal_bien_defini,
 )
-from bourbaki.cardinaux.arithmetique.ensembles_distributivite_cardinale import (
+from bourbaki.cardinaux.arithmetique.iii_3_3_produit.ensembles_distributivite_cardinale import (
     distributivite_cardinale,
 )
-from bourbaki.cardinaux.arithmetique.ensembles_produit_petits import (
+from bourbaki.cardinaux.arithmetique.iii_3_3_produit.ensembles_produit_petits import (
     produit_cardinal_un,
 )
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import est_fini, successeur, ZERO
@@ -154,7 +154,7 @@ def _P_produit(a):
 def _preuve_P0_produit(a, hfa):
     """{ Fini a [hfa] } ⊢ Fini(a·0).   (a·0 = Card(a×∅) = Card∅ = 0 ; 0 fini.)"""
     va = _tt(a)
-    from bourbaki.cardinaux.arithmetique.ensembles_produit_petits import produit_cardinal_zero
+    from bourbaki.cardinaux.arithmetique.iii_3_3_produit.ensembles_produit_petits import produit_cardinal_zero
     from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_fini_zero import fini_zero
     # a·0 := produit_cardinal_binaire(a, 0) = Card(a×0).  Or 0 = ZERO = Card∅.
     #   produit_cardinal_zero(a) : Card(a×∅) = Card∅.  Mais a·0 = Card(a×ZERO) = Card(a×Card∅).

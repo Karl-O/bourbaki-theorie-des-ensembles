@@ -51,7 +51,7 @@ from bourbaki.ensembles.familles.iii_7_limites import ensembles_limites_iii7 as 
 from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     instancie, conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
     equivalence_avant)
-from bourbaki.cardinaux.arithmetique.ensembles_graphe_de import graphe_de
+from bourbaki.cardinaux.arithmetique.fondations.ensembles_graphe_de import graphe_de
 from bourbaki.ensembles.fonctions.hors_ii_3.ii_5_produit_famille.ensembles_application_valeur import (
     valeur_application_dans_but, application_egale_par_valeurs,
     egalite_valeurs_application)

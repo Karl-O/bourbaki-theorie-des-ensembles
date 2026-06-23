@@ -5,7 +5,7 @@ le lemme de membership + 2 des 4 conjoints (fonctionnel, domaine).  Ce round FIN
 la transposition : injectif, image, valeur(q)=p, et l'EXISTENCE comme bijection
 (les 4 conjoints + τ(q)=p assemblés sous p,q∈S, p≠q).
 """
-from bourbaki.cardinaux.arithmetique.ensembles_transposition import (
+from bourbaki.cardinaux.arithmetique.iii_3_4_prop8_successeur.transposition import (
     transpo, transpo_membre, transpo_fonctionnel, transpo_domaine,
     transpo_injective, transpo_image, transpo_valeur_q, transposition_existe)
 from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege import injective_dans, image, valeur

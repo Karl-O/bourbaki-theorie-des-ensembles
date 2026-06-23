@@ -1,7 +1,7 @@
 """Acceptance — a^b ∈ ℕ INCONDITIONNEL (Cor. 3 §III.5.1, B0/B déchargés)."""
 from bourbaki.logique.i_1_termes_relations.formule import var, impl, et
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import est_fini
-from bourbaki.cardinaux.arithmetique.ensembles_exposant_cardinal import (
+from bourbaki.cardinaux.arithmetique.iii_3_5_exposant.definition.ensembles_exposant_cardinal import (
     exposant_cardinal_binaire,
 )
 from bourbaki.cardinaux.ensembles_n_arith_iii5 import (

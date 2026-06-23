@@ -54,14 +54,14 @@ from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import (
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import est_cardinal, cardinal
 from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import somme_disjointe
-from bourbaki.cardinaux.arithmetique.ensembles_arith_cardinale import (
+from bourbaki.cardinaux.arithmetique.iii_3_3_produit.ensembles_arith_cardinale import (
     produit_cardinal_binaire, produit_cardinal_bien_defini,
 )
-from bourbaki.cardinaux.arithmetique.ensembles_exposant_cardinal import (
+from bourbaki.cardinaux.arithmetique.iii_3_5_exposant.definition.ensembles_exposant_cardinal import (
     exposant_cardinal_binaire,
 )
-from bourbaki.cardinaux.arithmetique.ensembles_prop9_final_close import prop9_close
-from bourbaki.cardinaux.arithmetique.ensembles_exposant_un._bijection import (
+from bourbaki.cardinaux.arithmetique.iii_3_5_exposant.prop9_exp_somme.ensembles_prop9_final_close import prop9_close
+from bourbaki.cardinaux.arithmetique.iii_3_5_exposant.definition.exposant_un._bijection import (
     exposant_un_egale,
 )
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import est_fini, successeur, ZERO
@@ -215,7 +215,7 @@ def _preuve_P0_puissance(a, hfa, hB0):
     """{ Fini a [hfa], B0 [hB0] } ⊢ Fini(a^0).
 
     a^0 =[B0] Card(𝓕(∅;a)) =[exposant_zero_egale_un] Card({∅}) = 1 ; Fini(1)."""
-    from bourbaki.cardinaux.arithmetique.ensembles_exposant_cardinal import (
+    from bourbaki.cardinaux.arithmetique.iii_3_5_exposant.definition.ensembles_exposant_cardinal import (
         exposant_zero_egale_un,
     )
     from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_fini_un import fini_un, un_egale_card_singleton

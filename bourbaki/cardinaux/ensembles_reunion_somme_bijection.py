@@ -41,7 +41,7 @@ from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recolle
     somme_disjointe, ZERO, UN,
 )
 from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de, equipotent
-from bourbaki.cardinaux.arithmetique.ensembles_copie_marquee import (
+from bourbaki.cardinaux.arithmetique.iii_3_4_prop8_successeur.ensembles_copie_marquee import (
     _copie_graphe, copie_graphe_fonctionnel, copie_graphe_domaine,
     copie_graphe_injective, copie_graphe_image,
 )

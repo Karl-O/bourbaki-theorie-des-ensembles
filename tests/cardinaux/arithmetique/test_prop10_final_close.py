@@ -2,8 +2,8 @@
 
 ⚠️ LENT (~15 min : construit inf_egal_curry + inf_egal_uncurry, τ imbriqués 2 niveaux).
 """
-from bourbaki.cardinaux.arithmetique.ensembles_prop10_final_close import prop10_close
-from bourbaki.cardinaux.arithmetique.ensembles_prop10_currying import cible_prop10
+from bourbaki.cardinaux.arithmetique.iii_3_5_exposant.prop10_currying.ensembles_prop10_final_close import prop10_close
+from bourbaki.cardinaux.arithmetique.iii_3_5_exposant.prop10_currying.ensembles_prop10_currying import cible_prop10
 from bourbaki.logique.i_1_termes_relations.formule import var
 import bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege as E
 

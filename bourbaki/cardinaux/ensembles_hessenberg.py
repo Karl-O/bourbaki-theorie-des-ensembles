@@ -62,7 +62,7 @@ from bourbaki.ensembles.fonctions.ii_3_4_fonctions_valeur.ensembles_fonctions im
 
 from bourbaki.cardinaux.ensembles_cardinaux import (
     cardinal, inf_egal_card, est_injection_de)
-from bourbaki.cardinaux.arithmetique.ensembles_arith_cardinale import (
+from bourbaki.cardinaux.arithmetique.iii_3_3_produit.ensembles_arith_cardinale import (
     produit_cardinal_binaire, _prop1_direct_t)
 from bourbaki.cardinaux.ensembles_cantor_bernstein_final._recollement import cantor_bernstein
 from bourbaki.entiers.iii_6_infinis.iii_6_3_infinis_denombrables.ensembles_infinis import est_infini

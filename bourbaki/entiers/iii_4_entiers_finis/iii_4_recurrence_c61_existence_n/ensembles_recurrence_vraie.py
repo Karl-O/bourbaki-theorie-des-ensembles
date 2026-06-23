@@ -88,7 +88,7 @@ from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.e
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers_theoremes import (
     fini_implique_cardinal, card_est_un_cardinal,
 )
-from bourbaki.cardinaux.arithmetique.ensembles_arith_cardinale_props_exposant_monotone import (
+from bourbaki.cardinaux.arithmetique.iii_3_2_monotonie.ensembles_arith_cardinale_props_exposant_monotone import (
     inf_egal_transporte_cardinal,
 )
 from bourbaki.entiers.iii_6_infinis.iii_6_3_infinis_denombrables.ensembles_infinis import est_infini_ensemble, A4, theorie_infini

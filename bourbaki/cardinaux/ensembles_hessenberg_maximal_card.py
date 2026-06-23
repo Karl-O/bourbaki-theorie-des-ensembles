@@ -49,7 +49,7 @@ from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import (
     cardinal, est_bijection_de, equipotent, inf_egal_card,
 )
-from bourbaki.cardinaux.arithmetique.ensembles_arith_cardinale import (
+from bourbaki.cardinaux.arithmetique.iii_3_3_produit.ensembles_arith_cardinale import (
     produit_cardinal_binaire, _prop1_direct_t, produit_cardinal_bien_defini,
 )
 from bourbaki.cardinaux.ensembles_cardinaux_theoremes import inf_egal_reflexif

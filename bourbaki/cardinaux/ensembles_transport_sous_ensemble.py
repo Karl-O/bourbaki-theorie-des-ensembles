@@ -35,8 +35,8 @@ from bourbaki.cardinaux.ensembles_cardinaux_ordre import (
 from bourbaki.cardinaux.ensembles_realisation_segment_close import (
     injection_donne_equipotent_image,
 )
-from bourbaki.cardinaux.arithmetique.ensembles_arith_somme import _prop1_direct_t
-from bourbaki.cardinaux.arithmetique.ensembles_copie_marquee import _eq_sym_t
+from bourbaki.cardinaux.arithmetique.iii_3_3_somme.ensembles_arith_somme import _prop1_direct_t
+from bourbaki.cardinaux.arithmetique.iii_3_4_prop8_successeur.ensembles_copie_marquee import _eq_sym_t
 from bourbaki.cardinaux.ensembles_hessenberg_extension import _cardinal_est_son_cardinal_t
 from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     instancie, conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,

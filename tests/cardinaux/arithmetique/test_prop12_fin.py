@@ -18,9 +18,9 @@ from bourbaki.logique.i_1_termes_relations.formule import (var, egal, et, non, o
                                        appartient, inclus, pourtout, existe)
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import ZERO, UN
-from bourbaki.cardinaux.arithmetique import ensembles_prop12_fin as P
-from bourbaki.cardinaux.arithmetique.ensembles_powerset_exp import deux
-from bourbaki.cardinaux.arithmetique.ensembles_powerset_deux import preimage_un
+from bourbaki.cardinaux.arithmetique.iii_3_5_exposant.prop12_powerset import ensembles_prop12_fin as P
+from bourbaki.cardinaux.arithmetique.iii_3_5_exposant.prop12_powerset.ensembles_powerset_exp import deux
+from bourbaki.cardinaux.arithmetique.iii_3_5_exposant.prop12_powerset.ensembles_powerset_deux import preimage_un
 
 
 def _chi(y="Y", x="X"):

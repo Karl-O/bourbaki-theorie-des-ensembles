@@ -63,12 +63,12 @@ from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (conjonc
 from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import somme_disjointe
 from bourbaki.cardinaux.ensembles_cardinaux import inf_egal_card, cardinal
 from bourbaki.cardinaux.ensembles_cardinaux_theoremes import inf_egal_reflexif
-from bourbaki.cardinaux.arithmetique.ensembles_arith_cardinale_props_exposant_monotone import (
+from bourbaki.cardinaux.arithmetique.iii_3_2_monotonie.ensembles_arith_cardinale_props_exposant_monotone import (
     inf_egal_transporte_cardinal)
-from bourbaki.cardinaux.arithmetique.ensembles_somme_monotone import inf_egal_somme_invariant
-from bourbaki.cardinaux.arithmetique.ensembles_arith_cardinale_props_produit_monotone import (
+from bourbaki.cardinaux.arithmetique.iii_3_2_monotonie.ensembles_somme_monotone import inf_egal_somme_invariant
+from bourbaki.cardinaux.arithmetique.iii_3_2_monotonie.ensembles_arith_cardinale_props_produit_monotone import (
     inf_egal_produit_gauche, inf_egal_produit_droite, inf_egal_produit_invariant)
-from bourbaki.cardinaux.arithmetique.ensembles_arith_cardinale import produit_cardinal_binaire
+from bourbaki.cardinaux.arithmetique.iii_3_3_produit.ensembles_arith_cardinale import produit_cardinal_binaire
 
 
 def _t(v):

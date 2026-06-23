@@ -13,7 +13,7 @@ from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import cardinal
 from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import (
     somme_disjointe, ZERO, UN)
-from bourbaki.cardinaux.arithmetique import ensembles_prop9_exp_somme as P
+from bourbaki.cardinaux.arithmetique.iii_3_5_exposant.prop9_exp_somme import ensembles_prop9_exp_somme as P
 
 
 # ── PALIER 0 : ÉNONCÉ-CIBLE (formule) ────────────────────────────────────────

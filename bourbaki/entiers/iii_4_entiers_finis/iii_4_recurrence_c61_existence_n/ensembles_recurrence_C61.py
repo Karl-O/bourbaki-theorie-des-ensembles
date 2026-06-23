@@ -178,7 +178,7 @@ def b_le_0_implique_egal_0(b="b", F="F"):
     from bourbaki.cardinaux.ensembles_cardinaux import est_injection_de
     from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_fini_zero import cardinal_vide_egale_vide
     from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import extensionnalite_appliquee
-    from bourbaki.cardinaux.arithmetique.ensembles_exposant_cardinal import (
+    from bourbaki.cardinaux.arithmetique.iii_3_5_exposant.definition.ensembles_exposant_cardinal import (
         inclus_vide_implique_egal_vide,
     )
     from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import symetrie, composer_egalites
