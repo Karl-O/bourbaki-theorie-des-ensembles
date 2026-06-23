@@ -28,3 +28,6 @@ Le bug pré-existant ci-dessus est CORRIGÉ (1er résultat ÉTAPE B) : les 6 sym
 ## 2026-06-23 - Commentaires PERIMES (Cantor)
 
 Le corps de cantor_deux_exp levait NotImplementedError avec un commentaire pretendant que le pont set->cardinal n etait pas disponible. PERIME : equipotent_implique_inf_egal, le patron _card_le_set_t/_set_le_card_t/_le_trans_t (Hessenberg) et la Proposition 1 sont tous CLOS. Cantor 2^a>a au niveau cardinal est maintenant FERME (prop12_card/_cantor.py, 13 tests verts). Les docstrings REPORTE de ensembles_powerset_exp/_deux/_prop12_fin sont a relire (potentiellement perimees aussi).
+
+## 2026-06-24 retraction_est_injection (II.3.8) ECARTEE
+- L audit fan-out w1k1qywh0 a lui-meme signale que l enonce "une retraction est une injection" se reduit, sous forme close, soit a retraction_implique_injective (deja fait), soit a une tautologie P=>P (est_retraction(R,F,A) et est_section(F,R,A) sont la meme formule). Aucun contenu nouveau non vide certifiable sans postuler la surjectivite. Cible ecartee pour preserver l integrite (jamais de tautologie deguisee en theoreme). Le contenu reel est deja couvert par retraction_implique_injective.
