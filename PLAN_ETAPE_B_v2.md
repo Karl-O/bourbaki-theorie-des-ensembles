@@ -32,7 +32,7 @@ Priorise: perf_risque faible + difficulte facile d abord. [ ] = a faire, [x] = f
 - lemmes: bourbaki.ensembles.fonctions.ii_3_8_retractions_sections.ensembles_retractions_props:section_implique_surjective_valeur, bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege:est_section, bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege:injective_dans, bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite:symetrie, bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite:composer_egalites, bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2:instancie, bourbaki.logique.i_2_criteres_C.noyau.noyau_abrege:assume, bourbaki.logique.i_2_criteres_C.noyau.noyau_abrege:loi_deduction
 - fichier: C:/Users/KARL/OneDrive/Bureau/Apprendre/Livre/Bourbakie/Theorie_des_ensembles/V9/bourbaki/ensembles/fonctions/ii_3_8_retractions_sections/ensembles_retractions_props.py (ajout dans fichier existant ; 
 
-## [ ] image_difference_egal_si_injective — Corollaire de la Prop. 6 (image DIRECTE)  (faible/facile)
+## [x] image_difference_egal_si_injective — Corollaire de la Prop. 6 (image DIRECTE)  (faible/facile)
 - secteur: II.4 réunion/intersection d'un | E.II.4.5 (Chap. II §4, sous-section 5, « Réunion et intersection de deux ensembles »), Corollaire de la Proposition 6 : f injection ⟹ f⟨A∖X⟩ = f⟨A⟩∖f⟨X⟩.
 - statut: MANQUANT. Le DUAL réciproque est déjà CLOS (`image_reciproque_difference`, est_fonctionnel ⟹ f⁻¹⟨B∖Y⟩=f⁻¹⟨B⟩∖f⁻¹⟨Y⟩, fichier ii_4_image_famille/ensembles_image_algebre_binaire_ii4.py l.327). La versio
 - enonce: ⊢ injective(f) ⇒ f⟨A∖X⟩ = f⟨A⟩∖f⟨X⟩, pour X ⊂ A. Énoncé Bourbaki verbatim : « Soit f une injection de A dans B ; pour toute partie X de A, on a f⟨A−X⟩ = f⟨A⟩ − f⟨X⟩ » (Texte.tex §5, Corollaire de la Prop. 6, lignes 91-100).
