@@ -1,4 +1,7 @@
-"""TODO — II.5.2-5.3 : Application diagonale et diagonale Delta du produit E^I (mentionnees comme notions dans ensembles_extension_canonique mais pas de module/propositions propres de
+"""§II.5.3 — Application diagonale x↦x̃ et diagonale Δ du produit E^I.
 
-Dossier-trou : resultat du livre PAS ENCORE formalise. A combler en ETAPE B.
+Les notions (x̃, application diagonale, Δ) sont INTRODUITES dans
+ii_5_1_extension_canonique.ensembles_extension_canonique ; ce sous-dossier porte la
+PROPOSITION dure associée : `ensembles_diagonale_injective` certifie l'injectivité
+de l'application diagonale x↦x̃ (sous hypothèse d'indice-témoin α∈I).
 """
