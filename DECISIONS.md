@@ -18,3 +18,17 @@ Décisions prises sans solliciter l'utilisateur (cf. CLAUDE.md). Une ligne par d
 - **Outillage** : `outils_ia/reorg_moves.json` (carte durable des déplacements) +
   `outils_ia/migration_arbre.py` (migration par paquet : `git mv` + `__init__.py` + réécriture d'imports
   `\bold.dotted\b → new.dotted`, mode `--dry-run`).
+
+## 2026-06-23 — Migration (en cours)
+
+- **Outil finalisé** : motif A (chemin pointé contigu `a.b.c`, couvre aussi `from a.b.c import (noms)`)
+  + motif B (`from PARENT import NOM [as ALIAS]`, la **forme dominante** — 659× `ensembles_abrege`,
+  416× `noyau_abrege`). Vérifié : pas d'imports relatifs, pas de multi-sous-modules sur une ligne dans le
+  dépôt → ces deux motifs suffisent. Le canari a révélé l'oubli du motif B *avant* tout dégât (dry-run +
+  revert propre).
+- **Canari `structures/` (bourbaki/) MIGRÉ ✅** : 14 fichiers → `iv_1_structures_isomorphismes/` +
+  `iv_2_morphismes_structures_derivees/` (≤10), 26 fichiers d'imports réécrits, collecte + **167 tests
+  verts (1.8 s)**.
+- **tests/ mirroring — À FAIRE** : `reorg_moves.json` ne couvre que `bourbaki/`. Chaque `tests/<paquet>`
+  sera réorganisé en miroir (chaque `test_*.py` dans le sous-dossier de son module). `tests/structures`
+  reste à plat (≤10 non encore satisfait côté tests) tant que non mirroré — prochain sous-pas.

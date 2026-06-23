@@ -66,7 +66,7 @@ from bourbaki.logique.tactiques.tactiques_abrege import a_implique_a, syllogisme
 from bourbaki.logique.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
     equivalence_avant, equivalence_arriere, instancie)
-from bourbaki.structures.ensembles_universel_morphismes import (
+from bourbaki.structures.iv_2_morphismes_structures_derivees.ensembles_universel_morphismes import (
     est_morphisme, plus_fine, moins_fine, _morph_defaut, _t)
 
 
@@ -245,7 +245,7 @@ from bourbaki.cardinaux.ensembles_equipotence import (
     diagonale_fonctionnelle, diagonale_domaine, diagonale_injective,
     diagonale_image)
 from bourbaki.cardinaux.ensembles_composee_bijection import composee_bijection
-from bourbaki.structures.ensembles_especes import (
+from bourbaki.structures.iv_1_structures_isomorphismes.ensembles_especes import (
     est_isomorphisme, structure_transportee)
 
 

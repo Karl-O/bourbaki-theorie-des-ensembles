@@ -13,12 +13,12 @@ Vérifie pour chaque critère certifié dans `ensembles_cst_criteres_suite` :
 from bourbaki.logique.formule import var, egal, et, equiv
 from bourbaki.ensembles import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de
-from bourbaki.structures.ensembles_especes import (
+from bourbaki.structures.iv_1_structures_isomorphismes.ensembles_especes import (
     Espece, est_isomorphisme, structure_transportee)
-from bourbaki.structures.ensembles_especes_echelon import Schema, schema_parties
-from bourbaki.structures.ensembles_CST_criteres import (
+from bourbaki.structures.iv_1_structures_isomorphismes.ensembles_especes_echelon import Schema, schema_parties
+from bourbaki.structures.iv_2_morphismes_structures_derivees.cst_criteres.ensembles_CST_criteres import (
     initiales_mutuellement_plus_fines)
-import bourbaki.structures.ensembles_cst_criteres_suite as S
+import bourbaki.structures.iv_2_morphismes_structures_derivees.cst_criteres.ensembles_cst_criteres_suite as S
 
 
 # ── espèces de test ──────────────────────────────────────────────────────────

@@ -6,9 +6,9 @@ import pytest
 
 from bourbaki.logique.formule import var, app, egal, et, impl, appartient
 from bourbaki.ensembles import ensembles_abrege as E
-from bourbaki.structures import ensembles_especes_echelon as Ech
-from bourbaki.structures import ensembles_especes as Sp
-from bourbaki.structures import ensembles_especes_deduction as Ded
+from bourbaki.structures.iv_1_structures_isomorphismes import ensembles_especes_echelon as Ech
+from bourbaki.structures.iv_1_structures_isomorphismes import ensembles_especes as Sp
+from bourbaki.structures.iv_1_structures_isomorphismes import ensembles_especes_deduction as Ded
 
 
 def _espece_relationnelle(nom="RelBin"):

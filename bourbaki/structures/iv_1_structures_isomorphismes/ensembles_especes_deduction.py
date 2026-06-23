@@ -38,11 +38,11 @@ from bourbaki.logique.formule import var, egal, et, impl, appartient
 from bourbaki.logique import noyau_abrege as N
 from bourbaki.ensembles import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de
-from bourbaki.structures.ensembles_especes_echelon import (
+from bourbaki.structures.iv_1_structures_isomorphismes.ensembles_especes_echelon import (
     Schema, echelon, extension_canonique)
-from bourbaki.structures.ensembles_especes import (
+from bourbaki.structures.iv_1_structures_isomorphismes.ensembles_especes import (
     Espece, est_structure_espece, structure_transportee)
-from bourbaki.structures.ensembles_especes_typification import _conj
+from bourbaki.structures.iv_1_structures_isomorphismes.ensembles_especes_typification import _conj
 
 
 def _t(s):
@@ -184,7 +184,7 @@ def structure_sous_jacente_intrinseque(j: int, sigma: Espece, bases="auto", s="s
     # partie « = f_j(x_j) » suppose y_j = f_j(x_j) (déf. de la bijection), reportée.
     if bases == "auto":
         bases = [var(f"x{k+1}") for k in range(sigma.n)]
-    from bourbaki.structures.ensembles_especes_echelon import schema_base
+    from bourbaki.structures.iv_1_structures_isomorphismes.ensembles_especes_echelon import schema_base
     Tj = schema_base(j)
     Vx = projection_base(j)(list(bases), _t(s))                 # x_j
     ids = [E.diagonale(A) for A in sigma.auxiliaires]

@@ -48,10 +48,10 @@ from bourbaki.logique.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
     equivalence_avant, equivalence_arriere, equivalence_symetrie,
     equivalence_transitivite, instancie)
-from bourbaki.structures.ensembles_universel_morphismes import (
+from bourbaki.structures.iv_2_morphismes_structures_derivees.ensembles_universel_morphismes import (
     est_morphisme, plus_fine, propriete_IN, _morph_defaut, _t)
-from bourbaki.structures.ensembles_universel_finale import propriete_FI
-from bourbaki.structures.ensembles_CST_criteres import (
+from bourbaki.structures.iv_2_morphismes_structures_derivees.ensembles_universel_finale import propriete_FI
+from bourbaki.structures.iv_2_morphismes_structures_derivees.cst_criteres.ensembles_CST_criteres import (
     initiales_mutuellement_plus_fines, finales_mutuellement_plus_fines,
     id_est_morphisme)
 
@@ -169,7 +169,7 @@ def cst15_imrec_produit_egales(ep="Ep", struct_R="R", struct_J="J", i="I0",
     Réalisé comme INSTANCE de `cst10_initiales_egales` (même schéma d'unicité).  REPORTÉ :
     l'équivalence d'EXISTENCE.  NON VACUEUX : 𝓡=𝓙 ∉ hypothèses (ANTISYM est l'IMPLICATION
     (pf∧pf)⇒(𝓡=𝓙), pas l'égalité)."""
-    from bourbaki.structures.ensembles_CST_criteres import cst9_unicite_initiale
+    from bourbaki.structures.iv_2_morphismes_structures_derivees.cst_criteres.ensembles_CST_criteres import cst9_unicite_initiale
     sR, sJ = _t(struct_R), _t(struct_J)
     # les deux structures (image-réciproque-du-produit et initiale-des-composées) vérifient
     # (IN) pour la MÊME famille (E_ι,𝒮_ι, g_ι) ; unicité par antisymétrie = schéma CST9/CST10
@@ -213,7 +213,7 @@ def cst13_produit_associatif_egales(e="E", struct_P="P", struct_Pp="Pp", i="I0",
     l'isomorphisme canonique d'associativité et la construction effective des produits
     (CST22) ; on certifie le palier d'égalité « les deux structures produit coïncident ».
     NON VACUEUX : 𝒫=𝒫' ∉ hypothèses (ANTISYM est l'implication (pf∧pf)⇒(𝒫=𝒫'))."""
-    from bourbaki.structures.ensembles_CST_criteres import cst9_unicite_initiale
+    from bourbaki.structures.iv_2_morphismes_structures_derivees.cst_criteres.ensembles_CST_criteres import cst9_unicite_initiale
     sP, sPp = _t(struct_P), _t(struct_Pp)
     res = cst9_unicite_initiale(e, struct_P, struct_Pp, i, af, sf, ff, morph)
     assert res.conclusion == egal(sP, sPp), "conclusion ≠ (𝒫 = 𝒫')"
@@ -316,7 +316,7 @@ def cst21_quotients_egales(e="E", struct_F="F", struct_G="G", i="I0",
     celui de CST19).  REPORTÉ : l'EXISTENCE des structures quotient (CST22 dual) ; on
     certifie le palier « les deux structures quotient coïncident ».  NON VACUEUX : 𝒬=𝒬'
     ∉ hypothèses (ANTISYM est l'implication (pf∧pf)⇒(𝒬=𝒬'))."""
-    from bourbaki.structures.ensembles_CST_criteres import cst18_unicite_finale
+    from bourbaki.structures.iv_2_morphismes_structures_derivees.cst_criteres.ensembles_CST_criteres import cst18_unicite_finale
     sF, sG = _t(struct_F), _t(struct_G)
     res = cst18_unicite_finale(e, struct_F, struct_G, i, af, sf, gf, morph)
     assert res.conclusion == egal(sF, sG), "conclusion ≠ (𝒬 = 𝒬')"

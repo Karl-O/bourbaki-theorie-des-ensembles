@@ -1,5 +1,5 @@
 """Tests ISOLÉS du module NEUF
-`bourbaki.structures.ensembles_structures_derivees_props`
+`bourbaki.structures.iv_2_morphismes_structures_derivees.ensembles_structures_derivees_props`
 (§IV.2 — STRUCTURES DÉRIVÉES : CST10 transitivité initiales, CST11 structure
 induite par composition, CST19 transitivité finales, propriétés directes
 image réciproque/directe).
@@ -14,9 +14,9 @@ Pour chaque théorème on vérifie :
 """
 from bourbaki.logique.formule import var, egal, equiv
 from bourbaki.ensembles import ensembles_abrege as E
-from bourbaki.structures.ensembles_universel_morphismes import (
+from bourbaki.structures.iv_2_morphismes_structures_derivees.ensembles_universel_morphismes import (
     plus_fine, est_morphisme, _morph_defaut)
-import bourbaki.structures.ensembles_structures_derivees_props as P
+import bourbaki.structures.iv_2_morphismes_structures_derivees.ensembles_structures_derivees_props as P
 
 
 def _m():

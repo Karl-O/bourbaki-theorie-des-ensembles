@@ -5,8 +5,8 @@ Fidèle aux énoncés VERBATIM de IV.1.4–IV.1.5 ; theorie_ensembles() = 22 axi
 from bourbaki.logique.formule import var, egal, et, existe, appartient
 from bourbaki.ensembles import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de
-from bourbaki.structures import ensembles_especes_echelon as Ech
-from bourbaki.structures import ensembles_especes as Sp
+from bourbaki.structures.iv_1_structures_isomorphismes import ensembles_especes_echelon as Ech
+from bourbaki.structures.iv_1_structures_isomorphismes import ensembles_especes as Sp
 
 
 def _espece_relationnelle():

@@ -1,4 +1,4 @@
-"""Tests ISOLÉS du module NEUF `bourbaki.structures.ensembles_transport_iso_props`
+"""Tests ISOLÉS du module NEUF `bourbaki.structures.iv_1_structures_isomorphismes.ensembles_transport_iso_props`
 (§IV.1.5 / IV.1.2 — transport de structure & isomorphismes, niveau ESPÈCE Σ).
 
 Vérifie, pour chacun des six théorèmes :
@@ -12,12 +12,12 @@ Vérifie, pour chacun des six théorèmes :
 from bourbaki.logique.formule import var, egal
 from bourbaki.ensembles import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de
-from bourbaki.structures.ensembles_especes import (
+from bourbaki.structures.iv_1_structures_isomorphismes.ensembles_especes import (
     Espece, structure_transportee, est_isomorphisme, sont_isomorphes,
     est_automorphisme)
-from bourbaki.structures.ensembles_especes_echelon import (
+from bourbaki.structures.iv_1_structures_isomorphismes.ensembles_especes_echelon import (
     Schema, echelon, extension_canonique, schema_parties)
-import bourbaki.structures.ensembles_transport_iso_props as P
+import bourbaki.structures.iv_1_structures_isomorphismes.ensembles_transport_iso_props as P
 
 
 # ── espèces de test ──────────────────────────────────────────────────────────

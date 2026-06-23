@@ -23,7 +23,7 @@ from bourbaki.logique import noyau_abrege as N
 from bourbaki.ensembles import ensembles_abrege as E
 from bourbaki.logique.tactiques.tactiques_abrege2 import (
     equivalence_avant, instancie)
-from bourbaki.structures.ensembles_universel_morphismes import (
+from bourbaki.structures.iv_2_morphismes_structures_derivees.ensembles_universel_morphismes import (
     est_morphisme, _morph_defaut, _t)
 
 

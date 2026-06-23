@@ -59,7 +59,7 @@ from bourbaki.logique.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
     equivalence_avant, equivalence_arriere, equivalence_symetrie,
     equivalence_transitivite, instancie)
-from bourbaki.structures.ensembles_universel_morphismes import (
+from bourbaki.structures.iv_2_morphismes_structures_derivees.ensembles_universel_morphismes import (
     est_morphisme, _morph_defaut, _t)
 
 

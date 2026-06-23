@@ -81,10 +81,10 @@ from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de
 from bourbaki.cardinaux.ensembles_equipotence import (
     diagonale_fonctionnelle, diagonale_domaine, diagonale_injective,
     diagonale_image)
-from bourbaki.structures.ensembles_especes import (
+from bourbaki.structures.iv_1_structures_isomorphismes.ensembles_especes import (
     Espece, structure_transportee, est_isomorphisme, sont_isomorphes,
     est_automorphisme)
-from bourbaki.structures.ensembles_especes_echelon import (
+from bourbaki.structures.iv_1_structures_isomorphismes.ensembles_especes_echelon import (
     echelon, extension_canonique)
 
 

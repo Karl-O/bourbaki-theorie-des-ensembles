@@ -24,7 +24,7 @@ from typing import Sequence
 from bourbaki.logique.formule import var, et, impl, equiv, appartient
 from bourbaki.ensembles import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de
-from bourbaki.structures.ensembles_especes_echelon import Schema, echelon, extension_canonique
+from bourbaki.structures.iv_1_structures_isomorphismes.ensembles_especes_echelon import Schema, echelon, extension_canonique
 
 
 def _conj(formules):

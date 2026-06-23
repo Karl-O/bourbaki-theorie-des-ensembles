@@ -80,12 +80,12 @@ from bourbaki.logique.tactiques.tactiques_abrege2 import (
     equivalence_avant, equivalence_arriere, equivalence_symetrie,
     equivalence_transitivite, instancie)
 from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de
-from bourbaki.structures.ensembles_especes import (
+from bourbaki.structures.iv_1_structures_isomorphismes.ensembles_especes import (
     Espece, est_isomorphisme, structure_transportee)
-from bourbaki.structures.ensembles_especes_echelon import extension_canonique
-from bourbaki.structures.ensembles_CST_criteres import (
+from bourbaki.structures.iv_1_structures_isomorphismes.ensembles_especes_echelon import extension_canonique
+from bourbaki.structures.iv_2_morphismes_structures_derivees.cst_criteres.ensembles_CST_criteres import (
     initiales_mutuellement_plus_fines, finales_mutuellement_plus_fines)
-from bourbaki.structures.ensembles_universel_morphismes import _t
+from bourbaki.structures.iv_2_morphismes_structures_derivees.ensembles_universel_morphismes import _t
 
 
 # ════════════════════════════════════════════════════════════════════════════

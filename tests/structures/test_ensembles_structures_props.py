@@ -1,4 +1,4 @@
-"""Tests ISOLÉS du module NEUF `bourbaki.structures.ensembles_structures_props`
+"""Tests ISOLÉS du module NEUF `bourbaki.structures.iv_2_morphismes_structures_derivees.ensembles_structures_props`
 (§IV.1.5 / IV.2.2 / IV.3.1 — propositions « logiquement directes » du chap. IV).
 
 Vérifie, pour chacun des cinq groupes de la mission IV-structures-props :
@@ -12,11 +12,11 @@ Vérifie, pour chacun des cinq groupes de la mission IV-structures-props :
 from bourbaki.logique.formule import var, egal, et
 from bourbaki.ensembles import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de
-from bourbaki.structures.ensembles_universel_morphismes import (
+from bourbaki.structures.iv_2_morphismes_structures_derivees.ensembles_universel_morphismes import (
     plus_fine, est_morphisme, _morph_defaut)
-from bourbaki.structures.ensembles_especes import Espece, est_isomorphisme
-from bourbaki.structures.ensembles_especes_echelon import Schema
-import bourbaki.structures.ensembles_structures_props as P
+from bourbaki.structures.iv_1_structures_isomorphismes.ensembles_especes import Espece, est_isomorphisme
+from bourbaki.structures.iv_1_structures_isomorphismes.ensembles_especes_echelon import Schema
+import bourbaki.structures.iv_2_morphismes_structures_derivees.ensembles_structures_props as P
 
 
 # ── espèce minimale (1 base principale, 0 auxiliaire, schéma identité) ──────────

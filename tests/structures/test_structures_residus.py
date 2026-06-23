@@ -6,8 +6,8 @@ clôture des lemmes logiques directs, et l'invariance theorie_ensembles() = 22 a
 """
 from bourbaki.logique.formule import (var, et, impl, appartient, app, alpha_egal)
 from bourbaki.ensembles import ensembles_abrege as E
-from bourbaki.structures import ensembles_structures_residus as R
-from bourbaki.structures import ensembles_universel_morphismes as M
+from bourbaki.structures.iv_2_morphismes_structures_derivees import ensembles_structures_residus as R
+from bourbaki.structures.iv_2_morphismes_structures_derivees import ensembles_universel_morphismes as M
 from bourbaki.ensembles.relations import ensembles_decomposition_quotient as D
 
 

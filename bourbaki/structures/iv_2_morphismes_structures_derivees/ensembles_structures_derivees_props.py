@@ -73,9 +73,9 @@ from bourbaki.logique.tactiques.tactiques_abrege import antecedent_consequent
 from bourbaki.logique.tactiques.tactiques_abrege2 import (
     conjonction_intro, equivalence_avant, equivalence_arriere,
     equivalence_symetrie, equivalence_transitivite, instancie)
-from bourbaki.structures.ensembles_universel_morphismes import (
+from bourbaki.structures.iv_2_morphismes_structures_derivees.ensembles_universel_morphismes import (
     est_morphisme, plus_fine, propriete_IN, _morph_defaut, _t)
-from bourbaki.structures.ensembles_universel_finale import propriete_FI
+from bourbaki.structures.iv_2_morphismes_structures_derivees.ensembles_universel_finale import propriete_FI
 
 
 # ════════════════════════════════════════════════════════════════════════════

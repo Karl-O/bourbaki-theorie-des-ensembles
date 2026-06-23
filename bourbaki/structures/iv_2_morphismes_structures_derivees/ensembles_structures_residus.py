@@ -50,7 +50,7 @@ from bourbaki.logique import noyau_abrege as N
 from bourbaki.ensembles import ensembles_abrege as E
 from bourbaki.logique.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite)
-from bourbaki.structures.ensembles_universel_morphismes import (
+from bourbaki.structures.iv_2_morphismes_structures_derivees.ensembles_universel_morphismes import (
     est_morphisme, _morph_defaut, _t)
 from bourbaki.ensembles.relations.ensembles_decomposition_quotient import (
     relation_egalite_valeurs, surjection_canonique, injection_canonique,

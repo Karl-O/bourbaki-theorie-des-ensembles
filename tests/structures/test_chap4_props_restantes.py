@@ -1,4 +1,4 @@
-"""Tests ISOLÉS — `bourbaki.structures.ensembles_chap4_props_restantes`.
+"""Tests ISOLÉS — `bourbaki.structures.iv_2_morphismes_structures_derivees.cst_criteres.ensembles_chap4_props_restantes`.
 
 Critères de structures (CST) RESTANTS du chapitre IV : CST3 (réciproque du transport),
 MO_III (caractérisation des isos + réciproque d'un iso est un iso), CST12 (restriction
@@ -11,8 +11,8 @@ aux sous-structures), CST20 (passage aux quotients).  On certifie :
 """
 from bourbaki.logique.formule import var, egal, et, equiv
 from bourbaki.ensembles import ensembles_abrege as E
-from bourbaki.structures import ensembles_chap4_props_restantes as M
-from bourbaki.structures.ensembles_universel_morphismes import est_morphisme
+from bourbaki.structures.iv_2_morphismes_structures_derivees.cst_criteres import ensembles_chap4_props_restantes as M
+from bourbaki.structures.iv_2_morphismes_structures_derivees.ensembles_universel_morphismes import est_morphisme
 
 
 # ── theorie intangible ────────────────────────────────────────────────────────

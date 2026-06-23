@@ -7,7 +7,7 @@ noyau (clos, ou conditionnel avec les hypothèses attendues).
 from bourbaki.logique.formule import (var, et, ou, non, impl, equiv, pourtout,
                                        existe, appartient, egal, app, alpha_egal)
 from bourbaki.ensembles import ensembles_abrege as E
-from bourbaki.structures import ensembles_universel_morphismes as M
+from bourbaki.structures.iv_2_morphismes_structures_derivees import ensembles_universel_morphismes as M
 
 
 def test_morph_defaut_callable():

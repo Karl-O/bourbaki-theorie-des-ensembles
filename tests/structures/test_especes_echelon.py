@@ -3,7 +3,7 @@ canonique ⟨f₁,…,fₙ⟩^S.   REPRÉSENTATIONNEL : on vérifie que les def 
 bons OBJETS/TERMES, fidèlement aux énoncés VERBATIM de IV.1.1–IV.1.2."""
 from bourbaki.logique.formule import var
 from bourbaki.ensembles import ensembles_abrege as E
-from bourbaki.structures import ensembles_especes_echelon as Ech
+from bourbaki.structures.iv_1_structures_isomorphismes import ensembles_especes_echelon as Ech
 
 
 # ── §IV.1.1 — schémas : validité et nombre de termes ──────────────────────────
