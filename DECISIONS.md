@@ -123,3 +123,12 @@ le livre, ≤10 entrées/dossier.
   (≤10 OK) ; à ranger sous iii_3 plus tard (cosmétique).
 - **Outil migration_arbre.py = définitif** : transactionnel, scan tout V9, renommages de paquets, formes
   parenthésées, validation de format, garde anti-contamination. Aucune régression possible en silence.
+
+
+## 2026-06-23 (nuit) - ETAPE D: diagnostic perf + PIVOT strategique
+
+Profilage de trois_impair (proof cardinal ~400s, outils_ia/profil_hotspot.txt) : le cout est ALGORITHMIQUE, pas un hotspot cachable. Pour UNE preuve : ~46M modus_ponens, ~200M noeuds construits, hash = 70% du temps (434M appels). Cause : les tactiques s'etendent sur les formules-abreviations (impl=ou/non, et, equiv, pourtout) contenant le terme cardinal profond (~156k noeuds), generant un nombre polynomial/exponentiel d'operations.
+
+- FAIT : memoisation subst_t/subst_f (lru_cache borne 1M) = gain 28% (551->397s), sound (fonction pure, sanity logique verte). Commitee.
+- MUR : aller plus loin = refonte du noyau/tactiques (representation, partage, memoisation des theoremes) -> RISQUE sur la frontiere de confiance, HORS SCOPE d'une nuit autonome. Les preuves cardinales arithmetiques profondes (Hessenberg Lemme 2, trois_puiss_impair, division euclidienne, bon ordre cardinaux) restent donc PARTIELLES/MANQUANTES, documentees, perf-bloquees.
+- PIVOT : concentrer ETAPE B sur les ~100+ resultats de l'audit NON bloques par cette perf (II.3 fonctions, II.4 familles, II.5 produits, II.6 equivalence, III.1 ordre, III.2 bon ordre : set/order-theoriques, peu/pas de cardinaux profonds). Fan-out de planification puis delegation d'implementation, un resultat a la fois, certifie noyau.
