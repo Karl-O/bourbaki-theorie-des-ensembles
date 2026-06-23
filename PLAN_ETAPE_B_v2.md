@@ -2,7 +2,7 @@
 
 Priorise: perf_risque faible + difficulte facile d abord. [ ] = a faire, [x] = fait.
 
-## [ ] theoreme1_b_section_valeur  (faible/facile)
+## [x] theoreme1_b_section_valeur  (faible/facile)
 - secteur: II.3 correspondances et foncti | §II.3.8, Théorème 1 b) — composition des sections : « si s, s' sont des sections associées à f et f', s∘s' est une section associée à f''=f'∘f »
 - statut: MANQUANT — le module ensembles_retractions_props.py couvre Théorème 1 a) (theoreme1_a_retraction_valeur, composition des RÉTRACTIONS au niveau matriciel) et 1 d), mais le DUAL exact pour les SECTIONS 
 - enonce: ⊢_{S section de F sur A, S' section de F' sur B, s'(z)∈B} (z∈C) ⇒ f'(f(s(s'(z)))) = z. Lu matriciellement (encodage Déf. 11 du projet, comme theoreme1_a_retraction_valeur) : « s∘s' est une section de f''=f'∘f » signifie (∀z∈C) (f'∘f)((s∘s')(z))=z, soit en dépliant f'(f(s(s'(z))))=z. Preuve de Bourba
