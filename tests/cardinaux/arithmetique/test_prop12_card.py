@@ -8,7 +8,7 @@ import pytest
 from bourbaki.logique.i_1_termes_relations.formule import (var, egal, et, non, ou, impl, equiv,
                                        appartient, inclus, pourtout, existe)
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.cardinaux.arithmetique import ensembles_prop12_card as P
+from bourbaki.cardinaux.arithmetique.iii_3_5_exposant.prop12_powerset import prop12_card as P
 from bourbaki.cardinaux.arithmetique.iii_3_5_exposant.prop12_powerset.prop12_card import _bijection as B
 from bourbaki.cardinaux.arithmetique.iii_3_5_exposant.prop12_powerset.ensembles_powerset_exp import deux
 from bourbaki.cardinaux.arithmetique.iii_3_5_exposant.prop12_powerset.ensembles_powerset_deux import preimage_un
