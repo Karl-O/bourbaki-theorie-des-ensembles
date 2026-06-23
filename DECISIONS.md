@@ -47,3 +47,23 @@ Migrés + commités (gate collecte vert, 1 erreur connue tolérée) :
 **Restent** : `logique` (le plus transverse — 400+ imports `noyau_abrege`/`ensembles_abrege`),
 `cardinaux/arithmetique`, `cardinaux` (140 fichiers + fix du dossier `hessenberg/assemblage_vrai` à 11,
 + tests lourds ~16 min). À traiter avec un run de suite complète.
+
+## 2026-06-23 — `logique` migré (7/9) + outil rendu ROBUSTE (mésaventure)
+
+- **Bug 1** : l'outil pré-créait les `__init__.py` AVANT les `git mv` → collision quand un `git mv`
+  déplaçait un `__init__.py` existant → exit 128 **migration partielle = dépôt cassé**. Pire, des `git mv`
+  restés *staged* ont été aspirés par un commit d'outil ultérieur (HEAD contaminé). Récupéré par
+  `git reset --hard HEAD~1` sur le commit « journal » (logique à plat).
+- **Bug 2** : `_all_py()` ne scannait que `bourbaki/`+`tests/` → les imports de **`outils_ia/*.py`** et des
+  scripts racine n'étaient PAS réécrits → 6 erreurs de collecte. Corrigé : scan de TOUT V9 (hors
+  `__pycache__/.git/.venv/.pytest_cache`).
+- **Exigence utilisateur** « empêche ça » → outil rendu **TRANSACTIONNEL** : préflight (arbre git propre +
+  sources présentes + destinations libres) puis apply protégé avec **ROLLBACK auto** (`git reset --hard`
+  + `git clean`) à la moindre exception. Plus jamais d'état partiel. Commits d'outil protégés par un garde
+  anti-contamination (vérifier que seul l'outil est *staged*). Cf. [[outils-transactionnels]].
+- **`logique` migré** : I.1/I.2/I.3/I.4, 754 imports réécrits (outils_ia inclus), collecte **3005/1**.
+  Dossiers source vides (`logique/criteres`, `logique/tactiques`) nettoyés (`find -type d -empty -delete`).
+- **TODO outil** : ajouter le nettoyage auto des dossiers source vides en fin de migration.
+- **Restent** : `cardinaux/arithmetique`, puis `cardinaux` (fix `hessenberg/assemblage_vrai` 11→≤10 dans
+  `reorg_moves.json` AVANT apply), avec run de suite complète (avec `--timeout`, cf. test lent pré-existant
+  dans entiers/ensembles — cible ÉTAPE D).
