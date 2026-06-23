@@ -45,7 +45,7 @@ Priorise: perf_risque faible + difficulte facile d abord. [ ] = a faire, [x] = f
 - lemmes: ensembles_image_algebre_binaire_ii4:membre_image, ensembles_image_algebre_binaire_ii4:_instance_diff, ensembles_image_recip_famille_ii4:injective, ensembles_abrege:image, ensembles_abrege:difference, ensembles_theoremes:extensionnalite_appliquee, tactiques_abrege2:instancie, tactiques_abrege2:contraposition
 - fichier: C:/Users/KARL/OneDrive/Bureau/Apprendre/Livre/Bourbakie/Theorie_des_ensembles/V9/bourbaki/ensembles/familles/ii_4_reunion_intersection_familles/ii_4_image_famille/ensembles_image_difference_injective_
 
-## [ ] commutativite_reunion_binaire / commutativite_inter_binaire — corollaires nommés de la Prop. 1 + Cor.  (faible/facile)
+## [x] commutativite_reunion_binaire / commutativite_inter_binaire — corollaires nommés de la Prop. 1 + Cor.  (faible/facile)
 - secteur: II.4 réunion/intersection d'un | E.II.4.5 (sous-section 5), formules A∪B = B∪A et A∩B = B∩A présentées comme « conséquences des prop. 1 et 2 » (Texte.tex §4.5 lignes 29-39).
 - statut: PARTIEL. La commutativité ∪/∩ existe au niveau de l'algèbre booléenne profonde (ii_1_axiomes_algebre/ensembles_algebre_booleenne.py) mais N'EST PAS dérivée comme résultat de la SECTION II.4 à partir d
 - enonce: ⊢ A∪B = B∪A et ⊢ A∩B = B∩A, dérivés directement de la caractérisation z∈A∪B ⇔ (z∈A ∨ z∈B) (AXIOME_REUNION) et de la commutativité du ∨ (C-critère), resp. z∈A∩B ⇔ (z∈A et z∈B) et commutativité du et. Énoncé Bourbaki : Texte.tex §4.5 lignes 31-33.
