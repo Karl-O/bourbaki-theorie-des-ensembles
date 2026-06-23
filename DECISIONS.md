@@ -88,3 +88,20 @@ DOSSIERS**, 4 sous-paquets renommés `ensembles_X` → `X`). Trois bugs successi
 
 **RESTE** : `cardinaux` (140 fichiers, dernier). Puis suite complète `--timeout=120`, mirroring `tests/`,
 dossiers-trous.
+
+## 2026-06-23 — 🎉 ARBORESCENCE 9/9 PAQUETS MIGRÉE
+
+`cardinaux` migré sans accroc (139 moves, 464 imports réécrits, move-map bien formé, 0 renommage de
+paquet, 0 violation) → racine cardinaux/ = 8 entrées (arithmetique, ensembles_cantor_bernstein_final,
+iii_2/3/4/5/6_*, __init__). **Gate 3005/1 partout.** TOUTE la structure de `bourbaki/` calque désormais
+le livre, ≤10 entrées/dossier.
+- Vérif runtime lancée : `pytest --timeout=1200` plein dépôt (20 min/test : Hessenberg ~16 min passe, le
+  test qui pendait 1h20 sera tué → cible ÉTAPE D). Tâche `bbkjszyow`.
+- **RESTE pour finir ÉTAPE A** : (1) confirmer le run runtime ; (2) **mirroring `tests/`** — les fichiers
+  `tests/<paquet>/test_X.py` sont encore À PLAT (≤10 non satisfait côté tests) ; les ranger dans le
+  sous-dossier miroir de leur module (déduire le sous-dossier depuis les imports `from bourbaki.<pkg>...`
+  réécrits du test) ; (3) créer les **16 dossiers-trous** (normaliser les chemins, certains mal préfixés).
+- Note : `ensembles_cantor_bernstein_final/` reste un sous-paquet autonome à la racine de cardinaux/
+  (≤10 OK) ; à ranger sous iii_3 plus tard (cosmétique).
+- **Outil migration_arbre.py = définitif** : transactionnel, scan tout V9, renommages de paquets, formes
+  parenthésées, validation de format, garde anti-contamination. Aucune régression possible en silence.
