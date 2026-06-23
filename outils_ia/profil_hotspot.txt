@@ -1,0 +1,76 @@
+=== bourbaki.cardinaux.iii_6_infinis.denombrable.ensembles_denombrable_injection_iii6.trois_impair  est_clos=True ===
+
+---- par tottime (temps propre, hors sous-appels) ----
+         2024908861 function calls (1636910326 primitive calls) in 1117.567 seconds
+
+   Ordered by: internal time
+   List reduced from 2305 to 30 due to restriction <30>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+434024283/332384301  182.586    0.000  275.009    0.000 {built-in method builtins.hash}
+111953788   98.212    0.000   98.212    0.000 C:\Users\KARL\OneDrive\Bureau\Apprendre\Livre\Bourbakie\Theorie_des_ensembles\V9\bourbaki\logique\i_2_criteres_C\noyau\noyau_abrege.py:26(__init__)
+107838048/50030800   94.123    0.000  394.326    0.000 C:\Users\KARL\OneDrive\Bureau\Apprendre\Livre\Bourbakie\Theorie_des_ensembles\V9\bourbaki\logique\i_1_termes_relations\formule.py:83(__eq__)
+397217005/231732979   82.341    0.000  148.164    0.000 C:\Users\KARL\OneDrive\Bureau\Apprendre\Livre\Bourbakie\Theorie_des_ensembles\V9\bourbaki\logique\i_1_termes_relations\formule.py:76(__hash__)
+101920641   67.323    0.000   84.189    0.000 C:\Users\KARL\OneDrive\Bureau\Apprendre\Livre\Bourbakie\Theorie_des_ensembles\V9\bourbaki\logique\i_1_termes_relations\formule.py:107(ou)
+111953788   62.255    0.000  160.467    0.000 C:\Users\KARL\OneDrive\Bureau\Apprendre\Livre\Bourbakie\Theorie_des_ensembles\V9\bourbaki\logique\i_2_criteres_C\noyau\noyau_abrege.py:69(_t)
+ 90177774   60.659    0.000   75.944    0.000 C:\Users\KARL\OneDrive\Bureau\Apprendre\Livre\Bourbakie\Theorie_des_ensembles\V9\bourbaki\logique\i_1_termes_relations\formule.py:106(non)
+65552412/9906533   59.442    0.000  157.010    0.000 C:\Users\KARL\OneDrive\Bureau\Apprendre\Livre\Bourbakie\Theorie_des_ensembles\V9\bourbaki\logique\i_1_termes_relations\formule.py:50(__eq__)
+ 46256141   52.522    0.000  405.310    0.000 C:\Users\KARL\OneDrive\Bureau\Apprendre\Livre\Bourbakie\Theorie_des_ensembles\V9\bourbaki\logique\i_2_criteres_C\noyau\noyau_abrege.py:139(modus_ponens)
+ 55412892   36.682    0.000  129.952    0.000 C:\Users\KARL\OneDrive\Bureau\Apprendre\Livre\Bourbakie\Theorie_des_ensembles\V9\bourbaki\logique\i_1_termes_relations\formule.py:112(impl)
+196694192   33.089    0.000   33.089    0.000 C:\Users\KARL\OneDrive\Bureau\Apprendre\Livre\Bourbakie\Theorie_des_ensembles\V9\bourbaki\logique\i_1_termes_relations\formule.py:68(__init__)
+ 19919844   25.347    0.000  107.619    0.000 C:\Users\KARL\OneDrive\Bureau\Apprendre\Livre\Bourbakie\Theorie_des_ensembles\V9\bourbaki\logique\i_2_criteres_C\noyau\noyau_abrege.py:150(loi_deduction)
+ 17293074   25.171    0.000  119.965    0.000 C:\Users\KARL\OneDrive\Bureau\Apprendre\Livre\Bourbakie\Theorie_des_ensembles\V9\bourbaki\logique\i_2_criteres_C\noyau\noyau_abrege.py:79(s3)
+ 12169424   25.101    0.000  256.269    0.000 C:\Users\KARL\OneDrive\Bureau\Apprendre\Livre\Bourbakie\Theorie_des_ensembles\V9\bourbaki\logique\i_2_criteres_C\tactiques\tactiques_abrege.py:25(syllogisme)
+144195657/140660433   20.352    0.000   22.152    0.000 C:\Users\KARL\OneDrive\Bureau\Apprendre\Livre\Bourbakie\Theorie_des_ensembles\V9\bourbaki\logique\i_1_termes_relations\formule.py:43(__hash__)
+ 19931553   20.141    0.000   69.650    0.000 C:\Users\KARL\OneDrive\Bureau\Apprendre\Livre\Bourbakie\Theorie_des_ensembles\V9\bourbaki\logique\i_2_criteres_C\noyau\noyau_abrege.py:73(assume)
+  4601653   15.436    0.000  373.671    0.000 C:\Users\KARL\OneDrive\Bureau\Apprendre\Livre\Bourbakie\Theorie_des_ensembles\V9\bourbaki\logique\i_2_criteres_C\tactiques\tactiques_abrege2.py:20(mono_gauche)
+  5026131   14.328    0.000  196.893    0.000 C:\Users\KARL\OneDrive\Bureau\Apprendre\Livre\Bourbakie\Theorie_des_ensembles\V9\bourbaki\logique\i_2_criteres_C\tactiques\tactiques_abrege2.py:31(dni)
+   998933    9.851    0.000   67.738    0.000 C:\Users\KARL\OneDrive\Bureau\Apprendre\Livre\Bourbakie\Theorie_des_ensembles\V9\bourbaki\logique\i_2_criteres_C\noyau\noyau_abrege.py:83(s5)
+  4674337    9.515    0.000   55.510    0.000 C:\Users\KARL\OneDrive\Bureau\Apprendre\Livre\Bourbakie\Theorie_des_ensembles\V9\bourbaki\logique\i_2_criteres_C\noyau\noyau_abrege.py:80(s4)
+  2264570    8.687    0.000  346.632    0.000 C:\Users\KARL\OneDrive\Bureau\Apprendre\Livre\Bourbakie\Theorie_des_ensembles\V9\bourbaki\logique\i_2_criteres_C\tactiques\tactiques_abrege2.py:39(contraposition)
+ 24148935    7.362    0.000    7.362    0.000 C:\Users\KARL\OneDrive\Bureau\Apprendre\Livre\Bourbakie\Theorie_des_ensembles\V9\bourbaki\logique\i_2_criteres_C\tactiques\tactiques_abrege.py:13(antecedent_consequent)
+  4674337    7.096    0.000  109.351    0.000 C:\Users\KARL\OneDrive\Bureau\Apprendre\Livre\Bourbakie\Theorie_des_ensembles\V9\bourbaki\logique\i_2_criteres_C\tactiques\tactiques_abrege2.py:15(mono_droite)
+  7071414    6.302    0.000   68.577    0.000 C:\Users\KARL\OneDrive\Bureau\Apprendre\Livre\Bourbakie\Theorie_des_ensembles\V9\bourbaki\logique\i_2_criteres_C\tactiques\tactiques_abrege.py:20(a_implique_a)
+298028/101386    5.536    0.000    8.266    0.000 C:\Users\KARL\OneDrive\Bureau\Apprendre\Livre\Bourbakie\Theorie_des_ensembles\V9\bourbaki\logique\i_1_termes_relations\formule.py:209(<genexpr>)
+  2015868    5.296    0.000  282.436    0.000 C:\Users\KARL\OneDrive\Bureau\Apprendre\Livre\Bourbakie\Theorie_des_ensembles\V9\bourbaki\logique\i_2_criteres_C\tactiques\tactiques_abrege2.py:35(dne)
+   874518    5.060    0.000  357.706    0.000 C:\Users\KARL\OneDrive\Bureau\Apprendre\Livre\Bourbakie\Theorie_des_ensembles\V9\bourbaki\logique\i_2_criteres_C\tactiques\tactiques_abrege2.py:243(instanciation)
+   405907    4.638    0.000   41.188    0.000 C:\Users\KARL\OneDrive\Bureau\Apprendre\Livre\Bourbakie\Theorie_des_ensembles\V9\bourbaki\logique\i_2_criteres_C\noyau\noyau_abrege.py:98(s6)
+575348/43347    4.081    0.000   16.842    0.000 C:\Users\KARL\OneDrive\Bureau\Apprendre\Livre\Bourbakie\Theorie_des_ensembles\V9\bourbaki\logique\i_1_termes_relations\formule.py:224(<genexpr>)
+734754/135259    3.145    0.000    5.353    0.000 C:\Users\KARL\OneDrive\Bureau\Apprendre\Livre\Bourbakie\Theorie_des_ensembles\V9\bourbaki\logique\i_1_termes_relations\formule.py:153(_libres_f)
+
+
+
+---- par cumulative (temps total avec sous-appels) ----
+         2024908861 function calls (1636910326 primitive calls) in 1117.567 seconds
+
+   Ordered by: cumulative time
+   List reduced from 2305 to 25 due to restriction <25>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.005    0.005 1117.567 1117.567 C:\Users\KARL\OneDrive\Bureau\Apprendre\Livre\Bourbakie\Theorie_des_ensembles\V9\bourbaki\cardinaux\iii_6_infinis\denombrable\ensembles_denombrable_injection_iii6.py:123(trois_impair)
+        1    0.002    0.002  921.457  921.457 C:\Users\KARL\OneDrive\Bureau\Apprendre\Livre\Bourbakie\Theorie_des_ensembles\V9\bourbaki\cardinaux\iii_5_entiers\ensembles_parite_iii5.py:736(deux_k_plus_un_impair)
+        1    0.004    0.004  921.196  921.196 C:\Users\KARL\OneDrive\Bureau\Apprendre\Livre\Bourbakie\Theorie_des_ensembles\V9\bourbaki\cardinaux\iii_5_entiers\ensembles_parite_iii5.py:724(_pair_neq_impair_t)
+        1    0.014    0.014  921.184  921.184 C:\Users\KARL\OneDrive\Bureau\Apprendre\Livre\Bourbakie\Theorie_des_ensembles\V9\bourbaki\cardinaux\iii_5_entiers\ensembles_parite_iii5.py:690(pair_neq_impair)
+    13578    0.884    0.000  593.278    0.044 C:\Users\KARL\OneDrive\Bureau\Apprendre\Livre\Bourbakie\Theorie_des_ensembles\V9\bourbaki\ensembles\ii_2_couples_produit\ensembles_couples.py:105(couple_egal_implique_composantes)
+        1    0.514    0.514  489.003  489.003 C:\Users\KARL\OneDrive\Bureau\Apprendre\Livre\Bourbakie\Theorie_des_ensembles\V9\bourbaki\entiers\iii_4_entiers_finis\iii_4_recurrence_c61_existence_n\ensembles_principe_recurrence_preuve.py:448(principe_recurrence_preuve)
+        1    0.232    0.232  473.734  473.734 C:\Users\KARL\OneDrive\Bureau\Apprendre\Livre\Bourbakie\Theorie_des_ensembles\V9\bourbaki\entiers\iii_4_entiers_finis\iii_4_recurrence_c61_existence_n\ensembles_principe_recurrence_preuve.py:352(_min_A_via_cbo)
+        1    0.110    0.110  472.432  472.432 C:\Users\KARL\OneDrive\Bureau\Apprendre\Livre\Bourbakie\Theorie_des_ensembles\V9\bourbaki\cardinaux\iii_4_ordinal_cardinal\realisation_segment\ensembles_gate_onto_top.py:898(cardinaux_bien_ordonnes_close)
+        1    0.225    0.225  472.298  472.298 C:\Users\KARL\OneDrive\Bureau\Apprendre\Livre\Bourbakie\Theorie_des_ensembles\V9\bourbaki\cardinaux\iii_4_ordinal_cardinal\realisation_segment\ensembles_gate_onto_top.py:878(bon_ordre_intervalle_close)
+        1    0.060    0.060  472.064  472.064 C:\Users\KARL\OneDrive\Bureau\Apprendre\Livre\Bourbakie\Theorie_des_ensembles\V9\bourbaki\cardinaux\iii_4_ordinal_cardinal\realisation_segment\ensembles_gate_onto_top.py:851(_bon_ordre_intervalle_close_raw)
+        3    0.005    0.002  458.554  152.851 C:\Users\KARL\OneDrive\Bureau\Apprendre\Livre\Bourbakie\Theorie_des_ensembles\V9\bourbaki\cardinaux\iii_5_entiers\ensembles_parite_iii5.py:134(deux_succ_eq)
+ 46256141   52.522    0.000  405.310    0.000 C:\Users\KARL\OneDrive\Bureau\Apprendre\Livre\Bourbakie\Theorie_des_ensembles\V9\bourbaki\logique\i_2_criteres_C\noyau\noyau_abrege.py:139(modus_ponens)
+        3    0.005    0.002  403.028  134.343 C:\Users\KARL\OneDrive\Bureau\Apprendre\Livre\Bourbakie\Theorie_des_ensembles\V9\bourbaki\cardinaux\iii_4_ordinal_cardinal\realisation_segment\ensembles_gate_onto_top.py:275(_bo_form_clean)
+        1    0.003    0.003  403.016  403.016 C:\Users\KARL\OneDrive\Bureau\Apprendre\Livre\Bourbakie\Theorie_des_ensembles\V9\bourbaki\cardinaux\iii_4_ordinal_cardinal\realisation_segment\ensembles_gate_onto_top.py:150(_realise_clean_generalized)
+        1    0.004    0.004  403.011  403.011 C:\Users\KARL\OneDrive\Bureau\Apprendre\Livre\Bourbakie\Theorie_des_ensembles\V9\bourbaki\cardinaux\iii_4_ordinal_cardinal\realisation_segment\ensembles_subset_realise_close.py:553(realise_segment_pour_B_clean)
+107838048/50030800   94.123    0.000  394.326    0.000 C:\Users\KARL\OneDrive\Bureau\Apprendre\Livre\Bourbakie\Theorie_des_ensembles\V9\bourbaki\logique\i_1_termes_relations\formule.py:83(__eq__)
+        1    0.008    0.008  389.082  389.082 C:\Users\KARL\OneDrive\Bureau\Apprendre\Livre\Bourbakie\Theorie_des_ensembles\V9\bourbaki\cardinaux\iii_5_entiers\ensembles_parite_iii5.py:555(_pni_step)
+       13    0.002    0.000  381.483   29.345 C:\Users\KARL\OneDrive\Bureau\Apprendre\Livre\Bourbakie\Theorie_des_ensembles\V9\bourbaki\cardinaux\iii_2_trichotomie_ordinaux\coincidence_fusion\ensembles_fusion_depuis_coincidence_app.py:344(fusion_depuis_coincidence_app)
+       13    0.002    0.000  380.491   29.269 C:\Users\KARL\OneDrive\Bureau\Apprendre\Livre\Bourbakie\Theorie_des_ensembles\V9\bourbaki\cardinaux\iii_2_trichotomie_ordinaux\coincidence_fusion\ensembles_fusion_depuis_coincidence_app.py:298(_core_with_witnesses_app)
+       26    0.005    0.000  378.019   14.539 C:\Users\KARL\OneDrive\Bureau\Apprendre\Livre\Bourbakie\Theorie_des_ensembles\V9\bourbaki\cardinaux\iii_2_trichotomie_ordinaux\coincidence_fusion\ensembles_fusion_depuis_coincidence_app.py:254(_branche_couvrante_app)
+       26    0.009    0.000  377.475   14.518 C:\Users\KARL\OneDrive\Bureau\Apprendre\Livre\Bourbakie\Theorie_des_ensembles\V9\bourbaki\cardinaux\iii_2_trichotomie_ordinaux\coincidence_fusion\ensembles_fusion_depuis_coincidence_app.py:175(_coinc_point_app)
+  4601653   15.436    0.000  373.671    0.000 C:\Users\KARL\OneDrive\Bureau\Apprendre\Livre\Bourbakie\Theorie_des_ensembles\V9\bourbaki\logique\i_2_criteres_C\tactiques\tactiques_abrege2.py:20(mono_gauche)
+   874518    5.060    0.000  357.706    0.000 C:\Users\KARL\OneDrive\Bureau\Apprendre\Livre\Bourbakie\Theorie_des_ensembles\V9\bourbaki\logique\i_2_criteres_C\tactiques\tactiques_abrege2.py:243(instanciation)
+  2264570    8.687    0.000  346.632    0.000 C:\Users\KARL\OneDrive\Bureau\Apprendre\Livre\Bourbakie\Theorie_des_ensembles\V9\bourbaki\logique\i_2_criteres_C\tactiques\tactiques_abrege2.py:39(contraposition)
+   810545    1.642    0.000  317.527    0.000 C:\Users\KARL\OneDrive\Bureau\Apprendre\Livre\Bourbakie\Theorie_des_ensembles\V9\bourbaki\logique\i_2_criteres_C\tactiques\tactiques_abrege2.py:256(instancie)
+
+
