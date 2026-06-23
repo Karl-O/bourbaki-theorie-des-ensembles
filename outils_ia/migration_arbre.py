@@ -42,13 +42,16 @@ def _dotted(path: str):
     return path[:-3].replace("/", ".") if path.endswith(".py") else None
 
 
+_EXCLUDE = {"__pycache__", ".git", ".pytest_cache", ".venv", ".claude", "node_modules"}
+
+
 def _all_py():
-    for base in ("bourbaki", "tests"):
-        root = ROOT / base
-        if root.exists():
-            for f in root.rglob("*.py"):
-                if "__pycache__" not in f.parts:
-                    yield f
+    """TOUS les .py de V9 (bourbaki/, tests/, outils_ia/, .py racine…), hors dossiers
+    techniques. IMPORTANT : ne pas se limiter à bourbaki/+tests/ — outils_ia/ et les
+    scripts racine importent aussi des modules bourbaki et doivent être réécrits."""
+    for f in ROOT.rglob("*.py"):
+        if not any(part in _EXCLUDE for part in f.parts):
+            yield f
 
 
 def _git(*args):
