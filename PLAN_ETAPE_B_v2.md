@@ -18,7 +18,7 @@ Priorise: perf_risque faible + difficulte facile d abord. [ ] = a faire, [x] = f
 - lemmes: bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege:est_section, bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege:valeur, bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege:composee, bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite:congruence_terme, bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite:composer_egalites, bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2:instancie, bourbaki.logique.i_2_criteres_C.noyau.noyau_abrege:assume, bourbaki.logique.i_2_criteres_C.noyau.noyau_abrege:modus_ponens
 - fichier: C:/Users/KARL/OneDrive/Bureau/Apprendre/Livre/Bourbakie/Theorie_des_ensembles/V9/bourbaki/ensembles/fonctions/ii_3_8_retractions_sections/ensembles_retractions_props.py (ajout d'1 fonction + 1 cible d
 
-## [ ] section_unique_par_image  (faible/facile)
+## [x] section_unique_par_image  (faible/facile)
 - secteur: II.3 correspondances et foncti | §II.3.8, Déf. 11 (remarque finale) — « une section s est déterminée de manière unique par l'ensemble s(B) » : si s, s' sont deux sections de f surjective avec s(B)=s'(B), alors s=s'
 - statut: MANQUANT — aucune fonction sur l'unicité de la section (Grep 'section_unique' → aucun résultat). C'est une propriété purement set/fonction-théorique (égalité de valeurs forcée par injectivité de la re
 - enonce: Version VALEURS (faisable, fidèle au cœur de la remarque Déf. 11) : ⊢ [s, s' sections de f sur B] ⇒ (∀y)(y∈B ⇒ f(s(y))=f(s'(y))). En effet f(s(y))=y=f(s'(y)) pour tout y∈B (les deux sections vérifient f∘s=Id_B). C'est la brique d'unicité « au niveau des valeurs-images » : s(y) et s'(y) ont la même i
