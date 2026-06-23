@@ -105,6 +105,15 @@ def main() -> int:
         sys.exit(f"paquet inconnu: {args.paquet}\n  disponibles: {list(data)}")
     moves = [(m["de"], m["vers"]) for m in data[args.paquet]["deplacements"] if m["de"] != m["vers"]]
 
+    # validation de FORMAT (évite tout crash plus loin) : chemins V9-root-relatifs (bourbaki/…)
+    # désignant des fichiers (un parent + un nom). Échec ⇒ erreur claire, aucune mutation.
+    bad = [f"{de} -> {ve}" for de, ve in moves
+           if not (de.startswith("bourbaki/") and "/" in de.rstrip("/")
+                   and ve.startswith("bourbaki/") and "/" in ve.rstrip("/")
+                   and de.endswith(".py") and ve.endswith(".py"))]
+    if bad:
+        sys.exit("move-map MALFORMÉ (corriger outils_ia/reorg_moves.json) :\n  " + "\n  ".join(bad[:10]))
+
     rmap, fmap, pats = _build_patterns(moves)
     new_dirs = {d for d in (os.path.dirname(v) for _, v in moves) if d}
 

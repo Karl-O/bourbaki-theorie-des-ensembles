@@ -1656,188 +1656,256 @@
   "nb": 42,
   "deplacements": [
    {
-    "de": "ensembles_graphe_de.py",
-    "vers": "fondations/ensembles_graphe_de.py"
+    "de": "bourbaki/cardinaux/arithmetique/ensembles_graphe_de.py",
+    "vers": "bourbaki/cardinaux/arithmetique/fondations/ensembles_graphe_de.py"
    },
    {
-    "de": "ensembles_somme_monotone.py",
-    "vers": "iii_3_2_monotonie/ensembles_somme_monotone.py"
+    "de": "bourbaki/cardinaux/arithmetique/ensembles_somme_monotone.py",
+    "vers": "bourbaki/cardinaux/arithmetique/iii_3_2_monotonie/ensembles_somme_monotone.py"
    },
    {
-    "de": "ensembles_arith_cardinale_props_produit_monotone.py",
-    "vers": "iii_3_2_monotonie/ensembles_arith_cardinale_props_produit_monotone.py"
+    "de": "bourbaki/cardinaux/arithmetique/ensembles_arith_cardinale_props_produit_monotone.py",
+    "vers": "bourbaki/cardinaux/arithmetique/iii_3_2_monotonie/ensembles_arith_cardinale_props_produit_monotone.py"
    },
    {
-    "de": "ensembles_arith_cardinale_props_exposant_monotone.py",
-    "vers": "iii_3_2_monotonie/ensembles_arith_cardinale_props_exposant_monotone.py"
+    "de": "bourbaki/cardinaux/arithmetique/ensembles_arith_cardinale_props_exposant_monotone.py",
+    "vers": "bourbaki/cardinaux/arithmetique/iii_3_2_monotonie/ensembles_arith_cardinale_props_exposant_monotone.py"
    },
    {
-    "de": "ensembles_exposant_monotone_exp_incond.py",
-    "vers": "iii_3_2_monotonie/ensembles_exposant_monotone_exp_incond.py"
+    "de": "bourbaki/cardinaux/arithmetique/ensembles_exposant_monotone_exp_incond.py",
+    "vers": "bourbaki/cardinaux/arithmetique/iii_3_2_monotonie/ensembles_exposant_monotone_exp_incond.py"
    },
    {
-    "de": "ensembles_exposant_monotone_incond.py",
-    "vers": "iii_3_2_monotonie/ensembles_exposant_monotone_incond.py"
+    "de": "bourbaki/cardinaux/arithmetique/ensembles_exposant_monotone_incond.py",
+    "vers": "bourbaki/cardinaux/arithmetique/iii_3_2_monotonie/ensembles_exposant_monotone_incond.py"
    },
    {
-    "de": "ensembles_arith_somme.py",
-    "vers": "iii_3_3_somme/ensembles_arith_somme.py"
+    "de": "bourbaki/cardinaux/arithmetique/ensembles_arith_somme.py",
+    "vers": "bourbaki/cardinaux/arithmetique/iii_3_3_somme/ensembles_arith_somme.py"
    },
    {
-    "de": "ensembles_somme_equipotence.py",
-    "vers": "iii_3_3_somme/ensembles_somme_equipotence.py"
+    "de": "bourbaki/cardinaux/arithmetique/ensembles_somme_equipotence.py",
+    "vers": "bourbaki/cardinaux/arithmetique/iii_3_3_somme/ensembles_somme_equipotence.py"
    },
    {
-    "de": "ensembles_somme_commute.py",
-    "vers": "iii_3_3_somme/ensembles_somme_commute.py"
+    "de": "bourbaki/cardinaux/arithmetique/ensembles_somme_commute.py",
+    "vers": "bourbaki/cardinaux/arithmetique/iii_3_3_somme/ensembles_somme_commute.py"
    },
    {
-    "de": "ensembles_somme_associe.py",
-    "vers": "iii_3_3_somme/ensembles_somme_associe.py"
+    "de": "bourbaki/cardinaux/arithmetique/ensembles_somme_associe.py",
+    "vers": "bourbaki/cardinaux/arithmetique/iii_3_3_somme/ensembles_somme_associe.py"
    },
    {
-    "de": "ensembles_somme_zero.py",
-    "vers": "iii_3_3_somme/ensembles_somme_zero.py"
+    "de": "bourbaki/cardinaux/arithmetique/ensembles_somme_zero.py",
+    "vers": "bourbaki/cardinaux/arithmetique/iii_3_3_somme/ensembles_somme_zero.py"
    },
    {
-    "de": "ensembles_arith_cardinale.py",
-    "vers": "iii_3_3_produit/ensembles_arith_cardinale.py"
+    "de": "bourbaki/cardinaux/arithmetique/ensembles_arith_cardinale.py",
+    "vers": "bourbaki/cardinaux/arithmetique/iii_3_3_produit/ensembles_arith_cardinale.py"
    },
    {
-    "de": "ensembles_produit_equipotence.py",
-    "vers": "iii_3_3_produit/ensembles_produit_equipotence.py"
+    "de": "bourbaki/cardinaux/arithmetique/ensembles_produit_equipotence.py",
+    "vers": "bourbaki/cardinaux/arithmetique/iii_3_3_produit/ensembles_produit_equipotence.py"
    },
    {
-    "de": "ensembles_produit_commute.py",
-    "vers": "iii_3_3_produit/ensembles_produit_commute.py"
+    "de": "bourbaki/cardinaux/arithmetique/ensembles_produit_commute.py",
+    "vers": "bourbaki/cardinaux/arithmetique/iii_3_3_produit/ensembles_produit_commute.py"
    },
    {
-    "de": "ensembles_produit_petits.py",
-    "vers": "iii_3_3_produit/ensembles_produit_petits.py"
+    "de": "bourbaki/cardinaux/arithmetique/ensembles_produit_petits.py",
+    "vers": "bourbaki/cardinaux/arithmetique/iii_3_3_produit/ensembles_produit_petits.py"
    },
    {
-    "de": "ensembles_distributivite_cardinale.py",
-    "vers": "iii_3_3_produit/ensembles_distributivite_cardinale.py"
+    "de": "bourbaki/cardinaux/arithmetique/ensembles_distributivite_cardinale.py",
+    "vers": "bourbaki/cardinaux/arithmetique/iii_3_3_produit/ensembles_distributivite_cardinale.py"
    },
    {
-    "de": "ensembles_prop8_successeur.py",
-    "vers": "iii_3_4_prop8_successeur/ensembles_prop8_successeur.py"
+    "de": "bourbaki/cardinaux/arithmetique/ensembles_prop8_successeur.py",
+    "vers": "bourbaki/cardinaux/arithmetique/iii_3_4_prop8_successeur/ensembles_prop8_successeur.py"
    },
    {
-    "de": "ensembles_prop8_plus_point.py",
-    "vers": "iii_3_4_prop8_successeur/ensembles_prop8_plus_point.py"
+    "de": "bourbaki/cardinaux/arithmetique/ensembles_prop8_plus_point.py",
+    "vers": "bourbaki/cardinaux/arithmetique/iii_3_4_prop8_successeur/ensembles_prop8_plus_point.py"
    },
    {
-    "de": "ensembles_prop8_assemblage.py",
-    "vers": "iii_3_4_prop8_successeur/ensembles_prop8_assemblage.py"
+    "de": "bourbaki/cardinaux/arithmetique/ensembles_prop8_assemblage.py",
+    "vers": "bourbaki/cardinaux/arithmetique/iii_3_4_prop8_successeur/ensembles_prop8_assemblage.py"
    },
    {
-    "de": "ensembles_prop8_transposition.py",
-    "vers": "iii_3_4_prop8_successeur/ensembles_prop8_transposition.py"
+    "de": "bourbaki/cardinaux/arithmetique/ensembles_prop8_transposition.py",
+    "vers": "bourbaki/cardinaux/arithmetique/iii_3_4_prop8_successeur/ensembles_prop8_transposition.py"
    },
    {
-    "de": "ensembles_prop8_fini2.py",
-    "vers": "iii_3_4_prop8_successeur/ensembles_prop8_fini2.py"
+    "de": "bourbaki/cardinaux/arithmetique/ensembles_prop8_fini2.py",
+    "vers": "bourbaki/cardinaux/arithmetique/iii_3_4_prop8_successeur/ensembles_prop8_fini2.py"
    },
    {
-    "de": "ensembles_copie_marquee.py",
-    "vers": "iii_3_4_prop8_successeur/ensembles_copie_marquee.py"
+    "de": "bourbaki/cardinaux/arithmetique/ensembles_copie_marquee.py",
+    "vers": "bourbaki/cardinaux/arithmetique/iii_3_4_prop8_successeur/ensembles_copie_marquee.py"
    },
    {
-    "de": "ensembles_prop8_coeur/",
-    "vers": "iii_3_4_prop8_successeur/prop8_coeur/"
+    "de": "bourbaki/cardinaux/arithmetique/ensembles_prop8_coeur/_cas1.py",
+    "vers": "bourbaki/cardinaux/arithmetique/iii_3_4_prop8_successeur/prop8_coeur/_cas1.py"
    },
    {
-    "de": "ensembles_transposition/",
-    "vers": "iii_3_4_prop8_successeur/transposition/"
+    "de": "bourbaki/cardinaux/arithmetique/ensembles_prop8_coeur/_domaine.py",
+    "vers": "bourbaki/cardinaux/arithmetique/iii_3_4_prop8_successeur/prop8_coeur/_domaine.py"
    },
    {
-    "de": "ensembles_exposant_cardinal.py",
-    "vers": "iii_3_5_exposant/definition/ensembles_exposant_cardinal.py"
+    "de": "bourbaki/cardinaux/arithmetique/ensembles_prop8_coeur/_g.py",
+    "vers": "bourbaki/cardinaux/arithmetique/iii_3_4_prop8_successeur/prop8_coeur/_g.py"
    },
    {
-    "de": "ensembles_exposant_un_base.py",
-    "vers": "iii_3_5_exposant/definition/ensembles_exposant_un_base.py"
+    "de": "bourbaki/cardinaux/arithmetique/ensembles_prop8_coeur/_image.py",
+    "vers": "bourbaki/cardinaux/arithmetique/iii_3_4_prop8_successeur/prop8_coeur/_image.py"
    },
    {
-    "de": "ensembles_exposant_zero.py",
-    "vers": "iii_3_5_exposant/definition/ensembles_exposant_zero.py"
+    "de": "bourbaki/cardinaux/arithmetique/ensembles_prop8_coeur/_incl.py",
+    "vers": "bourbaki/cardinaux/arithmetique/iii_3_4_prop8_successeur/prop8_coeur/_incl.py"
    },
    {
-    "de": "ensembles_exposant_un/",
-    "vers": "iii_3_5_exposant/definition/exposant_un/"
+    "de": "bourbaki/cardinaux/arithmetique/ensembles_prop8_coeur/_marqueurs.py",
+    "vers": "bourbaki/cardinaux/arithmetique/iii_3_4_prop8_successeur/prop8_coeur/_marqueurs.py"
    },
    {
-    "de": "ensembles_exposant_somme.py",
-    "vers": "iii_3_5_exposant/prop9_exp_somme/ensembles_exposant_somme.py"
+    "de": "bourbaki/cardinaux/arithmetique/ensembles_prop8_coeur/_reduction.py",
+    "vers": "bourbaki/cardinaux/arithmetique/iii_3_4_prop8_successeur/prop8_coeur/_reduction.py"
    },
    {
-    "de": "ensembles_prop9_exp_somme.py",
-    "vers": "iii_3_5_exposant/prop9_exp_somme/ensembles_prop9_exp_somme.py"
+    "de": "bourbaki/cardinaux/arithmetique/ensembles_prop8_coeur/__init__.py",
+    "vers": "bourbaki/cardinaux/arithmetique/iii_3_4_prop8_successeur/prop8_coeur/__init__.py"
    },
    {
-    "de": "ensembles_prop9_final.py",
-    "vers": "iii_3_5_exposant/prop9_exp_somme/ensembles_prop9_final.py"
+    "de": "bourbaki/cardinaux/arithmetique/ensembles_transposition/_bijection.py",
+    "vers": "bourbaki/cardinaux/arithmetique/iii_3_4_prop8_successeur/transposition/_bijection.py"
    },
    {
-    "de": "ensembles_prop9_final_close.py",
-    "vers": "iii_3_5_exposant/prop9_exp_somme/ensembles_prop9_final_close.py"
+    "de": "bourbaki/cardinaux/arithmetique/ensembles_transposition/_existence.py",
+    "vers": "bourbaki/cardinaux/arithmetique/iii_3_4_prop8_successeur/transposition/_existence.py"
    },
    {
-    "de": "ensembles_prop9_close.py",
-    "vers": "iii_3_5_exposant/prop9_exp_somme/ensembles_prop9_close.py"
+    "de": "bourbaki/cardinaux/arithmetique/ensembles_transposition/_ht_glob.py",
+    "vers": "bourbaki/cardinaux/arithmetique/iii_3_4_prop8_successeur/transposition/_ht_glob.py"
    },
    {
-    "de": "ensembles_prop9_cloture.py",
-    "vers": "iii_3_5_exposant/prop9_exp_somme/ensembles_prop9_cloture.py"
+    "de": "bourbaki/cardinaux/arithmetique/ensembles_transposition/_injective.py",
+    "vers": "bourbaki/cardinaux/arithmetique/iii_3_4_prop8_successeur/transposition/_injective.py"
    },
    {
-    "de": "ensembles_exposant_produit.py",
-    "vers": "iii_3_5_exposant/prop10_currying/ensembles_exposant_produit.py"
+    "de": "bourbaki/cardinaux/arithmetique/ensembles_transposition/_membre.py",
+    "vers": "bourbaki/cardinaux/arithmetique/iii_3_4_prop8_successeur/transposition/_membre.py"
    },
    {
-    "de": "ensembles_prop10_currying.py",
-    "vers": "iii_3_5_exposant/prop10_currying/ensembles_prop10_currying.py"
+    "de": "bourbaki/cardinaux/arithmetique/ensembles_transposition/_valeur_image.py",
+    "vers": "bourbaki/cardinaux/arithmetique/iii_3_4_prop8_successeur/transposition/_valeur_image.py"
    },
    {
-    "de": "ensembles_prop10_inj_curry.py",
-    "vers": "iii_3_5_exposant/prop10_currying/ensembles_prop10_inj_curry.py"
+    "de": "bourbaki/cardinaux/arithmetique/ensembles_transposition/__init__.py",
+    "vers": "bourbaki/cardinaux/arithmetique/iii_3_4_prop8_successeur/transposition/__init__.py"
    },
    {
-    "de": "ensembles_prop10_inj_uncurry.py",
-    "vers": "iii_3_5_exposant/prop10_currying/ensembles_prop10_inj_uncurry.py"
+    "de": "bourbaki/cardinaux/arithmetique/ensembles_exposant_cardinal.py",
+    "vers": "bourbaki/cardinaux/arithmetique/iii_3_5_exposant/definition/ensembles_exposant_cardinal.py"
    },
    {
-    "de": "ensembles_prop10_close.py",
-    "vers": "iii_3_5_exposant/prop10_currying/ensembles_prop10_close.py"
+    "de": "bourbaki/cardinaux/arithmetique/ensembles_exposant_un_base.py",
+    "vers": "bourbaki/cardinaux/arithmetique/iii_3_5_exposant/definition/ensembles_exposant_un_base.py"
    },
    {
-    "de": "ensembles_prop10_final_close.py",
-    "vers": "iii_3_5_exposant/prop10_currying/ensembles_prop10_final_close.py"
+    "de": "bourbaki/cardinaux/arithmetique/ensembles_exposant_zero.py",
+    "vers": "bourbaki/cardinaux/arithmetique/iii_3_5_exposant/definition/ensembles_exposant_zero.py"
    },
    {
-    "de": "ensembles_prop10cor2_iii3.py",
-    "vers": "iii_3_5_exposant/prop10_currying/ensembles_prop10cor2_iii3.py"
+    "de": "bourbaki/cardinaux/arithmetique/ensembles_exposant_un/_bijection.py",
+    "vers": "bourbaki/cardinaux/arithmetique/iii_3_5_exposant/definition/exposant_un/_bijection.py"
    },
    {
-    "de": "ensembles_powerset_exp.py",
-    "vers": "iii_3_5_exposant/prop12_powerset/ensembles_powerset_exp.py"
+    "de": "bourbaki/cardinaux/arithmetique/ensembles_exposant_un/_gv.py",
+    "vers": "bourbaki/cardinaux/arithmetique/iii_3_5_exposant/definition/exposant_un/_gv.py"
    },
    {
-    "de": "ensembles_powerset_deux.py",
-    "vers": "iii_3_5_exposant/prop12_powerset/ensembles_powerset_deux.py"
+    "de": "bourbaki/cardinaux/arithmetique/ensembles_exposant_un/__init__.py",
+    "vers": "bourbaki/cardinaux/arithmetique/iii_3_5_exposant/definition/exposant_un/__init__.py"
    },
    {
-    "de": "ensembles_prop12_powerset.py",
-    "vers": "iii_3_5_exposant/prop12_powerset/ensembles_prop12_powerset.py"
+    "de": "bourbaki/cardinaux/arithmetique/ensembles_exposant_somme.py",
+    "vers": "bourbaki/cardinaux/arithmetique/iii_3_5_exposant/prop9_exp_somme/ensembles_exposant_somme.py"
    },
    {
-    "de": "ensembles_prop12_fin.py",
-    "vers": "iii_3_5_exposant/prop12_powerset/ensembles_prop12_fin.py"
+    "de": "bourbaki/cardinaux/arithmetique/ensembles_prop9_exp_somme.py",
+    "vers": "bourbaki/cardinaux/arithmetique/iii_3_5_exposant/prop9_exp_somme/ensembles_prop9_exp_somme.py"
    },
    {
-    "de": "ensembles_prop12_card/",
-    "vers": "iii_3_5_exposant/prop12_powerset/prop12_card/"
+    "de": "bourbaki/cardinaux/arithmetique/ensembles_prop9_final.py",
+    "vers": "bourbaki/cardinaux/arithmetique/iii_3_5_exposant/prop9_exp_somme/ensembles_prop9_final.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/arithmetique/ensembles_prop9_final_close.py",
+    "vers": "bourbaki/cardinaux/arithmetique/iii_3_5_exposant/prop9_exp_somme/ensembles_prop9_final_close.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/arithmetique/ensembles_prop9_close.py",
+    "vers": "bourbaki/cardinaux/arithmetique/iii_3_5_exposant/prop9_exp_somme/ensembles_prop9_close.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/arithmetique/ensembles_prop9_cloture.py",
+    "vers": "bourbaki/cardinaux/arithmetique/iii_3_5_exposant/prop9_exp_somme/ensembles_prop9_cloture.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/arithmetique/ensembles_exposant_produit.py",
+    "vers": "bourbaki/cardinaux/arithmetique/iii_3_5_exposant/prop10_currying/ensembles_exposant_produit.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/arithmetique/ensembles_prop10_currying.py",
+    "vers": "bourbaki/cardinaux/arithmetique/iii_3_5_exposant/prop10_currying/ensembles_prop10_currying.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/arithmetique/ensembles_prop10_inj_curry.py",
+    "vers": "bourbaki/cardinaux/arithmetique/iii_3_5_exposant/prop10_currying/ensembles_prop10_inj_curry.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/arithmetique/ensembles_prop10_inj_uncurry.py",
+    "vers": "bourbaki/cardinaux/arithmetique/iii_3_5_exposant/prop10_currying/ensembles_prop10_inj_uncurry.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/arithmetique/ensembles_prop10_close.py",
+    "vers": "bourbaki/cardinaux/arithmetique/iii_3_5_exposant/prop10_currying/ensembles_prop10_close.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/arithmetique/ensembles_prop10_final_close.py",
+    "vers": "bourbaki/cardinaux/arithmetique/iii_3_5_exposant/prop10_currying/ensembles_prop10_final_close.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/arithmetique/ensembles_prop10cor2_iii3.py",
+    "vers": "bourbaki/cardinaux/arithmetique/iii_3_5_exposant/prop10_currying/ensembles_prop10cor2_iii3.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/arithmetique/ensembles_powerset_exp.py",
+    "vers": "bourbaki/cardinaux/arithmetique/iii_3_5_exposant/prop12_powerset/ensembles_powerset_exp.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/arithmetique/ensembles_powerset_deux.py",
+    "vers": "bourbaki/cardinaux/arithmetique/iii_3_5_exposant/prop12_powerset/ensembles_powerset_deux.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/arithmetique/ensembles_prop12_powerset.py",
+    "vers": "bourbaki/cardinaux/arithmetique/iii_3_5_exposant/prop12_powerset/ensembles_prop12_powerset.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/arithmetique/ensembles_prop12_fin.py",
+    "vers": "bourbaki/cardinaux/arithmetique/iii_3_5_exposant/prop12_powerset/ensembles_prop12_fin.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/arithmetique/ensembles_prop12_card/_bijection.py",
+    "vers": "bourbaki/cardinaux/arithmetique/iii_3_5_exposant/prop12_powerset/prop12_card/_bijection.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/arithmetique/ensembles_prop12_card/_crux.py",
+    "vers": "bourbaki/cardinaux/arithmetique/iii_3_5_exposant/prop12_powerset/prop12_card/_crux.py"
+   },
+   {
+    "de": "bourbaki/cardinaux/arithmetique/ensembles_prop12_card/__init__.py",
+    "vers": "bourbaki/cardinaux/arithmetique/iii_3_5_exposant/prop12_powerset/prop12_card/__init__.py"
    }
   ],
   "dossiers_vides": [
