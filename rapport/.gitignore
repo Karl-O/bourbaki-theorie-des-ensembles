@@ -1,0 +1,10 @@
+# Artefacts de compilation LaTeX (régénérés par latexmk -pdf main.tex)
+*.aux
+*.fls
+*.fdb_latexmk
+*.log
+*.out
+*.toc
+*.synctex.gz
+latexmk.log
+# Le PDF est versionné (livrable) ; les artefacts ci-dessus non.

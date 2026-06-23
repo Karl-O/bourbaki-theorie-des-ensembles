@@ -1,0 +1,39 @@
+\subsection{§III.3, \theoreme{} 2 (Cantor) --- $2^{a} > a$ au niveau cardinal}
+\textbf{Énoncé (Bourbaki).} Pour tout cardinal $a$, on a $a < 2^{a}$. Restaté sur
+un ensemble $X$ de cardinal $a = \mathrm{Card}\,X$ : le cardinal de l'ensemble des
+parties est strictement supérieur à celui de $X$, $\mathrm{Card}\,X < 2^{\mathrm{Card}\,X}$,
+où $2^{\mathrm{Card}\,X}$ est l'exponentiation cardinale de base $2$. C'est le
+\theoreme{} 2 de E.III.3 transporté du niveau ensembliste ($X < \mathfrak{P}X$) au
+niveau cardinal.
+
+\textbf{Formalisé.} Cible : $\mathrm{Card}\,X < 2^{\mathrm{Card}\,X}$, soit
+$\bigl(\mathrm{Card}\,X \le 2^{\mathrm{Card}\,X}\bigr) \wedge \bigl(\mathrm{Card}\,X \neq 2^{\mathrm{Card}\,X}\bigr)$
+avec $2^{\mathrm{Card}\,X} = \texttt{exposant\_cardinal\_binaire}(2, X)$. \\
+Module : \texttt{bourbaki/cardinaux/arithmetique/iii\_3\_5\_exposant/prop12\_powerset/prop12\_card/\_cantor.py}
+(fonction-cible \texttt{cantor\_deux\_exp}).
+
+\textbf{Preuve (\Nstar).} La construction explicite d'une bijection $X \to \mathfrak{P}X$
+au niveau cardinal est un mur algorithmique ; on le contourne via le pivot d'équipotence
+déjà certifié (Proposition 12) $\texttt{card\_parties\_egale\_deux\_exp}$ :
+$\mathrm{Card}(\mathfrak{P}X) = 2^{\mathrm{Card}\,X}$. \emph{Face $\le$
+(\texttt{cantor\_face\_inf\_egal})} : chaîne de transitivité par invariance par équipotence
+(Proposition 1) $\mathrm{Card}\,X \le X \le \mathfrak{P}X \le \mathrm{Card}(\mathfrak{P}X)$,
+montée par \texttt{conjonction\_intro} de la transitivité instanciée et
+\texttt{modus\_ponens}, le maillon $X \le \mathfrak{P}X$ étant l'injection $x \mapsto \{x\}$
+de Cantor (étape 1, \texttt{inf\_egal\_parties}) ; puis réécriture
+$\mathrm{Card}(\mathfrak{P}X) \to 2^{\mathrm{Card}\,X}$ par Leibniz (\noyau{} S6) suivi de
+\texttt{equivalence\_avant}. \emph{Face $\neq$ (\texttt{cantor\_face\_non\_egal})} :
+$\texttt{cantor\_non\_equipotent}$ fournit $\neg\,\mathrm{Eq}(X, \mathfrak{P}X)$
+(argument diagonal) ; le sens réciproque de la Proposition 1
+$(\mathrm{Card}\,X = \mathrm{Card}(\mathfrak{P}X)) \Rightarrow \mathrm{Eq}(X, \mathfrak{P}X)$,
+\texttt{instancie} aux termes, est contraposé (\texttt{contraposition}) puis déchargé par
+\texttt{modus\_ponens} en $\neg(\mathrm{Card}\,X = \mathrm{Card}(\mathfrak{P}X))$ ; la
+réécriture sous la négation passe par S6 et \texttt{equiv\_neg}. \texttt{conjonction\_intro}
+des deux faces donne $\mathrm{Card}\,X < 2^{\mathrm{Card}\,X}$ (\texttt{cantor\_strict} au
+niveau ensembliste sert de patron logique aux faces $\le$ / $\neq$).
+
+\textbf{Statut.} CLOS (0 hypothèse) : le test \texttt{test\_cantor\_deux\_exp} verrouille
+\texttt{est\_clos} sur les deux faces et sur la conjonction finale, et
+\texttt{theorie\_ensembles()==22}. Ce résultat est clos, mais les résultats cardinaux plus
+profonds (bon ordre des cardinaux, $a^{2} = a$ de Hessenberg) restent partiels : le mur de
+performance correspondant est documenté dans l'avant-propos du rapport.

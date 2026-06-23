@@ -1,0 +1,52 @@
+% =============================================================================
+%  Conclusion — synthèse de la campagne, couverture, suites
+% =============================================================================
+\section*{Conclusion}
+\addcontentsline{toc}{section}{Conclusion}
+
+\paragraph{Bilan de la campagne} Vingt cibles ont été closes (vingt-cinq
+théorèmes certifiés), réparties sur les chapitres~II (correspondances, familles,
+produits, équivalences) et~III (ordre, bon ordre, cardinaux). Chaque résultat a
+franchi le même contrôle : preuve construite uniquement par les primitives
+\Nstar{}, conclusion strictement égale (au renommage des liants $\tau$ près) à
+l'énoncé de Bourbaki, hypothèses réduites aux antécédents honnêtes load-bearing,
+invariant \texttt{theorie\_ensembles() == 22} préservé, et test miroir au vert.
+La suite complète collecte sans erreur (plus de $3000$ tests).
+
+\paragraph{Dossiers-trous comblés} La campagne a rempli plusieurs dossiers de
+l'arborescence qui n'étaient que des marqueurs de manque : la diagonale
+injective et son appartenance au produit $E^I$ (II.5.2/II.5.3), les ensembles
+filtrants (III.1.8, élément maximal $=$ plus grand élément), et les parties
+saturées (II.6.4). L'arborescence calquée sur le livre rend ces progrès
+\emph{visibles} : un dossier jadis vide porte désormais un résultat certifié.
+
+\paragraph{Honnêteté des statuts} Plusieurs résultats sont \emph{clos sous
+hypothèses honnêtes} plutôt qu'inconditionnellement clos --- la réciproque de la
+monotonie du produit (II.5.4) repose sur la surjectivité de la projection
+$\mathrm{pr}_\alpha$, reçue en hypothèse ; l'associativité de la réunion (II.4.2)
+sur les deux clauses fidèles modélisant $L = \bigcup_\lambda J_\lambda$. Dans
+tous les cas la conclusion reste hors des hypothèses : ce sont des faits
+conditionnels au sens de Bourbaki, non des troncatures. Les formes plus fortes
+non atteintes (caractérisation par treillis de l'intersection d'intervalles,
+forme cardinale complète) sont signalées comme résidus honnêtes.
+
+\paragraph{Le mur cardinal} Les résultats d'arithmétique cardinale profonde
+restent partiels, bloqués par un mur algorithmique (hachage de formules sur des
+assemblages $\tau$ massifs) et non par une lacune mathématique. Le théorème de
+Cantor $2^a > a$ a néanmoins été clos au niveau cardinal (III.3, Théorème~2) en
+contournant la construction explicite par les lemmes d'équipotence déjà
+certifiés.
+
+\paragraph{Garde-fous méthodologiques} La campagne a été menée par délégation à
+des agents, chaque preuve étant \emph{revérifiée par le noyau} avant
+intégration : un agent ne peut pas forger un \theoreme{}. Les outils mutant le
+dépôt sont transactionnels (préflight $+$ rollback) ; les commits sont
+incrémentaux, sous garde anti-contamination ; toute exécution de test est bornée
+par un \emph{timeout}.
+
+\paragraph{Suites} Le moissonnage de l'audit de couverture identifie d'autres
+cibles faisables (compléments du Théorème~1 sur les rétractions/sections, lois
+de De~Morgan pour les familles, décomposition canonique d'une application,
+propriétés order-théoriques du bon ordre) qui prolongeront la campagne selon le
+même protocole. L'horizon reste la couverture intégrale du livre, les résultats
+cardinaux profonds attendant un progrès sur le c\oe ur de substitution.

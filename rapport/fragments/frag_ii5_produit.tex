@@ -1,0 +1,31 @@
+\subsection{§II.5.3 --- Injectivité de l'application diagonale $x\mapsto\tilde{x}$}
+\textbf{Énoncé (Bourbaki).} L'application diagonale $\mathrm{diag}:E\to E^I$, $x\mapsto\tilde{x}$ (où $\tilde{x}$ est le graphe de la fonction constante $\iota\mapsto x$, $\iota\in I$) est injective. On suppose $I\neq\emptyset$, écarté ici par un indice-témoin $\alpha\in I$ (sans quoi, pour $I=\emptyset$, tous les $\tilde{x}$ valent $\emptyset$ et l'injectivité tombe dès que $E$ a deux éléments).
+
+\textbf{Formalisé.} Cible : $(\alpha\in I \wedge x\in E \wedge y\in E \wedge \tilde{x}=\tilde{y})\Rightarrow x=y$. \\
+Module : \texttt{bourbaki/ensembles/familles/ii\_5\_produit\_famille/ii\_5\_2\_diagonale/ensembles\_diagonale\_injective.py}.
+
+\textbf{Preuve (\Nstar).} On \texttt{assume} la conjonction des quatre hypothèses (associée à gauche) et on extrait $\tilde{x}=\tilde{y}$ et $\alpha\in I$ par \texttt{conjonction\_elim\_gauche/droite}. Le pivot \texttt{graphe\_terme\_valeur} (forme du Critère, $\{u\in A\}\vdash F(u)=(u|z)T$) appliqué en $u=\alpha$ avec valeur-terme constante donne $\{\alpha\in I\}\vdash\tilde{x}(\alpha)=x$ et $\tilde{y}(\alpha)=y$ ; ces $\alpha\in I$ sont déchargés par \texttt{loi\_deduction} puis \texttt{modus\_ponens} sur le conjoint $\alpha\in I$. Leibniz (S6, \texttt{congruence\_terme}) sur le terme $\mathrm{valeur}(\cdot,\alpha)$ transporte $\tilde{x}=\tilde{y}$ en $\tilde{x}(\alpha)=\tilde{y}(\alpha)$ ; \texttt{symetrie} et \texttt{composer\_egalites} chaînent $x=\tilde{x}(\alpha)=\tilde{y}(\alpha)=y$. \texttt{loi\_deduction} décharge la conjonction en l'implication close.
+
+\textbf{Statut.} CLOS (0 hypothèse) : la conclusion est l'implication, les quatre antécédents (dont l'indice-témoin $\alpha\in I$ et les hypothèses de typage $x\in E$, $y\in E$) sont déchargés. Comble le dossier-trou \texttt{ii\_5\_2\_diagonale} ; \texttt{theorie\_ensembles()==22}.
+
+
+\subsection{§II.5.3 --- La diagonale vit dans le produit $E^I$}
+\textbf{Énoncé (Bourbaki).} Pour $x\in E$, $\tilde{x}$ est le graphe d'une application de $I$ dans $E$, donc $\tilde{x}\in E^I$. Par suite la diagonale $\Delta=\{\tilde{x}\mid x\in E\}=\mathrm{graphe}(\mathrm{diag})\langle E\rangle$ est une partie du produit $E^I$.
+
+\textbf{Formalisé.} Cibles : $(x\in E)\Rightarrow(\tilde{x}\in E^I)$ et $\Delta\subset E^I$. \\
+Module : \texttt{bourbaki/ensembles/familles/ii\_5\_produit\_famille/ii\_5\_2\_diagonale/ensembles\_diagonale\_dans\_exposant.py}.
+
+\textbf{Preuve (\Nstar).} La caractérisation $G\in E^I\Leftrightarrow((G\subset I\times E\wedge G\text{ fonctionnel})\wedge \mathrm{dom}\,G=I)$ provient de \texttt{axiome\_exposant}$(I,E)$, dans la théorie \emph{dédiée} \texttt{theorie\_exposant} (hors des 22 axiomes), \texttt{instancie} en $\tilde{x}$. (a) Les trois conjoints sont fermés : $\tilde{x}$ fonctionnel par \texttt{graphe\_terme\_fonctionnel} (C54), $\mathrm{dom}\,\tilde{x}=I$ par \texttt{graphe\_terme\_domaine} (sans hypothèse), et $\tilde{x}\subset I\times E$ sous $x\in E$ (tout $z\in\tilde{x}$ est un couple $(\iota,y)$ avec $\iota\in I$, $y=x\in E$ par Leibniz S6 et \texttt{couple\_dans\_produit\_ssi}, réécrit par $z=(\iota,y)$ ; témoins $\iota,y$ purgés par \texttt{existe\_elimination}). \texttt{conjonction\_intro} et \texttt{equivalence\_arriere} donnent $\tilde{x}\in E^I$ ; \texttt{loi\_deduction} décharge $x\in E$. (b) Sous le témoin $x$, \texttt{membre\_diagonale} (AXIOME\_IMAGE) et \texttt{membre\_graphe\_terme} donnent $x\in E$ et $z=\tilde{x}$ ; (a) fournit $\tilde{x}\in E^I$, réécrit en $z\in E^I$ par Leibniz ; \texttt{existe\_elimination} purge $x$, puis \texttt{generalisation} ferme $\Delta\subset E^I$.
+
+\textbf{Statut.} CLOS (0 hypothèse) pour les deux théorèmes : $(x\in E)\Rightarrow\tilde{x}\in E^I$ a son unique hypothèse de typage déchargée en implication, et $\Delta\subset E^I$ est sans hypothèse. La caractérisation de $E^I$ vit dans \texttt{theorie\_exposant} (séparée), donc \texttt{theorie\_ensembles()==22}.
+
+
+\subsection{§II.5.4 Cor.~3 --- Réciproque de la monotonie du produit}
+\textbf{Énoncé (Bourbaki).} Réciproque de la Proposition~10 : si $\prod_{\iota\in I}X_\iota\subset\prod_{\iota\in I}Y_\iota$ et $X_\iota\neq\emptyset$ pour tout $\iota$, alors $X_\iota\subset Y_\iota$ pour tout $\iota$. L'hypothèse $X_\iota\neq\emptyset$ sert à fournir, pour chaque $a\in X_\alpha$, un prolongement $F$ (surjectivité de $\mathrm{pr}_\alpha$, Cor.~1).
+
+\textbf{Formalisé.} Cible : $(\prod(f,I)\subset\prod(g,I)\wedge \alpha\in I\wedge F\in\prod(f,I)\wedge F(\alpha)=a)\Rightarrow a\in Y_\alpha$. \\
+Module : \texttt{bourbaki/ensembles/familles/ii\_5\_produit\_famille/ii\_5\_4\_projection\_partielle/ensembles\_produit\_inclus\_reciproque.py}.
+
+\textbf{Preuve (\Nstar).} On \texttt{assume} la conjonction des quatre antécédents (associée à gauche) et on extrait l'inclusion, $\alpha\in I$, $F\in\prod(f,I)$ et $F(\alpha)=a$ par \texttt{conjonction\_elim\_gauche/droite}. L'inclusion $\prod(f,I)\subset\prod(g,I)=(\forall z)(z\in\prod(f,I)\Rightarrow z\in\prod(g,I))$ est \texttt{instancie}-ée en $z:=F$, et \texttt{modus\_ponens} avec $F\in\prod(f,I)$ donne $F\in\prod(g,I)$. \texttt{projection\_dans\_facteur} sur $\prod(g,I)$ fournit $F\in\prod(g,I)\Rightarrow(\alpha\in I\Rightarrow F(\alpha)\in Y_\alpha)$, déchargée par deux \texttt{modus\_ponens} en $F(\alpha)\in Y_\alpha$. Enfin Leibniz (S6 sur $R:=(w\in Y_\alpha)$, lettre fraîche) transporte $F(\alpha)=a$ en $F(\alpha)\in Y_\alpha\Leftrightarrow a\in Y_\alpha$ ; \texttt{equivalence\_avant} donne $a\in Y_\alpha$, et \texttt{loi\_deduction} décharge la conjonction en implication close.
+
+\textbf{Statut.} CLOS (0 hypothèse) : les quatre antécédents sont déchargés en implication (\texttt{est\_clos}). Le témoin $F\in\prod(f,I)$ avec $F(\alpha)=a$ encapsule la surjectivité de $\mathrm{pr}_\alpha$ (Cor.~1, reçue en hypothèse et non postulée) ; le caractère conditionnel est ainsi porté par l'antécédent, jamais par la conclusion ni par une hypothèse pendante. \texttt{theorie\_ensembles()==22}.

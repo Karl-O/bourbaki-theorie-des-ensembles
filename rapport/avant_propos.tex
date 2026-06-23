@@ -1,0 +1,90 @@
+% =============================================================================
+%  Avant-propos — projet, noyau LCF, frontière de confiance
+% =============================================================================
+\section*{Avant-propos --- le projet V9}
+\addcontentsline{toc}{section}{Avant-propos --- le projet V9}
+
+\paragraph{Objectif} Reformaliser \emph{intégralement} le livre \emph{Théorie
+des ensembles} de N.~Bourbaki dans du code, chaque résultat nommé (définition,
+axiome, critère, proposition, théorème, corollaire) devenant un objet
+\theoreme{} \textbf{certifié par un noyau de preuve LCF} écrit en Python. La
+ligne directrice est une exigence d'\emph{adéquation} : « démontré dans le
+livre » doit coïncider avec « vérifié par la machine ». Un résultat n'est
+déclaré \emph{fait} que s'il est \emph{clos} (zéro hypothèse non déchargée) et
+que son énoncé est exactement celui de Bourbaki ; sinon il reste \emph{partiel}.
+
+\paragraph{Le noyau LCF et la frontière de confiance} Le c\oe ur de confiance
+est minuscule et isolé (\texttt{bourbaki/logique/i\_2\_criteres\_C/noyau/}). Un
+\theoreme{} ne peut être créé \emph{que} par les primitives du noyau, exposées
+sous le préfixe \Nstar{} : \texttt{assume}, \texttt{modus\_ponens},
+\texttt{loi\_deduction} (C6, déduction), \texttt{generalisation} (C27),
+\texttt{existe\_temoin}, les schémas \texttt{s1}--\texttt{s7}, \texttt{axiome},
+\texttt{instancie}. La classe \theoreme{} est verrouillée par une clé privée
+(\texttt{\_CLE}) : il est \emph{impossible} de fabriquer un théorème à la main,
+de contourner le constructeur ou de \emph{monkeypatcher} le noyau. Toute la
+mathématique du projet (des milliers de lemmes) vit \emph{au-dessus} de cette
+frontière : ce sont des \emph{tactiques} qui n'ont d'autre pouvoir que
+d'enchaîner les primitives. La figure~\ref{fig:couches} schématise ces couches.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.82\textwidth]{figures/architecture_noyau}
+  \caption{Architecture en couches. Seule la couche \noyau{} (primitives
+  \Nstar{}, verrou \texttt{\_CLE}) peut produire un \theoreme{}. Les tactiques,
+  les notions ensemblistes et les preuves de ce rapport sont au-dessus de la
+  frontière de confiance : elles ne peuvent que \emph{composer} des appels
+  certifiés.}
+  \label{fig:couches}
+\end{figure}
+
+\paragraph{Invariant d'axiomatique} La théorie de référence vaut exactement
+\textbf{22 axiomes} : \texttt{theorie\_ensembles().axiomes == 22}. Chaque
+résultat de ce rapport a été vérifié sans modifier ce compte ; les
+caractérisations auxiliaires (membership de $E^I$, des intervalles fermés,
+\dots) vivent dans des \emph{théories dédiées} séparées et n'altèrent pas
+l'invariant.
+
+\paragraph{Hypothèses honnêtes} Lorsqu'un énoncé du livre est \emph{conditionnel}
+(« si $f$ applique $A$ dans $B$, alors \dots »), la formalisation garde ces
+antécédents comme \emph{hypothèses explicites} du séquent, ou les décharge en
+une implication close. La règle absolue : \textbf{la conclusion n'apparaît
+jamais parmi les hypothèses}, et aucune hypothèse parasite n'est introduite. Un
+théorème « clos sous hypothèses honnêtes » est un \emph{fait conditionnel
+légitime}, fidèle à l'énoncé de Bourbaki --- jamais un résultat tronqué déguisé.
+
+\paragraph{Conventions de structure} L'arborescence \emph{calque la table des
+matières du livre} (chapitre $\to$ section $\to$ sous-section). Conséquence
+voulue : un trou de couverture devient visible \emph{structurellement} (dossier
+vide ou absent = résultat pas encore formalisé). Deux règles d'hygiène : un
+fichier $=$ une responsabilité, $\leq 300$ lignes ; et \textbf{$\leq 10$ entrées
+par dossier} (fichiers et sous-dossiers confondus) --- dès qu'un dossier atteint
+dix entrées, il est éclaté en sous-dossiers nommés d'après la section du livre.
+Le répertoire \texttt{tests/} reflète \texttt{bourbaki/} à l'identique.
+
+\paragraph{Performance et mur algorithmique} Le projet est volumineux et
+certaines preuves sont coûteuses. Le profilage a montré que les preuves
+\emph{cardinales profondes} (cardinal d'assemblages $\tau$ à $\sim 1.5\times
+10^{5}$ n\oe uds) coûtent plusieurs centaines de secondes, dominées par le
+hachage de formules lors de la substitution : un mur \emph{algorithmique}, non
+réductible par une simple optimisation locale. La mémoïsation de la substitution
+pure du noyau (figure~\ref{fig:memo}) apporte un gain mesuré mais ne franchit pas
+ce mur ; la stratégie retenue a donc été de \emph{pivoter} vers les résultats
+ensemblistes et d'ordre (chacun certifié en moins d'une seconde), en documentant
+les résultats cardinaux profonds comme partiels bloqués par la performance.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.72\textwidth]{figures/memoisation_subst}
+  \caption{Effet de la mémoïsation de la substitution pure du noyau
+  (\texttt{subst\_t}/\texttt{subst\_f}, fonctions déterministes sans effet de
+  bord) sur un témoin de preuve cardinale. Gain réel, mais le mur algorithmique
+  subsiste : d'où le pivot vers les résultats ensemblistes/d'ordre.}
+  \label{fig:memo}
+\end{figure}
+
+\paragraph{Cette campagne} Le présent rapport documente une campagne de
+formalisation (« ÉTAPE B ») ayant clos \textbf{20 cibles} (25 théorèmes
+certifiés) à travers les chapitres II et III, en comblant plusieurs
+« dossiers-trous » de l'arborescence. Chaque résultat est présenté ci-après avec
+l'énoncé de Bourbaki, ce qui est formalisé, la stratégie de preuve par les
+primitives \Nstar{}, et son statut (clos / clos sous hypothèses honnêtes).

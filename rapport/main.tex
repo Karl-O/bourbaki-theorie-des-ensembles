@@ -1,0 +1,169 @@
+% =============================================================================
+%  V9 — Bourbaki, Théorie des Ensembles : rapport de formalisation certifiée
+%
+%  Ce document explique le projet V9 : reformaliser INTÉGRALEMENT le livre
+%  « Théorie des ensembles » de N. Bourbaki, chaque résultat nommé devenant un
+%  objet `Theoreme` CERTIFIÉ par un noyau de preuve LCF (Python). « Démontré
+%  dans le livre » doit coïncider avec « vérifié par la machine ».
+%
+%  Style calqué sur ../../V6/V8/main.tex (rapport ingénieur V8).
+%  Compilation :  cd V9/rapport && latexmk -pdf main.tex
+% =============================================================================
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[french]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[a4paper,margin=2.5cm]{geometry}
+\usepackage{parskip}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{mathrsfs}
+\usepackage{stmaryrd}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\hypersetup{colorlinks=false,pdfborder={0 0 0}}
+
+% Caractères Unicode logiques courants (utilisés dans les listings et le texte)
+\DeclareUnicodeCharacter{03C4}{\ensuremath{\tau}}
+\DeclareUnicodeCharacter{03B1}{\ensuremath{\alpha}}
+\DeclareUnicodeCharacter{03B2}{\ensuremath{\beta}}
+\DeclareUnicodeCharacter{03B9}{\ensuremath{\iota}}
+\DeclareUnicodeCharacter{03BB}{\ensuremath{\lambda}}
+\DeclareUnicodeCharacter{0394}{\ensuremath{\Delta}}
+\DeclareUnicodeCharacter{2228}{\ensuremath{\vee}}
+\DeclareUnicodeCharacter{2227}{\ensuremath{\wedge}}
+\DeclareUnicodeCharacter{00AC}{\ensuremath{\neg}}
+\DeclareUnicodeCharacter{2200}{\ensuremath{\forall}}
+\DeclareUnicodeCharacter{2203}{\ensuremath{\exists}}
+\DeclareUnicodeCharacter{2208}{\ensuremath{\in}}
+\DeclareUnicodeCharacter{2209}{\ensuremath{\notin}}
+\DeclareUnicodeCharacter{2282}{\ensuremath{\subset}}
+\DeclareUnicodeCharacter{228A}{\ensuremath{\subsetneq}}
+\DeclareUnicodeCharacter{222A}{\ensuremath{\cup}}
+\DeclareUnicodeCharacter{2229}{\ensuremath{\cap}}
+\DeclareUnicodeCharacter{2205}{\ensuremath{\emptyset}}
+\DeclareUnicodeCharacter{21D2}{\ensuremath{\Rightarrow}}
+\DeclareUnicodeCharacter{21D4}{\ensuremath{\Leftrightarrow}}
+\DeclareUnicodeCharacter{2192}{\ensuremath{\to}}
+\DeclareUnicodeCharacter{2218}{\ensuremath{\circ}}
+\DeclareUnicodeCharacter{2260}{\ensuremath{\neq}}
+\DeclareUnicodeCharacter{2264}{\ensuremath{\leq}}
+\DeclareUnicodeCharacter{2265}{\ensuremath{\geq}}
+\DeclareUnicodeCharacter{207B}{\ensuremath{^{-1}}}
+\DeclareUnicodeCharacter{02DC}{\ensuremath{\tilde{\;}}}
+\DeclareUnicodeCharacter{25A1}{\ensuremath{\square}}
+\DeclareUnicodeCharacter{22A2}{\ensuremath{\vdash}}
+\DeclareUnicodeCharacter{2115}{\ensuremath{\mathbb{N}}}
+
+% Macros Bourbaki / projet
+\newcommand{\mT}{\mathscr{T}}
+\newcommand{\intEE}[2]{\llbracket #1, #2 \rrbracket}
+\newcommand{\seg}{\mathrm{S}}
+\newcommand{\Cl}{\mathrm{Cl}}
+\newcommand{\noyau}{\textsc{noyau}}
+\newcommand{\theoreme}{\texttt{Theoreme}}
+\newcommand{\Nstar}{\texttt{N.*}}
+
+% Environnements résultat
+\theoremstyle{definition}
+\newtheorem{resultat}{Résultat}[section]
+
+% Marqueurs de statut
+\newcommand{\statutclos}{\textbf{\textcolor{black}{[CLOS]}}}
+\newcommand{\statutcond}{\textbf{\textcolor{black}{[CLOS sous hyp.\ honnêtes]}}}
+
+% Listings Python
+\lstdefinestyle{py}{
+  language=Python,
+  basicstyle=\ttfamily\small,
+  keywordstyle=\bfseries,
+  commentstyle=\itshape,
+  showstringspaces=false,
+  breaklines=true,
+  tabsize=2,
+  numbers=left,
+  numberstyle=\tiny,
+  frame=single,
+}
+\lstset{style=py}
+
+% Titres discrets (identiques à V8)
+\usepackage{titlesec}
+\titleformat{\part}[block]{\normalsize\bfseries}{Chapitre~\thepart}{0.6em}{}
+\titleformat{\section}{\normalsize\bfseries}{\thesection}{0.6em}{}
+\titleformat{\subsection}{\small\bfseries}{\thesubsection}{0.6em}{}
+\titleformat{\paragraph}[runin]{\small\bfseries}{}{0pt}{}[\,:]
+\titlespacing*{\part}{0pt}{1.2em}{0.6em}
+\titlespacing*{\section}{0pt}{1.0em}{0.4em}
+\titlespacing*{\subsection}{0pt}{0.7em}{0.3em}
+
+\renewcommand{\thepart}{\Roman{part}}
+\renewcommand{\thesection}{\arabic{section}}
+\renewcommand{\thesubsection}{\thesection.\arabic{subsection}}
+
+\makeatletter
+\@addtoreset{section}{part}
+\makeatother
+
+\raggedright
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.5em}
+\setcounter{tocdepth}{2}
+
+\begin{document}
+
+\begin{center}
+  \large\bfseries
+  Théorie des Ensembles --- Bourbaki \\[0.3em]
+  \normalsize V9 --- Formalisation certifiée par noyau LCF
+\end{center}
+
+\bigskip
+\tableofcontents
+\clearpage
+
+% =============================================================================
+%  Avant-propos : projet, noyau LCF, frontière de confiance
+% =============================================================================
+\input{avant_propos}
+
+\clearpage
+
+% =============================================================================
+%  Résultats certifiés (campagne « ÉTAPE B »).
+%  Un fragment par section du livre — voir fragments/.
+% =============================================================================
+
+\part{Théorie des ensembles}
+
+\section{Correspondances et fonctions (II.3)}
+\input{fragments/frag_ii3_retractions}
+
+\section{Réunion et intersection d'une famille d'ensembles (II.4)}
+\input{fragments/frag_ii4_familles}
+
+\section{Produit d'une famille d'ensembles (II.5)}
+\input{fragments/frag_ii5_produit}
+
+\section{Relations d'équivalence (II.6)}
+\input{fragments/frag_ii6_equivalence}
+
+\part{Ensembles ordonnés, cardinaux, entiers}
+
+\section{Relations d'ordre, ensembles ordonnés (III.1)}
+\input{fragments/frag_iii1_ordre}
+
+\section{Ensembles bien ordonnés (III.2)}
+\input{fragments/frag_iii2_bonordre}
+
+\section{Ensembles équipotents, cardinaux (III.3)}
+\input{fragments/frag_iii3_cardinaux}
+
+\clearpage
+\input{conclusion}
+
+\end{document}

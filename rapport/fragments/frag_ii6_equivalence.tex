@@ -1,0 +1,85 @@
+% =============================================================================
+%  §II.6 — Relations d'équivalence
+%  Fragment inclus par main.tex (\input). Trois blocs subsection seulement.
+% =============================================================================
+
+\subsection{§II.6.2 (C55) --- La projection canonique sépare exactement les classes}
+\textbf{Énoncé (Bourbaki).} Soit $R$ une relation d'équivalence dans $E$, $p : E \to E/R$ la
+projection canonique. Pour $a, b \in E$, on a $p(a) = p(b)$ si et seulement si $R\{a,b\}$ :
+deux points ont même image par $p$ exactement lorsqu'ils sont équivalents (critère C55, socle
+de la décomposition canonique).
+
+\textbf{Formalisé.} Cible : $\bigl(p(a) = p(b)\bigr) \Leftrightarrow R\{a,b\}$, avec
+$p = $ application canonique de graphe $G$ et $R = \mathrm{rel\_graphe}(G)$. \\
+Module : \texttt{bourbaki/ensembles/ii\_6\_equivalence/ensembles\_projection\_c55.py}.
+
+\textbf{Preuve (\Nstar).} Pur recollage logique de deux maillons déjà clos, par transitivité
+d'équivalences sur le « milieu » commun $\Cl_R(a) = \Cl_R(b)$ (littéralement identique dans les
+deux maillons). On a $\mathit{eqv}_p : \bigl(p(a)=p(b)\bigr) \Leftrightarrow \bigl(\Cl_R(a)=\Cl_R(b)\bigr)$
+(\texttt{projection\_valeur\_classe}) et $\mathit{eqv}_R : R\{a,b\} \Leftrightarrow \bigl(\Cl_R(a)=\Cl_R(b)\bigr)$
+(\texttt{relation\_ssi\_classe\_egale}). On retourne $\mathit{eqv}_R$ par \texttt{equivalence\_symetrie},
+puis \texttt{equivalence\_transitivite} compose sur le milieu : $\bigl(p(a)=p(b)\bigr) \Leftrightarrow R\{a,b\}$.
+Aucune réécriture (le milieu coïncide), aucun axiome neuf.
+
+\textbf{Statut.} CLOS sous hypothèses honnêtes $\{$ $R$ réflexive dans $E$, $R$ symétrique, $R$
+transitive, $b \in E$, $p(a) = \Cl_R(a)$, $p(b) = \Cl_R(b)$ $\}$ ; le séquent final est l'union exacte
+(6 hypothèses, toutes load-bearing) des deux maillons, conclusion $\notin$ hypothèses, $a \in E$
+n'intervient pas (la classe de $b$ suffit côté $\Leftarrow$) ; \texttt{theorie\_ensembles()==22}.
+
+\subsection{§II.6.1 (Prop.\ 1, réciproque) --- Conditions sur le graphe $G$}
+\textbf{Énoncé (Bourbaki).} Soit $\Gamma$ une correspondance de $X$ dans $X$ de graphe $G$ et
+$R := \mathrm{rel\_graphe}(G)$. La Proposition 1 caractérise « $R$ est une relation d'équivalence »
+par des conditions sur $G$ : $G = G^{-1}$ équivaut à $R$ symétrique, $G \circ G \subset G$ équivaut
+à $R$ transitive. On formalise le sens réciproque (condition sur $G \Rightarrow$ propriété de $R$)
+pour ces deux volets, puis leur assemblage en relation d'équivalence (symétrie $\wedge$ transitivité).
+
+\textbf{Formalisé.} Cibles : $G = G^{-1} \Rightarrow \mathrm{est\_symetrique}(R)$ ;
+$G \circ G \subset G \Rightarrow \mathrm{est\_transitive}(R)$ ; d'où
+$\{G = G^{-1},\ G \circ G \subset G\} \vdash \mathrm{est\_relation\_equivalence}(R)$. \\
+Module : \texttt{bourbaki/ensembles/ii\_6\_equivalence/ensembles\_proposition1\_gamma.py}.
+
+\textbf{Preuve (\Nstar).} \emph{Symétrie} : sous $G = G^{-1}$, on \texttt{assume} $(x,y) \in G$ ;
+la S6 (Leibniz) réécrit l'hypothèse en $(x,y)\in G \Leftrightarrow (x,y)\in G^{-1}$, puis
+\texttt{couple\_reciproque} donne $(x,y)\in G^{-1} \Leftrightarrow (y,x)\in G$, d'où $(y,x)\in G$
+par \texttt{equivalence\_avant} et \texttt{modus\_ponens} ; \texttt{loi\_deduction} et double
+\texttt{generalisation} concluent. \emph{Transitivité} : sous $G\circ G \subset G$, on \texttt{assume}
+$(x,y)\in G$ et $(y,z)\in G$ ; la S5 (témoin $y$) produit $(\exists y)(\ldots)$, soit $(x,z)\in G\circ G$
+par \texttt{equivalence\_arriere} de \texttt{couple\_composee} ; on \texttt{instancie} l'inclusion au
+couple $(x,z)$, d'où $(x,z)\in G$ ; \texttt{loi\_deduction} et triple \texttt{generalisation}.
+\emph{Assemblage} : \texttt{conjonction\_intro}(sym, trans) $= \mathrm{est\_relation\_equivalence}(R)$.
+
+\textbf{Statut.} Trois théorèmes CLOS sous hypothèses honnêtes : symétrie sous $\{G = G^{-1}\}$,
+transitivité sous $\{G \circ G \subset G\}$, assemblage sous $\{G = G^{-1},\ G \circ G \subset G\}$
+(union exacte des deux antécédents, conclusion $\notin$ hypothèses, aucun affaibli). La réflexivité
+$\Delta \subset G$ n'entre pas (\texttt{est\_relation\_equivalence} = symétrie $\wedge$ transitivité) ;
+\texttt{theorie\_ensembles()==22}.
+
+\subsection{§II.6.4 --- Toute image réciproque $p^{-1}\langle B\rangle$ est saturée}
+\textbf{Énoncé (Bourbaki).} Le saturé d'une partie $A$ pour $R$ est $\tilde{A} = p^{-1}\langle p\langle A\rangle\rangle$,
+plus petite partie saturée contenant $A$. Le point clé : toute image réciproque $p^{-1}\langle B\rangle$
+d'une partie $B \subset E/R$ par la projection canonique $p$ est saturée pour $R$ ; en particulier
+$\tilde{A}$ (cas $B = p\langle A\rangle$) l'est.
+
+\textbf{Formalisé.} Cible : $\mathrm{est\_saturee}\bigl(p^{-1}\langle B\rangle,\, G\bigr)$, soit
+$(\forall x)(\forall y)\bigl((x \in p^{-1}\langle B\rangle \ \wedge\ (x,y)\in G) \Rightarrow y \in p^{-1}\langle B\rangle\bigr)$,
+pour une partie $B$ quelconque du quotient (image réciproque pure, $p\langle A\rangle$ non déplié). \\
+Module : \texttt{bourbaki/ensembles/ii\_6\_equivalence/ii\_6\_4\_saturees/ensembles\_sature\_partie.py}.
+
+\textbf{Preuve (\Nstar).} On prouve le corps instancié en deux points frais $s, t$, sous
+$(s \in p^{-1}\langle B\rangle \ \wedge\ (s,t)\in G)$ décomposé par \texttt{conjonction\_elim}.
+\emph{Membership} : \texttt{membre\_image\_reciproque} et \texttt{couple\_reciproque} (avec
+\texttt{alpha\_existe}) donnent $s \in p^{-1}\langle B\rangle \Leftrightarrow (\exists c)(c\in B \wedge (s,c)\in p)$ ;
+\texttt{existe\_elimination} extrait le témoin $c$. \emph{Transport} : \texttt{AXIOME\_APPCANON}
+(\texttt{instancie}) puis \texttt{couple\_egal\_implique\_composantes} donnent $c = \Cl_R(s)$ ;
+\texttt{relation\_implique\_classe\_egale} donne $\Cl_R(s)=\Cl_R(t)$, d'où $c = \Cl_R(t)$ par
+\texttt{composer\_egalites} et \texttt{congruence\_terme} ; « $G$ relation dans $E$ » fournit $y\in E$,
+et le sens $\Leftarrow$ de l'axiome (témoin $t$, S5) reconstruit $(t,c)\in p$. \emph{Retour} : on
+recompose $(\exists c)(\ldots)$, d'où $t \in p^{-1}\langle B\rangle$ ; \texttt{loi\_deduction} et double
+\texttt{generalisation}, puis \texttt{bridge\_equiv} ($\alpha$-pont, dérivé S5/témoin) transporte sur
+la forme canonique $\mathrm{est\_saturee}(\ldots)$ (liants $x, y$).
+
+\textbf{Statut.} CLOS sous hypothèses honnêtes $\{$ $R$ symétrique, $R$ transitive, $G$ relation dans
+$E$ (i.e.\ $(\forall a)(\forall b)((a,b)\in G \Rightarrow b\in E)$) $\}$ ; sym et trans sont consommées
+par \texttt{relation\_implique\_classe\_egale}, « $G$ relation dans $E$ » donne le $y\in E$ requis par
+le sens $\Leftarrow$ de l'axiome. Séquent = ces trois hypothèses exactement (anti-affaibli),
+conclusion $\notin$ hypothèses ; \texttt{theorie\_ensembles()==22}.
