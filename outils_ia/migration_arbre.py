@@ -73,8 +73,13 @@ def _preflight(moves):
     return errs
 
 
-def _build_patterns(moves):
-    """(rmap, fmap, pats) — cartes + motifs de réécriture compilés."""
+def _build_patterns(moves, pkg_renames=()):
+    """(rmap, fmap, pats) — cartes + motifs de réécriture compilés.
+
+    ``pkg_renames`` = déplacements de PAQUETS (dossiers entiers). On ajoute le chemin
+    pointé du paquet lui-même à rmap (motif A) — indispensable pour réécrire
+    ``from PKG import nom_reexporté`` / ``import PKG`` / ``PKG.attr`` quand un sous-paquet
+    bouge (ses noms ré-exportés par __init__ ne sont sinon pas suivis)."""
     rmap, fmap = {}, {}
     for de, vers in moves:
         if de.endswith("__init__.py"):
@@ -85,6 +90,11 @@ def _build_patterns(moves):
             op, name = od.rsplit(".", 1)
             np_, _ = nd.rsplit(".", 1)
             fmap[(op, name)] = np_
+    for r in pkg_renames:
+        od = r["de"].rstrip("/").replace("/", ".")
+        nd = r["vers"].rstrip("/").replace("/", ".")
+        if od != nd:
+            rmap[od] = nd
     pats = [(re.compile(r"(?<![\w.])" + re.escape(o) + r"(?![\w])"), n)
             for o, n in sorted(rmap.items(), key=lambda kv: -len(kv[0]))]
     pats += [(re.compile(r"(?m)^(\s*from\s+)" + re.escape(op) + r"(\s+import\s+)"
@@ -114,7 +124,8 @@ def main() -> int:
     if bad:
         sys.exit("move-map MALFORMÉ (corriger outils_ia/reorg_moves.json) :\n  " + "\n  ".join(bad[:10]))
 
-    rmap, fmap, pats = _build_patterns(moves)
+    pkg_renames = data[args.paquet].get("renommages_paquets", [])
+    rmap, fmap, pats = _build_patterns(moves, pkg_renames)
     new_dirs = {d for d in (os.path.dirname(v) for _, v in moves) if d}
 
     rel = []

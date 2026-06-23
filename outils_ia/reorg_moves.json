@@ -1981,6 +1981,24 @@
     "section": "III.3.5",
     "count": 5
    }
+  ],
+  "renommages_paquets": [
+   {
+    "de": "bourbaki/cardinaux/arithmetique/ensembles_exposant_un",
+    "vers": "bourbaki/cardinaux/arithmetique/iii_3_5_exposant/definition/exposant_un"
+   },
+   {
+    "de": "bourbaki/cardinaux/arithmetique/ensembles_prop12_card",
+    "vers": "bourbaki/cardinaux/arithmetique/iii_3_5_exposant/prop12_powerset/prop12_card"
+   },
+   {
+    "de": "bourbaki/cardinaux/arithmetique/ensembles_prop8_coeur",
+    "vers": "bourbaki/cardinaux/arithmetique/iii_3_4_prop8_successeur/prop8_coeur"
+   },
+   {
+    "de": "bourbaki/cardinaux/arithmetique/ensembles_transposition",
+    "vers": "bourbaki/cardinaux/arithmetique/iii_3_4_prop8_successeur/transposition"
+   }
   ]
  },
  "bourbaki/entiers": {
