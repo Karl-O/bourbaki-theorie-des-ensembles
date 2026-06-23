@@ -65,8 +65,8 @@ SALVAGE GRADUÉ — état des paliers (cf. les __all__) :
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (Terme, var, egal, et, ou, non, impl, inclus)
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_1_termes_relations.formule import (Terme, var, egal, et, ou, non, impl, inclus)
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 
 from bourbaki.cardinaux.ensembles_cardinaux import (
     est_cardinal, cardinal, inf_egal_card, inf_strict_card,
@@ -80,11 +80,11 @@ from bourbaki.cardinaux.arithmetique.ensembles_arith_cardinale import _prop1_dir
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import est_fini
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_fini_successeur import cardinal_de_cardinal
 
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     instancie, cas,
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
 )
-from bourbaki.logique.tactiques.tactiques_abrege_egalite import (
+from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import (
     symetrie, composer_egalites,
 )
 
@@ -312,7 +312,7 @@ def inf_strict_transitif(a="a", b="b", c="c"):
     # a≤b et a=c ⇒ c≤b  (réécrire le sujet a↦c)
     leib = N.s6(va, vc, "w", inf_egal_card(var("w"), vb))    # (a=c)⇒((a≤b)⇔(c≤b))
     eqv = N.modus_ponens(h_ac, leib)
-    from bourbaki.logique.tactiques.tactiques_abrege2 import equivalence_avant
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import equivalence_avant
     le_cb = N.modus_ponens(le_ab, equivalence_avant(eqv))    # c ≤ b
     # antisymétrie sur (b, c) : (est_card b et est_card c et b≤c et c≤b) ⇒ b=c
     conj4 = conjonction_intro(conjonction_intro(conjonction_intro(h_cb, h_cc), le_bc), le_cb)
@@ -344,7 +344,7 @@ def trichotomie_finis(a="a", b="b"):
       • si b≤a : soit a=b, soit a≠b et alors b<a.
     D'où a<b OU a=b OU b<a (l'ordre des cardinaux est total et strict).  Aucune
     hypothèse : la trichotomie suit de la comparabilité (grand théorème, CLOS)."""
-    from bourbaki.logique.tactiques.tactiques_abrege2 import tiers_exclu
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import tiers_exclu
     va, vb = _t(a), _t(b)
     le_ab = inf_egal_card(va, vb)
     le_ba = inf_egal_card(vb, va)

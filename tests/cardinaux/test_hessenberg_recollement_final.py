@@ -2,7 +2,7 @@
 
 Vérifie : theorie_ensembles()==22 ; conclusions == cibles miroir ; conclusion ∉ hyps ;
 liste les hypothèses honnêtes exactes de chaque lemme."""
-from bourbaki.logique.formule import egal, inclus, et, non, var
+from bourbaki.logique.i_1_termes_relations.formule import egal, inclus, et, non, var
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import (
     cardinal, est_cardinal, inf_egal_card, inf_strict_card,
@@ -54,7 +54,7 @@ def test_negation_b_inf_strict_a():
     Z = E.reunion(vS, var("Ucadre"))
     assert egal(Z, vS) in thm.hypotheses
     # témoin u∈U (U≠∅)
-    from bourbaki.logique.formule import appartient
+    from bourbaki.logique.i_1_termes_relations.formule import appartient
     assert appartient(var("uwit"), var("Ucadre")) in thm.hypotheses
     # documenter la liste exacte
     print("\nHYPS HONNÊTES negation_b_inf_strict_a:")

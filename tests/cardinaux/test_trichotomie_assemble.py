@@ -21,7 +21,7 @@ import pytest
 
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ordre.iii_1_relations_ordre.isomorphismes_ordre import ensembles_iso_ordre_canon as C
-from bourbaki.logique.formule import var, appartient
+from bourbaki.logique.i_1_termes_relations.formule import var, appartient
 from bourbaki.cardinaux import ensembles_trichotomie_assemble as TA
 from bourbaki.cardinaux import ensembles_maillon_coherences_prouvees as MCP
 from bourbaki.cardinaux import ensembles_trichotomie_maillon_final as MF
@@ -71,7 +71,7 @@ def test_prouve_maximalite_et_segment_dom_decharges():
     thm = TA.trichotomie_ordinaux_canon_prouve()
     hs = set(thm.hypotheses)
     h = TA.TS.h_iso_max("E", "R", "F", "Rp")
-    from bourbaki.logique.formule import ou, egal
+    from bourbaki.logique.i_1_termes_relations.formule import ou, egal
     maxim = ou(egal(E.dom(h), var("E")), egal(E.img(h), var("F")))
     assert maxim not in hs
     for (xb, yb) in (("x", "w"), ("x", "y")):

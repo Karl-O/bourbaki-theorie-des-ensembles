@@ -4,10 +4,10 @@ Vérifie : (a) que chaque NOTION s'introduit (prédicat/terme clos bien formé) 
 (b) que les théorèmes DIRECTS certifient EXACTEMENT la cible attendue (et que les
 hypothèses résiduelles attendues figurent bien) — pas une devinette.
 """
-from bourbaki.logique.formule import (
+from bourbaki.logique.i_1_termes_relations.formule import (
     var, egal, appartient, et, impl, pourtout, existe, inclus,
 )
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ensembles.familles.iii_7_limites import ensembles_limites as L
 from bourbaki.ordre.iii_7_limites import ensembles_limites_canoniques as C
@@ -52,7 +52,7 @@ def test_axiome_canonique_proj_dans_theorie():
     th = C.theorie_canonique_proj(var("E"), var("f"), leq, var("I"))
     assert ax in th.axiomes
     # forme : (∀a)(∀z)((z∈lim← et a∈I) ⇒ f_a(z)=pr_a z) — ∀ encodé ¬∃¬, tag "non"
-    from bourbaki.logique.formule import Formule
+    from bourbaki.logique.i_1_termes_relations.formule import Formule
     assert isinstance(ax, Formule)
 
 

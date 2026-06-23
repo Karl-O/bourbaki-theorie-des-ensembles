@@ -1,5 +1,5 @@
 """Test §II.3.7/§III.3 — F⁻¹ fonctionnel quand F est une application injective (Prop. 7)."""
-from bourbaki.logique.formule import var, egal
+from bourbaki.logique.i_1_termes_relations.formule import var, egal
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_bijection import reciproque_fonctionnelle
 
@@ -14,7 +14,7 @@ def test_reciproque_fonctionnelle():
 
 
 def test_reciproque_domaine():
-    from bourbaki.logique.formule import egal
+    from bourbaki.logique.i_1_termes_relations.formule import egal
     from bourbaki.cardinaux.ensembles_bijection import reciproque_domaine
     vF, vX, vY = var("F"), var("X"), var("Y")
     t = reciproque_domaine("F", "X", "Y")
@@ -23,7 +23,7 @@ def test_reciproque_domaine():
 
 
 def test_image_reciproque():
-    from bourbaki.logique.formule import egal
+    from bourbaki.logique.i_1_termes_relations.formule import egal
     from bourbaki.cardinaux.ensembles_bijection import image_reciproque
     vF, vX, vY = var("F"), var("X"), var("Y")
     t = image_reciproque("F", "X", "Y")
@@ -41,7 +41,7 @@ def test_reciproque_injective():
 
 
 def test_equipotence_symetrique():
-    from bourbaki.logique.formule import impl
+    from bourbaki.logique.i_1_termes_relations.formule import impl
     from bourbaki.cardinaux.ensembles_cardinaux import equipotent
     from bourbaki.cardinaux.ensembles_bijection import equipotence_symetrique
     vX, vY = var("X"), var("Y")
@@ -50,7 +50,7 @@ def test_equipotence_symetrique():
 
 
 def test_reciproque_est_application():
-    from bourbaki.logique.formule import impl, et
+    from bourbaki.logique.i_1_termes_relations.formule import impl, et
     from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de
     from bourbaki.cardinaux.ensembles_bijection import reciproque_est_application
     vF, vX, vY = var("F"), var("X"), var("Y")
@@ -62,7 +62,7 @@ def test_reciproque_est_application():
 
 
 def test_reciproque_est_bijection():
-    from bourbaki.logique.formule import impl
+    from bourbaki.logique.i_1_termes_relations.formule import impl
     from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de
     from bourbaki.cardinaux.ensembles_bijection import reciproque_est_bijection
     vF, vX, vY = var("F"), var("X"), var("Y")
@@ -97,7 +97,7 @@ def test_composee_injective():
 
 
 def test_equipotence_transitive():
-    from bourbaki.logique.formule import et, impl
+    from bourbaki.logique.i_1_termes_relations.formule import et, impl
     from bourbaki.cardinaux.ensembles_cardinaux import equipotent
     from bourbaki.cardinaux.ensembles_bijection import equipotence_transitive
     vX, vY, vZ = var("X"), var("Y"), var("Z")

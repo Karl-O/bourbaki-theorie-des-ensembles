@@ -23,7 +23,7 @@ les binders PAR DÉFAUT x='x', y='y', or compatible_ordre y forme valeur(f,y)=τ
 — le « y » y est CAPTURÉ par le τ interne (bug latent de binder). Ce module prouve la
 version CORRECTE (capture-free, binders xa/ya), qui est l'INTENTION du report.
 """
-from bourbaki.logique.formule import var, egal, appartient, non, Formule
+from bourbaki.logique.i_1_termes_relations.formule import var, egal, appartient, non, Formule
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux import ensembles_trichotomie_scaffold as TS
 from bourbaki.cardinaux import ensembles_trichotomie_extension_iso as X

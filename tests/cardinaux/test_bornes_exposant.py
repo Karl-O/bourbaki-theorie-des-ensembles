@@ -3,7 +3,7 @@
 B1  base_inf_egal_exposant  ⊢ (b≠0) ⇒ (Card a ≤ a^b)
 B2  un_inf_egal_exposant    ⊢ (a≠0) ⇒ (1 ≤ a^b),  1 = Card{∅}
 """
-from bourbaki.logique.formule import var, egal, non, impl
+from bourbaki.logique.i_1_termes_relations.formule import var, egal, non, impl
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import inf_egal_card, cardinal
 from bourbaki.cardinaux.arithmetique.ensembles_exposant_cardinal import (

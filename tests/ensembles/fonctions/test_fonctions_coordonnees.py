@@ -1,7 +1,7 @@
 """Tests §II.3.6, Exemple 2 — première/seconde fonction coordonnée sur G
 (applications z↦pr₁z, z↦pr₂z ; notion auparavant ABSENTE au niveau application).
 Définitions fidèles + fonctionnalité du graphe (C54) close.  theorie=22."""
-from bourbaki.logique.formule import var
+from bourbaki.logique.i_1_termes_relations.formule import var
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ensembles.fonctions.ii_3_6_fonction_terme import ensembles_fonctions_coordonnees as FC
 

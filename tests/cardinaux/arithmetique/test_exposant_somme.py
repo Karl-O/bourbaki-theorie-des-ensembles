@@ -3,7 +3,7 @@
 PALIERS SÛRS (caractérisation membership + formes), DÉRIVÉS des axiomes de
 DÉFINITION (rien postulé) ; la bijection restriction Φ (cœur) est REPORTÉE.
 """
-from bourbaki.logique.formule import var, egal, et, impl, appartient, existe, inclus
+from bourbaki.logique.i_1_termes_relations.formule import var, egal, et, impl, appartient, existe, inclus
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import cardinal
 from bourbaki.cardinaux.arithmetique.ensembles_exposant_cardinal import exposant_cardinal_binaire
@@ -36,14 +36,14 @@ def test_membre_exposant_somme():
     t = S.membre_exposant_somme("A", "B", "C", "G")
     corps = et(et(inclus(vG, E.produit(BC, vA)), E.est_fonctionnel(vG)),
                egal(E.dom(vG), BC))
-    from bourbaki.logique.formule import equiv
+    from bourbaki.logique.i_1_termes_relations.formule import equiv
     assert t.conclusion == equiv(appartient(vG, E.exposant(BC, vA)), corps)
     assert t.est_clos
 
 
 def test_membre_applications_somme():
     """⊢ t∈𝓕(B⊔C;A) ⇔ (∃G)(t=((G,B⊔C),A) et G∈A^(B⊔C)), CLOS."""
-    from bourbaki.logique.formule import equiv
+    from bourbaki.logique.i_1_termes_relations.formule import equiv
     vA, vB, vC, vt, vG = var("A"), var("B"), var("C"), var("t"), var("G")
     BC = somme_disjointe(vB, vC)
     t = S.membre_applications_somme("A", "B", "C", "t")
@@ -55,7 +55,7 @@ def test_membre_applications_somme():
 
 def test_membre_applications_b():
     """⊢ t∈𝓕(B;A) ⇔ (∃G)(t=((G,B),A) et G∈A^B), CLOS."""
-    from bourbaki.logique.formule import equiv
+    from bourbaki.logique.i_1_termes_relations.formule import equiv
     vA, vB, vt, vG = var("A"), var("B"), var("t"), var("G")
     t = S.membre_applications_b("A", "B", "t")
     triple = E.couple(E.couple(vG, vB), vA)
@@ -66,7 +66,7 @@ def test_membre_applications_b():
 
 def test_membre_produit_applications():
     """⊢ t∈𝓕(B;A)×𝓕(C;A) ⇔ (∃p)(∃q)(t=(p,q) et p∈𝓕(B;A) et q∈𝓕(C;A)), CLOS."""
-    from bourbaki.logique.formule import equiv
+    from bourbaki.logique.i_1_termes_relations.formule import equiv
     vA, vB, vC, vt, vp, vq = (var("A"), var("B"), var("C"),
                               var("t"), var("p"), var("q"))
     FB = E.applications(vB, vA)

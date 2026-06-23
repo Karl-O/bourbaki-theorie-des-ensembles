@@ -6,12 +6,12 @@ et sur S7 (congruence de τ sous équivalence universelle).
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import var, egal, existe, tau
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_1_termes_relations.formule import var, egal, existe, tau
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.tactiques.tactiques_abrege2 import conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite
-from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie, composer_egalites, congruence_terme
-from bourbaki.logique.tactiques.tactiques_abrege_quantif import existe_elimination
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite
+from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import symetrie, composer_egalites, congruence_terme
+from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import existe_elimination
 from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import couple_egal_implique_composantes
 
 

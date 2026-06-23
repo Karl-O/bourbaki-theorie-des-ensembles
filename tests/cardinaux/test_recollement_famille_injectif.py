@@ -4,7 +4,7 @@ from bourbaki.cardinaux.ensembles_recollement_famille_injectif import (
 )
 from bourbaki.ordre.iii_2_bon_ordre.recurrence_transfinie.ensembles_c60_coeur import union_famille
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.formule import var
+from bourbaki.logique.i_1_termes_relations.formule import var
 
 
 def test_union_famille_injective_certifie():

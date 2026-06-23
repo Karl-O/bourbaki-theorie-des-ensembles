@@ -56,16 +56,16 @@ plus_petit_de_bon_ordre PROUVÉ.  🚫 jamais de tautologie vide, jamais postule
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (
+from bourbaki.logique.i_1_termes_relations.formule import (
     Terme, var, egal, et, non, impl, appartient, existe, pourtout, inclus,
 )
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.tactiques.tactiques_abrege import inclusion_reflexive
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import inclusion_reflexive
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite, instancie,
 )
-from bourbaki.logique.tactiques.tactiques_abrege_quantif import existe_elimination
+from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import existe_elimination
 from bourbaki.cardinaux.ensembles_ordinal_cardinal_bon_ordre import plus_petit_de_bon_ordre
 from bourbaki.cardinaux.ensembles_clause_plus_petit_correspondance import (
     seg_terme, hyp_bon_ordre_seg, hyp_surjection,

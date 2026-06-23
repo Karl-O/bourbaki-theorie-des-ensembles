@@ -14,9 +14,9 @@ from bourbaki.cardinaux.arithmetique.ensembles_prop8_transposition import (
     transposition_hypothese)
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import successeur
 from bourbaki.cardinaux.ensembles_cardinaux import cardinal
-from bourbaki.logique.formule import var, egal
+from bourbaki.logique.i_1_termes_relations.formule import var, egal
 import bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege as E
-from bourbaki.logique.tactiques.tactiques_abrege2 import antecedent_consequent
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import antecedent_consequent
 
 
 _STAR = E.couple(E.VIDE, E.couple(E.VIDE, E.VIDE))   # * = (∅, 1)

@@ -6,7 +6,7 @@ LITTÉRALES + jeu d'hypothèses EXACT + clôture (.est_clos) du cœur.  theorie=
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (var, tau, egal, et, impl, appartient, pourtout)
+from bourbaki.logique.i_1_termes_relations.formule import (var, tau, egal, et, impl, appartient, pourtout)
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ensembles.ii_6_equivalence import ensembles_decomposition_effective as D
 

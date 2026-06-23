@@ -3,8 +3,8 @@
 Chaque test vérifie que la conclusion certifiée par le noyau est EXACTEMENT la
 cible attendue (et le statut des hypothèses résiduelles), et non une devinette.
 """
-from bourbaki.logique.formule import var, egal, appartient, et, impl, pourtout, equiv
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_1_termes_relations.formule import var, egal, appartient, et, impl, pourtout, equiv
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ensembles.familles.iii_7_limites import ensembles_limites as L
 

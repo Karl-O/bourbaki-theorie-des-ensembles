@@ -29,17 +29,17 @@ reunion(S₀,U)=S₀ n'apparaît JAMAIS ; conclusion ∉ hyps.  Noyau INTACT.
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (
+from bourbaki.logique.i_1_termes_relations.formule import (
     Terme, var, egal, et, impl, existe, pourtout, appartient, inclus, libres_f,
 )
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     instancie, conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
     equivalence_avant,
 )
-from bourbaki.logique.tactiques.tactiques_abrege_quantif import existe_elimination
+from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import existe_elimination
 
 from bourbaki.cardinaux.ensembles_cardinaux import cardinal, est_bijection_de
 from bourbaki.cardinaux.ensembles_hessenberg_hard import (
@@ -170,7 +170,7 @@ def _frame_membre_t_named(vE, vp, Sn, phin):
 
 def _frame_a_maximal_binder(E_set, mname):
     """frame_a_maximal avec le binder de (∃m) renommé-α vers mname."""
-    from bourbaki.logique.tactiques.tactiques_abrege_quantif import alpha_existe
+    from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import alpha_existe
     vE = _t(E_set)
     Gam, Fr = frame_ordre(vE), frame_pair(vE)
     fam = frame_a_maximal(E_set)                            # (∃m) element_maximal(.,m)

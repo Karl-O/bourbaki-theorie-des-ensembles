@@ -9,7 +9,7 @@ INVARIANT vérifié partout : theorie_ensembles() = 22.
 Anti-tautologie : aucune conclusion n'est l'une de ses hypothèses.
 Hypothèses EXACTES contrôlées (test miroir).
 """
-from bourbaki.logique.formule import var, pourtout, libres_f
+from bourbaki.logique.i_1_termes_relations.formule import var, pourtout, libres_f
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 
 import bourbaki.cardinaux.ensembles_realisation_segment_preuve as RSP
@@ -137,7 +137,7 @@ def test_bon_ordre_intervalle_depuis_realisation_theorie_22():
 #  (bon_ordre_intervalle(a) → cardinaux_bien_ordonnes(a) via la réduction CLOSE.)
 # ─────────────────────────────────────────────────────────────────────────────
 def test_chaine_cardinaux_bien_ordonnes_sous_realisation():
-    from bourbaki.logique import noyau_abrege as N
+    from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
     boi = RSP.bon_ordre_intervalle_depuis_realisation("a")     # [realisation]
     red = cardinaux_bien_ordonnes_de_bon_ordre("a")            # { bon_ordre_intervalle(a) } ⊢ cardinaux_bien_ordonnes(a)
     # décharge bon_ordre_intervalle(a) par boi

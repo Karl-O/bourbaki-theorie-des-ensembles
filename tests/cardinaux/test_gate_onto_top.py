@@ -8,7 +8,7 @@ sur le cardinal TOP Card(a) (≤-MAX de [0,a]).
 INVARIANT vérifié partout : theorie_ensembles() = 22.
 Anti-tautologie : aucune conclusion close ne peut être l'une de ses hypothèses (il n'y en a pas).
 """
-from bourbaki.logique.formule import var, appartient, inclus, egal, et, impl, non, pourtout, existe
+from bourbaki.logique.i_1_termes_relations.formule import var, appartient, inclus, egal, et, impl, non, pourtout, existe
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 
 import bourbaki.cardinaux.ensembles_gate_onto_top as M

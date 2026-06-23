@@ -75,7 +75,7 @@ l'assemblage (O1).  theorie_ensembles = 22, noyau INTACT, rien postulé.
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import var
+from bourbaki.logique.i_1_termes_relations.formule import var
 import bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege as E
 from bourbaki.entiers.iii_5_calcul_entiers.iii_5_8_factorielle.ensembles_factorielle_existence import regle_factorielle
 from bourbaki.ensembles.fonctions.hors_ii_3.iii_3_recollement.ensembles_restriction_somme import (

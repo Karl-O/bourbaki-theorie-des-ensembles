@@ -6,9 +6,9 @@ réflexivité primitive (Th1). Aucune nouvelle primitive : tout est dérivé.
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import var, egal, subst_t
-from bourbaki.logique import noyau_abrege as N
-from bourbaki.logique.tactiques.tactiques_abrege2 import equivalence_avant, equivalence_arriere
+from bourbaki.logique.i_1_termes_relations.formule import var, egal, subst_t
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import equivalence_avant, equivalence_arriere
 
 
 def symetrie(t, u):

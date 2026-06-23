@@ -8,7 +8,7 @@ on contrôle la FORME — anti-affaibli/anti-tautologie).  Pour les énoncés RE
 contrôle la formule-cible ; pour les formes CONDITIONNELLES, l'implication report ⇒
 conclusion.
 """
-from bourbaki.logique.formule import var, egal, et, ou, non, impl, inclus
+from bourbaki.logique.i_1_termes_relations.formule import var, egal, et, ou, non, impl, inclus
 from bourbaki.cardinaux.ensembles_cardinaux import (
     inf_egal_card, inf_strict_card, est_cardinal, cardinal,
 )

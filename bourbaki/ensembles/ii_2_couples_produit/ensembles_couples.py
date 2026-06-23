@@ -5,21 +5,21 @@ de Bourbaki (E.II.30) : (x,y)=(x',y') ⇒ (x=x' et y=y'), avec (x,y):={{x},{x,y}
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import Terme, var, egal, et, ou, appartient, impl
+from bourbaki.logique.i_1_termes_relations.formule import Terme, var, egal, et, ou, appartient, impl
 
 
 def _T(v):
     """Coercion nom→terme : accepte un Terme ou un nom de variable."""
     return v if isinstance(v, Terme) else var(v)
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import (_instance_paire, appartient_singleton,
                                  appartient_paire_gauche, appartient_paire_droite)
-from bourbaki.logique.tactiques.tactiques_abrege import a_implique_a
-from bourbaki.logique.tactiques.tactiques_abrege2 import (conjonction_intro, conjonction_elim_gauche,
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import a_implique_a
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (conjonction_intro, conjonction_elim_gauche,
                                equivalence_avant, equivalence_arriere,
                                equivalence_transitivite, cas)
-from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie, composer_egalites, congruence_terme
+from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import symetrie, composer_egalites, congruence_terme
 from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import couple_egal_si_composantes
 
 

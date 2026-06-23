@@ -6,7 +6,7 @@ Ici 0 = Card(∅), a·b = Card(A×B).  On certifie les deux formes (« nul » et
 nul ») et le lemme-clé Card X = 0 ⟺ X = ∅.  Chaque test vérifie la conclusion
 EXACTE et la clôture.
 """
-from bourbaki.logique.formule import var, egal, ou, non, et, equiv, impl
+from bourbaki.logique.i_1_termes_relations.formule import var, egal, ou, non, et, equiv, impl
 from bourbaki.cardinaux import ensembles_cardinaux_props_restantes_prop7 as P7
 from bourbaki.cardinaux.ensembles_cardinaux import cardinal, equipotent
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E

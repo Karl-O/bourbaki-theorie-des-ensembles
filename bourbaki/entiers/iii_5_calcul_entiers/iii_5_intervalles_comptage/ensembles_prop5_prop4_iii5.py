@@ -48,19 +48,19 @@ implémenté ici, comme prescrit dans sa docstring :
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (
+from bourbaki.logique.i_1_termes_relations.formule import (
     Terme, var, egal, et, ou, non, impl, equiv, appartient, pourtout,
 )
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 
-from bourbaki.logique.tactiques.tactiques_abrege import a_implique_a, syllogisme
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import a_implique_a, syllogisme
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
     equivalence_avant, equivalence_arriere, equivalence_transitivite,
     equivalence_symetrie, instancie, cas,
 )
-from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie, composer_egalites
+from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import symetrie, composer_egalites
 
 from bourbaki.cardinaux.ensembles_cardinaux import est_cardinal, inf_egal_card, cardinal
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import successeur, ZERO, est_fini, est_entier
@@ -117,7 +117,7 @@ def _a_imp_a_equiv(f):
 # ════════════════════════════════════════════════════════════════════════════
 def _membre_union_gen(a, b, z):
     """⊢ ( z ∈ [a,b]∪{b+1} ) ⇔ ( z∈[a,b] ou z=b+1 )."""
-    from bourbaki.logique.tactiques.tactiques_abrege2 import ou_congruence
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import ou_congruence
     va, vb, vz = _t(a), _t(b), _t(z)
     sb = successeur(vb)
     seg_b = E.intervalle_entiers(va, vb)
@@ -130,7 +130,7 @@ def _membre_union_gen(a, b, z):
 
 def _membre_union_s(a, b, s, z):
     """⊢ ( z ∈ [a,b]∪{s} ) ⇔ ( z∈[a,b] ou z=s )   (s borne sup. quelconque)."""
-    from bourbaki.logique.tactiques.tactiques_abrege2 import ou_congruence
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import ou_congruence
     va, vb, vs, vz = _t(a), _t(b), _t(s), _t(z)
     seg_b = E.intervalle_entiers(va, vb)
     sing = E.singleton(vs)

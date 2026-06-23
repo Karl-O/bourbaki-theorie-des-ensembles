@@ -6,8 +6,8 @@ from bourbaki.cardinaux.arithmetique.ensembles_arith_cardinale import (
 from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import (
     somme_cardinale_binaire as somme,
 )
-from bourbaki.logique.formule import var, egal
-from bourbaki.logique.tactiques.tactiques_abrege import antecedent_consequent
+from bourbaki.logique.i_1_termes_relations.formule import var, egal
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import antecedent_consequent
 from bourbaki.entiers.iii_5_calcul_entiers.iii_5_5_caracteristique_combinatoire.ensembles_prop7_caracteristique_iii5 import (
     carac_intersection, carac_complement, carac_union, phi,
 )

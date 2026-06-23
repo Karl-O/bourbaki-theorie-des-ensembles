@@ -4,7 +4,7 @@
 """
 from bourbaki.cardinaux.arithmetique.ensembles_prop10_final_close import prop10_close
 from bourbaki.cardinaux.arithmetique.ensembles_prop10_currying import cible_prop10
-from bourbaki.logique.formule import var
+from bourbaki.logique.i_1_termes_relations.formule import var
 import bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege as E
 
 

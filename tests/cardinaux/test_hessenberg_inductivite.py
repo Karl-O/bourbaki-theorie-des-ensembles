@@ -8,7 +8,7 @@ Vérifie :
   • frame_inductif : conclusion == est_inductif(Γ𝔉,𝔉), sous est_ordre +
     enonce_chaine_majoree (résidu honnête), non vacuous.
 """
-from bourbaki.logique.formule import var
+from bourbaki.logique.i_1_termes_relations.formule import var
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ordre.iii_2_bon_ordre.zorn_zermelo.ensembles_zorn import est_inductif
 from bourbaki.ordre.iii_2_bon_ordre.recurrence_transfinie.ensembles_c60_coeur import union_famille, famille_compatible

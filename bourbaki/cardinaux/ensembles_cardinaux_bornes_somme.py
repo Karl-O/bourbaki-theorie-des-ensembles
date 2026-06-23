@@ -36,16 +36,16 @@ les bornes de Bourbaki E.III.3.2 (« a ≤ a+b », « a ≤ a·b si b≠0 »).
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (Terme, var, egal, et, non, appartient, existe,
+from bourbaki.logique.i_1_termes_relations.formule import (Terme, var, egal, et, non, appartient, existe,
                                        inclus, subst_t)
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.tactiques.tactiques_abrege import syllogisme, a_implique_a
-from bourbaki.logique.tactiques.tactiques_abrege2 import (conjonction_intro,
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import syllogisme, a_implique_a
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (conjonction_intro,
                                conjonction_elim_gauche, conjonction_elim_droite,
                                equivalence_avant, equivalence_arriere, instancie)
-from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie
-from bourbaki.logique.tactiques.tactiques_abrege_quantif import existe_elimination
+from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import symetrie
+from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import existe_elimination
 from bourbaki.cardinaux.ensembles_cardinaux import (est_injection_de, inf_egal_card,
                                cardinal)
 from bourbaki.cardinaux.arithmetique.ensembles_copie_marquee import (
@@ -247,7 +247,7 @@ def inf_egal_produit(a_set="A", b_set="B"):
     # ¬(B=∅) ⇒ (∃m)(m∈B)
     nonvide = non_vide_ssi_element(vb)            # ¬(B=∅) ⇔ (∃z)(z∈B)
     # renommer le liant z↦m pour apparier ex_imp
-    from bourbaki.logique.tactiques.tactiques_abrege_quantif import alpha_existe
+    from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import alpha_existe
     ren = alpha_existe("z", "m", appartient(var("z"), vb))    # (∃z)(z∈B) ⇔ (∃m)(m∈B)
     nv_e = syllogisme(equivalence_avant(nonvide), equivalence_avant(ren))  # ¬(B=∅) ⇒ (∃m)(m∈B)
     return syllogisme(nv_e, ex_imp)              # ¬(B=∅) ⇒ A≤A×B

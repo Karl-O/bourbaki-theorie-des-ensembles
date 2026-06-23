@@ -3,9 +3,9 @@
 Chaque test vérifie la conclusion EXACTE (== cible reconstruite) et est_clos.
 Aucun fichier existant n'est modifié ; theorie_ensembles() reste à 22 axiomes.
 """
-from bourbaki.logique.formule import (var, app, egal, et, impl, non, appartient,
+from bourbaki.logique.i_1_termes_relations.formule import (var, app, egal, et, impl, non, appartient,
                                        existe, inclus, pourtout, equiv)
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ensembles.familles.ii_5_produit_famille.ii_5_6_7_algebre_produit import ensembles_produit_props2 as P
 

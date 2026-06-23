@@ -26,17 +26,17 @@ Définition du cardinal : exposant_cardinal_binaire(a,b) := Card(𝓕(b;a)).
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (Terme, var, egal, et, non, ou, impl, appartient,
+from bourbaki.logique.i_1_termes_relations.formule import (Terme, var, egal, et, non, ou, impl, appartient,
                      existe, pourtout, inclus, subst_t, subst_f)
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.tactiques.tactiques_abrege import a_implique_a, syllogisme
-from bourbaki.logique.tactiques.tactiques_abrege2 import (conjonction_intro, conjonction_elim_gauche,
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import a_implique_a, syllogisme
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (conjonction_intro, conjonction_elim_gauche,
                                conjonction_elim_droite, equivalence_avant,
                                equivalence_arriere, equivalence_transitivite,
                                instancie, projection_gauche, projection_droite)
-from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie, composer_egalites, congruence_terme
-from bourbaki.logique.tactiques.tactiques_abrege_quantif import existe_elimination, alpha_existe
+from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import symetrie, composer_egalites, congruence_terme
+from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import existe_elimination, alpha_existe
 from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import egalite_par_extension, vide_sans_element
 from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import singleton_membre, membre_paire_gauche
 from bourbaki.cardinaux.ensembles_cardinaux import cardinal

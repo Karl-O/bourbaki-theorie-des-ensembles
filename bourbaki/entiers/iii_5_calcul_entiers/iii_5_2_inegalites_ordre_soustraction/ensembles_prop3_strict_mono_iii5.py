@@ -37,16 +37,16 @@ PRODUIT.  a<b ⇒ ∃d( entier d, d≠0, b=a+d ).  Pour ce témoin d :
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (
+from bourbaki.logique.i_1_termes_relations.formule import (
     Terme, var, egal, non, et, impl, existe,
 )
-from bourbaki.logique import noyau_abrege as N
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite, instancie,
     equivalence_arriere,
 )
-from bourbaki.logique.tactiques.tactiques_abrege_quantif import existe_elimination
-from bourbaki.logique.tactiques.tactiques_abrege_egalite import (
+from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import existe_elimination
+from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import (
     symetrie, composer_egalites, congruence_terme,
 )
 
@@ -443,14 +443,14 @@ def _ne0_vers_card(x, x_ne0, hcard_x):
     card_x = N.modus_ponens(hcard_x, _card_de_card_t(vx))   # Card x = x
     # ¬(x=Card∅)  ⇒  ¬(Card x = Card∅)  via congruence : remplacer x par Card x
     #   on a Card x = x ; cible : (Card x = Card∅) ⇒ (x = Card∅) puis contraposée.
-    from bourbaki.logique.tactiques.tactiques_abrege2 import contraposition
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import contraposition
     cardvide = cardinal(E.VIDE)
     # (Card x = x) ⇒ ( (Card x = Card∅) ⇒ (x = Card∅) ) : congruence_terme sur w=Card∅ ? non.
     # Plus simple : V{w} := (w = Card∅) ; congruence_terme(Card x, x, ?) ne donne pas une impl.
     # On utilise S6 : (Card x = x) ⇒ ((Card x = Card∅) ⇔ (x = Card∅)).
     w = "wnv3"
     R = egal(var(w), cardvide)                              # (Card x|w)R=(Card x=Card∅), (x|w)R=(x=Card∅)
-    from bourbaki.logique.tactiques.tactiques_abrege2 import equivalence_avant
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import equivalence_avant
     eq = N.modus_ponens(card_x, N.s6(cardinal(vx), vx, w, R))   # (Card x=Card∅) ⇔ (x=Card∅)
     imp = equivalence_avant(eq)                             # (Card x=Card∅) ⇒ (x=Card∅)
     # contraposée : ¬(x=Card∅) ⇒ ¬(Card x=Card∅)

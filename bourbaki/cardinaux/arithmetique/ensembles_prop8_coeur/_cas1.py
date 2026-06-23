@@ -19,10 +19,10 @@ Eq(A×{0},B×{0}).
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import var, egal, impl
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_1_termes_relations.formule import var, egal, impl
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.tactiques.tactiques_abrege2 import (conjonction_intro,
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (conjonction_intro,
                                conjonction_elim_gauche, conjonction_elim_droite)
 from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import UN, somme_disjointe
 from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de, equipotent
@@ -65,7 +65,7 @@ def cas_fixe_bijection(a="A", b="B", h=_H):
     c1 = _cut(E.est_fonctionnel(vh), fun, g_fonctionnel(a, h))
 
     # Conjoint 2 : dom g = A×{0}  (hyp : A×{0}⊂dom h)
-    from bourbaki.logique.formule import inclus
+    from bourbaki.logique.i_1_termes_relations.formule import inclus
     c2 = _cut(inclus(A0, E.dom(vh)), A0_dom, g_domaine(a, h))
 
     # Conjoint 3 : injective_dans(g, A×{0})

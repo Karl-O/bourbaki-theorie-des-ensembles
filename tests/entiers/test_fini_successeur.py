@@ -4,7 +4,7 @@ On vérifie que chaque lemme du module ensembles_fini_successeur est CLOS (aucun
 hypothèse résiduelle, sauf indication contraire) et que sa CONCLUSION est exactement
 l'énoncé attendu (le noyau certifie ; on contrôle la forme).
 """
-from bourbaki.logique.formule import var, egal, non, et, impl, equiv
+from bourbaki.logique.i_1_termes_relations.formule import var, egal, non, et, impl, equiv
 from bourbaki.cardinaux.ensembles_cardinaux import cardinal, est_cardinal
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import successeur, est_fini
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_fini_successeur import (

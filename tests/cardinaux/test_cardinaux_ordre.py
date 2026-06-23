@@ -3,7 +3,7 @@
 Chaque test vérifie que la conclusion certifiée par le noyau EST EXACTEMENT la
 cible Bourbaki, et que le théorème est CLOS (aucune hypothèse).
 """
-from bourbaki.logique.formule import var, impl, et
+from bourbaki.logique.i_1_termes_relations.formule import var, impl, et
 from bourbaki.cardinaux import ensembles_cardinaux_ordre as O
 from bourbaki.cardinaux.ensembles_cardinaux import equipotent, inf_egal_card
 
@@ -32,7 +32,7 @@ def test_inf_egal_transitive():
 def test_composee_domaine_incl():
     """⊢_{dom F=X, image(F,X)⊂Y, dom G=Y}  dom(G∘F) = X."""
     t = O.composee_domaine_incl("G", "F", "X", "Y")
-    from bourbaki.logique.formule import egal
+    from bourbaki.logique.i_1_termes_relations.formule import egal
     from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
     assert t.conclusion == egal(E.dom(E.composee(var("G"), var("F"))), var("X"))
 
@@ -40,7 +40,7 @@ def test_composee_domaine_incl():
 def test_composee_image_incl():
     """⊢_{image(F,X)⊂Y, image(G,Y)⊂Z}  image(G∘F, X) ⊂ Z."""
     t = O.composee_image_incl("G", "F", "X", "Y", "Z")
-    from bourbaki.logique.formule import inclus
+    from bourbaki.logique.i_1_termes_relations.formule import inclus
     from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
     assert t.conclusion == inclus(E.image(E.composee(var("G"), var("F")), var("X")),
                                   var("Z"))

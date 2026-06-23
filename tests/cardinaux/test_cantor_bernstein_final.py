@@ -7,7 +7,7 @@ noyau (PROUVE == certifie) :
   • recollement_h          (ÉTAPE 3) — h=(f|D)∪(g⁻¹|(A∖D)) bijection a → b.
   • cantor_bernstein       (ÉTAPE 4) — (a≤b et b≤a) ⇒ Eq(a,b).  GRAND PRIX.
 """
-from bourbaki.logique.formule import var, egal, et, impl, inclus
+from bourbaki.logique.i_1_termes_relations.formule import var, egal, et, impl, inclus
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux import ensembles_cantor_bernstein as CB
 from bourbaki.cardinaux import ensembles_cantor_bernstein_final as CBF

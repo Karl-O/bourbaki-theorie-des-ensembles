@@ -1,5 +1,5 @@
 """Tests de ensembles_codomaine_reconciliation (Lemme 1 §III.2, réconciliation codomaine)."""
-from bourbaki.logique.formule import var, egal, inclus, appartient
+from bourbaki.logique.i_1_termes_relations.formule import var, egal, inclus, appartient
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis import ensembles_ordre_vocab as V
 from bourbaki.cardinaux import ensembles_codomaine_reconciliation as M

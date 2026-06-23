@@ -5,7 +5,7 @@ INVARIANT vérifié partout : theorie_ensembles() = 22.
 Anti-tautologie : aucune conclusion n'est l'une de ses hypothèses.
 Hypothèses EXACTES contrôlées.
 """
-from bourbaki.logique.formule import var, appartient, inclus, egal, et, impl, non, pourtout, existe
+from bourbaki.logique.i_1_termes_relations.formule import var, appartient, inclus, egal, et, impl, non, pourtout, existe
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 
 import bourbaki.cardinaux.ensembles_hyp_transport_ordinal_preuve as P
@@ -34,7 +34,7 @@ def test_pullback_membre_equivalence():
     PB = P.pullback("a", "Ro", "S")
     vt = var("t")
     corps = et(appartient(vt, var("a")), appartient(cardinal(seg("Ro", "a", vt)), var("S")))
-    from bourbaki.logique.formule import equiv
+    from bourbaki.logique.i_1_termes_relations.formule import equiv
     assert t.conclusion == equiv(appartient(vt, PB), corps)
 
 
@@ -173,7 +173,7 @@ def test_realisation_segment_est_le_maillon():
 
 def test_bo_form_artefact_contient_liant_terme():
     # l'artefact bloquant : un TERME (pullback) en position de LIANT — non dérivable.
-    from bourbaki.logique.formule import Terme
+    from bourbaki.logique.i_1_termes_relations.formule import Terme
     bf = P.bo_form_artefact("a", "Ro", "S")
 
     def term_binders(f):

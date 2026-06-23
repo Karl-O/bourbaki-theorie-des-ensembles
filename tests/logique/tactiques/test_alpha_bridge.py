@@ -6,13 +6,13 @@ DURS qui cassaient l'ancien alpha_existe — liant interne « @0 » et liant int
 coïncidant avec le NOM cible (« u »/« up »), c.-à-d. la forme exacte du verrou ℵ₀."""
 import pytest
 
-from bourbaki.logique.formule import (
+from bourbaki.logique.i_1_termes_relations.formule import (
     var, tau, existe, pourtout, appartient, egal, et, impl, alpha_egal,
 )
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.tactiques.tactiques_abrege import a_implique_a
-from bourbaki.logique.tactiques.ensembles_alpha_bridge import alpha_bridge, bridge_equiv
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import a_implique_a
+from bourbaki.logique.i_3_quantifies.ensembles_alpha_bridge import alpha_bridge, bridge_equiv
 
 
 def test_theorie_22():

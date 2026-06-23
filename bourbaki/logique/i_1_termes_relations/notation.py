@@ -25,7 +25,7 @@ from bourbaki.assemblage.assemblage import (
     Assemblage, negation, disjonction, implication, conjonction, equivalence,
     egalite, existe, pour_tout, tau_x,
 )
-from bourbaki.logique.lecture import Signature, DEFAUT, depuis_assemblage
+from bourbaki.logique.i_1_termes_relations.lecture import Signature, DEFAUT, depuis_assemblage
 
 _TOKEN = re.compile(r"<=>|=>|=|\(|\)|[A-Za-z][A-Za-z0-9]*'*")
 _LETTRE = re.compile(r"[A-Za-z]'*$")  # un terme-lettre : une seule lettre (+ primes)

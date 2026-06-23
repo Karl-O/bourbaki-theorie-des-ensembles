@@ -11,11 +11,11 @@ Non couverts (métathéorèmes hors fragment objet) : C2–C5, C19. Voir couvert
 from __future__ import annotations
 
 from bourbaki.assemblage.assemblage import (negation, disjonction, implication, conjonction, equivalence)
-from bourbaki.logique.lecture import DEFAUT
-from bourbaki.logique import noyau
-from bourbaki.logique.tactiques.tactiques import (a_implique_a, syllogisme, affaiblissement,
+from bourbaki.logique.i_1_termes_relations.lecture import DEFAUT
+from bourbaki.logique.i_2_criteres_C.noyau import noyau
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques import (a_implique_a, syllogisme, affaiblissement,
                        mono_gauche, mono_droite, antecedent_consequent)
-from bourbaki.logique.tactiques.tactiques_prop import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_prop import (
     tiers_exclu, double_negation_intro, double_negation_elim, contraposition,
     contraposition_theoreme, conjonction_intro, projection_gauche, projection_droite,
     equivalence_avant, equivalence_arriere)

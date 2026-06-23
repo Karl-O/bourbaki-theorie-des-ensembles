@@ -27,12 +27,12 @@ La dernière ligne (ou un pas de l'env) doit conclure le but.
 from __future__ import annotations
 from dataclasses import dataclass
 
-from bourbaki.logique.lecture import Signature, DEFAUT
-from bourbaki.logique import noyau
-from bourbaki.logique.tactiques.tactiques import a_implique_a, syllogisme
-from bourbaki.logique.tactiques.tactiques_prop import tiers_exclu, contraposition_theoreme
-from bourbaki.logique.tactiques.tactiques_egalite import reflexivite, symetrie, transitivite
-from bourbaki.logique.notation import _TOKEN, _parse, ErreurNotation, afficher
+from bourbaki.logique.i_1_termes_relations.lecture import Signature, DEFAUT
+from bourbaki.logique.i_2_criteres_C.noyau import noyau
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques import a_implique_a, syllogisme
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_prop import tiers_exclu, contraposition_theoreme
+from bourbaki.logique.i_4_egalitaires.tactiques_egalite import reflexivite, symetrie, transitivite
+from bourbaki.logique.i_1_termes_relations.notation import _TOKEN, _parse, ErreurNotation, afficher
 
 # Règle -> (fonction, sortes d'arguments). 'F' = formule, 'x' = lettre, 'T' = pas.
 REGLES: dict = {

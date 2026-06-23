@@ -1,7 +1,7 @@
 """Tests V9 — §II.3 Extensionnalité fonctionnelle (graphe_egal_par_valeurs)."""
 from __future__ import annotations
 
-from bourbaki.logique.formule import var, egal, et, impl, appartient, existe, pourtout
+from bourbaki.logique.i_1_termes_relations.formule import var, egal, et, impl, appartient, existe, pourtout
 from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege import (est_fonctionnel, est_un_graphe,
                                                  dom, valeur, couple)
 from bourbaki.ensembles.fonctions.ii_3_general.ensembles_extensionnalite import (

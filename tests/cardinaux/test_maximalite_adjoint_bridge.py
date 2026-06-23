@@ -21,7 +21,7 @@ INVARIANT : theorie_ensembles() = 22.  Rien postulé.  Conclusions NON vacueuses
 """
 import pytest
 
-from bourbaki.logique.formule import var, appartient, egal, inclus
+from bourbaki.logique.i_1_termes_relations.formule import var, appartient, egal, inclus
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis import ensembles_ordre_vocab as V
 from bourbaki.cardinaux import ensembles_trichotomie_extension_iso as EXT
@@ -108,7 +108,7 @@ def test_target2_hypotheses_classees():
 
 def test_target2_bijection_invariante():
     """Le conjoint est_bijective(h⁺,S∪{a},T∪{b}) est INVARIANT (indép. de la relation)."""
-    from bourbaki.logique.tactiques.tactiques_abrege2 import (
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
         conjonction_elim_gauche as cg)
     iso_adj = EXT.extension_iso_depuis_iso_h()
     bij_adj = cg(iso_adj)

@@ -69,7 +69,7 @@ non vacuous (∉ hypothèses).  vh (la règle T) OPAQUE (callable Terme→Terme)
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import Terme, var, egal, impl, appartient, pourtout, existe
+from bourbaki.logique.i_1_termes_relations.formule import Terme, var, egal, impl, appartient, pourtout, existe
 
 from bourbaki.ordre.iii_2_bon_ordre.recurrence_transfinie.ensembles_c60_pont import (
     recursion_transfinie_existence_final, essais_bien_formes, rule_codomain,
@@ -160,7 +160,7 @@ def regle_iteration(S, a):
 
     On IMPLÉMENTE ici cette règle telle quelle (terme τ), comme un callable Terme→Terme
     consommable par C62 ; on garde a et S génériques (a : Terme ; S : Terme→Terme)."""
-    from bourbaki.logique.formule import tau, et, ou, non
+    from bourbaki.logique.i_1_termes_relations.formule import tau, et, ou, non
     va = _t(a)
     YIT = "yit63"
 

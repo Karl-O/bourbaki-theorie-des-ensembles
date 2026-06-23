@@ -9,7 +9,7 @@ On certifie le scaffolding inconditionnel de l'étape (d) du blueprint :
   • le cœur dur (maximalité ⇒ trichotomie) POSÉ conditionnel/REPORTÉ (formule).
 theorie_ensembles() reste = 22 ; rien postulé ; conclusions non tautologiques.
 """
-from bourbaki.logique.formule import var, et, appartient, egal, Formule
+from bourbaki.logique.i_1_termes_relations.formule import var, et, appartient, egal, Formule
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis import ensembles_ordre_vocab as V
 from bourbaki.cardinaux import ensembles_trichotomie_scaffold as TS
@@ -64,7 +64,7 @@ def test_couple_iso_dans_h():
     assert cid.conclusion == TS.couple_iso_dans_h_cible()
     assert cid.conclusion not in cid.hypotheses    # NON vacueux
     # les hypothèses-clés (segments + iso + v=φ(u) + func/dom/graphe) sont présentes
-    from bourbaki.logique.formule import inclus
+    from bourbaki.logique.i_1_termes_relations.formule import inclus
     Rf = TS._R_de("R")
     Rpf = TS._R_de("Rp")
     vS, vT, vphi, vu, vv = var("S"), var("T"), var("phi"), var("u"), var("v")

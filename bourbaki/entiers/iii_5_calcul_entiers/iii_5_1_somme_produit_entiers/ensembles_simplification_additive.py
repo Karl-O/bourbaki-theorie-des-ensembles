@@ -34,10 +34,10 @@ ROUTE — récurrence C61 sur a (`principe_recurrence_preuve`, déjà CLOSE modu
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (
+from bourbaki.logique.i_1_termes_relations.formule import (
     Terme, var, egal, et, impl, pourtout,
 )
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 
 from bourbaki.cardinaux.ensembles_cardinaux import est_cardinal, cardinal
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import est_fini, est_entier, successeur, ZERO
@@ -45,11 +45,11 @@ from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recolle
     somme_cardinale_binaire,
 )
 
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
     instancie,
 )
-from bourbaki.logique.tactiques.tactiques_abrege_egalite import (
+from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import (
     symetrie, composer_egalites,
 )
 
@@ -164,7 +164,7 @@ def _succ_somme(va, vc):
     # plus simple : congruence du terme successeur via s6 sur (successeur w)
     leib2 = N.modus_ponens(ca_eq_ac, N.s6(ca, ac, "wsa2", egal(successeur(var("wsa2")), successeur(ac))))
     # leib2 : (s(c+a)=s(a+c)) ⇔ (s(a+c)=s(a+c)) ; on prend la flèche arrière depuis la réflexivité
-    from bourbaki.logique.tactiques.tactiques_abrege2 import equivalence_arriere
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import equivalence_arriere
     refl_sac = N.reflexivite(successeur(ac))             # s(a+c)=s(a+c)
     eq3 = N.modus_ponens(refl_sac, equivalence_arriere(leib2))   # s(c+a) = s(a+c)
 

@@ -1,11 +1,11 @@
 """Tests V9 — couche quantifiée abrégée (monotonie/congruence ∀/∃, élim ∃)."""
 from __future__ import annotations
 
-from bourbaki.logique.formule import var, appartient, impl, equiv, existe, pourtout, egal, tau, subst_f
-from bourbaki.logique import noyau_abrege as N
-from bourbaki.logique.tactiques.tactiques_abrege import a_implique_a
-from bourbaki.logique.tactiques.tactiques_abrege2 import conjonction_intro, projection_droite
-from bourbaki.logique.tactiques.tactiques_abrege_quantif import (monotonie_pour_tout, monotonie_existe,
+from bourbaki.logique.i_1_termes_relations.formule import var, appartient, impl, equiv, existe, pourtout, egal, tau, subst_f
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import a_implique_a
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import conjonction_intro, projection_droite
+from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import (monotonie_pour_tout, monotonie_existe,
                                       existe_vacuous, existe_elimination,
                                       congruence_pour_tout, congruence_existe,
                                       alpha_pour_tout, alpha_existe)
@@ -42,7 +42,7 @@ def test_existe_elimination():
     # implication CLOSE (x∈a et a=b) ⇒ (a=b) ; x non libre dans C ni dans Γ(=∅)
     thm = projection_droite(R, c)        # ⊢ (R et C) ⇒ C
     t = existe_elimination(thm, "x")
-    from bourbaki.logique.formule import et
+    from bourbaki.logique.i_1_termes_relations.formule import et
     assert t.conclusion == impl(existe("x", et(R, c)), c) and t.est_clos
 
 
@@ -72,8 +72,8 @@ def test_alpha_existe():
 
 
 def test_et_existe_droite():
-    from bourbaki.logique.formule import et
-    from bourbaki.logique.tactiques.tactiques_abrege_quantif import et_existe_droite
+    from bourbaki.logique.i_1_termes_relations.formule import et
+    from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import et_existe_droite
     P = appartient(a, b)                       # pas de y libre
     Q = appartient(var("y"), a)                # contient y
     t = et_existe_droite(P, "y", Q)
@@ -81,15 +81,15 @@ def test_et_existe_droite():
 
 
 def test_existe_commute():
-    from bourbaki.logique.tactiques.tactiques_abrege_quantif import existe_commute
+    from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import existe_commute
     t = existe_commute("x", "y", R)
     assert t.conclusion == equiv(existe("x", existe("y", R)), existe("y", existe("x", R)))
     assert t.est_clos
 
 
 def test_assoc_et():
-    from bourbaki.logique.formule import et
-    from bourbaki.logique.tactiques.tactiques_abrege2 import assoc_et
+    from bourbaki.logique.i_1_termes_relations.formule import et
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import assoc_et
     P, Q, S = appartient(a, b), appartient(b, a), appartient(a, a)
     t = assoc_et(P, Q, S)
     assert t.conclusion == equiv(et(P, et(Q, S)), et(et(P, Q), S)) and t.est_clos

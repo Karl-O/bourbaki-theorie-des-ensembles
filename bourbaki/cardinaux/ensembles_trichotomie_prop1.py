@@ -38,16 +38,16 @@ hypothèse.
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (
+from bourbaki.logique.i_1_termes_relations.formule import (
     Terme, var, egal, et, ou, non, impl, appartient, existe, pourtout, inclus, tau,
 )
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite, instancie,
     equivalence_avant, equivalence_arriere, cas, tiers_exclu,
 )
-from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie
+from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import symetrie
 from bourbaki.cardinaux.ensembles_ordinal_cardinal_bon_ordre import (
     bon_ordre_donne_clause_plus_petit,
 )
@@ -87,7 +87,7 @@ def _ex_falso(thm_a, thm_na, z):
 
 def _refute_self(thm_P_imp_notP):
     """De ⊢ (P ⇒ ¬P) déduit ⊢ ¬P.  ((P⇒¬P) ≡ (¬P∨¬P) → ¬P par S1.)"""
-    from bourbaki.logique.tactiques.tactiques_abrege import antecedent_consequent
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import antecedent_consequent
     P, notP = antecedent_consequent(thm_P_imp_notP.conclusion)
     return N.modus_ponens(thm_P_imp_notP, N.s1(notP))
 

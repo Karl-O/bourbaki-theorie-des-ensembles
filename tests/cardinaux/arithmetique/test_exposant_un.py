@@ -11,7 +11,7 @@ PALIERS :
       image(η,A)=𝓕({∅};A) ;
   (4) bijection η ⇒ Eq(A,𝓕)/Eq(𝓕,A) ⇒ a^1=a (Proposition 1).
 """
-from bourbaki.logique.formule import var, egal, et, impl, appartient, existe, inclus
+from bourbaki.logique.i_1_termes_relations.formule import var, egal, et, impl, appartient, existe, inclus
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import cardinal, equipotent, est_bijection_de
 from bourbaki.cardinaux.arithmetique import ensembles_exposant_un as M
@@ -69,7 +69,7 @@ def test_gv_injectif():
 
 def test_gv_membre():
     """⊢ (z ∈ G_v) ⇔ (z = (∅,v)), CLOS  (G_v a pour seul élément (∅,v))."""
-    from bourbaki.logique.formule import equiv
+    from bourbaki.logique.i_1_termes_relations.formule import equiv
     t = M.gv_membre()
     assert t.conclusion == equiv(appartient(var("z"), M._gv(var("c"))),
                                  egal(var("z"), E.couple(E.VIDE, var("c"))))

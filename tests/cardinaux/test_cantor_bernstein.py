@@ -3,7 +3,7 @@
 Vérifie, à chaque palier, que la CONCLUSION est exactement la cible et que le
 théorème est CLOS (aucune hypothèse résiduelle) là où il doit l'être.
 """
-from bourbaki.logique.formule import var, et, non, impl, appartient, inclus, egal, equiv
+from bourbaki.logique.i_1_termes_relations.formule import var, et, non, impl, appartient, inclus, egal, equiv
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux import ensembles_cantor_bernstein as CB
 

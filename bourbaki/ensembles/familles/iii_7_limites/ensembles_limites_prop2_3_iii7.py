@@ -44,18 +44,18 @@ La conclusion « y = z » n'apparaît dans aucune hypothèse (anti-tautologie).
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (
+from bourbaki.logique.i_1_termes_relations.formule import (
     Terme, var, app, egal, et, impl, appartient, pourtout,
 )
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ensembles.familles.iii_7_limites import ensembles_limites as L
 from bourbaki.ordre.iii_7_limites import ensembles_limites_canoniques as C
 from bourbaki.ordre.iii_7_limites.ensembles_limites_props2 import cofinal_canonique_coordonnee
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     instancie, conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
 )
-from bourbaki.logique.tactiques.tactiques_abrege_egalite import (
+from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import (
     composer_egalites, symetrie, congruence_terme,
 )
 from bourbaki.ensembles.familles.ii_5_produit_famille.ii_5_definitions.ensembles_extensionnalite_produit import (

@@ -1,6 +1,6 @@
 """Tests — §III.6.3 Hessenberg/Zorn : construction du témoin-majorant de chaîne
 abstraite (union des projections ⋃S=⋃pr₁(C), ⋃φ=⋃pr₂(C))."""
-from bourbaki.logique.formule import egal, et, existe, pourtout, appartient, impl, equiv, inclus, var
+from bourbaki.logique.i_1_termes_relations.formule import egal, et, existe, pourtout, appartient, impl, equiv, inclus, var
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_hessenberg_hard import frame_pair, frame_ordre
 from bourbaki.cardinaux.ensembles_chaine_temoin_abstrait import (

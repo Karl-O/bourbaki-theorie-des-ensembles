@@ -39,12 +39,12 @@ ce qui traverse sans collision des liants internes.
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import var, egal, non, et
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_1_termes_relations.formule import var, egal, non, et
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.tactiques.tactiques_abrege2 import (conjonction_intro, instancie,
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (conjonction_intro, instancie,
                                equivalence_avant)
-from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie
+from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import symetrie
 from bourbaki.cardinaux.ensembles_cardinaux import (inf_egal_card, inf_strict_card, cardinal)
 from bourbaki.cardinaux.ensembles_cardinaux_bornes import zero_inf_egal, inf_egal_successeur
 from bourbaki.cardinaux.ensembles_cardinaux_theoremes import equipotent_son_cardinal

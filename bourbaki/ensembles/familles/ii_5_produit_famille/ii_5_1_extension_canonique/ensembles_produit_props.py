@@ -43,16 +43,16 @@ G⟨S⟨Y⟩⟩=Y » est REPORTÉE — elle exige f⁻¹⟨f⟨X⟩⟩=X, lemme 
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (Terme, var, app, egal, et, impl, non, equiv,
+from bourbaki.logique.i_1_termes_relations.formule import (Terme, var, app, egal, et, impl, non, equiv,
                                        appartient, existe, inclus, pourtout)
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ensembles.fonctions.ii_3_3_composee_graphes.ensembles_composee import image_composee
 from bourbaki.ensembles.familles.ii_5_produit_famille.ii_5_definitions.ensembles_produit_famille import membre_parties
-from bourbaki.logique.tactiques.tactiques_abrege2 import (instancie, equivalence_avant,
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (instancie, equivalence_avant,
                                equivalence_arriere, conjonction_intro,
                                conjonction_elim_gauche, conjonction_elim_droite)
-from bourbaki.logique.tactiques.tactiques_abrege_egalite import (symetrie, composer_egalites,
+from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import (symetrie, composer_egalites,
                                congruence_terme)
 
 

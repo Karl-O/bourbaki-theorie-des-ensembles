@@ -7,7 +7,7 @@ les HYPOTHÈSES sont exactement les prémisses explicites attendues (anti-affaib
 ni plus, ni moins) ET que la conclusion est la cible (anti-tautologie : conclusion
 ≠ hypothèses).  theorie_ensembles() == 22 (intangible).
 """
-from bourbaki.logique.formule import var, et, impl, equiv, pourtout, appartient
+from bourbaki.logique.i_1_termes_relations.formule import var, et, impl, equiv, pourtout, appartient
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ensembles.ii_6_equivalence.ensembles_quotient_produit_restant import (
     relation_produit_couples, _relation_induite,

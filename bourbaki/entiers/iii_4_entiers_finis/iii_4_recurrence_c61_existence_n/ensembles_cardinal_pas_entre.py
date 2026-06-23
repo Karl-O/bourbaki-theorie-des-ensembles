@@ -60,16 +60,16 @@ SALVAGE GRADUÉ — ce qui est PROUVÉ vs REPORTÉ :
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (Terme, var, egal, et, ou, non, impl, existe,
+from bourbaki.logique.i_1_termes_relations.formule import (Terme, var, egal, et, ou, non, impl, existe,
                                        inclus)
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
     instancie, cas, tiers_exclu, equivalence_avant, equivalence_arriere,
 )
-from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie, composer_egalites
-from bourbaki.logique.tactiques.tactiques_abrege_quantif import existe_elimination
+from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import symetrie, composer_egalites
+from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import existe_elimination
 
 from bourbaki.cardinaux.ensembles_cardinaux import (
     est_cardinal, cardinal, inf_egal_card, est_injection_de, est_bijection_de,
@@ -226,7 +226,7 @@ def retrait_point_hyp_universel(b, c, f="F"):
     b ≤ c+1) : c'est la version requise par l'ASSEMBLAGE, car la décharge du ∃f
     (existe_elimination) exige que l'hypothèse restante ne contienne pas F libre.
     On l'instancie au témoin f à l'intérieur du corps.  ⚠️ NON PROUVÉE (REPORTÉE)."""
-    from bourbaki.logique.formule import pourtout
+    from bourbaki.logique.i_1_termes_relations.formule import pourtout
     nom = f if isinstance(f, str) else f.nom
     return pourtout(nom, retrait_point_hyp(b, c, f))
 

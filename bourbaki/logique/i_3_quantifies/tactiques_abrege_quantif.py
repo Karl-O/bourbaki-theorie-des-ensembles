@@ -8,10 +8,10 @@ au-delà de `existe_temoin`.
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import var, non, et, impl, existe, pourtout, tau, subst_f, libres_f
-from bourbaki.logique import noyau_abrege as N
-from bourbaki.logique.tactiques.tactiques_abrege import antecedent_consequent, syllogisme
-from bourbaki.logique.tactiques.tactiques_abrege2 import (instanciation_en_x, instanciation, instancie, contraposition,
+from bourbaki.logique.i_1_termes_relations.formule import var, non, et, impl, existe, pourtout, tau, subst_f, libres_f
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import antecedent_consequent, syllogisme
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (instanciation_en_x, instanciation, instancie, contraposition,
                                conjonction_intro, conjonction_elim_gauche,
                                conjonction_elim_droite, equivalence_avant, equivalence_arriere)
 
@@ -42,7 +42,7 @@ def monotonie_existe(thm_rs, x):
 
 def existe_vacuous(c, x):
     """⊢ (∃x)C ⇒ C   lorsque x n'est pas libre dans C  (existentielle vide)."""
-    if x in __import__("bourbaki.logique.formule", fromlist=["libres_f"]).libres_f(c):
+    if x in __import__("bourbaki.logique.i_1_termes_relations.formule", fromlist=["libres_f"]).libres_f(c):
         raise ValueError(f"{x!r} libre dans C : (∃x)C ⇒ C invalide")
     return N.existe_temoin(c, x)                        # (∃x)C ⇒ (τxC|x)C = C  (x∉C)
 

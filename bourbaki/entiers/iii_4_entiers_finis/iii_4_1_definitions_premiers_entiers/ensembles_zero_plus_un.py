@@ -51,16 +51,16 @@ PONT VERS Fini(0) — RÉSOLU (round 13, ensembles_fini_zero.py) :
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (Terme, var, egal, et, non, appartient, existe, subst_t, subst_f)
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_1_termes_relations.formule import (Terme, var, egal, et, non, appartient, existe, subst_t, subst_f)
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.tactiques.tactiques_abrege import a_implique_a, syllogisme
-from bourbaki.logique.tactiques.tactiques_abrege2 import (conjonction_intro, conjonction_elim_gauche,
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import a_implique_a, syllogisme
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (conjonction_intro, conjonction_elim_gauche,
                                conjonction_elim_droite, equivalence_avant,
                                equivalence_arriere, equivalence_transitivite,
                                instancie)
-from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie, composer_egalites, congruence_terme
-from bourbaki.logique.tactiques.tactiques_abrege_quantif import existe_elimination, alpha_existe
+from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import symetrie, composer_egalites, congruence_terme
+from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import existe_elimination, alpha_existe
 from bourbaki.ensembles.fonctions.ii_3_6_fonction_terme.ensembles_fonction_terme import membre_graphe_terme, graphe_terme_fonctionnel
 from bourbaki.cardinaux.ensembles_cantor import graphe_terme_domaine, graphe_terme_valeur
 from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import singleton_membre
@@ -146,9 +146,9 @@ def const_graphe_image(a="a", b="b"):
     mem = membre_graphe_terme(sa, vb, "t", "z", "x", "yb")         # ((t,z)∈C) ⇔ (t∈{a} et z=b)
     # body : t∈{a} et (t,z)∈C  ;  full : t∈{a} et (t∈{a} et z=b)
     body = et(appartient(vt, sa), appartient(E.couple(vt, vz), C))
-    from bourbaki.logique.tactiques.tactiques_abrege2 import et_congruence_droite
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import et_congruence_droite
     body_eq = et_congruence_droite(appartient(vt, sa), mem)        # body ⇔ (t∈{a} et (t∈{a} et z=b))
-    from bourbaki.logique.tactiques.tactiques_abrege_quantif import congruence_existe
+    from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import congruence_existe
     ex_body = congruence_existe(body_eq, "t")                      # (∃t)body ⇔ (∃t)full
     full = et(appartient(vt, sa), et(appartient(vt, sa), egal(vz, vb)))
     # ── (∃t)full ⇔ (z=b) ──────────────────────────────────────────────────────
@@ -220,7 +220,7 @@ def somme_zero_un_egale_singleton():
     AB = somme_disjointe(vide, sing)         # ∅ ⊔ {∅}
     cpl = E.couple(vide, UN)                 # (∅, 1)
     scpl = E.singleton(cpl)                  # {(∅, 1)}
-    from bourbaki.logique.formule import ou
+    from bourbaki.logique.i_1_termes_relations.formule import ou
     vz, vu, vv = var("z"), var("u"), var("v")
     car = membre_somme_caracterise(vide, sing, vz)   # z∈∅⊔{∅} ⇔ (exG ou exD)
     # disjonction caractérisante (construite EXPLICITEMENT, mêmes liants u/v que le lemme)
@@ -249,7 +249,7 @@ def somme_zero_un_egale_singleton():
     v1_eq_01 = N.modus_ponens(v_eq_vide, congruence_terme(vv, vide, E.couple(var("w"), UN)))
     z_eq_01 = composer_egalites(z_eq_v1, v1_eq_01)               # z=(∅,1)
     impD = existe_elimination(N.loi_deduction(bodyD, z_eq_01), "v")  # exD ⇒ z=(∅,1)
-    from bourbaki.logique.tactiques.tactiques_abrege2 import cas
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import cas
     h_disj = N.assume(disj)                                      # (exG ou exD)
     fwd = N.loi_deduction(disj, cas(h_disj, impG, impD))        # (exG ou exD) ⇒ z=(∅,1)
     # ⇐ : z=(∅,1) ⇒ (exG ou exD)  via le disjoint DROIT, témoin v:=∅

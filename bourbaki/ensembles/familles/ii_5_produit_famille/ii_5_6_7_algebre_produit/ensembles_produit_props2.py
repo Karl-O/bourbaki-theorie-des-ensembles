@@ -62,20 +62,20 @@ THÉORÈMES CERTIFIÉS  (chacun testé, cf. test_produit_props2.py)
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (Terme, var, app, egal, et, impl, non, equiv,
+from bourbaki.logique.i_1_termes_relations.formule import (Terme, var, app, egal, et, impl, non, equiv,
                                        appartient, existe, inclus, pourtout)
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ensembles.familles.ii_5_produit_famille.ii_5_definitions.ensembles_produit_famille import membre_produit_famille
 from bourbaki.ensembles.familles.ii_5_produit_famille.ii_5_1_extension_canonique.ensembles_extension_canonique import (produit_partiel,
                                projection_J)
-from bourbaki.logique.tactiques.tactiques_abrege import syllogisme
-from bourbaki.logique.tactiques.tactiques_abrege2 import (instancie, instanciation,
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import syllogisme
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (instancie, instanciation,
                                equivalence_avant, equivalence_arriere,
                                conjonction_intro, conjonction_elim_gauche,
                                conjonction_elim_droite)
-from bourbaki.logique.tactiques.tactiques_abrege_quantif import alpha_pour_tout
-from bourbaki.logique.tactiques.tactiques_abrege_egalite import (symetrie, composer_egalites,
+from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import alpha_pour_tout
+from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import (symetrie, composer_egalites,
                                congruence_terme)
 
 
@@ -210,7 +210,7 @@ def _congruence_appartient(t, a, b, w="w"):
 
 def _vars_libres_terme(t):
     """Variables libres d'un terme (pour choisir un liant frais sûr)."""
-    from bourbaki.logique.formule import libres_t
+    from bourbaki.logique.i_1_termes_relations.formule import libres_t
     return {var(n) for n in libres_t(t)}
 
 

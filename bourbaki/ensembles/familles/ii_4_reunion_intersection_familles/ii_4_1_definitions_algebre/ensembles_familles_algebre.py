@@ -37,17 +37,17 @@ loi de déduction sur « z∈· ⇒ z∈· » généralisée.
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (Terme, var, egal, et, impl, appartient,
+from bourbaki.logique.i_1_termes_relations.formule import (Terme, var, egal, et, impl, appartient,
                                        existe, pourtout, inclus)
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.tactiques.tactiques_abrege import syllogisme
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import syllogisme
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche as cg, conjonction_elim_droite as cd,
     equivalence_avant, equivalence_arriere, instancie,
     equivalence_transitivite as etr, equivalence_symetrie as esym,
     et_congruence_droite, et_congruence_gauche)
-from bourbaki.logique.tactiques.tactiques_abrege_quantif import (
+from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import (
     congruence_existe, existe_elimination, et_existe_gauche, existe_commute)
 from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import egalite_par_extension
 # RÉUTILISATION (pas de duplication) de l'infra famille-réciproque déjà certifiée.
@@ -234,7 +234,7 @@ def _assoc_et_droite(a, b, c):
 
 def et_existe_droite_sym(p, y, q):
     """⊢ (∃y)(P et Q) ⇔ (P et (∃y)Q)   (symétrique de et_existe_droite ; y∉P)."""
-    from bourbaki.logique.tactiques.tactiques_abrege_quantif import et_existe_droite
+    from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import et_existe_droite
     return esym(et_existe_droite(p, y, q))
 
 

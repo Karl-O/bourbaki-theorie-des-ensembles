@@ -26,17 +26,17 @@ MÊME machinerie que ensembles_somme_equipotence (sélecteur τc + garde-disjonc
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (Terme, var, egal, et, ou, non, appartient, existe,
+from bourbaki.logique.i_1_termes_relations.formule import (Terme, var, egal, et, ou, non, appartient, existe,
                      subst_t, subst_f)
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.tactiques.tactiques_abrege import a_implique_a, syllogisme
-from bourbaki.logique.tactiques.tactiques_abrege2 import (conjonction_intro, conjonction_elim_gauche,
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import a_implique_a, syllogisme
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (conjonction_intro, conjonction_elim_gauche,
                                conjonction_elim_droite, equivalence_avant,
                                equivalence_arriere, equivalence_transitivite,
                                instancie, cas)
-from bourbaki.logique.tactiques.tactiques_abrege_egalite import (symetrie, composer_egalites, congruence_terme)
-from bourbaki.logique.tactiques.tactiques_abrege_quantif import (existe_elimination, alpha_existe)
+from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import (symetrie, composer_egalites, congruence_terme)
+from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import (existe_elimination, alpha_existe)
 from bourbaki.ensembles.fonctions.ii_3_6_fonction_terme.ensembles_fonction_terme import (membre_graphe_terme, graphe_terme_fonctionnel)
 from bourbaki.cardinaux.ensembles_cantor import (graphe_terme_domaine, graphe_terme_valeur)
 from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import (somme_disjointe, ZERO, UN,
@@ -250,7 +250,7 @@ def commute_graphe_injective(a="A", b="B"):
     upinAB = conjonction_elim_droite(conjonction_elim_gauche(h))    # s'∈A⊔B
     val_eq = conjonction_elim_droite(h)                            # K(s)=K(s')
     cible = egal(vu, vup)
-    from bourbaki.logique.tactiques.tactiques_abrege_quantif import alpha_existe as _ax
+    from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import alpha_existe as _ax
     dec_u0 = N.modus_ponens(uinAB, equivalence_avant(membre_somme_caracterise(a, b, vu)))
     dec_up0 = N.modus_ponens(upinAB, equivalence_avant(membre_somme_caracterise(a, b, vup)))
     exA_u0, exB_u0 = dec_u0.conclusion.sous[0], dec_u0.conclusion.sous[1]
@@ -404,7 +404,7 @@ def commute_graphe_image(a="A", b="B"):
         copie droite = A) ; t=(q,1) (q∈B) ⇒ z=(q,0) ∈ B×{0} ⊆ B⊔A (injection_gauche).
     ⇐ : z=(c,0)∈B⊔A (c∈B copie gauche) ⇒ antécédent t₀=(c,1)∈A⊔B, K((c,1))=(c,0)=z ;
         z=(d,1)∈B⊔A (d∈A copie droite) ⇒ antécédent t₀=(d,0)∈A⊔B, K((d,0))=(d,1)=z."""
-    from bourbaki.logique.tactiques.tactiques_abrege_quantif import alpha_existe as _ax
+    from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import alpha_existe as _ax
     va, vb = _t(a), _t(b)
     AB = somme_disjointe(va, vb)
     BA = somme_disjointe(vb, va)
@@ -572,7 +572,7 @@ def _corps_pourtout(concl):
 
 def _renomme_injective(c3):
     """⊢ injective_dans(K,A⊔B) [liants s,sp]  →  forme défaut u,up."""
-    from bourbaki.logique.tactiques.tactiques_abrege_quantif import alpha_pour_tout, congruence_pour_tout
+    from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import alpha_pour_tout, congruence_pour_tout
     R_outer = _corps_pourtout(c3.conclusion)
     ren_outer = alpha_pour_tout("s", "u", R_outer)
     step1 = N.modus_ponens(c3, equivalence_avant(ren_outer))

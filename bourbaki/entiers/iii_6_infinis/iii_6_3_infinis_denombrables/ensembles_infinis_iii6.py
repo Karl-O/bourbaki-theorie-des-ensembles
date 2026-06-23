@@ -46,9 +46,9 @@ THÉORÈMES CLOS (est_clos = True, 0 hyp, theorie = 22) :
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (Terme, var, egal, et, non, equiv, impl,
+from bourbaki.logique.i_1_termes_relations.formule import (Terme, var, egal, et, non, equiv, impl,
                                        inclus, appartient)
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 
 from bourbaki.cardinaux.ensembles_cardinaux import (
@@ -59,8 +59,8 @@ from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.e
 from bourbaki.entiers.iii_6_infinis.iii_6_1_n_objet_existence.ensembles_ensemble_NN import ensemble_NN
 from bourbaki.entiers.iii_6_infinis.iii_6_1_n_objet_existence.ensembles_aleph0 import aleph_0, aleph0_egal_succ, aleph0_infini
 
-from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import symetrie
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     conjonction_intro, equivalence_avant, instancie,
 )
 
@@ -212,7 +212,7 @@ def NN_denombrable(y="Y"):
     temoin = conjonction_intro(NN_incl, NN_eq)                   # ℕ⊂ℕ et Eq(ℕ,ℕ) = R(ℕ)
     # S5 : (Y|ℕ)R(Y) ⇒ (∃Y) R(Y)
     res = N.modus_ponens(temoin, N.s5(corps, NN, y))            # (∃Y)( Y⊂ℕ et Eq(ℕ,Y) )
-    from bourbaki.logique.formule import existe
+    from bourbaki.logique.i_1_termes_relations.formule import existe
     assert res.conclusion == existe(y, corps), \
         "NN_denombrable : conclusion ≠ (∃Y)(Y⊂ℕ et Eq(ℕ,Y))"
     return res
@@ -220,7 +220,7 @@ def NN_denombrable(y="Y"):
 
 def _inclusion_reflexive_terme(t):
     """⊢ t ⊂ t   pour un TERME t  (réflexivité de l'inclusion, instanciée)."""
-    from bourbaki.logique.tactiques.tactiques_abrege import inclusion_reflexive
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import inclusion_reflexive
     refl_all = N.generalisation("X", inclusion_reflexive("X"))   # (∀X)(X ⊂ X)
     return instancie(refl_all, _t(t))                            # t ⊂ t
 
@@ -237,7 +237,7 @@ def existe_cardinal_infini_concret(a="a"):
     SATISFAIT dans theorie_ensembles() (=22) sans postulat : ℕ est l'ensemble infini que A4
     affirme exister.  Liant existentiel « a » FRAIS.  theorie = 22."""
     from bourbaki.entiers.iii_6_infinis.iii_6_3_infinis_denombrables.ensembles_infinis import est_infini
-    from bourbaki.logique.formule import existe
+    from bourbaki.logique.i_1_termes_relations.formule import existe
     a0 = aleph_0()
     corps = est_infini(var(a))                              # est_infini(a)   — liant a
     inf_a0 = aleph0_est_infini()                            # est_infini(ℵ₀) = (a|ℵ₀)corps

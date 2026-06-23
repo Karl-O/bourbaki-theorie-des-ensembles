@@ -15,16 +15,16 @@ Briques certifiées (term-tolérantes : points/valeurs = termes quelconques) :
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (Terme, var, egal, et, appartient, existe, inclus, subst_f)
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_1_termes_relations.formule import (Terme, var, egal, et, appartient, existe, inclus, subst_f)
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.tactiques.tactiques_abrege2 import (conjonction_intro,
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (conjonction_intro,
                                conjonction_elim_gauche, conjonction_elim_droite,
                                equivalence_avant, equivalence_arriere,
                                equivalence_transitivite, instancie)
-from bourbaki.logique.tactiques.tactiques_abrege_egalite import (symetrie,
+from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import (symetrie,
                                           composer_egalites, congruence_terme)
-from bourbaki.logique.tactiques.tactiques_abrege_quantif import existe_elimination
+from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import existe_elimination
 from bourbaki.ensembles.fonctions.ii_3_5_restrictions_prolongements.ensembles_restrictions import restriction_incluse
 from bourbaki.ensembles.fonctions.ii_3_4_fonctions_valeur.ensembles_fonctions import valeur_dans_graphe
 from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import couple_egal_implique_composantes
@@ -140,7 +140,7 @@ def g_inclus_h(a="A", h=_H):
     z_in = N.modus_ponens(pq_in, equivalence_arriere(N.modus_ponens(
         eq_z, N.s6(vz, E.couple(vp, vq), "w", appartient(var("w"), vh)))))   # z∈h
     avant = existe_elimination(existe_elimination(N.loi_deduction(body, z_in), "q"), "p")
-    from bourbaki.logique.tactiques.tactiques_abrege import syllogisme as _syll
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import syllogisme as _syll
     z_imp = _syll(equivalence_avant(inst), avant)                # z∈g ⇒ z∈h
     return N.generalisation("z", z_imp)                          # g ⊂ h
 

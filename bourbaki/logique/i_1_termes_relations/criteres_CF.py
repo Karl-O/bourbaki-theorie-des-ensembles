@@ -19,7 +19,7 @@ from __future__ import annotations
 from bourbaki.assemblage.assemblage import (Assemblage, concat, disjonction, negation, implication,
                         conjonction, equivalence, egalite, existe, pour_tout,
                         tau_x, substitution_b_x_a as sub, lettres)
-from bourbaki.logique.lecture import DEFAUT, est_relation, est_terme, depuis_assemblage
+from bourbaki.logique.i_1_termes_relations.lecture import DEFAUT, est_relation, est_terme, depuis_assemblage
 
 
 def _sorte(a, sig):

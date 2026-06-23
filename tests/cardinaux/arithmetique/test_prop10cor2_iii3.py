@@ -1,5 +1,5 @@
 """Tests §III.3 Prop 10 Cor 2 : (∏a_ι)^b = ∏ a_ι^b (forme ensembliste + réduction)."""
-from bourbaki.logique.formule import impl, egal
+from bourbaki.logique.i_1_termes_relations.formule import impl, egal
 from bourbaki.cardinaux.ensembles_cardinaux import cardinal, equipotent
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.arithmetique.ensembles_prop10cor2_iii3 import (

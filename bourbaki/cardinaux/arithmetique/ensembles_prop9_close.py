@@ -48,17 +48,17 @@ theorie_ensembles INCHANGÉE (22 axiomes) ; AUCUN fichier existant modifié.
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (Terme, var, egal, et, non, ou, impl,
+from bourbaki.logique.i_1_termes_relations.formule import (Terme, var, egal, et, non, ou, impl,
                      appartient, existe, pourtout, inclus, subst_t, subst_f)
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.tactiques.tactiques_abrege import a_implique_a, syllogisme
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import a_implique_a, syllogisme
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
     equivalence_avant, equivalence_arriere, equivalence_transitivite, instancie,
     cas)
-from bourbaki.logique.tactiques.tactiques_abrege_quantif import existe_elimination
-from bourbaki.logique.tactiques.tactiques_abrege_egalite import (
+from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import existe_elimination
+from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import (
     symetrie, composer_egalites, congruence_terme)
 
 from bourbaki.cardinaux.ensembles_cardinaux import (
@@ -179,7 +179,7 @@ def _couple_valeur_q(g, e, x):
     ax_dom = N.axiome(E.theorie_ensembles(), E.AXIOME_DOM)
     dom_car = instancie(instancie(ax_dom, vG), vx)               # x∈dom G ⇔ (∃y)((x,y)∈G)
     # AXIOME_DOM lie « y » ; on renomme en « q » pour s'apparier à valeur(·,·,"q")
-    from bourbaki.logique.tactiques.tactiques_abrege_quantif import alpha_existe
+    from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import alpha_existe
     inner_y = appartient(E.couple(vx, var("y")), vG)
     ren = alpha_existe("y", _VB, inner_y)                        # (∃y)…⇔(∃q)…
     dom_car_q = equivalence_transitivite(dom_car, ren)           # x∈dom G ⇔ (∃q)((x,q)∈G)
@@ -491,7 +491,7 @@ def W_phi_image_incluse(a="A", b="B", c="C"):
     W = W_phi(va, vb, vc)
     PHI = phi_valeur(var(_POINT), va, vb, vc)        # Φ(f), point f
     vz, vt = var("z"), var("t")
-    from bourbaki.logique.tactiques.tactiques_abrege_quantif import alpha_existe
+    from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import alpha_existe
 
     # z∈W⟨dom⟩ ⇔ (∃t)(t∈dom et (t,z)∈W)  (AXIOME_IMAGE ; le liant frais est α-renommé t)
     ax_img = N.axiome(E.theorie_ensembles(), E.AXIOME_IMAGE)
@@ -661,7 +661,7 @@ def _valeurs_coincident_sur_somme(vf1, vf2, va, vb, vc):
     RD1, RD2 = restriction_droite(vf1, vc), restriction_droite(vf2, vc)
     val_eq = egal(E.valeur(G1, vx, "y"), E.valeur(G2, vx, "y"))   # cible G₁(x)=G₂(x)
 
-    from bourbaki.logique.tactiques.tactiques_abrege_quantif import alpha_existe
+    from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import alpha_existe
     from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import _ou_congruence
     car0 = membre_somme_caracterise(vb, vc, vx)  # x∈B⊔C ⇔ ((∃u)(u∈B et x=(u,0)) ou (∃v)(v∈C et x=(v,1)))
     # α-renommer les DEUX liants : GAUCHE « u »→« s », DROIT « v »→« t » (points sûrs,
@@ -1394,7 +1394,7 @@ def W_psi_image_incluse(a="A", b="B", c="C"):
     W = W_psi(va, vb, vc)
     PSI = psi_valeur(var(_POINTPS), va, vb, vc)
     vz, vp = var("z"), var("p")
-    from bourbaki.logique.tactiques.tactiques_abrege_quantif import alpha_existe
+    from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import alpha_existe
 
     ax_img = N.axiome(E.theorie_ensembles(), E.AXIOME_IMAGE)
     img0 = instancie(instancie(instancie(ax_img, W), cod), vz)

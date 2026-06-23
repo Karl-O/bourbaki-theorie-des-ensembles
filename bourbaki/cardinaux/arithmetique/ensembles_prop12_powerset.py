@@ -45,16 +45,16 @@ disjonction des domaines.
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (Terme, var, egal, et, non, ou, impl,
+from bourbaki.logique.i_1_termes_relations.formule import (Terme, var, egal, et, non, ou, impl,
                      appartient, existe, pourtout, inclus, subst_t)
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.tactiques.tactiques_abrege import a_implique_a, syllogisme
-from bourbaki.logique.tactiques.tactiques_abrege2 import (conjonction_intro,
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import a_implique_a, syllogisme
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (conjonction_intro,
                                conjonction_elim_gauche, conjonction_elim_droite,
                                equivalence_avant, equivalence_arriere,
                                equivalence_transitivite, instancie, contraposition)
-from bourbaki.logique.tactiques.tactiques_abrege_egalite import (symetrie,
+from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import (symetrie,
                                composer_egalites, congruence_terme)
 # socle 2-élément (0=∅, 1={∅}) — RÉUTILISÉ, jamais redéfini :
 from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import ZERO, UN
@@ -200,7 +200,7 @@ def _graphe_terme_est_graphe(a, t, z="z"):
     from bourbaki.ensembles.fonctions.ii_3_6_fonction_terme.ensembles_fonction_terme import _inst_axiome
     inst = _inst_axiome(vA, t, vz, "x", "y")                         # (z∈F)⇔(∃x∃y)(z=(x,y) et …)
     # corps ⇒ (∃x)(∃y)(z=(x,y)) = est_un_couple(z)
-    from bourbaki.logique.tactiques.tactiques_abrege_quantif import existe_elimination
+    from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import existe_elimination
     vx2, vy2 = var("x"), var("y")
     body = et(et(egal(vz, E.couple(vx2, vy2)), appartient(vx2, vA)), egal(vy2, t))
     hb = N.assume(body)
@@ -221,7 +221,7 @@ def chi_est_graphe(y="Y", x="X"):
     G = Y×{1} et H = (X∖Y)×{0} sont des graphes (_graphe_terme_est_graphe) ;
     membre_reunion_graphes : z∈G∪H ⇔ (z∈G ou z∈H), d'où z est un couple dans les
     deux cas."""
-    from bourbaki.logique.tactiques.tactiques_abrege2 import cas
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import cas
     vy, vx = _t(y), _t(x)
     vz = var("z")
     G, H = _chi_gauche(vy), _chi_droite(vy, vx)
@@ -288,7 +288,7 @@ def reunion_Y_diff_egale_X(y="Y", x="X"):
       ⊃ : z∈X ⇒ (z∈Y ou ¬z∈Y ; si z∈Y alors z∈Y∪… ; si ¬z∈Y alors z∈X∖Y donc ∈…).
     """
     from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import extensionnalite_appliquee
-    from bourbaki.logique.tactiques.tactiques_abrege2 import cas, tiers_exclu
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import cas, tiers_exclu
     vy, vx = _t(y), _t(x)
     vz = var("z")
     diff = E.difference(vx, vy)

@@ -37,10 +37,10 @@ jamais postulées vraies, avec OBSTRUCTION précise documentée.  Noyau INTACT.
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (
+from bourbaki.logique.i_1_termes_relations.formule import (
     Terme, var, egal, et, non, impl, existe, pourtout, appartient, inclus, tau,
 )
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 
 from bourbaki.cardinaux.ensembles_cardinaux import (
@@ -63,11 +63,11 @@ from bourbaki.cardinaux.ensembles_descentes_inconditionnelles import (
     trois_b_egal_b_inconditionnel,
 )
 from bourbaki.entiers.iii_6_infinis.iii_6_3_infinis_denombrables.ensembles_infinis import est_infini
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     instancie, conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
     equivalence_avant, equivalence_arriere,
 )
-from bourbaki.logique.tactiques.tactiques_abrege_egalite import (
+from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import (
     symetrie, composer_egalites,
 )
 
@@ -550,7 +550,7 @@ def extension_force_egalite(E_set="E", phi0="phi0", psi="psi", S="S0", U="Ucadre
     assert q_eq_p.conclusion == egal(q, p)
 
     # pr₁(q)=pr₁(p) via congruence ; pr₁(q)=Z, pr₁(p)=S₀ ⇒ Z=S₀.
-    from bourbaki.logique.tactiques.tactiques_abrege_egalite import congruence_terme
+    from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import congruence_terme
     pr1_cong = N.modus_ponens(q_eq_p, congruence_terme(q, p, E.pr1(var("w"))))  # pr₁(q)=pr₁(p)
     pr1q_eq = projection_premiere_t(Z, phi1)              # pr₁(q)=Z
     pr1p_eq = projection_premiere_t(vS, vphi0)            # pr₁(p)=S₀
@@ -579,7 +579,7 @@ def _u_inclus_reunion(vS, vU, u="z"):
     car = instancie(instancie(instancie(
         N.axiome(E.theorie_ensembles(), E.AXIOME_REUNION), vS), vU), vu)  # u∈Z ⇔ (u∈S₀ ou u∈U)
     # u∈U ⇒ (u∈U ∨ u∈S₀)  [s2]  puis  ⇒ (u∈S₀ ∨ u∈U)  [s3]
-    from bourbaki.logique.tactiques.tactiques_abrege import syllogisme
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import syllogisme
     u_disj = N.modus_ponens(h, syllogisme(
         N.s2(appartient(vu, vU), appartient(vu, vS)),
         N.s3(appartient(vu, vU), appartient(vu, vS))))     # u∈S₀ ou u∈U
@@ -674,7 +674,7 @@ def card_S0_egal_card_E(S="S0", E_set="E"):
     nn = _auto_refutation(impl_ne_nn, non(cible))         # ⊢ ¬(𝔟≠a) = ¬¬(𝔟=a)
     assert nn.conclusion == non(non(cible))
     # tiers exclu (𝔟=a) ∨ ¬(𝔟=a) + cas : branche 1 triviale ; branche 2 ⊥ (nn).
-    from bourbaki.logique.tactiques.tactiques_abrege2 import tiers_exclu, cas
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import tiers_exclu, cas
     te = tiers_exclu(cible)                                # (𝔟=a) ∨ ¬(𝔟=a)
     cas1 = N.loi_deduction(cible, N.assume(cible))         # (𝔟=a) ⇒ (𝔟=a)
     h_ne2 = N.assume(non(cible))                           # ¬(𝔟=a)

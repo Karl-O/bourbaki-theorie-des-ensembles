@@ -8,7 +8,7 @@ On vérifie :
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import var, egal, et, ou, non, existe
+from bourbaki.logique.i_1_termes_relations.formule import var, egal, et, ou, non, existe
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import (
     inf_egal_card, inf_strict_card, est_cardinal, cardinal)
@@ -27,7 +27,7 @@ def test_theorie_intangible():
 
 # ── (A) a < b ⇒ a ≤ b ──────────────────────────────────────────────────────────
 def test_strict_implique_inf_egal_conclusion():
-    from bourbaki.logique.formule import impl
+    from bourbaki.logique.i_1_termes_relations.formule import impl
     thm = strict_implique_inf_egal("a", "b")
     assert thm.est_clos
     va, vb = var("a"), var("b")
@@ -65,7 +65,7 @@ def _build_hyp_inf_strict(va, vb, vc):
 
 
 def test_inf_egal_strict_compose_clos_et_conclusion():
-    from bourbaki.logique.formule import impl
+    from bourbaki.logique.i_1_termes_relations.formule import impl
     thm = inf_egal_strict_compose("a", "b", "c")
     assert thm.est_clos
     va, vb, vc = var("a"), var("b"), var("c")
@@ -74,7 +74,7 @@ def test_inf_egal_strict_compose_clos_et_conclusion():
 
 
 def test_strict_inf_egal_compose_clos_et_conclusion():
-    from bourbaki.logique.formule import impl
+    from bourbaki.logique.i_1_termes_relations.formule import impl
     thm = strict_inf_egal_compose("a", "b", "c")
     assert thm.est_clos
     va, vb, vc = var("a"), var("b"), var("c")
@@ -85,7 +85,7 @@ def test_strict_inf_egal_compose_clos_et_conclusion():
 
 
 def test_strict_transitive_clos_et_conclusion():
-    from bourbaki.logique.formule import impl
+    from bourbaki.logique.i_1_termes_relations.formule import impl
     thm = strict_transitive("a", "b", "c")
     assert thm.est_clos
     va, vb, vc = var("a"), var("b"), var("c")
@@ -99,7 +99,7 @@ def test_strict_transitive_clos_et_conclusion():
 
 # ── (E) bornes exponentielles conditionnelles ──────────────────────────────────
 def test_un_inf_egal_exposant_conditionnel():
-    from bourbaki.logique.formule import impl
+    from bourbaki.logique.i_1_termes_relations.formule import impl
     thm = un_inf_egal_exposant_conditionnel("a", "b")
     assert thm.est_clos
     va, vb = var("a"), var("b")
@@ -112,7 +112,7 @@ def test_un_inf_egal_exposant_conditionnel():
 
 
 def test_base_inf_egal_exposant_conditionnel():
-    from bourbaki.logique.formule import impl
+    from bourbaki.logique.i_1_termes_relations.formule import impl
     thm = base_inf_egal_exposant_conditionnel("a", "b")
     assert thm.est_clos
     va, vb = var("a"), var("b")

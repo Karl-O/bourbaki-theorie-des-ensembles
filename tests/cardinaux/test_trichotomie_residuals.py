@@ -20,7 +20,7 @@ On certifie (ensembles_trichotomie_residuals) :
 
 INVARIANT : theorie_ensembles() = 22.  Rien postulé.  Conclusions NON vacueuses.
 """
-from bourbaki.logique.formule import var, appartient, egal, inclus
+from bourbaki.logique.i_1_termes_relations.formule import var, appartient, egal, inclus
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis import ensembles_ordre_vocab as V
 from bourbaki.cardinaux import ensembles_trichotomie_residuals as RES
@@ -104,15 +104,15 @@ def test_residu_renforce_meme_consequent_que_depose():
     """Le conséquent (#8 ∧ #13) du renforcé est IDENTIQUE à celui du résidu DÉPOSÉ ;
     seul l'ANTÉCÉDENT diffère (les 2 segments ajoutés)."""
     from bourbaki.cardinaux.ensembles_coincidence_univ_app import _premisse_liste
-    from bourbaki.logique.tactiques.tactiques_abrege import antecedent_consequent
-    from bourbaki.logique.tactiques.tactiques_abrege2 import _peler_pourtout
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import antecedent_consequent
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import _peler_pourtout
     thm = RES.residu_univ_app_renforce()
     f = thm.conclusion
     for _ in range(6):
         _, f = _peler_pourtout(f)
     _, cons = antecedent_consequent(f)
     prem = _premisse_liste("rphip", "rphig", "rSp", "rTp", "rSg", "rTg", "F", "R", "Rp", "E")
-    from bourbaki.logique.formule import et
+    from bourbaki.logique.i_1_termes_relations.formule import et
     assert cons == et(prem[8], prem[13])
 
 

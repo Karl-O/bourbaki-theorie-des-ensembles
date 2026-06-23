@@ -3,8 +3,8 @@
 Vérifie : (1) les DÉFINITIONS se construisent (clos, sans gonflement) ;
 (2) le théorème DIRECT « Card(X) est un cardinal » == cible exacte + clos.
 """
-from bourbaki.logique.formule import var, egal, et, non, impl
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_1_termes_relations.formule import var, egal, et, non, impl
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers import ensembles_entiers as Ent
 from bourbaki.cardinaux.ensembles_cardinaux import cardinal, est_cardinal
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers_theoremes import (
@@ -70,7 +70,7 @@ def test_caracterisation_fini():
     thm = caracterisation_fini("a")
     assert thm.est_clos
     # Fini(𝔞) EST la conjonction ; l'équivalence est Fini(𝔞) ⇔ Fini(𝔞).
-    from bourbaki.logique.formule import equiv
+    from bourbaki.logique.i_1_termes_relations.formule import equiv
     assert thm.conclusion == equiv(Ent.est_fini(a), Ent.est_fini(a))
     # et Fini(𝔞) est BIEN la conjonction (cardinal ∧ ≠succ)  — fidélité Déf. 1
     assert Ent.est_fini(a) == et(est_cardinal(a), non(egal(a, Ent.successeur(a))))

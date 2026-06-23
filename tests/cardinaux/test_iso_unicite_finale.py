@@ -14,7 +14,7 @@ DESIGN_trichotomie_III2.md) :
 theorie_ensembles() reste = 22 (rien postulé : RÉUTILISE point_fixe_automorphisme,
 iso_unicite_extensionnel, lemme_4 et l'axiome de la paire/vide pour la glue).
 """
-from bourbaki.logique.formule import var, egal, et, non, impl, appartient, pourtout, equiv
+from bourbaki.logique.i_1_termes_relations.formule import var, egal, et, non, impl, appartient, pourtout, equiv
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux import ensembles_iso_unicite_finale as F
 from bourbaki.cardinaux.ensembles_lemme4_croissante import _R_de, _val, _f_dans_E

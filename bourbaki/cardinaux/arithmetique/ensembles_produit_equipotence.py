@@ -39,16 +39,16 @@ fait le pont, vérifié à chaque appel par égalité des développements-τ.
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (Terme, var, egal, et, appartient, existe, subst_t, subst_f)
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_1_termes_relations.formule import (Terme, var, egal, et, appartient, existe, subst_t, subst_f)
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.tactiques.tactiques_abrege import a_implique_a, syllogisme
-from bourbaki.logique.tactiques.tactiques_abrege2 import (conjonction_intro, conjonction_elim_gauche,
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import a_implique_a, syllogisme
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (conjonction_intro, conjonction_elim_gauche,
                                conjonction_elim_droite, equivalence_avant,
                                equivalence_arriere, equivalence_transitivite,
                                instancie)
-from bourbaki.logique.tactiques.tactiques_abrege_egalite import (symetrie, composer_egalites, congruence_terme)
-from bourbaki.logique.tactiques.tactiques_abrege_quantif import (existe_elimination, congruence_existe,
+from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import (symetrie, composer_egalites, congruence_terme)
+from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import (existe_elimination, congruence_existe,
                                       alpha_existe)
 from bourbaki.ensembles.fonctions.ii_3_6_fonction_terme.ensembles_fonction_terme import membre_graphe_terme, graphe_terme_fonctionnel
 from bourbaki.cardinaux.ensembles_cantor import (graphe_terme_couple_dans, graphe_terme_domaine,
@@ -62,7 +62,7 @@ from bourbaki.cardinaux.arithmetique.ensembles_produit_commute import (_membre_p
                                        _projection_premiere_ab, _projection_seconde_ab)
 from bourbaki.ensembles.ii_3_correspondances.ensembles_correspondances import _inst_image
 from bourbaki.ensembles.fonctions.ii_3_4_fonctions_valeur.ensembles_fonctions import valeur_dans_graphe, valeur_caracterisation
-from bourbaki.logique.tactiques.tactiques_abrege import syllogisme as _syll
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import syllogisme as _syll
 
 
 def _t(v):
@@ -490,7 +490,7 @@ def eq_produit_invariant(f="F", g="G", x="X", y="Y", x1="X1", y1="Y1"):
     (∃F')bij = Eq(X×Y, X₁×Y₁), sous les bijections F:X→X₁, G:Y→Y₁ extraites de
     Eq(X,X₁), Eq(Y,Y₁) par élimination des deux témoins existentiels."""
     from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de, equipotent
-    from bourbaki.logique.tactiques.tactiques_abrege_quantif import alpha_existe as _alpha
+    from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import alpha_existe as _alpha
     vF, vG = _t(f), _t(g)
     vX, vY, vX1, vY1 = _t(x), _t(y), _t(x1), _t(y1)
     A = E.produit(vX, vY)

@@ -15,7 +15,7 @@ ensembles_trichotomie_coherences — se CONSTRUISENT :
 Les conclusions sont EXACTEMENT les formules-témoins de COH (mêmes binders px/pw) ;
 theorie_ensembles() reste = 22 ; rien postulé ; conclusions non tautologiques (≠ hyps).
 """
-from bourbaki.logique.formule import Formule, appartient
+from bourbaki.logique.i_1_termes_relations.formule import Formule, appartient
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux import ensembles_trichotomie_scaffold as TS
 from bourbaki.cardinaux import ensembles_trichotomie_coherences as COH
@@ -138,5 +138,5 @@ def test_theorie_intacte():
 
 
 def __v(nom):
-    from bourbaki.logique.formule import var
+    from bourbaki.logique.i_1_termes_relations.formule import var
     return var(nom)

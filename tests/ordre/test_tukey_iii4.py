@@ -9,7 +9,7 @@ from bourbaki.ordre.iii_2_bon_ordre.zorn_zermelo.ensembles_zorn import est_induc
 from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis.ensembles_ordre_relation import est_ordre, element_maximal
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import de_caractere_fini
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.formule import var, existe
+from bourbaki.logique.i_1_termes_relations.formule import var, existe
 
 
 def test_theorie_inchangee():
@@ -27,7 +27,7 @@ def test_union_dans_S_trois_hyps():
     assert not th.est_clos
     assert len(th.hypotheses) == 3
     vS, vT = var("S"), var("T")
-    from bourbaki.logique.formule import inclus
+    from bourbaki.logique.i_1_termes_relations.formule import inclus
     hyps = list(th.hypotheses)
     assert inclus(vT, vS) in hyps                       # 𝔗⊂𝔖
     assert de_caractere_fini(vS, var("E")) in hyps      # caractère fini

@@ -12,8 +12,8 @@ Vérifie :
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import var, impl, pourtout
-from bourbaki.logique.tactiques.tactiques_abrege import antecedent_consequent
+from bourbaki.logique.i_1_termes_relations.formule import var, impl, pourtout
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import antecedent_consequent
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import est_cardinal
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_recurrence_c61_existence_n.ensembles_recurrence_C61 import cardinal_pas_entre

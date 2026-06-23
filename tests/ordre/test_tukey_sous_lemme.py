@@ -5,7 +5,7 @@ from bourbaki.ordre.iii_4_ensembles_finis.ensembles_tukey_iii4 import (
 )
 from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis.ensembles_ordre_relation import totalement_ordonne
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.formule import var, existe, appartient
+from bourbaki.logique.i_1_termes_relations.formule import var, existe, appartient
 
 
 def test_sous_lemme_conclusion_et_hyps():
@@ -32,7 +32,7 @@ def test_tukey_complet_clos():
     from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import de_caractere_fini
     from bourbaki.ordre.iii_2_bon_ordre.zorn_zermelo.ensembles_zorn import enonce_non_vide
     from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis.ensembles_ordre_relation import element_maximal
-    from bourbaki.logique.formule import var, et, impl, existe
+    from bourbaki.logique.i_1_termes_relations.formule import var, et, impl, existe
     r = Tukey_theoreme_complet()
     assert r.est_clos and len(r.hypotheses) == 0
     cf = de_caractere_fini(var("S"), var("E"))

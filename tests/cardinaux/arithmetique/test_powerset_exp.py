@@ -10,7 +10,7 @@ précise (cf. bijection_caracteristique_REPORTE) ; on verrouille ici :
   • exposant_deux_base       : 2^Card X = Card(𝓕(X; 2))  (pivot définitionnel) ;
   • cible_powerset_exp       : l'énoncé exact Card(𝔓(X)) = 2^Card X.
 """
-from bourbaki.logique.formule import var, egal, et, non, ou, appartient
+from bourbaki.logique.i_1_termes_relations.formule import var, egal, et, non, ou, appartient
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import cardinal
 from bourbaki.cardinaux.arithmetique.ensembles_exposant_cardinal import exposant_cardinal_binaire
@@ -30,7 +30,7 @@ def test_deux_membre():
     """⊢ (z ∈ 2) ⇔ (z = ∅ ou z = {∅}), CLOS  (axiome de la paire en {∅,{∅}})."""
     vz = var("z")
     t = P.deux_membre("z")
-    from bourbaki.logique.formule import equiv
+    from bourbaki.logique.i_1_termes_relations.formule import equiv
     assert t.conclusion == equiv(appartient(vz, _deux()),
                                  ou(egal(vz, E.VIDE), egal(vz, E.singleton(E.VIDE))))
     assert t.est_clos

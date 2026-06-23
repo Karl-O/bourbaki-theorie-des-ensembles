@@ -39,22 +39,22 @@ résidus HONNÊTES (satisfiables, vrais dans l'argument de Zorn E.III.48).  Noya
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (
+from bourbaki.logique.i_1_termes_relations.formule import (
     Terme, var, egal, et, ou, non, impl, existe, pourtout, appartient, inclus, tau,
     libres_f,
 )
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 
-from bourbaki.logique.tactiques.tactiques_abrege import syllogisme
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import syllogisme
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     instancie, conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
     equivalence_avant, equivalence_arriere,
 )
-from bourbaki.logique.tactiques.tactiques_abrege_quantif import (
+from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import (
     existe_elimination, alpha_existe,
 )
-from bourbaki.logique.tactiques.tactiques_abrege_egalite import (
+from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import (
     symetrie, composer_egalites,
 )
 
@@ -145,7 +145,7 @@ def _vide_inst(vz):
 
 def _efq(notP_thm, q):
     """De ⊢¬P, déduire ⊢ (P ⇒ Q)  (ex falso quodlibet)."""
-    from bourbaki.logique.tactiques.tactiques_abrege2 import dni, dne, contraposition
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import dni, dne, contraposition
     P = notP_thm.conclusion.sous[0]
     h = N.loi_deduction(non(q), notP_thm)
     return syllogisme(syllogisme(dni(P), contraposition(h)), dne(q))
@@ -517,7 +517,7 @@ def _reunion_inclus(h_S_sub, h_U_sub, vS, vU, vE, z="z"):
         N.axiome(E.theorie_ensembles(), E.AXIOME_REUNION), vS), vU), vz)  # z∈Z⇔(z∈S₀ ou z∈U)
     z_disj = N.modus_ponens(h_z, equivalence_avant(car))   # z∈S₀ ou z∈U
     # cas : z∈S₀ ⇒ z∈E ; z∈U ⇒ z∈E.
-    from bourbaki.logique.tactiques.tactiques_abrege2 import cas
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import cas
     b1 = N.loi_deduction(appartient(vz, vS),
         N.modus_ponens(N.assume(appartient(vz, vS)), instancie(h_S_sub, vz)))
     b2 = N.loi_deduction(appartient(vz, vU),
@@ -551,7 +551,7 @@ def _prouver_dom_disj(vphi0, vS, vU, dom0, inter_SU, inter_US):
     from bourbaki.cardinaux.ensembles_cantor_bernstein_final._recollement import (
         _disjoint_to_forall,
     )
-    from bourbaki.logique.tactiques.tactiques_abrege_egalite import composer_egalites as ce
+    from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import composer_egalites as ce
     SxS = E.produit(vS, vS)
     SxU, UxS, UxU = E.produit(vS, vU), E.produit(vU, vS), E.produit(vU, vU)
     Fp = E.reunion(SxU, E.reunion(UxS, UxU))

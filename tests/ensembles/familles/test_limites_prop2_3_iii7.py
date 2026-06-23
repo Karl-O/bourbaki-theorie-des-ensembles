@@ -6,7 +6,7 @@ y,z∈∏ + graphes).  On vérifie : ils se construisent (noyau accepte chaque p
 conclusion est la bonne, la conclusion n'est PAS une hypothèse (anti-tautologie), et
 theorie_ensembles() reste à 22.
 """
-from bourbaki.logique.formule import var, egal
+from bourbaki.logique.i_1_termes_relations.formule import var, egal
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ensembles.familles.iii_7_limites import ensembles_limites_prop2_3_iii7 as P
 

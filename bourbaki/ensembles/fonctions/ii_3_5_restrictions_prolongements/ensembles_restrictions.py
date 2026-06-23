@@ -19,16 +19,16 @@ Théorèmes certifiés :
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import var, egal, et, appartient, existe, inclus, pourtout, impl, subst_f
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_1_termes_relations.formule import var, egal, et, appartient, existe, inclus, pourtout, impl, subst_f
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.tactiques.tactiques_abrege import syllogisme
-from bourbaki.logique.tactiques.tactiques_abrege2 import (conjonction_intro, conjonction_elim_gauche,
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import syllogisme
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (conjonction_intro, conjonction_elim_gauche,
                                conjonction_elim_droite, equivalence_avant,
                                equivalence_arriere, equivalence_transitivite,
                                instancie, inclusion_transitive)
-from bourbaki.logique.tactiques.tactiques_abrege_egalite import composer_egalites, congruence_terme
-from bourbaki.logique.tactiques.tactiques_abrege_quantif import existe_elimination
+from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import composer_egalites, congruence_terme
+from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import existe_elimination
 from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import couple_egal_implique_composantes
 
 
@@ -101,7 +101,7 @@ def restriction_incluse(f="F", x="X"):
 def prolongement_reflexif(f="F"):
     """⊢ F ⊂ F.   (toute fonction est un prolongement d'elle-même.)"""
     vF, vz = var(f), var("z")
-    from bourbaki.logique.tactiques.tactiques_abrege import a_implique_a
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import a_implique_a
     return N.generalisation("z", a_implique_a(appartient(vz, vF)))
 
 

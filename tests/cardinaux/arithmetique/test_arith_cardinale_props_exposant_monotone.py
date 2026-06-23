@@ -11,7 +11,7 @@ tautologiques : l'hypothèse porte sur les supports, la conclusion sur leurs
 cardinaux a^c/b^c.  theorie=22.
 """
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.formule import var, impl
+from bourbaki.logique.i_1_termes_relations.formule import var, impl
 from bourbaki.cardinaux.ensembles_cardinaux import inf_egal_card, cardinal
 from bourbaki.cardinaux.arithmetique import (
     ensembles_arith_cardinale_props_exposant_monotone as X)

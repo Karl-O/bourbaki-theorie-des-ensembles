@@ -16,7 +16,7 @@ introduites FRAÎCHES (existe_elimination), donc ATOMIQUES, sans collision de bi
 
 INVARIANT : theorie_ensembles() = 22.  Rien postulé.  Conclusion NON vacueuse.
 """
-from bourbaki.logique.formule import var, appartient, libres_f
+from bourbaki.logique.i_1_termes_relations.formule import var, appartient, libres_f
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis import ensembles_ordre_vocab as V
 from bourbaki.cardinaux import ensembles_trichotomie_scaffold as TS
@@ -46,7 +46,7 @@ def test_pont_leve_au_temoin_tau():
     """iso_hplus_pour_R_majorants_discharges LÈVE au témoin τx(…) — la COLLISION
     (binder interne du τ vs binders fixes du recollement) que la variable fraîche évite."""
     import pytest
-    from bourbaki.logique.formule import tau, et, egal, pourtout, impl
+    from bourbaki.logique.i_1_termes_relations.formule import tau, et, egal, pourtout, impl
     from bourbaki.cardinaux.ensembles_segments_construction import seg as _seg
     h = TS.h_iso_max("E", "R", "F", "Rp")
     domh, imgh = E.dom(h), E.img(h)

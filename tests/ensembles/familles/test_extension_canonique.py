@@ -6,9 +6,9 @@ Aucun fichier existant n'est modifié : toutes les notions vivent dans le module
 neuf `ensembles_extension_canonique` ; les axiomes neufs (ext. aux produits) sont
 dans une THÉORIE DÉDIÉE — theorie_ensembles() reste à 22 axiomes (test dédié).
 """
-from bourbaki.logique.formule import (var, egal, et, impl, non, appartient, existe,
+from bourbaki.logique.i_1_termes_relations.formule import (var, egal, et, impl, non, appartient, existe,
                                        inclus, pourtout, equiv)
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ensembles.familles.ii_5_produit_famille.ii_5_1_extension_canonique import ensembles_extension_canonique as X
 
@@ -157,7 +157,7 @@ def test_valeur_image_produit_terme():
 
 
 def test_extension_produit_terme():
-    from bourbaki.logique.formule import app
+    from bourbaki.logique.i_1_termes_relations.formule import app
     vg, vI = var("g"), var("I")
     assert X.extension_produit(vg, vI) == app("extension_produit", vg, vI)
 

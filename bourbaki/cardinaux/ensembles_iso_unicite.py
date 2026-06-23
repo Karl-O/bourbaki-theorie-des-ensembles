@@ -40,16 +40,16 @@ monotone) — PAS de pont yv↔y ici.
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (
+from bourbaki.logique.i_1_termes_relations.formule import (
     Terme, var, egal, et, non, impl, appartient, pourtout,
 )
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
     instancie,
 )
-from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie
+from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import symetrie
 from bourbaki.cardinaux.ensembles_lemme4_croissante import (
     lemme_4, _val, _R_de, _antisym_de_bo, _f_dans_E,
 )
@@ -59,7 +59,7 @@ from bourbaki.ensembles.fonctions.hors_ii_3.ii_5_produit_famille.ensembles_appli
 from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de
 from bourbaki.cardinaux.ensembles_composee_bijection import composee_bijection
 from bourbaki.cardinaux.ensembles_bijection import reciproque_est_bijection
-from bourbaki.logique.tactiques.tactiques_abrege2 import conjonction_intro as _conj_intro
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import conjonction_intro as _conj_intro
 
 
 def _t(t):
@@ -69,7 +69,7 @@ def _t(t):
 def _leib(a, b, h_ab, phi_fun, h_phi_a, hole="hole_iso"):
     """De  a=b  et  φ(a)  déduit  φ(b)  (Leibniz S6, trou `hole`)."""
     va, vb = _t(a), _t(b)
-    from bourbaki.logique.tactiques.tactiques_abrege2 import equivalence_avant
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import equivalence_avant
     eqv = N.modus_ponens(h_ab, N.s6(va, vb, hole, phi_fun(var(hole))))
     return N.modus_ponens(h_phi_a, equivalence_avant(eqv))
 

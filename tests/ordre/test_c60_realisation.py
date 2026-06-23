@@ -12,7 +12,7 @@ des clauses de `realisation_famille` :
 INVARIANT vérifié partout : theorie_ensembles() = 22 ; conclusions non vacuous ; le
 résidu est EXACTEMENT (P2)+(P3)+(P4) (et le bon ordre pour l'existence).
 """
-from bourbaki.logique.formule import var, egal, appartient
+from bourbaki.logique.i_1_termes_relations.formule import var, egal, appartient
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 import bourbaki.ordre.iii_2_bon_ordre.recurrence_transfinie.ensembles_c60_realisation as Rz
 from bourbaki.ordre.iii_2_bon_ordre.recurrence_transfinie.ensembles_c60_final import (
@@ -46,7 +46,7 @@ def test_theorie_reste_22():
 def test_membre_Dfam_real_axiome():
     """L'axiome S8 de Dfam_real est instanciable (équivalence membership), via la
     forme attendue (p∈Dfam_real(x)) ⇔ (p∈𝔓(E×V) et (∃y∈seg)est_essai(p,y))."""
-    from bourbaki.logique.formule import equiv
+    from bourbaki.logique.i_1_termes_relations.formule import equiv
     eq = Rz.membre_Dfam_real(_vh)
     vp, vx = var("pD"), var("x0")
     Dx = Rz.Dfam_real(_vh, "E", "G", vx, "Vval")

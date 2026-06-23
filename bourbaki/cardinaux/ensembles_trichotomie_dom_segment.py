@@ -51,18 +51,18 @@ NON vacueux : la conclusion y∈dom(h) / est_segment(dom h,…) n'est aucune hyp
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (
+from bourbaki.logique.i_1_termes_relations.formule import (
     Terme, var, egal, et, non, impl, equiv, appartient, existe, pourtout, inclus,
 )
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis import ensembles_ordre_vocab as V
-from bourbaki.logique.tactiques.tactiques_abrege import syllogisme
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import syllogisme
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
     equivalence_avant, equivalence_arriere, instancie,
 )
-from bourbaki.logique.tactiques.tactiques_abrege_quantif import existe_elimination
+from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import existe_elimination
 from bourbaki.cardinaux import ensembles_trichotomie_scaffold as TS
 from bourbaki.cardinaux import ensembles_trichotomie_scaffold_maximalite as M
 
@@ -280,7 +280,7 @@ def dom_h_initial_sous_val(E_set="E", R="R", F_set="F", Rp="Rp",
     cz_to_dom = syllogisme(couple_imp, imp_S)                # (x,zd)∈h ⇒ y∈dom h
     ex_v_to_dom = existe_elimination(cz_to_dom, zd)          # (∃zd)((x,zd)∈h) ⇒ y∈dom h
     # AXIOME_DOM donne x∈domh ⇔ (∃y)((x,y)∈h) ; α-renommer (∃y)→(∃zd) pour raccorder.
-    from bourbaki.logique.tactiques.tactiques_abrege_quantif import alpha_existe
+    from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import alpha_existe
     dom_eq_x = _inst_dom(h, vx)                              # x∈domh ⇔ (∃y)((x,y)∈h)
     body_x_native = appartient(E.couple(vx, vzy), h)         # (x,y)∈h   (liant natif « y »)
     ren_x = alpha_existe(zy, zd, body_x_native)             # (∃y)((x,y)∈h) ⇔ (∃zd)((x,zd)∈h)

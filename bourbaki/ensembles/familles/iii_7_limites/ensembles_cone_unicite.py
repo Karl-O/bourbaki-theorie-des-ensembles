@@ -42,13 +42,13 @@ egalite_valeurs_application / extensionnalite_produit reste distinct (pas de cap
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (Terme, var, egal, et, impl, appartient,
+from bourbaki.logique.i_1_termes_relations.formule import (Terme, var, egal, et, impl, appartient,
                                        pourtout)
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ensembles.familles.iii_7_limites import ensembles_limites as L
 from bourbaki.ensembles.familles.iii_7_limites import ensembles_limites_iii7 as I7
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     instancie, conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
     equivalence_avant)
 from bourbaki.cardinaux.arithmetique.ensembles_graphe_de import graphe_de
@@ -119,7 +119,7 @@ def coords_donnent_projections(Efam="E", f="f", leq=None, i="I", z="zp1", zp="zp
     if leq is None:
         leq = _gleq()
     from bourbaki.ordre.iii_7_limites.ensembles_limites_canoniques import application_canonique_proj_valeur
-    from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie, composer_egalites
+    from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import symetrie, composer_egalites
     vE, vf, vi = _t(Efam), _t(f), _t(i)
     vz, vzp, va = var(z), var(zp), var(a)
     LIM = L.lim_proj(vE, vf)
@@ -272,7 +272,7 @@ def _lim_dans_produit(Efam, f, leq, i, terme, preuve_in_lim):
 def _renomme_liant(val_eq, u, up, vF, y):
     """α-renomme le liant « y » de val_eq en « x » pour APPARIER
     egalite_valeurs_application(u,u',F) (liant interne « x » par défaut)."""
-    from bourbaki.logique.tactiques.tactiques_abrege_quantif import alpha_pour_tout
+    from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import alpha_pour_tout
     vy = var(y)
     u_y = cone_map_valeur(u, vy)
     up_y = cone_map_valeur(up, vy)

@@ -31,20 +31,20 @@ conclusion ∉ hyps (non vacuous).  Noyau INTACT.
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (
+from bourbaki.logique.i_1_termes_relations.formule import (
     Terme, var, egal, et, impl, existe, pourtout, appartient, inclus, non,
 )
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     instancie, conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
     equivalence_avant,
 )
-from bourbaki.logique.tactiques.tactiques_abrege_egalite import (
+from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import (
     symetrie, congruence_terme,
 )
-from bourbaki.logique.tactiques.tactiques_abrege_quantif import existe_elimination
-from bourbaki.logique.tactiques.ensembles_alpha_bridge import alpha_bridge
+from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import existe_elimination
+from bourbaki.logique.i_3_quantifies.ensembles_alpha_bridge import alpha_bridge
 from bourbaki.ensembles.fonctions.hors_ii_3.ii_2_projections.ensembles_projections import projection_premiere
 
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import est_fini_ensemble
@@ -113,7 +113,7 @@ def _membre_pr1_infini(E_set, p):
         Scpl = E.couple(vS, vphi)
         # pr₁p = pr₁((S,φ)) = S ⇒ S = pr₁p
         cong1 = N.modus_ponens(p_eq, congruence_terme(vp, Scpl, E.pr1(var("w"))))  # pr₁p=pr₁((S,φ))
-        from bourbaki.logique.tactiques.tactiques_abrege_egalite import composer_egalites
+        from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import composer_egalites
         pr1_eq_S = composer_egalites(cong1, projection_premiere(nS, nphi))         # pr₁p=S
         S_eq_pr1 = N.modus_ponens(pr1_eq_S, symetrie(pr1p, vS))                    # S=pr₁p
         # réécrit S→pr₁p dans est_infini_ensemble(S) via S6 sur R(w)=est_infini_ensemble(w)

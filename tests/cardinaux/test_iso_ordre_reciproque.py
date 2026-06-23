@@ -8,7 +8,7 @@ KEYSTONE de la trichotomie (Th3 §III.2).
 Binders SAINS x,w (le second binder « y » empoisonnerait fy=valeur(φ,var y) par
 auto-capture τ_y) — forme fidèle non poisonnée de la définition E.III.1.3.
 """
-from bourbaki.logique.formule import var, egal, appartient
+from bourbaki.logique.i_1_termes_relations.formule import var, egal, appartient
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis.ensembles_ordre_vocab import (
     est_isomorphisme_ordre, compatible_ordre)

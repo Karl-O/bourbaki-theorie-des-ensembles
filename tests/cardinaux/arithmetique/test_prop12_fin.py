@@ -14,7 +14,7 @@ SENS du round-trip ρ∘χ = id sur 𝔓X (ÉTAPE 2), assemblés depuis l'infra 
     • couple_un_dans_chi       ((z,1)∈χ_Y) ⇔ (z∈Y) ;
     • rho_chi_identite         Y⊂X ⇒ Pre(χ_Y) = Y.
 """
-from bourbaki.logique.formule import (var, egal, et, non, ou, impl, equiv,
+from bourbaki.logique.i_1_termes_relations.formule import (var, egal, et, non, ou, impl, equiv,
                                        appartient, inclus, pourtout, existe)
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import ZERO, UN

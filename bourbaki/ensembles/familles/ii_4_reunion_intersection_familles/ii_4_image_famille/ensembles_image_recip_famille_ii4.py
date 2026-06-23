@@ -40,17 +40,17 @@ AXIOME_COMPL_FAM (De Morgan) ou famille_reparam (`ensembles_chap2_props_restante
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (Terme, var, app, egal, et, non, impl,
+from bourbaki.logique.i_1_termes_relations.formule import (Terme, var, app, egal, et, non, impl,
                                        appartient, existe, pourtout, inclus)
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.tactiques.tactiques_abrege import syllogisme
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import syllogisme
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche as cg, conjonction_elim_droite as cd,
     equivalence_avant, equivalence_arriere, instancie,
     equivalence_transitivite as etr, equivalence_symetrie as esym,
     et_congruence_droite, et_congruence_gauche)
-from bourbaki.logique.tactiques.tactiques_abrege_quantif import (
+from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import (
     congruence_existe, existe_elimination, monotonie_existe)
 from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import egalite_par_extension
 from bourbaki.ensembles.fonctions.ii_3_2_reciproque.ensembles_reciproque import couple_reciproque
@@ -116,7 +116,7 @@ def membre_image_recip(g, yset, a, xb="x"):
 
     NB : l'axiome AXIOME_IMAGE lie le témoin par « x » ; on α-renomme vers `xb`
     pour permettre des binders distincts dans les preuves emboîtées."""
-    from bourbaki.logique.tactiques.tactiques_abrege_quantif import alpha_existe
+    from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import alpha_existe
     vg, vY, va = _t(g), _t(yset), _t(a)
     vxb = var(xb)
     Grec = E.reciproque(vg)
@@ -205,7 +205,7 @@ def image_recip_diff_arriere(g="f", b="B", y="Y"):
             et(appartient(vx, vY), appartient(E.couple(va, vx), vg)), vx, "x")),
             equivalence_arriere(membre_image_recip(vg, vY, va)))     # a∈f⁻¹⟨Y⟩
     # ¬x∈Y :  x∈Y ⇒ a∈f⁻¹⟨Y⟩, mais ¬a∈f⁻¹⟨Y⟩  ⇒  ¬x∈Y
-    from bourbaki.logique.tactiques.tactiques_abrege2 import contraposition
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import contraposition
     imp_xY_aY = N.loi_deduction(appartient(vx, vY), aY)              # x∈Y ⇒ a∈f⁻¹⟨Y⟩
     n_xY = N.modus_ponens(n_aY, contraposition(imp_xY_aY))           # ¬x∈Y
     # x∈B∖Y
@@ -226,7 +226,7 @@ def image_recip_diff_avant(g="f", b="B", y="Y"):
     a∈f⁻¹⟨B∖Y⟩ : témoin x avec x∈B, ¬x∈Y, (a,x)∈f.  Donc a∈f⁻¹⟨B⟩ (même x).
     Pour ¬a∈f⁻¹⟨Y⟩ : si a∈f⁻¹⟨Y⟩, un témoin x' avec x'∈Y, (a,x')∈f ; Fonctionnelle
     donne x'=x, d'où x∈Y, contradiction avec ¬x∈Y.  D'où ¬a∈f⁻¹⟨Y⟩."""
-    from bourbaki.logique.tactiques.tactiques_abrege2 import contraposition
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import contraposition
     vg, vB, vY, va = _t(g), _t(b), _t(y), var("z")
     vx, vxq = var("x"), var("xq")
     L = image_recip(vg, E.difference(vB, vY))
@@ -348,7 +348,7 @@ def image_recip_inter_arriere(g="f", fam="Y", i="I", a="alpha"):
     a∈⋂f⁻¹⟨Y_ι⟩ : pour i=α, témoin x avec x∈Y_α, (a,x)∈f.  Pour tout i∈I, a∈f⁻¹⟨Y_i⟩
     donne un témoin x_i ; Fonctionnelle ⇒ x_i = x ; donc x∈Y_i.  Ainsi x∈⋂Y,
     (a,x)∈f : a∈f⁻¹⟨⋂Y⟩."""
-    from bourbaki.logique.tactiques.tactiques_abrege2 import contraposition
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import contraposition
     vg, vfam, vI, valpha = _t(g), _t(fam), _t(i), _t(a)
     va, vx, vxq, vi = var("z"), var("x"), var("xq"), var("i")
     inter = E.inter_famille(vfam, vI)
@@ -450,7 +450,7 @@ def image_reunion_egal(g="G", fam="X", i="I"):
     y∈Γ⟨⋃X⟩ ⇔ (∃x)(x∈⋃X et (x,y)∈Γ) ⇔ (∃x)((∃i)(i∈I et x∈X_i) et (x,y)∈Γ) ;
     on commute ∃x∃i, réassocie, et tire (∃i)(i∈I et (∃x)(x∈X_i et (x,y)∈Γ))
         = (∃i)(i∈I et y∈Γ⟨X_i⟩) = caractérisation de ⋃Γ⟨X·⟩."""
-    from bourbaki.logique.tactiques.tactiques_abrege_quantif import (
+    from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import (
         et_existe_gauche, existe_commute, et_existe_droite)
     vg, vfam, vI = _t(g), _t(fam), _t(i)
     vy, vx, vi = var("y"), var("x"), var("i")
@@ -587,7 +587,7 @@ def image_inter_arriere_si_inj(g="G", fam="X", i="I", a="alpha"):
 
 def _membre_fam_image_b(g, fam, i, y, xb):
     """Comme _membre_fam_image mais avec binder témoin `xb`."""
-    from bourbaki.logique.tactiques.tactiques_abrege_quantif import alpha_existe
+    from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import alpha_existe
     vg, vfam, vi, vy = _t(g), _t(fam), _t(i), _t(y)
     Xi = E.valeur_famille(vfam, vi)
     base = _membre_fam_image(vg, vfam, vi, vy)             # ⇔ (∃x)(x∈X_i et (x,y)∈Γ)
@@ -641,7 +641,7 @@ def image_recip_reunion_egal(g="f", fam="Y", i="I"):
     a∈f⁻¹⟨⋃Y⟩ ⇔ (∃x)(x∈⋃Y et (a,x)∈f) ⇔ (∃x)((∃i)(i∈I et x∈Y_i) et (a,x)∈f) ;
     on commute ∃x∃i, réassocie, et tire (∃i)(i∈I et (∃x)(x∈Y_i et (a,x)∈f))
         = (∃i)(i∈I et a∈f⁻¹⟨Y_i⟩) = caractérisation de ⋃f⁻¹⟨Y·⟩."""
-    from bourbaki.logique.tactiques.tactiques_abrege_quantif import (
+    from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import (
         et_existe_gauche, existe_commute, et_existe_droite)
     vg, vfam, vI = _t(g), _t(fam), _t(i)
     va, vx, vi = var("a"), var("x"), var("i")

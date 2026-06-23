@@ -1,5 +1,5 @@
 """Tests — eq_exposant_invariant : Eq(X,Y) ⇒ Eq(𝓕(X;A), 𝓕(Y;A))."""
-from bourbaki.logique.formule import var, impl
+from bourbaki.logique.i_1_termes_relations.formule import var, impl
 import bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import equipotent
 from bourbaki.cardinaux.ensembles_eq_exposant_invariant import (

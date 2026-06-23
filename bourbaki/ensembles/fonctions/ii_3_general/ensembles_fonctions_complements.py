@@ -34,7 +34,7 @@ Lemmes DIRECTS (sans nouvel axiome)
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import Terme, var, egal, et, impl, appartient, existe, pourtout, inclus
+from bourbaki.logique.i_1_termes_relations.formule import Terme, var, egal, et, impl, appartient, existe, pourtout, inclus
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ensembles.ii_3_correspondances.ensembles_fondations_notions import (
     correspondance, est_une_correspondance, est_application,

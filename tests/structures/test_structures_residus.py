@@ -4,7 +4,7 @@ Vérifient la FIDÉLITÉ des définitions (réutilisation exacte des graphes II.
 structures dérivées IV.2), la forme de l'énoncé IV.2.5 (hypothèses ⇒ g morphisme), la
 clôture des lemmes logiques directs, et l'invariance theorie_ensembles() = 22 axiomes.
 """
-from bourbaki.logique.formule import (var, et, impl, appartient, app, alpha_egal)
+from bourbaki.logique.i_1_termes_relations.formule import (var, et, impl, appartient, app, alpha_egal)
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.structures.iv_2_morphismes_structures_derivees import ensembles_structures_residus as R
 from bourbaki.structures.iv_2_morphismes_structures_derivees import ensembles_universel_morphismes as M

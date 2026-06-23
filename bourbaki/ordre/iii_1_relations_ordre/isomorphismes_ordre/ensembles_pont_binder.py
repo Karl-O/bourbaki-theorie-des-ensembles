@@ -16,10 +16,10 @@ theorie_ensembles() = 22 (alpha_tau primitive justifiée, pas un axiome).
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import Terme, var, et, equiv, impl, appartient
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_1_termes_relations.formule import Terme, var, et, equiv, impl, appartient
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.tactiques.tactiques_abrege2 import equivalence_avant, instancie
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import equivalence_avant, instancie
 from bourbaki.ordre.iii_1_relations_ordre.isomorphismes_ordre.ensembles_valeur_bridge import valeur_j_egal_y, valeur_y_egal_j
 
 

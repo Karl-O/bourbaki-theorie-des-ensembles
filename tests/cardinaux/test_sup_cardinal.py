@@ -7,7 +7,7 @@ Les autres tests (formes, lemmes cheap, théorie) sont rapides.
 """
 import pytest
 
-from bourbaki.logique.formule import (var, app, egal, et, impl, equiv, pourtout,
+from bourbaki.logique.i_1_termes_relations.formule import (var, app, egal, et, impl, equiv, pourtout,
                                        appartient, non, inclus)
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import est_cardinal, inf_egal_card
@@ -76,7 +76,7 @@ def test_majorants_non_vide_hyps():
 
 def test_comparabilite_cardinaux_terme_close():
     """⊢ (c≤a) OU (a≤c)   CLOS (comparabilité, INCONDITIONNEL via Zorn)."""
-    from bourbaki.logique.formule import ou
+    from bourbaki.logique.i_1_termes_relations.formule import ou
     thm = SUP.comparabilite_cardinaux_terme(var("c"), var("a"))
     assert thm.est_clos
     assert thm.conclusion == ou(inf_egal_card(var("c"), var("a")),

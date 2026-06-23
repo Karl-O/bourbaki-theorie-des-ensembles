@@ -6,7 +6,7 @@ On certifie que :
   (3) la cible trichotomie_ordinaux_canon DIFFÈRE de la forme défaut (défectueuse) ;
   (4) theorie=22 (aucun axiome ajouté ; ce ne sont que des INSTANCES des notions).
 """
-from bourbaki.logique.formule import var, appartient
+from bourbaki.logique.i_1_termes_relations.formule import var, appartient
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis import ensembles_ordre_vocab as V
 from bourbaki.ordre.iii_6_ordinaux import ensembles_ordinaux as O

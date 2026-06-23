@@ -4,8 +4,8 @@ Chaque test vérifie que la CONCLUSION du Theoreme renvoyé == la cible EXACTE
 attendue (formule construite indépendamment) ET que le théorème est CLOS (⊢ sans
 hypothèse), conformément à la discipline LCF stricte du projet.
 """
-from bourbaki.logique.formule import var, egal, et, non, impl, equiv, existe, inclus
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_1_termes_relations.formule import var, egal, et, non, impl, equiv, existe, inclus
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.entiers.iii_6_infinis.iii_6_3_infinis_denombrables import ensembles_infinis as I
 from bourbaki.entiers.iii_6_infinis.iii_6_3_infinis_denombrables import ensembles_infinis_theoremes as T
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import est_fini_ensemble

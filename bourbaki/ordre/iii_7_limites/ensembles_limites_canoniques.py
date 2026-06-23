@@ -50,17 +50,17 @@ les théorèmes durs sont nommés mais non prouvés.
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (
+from bourbaki.logique.i_1_termes_relations.formule import (
     Terme, var, egal, et, impl, appartient, existe, pourtout, inclus, app,
 )
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ensembles.familles.iii_7_limites import ensembles_limites as L
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     instancie, conjonction_elim_gauche, conjonction_elim_droite,
     equivalence_avant, equivalence_arriere,
 )
-from bourbaki.logique.tactiques.tactiques_abrege_egalite import (
+from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import (
     composer_egalites, symetrie,
 )
 
@@ -130,7 +130,7 @@ def canonique_proj_valeur(Efam="E", f="f", leq=None, i="I", a="a", z="z"):
     inst = instancie(instancie(ax, va), vz)               # hyp ⇒ f_α(z)=pr_α z
     Hz = N.assume(appartient(vz, L.lim_proj(vE, vf)))
     Ha = N.assume(appartient(va, vi))
-    from bourbaki.logique.tactiques.tactiques_abrege2 import conjonction_intro
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import conjonction_intro
     return N.modus_ponens(conjonction_intro(Hz, Ha), inst)   # f_α(z)=pr_α z
 
 
@@ -143,7 +143,7 @@ def relation_2_projective(Efam="E", f="f", leq=None, i="I", a="a", b="b", z="z")
         leq = _gleq()
     vE, vf, vi = _t(Efam), _t(f), _t(i)
     va, vb, vz = var(a), var(b), var(z)
-    from bourbaki.logique.tactiques.tactiques_abrege2 import conjonction_intro
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import conjonction_intro
     # (1) sur la limite : pr_α z = f_{αβ}(pr_β z)
     rel1_imp = L.limite_projective_relation_1(Efam, f, leq, i, z, a, b)   # prem ⇒ pr_α z=f_{αβ}(pr_β z)
     prem = et(et(appartient(va, vi), appartient(vb, vi)), leq(va, vb))
@@ -155,7 +155,7 @@ def relation_2_projective(Efam="E", f="f", leq=None, i="I", a="a", b="b", z="z")
     # f_α(z) = pr_α z = f_{αβ}(pr_β z)
     chaine = composer_egalites(fa, eq1)                   # f_α(z) = f_{αβ}(pr_β z)
     # remplacer pr_β z par f_β(z) :  f_{αβ}(pr_β z) = f_{αβ}(f_β(z)), via congruence
-    from bourbaki.logique.tactiques.tactiques_abrege_egalite import congruence_terme
+    from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import congruence_terme
     fab = L.appl_proj(vf, va, vb)
     # f_α(z) = f_{αβ}(pr_β z) ; et f_{αβ}(pr_β z) = f_{αβ}(f_β(z)) par symétrie de fb
     fb_sym = N.modus_ponens(fb, symetrie(application_canonique_proj_valeur(vE, vf, vb, vz),
@@ -386,7 +386,7 @@ def canonique_ind_valeur(Efam="E", f="f", i="I", gleq=None, a="a", x="x"):
         gleq = _GRAPHE_LEQ_DEFAUT
     vE, vf, vi = _t(Efam), _t(f), _t(i)
     va, vx = var(a), var(x)
-    from bourbaki.logique.tactiques.tactiques_abrege2 import conjonction_intro
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import conjonction_intro
     ax = N.axiome(theorie_canonique_ind(vE, vf, vi, gleq),
                   axiome_canonique_ind(vE, vf, vi, gleq))
     inst = instancie(instancie(ax, va), vx)

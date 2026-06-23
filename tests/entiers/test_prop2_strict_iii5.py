@@ -4,7 +4,7 @@ from bourbaki.entiers.iii_5_calcul_entiers.iii_5_2_inegalites_ordre_soustraction
     prop2_strict_equivalence, prop2_strict_equivalence_enonce,
 )
 from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege import theorie_ensembles
-from bourbaki.logique.formule import (
+from bourbaki.logique.i_1_termes_relations.formule import (
     var, egal, non, et, impl, existe, equiv,
 )
 from bourbaki.cardinaux.ensembles_cardinaux import inf_strict_card

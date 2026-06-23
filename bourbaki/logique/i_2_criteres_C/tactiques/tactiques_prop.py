@@ -12,10 +12,10 @@ Rappels d'assemblage :  A⇒B = ¬A∨B  ;  A et B = ¬(¬A∨¬B).
 from __future__ import annotations
 
 from bourbaki.assemblage.assemblage import Assemblage, negation, disjonction, implication
-from bourbaki.logique.lecture import Signature, DEFAUT, depuis_assemblage, vers_assemblage
-from bourbaki.logique import noyau
-from bourbaki.logique.noyau import Theoreme
-from bourbaki.logique.tactiques.tactiques import (
+from bourbaki.logique.i_1_termes_relations.lecture import Signature, DEFAUT, depuis_assemblage, vers_assemblage
+from bourbaki.logique.i_2_criteres_C.noyau import noyau
+from bourbaki.logique.i_2_criteres_C.noyau.noyau import Theoreme
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques import (
     antecedent_consequent, affaiblissement, a_implique_a,
     syllogisme, distribution, mono_gauche,
 )

@@ -32,11 +32,11 @@ theorie_ensembles() inchangée (22 axiomes) ; noyau intact.
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import var, et, impl, inclus
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_1_termes_relations.formule import var, et, impl, inclus
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.tactiques.tactiques_abrege import a_implique_a
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import a_implique_a
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     inclusion_transitive, conjonction_intro)
 
 
@@ -69,7 +69,7 @@ def est_sous_famille_buts(f, g, b, d):
 def sous_famille_reflexive(f="F"):
     """⊢ F ⊂ F.   (Toute famille est une sous-famille d'elle-même — E.II.3.5.)"""
     vF, vz = var(f), var("z")
-    from bourbaki.logique.formule import appartient
+    from bourbaki.logique.i_1_termes_relations.formule import appartient
     return N.generalisation("z", a_implique_a(appartient(vz, vF)))
 
 

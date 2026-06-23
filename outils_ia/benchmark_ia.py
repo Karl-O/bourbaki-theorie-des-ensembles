@@ -10,7 +10,7 @@ Chiffres réels, agrégés ; chaque preuve reste certifiée par le noyau.
 from __future__ import annotations
 
 from bourbaki.assemblage.assemblage import implication, negation, disjonction
-from bourbaki.logique.propositions import A, B, C, D, E, SIG_PROP
+from bourbaki.logique.i_1_termes_relations.propositions import A, B, C, D, E, SIG_PROP
 from outils_ia.modele import RegressionLogistique
 from outils_ia.encodeur import traits_paire_seq
 from outils_ia.chercheur_ia import jeu_relevance, prouver_guide

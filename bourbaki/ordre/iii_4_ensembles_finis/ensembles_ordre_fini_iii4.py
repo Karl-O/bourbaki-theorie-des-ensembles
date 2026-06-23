@@ -25,22 +25,22 @@ et le Corollaire 1 (qui en découle en X:=E). theorie=22, aucun postulat.
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (
+from bourbaki.logique.i_1_termes_relations.formule import (
     Terme, var, egal, et, ou, non, impl, appartient, existe, pourtout, inclus,
 )
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 
-from bourbaki.logique.tactiques.tactiques_abrege import a_implique_a, syllogisme
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import a_implique_a, syllogisme
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
     equivalence_avant, equivalence_arriere, instancie, cas,
     equivalence_transitivite, contraposition,
 )
-from bourbaki.logique.tactiques.tactiques_abrege_quantif import (
+from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import (
     existe_elimination, alpha_existe,
 )
-from bourbaki.logique.tactiques.tactiques_abrege_egalite import (
+from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import (
     symetrie, composer_egalites,
 )
 
@@ -195,7 +195,7 @@ def _preuve_pas_total(G, E_set, htot, P, X="Xrec", x="xrec", z="zpgT", m="m_pgf"
     #
     # On évite la disjonction X=∅/X≠∅ par tiers exclu sur ¬(X=∅) : on prouve P(X∪{x})
     # par CAS sur  (X=∅)  ou  ¬(X=∅).
-    from bourbaki.logique.tactiques.tactiques_abrege2 import tiers_exclu
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import tiers_exclu
     te = tiers_exclu(egal(vX, E.VIDE))                    # (X=∅) ou ¬(X=∅)
 
     # ── helper : (z,t)∈G transport via Leibniz pour z=x etc. déjà géré inline ──────
@@ -460,7 +460,7 @@ def _preuve_pas_filtrant(G, E_set, hord, hfilt, P, X="Xrec", x="xrec", m="m_mjf"
     X_sub_E = N.generalisation("z", N.loi_deduction(appartient(vz2, vX), z_in_E))
 
     # tiers exclu sur ¬(X=∅)
-    from bourbaki.logique.tactiques.tactiques_abrege2 import tiers_exclu
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import tiers_exclu
     te = tiers_exclu(egal(vX, E.VIDE))
     va = var(_ZMJ)   # liant du majorant : on raisonne sur a := _ZMJ
 
@@ -615,7 +615,7 @@ def _preuve_pas_maximal(G, E_set, hord, P, X="Xrec", x="xrec",
                         m="m_emf", a="a_emf"):
     """{ hord:est_ordre(G,E) } ⊢ _pas_ensemble(P)  pour P = _P_maximal(G,E)."""
     from bourbaki.entiers.iii_5_calcul_entiers.iii_5_1_somme_produit_entiers.ensembles_recurrence_finie import _pas_ensemble
-    from bourbaki.logique.tactiques.tactiques_abrege2 import tiers_exclu, dne, dni
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import tiers_exclu, dne, dni
     vE = _t(E_set)
     vX, vx = var(X), var(x)
     va, vm = var(a), var(m)

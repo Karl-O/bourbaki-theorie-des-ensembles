@@ -17,16 +17,16 @@ fidèle à C54). u, v, v' sont des lettres-paramètres distinctes de x, y, w.
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import var, egal, et, appartient, existe, subst_t, libres_t, libres_f
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_1_termes_relations.formule import var, egal, et, appartient, existe, subst_t, libres_t, libres_f
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.tactiques.tactiques_abrege import syllogisme
-from bourbaki.logique.tactiques.tactiques_abrege2 import (conjonction_intro, conjonction_elim_gauche,
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import syllogisme
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (conjonction_intro, conjonction_elim_gauche,
                                conjonction_elim_droite, equivalence_avant,
                                equivalence_arriere, equivalence_transitivite,
                                instancie, instanciation_en_x)
-from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie, composer_egalites, congruence_terme
-from bourbaki.logique.tactiques.tactiques_abrege_quantif import existe_elimination
+from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import symetrie, composer_egalites, congruence_terme
+from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import existe_elimination
 from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import couple_egal_implique_composantes
 
 
@@ -64,7 +64,7 @@ def membre_graphe_terme(a="A", t=None, u="u", v="v", x="x", y="y"):
     uA = N.modus_ponens(xA, equivalence_arriere(N.modus_ponens(
         ux, N.s6(vu, vx, "w", appartient(var("w"), vA)))))         # u∈A
     # v=T[u] : v=y, y=T (=T(x)), et T(x)=T(u) car u=x
-    from bourbaki.logique.formule import _fraiche
+    from bourbaki.logique.i_1_termes_relations.formule import _fraiche
     hole = _fraiche(libres_t(t) | libres_t(vu) | libres_t(vx) | {x, u, v})
     Thole = subst_t(var(hole), x, t)                               # T avec trou frais (x↦hole)
     xu = N.modus_ponens(ux, symetrie(vu, vx))                      # x=u
@@ -81,7 +81,7 @@ def membre_graphe_terme(a="A", t=None, u="u", v="v", x="x", y="y"):
     wit = conjonction_intro(conjonction_intro(refl, conjonction_elim_gauche(hc)),
                             conjonction_elim_droite(hc))           # = (u|x)(v|y)body
     # (v|y)body, puis (∃y), puis (u|x), puis (∃x)
-    from bourbaki.logique.formule import subst_f
+    from bourbaki.logique.i_1_termes_relations.formule import subst_f
     body_uy = subst_f(vu, x, body)            # (u|x)body
     ex_y = N.modus_ponens(wit, N.s5(body_uy, vv, y))              # (∃y)(u|x)body
     ex_xy = N.modus_ponens(ex_y, N.s5(existe(y, body), vu, x))    # (∃x)(∃y)body

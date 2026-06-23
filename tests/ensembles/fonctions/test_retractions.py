@@ -4,7 +4,7 @@ Chaque théorème est vérifié sur sa CONCLUSION EXACTE (== cible) et sur .est_
 Les cibles sont construites indépendamment (par les définitions de ensembles_abrege
 ou par le mécanisme de substitution canonique), pas extraites de la preuve.
 """
-from bourbaki.logique.formule import var, egal, et, appartient, impl, pourtout, existe
+from bourbaki.logique.i_1_termes_relations.formule import var, egal, et, appartient, impl, pourtout, existe
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ensembles.fonctions.ii_3_8_retractions_sections import ensembles_retractions as RS
 

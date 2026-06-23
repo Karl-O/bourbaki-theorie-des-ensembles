@@ -74,20 +74,20 @@ arrière), de la surjectivité (image=but) et de ponts CLOS du dépôt.  NON vac
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (
+from bourbaki.logique.i_1_termes_relations.formule import (
     Terme, var, egal, et, ou, non, impl, equiv, appartient, existe, pourtout, inclus,
 )
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis import ensembles_ordre_vocab as V
-from bourbaki.logique.tactiques.tactiques_abrege import syllogisme
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import syllogisme
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
     equivalence_avant, equivalence_arriere, instancie,
 )
 from bourbaki.cardinaux.ensembles_cantor_bernstein import inclusion_transitive_terme
-from bourbaki.logique.tactiques.tactiques_abrege_quantif import existe_elimination
-from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie, composer_egalites
+from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import existe_elimination
+from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import symetrie, composer_egalites
 from bourbaki.ensembles.ii_3_correspondances.ensembles_correspondances import (
     image_croissante, _inst_image,
 )
@@ -216,7 +216,7 @@ def image_segment_est_segment(phi="phi", S="S", T="T", S0="S0",
     # ════════ SOUS LES DEUX TÉMOINS (xa pour yv, xb pour zv), prouver zv∈img0 ════════
     #   On élimine d'abord ∃ pour xb (liant « xb »), puis ∃ pour xa (liant « xa »), en
     #   α-renommant les deux existentielles (liant natif « x ») vers xa / xb distincts.
-    from bourbaki.logique.tactiques.tactiques_abrege_quantif import alpha_existe
+    from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import alpha_existe
     vxa, vxb = var("xa"), var("xb")
     # α : (∃x)(x∈S0 et (x,yv)∈φ) ⇔ (∃xa)(xa∈S0 et (xa,yv)∈φ)
     ren_a = alpha_existe("x", "xa", body_xa)
@@ -301,8 +301,8 @@ def image_segment_est_segment(phi="phi", S="S", T="T", S0="S0",
     init_clause = N.generalisation("yv", N.generalisation("zv", body_init))
     #   α-renommer (∀yv)(∀zv) → (∀x)(∀y) : forme canonique de est_segment (binders x,y).
     #   inner zv→y (sous ∀yv), puis outer yv→x.
-    from bourbaki.logique.tactiques.tactiques_abrege2 import _peler_pourtout
-    from bourbaki.logique.tactiques.tactiques_abrege_quantif import (
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import _peler_pourtout
+    from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import (
         alpha_pour_tout, congruence_pour_tout,
     )
     _, body_yv = _peler_pourtout(init_clause.conclusion)         # (∀zv)(corps)
@@ -365,8 +365,8 @@ def restriction_inclus_produit_image(phi="phi", X="X"):
     #    α-renomme le corps ∃ de la restriction vers des binders FRAIS rp,rq (≠ p,q,x).
     vrp, vrq = var("rp"), var("rq")
 
-    from bourbaki.logique.tactiques.tactiques_abrege_quantif import alpha_existe
-    from bourbaki.logique.formule import subst_f
+    from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import alpha_existe
+    from bourbaki.logique.i_1_termes_relations.formule import subst_f
     inst0 = _inst_restriction(vphi, vX, vz)            # z∈φ|X ⇔ (∃p)(∃q)body0  (binders p,q)
     body0 = et(et(egal(vz, E.couple(var("p"), var("q"))), appartient(var("p"), vX)),
                appartient(E.couple(var("p"), var("q")), vphi))
@@ -406,7 +406,7 @@ def restriction_inclus_produit_image(phi="phi", X="X"):
 
 def _congruence_existe(thm_eq, x):
     """⊢ (R⇔S) (x non libre dans Γ) ⟹ Γ ⊢ (∃x)R ⇔ (∃x)S."""
-    from bourbaki.logique.tactiques.tactiques_abrege_quantif import monotonie_existe
+    from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import monotonie_existe
     avant = monotonie_existe(equivalence_avant(thm_eq), x)
     arriere = monotonie_existe(equivalence_arriere(thm_eq), x)
     return conjonction_intro(avant, arriere)
@@ -414,7 +414,7 @@ def _congruence_existe(thm_eq, x):
 
 def _equiv_transit(*equivs):
     """Chaîne d'équivalences A⇔B, B⇔C, … en A⇔Z (equivalence_transitivite répété)."""
-    from bourbaki.logique.tactiques.tactiques_abrege2 import equivalence_transitivite
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import equivalence_transitivite
     acc = equivs[0]
     for e in equivs[1:]:
         acc = equivalence_transitivite(acc, e)
@@ -619,8 +619,8 @@ def dom_h_initial_sans_val(E_set="E", R="R", F_set="F", Rp="Rp",
     (φ(y)∈F) est DÉRIVÉ par `PV.val_dans_F_depuis_structure` (CLOS) au lieu d'être
     postulé via val_dans_F : la prémisse de structure de graphe (φ⊂S×T, dom φ=S) est
     le cœur STRENGTHENED de h.  CLOS (0 hyp) : theorie=22, NON vacueux."""
-    from bourbaki.logique.tactiques.tactiques_abrege import syllogisme
-    from bourbaki.logique.tactiques.tactiques_abrege_quantif import (
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import syllogisme
+    from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import (
         existe_elimination, alpha_existe,
     )
     from bourbaki.cardinaux.ensembles_codomaine_reconciliation import _rename_iso_order_binders
@@ -766,10 +766,10 @@ def _seg_dom_sans_val_binders(E_set, R, F_set, Rp, xb, yb):
 
     `dom_h_est_segment_sans_val` (binders SÛRS xa,ya) α-renommé vers (xb,yb), comme
     `A._dom_segment_aux_binders` mais sur la version VAL-FREE (codomaine DÉRIVÉ)."""
-    from bourbaki.logique.tactiques.tactiques_abrege2 import (
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
         conjonction_elim_gauche as cg, conjonction_elim_droite as cd, _peler_pourtout,
     )
-    from bourbaki.logique.tactiques.tactiques_abrege_quantif import (
+    from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import (
         alpha_pour_tout, congruence_pour_tout,
     )
     ds = dom_h_est_segment_sans_val(E_set, R, F_set, Rp, x="xa", y="ya")

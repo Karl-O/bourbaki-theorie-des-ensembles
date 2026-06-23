@@ -42,18 +42,18 @@ AUCUN axiome nouveau.
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (Terme, var, egal, et, ou, non, impl,
+from bourbaki.logique.i_1_termes_relations.formule import (Terme, var, egal, et, ou, non, impl,
                                        appartient, existe, pourtout, inclus)
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.tactiques.tactiques_abrege import syllogisme
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import syllogisme
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
     equivalence_avant, equivalence_arriere, equivalence_transitivite,
     instancie, cas, contraposition)
-from bourbaki.logique.tactiques.tactiques_abrege_egalite import (
+from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import (
     symetrie, composer_egalites, congruence_terme)
-from bourbaki.logique.tactiques.tactiques_abrege_quantif import (
+from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import (
     existe_elimination, alpha_existe)
 from bourbaki.ensembles.fonctions.ii_3_4_fonctions_valeur.ensembles_fonctions import (
     valeur_dans_graphe, valeur_caracterisation)
@@ -92,7 +92,7 @@ def _z_in_diff_ssi(e, x, z):
     vE, vx, vz = _t(e), _t(x), _t(z)
     diff = _inst_diff(vE, E.singleton(vx), vz)         # z∈E∖{x} ⇔ (z∈E et ¬(z∈{x}))
     sing = singleton_membre(vz, vx)                    # (z∈{x}) ⇔ (z=x)
-    from bourbaki.logique.tactiques.tactiques_abrege2 import et_congruence_droite
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import et_congruence_droite
     # ¬(z∈{x}) ⇔ ¬(z=x)   [fwd : ¬(z∈{x})⇒¬(z=x) = contraposée de (z=x)⇒(z∈{x})]
     neg_eq = conjonction_intro(contraposition(equivalence_arriere(sing)),
                                contraposition(equivalence_avant(sing)))
@@ -334,7 +334,7 @@ def eq_retrait_meme_ensemble(y="Y", p="p", yy="yy"):
         (réécriture σ(p)=yy)."""
     from bourbaki.cardinaux.ensembles_equipotence import equipotence_reflexive
     from bourbaki.cardinaux.arithmetique.ensembles_transposition import transposition_existe
-    from bourbaki.logique.tactiques.tactiques_abrege2 import tiers_exclu
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import tiers_exclu
     vY, vp, vyy = _t(y), _t(p), _t(yy)
     Ymp = E.difference(vY, E.singleton(vp))            # Y∖{p}
     Ymyy = E.difference(vY, E.singleton(vyy))          # Y∖{yy}
@@ -403,7 +403,7 @@ def equipotence_reflexive_pour(t):
 
 def _ne_symetrie(a, b):
     """⊢ ¬(a=b) ⇒ ¬(b=a).   (contraposée de la symétrie de l'égalité.)"""
-    from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie
+    from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import symetrie
     return contraposition(symetrie(b, a))              # (b=a)⇒(a=b) contraposé : ¬(a=b)⇒¬(b=a)
 
 

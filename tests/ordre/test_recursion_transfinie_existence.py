@@ -9,7 +9,7 @@ GÉNÉRIQUE sur les fonctions-valeur vf, vg, vhf, vhg.
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import var, app, egal, et, non, impl, appartient
+from bourbaki.logique.i_1_termes_relations.formule import var, app, egal, et, non, impl, appartient
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ordre.iii_2_bon_ordre.recurrence_transfinie import ensembles_recursion_transfinie_existence as EX
 from bourbaki.ordre.iii_2_bon_ordre.recurrence_transfinie.ensembles_recurrence_transfinie import (

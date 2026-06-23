@@ -1,7 +1,7 @@
 """Tests — Chapitre III §1 : relations d'ordre, ensembles ordonnés (théorèmes directs)."""
 from __future__ import annotations
 
-from bourbaki.logique.formule import var, egal, et, impl, appartient, pourtout, inclus
+from bourbaki.logique.i_1_termes_relations.formule import var, egal, et, impl, appartient, pourtout, inclus
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis import ensembles_ordre as O
 

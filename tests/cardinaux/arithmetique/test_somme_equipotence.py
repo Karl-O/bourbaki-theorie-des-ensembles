@@ -9,7 +9,7 @@ domaine, valeur sur chaque copie (puis injectif/image/assemblage si atteints).
 """
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.arithmetique import ensembles_somme_equipotence as S
-from bourbaki.logique.formule import var, egal, appartient, subst_t
+from bourbaki.logique.i_1_termes_relations.formule import var, egal, appartient, subst_t
 
 
 def _K():
@@ -104,7 +104,7 @@ def test_somme_est_bijection():
 def test_eq_somme_invariant_clos():
     """⊢ (Eq(A,A₁) et Eq(B,B₁)) ⇒ Eq(A⊔B, A₁⊔B₁) : INVARIANCE de la somme, CLOS."""
     from bourbaki.cardinaux.ensembles_cardinaux import equipotent
-    from bourbaki.logique.formule import impl, et
+    from bourbaki.logique.i_1_termes_relations.formule import impl, et
     thm = S.eq_somme_invariant()
     AB = S.somme_disjointe(var("A"), var("B"))
     A1B1 = S.somme_disjointe(var("A1"), var("B1"))
@@ -128,7 +128,7 @@ def test_somme_cardinale_bien_definie_clos():
 
     La somme cardinale a+b := Card(A⊔B) ne dépend que de Card A, Card B."""
     from bourbaki.cardinaux.ensembles_cardinaux import equipotent, cardinal
-    from bourbaki.logique.formule import impl, et
+    from bourbaki.logique.i_1_termes_relations.formule import impl, et
     thm = S.somme_cardinale_bien_definie()
     AB = S.somme_disjointe(var("A"), var("B"))
     A1B1 = S.somme_disjointe(var("A1"), var("B1"))
@@ -141,7 +141,7 @@ def test_somme_cardinale_bien_definie_clos():
 def test_eq_somme_invariant_termes():
     """L'invariance tient sur des TERMES composés (ex. A = Card U)."""
     from bourbaki.cardinaux.ensembles_cardinaux import equipotent
-    from bourbaki.logique.formule import impl, et
+    from bourbaki.logique.i_1_termes_relations.formule import impl, et
     CU = E.app("card", var("U"))
     thm = S.eq_somme_invariant("F", "G", CU, "B", "A1", "B1")
     AB = S.somme_disjointe(CU, var("B"))

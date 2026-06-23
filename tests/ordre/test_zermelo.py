@@ -12,7 +12,7 @@ On vérifie palier par palier (SALVAGE GRADUÉ) :
 INVARIANT : theorie_ensembles() reste = 22 (axiomes de W/Θ/Union en théories
 DÉDIÉES).  🚫 JAMAIS postuler le bon ordre : il est CONSTRUIT.
 """
-from bourbaki.logique.formule import var
+from bourbaki.logique.i_1_termes_relations.formule import var
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis.ensembles_ordre_relation import est_ordre, transitivite_rel
 from bourbaki.ordre.iii_2_bon_ordre.zorn_zermelo import ensembles_zermelo as Z
@@ -89,7 +89,7 @@ def test_Union_bop_match():
 
 
 def test_Union_dans_W():
-    from bourbaki.logique.formule import appartient
+    from bourbaki.logique.i_1_termes_relations.formule import appartient
     th = Z.Union_dans_W("X", "D")
     assert th.conclusion == appartient(Z.Union(X, var("D")), Z.W(X))
     assert len(th.hypotheses) == 2
@@ -120,7 +120,7 @@ def test_vide_bon_ordre_partiel():
 
 
 def test_vide_dans_W():
-    from bourbaki.logique.formule import appartient
+    from bourbaki.logique.i_1_termes_relations.formule import appartient
     th = Z.vide_dans_W("X")
     assert th.est_clos
     assert th.conclusion == appartient(E.VIDE, Z.W(X))
@@ -147,8 +147,8 @@ def test_theorie_Ext_dediee():
 
 
 def test_Ext_seg_initial():
-    import bourbaki.logique.noyau_abrege as N
-    from bourbaki.logique.formule import var, non, appartient
+    import bourbaki.logique.i_2_criteres_C.noyau.noyau_abrege as N
+    from bourbaki.logique.i_1_termes_relations.formule import var, non, appartient
     vX, vM, vx0 = var("X"), var("M"), var("x0")
     Hx0nd = N.assume(non(appartient(vx0, Z.champ(vM))))
     th = Z.Ext_seg_initial(vX, vM, vx0, Hx0nd, p="p", q="q")
@@ -157,14 +157,14 @@ def test_Ext_seg_initial():
 
 def test_Ext_dans_W():
     # 🎯 LE BON-ORDRE DU GRAPHE ÉTENDU : M' (x₀ au sommet) ∈ W.
-    from bourbaki.logique.formule import var, appartient
+    from bourbaki.logique.i_1_termes_relations.formule import var, appartient
     th = Z.Ext_dans_W("X", "M", "x0")
     assert len(th.hypotheses) == 3               # M∈W, x₀∉champ M, x₀∈X
     assert th.conclusion == appartient(Z.Ext(var("X"), var("M"), var("x0")), Z.W(var("X")))
 
 
 def test_maximal_champ_eq_X():
-    from bourbaki.logique.formule import egal
+    from bourbaki.logique.i_1_termes_relations.formule import egal
     th = Z.maximal_champ_eq_X("X", "M", "x0")
     assert len(th.hypotheses) == 1               # element_maximal(Θ,W,M)
     assert th.conclusion == egal(Z.champ(var("M")), X)
@@ -172,7 +172,7 @@ def test_maximal_champ_eq_X():
 
 # ── ÉTAPE 5 — 🎯🎯🎯🎯 ZERMELO : (∃R) est_bien_ordonne(R, X) ─────────────────
 def test_zermelo():
-    from bourbaki.logique.formule import existe
+    from bourbaki.logique.i_1_termes_relations.formule import existe
     th = Z.zermelo("X")
     assert th.est_clos
     assert len(th.hypotheses) == 0

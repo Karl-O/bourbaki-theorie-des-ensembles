@@ -1,7 +1,7 @@
 """Tests §IV.1.1–IV.1.2 — schémas d'échelon, échelon S(E₁,…,Eₙ), extension
 canonique ⟨f₁,…,fₙ⟩^S.   REPRÉSENTATIONNEL : on vérifie que les def renvoient les
 bons OBJETS/TERMES, fidèlement aux énoncés VERBATIM de IV.1.1–IV.1.2."""
-from bourbaki.logique.formule import var
+from bourbaki.logique.i_1_termes_relations.formule import var
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.structures.iv_1_structures_isomorphismes import ensembles_especes_echelon as Ech
 

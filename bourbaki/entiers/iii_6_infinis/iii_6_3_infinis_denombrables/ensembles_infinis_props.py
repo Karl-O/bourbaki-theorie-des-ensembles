@@ -44,8 +44,8 @@ est_denombrable, A4, N opaque) et des grands théorèmes DÉJÀ prouvés du proj
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (Terme, var, egal, et, ou, non, impl, equiv)
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_1_termes_relations.formule import (Terme, var, egal, et, ou, non, impl, equiv)
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 
 from bourbaki.cardinaux.ensembles_cardinaux import est_cardinal, cardinal, inf_egal_card
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import est_fini, est_fini_ensemble, successeur
@@ -54,7 +54,7 @@ from bourbaki.entiers.iii_6_infinis.iii_6_3_infinis_denombrables.ensembles_infin
 )
 from bourbaki.entiers.iii_6_infinis.iii_6_1_n_objet_existence.ensembles_N_collectivise import fini_downward
 
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     instancie, conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
 )
 
@@ -94,7 +94,7 @@ def cardinal_egal_succ_implique_infini(a="a"):
     Fini(a) = est_cardinal(a) ∧ (a ≠ a+1) ; sous l'hypothèse a = a+1, le 2ᵉ conjoint
     a ≠ a+1 est réfuté (¬¬(a=a+1) contredirait a≠a+1).  Donc Fini(a) est faux, i.e.
     est_infini(a) = ¬Fini(a).  Vrai pour TOUT terme a (pas besoin de est_cardinal)."""
-    from bourbaki.logique.tactiques.tactiques_abrege2 import dni
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import dni
     va = _t(a)
     sa = successeur(va)
     fini = est_fini(va)                                   # est_cardinal(a) ∧ a≠a+1
@@ -126,7 +126,7 @@ def cardinal_infini_implique_egal_succ(a="a"):
     et Fini(a)=est_cardinal(a)∧(a≠a+1) ; sous est_cardinal(a), supposer a≠a+1 donnerait
     Fini(a) (conjonction), contredisant ¬Fini(a) ; donc ¬(a≠a+1), i.e. a=a+1 (double
     négation).  Hypothèse est_cardinal(a) ESSENTIELLE (cf. docstring du module)."""
-    from bourbaki.logique.tactiques.tactiques_abrege2 import dne
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import dne
     va = _t(a)
     sa = successeur(va)
     ante = et(est_cardinal(va), est_infini(va))
@@ -272,7 +272,7 @@ def sous_ensemble_denombrable_cond(A="A", B="B"):
     le_AB EN PREMIER puis on bâtit H à partir de SA conclusion (le ≤ ensembliste exact
     produit par partie_inf_egal_card), garantissant l'identité structurelle pour le MP."""
     from bourbaki.entiers.iii_4_entiers_finis.iii_4_2_finis_props.ensembles_finis_props import partie_inf_egal_card
-    from bourbaki.logique.formule import inclus
+    from bourbaki.logique.i_1_termes_relations.formule import inclus
     vA, vB = _t(A), _t(B)
     # étape 1 : A ⊂ B ⇒ A ≤ B   (ENSEMBLES) ; on capture A≤B = le_concl
     h_incl = N.assume(inclus(vA, vB))                     # A ⊂ B

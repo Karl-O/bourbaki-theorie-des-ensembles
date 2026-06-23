@@ -34,9 +34,9 @@ THÉORÈMES DIRECTS certifiés (bonus, niveau abrégé pur — synonymies défin
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (Terme, var, app, egal, et, non, impl, existe,
+from bourbaki.logique.i_1_termes_relations.formule import (Terme, var, app, egal, et, non, impl, existe,
                                        pourtout, appartient, inclus)
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import (UN, longueur_suite, est_suite_finie,
                                                 est_entier, intervalle_entiers)

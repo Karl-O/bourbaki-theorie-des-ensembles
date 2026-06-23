@@ -18,7 +18,7 @@ def test_complement_grand_clos_et_cible():
     # hypothèses honnêtes attendues, non vacuous
     assert thm.conclusion not in thm.hypotheses
     # 3 hyps honnêtes
-    from bourbaki.logique.formule import egal, inclus, var
+    from bourbaki.logique.i_1_termes_relations.formule import egal, inclus, var
     from bourbaki.cardinaux.ensembles_cardinaux import (
         cardinal, inf_strict_card,
     )

@@ -40,13 +40,13 @@ THÉORÈMES DIRECTS certifiés par le noyau :
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import var, egal, et, impl, pourtout, appartient
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_1_termes_relations.formule import var, egal, et, impl, pourtout, appartient
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.tactiques.tactiques_abrege2 import (conjonction_intro, conjonction_elim_gauche,
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (conjonction_intro, conjonction_elim_gauche,
                                conjonction_elim_droite, equivalence_avant,
                                instancie)
-from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie as eg_symetrie
+from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import symetrie as eg_symetrie
 from bourbaki.cardinaux.ensembles_equipotence import (diagonale_fonctionnelle, diagonale_domaine,
                                     diagonale_valeur)
 from bourbaki.ensembles.fonctions.ii_3_7_composee_fonctions.ensembles_fonctions_composee import composition_valeur

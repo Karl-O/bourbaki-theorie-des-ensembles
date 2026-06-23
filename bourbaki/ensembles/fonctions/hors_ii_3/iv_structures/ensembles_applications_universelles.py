@@ -55,12 +55,12 @@ REPORTÉ honnêtement (cf. champ « reportes ») :
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import var, egal, et, impl, existe, pourtout
-from bourbaki.logique import noyau_abrege as N
-from bourbaki.logique.tactiques.tactiques_abrege2 import (conjonction_intro, conjonction_elim_gauche,
+from bourbaki.logique.i_1_termes_relations.formule import var, egal, et, impl, existe, pourtout
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (conjonction_intro, conjonction_elim_gauche,
                                conjonction_elim_droite, instancie,
                                instanciation)
-from bourbaki.logique.tactiques.tactiques_abrege_quantif import existe_elimination
+from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import existe_elimination
 
 
 # ── corps de factorisation : morph(f) et (φ = f∘φ_E) ──────────────────────────

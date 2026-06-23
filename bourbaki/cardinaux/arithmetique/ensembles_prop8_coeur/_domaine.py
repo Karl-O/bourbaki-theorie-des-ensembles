@@ -11,14 +11,14 @@ puis égalité par extension.
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (var, egal, et, appartient, existe, inclus)
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_1_termes_relations.formule import (var, egal, et, appartient, existe, inclus)
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.tactiques.tactiques_abrege import a_implique_a, syllogisme
-from bourbaki.logique.tactiques.tactiques_abrege2 import (conjonction_intro,
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import a_implique_a, syllogisme
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (conjonction_intro,
                                conjonction_elim_gauche, conjonction_elim_droite,
                                equivalence_avant, equivalence_arriere, instancie)
-from bourbaki.logique.tactiques.tactiques_abrege_quantif import existe_elimination
+from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import existe_elimination
 from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import egalite_par_extension
 from bourbaki.cardinaux.arithmetique.ensembles_prop8_coeur._g import (
     A0_terme, G_RESTR, membre_g_ssi_t, _H)
@@ -37,9 +37,9 @@ def g_domaine(a="A", h=_H):
     # u∈dom g ⇔ (∃v)((u,v)∈g)   (AXIOME_DOM, liant interne « y » → renommé « v »)
     ax_dom = N.axiome(E.theorie_ensembles(), E.AXIOME_DOM)
     dom_car0 = instancie(instancie(ax_dom, g), vu)        # u∈dom g ⇔ (∃y)((u,y)∈g)
-    from bourbaki.logique.tactiques.tactiques_abrege_quantif import alpha_existe
+    from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import alpha_existe
     ren = alpha_existe("y", "v", appartient(E.couple(vu, var("y")), g))
-    from bourbaki.logique.tactiques.tactiques_abrege2 import equivalence_transitivite
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import equivalence_transitivite
     dom_car = equivalence_transitivite(dom_car0, ren)     # u∈dom g ⇔ (∃v)((u,v)∈g)
 
     # ── ⇒ : (∃v)((u,v)∈g) ⇒ u∈A×{0} ───────────────────────────────────────────

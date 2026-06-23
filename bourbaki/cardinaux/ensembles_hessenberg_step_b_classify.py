@@ -34,8 +34,8 @@ est EXPOSÉ, pas masqué.  Ce module N'AJOUTE PAS d'axiome et ne prétend RIEN c
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import libres_f, var
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_1_termes_relations.formule import libres_f, var
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 
 from bourbaki.cardinaux.ensembles_hessenberg_chaine_vraie import extension_absurde_chainee
 from bourbaki.cardinaux.ensembles_hessenberg_structural_discharge import (
@@ -47,7 +47,7 @@ from bourbaki.cardinaux.ensembles_produit_union_carre import s0sq_cadre_reunion_
 # Étiquettes humaines des 12 hyps, indexées par une SIGNATURE structurelle stable
 # (préfixe de la formule affichée) — robuste au renommage interne.
 def _label(h):
-    from bourbaki.logique.formule import afficher_f as af
+    from bourbaki.logique.i_1_termes_relations.formule import afficher_f as af
     s = af(h)
     fv = sorted(libres_f(h))
     if s.startswith("(inter(image(phi0"):

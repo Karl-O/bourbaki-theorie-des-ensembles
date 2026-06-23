@@ -35,14 +35,14 @@ theorie_ensembles() inchang√©e (22 axiomes) ; noyau intact.  Aucun axiome ajout√
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (var, app, egal, et, impl, equiv, pourtout,
+from bourbaki.logique.i_1_termes_relations.formule import (var, app, egal, et, impl, equiv, pourtout,
                                        appartient)
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import (est_cardinal, inf_egal_card,
                                                     cardinal)
 from bourbaki.cardinaux.ensembles_cardinaux_theoremes import inf_egal_reflexif
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite)
 
 

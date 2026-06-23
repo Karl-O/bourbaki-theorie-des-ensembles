@@ -9,7 +9,7 @@ aux sous-structures), CST20 (passage aux quotients).  On certifie :
   • MO_III (équivalence) est CLOS (0 hypothèse) ;
   • theorie_ensembles() reste à 22 axiomes (rien postulé).
 """
-from bourbaki.logique.formule import var, egal, et, equiv
+from bourbaki.logique.i_1_termes_relations.formule import var, egal, et, equiv
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.structures.iv_2_morphismes_structures_derivees.cst_criteres import ensembles_chap4_props_restantes as M
 from bourbaki.structures.iv_2_morphismes_structures_derivees.ensembles_universel_morphismes import est_morphisme
@@ -110,7 +110,7 @@ def test_cst12_hypotheses_explicites():
 # ── CST20 — passage des morphismes aux quotients ──────────────────────────────
 def test_cst20_conclusion_exacte():
     t = M.cst20_passage_quotient()
-    from bourbaki.logique.formule import app
+    from bourbaki.logique.i_1_termes_relations.formule import app
     va, vs, vap, vsp = var("A"), var("S"), var("Ap"), var("Sp")
     vr, vrp, vf = var("R"), var("Rp"), var("f")
     AR = E.quotient(vr, va)
@@ -125,7 +125,7 @@ def test_cst20_conclusion_exacte():
 
 
 def test_cst20_hypotheses_explicites():
-    from bourbaki.logique.formule import app
+    from bourbaki.logique.i_1_termes_relations.formule import app
     va, vs, vap, vsp = var("A"), var("S"), var("Ap"), var("Sp")
     vr, vrp, vf = var("R"), var("Rp"), var("f")
     AR = E.quotient(vr, va)

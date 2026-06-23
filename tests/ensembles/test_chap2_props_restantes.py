@@ -3,7 +3,7 @@
 Vérifie la conclusion EXACTE (== cible verbatim) et .est_clos de chaque théorème.
 theorie_ensembles() reste à 22 axiomes (aucun axiome neuf en théorie principale).
 """
-from bourbaki.logique.formule import (var, egal, et, impl, appartient, existe,
+from bourbaki.logique.i_1_termes_relations.formule import (var, egal, et, impl, appartient, existe,
                                        pourtout, inclus)
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ensembles.ii_4_reunion_intersection import ensembles_chap2_props_restantes as P

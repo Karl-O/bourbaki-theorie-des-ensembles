@@ -5,10 +5,10 @@ tactiques_prop.py / tactiques_egalite.py — on les porte sur `noyau_abrege`.
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (var, non, ou, et, egal, impl, existe, pourtout, appartient,
+from bourbaki.logique.i_1_termes_relations.formule import (var, non, ou, et, egal, impl, existe, pourtout, appartient,
                      inclus, subst_f)
-from bourbaki.logique import noyau_abrege as N
-from bourbaki.logique.tactiques.tactiques_abrege import antecedent_consequent, a_implique_a, syllogisme
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import antecedent_consequent, a_implique_a, syllogisme
 
 
 # ── monotonie de ∨, affaiblissement ───────────────────────────────────────────

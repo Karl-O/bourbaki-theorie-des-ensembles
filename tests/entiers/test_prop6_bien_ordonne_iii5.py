@@ -27,10 +27,10 @@ def test_partie_finie_est_finie_close():
 
 
 def test_clause_plus_petit_close():
-    from bourbaki.logique.formule import et, impl
+    from bourbaki.logique.i_1_termes_relations.formule import et, impl
     from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis.ensembles_ordre_relation import totalement_ordonne
     from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import est_fini_ensemble
-    from bourbaki.logique.formule import var
+    from bourbaki.logique.i_1_termes_relations.formule import var
     t = clause_plus_petit_fini_total("Gbo", "Ebo")
     assert t.est_clos
     hyp = et(totalement_ordonne("Gbo", "Ebo"), est_fini_ensemble(var("Ebo")))

@@ -17,10 +17,10 @@ from __future__ import annotations
 import heapq
 from itertools import count
 
-from bourbaki.logique.lecture import DEFAUT, est_relation
-from bourbaki.logique import noyau
-from bourbaki.logique.tactiques.tactiques import antecedent_consequent
-from bourbaki.logique.tactiques.tactiques_prop import contraposition, double_negation_intro, double_negation_elim
+from bourbaki.logique.i_1_termes_relations.lecture import DEFAUT, est_relation
+from bourbaki.logique.i_2_criteres_C.noyau import noyau
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques import antecedent_consequent
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_prop import contraposition, double_negation_intro, double_negation_elim
 from outils_ia.chercheur import vocabulaire, _est_implication
 
 _CAP = 8  # nb max de relations servant à engendrer les instances de feuille

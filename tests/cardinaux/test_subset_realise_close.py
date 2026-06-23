@@ -31,7 +31,7 @@ def _bo_Ro_a():
 
 
 def _B_sub_a():
-    from bourbaki.logique.formule import inclus
+    from bourbaki.logique.i_1_termes_relations.formule import inclus
     return inclus(E.var("Bsr"), E.var("asr"))
 
 
@@ -49,7 +49,7 @@ def test_func_h_prime_hyps_honnetes():
 
 
 def test_maximalite_h_prime_disjonction():
-    from bourbaki.logique.formule import ou, egal
+    from bourbaki.logique.i_1_termes_relations.formule import ou, egal
     t = M.maximalite_h_prime()
     vh = M.h_prime()
     assert t.conclusion == ou(egal(E.dom(vh), E.var("Bsr")), egal(E.img(vh), E.var("asr")))
@@ -93,7 +93,7 @@ def test_realise_segment_pour_B_conclusion():
 
 
 def test_realise_segment_pour_B_sans_dom_3_hyps():
-    from bourbaki.logique.formule import non, egal
+    from bourbaki.logique.i_1_termes_relations.formule import non, egal
     t = M.realise_segment_pour_B_sans_dom()
     assert t.conclusion == M.realise_segment_pour_B_cible()
     assert t.conclusion not in set(t.hypotheses)
@@ -112,7 +112,7 @@ def test_equipotent_implique_inf_egal_clos():
 
 # ── pr₂h'=a ⇒ Eq(B,a) (Cantor-Bernstein) ─────────────────────────────────────
 def test_pr2_eq_a_donne_eq_B_a():
-    from bourbaki.logique.formule import egal
+    from bourbaki.logique.i_1_termes_relations.formule import egal
     from bourbaki.cardinaux.ensembles_cardinaux import equipotent
     t = M.pr2_eq_a_donne_eq_B_a()
     assert t.conclusion == equipotent(E.var("Bsr"), E.var("asr"))   # Eq(B,a)
@@ -124,7 +124,7 @@ def test_pr2_eq_a_donne_eq_B_a():
 
 # ── FORME PROPRE : ¬Eq(B,a) ⇒ ∃t(t∈a et Eq(B,seg)) ───────────────────────────
 def test_realise_segment_pour_B_clean_3_hyps():
-    from bourbaki.logique.formule import non
+    from bourbaki.logique.i_1_termes_relations.formule import non
     from bourbaki.cardinaux.ensembles_cardinaux import equipotent
     t = M.realise_segment_pour_B_clean()
     assert t.conclusion == M.realise_segment_pour_B_clean_cible()

@@ -8,7 +8,7 @@ reste à 22 axiomes (aucun axiome neuf)."""
 from bourbaki.ensembles.ii_6_equivalence.ensembles_quotient_c56_c57 import (
     c56_quotient_existe_ssi_pourtout, c57_bien_definie, membres_t_R_lies)
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.formule import var, egal, equiv, existe, appartient
+from bourbaki.logique.i_1_termes_relations.formule import var, egal, equiv, existe, appartient
 
 
 def test_theorie_inchangee_22():

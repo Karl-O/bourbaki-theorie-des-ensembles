@@ -5,7 +5,7 @@ PARTIELLES, son inductivité (réunion d'une chaîne = injection partielle),
 l'application de Zorn, l'extension g∪{(x,y)} et la conclusion disjonctive sont
 toutes des théorèmes du noyau strict, theorie_ensembles() restant = 22.
 """
-from bourbaki.logique.formule import var, ou, egal, inclus, appartient
+from bourbaki.logique.i_1_termes_relations.formule import var, ou, egal, inclus, appartient
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis.ensembles_ordre_relation import est_ordre, element_maximal
 from bourbaki.ordre.iii_2_bon_ordre.zorn_zermelo.ensembles_zorn import est_inductif

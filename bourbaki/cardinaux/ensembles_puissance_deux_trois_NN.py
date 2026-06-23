@@ -18,9 +18,9 @@ theorie_ensembles INCHANGÉE (22).  Noyau INTACT.  Aucun axiome nouveau.
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import Terme, var, et, impl
-from bourbaki.logique import noyau_abrege as N
-from bourbaki.logique.tactiques.tactiques_abrege2 import instancie
+from bourbaki.logique.i_1_termes_relations.formule import Terme, var, et, impl
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import instancie
 
 from bourbaki.cardinaux.arithmetique.ensembles_exposant_cardinal import (
     exposant_cardinal_binaire,
@@ -48,7 +48,7 @@ def _base_puissance_dans_NN(base_terme, fini_base, n="npdt"):
     `puissance_entiers_ferme_inconditionnel` ⊢ (Fini a et Fini b) ⇒ Fini(a^b),
     généralisé sur la base 'apuf' puis instancié au TERME base ; on décharge le
     conjoint Fini(base) par `fini_base`, laissant Fini(n) ⇒ Fini(base^n)."""
-    from bourbaki.logique.tactiques.tactiques_abrege2 import conjonction_intro
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import conjonction_intro
     vbase, vn = _t(base_terme), _t(n)
     # (Fini a et Fini b) ⇒ Fini(a^b)  sur NOMS FRAIS apuf,bpuf, capture-safe
     pef = puissance_entiers_ferme_inconditionnel("apuf", "bpuf")

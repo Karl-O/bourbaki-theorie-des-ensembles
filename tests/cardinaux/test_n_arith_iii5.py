@@ -5,7 +5,7 @@ certifié sous les SEULES hypothèses de support (exponent-invariance), via le m
 a^(n+1)=a^n·a (puissance_succ_eq) + G1 (produit_binaire_entier) + récurrence C61.
 theorie=22, kernel intact.
 """
-from bourbaki.logique.formule import var, egal, et, impl, pourtout
+from bourbaki.logique.i_1_termes_relations.formule import var, egal, et, impl, pourtout
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import est_fini, successeur, ZERO
 from bourbaki.cardinaux.ensembles_cardinaux import est_cardinal, cardinal

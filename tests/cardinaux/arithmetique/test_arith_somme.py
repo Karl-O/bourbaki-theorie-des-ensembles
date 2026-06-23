@@ -5,7 +5,7 @@
   • somme_cardinale_zero_neutre  : 0+b = b  (Card(∅⊔B) = Card B) ;
   • somme_cardinale_associative  : (a+b)+c = a+(b+c)  (Card((A⊔B)⊔C)=Card(A⊔(B⊔C))).
 """
-from bourbaki.logique.formule import var, egal, et, impl, subst_t
+from bourbaki.logique.i_1_termes_relations.formule import var, egal, et, impl, subst_t
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import cardinal, est_bijection_de, equipotent
 from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import somme_disjointe, somme_cardinale_binaire, ZERO

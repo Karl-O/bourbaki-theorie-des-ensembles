@@ -6,7 +6,7 @@ lexicographique) est INTRODUITE par un def FIDÈLE, que les termes/formules se
 construisent et coïncident avec l'énoncé Bourbaki, et que les lemmes directs
 sont CLOS (ou gardent exactement les hypothèses attendues).
 """
-from bourbaki.logique.formule import (
+from bourbaki.logique.i_1_termes_relations.formule import (
     var, app, egal, et, ou, impl, non, equiv, appartient, existe, pourtout, inclus,
 )
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E

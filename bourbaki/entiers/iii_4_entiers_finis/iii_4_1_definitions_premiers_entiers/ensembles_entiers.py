@@ -45,7 +45,7 @@ ensembles_zero_plus_un.py.
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (Terme, var, app, egal, et, non, impl, existe, pourtout, equiv,
+from bourbaki.logique.i_1_termes_relations.formule import (Terme, var, app, egal, et, non, impl, existe, pourtout, equiv,
                      inclus, appartient)
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import (cardinal, est_cardinal, CARD_VIDE,
@@ -124,7 +124,7 @@ def de_caractere_fini(S, e, x="X", y="Y"):
     vX, vY = var(x), var(y)
     droite = pourtout(y, impl(et(inclus(vY, vX), est_fini_ensemble(vY)),
                               appartient(vY, S)))
-    from bourbaki.logique.formule import equiv
+    from bourbaki.logique.i_1_termes_relations.formule import equiv
     return pourtout(x, equiv(appartient(vX, S), droite))
 
 

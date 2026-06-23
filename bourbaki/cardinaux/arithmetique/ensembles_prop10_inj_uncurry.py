@@ -31,15 +31,15 @@ GABARIT : ensembles_prop9_close (Φ : W_phi_*, back-and-forth) et ensembles_prop
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (Terme, var, egal, et, impl, non, ou,
+from bourbaki.logique.i_1_termes_relations.formule import (Terme, var, egal, et, impl, non, ou,
                      appartient, existe, pourtout, inclus, subst_t, subst_f)
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
     equivalence_avant, equivalence_arriere, equivalence_transitivite, instancie)
-from bourbaki.logique.tactiques.tactiques_abrege_quantif import existe_elimination
-from bourbaki.logique.tactiques.tactiques_abrege_egalite import (
+from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import existe_elimination
+from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import (
     symetrie, composer_egalites, congruence_terme)
 
 from bourbaki.cardinaux.ensembles_cardinaux import est_injection_de, inf_egal_card
@@ -364,7 +364,7 @@ def W_U_image_incluse(a="A", b="B", c="C"):
     W = W_U(va, vb, vc)
     UU = uncurry_appli(var(_POINT), va, vb, vc)      # U(g), point g
     vz, vt = var("z"), var("t")
-    from bourbaki.logique.tactiques.tactiques_abrege_quantif import alpha_existe
+    from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import alpha_existe
 
     # z∈W⟨dom⟩ ⇔ (∃t)(t∈dom et (t,z)∈W)  (AXIOME_IMAGE ; liant frais α-renommé t)
     ax_img = N.axiome(E.theorie_ensembles(), E.AXIOME_IMAGE)

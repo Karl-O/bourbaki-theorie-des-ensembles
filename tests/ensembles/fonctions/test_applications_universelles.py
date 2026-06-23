@@ -8,7 +8,7 @@ Les prédicats `morph` / `fact` sont des prédicats CONCRETS de test (callables
 Terme→Formule) : f morphisme := f∈M  (M graphe générique) ;  φ=f∘φ_E := égalité
 fixe.  Les théorèmes prouvés valent quel que soit le contenu de ces prédicats.
 """
-from bourbaki.logique.formule import var, egal, et, impl, existe, pourtout, appartient
+from bourbaki.logique.i_1_termes_relations.formule import var, egal, et, impl, existe, pourtout, appartient
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ensembles.fonctions.hors_ii_3.iv_structures import ensembles_applications_universelles as U
 

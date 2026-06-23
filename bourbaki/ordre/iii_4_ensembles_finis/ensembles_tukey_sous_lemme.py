@@ -33,19 +33,19 @@ Rien postulé : la récurrence finie est CLOSE ; le pas est DÉMONTRÉ.
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (
+from bourbaki.logique.i_1_termes_relations.formule import (
     Terme, var, egal, et, ou, non, impl, equiv, appartient, existe, pourtout, inclus,
 )
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.tactiques.tactiques_abrege import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import (
     a_implique_a, inclusion_reflexive,
 )
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
     equivalence_avant, equivalence_arriere, instancie, cas,
 )
-from bourbaki.logique.tactiques.tactiques_abrege_quantif import existe_elimination
+from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import existe_elimination
 
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import est_fini_ensemble
 from bourbaki.entiers.iii_5_calcul_entiers.iii_5_1_somme_produit_entiers.ensembles_recurrence_finie import recurrence_finie
@@ -264,7 +264,7 @@ def _preuve_pas(S, T, M="Mtk", F="Ftk", x="xtk", M1="M1tk", W="Wtk", M0="M0tk"):
     # x∈U ⇒ (∃C)(C∈𝔗 et x∈C)  (binder « C » du corps de Union)
     exW = N.modus_ponens(x_in_U, equivalence_avant(_inst_Union(Incl(vS), vS, vT, vx)))
     # α-renomme C → W pour s'aligner sur le binder existe_elimination
-    from bourbaki.logique.tactiques.tactiques_abrege_quantif import alpha_existe
+    from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import alpha_existe
     if W != "C":
         exW = N.modus_ponens(exW,
             equivalence_avant(alpha_existe("C", W, et(appartient(var("C"), vT), appartient(vx, var("C"))))))
@@ -312,7 +312,7 @@ def _preuve_pas(S, T, M="Mtk", F="Ftk", x="xtk", M1="M1tk", W="Wtk", M0="M0tk"):
     wit_M1 = N.loi_deduction(et(appartient(vM1, vT), inclus(vF, vM1)), concl_afterW)
     exM1_imp = existe_elimination(wit_M1, M1)             # (∃M1)(M1∈𝔗 et F⊂M1) ⇒ concl
     # exM1 a pour binder « M » (= Mtk) ; réaligne sur M1
-    from bourbaki.logique.tactiques.tactiques_abrege_quantif import alpha_existe
+    from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import alpha_existe
     corps_M1 = et(appartient(var(M1), vT), inclus(vF, var(M1)))
     if M != M1:
         exM1 = N.modus_ponens(exM1,
@@ -489,10 +489,10 @@ def _tukey_via_per_chaine(S, m, T, x, y, z, Y, M, hyp, H, Hcf, Hnv, Hcnv):
     body = N.loi_deduction(chaine(G, vS, vT, x, y, z), ex_maj)
     allT = N.generalisation(T, body)
     # α-renomme 𝔗 → C (binder canonique de est_inductif)
-    from bourbaki.logique.tactiques.tactiques_abrege2 import _peler_pourtout
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import _peler_pourtout
     _, corps_T = _peler_pourtout(allT.conclusion)
     if T != "C":
-        from bourbaki.logique.tactiques.tactiques_abrege_quantif import alpha_pour_tout
+        from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import alpha_pour_tout
         allT = N.modus_ponens(allT, equivalence_avant(alpha_pour_tout(T, "C", corps_T)))
     ind_S = conjonction_intro(ord_S, allT)                    # est_inductif(Incl,𝔖)
 

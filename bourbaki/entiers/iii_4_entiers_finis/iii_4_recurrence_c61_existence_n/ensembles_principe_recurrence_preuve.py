@@ -83,29 +83,29 @@ PREUVE (plus-petit-contre-exemple — Bourbaki justifie C61 par le bon ordre de 
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (
+from bourbaki.logique.i_1_termes_relations.formule import (
     Terme, var, app, egal, et, non, impl, equiv, appartient, existe, pourtout,
     inclus,
 )
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import (
     est_cardinal, inf_egal_card, inf_strict_card,
 )
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import est_fini, successeur, ZERO
 
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
     instancie, contraposition, equivalence_avant, equivalence_arriere, dne, dni,
     antecedent_consequent,
 )
-from bourbaki.logique.tactiques.tactiques_abrege_quantif import (
+from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import (
     existe_elimination, alpha_pour_tout, alpha_existe, congruence_existe,
 )
-from bourbaki.logique.tactiques.tactiques_abrege import a_implique_a
-from bourbaki.logique.tactiques.tactiques_abrege2 import ou_congruence
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import a_implique_a
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import ou_congruence
 
-from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie
+from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import symetrie
 
 from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_vide import non_vide_ssi_element
 from bourbaki.ordre.iii_1_relations_ordre.isomorphismes_ordre.ensembles_pont_binder import reecrire
@@ -251,7 +251,7 @@ def _eq_alpha_formule(f1, f2):
         return conjonction_intro(a_implique_a(f1), a_implique_a(f1))
     if f1.tag == "non" and f2.tag == "non":
         s = _eq_alpha_formule(f1.sous[0], f2.sous[0])
-        from bourbaki.logique.tactiques.tactiques_abrege2 import contraposition
+        from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import contraposition
         return conjonction_intro(contraposition(equivalence_arriere(s)),
                                  contraposition(equivalence_avant(s)))      # ¬A ⇔ ¬B
     if f1.tag == "ou" and f2.tag == "ou":
@@ -613,7 +613,7 @@ def _aligne_pourtout(thm_all, cible_all, src_binder):
     où corps_raw = le corps RAW de thm_all extrait par instancie(assume(.), src) [identité
     sur src ⇒ NON renommé].  Le sens AVANT de ce pont a son antécédent == thm_all.conclusion
     et son conséquent == cible_all EXACTEMENT (vérifié)."""
-    from bourbaki.logique.tactiques.tactiques_abrege_quantif import alpha_pour_tout
+    from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import alpha_pour_tout
     if thm_all.conclusion == cible_all:
         return thm_all
     dst = cible_all.sous[0].lieur                         # binder de (∀dst) = exists-node lieur

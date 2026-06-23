@@ -1,11 +1,11 @@
 """Tests — PRINCIPE DE RÉCURRENCE SUR LES ENSEMBLES FINIS (recurrence_finie)."""
-from bourbaki.logique.formule import var, appartient
+from bourbaki.logique.i_1_termes_relations.formule import var, appartient
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.entiers.iii_5_calcul_entiers.iii_5_1_somme_produit_entiers.ensembles_recurrence_finie import (
     recurrence_finie, recurrence_finie_enonce, _preuve_Q0, _preuve_step,
     _pas_ensemble, _Q,
 )
-import bourbaki.logique.noyau_abrege as N
+import bourbaki.logique.i_2_criteres_C.noyau.noyau_abrege as N
 
 
 # prédicat de test arbitraire P(t) := t ∈ a

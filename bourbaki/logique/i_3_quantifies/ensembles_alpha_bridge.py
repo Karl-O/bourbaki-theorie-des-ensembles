@@ -48,16 +48,16 @@ sous un terme.  Ce cas n'apparaît pas pour le verrou ℵ₀ (les atomes devienn
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (
+from bourbaki.logique.i_1_termes_relations.formule import (
     Formule, Terme, var, tau, subst_f, alpha_egal,
 )
-from bourbaki.logique import noyau_abrege as N
-from bourbaki.logique.tactiques.tactiques_abrege import a_implique_a, syllogisme
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import a_implique_a, syllogisme
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     conjonction_intro, equiv_neg, ou_congruence, equivalence_transitivite,
     equivalence_symetrie, equivalence_avant,
 )
-from bourbaki.logique.tactiques.tactiques_abrege_quantif import (
+from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import (
     congruence_existe, existe_elimination,
 )
 

@@ -15,9 +15,9 @@ Deux statuts :
 from __future__ import annotations
 
 from bourbaki.assemblage.assemblage import Assemblage, negation, disjonction, implication, est_lettre
-from bourbaki.logique.lecture import Signature, DEFAUT, depuis_assemblage, vers_assemblage
-from bourbaki.logique import noyau
-from bourbaki.logique.noyau import Theoreme
+from bourbaki.logique.i_1_termes_relations.lecture import Signature, DEFAUT, depuis_assemblage, vers_assemblage
+from bourbaki.logique.i_2_criteres_C.noyau import noyau
+from bourbaki.logique.i_2_criteres_C.noyau.noyau import Theoreme
 
 
 # ── Décomposition utilitaire ──────────────────────────────────────────────────

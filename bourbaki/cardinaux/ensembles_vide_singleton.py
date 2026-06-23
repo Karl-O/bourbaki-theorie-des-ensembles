@@ -20,14 +20,14 @@ Lemmes (chacun CLOS, certifié noyau, réutilisable) :
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import var, egal, non, et, appartient, existe
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_1_termes_relations.formule import var, egal, non, et, appartient, existe
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.tactiques.tactiques_abrege2 import (instancie, equivalence_avant, equivalence_arriere,
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (instancie, equivalence_avant, equivalence_arriere,
                                conjonction_elim_gauche, conjonction_elim_droite,
                                conjonction_intro)
-from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie, composer_egalites
-from bourbaki.logique.tactiques.tactiques_abrege_quantif import existe_elimination
+from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import symetrie, composer_egalites
+from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import existe_elimination
 from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import extensionnalite_appliquee
 from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de, equipotent
 

@@ -39,14 +39,14 @@ THÉORÈMES DIRECTS certifiés par le noyau :
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import var, egal, et, existe, pourtout, appartient
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_1_termes_relations.formule import var, egal, et, existe, pourtout, appartient
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.tactiques.tactiques_abrege import a_implique_a
-from bourbaki.logique.tactiques.tactiques_abrege2 import (conjonction_intro, conjonction_elim_gauche,
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import a_implique_a
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (conjonction_intro, conjonction_elim_gauche,
                                conjonction_elim_droite, equivalence_transitivite,
                                instancie)
-from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie as eg_symetrie
+from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import symetrie as eg_symetrie
 from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de
 from bourbaki.cardinaux.ensembles_equipotence import (diagonale_fonctionnelle, diagonale_domaine,
                                     diagonale_injective, diagonale_image,
@@ -60,7 +60,7 @@ def compatible(f, e, r, rp, x="a", y="b"):
     Déf. III.1.3 pour un ordre : x≤y et f(x)≤f(y) équivalentes.)"""
     vx, vy = var(x), var(y)
     fx, fy = E.valeur(f, vx), E.valeur(f, vy)
-    from bourbaki.logique.formule import impl, equiv
+    from bourbaki.logique.i_1_termes_relations.formule import impl, equiv
     return pourtout(x, pourtout(y,
         impl(et(appartient(vx, e), appartient(vy, e)),
              equiv(r(vx, vy), rp(fx, fy)))))

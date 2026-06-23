@@ -12,7 +12,7 @@ MÉMOÏSÉE (lru_cache) ; un fixture session-scope la déclenche une seule fois 
 tests réutilisent les théorèmes."""
 import pytest
 
-from bourbaki.logique.formule import (
+from bourbaki.logique.i_1_termes_relations.formule import (
     var, tau, equiv, impl, appartient, pourtout, libres_t,
 )
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
@@ -91,7 +91,7 @@ def test_appartenance_NN_derivee_de_N_existe(ap):
     """La caractérisation est DÉRIVÉE de N_existe (coll), PAS supposée : elle utilise
     l'axiome-τ existe_temoin dont l'antécédent est EXACTEMENT coll(x, Fini x)."""
     from bourbaki.entiers.iii_6_infinis.iii_6_1_n_objet_existence.ensembles_N_collectivise import _coll_fini
-    from bourbaki.logique import noyau_abrege as N
+    from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
     R = _coll_fini("x").sous[0]
     ax_tau = N.existe_temoin(R, "y")                       # (∃y)R ⇒ (τy R | y)R
     # l'antécédent de l'axiome-τ EST coll(x, Fini x), la chose prouvée par N_existe

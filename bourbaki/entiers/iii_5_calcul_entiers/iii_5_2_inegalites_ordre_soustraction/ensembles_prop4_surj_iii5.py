@@ -29,18 +29,18 @@ ROUTE
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (
+from bourbaki.logique.i_1_termes_relations.formule import (
     Terme, var, egal, et, impl, ou, existe, appartient,
 )
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 
-from bourbaki.logique.tactiques.tactiques_abrege import a_implique_a
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import a_implique_a
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
     instancie, equivalence_avant, equivalence_arriere, cas,
 )
-from bourbaki.logique.tactiques.tactiques_abrege_egalite import (
+from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import (
     symetrie, composer_egalites,
 )
 
@@ -285,7 +285,7 @@ def prop4_surjective(a="aP4surj", b="bP4surj", y="yP4surj", u="uP4surj"):
 
     # réaliser le témoin u := τc( card c et y=a+c ) (τ canonique du corps RENFORCÉ,
     # qui PORTE est_cardinal — ce n'est donc PAS diff_somme, dont le corps diffère).
-    from bourbaki.logique.formule import tau
+    from bourbaki.logique.i_1_termes_relations.formule import tau
     body = et(est_cardinal(var(cc)), egal(vy, somme_cardinale_binaire(va, var(cc))))
     wu = tau(cc, body)                                          # u = τc(card c et y=a+c)
     realise = N.modus_ponens(exists, N.existe_temoin(body, cc)) # (card u et y = a+u)

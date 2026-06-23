@@ -18,16 +18,16 @@ bijection  K : B → ∅⊔B,  v ↦ (v, 1),  de graphe  K := graphe_terme(B, (k
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (Terme, var, egal, et, non, appartient, existe, subst_t, subst_f)
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_1_termes_relations.formule import (Terme, var, egal, et, non, appartient, existe, subst_t, subst_f)
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.tactiques.tactiques_abrege import a_implique_a, syllogisme
-from bourbaki.logique.tactiques.tactiques_abrege2 import (conjonction_intro, conjonction_elim_gauche,
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import a_implique_a, syllogisme
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (conjonction_intro, conjonction_elim_gauche,
                                conjonction_elim_droite, equivalence_avant,
                                equivalence_arriere, equivalence_transitivite,
                                instancie, cas)
-from bourbaki.logique.tactiques.tactiques_abrege_egalite import (symetrie, composer_egalites, congruence_terme)
-from bourbaki.logique.tactiques.tactiques_abrege_quantif import (existe_elimination, alpha_existe)
+from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import (symetrie, composer_egalites, congruence_terme)
+from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import (existe_elimination, alpha_existe)
 from bourbaki.ensembles.fonctions.ii_3_6_fonction_terme.ensembles_fonction_terme import (membre_graphe_terme, graphe_terme_fonctionnel)
 from bourbaki.cardinaux.ensembles_cantor import (graphe_terme_domaine, graphe_terme_valeur)
 from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import couple_egal_implique_composantes
@@ -138,7 +138,7 @@ def neutre_graphe_image(b="B"):
     fwd_full = syllogisme(equivalence_avant(img_car), fwd)  # z∈K⟨B⟩ ⇒ z∈∅⊔B
 
     # ── ⇐ : z∈∅⊔B ⇒ z∈K⟨B⟩ ────────────────────────────────────────────────────
-    from bourbaki.logique.formule import ou
+    from bourbaki.logique.i_1_termes_relations.formule import ou
     dec_z0 = N.modus_ponens(N.assume(appartient(vz, AB)),
                             equivalence_avant(membre_somme_caracterise(vide, vb, vz)))
     exG0, exD0 = dec_z0.conclusion.sous[0], dec_z0.conclusion.sous[1]
@@ -170,7 +170,7 @@ def neutre_graphe_image(b="B"):
         # z=(d,1)=T[d]
         z_eq_Td = z_eq                                     # T[d]=(d,1) littéralement
         mem_d = membre_graphe_terme(vb, T, "td", "z", "k", "yb")   # ((td,z)∈K)⇔(td∈B et z=T[td])
-        from bourbaki.logique.tactiques.tactiques_abrege2 import instancie as _inst
+        from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import instancie as _inst
         mem_dd = _inst(N.generalisation("td", mem_d), vd)  # ((d,z)∈K)⇔(d∈B et z=(d,1))
         dz_in_K = N.modus_ponens(conjonction_intro(d_in, z_eq_Td),
                                  equivalence_arriere(mem_dd))   # (d,z)∈K

@@ -8,7 +8,7 @@ On certifie (symboliquement, A/B génériques) :
 Chaque test vérifie que la conclusion certifiée par le noyau EST EXACTEMENT la
 cible Bourbaki, et la clôture.
 """
-from bourbaki.logique.formule import var, non, egal
+from bourbaki.logique.i_1_termes_relations.formule import var, non, egal
 from bourbaki.cardinaux import ensembles_cardinaux_bornes_somme as B
 from bourbaki.cardinaux.ensembles_cardinaux import (inf_egal_card, cardinal,
                                est_injection_de)
@@ -79,13 +79,13 @@ def test_produit_injection_temoin():
     AB = E.produit(var("A"), var("B"))
     assert t.conclusion == est_injection_de(DX, var("A"), AB)
     # hypothèse résiduelle : m ∈ B
-    from bourbaki.logique.formule import appartient
+    from bourbaki.logique.i_1_termes_relations.formule import appartient
     assert t.hypotheses == frozenset({appartient(var("m"), var("B"))})
 
 
 def test_inf_egal_produit():
     """⊢ ¬(B=∅) ⇒ (A ≤ A×B)   (« a ≤ a·b si b≠0 », E.III.3.2)."""
-    from bourbaki.logique.formule import impl
+    from bourbaki.logique.i_1_termes_relations.formule import impl
     t = B.inf_egal_produit("A", "B")
     AB = E.produit(var("A"), var("B"))
     cible = impl(non(egal(var("B"), E.VIDE)), inf_egal_card(var("A"), AB))
@@ -96,7 +96,7 @@ def test_inf_egal_produit():
 
 def test_cardinal_inf_egal_produit():
     """⊢ ¬(B=∅) ⇒ (Card(A) ≤ Card(A)×B)   (= a ≤ a·b si b≠0, sur les cardinaux)."""
-    from bourbaki.logique.formule import impl
+    from bourbaki.logique.i_1_termes_relations.formule import impl
     t = B.cardinal_inf_egal_produit("A", "B")
     cA = cardinal(var("A"))
     AB = E.produit(cA, var("B"))

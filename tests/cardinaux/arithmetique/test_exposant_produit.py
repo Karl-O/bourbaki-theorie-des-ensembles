@@ -4,8 +4,8 @@ PALIERS SÛRS certifiés par le noyau (la bijection de currying complète est RE
 cf. docstring du module).  On vérifie que chaque lemme livré est un Theoreme du noyau,
 CLOS, et que sa conclusion a la FORME exacte attendue (définitions / caractérisations
 membership / réduction à l'équipotence)."""
-from bourbaki.logique.formule import var, egal, et, impl, equiv, inclus, appartient, existe
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_1_termes_relations.formule import var, egal, et, impl, equiv, inclus, appartient, existe
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import cardinal, equipotent
 from bourbaki.cardinaux.arithmetique import ensembles_exposant_produit as XP

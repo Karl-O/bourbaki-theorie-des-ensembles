@@ -12,16 +12,16 @@ On simplifie ¬((x,y)=(p,p)) sous x=y en ¬(x=p) (et de même q).
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import Terme, var, egal, et, ou, non, appartient
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_1_termes_relations.formule import Terme, var, egal, et, ou, non, appartient
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.tactiques.tactiques_abrege import a_implique_a
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import a_implique_a
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
     equivalence_avant, equivalence_arriere, equivalence_transitivite,
     equivalence_symetrie, et_congruence_gauche, et_congruence_droite,
     ou_congruence, instancie, cas)
-from bourbaki.logique.tactiques.tactiques_abrege_egalite import (
+from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import (
     symetrie, composer_egalites, congruence_terme)
 from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import (
     couple_egal_implique_composantes, membre_paire_gauche, membre_paire_droite)
@@ -103,7 +103,7 @@ def transpo_membre(s="S", p="p", q="q", x="x", y="y"):
     # 2c. z∈{(p,p),(q,q)} ⇔ (z=(p,p) ou z=(q,q))
     paire_enl = _paire_couple_membre(z, E.couple(vp, vp), E.couple(vq, vq))
     # ¬(z∈enl) ⇔ ¬(z=(p,p) ou z=(q,q)) ⇔ (¬(z=(p,p)) et ¬(z=(q,q)))   [de Morgan]
-    from bourbaki.logique.tactiques.tactiques_abrege2 import equiv_neg, demorgan_ou
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import equiv_neg, demorgan_ou
     neg_paire = equiv_neg(paire_enl)                        # ¬(z∈enl) ⇔ ¬(z=(p,p) ou z=(q,q))
     dem = demorgan_ou(egal(z, E.couple(vp, vp)), egal(z, E.couple(vq, vq)))  # ¬(.. ou ..) ⇔ (¬.. et ¬..)
     neg_enl = equivalence_transitivite(neg_paire, dem)      # ¬(z∈enl) ⇔ (¬(z=(p,p)) et ¬(z=(q,q)))
@@ -173,7 +173,7 @@ def _neg_couple_eq_via_xy(vx, vy, va, thm_xy):
     """{x=y} ⊢ ¬((x,y)=(a,a)) ⇔ ¬(x=a).   (thm_xy : preuve de x=y, déjà sous hyp.)
 
     (x,y)=(a,a) ⇔ (x=a et y=a) [Prop 1] ; sous x=y, (x=a et y=a) ⇔ x=a ; congruence ¬."""
-    from bourbaki.logique.tactiques.tactiques_abrege2 import equiv_neg
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import equiv_neg
     eq_simp = _eq_couple_simplifie(vx, vy, va)              # (x,y)=(a,a) ⇔ (x=a et y=a)
     # sous x=y : (x=a et y=a) ⇔ x=a, en utilisant thm_xy (déjà dérivé sous hyp)
     h1 = N.assume(et(egal(vx, va), egal(vy, va)))

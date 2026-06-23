@@ -71,13 +71,13 @@ B⊆a, ¬(pr₂h'=a) }.  NON vacueux.  NE MODIFIE AUCUN fichier existant.
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (
+from bourbaki.logique.i_1_termes_relations.formule import (
     Terme, var, egal, et, ou, non, appartient, existe, inclus,
 )
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis import ensembles_ordre_vocab as V
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite, instancie,
     equivalence_avant, cas,
 )
@@ -155,7 +155,7 @@ def _hyp_porte(hyp, nom_graphe):
     """Teste si l'hypothèse bo `hyp` (forme est_bien_ordonne(_R_de(nom),·)) porte le
     graphe `nom_graphe` (R ou Rp).  Repère par appartenance de var(nom_graphe) aux
     variables libres de hyp."""
-    from bourbaki.logique.formule import libres_f
+    from bourbaki.logique.i_1_termes_relations.formule import libres_f
     return nom_graphe in libres_f(hyp)
 
 
@@ -283,7 +283,7 @@ def pr2_eq_seg_exists(Ro="Ro", a="asr", B="Bsr"):
     avec pr₂h'=seg(Ro,a,x) ; x∈a∖pr₂h' ⇒ x∈a (AXIOME_DIFF).  On bâtit (∃t)(t∈a et
     pr₂h'=seg(Ro,a,t)).  theorie=22."""
     from bourbaki.cardinaux import ensembles_trichotomie_prop1 as P1
-    from bourbaki.logique.tactiques.tactiques_abrege_quantif import existe_elimination
+    from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import existe_elimination
     va = _t(a)
     vh = h_prime(Ro, a, B)
     imgh = E.img(vh)
@@ -348,7 +348,7 @@ def realise_segment_pour_B(Ro="Ro", a="asr", B="Bsr"):
     (pr2_eq_seg_exists, branche pr₂h'≠a) : pour le témoin t, pr₂h'=seg(Ro,a,t) réécrit
     (Leibniz) Eq(B,pr₂h') en Eq(B,seg(Ro,a,t)).  C'est la conclusion de subset_realise_
     segment POUR CE B, sous le bon ordre + les 2 conditions de branche.  theorie=22."""
-    from bourbaki.logique.tactiques.tactiques_abrege_quantif import existe_elimination
+    from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import existe_elimination
     va = _t(a)
     vB = _t(B)
     vh = h_prime(Ro, a, B)
@@ -391,7 +391,7 @@ def dom_eq_B_depuis_branche(Ro="Ro", a="asr", B="Bsr"):
     🎯 La MAXIMALITÉ donne ( dom h'=B ) ou ( pr₂h'=a ) (maximalite_h_prime, sous {bo,B⊆a}).
     Sous ¬(pr₂h'=a), l'analyse de cas (cas) : branche pr₂h'=a ⇒ ex falso ⇒ dom h'=B ;
     branche dom h'=B ⇒ direct.  theorie=22."""
-    from bourbaki.logique.tactiques.tactiques_abrege import a_implique_a
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import a_implique_a
     vh = h_prime(Ro, a, B)
     domh, imgh = E.dom(vh), E.img(vh)
     vB, va = _t(B), _t(a)
@@ -455,8 +455,8 @@ def equipotent_implique_inf_egal(X="X", Y="Y"):
     (func∧dom=X)∧injective_dans(F,X)∧image(F,X)=Y ; de image(F,X)=Y on tire
     image(F,X)⊆Y (Leibniz sur image⊆image réflexif), d'où est_injection_de(F,X,Y),
     puis (∃F) = inf_egal_card(X,Y) ; ∃-élim du témoin de bijection.  theorie=22."""
-    from bourbaki.logique.tactiques.tactiques_abrege import a_implique_a
-    from bourbaki.logique.tactiques.tactiques_abrege_quantif import existe_elimination
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import a_implique_a
+    from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import existe_elimination
     from bourbaki.cardinaux.ensembles_cardinaux import (
         est_bijection_de, est_injection_de, inf_egal_card,
     )
@@ -564,7 +564,7 @@ def realise_segment_pour_B_clean(Ro="Ro", a="asr", B="Bsr"):
     CLOSE.  (Le cas Eq(B,a), notamment B=a, est précisément l'exception où aucun
     segment PROPRE ne convient.)"""
     from bourbaki.cardinaux.ensembles_cardinaux import equipotent as _eq
-    from bourbaki.logique.tactiques.tactiques_abrege2 import contraposition
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import contraposition
     va, vB = _t(a), _t(B)
     vh = h_prime(Ro, a, B)
     imgh = E.img(vh)

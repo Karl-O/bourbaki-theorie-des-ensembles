@@ -10,7 +10,7 @@ Couvre les PALIERS CLOS du module ensembles_prop9_close :
 Les représentations τ imbriquées rendent certains théorèmes lents (cf. MEMORY) ;
 les tests les plus lourds sont marqués pour exécution ciblée si besoin.
 """
-from bourbaki.logique.formule import var, egal, et, impl, appartient, inclus
+from bourbaki.logique.i_1_termes_relations.formule import var, egal, et, impl, appartient, inclus
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import (
     inf_egal_card, est_injection_de, equipotent, cardinal)
@@ -135,7 +135,7 @@ def test_assembleur_cantor_bernstein():
     inf_egal_card sont fournies.  Ici les deux directions sont SUPPOSÉES : on vérifie
     que l'assembleur atteint EXACTEMENT la cible (conclusion == cible_prop9_exp_somme)
     et que ses deux seules hypothèses sont les deux directions."""
-    from bourbaki.logique import noyau_abrege as N
+    from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
     va, vb, vc = var("A"), var("B"), var("C")
     dom = P.domaine_phi(va, vb, vc)
     cod = P.codomaine_phi(va, vb, vc)
@@ -149,7 +149,7 @@ def test_assembleur_cantor_bernstein():
 def test_direction_A_est_une_hypothese_du_final():
     """La DIRECTION A (inf_egal_phi, CLOSE) DÉCHARGE l'une des deux hypothèses de
     l'assembleur : il ne resterait QUE la Direction B (ψ) à clore."""
-    from bourbaki.logique import noyau_abrege as N
+    from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
     va, vb, vc = var("A"), var("B"), var("C")
     dom = P.domaine_phi(va, vb, vc)
     cod = P.codomaine_phi(va, vb, vc)

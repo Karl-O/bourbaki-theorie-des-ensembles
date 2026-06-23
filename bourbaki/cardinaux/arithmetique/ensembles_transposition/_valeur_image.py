@@ -11,18 +11,18 @@ les égalités q=q, p=p étant réflexives.  De là τ(q)=p (fonctionnalité + C
 surjectivité (tout y∈S est atteint : p←q, q←p, sinon y←y)."""
 from __future__ import annotations
 
-from bourbaki.logique.formule import (Terme, var, egal, et, ou, non, appartient,
+from bourbaki.logique.i_1_termes_relations.formule import (Terme, var, egal, et, ou, non, appartient,
                                        existe)
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.tactiques.tactiques_abrege import a_implique_a
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import a_implique_a
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
     equivalence_avant, equivalence_arriere, equivalence_transitivite,
     instancie, cas, tiers_exclu)
-from bourbaki.logique.tactiques.tactiques_abrege_egalite import (
+from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import (
     symetrie, composer_egalites)
-from bourbaki.logique.tactiques.tactiques_abrege_quantif import existe_elimination
+from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import existe_elimination
 from bourbaki.ensembles.fonctions.ii_3_4_fonctions_valeur.ensembles_fonctions import valeur_caracterisation
 from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import egalite_par_extension
 from bourbaki.cardinaux.arithmetique.ensembles_transposition._membre import (
@@ -91,7 +91,7 @@ def transpo_image(s="S", p="p", q="q"):
     z∈τ⟨S⟩ ⇔ (∃t)(t∈S et (t,z)∈τ) ⇔ z∈S, par extension.
       ⊂ : (t,z)∈τ ⇒ FIX(t,z) (z=t∈S) ou ECH(t,z) (z=q ou z=p, ∈S) ;
       ⊃ : z∈S est atteint — z=p←q (q,p)∈τ ; z=q←p (p,q)∈τ ; sinon z←z (z,z)∈τ (FIX)."""
-    from bourbaki.logique.tactiques.tactiques_abrege_quantif import (alpha_existe,
+    from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import (alpha_existe,
                                                                      congruence_existe)
     vS, vp, vq = _t(s), _t(p), _t(q)
     vz, vt, vy = var("z"), var("t"), var("y")

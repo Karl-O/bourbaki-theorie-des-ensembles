@@ -12,11 +12,11 @@ Preuve (DOUBLE INCLUSION, SANS récurrence, INCONDITIONNELLE) :
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (var, et, impl, appartient, egal, pourtout)
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_1_termes_relations.formule import (var, et, impl, appartient, egal, pourtout)
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.tactiques.tactiques_abrege2 import (instancie, conjonction_intro)
-from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (instancie, conjonction_intro)
+from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import symetrie
 from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import extensionnalite_appliquee
 from bourbaki.ensembles.familles.ii_5_produit_famille.ii_5_6_7_algebre_produit.ensembles_produit_props2 import facteurs_egaux_donne_inclus
 
@@ -49,8 +49,8 @@ def _symetrise_sous_quantif(h, vf, vg, vI, iota="i"):
     imp_a = N.loi_deduction(appartient(va, vI), eq_yx)   # a∈I ⇒ Y_a=X_a
     forall_a = N.generalisation("a", imp_a)              # (∀a)(a∈I ⇒ Y_a=X_a)
     # α-renommer le liant « a » → « i » pour coïncider avec l'hypothèse attendue
-    from bourbaki.logique.tactiques.tactiques_abrege_quantif import alpha_pour_tout
-    from bourbaki.logique.tactiques.tactiques_abrege2 import equivalence_avant
+    from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import alpha_pour_tout
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import equivalence_avant
     membre = impl(appartient(va, vI),
                   egal(E.valeur_famille(vg, va), E.valeur_famille(vf, va)))
     return N.modus_ponens(forall_a,

@@ -42,14 +42,14 @@ RÉSULTATS :
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (
+from bourbaki.logique.i_1_termes_relations.formule import (
     Terme, var, egal, et, impl, existe, tau,
 )
-from bourbaki.logique import noyau_abrege as N
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite, instancie,
 )
-from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie
+from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import symetrie
 
 from bourbaki.cardinaux.ensembles_cardinaux import (
     est_cardinal, cardinal, inf_egal_card,
@@ -225,7 +225,7 @@ def soustraction_unicite(a="a", c="c", cp="cp", b="b"):
 
 def _trans_egal(h_xy, h_yz, x, y, z):
     """De ⊢ X=Y et ⊢ Y=Z produire ⊢ X=Z (Leibniz : réécrire Y↦Z dans X=Y)."""
-    from bourbaki.logique.tactiques.tactiques_abrege2 import equivalence_avant
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import equivalence_avant
     equiv = N.modus_ponens(h_yz, N.s6(y, z, "w", egal(x, var("w"))))   # (X=Y) ⇔ (X=Z)
     return N.modus_ponens(h_xy, equivalence_avant(equiv))
 

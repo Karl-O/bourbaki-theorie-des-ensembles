@@ -1,5 +1,5 @@
 """Tests §III — PONT liant-valeur j ↔ y (alpha_tau, débloque la chaîne du Lemme 1)."""
-from bourbaki.logique.formule import var, egal
+from bourbaki.logique.i_1_termes_relations.formule import var, egal
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ordre.iii_1_relations_ordre.isomorphismes_ordre import ensembles_valeur_bridge as B
 

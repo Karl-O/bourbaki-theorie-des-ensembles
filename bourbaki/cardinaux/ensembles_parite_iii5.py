@@ -22,16 +22,16 @@ LEMMES (theorie=22, noyau intact) :
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (
+from bourbaki.logique.i_1_termes_relations.formule import (
     Terme, var, egal, et, ou, non, impl, existe, pourtout,
 )
-from bourbaki.logique import noyau_abrege as N
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite, instancie,
     equivalence_avant, equivalence_arriere, cas,
 )
-from bourbaki.logique.tactiques.tactiques_abrege_quantif import existe_elimination
-from bourbaki.logique.tactiques.tactiques_abrege_egalite import (
+from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import existe_elimination
+from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import (
     symetrie, composer_egalites, congruence_terme,
 )
 
@@ -476,7 +476,7 @@ def _ex_falso(thm_a, thm_na, cible):
 
 def _refute_self(thm_P_imp_notP):
     """De ⊢ (P ⇒ ¬P) déduit ⊢ ¬P."""
-    from bourbaki.logique.tactiques.tactiques_abrege2 import antecedent_consequent
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import antecedent_consequent
     P, notP = antecedent_consequent(thm_P_imp_notP.conclusion)
     return N.modus_ponens(thm_P_imp_notP, N.s1(notP))
 
@@ -651,7 +651,7 @@ def _pni_step(a="apni"):
     imp_bne = N.loi_deduction(non(egal(vb, ZERO)), contra_bne)
 
     # tiers exclu sur (b=0) : combine imp_b0 et imp_bne
-    from bourbaki.logique.tactiques.tactiques_abrege2 import tiers_exclu
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import tiers_exclu
     te = tiers_exclu(egal(vb, ZERO))                   # (b=0) ou ¬(b=0)
     res_ne = cas(te, imp_b0, imp_bne)                  # falso_target = ¬(2(a+1)=succ 2b)
 
@@ -1086,7 +1086,7 @@ def impair_fois_impair(a="aifi", b="bifi"):
     cible = est_impair_propre(produit_cardinal_binaire(va, vb))
 
     # impair_decompose(a) ⇒ ∃kid (Fini kid et a=succ 2kid) ; idem b. α-renomme kid→iifi/jifi.
-    from bourbaki.logique.tactiques.tactiques_abrege_quantif import alpha_existe
+    from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import alpha_existe
     deca0 = N.modus_ponens(conjonction_intro(fa, impa), impair_decompose(a))
     decb0 = N.modus_ponens(conjonction_intro(fb, impb), impair_decompose(b))
     body_a = et(est_fini(var("kid")), egal(va, successeur(deux_fois(var("kid")))))

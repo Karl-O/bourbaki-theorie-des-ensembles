@@ -10,12 +10,12 @@ theorie_ensembles() INCHANGÉE = 22 ; aucun axiome ajouté.
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import Terme, var, appartient, et, non
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_1_termes_relations.formule import Terme, var, appartient, et, non
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import _instance_reunion, egalite_par_extension
-from bourbaki.logique.tactiques.tactiques_abrege import a_implique_a
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import a_implique_a
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     conjonction_intro, et_congruence_droite, et_congruence_gauche,
     equivalence_transitivite, equivalence_symetrie, assoc_et, demorgan_ou,
     equiv_neg, instancie,

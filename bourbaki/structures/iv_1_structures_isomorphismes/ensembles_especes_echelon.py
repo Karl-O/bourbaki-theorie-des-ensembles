@@ -30,7 +30,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Sequence, Tuple
 
-from bourbaki.logique.formule import app
+from bourbaki.logique.i_1_termes_relations.formule import app
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 
 

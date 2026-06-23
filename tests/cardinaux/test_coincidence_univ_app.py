@@ -4,7 +4,7 @@ Vérifie que coincidence_univ_close_isos est ramené à EXACTEMENT la prémisse 
 (isos/func/dom + segments + bons ordres + inclus(S1,S2) + 2 inclusions de graphe),
 que la conclusion est la cible, que theorie=22, et que le séquent est non vacueux.
 """
-from bourbaki.logique.formule import afficher_f
+from bourbaki.logique.i_1_termes_relations.formule import afficher_f
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_coincidence_univ_app import (
     coincidence_univ_app,
@@ -48,7 +48,7 @@ def test_hypotheses_sont_la_premisse_propre():
     assert hyps == premisse
     assert len(hyps) == 14
     # le bon ordre est AMBIANT VRAI : bo(R,E)+bo(R',F), JAMAIS bo sur un segment (propre)
-    from bourbaki.logique.formule import var, appartient, inclus
+    from bourbaki.logique.i_1_termes_relations.formule import var, appartient, inclus
     Rf = lambda a, b: appartient(E.couple(a, b), var("R"))
     Rpf = lambda a, b: appartient(E.couple(a, b), var("Rp"))
     img = E.image(var("phi2"), var("S1"))
@@ -75,7 +75,7 @@ def test_reciproque_inclusion_monotone_close():
 
 def test_reciproque_inclus_produit_miroir():
     """reciproque(G) ⊂ B×A sous la seule hyp forward G ⊂ A×B."""
-    from bourbaki.logique.formule import var, inclus
+    from bourbaki.logique.i_1_termes_relations.formule import var, inclus
     p = reciproque_inclus_produit_miroir(var("G"), var("A"), var("B"))
     assert p.conclusion == inclus(E.reciproque(var("G")), E.produit(var("B"), var("A")))
     assert set(p.hypotheses) == {inclus(var("G"), E.produit(var("A"), var("B")))}

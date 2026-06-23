@@ -52,24 +52,24 @@ SALVAGE GRADUÉ — état des paliers (voir le rapport / les __all__) :
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (
+from bourbaki.logique.i_1_termes_relations.formule import (
     Terme, var, app, egal, et, ou, non, impl, equiv, appartient, existe, pourtout,
     subst_f,
 )
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import (
     est_cardinal, cardinal, inf_egal_card, inf_strict_card,
 )
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import est_fini, successeur, ZERO
 
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
     contraposition, cas, instancie, equivalence_avant, equivalence_arriere,
     dni, dne,
 )
-from bourbaki.logique.tactiques.tactiques_abrege_quantif import existe_elimination
-from bourbaki.logique.tactiques.tactiques_abrege import syllogisme, a_implique_a
+from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import existe_elimination
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import syllogisme, a_implique_a
 
 
 def _t(t):
@@ -98,7 +98,7 @@ def _ex_falso(thm_a, thm_na, cible):
 #  l'image ⊂ ∅, impossible.  Donc b ⊂ ∅, b = ∅ = 0 (cardinal_vide_egale_vide), et
 #  Fini b = Fini 0 (fini_zero).
 # ════════════════════════════════════════════════════════════════════════════
-from bourbaki.logique.formule import inclus
+from bourbaki.logique.i_1_termes_relations.formule import inclus
 
 
 def _dom_membre(F, z, y="y"):
@@ -144,7 +144,7 @@ def _injection_dans_vide_domaine_vide(F, b, z="z", y="y"):
                                   appartient(E.couple(var("x"), vy), vF)), vz, "x"))  # (∃x)(x∈b et (x,y)∈F)
     y_in_img = N.modus_ponens(ex_x, equivalence_arriere(_image_membre(vF, vb, vy)))  # y∈image(F,b)
     # y∈∅  via image⊂∅  : inclus(image,∅) = (∀z)(z∈image ⇒ z∈∅) ; instancie au terme y
-    from bourbaki.logique.tactiques.tactiques_abrege2 import instanciation
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import instanciation
     incl_body = impl(appartient(var("z"), img), appartient(var("z"), E.VIDE))
     inst = instanciation(incl_body, vy, "z")               # (∀z)(...) ⇒ (y∈image ⇒ y∈∅)
     y_imp = N.modus_ponens(h_img_sub, inst)                # (y∈image ⇒ y∈∅)
@@ -181,7 +181,7 @@ def b_le_0_implique_egal_0(b="b", F="F"):
     from bourbaki.cardinaux.arithmetique.ensembles_exposant_cardinal import (
         inclus_vide_implique_egal_vide,
     )
-    from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie, composer_egalites
+    from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import symetrie, composer_egalites
     vb, vF = _t(b), _t(F)
     img = E.image(vF, vb)
     # Card∅ = ∅  (donc ZERO = ∅)
@@ -221,7 +221,7 @@ def base_P0(b="b"):
     b_eq_0 = N.modus_ponens(h_le, b_le_0_implique_egal_0(b))   # b = 0
     fini0 = fini_zero()                                    # Fini(0)
     # 0 = b  (symétrie) → Fini(0) ⇔ Fini(b)  ;  réécrit le sujet de Fini.
-    from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie
+    from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import symetrie
     zero_eq_b = N.modus_ponens(b_eq_0, symetrie(vb, ZERO)) # 0 = b
     leib = N.s6(ZERO, vb, "w", est_fini(var("w")))         # (0=b) ⇒ (Fini 0 ⇔ Fini b)
     eqv = N.modus_ponens(zero_eq_b, leib)                  # Fini(0) ⇔ Fini(b)
@@ -275,7 +275,7 @@ def pas_recurrence(c="c", b="b"):
     from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_fini_successeur import (
         fini_implique_fini_successeur, cardinal_de_cardinal,
     )
-    from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie
+    from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import symetrie
     vc, vb = _t(c), var(b)
     succ_c = successeur(vc)
     Pc = _P(vc, b)
@@ -506,7 +506,7 @@ def cardinaux_bien_ordonnes(a="a", S="S", m="m", x="x"):
     Énoncé fourni comme cible structurelle ; socle du critère C61."""
     va, vS, vm, vx = _t(a), var(S), var(m), var(x)
     interv = E.intervalle_entiers(ZERO, va)               # [0, a]
-    from bourbaki.logique.formule import inclus
+    from bourbaki.logique.i_1_termes_relations.formule import inclus
     hyp = et(inclus(vS, interv), non(egal(vS, E.VIDE)))   # S ⊂ [0,a] et S ≠ ∅
     plus_petit = existe(m, et(appartient(vm, vS),
         pourtout(x, impl(appartient(vx, vS), inf_egal_card(vm, vx)))))

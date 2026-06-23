@@ -6,7 +6,7 @@ INVARIANT vérifié partout : theorie_ensembles() = 22.
 Anti-tautologie : la conclusion seg(t)⊂seg(t') (et la forme ∀ seg_monotone) n'est
 JAMAIS l'une des hypothèses.  Hypothèses EXACTES contrôlées.
 """
-from bourbaki.logique.formule import (
+from bourbaki.logique.i_1_termes_relations.formule import (
     var, appartient, inclus, egal, et, impl, non, pourtout, libres_f,
 )
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E

@@ -2,7 +2,7 @@
 transport, automorphisme, structures isomorphes.   REPRÉSENTATIONNEL pour les
 définitions ; LEMMES DIRECTS clos pour transport_egalite / transport_donne_isomorphisme.
 Fidèle aux énoncés VERBATIM de IV.1.4–IV.1.5 ; theorie_ensembles() = 22 axiomes."""
-from bourbaki.logique.formule import var, egal, et, existe, appartient
+from bourbaki.logique.i_1_termes_relations.formule import var, egal, et, existe, appartient
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de
 from bourbaki.structures.iv_1_structures_isomorphismes import ensembles_especes_echelon as Ech
@@ -97,7 +97,7 @@ def test_transport_donne_isomorphisme_close():
     thm = Sp.transport_donne_isomorphisme(sigma, [vf], [vE], [vEp], vU)
     assert thm.est_clos
     # conclusion : (f bij de E sur E') ⇒ est_isomorphisme(Σ,f,E,E',U,U')
-    from bourbaki.logique.formule import impl
+    from bourbaki.logique.i_1_termes_relations.formule import impl
     Up = Sp.structure_transportee(sigma, [vf], vU)
     bij = est_bijection_de(vf, vE, vEp)
     iso = Sp.est_isomorphisme(sigma, [vf], [vE], [vEp], vU, Up)

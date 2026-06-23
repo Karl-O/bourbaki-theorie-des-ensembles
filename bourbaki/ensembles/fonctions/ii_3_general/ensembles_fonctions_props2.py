@@ -42,16 +42,16 @@ est_surjective(F,A,B) = (F⟨A⟩=B), est_bijective(F,A,B) = injective_dans(F,A)
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (Terme, var, egal, et, impl, appartient,
+from bourbaki.logique.i_1_termes_relations.formule import (Terme, var, egal, et, impl, appartient,
                                        existe, equiv)
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.tactiques.tactiques_abrege2 import (conjonction_intro,
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (conjonction_intro,
                                conjonction_elim_gauche, conjonction_elim_droite,
                                equivalence_transitivite, equivalence_symetrie,
                                equivalence_avant, et_congruence_droite,
                                et_congruence_gauche, assoc_et, instancie)
-from bourbaki.logique.tactiques.tactiques_abrege_quantif import (congruence_existe,
+from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import (congruence_existe,
                                et_existe_droite, et_existe_gauche, existe_commute,
                                existe_elimination)
 from bourbaki.ensembles.ii_3_correspondances.ensembles_correspondances import _inst_image

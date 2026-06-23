@@ -1,7 +1,7 @@
 """Tests V9 — théorèmes du chapitre II utilisant A1 (extensionnalité) et A2 (paire)."""
 from __future__ import annotations
 
-from bourbaki.logique.formule import var, egal, inclus, et, impl, ou, non, appartient, equiv, pourtout, afficher_f
+from bourbaki.logique.i_1_termes_relations.formule import var, egal, inclus, et, impl, ou, non, appartient, equiv, pourtout, afficher_f
 from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege import paire, singleton, VIDE, reunion, intersection
 from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import (extensionnalite_appliquee, existence_paire,
                                  unicite_par_extension, unicite_paire,

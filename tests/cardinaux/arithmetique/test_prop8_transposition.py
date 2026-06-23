@@ -10,7 +10,7 @@ COMPLET modulo la SEULE brique concrète d'existence de la transposition HT_glob
 où HT_glob(A,B) := (∀h)(∃τ)(bij(τ,B⊔{∅},B⊔{∅}) et τ(h(*))=*).  La construction
 concrète de τ (échange ponctuel dans B⊔{∅}) reste à fournir.
 """
-from bourbaki.logique.formule import var, egal, et, impl, appartient, afficher_f
+from bourbaki.logique.i_1_termes_relations.formule import var, egal, et, impl, appartient, afficher_f
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de, equipotent, cardinal
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers import ensembles_entiers as Ent
@@ -97,7 +97,7 @@ def test_h2_cas1_eq():
 # ── CAS 2 sous l'hypothèse existentielle de transposition HT(B,h(*)) ──────────
 def test_transposition_hypothese_formule():
     """HT(B,c₀) = (∃τ)(bij(τ,B⊔{∅},B⊔{∅}) et τ(c₀)=*)  (énoncé exact de la brique)."""
-    from bourbaki.logique.formule import existe
+    from bourbaki.logique.i_1_termes_relations.formule import existe
     c0 = var("c0")
     BS = T._BS("B")
     f = T.transposition_hypothese("B", c0, "tau")
@@ -124,7 +124,7 @@ def test_cas2_via_transposition():
 # ── H2 (CAS 2) à partir de l'hypothèse globale de transposition ───────────────
 def test_transposition_globale_formule():
     """HT_glob(A,B) = (∀h)(∃τ)(bij(τ,B⊔{∅},B⊔{∅}) et τ(h(*))=*)  (énoncé exact)."""
-    from bourbaki.logique.formule import pourtout
+    from bourbaki.logique.i_1_termes_relations.formule import pourtout
     f = T.transposition_globale("A", "B", "h", "tau")
     expect = pourtout("h", T.transposition_hypothese("B", _hstar(), "tau"))
     assert f == expect

@@ -15,12 +15,12 @@ ici au niveau du noyau).  theorie_ensembles() INCHANGÉE = 22 ; aucun axiome ajo
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import Terme, var, appartient, et, ou, non
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_1_termes_relations.formule import Terme, var, appartient, et, ou, non
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import _instance_reunion, egalite_par_extension
-from bourbaki.logique.tactiques.tactiques_abrege import a_implique_a
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import a_implique_a
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
     et_congruence_droite, et_congruence_gauche, ou_congruence,
     equivalence_transitivite, equivalence_symetrie, assoc_et, et_ou_distrib,
@@ -34,14 +34,14 @@ def _t(x):
 
 def _instance_inter(a, b, z):
     """⊢ (z ∈ a∩b) ⇔ (z∈a et z∈b)   (instance de AXIOME_INTER aux termes a,b,z)."""
-    from bourbaki.logique.tactiques.tactiques_abrege2 import instancie
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import instancie
     ax = N.axiome(E.theorie_ensembles(), E.AXIOME_INTER)
     return instancie(instancie(instancie(ax, a), b), z)
 
 
 def _instance_diff(e, x, z):
     """⊢ (z ∈ e∖x) ⇔ (z∈e et ¬(z∈x))   (instance de AXIOME_DIFF aux termes e,x,z)."""
-    from bourbaki.logique.tactiques.tactiques_abrege2 import instancie
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import instancie
     ax = N.axiome(E.theorie_ensembles(), E.AXIOME_DIFF)
     return instancie(instancie(instancie(ax, e), x), z)
 

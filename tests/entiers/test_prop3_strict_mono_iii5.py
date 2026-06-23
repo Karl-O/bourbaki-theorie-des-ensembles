@@ -1,5 +1,5 @@
 """Tests §III.5.2 — PROPOSITION 3 (cas binaire, monotonie STRICTE)."""
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege import theorie_ensembles
 from bourbaki.entiers.iii_5_calcul_entiers.iii_5_2_inegalites_ordre_soustraction.ensembles_prop3_strict_mono_iii5 import (
     somme_strict_monotone, somme_strict_monotone_enonce,

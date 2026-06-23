@@ -9,8 +9,8 @@ développement de base b, combinatoire) repose sur la RÉCURRENCE (C61) et/ou
 l'arithmétique cardinale binaire (NON disponibles) → REPORTÉ (cf. rapport &
 docstrings de ensembles_entiers / ensembles_entiers_theoremes).
 """
-from bourbaki.logique.formule import var, egal, et, impl, equiv, appartient
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_1_termes_relations.formule import var, egal, et, impl, equiv, appartient
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers import ensembles_entiers as Ent
 from bourbaki.cardinaux.ensembles_cardinaux import est_cardinal, inf_egal_card
@@ -58,7 +58,7 @@ def test_pair_est_divise_par_deux():
 def test_axiome_intervalle_bien_forme():
     ax = axiome_intervalle_entiers("a", "b", "x")
     # axiome clos (aucune variable libre)
-    from bourbaki.logique.formule import libres_f
+    from bourbaki.logique.i_1_termes_relations.formule import libres_f
     assert libres_f(ax) == set()
     # structure : (∀a)(∀b)(∀x)(...)
     assert ax.tag == "non"   # ∀ = ¬∃¬ au niveau primitif

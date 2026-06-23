@@ -22,19 +22,19 @@ théorèmes CLOS sous les SEULES gardes honnêtes.  Noyau INTACT.
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (
+from bourbaki.logique.i_1_termes_relations.formule import (
     Terme, var, egal, et, non, impl, existe, appartient,
 )
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 
-from bourbaki.logique.tactiques.tactiques_abrege import syllogisme
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import syllogisme
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     instancie, conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
     equivalence_avant, equivalence_arriere, equivalence_transitivite,
 )
-from bourbaki.logique.tactiques.tactiques_abrege_quantif import existe_elimination
-from bourbaki.logique.tactiques.tactiques_abrege_egalite import (
+from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import existe_elimination
+from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import (
     symetrie, composer_egalites,
 )
 from bourbaki.ensembles.familles.ii_2_produit_deux_ensembles.ensembles_produit import _instance_produit
@@ -57,7 +57,7 @@ def _vide_inst(vz):
 
 def _efq(notP_thm, q):
     """De ⊢¬P, déduire ⊢ (P ⇒ Q)   (ex falso quodlibet)."""
-    from bourbaki.logique.tactiques.tactiques_abrege2 import dni, dne, contraposition
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import dni, dne, contraposition
     P = notP_thm.conclusion.sous[0]
     h = N.loi_deduction(non(q), notP_thm)             # ¬Q ⇒ ¬P
     return syllogisme(syllogisme(dni(P), contraposition(h)), dne(q))   # P ⇒ Q
@@ -706,7 +706,7 @@ def chaine_falsum_plat(E_set="E", phi0="phi0", S="S0", U="Ucadre", psi="psi", u=
     domaine) DÉCHARGÉE par s0sq.  Miroir de `chaine_falsum_sous_temoins` mais sur le
     cadre PLAT.  ⊢ ¬(u∈U) sous un témoin u∈U (= ⊥), avec STRICTEMENT MOINS d'hyps que
     les 12 originales (hyp[2] GONE) et le lock reunion(S₀,U)=S₀ ABSENT."""
-    from bourbaki.logique.formule import libres_f
+    from bourbaki.logique.i_1_termes_relations.formule import libres_f
     from bourbaki.cardinaux.ensembles_hessenberg_structural_discharge import U_disjoint_S0
     vU, vu = _t(U), _t(u)
     u_in_U = appartient(vu, vU)

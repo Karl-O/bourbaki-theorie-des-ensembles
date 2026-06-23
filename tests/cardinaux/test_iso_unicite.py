@@ -6,7 +6,7 @@ dérivé de lemme_4 + antisymétrie, hypothèses STRUCTURELLES explicites, concl
 fidèle, non tautologique) ; et le pas final extensionnel f=g (iso_unicite_extensionnel,
 RÉUTILISE application_egale_par_valeurs).  theorie_ensembles() reste = 22.
 """
-from bourbaki.logique.formule import var, egal, impl, appartient, pourtout
+from bourbaki.logique.i_1_termes_relations.formule import var, egal, impl, appartient, pourtout
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux import ensembles_iso_unicite as U
 from bourbaki.cardinaux.ensembles_lemme4_croissante import _R_de, _val, _f_dans_E

@@ -14,11 +14,11 @@ from bourbaki.assemblage.assemblage import (
     Assemblage, negation, conjonction, egalite, existe, pour_tout,
     substitution_b_x_a,
 )
-from bourbaki.logique.lecture import Signature, DEFAUT
-from bourbaki.logique import noyau
-from bourbaki.logique.noyau import Theoreme
-from bourbaki.logique.tactiques.tactiques import syllogisme, antecedent_consequent
-from bourbaki.logique.tactiques.tactiques_prop import (
+from bourbaki.logique.i_1_termes_relations.lecture import Signature, DEFAUT
+from bourbaki.logique.i_2_criteres_C.noyau import noyau
+from bourbaki.logique.i_2_criteres_C.noyau.noyau import Theoreme
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques import syllogisme, antecedent_consequent
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_prop import (
     contraposition, double_negation_elim,
     conjonction_elim_gauche, conjonction_elim_droite,
     equivalence_avant, equivalence_arriere,
@@ -58,7 +58,7 @@ def reflexivite(x: str = "x", sig: Signature = DEFAUT) -> Theoreme:
     4.  ⊢ (∀x)S               double négation (S = x=x)  [C26, sens ⇐]
     5.  ⊢ (∀x)S ⇒ S           instanciation (C30, T=x) ; MP → ⊢ S
     """
-    from bourbaki.logique.tactiques.tactiques_prop import equivalence_reflexive, double_negation_intro
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_prop import equivalence_reflexive, double_negation_intro
     S = egalite(Assemblage((x,)), Assemblage((x,)))   # x = x
     R = negation(S)                                   # ¬(x=x)
 

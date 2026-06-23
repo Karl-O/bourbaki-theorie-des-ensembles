@@ -20,10 +20,10 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 
 from bourbaki.assemblage.assemblage import Assemblage, negation, disjonction
-from bourbaki.logique.lecture import Signature, DEFAUT, depuis_assemblage, vers_assemblage, est_relation
-from bourbaki.logique import noyau
-from bourbaki.logique.noyau import Theoreme
-from bourbaki.logique.tactiques.tactiques import antecedent_consequent
+from bourbaki.logique.i_1_termes_relations.lecture import Signature, DEFAUT, depuis_assemblage, vers_assemblage, est_relation
+from bourbaki.logique.i_2_criteres_C.noyau import noyau
+from bourbaki.logique.i_2_criteres_C.noyau.noyau import Theoreme
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques import antecedent_consequent
 
 _MAX_VOCAB = 5  # borne le nombre de relations servant à engendrer les schémas
                 # (S4 est cubique : 5³ instances ; suffit pour le fragment visé)

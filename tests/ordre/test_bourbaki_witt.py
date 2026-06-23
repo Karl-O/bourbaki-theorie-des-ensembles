@@ -8,7 +8,7 @@ On vérifie :
     d'énoncés, non prouvés ;
   • theorie_ensembles() reste = 22 axiomes (axiome_M vit dans une théorie DÉDIÉE).
 """
-from bourbaki.logique.formule import (
+from bourbaki.logique.i_1_termes_relations.formule import (
     var, egal, et, impl, appartient, pourtout, inclus,
 )
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
@@ -47,7 +47,7 @@ def test_application_dans_definition():
 def test_chaine_complet_definition():
     f = BW.chaine_complet(G, Es)
     corps = impl(chaine(G, Es, C),
-                 __import__("bourbaki.logique.formule", fromlist=["existe"]).existe(
+                 __import__("bourbaki.logique.i_1_termes_relations.formule", fromlist=["existe"]).existe(
                      "s", O.borne_superieure(G, C, s, Es)))
     cible = et(O.est_ordre(G, Es), pourtout("C", corps))
     assert f == cible
@@ -144,7 +144,7 @@ def test_point_fixe_de_sup():
 
 # ── ÉNONCÉS (définitions d'énoncés ; non prouvés) ─────────────────────────────
 def test_bourbaki_witt_enonce():
-    from bourbaki.logique.formule import existe
+    from bourbaki.logique.i_1_termes_relations.formule import existe
     f = BW.bourbaki_witt(G, Es, P, A)
     # ⇒ (∃s)(p(s)=s)
     hyp = et(et(et(et(O.est_ordre(G, Es),

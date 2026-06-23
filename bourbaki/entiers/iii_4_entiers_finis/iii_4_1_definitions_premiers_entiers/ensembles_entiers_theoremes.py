@@ -58,13 +58,13 @@ III.3 NON implémentée) :
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (var, Terme, egal, et, non, impl, equiv, appartient, pourtout)
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_1_termes_relations.formule import (var, Terme, egal, et, non, impl, equiv, appartient, pourtout)
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import cardinal, est_cardinal, inf_egal_card
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import est_fini, est_fini_ensemble, successeur
-from bourbaki.logique.tactiques.tactiques_abrege import a_implique_a
-from bourbaki.logique.tactiques.tactiques_abrege2 import (instancie, equivalence_avant, dni,
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import a_implique_a
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (instancie, equivalence_avant, dni,
                                conjonction_intro,
                                conjonction_elim_gauche, conjonction_elim_droite)
 
@@ -81,7 +81,7 @@ def card_est_un_cardinal(x="X", lieur="X'"):
     Témoin X':=X : l'instance (X|X')(Card(X)=Card(X')) est Card(X)=Card(X)
     (réflexivité), puis S5.  Le liant interne par défaut est « X' » (≠ X).
     x : nom de variable (str) OU Terme (ex. ∅, pour « 0 est un cardinal »)."""
-    from bourbaki.logique.formule import Terme
+    from bourbaki.logique.i_1_termes_relations.formule import Terme
     vX = x if isinstance(x, Terme) else var(x)
     cX = cardinal(vX)
     # corps R{X'} = (Card(X) = Card(X')),  liant X'

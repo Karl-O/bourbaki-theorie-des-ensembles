@@ -45,15 +45,15 @@ from __future__ import annotations
 
 from functools import lru_cache
 
-from bourbaki.logique.formule import (
+from bourbaki.logique.i_1_termes_relations.formule import (
     Terme, var, tau, egal, equiv, impl, appartient, pourtout, existe, subst_f,
     libres_t,
 )
-from bourbaki.logique import noyau_abrege as N
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     equivalence_avant, equivalence_arriere, instancie,
 )
-from bourbaki.logique.tactiques.tactiques_abrege_quantif import alpha_pour_tout
+from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import alpha_pour_tout
 
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import est_fini, successeur, ZERO
 from bourbaki.entiers.iii_6_infinis.iii_6_1_n_objet_existence.ensembles_N_collectivise import _coll_fini

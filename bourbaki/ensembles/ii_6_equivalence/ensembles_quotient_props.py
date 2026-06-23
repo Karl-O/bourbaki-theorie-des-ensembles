@@ -49,12 +49,12 @@ d'application_egale_par_valeurs, internes à ce pont).
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (Terme, var, egal, et, impl, appartient,
+from bourbaki.logique.i_1_termes_relations.formule import (Terme, var, egal, et, impl, appartient,
                                        pourtout)
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.tactiques.tactiques_abrege2 import instancie
-from bourbaki.logique.tactiques.tactiques_abrege_egalite import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import instancie
+from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import (
     symetrie, composer_egalites, congruence_terme)
 from bourbaki.ensembles.fonctions.ii_3_8_retractions_sections.ensembles_composee_valeurs import composition_valeur_t
 from bourbaki.ensembles.fonctions.hors_ii_3.ii_5_produit_famille.ensembles_application_valeur import (
@@ -132,7 +132,7 @@ def relation_Rp(p):
 
 def _dom_point(g, t):
     """(∃y)((t,y)∈G) — « t est dans le domaine de G »  (C46, condition de domaine)."""
-    from bourbaki.logique.formule import existe
+    from bourbaki.logique.i_1_termes_relations.formule import existe
     return existe("y", appartient(E.couple(_t(t), var("y")), _t(g)))
 
 
@@ -161,7 +161,7 @@ def factorisation_compatible_Rp(f="f", h="h", p="P", e="E", quot="Q", x="x", y="
     conditions universelles, h∘p fonctionnel) sont x,y-libres, donc généralisables.
 
     Conditionné aux hypothèses EXPLICITES ci-dessus (jamais postulées)."""
-    from bourbaki.logique.formule import existe
+    from bourbaki.logique.i_1_termes_relations.formule import existe
     vf, vh, vp = _t(f), _t(h), _t(p)
     ve, vQ = _t(e), _t(quot)
     vx, vy = _t(x), _t(y)
@@ -199,7 +199,7 @@ def factorisation_compatible_Rp(f="f", h="h", p="P", e="E", quot="Q", x="x", y="
     # imp1 : reste hyps = {f=h∘P, h∘P func, x∈E, yb∈E, dom_p, dom_h, p_into_Q}
     # garde explicite (x∈E et y∈E) ⇒ (p(x)=p(y) ⇒ f(x)=f(y))
     h_both = N.assume(et(appartient(vx, ve), appartient(vy, ve)))
-    from bourbaki.logique.tactiques.tactiques_abrege2 import (
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
         conjonction_elim_gauche, conjonction_elim_droite)
     # re-dériver imp1 sous la conjonction unique (réutilise h_xinE/h_yinE via cut)
     body = impl(egal(px, py), egal(E.valeur(vf, vx), E.valeur(vf, vy)))
@@ -276,7 +276,7 @@ def surjectivite_ponctuelle(p, quot, t="t", x="xa"):
     Tout élément du quotient Q = E/R est de la forme p(x) — la surjectivité de
     l'application canonique p, lue « par valeurs ».  p : graphe ; quot = Q.  Renvoie
     une Formule."""
-    from bourbaki.logique.formule import existe
+    from bourbaki.logique.i_1_termes_relations.formule import existe
     vp, vQ = _t(p), _t(quot)
     vt, vx = var(t), var(x)
     return pourtout(t, impl(appartient(vt, vQ), existe(x, egal(vt, E.valeur(vp, vx)))))
@@ -311,8 +311,8 @@ def coincidence_sur_quotient(h="h", hp="hp", p="P", quot="Q", t="x", x="xa"):
     La 2e hypothèse (coïncidence ponctuelle des graphes) est x-LIBRE après son ∀, donc
     n'obstrue pas l'élimination du témoin x ; elle est elle-même conséquence des deux
     factorisations (factorisation_meme_valeurs ; cf. report)."""
-    from bourbaki.logique.formule import existe
-    from bourbaki.logique.tactiques.tactiques_abrege_quantif import existe_elimination
+    from bourbaki.logique.i_1_termes_relations.formule import existe
+    from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import existe_elimination
     vh, vhp, vp, vQ = _t(h), _t(hp), _t(p), _t(quot)
     vt, vx = var(t), var(x)
     grh, grhp = graphe_de(vh), graphe_de(vhp)
@@ -365,7 +365,7 @@ def factorisation_unique(h="h", hp="hp", p="P", but="F", quot="Q", t="x", x="xa"
 
 def _arriere(eqv_thm):
     """De ⊢ (A ⇔ B) déduire ⊢ (B ⇒ A).  (sens arrière d'une équivalence prouvée.)"""
-    from bourbaki.logique.tactiques.tactiques_abrege2 import equivalence_arriere
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import equivalence_arriere
     return equivalence_arriere(eqv_thm)
 
 

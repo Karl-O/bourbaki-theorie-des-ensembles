@@ -20,10 +20,10 @@ theorie=22.  Rien postulé : chaque conclusion est dérivée, hyps structurelles
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import Terme, var, egal, appartient, inclus, pourtout, impl
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_1_termes_relations.formule import Terme, var, egal, appartient, inclus, pourtout, impl
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     equivalence_avant, instancie, conjonction_intro,
     conjonction_elim_gauche, conjonction_elim_droite,
 )
@@ -59,8 +59,8 @@ def composee_dans_S(g="psi", f="phi", S="S", T="T", t="t"):
     (valeur_dans_codomaine sur g), (g∘f)(t)=g(f(t)) (composition_valeur), d'où
     (g∘f)(t)∈S ; pont « y→j » pour la forme `_val` attendue par coincidence.
     Binders/valeurs en « y » (helpers) ; conclusion en « j » (séquent coincidence)."""
-    from bourbaki.logique.formule import existe
-    from bourbaki.logique.tactiques.tactiques_abrege2 import equivalence_arriere
+    from bourbaki.logique.i_1_termes_relations.formule import existe
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import equivalence_arriere
     vf, vg, vS, vT, vt, vy = var(f), var(g), var(S), var(T), var(t), var("y")
     comp = E.composee(vg, vf)
     ft_y = E.valeur(vf, vt)               # f(t)[y]
@@ -122,8 +122,8 @@ def composee_dans_S_t(g, f, S, T, t="t"):
     Identique à composee_dans_S mais g, f sont des TERMES (ex. g=reciproque φ') : utilise
     `composition_valeur_t` (au lieu de composition_valeur, name-based) — d'où l'hyp
     (g∘f) fonctionnel EXPLICITE en plus."""
-    from bourbaki.logique.formule import existe
-    from bourbaki.logique.tactiques.tactiques_abrege2 import equivalence_arriere
+    from bourbaki.logique.i_1_termes_relations.formule import existe
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import equivalence_arriere
     from bourbaki.ensembles.fonctions.ii_3_8_retractions_sections.ensembles_composee_valeurs import composition_valeur_t
     vg, vf, vS, vT, vt, vy = _t(g), _t(f), _t(S), _t(T), var(t), var("y")
     comp = E.composee(vg, vf)
@@ -159,9 +159,9 @@ def retraction_phi(phi="phi", S="S", T="T", x="x"):
     qui donne φ∘φ⁻¹=id sur l'image).  (x,φ(x))∈φ (valeur_dans_graphe), donc (φ(x),x)∈φ⁻¹
     (couple_reciproque) ; φ⁻¹ fonctionnel ⇒ φ⁻¹(φ(x))=x (valeur_caracterisation).  Liant
     « y » (helpers).  φ⁻¹ fonctionnel = φ injective (vrai pour un iso).  Sous-lemme BRIQUE 3."""
-    from bourbaki.logique.formule import existe
-    from bourbaki.logique.tactiques.tactiques_abrege2 import equivalence_arriere
-    from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie
+    from bourbaki.logique.i_1_termes_relations.formule import existe
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import equivalence_arriere
+    from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import symetrie
     from bourbaki.ensembles.fonctions.ii_3_4_fonctions_valeur.ensembles_fonctions import (
         valeur_dans_graphe, valeur_caracterisation)
     from bourbaki.ensembles.fonctions.ii_3_2_reciproque.ensembles_reciproque import couple_reciproque
@@ -222,9 +222,9 @@ def raccord_phip(phi="phi", phip="phip", S="S", T="T", u="u"):
     c(u)=φ'⁻¹(φ(u)) (composition_valeur_t) ; φ'(φ'⁻¹(φ(u)))=φ(u) (section_reciproque,
     sous φ(u)∈T) ; pont liant j↔y aux frontières (le point c(u)[j] porte un τ_j, donc
     le pont externe sur φ'(c(u)) NE capture PAS — contrairement au cas τ_y)."""
-    from bourbaki.logique.formule import existe
-    from bourbaki.logique.tactiques.tactiques_abrege2 import equivalence_arriere
-    from bourbaki.logique.tactiques.tactiques_abrege_egalite import composer_egalites
+    from bourbaki.logique.i_1_termes_relations.formule import existe
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import equivalence_arriere
+    from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import composer_egalites
     from bourbaki.cardinaux.ensembles_iso_ordre_reciproque import section_reciproque
     from bourbaki.ensembles.fonctions.ii_3_8_retractions_sections.ensembles_composee_valeurs import composition_valeur_t
     vphi, vphip, vS, vT, vu, vy = _t(phi), _t(phip), _t(S), _t(T), var(u), var("y")
@@ -294,7 +294,7 @@ def raccord_phip_cible(phi="phi", phip="phip", S="S", T="T", u="u"):
 def _decharge_exists_dom(g, x_term, dom_eq_thm, dom_set, in_dom_thm):
     """⊢ (∃y)((x_term, y) ∈ g)  à partir de : (x_term ∈ dom_set), (dom g = dom_set).
     Renvoie (∃y)((x,y)∈g) [AXIOME_DOM], via x∈dom_set + dom g=dom_set ⇒ x∈dom g."""
-    from bourbaki.logique.tactiques.tactiques_abrege2 import equivalence_arriere
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import equivalence_arriere
     vy = var("y")
     x_in_domg = N.modus_ponens(in_dom_thm, equivalence_arriere(N.modus_ponens(
         dom_eq_thm, N.s6(E.dom(g), dom_set, "hde", appartient(x_term, var("hde"))))))
@@ -314,9 +314,9 @@ def retraction_kc(phi="phi", phip="phip", S="S", T="T", x="x"):
       • k(c(x)) = φ⁻¹(φ'(c(x))) = φ⁻¹(φ(x))  (composition_valeur_t sur k ; c(x) en τ_j → sûr)
       • φ⁻¹(φ(x)) = x                    (retraction_phi)
     Ponts liant j↔y sur points PLAINS / τ_j (jamais τ_y) → pas de capture."""
-    from bourbaki.logique.formule import existe
-    from bourbaki.logique.tactiques.tactiques_abrege_egalite import composer_egalites
-    from bourbaki.logique.tactiques.tactiques_abrege2 import equivalence_arriere
+    from bourbaki.logique.i_1_termes_relations.formule import existe
+    from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import composer_egalites
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import equivalence_arriere
     from bourbaki.cardinaux.ensembles_iso_ordre_reciproque import section_reciproque
     from bourbaki.ensembles.fonctions.ii_3_8_retractions_sections.ensembles_composee_valeurs import composition_valeur_t
     from bourbaki.ordre.iii_1_relations_ordre.isomorphismes_ordre.ensembles_valeur_bridge import valeur_y_egal_j
@@ -360,7 +360,7 @@ def retraction_kc(phi="phi", phip="phip", S="S", T="T", x="x"):
     comp_k = composition_valeur_t(PhiInv, vphip, cx_j)        # k(c(x)[j])[y] = φ⁻¹(φ'(c(x)[j]))[y]
     #   décharge domaines : c(x)[j]∈dom φ'=S, φ'(c(x)[j])∈dom φ⁻¹=T
     #   c(x)[j]∈S : φ'⁻¹(φ(x))[y]∈S (valeur_dans_codomaine, φ(x)∈T) + c(x)[j]=φ'⁻¹(φ(x))[y]
-    from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie as _sym
+    from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import symetrie as _sym
     finv_in_S = valeur_dans_codomaine(PhipInv, vT, vS, phi_x_y)   # φ'⁻¹(φ(x))[y]∈S  [hyp φ(x)∈T]
     finv_in_S = N.modus_ponens(phiu_in_T, N.loi_deduction(appartient(phi_x_y, vT), finv_in_S))
     cxj_in_S = N.modus_ponens(finv_in_S, equivalence_avant(N.modus_ponens(
@@ -484,8 +484,8 @@ def coincidence_univ_close_isos(phi1="phi1", phi2="phi2", S1="S1", T1="T1", u="u
 def _coincidence_univ_assemble(base, phi2, S1, u):
     """Commun à coincidence_univ_close[_isos] : depuis base ⊢ (∀u)(u∈S1⇒φ1(u)=(φ2|S1)(u)),
     réécrit (φ2|S1)(u)=φ2(u) (restriction_valeur + ponts j↔y) ⊢ (∀u)(u∈S1⇒φ1(u)=φ2(u))."""
-    from bourbaki.logique.tactiques.tactiques_abrege_egalite import composer_egalites
-    from bourbaki.logique.tactiques.tactiques_abrege2 import instancie as _i
+    from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import composer_egalites
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import instancie as _i
     from bourbaki.ordre.iii_1_relations_ordre.isomorphismes_ordre.ensembles_valeur_bridge import valeur_y_egal_j
     from bourbaki.cardinaux.ensembles_cantor_bernstein_bij import restriction_valeur
     vphi2, vS1, vu = var(phi2), var(S1), var(u)

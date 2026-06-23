@@ -2,7 +2,7 @@
 
 Chaque test vérifie la CONCLUSION EXACTE du théorème via le noyau abrégé.
 """
-from bourbaki.logique.formule import (var, egal, et, ou, non, impl, appartient,
+from bourbaki.logique.i_1_termes_relations.formule import (var, egal, et, ou, non, impl, appartient,
                                        pourtout)
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import ZERO, UN

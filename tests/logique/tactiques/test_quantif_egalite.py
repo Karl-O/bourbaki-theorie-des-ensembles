@@ -17,8 +17,8 @@ from bourbaki.assemblage.assemblage import (
     Assemblage, implication, substitution_b_x_a, tau_x,
     conjonction, equivalence, egalite, existe, pour_tout,
 )
-from bourbaki.logique.lecture import depuis_assemblage, vers_assemblage, est_relation, est_terme
-from bourbaki.logique import noyau
+from bourbaki.logique.i_1_termes_relations.lecture import depuis_assemblage, vers_assemblage, est_relation, est_terme
+from bourbaki.logique.i_2_criteres_C.noyau import noyau
 
 # Relations / termes concrets.
 R = Assemblage(("=", "x", "a"))     # x = a   (relation, x libre)

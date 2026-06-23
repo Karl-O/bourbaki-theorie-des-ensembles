@@ -5,7 +5,7 @@ le noyau : soit CLOS (purement logique, 0 hypothèse), soit CONDITIONNEL avec le
 hypothèses EXACTEMENT attendues (= axiomes-schémas (IN)/(FI)/(AU)/(MO) instanciés),
 et que la conclusion est bien la formule fidèle visée — JAMAIS une tautologie P⇒P.
 """
-from bourbaki.logique.formule import (var, egal, et, impl, app, non, alpha_egal)
+from bourbaki.logique.i_1_termes_relations.formule import (var, egal, et, impl, app, non, alpha_egal)
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.structures.iv_2_morphismes_structures_derivees.cst_criteres import ensembles_CST_criteres as C
 from bourbaki.structures.iv_2_morphismes_structures_derivees import ensembles_universel_morphismes as M
@@ -156,7 +156,7 @@ def test_contraposition_injection_ponctuelle_CLOS():
     # conclusion = ( (¬(x=y) ⇒ φx≠φy) ⇒ ( (φx=φy) ⇒ x=y) )
     assert t.conclusion.tag == "ou"         # implication
     # conclusion fidèle : implication (séparation pt) ⇒ (injection pt)
-    from bourbaki.logique.formule import impl, non, egal
+    from bourbaki.logique.i_1_termes_relations.formule import impl, non, egal
     vx, vy, vphi = var("x"), var("y"), var("phiE")
     sep = non(egal(E.valeur(vphi, vx), E.valeur(vphi, vy)))   # φ_E(x) ≠ φ_E(y)
     diff = non(egal(vx, vy))                                  # x ≠ y

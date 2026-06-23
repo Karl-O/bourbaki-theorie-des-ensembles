@@ -6,7 +6,7 @@ C62 avec la règle d'itération T_{S,a}.  theorie=22, conclusion non vacuous.
 """
 import pytest
 
-from bourbaki.logique.formule import var, egal, impl, appartient, pourtout, existe
+from bourbaki.logique.i_1_termes_relations.formule import var, egal, impl, appartient, pourtout, existe
 from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege import theorie_ensembles, est_bien_ordonne
 from bourbaki.ordre.iii_2_bon_ordre.recurrence_transfinie.ensembles_c60_pont import essais_bien_formes, rule_codomain
 from bourbaki.ordre.iii_2_bon_ordre.recurrence_transfinie.ensembles_recurrence_transfinie import _graphe_R
@@ -72,7 +72,7 @@ def test_c63_conclusion_et_hyps():
 
 def test_c63_regle_iteration_est_terme():
     """La règle d'itération T_{S,a} est un terme bien formé (callable Terme→Terme)."""
-    from bourbaki.logique.formule import Terme
+    from bourbaki.logique.i_1_termes_relations.formule import Terme
     T = regle_iteration(lambda u: var("Sof"), var("a63"))
     out = T(var("u0"))
     assert isinstance(out, Terme)

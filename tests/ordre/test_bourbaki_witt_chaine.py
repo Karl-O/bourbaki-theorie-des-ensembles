@@ -12,7 +12,7 @@ On vérifie, ÉTAPE par ÉTAPE (preuve de Witt, deux tours emboîtés) :
 INVARIANT : theorie_ensembles() reste = 22 (axiomes de M_c/Cext en théories DÉDIÉES).
 Rien n'est postulé : M chaîne et le point fixe sont DÉMONTRÉS (.est_clos vérifié).
 """
-from bourbaki.logique.formule import var
+from bourbaki.logique.i_1_termes_relations.formule import var
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis.ensembles_ordre_relation import totalement_ordonne
 from bourbaki.ordre.iii_2_bon_ordre.zorn_zermelo.ensembles_bourbaki_witt import (
@@ -62,12 +62,12 @@ def test_Mc_est_tour():
 # ── ÉTAPE 2 — M_c = M ⇒ comparabilité ────────────────────────────────────────
 def test_M_inclus_Mc():
     t = W.M_inclus_Mc()
-    from bourbaki.logique.formule import inclus
+    from bourbaki.logique.i_1_termes_relations.formule import inclus
     assert t.conclusion == inclus(Mt(), W.Mc(G, Es, P, A, Cc))
 
 
 def test_comparable_a_c():
-    from bourbaki.logique.formule import var, pourtout, impl, appartient, ou
+    from bourbaki.logique.i_1_termes_relations.formule import var, pourtout, impl, appartient, ou
     t = W.comparable_a_c()
     # (∀x)(x∈M ⇒ (x≤c OU c≤x))
     vx = var("x")
@@ -79,7 +79,7 @@ def test_comparable_a_c():
 # ── ÉTAPE 3 — Cext est un TOUR (cœur dur : s_est_extreme) ─────────────────────
 def test_a_dans_Cext():
     t = W.a_dans_Cext()
-    from bourbaki.logique.formule import appartient
+    from bourbaki.logique.i_1_termes_relations.formule import appartient
     assert t.conclusion == appartient(A, W.Cext(G, Es, P, A))
 
 
@@ -102,7 +102,7 @@ def test_Cext_est_tour():
 
 # ── ÉTAPE 4 — Cext = M ⇒ tout c∈M extrême ────────────────────────────────────
 def test_tout_M_extreme():
-    from bourbaki.logique.formule import var, pourtout, impl, appartient
+    from bourbaki.logique.i_1_termes_relations.formule import var, pourtout, impl, appartient
     t = W.tout_M_extreme()
     vc = var("c")
     cible = pourtout("c", impl(appartient(vc, Mt()),
@@ -135,7 +135,7 @@ def test_bourbaki_witt_theoreme_CLOS():
 
 
 def test_bourbaki_witt_avec_temoin_dans_E():
-    from bourbaki.logique.formule import existe, et, egal, appartient
+    from bourbaki.logique.i_1_termes_relations.formule import existe, et, egal, appartient
     from bourbaki.ordre.iii_2_bon_ordre.zorn_zermelo.ensembles_bourbaki_witt import pval
     t = W.bourbaki_witt_theoreme(avec_E=True)
     assert t.est_clos
@@ -143,7 +143,7 @@ def test_bourbaki_witt_avec_temoin_dans_E():
     vs = var("s")
     corps = et(appartient(vs, Es), egal(pval(P, vs), vs))
     # antécédent identique, conséquent renforcé
-    from bourbaki.logique.tactiques.tactiques_abrege import antecedent_consequent
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import antecedent_consequent
     _, cons = antecedent_consequent(t.conclusion)
     assert cons == existe("s", corps)
 

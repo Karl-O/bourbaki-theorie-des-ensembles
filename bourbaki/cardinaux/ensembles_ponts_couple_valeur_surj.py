@@ -36,15 +36,15 @@ conclusion ∉ hyps (non vacuous).
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (
+from bourbaki.logique.i_1_termes_relations.formule import (
     Terme, var, egal, et, impl, existe, pourtout, appartient, inclus,
 )
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     conjonction_intro, equivalence_arriere, instancie,
 )
-from bourbaki.logique.tactiques.tactiques_abrege_quantif import (
+from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import (
     existe_elimination, alpha_existe,
 )
 from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis.ensembles_ordre_relation import inclusion_antisymetrique
@@ -102,7 +102,7 @@ def couple_surjectif_implique_image_egale(F="Fsr", D="Dsr", T="Tsr"):
     car = instancie(instancie(instancie(ax_img, vF), vD), vw)  # w∈image(F,D) ⇔ (∃x)(x∈D et (x,w)∈F)
     # surj_w est en "asr" (forme RICHE) ; AXIOME_IMAGE produit le binder "x".
     # On renomme (∃asr)... ⇐⇒ (∃x)... pour appliquer le sens arrière de car.
-    from bourbaki.logique.tactiques.tactiques_abrege2 import equivalence_avant
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import equivalence_avant
     surj_w_x = N.modus_ponens(surj_w, equivalence_avant(alpha_existe(
         "asr", "x", et(appartient(va, vD), appartient(E.couple(va, vw), vF)))))  # (∃x)(x∈D et (x,w)∈F)
     w_in_img = N.modus_ponens(surj_w_x, equivalence_arriere(car))   # w∈image(F,D)
@@ -148,7 +148,7 @@ def couple_domaine_implique_dom_egale(F="Fdc", D="Ddc"):
     ax_dom = N.axiome(E.theorie_ensembles(), E.AXIOME_DOM)
     car = instancie(instancie(ax_dom, vF), vab)              # ab∈dom F ⇔ (∃y)((ab,y)∈F)
     # binder canonique "y" → on renomme la couverture "wdc" vers "y" pour matcher
-    from bourbaki.logique.tactiques.tactiques_abrege2 import equivalence_avant
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import equivalence_avant
     dom_ab_y = N.modus_ponens(dom_ab, equivalence_avant(alpha_existe(
         "wdc", "y", appartient(E.couple(vab, vw), vF))))     # (∃y)((ab,y)∈F)
     ab_in_dom = N.modus_ponens(dom_ab_y, equivalence_arriere(car))   # ab∈dom F

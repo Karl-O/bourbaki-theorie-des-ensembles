@@ -44,12 +44,12 @@ logique pur, soit conditionnel à des hypothèses EXPLICITES = les axiomes-sché
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (var, egal, et, ou, impl, equiv, non,
+from bourbaki.logique.i_1_termes_relations.formule import (var, egal, et, ou, impl, equiv, non,
                                        pourtout, existe, appartient, app)
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.tactiques.tactiques_abrege import (a_implique_a, syllogisme)
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import (a_implique_a, syllogisme)
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
     equivalence_avant, equivalence_arriere, equivalence_symetrie,
     equivalence_transitivite, instancie)
@@ -400,7 +400,7 @@ def _contraposition_injection_ponctuelle(e="E", phi_e="phiE", x="x", y="y"):
     ponctuel ; le saut « φ séparante ⇔ φ injective » s'en déduit par ∀-introduction.
     L'EXISTENCE de l'α-application séparante (cas où la solution n'est pas injective)
     est REPORTÉE (construction, CST22).  Purement logique (contraposition + dne)."""
-    from bourbaki.logique.tactiques.tactiques_abrege2 import contraposition, dne
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import contraposition, dne
     vphi, vx, vy = _t(phi_e), _t(x), _t(y)
     sep = non(egal(E.valeur(vphi, vx), E.valeur(vphi, vy)))   # φ_E(x) ≠ φ_E(y)
     diff = non(egal(vx, vy))                                  # x ≠ y
@@ -410,7 +410,7 @@ def _contraposition_injection_ponctuelle(e="E", phi_e="phiE", x="x", y="y"):
     contra = contraposition(h)            # ¬sep ⇒ ¬diff  = ¬¬(φx=φy) ⇒ ¬¬(x=y)
     eq_phi = egal(E.valeur(vphi, vx), E.valeur(vphi, vy))
     # (φx=φy) ⇒ ¬¬(φx=φy)  [dni]  puis contra  puis ¬¬(x=y) ⇒ (x=y) [dne]
-    from bourbaki.logique.tactiques.tactiques_abrege2 import dni
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import dni
     step1 = syllogisme(dni(eq_phi), contra)        # (φx=φy) ⇒ ¬¬(x=y)
     step2 = syllogisme(step1, dne(egal(vx, vy)))   # (φx=φy) ⇒ (x=y)
     return N.loi_deduction(impl(diff, sep), step2)  # ⊢ (séparation pt) ⇒ (injection pt)

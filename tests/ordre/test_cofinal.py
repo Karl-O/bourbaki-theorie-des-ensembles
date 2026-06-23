@@ -6,10 +6,10 @@ Vérifie : (a) chaque NOTION s'introduit (prédicat/terme clos bien formé, VERB
 (b) les lemmes DIRECTS certifient EXACTEMENT la cible (décompositions, instances) ;
 (c) theorie_ensembles() reste INCHANGÉE à 22 axiomes (rien n'y est ajouté).
 """
-from bourbaki.logique.formule import (
+from bourbaki.logique.i_1_termes_relations.formule import (
     Formule, var, app, egal, appartient, et, ou, impl, non, pourtout, existe, inclus,
 )
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ensembles.familles.iii_7_limites import ensembles_limites as L
 from bourbaki.ordre.iii_7_limites import ensembles_cofinal as C

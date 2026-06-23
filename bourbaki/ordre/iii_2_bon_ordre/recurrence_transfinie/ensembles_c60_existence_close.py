@@ -82,20 +82,20 @@ sont HONNÊTES, déchargées par loi_deduction — les données mêmes du Critè
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (
+from bourbaki.logique.i_1_termes_relations.formule import (
     Terme, var, egal, et, non, impl, appartient, pourtout, existe,
 )
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
     equivalence_avant, equivalence_arriere, instancie, antecedent_consequent,
 )
-from bourbaki.logique.tactiques.tactiques_abrege_egalite import (
+from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import (
     symetrie, composer_egalites,
 )
-from bourbaki.logique.tactiques.tactiques_abrege_quantif import existe_elimination
+from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import existe_elimination
 from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import (
     singleton_membre, couple_egal_implique_composantes,
 )
@@ -160,7 +160,7 @@ def dom_singleton_couple(x="x0", v="v0", z="z"):
       z∈dom{(x,v)} ⇔ (∃y)((z,y)∈{(x,v)}) ⇔ (z,y)=(x,v) ⇒ z=x ⇔ z∈{x}  ;
       réciproquement z=x ⇒ (z,v)∈{(x,v)} ⇒ z∈dom.  Le domaine d'un essai trivial en
       x est exactement {x} (utile pour la disjonction des domaines)."""
-    from bourbaki.logique.formule import inclus
+    from bourbaki.logique.i_1_termes_relations.formule import inclus
     vx, vv = _t(x), _t(v)
     cpl0 = E.couple(vx, vv)
     S = E.singleton(cpl0)

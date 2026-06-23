@@ -9,8 +9,8 @@ Chaque test vérifie : la conclusion EST EXACTEMENT la cible, la clôture (.est_
 l'absence d'hypothèse résiduelle, la non-vacuité, et que le consequent dérivé EST
 LITTÉRALEMENT le report `existe_complement_cardinal`.
 """
-from bourbaki.logique.formule import var, egal, existe, impl, et
-from bourbaki.logique.tactiques.tactiques_abrege import antecedent_consequent
+from bourbaki.logique.i_1_termes_relations.formule import var, egal, existe, impl, et
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import antecedent_consequent
 from bourbaki.cardinaux import ensembles_prop13_complement as P13
 from bourbaki.cardinaux.ensembles_cardinaux_props_restantes import (
     existe_complement_cardinal,

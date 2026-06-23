@@ -12,7 +12,7 @@ On certifie (ensembles_trichotomie_maximalite_preuve) :
      • adjonction_contredit_segment_propre : {10 hyps} ⊢ ¬(dom h = seg(R,E,a)).
 theorie_ensembles() reste = 22 ; rien postulé ; conclusions non tautologiques.
 """
-from bourbaki.logique.formule import var, egal, appartient, non, Formule
+from bourbaki.logique.i_1_termes_relations.formule import var, egal, appartient, non, Formule
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux import ensembles_trichotomie_scaffold as TS
 from bourbaki.cardinaux import ensembles_trichotomie_scaffold_maximalite as M

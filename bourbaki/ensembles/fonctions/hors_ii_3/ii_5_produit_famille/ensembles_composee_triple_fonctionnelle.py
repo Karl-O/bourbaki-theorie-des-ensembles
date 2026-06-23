@@ -19,10 +19,10 @@ Noyau INCHANGÉ (theorie = 22 axiomes).
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import var, et, Terme
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_1_termes_relations.formule import var, et, Terme
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite, instancie,
 )
 from bourbaki.ensembles.fonctions.ii_3_7_composee_fonctions.ensembles_fonctions_composee import composee_fonctionnelle
@@ -76,7 +76,7 @@ def composee_triple_fonctionnelle_cible(f="F", g="G", h="H"):
     HGF = E.composee(vH, GF)
     hyp = et(E.est_fonctionnel(vF),
              et(E.est_fonctionnel(vG), E.est_fonctionnel(vH)))
-    from bourbaki.logique.formule import impl
+    from bourbaki.logique.i_1_termes_relations.formule import impl
     return impl(hyp, E.est_fonctionnel(HGF))
 
 

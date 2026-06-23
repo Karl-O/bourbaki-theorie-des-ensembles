@@ -11,7 +11,7 @@ graphe_de(f) = pr₁(pr₁ f), PAS sur le triple f.  Deux théorèmes CONDITIONN
 On vérifie la CONCLUSION littérale et le JEU D'HYPOTHÈSES exact (versions
 conditionnelles : .hypotheses non vide, donc PAS .est_clos).
 """
-from bourbaki.logique.formule import var, egal, et, impl, appartient, pourtout
+from bourbaki.logique.i_1_termes_relations.formule import var, egal, et, impl, appartient, pourtout
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.arithmetique.ensembles_graphe_de import graphe_de
 from bourbaki.ensembles.fonctions.hors_ii_3.ii_5_produit_famille import ensembles_application_valeur as M

@@ -4,7 +4,7 @@ Chaque test vérifie soit que la DÉFINITION renvoyée est exactement la formule
 fidèle visée, soit qu'un THÉORÈME logique direct est correctement certifié par le
 noyau (clos, ou conditionnel avec les hypothèses attendues).
 """
-from bourbaki.logique.formule import (var, et, ou, non, impl, equiv, pourtout,
+from bourbaki.logique.i_1_termes_relations.formule import (var, et, ou, non, impl, equiv, pourtout,
                                        existe, appartient, egal, app, alpha_egal)
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.structures.iv_2_morphismes_structures_derivees import ensembles_universel_morphismes as M

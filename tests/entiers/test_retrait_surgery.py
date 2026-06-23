@@ -9,7 +9,7 @@ visé ; theorie_ensembles() = 22 INTANGIBLE.
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (var, et, non, impl, inclus, appartient,
+from bourbaki.logique.i_1_termes_relations.formule import (var, et, non, impl, inclus, appartient,
                                        existe, egal)
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import est_injection_de, inf_egal_card
@@ -120,8 +120,8 @@ def test_retrait_point_hyp_mod_general_clos():
 def test_cardinal_pas_entre_mod_general_clos():
     from bourbaki.cardinaux.ensembles_cardinaux import est_cardinal, inf_egal_card
     from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import successeur
-    from bourbaki.logique.formule import ou
-    from bourbaki.logique.tactiques.tactiques_abrege import antecedent_consequent
+    from bourbaki.logique.i_1_termes_relations.formule import ou
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import antecedent_consequent
     th = cardinal_pas_entre_mod_general("b", "c", "F")
     assert th.est_clos and len(th.hypotheses) == 0
     ante, cons = antecedent_consequent(th.conclusion)

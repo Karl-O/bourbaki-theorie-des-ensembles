@@ -48,13 +48,13 @@ totalement_ordonne, majorant, borne_superieure, plus_grand_element, …) et
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (
+from bourbaki.logique.i_1_termes_relations.formule import (
     Terme, var, egal, et, ou, non, impl, equiv, appartient, existe, pourtout, inclus,
 )
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.tactiques.tactiques_abrege import syllogisme
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import syllogisme
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
     projection_gauche, projection_droite,
     equivalence_avant, equivalence_arriere, instancie, instanciation_en_x,
@@ -348,7 +348,7 @@ def M_inclus_terme(G, E_set, p, a, s):
 
 def _inclusion_trans(a, b, c, ab, bc):
     """De ⊢ a⊂b et ⊢ b⊂c, déduit ⊢ a⊂c (sous les mêmes hypothèses)."""
-    from bourbaki.logique.tactiques.tactiques_abrege2 import inclusion_transitive
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import inclusion_transitive
     th = inclusion_transitive("a", "b", "c")            # ((a⊂b)et(b⊂c))⇒(a⊂c)
     for nm, tm in (("a", a), ("b", b), ("c", c)):
         th = instancie(N.generalisation(nm, th), tm)

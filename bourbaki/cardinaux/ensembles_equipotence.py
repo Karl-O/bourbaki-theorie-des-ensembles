@@ -30,16 +30,16 @@ REPORTÉ honnêtement (anti-faux-résultat ; voir le rapport) :
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import var, egal, et, appartient, existe, pourtout
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_1_termes_relations.formule import var, egal, et, appartient, existe, pourtout
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.tactiques.tactiques_abrege import syllogisme
-from bourbaki.logique.tactiques.tactiques_abrege2 import (conjonction_intro, conjonction_elim_gauche,
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import syllogisme
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (conjonction_intro, conjonction_elim_gauche,
                                conjonction_elim_droite, equivalence_avant,
                                equivalence_arriere, equivalence_transitivite,
                                equivalence_symetrie, instancie)
-from bourbaki.logique.tactiques.tactiques_abrege_quantif import existe_elimination
-from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie as eg_symetrie, composer_egalites
+from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import existe_elimination
+from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import symetrie as eg_symetrie, composer_egalites
 from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import egalite_par_extension
 
 
@@ -91,7 +91,7 @@ def diagonale_membre(x="X", u="u", v="v"):
     # témoin d0:=u :  u∈X  et  (u,v)=(u,u)   [car v=u ⇒ (u,v)=(u,u)]
     v_eq_u = N.modus_ponens(u_v, eg_symetrie(vu, vv))          # v=u
     # (u,v)=(u,u) : congruence sur le 2e argument du couple (trou w en 2e position)
-    from bourbaki.logique.tactiques.tactiques_abrege_egalite import congruence_terme
+    from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import congruence_terme
     cpl_vu = N.modus_ponens(v_eq_u, congruence_terme(vv, vu, E.couple(vu, var("w"))))
     #   v=u ⇒ (u,v)=(u,u)
     wit = conjonction_intro(u_inX, cpl_vu)                     # (u|d0)body
@@ -139,7 +139,7 @@ def diagonale_domaine(x="X"):
     # (z,y)∈Δ_X ⇔ (z∈X et z=y)
     mem = diagonale_membre(x, "z", "y")
     # (∃y)((z,y)∈Δ) ⇔ (∃y)(z∈X et z=y)
-    from bourbaki.logique.tactiques.tactiques_abrege_quantif import congruence_existe
+    from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import congruence_existe
     ex_eq = congruence_existe(mem, "y")
     inX = appartient(vz, vX)
     body = et(inX, egal(vz, vy))
@@ -155,7 +155,7 @@ def diagonale_domaine(x="X"):
     chain = equivalence_transitivite(dom_car,
               equivalence_transitivite(ex_eq, ex_inX))         # z∈dom Δ ⇔ z∈X
     # caractérisation de X par lui-même : (∀z)(z∈X ⇔ z∈X)  (réflexivité de ⇔)
-    from bourbaki.logique.tactiques.tactiques_abrege import a_implique_a
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import a_implique_a
     selfX = N.generalisation("z", conjonction_intro(a_implique_a(inX), a_implique_a(inX)))
     char_dom = N.generalisation("z", chain)
     return egalite_par_extension(char_dom, selfX, E.dom(DX), vX)
@@ -173,16 +173,16 @@ def diagonale_image(x="X"):
     ax_img = N.axiome(E.theorie_ensembles(), E.AXIOME_IMAGE)
     img_car0 = instancie(instancie(instancie(ax_img, DX), vX), vz)
     # l'axiome IMAGE a son liant interne « x » ; renommer en « t » pour éviter capture
-    from bourbaki.logique.tactiques.tactiques_abrege_quantif import alpha_existe
+    from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import alpha_existe
     # img_car0 : z∈Δ⟨X⟩ ⇔ (∃x)(x∈X et (x,z)∈Δ)
     inner_x = et(appartient(var("x"), vX), appartient(E.couple(var("x"), vz), DX))
     ren = alpha_existe("x", "t", inner_x)                     # (∃x)…x… ⇔ (∃t)…t…
     img_car = equivalence_transitivite(img_car0, ren)        # z∈Δ⟨X⟩ ⇔ (∃t)(t∈X et (t,z)∈Δ)
     # (t,z)∈Δ ⇔ (t∈X et t=z)   →  (t∈X et (t,z)∈Δ) ⇔ (t∈X et (t∈X et t=z))
     mem = diagonale_membre(x, "t", "z")
-    from bourbaki.logique.tactiques.tactiques_abrege2 import et_congruence_droite
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import et_congruence_droite
     body_eq = et_congruence_droite(appartient(vt, vX), mem)
-    from bourbaki.logique.tactiques.tactiques_abrege_quantif import congruence_existe
+    from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import congruence_existe
     ex_eq = congruence_existe(body_eq, "t")                   # (∃t)(t∈X et (t,z)∈Δ) ⇔ (∃t)(t∈X et (t∈X et t=z))
     # (∃t)(t∈X et (t∈X et t=z)) ⇔ z∈X
     full = et(appartient(vt, vX), et(appartient(vt, vX), egal(vt, vz)))
@@ -201,7 +201,7 @@ def diagonale_image(x="X"):
     ex_inX = conjonction_intro(fwd, bwd)                     # (∃t)…full… ⇔ z∈X
     chain = equivalence_transitivite(img_car,
               equivalence_transitivite(ex_eq, ex_inX))        # z∈Δ⟨X⟩ ⇔ z∈X
-    from bourbaki.logique.tactiques.tactiques_abrege import a_implique_a
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import a_implique_a
     selfX = N.generalisation("z", conjonction_intro(a_implique_a(inXz), a_implique_a(inXz)))
     char_img = N.generalisation("z", chain)
     return egalite_par_extension(char_img, selfX, E.image(DX, vX), vX)

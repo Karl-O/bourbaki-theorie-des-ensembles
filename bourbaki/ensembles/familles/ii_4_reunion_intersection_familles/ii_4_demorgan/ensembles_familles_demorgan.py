@@ -23,18 +23,18 @@ distribution de z∈E passe par et_existe_droite, valide sans I≠∅).
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import var, egal, et, ou, non, impl, existe, pourtout, appartient
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_1_termes_relations.formule import var, egal, et, ou, non, impl, existe, pourtout, appartient
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.tactiques.tactiques_abrege import a_implique_a
-from bourbaki.logique.tactiques.tactiques_abrege2 import (dni, dne, equiv_neg, demorgan_ou, demorgan_et,
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import a_implique_a
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (dni, dne, equiv_neg, demorgan_ou, demorgan_et,
                                ou_congruence,
                                equivalence_transitivite as etr,
                                equivalence_symetrie as esym,
                                conjonction_intro, conjonction_elim_gauche as cg,
                                conjonction_elim_droite as cd, instancie,
                                et_congruence_droite, et_congruence_gauche)
-from bourbaki.logique.tactiques.tactiques_abrege_quantif import (congruence_existe, congruence_pour_tout,
+from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import (congruence_existe, congruence_pour_tout,
                                       et_existe_droite, existe_elimination)
 from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import egalite_par_extension
 

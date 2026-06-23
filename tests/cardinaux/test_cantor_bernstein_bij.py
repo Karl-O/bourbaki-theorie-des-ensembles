@@ -4,7 +4,7 @@ Vérifie la CONCLUSION EXACTE et les HYPOTHÈSES de chaque théorème via le noy
 Les briques de restriction (image/dom/valeur/injective) sont GÉNÉRALES ; morceau_fD
 assemble le premier morceau de la bijection (f|D : D → f⟨D⟩).
 """
-from bourbaki.logique.formule import var, egal, impl, inclus, appartient
+from bourbaki.logique.i_1_termes_relations.formule import var, egal, impl, inclus, appartient
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux import ensembles_cantor_bernstein as CB
 from bourbaki.cardinaux import ensembles_cantor_bernstein_bij as B

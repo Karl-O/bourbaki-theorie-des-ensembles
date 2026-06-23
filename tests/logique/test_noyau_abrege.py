@@ -5,9 +5,9 @@ python -m pytest V9/test_noyau_abrege.py -v
 from __future__ import annotations
 import pytest
 
-from bourbaki.logique.formule import (var, egal, appartient, ou, impl, equiv, pourtout, existe,
+from bourbaki.logique.i_1_termes_relations.formule import (var, egal, appartient, ou, impl, equiv, pourtout, existe,
                      tau, subst_f)
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 
 A = egal(var("a"), var("b"))

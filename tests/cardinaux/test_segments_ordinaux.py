@@ -5,7 +5,7 @@ INVARIANT vérifié : theorie_ensembles() = 22 ; conclusion == hyp_bon_ordre_seg
 LITTÉRALEMENT ; hypothèses EXACTES = bon ordre des indices + S≠∅ + seg_monotone ;
 NON vacueux ; existence Zermelo CLOSE.
 """
-from bourbaki.logique.formule import (
+from bourbaki.logique.i_1_termes_relations.formule import (
     var, non, egal, appartient, libres_f,
 )
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E

@@ -40,17 +40,17 @@ theorie_ensembles INCHANGÉE (22) ; aucun fichier existant modifié.
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (Terme, var, egal, et, non, ou, impl,
+from bourbaki.logique.i_1_termes_relations.formule import (Terme, var, egal, et, non, ou, impl,
                      appartient, existe, pourtout, inclus, subst_t, subst_f)
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
     equivalence_avant, equivalence_arriere, equivalence_transitivite, instancie,
     cas)
-from bourbaki.logique.tactiques.tactiques_abrege_quantif import (
+from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import (
     existe_elimination, alpha_existe)
-from bourbaki.logique.tactiques.tactiques_abrege_egalite import (
+from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import (
     symetrie, composer_egalites, congruence_terme)
 
 from bourbaki.cardinaux.ensembles_cardinaux import (
@@ -306,7 +306,7 @@ def _S_union_compl_D(s, d):
     fwd = N.generalisation("z", N.loi_deduction(appartient(vz, U), zD_L))   # U⊂D
 
     # ── ⇐ : z∈D ⇒ z∈U  (tertium : z∈S ou ¬z∈S) ─────────────────────────────────
-    from bourbaki.logique.tactiques.tactiques_abrege2 import tiers_exclu
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import tiers_exclu
     zDmS = appartient(vz, DmS)
     hR = N.assume(zD)
     tnd = tiers_exclu(zS)                                  # z∈S ou ¬z∈S

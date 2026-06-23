@@ -5,10 +5,10 @@ en formule/terme close bien formée ; (b) que les THÉORÈMES certifient EXACTEM
 conclusion visée AVEC les hypothèses attendues (non-vacuité : la conclusion n'est ni
 une hypothèse, ni une tautologie P⇒P) ; (c) que rien n'est postulé (theorie=22).
 """
-from bourbaki.logique.formule import (
+from bourbaki.logique.i_1_termes_relations.formule import (
     var, app, egal, appartient, et, impl, non, pourtout, existe, inclus,
 )
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ensembles.familles.iii_7_limites import ensembles_limites as L
 from bourbaki.ordre.iii_7_limites import ensembles_limites_canoniques as C
@@ -35,13 +35,13 @@ def test_diagramme_valeur_proj_forme():
 
 def test_commute_valeur_proj_close():
     """commute_valeur_proj est une formule (∀∀∀ ⇒ DIAG) — bien formée."""
-    from bourbaki.logique.formule import Formule
+    from bourbaki.logique.i_1_termes_relations.formule import Formule
     f = P.commute_valeur_proj("u", "f", "g", _leq(), "I")
     assert isinstance(f, Formule)
 
 
 def test_commute_valeur_ind_close():
-    from bourbaki.logique.formule import Formule
+    from bourbaki.logique.i_1_termes_relations.formule import Formule
     f = P.commute_valeur_ind("u", "f", "g", _leq(), "I")
     assert isinstance(f, Formule)
 
@@ -56,7 +56,7 @@ def test_w_indice_proj_valeur():
 
 
 def test_critere_separation_proj_forme():
-    from bourbaki.logique.formule import Formule
+    from bourbaki.logique.i_1_termes_relations.formule import Formule
     s = P.critere_separation_proj("u", "F", "I")
     assert isinstance(s, Formule)
 

@@ -7,9 +7,9 @@ introductrice » de Bourbaki), légitime car existence + unicité sont prouvées
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (Terme, var, app, tau, egal, inclus, ou, et, impl, non, equiv,
+from bourbaki.logique.i_1_termes_relations.formule import (Terme, var, app, tau, egal, inclus, ou, et, impl, non, equiv,
                      pourtout, existe, coll, appartient)
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 
 _X, _Y, _Z = var("x"), var("y"), var("z")
 

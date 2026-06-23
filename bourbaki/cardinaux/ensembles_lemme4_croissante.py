@@ -18,21 +18,21 @@ A est construit par un AXIOME DÉFINITIONNEL (S8+A1) dans une THÉORIE DÉDIÉE 
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (
+from bourbaki.logique.i_1_termes_relations.formule import (
     Terme, var, egal, et, ou, non, impl, appartient, pourtout, equiv, inclus,
 )
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.formule import tau
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_1_termes_relations.formule import tau
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
     instancie, equivalence_avant, equivalence_arriere, projection_gauche,
     cas, tiers_exclu, dne,
 )
-from bourbaki.logique.tactiques.tactiques_abrege import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import (
     a_implique_a, syllogisme, antecedent_consequent,
 )
-from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie
+from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import symetrie
 from bourbaki.cardinaux.ensembles_ordinal_cardinal_bon_ordre import (
     bon_ordre_donne_clause_plus_petit,
 )
@@ -144,7 +144,7 @@ def A_inclus_E(R="R", E_set="E", f="f", z="z"):
     """⊢ A ⊂ E.   (φ(z) ⇒ z∈E par projection gauche.)"""
     vz = var(z)
     eq = A_membre(R, E_set, f, vz)                       # z∈A ⇔ (z∈E et f(z)<z)
-    from bourbaki.logique.tactiques.tactiques_abrege import syllogisme
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import syllogisme
     z_imp = syllogisme(equivalence_avant(eq),
                        projection_gauche(appartient(vz, _t(E_set)),
                                          _strict(_val(f, vz), vz, R)))

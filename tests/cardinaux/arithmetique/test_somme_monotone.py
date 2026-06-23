@@ -6,7 +6,7 @@
   • cardinal_inf_egal_monotone_successeur : (Card A≤Card B) ⇒ (a+1 ≤ b+1).
 Chaque test vérifie la conclusion EXACTE + clôture.
 """
-from bourbaki.logique.formule import var, egal, et, inclus, impl
+from bourbaki.logique.i_1_termes_relations.formule import var, egal, et, inclus, impl
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import inf_egal_card, cardinal
 from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import somme_disjointe

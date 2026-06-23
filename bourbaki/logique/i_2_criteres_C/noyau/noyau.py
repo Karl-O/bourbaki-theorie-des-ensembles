@@ -28,7 +28,7 @@ from bourbaki.assemblage.assemblage import (
     Assemblage, est_lettre, lettres, disjonction, implication,
     substitution_b_x_a, tau_x, egalite, equivalence, existe, pour_tout,
 )
-from bourbaki.logique.lecture import (
+from bourbaki.logique.i_1_termes_relations.lecture import (
     Signature, DEFAUT, est_relation, est_terme, depuis_assemblage, vers_assemblage,
 )
 

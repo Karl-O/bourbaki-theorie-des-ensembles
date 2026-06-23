@@ -6,8 +6,8 @@ l'inclusion ; le reste de la boîte à outils suivra.
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import var, appartient, inclus
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_1_termes_relations.formule import var, appartient, inclus
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 
 
 def antecedent_consequent(f):

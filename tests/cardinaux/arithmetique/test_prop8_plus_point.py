@@ -7,7 +7,7 @@ gauche A×{0} à laquelle on adjoint, disjointement, l'unique point marqué * = 
   • marqueur_hors_copie_gauche : ¬((∅,1) ∈ A×{0}) ;
   • somme_un_plus_point        : (z∈A⊔{∅}) ⇔ ((z∈A×{0}) ou (z=(∅,1))).
 """
-from bourbaki.logique.formule import var, egal, ou, non, appartient, equiv
+from bourbaki.logique.i_1_termes_relations.formule import var, egal, ou, non, appartient, equiv
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import somme_disjointe, ZERO, UN
 from bourbaki.cardinaux.arithmetique import ensembles_prop8_plus_point as PP

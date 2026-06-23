@@ -19,17 +19,17 @@ injective_dans(h,A⊔{∅}), dom h = A⊔{∅}, image(h,A⊔{∅}) = B⊔{∅}, 
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (var, egal, et, ou, non, appartient, existe, inclus)
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_1_termes_relations.formule import (var, egal, et, ou, non, appartient, existe, inclus)
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.tactiques.tactiques_abrege import a_implique_a, syllogisme
-from bourbaki.logique.tactiques.tactiques_abrege2 import (conjonction_intro,
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import a_implique_a, syllogisme
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (conjonction_intro,
                                conjonction_elim_gauche, conjonction_elim_droite,
                                equivalence_avant, equivalence_arriere,
                                equivalence_transitivite, instancie, cas, disj_syll_thm)
-from bourbaki.logique.tactiques.tactiques_abrege_egalite import (symetrie,
+from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import (symetrie,
                                           composer_egalites, congruence_terme)
-from bourbaki.logique.tactiques.tactiques_abrege_quantif import existe_elimination, alpha_existe
+from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import existe_elimination, alpha_existe
 from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import egalite_par_extension
 from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import ZERO, UN, somme_disjointe
 from bourbaki.ensembles.fonctions.ii_3_4_fonctions_valeur.ensembles_fonctions import valeur_caracterisation, valeur_dans_graphe
@@ -102,7 +102,7 @@ def _membre_image_g(a, z, h="h"):
     bwd_in = N.loi_deduction(inR, conjonction_intro(u_inA0_r, uz_g_r))
     inner_equiv = conjonction_intro(fwd_in, bwd_in)            # inL ⇔ inR
     # (∃u)inL ⇔ (∃u)inR
-    from bourbaki.logique.tactiques.tactiques_abrege_quantif import congruence_existe
+    from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import congruence_existe
     ex_equiv = congruence_existe(inner_equiv, "u")
     return equivalence_transitivite(img, ex_equiv)            # z∈g⟨A0⟩ ⇔ (∃u)(u∈A0 et (u,z)∈h)
 

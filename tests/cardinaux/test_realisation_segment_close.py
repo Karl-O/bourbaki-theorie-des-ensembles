@@ -186,6 +186,6 @@ def test_cardinaux_bien_ordonnes_depuis_subset_non_vacueux():
 def test_garde_est_Ro_independante():
     # realisation_segment_garde et subset_realise_segment sont Ro-INDÉPENDANTES
     # (seg(a,·,t) = seg_ext(a,t) ne porte pas Ro), condition de l'élimination ∃Ro.
-    from bourbaki.logique.formule import libres_f
+    from bourbaki.logique.i_1_termes_relations.formule import libres_f
     assert "Ro" not in libres_f(M.realisation_segment_garde())
     assert "Ro" not in libres_f(M.subset_realise_segment())

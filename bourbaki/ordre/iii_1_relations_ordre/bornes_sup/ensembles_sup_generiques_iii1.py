@@ -38,16 +38,16 @@ theorie_ensembles INTANGIBLE = 22 : tout est DÉRIVÉ de la logique pure du
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (
+from bourbaki.logique.i_1_termes_relations.formule import (
     Terme, var, egal, et, impl, appartient, existe, pourtout, inclus,
 )
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
     instancie,
 )
-from bourbaki.logique.tactiques.tactiques_abrege_quantif import existe_elimination
+from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import existe_elimination
 from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis.ensembles_ordre_relation import (
     majorant, borne_superieure,
 )
@@ -247,11 +247,11 @@ def majorant_reunion_iff(G="G", A="A", B="B", E_set="E", m="m", x="x"):
     [Le passage de ce lemme à l'égalité sup(A∪B)=sup{supA,supB} demande la borne sup
     d'une PAIRE {supA,supB} : voir RAPPORT — résiduel honnête.]"""
     from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import _instance_reunion
-    from bourbaki.logique.formule import ou as _ou
-    from bourbaki.logique.tactiques.tactiques_abrege2 import (
+    from bourbaki.logique.i_1_termes_relations.formule import ou as _ou
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
         equivalence_arriere as _ea, equivalence_avant as _ev, cas as _cas,
     )
-    from bourbaki.logique.tactiques.tactiques_abrege import syllogisme
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import syllogisme
     vA, vB, vm, vE = _terme(A), _terme(B), _terme(m), _terme(E_set)
     vx = var(x)
     AuB = E.reunion(vA, vB)

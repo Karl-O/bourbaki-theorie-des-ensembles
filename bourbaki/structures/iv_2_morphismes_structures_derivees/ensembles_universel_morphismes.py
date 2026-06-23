@@ -36,12 +36,12 @@ et l'on certifie les lemmes DIRECTS (définitionnels + le cœur logique de IN/FI
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (var, egal, et, impl, equiv, pourtout,
+from bourbaki.logique.i_1_termes_relations.formule import (var, egal, et, impl, equiv, pourtout,
                                        existe, appartient)
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.tactiques.tactiques_abrege import a_implique_a
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import a_implique_a
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
     equivalence_avant, equivalence_arriere, instancie)
 
@@ -53,7 +53,7 @@ def _morph_defaut(nom="Mor"):
     """Prédicat de morphisme générique : « f ∈ Mor(e1,s1,e2,s2) » via un terme
     opaque app(nom, e1,s1,e2,s2) jouant le rôle de σ[e1,e2,s1,s2] (l'ensemble des
     σ-morphismes, MO_I : ⊂ 𝓕(e1;e2)).  Le lecteur passe son propre `morph`."""
-    from bourbaki.logique.formule import app
+    from bourbaki.logique.i_1_termes_relations.formule import app
     return lambda e1, s1, e2, s2, f: appartient(f, app(nom, e1, s1, e2, s2))
 
 
@@ -73,7 +73,7 @@ def est_morphisme(e1, s1, e2, s2, f, morph=None):
 def ensemble_morphismes(e1, s1, e2, s2, sigma="Sig"):
     """σ[E, E', 𝒮, 𝒮'] — l'ensemble (terme) des σ-morphismes de E dans E'
     (IV.2.1).  Terme opaque app(sigma, e1,s1,e2,s2) ; (MO_I) ⟹ σ[…] ⊂ 𝓕(E;E')."""
-    from bourbaki.logique.formule import app
+    from bourbaki.logique.i_1_termes_relations.formule import app
     return app(sigma, e1, s1, e2, s2)
 
 
@@ -98,14 +98,14 @@ def moins_fine(e, s1, s2, morph=None):
 def comparables(e, s1, s2, morph=None):
     """« 𝒮₁ et 𝒮₂ sont comparables » := l'une est plus fine que l'autre (IV.2.2).
     Codé : plus_fine(E,𝒮₁,𝒮₂) ∨ plus_fine(E,𝒮₂,𝒮₁)."""
-    from bourbaki.logique.formule import ou
+    from bourbaki.logique.i_1_termes_relations.formule import ou
     return ou(plus_fine(e, s1, s2, morph), plus_fine(e, s2, s1, morph))
 
 
 def strictement_plus_fine(e, s1, s2, morph=None):
     """« 𝒮₁ est strictement plus fine que 𝒮₂ » := 𝒮₁ plus fine que 𝒮₂ ET 𝒮₁ ≠ 𝒮₂
     (IV.2.2)."""
-    from bourbaki.logique.formule import non
+    from bourbaki.logique.i_1_termes_relations.formule import non
     return et(plus_fine(e, s1, s2, morph), non(egal(_t(s1), _t(s2))))
 
 
@@ -204,13 +204,13 @@ def initiale_implique_f_iota_morphisme(e="E", struct_I="I", i="I0",
     struct_I = _t(struct_I)
     ve, vi = var(e), var(i)
     if af is None:
-        from bourbaki.logique.formule import app
+        from bourbaki.logique.i_1_termes_relations.formule import app
         af = lambda t: app("A", t)
     if sf is None:
-        from bourbaki.logique.formule import app
+        from bourbaki.logique.i_1_termes_relations.formule import app
         sf = lambda t: app("Sig", t)
     if ff is None:
-        from bourbaki.logique.formule import app
+        from bourbaki.logique.i_1_termes_relations.formule import app
         ff = lambda t: app("f", t)
     if morph is None:
         morph = _morph_defaut()
@@ -248,7 +248,7 @@ def image_reciproque_structure(e, a, s, f, ep="Ep", sp="Sp", g="g", morph=None,
 def _struct_image_reciproque(a, s, f):
     """Terme (opaque) de la structure image réciproque f⁻¹(𝒮) — son existence et sa
     construction effective sont REPORTÉES (CST22) ; ici terme nommé."""
-    from bourbaki.logique.formule import app
+    from bourbaki.logique.i_1_termes_relations.formule import app
     return app("image_reciproque_struct", a, s, f)
 
 
@@ -267,7 +267,7 @@ def structure_produit(i, af, sf, e=None, prf=None, morph=None, iota="iota"):
     """« structure produit des 𝒮_ι » := structure initiale pour la famille
     (A_ι, 𝒮_ι, pr_ι)_{ι∈I} sur E = ∏_ι A_ι  (IV.2), pr_ι la projection.
     Renvoie la caractérisation (propriété (IN)) avec f_ι = pr_ι."""
-    from bourbaki.logique.formule import app
+    from bourbaki.logique.i_1_termes_relations.formule import app
     if e is None:
         e = app("produit_fam", app("famille_A"), _t(i))   # ∏_ι A_ι  (terme)
     struct_P = _struct_produit(i, sf)
@@ -279,7 +279,7 @@ def structure_produit(i, af, sf, e=None, prf=None, morph=None, iota="iota"):
 
 
 def _struct_produit(i, sf):
-    from bourbaki.logique.formule import app
+    from bourbaki.logique.i_1_termes_relations.formule import app
     return app("structure_produit", _t(i) if isinstance(i, str) else i)
 
 

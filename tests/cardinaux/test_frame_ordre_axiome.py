@@ -1,5 +1,5 @@
 """Tests — axiome DÉFINITIONNEL du graphe d'ordre Γ𝔉 (Hessenberg, Zorn E.III.48)."""
-from bourbaki.logique.formule import var, appartient, equiv
+from bourbaki.logique.i_1_termes_relations.formule import var, appartient, equiv
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege import theorie_ensembles
 from bourbaki.cardinaux.ensembles_hessenberg_hard import frame_ordre

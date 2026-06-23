@@ -11,7 +11,7 @@ KEYSTONE de la trichotomie des ordinaux (la « glue » composition au niveau gra
 Vérifie : conclusion == cible (anti-tautologie/anti-affaiblissement), hypothèses ==
 EXACTEMENT les 6 prémisses structurelles, forme implicative CLOSE, theorie = 22 axiomes.
 """
-from bourbaki.logique.formule import var, egal, et, appartient
+from bourbaki.logique.i_1_termes_relations.formule import var, egal, et, appartient
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis.ensembles_ordre_vocab import (est_isomorphisme_ordre,
                                                   compatible_ordre)

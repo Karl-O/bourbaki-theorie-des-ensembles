@@ -15,7 +15,7 @@ from bourbaki.cardinaux import ensembles_maximalite_close as MAX
 from bourbaki.cardinaux import ensembles_fusion_depuis_coincidence_app as FDA
 from bourbaki.cardinaux import ensembles_trichotomie_scaffold as TS
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.formule import appartient, var
+from bourbaki.logique.i_1_termes_relations.formule import appartient, var
 
 
 def _Rf(R):

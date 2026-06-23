@@ -39,7 +39,7 @@ def test_bo_induit_B_theorie_22():
 def test_membre_graphe_induit_forme():
     # (u,v)∈graphe_induit(Ro,B) ⇔ ((u,v)∈Ro et (u∈B et v∈B)) — instance d'axiome (clos)
     eqv = OI.membre_graphe_induit()
-    from bourbaki.logique.formule import equiv, appartient, et
+    from bourbaki.logique.i_1_termes_relations.formule import equiv, appartient, et
     from bourbaki.cardinaux.ensembles_segments_construction import _R_de
     Rof = _R_de("Ro")
     u, v, B = E.var("ui"), E.var("vi"), E.var("B")

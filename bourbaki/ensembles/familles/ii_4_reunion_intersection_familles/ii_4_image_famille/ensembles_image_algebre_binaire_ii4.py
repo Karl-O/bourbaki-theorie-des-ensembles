@@ -26,17 +26,17 @@ réciproque G:=f⁻¹ (couple (x,a)∈f⁻¹).  theorie_ensembles() inchangée (
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (
+from bourbaki.logique.i_1_termes_relations.formule import (
     var, egal, et, ou, non, appartient, existe, impl, Terme)
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
     equivalence_avant, equivalence_arriere,
     instancie, equivalence_transitivite as etr, equivalence_symetrie as esym,
     et_congruence_gauche, et_congruence_droite, comm_et, et_ou_distrib,
     ou_congruence, assoc_et, cas)
-from bourbaki.logique.tactiques.tactiques_abrege_quantif import congruence_existe
+from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import congruence_existe
 from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import egalite_par_extension
 from bourbaki.cardinaux.ensembles_produit_union_carre import existe_ou
 
@@ -131,9 +131,9 @@ def image_reunion_binaire(f="f", b="B", y="Y"):
 # ════════════════════════════════════════════════════════════════════════════
 #  Outils communs aux lemmes CONDITIONNELS (hyp `est_fonctionnel(f)`).
 # ════════════════════════════════════════════════════════════════════════════
-from bourbaki.logique.formule import pourtout, subst_f
-from bourbaki.logique.tactiques.tactiques_abrege2 import syllogisme
-from bourbaki.logique.tactiques.tactiques_abrege_quantif import existe_elimination, alpha_existe
+from bourbaki.logique.i_1_termes_relations.formule import pourtout, subst_f
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import syllogisme
+from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import existe_elimination, alpha_existe
 from bourbaki.ensembles.fonctions.ii_3_2_reciproque.ensembles_reciproque import couple_reciproque
 from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import extensionnalite_appliquee
 
@@ -248,7 +248,7 @@ def image_reciproque_inter_binaire(f="f", b="B", y="Y"):
     return N.loi_deduction(E.est_fonctionnel(vf), eq)
 
 
-from bourbaki.logique.tactiques.tactiques_abrege2 import contraposition
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import contraposition
 
 
 # ════════════════════════════════════════════════════════════════════════════

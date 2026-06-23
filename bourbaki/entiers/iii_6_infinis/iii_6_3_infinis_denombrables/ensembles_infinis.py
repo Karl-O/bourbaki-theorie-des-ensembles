@@ -70,9 +70,9 @@ III.6.3 et/ou la récurrence C61, NON disponibles ; cf. ensembles_entiers*.py) :
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (Terme, var, app, tau, egal, et, non, impl, equiv, ou,
+from bourbaki.logique.i_1_termes_relations.formule import (Terme, var, app, tau, egal, et, non, impl, equiv, ou,
                      existe, pourtout, appartient, inclus)
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import cardinal, equipotent, inf_egal_card
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import est_fini, est_fini_ensemble, est_entier

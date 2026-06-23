@@ -7,7 +7,7 @@ Vérifient les FORMULES verbatim des définitions et la conclusion EXACTE (== ci
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (var, app, egal, et, impl, equiv,
+from bourbaki.logique.i_1_termes_relations.formule import (var, app, egal, et, impl, equiv,
                                        appartient, existe, pourtout, tau)
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ensembles.ii_6_equivalence import ensembles_quotient_complements as Q

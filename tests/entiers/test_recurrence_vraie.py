@@ -2,7 +2,7 @@
 résidu honnête `predecesseur_fini_universel` (report #2 FAUX éliminé)."""
 import pytest
 
-from bourbaki.logique.formule import var, et, impl, non, pourtout, existe
+from bourbaki.logique.i_1_termes_relations.formule import var, et, impl, non, pourtout, existe
 from bourbaki.cardinaux.ensembles_cardinaux import est_cardinal, inf_egal_card
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import est_fini, ZERO, successeur
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E

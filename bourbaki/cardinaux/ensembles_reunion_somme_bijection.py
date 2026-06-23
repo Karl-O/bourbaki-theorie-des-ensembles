@@ -24,16 +24,16 @@ Les 4 conjoints de est_bijection_de(W, A∪B, A⊔B) :
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (Terme, var, egal, et, non, appartient,
+from bourbaki.logique.i_1_termes_relations.formule import (Terme, var, egal, et, non, appartient,
                                        existe, pourtout, inclus)
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.tactiques.tactiques_abrege import a_implique_a
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import a_implique_a
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
     equivalence_avant, equivalence_arriere, instancie,
 )
-from bourbaki.logique.tactiques.tactiques_abrege_egalite import (
+from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import (
     symetrie, composer_egalites,
 )
 
@@ -66,7 +66,7 @@ def _subst_terme(term, old_t, new_v):
     if term == old_t:
         return new_v
     if getattr(term, "tag", None) == "app":
-        from bourbaki.logique.formule import app as _app
+        from bourbaki.logique.i_1_termes_relations.formule import app as _app
         return _app(term.nom, *[_subst_terme(arg, old_t, new_v) for arg in term.args])
     return term
 
@@ -251,7 +251,7 @@ def _images_disjointes(a, b):
     imgB_eq = copie_graphe_image(vb, UN)                 # image(Δ₁,B) = B×{1}
     domA_eq = copie_graphe_domaine(va, ZERO)             # dom Δ₀ = A
     domB_eq = copie_graphe_domaine(vb, UN)               # dom Δ₁ = B
-    from bourbaki.logique.tactiques.tactiques_abrege_egalite import congruence_terme
+    from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import congruence_terme
     # image(Δ₀, dom Δ₀) = A×{0} :  domΔ₀↦A (congruence dans le 2e arg de image, SAFE car
     # gA ne contient pas dom(gA)) donne image(Δ₀,domΔ₀)=image(Δ₀,A) ; puis =A×{0}.
     imgAdom_eq_imgAA = N.modus_ponens(domA_eq,

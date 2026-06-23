@@ -7,10 +7,10 @@ python -m pytest V9/test_formule.py -v
 """
 from __future__ import annotations
 
-from bourbaki.logique import formule as F
-from bourbaki.logique.formule import (var, egal, appartient, inclus, non, ou, et, impl,
+from bourbaki.logique.i_1_termes_relations import formule as F
+from bourbaki.logique.i_1_termes_relations.formule import (var, egal, appartient, inclus, non, ou, et, impl,
                      pourtout, existe, coll, subst_f, libres_f, afficher_f)
-from bourbaki.logique.lecture import est_relation
+from bourbaki.logique.i_1_termes_relations.lecture import est_relation
 
 
 # ── Axiomes du chapitre II, construits SANS explosion ─────────────────────────
@@ -58,13 +58,13 @@ def test_affichage():
     # A2 = (∀x)(∀y) Coll_z(...) ; Coll s'affiche par sa définition (∃…)(∀…)
     assert afficher_f(A2).startswith("(∀x) (∀y) (∃")
     # ⇒ et ∀ sont reconnus dans A1
-    from bourbaki.logique.formule import impl, var as v
+    from bourbaki.logique.i_1_termes_relations.formule import impl, var as v
     assert afficher_f(impl(egal(v("a"), v("b")), egal(v("c"), v("d")))) == "((a = b) ⇒ (c = d))"
     assert afficher_f(A1).startswith("(∀x) (∀y)")
 
 
 def test_alpha_equivalence():
-    from bourbaki.logique.formule import alpha_egal, existe, appartient, var as v
+    from bourbaki.logique.i_1_termes_relations.formule import alpha_egal, existe, appartient, var as v
     # (∃x)(x∈u) ≡ (∃w)(w∈u) à renommage près, mais ≠ structurellement
     f = existe("x", appartient(v("x"), v("u")))
     g = existe("w", appartient(v("w"), v("u")))

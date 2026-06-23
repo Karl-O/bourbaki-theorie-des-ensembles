@@ -4,7 +4,7 @@ Certifie que l'endgame logique tient : à partir des deux isos (h : D≅I, hi : 
 de la maximalité (D=E ou I=F) et des deux segments, on conclut la trichotomie SAINE
 (trichotomie_ordinaux_canon, forme anti-capture). 5 hyps structurelles, non tautologique.
 """
-from bourbaki.logique.formule import var, egal, ou, appartient
+from bourbaki.logique.i_1_termes_relations.formule import var, egal, ou, appartient
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux import ensembles_trichotomie_maillon_final as MF
 from bourbaki.ordre.iii_1_relations_ordre.isomorphismes_ordre import ensembles_iso_ordre_canon as C

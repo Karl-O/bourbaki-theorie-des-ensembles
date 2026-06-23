@@ -1,5 +1,5 @@
 """Tests STEP B2 — pelage des témoins de la chaîne de contradiction Hessenberg."""
-from bourbaki.logique.formule import libres_f, egal, non, var
+from bourbaki.logique.i_1_termes_relations.formule import libres_f, egal, non, var
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import cardinal
 from bourbaki.cardinaux.ensembles_frame_extension_finale import cadre_ensemble

@@ -42,21 +42,21 @@ from __future__ import annotations
 
 from functools import lru_cache
 
-from bourbaki.logique.formule import (
+from bourbaki.logique.i_1_termes_relations.formule import (
     Terme, var, egal, et, ou, non, impl, appartient, existe, pourtout, inclus, tau,
 )
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.tactiques.tactiques_abrege import a_implique_a
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import a_implique_a
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite, instancie,
     equivalence_avant, equivalence_arriere, contraposition, syllogisme, cas,
     tiers_exclu, antecedent_consequent,
 )
-from bourbaki.logique.tactiques.tactiques_abrege_quantif import (
+from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import (
     existe_elimination, alpha_existe,
 )
-from bourbaki.logique.tactiques.tactiques_abrege_egalite import (
+from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import (
     composer_egalites, symetrie as _sym_eq,
 )
 
@@ -294,10 +294,10 @@ def _bo_alpha_equiv(Rname, e, setb, elemb, compb):
 
     α-renomme les TROIS liants de la clause-minimum (∀S→∀setb, ∃a→∃elemb, ∀w→∀compb).
     Renommage innermost-first (w, a, S).  Clone PARAMÉTRIQUE de RSP._bo_full_equiv."""
-    from bourbaki.logique.tactiques.tactiques_abrege_quantif import (
+    from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import (
         alpha_pour_tout, alpha_existe, congruence_pour_tout, congruence_existe,
     )
-    from bourbaki.logique.tactiques.tactiques_abrege2 import (
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
         et_congruence_droite, equivalence_transitivite, ou_congruence,
     )
     from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege import est_relation_ordre_dans
@@ -347,7 +347,7 @@ def _zermelo_bo(a, setb, elemb, compb, Ro="Ro"):
     PARAMÉTRIQUE de RSP.zermelo_bo_form : zermelo('Xz') donne (∃Rz) bo(.., S,a,w) ; on
     α-renomme la clause-minimum (S→setb, a→elemb, w→compb), renomme ∃Rz→Ro, généralise
     Xz et instancie au TERME a.  CLOS, 0 hypothèse."""
-    from bourbaki.logique.tactiques.tactiques_abrege_quantif import (
+    from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import (
         alpha_existe, congruence_existe,
     )
     va = _t(a)
@@ -383,7 +383,7 @@ def _equiv_clean_pp(Ro="Ro", a="a"):
     bo_clean = est_bien_ordonne(.., X='X',a='a',w='w') (de realisation_garde_clean) ;
     bo_pp = la forme GENUINE de plus_petit_card_segment (binders extraits structurellement).
     Composition : (bo_Saw ⇔ bo_clean)⁻¹ puis (bo_Saw ⇔ bo_pp)."""
-    from bourbaki.logique.tactiques.tactiques_abrege2 import (
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
         equivalence_symetrie, equivalence_transitivite,
     )
     setb, elemb, compb = _bo_min_binders(_bo_form_pp(Ro, a))

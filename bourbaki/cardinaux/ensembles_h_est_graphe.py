@@ -48,18 +48,18 @@ NE MODIFIE AUCUN fichier existant.
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (
+from bourbaki.logique.i_1_termes_relations.formule import (
     Terme, var, egal, et, impl, equiv, appartient, existe, pourtout, subst_f,
 )
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import couple_egal_implique_composantes
-from bourbaki.logique.tactiques.tactiques_abrege import syllogisme
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import syllogisme
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
     equivalence_avant, equivalence_arriere, instancie, projection_droite,
 )
-from bourbaki.logique.tactiques.tactiques_abrege_quantif import (
+from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import (
     existe_elimination, monotonie_existe,
 )
 from bourbaki.cardinaux import ensembles_trichotomie_scaffold as TS
@@ -204,7 +204,7 @@ def h_membre_depuis_set(E_set="E", R="R", F_set="F", Rp="Rp", u="cu", v="cv",
 
 def _symetrie(t, u):
     """⊢ (T=U) ⇒ (U=T)."""
-    from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie
+    from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import symetrie
     return symetrie(t, u)
 
 
@@ -281,7 +281,7 @@ def h_est_graphe(E_set="E", R="R", F_set="F", Rp="Rp", z="z", a="a", b="b"):
     corps_ab = TS._corps_h(_t(E_set), _t(R), _t(F_set), _t(Rp), va, vb)
     # ── (∃a)(∃b)(z=(a,b) et corps_h(a,b)) ⇒ (∃a)(∃b)(z=(a,b)) ────────────────────
     #   affaiblir le corps inner : (z=(a,b) et corps_h(a,b)) ⇒ z=(a,b)  [projection]
-    from bourbaki.logique.tactiques.tactiques_abrege2 import projection_gauche
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import projection_gauche
     proj = projection_gauche(egal(vz, E.couple(va, vb)), corps_ab)   # (z=(a,b) et …) ⇒ z=(a,b)
     #   monter sous (∃b) puis (∃a)
     mono_b = monotonie_existe(proj, b)                        # (∃b)(full) ⇒ (∃b)(z=(a,b))
@@ -301,15 +301,15 @@ def _alpha_existe2(src, a, b, x, y, vz):
 
     On renomme d'abord le liant INTERNE b→y, on remonte la congruence sous (∃a), puis
     on renomme le liant EXTERNE a→x.  x,y supposés FRAIS dans z (binders d'est_un_couple)."""
-    from bourbaki.logique.tactiques.tactiques_abrege_quantif import alpha_existe
-    from bourbaki.logique.formule import subst_f as _subst
+    from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import alpha_existe
+    from bourbaki.logique.i_1_termes_relations.formule import subst_f as _subst
     va = var(a)
     inner = egal(vz, E.couple(va, var(b)))                    # z=(a,b)
     ren_b = alpha_existe(b, y, inner)                         # (∃b)(z=(a,b)) ⇔ (∃y)(z=(a,y))
     eqv_b_lift = _congruence_existe(ren_b, a)                 # (∃a)(∃b)… ⇔ (∃a)(∃y)…
     body_x = existe(y, _subst(var(y), b, inner))             # (∃y)(z=(a,y))
     ren_a = alpha_existe(a, x, body_x)                       # (∃a)(∃y)… ⇔ (∃x)(∃y)…
-    from bourbaki.logique.tactiques.tactiques_abrege2 import equivalence_transitivite
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import equivalence_transitivite
     return equivalence_transitivite(eqv_b_lift, ren_a)
 
 

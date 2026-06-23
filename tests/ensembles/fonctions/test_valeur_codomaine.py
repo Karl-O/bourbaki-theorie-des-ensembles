@@ -5,7 +5,7 @@ clôture conditionnelle (hypothèses exactes) et conclusions Bourbaki exactes.
 """
 from bourbaki.ensembles.fonctions.ii_3_4_fonctions_valeur.ensembles_valeur_codomaine import (
     couple_valeur_dans_graphe, valeur_dans_codomaine)
-from bourbaki.logique.formule import var, egal, appartient, inclus
+from bourbaki.logique.i_1_termes_relations.formule import var, egal, appartient, inclus
 import bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege as E
 
 

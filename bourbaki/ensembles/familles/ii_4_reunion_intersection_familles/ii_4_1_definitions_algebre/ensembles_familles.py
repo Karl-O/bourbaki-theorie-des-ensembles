@@ -17,15 +17,15 @@ longues preuves multi-étapes nouvelles.
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import var, egal, et, impl, appartient, existe, pourtout, inclus
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_1_termes_relations.formule import var, egal, et, impl, appartient, existe, pourtout, inclus
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.tactiques.tactiques_abrege import syllogisme
-from bourbaki.logique.tactiques.tactiques_abrege2 import (conjonction_intro, conjonction_elim_gauche,
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import syllogisme
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (conjonction_intro, conjonction_elim_gauche,
                                conjonction_elim_droite, equivalence_avant,
                                equivalence_arriere, instancie, contraposition,
                                projection_gauche, dni)
-from bourbaki.logique.tactiques.tactiques_abrege_quantif import monotonie_existe, monotonie_pour_tout
+from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import monotonie_existe, monotonie_pour_tout
 from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import vide_sans_element
 from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_vide import vide_ssi_sans_element
 

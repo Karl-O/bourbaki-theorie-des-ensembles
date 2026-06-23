@@ -53,17 +53,17 @@ chaque conclusion est NEUVE (≠ hypothèses, ≠ P⇒P), vérifié dans le test
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (
+from bourbaki.logique.i_1_termes_relations.formule import (
     Terme, var, app, egal, et, ou, impl, non, appartient, existe, pourtout, inclus,
 )
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ensembles.familles.iii_7_limites import ensembles_limites as L
 from bourbaki.ordre.iii_7_limites import ensembles_limites_canoniques as C
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     instancie, conjonction_intro,
 )
-from bourbaki.logique.tactiques.tactiques_abrege_egalite import (
+from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import (
     composer_egalites, symetrie, congruence_terme,
 )
 
@@ -159,7 +159,7 @@ def _relation_2_au_point(Efam, f, leq, i, z, a, b):
     ax_lim = N.axiome(L.theorie_lim_proj(vE, vf, leq, vi),
                       L.axiome_lim_proj(vE, vf, leq, vi))
     car = instancie(ax_lim, vz)                          # z∈lim ⇔ (z∈∏ et cond1)
-    from bourbaki.logique.tactiques.tactiques_abrege2 import (
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
         equivalence_avant, conjonction_elim_droite as _ced,
     )
     Hz = N.assume(appartient(vz, L.lim_proj(vE, vf)))

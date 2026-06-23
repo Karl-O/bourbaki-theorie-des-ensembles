@@ -5,7 +5,7 @@ l'égalité de cardinaux Card(𝔓X) = 2^Card X (Proposition 12), assemblées de
 crux χ∘ρ = id (chi_eq_graphe : χ_{Pre(G)} = G) et ρ∘χ = id (Pre(χ_Y)=Y, round 27).
 """
 import pytest
-from bourbaki.logique.formule import (var, egal, et, non, ou, impl, equiv,
+from bourbaki.logique.i_1_termes_relations.formule import (var, egal, et, non, ou, impl, equiv,
                                        appartient, inclus, pourtout, existe)
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.arithmetique import ensembles_prop12_card as P

@@ -33,18 +33,18 @@ restatement de Cantor 2^Card X > Card X.  Ce module livre l'EMBALLAGE TRIPLE
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (Terme, var, egal, et, non, ou, impl, equiv,
+from bourbaki.logique.i_1_termes_relations.formule import (Terme, var, egal, et, non, ou, impl, equiv,
                      appartient, existe, pourtout, inclus, subst_t)
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.tactiques.tactiques_abrege import a_implique_a, syllogisme
-from bourbaki.logique.tactiques.tactiques_abrege2 import (conjonction_intro,
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import a_implique_a, syllogisme
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (conjonction_intro,
                                conjonction_elim_gauche, conjonction_elim_droite,
                                equivalence_avant, equivalence_arriere,
                                equivalence_transitivite, instancie, cas)
-from bourbaki.logique.tactiques.tactiques_abrege_egalite import (symetrie,
+from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import (symetrie,
                                composer_egalites, congruence_terme)
-from bourbaki.logique.tactiques.tactiques_abrege_quantif import existe_elimination
+from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import existe_elimination
 from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import extensionnalite_appliquee
 # socle 2-élément (0=∅, 1={∅}) — RÉUTILISÉ, jamais redéfini :
 from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import ZERO, UN
@@ -280,7 +280,7 @@ def _non_egal_sym(a, b):
 
     symetrie(b,a) ⊢ (b=a) ⇒ (a=b) ; sa contraposée (tactiques_abrege2) est
     ⊢ ¬(a=b) ⇒ ¬(b=a)."""
-    from bourbaki.logique.tactiques.tactiques_abrege2 import contraposition
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import contraposition
     va, vb = _t(a), _t(b)
     sym = symetrie(vb, va)                                # ⊢ (b=a) ⇒ (a=b)
     return contraposition(sym)                            # ⊢ ¬(a=b) ⇒ ¬(b=a)

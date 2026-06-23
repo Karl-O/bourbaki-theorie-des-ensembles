@@ -7,13 +7,13 @@
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import var, egal, appartient, inclus, impl
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_1_termes_relations.formule import var, egal, appartient, inclus, impl
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.tactiques.tactiques_abrege import syllogisme
-from bourbaki.logique.tactiques.tactiques_abrege2 import (equivalence_avant,
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import syllogisme
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (equivalence_avant,
                                equivalence_arriere, instancie)
-from bourbaki.logique.tactiques.tactiques_abrege_egalite import congruence_terme
+from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import congruence_terme
 from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import ZERO, UN, somme_disjointe
 from bourbaki.cardinaux.arithmetique.ensembles_prop8_coeur._g import A0_terme
 
@@ -44,7 +44,7 @@ def A0_inclus_dom(a="A", h="h"):
     AS = somme_disjointe(var(a) if isinstance(a, str) else a, E.singleton(E.VIDE))
     incl = A0_inclus_AS(a)                                  # A×{0} ⊂ A⊔{∅}
     hdom = N.assume(egal(E.dom(vh), AS))                    # dom h = A⊔{∅}
-    from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie
+    from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import symetrie
     eq2 = N.modus_ponens(hdom, symetrie(E.dom(vh), AS))     # A⊔{∅} = dom h
     # réécrire A⊔{∅} → dom h dans (A×{0} ⊂ ·)
     return N.modus_ponens(incl, equivalence_avant(N.modus_ponens(

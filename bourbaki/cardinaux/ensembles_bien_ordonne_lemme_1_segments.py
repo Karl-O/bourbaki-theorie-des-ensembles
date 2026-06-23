@@ -58,15 +58,15 @@ antisymétrie sont RÉELLEMENT consommées).
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (
+from bourbaki.logique.i_1_termes_relations.formule import (
     Terme, var, egal, et, non, impl, appartient, existe, pourtout, inclus, ou,
 )
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.tactiques.tactiques_abrege import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import (
     a_implique_a, syllogisme, inclusion_reflexive,
 )
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite, instancie,
     equivalence_avant, equivalence_arriere, contraposition, dne,
 )
@@ -109,7 +109,7 @@ def _ex_falso(thm_a, thm_na, z):
 
 def _refute_self(thm_P_imp_notP):
     """De ⊢ (P ⇒ ¬P) déduit ⊢ ¬P.   ((P⇒¬P) ≡ (¬P∨¬P) → ¬P par S1.)"""
-    from bourbaki.logique.tactiques.tactiques_abrege import antecedent_consequent
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import antecedent_consequent
     P, notP = antecedent_consequent(thm_P_imp_notP.conclusion)  # P⇒¬P = ¬P∨¬P
     return N.modus_ponens(thm_P_imp_notP, N.s1(notP))           # (¬P∨¬P)⇒¬P
 
@@ -286,7 +286,7 @@ def seg_reflechit_ordre(R="R", a="a", t="t", s="s"):
     Rf = _R_de(R)
     va, vt, vs = _t(a), _t(t), _t(s)
     St, Ss = seg(R, a, vt), seg(R, a, vs)
-    from bourbaki.logique.tactiques.tactiques_abrege2 import cas, tiers_exclu
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import cas, tiers_exclu
 
     Hcmp = N.assume(comparables_dans(R, a, vt, vs))         # R{t,s} ou R{s,t}
     Hs_in_a = N.assume(appartient(vs, va))                  # s∈a
@@ -304,7 +304,7 @@ def seg_reflechit_ordre(R="R", a="a", t="t", s="s"):
     #     transport R{s,t} → R{t,t} (remplacer s par t dans 1ᵉʳ argument)
     Rtt = _leib_transport(vs, vt, Hseqt, lambda w: Rf(w, vt), Hst)   # R{t,t}
     #     transport R{t,t} → R{t,s} (remplacer t par s dans 2ᵉ argument, via t=s)
-    from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie as _sym
+    from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import symetrie as _sym
     Hteqs = N.modus_ponens(Hseqt, _sym(vs, vt))            # t=s   (de s=t)
     Rts_B1 = _leib_transport(vt, vs, Hteqs, lambda w: Rf(vt, w), Rtt)  # R{t,s}
     brB1 = N.loi_deduction(egal(vs, vt), Rts_B1)           # (s=t) ⇒ R{t,s}   [Hst]

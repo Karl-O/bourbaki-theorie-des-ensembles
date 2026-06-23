@@ -20,12 +20,12 @@ tion de « x entier »), Théorème 2 (𝔞²=𝔞), Lemmes 1-2, Cor. 1-4, Prop.
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import var, et, non, equiv, impl
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_1_termes_relations.formule import var, et, non, equiv, impl
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.entiers.iii_6_infinis.iii_6_3_infinis_denombrables import ensembles_infinis as I
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import est_fini, est_fini_ensemble
-from bourbaki.logique.tactiques.tactiques_abrege import a_implique_a
-from bourbaki.logique.tactiques.tactiques_abrege2 import (conjonction_intro, conjonction_elim_gauche,
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import a_implique_a
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (conjonction_intro, conjonction_elim_gauche,
                                conjonction_elim_droite)
 
 
@@ -68,7 +68,7 @@ def cardinal_infini_ssi_non_fini(a="a"):
     (Déf. 1).  est_infini(𝔞) EST littéralement ¬Fini(𝔞) (= ¬est_fini(𝔞)) ; l'énoncé
     est l'équivalence définitionnelle au niveau des CARDINAUX (l'énoncé pour les
     ENSEMBLES est infini_ssi_non_fini).  a : nom de variable (str) OU Terme."""
-    from bourbaki.logique.formule import Terme
+    from bourbaki.logique.i_1_termes_relations.formule import Terme
     va = a if isinstance(a, Terme) else var(a)
     sens = a_implique_a(I.est_infini(va))               # (𝔞 infini) ⇒ (𝔞 infini) = ¬Fini(𝔞)
     return conjonction_intro(sens, sens)

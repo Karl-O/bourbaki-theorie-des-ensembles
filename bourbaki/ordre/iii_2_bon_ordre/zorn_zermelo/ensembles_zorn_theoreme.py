@@ -28,21 +28,21 @@ NOTATIONS d'ordre :  x ≤ y := (x,y)∈G   [_le] ;   X ⊂ Y := inclus(X,Y).
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (
+from bourbaki.logique.i_1_termes_relations.formule import (
     Terme, var, egal, et, ou, non, impl, equiv, appartient, existe, pourtout, inclus, tau,
 )
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.tactiques.tactiques_abrege import syllogisme, a_implique_a
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import syllogisme, a_implique_a
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
     projection_gauche, projection_droite, contraposition, cas, tiers_exclu,
     equivalence_avant, equivalence_arriere, equivalence_symetrie, instancie,
 )
-from bourbaki.logique.tactiques.tactiques_abrege_quantif import (
+from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import (
     monotonie_existe, existe_elimination,
 )
-from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie as _sym
+from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import symetrie as _sym
 from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis.ensembles_ordre_relation import (
     est_ordre, reflexivite_sur, antisymetrie, transitivite_rel, totalement_ordonne,
     majorant, borne_superieure, plus_grand_element, plus_petit_element,
@@ -79,7 +79,7 @@ def _cut(thm, hyp, preuve_hyp):
 
 def _incl_refl(t):
     """⊢ t⊂t  pour un TERME t."""
-    from bourbaki.logique.tactiques.tactiques_abrege import inclusion_reflexive
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import inclusion_reflexive
     th = inclusion_reflexive("_r")
     return instancie(N.generalisation("_r", th), _terme(t))
 
@@ -91,7 +91,7 @@ def _incl_trans(a, b, c, ab, bc):
     la forme canonique `inclus(a,c)` (auto-freshening si x/y/z y est libre), pour
     que la conclusion soit STRUCTURELLEMENT identique à inclus(a,c) — cas du poset
     P où les chaînes portent les noms x/y/z."""
-    from bourbaki.logique.tactiques.tactiques_abrege2 import _peler_pourtout
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import _peler_pourtout
     va, vb, vc = _terme(a), _terme(b), _terme(c)
     cible = inclus(va, vc)                               # (∀<bndr>)(<bndr>∈a ⇒ <bndr>∈c)
     bndr, _ = _peler_pourtout(cible)                     # le binder réel du ∀ (souvent @0)
@@ -298,7 +298,7 @@ def _vide_inclus(t, z="_zv"):
     """⊢ ∅ ⊂ t  pour un TERME t  (l'ensemble vide est inclus dans tout ensemble).
 
     Binder choisi pour matcher inclus(∅,t)."""
-    from bourbaki.logique.tactiques.tactiques_abrege2 import _peler_pourtout
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import _peler_pourtout
     vt = _terme(t)
     cible = inclus(E.VIDE, vt)
     bndr, _ = _peler_pourtout(cible)
@@ -433,7 +433,7 @@ def Union_inclus_E(G="G", E_set="E", D="D", x="x", C="C"):
     """⊢ { 𝔇⊂P } ⊢ ⋃𝔇 ⊂ E.
 
     Si x∈⋃𝔇, témoin C∈𝔇⊂P donc C est une chaîne (C⊂E), et x∈C, d'où x∈E."""
-    from bourbaki.logique.tactiques.tactiques_abrege2 import _peler_pourtout
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import _peler_pourtout
     vG, vE, vD = var(G), var(E_set), var(D)
     Ut = Union(vG, vE, vD)
     cible = inclus(Ut, vE)
@@ -526,7 +526,7 @@ def Union_totalement_ordonne(G="G", E_set="E", D="D", x="x", y="y", C="C", Cp="C
     Hxy = N.assume(et(appartient(vx, Ut), appartient(vy, Ut)))
     xU = conjonction_elim_gauche(Hxy)                    # x∈⋃𝔇
     yU = conjonction_elim_droite(Hxy)                    # y∈⋃𝔇
-    from bourbaki.logique.tactiques.tactiques_abrege_quantif import alpha_existe
+    from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import alpha_existe
     ex_x = N.modus_ponens(xU, equivalence_avant(_inst_Union(vG, vE, vD, vx)))  # (∃C)(C∈𝔇 et x∈C)
     ex_y_C = N.modus_ponens(yU, equivalence_avant(_inst_Union(vG, vE, vD, vy)))  # (∃C)(C∈𝔇 et y∈C)
     # α-renomme le ∃ de y vers C′ (=Cp) pour ne pas collisionner avec le ∃ de x
@@ -589,7 +589,7 @@ def _C_inclus_Union(G, E_set, D, C, hCD):
     """De ⊢ C∈𝔇 [hCD] déduit ⊢ C⊂⋃𝔇  (tout C∈𝔇 est inclus dans la réunion).
 
     Pour x∈C : (C∈𝔇 et x∈C) témoigne (∃C)(C∈𝔇 et x∈C), donc x∈⋃𝔇."""
-    from bourbaki.logique.tactiques.tactiques_abrege2 import _peler_pourtout
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import _peler_pourtout
     vG, vE, vD, vC = _terme(G), _terme(E_set), _terme(D), _terme(C)
     Ut = Union(vG, vE, vD)
     cible = inclus(vC, Ut)
@@ -633,7 +633,7 @@ def Union_borne_sup(G="G", E_set="E", D="D", m="m", C="x", y="y"):
     ⋃𝔇 est un majorant (Union_majorant) et c'est le PLUS PETIT : pour tout
     majorant m de 𝔇 dans P, m∈P et (∀C)(C∈𝔇⇒C⊂m), donc ⋃𝔇⊂m (tout x∈⋃𝔇 a un
     témoin C∈𝔇 avec x∈C⊂m), d'où (⋃𝔇,m)∈Γ."""
-    from bourbaki.logique.tactiques.tactiques_abrege2 import _peler_pourtout
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import _peler_pourtout
     vG, vE, vD, vm = var(G), var(E_set), var(D), var(m)
     Ut = Union(vG, vE, vD)
     maj_U = Union_majorant(G, E_set, D, C)               # majorant(Γ,𝔇,⋃𝔇,P)  [4 hyps]
@@ -710,10 +710,10 @@ def Gamma_chaine_complet(G="G", E_set="E", D="D", s="s", x="x", y="y", z="z"):
     body = N.loi_deduction(chaine(Gam, Pp, vD, x, y, z), ex_bsup)
     allD = N.generalisation(D, body)                     # (∀D)(chaine⇒(∃s)bsup)
     # α-renomme le liant D → C pour matcher chaine_complet(Γ,P) (binder canonique « C »)
-    from bourbaki.logique.tactiques.tactiques_abrege2 import _peler_pourtout
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import _peler_pourtout
     _, corps_D = _peler_pourtout(allD.conclusion)
     if D != "C":
-        from bourbaki.logique.tactiques.tactiques_abrege_quantif import alpha_pour_tout
+        from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import alpha_pour_tout
         ren = alpha_pour_tout(D, "C", corps_D)           # (∀D)corps ⇔ (∀C)corps'
         allD = N.modus_ponens(allD, equivalence_avant(ren))
     return conjonction_intro(ord_GP, allD)              # chaine_complet(Γ,P)
@@ -736,7 +736,7 @@ def _membre_ajoute(C, t, z):
     inst = instancie(instancie(instancie(ax, vC), E.singleton(vt)), vz)  # z∈C∪{t} ⇔ (z∈C ou z∈{t})
     from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import singleton_membre
     sm = singleton_membre(vz, vt)                            # z∈{t} ⇔ z=t
-    from bourbaki.logique.tactiques.tactiques_abrege2 import (
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
         ou_congruence, equivalence_transitivite,
     )
     aa = a_implique_a(appartient(vz, vC))
@@ -792,7 +792,7 @@ def ajoute_est_chaine(G="G", E_set="E", C="C", t="t", x="x", y="y"):
     Hgtr = N.assume(transitivite_rel(vG))
     C_E = conjonction_elim_gauche(Hch)                   # C⊂E
     # (1) C∪{t}⊂E
-    from bourbaki.logique.tactiques.tactiques_abrege2 import _peler_pourtout
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import _peler_pourtout
     cibleAE = inclus(A, vE)
     bAE, _ = _peler_pourtout(cibleAE)
     vz = var(bAE)
@@ -903,8 +903,8 @@ def _non_maximal_donne_strict(G, E_set, m, hmE, hsans, x="x", t="t"):
 
     E sans maximal ⇒ m (∈E) n'est PAS maximal ⇒ ¬(∀x)((x∈E et (m,x)∈G)⇒x=m),
     donc (∃x)(x∈E et (m,x)∈G et x≠m), reformé en (∃t)(t∈E et ((m,t)∈G et t≠m))."""
-    from bourbaki.logique.tactiques.tactiques_abrege2 import dne, demorgan_et
-    from bourbaki.logique.tactiques.tactiques_abrege_quantif import congruence_existe
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import dne, demorgan_et
+    from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import congruence_existe
     from bourbaki.ordre.iii_2_bon_ordre.zorn_zermelo.ensembles_bourbaki_witt_chaine import (
         _neg_impl_equiv, _ex_falso, _refute_self,
     )
@@ -934,7 +934,7 @@ def _non_maximal_donne_strict(G, E_set, m, hmE, hsans, x="x", t="t"):
 
 def _dni_local(thm):
     """De ⊢ P déduit ⊢ ¬¬P."""
-    from bourbaki.logique.tactiques.tactiques_abrege2 import dni
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import dni
     return N.modus_ponens(thm, dni(thm.conclusion))
 
 
@@ -942,15 +942,15 @@ def _reformule_strict(G, E_set, m, ex_conj, x, t):
     """De ⊢ (∃x)((x∈E et (m,x)∈G) et x≠m) déduit ⊢ (∃t)(t∈E et ((m,t)∈G et t≠m)).
 
     Réassocie ((P et Q) et R) en (P et (Q et R)) sous le ∃, puis α-renomme x→t."""
-    from bourbaki.logique.tactiques.tactiques_abrege2 import assoc_et
-    from bourbaki.logique.tactiques.tactiques_abrege_quantif import congruence_existe, alpha_existe
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import assoc_et
+    from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import congruence_existe, alpha_existe
     vG, vE, vm = _terme(G), _terme(E_set), _terme(m)
     P = appartient(var(x), vE)
     Q = _le(vm, var(x), vG)
     R = non(egal(var(x), vm))
     # ((P et Q) et R) ⇔ (P et (Q et R))
     asse = assoc_et(P, Q, R)                             # (P et (Q et R)) ⇔ ((P et Q) et R)
-    from bourbaki.logique.tactiques.tactiques_abrege2 import equivalence_symetrie
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import equivalence_symetrie
     asse_inv = equivalence_symetrie(asse)               # ((P et Q) et R) ⇔ (P et (Q et R))
     ex_assoc = N.modus_ponens(ex_conj, equivalence_avant(congruence_existe(asse_inv, x)))  # (∃x)(P et (Q et R))
     # α-renomme x → t
@@ -998,7 +998,7 @@ def _strict_chaine_temoin(G, E_set, C, m, t, refl_E, antisym, trans,
 
 def _C_inclus_ajoute(G, C, t):
     """⊢ C ⊂ C∪{t}  (binder matché à inclus(C,C∪{t}))."""
-    from bourbaki.logique.tactiques.tactiques_abrege2 import _peler_pourtout
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import _peler_pourtout
     vG, vC, vt = _terme(G), _terme(C), _terme(t)
     D = _ajoute(vC, vt)
     cible = inclus(vC, D)
@@ -1166,7 +1166,7 @@ def _alpha_forall_x(thm, src, dst, corps_src):
     """De ⊢ (∀src)corps déduit ⊢ (∀dst)(dst|src)corps  (α-renommage du ∀)."""
     if src == dst:
         return thm
-    from bourbaki.logique.tactiques.tactiques_abrege_quantif import alpha_pour_tout
+    from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import alpha_pour_tout
     ren = alpha_pour_tout(src, dst, corps_src)          # (∀src)corps ⇔ (∀dst)corps'
     return N.modus_ponens(thm, equivalence_avant(ren))
 
@@ -1330,7 +1330,7 @@ def zorn_theoreme(G="G", E_set="E", m="m", C="C", x="x", y="y", z="z"):
     falso = _ex_falso(conj, not_conj, non(sans_maximal(vG, vE)))   # ¬sans_maximal  [Hsm, Hz]
     not_sm = _refute_self(N.loi_deduction(sans_maximal(vG, vE), falso))  # ¬sans_maximal  [Hz]
     # ¬sans_maximal = ¬¬(∃m)maximal ⇒ (∃m)maximal  (dne)
-    from bourbaki.logique.tactiques.tactiques_abrege2 import dne
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import dne
     ex_max = element_maximal(vG, vE, var(m), x)
     conc = N.modus_ponens(not_sm, dne(existe(m, ex_max)))   # (∃m)element_maximal(G,E,m)  [Hz]
     return N.loi_deduction(hyp_zorn, conc)               # ⊢ hyp_zorn ⇒ (∃m)maximal

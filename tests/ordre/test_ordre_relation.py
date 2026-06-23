@@ -3,7 +3,7 @@
 Chaque test vérifie la conclusion EXACTE produite par le noyau abrégé ET que le
 théorème est CLOS (aucune hypothèse résiduelle).
 """
-from bourbaki.logique.formule import var, egal, et, ou, impl, appartient, inclus
+from bourbaki.logique.i_1_termes_relations.formule import var, egal, et, ou, impl, appartient, inclus
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis import ensembles_ordre_relation as O
 
@@ -88,7 +88,7 @@ def test_definitions_ordre_construisent():
     assert O.borne_superieure(G, A, m, Es) is not None
     assert O.borne_inferieure(G, A, m, Es) is not None
     # totalement_ordonne = est_ordre(G,E) et (comparabilité) — premier conjoint
-    from bourbaki.logique.formule import var as _v, pourtout, impl as _impl, et as _et
+    from bourbaki.logique.i_1_termes_relations.formule import var as _v, pourtout, impl as _impl, et as _et
     vx, vy = _v("x"), _v("y")
     comparables = pourtout("x", pourtout("y",
         _impl(_et(appartient(vx, Es), appartient(vy, Es)),

@@ -5,7 +5,7 @@ Vérifie la fidélité des DÉFINITIONS introduites (formes attendues) et la
 certification par le noyau des LEMMES logiques directs (extraction des conditions
 (CU_k) de la conjonction des hypothèses de CST22).
 """
-from bourbaki.logique.formule import (var, et, impl, equiv, existe, pourtout,
+from bourbaki.logique.i_1_termes_relations.formule import (var, et, impl, equiv, existe, pourtout,
                                        appartient, inclus, egal, app, alpha_egal)
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import (cardinal, est_cardinal,

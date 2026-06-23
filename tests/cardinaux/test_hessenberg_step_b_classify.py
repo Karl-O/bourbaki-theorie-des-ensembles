@@ -39,7 +39,7 @@ def test_discharge_u_disjoint_is_lateral():
 
 def test_blocker_is_somme_disjointe():
     """Le blocker architectural (HYP 2 / HYP 11) porte bien les tags somme-disjointe."""
-    from bourbaki.logique.formule import afficher_f as af
+    from bourbaki.logique.i_1_termes_relations.formule import afficher_f as af
     thm, _ = classification()
     tagged = [h for h in thm.hypotheses if "paire(vide(), vide())" in af(h)]
     # au moins les 2 hyps cadre⊔ (S₀²∪cadre⊔=Z² et ψ sur cadre⊔)

@@ -40,17 +40,17 @@ SAUVEGARDÉ avant le suivant.
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (
+from bourbaki.logique.i_1_termes_relations.formule import (
     Terme, var, egal, et, ou, non, impl, appartient, inclus, pourtout,
 )
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis import ensembles_ordre_vocab as V
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
     instancie, equivalence_avant, equivalence_arriere,
 )
-from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie, composer_egalites
+from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import symetrie, composer_egalites
 
 
 def _t(x):
@@ -472,7 +472,7 @@ def codomaine_egal_image(phi1="phi1", phi2="phi2", S1="S1", T1="T1", S2="S2",
     from bourbaki.cardinaux.ensembles_segment_comparabilite_abstrait import (
         segments_abstraits_comparables,
     )
-    from bourbaki.logique.tactiques.tactiques_abrege2 import cas
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import cas
     from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis.ensembles_ordre_relation import inclusion_antisymetrique
 
     Rf, Rpf = _R_de(R), _R_de(Rp)

@@ -63,12 +63,12 @@ lève), sans rien postuler ni asserter de faux.
 """
 from __future__ import annotations
 
-from bourbaki.logique import noyau_abrege as N
-from bourbaki.logique.formule import var, Terme, Formule
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
+from bourbaki.logique.i_1_termes_relations.formule import var, Terme, Formule
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     instancie, equivalence_arriere,
 )
-from bourbaki.logique.tactiques.ensembles_alpha_bridge import (
+from bourbaki.logique.i_3_quantifies.ensembles_alpha_bridge import (
     alpha_bridge, _fraiche_totale,
 )
 import bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege as E

@@ -8,13 +8,13 @@ longues par disjonction des cas imbriquée).
 from __future__ import annotations
 
 from bourbaki.assemblage.assemblage import (negation, disjonction, conjonction, implication, equivalence)
-from bourbaki.logique.lecture import DEFAUT
-from bourbaki.logique import noyau
-from bourbaki.logique.tactiques.tactiques import a_implique_a, syllogisme, mono_gauche, mono_droite
-from bourbaki.logique.tactiques.tactiques_prop import (double_negation_intro, double_negation_elim,
+from bourbaki.logique.i_1_termes_relations.lecture import DEFAUT
+from bourbaki.logique.i_2_criteres_C.noyau import noyau
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques import a_implique_a, syllogisme, mono_gauche, mono_droite
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_prop import (double_negation_intro, double_negation_elim,
                             contraposition, conjonction_intro,
                             conjonction_elim_gauche, conjonction_elim_droite)
-from bourbaki.logique.criteres import criteres_C as K
+from bourbaki.logique.i_2_criteres_C.criteres import criteres_C as K
 
 
 def c24_assoc_et(a, b, c, sig=DEFAUT):
@@ -72,7 +72,7 @@ def c25_second(thm_non_a, b, sig=DEFAUT):
     """⊢ ¬A  ⟹  ⊢ (A ou B) ⇔ B.  (2ᵉ cas de C25.)"""
     a = thm_non_a.conclusion.signes  # juste pour récupérer A via la négation
     # A = relation telle que thm_non_a : ⊢ ¬A. On reconstruit A par lecture.
-    from bourbaki.logique.lecture import depuis_assemblage, vers_assemblage
+    from bourbaki.logique.i_1_termes_relations.lecture import depuis_assemblage, vers_assemblage
     arbre = depuis_assemblage(thm_non_a.conclusion, sig)
     A = vers_assemblage(arbre.enfants[0])             # le R sous le ¬
     a_imp_b = noyau.modus_ponens(thm_non_a, noyau.s2(negation(A), b, sig), sig)  # ⊢ A⇒B

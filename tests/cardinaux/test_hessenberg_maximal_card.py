@@ -4,7 +4,7 @@ maximal_carre_egal (𝔟²=𝔟) / hessenberg_a_carre_inf_egal (≥ dur) /
 hessenberg_aa_egal_de_maximal (a²=a sous 2 hyps honnêtes).  theorie=22, non vacuous."""
 from __future__ import annotations
 
-from bourbaki.logique.formule import egal, var
+from bourbaki.logique.i_1_termes_relations.formule import egal, var
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege import theorie_ensembles
 from bourbaki.cardinaux.ensembles_cardinaux import cardinal, est_bijection_de

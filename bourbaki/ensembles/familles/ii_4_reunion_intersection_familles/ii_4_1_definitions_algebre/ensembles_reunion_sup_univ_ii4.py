@@ -22,16 +22,16 @@ de l'axiome de réunion et du liant « z » de l'abréviation ⊂).
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (var, egal, et, impl, appartient,
+from bourbaki.logique.i_1_termes_relations.formule import (var, egal, et, impl, appartient,
                                        existe, pourtout, inclus, equiv)
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.tactiques.tactiques_abrege import syllogisme
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import syllogisme
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche as cg,
     conjonction_elim_droite as cd, equivalence_avant, equivalence_arriere,
     instancie)
-from bourbaki.logique.tactiques.tactiques_abrege_quantif import existe_elimination
+from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import existe_elimination
 
 
 def _inst_reunion(f, i, z):

@@ -13,7 +13,7 @@ géométriques EXPLICITES (les « témoins communs » = Lemme 1 §III.2), jamais
 
 theorie_ensembles() reste = 22 ; rien postulé ; conclusions non tautologiques (≠ hyps).
 """
-from bourbaki.logique.formule import var, egal, appartient, Formule
+from bourbaki.logique.i_1_termes_relations.formule import var, egal, appartient, Formule
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux import ensembles_trichotomie_scaffold as TS
 from bourbaki.cardinaux import ensembles_trichotomie_h_iso as H

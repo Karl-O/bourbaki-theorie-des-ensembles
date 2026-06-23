@@ -5,7 +5,7 @@ CONCLUSION est EXACTEMENT la cible visée (anti-affaibli : pas de tautologie dé
 que les ÉNONCÉS-CIBLES reportés sont des formules bien formées (non postulées), et que
 theorie_ensembles() reste à 22 axiomes (INTANGIBLE).
 """
-from bourbaki.logique.formule import (var, egal, et, impl, non, existe, libres_f)
+from bourbaki.logique.i_1_termes_relations.formule import (var, egal, et, impl, non, existe, libres_f)
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import (
     est_cardinal, cardinal, inf_egal_card, inf_strict_card,

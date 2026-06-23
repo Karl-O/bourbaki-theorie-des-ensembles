@@ -27,8 +27,8 @@ ROUTE (briques CLOSES uniquement) :
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import Terme, var, egal, et, impl
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_1_termes_relations.formule import Terme, var, egal, et, impl
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 
 from bourbaki.cardinaux.ensembles_cardinaux import (
@@ -36,10 +36,10 @@ from bourbaki.cardinaux.ensembles_cardinaux import (
 )
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import est_fini_ensemble
 
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
 )
-from bourbaki.logique.tactiques.tactiques_abrege_egalite import (
+from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import (
     symetrie, composer_egalites,
 )
 
@@ -64,7 +64,7 @@ def _cardinal_egal_si_equipotent_t(tX, tY):
     capture-safe pour des termes quelconques (ici f⟨E⟩)."""
     gen = N.generalisation("X", N.generalisation("Y",
         cardinal_egal_si_equipotent("X", "Y")))
-    from bourbaki.logique.tactiques.tactiques_abrege2 import instancie
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import instancie
     return instancie(instancie(gen, _t(tX)), _t(tY))
 
 
@@ -95,7 +95,7 @@ def cor4_inj_implique_surj(f="f4", Eens="E4", Fens="F4"):
 
     # ── f⟨E⟩ ⊂ F  (4e conjoint de est_injection_de) ─────────────────────────
     h_img_incl = conjonction_elim_droite(h_inj)                     # f⟨E⟩ ⊂ F
-    from bourbaki.logique.formule import inclus
+    from bourbaki.logique.i_1_termes_relations.formule import inclus
     assert h_img_incl.conclusion == inclus(img, vF), "img_incl ≠ (f⟨E⟩⊂F)"
 
     # ── Eq(E, f⟨E⟩) ─────────────────────────────────────────────────────────

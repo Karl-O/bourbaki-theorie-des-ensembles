@@ -10,7 +10,7 @@ canoniques et la caractérisation complète de l'appartenance.
 """
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme import ensembles_somme_disjointe as S
-from bourbaki.logique.formule import var, egal, et, ou, impl, appartient, existe
+from bourbaki.logique.i_1_termes_relations.formule import var, egal, et, ou, impl, appartient, existe
 
 
 def test_somme_disjointe_reunion_clos():

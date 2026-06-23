@@ -5,7 +5,7 @@
 
 INVARIANT : theorie_ensembles() reste = 22 (P/Γ/Union en théories dédiées).
 """
-from bourbaki.logique.formule import var, appartient, equiv, inclus
+from bourbaki.logique.i_1_termes_relations.formule import var, appartient, equiv, inclus
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ordre.iii_2_bon_ordre.zorn_zermelo import ensembles_zorn_theoreme as Z
 
@@ -139,9 +139,9 @@ def test_zorn_theoreme_CLOS():
 
 
 def test_zorn_theoreme_conclusion_est_maximal():
-    from bourbaki.logique.formule import existe, impl
+    from bourbaki.logique.i_1_termes_relations.formule import existe, impl
     from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis.ensembles_ordre_relation import element_maximal
-    from bourbaki.logique.tactiques.tactiques_abrege import antecedent_consequent
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import antecedent_consequent
     t = Z.zorn_theoreme()
     _, cons = antecedent_consequent(t.conclusion)
     assert cons == existe("m", element_maximal(G, Es, var("m")))

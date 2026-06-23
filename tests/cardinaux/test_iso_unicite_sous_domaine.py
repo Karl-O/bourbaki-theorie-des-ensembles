@@ -7,7 +7,7 @@ antisymétrie AMBIANTE).  On vérifie : 7 hypothèses STRUCTURELLES EXACTES (don
 inclus(S,E), JAMAIS bo(R,S)), conclusion fidèle (= cible), non tautologique ;
 auto_iso_est_identite_sous_domaine en miroir ; theorie_ensembles() reste = 22.
 """
-from bourbaki.logique.formule import var, egal, impl, appartient, pourtout, inclus
+from bourbaki.logique.i_1_termes_relations.formule import var, egal, impl, appartient, pourtout, inclus
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux import ensembles_iso_unicite_sous_domaine as U
 from bourbaki.cardinaux.ensembles_lemme4_croissante import _R_de, _val

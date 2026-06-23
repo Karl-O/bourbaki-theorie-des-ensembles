@@ -1,5 +1,5 @@
 """Tests — décharge structurelle des hyps honnêtes de Hessenberg a²=a (cat. A, C, E)."""
-from bourbaki.logique.formule import (
+from bourbaki.logique.i_1_termes_relations.formule import (
     var, egal, et, non, impl, pourtout, appartient, inclus, equiv,
 )
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E

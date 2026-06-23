@@ -56,22 +56,22 @@ INVARIANT : theorie_ensembles() = 22.  Rien postulé.  Hypothèses HONNÊTES
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (
+from bourbaki.logique.i_1_termes_relations.formule import (
     Terme, var, egal, et, ou, non, impl, equiv, appartient, existe, pourtout, inclus,
 )
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis import ensembles_ordre_vocab as V
-from bourbaki.logique.tactiques.tactiques_abrege import syllogisme, a_implique_a
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import syllogisme, a_implique_a
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
     equivalence_avant, equivalence_arriere, instancie, cas, tiers_exclu,
     _peler_pourtout, contraposition, dni, dne,
 )
-from bourbaki.logique.tactiques.tactiques_abrege_quantif import (
+from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import (
     existe_elimination, monotonie_existe, alpha_pour_tout, congruence_pour_tout,
 )
-from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie, composer_egalites
+from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import symetrie, composer_egalites
 
 from bourbaki.cardinaux import ensembles_trichotomie_scaffold as TS
 from bourbaki.cardinaux import ensembles_trichotomie_scaffold_maximalite as M
@@ -120,7 +120,7 @@ def _ex_falso(thm_a, thm_na, z):
 
 def _refute_self(thm_P_imp_notP):
     """De ⊢ (P ⇒ ¬P) déduit ⊢ ¬P  (via S1)."""
-    from bourbaki.logique.tactiques.tactiques_abrege import antecedent_consequent
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import antecedent_consequent
     P, notP = antecedent_consequent(thm_P_imp_notP.conclusion)
     return N.modus_ponens(thm_P_imp_notP, N.s1(notP))
 
@@ -751,7 +751,7 @@ def maximalite_donne_trichotomie_close(E_set="E", R="R", F_set="F", Rp="Rp"):
     elim_a = existe_elimination(imp_a, "a")
     D_after_a = N.modus_ponens(p1a, elim_a)
 
-    from bourbaki.logique.tactiques.tactiques_abrege2 import dne, mono_gauche
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import dne, mono_gauche
     imp = N.loi_deduction(non(D), D_after_a)
     return N.modus_ponens(imp, syllogisme(mono_gauche(dne(D), D), N.s1(D)))
 

@@ -3,7 +3,7 @@
 Vérifie la fidélité des DÉFINITIONS et la certification par le noyau des THÉORÈMES
 logiques directs (critère (AU) ⟺ (AU_I′)+(AU_II′)).
 """
-from bourbaki.logique.formule import (var, et, ou, non, impl, equiv, pourtout,
+from bourbaki.logique.i_1_termes_relations.formule import (var, et, ou, non, impl, equiv, pourtout,
                                        existe, appartient, egal, app, alpha_egal)
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.structures import ensembles_universel_applications as U

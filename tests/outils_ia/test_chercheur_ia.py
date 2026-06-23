@@ -9,8 +9,8 @@ Benchmark :  python V9/test_chercheur_ia.py
 from __future__ import annotations
 
 from bourbaki.assemblage.assemblage import implication, disjonction
-from bourbaki.logique.propositions import A, B, C, D, SIG_PROP
-from bourbaki.logique import noyau
+from bourbaki.logique.i_1_termes_relations.propositions import A, B, C, D, SIG_PROP
+from bourbaki.logique.i_2_criteres_C.noyau import noyau
 from outils_ia.modele import RegressionLogistique
 from outils_ia.chercheur_ia import jeu_relevance, prouver_guide
 from outils_ia.encodeur import traits_paire_seq

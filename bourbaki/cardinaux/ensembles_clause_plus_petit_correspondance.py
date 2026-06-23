@@ -50,15 +50,15 @@ hypothèses ordinales explicites ; le PIVOT monotone est PROUVÉ (non supposé).
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (
+from bourbaki.logique.i_1_termes_relations.formule import (
     Terme, var, app, egal, et, impl, appartient, existe, pourtout, inclus,
 )
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite, instancie,
 )
-from bourbaki.logique.tactiques.tactiques_abrege_quantif import existe_elimination
+from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import existe_elimination
 from bourbaki.cardinaux.ensembles_cardinaux import inf_egal_card, cardinal
 from bourbaki.cardinaux.ensembles_cardinaux_ordre import (
     equipotence_implique_inf_egal, inf_egal_transitive,
@@ -190,7 +190,7 @@ def _leib_gauche(thm, ancien, nouveau, h_eq, phi):
     """De ⊢ φ(ancien) [thm] et ⊢ ancien=nouveau [h_eq] déduit ⊢ φ(nouveau).
 
     Leibniz via S6 : (ancien=nouveau) ⇒ (φ(ancien) ⇔ φ(nouveau))."""
-    from bourbaki.logique.tactiques.tactiques_abrege2 import equivalence_avant
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import equivalence_avant
     eqv = N.modus_ponens(h_eq, N.s6(ancien, nouveau, "wL", phi(var("wL"))))
     return N.modus_ponens(thm, equivalence_avant(eqv))
 

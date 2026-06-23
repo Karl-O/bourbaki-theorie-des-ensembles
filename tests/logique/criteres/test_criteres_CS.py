@@ -9,7 +9,7 @@ python -m pytest V9/test_criteres_CS.py -v
 from __future__ import annotations
 
 from bourbaki.assemblage.assemblage import Assemblage, egalite, disjonction, negation
-from bourbaki.logique.criteres import criteres_CS as CS
+from bourbaki.logique.i_1_termes_relations import criteres_CS as CS
 
 # termes/relations concrets (lettres minuscules = termes ; = signe spécifique)
 def L(n):

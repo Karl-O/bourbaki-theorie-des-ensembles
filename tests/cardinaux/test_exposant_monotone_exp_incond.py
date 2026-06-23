@@ -5,7 +5,7 @@
 
 theorie_ensembles INCHANGÉE (22 axiomes).
 """
-from bourbaki.logique.formule import var, et, non, egal, impl
+from bourbaki.logique.i_1_termes_relations.formule import var, et, non, egal, impl
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import inf_egal_card
 from bourbaki.cardinaux.arithmetique.ensembles_exposant_cardinal import exposant_cardinal_binaire

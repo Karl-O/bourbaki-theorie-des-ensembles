@@ -2,7 +2,7 @@
 INCONDITIONNEL (la comparabilité, hypothèse de seg_reflechit_ordre, est déchargée via
 la totalité du bon ordre).  theorie=22, anti-tautologie.
 """
-from bourbaki.logique.formule import var, ou, impl, appartient
+from bourbaki.logique.i_1_termes_relations.formule import var, ou, impl, appartient
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux import ensembles_bien_ordonne_seg_iso as S
 from bourbaki.cardinaux.ensembles_bien_ordonne_lemme_1_segments import (
@@ -34,7 +34,7 @@ def test_reflechit_ordre_total():
     assert comparables_dans("R", "a", "t", "s") not in refl.hypotheses
     # conclusion = l'implication réciproque
     Rf = _Rf("R")
-    from bourbaki.logique.formule import inclus
+    from bourbaki.logique.i_1_termes_relations.formule import inclus
     cible = impl(inclus(seg("R", "a", "t"), seg("R", "a", "s")), Rf(var("t"), var("s")))
     assert refl.conclusion == cible
     assert refl.conclusion not in refl.hypotheses

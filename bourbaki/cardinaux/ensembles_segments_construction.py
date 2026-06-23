@@ -70,12 +70,12 @@ affaibli déguisé : la conclusion seg(t)⊂seg(t') n'est aucune des hypothèses
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (
+from bourbaki.logique.i_1_termes_relations.formule import (
     Terme, var, egal, et, non, impl, appartient, existe, pourtout, inclus,
 )
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite, instancie,
     equivalence_avant, equivalence_arriere,
 )
@@ -161,7 +161,7 @@ def seg_strict_monotone(R="R", a="a", t="t", s="s", u="u"):
     va, vt, vs = _t(a), _t(t), _t(s)
     St, Ss = seg(R, a, t), seg(R, a, s)
     # binder canonique de l'inclusion (= « u » par défaut)
-    from bourbaki.logique.tactiques.tactiques_abrege2 import _peler_pourtout
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import _peler_pourtout
     cible = inclus(St, Ss)
     un, _ = _peler_pourtout(cible)
     vu = var(un)
@@ -187,7 +187,7 @@ def seg_strict_monotone(R="R", a="a", t="t", s="s", u="u"):
     anti_ts = _antisym_inst(R, vt, vs, Hanti)                 # (R{t,s} et R{s,t}) ⇒ t=s
     t_eq_s = N.modus_ponens(conjonction_intro(Hts, Rst), anti_ts)  # t=s
     #   u=s et t=s ⇒ u=t  (transitivité de l'égalité : u=s, s=t)
-    from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie as _sym, transitivite as _trans_eg
+    from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import symetrie as _sym, transitivite as _trans_eg
     s_eq_t = N.modus_ponens(t_eq_s, _sym(vt, vs))            # s=t   (de t=s)
     #   transitivite(u,s,t) : conclusion u=t, hyps {u=s, s=t} → décharger les deux
     u_eq_t = _trans_eg(vu, vs, vt)                          # u=t   [u=s, s=t]
@@ -224,7 +224,7 @@ def _ex_falso(thm_a, thm_na, z):
 
 def _refute_self(thm_P_imp_notP):
     """De ⊢ (P ⇒ ¬P) déduit ⊢ ¬P.   ((P⇒¬P) ≡ (¬P∨¬P) → ¬P par S1.)"""
-    from bourbaki.logique.tactiques.tactiques_abrege import antecedent_consequent
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import antecedent_consequent
     P, notP = antecedent_consequent(thm_P_imp_notP.conclusion)  # P⇒¬P = ¬P∨¬P
     return N.modus_ponens(thm_P_imp_notP, N.s1(notP))           # (¬P∨¬P)⇒¬P
 
@@ -354,7 +354,7 @@ def hyp_bon_ordre_seg_reel(R="R", a="a", S="S", m="ms", x="xs",
     but = existe(mn, body_r)                                # (∃m)(m∈S et (∀x∈S)seg(m)⊂seg(x))
     ex = N.modus_ponens(corps_seg, N.s5(body_r, vm, mn))    # but
     # ── éliminer le ∃m de l'engine
-    from bourbaki.logique.tactiques.tactiques_abrege_quantif import existe_elimination
+    from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import existe_elimination
     wit_imp = N.loi_deduction(corps_R, ex)                  # corps_R ⇒ but
     ex_imp = existe_elimination(wit_imp, mn)                # (∃m)corps_R ⇒ but
     res = N.modus_ponens(pp, ex_imp)                        # but  [est_bien_ordonne(R,a), S⊂a, S≠∅]

@@ -39,22 +39,22 @@ conclusion n'est une de ses hypothèses.
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (
+from bourbaki.logique.i_1_termes_relations.formule import (
     Terme, var, egal, et, ou, non, impl, equiv, appartient, existe, pourtout, inclus,
 )
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis import ensembles_ordre_vocab as V
-from bourbaki.logique.tactiques.tactiques_abrege import syllogisme
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import syllogisme
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
     equivalence_avant, equivalence_arriere, instancie, projection_droite,
     cas, tiers_exclu,
 )
-from bourbaki.logique.tactiques.tactiques_abrege_quantif import (
+from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import (
     existe_elimination, monotonie_existe,
 )
-from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie, composer_egalites
+from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import symetrie, composer_egalites
 
 from bourbaki.cardinaux import ensembles_trichotomie_scaffold as TS
 from bourbaki.cardinaux import ensembles_trichotomie_scaffold_maximalite as M
@@ -96,7 +96,7 @@ def _ex_falso(thm_a, thm_na, z):
 
 def _refute_self(thm_P_imp_notP):
     """De ⊢ (P ⇒ ¬P) déduit ⊢ ¬P  (via S1)."""
-    from bourbaki.logique.tactiques.tactiques_abrege import antecedent_consequent
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import antecedent_consequent
     P, notP = antecedent_consequent(thm_P_imp_notP.conclusion)
     return N.modus_ponens(thm_P_imp_notP, N.s1(notP))
 
@@ -436,7 +436,7 @@ def _de_morgan_ou(thm_neg_ou):
 
 def _contrapose_mp(thm_negC, thm_a_imp_c):
     """⊢ ¬C [thm_negC], ⊢ A⇒C ⟹ ⊢ ¬A   (contraposition + MP)."""
-    from bourbaki.logique.tactiques.tactiques_abrege2 import contraposition
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import contraposition
     return N.modus_ponens(thm_negC, contraposition(thm_a_imp_c))
 
 
@@ -444,7 +444,7 @@ def _par_absurde(thm_D_sous_negD, D):
     """De ⊢ D [hyp ¬D] (parmi d'autres hyps), déduit ⊢ D  (en DÉCHARGEANT ¬D).
 
     (¬D ⊢ D)  →  (¬D ⇒ D)  →  D  via  (¬¬D∨D)⇒(D∨D)⇒D  (dne + S1)."""
-    from bourbaki.logique.tactiques.tactiques_abrege2 import dne, mono_gauche
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import dne, mono_gauche
     imp = N.loi_deduction(non(D), thm_D_sous_negD)     # ¬D ⇒ D
     return N.modus_ponens(imp, syllogisme(mono_gauche(dne(D), D), N.s1(D)))
 
@@ -465,7 +465,7 @@ def _prop1_temoin(R, e_set, d_term, w="w"):
     petit_x = et(appartient(var("x"), DmD),
                  pourtout(w, impl(appartient(var(w), DmD), Rf(var("x"), var(w)))))
     body_x = et(petit_x, egal(vd, _seg(R, e_set, var("x"))))
-    from bourbaki.logique.formule import tau
+    from bourbaki.logique.i_1_termes_relations.formule import tau
     a_t = tau("x", body_x)
     # prop1 (3 hyps) ⊢ ∃x body_x
     p1 = P1.prop1_segment_propre(R, e_set, d_term, x="x", w=w)
@@ -582,7 +582,7 @@ def maximalite_donne_trichotomie_prouve_residu(E_set="E", R="R", F_set="F", Rp="
     documentation / test miroir.  C'est le GAP PRÉCIS restant (cf. docstring)."""
     h = TS.h_iso_max(E_set, R, F_set, Rp)
     domh, imgh = E.dom(h), E.img(h)
-    from bourbaki.logique.formule import tau
+    from bourbaki.logique.i_1_termes_relations.formule import tau
     Rf, Rpf = _R_de(R), _R_de(Rp)
     # τ-témoins a*, b* (mêmes que dans la preuve)
     def _tau(R_, e_, d_):

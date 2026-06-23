@@ -5,7 +5,7 @@ attendues) de chaque théorème certifié par le noyau abrégé.
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (var, egal, et, impl, equiv, appartient, pourtout, existe,
+from bourbaki.logique.i_1_termes_relations.formule import (var, egal, et, impl, equiv, appartient, pourtout, existe,
                      afficher_f)
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux import ensembles_equivalence as Q

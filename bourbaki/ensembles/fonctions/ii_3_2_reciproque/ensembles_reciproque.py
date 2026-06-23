@@ -5,14 +5,14 @@ réciproque et de la fonction réciproque.
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import var, egal, et, appartient, existe, subst_f, Terme
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_1_termes_relations.formule import var, egal, et, appartient, existe, subst_f, Terme
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.tactiques.tactiques_abrege2 import (conjonction_intro, conjonction_elim_gauche,
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (conjonction_intro, conjonction_elim_gauche,
                                conjonction_elim_droite, equivalence_avant,
                                equivalence_arriere, equivalence_transitivite, instancie)
-from bourbaki.logique.tactiques.tactiques_abrege_egalite import composer_egalites, congruence_terme
-from bourbaki.logique.tactiques.tactiques_abrege_quantif import (existe_elimination, congruence_existe,
+from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import composer_egalites, congruence_terme
+from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import (existe_elimination, congruence_existe,
                                       alpha_existe)
 from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import couple_egal_implique_composantes
 from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import egalite_par_extension
@@ -43,7 +43,7 @@ def _inst_recip(g, z):
 
 def couple_reciproque(g="G", u="u", v="v"):
     """⊢ ((u,v) ∈ G⁻¹) ⇔ ((v,u) ∈ G).   (E.II.41 ; u, v noms OU termes, distincts de p, q.)"""
-    from bourbaki.logique.formule import Terme
+    from bourbaki.logique.i_1_termes_relations.formule import Terme
     vG = g if isinstance(g, Terme) else var(g)
     vu = u if isinstance(u, Terme) else var(u)
     vv = v if isinstance(v, Terme) else var(v)
@@ -138,8 +138,8 @@ def reciproque_produit(x="X", y="Y"):
 
     z∈(X×Y)⁻¹ ⇔ (∃p)(∃q)(z=(p,q) et (q,p)∈X×Y) ⇔ (∃p)(∃q)(z=(p,q) et (q∈X et p∈Y)) ;
     z∈Y×X    ⇔ (∃p)(∃q)((z=(p,q) et p∈Y) et q∈X) ⇔ même R ; égalité par A1."""
-    from bourbaki.logique.formule import et
-    from bourbaki.logique.tactiques.tactiques_abrege2 import (equivalence_symetrie, comm_et, assoc_et,
+    from bourbaki.logique.i_1_termes_relations.formule import et
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (equivalence_symetrie, comm_et, assoc_et,
                                    et_congruence_droite)
     from bourbaki.ensembles.familles.ii_2_produit_deux_ensembles.ensembles_produit import couple_dans_produit_ssi
     vX, vY = _T(x), _T(y)

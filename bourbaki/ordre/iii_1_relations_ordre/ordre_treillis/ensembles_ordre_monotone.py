@@ -41,15 +41,15 @@ THÉORÈMES DIRECTS certifiés par le noyau abrégé :
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (
+from bourbaki.logique.i_1_termes_relations.formule import (
     Terme, var, egal, et, ou, impl, non, appartient, existe, pourtout,
 )
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis.ensembles_ordre_relation import (
     est_ordre, borne_superieure, borne_inferieure,
 )
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
     equivalence_avant, equivalence_arriere, instancie, cas, tiers_exclu,
 )
@@ -207,7 +207,7 @@ def decroissante_implique_monotone(G="G", Gp="Gp", f="f",
     cr = est_croissante(G, Gp, f, E_set, Ep_set, x, y)
     dec = est_decroissante(G, Gp, f, E_set, Ep_set, x, y)
     # dec ⇒ (dec ou cr)  puis  (dec ou cr) ⇒ (cr ou dec)
-    from bourbaki.logique.tactiques.tactiques_abrege import syllogisme
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import syllogisme
     return syllogisme(N.s2(dec, cr), N.s3(dec, cr))        # dec ⇒ (cr ou dec)
 
 
@@ -320,7 +320,7 @@ def strictement_decroissante_implique_decroissante(G="G", Gp="Gp", f="f",
     fy_in = N.modus_ponens(y_in, instancie(Hbut, vy))                  # f(y)∈E'
     fyfy = N.modus_ponens(fy_in, instancie(refl_Ep, _val(f, vy)))      # (f(y),f(y))∈G'
     # trou sur la 2e coordonnée : Φ(w)=(f(y),f(w))∈G' ; (y=x)⇒(Φ(y)⇔Φ(x))
-    from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie
+    from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import symetrie
     y_eq_x = N.modus_ponens(Heq, symetrie(vx, vy))                     # y=x
     phi = _couple_dans(_val(f, vy), _val(f, var("w")), Gp)
     leib = N.s6(vy, vx, "w", phi)                                      # (y=x)⇒(Φ(y)⇔Φ(x))

@@ -5,7 +5,7 @@ deux instances concrètes 0 < 1 et 1 < 2.  Chaque test vérifie que la conclusio
 certifiée par le noyau EST EXACTEMENT la cible Bourbaki (inf_strict_card / inf_egal_card
 / ¬(·=·)), et la clôture (théorème inconditionnel : aucune hypothèse).
 """
-from bourbaki.logique.formule import egal, non
+from bourbaki.logique.i_1_termes_relations.formule import egal, non
 from bourbaki.cardinaux import ensembles_ordre_strict_petits as S
 from bourbaki.cardinaux.ensembles_cardinaux import (inf_egal_card, inf_strict_card)
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import ZERO, UN, DEUX, successeur

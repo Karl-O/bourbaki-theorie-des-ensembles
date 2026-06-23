@@ -2,7 +2,7 @@
 
 Chaque test vérifie la conclusion EXACTE (== cible reconstruite) et est_clos.
 """
-from bourbaki.logique.formule import var, egal, non
+from bourbaki.logique.i_1_termes_relations.formule import var, egal, non
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux import ensembles_vide_singleton as VS
 from bourbaki.cardinaux.ensembles_cardinaux import equipotent

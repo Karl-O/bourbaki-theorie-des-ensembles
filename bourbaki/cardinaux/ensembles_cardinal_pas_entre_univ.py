@@ -61,8 +61,8 @@ LIVRAISON (CLOSE, 0 hyp, theorie=22) :
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import var, impl, pourtout
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_1_termes_relations.formule import var, impl, pourtout
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.cardinaux.ensembles_cardinaux import est_cardinal
 from bourbaki.cardinaux.ensembles_equipotence_retrait import (
     cardinal_pas_entre_inconditionnel,

@@ -15,7 +15,7 @@ GÉNÉRIQUE sur la valeur-règle vh.
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import var, app, egal, et, non, appartient, pourtout
+from bourbaki.logique.i_1_termes_relations.formule import var, app, egal, et, non, appartient, pourtout
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ordre.iii_2_bon_ordre.recurrence_transfinie import ensembles_c60_existence_close as C
 from bourbaki.ordre.iii_2_bon_ordre.recurrence_transfinie.ensembles_recurrence_transfinie import _graphe_R

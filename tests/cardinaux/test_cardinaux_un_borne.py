@@ -4,7 +4,7 @@
 certifie ¬(X=∅) ⇒ ({∅} ≤ X) (1 = Card{∅}), via l'injection CONSTANTE {∅}→X, ∅↦e
 (e = τ_w(w∈X) témoin de X≠∅).  Chaque test vérifie la conclusion EXACTE + clôture.
 """
-from bourbaki.logique.formule import var, egal, non, impl, appartient, inclus
+from bourbaki.logique.i_1_termes_relations.formule import var, egal, non, impl, appartient, inclus
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import inf_egal_card, cardinal
 from bourbaki.cardinaux import ensembles_cardinaux_un_borne as M

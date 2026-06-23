@@ -26,12 +26,12 @@ INVARIANT : theorie_ensembles() = 22.  Rien postulé : on CONSTRUIT l'injection 
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (
+from bourbaki.logique.i_1_termes_relations.formule import (
     Terme, var, egal, inclus, appartient,
 )
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     conjonction_intro, instancie, equivalence_arriere,
 )
 from bourbaki.cardinaux.ensembles_cardinaux import (

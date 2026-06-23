@@ -42,17 +42,17 @@ sens venant de théorèmes clos.
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (
+from bourbaki.logique.i_1_termes_relations.formule import (
     Terme, var, egal, et, ou, non, impl, equiv,
 )
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
     equivalence_avant, instancie, cas,
 )
-from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie
+from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import symetrie
 
 from bourbaki.cardinaux.ensembles_cardinaux import (
     est_cardinal, inf_egal_card, inf_strict_card,
@@ -249,7 +249,7 @@ def successeur_ordre_strict(x="x", b="b"):
         la 2ᵉ branche ⇒ x≤b.
       • (⇐) sous est_fini(b) : x≤b ⇒ x≤b+1 (monotone) ; ¬(x=b+1) car x=b+1 ⇒ b+1≤b
         (Leibniz dans x≤b), contredisant ¬(b+1≤b) (succ_pas_inf_egal)."""
-    from bourbaki.logique.tactiques.tactiques_abrege import a_implique_a
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import a_implique_a
     vx, vb = _t(x), _t(b)
     sb = successeur(vb)
 

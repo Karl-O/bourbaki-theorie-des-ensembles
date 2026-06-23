@@ -17,11 +17,11 @@ COÏNCIDENCE.  theorie=22, non vacueux.
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import Terme, var, egal, et, appartient, inclus, existe
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_1_termes_relations.formule import Terme, var, egal, et, appartient, inclus, existe
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis import ensembles_ordre_vocab as V
-from bourbaki.logique.tactiques.tactiques_abrege2 import conjonction_intro, instancie
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import conjonction_intro, instancie
 from bourbaki.cardinaux.ensembles_trichotomie_coherences import _temoin_commun_coeur
 
 
@@ -39,7 +39,7 @@ _HOLE = "hole_tcv"
 
 def _leib(a, b, h_ab, phi_fun, h_phi_a):
     va, vb = _t(a), _t(b)
-    from bourbaki.logique.tactiques.tactiques_abrege2 import equivalence_avant
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import equivalence_avant
     eqv = N.modus_ponens(h_ab, N.s6(va, vb, _HOLE, phi_fun(var(_HOLE))))
     return N.modus_ponens(h_phi_a, equivalence_avant(eqv))
 

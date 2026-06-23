@@ -67,16 +67,16 @@ HONNÊTES { bo(Ro,a), realisation_segment(Ro,a,·) } (Ro bien formé, PAS le lia
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (
+from bourbaki.logique.i_1_termes_relations.formule import (
     Terme, var, egal, et, non, impl, appartient, existe, pourtout, inclus, equiv,
 )
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
     equivalence_avant, equivalence_arriere, instancie,
 )
-from bourbaki.logique.tactiques.tactiques_abrege_quantif import existe_elimination
+from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import existe_elimination
 from bourbaki.cardinaux.ensembles_segments_construction import seg, _R_de
 from bourbaki.cardinaux.ensembles_cardinaux import cardinal, inf_egal_card
 from bourbaki.cardinaux.ensembles_ordinal_cardinal_correspondance import intervalle_0a
@@ -175,7 +175,7 @@ def pullback_inclus_a(a="a", Ro="Ro", S="S", t="z"):
 
     🎯 Le conjoint « PB⊂a » CLOS.  De la sélection, t∈PB ⇒ ( t∈a et … ) ⇒ t∈a ;
     binder canonique « z » de l'inclusion.  theorie=22, NON vacueux."""
-    from bourbaki.logique.tactiques.tactiques_abrege2 import _peler_pourtout
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import _peler_pourtout
     va = _t(a)
     PB = pullback(a, Ro, S)
     cible = inclus(PB, va)
@@ -307,7 +307,7 @@ def pullback_non_vide(a="a", Ro="Ro", S="S", c=BOIO._BC, t=BOIO._BX):
     nv = non_vide_ssi_element(vS)                              # ¬(S=∅) ⇔ (∃z) z∈S
     H_ne = N.assume(non(egal(vS, E.VIDE)))                     # S≠∅
     ex_z = N.modus_ponens(H_ne, equivalence_avant(nv))        # (∃z) z∈S
-    from bourbaki.logique.tactiques.tactiques_abrege_quantif import alpha_existe
+    from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import alpha_existe
     ex_c = N.modus_ponens(ex_z, equivalence_avant(
         alpha_existe("z", cn, appartient(var("z"), vS))))      # (∃c) c∈S
 
@@ -359,7 +359,7 @@ def _ex_falso(thm_a, thm_na, z):
 
 def _refute_self(thm_P_imp_notP):
     """De ⊢ (P ⇒ ¬P) déduit ⊢ ¬P.  ((P⇒¬P) ≡ (¬P∨¬P)→¬P par S1.)"""
-    from bourbaki.logique.tactiques.tactiques_abrege import antecedent_consequent
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import antecedent_consequent
     P, notP = antecedent_consequent(thm_P_imp_notP.conclusion)
     return N.modus_ponens(thm_P_imp_notP, N.s1(notP))
 

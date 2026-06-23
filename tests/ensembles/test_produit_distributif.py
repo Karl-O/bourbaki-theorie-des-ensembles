@@ -5,7 +5,7 @@ Vérifie (honnêteté LCF stricte) : CLÔTURE (0 hyp), conclusion == l'ÉQUIVALE
 littérale entre les deux appartenances, NON-VACUITÉ (les deux membres DIFFÈRENT), et
 theorie_ensembles() = 22.
 """
-from bourbaki.logique.formule import var, equiv, appartient
+from bourbaki.logique.i_1_termes_relations.formule import var, equiv, appartient
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 import bourbaki.ensembles.ii_2_couples_produit.ensembles_produit_distributif as M
 

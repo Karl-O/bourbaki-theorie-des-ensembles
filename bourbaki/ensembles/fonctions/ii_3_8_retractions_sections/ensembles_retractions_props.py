@@ -37,14 +37,14 @@ aux hypothèses C46 explicites (jamais postulées) ou REPORTÉES (cf. rapport).
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (var, egal, et, appartient, impl, pourtout,
+from bourbaki.logique.i_1_termes_relations.formule import (var, egal, et, appartient, impl, pourtout,
                                        existe, Terme)
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.tactiques.tactiques_abrege2 import (conjonction_intro,
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (conjonction_intro,
                                conjonction_elim_gauche, conjonction_elim_droite,
                                instancie, equivalence_avant, equivalence_arriere)
-from bourbaki.logique.tactiques.tactiques_abrege_egalite import (symetrie,
+from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import (symetrie,
                                composer_egalites, congruence_terme)
 from bourbaki.ensembles.fonctions.ii_3_8_retractions_sections.ensembles_composee_valeurs import composition_valeur_t
 
@@ -275,7 +275,7 @@ def theoreme1_d_surjective_valeur(f="F", fp="Fp", c="C"):
     body = N.modus_ponens(N.assume(Rpp), N.s5(Rp, fx, "yy"))  # {f'(f(x))=z} ⊢ (∃yy)(f'(yy)=z)
     step = N.loi_deduction(Rpp, body)                      # f'(f(x))=z ⇒ (∃yy)(f'(yy)=z)
     # éliminer le ∃x  (existe_elimination : (R⇒Q)⇒((∃x R)⇒Q) avec x∉Q)
-    from bourbaki.logique.tactiques.tactiques_abrege_quantif import existe_elimination
+    from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import existe_elimination
     ex_y = N.modus_ponens(ex_x, existe_elimination(step, "x"))   # (∃yy)(f'(yy)=z)
     inner = N.loi_deduction(appartient(vz, vC), ex_y)      # z∈C ⇒ (∃yy)(f'(yy)=z)
     gen = N.generalisation("z", inner)

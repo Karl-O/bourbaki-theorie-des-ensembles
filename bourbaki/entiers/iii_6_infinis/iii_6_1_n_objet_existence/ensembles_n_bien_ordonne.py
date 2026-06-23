@@ -38,16 +38,16 @@ INVARIANT : theorie_ensembles() = 22.  Tout est DÉRIVÉ (rien postulé).  CLOS,
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (
+from bourbaki.logique.i_1_termes_relations.formule import (
     Terme, var, egal, et, non, ou, impl, appartient, existe, pourtout, inclus,
 )
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
     equivalence_avant, equivalence_arriere, instancie,
 )
-from bourbaki.logique.tactiques.tactiques_abrege_quantif import existe_elimination
+from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import existe_elimination
 
 from bourbaki.cardinaux.ensembles_cardinaux import inf_egal_card
 from bourbaki.cardinaux.ensembles_cardinaux_theoremes import inf_egal_reflexif
@@ -284,7 +284,7 @@ def clause_min_NN(A="X", a0="a0", m="a", x="w"):
     A_ne = conjonction_elim_droite(HA)                           # A≠∅
 
     # ── témoin a₀∈A  (binder « z » de non_vide_ssi_element renommé en a0)
-    from bourbaki.logique.tactiques.tactiques_abrege_quantif import alpha_existe
+    from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import alpha_existe
     ex_z = N.modus_ponens(A_ne, equivalence_avant(non_vide_ssi_element(vA)))   # (∃z)(z∈A)
     ren_a0 = alpha_existe("z", a0, appartient(var("z"), vA))                    # (∃z)(z∈A) ⇔ (∃a0)(a0∈A)
     ex_a0 = N.modus_ponens(ex_z, equivalence_avant(ren_a0))                     # (∃a0)(a0∈A)
@@ -400,7 +400,7 @@ def _comp_at(vm, vx):
 
 def _ou_elim(disj, imp1, imp2):
     """De ⊢ (P ou Q), ⊢ (P⇒R), ⊢ (Q⇒R), déduit ⊢ R  (élimination de la disjonction, tac `cas`)."""
-    from bourbaki.logique.tactiques.tactiques_abrege2 import cas
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import cas
     return cas(disj, imp1, imp2)
 
 
@@ -421,7 +421,7 @@ def n_bien_ordonne():
     ORDRE (relation_ordre_dans_NN, CLOS) et de la CLAUSE de plus petit élément
     (clause_plus_petit_NN, CLOS, ramenée au bon ordre borné déposé).  Conclusion ==
     E.est_bien_ordonne(R_ℕ, ℕ, 'xo','yo','zo','X','a','w') LITTÉRALEMENT.  theorie=22."""
-    from bourbaki.logique.formule import alpha_egal
+    from bourbaki.logique.i_1_termes_relations.formule import alpha_egal
     ordre = relation_ordre_dans_NN()                          # est_relation_ordre_dans(R_ℕ, ℕ)
     clause = clause_plus_petit_NN("X", "a0", "a", "w")        # la clause min
     res = conjonction_intro(ordre, clause)

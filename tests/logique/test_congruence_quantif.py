@@ -9,10 +9,10 @@ from __future__ import annotations
 
 from bourbaki.assemblage.assemblage import (Assemblage, negation, implication, equivalence, egalite,
                         existe, pour_tout)
-from bourbaki.logique.propositions import SIG_PROP
-from bourbaki.logique.tactiques.tactiques import a_implique_a
-from bourbaki.logique.criteres import criteres_C as K
-from bourbaki.logique import congruence_quantif as Q
+from bourbaki.logique.i_1_termes_relations.propositions import SIG_PROP
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques import a_implique_a
+from bourbaki.logique.i_2_criteres_C.criteres import criteres_C as K
+from bourbaki.logique.i_3_quantifies import congruence_quantif as Q
 
 S = SIG_PROP
 X, Y = Assemblage(("x",)), Assemblage(("y",))

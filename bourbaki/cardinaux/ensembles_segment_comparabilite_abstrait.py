@@ -14,14 +14,14 @@ theorie=22, non vacueux.
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import Terme, var, egal, ou, non, appartient, inclus, tau
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_1_termes_relations.formule import Terme, var, egal, ou, non, appartient, inclus, tau
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     conjonction_elim_gauche, conjonction_elim_droite, instancie, equivalence_avant,
     cas, tiers_exclu,
 )
-from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie
+from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import symetrie
 from bourbaki.cardinaux import ensembles_trichotomie_prop1 as P1
 from bourbaki.cardinaux.ensembles_trichotomie_restriction import (
     comparabilite_segments_temoins,

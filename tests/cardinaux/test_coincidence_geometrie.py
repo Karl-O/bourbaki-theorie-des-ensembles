@@ -57,12 +57,12 @@ def test_retraction_kc_conclusion():
 def test_composee_dans_S_t_termes():
     """Version TERMES de composee_dans_S (pour c=composee(reciproque φ',φ), g terme).
     composition_valeur_t au lieu de composition_valeur → 1 hyp comp-func en plus."""
-    from bourbaki.logique.formule import var
+    from bourbaki.logique.i_1_termes_relations.formule import var
     t = G.composee_dans_S_t(E.reciproque(var("phip")), var("phi"), var("S"), var("T"))
     assert not t.est_clos
     # même cible que composee_dans_S mais avec le terme composé
     c = E.composee(E.reciproque(var("phip")), var("phi"))
-    from bourbaki.logique.formule import pourtout, impl, appartient
+    from bourbaki.logique.i_1_termes_relations.formule import pourtout, impl, appartient
     cible = pourtout("t", impl(appartient(var("t"), var("S")),
                                appartient(E.valeur(c, var("t"), b="j"), var("S"))))
     assert t.conclusion == cible
@@ -73,7 +73,7 @@ def test_coincidence_close_assemblage():
     """🎯 ASSEMBLAGE : coïncidence (Lemme 1) avec les 4 familles de géométrie DÉCHARGÉES.
     Conditionnel sur {bon ordre, c/k strict. croissantes, structurelles iso} SEULEMENT —
     le résidu géométrique (c,k:S→S, k∘c=id, raccord) n'est PLUS une hypothèse."""
-    from bourbaki.logique.formule import var, pourtout, impl, appartient
+    from bourbaki.logique.i_1_termes_relations.formule import var, pourtout, impl, appartient
     t = G.coincidence_close()
     assert not t.est_clos
     assert t.conclusion == G.coincidence_close_cible()      # (∀u)(u∈S ⇒ φ(u)=φ'(u))

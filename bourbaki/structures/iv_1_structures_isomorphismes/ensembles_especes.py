@@ -30,8 +30,8 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Callable, Sequence, Tuple, Optional
 
-from bourbaki.logique.formule import var, egal, et, existe, appartient
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_1_termes_relations.formule import var, egal, et, existe, appartient
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de
 from bourbaki.structures.iv_1_structures_isomorphismes.ensembles_especes_echelon import (
@@ -207,7 +207,7 @@ def transport_donne_isomorphisme(sigma: Espece, f_bij: Sequence,
     hyp = _conj(bij)                               # H : toutes les bijections
     h = N.assume(hyp)                              # H ⊢ H
     # décompose H en ses conjoints (les clauses de bijection), dans l'ordre
-    from bourbaki.logique.tactiques.tactiques_abrege2 import (
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
         conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite)
     parts = []
     reste = h

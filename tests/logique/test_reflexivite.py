@@ -9,10 +9,10 @@ from bourbaki.assemblage.assemblage import (
     Assemblage, negation, implication, conjonction, equivalence,
     egalite, pour_tout,
 )
-from bourbaki.logique import noyau
-from bourbaki.logique.tactiques import tactiques as T
-from bourbaki.logique.tactiques import tactiques_prop as P
-from bourbaki.logique.tactiques.tactiques_egalite import instanciation_en_x, reflexivite
+from bourbaki.logique.i_2_criteres_C.noyau import noyau
+from bourbaki.logique.i_2_criteres_C.tactiques import tactiques as T
+from bourbaki.logique.i_2_criteres_C.tactiques import tactiques_prop as P
+from bourbaki.logique.i_4_egalitaires.tactiques_egalite import instanciation_en_x, reflexivite
 
 A = Assemblage(("=", "a", "b"))
 B = Assemblage(("=", "b", "c"))

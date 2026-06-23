@@ -7,7 +7,7 @@ Vérifie (conclusion EXACTE + est_clos) :
   • eq_somme_zero_un       ⊢ Eq(∅⊔{∅}, {∅}) ;
   • card_somme_zero_un     ⊢ Card(∅⊔{∅}) = Card({∅})   (= « 0+1 = 1 » au niveau cardinal).
 """
-from bourbaki.logique.formule import var, egal
+from bourbaki.logique.i_1_termes_relations.formule import var, egal
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import equipotent, cardinal, est_bijection_de
 from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import somme_disjointe, somme_cardinale_binaire, UN

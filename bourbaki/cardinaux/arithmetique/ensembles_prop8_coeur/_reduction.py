@@ -14,10 +14,10 @@ bijection h : A⊔{∅} → B⊔{∅} FIXE le point marqué * = (∅,1), alors A
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import var, egal
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_1_termes_relations.formule import var, egal
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.tactiques.tactiques_abrege import syllogisme
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import syllogisme
 from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import UN, somme_disjointe
 from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de
 from bourbaki.cardinaux.arithmetique.ensembles_copie_marquee import eq_copies_gauches_implique_eq

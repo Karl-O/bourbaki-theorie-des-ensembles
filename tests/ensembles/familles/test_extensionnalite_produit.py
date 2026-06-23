@@ -4,7 +4,7 @@ Vérifie que `extensionnalite_produit` est CLOS (0 hyp), de conclusion EXACTEMEN
 l'implication (x∈∏ et y∈∏ et graphe x et graphe y et (∀ι∈I) pr_ι x=pr_ι y) ⇒ x=y,
 NON vacuous (x=y n'est pas dans l'antécédent).  theorie_ensembles() reste à 22.
 """
-from bourbaki.logique.formule import var, egal, et, impl, appartient, pourtout
+from bourbaki.logique.i_1_termes_relations.formule import var, egal, et, impl, appartient, pourtout
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ensembles.familles.ii_5_produit_famille.ii_5_definitions import ensembles_extensionnalite_produit as X
 
@@ -41,5 +41,5 @@ def test_extensionnalite_produit_non_vacuous():
     antecedent = th.conclusion.sous[0]            # impl(f,g) = ou(non f, g) ; non f = sous[0]
     assert egal(vx, vy) != antecedent
     # plus précisément, egal(x,y) n'apparaît pas comme conjoint de l'antécédent
-    from bourbaki.logique.formule import non
+    from bourbaki.logique.i_1_termes_relations.formule import non
     assert antecedent.sous[0] != non(egal(vx, vy))

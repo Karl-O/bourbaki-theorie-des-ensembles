@@ -25,14 +25,14 @@ qui ferme la Prop. 8 est un terme CONSTRUIT, ses 4 conjoints de bijection prouv�
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import var, egal, non, et
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_1_termes_relations.formule import var, egal, non, et
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import cardinal, est_cardinal
 from bourbaki.cardinaux.ensembles_cardinaux_theoremes import (equipotent_son_cardinal,
                                           cardinal_egal_si_equipotent)
-from bourbaki.logique.tactiques.tactiques_abrege2 import (instancie, contraposition)
-from bourbaki.logique.tactiques.tactiques_abrege_egalite import (symetrie,
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (instancie, contraposition)
+from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import (symetrie,
                                           composer_egalites, congruence_terme)
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers import ensembles_entiers as Ent
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import UN, DEUX, successeur
@@ -131,7 +131,7 @@ def fini_deux():
     conjoints sont certifiés : deux_est_un_cardinal et deux_distinct_successeur_deux
     (ce dernier via la PROPOSITION 8 désormais entière).  Leur conjonction EST Fini(2)
     = est_fini(2).  TROISIÈME ENTIER NATUREL concret, LE JALON de la tâche."""
-    from bourbaki.logique.tactiques.tactiques_abrege2 import conjonction_intro
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import conjonction_intro
     card2 = deux_est_un_cardinal()                       # 2 est un cardinal
     ne = deux_distinct_successeur_deux()                 # 2 ≠ 2+1
     return conjonction_intro(card2, ne)                  # Fini(2) = est_fini(2)

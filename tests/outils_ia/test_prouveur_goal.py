@@ -8,8 +8,8 @@ python -m pytest V9/test_prouveur_goal.py -v
 from __future__ import annotations
 
 from bourbaki.assemblage.assemblage import implication, negation, disjonction
-from bourbaki.logique.propositions import A, B, C, D, SIG_PROP
-from bourbaki.logique import noyau
+from bourbaki.logique.i_1_termes_relations.propositions import A, B, C, D, SIG_PROP
+from bourbaki.logique.i_2_criteres_C.noyau import noyau
 from outils_ia import prouveur_goal
 from outils_ia.chercheur_ia import prouver_guide
 

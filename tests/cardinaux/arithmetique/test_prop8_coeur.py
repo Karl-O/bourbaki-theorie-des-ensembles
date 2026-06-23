@@ -12,7 +12,7 @@ la réduction finale du CAS 1 :
   • eq_copies_cas_fixe : ⊢ bij(h,A⊔{∅},B⊔{∅}) ⇒ (h(*)=* ⇒ Eq(A×{0},B×{0})) ;
   • eq_cas_fixe_implique_eq : ⊢ bij(h,A⊔{∅},B⊔{∅}) ⇒ (h(*)=* ⇒ Eq(A,B)).
 """
-from bourbaki.logique.formule import var, egal, impl
+from bourbaki.logique.i_1_termes_relations.formule import var, egal, impl
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import UN, ZERO, somme_disjointe
 from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de, equipotent
@@ -40,7 +40,7 @@ def test_g_fonctionnel():
 
 def test_g_domaine():
     """{A×{0}⊂dom h} ⊢ dom g = A×{0}."""
-    from bourbaki.logique.formule import inclus
+    from bourbaki.logique.i_1_termes_relations.formule import inclus
     t = C.g_domaine("A", "h")
     vh = var("h")
     g = C.G_RESTR("A", "h")

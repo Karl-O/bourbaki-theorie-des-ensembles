@@ -10,7 +10,7 @@ from bourbaki.cardinaux.ensembles_hessenberg_inductivite import enonce_chaine_ma
 from bourbaki.cardinaux.ensembles_hessenberg_hard import frame_pair, frame_ordre
 from bourbaki.ordre.iii_2_bon_ordre.zorn_zermelo.ensembles_zorn import est_inductif
 from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis.ensembles_ordre_relation import est_ordre
-from bourbaki.logique.formule import var
+from bourbaki.logique.i_1_termes_relations.formule import var
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 
 

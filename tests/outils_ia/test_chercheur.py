@@ -10,7 +10,7 @@ Démo :  python V9/test_chercheur.py
 from __future__ import annotations
 
 from bourbaki.assemblage.assemblage import Assemblage, disjonction, implication
-from bourbaki.logique import noyau
+from bourbaki.logique.i_2_criteres_C.noyau import noyau
 from outils_ia.chercheur import Prouveur, saturer_mp
 
 A = Assemblage(("=", "a", "b"))

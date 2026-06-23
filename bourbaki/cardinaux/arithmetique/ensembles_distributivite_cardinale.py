@@ -40,17 +40,17 @@ Les marqueurs 0=∅, 1={∅} sont importés d'ensembles_somme_disjointe (ZERO, U
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (Terme, var, egal, et, ou, non, appartient, existe,
+from bourbaki.logique.i_1_termes_relations.formule import (Terme, var, egal, et, ou, non, appartient, existe,
                      subst_t, subst_f)
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.tactiques.tactiques_abrege import a_implique_a, syllogisme
-from bourbaki.logique.tactiques.tactiques_abrege2 import (conjonction_intro, conjonction_elim_gauche,
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import a_implique_a, syllogisme
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (conjonction_intro, conjonction_elim_gauche,
                                conjonction_elim_droite, equivalence_avant,
                                equivalence_arriere, equivalence_transitivite,
                                instancie, cas)
-from bourbaki.logique.tactiques.tactiques_abrege_egalite import (symetrie, composer_egalites, congruence_terme)
-from bourbaki.logique.tactiques.tactiques_abrege_quantif import (existe_elimination, alpha_existe,
+from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import (symetrie, composer_egalites, congruence_terme)
+from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import (existe_elimination, alpha_existe,
                                       congruence_existe)
 from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import (somme_disjointe, ZERO, UN,
                                        injection_gauche_dans_somme,
@@ -630,7 +630,7 @@ def _renomme_injective(c3):
     """⊢ injective_dans(D,Dom) [liants s,sp] → même avec liants u,up (forme défaut).
 
     Renomme-α les deux ∀ (s→u puis sp→up) pour aligner sur est_bijection_de."""
-    from bourbaki.logique.tactiques.tactiques_abrege_quantif import alpha_pour_tout, congruence_pour_tout
+    from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import alpha_pour_tout, congruence_pour_tout
     R_outer = _corps_pourtout(c3.conclusion)              # (∀sp)body
     ren_outer = alpha_pour_tout("s", "u", R_outer)        # (∀s)R_outer ⇔ (∀u)(u|s)R_outer
     step1 = N.modus_ponens(c3, equivalence_avant(ren_outer))   # (∀u)(∀sp)body'

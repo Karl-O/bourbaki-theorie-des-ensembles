@@ -20,13 +20,13 @@ Le MAILLON ALGÉBRIQUE  a·(n+1) = a·n + a  (produit_succ_distribue) :
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import var, egal, et, impl
-from bourbaki.logique import noyau_abrege as N
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_1_termes_relations.formule import var, egal, et, impl
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite, instancie,
     equivalence_avant, equivalence_arriere,
 )
-from bourbaki.logique.tactiques.tactiques_abrege_egalite import (
+from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import (
     symetrie, composer_egalites, congruence_terme,
 )
 
@@ -57,7 +57,7 @@ from bourbaki.entiers.iii_4_entiers_finis.iii_4_recurrence_c61_existence_n.ensem
 )
 
 
-from bourbaki.logique.formule import Terme
+from bourbaki.logique.i_1_termes_relations.formule import Terme
 
 
 def _tt(v):

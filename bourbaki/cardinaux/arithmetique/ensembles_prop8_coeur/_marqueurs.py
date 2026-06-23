@@ -11,12 +11,12 @@ est FIXÉ par la bijection h : A⊔{∅} → B⊔{∅}) :
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (var, egal, et, non, appartient, existe)
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_1_termes_relations.formule import (var, egal, et, non, appartient, existe)
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.tactiques.tactiques_abrege2 import (conjonction_intro,
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (conjonction_intro,
                                equivalence_avant, equivalence_arriere, instancie)
-from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie, congruence_terme
+from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import symetrie, congruence_terme
 from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import UN
 from bourbaki.cardinaux.arithmetique.ensembles_prop8_plus_point import (
     marqueur, marqueur_dans_somme, marqueur_hors_copie_gauche)
@@ -69,7 +69,7 @@ def m_diff_si_A0(a, point):
 
     Si point=*, alors *∈A×{0} (Leibniz, point→*), contredisant m_hors_A0
     (¬(*∈A×{0})).  Donc point≠*."""
-    from bourbaki.logique.formule import Terme
+    from bourbaki.logique.i_1_termes_relations.formule import Terme
     from bourbaki.cardinaux.arithmetique.ensembles_prop8_coeur._g import A0_terme
     pt = point if isinstance(point, Terme) else var(point)
     A0 = A0_terme(a)

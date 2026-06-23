@@ -5,7 +5,7 @@ postulait via l'hypothèse OPAQUE val_dans_F — est DÉRIVÉ des seules hypoth�
 STRUCTURE DE GRAPHE (φ⊂S×T, dom φ=S, p∈S) plus « T segment de F ».  theorie=22 ;
 conclusions non tautologiques (φ(p)∈T / φ(p)∈F ∉ hypothèses) ; rien postulé.
 """
-from bourbaki.logique.formule import (
+from bourbaki.logique.i_1_termes_relations.formule import (
     var, et, impl, egal, appartient, pourtout, inclus, Formule,
 )
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E

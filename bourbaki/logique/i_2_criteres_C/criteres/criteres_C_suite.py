@@ -10,14 +10,14 @@ from __future__ import annotations
 
 from bourbaki.assemblage.assemblage import (negation, disjonction, conjonction, implication,
                         equivalence, existe)
-from bourbaki.logique.lecture import DEFAUT
-from bourbaki.logique import noyau
-from bourbaki.logique.tactiques.tactiques import syllogisme, mono_gauche, antecedent_consequent
-from bourbaki.logique.tactiques.tactiques_prop import (double_negation_intro, double_negation_elim,
+from bourbaki.logique.i_1_termes_relations.lecture import DEFAUT
+from bourbaki.logique.i_2_criteres_C.noyau import noyau
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques import syllogisme, mono_gauche, antecedent_consequent
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_prop import (double_negation_intro, double_negation_elim,
                             conjonction_intro, conjonction_elim_gauche,
                             conjonction_elim_droite, equivalence_avant,
                             equivalence_arriere, projection_gauche)
-from bourbaki.logique.criteres import criteres_C as K
+from bourbaki.logique.i_2_criteres_C.criteres import criteres_C as K
 
 
 # ── C23 : congruence de l'équivalence (sous l'hypothèse A⇔B) ──────────────────

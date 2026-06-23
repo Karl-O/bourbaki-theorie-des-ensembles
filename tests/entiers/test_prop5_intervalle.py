@@ -6,7 +6,7 @@ from bourbaki.entiers.iii_5_calcul_entiers.iii_5_intervalles_comptage.ensembles_
     _membre_equivalence, membre_equivalence_enonce, _membre_union,
 )
 from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege import theorie_ensembles
-from bourbaki.logique.formule import var
+from bourbaki.logique.i_1_termes_relations.formule import var
 
 
 def test_membre_equivalence_clos():

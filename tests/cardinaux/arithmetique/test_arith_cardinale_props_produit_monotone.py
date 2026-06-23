@@ -9,7 +9,7 @@ et un palier IMAGE version INCLUSION (image(H,A×B) ⊂ A₁×B₁ sous F⟨A⟩
 Cas particuliers à facteur fixe (gauche/droite) via réflexivité de ≤.  theorie=22.
 """
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.formule import var, et, impl, inclus
+from bourbaki.logique.i_1_termes_relations.formule import var, et, impl, inclus
 from bourbaki.cardinaux.ensembles_cardinaux import inf_egal_card, cardinal
 from bourbaki.cardinaux.arithmetique import (
     ensembles_arith_cardinale_props_produit_monotone as M)

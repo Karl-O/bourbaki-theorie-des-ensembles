@@ -1,5 +1,5 @@
 """Test §III.2 — comparabilité de deux segments abstraits (brique de Lemme 1)."""
-from bourbaki.logique.formule import var, appartient
+from bourbaki.logique.i_1_termes_relations.formule import var, appartient
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux import ensembles_segment_comparabilite_abstrait as SC
 

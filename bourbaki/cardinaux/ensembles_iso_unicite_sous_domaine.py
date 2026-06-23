@@ -33,15 +33,15 @@ lemme_4 / ordre monotone), via _val.  h,k acceptent des TERMES composés (c=φ'�
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (
+from bourbaki.logique.i_1_termes_relations.formule import (
     Terme, var, egal, et, non, impl, appartient, pourtout, inclus,
 )
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     conjonction_intro, instancie,
 )
-from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie
+from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import symetrie
 from bourbaki.cardinaux.ensembles_lemme4_croissante import (
     _val, _R_de, _antisym_de_bo,
 )
@@ -57,7 +57,7 @@ def _t(t):
 def _leib(a, b, h_ab, phi_fun, h_phi_a, hole="hole_iso_sd"):
     """De  a=b  et  φ(a)  déduit  φ(b)  (Leibniz S6, trou `hole`)."""
     va, vb = _t(a), _t(b)
-    from bourbaki.logique.tactiques.tactiques_abrege2 import equivalence_avant
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import equivalence_avant
     eqv = N.modus_ponens(h_ab, N.s6(va, vb, hole, phi_fun(var(hole))))
     return N.modus_ponens(h_phi_a, equivalence_avant(eqv))
 

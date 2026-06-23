@@ -4,7 +4,7 @@ Vérifie pour chaque théorème : conclusion EXACTE (== cible verbatim),
 .est_clos, et l'ABSENCE de vacuité (conclusion ∉ hypotheses).
 theorie_ensembles() reste à 22 axiomes (aucun axiome neuf en théorie principale).
 """
-from bourbaki.logique.formule import (var, egal, et, impl, appartient, existe,
+from bourbaki.logique.i_1_termes_relations.formule import (var, egal, et, impl, appartient, existe,
                                        pourtout, inclus)
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_1_definitions_algebre import ensembles_familles_algebre as A

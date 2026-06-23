@@ -1,5 +1,5 @@
 """Tests — PONT couple→valeur : injectif_graphe(F) ⇒ injective_dans(F, dom F)."""
-from bourbaki.logique.formule import var
+from bourbaki.logique.i_1_termes_relations.formule import var
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege import theorie_ensembles
 from bourbaki.cardinaux.ensembles_recollement_famille_injectif import injectif_graphe

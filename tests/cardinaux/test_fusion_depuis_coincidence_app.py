@@ -77,7 +77,7 @@ def test_non_vacueux():
 def test_residu_strictement_plus_faible_que_coincidence_univ():
     """Le résidu ne porte AUCUNE égalité de valeurs (≠ coïncidence) : son CONSÉQUENT est
     seulement (segment image et inclusion de graphe-restriction)."""
-    from bourbaki.logique.formule import egal
+    from bourbaki.logique.i_1_termes_relations.formule import egal
     from bourbaki.cardinaux.ensembles_coincidence_univ_app import _premisse_liste
     res = FDA.residu_univ_app()
     # descendre sous les 6 ∀ jusqu'à l'implication ANT ⇒ CONS
@@ -87,7 +87,7 @@ def test_residu_strictement_plus_faible_que_coincidence_univ():
     # cur est l'implication ¬(¬ANT ou CONS)-encodée ; on vérifie via les conjoints attendus
     prem = _premisse_liste("rphip", "rphig", "rSp", "rTp", "rSg", "rTg", "F", "R", "Rp", "E")
     # le conséquent attendu = et(prem[8], prem[13]) (segment-image, graphe-restriction)
-    from bourbaki.logique.formule import et
+    from bourbaki.logique.i_1_termes_relations.formule import et
     cons_attendu = et(prem[8], prem[13])
     # aucune égalité de valeurs dans le conséquent (pas un '=' top-level)
     assert cons_attendu.connecteur != "=" if hasattr(cons_attendu, "connecteur") else True

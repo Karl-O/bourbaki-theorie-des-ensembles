@@ -2,9 +2,9 @@
 from __future__ import annotations
 
 from bourbaki.assemblage.assemblage import (negation, disjonction, conjonction, implication, equivalence)
-from bourbaki.logique.propositions import A, B, C, SIG_PROP
-from bourbaki.logique import noyau
-from bourbaki.logique.criteres import criteres_C_suite2 as KS2
+from bourbaki.logique.i_1_termes_relations.propositions import A, B, C, SIG_PROP
+from bourbaki.logique.i_2_criteres_C.noyau import noyau
+from bourbaki.logique.i_2_criteres_C.criteres import criteres_C_suite2 as KS2
 
 S = SIG_PROP
 

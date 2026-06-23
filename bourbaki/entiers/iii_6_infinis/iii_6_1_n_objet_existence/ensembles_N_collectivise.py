@@ -49,11 +49,11 @@ STRUCTURE DE LA PREUVE (recette A→E)
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (
+from bourbaki.logique.i_1_termes_relations.formule import (
     Terme, var, app, egal, et, ou, non, impl, equiv, appartient, existe, pourtout,
     subst_f,
 )
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import (
     est_cardinal, cardinal, inf_egal_card,
@@ -63,11 +63,11 @@ from bourbaki.entiers.iii_6_infinis.iii_6_3_infinis_denombrables.ensembles_infin
     est_infini_ensemble, est_infini, A4, theorie_infini,
 )
 
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
     contraposition, cas, instancie, equivalence_avant, equivalence_arriere,
 )
-from bourbaki.logique.tactiques.tactiques_abrege_quantif import existe_elimination
+from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import existe_elimination
 
 
 def _t(t):
@@ -128,7 +128,7 @@ def cardinal_infini_existe(a="a", X="X"):
     Card X≠Card X+1, 1er conjoint est_cardinal(Card X) PROUVÉ) ; par contraposée,
     ¬Fini_cap(Card X) ⇒ ¬Fini_unc(Card X)."""
     from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers_theoremes import card_est_un_cardinal
-    from bourbaki.logique.tactiques.tactiques_abrege2 import composantes_conjonction
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import composantes_conjonction
     vX = var(X)
     cX = cardinal(vX)                                       # Card X
     va = var(a)
@@ -210,8 +210,8 @@ def zero_inf_egal_cardinal(x="x", Xw="Xw"):
     De est_cardinal(x) = (∃X)(x = Card X), on extrait un témoin X ; cardinal_zero_inf_egal(X)
     donne 0 ≤ Card X = ZERO ≤ Card X ; Leibniz réécrit Card X ↦ x (via x = Card X)."""
     from bourbaki.cardinaux.ensembles_cardinaux_bornes import cardinal_zero_inf_egal
-    from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie
-    from bourbaki.logique.tactiques.tactiques_abrege_quantif import alpha_existe
+    from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import symetrie
+    from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import alpha_existe
     vx = _t(x)
     vXw = var(Xw)
     corps = egal(vx, cardinal(vXw))                         # x = Card Xw
@@ -307,10 +307,10 @@ def fini_implique_dans_intervalle(a="a", x="x"):
     (que l'instanciation b:=a peut α-renommer si a contient des variables liées par
     est_cardinal — ex. a=Card X)."""
     from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers_theoremes import fini_implique_cardinal
-    from bourbaki.logique.tactiques.tactiques_abrege2 import (
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
         composantes_conjonction, antecedent_consequent,
     )
-    from bourbaki.logique.tactiques.tactiques_abrege_quantif import alpha_existe
+    from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import alpha_existe
     va, vx = _t(a), _t(x)
     membre = _membre_intervalle_0a(va, vx)                  # x∈[0,a] ⇔ (card x et 0≤x et x≤a)
     ant, _c = antecedent_consequent(equivalence_arriere(membre).conclusion)
@@ -340,8 +340,8 @@ def _fini_aligne(thm_fini, x, cible):
     Fini(x) = (est_cardinal(x) et x≠x+1) ; seul le liant interne de est_cardinal(x)
     diffère.  On extrait les deux conjoints, on aligne est_cardinal(x) par renommage-α
     de son existentielle (liant « X » → liant de la cible), et on réassemble."""
-    from bourbaki.logique.tactiques.tactiques_abrege2 import composantes_conjonction
-    from bourbaki.logique.tactiques.tactiques_abrege_quantif import alpha_existe
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import composantes_conjonction
+    from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import alpha_existe
     vx = _t(x)
     if thm_fini.conclusion == cible:
         return thm_fini
@@ -363,7 +363,7 @@ def _corps_Ncol_inst(a, x):
 
     Renvoie (ax_ncol, AL, AR) où AL = « x∈[0,a] » et AR = « Fini(x) » DANS LA FORME
     exacte de l'antécédent de l'axiome (AR peut avoir le liant de est_cardinal renommé)."""
-    from bourbaki.logique.tactiques.tactiques_abrege2 import (
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
         composantes_conjonction, antecedent_consequent,
     )
     ax = _inst_Ncol(a, x)
@@ -417,7 +417,7 @@ def Ncol_equivaut_fini(a="a", x="x"):
 # ════════════════════════════════════════════════════════════════════════════
 def _coll_fini(x="x"):
     """La formule coll(x, Fini(x)) = (∃Y)(∀x)(x∈Y ⇔ Fini(x))   (liant existentiel « y »)."""
-    from bourbaki.logique.formule import coll
+    from bourbaki.logique.i_1_termes_relations.formule import coll
     return coll(x, est_fini(var(x)))
 
 
@@ -434,7 +434,7 @@ def N_collectivise_sous_cardinal(a="a", x="x", Y="y"):
     equ_all = Ncol_equivaut_fini(va, x)                   # (∀x)(x∈Ncol(a) ⇔ Fini x)  [hyps A,B]
     R = pourtout(x, equiv(appartient(vx, var(Y)), est_fini(vx)))
     s5 = N.s5(R, Ncol(va), Y)                             # (Ncol(a)|Y)R ⇒ (∃Y)R = coll(x,Fini x)
-    from bourbaki.logique.tactiques.tactiques_abrege2 import antecedent_consequent
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import antecedent_consequent
     ant_s5, _c = antecedent_consequent(s5.conclusion)     # (Ncol(a)|Y)R
     equ_aligne = _aligner_pour_tout(equ_all, ant_s5, x)   # ⊢ ant_s5  (= equ_all aligné α)
     return N.modus_ponens(equ_aligne, s5)                # coll(x, Fini x)   [hyps A, B]
@@ -446,10 +446,10 @@ def _aligner_pour_tout(thm_all, cible, x):
 
     On instancie thm_all à x, on reconstruit l'équivalence cible à partir des deux sens
     en alignant le membre Fini (via _fini_aligne), puis on re-généralise."""
-    from bourbaki.logique.tactiques.tactiques_abrege2 import (
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
         antecedent_consequent, conjonction_intro, composantes_conjonction,
     )
-    from bourbaki.logique.tactiques.tactiques_abrege2 import _peler_pourtout
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import _peler_pourtout
     if thm_all.conclusion == cible:
         return thm_all
     vx = _t(x)

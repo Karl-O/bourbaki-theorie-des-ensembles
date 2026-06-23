@@ -49,11 +49,11 @@ THÉORÈMES CERTIFIÉS  (chacun testé, cf. test_ensembles_quotient_produit_rest
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (Terme, var, egal, et, impl, equiv,
+from bourbaki.logique.i_1_termes_relations.formule import (Terme, var, egal, et, impl, equiv,
                                        appartient, pourtout)
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
     instancie)
 
@@ -234,7 +234,7 @@ def induite_reflexive_dans(R=None, a="A", e="E", x="x"):
     h_xinA = N.assume(appartient(vx, va))              # x∈A
     xinE = N.modus_ponens(h_xinA, instancie(hAE, vx))  # x∈E
     refl_x = instancie(hrefl, vx)                      # R{x,x} ⇔ x∈E
-    from bourbaki.logique.tactiques.tactiques_abrege2 import equivalence_arriere
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import equivalence_arriere
     rxx = N.modus_ponens(xinE, equivalence_arriere(refl_x))   # R{x,x}
     RAxx = conjonction_intro(conjonction_intro(h_xinA, h_xinA), rxx)   # R_A{x,x}
     imp_bwd = N.loi_deduction(appartient(vx, va), RAxx)   # x∈A ⇒ R_A{x,x}

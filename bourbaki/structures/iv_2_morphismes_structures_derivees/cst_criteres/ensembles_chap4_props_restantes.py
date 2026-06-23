@@ -50,12 +50,12 @@ REPORTÉ honnêtement (méta / lourd, hors fragment) : la PREUVE de CST1/CST3 (f
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (var, egal, et, impl, equiv, non,
+from bourbaki.logique.i_1_termes_relations.formule import (var, egal, et, impl, equiv, non,
                                        pourtout, existe, appartient, app, inclus)
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.tactiques.tactiques_abrege import syllogisme
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import syllogisme
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
     equivalence_avant, equivalence_arriere, equivalence_symetrie,
     equivalence_transitivite, instancie)
@@ -209,7 +209,7 @@ def _est_iso_morph_reflexivite_triviale(e="E", s="S", ep="Ep", sp="Sp", f="f", m
     morph = _morph(morph)
     iso = est_iso_morph(e, s, ep, sp, f, morph)         # = (morph f ∧ morph f⁻¹)
     # iso ⇔ iso : réflexivité de l'équivalence (a_implique_a dans les deux sens)
-    from bourbaki.logique.tactiques.tactiques_abrege import a_implique_a
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import a_implique_a
     av = a_implique_a(iso)                               # iso ⇒ iso
     ar = a_implique_a(iso)                               # iso ⇒ iso  (même formule, l'autre sens)
     # équiv = (iso⇒iso) ∧ (iso⇒iso) ; conjonction_intro donne le ⇔ (codage de equiv)

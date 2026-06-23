@@ -8,7 +8,7 @@ anti-tautologie).  Pour les formes CONDITIONNELLES, on contrôle l'implication
 report ⇒ conclusion ET que l'antécédent (report) DIFFÈRE du conséquent (garde-fou
 anti-tautologie).  Pour les énoncés REPORTÉS, on contrôle la formule-cible.
 """
-from bourbaki.logique.formule import var, egal, et, ou, non, impl, equiv, inclus
+from bourbaki.logique.i_1_termes_relations.formule import var, egal, et, ou, non, impl, equiv, inclus
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import (
     cardinal, equipotent, inf_egal_card, inf_strict_card, est_bijection_de,

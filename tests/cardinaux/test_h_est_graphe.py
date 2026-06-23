@@ -16,7 +16,7 @@ from bourbaki.cardinaux import ensembles_trichotomie_scaffold as TS
 from bourbaki.cardinaux import ensembles_trichotomie_hgraphe_pr2seg as HG
 from bourbaki.cardinaux import ensembles_fusion_depuis_coincidence_app as FDA
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.formule import appartient, var
+from bourbaki.logique.i_1_termes_relations.formule import appartient, var
 
 
 def _Rf(R):

@@ -4,8 +4,8 @@ Chaque test vérifie que la conclusion certifiée par le noyau est EXACTEMENT la
 cible attendue ET le statut HONNÊTE des hypothèses résiduelles (non vacuous : la
 conclusion ne figure JAMAIS dans les hypothèses).  theorie_ensembles() reste à 22.
 """
-from bourbaki.logique.formule import var, egal, et, impl, appartient, pourtout
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_1_termes_relations.formule import var, egal, et, impl, appartient, pourtout
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ensembles.familles.iii_7_limites import ensembles_limites as L
 from bourbaki.ensembles.familles.iii_7_limites import ensembles_limites_iii7 as I7

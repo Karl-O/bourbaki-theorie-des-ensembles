@@ -45,22 +45,22 @@ from __future__ import annotations
 
 from functools import lru_cache
 
-from bourbaki.logique.formule import (
+from bourbaki.logique.i_1_termes_relations.formule import (
     Terme, var, egal, et, non, impl, existe, pourtout, appartient, inclus,
     subst_t, subst_f,
 )
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.tactiques.tactiques_abrege import a_implique_a, syllogisme
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import a_implique_a, syllogisme
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
     equivalence_avant, equivalence_arriere, equivalence_transitivite, instancie,
     contraposition,
 )
-from bourbaki.logique.tactiques.tactiques_abrege_egalite import (
+from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import (
     symetrie, composer_egalites, congruence_terme,
 )
-from bourbaki.logique.tactiques.tactiques_abrege_quantif import (
+from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import (
     existe_elimination, alpha_existe, congruence_existe, alpha_pour_tout,
 )
 
@@ -72,10 +72,10 @@ from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.e
 
 # ── PONT-α DÉRIVÉ (verrou de liants) — convertit une forme à liants SÛRS vers la
 #    forme PAR DÉFAUT exigée par est_injection_de / inclus, sans toucher le noyau ──
-from bourbaki.logique.tactiques.ensembles_alpha_bridge import (
+from bourbaki.logique.i_3_quantifies.ensembles_alpha_bridge import (
     alpha_bridge, _alpha_existe_exact,
 )
-from bourbaki.logique.tactiques.tactiques_abrege2 import et_congruence_droite
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import et_congruence_droite
 from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import singleton_membre
 from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import extensionnalite_appliquee
 
@@ -100,7 +100,7 @@ from bourbaki.cardinaux.ensembles_equipotence import equipotence_reflexive
 from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import (
     somme_disjointe, injection_droite_dans_somme, _dans_singleton, UN as _UN_MARQUEUR,
 )
-from bourbaki.logique.tactiques.tactiques_abrege2 import conjonction_intro as _conj_intro
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import conjonction_intro as _conj_intro
 
 # ── briques pour « successeur ≠ 0 » (NN-indépendantes, rapides) ────────────────
 from bourbaki.cardinaux.ensembles_cardinaux_props_restantes_prop7 import (

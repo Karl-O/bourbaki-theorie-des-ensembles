@@ -20,7 +20,7 @@ On certifie (rien postulé) que χ_Y est une vraie FONCTION X → {0,1} :
 Le CRUX (bijection χ ⇄ ρ complète + Card(𝔓X)=2^Card X) reste REPORTÉ (emballage
 triple χ_Y∈𝓕(X;2) + alignement graphe/triple entre χ et le ρ du round 24).
 """
-from bourbaki.logique.formule import (var, egal, et, non, ou, impl, equiv,
+from bourbaki.logique.i_1_termes_relations.formule import (var, egal, et, non, ou, impl, equiv,
                                        appartient, inclus, pourtout)
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import ZERO, UN

@@ -57,11 +57,11 @@ THÉORÈMES CERTIFIÉS (chacun testé, cf. test_extension_canonique.py) :
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (Terme, var, app, egal, et, impl, non, equiv,
+from bourbaki.logique.i_1_termes_relations.formule import (Terme, var, app, egal, et, impl, non, equiv,
                                        appartient, existe, inclus, pourtout)
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.tactiques.tactiques_abrege2 import (instancie, equivalence_avant,
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (instancie, equivalence_avant,
                                equivalence_arriere, conjonction_intro,
                                conjonction_elim_gauche, conjonction_elim_droite)
 

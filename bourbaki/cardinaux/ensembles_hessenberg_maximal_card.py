@@ -40,10 +40,10 @@ a²=a n'est JAMAIS supposé, le ≥ dur jamais supposé vrai.  Noyau INTACT.
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (
+from bourbaki.logique.i_1_termes_relations.formule import (
     Terme, var, egal, et, impl, existe, pourtout, appartient,
 )
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 
 from bourbaki.cardinaux.ensembles_cardinaux import (
@@ -57,10 +57,10 @@ from bourbaki.cardinaux.ensembles_hessenberg import (
     enonce_hard_aa_inf_egal_a, hessenberg_depuis_hard, enonce_hessenberg,
 )
 from bourbaki.entiers.iii_6_infinis.iii_6_3_infinis_denombrables.ensembles_infinis import est_infini
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     instancie, conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
 )
-from bourbaki.logique.tactiques.tactiques_abrege_egalite import (
+from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import (
     symetrie, composer_egalites,
 )
 
@@ -166,7 +166,7 @@ def hessenberg_a_carre_inf_egal(E_set="E", S="S0"):
     # cE = prod_EE (symétrie de prod_eq_cE) ; S6 sur R(w):= w ≤ Card E.
     cE_eq_prod = N.modus_ponens(prod_eq_cE, symetrie(prod_EE, cE))   # Card E = CardE·CardE
     s6 = N.s6(cE, prod_EE, "w", inf_egal_card(var("w"), cE))         # (CardE=prod)⇒(CardE≤CardE ⇔ prod≤CardE)
-    from bourbaki.logique.tactiques.tactiques_abrege2 import equivalence_avant
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import equivalence_avant
     le = N.modus_ponens(refl, equivalence_avant(N.modus_ponens(cE_eq_prod, s6)))  # CardE·CardE ≤ Card E
     assert le.conclusion == inf_egal_card(prod_EE, cE)
 

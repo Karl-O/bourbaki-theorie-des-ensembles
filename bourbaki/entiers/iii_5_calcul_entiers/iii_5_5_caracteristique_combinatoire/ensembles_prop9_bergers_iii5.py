@@ -43,13 +43,13 @@ close — donc seul le membre SOMME est certifié.
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import Terme, var, egal
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_1_termes_relations.formule import Terme, var, egal
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.cardinaux.ensembles_cardinaux import cardinal
 from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import (
     somme_disjointe, somme_cardinale_binaire)
 from bourbaki.cardinaux.arithmetique.ensembles_arith_somme import somme_disjointe_cardinal
-from bourbaki.logique.tactiques.tactiques_abrege2 import instancie
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import instancie
 
 
 def _t(v):
@@ -79,7 +79,7 @@ def bergers_binaire_somme(a="A"):
     """
     va = _t(a)
     cA = cardinal(va)
-    from bourbaki.logique.tactiques.tactiques_abrege2 import conjonction_intro
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import conjonction_intro
     # On évite la capture τ de `eq_somme_invariant` (binders internes a,b) en
     # bâtissant l'implication sur des NOMS sûrs (E0,E1,A1), puis en généralisant
     # et en instanciant aux TERMES voulus (X:=A, Y:=A, a:=Card A).  Le renommage

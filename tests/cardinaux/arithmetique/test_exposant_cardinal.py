@@ -10,7 +10,7 @@ des théorèmes) ; a^0 = 1 (Prop. 11) est DÉRIVÉ, pas postulé :
   • exposant_zero_egale_un : Card(𝓕(∅;F)) = Card({∅})  (= a^0 = 1) ;
   • exposant_cardinal_zero_egale_un : exposant_cardinal_binaire(a,0) = Card({∅}).
 """
-from bourbaki.logique.formule import var, egal, et, impl, appartient
+from bourbaki.logique.i_1_termes_relations.formule import var, egal, et, impl, appartient
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import cardinal, equipotent
 from bourbaki.cardinaux.arithmetique import ensembles_exposant_cardinal as X
@@ -28,7 +28,7 @@ def test_axiome_exposant_bien_forme():
     vE, vF, vG = var("E"), var("F"), var("G")
     ax = E.axiome_exposant(vE, vF)
     # corps : G⊂E×F et G fonctionnel et dom G=E
-    from bourbaki.logique.formule import inclus, pourtout, equiv
+    from bourbaki.logique.i_1_termes_relations.formule import inclus, pourtout, equiv
     corps = et(et(inclus(vG, E.produit(vE, vF)), E.est_fonctionnel(vG)),
                egal(E.dom(vG), vE))
     assert ax == pourtout("G", equiv(appartient(vG, E.exposant(vE, vF)), corps))
@@ -38,7 +38,7 @@ def test_axiome_applications_bien_forme():
     """L'axiome de membership de 𝓕(E;F) caractérise t comme triple ((G,E),F)."""
     vE, vF = var("E"), var("F")
     ax = E.axiome_applications(vE, vF)
-    from bourbaki.logique.formule import pourtout, equiv, existe
+    from bourbaki.logique.i_1_termes_relations.formule import pourtout, equiv, existe
     vt, vG = var("t"), var("G")
     triple = E.couple(E.couple(vG, vE), vF)
     corps = existe("G", et(egal(vt, triple), appartient(vG, E.exposant(vE, vF))))
@@ -48,7 +48,7 @@ def test_axiome_applications_bien_forme():
 # ── (a) lemmes sur le vide ─────────────────────────────────────────────────────
 def test_vide_inclus():
     """⊢ ∅ ⊂ X, CLOS  (le vide est inclus dans tout ensemble)."""
-    from bourbaki.logique.formule import inclus
+    from bourbaki.logique.i_1_termes_relations.formule import inclus
     t = X.vide_inclus("X")
     assert t.conclusion == inclus(E.VIDE, var("X"))
     assert t.est_clos

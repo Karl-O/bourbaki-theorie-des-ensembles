@@ -1,7 +1,7 @@
 """Tests V9 — §II.2.2 Produit X×Y : définition, monotonie (Prop 2 sens direct)."""
 from __future__ import annotations
 
-from bourbaki.logique.formule import var, et, ou, impl, appartient, existe, egal, inclus, equiv, afficher_f
+from bourbaki.logique.i_1_termes_relations.formule import var, et, ou, impl, appartient, existe, egal, inclus, equiv, afficher_f
 from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege import produit, couple, est_un_couple, pr1, pr2, VIDE
 from bourbaki.ensembles.familles.ii_2_produit_deux_ensembles.ensembles_produit import (produit_inclusion_facile, couple_dans_produit,
                                couple_dans_produit_ssi,
@@ -9,7 +9,7 @@ from bourbaki.ensembles.familles.ii_2_produit_deux_ensembles.ensembles_produit i
                                produit_vide_dur, produit_vide,
                                produit_inclusion_reciproque_gauche,
                                produit_inclusion_reciproque_droite)
-from bourbaki.logique.formule import non
+from bourbaki.logique.i_1_termes_relations.formule import non
 
 
 def test_est_un_couple():

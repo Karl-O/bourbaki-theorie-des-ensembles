@@ -14,7 +14,7 @@ Un `Theoreme` (séquent Γ⊢B sur des Formule) n'est créable que par ces règl
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (Formule, ou, non, impl, equiv, egal, pourtout, existe, tau,
+from bourbaki.logique.i_1_termes_relations.formule import (Formule, ou, non, impl, equiv, egal, pourtout, existe, tau,
                      subst_f, libres_f, var, developper_t)
 
 _CLE = object()
@@ -45,7 +45,7 @@ class Theoreme:
         return hash((self.hypotheses, self.conclusion))
 
     def __repr__(self):
-        from bourbaki.logique.formule import afficher_f
+        from bourbaki.logique.i_1_termes_relations.formule import afficher_f
         base = afficher_f(self.conclusion)
         if self.est_clos:
             return f"⊢ {base}   [{self.justification}]"

@@ -4,7 +4,7 @@ Chaque test vérifie la conclusion EXACTE produite par le noyau abrégé et les
 hypothèses résiduelles (les lemmes ouverts gardent leurs hypothèses ; les
 définitions se construisent bien et coïncident avec la forme Bourbaki).
 """
-from bourbaki.logique.formule import (
+from bourbaki.logique.i_1_termes_relations.formule import (
     var, et, impl, appartient, pourtout, existe, inclus,
 )
 from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis import ensembles_ordre_relation as O

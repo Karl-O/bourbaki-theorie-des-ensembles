@@ -31,10 +31,10 @@ INVARIANT : theorie_ensembles() = 22.  Noyau INTACT.
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (
+from bourbaki.logique.i_1_termes_relations.formule import (
     Terme, var, egal, et, non, ou, impl, appartient, pourtout, subst_t,
 )
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import ZERO, UN, fonction_caracteristique
@@ -45,12 +45,12 @@ from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recolle
     somme_cardinale_binaire,
 )
 
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
     equivalence_avant, equivalence_arriere, tiers_exclu, cas, instancie,
 )
-from bourbaki.logique.tactiques.tactiques_abrege import a_implique_a, syllogisme
-from bourbaki.logique.tactiques.tactiques_abrege_egalite import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import a_implique_a, syllogisme
+from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import (
     symetrie, transitivite, composer_egalites, congruence_terme,
 )
 
@@ -180,13 +180,13 @@ def carac_intersection(x="x", A="A", B="B", E_="E"):
         h = N.assume(inAB)
         xa = conjonction_elim_gauche(N.modus_ponens(h, equivalence_avant(bridge)))
         imp = N.loi_deduction(inAB, xa)                # x∈A∩B ⇒ x∈A
-        from bourbaki.logique.tactiques.tactiques_abrege2 import contraposition
+        from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import contraposition
         return N.modus_ponens(hnA, contraposition(imp))   # ¬(x∈A∩B)
     def inter_out_right(hnB):
         h = N.assume(inAB)
         xb = conjonction_elim_droite(N.modus_ponens(h, equivalence_avant(bridge)))
         imp = N.loi_deduction(inAB, xb)
-        from bourbaki.logique.tactiques.tactiques_abrege2 import contraposition
+        from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import contraposition
         return N.modus_ponens(hnB, contraposition(imp))
 
     # CAS x∈A :
@@ -280,12 +280,12 @@ def carac_complement(x="x", A="A", E_="E"):
         return N.modus_ponens(conjonction_intro(hxE, hnA), equivalence_arriere(bridge))
     # ¬(x∈E−A) sous x∈A : x∈E−A ⇒ ¬x∈A, contraposée
     def compl_out(hxA):
-        from bourbaki.logique.tactiques.tactiques_abrege2 import contraposition
+        from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import contraposition
         h = N.assume(inCA)
         nxa = conjonction_elim_droite(N.modus_ponens(h, equivalence_avant(bridge)))  # ¬x∈A
         imp = N.loi_deduction(inCA, nxa)               # x∈E−A ⇒ ¬x∈A
         # de x∈A on veut ¬(x∈E−A) : contraposée de imp donne ¬¬x∈A ⇒ ¬(x∈E−A)
-        from bourbaki.logique.tactiques.tactiques_abrege2 import dni
+        from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import dni
         return N.modus_ponens(N.modus_ponens(hxA, dni(inA)), contraposition(imp))
 
     # CAS x∈A : φ_A=1, φ_{E−A}=0,  0+1=1
@@ -347,7 +347,7 @@ def carac_union(x="x", A="A", B="B", E_="E"):
 
     concl = egal(somme(phiU, phiI), somme(phiA, phiB))
 
-    from bourbaki.logique.tactiques.tactiques_abrege2 import contraposition, dni, mono_droite, mono_gauche
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import contraposition, dni, mono_droite, mono_gauche
     # x∈A∪B sous x∈A : injection gauche dans la disjonction
     def union_in_left(hxA):
         return N.modus_ponens(N.modus_ponens(hxA, N.s2(inA, inB)), equivalence_arriere(bU))
@@ -416,7 +416,7 @@ def carac_union(x="x", A="A", B="B", E_="E"):
 
 def _union_out_both(bU, inU, inA, inB, hnA, hnB):
     """sous ¬x∈A, ¬x∈B : ⊢ ¬(x∈A∪B).   (x∈A∪B ⇒ x∈A∨x∈B, et ¬A∧¬B ⊢ ¬(A∨B).)"""
-    from bourbaki.logique.tactiques.tactiques_abrege2 import demorgan_ou, equivalence_arriere as eqarr
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import demorgan_ou, equivalence_arriere as eqarr
     # ¬x∈A et ¬x∈B  ⇒  ¬(x∈A ou x∈B)   via De Morgan
     nor = N.modus_ponens(conjonction_intro(hnA, hnB),
                          equivalence_arriere(demorgan_ou(inA, inB)))   # ¬(x∈A ou x∈B)
@@ -424,7 +424,7 @@ def _union_out_both(bU, inU, inA, inB, hnA, hnB):
     h = N.assume(inU)
     disj = N.modus_ponens(h, equivalence_avant(bU))
     imp = N.loi_deduction(inU, disj)                   # x∈A∪B ⇒ (x∈A∨x∈B)
-    from bourbaki.logique.tactiques.tactiques_abrege2 import contraposition, dne
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import contraposition, dne
     # ¬(x∈A∨x∈B) ⇒ ¬(x∈A∪B)
     return N.modus_ponens(nor, contraposition(imp))
 

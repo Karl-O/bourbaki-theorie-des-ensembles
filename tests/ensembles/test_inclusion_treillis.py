@@ -3,7 +3,7 @@
 Honnêteté LCF : CLOS (0 hyp), conclusion == l'ÉQUIVALENCE fidèle (inclus ⇔ égalité),
 les deux membres DIFFÈRENT, theorie = 22.
 """
-from bourbaki.logique.formule import var, equiv, inclus, egal
+from bourbaki.logique.i_1_termes_relations.formule import var, equiv, inclus, egal
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 import bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_inclusion_treillis as M
 

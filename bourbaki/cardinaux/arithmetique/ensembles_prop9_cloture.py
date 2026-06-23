@@ -38,10 +38,10 @@ fonction-espace χ∘ρ=id est lui aussi reporté).
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import Terme, var, egal, et, appartient
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_1_termes_relations.formule import Terme, var, egal, et, appartient
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.tactiques.tactiques_abrege2 import conjonction_intro
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import conjonction_intro
 from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de
 from bourbaki.cardinaux.arithmetique.ensembles_prop9_final import (
     W, domaine_phi, codomaine_phi, W_fonctionnel, W_domaine,

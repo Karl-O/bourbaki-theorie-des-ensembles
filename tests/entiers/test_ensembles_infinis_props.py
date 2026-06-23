@@ -9,7 +9,7 @@ Vérifie :
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import var, egal, et, impl, equiv, non, inclus
+from bourbaki.logique.i_1_termes_relations.formule import var, egal, et, impl, equiv, non, inclus
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import est_fini, successeur
 from bourbaki.cardinaux.ensembles_cardinaux import est_cardinal, cardinal, inf_egal_card
 from bourbaki.entiers.iii_6_infinis.iii_6_3_infinis_denombrables.ensembles_infinis import (
@@ -86,7 +86,7 @@ def test_infini_monotone_cond_report_est_fini_downward():
     va, vb = var("a"), var("b")
     assert th.conclusion.tag == "non" or True  # impl en abrégé = ¬∨
     # antécédent de l'implication externe == fini_downward(a,b)
-    from bourbaki.logique.tactiques.tactiques_abrege import antecedent_consequent
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import antecedent_consequent
     ante, _ = antecedent_consequent(th.conclusion)
     assert ante == fini_downward(va, vb)
 
@@ -105,7 +105,7 @@ def test_infini_ensemble_monotone_cond_clos_et_forme():
 # ── (6) PARTIE d'un dénombrable (CONDITIONNEL transport)  (CLOS, report en hyp) ─
 def _le_AB_exact():
     """A ≤ B (ensembles) tel que produit par partie_inf_egal_card — forme exacte."""
-    from bourbaki.logique import noyau_abrege as N
+    from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
     from bourbaki.entiers.iii_4_entiers_finis.iii_4_2_finis_props.ensembles_finis_props import partie_inf_egal_card
     vA, vB = var("A"), var("B")
     h = N.assume(inclus(vA, vB))
@@ -125,7 +125,7 @@ def test_sous_ensemble_denombrable_cond_clos_et_forme():
 
 def test_sous_ensemble_denombrable_report_unique():
     # le SEUL antécédent (report) est le transport « A≤B et B dén. ⇒ A dén. »
-    from bourbaki.logique.tactiques.tactiques_abrege import antecedent_consequent
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import antecedent_consequent
     th = P.sous_ensemble_denombrable_cond("A", "B")
     vA, vB = var("A"), var("B")
     le_concl = _le_AB_exact()

@@ -13,7 +13,7 @@ Vérifie (conclusions EXACTES + clos) les paliers de la bijection a↦(a,m), gra
   • eq_copie_gauche/droite    : Eq(A, A×{0}) / Eq(B, B×{1})                       ;
   • eq_copies_gauches_implique_eq : Eq(A×{0}, B×{0}) ⇒ Eq(A, B)  (transport CAS 1).
 """
-from bourbaki.logique.formule import var, egal, impl
+from bourbaki.logique.i_1_termes_relations.formule import var, egal, impl
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import equipotent, est_bijection_de
 from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import ZERO, UN
@@ -50,7 +50,7 @@ def test_copie_graphe_valeur():
     t = C.copie_graphe_valeur(A, ZERO, "a")
     assert t.conclusion == egal(E.valeur(_DX(A, ZERO), a), E.couple(a, ZERO))
     # unique hypothèse : a∈A
-    from bourbaki.logique.formule import appartient
+    from bourbaki.logique.i_1_termes_relations.formule import appartient
     assert list(t.hypotheses) == [appartient(a, A)]
 
 

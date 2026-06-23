@@ -2,7 +2,7 @@
 
 Chaque théorème : conclusion == cible EXACTE et démonstration CLOSE (certifiée
 par le noyau).  Les définitions sont vérifiées bien formées."""
-from bourbaki.logique.formule import var, appartient, equiv, et, existe
+from bourbaki.logique.i_1_termes_relations.formule import var, appartient, equiv, et, existe
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ensembles.fonctions.hors_ii_3.iv_structures import ensembles_isomorphismes as I
 from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de

@@ -32,18 +32,18 @@ vraies dans l'argument de Zorn E.III.48).  Noyau INTACT.
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (
+from bourbaki.logique.i_1_termes_relations.formule import (
     Terme, var, egal, et, non, impl, existe, pourtout, appartient, inclus,
     libres_f, subst_f,
 )
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     instancie, conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
     equivalence_avant,
 )
-from bourbaki.logique.tactiques.tactiques_abrege_egalite import (
+from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import (
     symetrie, composer_egalites,
 )
 
@@ -164,13 +164,13 @@ def _non_vide_existe_element(vU, u):
     `non_vide_ssi_element(U)` donne ¬(U=∅) ⇔ (∃z)(z∈U) (binder z) ; on prend le sens
     avant et on α-renomme (∃z)→(∃u) pour matcher le témoin uwit."""
     from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_vide import non_vide_ssi_element
-    from bourbaki.logique.tactiques.tactiques_abrege_quantif import alpha_existe
+    from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import alpha_existe
     eqv = non_vide_ssi_element(vU)                       # ¬(U=∅) ⇔ (∃z)(z∈U)
     avant = equivalence_avant(eqv)                       # ¬(U=∅) ⇒ (∃z)(z∈U)
     if u == "z":
         return avant
     aeq = alpha_existe("z", u, appartient(var("z"), vU))  # (∃z)(z∈U) ⇔ (∃u)(u∈U)
-    from bourbaki.logique.tactiques.tactiques_abrege import syllogisme
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import syllogisme
     return syllogisme(avant, equivalence_avant(aeq))     # ¬(U=∅) ⇒ (∃u)(u∈U)
 
 
@@ -191,7 +191,7 @@ def negation_strict_sous_temoins_UF(E_set="E", phi0="phi0", psi="psi", S="S0",
       • uwit : `loi_deduction(u∈U)` + `existe_elimination(·,"uwit")`, le ∃u déchargé par
         `U_non_vide` (Card U≠0 ⇒ (∃u)u∈U).
     Aucune hyp résiduelle ne mentionne ψ ni uwit (ACCEPTANCE).  Lock ABSENT.  theorie=22."""
-    from bourbaki.logique.tactiques.tactiques_abrege_quantif import (
+    from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import (
         existe_elimination, alpha_existe,
     )
     from bourbaki.cardinaux.ensembles_hessenberg_structural_discharge import U_non_vide
@@ -208,7 +208,7 @@ def negation_strict_sous_temoins_UF(E_set="E", phi0="phi0", psi="psi", S="S0",
     cur, bij = _psi_free_residuals(b0, vphi0, vpsi, vS, vU)
     assert bij == est_bijection_de(vpsi, F, vU)
 
-    from bourbaki.logique.tactiques.tactiques_abrege import syllogisme
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import syllogisme
 
     # ── 2. élimine ψ : (∃ψ)bij ⇒ marqueur,  ∃ψ fourni par cadre_bijection ─────
     assert psi not in libres_f(marqueur)
@@ -277,7 +277,7 @@ def b2_blocker_classification():
     b1 = negation_strict_sous_temoins_UF()
     uc = [h for h in b1.hypotheses if "Ucadre" in libres_f(h)]
     assert len(uc) == 9, f"b2_blocker : {len(uc)} hyps Ucadre (attendu 9)"
-    from bourbaki.logique.formule import afficher_f as af
+    from bourbaki.logique.i_1_termes_relations.formule import afficher_f as af
     table = []
     nb_mur = 0
     for h in sorted(uc, key=lambda x: str(x)):
@@ -319,7 +319,7 @@ def _remplacer_terme(formule, ancien, nouveau):
     """Remplace toutes les occurrences du TERME `ancien` par `nouveau` dans `formule`
     (substitution structurelle, capture-naïve : usage interne réécriture S6 sur termes
     clos sans collision de binder)."""
-    from bourbaki.logique.formule import Formule
+    from bourbaki.logique.i_1_termes_relations.formule import Formule
 
     def rt(t):
         if t == ancien:

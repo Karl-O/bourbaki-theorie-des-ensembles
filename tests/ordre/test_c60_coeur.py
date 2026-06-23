@@ -8,7 +8,7 @@ Vérifie le module `bourbaki.ordre.iii_2_bon_ordre.recurrence_transfinie.ensembl
 
 INVARIANT vérifié partout : theorie_ensembles() = 22.
 """
-from bourbaki.logique.formule import var, egal
+from bourbaki.logique.i_1_termes_relations.formule import var, egal
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 import bourbaki.ordre.iii_2_bon_ordre.recurrence_transfinie.ensembles_c60_coeur as C
 from bourbaki.ordre.iii_2_bon_ordre.recurrence_transfinie.ensembles_recurrence_transfinie import _graphe_R
@@ -58,7 +58,7 @@ def test_valeur_union_famille():
     assert r.conclusion == egal(E.valeur(U, vu), E.valeur(vp, vu))
     # TROIS hypothèses honnêtes
     assert len(r.hypotheses) == 3
-    from bourbaki.logique.formule import appartient
+    from bourbaki.logique.i_1_termes_relations.formule import appartient
     assert C.famille_compatible(vD) in r.hypotheses
     assert appartient(vp, vD) in r.hypotheses
     assert appartient(vu, E.dom(vp)) in r.hypotheses

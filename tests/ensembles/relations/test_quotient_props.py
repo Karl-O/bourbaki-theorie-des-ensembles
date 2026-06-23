@@ -6,7 +6,7 @@ tautologie vide, jamais postulé) des théorèmes de `ensembles_quotient_props`.
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (var, egal, et, impl, appartient, pourtout)
+from bourbaki.logique.i_1_termes_relations.formule import (var, egal, et, impl, appartient, pourtout)
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.arithmetique.ensembles_graphe_de import graphe_de
 from bourbaki.ensembles.ii_6_equivalence import ensembles_quotient_props as Q
@@ -87,7 +87,7 @@ def test_factorisation_meme_valeurs():
 
 
 def test_surjectivite_ponctuelle_def():
-    from bourbaki.logique.formule import existe
+    from bourbaki.logique.i_1_termes_relations.formule import existe
     vP, vQ = var("P"), var("Q")
     f = Q.surjectivite_ponctuelle(vP, vQ)
     vt, vx = var("t"), var("xa")

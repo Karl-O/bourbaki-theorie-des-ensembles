@@ -8,7 +8,7 @@ R{x,y} := inf_egal_card(x,y)) et la clôture (.est_clos).
 NB : comparabilité (Zorn) et Cantor–Bernstein (point fixe) sont coûteux ; ces
 tests sont volontairement peu nombreux et ciblés.
 """
-from bourbaki.logique.formule import var, egal, et, ou, impl, pourtout
+from bourbaki.logique.i_1_termes_relations.formule import var, egal, et, ou, impl, pourtout
 from bourbaki.cardinaux import ensembles_cardinaux_props_restantes_ordre as O
 from bourbaki.cardinaux.ensembles_cardinaux import inf_egal_card, est_cardinal, cardinal
 

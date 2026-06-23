@@ -55,18 +55,18 @@ NE MODIFIE AUCUN fichier existant.
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (
+from bourbaki.logique.i_1_termes_relations.formule import (
     Terme, var, tau, egal, et, impl, appartient, inclus, existe, pourtout,
 )
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis import ensembles_ordre_vocab as V
-from bourbaki.logique.tactiques.tactiques_abrege import syllogisme
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import syllogisme
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
     instancie, cas,
 )
-from bourbaki.logique.tactiques.tactiques_abrege_quantif import (
+from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import (
     monotonie_existe, existe_elimination,
 )
 from bourbaki.cardinaux import ensembles_temoin_deux_couples as T2
@@ -330,7 +330,7 @@ def _core_with_witnesses(E_set, R, F_set, Rp, u, v, up, vp,
 # ════════════════════════════════════════════════════════════════════════════
 def _cons(thm_imp):
     """Le CONSÉQUENT C de ⊢ (A⇒C)  (sans hypothèse de forme)."""
-    from bourbaki.logique.tactiques.tactiques_abrege import antecedent_consequent
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import antecedent_consequent
     return antecedent_consequent(thm_imp.conclusion)[1]
 
 

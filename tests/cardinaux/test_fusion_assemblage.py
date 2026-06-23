@@ -46,7 +46,7 @@ def test_conclusion_est_bien_fusion_hyp():
 def test_swap_temoin_commun_clos():
     """Le SWAP des antécédents est CLOS et inconditionnel."""
     from bourbaki.cardinaux import ensembles_trichotomie_coherences as COH
-    from bourbaki.logique.formule import impl
+    from bourbaki.logique.i_1_termes_relations.formule import impl
     sw = FA._swap_temoin_commun("E", "R", "F", "Rp", "u", "v", "up", "vp")
     assert sw.est_clos
     src = COH.temoin_commun_h("E", "R", "F", "Rp", "up", "vp", "u", "v")

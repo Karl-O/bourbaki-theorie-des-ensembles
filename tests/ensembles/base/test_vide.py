@@ -1,7 +1,7 @@
 """Test V9 — caractérisation de l'ensemble vide A=∅ ⇔ (∀z)¬(z∈A)."""
 from __future__ import annotations
 
-from bourbaki.logique.formule import var, egal, non, appartient, pourtout, equiv
+from bourbaki.logique.i_1_termes_relations.formule import var, egal, non, appartient, pourtout, equiv
 from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege import VIDE
 from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_vide import vide_ssi_sans_element
 

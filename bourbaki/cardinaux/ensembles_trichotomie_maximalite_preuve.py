@@ -65,14 +65,14 @@ AXIOME_IMG / AXIOME_SEGMENT_EXTREMITE (déjà présents) + de l'axiome dédié d
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (
+from bourbaki.logique.i_1_termes_relations.formule import (
     Terme, var, egal, et, ou, non, impl, equiv, appartient, existe, pourtout, inclus,
 )
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis import ensembles_ordre_vocab as V
-from bourbaki.logique.tactiques.tactiques_abrege import a_implique_a, syllogisme
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import a_implique_a, syllogisme
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
     equivalence_avant, equivalence_arriere, instancie,
 )
@@ -96,7 +96,7 @@ def _ex_falso(thm_a, thm_na, z):
 
 def _refute_self(thm_P_imp_notP):
     """De ⊢(P⇒¬P), conclure ⊢¬P  (via S1 : (¬P∨¬P)⇒¬P)."""
-    from bourbaki.logique.tactiques.tactiques_abrege import antecedent_consequent
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import antecedent_consequent
     P, notP = antecedent_consequent(thm_P_imp_notP.conclusion)
     return N.modus_ponens(thm_P_imp_notP, N.s1(notP))
 
@@ -286,7 +286,7 @@ def extension_iso_hypotheses(E_set="E", R="R", F_set="F", Rp="Rp",
     (7 originales + 3 « φ APPLICATION » func/dom/graphe), partagées par
     extension_iso_donne_antecedent et adjonction_contredit_segment_propre.
     Pour documentation / tests miroir."""
-    from bourbaki.logique.formule import inclus
+    from bourbaki.logique.i_1_termes_relations.formule import inclus
     Rf = TS._R_de(R)
     Rpf = TS._R_de(Rp)
     vE, vF = _t(E_set), _t(F_set)

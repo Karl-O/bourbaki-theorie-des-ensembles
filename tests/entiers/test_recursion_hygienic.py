@@ -11,8 +11,8 @@ Vérifie :
 """
 import pytest
 
-from bourbaki.logique import noyau_abrege as N
-from bourbaki.logique.formule import var, tau, egal
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
+from bourbaki.logique.i_1_termes_relations.formule import var, tau, egal
 import bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege as E
 from bourbaki.entiers.iii_6_infinis.iii_6_2_recursion_c62.ensembles_recursion_hygienic import (
     antecedent_dans_domaine_hygienic,

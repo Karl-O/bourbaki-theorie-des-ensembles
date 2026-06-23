@@ -29,12 +29,12 @@ le nouvel axiome vit dans `theorie_frame_ordre` (dédiée).  Rien postulé.
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (
+from bourbaki.logique.i_1_termes_relations.formule import (
     Terme, var, egal, et, existe, pourtout, appartient, equiv, inclus,
 )
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.tactiques.tactiques_abrege2 import instancie
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import instancie
 
 from bourbaki.cardinaux.ensembles_hessenberg_hard import frame_pair, frame_ordre
 

@@ -6,9 +6,9 @@ from __future__ import annotations
 
 from bourbaki.assemblage.assemblage import (Assemblage, negation, implication, equivalence, egalite,
                         pour_tout, tau_x, substitution_b_x_a)
-from bourbaki.logique.propositions import SIG_PROP
-from bourbaki.logique import noyau
-from bourbaki.logique.tactiques.tactiques_egalite import (instanciation, instanciation_en_x,
+from bourbaki.logique.i_1_termes_relations.propositions import SIG_PROP
+from bourbaki.logique.i_2_criteres_C.noyau import noyau
+from bourbaki.logique.i_4_egalitaires.tactiques_egalite import (instanciation, instanciation_en_x,
                                reflexivite_terme, c44)
 
 S = SIG_PROP

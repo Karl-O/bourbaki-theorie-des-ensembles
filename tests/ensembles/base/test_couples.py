@@ -2,14 +2,14 @@
 et la couche égalitaire abrégée (symétrie, transitivité, congruence C44)."""
 from __future__ import annotations
 
-from bourbaki.logique.formule import var, egal, et, impl, equiv, app, tau, existe, afficher_f
+from bourbaki.logique.i_1_termes_relations.formule import var, egal, et, impl, equiv, app, tau, existe, afficher_f
 from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege import couple, pr1, pr2, paire, singleton
 from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import couple_egal_si_composantes
 from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import (singleton_membre, singleton_injectif,
                                singleton_egale_paire, membre_paire_gauche,
                                membre_paire_droite, paire_cancellation,
                                couple_egal_implique_composantes, proposition_1)
-from bourbaki.logique.tactiques.tactiques_abrege_egalite import (symetrie, transitivite, composer_egalites,
+from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import (symetrie, transitivite, composer_egalites,
                                       congruence_terme)
 
 
@@ -41,7 +41,7 @@ def test_transitivite():
 
 
 def test_composer_egalites():
-    from bourbaki.logique import noyau_abrege as N
+    from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
     a, b, c = var("a"), var("b"), var("c")
     hab = N.assume(egal(a, b))
     hbc = N.assume(egal(b, c))
@@ -60,7 +60,7 @@ def test_congruence_terme():
 
 # ── Lemmes d'injectivité des paires ────────────────────────────────────────────
 def test_singleton_membre():
-    from bourbaki.logique.formule import appartient
+    from bourbaki.logique.i_1_termes_relations.formule import appartient
     a, c = var("a"), var("c")
     t = singleton_membre(a, c)                  # (a∈{c}) ⇔ (a=c)
     assert t.conclusion == equiv(appartient(a, singleton(c)), egal(a, c))
@@ -82,7 +82,7 @@ def test_singleton_egale_paire():
 
 def test_membre_paire():
     a, b = var("a"), var("b")
-    from bourbaki.logique.formule import appartient
+    from bourbaki.logique.i_1_termes_relations.formule import appartient
     assert membre_paire_gauche(a, b).conclusion == appartient(a, paire(a, b))
     assert membre_paire_droite(a, b).conclusion == appartient(b, paire(a, b))
     assert membre_paire_gauche(a, b).est_clos

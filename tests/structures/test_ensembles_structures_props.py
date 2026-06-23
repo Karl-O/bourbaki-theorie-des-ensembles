@@ -9,7 +9,7 @@ Vérifie, pour chacun des cinq groupes de la mission IV-structures-props :
     / est_isomorphisme du chap. IV) ;
   • theorie_ensembles() reste à 22 axiomes (aucun axiome créé).
 """
-from bourbaki.logique.formule import var, egal, et
+from bourbaki.logique.i_1_termes_relations.formule import var, egal, et
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de
 from bourbaki.structures.iv_2_morphismes_structures_derivees.ensembles_universel_morphismes import (

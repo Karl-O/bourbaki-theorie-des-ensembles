@@ -41,13 +41,13 @@ support ; sa décharge = construction de `eq_exposant_invariant` (REPORTÉE, iso
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import Terme, var, egal, et, impl
-from bourbaki.logique import noyau_abrege as N
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_1_termes_relations.formule import Terme, var, egal, et, impl
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite, instancie,
     equivalence_arriere, equivalence_avant,
 )
-from bourbaki.logique.tactiques.tactiques_abrege_egalite import (
+from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import (
     symetrie, composer_egalites, congruence_terme,
 )
 
@@ -243,7 +243,7 @@ def _preuve_P0_puissance(a, hfa, hB0):
 
 def _preuve_step_puissance(a, hfa, hBuniv, n="npu"):
     """{ Fini a [hfa], (∀m)B [hBuniv] } ⊢ (∀n)( (Fini n et Fini(a^n)) ⇒ Fini(a^(n+1)) )."""
-    from bourbaki.logique.formule import pourtout
+    from bourbaki.logique.i_1_termes_relations.formule import pourtout
     va = _t(a)
     vn = var(n)
     ca = conjonction_elim_gauche(hfa)                 # est_cardinal a
@@ -288,7 +288,7 @@ def puissance_entiers_ferme(a="apuf", b="bpuf", n="npuf", k="kpuf"):
         • P[n]⇒P[n+1] : a^(n+1)=a^n·a    [puissance_succ_eq, sous B(n)] ; Fini par G1.
     theorie=22.  La décharge de (B0)+(B) = keystone `eq_exposant_invariant` (REPORTÉ).
     """
-    from bourbaki.logique.formule import pourtout
+    from bourbaki.logique.i_1_termes_relations.formule import pourtout
     va, vb = _t(a), _t(b)
     P = _puissance_P(va)
 

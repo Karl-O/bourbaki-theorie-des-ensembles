@@ -4,7 +4,7 @@ Chaque test vérifie que la CONCLUSION du théorème renvoyé par le noyau est
 EXACTEMENT la cible visée (et qu'il est clos pour les théorèmes inconditionnels,
 ou que ses hypothèses sont les conditions attendues pour les conditionnels).
 """
-from bourbaki.logique.formule import var, et, impl, appartient, alpha_egal
+from bourbaki.logique.i_1_termes_relations.formule import var, et, impl, appartient, alpha_egal
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ensembles.fonctions.hors_ii_3.iv_structures import ensembles_morphismes as M
 

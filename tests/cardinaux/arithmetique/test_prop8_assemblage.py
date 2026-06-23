@@ -12,7 +12,7 @@ deux cas de la preuve back-and-forth, le CAS 1 (h(*)=*) étant clos et le CAS 2
 H2(A,B) = (∀h)((bij(h,A⊔{∅},B⊔{∅}) et h(*)∈B×{0}) ⇒ Eq(A×{0},B×{0})) est le SEUL
 lemme reporté (le CAS 2, échange a₀↦b₀) ; tout le reste est certifié.
 """
-from bourbaki.logique.formule import var, egal, impl, appartient
+from bourbaki.logique.i_1_termes_relations.formule import var, egal, impl, appartient
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import ZERO, UN, somme_disjointe
 from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de, equipotent, cardinal
@@ -44,7 +44,7 @@ def test_hstar_dans_BS():
 
 def test_cas2_hypothese():
     """H2 = (∀h)((bij(h,A⊔{∅},B⊔{∅}) et h(*)∈B×{0}) ⇒ Eq(A×{0},B×{0}))."""
-    from bourbaki.logique.formule import et, pourtout
+    from bourbaki.logique.i_1_termes_relations.formule import et, pourtout
     H2 = A.cas2_hypothese("A", "B", "h")
     vh = var("h")
     hstar = E.valeur(vh, _M)

@@ -1,7 +1,7 @@
 """Test V9 — §II.3.3 graphe composé : (x,z)∈G'∘G ⇔ (∃y)((x,y)∈G et (y,z)∈G')."""
 from __future__ import annotations
 
-from bourbaki.logique.formule import var, equiv, egal, et, appartient, existe
+from bourbaki.logique.i_1_termes_relations.formule import var, equiv, egal, et, appartient, existe
 from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege import couple, composee, image
 from bourbaki.ensembles.fonctions.ii_3_3_composee_graphes.ensembles_composee import couple_composee, image_composee
 

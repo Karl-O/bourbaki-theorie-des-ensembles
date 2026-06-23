@@ -58,8 +58,8 @@ modifié (module + test NEUFS).
 """
 from __future__ import annotations
 
-from bourbaki.logique import noyau_abrege as N
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     conjonction_intro, composantes_conjonction,
 )
 from bourbaki.cardinaux.ensembles_ordinal_cardinal_correspondance import (

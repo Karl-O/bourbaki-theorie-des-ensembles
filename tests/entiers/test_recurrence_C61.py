@@ -12,10 +12,10 @@ PALIERS :
      recurrence_C61 (métathéorème), fini_downward_thm + N_collectivise_final
      (sous les DEUX reports principe_recurrence + cardinal_pas_entre).
 """
-from bourbaki.logique.formule import (
+from bourbaki.logique.i_1_termes_relations.formule import (
     var, coll, pourtout, impl, et, ou, egal, non, appartient, existe,
 )
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import inf_egal_card
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import est_fini, ZERO, successeur
@@ -137,7 +137,7 @@ def test_cardinaux_bien_ordonnes_est_un_enonce():
     f = C.cardinaux_bien_ordonnes("a")
     assert f.tag == "non"            # (∀S) = ¬(∃S)¬
     # forme attendue reconstruite indépendamment
-    from bourbaki.logique.formule import inclus
+    from bourbaki.logique.i_1_termes_relations.formule import inclus
     va, vS, vm, vx = var("a"), var("S"), var("m"), var("x")
     interv = E.intervalle_entiers(ZERO, va)
     hyp = et(inclus(vS, interv), non(egal(vS, E.VIDE)))

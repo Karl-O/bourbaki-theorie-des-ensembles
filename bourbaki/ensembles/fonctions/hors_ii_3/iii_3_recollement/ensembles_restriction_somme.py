@@ -24,15 +24,15 @@ l'hypothèse de disjonction au pivot.
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (Terme, var, egal, et, ou, non, impl,
+from bourbaki.logique.i_1_termes_relations.formule import (Terme, var, egal, et, ou, non, impl,
                                        appartient, existe, pourtout, subst_f)
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.tactiques.tactiques_abrege import syllogisme, antecedent_consequent
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import syllogisme, antecedent_consequent
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
     equivalence_avant, equivalence_arriere, instancie, cas)
-from bourbaki.logique.tactiques.tactiques_abrege_quantif import existe_elimination
+from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import existe_elimination
 
 
 def _t(v):
@@ -87,7 +87,7 @@ def antecedent_dans_domaine(u="u", v="v", f="F", y="y"):
     car_exists = antecedent_consequent(equivalence_arriere(car).conclusion)[0]  # (∃y)((u,y)∈F)
     # si le liant fourni n'est pas « y », α-convertir vers la forme de AXIOME_DOM
     if ex.conclusion != car_exists:
-        from bourbaki.logique.tactiques.ensembles_alpha_bridge import alpha_bridge
+        from bourbaki.logique.i_3_quantifies.ensembles_alpha_bridge import alpha_bridge
         ex = alpha_bridge(ex, car_exists)                    # (∃y)((u,y)∈F)
     u_in_dom = N.modus_ponens(ex, equivalence_arriere(car))  # u∈dom F
     return N.loi_deduction(appartient(cpl, vf), u_in_dom)
@@ -284,7 +284,7 @@ def domaines_disjoints_si_marques(g="G", h="H", b="B", c="C", u="u"):
     l'appelant qui maîtrise la fraîcheur de u dans son contexte."""
     from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import ZERO, UN
     from bourbaki.cardinaux.ensembles_vide_singleton import vide_distinct_singleton
-    from bourbaki.logique.tactiques.tactiques_abrege2 import contraposition
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import contraposition
     vg, vh, vb, vc = _t(g), _t(h), _t(b), _t(c)
     vu = _t(u)
     B0 = E.produit(vb, E.singleton(ZERO))
@@ -318,7 +318,7 @@ def domaines_disjoints_si_marques(g="G", h="H", b="B", c="C", u="u"):
 def _seconde_coord_marquee(u, a, c, p="p", q="q"):
     """⊢ (u ∈ A×{c}) ⇒ (∃p)(u = (p, c)).   (extraction de la forme (p,c) ; la 2ᵉ
     coordonnée d'un couple de A×{c} vaut c.  Liants p,q internes.)"""
-    from bourbaki.logique.tactiques.tactiques_abrege_egalite import (composer_egalites,
+    from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import (composer_egalites,
                                                                      congruence_terme)
     vu, va, vc = _t(u), _t(a), _t(c)
     vp, vq = var(p), var(q)
@@ -356,9 +356,9 @@ def _zero_egal_un_de_temoins(u, exB, exC):
     existentielles ont le même liant 'p' ; on renomme celui de exC en 'pp'
     (alpha_existe) pour que les deux témoins soient distincts."""
     from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import ZERO, UN
-    from bourbaki.logique.tactiques.tactiques_abrege_egalite import (symetrie,
+    from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import (symetrie,
                                                                      composer_egalites)
-    from bourbaki.logique.tactiques.tactiques_abrege_quantif import alpha_existe
+    from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import alpha_existe
     from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import couple_egal_implique_composantes
     vu = _t(u)
     vp, vpp = var("p"), var("pp")

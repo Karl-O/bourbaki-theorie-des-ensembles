@@ -52,8 +52,8 @@ CONTENU — ce qui est NOUVELLEMENT CLOS ici (GREP : non couvert ailleurs) :
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import Terme, var, egal, non
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_1_termes_relations.formule import Terme, var, egal, non
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 
 from bourbaki.cardinaux.ensembles_cardinaux import (
@@ -67,7 +67,7 @@ from bourbaki.entiers.iii_5_calcul_entiers.iii_5_1_somme_produit_entiers.ensembl
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_2_finis_props.ensembles_finis_props import inf_strict_exclut_reciproque
 from bourbaki.entiers.iii_6_infinis.iii_6_3_infinis_denombrables.ensembles_infinis import NN, aleph0, puissance_continu
 
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     contraposition, instancie, conjonction_intro,
 )
 
@@ -160,7 +160,7 @@ def cantor_deux_exp(x="X"):
     equivalence_avant.  2^Card X = exposant_cardinal_binaire(2, X)."""
     from bourbaki.cardinaux.arithmetique.ensembles_exposant_cardinal import exposant_cardinal_binaire
     from bourbaki.cardinaux.arithmetique.ensembles_powerset_exp import deux
-    from bourbaki.logique.tactiques.tactiques_abrege2 import equivalence_avant
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import equivalence_avant
     vX = _t(x)
     PX = E.parties(vX)
     cX, cPX = cardinal(vX), cardinal(PX)
@@ -193,7 +193,7 @@ def aleph0_inf_egal_continu():
 
     Conjoint gauche de aleph0_strict_continu (projection du < = ≤ et ≠).  Card N ≤
     Card P(N) = ℵ₀ ≤ 2^ℵ₀ (le pont sur l'injection x↦{x})."""
-    from bourbaki.logique.tactiques.tactiques_abrege2 import conjonction_elim_gauche
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import conjonction_elim_gauche
     return conjonction_elim_gauche(aleph0_strict_continu())   # ℵ₀ ≤ 2^ℵ₀
 
 

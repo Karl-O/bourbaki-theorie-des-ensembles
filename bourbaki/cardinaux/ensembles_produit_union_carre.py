@@ -16,19 +16,19 @@ Noyau INTACT.
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (
+from bourbaki.logique.i_1_termes_relations.formule import (
     Terme, var, egal, et, ou, existe, appartient,
 )
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 
-from bourbaki.logique.tactiques.tactiques_abrege import syllogisme
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import syllogisme
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
     equivalence_avant, equivalence_arriere,
     equivalence_transitivite, equivalence_symetrie, instancie, cas,
 )
-from bourbaki.logique.tactiques.tactiques_abrege_quantif import (
+from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import (
     monotonie_existe, existe_elimination, congruence_existe,
 )
 from bourbaki.ensembles.familles.ii_2_produit_deux_ensembles.ensembles_produit import _instance_produit
@@ -153,7 +153,7 @@ def _char_droite(a, b, c, z="z"):
     # z∈A×C ⇔ (∃p∃q)bA  ;  z∈B×C ⇔ (∃p∃q)bB
     eA = _instance_produit(vA, vC, vz)
     eB = _instance_produit(vB, vC, vz)
-    from bourbaki.logique.tactiques.tactiques_abrege2 import ou_congruence
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import ou_congruence
     e1 = ou_congruence(eA, eB)                                 # (z∈A×C∨z∈B×C) ⇔ R
     chain = equivalence_transitivite(e0, e1)
     return N.generalisation(z, chain)
@@ -239,7 +239,7 @@ def _char_gauche_droite(a, b, c, z="z"):
 
 def _char_droite_droite(a, b, c, z="z"):
     """⊢ (∀z)( z∈(A×B)∪(A×C) ⇔ R_droite )."""
-    from bourbaki.logique.tactiques.tactiques_abrege2 import ou_congruence
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import ou_congruence
     vA, vB, vC, vz = _t(a), _t(b), _t(c), var(z)
     R, bB, bC = _R_droite(a, b, c, z)
     AB, AC = E.produit(vA, vB), E.produit(vA, vC)
@@ -268,7 +268,7 @@ def produit_union_droite(a="A", b="B", c="C", z="z"):
 # ════════════════════════════════════════════════════════════════════════════
 def produit_union_carre(a="A", b="B", z="z"):
     """⊢ (A∪B)×(A∪B) = (A×A)∪((A×B)∪((B×A)∪(B×B))).   [CLOS, 0 hyp]."""
-    from bourbaki.logique.tactiques.tactiques_abrege_egalite import congruence_terme, composer_egalites
+    from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import congruence_terme, composer_egalites
     from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_algebre_booleenne import associativite_reunion
     vA, vB = _t(a), _t(b)
     AB = E.reunion(vA, vB)
@@ -324,7 +324,7 @@ def s0sq_cadre_reunion_egale_carre(S="S0", U="Ucadre", z="z"):
     NON tagués).  Décharger hyp 2 demande de RE-CÂBLER ψ pour qu'elle ait pour
     domaine la frame en RÉUNION (pas en ⊔) — changement d'architecture de
     `phi_etendue_bijection`/`cadre_ensemble`, hors scope mécanique de TASK B."""
-    from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie
+    from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import symetrie
     cr = carre_reunion_S0_U(S, U, z)
     lhs, rhs = cr.conclusion.termes                         # Z² = S₀²∪F
     res = N.modus_ponens(cr, symetrie(lhs, rhs))            # S₀²∪F = Z²

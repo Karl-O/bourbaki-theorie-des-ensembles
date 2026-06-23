@@ -10,7 +10,7 @@ Vérifie :
 NB : dans le noyau, impl(p,q) DÉSUCRE en ou(non p, q) et equiv en conjonction de
 ou ; on teste donc l'ÉGALITÉ STRUCTURELLE contre les énoncés-cibles (et non le tag).
 """
-from bourbaki.logique.formule import impl, equiv, non
+from bourbaki.logique.i_1_termes_relations.formule import impl, equiv, non
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_hessenberg_hard import (
     frame_membre, maximal_pair_existe, hessenberg_carre,

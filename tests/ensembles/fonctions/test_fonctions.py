@@ -1,7 +1,7 @@
 """Tests V9 — §II.3.4 Fonctions : graphe fonctionnel, valeur f(x), C46."""
 from __future__ import annotations
 
-from bourbaki.logique.formule import var, egal, et, equiv, appartient, existe, pourtout, impl
+from bourbaki.logique.i_1_termes_relations.formule import var, egal, et, equiv, appartient, existe, pourtout, impl
 from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege import est_fonctionnel, valeur, couple
 from bourbaki.ensembles.fonctions.ii_3_4_fonctions_valeur.ensembles_fonctions import valeur_dans_graphe, valeur_caracterisation
 
@@ -23,7 +23,7 @@ def test_composee_fonctionnelle():
 
 
 def test_composition_valeur():
-    from bourbaki.logique.formule import existe, appartient
+    from bourbaki.logique.i_1_termes_relations.formule import existe, appartient
     from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege import composee, valeur, couple
     from bourbaki.ensembles.fonctions.ii_3_7_composee_fonctions.ensembles_fonctions_composee import composition_valeur
     vG, vF, vx, vy = var("G"), var("F"), var("x"), var("y")

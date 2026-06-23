@@ -17,12 +17,12 @@ Côté droit  (AXIOME_COMPOSEE sur (G⁻¹, Gp⁻¹) + couple_reciproque ×2 + c
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import var, egal, et, appartient, existe
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_1_termes_relations.formule import var, egal, et, appartient, existe
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.tactiques.tactiques_abrege2 import (instancie, equivalence_transitivite,
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (instancie, equivalence_transitivite,
                                et_congruence_droite, et_congruence_gauche, comm_et)
-from bourbaki.logique.tactiques.tactiques_abrege_quantif import congruence_existe, alpha_existe
+from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import congruence_existe, alpha_existe
 from bourbaki.ensembles.fonctions.ii_3_3_composee_graphes.ensembles_composee import couple_composee
 from bourbaki.ensembles.fonctions.ii_3_2_reciproque.ensembles_reciproque import couple_reciproque
 from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import egalite_par_extension

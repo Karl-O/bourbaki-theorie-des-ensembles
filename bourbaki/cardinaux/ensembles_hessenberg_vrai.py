@@ -37,10 +37,10 @@ a²=a jamais supposé ; ≥ dur jamais supposé.
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (
+from bourbaki.logique.i_1_termes_relations.formule import (
     Terme, var, egal, et, ou, non, impl, existe, pourtout, appartient, inclus, tau,
 )
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 
 from bourbaki.cardinaux.ensembles_cardinaux import (
@@ -48,7 +48,7 @@ from bourbaki.cardinaux.ensembles_cardinaux import (
 )
 from bourbaki.entiers.iii_6_infinis.iii_6_3_infinis_denombrables.ensembles_infinis import est_infini
 
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     instancie, conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
 )
 
@@ -244,7 +244,7 @@ def _infini_non_nul(b, h_inf):
 
 def _symetrie_t(ta, tb):
     """⊢ (a=b) ⇒ (b=a)  pour TERMES (symétrie)."""
-    from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie
+    from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import symetrie
     return symetrie(ta, tb)
 
 
@@ -254,7 +254,7 @@ def _reecrire_gauche_ne(ne_thm, eq_thm, told, tnew, tright):
     s6 = N.s6(tnew, told, "wne", egal(var("wne"), tright))
     equiv = N.modus_ponens(eq_thm, s6)                     # (tnew=tright) ⇔ (told=tright)
     # contrapose : ¬(told=tright) ⇒ ¬(tnew=tright)
-    from bourbaki.logique.tactiques.tactiques_abrege2 import equivalence_arriere
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import equivalence_arriere
     # ¬(told=tright) et (tnew=tright⇒told=tright) ⇒ ¬(tnew=tright)
     h_new = N.assume(egal(tnew, tright))
     told_eq = N.modus_ponens(h_new, equivalence_avant_local(equiv))   # told=tright
@@ -265,7 +265,7 @@ def _reecrire_gauche_ne(ne_thm, eq_thm, told, tnew, tright):
 
 
 def equivalence_avant_local(equiv_thm):
-    from bourbaki.logique.tactiques.tactiques_abrege2 import equivalence_avant
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import equivalence_avant
     return equivalence_avant(equiv_thm)
 
 
@@ -285,7 +285,7 @@ def u_dans_U_derive(E_set="E", S="S0", Vbind="Vhess"):
     extrait uτ=τz(z∈Uτ) avec uτ∈Uτ.  Le témoin u∈U de la contradiction de Hessenberg
     n'est DONC PLUS une hypothèse — il est dérivé de Uτ≠∅ (lui-même dérivé de Card Uτ=𝔟
     infini).  Les TROIS faits du trio sont maintenant DÉRIVÉS."""
-    from bourbaki.logique.tactiques.tactiques_abrege2 import equivalence_avant
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import equivalence_avant
     Ut, corps, _ = _temoin_U(E_set, S, Vbind)
     nv = U_non_vide_derive(E_set, S, Vbind)                # ¬(Uτ=∅)
     equiv = _non_vide_ssi_element_t(Ut)                    # ¬(Uτ=∅) ⇔ (∃z)(z∈Uτ)

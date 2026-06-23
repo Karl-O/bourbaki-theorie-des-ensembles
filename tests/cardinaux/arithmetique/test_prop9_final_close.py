@@ -2,7 +2,7 @@
 
 §III.3.5 : a^(b+c) = a^b·a^c, c.-à-d. Card(𝓕(B⊔C;A)) = Card(𝓕(B;A)×𝓕(C;A)).
 Le dernier pas : ψ-injectivité ⇒ inf_egal_psi ⇒ prop9_close (Cantor–Bernstein)."""
-from bourbaki.logique.formule import var, appartient, egal
+from bourbaki.logique.i_1_termes_relations.formule import var, appartient, egal
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.arithmetique.ensembles_prop9_exp_somme import (
     cible_prop9_exp_somme)

@@ -45,21 +45,21 @@ MODIFIE AUCUN fichier existant.
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (
+from bourbaki.logique.i_1_termes_relations.formule import (
     Terme, var, egal, et, ou, non, impl, equiv, appartient, existe, pourtout, inclus,
 )
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis import ensembles_ordre_vocab as V
-from bourbaki.logique.tactiques.tactiques_abrege import syllogisme
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import syllogisme
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
     equivalence_avant, equivalence_arriere, instancie,
 )
-from bourbaki.logique.tactiques.tactiques_abrege_quantif import (
+from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import (
     existe_elimination, alpha_existe,
 )
-from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie, composer_egalites
+from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import symetrie, composer_egalites
 from bourbaki.ensembles.ii_3_correspondances.ensembles_correspondances import _inst_image, _inst_img
 from bourbaki.ensembles.familles.ii_2_produit_deux_ensembles.ensembles_produit import (
     _instance_produit, couple_dans_produit_ssi,
@@ -321,8 +321,8 @@ def _pr2_h_initial(E_set="E", R="R", F_set="F", Rp="Rp", S="S", T="T", phi="phi"
     body = N.loi_deduction(premisse, y_in_imgh_final)
     init_clause = N.generalisation("xs", N.generalisation("ys", body))   # (∀xs)(∀ys)(…)
     #   α-renommer (∀xs)(∀ys) → (∀x)(∀y) : forme canonique de est_segment (binders x,y).
-    from bourbaki.logique.tactiques.tactiques_abrege2 import _peler_pourtout
-    from bourbaki.logique.tactiques.tactiques_abrege_quantif import (
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import _peler_pourtout
+    from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import (
         alpha_pour_tout, congruence_pour_tout,
     )
     _, body_xs = _peler_pourtout(init_clause.conclusion)        # (∀ys)(corps)
@@ -349,7 +349,7 @@ def _find_exists_binder(f):
 
 def _equiv_transit(*equivs):
     """Chaîne d'équivalences A⇔B, B⇔C, … en A⇔Z."""
-    from bourbaki.logique.tactiques.tactiques_abrege2 import equivalence_transitivite
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import equivalence_transitivite
     acc = equivs[0]
     for e in equivs[1:]:
         acc = equivalence_transitivite(acc, e)
@@ -411,7 +411,7 @@ def h_inclus_dom_pr2(E_set="E", R="R", F_set="F", Rp="Rp"):
     inner_xy = egal(vz, E.couple(var("x"), var("y")))
     ren_y = alpha_existe("y", "kq", inner_xy)                  # (∃y)(z=(x,y)) ⇔ (∃kq)(z=(x,kq))
     eqv_y_lift = _congruence_existe(ren_y, "x")               # (∃x)(∃y)… ⇔ (∃x)(∃kq)…
-    from bourbaki.logique.formule import subst_f
+    from bourbaki.logique.i_1_termes_relations.formule import subst_f
     body_x2 = existe("kq", subst_f(vq, "y", inner_xy))         # (∃kq)(z=(x,kq))
     ren_x = alpha_existe("x", "kp", body_x2)                   # (∃x)(∃kq)… ⇔ (∃kp)(∃kq)…
     z_couple_pq = N.modus_ponens(z_couple, equivalence_avant(
@@ -457,7 +457,7 @@ def h_inclus_dom_pr2_cible(E_set="E", R="R", F_set="F", Rp="Rp"):
 
 def _congruence_existe(thm_eq, x):
     """⊢ (R⇔S) (x non libre dans Γ) ⟹ Γ ⊢ (∃x)R ⇔ (∃x)S."""
-    from bourbaki.logique.tactiques.tactiques_abrege_quantif import monotonie_existe
+    from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import monotonie_existe
     avant = monotonie_existe(equivalence_avant(thm_eq), x)
     arriere = monotonie_existe(equivalence_arriere(thm_eq), x)
     return conjonction_intro(avant, arriere)
@@ -468,10 +468,10 @@ def _pr2_seg_binders(E_set, R, F_set, Rp, xb, yb):
 
     `pr2_h_est_segment` (binders x,y) α-renommé vers (xb,yb), motif
     RES._seg_dom_sans_val_binders."""
-    from bourbaki.logique.tactiques.tactiques_abrege2 import (
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
         conjonction_elim_gauche as cg, conjonction_elim_droite as cd, _peler_pourtout,
     )
-    from bourbaki.logique.tactiques.tactiques_abrege_quantif import (
+    from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import (
         alpha_pour_tout, congruence_pour_tout,
     )
     ps = pr2_h_est_segment(E_set, R, F_set, Rp)       # binders x,y

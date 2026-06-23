@@ -3,7 +3,7 @@
 Pour chaque DÉFINITION : on vérifie la forme attendue (construction fidèle).
 Pour chaque LEMME : on vérifie la conclusion EXACTE et le statut clos / hypothèses.
 """
-from bourbaki.logique.formule import (
+from bourbaki.logique.i_1_termes_relations.formule import (
     var, egal, et, ou, impl, non, appartient, existe, pourtout,
 )
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E

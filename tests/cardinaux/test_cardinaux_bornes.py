@@ -5,7 +5,7 @@ tout cardinal x ≠ 0. »  On certifie ici 0 ≤ a (application vide) et a ≤ a
 (injection canonique gauche u↦(u,0)).  Chaque test vérifie que la conclusion
 certifiée par le noyau EST EXACTEMENT la cible Bourbaki, et la clôture.
 """
-from bourbaki.logique.formule import var, egal, inclus, impl, appartient
+from bourbaki.logique.i_1_termes_relations.formule import var, egal, inclus, impl, appartient
 from bourbaki.cardinaux import ensembles_cardinaux_bornes as B
 from bourbaki.cardinaux.ensembles_cardinaux import inf_egal_card, cardinal
 from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import somme_disjointe

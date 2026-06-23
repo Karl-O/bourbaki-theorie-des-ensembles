@@ -15,9 +15,9 @@ PALIERS :
            le report retrait_point_hyp de ensembles_cardinal_pas_entre LITTÉRALEMENT ;
        retrait_point_hyp_mod_surgery (CLOS 0 hyp : la surgery en antécédent explicite).
 """
-from bourbaki.logique.formule import var, egal, et, impl, non
+from bourbaki.logique.i_1_termes_relations.formule import var, egal, et, impl, non
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.tactiques.tactiques_abrege import antecedent_consequent
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import antecedent_consequent
 from bourbaki.cardinaux.ensembles_cardinaux import (
     equipotent, cardinal, inf_egal_card, est_injection_de,
 )

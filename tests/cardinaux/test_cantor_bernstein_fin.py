@@ -3,7 +3,7 @@
 Vérifie les PALIERS additifs : double complément, image dans le codomaine,
 et LE PIVOT  A∖D = g⟨B∖f⟨D⟩⟩.
 """
-from bourbaki.logique.formule import var, et, non, impl, appartient, inclus, egal
+from bourbaki.logique.i_1_termes_relations.formule import var, et, non, impl, appartient, inclus, egal
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux import ensembles_cantor_bernstein as CB
 from bourbaki.cardinaux import ensembles_cantor_bernstein_fin as CBF

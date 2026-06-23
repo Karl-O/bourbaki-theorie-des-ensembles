@@ -13,7 +13,7 @@ atomique A, et l'assemblage de A⇒A est exactement ∨ ¬ A A = (OU, NON, A, A)
 from __future__ import annotations
 
 from bourbaki.assemblage.assemblage import Assemblage
-from bourbaki.logique.lecture import DEFAUT
+from bourbaki.logique.i_1_termes_relations.lecture import DEFAUT
 
 # Atomes propositionnels disponibles (poids 0, sorte « relation »).
 _NOMS = ("A", "B", "C", "D", "E")

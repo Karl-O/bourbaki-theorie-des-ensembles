@@ -8,7 +8,7 @@ Tout le reste (existence/unicité de la division euclidienne, propriétés du
 développement de base b, Cor. 3 « a^b entier ») repose sur l'arithmétique cardinale
 binaire et/ou la récurrence (NON disponibles) → REPORTÉ (cf. docstrings du module).
 """
-from bourbaki.logique.formule import var, egal, impl, libres_f
+from bourbaki.logique.i_1_termes_relations.formule import var, egal, impl, libres_f
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers import ensembles_entiers as Ent
 from bourbaki.cardinaux.arithmetique.ensembles_exposant_cardinal import (

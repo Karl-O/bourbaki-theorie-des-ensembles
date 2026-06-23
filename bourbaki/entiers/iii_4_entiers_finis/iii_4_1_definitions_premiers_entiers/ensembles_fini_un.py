@@ -58,8 +58,8 @@ Prop. 1 Fini(𝔞)⇔Fini(𝔞+1)).  Cette généralisation n'est pas encore dis
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import var, egal, non, et, appartient, existe
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_1_termes_relations.formule import var, egal, non, et, appartient, existe
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import (est_bijection_de, cardinal, equipotent)
 from bourbaki.cardinaux.ensembles_cardinaux_theoremes import (equipotent_si_cardinal_egal,
@@ -77,10 +77,10 @@ from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recolle
                                        injection_droite_dans_somme)
 from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import (couple_egal_implique_composantes,
                                   singleton_membre, membre_paire_gauche)
-from bourbaki.logique.tactiques.tactiques_abrege2 import (conjonction_intro, conjonction_elim_gauche,
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (conjonction_intro, conjonction_elim_gauche,
                                conjonction_elim_droite, equivalence_avant, instancie)
-from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie, composer_egalites, congruence_terme
-from bourbaki.logique.tactiques.tactiques_abrege_quantif import existe_elimination
+from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import symetrie, composer_egalites, congruence_terme
+from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import existe_elimination
 
 
 # ── Objets de base : 1 = Card({∅}) = successeur(0) ; les marqueurs 0 = ∅, 1 = {∅} ──
@@ -282,7 +282,7 @@ def un_est_un_cardinal():
     CS_eq_un = N.modus_ponens(un_eq, symetrie(_UN, _CARD_SING))   # Card({∅}) = 1
     matrice_equiv = N.modus_ponens(CS_eq_un,
         N.s6(_CARD_SING, _UN, "w", egal(var("w"), cardinal(vX))))   # (Card{∅}=Card X)⇔(1=Card X)
-    from bourbaki.logique.tactiques.tactiques_abrege_quantif import congruence_existe
+    from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import congruence_existe
     cong = congruence_existe(matrice_equiv, "X")            # (∃X)(Card{∅}=Card X) ⇔ (∃X)(1=Card X)
     return N.modus_ponens(card_sing_is_card, equivalence_avant(cong))   # est_cardinal(1)
 

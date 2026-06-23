@@ -34,16 +34,16 @@ SOURCE (lue visuellement, E II.17 / E II.20-21) :
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (var, egal, et, appartient, impl, pourtout,
+from bourbaki.logique.i_1_termes_relations.formule import (var, egal, et, appartient, impl, pourtout,
                                        Terme)
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.tactiques.tactiques_abrege2 import (conjonction_intro,
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (conjonction_intro,
                                conjonction_elim_gauche, conjonction_elim_droite,
                                instancie, equivalence_avant, equivalence_arriere,
                                equivalence_transitivite, equivalence_symetrie)
-from bourbaki.logique.tactiques.tactiques_abrege_quantif import congruence_pour_tout
-from bourbaki.logique.tactiques.tactiques_abrege_egalite import (symetrie,
+from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import congruence_pour_tout
+from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import (symetrie,
                                composer_egalites, congruence_terme)
 from bourbaki.ensembles.fonctions.ii_3_2_reciproque.ensembles_reciproque import couple_reciproque
 
@@ -112,7 +112,7 @@ def reciproque_fonctionnel_ssi_injectif(f="F"):
 
 def cible_reciproque_fonctionnel_ssi_injectif(f="F"):
     """Cible exacte : est_fonctionnel(F⁻¹) ⇔ F injectif (graphe)."""
-    from bourbaki.logique.formule import equiv
+    from bourbaki.logique.i_1_termes_relations.formule import equiv
     vF = _T(f)
     return equiv(E.est_fonctionnel(E.reciproque(vF)), _graphe_injectif(vF))
 

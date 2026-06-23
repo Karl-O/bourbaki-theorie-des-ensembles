@@ -12,8 +12,8 @@ Vérifie :
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import var, et, appartient, impl
-from bourbaki.logique.tactiques.tactiques_abrege import antecedent_consequent
+from bourbaki.logique.i_1_termes_relations.formule import var, et, appartient, impl
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import antecedent_consequent
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de, equipotent, est_cardinal
 from bourbaki.cardinaux.ensembles_equipotence_retrait import (
@@ -95,8 +95,8 @@ def test_gen_interchangeable_avec_surgery():
         equipotence_retrait_un_point_general as SURG_GEN)
     from bourbaki.entiers.iii_4_entiers_finis.iii_4_2_pigeonhole_surgery.ensembles_retrait_point import _S, _STAR
     from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import successeur
-    from bourbaki.logique import noyau_abrege as N
-    from bourbaki.logique.tactiques.tactiques_abrege2 import instancie
+    from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import instancie
     vc, vq = var("c"), var("q")
     succ_c, S = successeur(vc), _S(vc)
 

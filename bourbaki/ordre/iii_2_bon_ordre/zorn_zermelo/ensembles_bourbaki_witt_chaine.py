@@ -33,22 +33,22 @@ introduites comme TERMES + axiomes DÉFINITIONNELS en théories DÉDIÉES (motif
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (
+from bourbaki.logique.i_1_termes_relations.formule import (
     Terme, var, egal, et, ou, non, impl, equiv, appartient, existe, pourtout, inclus,
 )
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.tactiques.tactiques_abrege import syllogisme, a_implique_a
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import syllogisme, a_implique_a
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
     projection_gauche, projection_droite, contraposition, cas, tiers_exclu,
     equivalence_avant, equivalence_arriere, instancie, instanciation_en_x,
     comm_ou, demorgan_et,
 )
-from bourbaki.logique.tactiques.tactiques_abrege_quantif import (
+from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import (
     monotonie_existe, existe_elimination,
 )
-from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie as _sym
+from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import symetrie as _sym
 from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis.ensembles_ordre_relation import (
     est_ordre, reflexivite_sur, antisymetrie, transitivite_rel, totalement_ordonne,
     majorant, borne_superieure, plus_grand_element, plus_petit_element,
@@ -88,7 +88,7 @@ def _cut(thm, hyp, preuve_hyp):
 
 def _inclus_refl(t):
     """⊢ t⊂t  pour un TERME t  (réflexivité de l'inclusion, instanciée)."""
-    from bourbaki.logique.tactiques.tactiques_abrege import inclusion_reflexive
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import inclusion_reflexive
     th = inclusion_reflexive("_r")                            # _r⊂_r
     return instancie(N.generalisation("_r", th), _terme(t))   # t⊂t
 
@@ -99,7 +99,7 @@ def _incl_trans(a, b, c, ab, bc):
     Binders set-variables GARANTIS FRAIS (« _i1/_i2/_i3 ») : ne collisionnent jamais
     avec a,b,c (qui peuvent contenir var('u'/'v'/'w') quand l'élément d'un M_c/Cext
     porte un de ces noms)."""
-    from bourbaki.logique.tactiques.tactiques_abrege2 import inclusion_transitive
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import inclusion_transitive
     th = inclusion_transitive("_i1", "_i2", "_i3")
     for nm, tm in (("_i1", _terme(a)), ("_i2", _terme(b)), ("_i3", _terme(c))):
         th = instancie(N.generalisation(nm, th), tm)
@@ -255,7 +255,7 @@ def Mc_clos_p(G="G", E_set="E", p="p", a="a", c="c", x="x"):
 
 def _C_inclus_M(G, E_set, p, a, c, C, hC_Mc):
     """{ C⊂M_c [hC_Mc] } ⊢ C⊂M   (transitivité C⊂M_c⊂M)."""
-    from bourbaki.logique.tactiques.tactiques_abrege2 import inclusion_transitive
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import inclusion_transitive
     vG, vE, vp, va, vc = _terme(G), _terme(E_set), _terme(p), _terme(a), _terme(c)
     Mct, Mt = Mc(vG, vE, vp, va, vc), M(vG, vE, vp, va)
     McM = Mc_inclus_M_terme(vG, vE, vp, va, vc)             # M_c⊂M
@@ -313,8 +313,8 @@ def Mc_clos_sup(G="G", E_set="E", p="p", a="a", c="c", C="C", s="s",
     # BRANCHE NOT : ∃x∈C ¬(x≤c) ; témoin x ⇒ p(c)≤x≤s ⇒ p(c)≤s
     Hnot = N.assume(non(allxc))                             # ¬(∀x)(x∈C⇒x≤c)
     # ¬(∀x)R = ¬¬(∃x)¬R → (∃x)¬R   (dne)
-    from bourbaki.logique.tactiques.tactiques_abrege2 import dne as _dne
-    from bourbaki.logique.tactiques.tactiques_abrege_quantif import congruence_existe
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import dne as _dne
+    from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import congruence_existe
     Rxc = impl(appartient(var(x), vC), _le(var(x), vc, vG))  # x∈C⇒x≤c
     ex_negR = N.modus_ponens(Hnot, _dne(existe(x, non(Rxc))))   # (∃x)¬(x∈C⇒x≤c)
     # ¬(x∈C⇒x≤c) ⇔ (x∈C et ¬(x≤c))  sous ∃
@@ -642,9 +642,9 @@ def _applique_least(least_s, m, hmE, maj_fun_c, c_binder):
 
     On INSTANCIE least_s en m, on lit l'antécédent attendu (= majorant(G,D,m,E)
     avec binder canonique), et on α-renomme maj_fun_c vers ce binder pour matcher."""
-    from bourbaki.logique.tactiques.tactiques_abrege import antecedent_consequent
-    from bourbaki.logique.tactiques.tactiques_abrege_quantif import alpha_pour_tout
-    from bourbaki.logique.tactiques.tactiques_abrege2 import _peler_pourtout
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import antecedent_consequent
+    from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import alpha_pour_tout
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import _peler_pourtout
     least_m = instancie(least_s, _terme(m))                       # majorant(G,D,m,E)⇒(s,m)∈G
     maj_attendu, _ = antecedent_consequent(least_m.conclusion)
     maj_fun_attendu = conjonction_elim_droite(N.assume(maj_attendu))  # (∀@)(@∈D⇒(@,m)∈G)  [maj_attendu]
@@ -698,8 +698,8 @@ def _xeqc_subcase(G, E_set, p, a, D, s, c, x, cp,
     x_eq_s = _antisym(vG, vx, vs, hx_le_s, s_le_x)                 # x=s
     absurde = _ex_falso(x_eq_s, hx_ne_s, ex_form)                  # ∃c′…  (ex falso)
     maj_c_imp = N.loi_deduction(allcp, absurde)                   # allcp ⇒ (∃c′…)
-    from bourbaki.logique.tactiques.tactiques_abrege2 import dne as _dne
-    from bourbaki.logique.tactiques.tactiques_abrege_quantif import congruence_existe
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import dne as _dne
+    from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import congruence_existe
     Rcp = impl(appartient(var(cp), vD), _le(var(cp), vc, vG))     # c′∈D⇒c′≤c
     Hnall = N.assume(non(allcp))
     ex_neg = N.modus_ponens(Hnall, _dne(existe(cp, non(Rcp))))    # ∃c′¬(c′∈D⇒c′≤c)
@@ -715,7 +715,7 @@ def _xeqc_subcase(G, E_set, p, a, D, s, c, x, cp,
     ncpc = conjonction_elim_droite(Hcp)                           # ¬(c′≤c)
     cpext, cpM, cp_le_s = _cp_extreme_et_le_s(G, E_set, p, a, D, s, cp, hcpD, D_C, s_maj_fun)
     # comparabilité c,c′ dans D : c≤c′ OU c′≤c ; ¬(c′≤c) ⇒ c≤c′
-    from bourbaki.logique.tactiques.tactiques_abrege_egalite import composer_egalites
+    from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import composer_egalites
     comp = _comparable_dans_D(vG, vE, vD, vc, var(cp), hcD, hcpD, tot_D)  # c≤c′ OU c′≤c
     comp2 = N.modus_ponens(comp, equivalence_avant(             # c′≤c OU c≤c′
         comm_ou(_le(vc, var(cp), vG), _le(var(cp), vc, vG))))
@@ -795,8 +795,8 @@ def s_est_extreme(G="G", E_set="E", p="p", a="a", D="D", s="s",
     bAll = N.loi_deduction(allc, _ex_falso(x_eq_s, x_ne_s, but))   # allc ⇒ but
 
     # BRANCHE NOT : ∃c∈D ¬(p(c)≤x)
-    from bourbaki.logique.tactiques.tactiques_abrege2 import dne as _dne
-    from bourbaki.logique.tactiques.tactiques_abrege_quantif import congruence_existe
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import dne as _dne
+    from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import congruence_existe
     Rc = impl(appartient(vc, vD), _le(pval(vp, vc), vx, vG))   # c∈D⇒p(c)≤x
     Hnot = N.assume(non(allc))
     ex_neg = N.modus_ponens(Hnot, _dne(existe(c, non(Rc))))   # (∃c)¬(c∈D⇒p(c)≤x)
@@ -891,7 +891,7 @@ def Cext_est_tour(G="G", E_set="E", p="p", a="a"):
     HYPS : plus_petit_element(G,E,a), a∈E + structurelles (antisym, trans, refl,
     inflat, application_dans).  Assemble (T0) Cext⊂E, (T1) a∈Cext, (T2) clos par p,
     (T3) clos par sup.  Le clos_par_p est ré-α (binder c→x) pour matcher est_tour."""
-    from bourbaki.logique.tactiques.tactiques_abrege_quantif import alpha_pour_tout
+    from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import alpha_pour_tout
     vG, vE, vp, va = var(G), var(E_set), var(p), var(a)
     Ct = Cext(vG, vE, vp, va)
     t0 = Cext_inclus_E(G, E_set, p, a)                      # Cext⊂E
@@ -961,7 +961,7 @@ def M_est_une_chaine(G="G", E_set="E", p="p", a="a", x="x", y="y", z="z"):
     comparable à tout x∈M (ÉTAPE 2, comparable_a_c).  HYPS : est_ordre(G,E) +
     application_dans + inflationnaire + plus_petit_element + a∈E (toutes structurelles,
     déchargées comme dans point_fixe_de_sup ; theorie_ensembles inchangée)."""
-    from bourbaki.logique.tactiques.tactiques_abrege_quantif import (
+    from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import (
         alpha_pour_tout, congruence_pour_tout,
     )
     vG, vE, vp, va = var(G), var(E_set), var(p), var(a)
@@ -1183,7 +1183,7 @@ def bw_strict_contradiction(G="G", E_set="E", p="p", a="a", s="s", x="x", y="y",
 
 def _refute_self(thm_P_imp_notP):
     """De ⊢ (P ⇒ ¬P) déduit ⊢ ¬P.   ((P⇒¬P) ≡ (¬P∨¬P) → ¬P par S1.)"""
-    from bourbaki.logique.tactiques.tactiques_abrege import antecedent_consequent
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import antecedent_consequent
     P, notP = antecedent_consequent(thm_P_imp_notP.conclusion)  # P⇒¬P = ¬P∨¬P
     return N.modus_ponens(thm_P_imp_notP, N.s1(notP))           # (¬P∨¬P)⇒¬P
 
@@ -1225,13 +1225,13 @@ def _disj_syll(thm_pq, thm_np):
 
 def _neg_impl_equiv(P, Q):
     """⊢ ¬(P⇒Q) ⇔ (P et ¬Q).   (¬(P⇒Q) = ¬(¬P∨Q) ⇔ (¬¬P et ¬Q) ⇔ (P et ¬Q).)"""
-    from bourbaki.logique.tactiques.tactiques_abrege2 import (
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
         demorgan_ou, dne, dni, et_congruence_gauche,
     )
     dm = demorgan_ou(non(P), Q)                              # ¬(¬P∨Q) ⇔ (¬¬P et ¬Q)
     dnP = conjonction_intro(dne(P), dni(P))                 # ¬¬P ⇔ P
     cong = et_congruence_gauche(dnP, non(Q))               # (¬¬P et ¬Q) ⇔ (P et ¬Q)
-    from bourbaki.logique.tactiques.tactiques_abrege2 import equivalence_transitivite
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import equivalence_transitivite
     return equivalence_transitivite(dm, cong)              # ¬(P⇒Q) ⇔ (P et ¬Q)
 
 

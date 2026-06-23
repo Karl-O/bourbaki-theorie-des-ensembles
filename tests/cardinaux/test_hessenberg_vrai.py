@@ -4,7 +4,7 @@ Vérifie que `negation_b_inf_strict_a_vrai` est CLOS, theorie=22, et — surtout
 NON-VACUEUX : le trio géométrique contradictoire (S₀∪U=S₀, u∈U, U∩S₀=∅) n'est PLUS
 présent dans l'ensemble des hypothèses (les deux faits dangereux sont DÉRIVÉS).
 """
-from bourbaki.logique.formule import (
+from bourbaki.logique.i_1_termes_relations.formule import (
     var, egal, non, impl, pourtout, appartient, inclus, tau,
 )
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E

@@ -1,5 +1,5 @@
 """Tests §III.3 — Eq(X,Card X) et Proposition 1 (sens direct)."""
-from bourbaki.logique.formule import var, egal, impl
+from bourbaki.logique.i_1_termes_relations.formule import var, egal, impl
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import equipotent, cardinal
 from bourbaki.cardinaux.ensembles_cardinaux_theoremes import equipotent_son_cardinal, cardinal_egal_si_equipotent
@@ -27,7 +27,7 @@ def test_equipotent_si_cardinal_egal():
 
 
 def test_proposition_1_cardinaux():
-    from bourbaki.logique.formule import equiv
+    from bourbaki.logique.i_1_termes_relations.formule import equiv
     from bourbaki.cardinaux.ensembles_cardinaux_theoremes import proposition_1_cardinaux
     vX, vY = var("X"), var("Y")
     t = proposition_1_cardinaux("X", "Y")

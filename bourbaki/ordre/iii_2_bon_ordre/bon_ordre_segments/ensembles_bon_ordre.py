@@ -18,11 +18,11 @@ critères C59/C60 (récurrence / définition par récurrence transfinie).
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import Terme, var, et, ou, appartient
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_1_termes_relations.formule import Terme, var, et, ou, appartient
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.tactiques.tactiques_abrege import syllogisme
-from bourbaki.logique.tactiques.tactiques_abrege2 import (instancie, conjonction_intro,
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import syllogisme
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (instancie, conjonction_intro,
                                conjonction_elim_gauche, conjonction_elim_droite,
                                projection_gauche, projection_droite,
                                equivalence_avant, equivalence_arriere)
@@ -68,7 +68,7 @@ def ensemble_est_segment(R, e="E", x="x", y="y"):
 
 def _a_implique_a(f):
     """⊢ f ⇒ f."""
-    from bourbaki.logique.tactiques.tactiques_abrege import a_implique_a
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import a_implique_a
     return a_implique_a(f)
 
 
@@ -155,7 +155,7 @@ def reunion_segments_segment(R, A="A", B="B", e="E", x="x", y="y"):
     """⊢ (est_segment(A,R,E) et est_segment(B,R,E)) ⇒ est_segment(A∪B,R,E).
 
     (E.III.2.1 : « toute réunion de segments de E est un segment de E ».)"""
-    from bourbaki.logique.tactiques.tactiques_abrege2 import cas
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import cas
     vA, vB, ve = _terme(A), _terme(B), _terme(e)
     vx, vy = var(x), var(y)
     AunionB = E.reunion(vA, vB)

@@ -2,7 +2,7 @@
 from __future__ import annotations
 
 from bourbaki.assemblage.assemblage import Assemblage, egalite
-from bourbaki.logique.criteres import criteres_CF as CF
+from bourbaki.logique.i_1_termes_relations import criteres_CF as CF
 
 R = egalite(Assemblage(("x",)), Assemblage(("a",)))   # (x = a), relation
 Sr = egalite(Assemblage(("x",)), Assemblage(("b",)))  # (x = b), relation

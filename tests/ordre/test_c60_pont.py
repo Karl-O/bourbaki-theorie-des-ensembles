@@ -1,5 +1,5 @@
 """Tests du PONT bare→ambiant C60 (`ensembles_c60_pont`)."""
-from bourbaki.logique.formule import app, var
+from bourbaki.logique.i_1_termes_relations.formule import app, var
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 import bourbaki.ordre.iii_2_bon_ordre.recurrence_transfinie.ensembles_c60_pont as P
 from bourbaki.ordre.iii_2_bon_ordre.recurrence_transfinie.ensembles_recursion_transfinie_existence import couverture_totale

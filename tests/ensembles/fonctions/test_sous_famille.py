@@ -2,7 +2,7 @@
 
 Définitions fidèles + propriétés cheap closes (miroir du prolongement).
 theorie_ensembles() = 22 axiomes ; aucune définition vacuux/inventée."""
-from bourbaki.logique.formule import var, et, impl, inclus, appartient, pourtout
+from bourbaki.logique.i_1_termes_relations.formule import var, et, impl, inclus, appartient, pourtout
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ensembles.fonctions.ii_3_5_restrictions_prolongements import ensembles_sous_famille as SF
 
@@ -41,7 +41,7 @@ def test_sous_famille_converse_prolongement_close():
     assert thm.est_clos
     # est_sous_famille(f,g) ⇔ prolonge(g,f) — les deux membres sont F⊂G, mais la
     # propriété relie deux NOTIONS distinctes (sous-famille de f vs prolongement par g).
-    from bourbaki.logique.formule import equiv
+    from bourbaki.logique.i_1_termes_relations.formule import equiv
     assert thm.conclusion == equiv(SF.est_sous_famille(vF, vG), E.prolonge(vG, vF))
 
 

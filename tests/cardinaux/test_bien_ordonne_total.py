@@ -4,7 +4,7 @@ On certifie que `bon_ordre_est_total` établit RÉELLEMENT la totalité (R{x,y} 
 sous la SEULE hypothèse est_bien_ordonne(R,E), que la forme close décharge cette
 hypothèse (0 hyp), et que rien n'est une tautologie vide.  theorie=22.
 """
-from bourbaki.logique.formule import impl
+from bourbaki.logique.i_1_termes_relations.formule import impl
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux import ensembles_bien_ordonne_total as T
 

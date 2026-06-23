@@ -25,8 +25,8 @@ INVARIANT : theorie_ensembles() = 22.  Aucun axiome nouveau.  Noyau INTACT.
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import Terme, var, egal, et, ou, non, impl
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_1_termes_relations.formule import Terme, var, egal, et, ou, non, impl
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 
 from bourbaki.cardinaux.ensembles_cardinaux import inf_egal_card, est_cardinal
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import est_fini
@@ -39,11 +39,11 @@ from bourbaki.entiers.iii_4_entiers_finis.iii_4_recurrence_c61_existence_n.ensem
 from bourbaki.entiers.iii_6_infinis.iii_6_1_n_objet_existence.ensembles_N_collectivise import fini_downward
 from bourbaki.cardinaux.ensembles_comparabilite import comparabilite_cardinaux
 
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
     instancie,
 )
-from bourbaki.logique.tactiques.tactiques_abrege2 import cas
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import cas
 
 
 def _t(v):

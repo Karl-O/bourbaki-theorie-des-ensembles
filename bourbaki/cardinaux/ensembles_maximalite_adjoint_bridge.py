@@ -38,14 +38,14 @@ INVARIANT : theorie_ensembles() = 22.  Rien postulé.  NON vacueux.
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (
+from bourbaki.logique.i_1_termes_relations.formule import (
     Terme, var, egal, et, ou, non, impl, equiv, appartient, existe, pourtout, inclus,
 )
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis import ensembles_ordre_vocab as V
-from bourbaki.logique.tactiques.tactiques_abrege import syllogisme
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import syllogisme
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
     equivalence_avant, equivalence_arriere, equivalence_symetrie,
     equivalence_transitivite, instancie, cas, tiers_exclu,
@@ -140,7 +140,7 @@ def adjoint_egale_R_au_sommet(R="R", E_set="E", S="S", a="a", xq="xq", yq="yq"):
     eq_at_a = conjonction_intro(N.loi_deduction(le(vx, va), R_xa),
                                 N.loi_deduction(Rf(vx, va), adj_xa_vrai))
     #   transporter a → yq (Leibniz, via yq=a symétrisé)
-    from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie
+    from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import symetrie
     Ha_eq_y = N.modus_ponens(Hyeq, symetrie(vy, va))      # a=yq
     eqv_a_y = N.modus_ponens(Ha_eq_y,
         N.s6(va, vy, _HOLE, equiv(le(vx, var(_HOLE)), Rf(vx, var(_HOLE)))))
@@ -335,7 +335,7 @@ def majorant_seg_ferme_depuis_bo(R="R", E_set="E", a="a"):
 
     # branche xq=a ⇒ R{xq,a}  (Leibniz a→xq sur R{a,a})
     Hxa = N.assume(egal(vx, va))                           # xq=a
-    from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie
+    from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import symetrie
     Hax = N.modus_ponens(Hxa, symetrie(vx, va))            # a=xq
     R_xa_2 = N.modus_ponens(Raa,
         equivalence_avant(N.modus_ponens(Hax,

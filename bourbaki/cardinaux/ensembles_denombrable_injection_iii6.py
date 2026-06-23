@@ -13,13 +13,13 @@ theorie_ensembles INCHANGÉE (22).  Noyau INTACT.  Aucun axiome nouveau.
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import Terme, var, egal, et, ou, non, impl, existe, pourtout
-from bourbaki.logique import noyau_abrege as N
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_1_termes_relations.formule import Terme, var, egal, et, ou, non, impl, existe, pourtout
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite, instancie,
     equivalence_avant, equivalence_arriere,
 )
-from bourbaki.logique.tactiques.tactiques_abrege_egalite import (
+from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import (
     symetrie, composer_egalites, congruence_terme,
 )
 
@@ -350,7 +350,7 @@ def deux_puiss_pair(k="kdpp"):
     assert pair_2k.conclusion == est_pair_propre(e2k), "pair 2^k mal formé"
     # éliminer le témoin kp
     imp_corps = N.loi_deduction(corps, pair_2k)
-    from bourbaki.logique.tactiques.tactiques_abrege_quantif import existe_elimination
+    from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import existe_elimination
     ex_imp = existe_elimination(imp_corps, "kpred")
     out_body = N.modus_ponens(pred, ex_imp)
     res = N.loi_deduction(et(est_fini(vk), non(egal(vk, ZERO))), out_body)
@@ -381,7 +381,7 @@ def simplification_multiplicative(a="asm", b="bsm", c="csm", d="dsm"):
     from bourbaki.entiers.iii_4_entiers_finis.iii_4_2_finis_props.ensembles_finis_props import trichotomie_finis
     from bourbaki.entiers.iii_5_calcul_entiers.iii_5_2_inegalites_ordre_soustraction.ensembles_prop3_strict_mono_iii5 import produit_strict_monotone
     from bourbaki.cardinaux.ensembles_cardinaux import inf_strict_card
-    from bourbaki.logique.tactiques.tactiques_abrege2 import cas
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import cas
     va, vb, vc = _t(a), _t(b), _t(c)
     ac = produit_cardinal_binaire(va, vc)
     bc = produit_cardinal_binaire(vb, vc)

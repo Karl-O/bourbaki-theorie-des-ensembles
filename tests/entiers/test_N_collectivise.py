@@ -6,10 +6,10 @@ indépendamment) et l'ensemble des HYPOTHÈSES (clos ou conditionné à l'unique
 INVARIANT vérifié : theorie_ensembles() reste = 22 (l'axiome de séparation Ncol est en
 théorie DÉDIÉE).  La collectivisation de Fini est DÉMONTRÉE (= théorème), JAMAIS postulée.
 """
-from bourbaki.logique.formule import (
+from bourbaki.logique.i_1_termes_relations.formule import (
     var, coll, pourtout, equiv, appartient, non, existe, et,
 )
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import est_fini, ZERO
 from bourbaki.cardinaux.ensembles_cardinaux import inf_egal_card

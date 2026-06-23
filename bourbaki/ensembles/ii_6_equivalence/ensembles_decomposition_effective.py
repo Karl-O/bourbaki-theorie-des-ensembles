@@ -46,15 +46,15 @@ Liants : « w » (trou de congruence/S7 et variable de classe), « x », « y »
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (Terme, var, egal, et, impl, equiv,
+from bourbaki.logique.i_1_termes_relations.formule import (Terme, var, egal, et, impl, equiv,
                                        appartient, pourtout)
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite)
-from bourbaki.logique.tactiques.tactiques_abrege_egalite import (
+from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import (
     symetrie, composer_egalites)
-from bourbaki.logique.formule import tau
+from bourbaki.logique.i_1_termes_relations.formule import tau
 
 
 def _t(v):
@@ -274,7 +274,7 @@ def b_injective_via_pont(f="f", b="b", e=None, x="x", y="y", w="w"):
     # le PONT universel, instancié en x, y
     pont = pont_valeurs_b(vf, vb, ve, x=x, w=w)      # (∀a)(a∈E ⇒ b(θa)=f(a))
     h_pont = N.assume(pont)
-    from bourbaki.logique.tactiques.tactiques_abrege2 import instancie
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import instancie
     pont_x = instancie(h_pont, vx)                   # x∈E ⇒ b(θx)=f(x)
     pont_y = instancie(h_pont, vy)                   # y∈E ⇒ b(θy)=f(y)
 

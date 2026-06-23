@@ -8,13 +8,13 @@ from __future__ import annotations
 
 from bourbaki.assemblage.assemblage import (Assemblage, negation, conjonction, implication,
                         existe, pour_tout)
-from bourbaki.logique.lecture import DEFAUT
-from bourbaki.logique import noyau
-from bourbaki.logique.tactiques.tactiques_prop import conjonction_intro
-from bourbaki.logique.tactiques.tactiques_egalite import instanciation_en_x
-from bourbaki.logique.congruence_quantif import monotonie_existe, congruence_existe
-from bourbaki.logique.criteres import criteres_C as K
-from bourbaki.logique.criteres import criteres_C_suite2 as KS2
+from bourbaki.logique.i_1_termes_relations.lecture import DEFAUT
+from bourbaki.logique.i_2_criteres_C.noyau import noyau
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_prop import conjonction_intro
+from bourbaki.logique.i_4_egalitaires.tactiques_egalite import instanciation_en_x
+from bourbaki.logique.i_3_quantifies.congruence_quantif import monotonie_existe, congruence_existe
+from bourbaki.logique.i_2_criteres_C.criteres import criteres_C as K
+from bourbaki.logique.i_2_criteres_C.criteres import criteres_C_suite2 as KS2
 
 
 def c34_pour_tout(r, x, y, sig=DEFAUT):

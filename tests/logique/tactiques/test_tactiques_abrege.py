@@ -1,9 +1,9 @@
 """Tests V9 — tactiques abrégées + 1er théorème du chapitre II (réflexivité de ⊂)."""
 from __future__ import annotations
 
-from bourbaki.logique.formule import var, egal, impl, inclus, afficher_f
-from bourbaki.logique import noyau_abrege as N
-from bourbaki.logique.tactiques.tactiques_abrege import a_implique_a, syllogisme, inclusion_reflexive
+from bourbaki.logique.i_1_termes_relations.formule import var, egal, impl, inclus, afficher_f
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import a_implique_a, syllogisme, inclusion_reflexive
 
 A = egal(var("a"), var("b"))
 B = egal(var("b"), var("c"))

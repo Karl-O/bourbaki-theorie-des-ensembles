@@ -6,7 +6,7 @@ P5c `hessenberg_a_carre_egal_a_REEL` ⊢ est_infini(Card E) ⇒ Card E·Card E=C
 conclusion E-SEULE, aucun témoin (S0/Ucadre/phi0/psi/uwit/Smx/phimx/mmx) libre ; les
 seules hypothèses résiduelles sont les 2 résidus E-niveau de frame_a_maximal (Zorn).
 """
-from bourbaki.logique.formule import libres_f, non, egal, var
+from bourbaki.logique.i_1_termes_relations.formule import libres_f, non, egal, var
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 
 

@@ -19,10 +19,10 @@ import heapq
 from itertools import count
 
 from bourbaki.assemblage.assemblage import Assemblage
-from bourbaki.logique.propositions import SIG_PROP, A, B, C, D
-from bourbaki.logique.lecture import est_relation
-from bourbaki.logique import noyau
-from bourbaki.logique.tactiques.tactiques import antecedent_consequent
+from bourbaki.logique.i_1_termes_relations.propositions import SIG_PROP, A, B, C, D
+from bourbaki.logique.i_1_termes_relations.lecture import est_relation
+from bourbaki.logique.i_2_criteres_C.noyau import noyau
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques import antecedent_consequent
 from outils_ia.chercheur import vocabulaire, instances_schemas, _est_implication
 from outils_ia.encodeur import traits_paire_seq, encoder_sequence, _sequence_canonique
 from outils_ia.modele import RegressionLogistique

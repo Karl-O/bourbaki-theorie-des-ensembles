@@ -11,7 +11,7 @@ d'image X₁×Y₁ (sous F,G surjectives) ; l'assemblage donne la bijection prod
 """
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.arithmetique import ensembles_produit_equipotence as PE
-from bourbaki.logique.formule import var, egal, et, subst_t
+from bourbaki.logique.i_1_termes_relations.formule import var, egal, et, subst_t
 from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de, equipotent
 
 

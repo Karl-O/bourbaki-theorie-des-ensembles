@@ -14,7 +14,7 @@ Vérifie :
 """
 import pytest
 
-from bourbaki.logique.formule import var, pourtout, impl, et, non, appartient, egal, inclus
+from bourbaki.logique.i_1_termes_relations.formule import var, pourtout, impl, et, non, appartient, egal, inclus
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import ZERO, est_fini, successeur
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_recurrence_c61_existence_n import ensembles_recurrence_C61 as C

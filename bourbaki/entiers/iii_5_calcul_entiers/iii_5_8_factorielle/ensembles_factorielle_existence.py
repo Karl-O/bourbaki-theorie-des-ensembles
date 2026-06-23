@@ -81,7 +81,7 @@ theorie=22, noyau INTACT, rien postulé.  Deux verrous τ-hygiène (O3) + gluing
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import Terme, var, egal, et, ou, non, tau
+from bourbaki.logique.i_1_termes_relations.formule import Terme, var, egal, et, ou, non, tau
 import bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege as E
 
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import successeur, ZERO, UN

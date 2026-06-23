@@ -5,7 +5,7 @@ INVARIANT vérifié partout : theorie_ensembles() = 22.
 Anti-tautologie : aucune conclusion n'est l'une de ses hypothèses.
 Hypothèses EXACTES contrôlées.
 """
-from bourbaki.logique.formule import var, appartient, inclus, egal, et, impl, non, pourtout, existe
+from bourbaki.logique.i_1_termes_relations.formule import var, appartient, inclus, egal, et, impl, non, pourtout, existe
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis import ensembles_ordre_vocab as V
 

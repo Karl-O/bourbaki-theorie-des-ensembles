@@ -26,15 +26,15 @@ theorie_ensembles() RESTE à 22 axiomes (aucun axiome neuf).
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (var, et, impl, appartient, egal, inclus,
+from bourbaki.logique.i_1_termes_relations.formule import (var, et, impl, appartient, egal, inclus,
                                        pourtout)
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     instancie, equivalence_avant, equivalence_arriere,
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite)
-from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie
-from bourbaki.logique.tactiques.tactiques_abrege_quantif import alpha_pour_tout
+from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import symetrie
+from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import alpha_pour_tout
 from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import extensionnalite_appliquee
 from bourbaki.ensembles.familles.ii_5_produit_famille.ii_5_definitions.ensembles_produit_famille import membre_produit_famille
 from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_algebre_booleenne import _instance_inter

@@ -1,5 +1,5 @@
 """Tests §III.6.3 — échelle finale Hessenberg a²=a (P5a/P5b/P5c)."""
-from bourbaki.logique.formule import libres_f, non, egal, var
+from bourbaki.logique.i_1_termes_relations.formule import libres_f, non, egal, var
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 
 

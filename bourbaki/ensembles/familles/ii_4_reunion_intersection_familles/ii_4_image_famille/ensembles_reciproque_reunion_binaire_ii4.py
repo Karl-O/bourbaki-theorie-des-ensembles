@@ -22,14 +22,14 @@ f⁻¹⟨Z⟩ := image(reciproque(f), Z).  Preuve purement pointwise (A1 + AXIOM
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import var, egal, et, ou, appartient, existe, Terme
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_1_termes_relations.formule import var, egal, et, ou, appartient, existe, Terme
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     conjonction_intro, equivalence_avant, equivalence_arriere, instancie,
     equivalence_transitivite as etr, equivalence_symetrie as esym,
     et_congruence_gauche, comm_et, et_ou_distrib, ou_congruence)
-from bourbaki.logique.tactiques.tactiques_abrege_quantif import congruence_existe
+from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import congruence_existe
 from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import egalite_par_extension
 from bourbaki.cardinaux.ensembles_produit_union_carre import existe_ou
 

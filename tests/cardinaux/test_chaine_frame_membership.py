@@ -1,5 +1,5 @@
 """Tests — assemblage bijection-recollement de chaîne + frame-membership (§III.6.3)."""
-from bourbaki.logique.formule import var, appartient, et
+from bourbaki.logique.i_1_termes_relations.formule import var, appartient, et
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de
 from bourbaki.ordre.iii_2_bon_ordre.recurrence_transfinie.ensembles_c60_coeur import union_famille

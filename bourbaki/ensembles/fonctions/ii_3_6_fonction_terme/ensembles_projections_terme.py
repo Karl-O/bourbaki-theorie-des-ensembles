@@ -37,13 +37,13 @@ t = coordonnée-témoin de l'image ; z = élément courant ; w = trou de Leibniz
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import Terme, var, egal, et, impl, appartient, pourtout, subst_t
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_1_termes_relations.formule import Terme, var, egal, et, impl, appartient, pourtout, subst_t
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.tactiques.tactiques_abrege2 import (conjonction_elim_gauche, conjonction_elim_droite,
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (conjonction_elim_gauche, conjonction_elim_droite,
                                equivalence_avant, equivalence_arriere,
                                equivalence_transitivite, instancie)
-from bourbaki.logique.tactiques.tactiques_abrege_quantif import existe_elimination, alpha_existe
+from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import existe_elimination, alpha_existe
 from bourbaki.ensembles.fonctions.ii_3_6_fonction_terme.ensembles_fonction_terme import membre_graphe_terme
 # réexports §3.6
 from bourbaki.cardinaux.ensembles_cantor import (graphe_terme_domaine, graphe_terme_couple_dans,

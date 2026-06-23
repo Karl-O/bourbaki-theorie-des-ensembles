@@ -39,11 +39,11 @@ ARCHITECTURE DE LA PREUVE (du bas vers le haut), 3 grandes étapes :
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (Terme, var, egal, et, non, impl, existe,
+from bourbaki.logique.i_1_termes_relations.formule import (Terme, var, egal, et, non, impl, existe,
                                        inclus, appartient, pourtout)
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
     equivalence_avant, equivalence_arriere, instancie, dne, contraposition)
 
@@ -225,7 +225,7 @@ def injection_non_surj_donne_inf_egal_diff(f="F", b="b", e="E"):
       • monotonie de (∃q) sur le corps ⇒ (∃q)(q∈E et b ≤ E∖{q}).
     INCONDITIONNEL, réutilisable — la moitié « ensembliste » de la surgery, AVANT
     l'échange ponctuel qui fixe le point retiré sur le marqueur."""
-    from bourbaki.logique.tactiques.tactiques_abrege_quantif import monotonie_existe
+    from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import monotonie_existe
     vF, vb, vE = _t(f), _t(b), _t(e)
     img = E.image(vF, vb)                                    # image(F,b)
     vq = var("q")
@@ -338,8 +338,8 @@ def retrait_surgery_assemble(b="b", c="c", f="F"):
     malgré le renommage anti-capture du τ de Card(C⊔{∅})."""
     from bourbaki.entiers.iii_4_entiers_finis.iii_4_2_pigeonhole_surgery.ensembles_retrait_point import (
         retrait_surgery_hyp, inf_egal_via_eq_codom)
-    from bourbaki.logique.tactiques.tactiques_abrege_quantif import existe_elimination
-    from bourbaki.logique.tactiques.tactiques_abrege import antecedent_consequent
+    from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import existe_elimination
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import antecedent_consequent
     vb, vc, vf = _t(b), _t(c), _t(f)
     succ_c = _succ(c)                                        # c+1
     Sstar = _S_etoile(c)                                     # (C⊔{∅})∖{*}
@@ -498,7 +498,7 @@ def retrait_point_hyp_mod_general(b="b", c="c", f="F", q="q"):
     ensembles_cardinal_pas_entre LITTÉRALEMENT (= retrait_point_hyp_enonce)."""
     from bourbaki.entiers.iii_4_entiers_finis.iii_4_2_pigeonhole_surgery.ensembles_retrait_point import (
         retrait_point_hyp_mod_surgery, retrait_point_hyp_enonce)
-    from bourbaki.logique.tactiques.tactiques_abrege import antecedent_consequent
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import antecedent_consequent
     GEN = equipotence_retrait_un_point_general()
     g2s = retrait_surgery_mod_general(b, c, f, q)          # GEN ⇒ retrait_surgery_hyp
     s2p = retrait_point_hyp_mod_surgery(b, c, f)           # retrait_surgery_hyp ⇒ retrait_point_hyp

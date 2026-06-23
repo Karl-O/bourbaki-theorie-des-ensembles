@@ -5,7 +5,7 @@ l'hypothèse de codomaine explicite val_dans_F (φ(p)∈F le long des isos témo
 JAMAIS postulée comme théorème.  theorie_ensembles() reste = 22 ; conclusions non
 tautologiques (y∈dom h / est_segment ∉ hypothèses).
 """
-from bourbaki.logique.formule import var, et, appartient, Formule
+from bourbaki.logique.i_1_termes_relations.formule import var, et, appartient, Formule
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux import ensembles_trichotomie_dom_segment as DS
 

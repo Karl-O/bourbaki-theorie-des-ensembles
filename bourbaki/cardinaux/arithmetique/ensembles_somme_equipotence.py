@@ -45,17 +45,17 @@ Les marqueurs 0=∅, 1={∅} sont importés d'ensembles_somme_disjointe (ZERO, U
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (Terme, var, egal, et, ou, non, appartient, existe,
+from bourbaki.logique.i_1_termes_relations.formule import (Terme, var, egal, et, ou, non, appartient, existe,
                      subst_t, subst_f)
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.tactiques.tactiques_abrege import a_implique_a, syllogisme
-from bourbaki.logique.tactiques.tactiques_abrege2 import (conjonction_intro, conjonction_elim_gauche,
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import a_implique_a, syllogisme
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (conjonction_intro, conjonction_elim_gauche,
                                conjonction_elim_droite, equivalence_avant,
                                equivalence_arriere, equivalence_transitivite,
                                instancie, cas)
-from bourbaki.logique.tactiques.tactiques_abrege_egalite import (symetrie, composer_egalites, congruence_terme)
-from bourbaki.logique.tactiques.tactiques_abrege_quantif import (existe_elimination, alpha_existe)
+from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import (symetrie, composer_egalites, congruence_terme)
+from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import (existe_elimination, alpha_existe)
 from bourbaki.ensembles.fonctions.ii_3_6_fonction_terme.ensembles_fonction_terme import membre_graphe_terme, graphe_terme_fonctionnel
 from bourbaki.cardinaux.ensembles_cantor import (graphe_terme_domaine, graphe_terme_valeur)
 from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import (somme_disjointe, ZERO, UN,
@@ -228,7 +228,7 @@ def _ou_commute_gd(gd, cond2):
 
     gd : ((1=1 et c=G) ou (1=0 et c=F)) ⇔ (c=G)  ;  cond2 = ((1=0 et c=F) ou (1=1 et c=G)).
     On préfixe la commutativité du « ou » : cond2 ⇔ gd-gauche, puis transitivité."""
-    from bourbaki.logique.tactiques.tactiques_abrege2 import comm_ou
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import comm_ou
     gd_gauche = gd.conclusion.sous[0].sous[0].sous[0]   # récupère D' (membre gauche de l'équiv)
     # comm_ou(P,Q) ⊢ (P ou Q) ⇔ (Q ou P) ; cond2 = (P ou Q), D' = (Q ou P)
     P = cond2.sous[0]   # 1ᵉʳ disjoint de cond2 = (1=0 et c=F)
@@ -381,7 +381,7 @@ def somme_graphe_injective(f="F", g="G", a="A", b="B"):
 
     from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import membre_somme_caracterise
     from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import _ou_congruence
-    from bourbaki.logique.tactiques.tactiques_abrege_quantif import alpha_existe as _ax
+    from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import alpha_existe as _ax
     # décomposition de s : (∃p)(p∈A et s=(p,0)) ou (∃q)(q∈B et s=(q,1))  (renommer u→p, v→q)
     dec_u0 = N.modus_ponens(uinAB, equivalence_avant(membre_somme_caracterise(a, b, vu)))
     # décomposition de s' avec témoins DISTINCTS pp, qp (≠ p,q de s)
@@ -541,7 +541,7 @@ def _somme_image_backward(f, g, a, b, a1, b1, vz, K, AB, A1B1, T,
                                            injection_gauche_dans_somme,
                                            injection_droite_dans_somme)
     from bourbaki.ensembles.fonctions.ii_3_4_fonctions_valeur.ensembles_fonctions import valeur_caracterisation
-    from bourbaki.logique.tactiques.tactiques_abrege_quantif import alpha_existe as _ax
+    from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import alpha_existe as _ax
     vF, vG = _t(f), _t(g)
     va, vb, va1, vb1 = _t(a), _t(b), _t(a1), _t(b1)
     # décomposer z∈A₁⊔B₁
@@ -673,7 +673,7 @@ def somme_graphe_image(f="F", g="G", a="A", b="B", a1="A1", b1="B1"):
     from bourbaki.cardinaux.arithmetique.ensembles_produit_equipotence import _valeur_dans_image, _antecedent_image
     from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import membre_somme_caracterise, _ou_congruence
     from bourbaki.ensembles.fonctions.ii_3_4_fonctions_valeur.ensembles_fonctions import valeur_caracterisation
-    from bourbaki.logique.tactiques.tactiques_abrege_quantif import alpha_existe as _ax
+    from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import alpha_existe as _ax
     vF, vG = _t(f), _t(g)
     va, vb, va1, vb1 = _t(a), _t(b), _t(a1), _t(b1)
     AB = somme_disjointe(va, vb)
@@ -823,7 +823,7 @@ def _renomme_injective(c3):
     """⊢ injective_dans(K,A⊔B) [liants s,sp]  →  même avec liants u,up (forme défaut).
 
     Renomme-α les deux ∀ (s→u puis sp→up) pour aligner sur est_bijection_de."""
-    from bourbaki.logique.tactiques.tactiques_abrege_quantif import alpha_pour_tout, congruence_pour_tout
+    from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import alpha_pour_tout, congruence_pour_tout
     R_outer = _corps_pourtout(c3.conclusion)              # (∀sp)body
     ren_outer = alpha_pour_tout("s", "u", R_outer)        # (∀s)R_outer ⇔ (∀u)(u|s)R_outer
     step1 = N.modus_ponens(c3, equivalence_avant(ren_outer))   # (∀u)(∀sp)body'
@@ -889,7 +889,7 @@ def eq_somme_invariant(f="F", g="G", a="A", b="B", a1="A1", b1="B1"):
     (∃F')bij = Eq(A⊔B, A₁⊔B₁), sous les bijections F:A→A₁, G:B→B₁ extraites de
     Eq(A,A₁), Eq(B,B₁) par élimination des deux témoins existentiels."""
     from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de, equipotent
-    from bourbaki.logique.tactiques.tactiques_abrege_quantif import alpha_existe as _alpha
+    from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import alpha_existe as _alpha
     vF, vG = _t(f), _t(g)
     va, vb, va1, vb1 = _t(a), _t(b), _t(a1), _t(b1)
     AB = somme_disjointe(va, vb)

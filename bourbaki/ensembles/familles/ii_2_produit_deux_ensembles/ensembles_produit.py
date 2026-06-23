@@ -6,17 +6,17 @@ Proposition 2 (sens facile) — monotonie du produit pour l'inclusion.
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import var, egal, et, ou, non, impl, appartient, existe, inclus, subst_f
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_1_termes_relations.formule import var, egal, et, ou, non, impl, appartient, existe, inclus, subst_f
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.tactiques.tactiques_abrege import syllogisme
-from bourbaki.logique.tactiques.tactiques_abrege2 import (conjonction_intro, conjonction_elim_gauche,
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import syllogisme
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (conjonction_intro, conjonction_elim_gauche,
                                conjonction_elim_droite, equivalence_avant,
                                equivalence_arriere, instancie, contraposition,
                                projection_gauche, projection_droite, cas, tiers_exclu)
-from bourbaki.logique.tactiques.tactiques_abrege_quantif import (monotonie_existe, existe_elimination,
+from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import (monotonie_existe, existe_elimination,
                                       alpha_pour_tout, alpha_existe)
-from bourbaki.logique.tactiques.tactiques_abrege_egalite import composer_egalites, congruence_terme
+from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import composer_egalites, congruence_terme
 from bourbaki.ensembles.fonctions.hors_ii_3.ii_2_projections.ensembles_projections import projection_premiere, projection_seconde
 from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_vide import vide_ssi_sans_element, non_vide_ssi_element
 
@@ -74,9 +74,9 @@ def couple_dans_produit(u="u", v="v", a="A", b="B"):
 
 def couple_dans_produit_ssi(u="u", v="v", a="A", b="B"):
     """⊢ ((u,v) ∈ A×B) ⇔ (u∈A et v∈B).   (u, v noms OU termes, distincts de p, q.)"""
-    from bourbaki.logique.formule import Terme
-    from bourbaki.logique.tactiques.tactiques_abrege2 import equivalence_transitivite
-    from bourbaki.logique.tactiques.tactiques_abrege_egalite import congruence_terme
+    from bourbaki.logique.i_1_termes_relations.formule import Terme
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import equivalence_transitivite
+    from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import congruence_terme
     from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import couple_egal_implique_composantes
     vu = u if isinstance(u, Terme) else var(u)
     vv = v if isinstance(v, Terme) else var(v)
@@ -119,7 +119,7 @@ def produit_projections(a="A", b="B", z="z"):
     """⊢ (z ∈ A×B) ⇒ (pr₁z ∈ A et pr₂z ∈ B).   (z appartient au produit ⇒ ses
     projections sont dans les facteurs — sens utilisé dans les Prop. 2-3.
     z : nom de variable ou TERME quelconque sans p, q libres.)"""
-    from bourbaki.logique.formule import Terme
+    from bourbaki.logique.i_1_termes_relations.formule import Terme
     vA, vB = var(a), var(b)
     vz = z if isinstance(z, Terme) else var(z)
     vp, vq = var("p"), var("q")

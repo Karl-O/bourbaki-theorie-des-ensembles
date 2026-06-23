@@ -1,5 +1,5 @@
 """TASK A — distribution ensembliste pleine produit/réunion + (A∪B)²."""
-from bourbaki.logique.formule import var, egal
+from bourbaki.logique.i_1_termes_relations.formule import var, egal
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_produit_union_carre import (
     existe_ou, produit_union_gauche, produit_union_droite,
@@ -12,7 +12,7 @@ def _A():
 
 
 def test_existe_ou_clos():
-    from bourbaki.logique.formule import appartient
+    from bourbaki.logique.i_1_termes_relations.formule import appartient
     r = existe_ou("w", appartient(var("p"), var("A")), appartient(var("p"), var("B")))
     assert not r.hypotheses
 
@@ -60,7 +60,7 @@ def test_theorie_22():
 
 def test_s0sq_cadre_reunion_egale_carre_clos():
     from bourbaki.cardinaux.ensembles_produit_union_carre import s0sq_cadre_reunion_egale_carre
-    from bourbaki.logique.formule import var, egal
+    from bourbaki.logique.i_1_termes_relations.formule import var, egal
     r = s0sq_cadre_reunion_egale_carre()
     assert not r.hypotheses
     vS, vU = var("S0"), var("Ucadre")

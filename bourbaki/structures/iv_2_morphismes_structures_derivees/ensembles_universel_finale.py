@@ -17,11 +17,11 @@ décomposition canonique d'un morphisme.
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (var, et, impl, equiv, pourtout, appartient,
+from bourbaki.logique.i_1_termes_relations.formule import (var, et, impl, equiv, pourtout, appartient,
                                        app)
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     equivalence_avant, instancie)
 from bourbaki.structures.iv_2_morphismes_structures_derivees.ensembles_universel_morphismes import (
     est_morphisme, _morph_defaut, _t)

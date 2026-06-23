@@ -58,15 +58,15 @@ conclusion n'est aucune de ses hypothèses.
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (
+from bourbaki.logique.i_1_termes_relations.formule import (
     Terme, var, app, egal, et, ou, non, impl, equiv, appartient,
     existe, pourtout, inclus,
 )
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis import ensembles_ordre_vocab as V
-from bourbaki.logique.tactiques.tactiques_abrege import syllogisme, a_implique_a
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import syllogisme, a_implique_a
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
     equivalence_avant, equivalence_arriere, instancie, cas,
 )
@@ -105,7 +105,7 @@ def _ex_falso(thm_a, thm_na, z):
 
 def _refute_self(thm_P_imp_notP):
     """De ⊢ (P ⇒ ¬P) déduit ⊢ ¬P  (via S1)."""
-    from bourbaki.logique.tactiques.tactiques_abrege import antecedent_consequent
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import antecedent_consequent
     P, notP = antecedent_consequent(thm_P_imp_notP.conclusion)
     return N.modus_ponens(thm_P_imp_notP, N.s1(notP))
 
@@ -224,7 +224,7 @@ def singleton_couple_fonctionnel(a="a", b="b"):
     z_eq_b = conjonction_elim_droite(N.modus_ponens(
         uz_eq_ab, couple_egal_implique_composantes(vu, vz, va, vb)))   # z=b
     # v=z : de v=b et z=b
-    from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie, composer_egalites
+    from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import symetrie, composer_egalites
     b_eq_z = N.modus_ponens(z_eq_b, symetrie(vz, vb))  # b=z
     v_eq_z = composer_egalites(v_eq_b, b_eq_z)         # v=z
     body = N.loi_deduction(et(appartient(cuv, G), appartient(cuz, G)), v_eq_z)
@@ -329,8 +329,8 @@ def dom_singleton_couple(a="a", b="b", u="u", y="y"):
 
     ⇒ : (u,y)=(a,b) ⇒ u=a (1ʳᵉ composante) ⇒ u∈{a}.
     ⇐ : u∈{a} ⇒ u=a ⇒ (u,b)=(a,b) ⇒ (u,b)∈{(a,b)} ⇒ u∈dom{(a,b)} (témoin y:=b)."""
-    from bourbaki.logique.tactiques.tactiques_abrege_quantif import existe_elimination
-    from bourbaki.logique.tactiques.tactiques_abrege_egalite import congruence_terme
+    from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import existe_elimination
+    from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import congruence_terme
     from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import couple_egal_si_composantes
     va, vb = _t(a), _t(b)
     ab = E.couple(va, vb)
@@ -471,7 +471,7 @@ def valeur_temoin_en_a_sous_a_hors(E_set="E", R="R", F_set="F", Rp="Rp", a="a", 
 
     SENS : le point adjoint réalise bien l'appariement a↦b dans h⁺ — c'est φ⁺(a)=b,
     la valeur du sommet, indispensable à « h⁺ envoie ]←,a] sur ]←,b] »."""
-    from bourbaki.logique.tactiques.tactiques_abrege_egalite import composer_egalites
+    from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import composer_egalites
     va, vb = _t(a), _t(b)
     h = TS.h_iso_max(E_set, R, F_set, Rp)
     G = graphe_point(va, vb)
@@ -498,7 +498,7 @@ def _valeur_graphe_point_en_a(a, b):
     """⊢ valeur( {(a,b)}, a ) = b.   ({(a,b)} fonctionnel, (a,a-value)=b par unicité.)"""
     from bourbaki.ensembles.fonctions.ii_3_4_fonctions_valeur.ensembles_fonctions import (
         valeur_caracterisation, valeur_dans_graphe)
-    from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie
+    from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import symetrie
     va, vb = _t(a), _t(b)
     ab = E.couple(va, vb)
     G = graphe_point(va, vb)

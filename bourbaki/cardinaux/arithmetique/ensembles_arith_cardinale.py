@@ -30,22 +30,22 @@ RÉSULTATS (chacun CERTIFIÉ par le noyau et TESTÉ, test_arith_cardinale.py) :
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (Terme, var, egal, et, impl, appartient, existe,
+from bourbaki.logique.i_1_termes_relations.formule import (Terme, var, egal, et, impl, appartient, existe,
                      subst_t, subst_f)
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import cardinal
 from bourbaki.cardinaux.ensembles_cardinaux_theoremes import (equipotent_son_cardinal,
                                            cardinal_egal_si_equipotent)
 from bourbaki.cardinaux.arithmetique.ensembles_produit_equipotence import eq_produit_invariant
 from bourbaki.cardinaux.arithmetique.ensembles_produit_commute import eq_produit_commute
-from bourbaki.logique.tactiques.tactiques_abrege2 import (conjonction_intro, conjonction_elim_gauche,
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (conjonction_intro, conjonction_elim_gauche,
                                conjonction_elim_droite, equivalence_avant,
                                equivalence_arriere, equivalence_transitivite,
                                instancie)
-from bourbaki.logique.tactiques.tactiques_abrege import a_implique_a, syllogisme
-from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie, composer_egalites, congruence_terme
-from bourbaki.logique.tactiques.tactiques_abrege_quantif import (existe_elimination, alpha_existe,
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import a_implique_a, syllogisme
+from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import symetrie, composer_egalites, congruence_terme
+from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import (existe_elimination, alpha_existe,
                                       congruence_existe)
 from bourbaki.cardinaux.ensembles_cardinaux import equipotent, est_bijection_de
 
@@ -85,7 +85,7 @@ def _eq_son_cardinal_reecrit(x, a):
 def _eq_son_cardinal_terme(vX):
     """⊢ Eq(T, Card T) pour un TERME T (généralise equipotent_son_cardinal aux termes)."""
     refl_all = N.generalisation("X", equipotent_son_cardinal("X"))   # (∀X) Eq(X, Card X)
-    from bourbaki.logique.tactiques.tactiques_abrege2 import instancie
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import instancie
     return instancie(refl_all, vX)
 
 
@@ -96,7 +96,7 @@ def _prop1_direct_t(tU, tV):
     n'accepte que des NOMS de variables) : on généralise le sens direct en X, Y
     puis on instancie aux termes U, V (robuste grâce au renommage déterministe
     _fraiche → @0,@1)."""
-    from bourbaki.logique.tactiques.tactiques_abrege2 import instancie
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import instancie
     gen = N.generalisation("X", N.generalisation("Y",
         cardinal_egal_si_equipotent("X", "Y")))      # (∀X)(∀Y)(Eq(X,Y) ⇒ Card X=Card Y)
     return instancie(instancie(gen, tU), tV)         # Eq(U,V) ⇒ Card U=Card V

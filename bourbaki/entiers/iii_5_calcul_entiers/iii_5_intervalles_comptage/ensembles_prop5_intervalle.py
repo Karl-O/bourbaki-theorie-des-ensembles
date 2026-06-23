@@ -46,19 +46,19 @@ puis double inclusion ⇒ égalité.
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (
+from bourbaki.logique.i_1_termes_relations.formule import (
     Terme, var, egal, et, ou, non, impl, equiv, appartient, inclus, pourtout,
 )
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 
-from bourbaki.logique.tactiques.tactiques_abrege import syllogisme, a_implique_a
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import syllogisme, a_implique_a
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
     equivalence_avant, equivalence_arriere, equivalence_transitivite,
     equivalence_symetrie, instancie, cas,
 )
-from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie
+from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import symetrie
 
 from bourbaki.cardinaux.ensembles_cardinaux import est_cardinal, inf_egal_card
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import successeur, ZERO
@@ -106,7 +106,7 @@ def intervalle_successeur_enonce(b="b"):
 def membre_equivalence_enonce(b="b", z="zz"):
     """Formule du cœur (∗) de Prop 5 :
         est_cardinal(b) ⇒ ( z∈[0,b+1] ⇔ z∈([0,b]∪{b+1}) )."""
-    from bourbaki.logique.formule import equiv
+    from bourbaki.logique.i_1_termes_relations.formule import equiv
     vb, vz = _t(b), _t(z)
     sb = successeur(vb)
     seg_sb = E.intervalle_entiers(ZERO, sb)
@@ -121,7 +121,7 @@ def _membre_union(b, z):
     AXIOME_REUNION : z∈A∪B ⇔ (z∈A ou z∈B) ; singleton_membre : z∈{b+1} ⇔ z=b+1 ;
     congruence du « ou » sur le 2ᵉ disjoint."""
     from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import _instance_reunion
-    from bourbaki.logique.tactiques.tactiques_abrege2 import ou_congruence
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import ou_congruence
     vb, vz = _t(b), _t(z)
     sb = successeur(vb)
     seg_b = E.intervalle_entiers(ZERO, vb)
@@ -251,7 +251,7 @@ def intervalle_successeur(b="b"):
     z = "zz"
     vz = var(z)
 
-    from bourbaki.logique.formule import inclus
+    from bourbaki.logique.i_1_termes_relations.formule import inclus
     from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import extensionnalite_appliquee
 
     h_card = N.assume(est_cardinal(vb))                 # est_cardinal(b)

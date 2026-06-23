@@ -59,8 +59,8 @@ un CONTENU non trivial (monotonie, borne) certifié par le noyau.
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (Terme, var, egal, et, non, impl, existe)
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_1_termes_relations.formule import (Terme, var, egal, et, non, impl, existe)
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 
 from bourbaki.cardinaux.ensembles_cardinaux import (
@@ -84,11 +84,11 @@ from bourbaki.cardinaux.arithmetique.ensembles_somme_monotone import (
 )
 from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import est_fini
 
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     instancie, conjonction_intro,
     conjonction_elim_gauche, conjonction_elim_droite,
 )
-from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie, composer_egalites
+from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import symetrie, composer_egalites
 
 
 def _t(t):
@@ -274,7 +274,7 @@ def prop2_somme_implique_inf_egal(a="a", b="b", c="c"):
 
 def _eqv_avant(equiv_thm):
     """⊢ A ⇔ B ⟹ ⊢ A ⇒ B   (sens AVANT d'une équivalence, raccourci local)."""
-    from bourbaki.logique.tactiques.tactiques_abrege2 import equivalence_avant
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import equivalence_avant
     return equivalence_avant(equiv_thm)
 
 
@@ -284,7 +284,7 @@ def equivalence_avant_S6_card(tA, tMaj, eq_thm):
     De Card A = A (preuve eq_thm), S6 donne (Card A ≤ M ⇔ A ≤ M) ; on renvoie le sens
     AVANT comme IMPLICATION close (eq_thm est déjà une preuve, donc l'implication est
     sans hypothèse résiduelle au-delà de celles de eq_thm)."""
-    from bourbaki.logique.tactiques.tactiques_abrege2 import equivalence_avant
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import equivalence_avant
     cA = cardinal(_t(tA))
     leib = N.s6(cA, _t(tA), "w", inf_egal_card(var("w"), _t(tMaj)))   # (Card A = A) ⇒ (CardA≤M ⇔ A≤M)
     equiv = N.modus_ponens(eq_thm, leib)                        # (Card A ≤ M) ⇔ (A ≤ M)

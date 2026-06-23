@@ -5,7 +5,7 @@ On certifie : l'axiome définitionnel de A (theorie=22), A=∅ sous les bonnes h
 et Lemme 4 lui-même à 3 hypothèses STRUCTURELLES (bon ordre canonique + f:E→E + f
 strictement croissante), conclusion fidèle, non tautologique.
 """
-from bourbaki.logique.formule import var, egal
+from bourbaki.logique.i_1_termes_relations.formule import var, egal
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux import ensembles_lemme4_croissante as L
 from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis.ensembles_ordre_monotone import est_strictement_croissante

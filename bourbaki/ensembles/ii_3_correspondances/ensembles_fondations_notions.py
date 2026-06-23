@@ -29,8 +29,8 @@ theorie_ensembles() RESTE à 22 axiomes (rien n'est écrit dedans).
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import Terme, var, egal, et, impl, appartient, pourtout
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_1_termes_relations.formule import Terme, var, egal, et, impl, appartient, pourtout
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 
 
@@ -114,13 +114,13 @@ def application_identique_est_application(a="A", x="x"):
     Via `axiome_graphe_terme` (théorie dédiée) + `AXIOME_PRODUIT`.  On ne prouve PAS
     ici « Id_A est une application » au complet (fonctionnalité + dom exact) — gros
     lemme reporté ; seule l'inclusion du graphe dans A×A est établie."""
-    from bourbaki.logique.formule import existe
-    from bourbaki.logique.tactiques.tactiques_abrege2 import (
+    from bourbaki.logique.i_1_termes_relations.formule import existe
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
         instancie, equivalence_avant, equivalence_arriere, conjonction_intro,
         conjonction_elim_gauche, conjonction_elim_droite)
-    from bourbaki.logique.tactiques.tactiques_abrege import syllogisme
-    from bourbaki.logique.tactiques.tactiques_abrege_quantif import existe_elimination
-    from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import syllogisme
+    from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import existe_elimination
+    from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import symetrie
 
     vA = _t(a)
     vw, vx, vy = var("w"), var(x), var("y")

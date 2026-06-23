@@ -35,17 +35,17 @@ niveaux : pr externes a,b puis pr internes c,d).
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (Terme, var, egal, et, ou, non, appartient, existe,
+from bourbaki.logique.i_1_termes_relations.formule import (Terme, var, egal, et, ou, non, appartient, existe,
                      subst_t, subst_f)
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.tactiques.tactiques_abrege import a_implique_a, syllogisme
-from bourbaki.logique.tactiques.tactiques_abrege2 import (conjonction_intro, conjonction_elim_gauche,
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import a_implique_a, syllogisme
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (conjonction_intro, conjonction_elim_gauche,
                                conjonction_elim_droite, equivalence_avant,
                                equivalence_arriere, equivalence_transitivite,
                                instancie, cas)
-from bourbaki.logique.tactiques.tactiques_abrege_egalite import (symetrie, composer_egalites, congruence_terme)
-from bourbaki.logique.tactiques.tactiques_abrege_quantif import (existe_elimination, alpha_existe)
+from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import (symetrie, composer_egalites, congruence_terme)
+from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import (existe_elimination, alpha_existe)
 from bourbaki.ensembles.fonctions.ii_3_6_fonction_terme.ensembles_fonction_terme import (membre_graphe_terme, graphe_terme_fonctionnel)
 from bourbaki.cardinaux.ensembles_cantor import (graphe_terme_domaine, graphe_terme_valeur)
 from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import (somme_disjointe, ZERO, UN,
@@ -72,12 +72,12 @@ def _equiv_rhs(equiv_concl):
 def _ren(ex_node, cible):
     """⊢ (∃src)R ⇔ (∃cible)R[src→cible], OU réflexivité si src==cible déjà.
     (Renommage-α tolérant : évite l'erreur identité-rename d'alpha_existe.)"""
-    from bourbaki.logique.tactiques.tactiques_abrege_quantif import alpha_existe as _ax
-    from bourbaki.logique.tactiques.tactiques_abrege2 import equivalence_avant as _eqav
+    from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import alpha_existe as _ax
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import equivalence_avant as _eqav
     src = ex_node.lieur
     if src == cible:
         # identité : (∃src)R ⇔ (∃src)R  (réflexivité de l'équivalence)
-        from bourbaki.logique.tactiques.tactiques_abrege import a_implique_a
+        from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import a_implique_a
         whole = existe(src, ex_node.sous[0])
         return conjonction_intro(a_implique_a(whole), a_implique_a(whole))
     return _ax(src, cible, ex_node.sous[0])
@@ -492,7 +492,7 @@ def membre_assoc3(a="A", b="B", c="C", s="s"):
 
     caseA=(∃u)(u∈A et s=((u,0),0)) ; caseB=(∃v)(v∈B et s=((v,1),0)) ;
     caseC=(∃w)(w∈C et s=(w,1)).  Décomposition à deux niveaux du marqueur."""
-    from bourbaki.logique.tactiques.tactiques_abrege_quantif import alpha_existe as _ax
+    from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import alpha_existe as _ax
     va, vb, vc = _t(a), _t(b), _t(c)
     vs = _t(s)
     AB = somme_disjointe(va, vb)
@@ -917,7 +917,7 @@ def assoc_graphe_image(a="A", b="B", c="C"):
     z∈K⟨(A⊔B)⊔C⟩ ⇔ (∃t)(t∈(A⊔B)⊔C et z=T[t]).
     ⇒ : t feuille A/B/C → z=K(t) feuille (u,0)/((v,0),1)/((w,1),1) ∈ A⊔(B⊔C).
     ⇐ : z∈A⊔(B⊔C) feuille → antécédent dans (A⊔B)⊔C, K(antécédent)=z."""
-    from bourbaki.logique.tactiques.tactiques_abrege_quantif import alpha_existe as _ax
+    from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import alpha_existe as _ax
     va, vb, vc = _t(a), _t(b), _t(c)
     ABC = _ABC_gauche(a, b, c)        # (A⊔B)⊔C
     ABCd = _ABC_droite(a, b, c)       # A⊔(B⊔C)
@@ -1158,7 +1158,7 @@ def _membre_droite3(a, b, c, s="s"):
     Binders u,v,r : « p »/« q » sont les liants internes de couple_dans_produit_ssi
     (collision si passés comme valeur à injection_*), « w » est le trou de
     congruence_terme — tous évités."""
-    from bourbaki.logique.tactiques.tactiques_abrege_quantif import alpha_existe as _ax
+    from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import alpha_existe as _ax
     va, vb, vc = _t(a), _t(b), _t(c)
     vs = _t(s)
     BC = somme_disjointe(vb, vc)
@@ -1286,7 +1286,7 @@ def _corps_pourtout(concl):
 
 def _renomme_injective(c3):
     """⊢ injective_dans(K,(A⊔B)⊔C) [liants s,sp]  →  forme défaut u,up."""
-    from bourbaki.logique.tactiques.tactiques_abrege_quantif import alpha_pour_tout, congruence_pour_tout
+    from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import alpha_pour_tout, congruence_pour_tout
     R_outer = _corps_pourtout(c3.conclusion)
     ren_outer = alpha_pour_tout("s", "u", R_outer)
     step1 = N.modus_ponens(c3, equivalence_avant(ren_outer))

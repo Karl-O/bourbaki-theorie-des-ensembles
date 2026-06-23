@@ -3,7 +3,7 @@
 Vérifie la conclusion EXACTE (== cible) et la clôture (est_clos) de chaque
 théorème certifié par le noyau abrégé.
 """
-from bourbaki.logique.formule import var, equiv, et, impl, appartient, egal, subst_t, alpha_egal
+from bourbaki.logique.i_1_termes_relations.formule import var, equiv, et, impl, appartient, egal, subst_t, alpha_egal
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ensembles.fonctions.ii_3_6_fonction_terme import ensembles_fonction_terme as FT
 
@@ -45,7 +45,7 @@ def test_graphe_terme_fonctionnel_conclusion_exacte():
 
 def test_axiome_graphe_terme_bien_forme():
     # L'axiome de caractérisation est utilisable par le noyau (constante introductrice).
-    from bourbaki.logique import noyau_abrege as N
+    from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
     T = E.singleton(_X)
     th = E.theorie_graphe_terme(var("A"), T)
     ax = N.axiome(th, E.axiome_graphe_terme(var("A"), T))

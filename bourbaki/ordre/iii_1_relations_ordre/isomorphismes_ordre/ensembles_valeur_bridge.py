@@ -16,8 +16,8 @@ INVARIANT : theorie_ensembles() = 22 (alpha_tau est une primitive justifiée, pa
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import Terme, var, appartient, egal
-from bourbaki.logique.noyau_abrege import alpha_tau
+from bourbaki.logique.i_1_termes_relations.formule import Terme, var, appartient, egal
+from bourbaki.logique.i_2_criteres_C.noyau.noyau_abrege import alpha_tau
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 
 J = "j"   # liant-valeur de est_strictement_croissante / _val

@@ -30,18 +30,18 @@ Lemmes intermédiaires re-utilisables :
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (Terme, var, egal, et, non, equiv, appartient,
+from bourbaki.logique.i_1_termes_relations.formule import (Terme, var, egal, et, non, equiv, appartient,
                      existe, subst_t)
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.tactiques.tactiques_abrege import a_implique_a
-from bourbaki.logique.tactiques.tactiques_abrege2 import (conjonction_intro, conjonction_elim_gauche,
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import a_implique_a
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (conjonction_intro, conjonction_elim_gauche,
                                conjonction_elim_droite, equivalence_avant,
                                equivalence_arriere, equivalence_transitivite,
                                equivalence_symetrie, equiv_neg, instancie)
-from bourbaki.logique.tactiques.tactiques_abrege_egalite import (symetrie, symetrie as eg_symetrie,
+from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import (symetrie, symetrie as eg_symetrie,
                                       composer_egalites)
-from bourbaki.logique.tactiques.tactiques_abrege_quantif import existe_elimination, congruence_existe, alpha_existe
+from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import existe_elimination, congruence_existe, alpha_existe
 from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import egalite_par_extension
 from bourbaki.ensembles.fonctions.ii_3_6_fonction_terme.ensembles_fonction_terme import membre_graphe_terme, graphe_terme_fonctionnel
 from bourbaki.ensembles.fonctions.ii_3_4_fonctions_valeur.ensembles_fonctions import valeur_caracterisation
@@ -287,9 +287,9 @@ def paradoxe_diagonal(p):
     H⇒P et H⇒¬P ; par contraposition+dni, H⇒¬H, d'où ¬H (idempotence).
     Appliqué à P = (a ∈ D) avec D = {x∈X | x∉f(x)}, c'est exactement la
     contradiction « a∈D ⇔ a∉D » obtenue pour un antécédent a de D par f."""
-    from bourbaki.logique.tactiques.tactiques_abrege2 import (conjonction_elim_gauche, conjonction_elim_droite,
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (conjonction_elim_gauche, conjonction_elim_droite,
                                    contraposition, dni)
-    from bourbaki.logique.tactiques.tactiques_abrege import syllogisme
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import syllogisme
     H = equiv(p, non(p))                                  # P ⇔ ¬P
     hH = N.assume(H)
     f = conjonction_elim_gauche(hH)                      # P ⇒ ¬P
@@ -427,7 +427,7 @@ def cantor_non_equipotent(x="X"):
     bij on a ¬bij, donc (ex falso) ¬Eq.  D'où bij ⇒ ¬Eq, puis, comme F n'est pas
     libre dans ¬Eq, (∃F)bij ⇒ ¬Eq = Eq ⇒ ¬Eq ; l'idempotence (S1) conclut ¬Eq.
     Combiné à inf_egal_parties (⊢ X ≤ P(X)), cela donne Card X < Card P(X)."""
-    from bourbaki.logique.formule import existe as _ex
+    from bourbaki.logique.i_1_termes_relations.formule import existe as _ex
     vX = _t(x)
     PX = E.parties(vX)
     bij = est_bijection_de_local(vX, var("F"), PX)

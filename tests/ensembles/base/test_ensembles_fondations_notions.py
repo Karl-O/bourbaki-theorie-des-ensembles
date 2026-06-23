@@ -6,7 +6,7 @@ clôture, dépliage fidèle) ; (2) le lemme direct G(Id_A) ⊂ A×A certifié pa
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (var, egal, et, appartient, inclus, pourtout,
+from bourbaki.logique.i_1_termes_relations.formule import (var, egal, et, appartient, inclus, pourtout,
                                        libres_f, afficher_f)
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ensembles.ii_3_correspondances import ensembles_fondations_notions as F
@@ -65,7 +65,7 @@ def test_graphe_identite_variables_libres():
 
 # ── 5. Lemme direct certifié : G(Id_A) ⊂ A×A ──────────────────────────────────
 def test_graphe_identite_inclus_dans_produit_certifie():
-    from bourbaki.logique.formule import impl, alpha_egal
+    from bourbaki.logique.i_1_termes_relations.formule import impl, alpha_egal
     thm = F.application_identique_est_application("A")
     # conclusion : G(Id_A) ⊂ A×A   = (∀w)(w∈G ⇒ w∈A×A).
     vw = var("w")

@@ -8,13 +8,13 @@ Certifie que `prop1_segment_propre` établit RÉELLEMENT, sous les SEULES hypoth
 que la forme close décharge les 3 hypothèses, et que rien n'est tautologie/postulé.
 theorie=22.
 """
-from bourbaki.logique.formule import non, egal, var, impl, et
+from bourbaki.logique.i_1_termes_relations.formule import non, egal, var, impl, et
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux import ensembles_trichotomie_prop1 as P
 
 
 def _R_de(R="R"):
-    from bourbaki.logique.formule import appartient
+    from bourbaki.logique.i_1_termes_relations.formule import appartient
     vR = var(R)
     return lambda a, b: appartient(E.couple(a, b), vR)
 

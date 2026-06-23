@@ -6,7 +6,7 @@ canonique de deux ensembles disjoints (Prop. 10 §II.4, eq_reunion_somme) — es
 Puis N_existe ⊢ coll(x, Fini x) à 0 hyp : ℕ EXISTE, INCONDITIONNEL."""
 import pytest
 
-from bourbaki.logique.formule import var, egal, et, impl, non, existe, pourtout, appartient
+from bourbaki.logique.i_1_termes_relations.formule import var, egal, et, impl, non, existe, pourtout, appartient
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import est_cardinal, cardinal
 

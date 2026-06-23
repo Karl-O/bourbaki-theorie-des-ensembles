@@ -9,11 +9,11 @@ python -m pytest V9/test_criteres_C.py -v
 from __future__ import annotations
 
 from bourbaki.assemblage.assemblage import (negation, disjonction, implication, conjonction, equivalence)
-from bourbaki.logique.propositions import A, B, C, SIG_PROP
-from bourbaki.logique import noyau
-from bourbaki.logique.tactiques.tactiques import a_implique_a
-from bourbaki.logique.tactiques.tactiques_prop import tiers_exclu
-from bourbaki.logique.criteres import criteres_C as K
+from bourbaki.logique.i_1_termes_relations.propositions import A, B, C, SIG_PROP
+from bourbaki.logique.i_2_criteres_C.noyau import noyau
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques import a_implique_a
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_prop import tiers_exclu
+from bourbaki.logique.i_2_criteres_C.criteres import criteres_C as K
 
 S = SIG_PROP
 

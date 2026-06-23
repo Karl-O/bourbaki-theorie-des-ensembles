@@ -34,21 +34,21 @@ NOTATIONS :  (a,b)∈G := appartient(couple(a,b),G) ;  G⊂H := inclus(G,H).
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (
+from bourbaki.logique.i_1_termes_relations.formule import (
     Terme, var, egal, et, ou, non, impl, equiv, appartient, existe, pourtout, inclus, tau,
 )
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.tactiques.tactiques_abrege import a_implique_a, syllogisme
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import a_implique_a, syllogisme
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
     contraposition, cas, tiers_exclu, equivalence_avant, equivalence_arriere,
     equivalence_symetrie, equivalence_transitivite, instancie,
 )
-from bourbaki.logique.tactiques.tactiques_abrege_quantif import (
+from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import (
     existe_elimination, congruence_existe, alpha_existe, monotonie_existe,
 )
-from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie as _sym
+from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import symetrie as _sym
 from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis.ensembles_ordre_relation import (
     est_ordre, reflexivite_sur, antisymetrie, transitivite_rel, totalement_ordonne,
     majorant, borne_superieure, element_maximal,
@@ -78,14 +78,14 @@ def _cut(thm, hyp, preuve_hyp):
 
 def _incl_refl(t):
     """⊢ t⊂t  pour un TERME t."""
-    from bourbaki.logique.tactiques.tactiques_abrege import inclusion_reflexive
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import inclusion_reflexive
     th = inclusion_reflexive("_r")
     return instancie(N.generalisation("_r", th), _terme(t))
 
 
 def _incl_trans(a, b, c, ab, bc):
     """De ⊢ a⊂b [ab] et ⊢ b⊂c [bc] (TERMES) déduit ⊢ a⊂c (avec le binder canonique)."""
-    from bourbaki.logique.tactiques.tactiques_abrege2 import _peler_pourtout
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import _peler_pourtout
     va, vb, vc = _terme(a), _terme(b), _terme(c)
     cible = inclus(va, vc)
     bndr, _ = _peler_pourtout(cible)
@@ -350,7 +350,7 @@ def Union_inclus_produit(X="X", Y="Y", D="D", w="w", G="G"):
     """⊢ { 𝔇⊂Inj } ⊢ ⋃𝔇 ⊂ X×Y.
 
     Si w∈⋃𝔇, témoin G∈𝔇⊂Inj donc G⊂X×Y (inj. partielle), et w∈G, d'où w∈X×Y."""
-    from bourbaki.logique.tactiques.tactiques_abrege2 import _peler_pourtout
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import _peler_pourtout
     vX, vY, vD = var(X), var(Y), var(D)
     Ut = Union(vX, vY, vD)
     XY = E.produit(vX, vY)
@@ -520,7 +520,7 @@ def _G_inclus_Union(X, Y, D, G, hGD):
     """De ⊢ G∈𝔇 [hGD] déduit ⊢ G⊂⋃𝔇  (tout G∈𝔇 est inclus dans la réunion).
 
     Pour w∈G : (G∈𝔇 et w∈G) témoigne (∃G)(G∈𝔇 et w∈G), donc w∈⋃𝔇."""
-    from bourbaki.logique.tactiques.tactiques_abrege2 import _peler_pourtout
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import _peler_pourtout
     vX, vY, vD, vG = _terme(X), _terme(Y), _terme(D), _terme(G)
     Ut = Union(vX, vY, vD)
     cible = inclus(vG, Ut)
@@ -586,10 +586,10 @@ def Inj_inductif(X="X", Y="Y", D="C", m="m", x="x", y="y", z="z"):
     body = N.loi_deduction(chaine(Gam, Inj_set, vD, x, y, z), ex_maj)
     allD = N.generalisation(D, body)                          # (∀D)(chaine⇒(∃m)majorant)
     # α-renomme le liant D → C pour matcher est_inductif(ΓI,Inj) (binder canonique « C »)
-    from bourbaki.logique.tactiques.tactiques_abrege2 import _peler_pourtout
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import _peler_pourtout
     _, corps_D = _peler_pourtout(allD.conclusion)
     if D != "C":
-        from bourbaki.logique.tactiques.tactiques_abrege_quantif import alpha_pour_tout
+        from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import alpha_pour_tout
         ren = alpha_pour_tout(D, "C", corps_D)
         allD = N.modus_ponens(allD, equivalence_avant(ren))
     return conjonction_intro(ord_GI, allD)                    # est_inductif(ΓI,Inj)
@@ -612,7 +612,7 @@ def _exfalso_vide(z, phi):
 
 def _vide_inclus(t, z="_zv"):
     """⊢ ∅ ⊂ t  pour un TERME t  (le vide est inclus dans tout ensemble)."""
-    from bourbaki.logique.tactiques.tactiques_abrege2 import _peler_pourtout
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import _peler_pourtout
     vt = _terme(t)
     cible = inclus(E.VIDE, vt)
     bndr, _ = _peler_pourtout(cible)
@@ -727,7 +727,7 @@ def dom_inclus_X(X="X", Y="Y", g="g", x="x", y="y"):
     """⊢ { g⊂X×Y } ⊢ dom(g) ⊂ X.
 
     x∈dom g ⇒ (∃y)((x,y)∈g) ; (x,y)∈g⊂X×Y ⇒ (x,y)∈X×Y ⇒ x∈X (1re projection)."""
-    from bourbaki.logique.tactiques.tactiques_abrege2 import _peler_pourtout
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import _peler_pourtout
     vX, vY, vg = _terme(X), _terme(Y), _terme(g)
     XY = E.produit(vX, vY)
     cible = inclus(E.dom(vg), vX)
@@ -752,7 +752,7 @@ def img_inclus_Y(X="X", Y="Y", g="g", x="x", y="y"):
     """⊢ { g⊂X×Y } ⊢ img(g) ⊂ Y.
 
     y∈img g ⇒ (∃x)((x,y)∈g) ; (x,y)∈g⊂X×Y ⇒ (x,y)∈X×Y ⇒ y∈Y (2e projection)."""
-    from bourbaki.logique.tactiques.tactiques_abrege2 import _peler_pourtout
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import _peler_pourtout
     vX, vY, vg = _terme(X), _terme(Y), _terme(g)
     XY = E.produit(vX, vY)
     cible = inclus(E.img(vg), vY)
@@ -779,7 +779,7 @@ def _sous_propre_temoin(A, B, hAB, hAneB, z="z"):
 
     Si B⊂A, alors (A⊂B et B⊂A) ⇒ A=B (A1), contredisant A≠B ; donc ¬(B⊂A) =
     ¬(∀z)(z∈B⇒z∈A), d'où (∃z)¬(z∈B⇒z∈A) ⇔ (∃z)(z∈B et z∉A)."""
-    from bourbaki.logique.tactiques.tactiques_abrege2 import dne
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import dne
     from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import extensionnalite_appliquee
     from bourbaki.ordre.iii_2_bon_ordre.zorn_zermelo.ensembles_bourbaki_witt_chaine import _ex_falso, _refute_self, _neg_impl_equiv
     vA, vB = _terme(A), _terme(B)
@@ -808,7 +808,7 @@ def _ext(g, x0, y0):
 def _membre_ext(g, x0, y0, c):
     """⊢ ( c ∈ g∪{(x₀,y₀)} ) ⇔ ( c∈g ou c=(x₀,y₀) )  (axiome réunion + singleton)."""
     from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import singleton_membre
-    from bourbaki.logique.tactiques.tactiques_abrege2 import ou_congruence
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import ou_congruence
     vg, c0 = _terme(g), E.couple(_terme(x0), _terme(y0))
     vc = _terme(c)
     ax = N.axiome(E.theorie_ensembles(), E.AXIOME_REUNION)
@@ -934,7 +934,7 @@ def _ext_fonctionnel(X, Y, g, x0, y0, Hxnd, u="u", v="v", z="z"):
     Huz_c0b = N.assume(egal(cuz, c0))
     comps_z2 = _couple_comps(vu, vz, vx0, vy0, Huz_c0b)         # u=x0 et z=y0
     z_eq_y0 = conjonction_elim_droite(comps_z2)           # z=y0
-    from bourbaki.logique.tactiques.tactiques_abrege_egalite import composer_egalites
+    from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import composer_egalites
     y0_eq_z = N.modus_ponens(z_eq_y0, _sym(vz, vy0))      # y0=z
     v_eq_z = composer_egalites(v_eq_y0, y0_eq_z)          # v=z
     b_vc0_zc0 = N.loi_deduction(egal(cuz, c0), v_eq_z)
@@ -951,7 +951,7 @@ def _ext_injectif(X, Y, g, x0, y0, Hynd, a="a", b="b", ap="ap"):
     Cas (g,g): g injectif. Cas mixtes (g,c0)/(c0,g): b=y₀ ⇒ (·,y₀)∈g, contredit
     y₀∉img g (vacuité). Cas (c0,c0): a=x₀=a'."""
     from bourbaki.ordre.iii_2_bon_ordre.zorn_zermelo.ensembles_bourbaki_witt_chaine import _ex_falso, _refute_self
-    from bourbaki.logique.tactiques.tactiques_abrege_egalite import composer_egalites
+    from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import composer_egalites
     vg, vx0, vy0 = _terme(g), _terme(x0), _terme(y0)
     va, vb, vap = var(a), var(b), var(ap)
     c0 = E.couple(vx0, vy0)
@@ -1013,7 +1013,7 @@ def _ext_inclus_produit(X, Y, g, x0, y0, Hgsub, HxX, HyY, c="c"):
     """{ g⊂X×Y [Hgsub], x₀∈X [HxX], y₀∈Y [HyY] } ⊢ g∪{(x₀,y₀)} ⊂ X×Y.
 
     c∈D ⇒ c∈g⊂X×Y, ou c=(x₀,y₀) avec x₀∈X et y₀∈Y donc (x₀,y₀)∈X×Y."""
-    from bourbaki.logique.tactiques.tactiques_abrege2 import _peler_pourtout
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import _peler_pourtout
     vX, vY, vg = _terme(X), _terme(Y), _terme(g)
     vx0, vy0 = _terme(x0), _terme(y0)
     XY = E.produit(vX, vY)
@@ -1042,7 +1042,7 @@ def _ext_inclus_produit(X, Y, g, x0, y0, Hgsub, HxX, HyY, c="c"):
 # ── g ⊂ g∪{(x₀,y₀)}  et  g ≠ g∪{(x₀,y₀)} (strictement plus grand) ────────────
 def _g_inclus_ext(g, x0, y0, c="c"):
     """⊢ g ⊂ g∪{(x₀,y₀)}.   (tout c∈g est dans la réunion.)"""
-    from bourbaki.logique.tactiques.tactiques_abrege2 import _peler_pourtout
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import _peler_pourtout
     vg = _terme(g)
     D = _ext(g, x0, y0)
     cible = inclus(vg, D)
@@ -1241,7 +1241,7 @@ def _image_inclus_Y(g, X, Y, Himgsub, u="u", z="z"):
     """{ img g⊂Y [Himgsub] } ⊢ image(g,X) ⊂ Y.
 
     z∈g⟨X⟩ ⇒ (∃u)(u∈X et (u,z)∈g) ; (u,z)∈g ⇒ z∈img g (axiome img) ⇒ z∈Y."""
-    from bourbaki.logique.tactiques.tactiques_abrege2 import _peler_pourtout
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import _peler_pourtout
     vg, vX, vY = _terme(g), _terme(X), _terme(Y)
     cible = inclus(E.image(vg, vX), vY)
     bndr, _ = _peler_pourtout(cible)
@@ -1305,7 +1305,7 @@ def reciproque_inj_partielle(X="X", Y="Y", g="g", a="a", b="b", ap="ap", c="c"):
     injectif (graphe).  g⁻¹ injectif (graphe) ⇐ g fonctionnel.  (Échange exact des
     rôles fonctionnel/injectif par la réciproque.)"""
     from bourbaki.ensembles.fonctions.ii_3_2_reciproque.ensembles_reciproque import couple_reciproque, reciproque_produit
-    from bourbaki.logique.tactiques.tactiques_abrege2 import _peler_pourtout
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import _peler_pourtout
     vX, vY, vg = _terme(X), _terme(Y), _terme(g)
     grec = E.reciproque(vg)
     Hinj = N.assume(inj_partielle(vg, vX, vY))             # inj_partielle(g,X,Y)
@@ -1376,7 +1376,7 @@ def reciproque_inj_partielle(X="X", Y="Y", g="g", a="a", b="b", ap="ap", c="c"):
 def dom_reciproque_eq_Y(X="X", Y="Y", g="g"):
     """⊢ { img g=Y } ⊢ dom(g⁻¹) = Y.   (pr₁(g⁻¹)=pr₂g=img g=Y.)"""
     from bourbaki.ensembles.fonctions.ii_3_2_reciproque.ensembles_reciproque import pr1_reciproque
-    from bourbaki.logique.tactiques.tactiques_abrege_egalite import composer_egalites
+    from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import composer_egalites
     vX, vY, vg = _terme(X), _terme(Y), _terme(g)
     HimgY = N.assume(egal(E.img(vg), vY))                 # img g=Y  (= pr₂g=Y)
     pr1 = pr1_reciproque(vg)                              # dom(g⁻¹)=img g  (pr₁(g⁻¹)=pr₂g)

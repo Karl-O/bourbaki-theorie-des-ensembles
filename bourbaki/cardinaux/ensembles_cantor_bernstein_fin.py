@@ -30,17 +30,17 @@ AXIOME_DIFF + phi_point_fixe + est_injection_de + image_croissante).
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (var, egal, et, ou, non, impl, appartient,
+from bourbaki.logique.i_1_termes_relations.formule import (var, egal, et, ou, non, impl, appartient,
                                        existe, pourtout, inclus, Terme)
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.tactiques.tactiques_abrege import syllogisme
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import syllogisme
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
     projection_gauche, projection_droite, contraposition,
     equivalence_avant, equivalence_arriere, instancie, instanciation_en_x,
     inclusion_transitive, cas, tiers_exclu)
-from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie, composer_egalites
+from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import symetrie, composer_egalites
 from bourbaki.ensembles.ii_3_correspondances.ensembles_correspondances import image_croissante
 from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import egalite_par_extension
 from bourbaki.cardinaux import ensembles_cantor_bernstein as CB
@@ -216,7 +216,7 @@ def pivot_AmoinsD(a="A", b="B", f="f", g="g"):
 
     Sur A∖D, tout élément est donc g(b) pour un b ∈ B∖f⟨D⟩ : c'est ce qui
     permet de recoller g⁻¹ sur A∖D dans la bijection finale."""
-    from bourbaki.logique.tactiques.tactiques_abrege_egalite import congruence_terme
+    from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import congruence_terme
     vA, vB, vf, vg = _t(a), _t(b), _t(f), _t(g)
     dterm = CB.D(vA, vB, vf, vg)
     gBfD = E.image(vg, E.difference(vB, E.image(vf, dterm)))   # g⟨B∖f⟨D⟩⟩

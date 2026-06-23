@@ -22,15 +22,15 @@ theorie_ensembles() INCHANGÉE (22 ax.). On réutilise l'infra `famille_reparam`
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (Terme, var, egal, et, impl,
+from bourbaki.logique.i_1_termes_relations.formule import (Terme, var, egal, et, impl,
                                        appartient, existe, pourtout)
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche as cg,
     conjonction_elim_droite as cd, equivalence_avant, equivalence_arriere,
     instancie)
-from bourbaki.logique.tactiques.tactiques_abrege_quantif import existe_elimination
+from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import existe_elimination
 from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import extensionnalite_appliquee
 
 from bourbaki.ensembles.ii_4_reunion_intersection.ensembles_chap2_props_restantes import (

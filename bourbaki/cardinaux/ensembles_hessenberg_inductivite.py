@@ -54,12 +54,12 @@ l'inductivité ne sont supposés vrais (toujours en antécédent).
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (
+from bourbaki.logique.i_1_termes_relations.formule import (
     Terme, var, egal, et, impl, existe, pourtout, appartient, inclus,
 )
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.tactiques.tactiques_abrege2 import instancie
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import instancie
 
 from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis.ensembles_ordre_relation import (
     est_ordre, majorant, totalement_ordonne,
@@ -145,7 +145,7 @@ def frame_inductif(E_set="E", C="C", m="m", x="x", y="y", z="z"):
     majorant — fonctionnalité close ici, injectivité/surjectivité chaîne à venir),
     `frame_inductif` livre l'hypothèse d'inductivité dont Zorn (`maximal_pair_existe`)
     a besoin.  CLOS (introduction de conjonction) ; conclusion ∉ hyps ; theorie=22."""
-    from bourbaki.logique.tactiques.tactiques_abrege2 import conjonction_intro
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import conjonction_intro
     vE = _t(E_set)
     Gam = frame_ordre(vE)                                  # Γ𝔉
     Fr = frame_pair(vE)                                    # 𝔉

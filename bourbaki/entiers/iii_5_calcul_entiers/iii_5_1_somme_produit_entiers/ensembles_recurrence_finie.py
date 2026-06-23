@@ -30,10 +30,10 @@ sur ℕ, déjà CLOSE modulo `predecesseur_fini_universel`, lui-même CLOS par P
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (
+from bourbaki.logique.i_1_termes_relations.formule import (
     Terme, var, egal, et, non, impl, appartient, existe, pourtout,
 )
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 
 from bourbaki.cardinaux.ensembles_cardinaux import est_cardinal, cardinal
@@ -41,12 +41,12 @@ from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.e
     est_fini, est_fini_ensemble, successeur, ZERO,
 )
 
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
     equivalence_avant, equivalence_arriere, instancie,
 )
-from bourbaki.logique.tactiques.tactiques_abrege_quantif import existe_elimination
-from bourbaki.logique.tactiques.tactiques_abrege_egalite import (
+from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import existe_elimination
+from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import (
     symetrie, composer_egalites,
 )
 
@@ -78,8 +78,8 @@ from bourbaki.entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.e
     fini_implique_cardinal, card_est_un_cardinal,
 )
 from bourbaki.entiers.iii_6_infinis.iii_6_1_n_objet_existence.ensembles_aleph0 import card_egal_succ_card_diff as _ces
-from bourbaki.logique.tactiques.tactiques_abrege2 import contraposition
-from bourbaki.logique.tactiques.tactiques_abrege import a_implique_a
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import contraposition
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import a_implique_a
 
 
 def _t(t):
@@ -295,7 +295,7 @@ def _preuve_step(P, hPas, n="nrec", X="XQ", x0="x0rec"):
     imp_x0 = N.loi_deduction(appartient(vx0, vX), P_X)       # (x0∈X) ⇒ P(X)
     ex_imp = existe_elimination(imp_x0, x0)                  # (∃x0)(x0∈X) ⇒ P(X)
     # ex_z lie « z » : α-renomme « z » → x0
-    from bourbaki.logique.tactiques.tactiques_abrege_quantif import alpha_existe
+    from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import alpha_existe
     ex_x0 = N.modus_ponens(ex_z, equivalence_avant(alpha_existe("z", x0, appartient(var("z"), vX))))
     P_X_final = N.modus_ponens(ex_x0, ex_imp)               # P(X)   [Fini n, Q(n), hPas, Fini-ens X, Card X=succ n]
 

@@ -55,15 +55,15 @@ ASSEMBLAGE :  retrait_surgery_hyp  ∘  inf_egal_diff_marqueur_implique  ⇒
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (Terme, var, egal, et, non, impl, existe,
+from bourbaki.logique.i_1_termes_relations.formule import (Terme, var, egal, et, non, impl, existe,
                                        inclus, appartient)
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.tactiques.tactiques_abrege import syllogisme
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import syllogisme
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
     equivalence_avant, equivalence_arriere, instancie)
-from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie, composer_egalites
+from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import symetrie, composer_egalites
 
 from bourbaki.cardinaux.ensembles_cardinaux import (
     est_injection_de, equipotent, cardinal, inf_egal_card,
@@ -154,8 +154,8 @@ def _dans_singleton_star_ssi(z):
     car = instancie(instancie(instancie(ax_p, _STAR), _STAR), vz)   # z∈{*,*} ⇔ (z=* ou z=*)
     # (z=* ou z=*) ⇔ z=*   (idempotence du « ou »)
     from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recollement_somme.ensembles_somme_disjointe import _ou_idem
-    from bourbaki.logique.tactiques.tactiques_abrege import a_implique_a
-    from bourbaki.logique.formule import ou
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import a_implique_a
+    from bourbaki.logique.i_1_termes_relations.formule import ou
     h_or = N.assume(ou(egal(vz, _STAR), egal(vz, _STAR)))
     fwd = N.loi_deduction(ou(egal(vz, _STAR), egal(vz, _STAR)),
                           _ou_idem(h_or, egal(vz, _STAR)))           # (z=* ou z=*) ⇒ z=*
@@ -163,7 +163,7 @@ def _dans_singleton_star_ssi(z):
                           N.modus_ponens(N.assume(egal(vz, _STAR)),
                                          N.s2(egal(vz, _STAR), egal(vz, _STAR))))  # z=* ⇒ (z=* ou z=*)
     idem = conjonction_intro(fwd, bwd)                              # (z=* ou z=*) ⇔ z=*
-    from bourbaki.logique.tactiques.tactiques_abrege2 import equivalence_transitivite
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import equivalence_transitivite
     return equivalence_transitivite(car, idem)                      # z∈{*} ⇔ z=*
 
 
@@ -176,8 +176,8 @@ def diff_marqueur_egal_copie(c="c"):
                        ⇔  z∈C×{0}.
     Le « et ¬(z=*) » ÉLIMINE la branche z=* de la disjonction (un « ou » dont une
     branche est niée se réduit à l'autre).  INCONDITIONNEL."""
-    from bourbaki.logique.formule import ou
-    from bourbaki.logique.tactiques.tactiques_abrege import a_implique_a
+    from bourbaki.logique.i_1_termes_relations.formule import ou
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import a_implique_a
     vc = _t(c)
     S = _S(c)                                             # C⊔{∅}
     C0 = _C0(c)                                            # C×{0}
@@ -201,12 +201,12 @@ def diff_marqueur_egal_copie(c="c"):
     z_in_S = conjonction_elim_gauche(z_in_S_and)                      # z∈S
     nz_sing = conjonction_elim_droite(z_in_S_and)                     # ¬(z∈{*})
     # ¬(z∈{*}) ⇒ ¬(z=*)   (contraposée de z=* ⇒ z∈{*}, i.e. ⇐ de sing_ssi)
-    from bourbaki.logique.tactiques.tactiques_abrege2 import contraposition
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import contraposition
     nz_star = N.modus_ponens(nz_sing,
         contraposition(equivalence_arriere(sing_ssi)))               # ¬(z=*)
     disj = N.modus_ponens(z_in_S, equivalence_avant(sup))            # z∈C×{0} ou z=*
     # (z∈C×{0} ou z=*) et ¬(z=*) ⇒ z∈C×{0}   (cas : branche z=* contredit ¬(z=*))
-    from bourbaki.logique.tactiques.tactiques_abrege2 import cas
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import cas
     br_left = N.loi_deduction(z_in_C0, N.assume(z_in_C0))             # z∈C×{0} ⇒ z∈C×{0}
     # branche z=* : z=* et ¬(z=*) ⊢ z∈C×{0}  (ex falso quodlibet : ¬P ⇒ (P ⇒ Z))
     h_star = N.assume(z_eq_star)

@@ -17,7 +17,7 @@ from __future__ import annotations
 from collections import Counter
 
 from bourbaki.assemblage.assemblage import Assemblage, est_lettre
-from bourbaki.logique.lecture import Signature, DEFAUT, depuis_assemblage, vers_assemblage
+from bourbaki.logique.i_1_termes_relations.lecture import Signature, DEFAUT, depuis_assemblage, vers_assemblage
 
 # Ordre figé des traits (un changement d'ordre changerait l'entrée du modèle).
 TRAITS = (

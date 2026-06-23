@@ -23,8 +23,8 @@ ROUTE (entièrement à partir de briques CLOSES) :
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import Terme, var, egal, et
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_1_termes_relations.formule import Terme, var, egal, et
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 
 from bourbaki.cardinaux.ensembles_cardinaux import est_cardinal, cardinal, inf_strict_card
@@ -33,11 +33,11 @@ from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_recolle
     somme_disjointe, somme_cardinale_binaire,
 )
 
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
     equivalence_avant, instancie,
 )
-from bourbaki.logique.tactiques.tactiques_abrege_egalite import (
+from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import (
     symetrie, composer_egalites, congruence_terme,
 )
 
@@ -65,13 +65,13 @@ def _t(t):
 # ════════════════════════════════════════════════════════════════════════════
 def _diff_inclus(tE, tX, w="z"):
     """⊢ (E∖X) ⊂ E.    z∈E∖X ⇒ (z∈E et ¬z∈X) ⇒ z∈E.  (binder « z » aligné sur inclus.)"""
-    from bourbaki.logique.formule import appartient, impl, non, inclus
-    from bourbaki.logique.tactiques.tactiques_abrege2 import projection_gauche, syllogisme
-    from bourbaki.logique.formule import libres_t
+    from bourbaki.logique.i_1_termes_relations.formule import appartient, impl, non, inclus
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import projection_gauche, syllogisme
+    from bourbaki.logique.i_1_termes_relations.formule import libres_t
     # choix du binder identique à inclus(E∖X, E)
     EmX = E.difference(tE, tX)
     if w in libres_t(EmX) | libres_t(tE):
-        from bourbaki.logique.formule import _fraiche
+        from bourbaki.logique.i_1_termes_relations.formule import _fraiche
         w = _fraiche(libres_t(EmX) | libres_t(tE))
     vw = var(w)
     from bourbaki.cardinaux.ensembles_cantor_bernstein_fin import _inst_diff
@@ -88,7 +88,7 @@ def _diff_inclus(tE, tX, w="z"):
 # ════════════════════════════════════════════════════════════════════════════
 def partie_egal_cardinal_egal_enonce(X="Xpe", Eens="Epe"):
     """⊢-cible : ( X⊂E et est_fini_ensemble(E) et Card X = Card E ) ⇒ X = E."""
-    from bourbaki.logique.formule import impl, inclus
+    from bourbaki.logique.i_1_termes_relations.formule import impl, inclus
     vX, vE = _t(X), _t(Eens)
     ante = et(et(inclus(vX, vE), est_fini_ensemble(vE)),
               egal(cardinal(vX), cardinal(vE)))
@@ -99,7 +99,7 @@ def partie_egal_cardinal_egal(X="Xpe", Eens="Epe"):
     """🎯🎯 ⊢ ( X⊂E et est_fini_ensemble(E) et Card X = Card E ) ⇒ X = E.   (CLOS, 0 hyp.)
 
     Cœur de la pigeonhole (Cor. 2 §III.4).  Voir docstring de module pour la route."""
-    from bourbaki.logique.formule import impl, inclus
+    from bourbaki.logique.i_1_termes_relations.formule import impl, inclus
     vX, vE = _t(X), _t(Eens)
     incl = inclus(vX, vE)
     EmX = E.difference(vE, vX)                              # E∖X
@@ -117,7 +117,7 @@ def partie_egal_cardinal_egal(X="Xpe", Eens="Epe"):
     E_eq_reun = N.modus_ponens(h_incl, partie_reunion_complement(vE, vX))  # X∪(E∖X) = E
     assert E_eq_reun.conclusion == egal(reun, vE), "E_eq_reun ≠ (X∪(E∖X)=E)"
     disj = partie_disjoint_complement(vE, vX)               # X∩(E∖X) = ∅   (clos)
-    from bourbaki.logique.formule import appartient   # noqa
+    from bourbaki.logique.i_1_termes_relations.formule import appartient   # noqa
     assert disj.est_clos
 
     # ── (2) X fini, E∖X fini ────────────────────────────────────────────────
@@ -243,7 +243,7 @@ def _est_cardinal_du_cardinal(tEns):
 # ════════════════════════════════════════════════════════════════════════════
 def cor2_partie_propre_inf_strict_enonce(X="Xpe", Eens="Epe"):
     """⊢-cible : ( X⊂E et ¬(X=E) et est_fini_ensemble(E) ) ⇒ Card X < Card E."""
-    from bourbaki.logique.formule import impl, inclus, non
+    from bourbaki.logique.i_1_termes_relations.formule import impl, inclus, non
     vX, vE = _t(X), _t(Eens)
     ante = et(et(inclus(vX, vE), non(egal(vX, vE))), est_fini_ensemble(vE))
     return impl(ante, inf_strict_card(cardinal(vX), cardinal(vE)))
@@ -257,7 +257,7 @@ def cor2_partie_propre_inf_strict(X="Xpe", Eens="Epe"):
       • Card X ≠ Card E : sinon (X⊂E et fini E et Card X=Card E) ⇒ X=E
         (partie_egal_cardinal_egal), contredisant X≠E ;
       • Card X < Card E := (Card X≤Card E et Card X≠Card E)."""
-    from bourbaki.logique.formule import impl, inclus, non
+    from bourbaki.logique.i_1_termes_relations.formule import impl, inclus, non
     from bourbaki.entiers.iii_4_entiers_finis.iii_4_2_finis_props.ensembles_finis_props import (
         partie_inf_egal_card, _pont_inf_egal_card,
     )
@@ -279,7 +279,7 @@ def cor2_partie_propre_inf_strict(X="Xpe", Eens="Epe"):
     assert le_card.conclusion == _inf_egal(cX, cE)
 
     # ¬(Card X = Card E)  par réduction à l'absurde via le sous-lemme
-    from bourbaki.logique.tactiques.tactiques_abrege2 import contraposition
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import contraposition
     sublem = partie_egal_cardinal_egal(vX, vE)                     # (X⊂E et fini E et CardX=CardE)⇒X=E
     h_cardeq = N.assume(egal(cX, cE))                              # supposons Card X = Card E
     sub_ante = conjonction_intro(conjonction_intro(h_incl, h_fini), h_cardeq)

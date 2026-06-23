@@ -20,12 +20,12 @@ theorie_ensembles() INCHANGÉE (= 22) : aucun axiome ajouté.
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import Terme, var, appartient, et
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_1_termes_relations.formule import Terme, var, appartient, et
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ensembles.familles.ii_2_produit_deux_ensembles.ensembles_produit import couple_dans_produit_ssi
 from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import _instance_reunion
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     et_congruence_droite, et_congruence_gauche, et_ou_distrib, ou_congruence,
     equivalence_symetrie, equivalence_transitivite, conjonction_intro,
     conjonction_elim_gauche, conjonction_elim_droite,
@@ -38,14 +38,14 @@ def _t(x):
 
 def _instance_inter(a, b, z):
     """⊢ (z ∈ a∩b) ⇔ (z∈a et z∈b)   (instance de AXIOME_INTER aux termes a,b,z)."""
-    from bourbaki.logique.tactiques.tactiques_abrege2 import instancie
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import instancie
     ax = N.axiome(E.theorie_ensembles(), E.AXIOME_INTER)
     return instancie(instancie(instancie(ax, a), b), z)
 
 
 def _et_et_distrib(p, q, r):
     """⊢ (P et (Q et R)) ⇔ ((P et Q) et (P et R))   (distribution de et sur et, P dupliqué)."""
-    from bourbaki.logique.formule import et as _et
+    from bourbaki.logique.i_1_termes_relations.formule import et as _et
     hf = N.assume(_et(p, _et(q, r)))
     pp = conjonction_elim_gauche(hf)
     qr = conjonction_elim_droite(hf)
@@ -108,7 +108,7 @@ def couple_dans_produit_distributif_intersection(u="u", v="v", a="A", b="B", c="
 
 def _reshuffle4(p, q, r, s):
     """⊢ ((P et Q) et (R et S)) ⇔ ((P et R) et (Q et S))   (échange des conjoints médians)."""
-    from bourbaki.logique.formule import et as _et
+    from bourbaki.logique.i_1_termes_relations.formule import et as _et
     h = N.assume(_et(_et(p, q), _et(r, s)))
     pq, rs = conjonction_elim_gauche(h), conjonction_elim_droite(h)
     fwd = N.loi_deduction(_et(_et(p, q), _et(r, s)), conjonction_intro(

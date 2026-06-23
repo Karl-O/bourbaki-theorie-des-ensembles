@@ -6,7 +6,7 @@ indépendamment).  Les théorèmes INCONDITIONNELS sont contrôlés sur `.est_cl
 les théorèmes CONDITIONNELS (composée surjective/bijective, valeur 2 arg.) le sont
 sur l'ENSEMBLE EXACT de leurs hypothèses (jamais postulées).
 """
-from bourbaki.logique.formule import var, egal, et, impl, appartient, existe, equiv
+from bourbaki.logique.i_1_termes_relations.formule import var, egal, et, impl, appartient, existe, equiv
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ensembles.fonctions.ii_3_general import ensembles_fonctions_props2 as P2
 

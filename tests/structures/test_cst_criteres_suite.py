@@ -10,7 +10,7 @@ Vérifie pour chaque critère certifié dans `ensembles_cst_criteres_suite` :
   • l'IDENTITÉ LITTÉRALE de la conclusion à la cible fidèle ;
   • theorie_ensembles() reste à 22 axiomes (aucun axiome créé).
 """
-from bourbaki.logique.formule import var, egal, et, equiv
+from bourbaki.logique.i_1_termes_relations.formule import var, egal, et, equiv
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de
 from bourbaki.structures.iv_1_structures_isomorphismes.ensembles_especes import (
@@ -112,7 +112,7 @@ def test_cst10_initiales_egales_certifie():
     assert t.conclusion not in t.hypotheses
     # l'antisymétrie (MO_III) est une hypothèse explicite, identique au schéma CST9
     mut = initiales_mutuellement_plus_fines()
-    from bourbaki.logique.formule import impl
+    from bourbaki.logique.i_1_termes_relations.formule import impl
     antisym = impl(mut.conclusion, egal(var("I"), var("J")))
     assert antisym in t.hypotheses
     # 5 hyps : 2 (IN) + 2 id-morph + ANTISYM
@@ -131,7 +131,7 @@ def test_cst11_induites_egales_certifie():
     # non dégénéré : l'égalité finale n'est PAS une hypothèse
     assert t.conclusion not in t.hypotheses
     # les hyps relient chaque induite au TRANSPORTÉ commun
-    from bourbaki.logique.formule import app
+    from bourbaki.logique.i_1_termes_relations.formule import app
     T = app("transporte_induit", var("jC"), var("S"))
     assert egal(var("indAC"), T) in t.hypotheses
     assert egal(var("indBC"), T) in t.hypotheses
@@ -148,6 +148,6 @@ def test_cst14_produit_induite_egales_certifie():
     assert t.conclusion == egal(var("SindB"), var("SprodB"))
     # non dégénéré
     assert t.conclusion not in t.hypotheses
-    from bourbaki.logique.formule import app
+    from bourbaki.logique.i_1_termes_relations.formule import app
     assert egal(var("SindB"), var("Scommun")) in t.hypotheses
     assert egal(var("SprodB"), var("Scommun")) in t.hypotheses

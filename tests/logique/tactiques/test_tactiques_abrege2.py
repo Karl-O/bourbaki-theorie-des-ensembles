@@ -1,9 +1,9 @@
 """Tests V9 — boîte à outils abrégée + ⊂-transitivité (chapitre II)."""
 from __future__ import annotations
 
-from bourbaki.logique.formule import (var, egal, non, impl, equiv, et, inclus, afficher_f)
-from bourbaki.logique import noyau_abrege as N
-from bourbaki.logique.tactiques import tactiques_abrege2 as T2
+from bourbaki.logique.i_1_termes_relations.formule import (var, egal, non, impl, equiv, et, inclus, afficher_f)
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.tactiques import tactiques_abrege2 as T2
 
 A = egal(var("a"), var("b"))
 B = egal(var("b"), var("c"))
@@ -28,7 +28,7 @@ def test_conjonction_intro_elim():
 
 def test_instanciation_en_x():
     R = egal(var("x"), var("a"))
-    from bourbaki.logique.formule import pourtout
+    from bourbaki.logique.i_1_termes_relations.formule import pourtout
     t = T2.instanciation_en_x(R, "x")
     assert t.conclusion == impl(pourtout("x", R), R) and t.est_clos
 

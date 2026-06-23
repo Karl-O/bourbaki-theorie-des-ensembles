@@ -14,7 +14,7 @@ On certifie (ensembles_maximalite_substantielle) :
 
 INVARIANT : theorie_ensembles() = 22.  Rien postulé.  Conclusions NON vacueuses.
 """
-from bourbaki.logique.formule import var, egal, ou, non, appartient, Formule
+from bourbaki.logique.i_1_termes_relations.formule import var, egal, ou, non, appartient, Formule
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis import ensembles_ordre_vocab as V
 from bourbaki.cardinaux import ensembles_trichotomie_scaffold as TS
@@ -136,7 +136,7 @@ def test_maximalite_residu_est_le_gap_precis():
     h = TS.h_iso_max("E", "R", "F", "Rp")
     Rf, Rpf = _R_de("R"), _R_de("Rp")
     from bourbaki.cardinaux import ensembles_trichotomie_temoin_adjonction as ADJ
-    from bourbaki.logique.formule import tau, et as _et, pourtout, impl
+    from bourbaki.logique.i_1_termes_relations.formule import tau, et as _et, pourtout, impl
     # τ-témoins (reconstruits comme dans la preuve)
     domh, imgh = E.dom(h), E.img(h)
     from bourbaki.cardinaux.ensembles_segments_construction import seg as _seg

@@ -46,15 +46,15 @@ satisfiable (ne contredit rien) et VRAI.
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import Terme, var, egal, non
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_1_termes_relations.formule import Terme, var, egal, non
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import inf_egal_card, equipotent
 from bourbaki.entiers.iii_6_infinis.iii_6_1_n_objet_existence.ensembles_ensemble_NN import ensemble_NN, zero_dans_NN
 from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_vide import non_vide_ssi_element
 from bourbaki.cardinaux.ensembles_cardinaux_bornes_somme import inf_egal_produit
-from bourbaki.logique.tactiques.tactiques_abrege2 import instancie
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import instancie
 
 
 def _t(t):
@@ -75,7 +75,7 @@ def NN_non_vide():
     # (∃z)(z∈ℕ) par témoin 0
     exists = N.modus_ponens(z0, N.s5(E.appartient(var("z"), NN), zero, "z"))
     equiv = non_vide_ssi_element(NN)                      # ¬(ℕ=∅) ⇔ (∃z)(z∈ℕ)
-    from bourbaki.logique.tactiques.tactiques_abrege2 import equivalence_arriere
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import equivalence_arriere
     res = N.modus_ponens(exists, equivalence_arriere(equiv))   # ¬(ℕ=∅)
     assert res.conclusion == non(egal(NN, E.VIDE)), \
         f"NN_non_vide : conclusion inattendue\n{res.conclusion}"
@@ -119,7 +119,7 @@ def denombrable_carre():
     from bourbaki.cardinaux.ensembles_cantor_bernstein_final._recollement import (
         cantor_bernstein,
     )
-    from bourbaki.logique.tactiques.tactiques_abrege2 import conjonction_intro
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import conjonction_intro
     NN = ensemble_NN()
     NN2 = E.produit(NN, NN)
     # ── CANTOR–BERNSTEIN capture-safe : prouvé sur NOMS FRAIS Acb,Bcb (≠ liants de ℕ),

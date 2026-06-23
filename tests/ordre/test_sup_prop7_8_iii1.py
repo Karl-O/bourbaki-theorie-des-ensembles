@@ -1,6 +1,6 @@
 """Tests — PROPOSITION 7 (sup par recouvrement, cœur binaire) §III.1 (E.III.11)."""
-from bourbaki.logique import noyau_abrege as N
-from bourbaki.logique.formule import var
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
+from bourbaki.logique.i_1_termes_relations.formule import var
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis.ensembles_ordre_relation import borne_superieure, majorant
 from bourbaki.ordre.iii_1_relations_ordre.bornes_sup.ensembles_sup_prop7_8_iii1 import (
@@ -22,7 +22,7 @@ def test_borne_sup_reunion_iff_clos():
 def test_borne_sup_reunion_iff_conclusion():
     """La conclusion est bien l'équivalence
     borne_superieure(A∪B,m) ⟺ (plus petit majorant commun)."""
-    from bourbaki.logique.formule import equiv, et, impl, pourtout, appartient as _app
+    from bourbaki.logique.i_1_termes_relations.formule import equiv, et, impl, pourtout, appartient as _app
     th = borne_sup_reunion_iff()
     G, A, B, Es, m = var("G"), var("A"), var("B"), var("E"), var("m")
     AuB = E.reunion(A, B)

@@ -5,7 +5,7 @@
   • trois_inf_egal_infini : ( card 𝔟 et inf 𝔟 ) ⇒ 3 ≤ 𝔟                     (CLOS).
 theorie=22, noyau intact.
 """
-from bourbaki.logique.formule import var, et, impl
+from bourbaki.logique.i_1_termes_relations.formule import var, et, impl
 from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege import theorie_ensembles
 from bourbaki.cardinaux.ensembles_cardinaux import inf_egal_card, est_cardinal
 from bourbaki.entiers.iii_6_infinis.iii_6_3_infinis_denombrables.ensembles_infinis import est_infini

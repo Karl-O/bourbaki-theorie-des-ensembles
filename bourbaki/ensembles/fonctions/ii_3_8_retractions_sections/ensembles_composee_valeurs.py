@@ -21,11 +21,11 @@ Les compositions r∘r' / s∘s' du Théorème 1 a-f, et Prop. 9, restent report
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import Terme, var, egal, existe, appartient
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_1_termes_relations.formule import Terme, var, egal, existe, appartient
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.tactiques.tactiques_abrege2 import instancie, equivalence_avant
-from bourbaki.logique.tactiques.tactiques_abrege_egalite import composer_egalites, congruence_terme, symetrie
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import instancie, equivalence_avant
+from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import composer_egalites, congruence_terme, symetrie
 from bourbaki.ensembles.fonctions.ii_3_4_fonctions_valeur.ensembles_fonctions import valeur_dans_graphe, valeur_caracterisation
 from bourbaki.ensembles.fonctions.ii_3_7_composee_fonctions.ensembles_fonctions_composee import composee_intro
 

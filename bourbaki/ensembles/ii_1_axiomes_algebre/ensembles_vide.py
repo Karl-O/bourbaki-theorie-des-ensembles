@@ -5,14 +5,14 @@ backward = double inclusion (ex falso + axiome du vide) puis extensionnalité A1
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import Terme, var, egal, non, impl, appartient, pourtout, existe, inclus
-from bourbaki.logique import noyau_abrege as N
-from bourbaki.logique.tactiques.tactiques_abrege2 import (conjonction_intro, equivalence_avant, equivalence_arriere,
+from bourbaki.logique.i_1_termes_relations.formule import Terme, var, egal, non, impl, appartient, pourtout, existe, inclus
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (conjonction_intro, equivalence_avant, equivalence_arriere,
                                equivalence_transitivite, contraposition, dni, dne,
                                instanciation_en_x)
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie
-from bourbaki.logique.tactiques.tactiques_abrege_quantif import congruence_existe
+from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import symetrie
+from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import congruence_existe
 from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import extensionnalite_appliquee
 
 

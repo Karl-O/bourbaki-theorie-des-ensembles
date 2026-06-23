@@ -8,7 +8,7 @@ Couvre les trois modules NEUFS :
 INVARIANT vérifié : theorie_ensembles() = 22 ; aucune tautologie vide ; les pièces
 ordinales reportées sont les SEULES hypothèses résiduelles.
 """
-from bourbaki.logique.formule import (
+from bourbaki.logique.i_1_termes_relations.formule import (
     var, inclus, impl, egal, et, appartient, existe, pourtout,
 )
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E

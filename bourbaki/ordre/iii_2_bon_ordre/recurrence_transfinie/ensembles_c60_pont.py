@@ -32,20 +32,20 @@ INVARIANT : theorie_ensembles() = 22.  Tout DÉRIVÉ, rien postulé.  vh OPAQUE.
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (
+from bourbaki.logique.i_1_termes_relations.formule import (
     Terme, var, egal, et, impl, appartient, existe, pourtout, inclus, subst_f,
 )
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
     equivalence_avant, equivalence_arriere, instancie, equivalence_transitivite,
 )
-from bourbaki.logique.tactiques.tactiques_abrege_quantif import (
+from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import (
     existe_elimination, monotonie_existe, alpha_existe,
 )
-from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie, composer_egalites
+from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import symetrie, composer_egalites
 
 from bourbaki.ensembles.fonctions.ii_3_4_fonctions_valeur.ensembles_fonctions import valeur_dans_graphe
 from bourbaki.ensembles.fonctions.hors_ii_3.iii_3_recollement.ensembles_restriction_somme import antecedent_dans_domaine
@@ -175,7 +175,7 @@ def essai_dans_parties(vh, e="E", G="G", y="ypont", V="Vval",
 
     # p ⊂ E×V  =  (∀z)( z∈p ⇒ z∈E×V )  (binder 'z' attendu par inclus / A3)
     sub0 = N.generalisation(c, N.loi_deduction(appartient(vc, vp), c_in_EV_f))   # (∀cpont)(…)
-    from bourbaki.logique.tactiques.tactiques_abrege_quantif import alpha_pour_tout
+    from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import alpha_pour_tout
     sub = N.modus_ponens(sub0, equivalence_avant(alpha_pour_tout(
         c, "z", impl(appartient(vc, vp), appartient(vc, EV)))))   # (∀z)(z∈p ⇒ z∈E×V)
     assert sub.conclusion == inclus(vp, EV), "essai_dans_parties : ≠ (p ⊂ E×V)"

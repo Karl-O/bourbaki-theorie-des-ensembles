@@ -86,8 +86,8 @@ l'assemblage essais→f totale (chantier §III.2 du gluing de famille), distinct
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import var, subst_f, appartient
-import bourbaki.logique.noyau_abrege as N
+from bourbaki.logique.i_1_termes_relations.formule import var, subst_f, appartient
+import bourbaki.logique.i_2_criteres_C.noyau.noyau_abrege as N
 import bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege as E
 
 

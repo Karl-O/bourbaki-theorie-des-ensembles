@@ -45,9 +45,9 @@ la conclusion est_fini(f(n)) ∉ {R0, Rs}).  theorie=22, noyau intact.
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import Terme, var, egal, et, impl, pourtout
-from bourbaki.logique import noyau_abrege as N
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_1_termes_relations.formule import Terme, var, egal, et, impl, pourtout
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite, instancie,
     equivalence_arriere,
 )

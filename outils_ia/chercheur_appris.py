@@ -20,10 +20,10 @@ import math
 from itertools import count
 
 from bourbaki.assemblage.assemblage import Assemblage
-from bourbaki.logique.lecture import Signature, DEFAUT
-from bourbaki.logique import noyau
-from bourbaki.logique.noyau import Theoreme
-from bourbaki.logique.tactiques.tactiques import antecedent_consequent
+from bourbaki.logique.i_1_termes_relations.lecture import Signature, DEFAUT
+from bourbaki.logique.i_2_criteres_C.noyau import noyau
+from bourbaki.logique.i_2_criteres_C.noyau.noyau import Theoreme
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques import antecedent_consequent
 from outils_ia.chercheur import vocabulaire, instances_schemas, _est_implication
 
 _FAMILLES = ("S1", "S2", "S3", "S4")

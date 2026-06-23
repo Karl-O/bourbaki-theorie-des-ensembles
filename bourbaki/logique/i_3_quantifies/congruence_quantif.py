@@ -17,12 +17,12 @@ monotonie de ∃, on utilise C30 GÉNÉRAL avec le terme témoin τ_x(R), puis S
 from __future__ import annotations
 
 from bourbaki.assemblage.assemblage import (negation, implication, existe, pour_tout, tau_x)
-from bourbaki.logique.lecture import DEFAUT
-from bourbaki.logique import noyau
-from bourbaki.logique.tactiques.tactiques import syllogisme, antecedent_consequent
-from bourbaki.logique.tactiques.tactiques_prop import conjonction_intro, equivalence_avant, equivalence_arriere
-from bourbaki.logique.tactiques.tactiques_egalite import instanciation, instanciation_en_x
-from bourbaki.logique.criteres import criteres_C as K
+from bourbaki.logique.i_1_termes_relations.lecture import DEFAUT
+from bourbaki.logique.i_2_criteres_C.noyau import noyau
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques import syllogisme, antecedent_consequent
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_prop import conjonction_intro, equivalence_avant, equivalence_arriere
+from bourbaki.logique.i_4_egalitaires.tactiques_egalite import instanciation, instanciation_en_x
+from bourbaki.logique.i_2_criteres_C.criteres import criteres_C as K
 
 
 def monotonie_existe(thm_rs, x, sig=DEFAUT):

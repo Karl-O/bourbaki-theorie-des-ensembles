@@ -6,7 +6,7 @@ Benchmark honnête :  python V9/test_chercheur_appris.py
 from __future__ import annotations
 
 from bourbaki.assemblage.assemblage import Assemblage, disjonction, implication
-from bourbaki.logique import noyau
+from bourbaki.logique.i_2_criteres_C.noyau import noyau
 from outils_ia.chercheur_appris import TableProbas, ChercheurAppris, prouver_appris
 
 A = Assemblage(("=", "a", "b"))

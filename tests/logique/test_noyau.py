@@ -9,11 +9,11 @@ import pytest
 from bourbaki.assemblage.assemblage import (
     Assemblage, concat, disjonction, negation, implication, tau_x,
 )
-from bourbaki.logique.lecture import (
+from bourbaki.logique.i_1_termes_relations.lecture import (
     depuis_assemblage, vers_assemblage, est_significatif,
     est_relation, est_terme, NonSignificatif,
 )
-from bourbaki.logique import noyau
+from bourbaki.logique.i_2_criteres_C.noyau import noyau
 
 # Relation atomique concrète : A = (a = b), assemblage « = a b ».
 A = Assemblage(("=", "a", "b"))

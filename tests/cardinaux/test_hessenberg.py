@@ -8,7 +8,7 @@
     (enonce_hard_aa_inf_egal_a).
 Aucun théorème faux ; theorie_ensembles() = 22 (rien postulé).
 """
-from bourbaki.logique.formule import var, egal, et, impl
+from bourbaki.logique.i_1_termes_relations.formule import var, egal, et, impl
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import (
     cardinal, inf_egal_card, est_injection_de)

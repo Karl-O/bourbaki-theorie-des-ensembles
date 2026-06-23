@@ -71,20 +71,20 @@ restante (les produire depuis a=min(E∖S), b=min(F∖T)) est REPORTÉE précis�
 """
 from __future__ import annotations
 
-from bourbaki.logique.formule import (
+from bourbaki.logique.i_1_termes_relations.formule import (
     Terme, var, app, egal, et, ou, non, impl, equiv, appartient,
     existe, pourtout, inclus,
 )
-from bourbaki.logique import noyau_abrege as N
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis import ensembles_ordre_vocab as V
 from bourbaki.ordre.iii_1_relations_ordre.isomorphismes_ordre.ensembles_pont_binder import pont_compatible
-from bourbaki.logique.tactiques.tactiques_abrege import syllogisme, a_implique_a
-from bourbaki.logique.tactiques.tactiques_abrege2 import (
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import syllogisme, a_implique_a
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
     equivalence_avant, equivalence_arriere, instancie, cas, tiers_exclu,
 )
-from bourbaki.logique.tactiques.tactiques_abrege_egalite import (
+from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import (
     symetrie, composer_egalites,
 )
 from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import singleton_membre
@@ -120,7 +120,7 @@ def _ex_falso(thm_a, thm_na, z):
 
 def _refute_self(thm_P_imp_notP):
     """De ⊢ (P ⇒ ¬P) déduit ⊢ ¬P  (via S1)."""
-    from bourbaki.logique.tactiques.tactiques_abrege import antecedent_consequent
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import antecedent_consequent
     P, notP = antecedent_consequent(thm_P_imp_notP.conclusion)
     return N.modus_ponens(thm_P_imp_notP, N.s1(notP))
 
@@ -229,11 +229,11 @@ def _membre_adjoint(Sset, sommet, x):
     car = membre_reunion_graphes(vS, E.singleton(vsom), vx)   # x∈Ep ⇔ (x∈Sset ou x∈{sommet})
     sm = singleton_membre(vx, vsom)                       # x∈{sommet} ⇔ x=sommet
     # x∈Ep ⇔ (x∈Sset ou x=sommet)  via congruence du ∨ droit
-    from bourbaki.logique.tactiques.tactiques_abrege2 import ou_congruence
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import ou_congruence
     a_imp_a = a_implique_a(appartient(vx, vS))
     eq_S = conjonction_intro(a_imp_a, a_imp_a)            # (x∈Sset) ⇔ (x∈Sset)
     cong = ou_congruence(eq_S, sm)                        # (x∈Sset ou x∈{sommet}) ⇔ (x∈Sset ou x=sommet)
-    from bourbaki.logique.tactiques.tactiques_abrege2 import equivalence_transitivite
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import equivalence_transitivite
     return equivalence_transitivite(car, cong)            # x∈Ep ⇔ (x∈Sset ou x=sommet)
 
 
@@ -471,7 +471,7 @@ def compat_extension_sous_iso(E_set="E", R="R", F_set="F", Rp="Rp", a="a", b="b"
             # compat de h instancié (x,y) : (x∈S et y∈S) ⇒ (R{x,y} ⇔ Rp{h(x),h(y)})
             ci = instancie(instancie(H_compat, vx), vy)
             r_equiv_rp = N.modus_ponens(conjonction_intro(Hx_S, Hy_S), ci)  # R{x,y}⇔Rp{h(x),h(y)}
-            from bourbaki.logique.tactiques.tactiques_abrege2 import (
+            from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
                 equivalence_transitivite, equivalence_symetrie)
             # transporter red_b : ≤'_b(h⁺x,h⁺y) ⇔ Rp{h⁺x,h⁺y}  en réécrivant les
             #   ARGUMENTS de Rp côté DROIT :  h⁺x→h(x), h⁺y→h(y)  (LHS ≤'_b inchangé).
@@ -674,9 +674,9 @@ def image_point_graphe(a="a", b="b", y="z"):
     L'image directe du graphe ponctuel {(a,b)} par son domaine {a} est {b} :
       y∈image({(a,b)},{a}) ⇔ (∃x)(x∈{a} et (x,y)∈{(a,b)}) ⇔ y=b ⇔ y∈{b}.
     Double inclusion + extensionnalité A1.  INCONDITIONNEL, theorie=22.  NON vacueux."""
-    from bourbaki.logique.tactiques.tactiques_abrege_quantif import existe_elimination
+    from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import existe_elimination
     from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import couple_egal_implique_composantes
-    from bourbaki.logique.tactiques.tactiques_abrege_egalite import congruence_terme
+    from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import congruence_terme
     va, vb = _t(a), _t(b)
     ab = E.couple(va, vb)
     G = A.graphe_point(va, vb)
@@ -928,7 +928,7 @@ def extension_iso_depuis_iso_h(E_set="E", R="R", F_set="F", Rp="Rp", a="a", b="b
     maximalité : « h iso de segments ⇒ h⁺ iso de segments adjoints ».
     CONDITIONNEL — JAMAIS postulé.  theorie=22.  NON vacueux."""
     from bourbaki.cardinaux import ensembles_trichotomie_scaffold as TS
-    from bourbaki.logique.tactiques.tactiques_abrege2 import (
+    from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
         conjonction_elim_gauche as cg, conjonction_elim_droite as cd)
     va = _t(a)
     hg = TS.h_iso_max(E_set, R, F_set, Rp)
