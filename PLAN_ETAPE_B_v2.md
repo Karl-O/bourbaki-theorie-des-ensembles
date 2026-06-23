@@ -58,7 +58,7 @@ Priorise: perf_risque faible + difficulte facile d abord. [ ] = a faire, [x] = f
 - lemmes: ensembles_image_algebre_binaire_ii4:_instance_reunion, ensembles_image_algebre_binaire_ii4:_instance_inter, tactiques_abrege2:comm_et, tactiques_abrege2:equivalence_transitivite, ensembles_theoremes:egalite_par_extension, ensembles_abrege:reunion, ensembles_abrege:inter, noyau_abrege:generalisation
 - fichier: C:/Users/KARL/OneDrive/Bureau/Apprendre/Livre/Bourbakie/Theorie_des_ensembles/V9/bourbaki/ensembles/familles/ii_4_reunion_intersection_familles/ii_4_1_definitions_algebre/ensembles_binaire_commut_ii4.
 
-## [ ] diagonale_injective — injectivité de l'application diagonale x ↦ x̃  (faible/facile)
+## [x] diagonale_injective — injectivité de l'application diagonale x ↦ x̃  (faible/facile)
 - secteur: II.5 — Produit d'une famille d | E.II.5.3 (Définition du produit, paragraphe sur la diagonale Δ et l'application diagonale)
 - statut: MANQUANT — explicitement REPORTÉ. La docstring de application_diagonale (ensembles_extension_canonique.py l.172-179) dit « Injection (Bourbaki) — l'injectivité est REPORTÉE (lemme dur) ». Le sous-doss
 - enonce: Soit E un ensemble, I un ensemble d'indices. Pour x∈E, x̃ = graphe de la fonction constante ι↦x. L'application diagonale x↦x̃ de E dans E^I est une injection. Forme formalisable fidèle (sous hypothèse honnête I≠∅, requise car sur I=∅ tous les x̃ valent ∅) : ⊢ ( ¬(I=∅) et x∈E et y∈E et x̃ = ỹ ) ⇒ x =
