@@ -20,3 +20,7 @@
   a `membre_image_recip`/`famille_image_recip`, noms différents). **Quarantaine** : le garde-fou de
   migration tolère cette unique erreur connue (`--continue-on-collection-errors`, baseline = 1 erreur).
   **À reconstruire en ÉTAPE B** (II.4 algèbre des familles, déjà PARTIEL dans l'audit).
+
+## 2026-06-23 — RÉSOLU : familles_algebre
+
+Le bug pré-existant ci-dessus est CORRIGÉ (1er résultat ÉTAPE B) : les 6 symboles du module supprimé  avaient déjà été reconstruits sous d'autres noms dans  (membre_image_recip, famille_image_recip, _val_recip, _membre_eq, _t ;  mort retiré). Import réparé par alias dans le module ET le test. **Gate collecte = 3011/0** (plus d'erreur). La baseline du garde-fou de migration passe de 1 à 0.

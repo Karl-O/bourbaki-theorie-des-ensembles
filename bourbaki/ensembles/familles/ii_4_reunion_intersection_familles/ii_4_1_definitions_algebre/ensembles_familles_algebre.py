@@ -51,8 +51,10 @@ from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import (
     congruence_existe, existe_elimination, et_existe_gauche, existe_commute)
 from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import egalite_par_extension
 # RÉUTILISATION (pas de duplication) de l'infra famille-réciproque déjà certifiée.
-from bourbaki.ensembles.familles.ensembles_familles_reunion_props import (
-    membre_image_reciproque, famille_reciproque, _val_recip, _membre_eq, _sym, _t)
+from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_image_famille.ensembles_image_recip_famille_ii4 import (
+    membre_image_recip as membre_image_reciproque,
+    famille_image_recip as famille_reciproque,
+    _val_recip, _membre_eq, _t)
 
 
 # ── instances des axiomes de theorie_ensembles (22 ax., inchangée) ────────────
