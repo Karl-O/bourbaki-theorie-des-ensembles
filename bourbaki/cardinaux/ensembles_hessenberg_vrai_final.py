@@ -45,7 +45,7 @@ from bourbaki.cardinaux.ensembles_cardinaux import cardinal, est_bijection_de
 from bourbaki.cardinaux.ensembles_hessenberg_hard import (
     frame_pair, frame_ordre, frame_membre, axiome_frame, theorie_frame,
 )
-from bourbaki.ordre.ensembles_ordre_relation import element_maximal
+from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis.ensembles_ordre_relation import element_maximal
 from bourbaki.cardinaux.ensembles_frame_a_maximal import frame_a_maximal
 from bourbaki.cardinaux.ensembles_hessenberg_maximal_card import (
     maximal_carre_egal, hessenberg_aa_egal_de_maximal,

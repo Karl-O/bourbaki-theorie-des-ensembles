@@ -1,6 +1,6 @@
 """Tests — §III.2 C60 EXISTENCE, LE CŒUR (recollement d'une famille d'essais).
 
-Vérifie le module `bourbaki.ordre.ensembles_c60_coeur` :
+Vérifie le module `bourbaki.ordre.iii_2_bon_ordre.recurrence_transfinie.ensembles_c60_coeur` :
   • (ii)  collectivisation ⋃𝔇 en THÉORIE DÉDIÉE (theorie_ensembles reste 22) ;
   • (i)   🎯 family-union-functional : famille compatible ⇒ ⋃𝔇 fonctionnel
           (1 hyp honnête, conclusion exacte, non vacuous) ;
@@ -10,8 +10,8 @@ INVARIANT vérifié partout : theorie_ensembles() = 22.
 """
 from bourbaki.logique.formule import var, egal
 from bourbaki.ensembles import ensembles_abrege as E
-import bourbaki.ordre.ensembles_c60_coeur as C
-from bourbaki.ordre.ensembles_recurrence_transfinie import _graphe_R
+import bourbaki.ordre.iii_2_bon_ordre.recurrence_transfinie.ensembles_c60_coeur as C
+from bourbaki.ordre.iii_2_bon_ordre.recurrence_transfinie.ensembles_recurrence_transfinie import _graphe_R
 
 
 def test_theorie_reste_22():

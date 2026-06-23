@@ -45,14 +45,14 @@ from bourbaki.logique.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
     equivalence_avant, equivalence_arriere, equivalence_symetrie,
     equivalence_transitivite, instancie)
-from bourbaki.ordre.ensembles_ordre_vocab import (
+from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis.ensembles_ordre_vocab import (
     est_isomorphisme_ordre, compatible_ordre,
     isomorphisme_ordre_est_bijection, isomorphisme_ordre_compatible)
 from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de
 from bourbaki.cardinaux.ensembles_bijection import reciproque_est_bijection
 from bourbaki.ensembles.fonctions.ensembles_reciproque import couple_reciproque
 from bourbaki.ensembles.fonctions.ensembles_fonctions import valeur_dans_graphe
-from bourbaki.ordre.ensembles_valeur_bridge import valeur_j_egal_y, valeur_y_egal_j
+from bourbaki.ordre.iii_1_relations_ordre.isomorphismes_ordre.ensembles_valeur_bridge import valeur_j_egal_y, valeur_y_egal_j
 
 
 def _T(v):

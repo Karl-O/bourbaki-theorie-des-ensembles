@@ -31,7 +31,7 @@ from bourbaki.logique.tactiques.tactiques_abrege import a_implique_a
 from bourbaki.logique.tactiques.tactiques_abrege2 import (
     conjonction_intro, equivalence_avant, cas,
 )
-from bourbaki.ordre import ensembles_iso_ordre_canon as C
+from bourbaki.ordre.iii_1_relations_ordre.isomorphismes_ordre import ensembles_iso_ordre_canon as C
 
 
 def _t(t):

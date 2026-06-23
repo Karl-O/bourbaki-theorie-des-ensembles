@@ -36,7 +36,7 @@ from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie
 from bourbaki.cardinaux.ensembles_ordinal_cardinal_bon_ordre import (
     bon_ordre_donne_clause_plus_petit,
 )
-from bourbaki.ordre.ensembles_ordre_monotone import est_strictement_croissante
+from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis.ensembles_ordre_monotone import est_strictement_croissante
 from bourbaki.cardinaux.ensembles_bien_ordonne_total import bon_ordre_est_total
 from bourbaki.cardinaux.ensembles_segments_construction import (
     seg as _seg, membre_segment as _membre_seg,

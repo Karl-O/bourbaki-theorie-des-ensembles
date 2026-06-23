@@ -8,8 +8,8 @@ Vérifie : CLÔTURE (est_clos, 0 hyp), conclusion == énoncé Bourbaki, theorie=
 """
 from bourbaki.logique.formule import var, egal, et, impl, appartient, pourtout
 from bourbaki.ensembles import ensembles_abrege as E
-from bourbaki.ordre import ensembles_ordre_vocab as V
-from bourbaki.ordre import ensembles_iii1_ordre_props as P
+from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis import ensembles_ordre_vocab as V
+from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis import ensembles_iii1_ordre_props as P
 
 
 # Relation ≤ de test : a≤b := (a,b)∈G  (convention graphe, comme le reste du projet)

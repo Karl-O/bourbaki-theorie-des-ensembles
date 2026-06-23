@@ -1,5 +1,5 @@
 """Tests — §III.2 C60 EXISTENCE, RÉALISATION DE LA FAMILLE
-(`bourbaki.ordre.ensembles_c60_realisation`).
+(`bourbaki.ordre.iii_2_bon_ordre.recurrence_transfinie.ensembles_c60_realisation`).
 
 Vérifie la CONSTRUCTION S8 de la famille concrète des essais des y<x et la DÉCHARGE
 des clauses de `realisation_famille` :
@@ -14,13 +14,13 @@ résidu est EXACTEMENT (P2)+(P3)+(P4) (et le bon ordre pour l'existence).
 """
 from bourbaki.logique.formule import var, egal, appartient
 from bourbaki.ensembles import ensembles_abrege as E
-import bourbaki.ordre.ensembles_c60_realisation as Rz
-from bourbaki.ordre.ensembles_c60_final import (
+import bourbaki.ordre.iii_2_bon_ordre.recurrence_transfinie.ensembles_c60_realisation as Rz
+from bourbaki.ordre.iii_2_bon_ordre.recurrence_transfinie.ensembles_c60_final import (
     membres_fonctionnels, equation_au_point, realisation_famille,
 )
-from bourbaki.ordre.ensembles_recursion_transfinie_existence import couverture_totale
-from bourbaki.ordre.ensembles_c60_existence_close import couvert_essai
-from bourbaki.ordre.ensembles_recurrence_transfinie import _graphe_R
+from bourbaki.ordre.iii_2_bon_ordre.recurrence_transfinie.ensembles_recursion_transfinie_existence import couverture_totale
+from bourbaki.ordre.iii_2_bon_ordre.recurrence_transfinie.ensembles_c60_existence_close import couvert_essai
+from bourbaki.ordre.iii_2_bon_ordre.recurrence_transfinie.ensembles_recurrence_transfinie import _graphe_R
 
 
 def _vh(t):

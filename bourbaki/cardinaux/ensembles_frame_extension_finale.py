@@ -530,7 +530,7 @@ def extension_force_egalite(E_set="E", phi0="phi0", psi="psi", S="S0", U="Ucadre
     instancié en x:=(Z,φ₁), avec (Z,φ₁)∈𝔉 et ((S₀,φ₀),(Z,φ₁))∈Γ𝔉, donne (Z,φ₁)=(S₀,φ₀) ;
     pr₁ + projection_premiere ⇒ Z=S₀.  Hyps honnêtes ; theorie=22."""
     from bourbaki.cardinaux.ensembles_hessenberg_hard import frame_pair, frame_ordre
-    from bourbaki.ordre.ensembles_ordre_relation import element_maximal
+    from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis.ensembles_ordre_relation import element_maximal
     vE, vphi0, vpsi = _t(E_set), _t(phi0), _t(psi)
     vS, vU = _t(S), _t(U)
     Z = E.reunion(vS, vU)

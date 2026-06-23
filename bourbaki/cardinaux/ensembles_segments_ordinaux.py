@@ -193,7 +193,7 @@ def bon_ordre_indices_existe(S="S"):
 
     zermelo() ⊢ (∃R)est_bien_ordonne(R_R,X) avec X libre ; on généralise sur X puis on
     instancie au TERME S (binders internes de zermelo intacts — aucune collision)."""
-    from bourbaki.ordre.ensembles_zermelo import zermelo
+    from bourbaki.ordre.iii_2_bon_ordre.zorn_zermelo.ensembles_zermelo import zermelo
     z = zermelo()                                  # (∃R)est_bien_ordonne(R_R,X)  [X libre]
     return instancie(N.generalisation("X", z), _t(S))   # (∃R)est_bien_ordonne(R_R,S)
 

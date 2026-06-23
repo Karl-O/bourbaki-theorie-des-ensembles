@@ -7,8 +7,8 @@ from bourbaki.logique.formule import (
     var, egal, et, ou, impl, non, appartient, existe, pourtout,
 )
 from bourbaki.ensembles import ensembles_abrege as E
-from bourbaki.ordre import ensembles_ordre_monotone as M
-from bourbaki.ordre.ensembles_ordre_relation import (
+from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis import ensembles_ordre_monotone as M
+from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis.ensembles_ordre_relation import (
     est_ordre, borne_superieure, borne_inferieure,
 )
 

@@ -2,7 +2,7 @@
 from bourbaki.logique.formule import var, appartient, et
 from bourbaki.ensembles import ensembles_abrege as E
 from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de
-from bourbaki.ordre.ensembles_c60_coeur import union_famille
+from bourbaki.ordre.iii_2_bon_ordre.recurrence_transfinie.ensembles_c60_coeur import union_famille
 from bourbaki.cardinaux.ensembles_hessenberg_hard import frame_pair
 from bourbaki.cardinaux.ensembles_chaine_frame_membership import (
     union_chaine_est_bijection, union_chaine_dans_frame,
@@ -28,7 +28,7 @@ def test_union_chaine_dans_frame():
 
 
 def test_frame_inductif_chaine():
-    from bourbaki.ordre.ensembles_zorn import est_inductif
+    from bourbaki.ordre.iii_2_bon_ordre.zorn_zermelo.ensembles_zorn import est_inductif
     from bourbaki.cardinaux.ensembles_hessenberg_hard import frame_pair, frame_ordre
     from bourbaki.cardinaux.ensembles_chaine_frame_membership import frame_inductif_chaine
     th = frame_inductif_chaine("E")

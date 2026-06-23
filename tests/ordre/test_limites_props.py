@@ -11,8 +11,8 @@ from bourbaki.logique.formule import (
 from bourbaki.logique import noyau_abrege as N
 from bourbaki.ensembles import ensembles_abrege as E
 from bourbaki.ensembles.familles import ensembles_limites as L
-from bourbaki.ordre import ensembles_limites_canoniques as C
-from bourbaki.ordre import ensembles_limites_props as P
+from bourbaki.ordre.iii_7_limites import ensembles_limites_canoniques as C
+from bourbaki.ordre.iii_7_limites import ensembles_limites_props as P
 
 
 def _leq():
@@ -176,7 +176,7 @@ def test_unicite_factorisation_ponctuelle():
 # ════════════════════════════════════════════════════════════════════════════
 def test_image_reciproque_composante_proj():
     """M_α = (u_α)^{-1}(x'_α) — α-composante du système image réciproque (Prop.2)."""
-    from bourbaki.ordre import ensembles_cofinal as CF
+    from bourbaki.ordre.iii_7_limites import ensembles_cofinal as CF
     th = P.image_reciproque_composante_proj("u", "xp", "a")
     va = var("a")
     M = CF.systeme_image_reciproque(var("u"), var("xp"))

@@ -16,10 +16,10 @@ Aucune conclusion n'est tautologie / postulée ; theorie=22 ; aucun fichier modi
 """
 from bourbaki.logique.formule import var, egal, appartient, libres_f
 from bourbaki.ensembles import ensembles_abrege as E
-from bourbaki.ordre.ensembles_ordre_vocab import (
+from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis.ensembles_ordre_vocab import (
     compatible_ordre, est_isomorphisme_ordre,
 )
-from bourbaki.ordre.ensembles_ordre_monotone import est_strictement_croissante
+from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis.ensembles_ordre_monotone import est_strictement_croissante
 from bourbaki.cardinaux.ensembles_iso_unicite_finale import _compat_yv, _inj_hyp
 from bourbaki.cardinaux.ensembles_lemme4_croissante import _R_de
 from bourbaki.cardinaux import ensembles_coincidence_pont as P

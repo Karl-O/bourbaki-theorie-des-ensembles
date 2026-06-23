@@ -7,7 +7,7 @@ Hypothèses EXACTES contrôlées.
 """
 from bourbaki.logique.formule import var, appartient, inclus, egal, et, impl, non, pourtout, existe
 from bourbaki.ensembles import ensembles_abrege as E
-from bourbaki.ordre import ensembles_ordre_vocab as V
+from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis import ensembles_ordre_vocab as V
 
 import bourbaki.cardinaux.ensembles_bon_ordre_intervalle_ordinal as M
 import bourbaki.cardinaux.ensembles_ordinaux_bien_ordonnes as OBO

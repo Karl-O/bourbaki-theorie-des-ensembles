@@ -13,7 +13,7 @@ EXACTEMENT les 6 prémisses structurelles, forme implicative CLOSE, theorie = 22
 """
 from bourbaki.logique.formule import var, egal, et, appartient
 from bourbaki.ensembles import ensembles_abrege as E
-from bourbaki.ordre.ensembles_ordre_vocab import (est_isomorphisme_ordre,
+from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis.ensembles_ordre_vocab import (est_isomorphisme_ordre,
                                                   compatible_ordre)
 from bourbaki.cardinaux.ensembles_iso_ordre_composee import (
     composee_isomorphisme_ordre, composee_isomorphisme_ordre_implication,

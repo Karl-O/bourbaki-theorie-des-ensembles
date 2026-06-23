@@ -51,11 +51,11 @@ from bourbaki.cardinaux.ensembles_cardinaux import cardinal, est_cardinal
 from bourbaki.entiers.ensembles_entiers import est_fini_ensemble, est_fini
 from bourbaki.entiers.ensembles_entiers_theoremes import card_est_un_cardinal
 
-from bourbaki.ordre.ensembles_ordre_relation import (
+from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis.ensembles_ordre_relation import (
     totalement_ordonne, plus_petit_element, _couple_dans,
 )
-from bourbaki.ordre.ensembles_ordre_fini_iii4 import _decompose_total
-from bourbaki.ordre.ensembles_zermelo import est_bien_ordonne_graphe, R_de
+from bourbaki.ordre.iii_4_ensembles_finis.ensembles_ordre_fini_iii4 import _decompose_total
+from bourbaki.ordre.iii_2_bon_ordre.zorn_zermelo.ensembles_zermelo import est_bien_ordonne_graphe, R_de
 
 from bourbaki.entiers.ensembles_prop6_fini_interval_iii5 import (
     prop3_total_min, _ppe, _ZPP,

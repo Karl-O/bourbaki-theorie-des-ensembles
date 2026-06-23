@@ -108,7 +108,7 @@ from bourbaki.logique.tactiques.tactiques_abrege2 import ou_congruence
 from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie
 
 from bourbaki.ensembles.base.ensembles_vide import non_vide_ssi_element
-from bourbaki.ordre.ensembles_pont_binder import reecrire
+from bourbaki.ordre.iii_1_relations_ordre.isomorphismes_ordre.ensembles_pont_binder import reecrire
 
 from bourbaki.entiers.ensembles_recurrence_C61 import (
     principe_recurrence, _fini_et_P_implique_succ, _fini_implique_P, _P_pred,

@@ -9,8 +9,8 @@ from bourbaki.logique.formule import (
 )
 from bourbaki.logique import noyau_abrege as N
 from bourbaki.ensembles import ensembles_abrege as E
-from bourbaki.ordre import ensembles_ordre_relation as O
-from bourbaki.ordre import ensembles_ordre_treillis_props as P
+from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis import ensembles_ordre_relation as O
+from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis import ensembles_ordre_treillis_props as P
 
 
 G, Gp, Gpp = var("G"), var("Gp"), var("Gpp")

@@ -61,8 +61,8 @@ from bourbaki.cardinaux.ensembles_frame_inductif_assemblage import (
     frame_inductif_inconditionnel, m_dans_frame_universel,
 )
 from bourbaki.cardinaux.ensembles_frame_ordre_est_ordre import frame_ordre_est_ordre
-from bourbaki.ordre.ensembles_ordre_relation import est_ordre, element_maximal
-from bourbaki.ordre.ensembles_zorn import est_inductif, enonce_non_vide
+from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis.ensembles_ordre_relation import est_ordre, element_maximal
+from bourbaki.ordre.iii_2_bon_ordre.zorn_zermelo.ensembles_zorn import est_inductif, enonce_non_vide
 from bourbaki.cardinaux.ensembles_hessenberg_hard import maximal_pair_existe
 
 

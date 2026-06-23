@@ -2,7 +2,7 @@
 from bourbaki.cardinaux.ensembles_recollement_famille_injectif import (
     union_famille_injective, famille_dirigee, membres_injectifs, injectif_graphe,
 )
-from bourbaki.ordre.ensembles_c60_coeur import union_famille
+from bourbaki.ordre.iii_2_bon_ordre.recurrence_transfinie.ensembles_c60_coeur import union_famille
 from bourbaki.ensembles import ensembles_abrege as E
 from bourbaki.logique.formule import var
 

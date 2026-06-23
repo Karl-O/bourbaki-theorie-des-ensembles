@@ -7,7 +7,7 @@ INVARIANT : theorie_ensembles() reste = 22 (P/Γ/Union en théories dédiées).
 """
 from bourbaki.logique.formule import var, appartient, equiv, inclus
 from bourbaki.ensembles import ensembles_abrege as E
-from bourbaki.ordre import ensembles_zorn_theoreme as Z
+from bourbaki.ordre.iii_2_bon_ordre.zorn_zermelo import ensembles_zorn_theoreme as Z
 
 
 G, Es, Cc, Dd = var("G"), var("E"), var("C"), var("D")
@@ -40,7 +40,7 @@ def test_Gamma_membre_close():
 
 
 def test_Gamma_est_ordre_close():
-    from bourbaki.ordre.ensembles_ordre_relation import est_ordre
+    from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis.ensembles_ordre_relation import est_ordre
     t = Z.Gamma_est_ordre()
     assert t.est_clos
     assert t.conclusion == est_ordre(Z.Gamma(G, Es), Z.P(G, Es))
@@ -48,8 +48,8 @@ def test_Gamma_est_ordre_close():
 
 # ── ÉTAPE 3 — ∅ ∈ P plus petit élément ───────────────────────────────────────
 def test_vide_est_chaine():
-    from bourbaki.ordre.ensembles_zorn import chaine
-    from bourbaki.ordre.ensembles_ordre_relation import antisymetrie, transitivite_rel
+    from bourbaki.ordre.iii_2_bon_ordre.zorn_zermelo.ensembles_zorn import chaine
+    from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis.ensembles_ordre_relation import antisymetrie, transitivite_rel
     t = Z.vide_est_chaine()
     assert t.conclusion == chaine(G, Es, E.VIDE)
     assert antisymetrie(G) in t.hypotheses
@@ -62,7 +62,7 @@ def test_vide_dans_P():
 
 
 def test_vide_plus_petit():
-    from bourbaki.ordre.ensembles_ordre_relation import plus_petit_element
+    from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis.ensembles_ordre_relation import plus_petit_element
     t = Z.vide_plus_petit()
     assert t.conclusion == plus_petit_element(Z.Gamma(G, Es), Z.P(G, Es), E.VIDE)
 
@@ -79,7 +79,7 @@ def test_Union_dans_P():
 
 
 def test_Union_borne_sup():
-    from bourbaki.ordre.ensembles_ordre_relation import borne_superieure
+    from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis.ensembles_ordre_relation import borne_superieure
     Dd2 = var("D")
     t = Z.Union_borne_sup()
     assert t.conclusion == borne_superieure(Z.Gamma(G, Es), Dd2,
@@ -87,8 +87,8 @@ def test_Union_borne_sup():
 
 
 def test_Gamma_chaine_complet():
-    from bourbaki.ordre.ensembles_bourbaki_witt import chaine_complet
-    from bourbaki.ordre.ensembles_ordre_relation import antisymetrie, transitivite_rel
+    from bourbaki.ordre.iii_2_bon_ordre.zorn_zermelo.ensembles_bourbaki_witt import chaine_complet
+    from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis.ensembles_ordre_relation import antisymetrie, transitivite_rel
     t = Z.Gamma_chaine_complet()
     assert t.conclusion == chaine_complet(Z.Gamma(G, Es), Z.P(G, Es))
     # seules hyps STRUCTURELLES globales de G (jamais postulé)
@@ -99,14 +99,14 @@ def test_Gamma_chaine_complet():
 
 # ── ÉTAPE 4 — chaîne strictement plus grande via τ (E sans maximal) ──────────
 def test_ajoute_est_chaine():
-    from bourbaki.ordre.ensembles_zorn import chaine
+    from bourbaki.ordre.iii_2_bon_ordre.zorn_zermelo.ensembles_zorn import chaine
     Cc2, tt = var("C"), var("t")
     t = Z.ajoute_est_chaine()
     assert t.conclusion == chaine(G, Es, E.reunion(Cc2, E.singleton(tt)))
 
 
 def test_strict_chaine_existe():
-    from bourbaki.ordre.ensembles_zorn import est_inductif
+    from bourbaki.ordre.iii_2_bon_ordre.zorn_zermelo.ensembles_zorn import est_inductif
     Cc2 = var("C")
     t = Z.strict_chaine_existe()
     assert t.conclusion == Z._enonce_strict_D(G, Es, Cc2, "D")
@@ -116,8 +116,8 @@ def test_strict_chaine_existe():
 
 
 def test_f_application_dans():
-    from bourbaki.ordre.ensembles_bourbaki_witt import application_dans
-    from bourbaki.ordre.ensembles_zorn import est_inductif
+    from bourbaki.ordre.iii_2_bon_ordre.zorn_zermelo.ensembles_bourbaki_witt import application_dans
+    from bourbaki.ordre.iii_2_bon_ordre.zorn_zermelo.ensembles_zorn import est_inductif
     t = Z.f_application_dans()
     assert t.conclusion == application_dans(Z.P(G, Es), Z.zorn_f(G, Es))
     assert est_inductif(G, Es) in t.hypotheses
@@ -125,14 +125,14 @@ def test_f_application_dans():
 
 
 def test_f_inflationnaire_strict():
-    from bourbaki.ordre.ensembles_bourbaki_witt_chaine import inflationnaire_strict
+    from bourbaki.ordre.iii_2_bon_ordre.zorn_zermelo.ensembles_bourbaki_witt_chaine import inflationnaire_strict
     t = Z.f_inflationnaire_strict()
     assert t.conclusion == inflationnaire_strict(Z.Gamma(G, Es), Z.P(G, Es), Z.zorn_f(G, Es))
 
 
 # ── ÉTAPE 5 — 🎯🎯🎯 LE THÉORÈME DE ZORN (CLOS, == énoncé) ───────────────────
 def test_zorn_theoreme_CLOS():
-    from bourbaki.ordre.ensembles_zorn import zorn
+    from bourbaki.ordre.iii_2_bon_ordre.zorn_zermelo.ensembles_zorn import zorn
     t = Z.zorn_theoreme()
     assert t.est_clos                                   # INCONDITIONNEL — 0 hypothèse
     assert t.conclusion == zorn(G, Es)                  # == énoncé du THÉORÈME 2
@@ -140,7 +140,7 @@ def test_zorn_theoreme_CLOS():
 
 def test_zorn_theoreme_conclusion_est_maximal():
     from bourbaki.logique.formule import existe, impl
-    from bourbaki.ordre.ensembles_ordre_relation import element_maximal
+    from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis.ensembles_ordre_relation import element_maximal
     from bourbaki.logique.tactiques.tactiques_abrege import antecedent_consequent
     t = Z.zorn_theoreme()
     _, cons = antecedent_consequent(t.conclusion)

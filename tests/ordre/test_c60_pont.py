@@ -1,10 +1,10 @@
 """Tests du PONT bare→ambiant C60 (`ensembles_c60_pont`)."""
 from bourbaki.logique.formule import app, var
 from bourbaki.ensembles import ensembles_abrege as E
-import bourbaki.ordre.ensembles_c60_pont as P
-from bourbaki.ordre.ensembles_recursion_transfinie_existence import couverture_totale
-from bourbaki.ordre.ensembles_c60_existence_close import couvert_essai
-from bourbaki.ordre.ensembles_recurrence_transfinie import _graphe_R
+import bourbaki.ordre.iii_2_bon_ordre.recurrence_transfinie.ensembles_c60_pont as P
+from bourbaki.ordre.iii_2_bon_ordre.recurrence_transfinie.ensembles_recursion_transfinie_existence import couverture_totale
+from bourbaki.ordre.iii_2_bon_ordre.recurrence_transfinie.ensembles_c60_existence_close import couvert_essai
+from bourbaki.ordre.iii_2_bon_ordre.recurrence_transfinie.ensembles_recurrence_transfinie import _graphe_R
 
 
 def _vh():
@@ -37,7 +37,7 @@ def test_essai_dans_parties_depuis_bien_formes():
 
 def test_antecedent_ambiant_depuis_bare():
     vh = _vh()
-    from bourbaki.ordre.ensembles_c60_clauses import antecedent_couverture_ambiant
+    from bourbaki.ordre.iii_2_bon_ordre.recurrence_transfinie.ensembles_c60_clauses import antecedent_couverture_ambiant
     th = P.antecedent_ambiant_depuis_bare(vh)
     assert th.conclusion == antecedent_couverture_ambiant(
         vh, "E", "G", var("x0"), "Vval", "ytf", "pcf", "zess")

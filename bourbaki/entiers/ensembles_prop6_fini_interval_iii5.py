@@ -44,14 +44,14 @@ from bourbaki.logique.tactiques.tactiques_abrege2 import (
 from bourbaki.logique.tactiques.tactiques_abrege_quantif import existe_elimination
 from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie
 
-from bourbaki.ordre.ensembles_ordre_relation import (
+from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis.ensembles_ordre_relation import (
     totalement_ordonne, plus_petit_element, _couple_dans,
 )
 from bourbaki.entiers.ensembles_recurrence_finie import recurrence_finie
 from bourbaki.entiers.ensembles_entiers import est_fini_ensemble
 
 # Réutilise les briques déjà déposées (membership X∪{x}, ∨-droite, décompo total).
-from bourbaki.ordre.ensembles_ordre_fini_iii4 import (
+from bourbaki.ordre.iii_4_ensembles_finis.ensembles_ordre_fini_iii4 import (
     _membre_union_singleton, _ou_droite, _decompose_total, _inclus_refl_via,
 )
 

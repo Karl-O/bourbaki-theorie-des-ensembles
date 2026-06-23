@@ -53,7 +53,7 @@ from bourbaki.ensembles import ensembles_abrege as E
 from bourbaki.logique.tactiques.tactiques_abrege2 import conjonction_intro, instancie
 from bourbaki.cardinaux.ensembles_cardinaux import cardinal, equipotent
 from bourbaki.cardinaux.ensembles_cardinaux_theoremes import equipotent_si_cardinal_egal
-from bourbaki.ordre.ensembles_iso_ordre_canon import (
+from bourbaki.ordre.iii_1_relations_ordre.isomorphismes_ordre.ensembles_iso_ordre_canon import (
     sont_isomorphes_ordre_canon, trichotomie_ordinaux_canon,
 )
 from bourbaki.cardinaux import ensembles_h_est_graphe as HG
@@ -70,7 +70,7 @@ def _trich():
 
 def _R_de(R):
     # close_v3 utilise la relation-graphe R_de(var(R)) ; on reproduit sa forme
-    from bourbaki.ordre.ensembles_zermelo import R_de
+    from bourbaki.ordre.iii_2_bon_ordre.zorn_zermelo.ensembles_zermelo import R_de
     return R_de(var(R))
 
 

@@ -17,9 +17,9 @@ from __future__ import annotations
 
 from bourbaki.logique.formule import var, app, egal, et, non, appartient, pourtout
 from bourbaki.ensembles import ensembles_abrege as E
-from bourbaki.ordre import ensembles_c60_existence_close as C
-from bourbaki.ordre.ensembles_recurrence_transfinie import _graphe_R
-from bourbaki.ordre.ensembles_recursion_transfinie_existence import (
+from bourbaki.ordre.iii_2_bon_ordre.recurrence_transfinie import ensembles_c60_existence_close as C
+from bourbaki.ordre.iii_2_bon_ordre.recurrence_transfinie.ensembles_recurrence_transfinie import _graphe_R
+from bourbaki.ordre.iii_2_bon_ordre.recurrence_transfinie.ensembles_recursion_transfinie_existence import (
     couverture_totale, heredite_couverture,
 )
 

@@ -19,7 +19,7 @@ Points VÉRIFIÉS (honnêteté LCF stricte) :
 """
 from bourbaki.logique.formule import var, appartient, inclus, libres_f
 from bourbaki.ensembles import ensembles_abrege as E
-from bourbaki.ordre import ensembles_ordre_vocab as V
+from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis import ensembles_ordre_vocab as V
 from bourbaki.cardinaux.ensembles_coincidence_pont import (
     coincidence_depuis_isos_compat,
 )

@@ -73,9 +73,9 @@ from bourbaki.logique.formule import (
 )
 from bourbaki.logique import noyau_abrege as N
 from bourbaki.ensembles import ensembles_abrege as E
-from bourbaki.ordre import ensembles_ordre_vocab as V
-from bourbaki.ordre.ensembles_pont_binder import reecrire
-from bourbaki.ordre.ensembles_valeur_bridge import valeur_j_egal_y
+from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis import ensembles_ordre_vocab as V
+from bourbaki.ordre.iii_1_relations_ordre.isomorphismes_ordre.ensembles_pont_binder import reecrire
+from bourbaki.ordre.iii_1_relations_ordre.isomorphismes_ordre.ensembles_valeur_bridge import valeur_j_egal_y
 from bourbaki.logique.tactiques.tactiques_abrege import syllogisme
 from bourbaki.logique.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,

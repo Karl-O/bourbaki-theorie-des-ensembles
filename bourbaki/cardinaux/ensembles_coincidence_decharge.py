@@ -95,7 +95,7 @@ from bourbaki.ensembles import ensembles_abrege as E
 from bourbaki.logique.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
 )
-from bourbaki.ordre.ensembles_ordre_vocab import est_isomorphisme_ordre
+from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis.ensembles_ordre_vocab import est_isomorphisme_ordre
 from bourbaki.cardinaux.ensembles_iso_ordre_composee import (
     composee_isomorphisme_ordre,
 )

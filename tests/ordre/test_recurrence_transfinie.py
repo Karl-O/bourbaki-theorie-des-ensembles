@@ -9,7 +9,7 @@ from __future__ import annotations
 
 from bourbaki.logique.formule import var, app, egal, et, non, impl, appartient
 from bourbaki.ensembles import ensembles_abrege as E
-from bourbaki.ordre import ensembles_recurrence_transfinie as TF
+from bourbaki.ordre.iii_2_bon_ordre.recurrence_transfinie import ensembles_recurrence_transfinie as TF
 
 
 def _R(a, b):

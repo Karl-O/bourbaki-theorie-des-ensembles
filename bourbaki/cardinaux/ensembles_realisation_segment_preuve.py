@@ -71,7 +71,7 @@ from bourbaki.logique.tactiques.tactiques_abrege_quantif import (
 
 import bourbaki.cardinaux.ensembles_bon_ordre_intervalle_ordinal as BOIO
 import bourbaki.cardinaux.ensembles_hyp_transport_ordinal_preuve as HTP
-import bourbaki.ordre.ensembles_zermelo as Z
+import bourbaki.ordre.iii_2_bon_ordre.zorn_zermelo.ensembles_zermelo as Z
 from bourbaki.cardinaux.ensembles_segments_construction import _R_de
 from bourbaki.cardinaux.ensembles_cardinaux import inf_egal_card, cardinal
 from bourbaki.cardinaux.ensembles_segments_construction import seg

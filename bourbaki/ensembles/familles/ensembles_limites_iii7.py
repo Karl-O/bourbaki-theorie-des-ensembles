@@ -5,7 +5,7 @@ propriété universelle (cône) de la limite projective E = lim←_{α∈I} E_α
 toucher aux fichiers déposés.  Il RÉUTILISE (import, AUCUNE modification) :
  - `bourbaki.ensembles.familles.ensembles_limites` (système projectif, lim_proj,
    axiome (1), appartient_limite_projective, limite_projective_relation_1) ;
- - `bourbaki.ordre.ensembles_limites_canoniques` (application canonique f_α,
+ - `bourbaki.ordre.iii_7_limites.ensembles_limites_canoniques` (application canonique f_α,
    canonique_proj_valeur f_α(z)=pr_α z).
 
 ÉNONCÉ (Proposition 1, §III.7.2).  Soit (E_α, f_{αβ}) un système projectif relatif
@@ -52,7 +52,7 @@ from bourbaki.logique.formule import (
 from bourbaki.logique import noyau_abrege as N
 from bourbaki.ensembles import ensembles_abrege as E
 from bourbaki.ensembles.familles import ensembles_limites as L
-from bourbaki.ordre import ensembles_limites_canoniques as C
+from bourbaki.ordre.iii_7_limites import ensembles_limites_canoniques as C
 from bourbaki.logique.tactiques.tactiques_abrege2 import (
     instancie, conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
     equivalence_avant, equivalence_arriere,

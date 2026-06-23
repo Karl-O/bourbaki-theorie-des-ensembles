@@ -4,9 +4,9 @@ Vérifie : l'ordre d'inclusion Incl sur 𝔖 est un ordre (inconditionnel) et
 inductif (sous caractère fini + sous-lemme « partie finie de ⋃(chaîne) ⊂ un
 membre »), d'où — par zorn_theoreme — l'existence d'un élément maximal de 𝔖.
 theorie_ensembles() reste = 22 (noyau inchangé)."""
-from bourbaki.ordre import ensembles_tukey_iii4 as TK
-from bourbaki.ordre.ensembles_zorn import est_inductif, enonce_non_vide
-from bourbaki.ordre.ensembles_ordre_relation import est_ordre, element_maximal
+from bourbaki.ordre.iii_4_ensembles_finis import ensembles_tukey_iii4 as TK
+from bourbaki.ordre.iii_2_bon_ordre.zorn_zermelo.ensembles_zorn import est_inductif, enonce_non_vide
+from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis.ensembles_ordre_relation import est_ordre, element_maximal
 from bourbaki.entiers.ensembles_entiers import de_caractere_fini
 from bourbaki.ensembles import ensembles_abrege as E
 from bourbaki.logique.formule import var, existe

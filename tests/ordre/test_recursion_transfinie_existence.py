@@ -11,8 +11,8 @@ from __future__ import annotations
 
 from bourbaki.logique.formule import var, app, egal, et, non, impl, appartient
 from bourbaki.ensembles import ensembles_abrege as E
-from bourbaki.ordre import ensembles_recursion_transfinie_existence as EX
-from bourbaki.ordre.ensembles_recurrence_transfinie import (
+from bourbaki.ordre.iii_2_bon_ordre.recurrence_transfinie import ensembles_recursion_transfinie_existence as EX
+from bourbaki.ordre.iii_2_bon_ordre.recurrence_transfinie.ensembles_recurrence_transfinie import (
     _graphe_R, coincidence_solutions,
 )
 

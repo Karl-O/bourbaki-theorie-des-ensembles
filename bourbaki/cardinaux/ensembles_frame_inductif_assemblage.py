@@ -45,8 +45,8 @@ from bourbaki.logique.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, instancie,
 )
 
-from bourbaki.ordre.ensembles_ordre_relation import majorant
-from bourbaki.ordre.ensembles_zorn import chaine
+from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis.ensembles_ordre_relation import majorant
+from bourbaki.ordre.iii_2_bon_ordre.zorn_zermelo.ensembles_zorn import chaine
 from bourbaki.cardinaux.ensembles_hessenberg_hard import frame_pair, frame_ordre
 from bourbaki.cardinaux.ensembles_chaine_temoin_abstrait import (
     union_premiere, union_seconde, temoin_majore_membre,
@@ -54,7 +54,7 @@ from bourbaki.cardinaux.ensembles_chaine_temoin_abstrait import (
 from bourbaki.cardinaux.ensembles_hessenberg_inductivite import (
     enonce_chaine_majoree, frame_inductif,
 )
-from bourbaki.ordre.ensembles_ordre_relation import est_ordre
+from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis.ensembles_ordre_relation import est_ordre
 
 
 def _t(v):
@@ -173,7 +173,7 @@ def frame_inductif_inconditionnel(E_set="E", C="C", m="m", x="xmaj", y="y", z="z
     `m_dans_frame` (frame-membership du recollement — buté sur Lemme 1).  Obtenu en
     branchant `enonce_chaine_majoree_preuve` dans `frame_inductif` (cut de la seconde
     hyp honnête).  Conclusion ∉ hyps ; theorie=22."""
-    from bourbaki.ordre.ensembles_zorn import est_inductif
+    from bourbaki.ordre.iii_2_bon_ordre.zorn_zermelo.ensembles_zorn import est_inductif
     vE = _t(E_set)
     Gam = frame_ordre(vE)
     Fr = frame_pair(vE)

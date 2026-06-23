@@ -8,9 +8,9 @@ On certifie que :
 """
 from bourbaki.logique.formule import var, appartient
 from bourbaki.ensembles import ensembles_abrege as E
-from bourbaki.ordre import ensembles_ordre_vocab as V
-from bourbaki.ordre import ensembles_ordinaux as O
-from bourbaki.ordre import ensembles_iso_ordre_canon as C
+from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis import ensembles_ordre_vocab as V
+from bourbaki.ordre.iii_6_ordinaux import ensembles_ordinaux as O
+from bourbaki.ordre.iii_1_relations_ordre.isomorphismes_ordre import ensembles_iso_ordre_canon as C
 
 
 def _Rf(g="R"):

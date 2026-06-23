@@ -148,7 +148,7 @@ def test_report_est_un_enonce_non_prouve():
     enonce = A.temoin_est_iso_segments_report()
     assert isinstance(enonce, Formule)                    # un énoncé, PAS un théorème
     # c'est bien est_isomorphisme_ordre(h⁺, ]←,a], ]←,b], ≤'_a, ≤'_b)
-    from bourbaki.ordre import ensembles_ordre_vocab as V
+    from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis import ensembles_ordre_vocab as V
     from bourbaki.cardinaux.ensembles_segments_construction import seg as _seg
     def Rf(x, y): return appartient(E.couple(x, y), var("R"))
     def Rpf(x, y): return appartient(E.couple(x, y), var("Rp"))

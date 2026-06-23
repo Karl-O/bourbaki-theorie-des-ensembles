@@ -3,7 +3,7 @@ from __future__ import annotations
 
 from bourbaki.logique.formule import var, egal, et, impl, appartient, pourtout, inclus
 from bourbaki.ensembles import ensembles_abrege as E
-from bourbaki.ordre import ensembles_ordre as O
+from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis import ensembles_ordre as O
 
 
 def _R(a, b):

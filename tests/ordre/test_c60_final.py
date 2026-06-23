@@ -1,4 +1,4 @@
-"""Tests — §III.2 C60 EXISTENCE, ASSEMBLAGE FINAL (`bourbaki.ordre.ensembles_c60_final`).
+"""Tests — §III.2 C60 EXISTENCE, ASSEMBLAGE FINAL (`bourbaki.ordre.iii_2_bon_ordre.recurrence_transfinie.ensembles_c60_final`).
 
 Vérifie :
   • la brique graphe→valeur `couple_donne_valeur` (le chunk reporté de c60_coeur) ;
@@ -11,9 +11,9 @@ INVARIANT vérifié partout : theorie_ensembles() = 22 ; conclusions non vacuous
 """
 from bourbaki.logique.formule import var, egal, appartient
 from bourbaki.ensembles import ensembles_abrege as E
-import bourbaki.ordre.ensembles_c60_final as F
-from bourbaki.ordre.ensembles_c60_coeur import famille_compatible, union_famille
-from bourbaki.ordre.ensembles_recurrence_transfinie import _graphe_R
+import bourbaki.ordre.iii_2_bon_ordre.recurrence_transfinie.ensembles_c60_final as F
+from bourbaki.ordre.iii_2_bon_ordre.recurrence_transfinie.ensembles_c60_coeur import famille_compatible, union_famille
+from bourbaki.ordre.iii_2_bon_ordre.recurrence_transfinie.ensembles_recurrence_transfinie import _graphe_R
 
 
 def test_theorie_reste_22():
@@ -97,7 +97,7 @@ def test_valeur_singleton_couple_clos():
 
 def test_dom_extension_un_pas():
     """dom(⋃𝔇 ∪ {(x,v)}) = seg∪{x}  [1 hyp honnête dom(⋃𝔇)=seg]."""
-    from bourbaki.ordre.ensembles_c60_existence_close import dom_essai
+    from bourbaki.ordre.iii_2_bon_ordre.recurrence_transfinie.ensembles_c60_existence_close import dom_essai
     r = F.dom_extension_un_pas()
     vD = var("Df")
     U = union_famille(vD)
@@ -142,7 +142,7 @@ def test_recursion_essai_prolonge():
 
 def test_couvert_essai_depuis_famille():
     """🎯 DÉCHARGE COMPLÈTE en x : construit l'essai p_x' ⇒ couvert_essai(x)  [5 hyps]."""
-    from bourbaki.ordre.ensembles_c60_existence_close import couvert_essai
+    from bourbaki.ordre.iii_2_bon_ordre.recurrence_transfinie.ensembles_c60_existence_close import couvert_essai
     r = F.couvert_essai_depuis_famille(_vh)
     vD = var("Df")
     couvert = couvert_essai(_vh, _graphe_R("G"), var("E"), "pess", "zess")(var("x0"))
@@ -169,8 +169,8 @@ def _vval(x):
 
 def test_heredite_couverture_realisee():
     """🎯 { realisation_famille } ⊢ heredite_couverture(couvert_essai)  [1 hyp honnête]."""
-    from bourbaki.ordre.ensembles_recursion_transfinie_existence import heredite_couverture
-    from bourbaki.ordre.ensembles_c60_existence_close import couvert_essai
+    from bourbaki.ordre.iii_2_bon_ordre.recurrence_transfinie.ensembles_recursion_transfinie_existence import heredite_couverture
+    from bourbaki.ordre.iii_2_bon_ordre.recurrence_transfinie.ensembles_c60_existence_close import couvert_essai
     r = F.heredite_couverture_realisee(_Dfam, _vval, _vh)
     R = _graphe_R("G")
     couvert = couvert_essai(_vh, R, var("E"))
@@ -183,8 +183,8 @@ def test_heredite_couverture_realisee():
 
 def test_recursion_transfinie_existence():
     """🎯🎯 EXISTENCE C60 : { bon ordre, realisation_famille } ⊢ (∀x∈E)(∃p)(est_essai(p,x))."""
-    from bourbaki.ordre.ensembles_recursion_transfinie_existence import couverture_totale
-    from bourbaki.ordre.ensembles_c60_existence_close import couvert_essai
+    from bourbaki.ordre.iii_2_bon_ordre.recurrence_transfinie.ensembles_recursion_transfinie_existence import couverture_totale
+    from bourbaki.ordre.iii_2_bon_ordre.recurrence_transfinie.ensembles_c60_existence_close import couvert_essai
     r = F.recursion_transfinie_existence(_Dfam, _vval, _vh)
     R = _graphe_R("G")
     ve = var("E")

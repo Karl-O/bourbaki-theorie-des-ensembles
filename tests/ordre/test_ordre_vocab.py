@@ -10,7 +10,7 @@ from bourbaki.logique.formule import (
     var, app, egal, et, ou, impl, non, equiv, appartient, existe, pourtout, inclus,
 )
 from bourbaki.ensembles import ensembles_abrege as E
-from bourbaki.ordre import ensembles_ordre_vocab as V
+from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis import ensembles_ordre_vocab as V
 
 
 # Relation ≤ de test : a≤b := (a,b)∈G  (convention graphe, comme le reste du projet)

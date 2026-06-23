@@ -12,8 +12,8 @@ from bourbaki.logique.formule import (
 from bourbaki.logique import noyau_abrege as N
 from bourbaki.ensembles import ensembles_abrege as E
 from bourbaki.cardinaux import ensembles_cardinaux as C
-from bourbaki.ordre import ensembles_ordre_vocab as V
-from bourbaki.ordre import ensembles_ordinaux as O
+from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis import ensembles_ordre_vocab as V
+from bourbaki.ordre.iii_6_ordinaux import ensembles_ordinaux as O
 
 
 # Relation ≤ de test : a≤b := (a,b)∈G  (convention graphe du projet)

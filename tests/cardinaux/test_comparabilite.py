@@ -7,8 +7,8 @@ toutes des théorèmes du noyau strict, theorie_ensembles() restant = 22.
 """
 from bourbaki.logique.formule import var, ou, egal, inclus, appartient
 from bourbaki.ensembles import ensembles_abrege as E
-from bourbaki.ordre.ensembles_ordre_relation import est_ordre, element_maximal
-from bourbaki.ordre.ensembles_zorn import est_inductif
+from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis.ensembles_ordre_relation import est_ordre, element_maximal
+from bourbaki.ordre.iii_2_bon_ordre.zorn_zermelo.ensembles_zorn import est_inductif
 from bourbaki.cardinaux.ensembles_cardinaux import inf_egal_card
 from bourbaki.cardinaux import ensembles_comparabilite as C
 

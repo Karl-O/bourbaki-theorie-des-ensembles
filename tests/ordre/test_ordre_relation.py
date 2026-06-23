@@ -5,7 +5,7 @@ théorème est CLOS (aucune hypothèse résiduelle).
 """
 from bourbaki.logique.formule import var, egal, et, ou, impl, appartient, inclus
 from bourbaki.ensembles import ensembles_abrege as E
-from bourbaki.ordre import ensembles_ordre_relation as O
+from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis import ensembles_ordre_relation as O
 
 
 def _couple_dans(t, u, G):

@@ -12,7 +12,7 @@ from bourbaki.ensembles import ensembles_abrege as E
 from bourbaki.cardinaux import ensembles_iso_unicite_sous_domaine as U
 from bourbaki.cardinaux.ensembles_lemme4_croissante import _R_de, _val
 from bourbaki.cardinaux.ensembles_lemme4_sous_domaine import _f_dans_S
-from bourbaki.ordre.ensembles_ordre_monotone import est_strictement_croissante
+from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis.ensembles_ordre_monotone import est_strictement_croissante
 
 
 def test_point_fixe_sous_domaine():

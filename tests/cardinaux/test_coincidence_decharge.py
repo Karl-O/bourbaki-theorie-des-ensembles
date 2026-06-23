@@ -16,7 +16,7 @@ Aucune conclusion n'est tautologie / postulée ; theorie=22 ; aucun fichier modi
 """
 from bourbaki.logique.formule import var, egal, et, appartient
 from bourbaki.ensembles import ensembles_abrege as E
-from bourbaki.ordre.ensembles_ordre_vocab import (
+from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis.ensembles_ordre_vocab import (
     est_isomorphisme_ordre, compatible_ordre,
 )
 from bourbaki.cardinaux import ensembles_coincidence_decharge as D

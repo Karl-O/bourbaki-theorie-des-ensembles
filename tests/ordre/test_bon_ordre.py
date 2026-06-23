@@ -6,7 +6,7 @@ from __future__ import annotations
 
 from bourbaki.logique.formule import var, egal, et, impl, ou, non, appartient, inclus, pourtout, existe
 from bourbaki.ensembles import ensembles_abrege as E
-from bourbaki.ordre import ensembles_bon_ordre as BO
+from bourbaki.ordre.iii_2_bon_ordre.bon_ordre_segments import ensembles_bon_ordre as BO
 
 
 def _R(a, b):

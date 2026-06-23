@@ -6,7 +6,7 @@ leurs hypothèses HONNÊTES (jamais la conclusion parmi les hypothèses → jama
 vacuité), et que theorie_ensembles reste = 22 axiomes (rien postulé)."""
 from __future__ import annotations
 
-import bourbaki.ordre.ensembles_sup_generiques_iii1 as M
+import bourbaki.ordre.iii_1_relations_ordre.bornes_sup.ensembles_sup_generiques_iii1 as M
 from bourbaki.ensembles import ensembles_abrege as E
 
 

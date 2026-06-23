@@ -78,7 +78,7 @@ def cone_coordonnees_egales(Efam, f, u, up, leq, i, ff, a="a", y="yy"):
 
     f_α(u(y)) = application_canonique_proj_valeur(Efam,f,α,u(y))  (la canonique f_α
     appliquée à l'image u(y) ∈ lim←)."""
-    from bourbaki.ordre.ensembles_limites_canoniques import application_canonique_proj_valeur
+    from bourbaki.ordre.iii_7_limites.ensembles_limites_canoniques import application_canonique_proj_valeur
     vE, vf, vi, vF = _t(Efam), _t(f), _t(i), _t(ff)
     va, vy = var(a), var(y)
     u_y = cone_map_valeur(u, vy)
@@ -118,7 +118,7 @@ def coords_donnent_projections(Efam="E", f="f", leq=None, i="I", z="zp1", zp="zp
     extensionnalite_produit aux mêmes points (donc les hypothèses s'apparient)."""
     if leq is None:
         leq = _gleq()
-    from bourbaki.ordre.ensembles_limites_canoniques import application_canonique_proj_valeur
+    from bourbaki.ordre.iii_7_limites.ensembles_limites_canoniques import application_canonique_proj_valeur
     from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie, composer_egalites
     vE, vf, vi = _t(Efam), _t(f), _t(i)
     vz, vzp, va = var(z), var(zp), var(a)

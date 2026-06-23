@@ -18,8 +18,8 @@ from bourbaki.logique.formule import var, egal, et, non, impl, appartient, pourt
 from bourbaki.ensembles import ensembles_abrege as E
 from bourbaki.cardinaux import ensembles_iso_unicite_finale as F
 from bourbaki.cardinaux.ensembles_lemme4_croissante import _R_de, _val, _f_dans_E
-from bourbaki.ordre.ensembles_ordre_monotone import est_strictement_croissante
-from bourbaki.ordre.ensembles_ordre_vocab import compatible_ordre
+from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis.ensembles_ordre_monotone import est_strictement_croissante
+from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis.ensembles_ordre_vocab import compatible_ordre
 
 
 # ════════════════════════════════════════════════════════════════════════════

@@ -28,7 +28,7 @@ def test_partie_finie_est_finie_close():
 
 def test_clause_plus_petit_close():
     from bourbaki.logique.formule import et, impl
-    from bourbaki.ordre.ensembles_ordre_relation import totalement_ordonne
+    from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis.ensembles_ordre_relation import totalement_ordonne
     from bourbaki.entiers.ensembles_entiers import est_fini_ensemble
     from bourbaki.logique.formule import var
     t = clause_plus_petit_fini_total("Gbo", "Ebo")

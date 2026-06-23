@@ -628,7 +628,7 @@ def _unpack_maximal_meq(E_set, derive, mfresh="mmx", Sf="Smx", phif="phimx"):
     from bourbaki.cardinaux.ensembles_hessenberg_hard import (
         frame_pair, frame_ordre, axiome_frame, theorie_frame,
     )
-    from bourbaki.ordre.ensembles_ordre_relation import element_maximal
+    from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis.ensembles_ordre_relation import element_maximal
     from bourbaki.cardinaux.ensembles_frame_a_maximal import frame_a_maximal
     from bourbaki.cardinaux.ensembles_hessenberg_vrai_final import (
         _frame_membre_t, _frame_membre_t_named, _frame_a_maximal_binder,
@@ -714,7 +714,7 @@ def hessenberg_a_carre_egal_a_REEL(E_set="E"):
     )
     from bourbaki.cardinaux.ensembles_hessenberg import enonce_hessenberg
     from bourbaki.cardinaux.ensembles_hessenberg_hard import frame_pair, frame_ordre
-    from bourbaki.ordre.ensembles_ordre_relation import element_maximal
+    from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis.ensembles_ordre_relation import element_maximal
 
     def derive(bij0, S0_inclus, S0_infini, maximal_hyp, m_eq, vS0, vphi0):
         Sn = vS0.nom

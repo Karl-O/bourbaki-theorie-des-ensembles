@@ -20,7 +20,7 @@ theorie_ensembles() = 22 (rien postulé).  Conclusion == trichotomie_ordinaux_ca
 import pytest
 
 from bourbaki.ensembles import ensembles_abrege as E
-from bourbaki.ordre import ensembles_iso_ordre_canon as C
+from bourbaki.ordre.iii_1_relations_ordre.isomorphismes_ordre import ensembles_iso_ordre_canon as C
 from bourbaki.logique.formule import var, appartient
 from bourbaki.cardinaux import ensembles_trichotomie_assemble as TA
 from bourbaki.cardinaux import ensembles_maillon_coherences_prouvees as MCP

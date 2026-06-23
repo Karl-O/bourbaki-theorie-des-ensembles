@@ -91,9 +91,10 @@ def main() -> int:
         for r in rel[:30]:
             print("      ", r)
 
-    # 3) dossiers à créer (parents des cibles + dossiers-trous)
+    # 3) dossiers à créer = parents des cibles UNIQUEMENT.
+    #    Les dossiers-trous (pk["dossiers_vides"]) sont créés dans une passe dédiée
+    #    ultérieure : leurs chemins sont parfois mal préfixés selon l'agent.
     new_dirs = {os.path.dirname(vers) for _, vers in moves}
-    new_dirs |= {d["dossier"].rstrip("/") for d in pk.get("dossiers_vides", [])}
     new_dirs = {d for d in new_dirs if d}
 
     if dry:

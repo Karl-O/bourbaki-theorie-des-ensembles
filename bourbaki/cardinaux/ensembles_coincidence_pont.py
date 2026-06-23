@@ -87,11 +87,11 @@ from bourbaki.logique.tactiques.tactiques_abrege2 import (
     instancie, equivalence_avant,
     conjonction_elim_gauche, conjonction_elim_droite,
 )
-from bourbaki.ordre.ensembles_valeur_bridge import valeur_y_egal_j
-from bourbaki.ordre.ensembles_ordre_vocab import (
+from bourbaki.ordre.iii_1_relations_ordre.isomorphismes_ordre.ensembles_valeur_bridge import valeur_y_egal_j
+from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis.ensembles_ordre_vocab import (
     compatible_ordre, est_isomorphisme_ordre,
 )
-from bourbaki.ordre.ensembles_ordre_monotone import est_strictement_croissante
+from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis.ensembles_ordre_monotone import est_strictement_croissante
 from bourbaki.cardinaux.ensembles_iso_unicite_finale import (
     _compat_yv, _inj_hyp, iso_donne_strict_croissant,
 )

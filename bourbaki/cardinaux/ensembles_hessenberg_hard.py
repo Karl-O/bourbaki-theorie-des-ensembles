@@ -73,9 +73,9 @@ from bourbaki.cardinaux.arithmetique.ensembles_arith_cardinale import (
     produit_cardinal_binaire,
 )
 from bourbaki.entiers.ensembles_infinis import est_infini, est_infini_ensemble
-from bourbaki.ordre.ensembles_ordre_relation import est_ordre, element_maximal
-from bourbaki.ordre.ensembles_zorn import est_inductif, enonce_non_vide
-from bourbaki.ordre.ensembles_zorn_theoreme import zorn_theoreme
+from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis.ensembles_ordre_relation import est_ordre, element_maximal
+from bourbaki.ordre.iii_2_bon_ordre.zorn_zermelo.ensembles_zorn import est_inductif, enonce_non_vide
+from bourbaki.ordre.iii_2_bon_ordre.zorn_zermelo.ensembles_zorn_theoreme import zorn_theoreme
 
 # Le PONT FINAL + l'énoncé-frontière sont DÉJÀ clos dans ensembles_hessenberg ; on
 # les RÉ-EXPORTE pour offrir Hessenberg complet « dès que le ≥ tombe ».

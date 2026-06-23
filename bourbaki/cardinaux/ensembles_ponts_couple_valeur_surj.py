@@ -47,7 +47,7 @@ from bourbaki.logique.tactiques.tactiques_abrege2 import (
 from bourbaki.logique.tactiques.tactiques_abrege_quantif import (
     existe_elimination, alpha_existe,
 )
-from bourbaki.ordre.ensembles_ordre_relation import inclusion_antisymetrique
+from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis.ensembles_ordre_relation import inclusion_antisymetrique
 
 
 def _t(v):

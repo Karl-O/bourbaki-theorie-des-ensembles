@@ -1,9 +1,9 @@
 """Tests — sous-lemme de Tukey prouvé par récurrence finie (§III.4-5)."""
-from bourbaki.ordre.ensembles_tukey_sous_lemme import sous_lemme_preuve
-from bourbaki.ordre.ensembles_tukey_iii4 import (
+from bourbaki.ordre.iii_4_ensembles_finis.ensembles_tukey_sous_lemme import sous_lemme_preuve
+from bourbaki.ordre.iii_4_ensembles_finis.ensembles_tukey_iii4 import (
     sous_lemme_partie_finie_dans_membre, Incl,
 )
-from bourbaki.ordre.ensembles_ordre_relation import totalement_ordonne
+from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis.ensembles_ordre_relation import totalement_ordonne
 from bourbaki.ensembles import ensembles_abrege as E
 from bourbaki.logique.formule import var, existe, appartient
 
@@ -25,13 +25,13 @@ def test_theorie_22():
 
 
 def test_tukey_complet_clos():
-    from bourbaki.ordre.ensembles_tukey_sous_lemme import (
+    from bourbaki.ordre.iii_4_ensembles_finis.ensembles_tukey_sous_lemme import (
         Tukey_theoreme_complet, chaines_non_vides,
     )
-    from bourbaki.ordre.ensembles_tukey_iii4 import Incl
+    from bourbaki.ordre.iii_4_ensembles_finis.ensembles_tukey_iii4 import Incl
     from bourbaki.entiers.ensembles_entiers import de_caractere_fini
-    from bourbaki.ordre.ensembles_zorn import enonce_non_vide
-    from bourbaki.ordre.ensembles_ordre_relation import element_maximal
+    from bourbaki.ordre.iii_2_bon_ordre.zorn_zermelo.ensembles_zorn import enonce_non_vide
+    from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis.ensembles_ordre_relation import element_maximal
     from bourbaki.logique.formule import var, et, impl, existe
     r = Tukey_theoreme_complet()
     assert r.est_clos and len(r.hypotheses) == 0

@@ -1,7 +1,7 @@
 """Tests — Γ𝔉(E) est un ORDRE sur 𝔉(E) (Hessenberg, Zorn E.III.48)."""
 from bourbaki.logique.formule import var
 from bourbaki.ensembles import ensembles_abrege as E
-from bourbaki.ordre.ensembles_ordre_relation import (
+from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis.ensembles_ordre_relation import (
     reflexivite_sur, antisymetrie, transitivite_rel, est_ordre,
 )
 from bourbaki.cardinaux.ensembles_hessenberg_hard import frame_pair, frame_ordre

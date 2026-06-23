@@ -81,7 +81,7 @@ from bourbaki.logique.tactiques.tactiques_abrege2 import (
     instancie, equivalence_avant,
 )
 from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie
-from bourbaki.ordre.ensembles_ordre_monotone import est_strictement_croissante
+from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis.ensembles_ordre_monotone import est_strictement_croissante
 from bourbaki.cardinaux.ensembles_lemme4_croissante import (
     _val, _R_de, _ex_falso, _refute_self,
 )

@@ -108,7 +108,7 @@ from bourbaki.logique.tactiques.tactiques_abrege_egalite import (
     composer_egalites, symetrie as _sym_eq,
 )
 
-from bourbaki.ordre import ensembles_ordre_vocab as V
+from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis import ensembles_ordre_vocab as V
 from bourbaki.cardinaux.ensembles_cardinaux import (
     est_bijection_de, equipotent, est_injection_de, inf_egal_card, cardinal, est_cardinal,
 )

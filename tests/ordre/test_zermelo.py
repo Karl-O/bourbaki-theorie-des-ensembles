@@ -14,8 +14,8 @@ DÉDIÉES).  🚫 JAMAIS postuler le bon ordre : il est CONSTRUIT.
 """
 from bourbaki.logique.formule import var
 from bourbaki.ensembles import ensembles_abrege as E
-from bourbaki.ordre.ensembles_ordre_relation import est_ordre, transitivite_rel
-from bourbaki.ordre import ensembles_zermelo as Z
+from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis.ensembles_ordre_relation import est_ordre, transitivite_rel
+from bourbaki.ordre.iii_2_bon_ordre.zorn_zermelo import ensembles_zermelo as Z
 
 
 X = var("X")
@@ -81,7 +81,7 @@ def test_Union_bien_ordonne_corps():
 
 
 def test_Union_bop_match():
-    from bourbaki.ordre.ensembles_zermelo import bon_ordre_partiel
+    from bourbaki.ordre.iii_2_bon_ordre.zorn_zermelo.ensembles_zermelo import bon_ordre_partiel
     th = Z.Union_bop("X", "D")
     Ut = Z.Union(X, var("D"))
     assert th.conclusion == bon_ordre_partiel(Ut, X)
@@ -96,7 +96,7 @@ def test_Union_dans_W():
 
 
 def test_Union_majorant():
-    from bourbaki.ordre.ensembles_ordre_relation import majorant
+    from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis.ensembles_ordre_relation import majorant
     th = Z.Union_majorant("X", "D")
     Ut = Z.Union(X, var("D"))
     assert th.conclusion == majorant(Z.Theta(X), var("D"), Ut, Z.W(X), "x")
@@ -105,7 +105,7 @@ def test_Union_majorant():
 
 def test_W_inductif():
     # 🎯🎯 (Θ,W) EST INDUCTIF — assemblage du cœur, INCONDITIONNEL.
-    from bourbaki.ordre.ensembles_zorn import est_inductif
+    from bourbaki.ordre.iii_2_bon_ordre.zorn_zermelo.ensembles_zorn import est_inductif
     th = Z.W_inductif("X")
     assert th.est_clos
     assert th.conclusion == est_inductif(Z.Theta(X), Z.W(X))
@@ -113,7 +113,7 @@ def test_W_inductif():
 
 # ── ÉTAPE 2 — W ≠ ∅ (∅ est un bon ordre partiel) ─────────────────────────────
 def test_vide_bon_ordre_partiel():
-    from bourbaki.ordre.ensembles_zermelo import bon_ordre_partiel
+    from bourbaki.ordre.iii_2_bon_ordre.zorn_zermelo.ensembles_zermelo import bon_ordre_partiel
     th = Z.vide_bon_ordre_partiel("X")
     assert th.est_clos
     assert th.conclusion == bon_ordre_partiel(E.VIDE, X)
@@ -127,7 +127,7 @@ def test_vide_dans_W():
 
 
 def test_W_non_vide():
-    from bourbaki.ordre.ensembles_zorn import enonce_non_vide
+    from bourbaki.ordre.iii_2_bon_ordre.zorn_zermelo.ensembles_zorn import enonce_non_vide
     th = Z.W_non_vide("X", "w")
     assert th.est_clos
     assert th.conclusion == enonce_non_vide(Z.W(X), "w")

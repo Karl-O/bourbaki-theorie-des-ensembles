@@ -50,8 +50,8 @@ from bourbaki.logique.formule import (
 from bourbaki.logique import noyau_abrege as N
 from bourbaki.ensembles import ensembles_abrege as E
 from bourbaki.ensembles.familles import ensembles_limites as L
-from bourbaki.ordre import ensembles_limites_canoniques as C
-from bourbaki.ordre.ensembles_limites_props2 import cofinal_canonique_coordonnee
+from bourbaki.ordre.iii_7_limites import ensembles_limites_canoniques as C
+from bourbaki.ordre.iii_7_limites.ensembles_limites_props2 import cofinal_canonique_coordonnee
 from bourbaki.logique.tactiques.tactiques_abrege2 import (
     instancie, conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
 )

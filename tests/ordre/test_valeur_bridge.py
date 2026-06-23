@@ -1,7 +1,7 @@
 """Tests §III — PONT liant-valeur j ↔ y (alpha_tau, débloque la chaîne du Lemme 1)."""
 from bourbaki.logique.formule import var, egal
 from bourbaki.ensembles import ensembles_abrege as E
-from bourbaki.ordre import ensembles_valeur_bridge as B
+from bourbaki.ordre.iii_1_relations_ordre.isomorphismes_ordre import ensembles_valeur_bridge as B
 
 
 def test_valeur_j_egal_y_clos():

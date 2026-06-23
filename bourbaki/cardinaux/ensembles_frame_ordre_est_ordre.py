@@ -44,7 +44,7 @@ from bourbaki.ensembles.fonctions.ensembles_projections import (
 
 from bourbaki.cardinaux.ensembles_hessenberg_hard import frame_pair, frame_ordre, frame_membre
 from bourbaki.cardinaux.ensembles_frame_ordre_axiome import frame_ordre_membre_t
-from bourbaki.ordre.ensembles_ordre_relation import (
+from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis.ensembles_ordre_relation import (
     reflexivite_sur, antisymetrie, transitivite_rel, est_ordre,
 )
 

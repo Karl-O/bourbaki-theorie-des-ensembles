@@ -71,11 +71,11 @@ from __future__ import annotations
 
 from bourbaki.logique.formule import Terme, var, egal, impl, appartient, pourtout, existe
 
-from bourbaki.ordre.ensembles_c60_pont import (
+from bourbaki.ordre.iii_2_bon_ordre.recurrence_transfinie.ensembles_c60_pont import (
     recursion_transfinie_existence_final, essais_bien_formes, rule_codomain,
 )
-from bourbaki.ordre.ensembles_recurrence_transfinie import _graphe_R
-from bourbaki.ordre.ensembles_c60_existence_close import est_essai
+from bourbaki.ordre.iii_2_bon_ordre.recurrence_transfinie.ensembles_recurrence_transfinie import _graphe_R
+from bourbaki.ordre.iii_2_bon_ordre.recurrence_transfinie.ensembles_c60_existence_close import est_essai
 import bourbaki.ensembles.ensembles_abrege as E
 
 

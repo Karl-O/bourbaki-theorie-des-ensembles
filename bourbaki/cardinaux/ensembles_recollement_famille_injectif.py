@@ -40,7 +40,7 @@ from bourbaki.logique.tactiques.tactiques_abrege2 import (
 from bourbaki.logique.tactiques.tactiques_abrege_quantif import (
     existe_elimination, alpha_existe,
 )
-from bourbaki.ordre.ensembles_c60_coeur import (
+from bourbaki.ordre.iii_2_bon_ordre.recurrence_transfinie.ensembles_c60_coeur import (
     union_famille, membre_union_famille, _inst_union_famille,
 )
 

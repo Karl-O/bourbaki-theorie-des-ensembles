@@ -63,7 +63,7 @@ from bourbaki.logique import noyau_abrege as N
 from bourbaki.ensembles import ensembles_abrege as E
 from bourbaki.logique.tactiques.tactiques_abrege2 import conjonction_intro
 
-from bourbaki.ordre.ensembles_c60_coeur import (
+from bourbaki.ordre.iii_2_bon_ordre.recurrence_transfinie.ensembles_c60_coeur import (
     union_famille, famille_compatible,
 )
 from bourbaki.cardinaux.ensembles_recollement_famille_injectif import (

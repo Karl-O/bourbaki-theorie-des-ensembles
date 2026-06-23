@@ -84,7 +84,7 @@ import bourbaki.cardinaux.ensembles_bon_ordre_intervalle_ordinal as BOIO
 import bourbaki.cardinaux.ensembles_realisation_segment_preuve as RSP
 import bourbaki.cardinaux.ensembles_realisation_segment_close as RSC
 import bourbaki.cardinaux.ensembles_subset_realise_close as SC
-import bourbaki.ordre.ensembles_zermelo as Z
+import bourbaki.ordre.iii_2_bon_ordre.zorn_zermelo.ensembles_zermelo as Z
 
 
 def _t(t):

@@ -9,7 +9,7 @@ from bourbaki.logique.formule import (
     var, et, impl, egal, appartient, pourtout, inclus, Formule,
 )
 from bourbaki.ensembles import ensembles_abrege as E
-from bourbaki.ordre import ensembles_ordre_vocab as V
+from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis import ensembles_ordre_vocab as V
 from bourbaki.cardinaux import ensembles_trichotomie_pont_val as PV
 from bourbaki.cardinaux import ensembles_trichotomie_dom_segment as DS
 

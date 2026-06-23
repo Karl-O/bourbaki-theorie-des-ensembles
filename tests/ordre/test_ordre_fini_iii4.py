@@ -2,7 +2,7 @@
 import pytest
 
 from bourbaki.ensembles import ensembles_abrege as E
-from bourbaki.ordre.ensembles_ordre_fini_iii4 import (
+from bourbaki.ordre.iii_4_ensembles_finis.ensembles_ordre_fini_iii4 import (
     prop3_total, prop3_total_enonce,
     cor1_total, cor1_total_enonce,
     prop3_filtrant, prop3_filtrant_enonce,

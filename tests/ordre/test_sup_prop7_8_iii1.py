@@ -2,8 +2,8 @@
 from bourbaki.logique import noyau_abrege as N
 from bourbaki.logique.formule import var
 from bourbaki.ensembles import ensembles_abrege as E
-from bourbaki.ordre.ensembles_ordre_relation import borne_superieure, majorant
-from bourbaki.ordre.ensembles_sup_prop7_8_iii1 import (
+from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis.ensembles_ordre_relation import borne_superieure, majorant
+from bourbaki.ordre.iii_1_relations_ordre.bornes_sup.ensembles_sup_prop7_8_iii1 import (
     borne_sup_reunion_iff,
     sup_reunion_est_borne_sup_majorants_communs,
 )

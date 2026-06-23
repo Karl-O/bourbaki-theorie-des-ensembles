@@ -137,7 +137,7 @@ def test_ordinal_inf_sous_iso_non_vacueux():
 #  iso_reflexif_seg / ordinal_inferieur_ou_egal_litteral — énoncés du REPORT.
 # ─────────────────────────────────────────────────────────────────────────────
 def test_iso_reflexif_seg_forme():
-    from bourbaki.ordre import ensembles_ordre_vocab as V
+    from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis import ensembles_ordre_vocab as V
     iso = OBO.iso_reflexif_seg("Ro", "o", "m", f="fseg")
     Rf = _Rf()
     Sm = seg("Ro", "o", var("m"))
@@ -145,7 +145,7 @@ def test_iso_reflexif_seg_forme():
 
 
 def test_ordinal_inferieur_ou_egal_litteral_forme():
-    from bourbaki.ordre import ensembles_ordinaux as O
+    from bourbaki.ordre.iii_6_ordinaux import ensembles_ordinaux as O
     lit = OBO.ordinal_inferieur_ou_egal_litteral("Ro", "o", "m", "x")
     Rf = _Rf()
     Sm = seg("Ro", "o", var("m"))

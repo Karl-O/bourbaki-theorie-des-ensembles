@@ -13,14 +13,14 @@ from bourbaki.logique.formule import app, var
 from bourbaki.logique import noyau_abrege as N
 from bourbaki.ensembles import ensembles_abrege as E
 
-from bourbaki.ordre.ensembles_recurrence_transfinie import _graphe_R
-from bourbaki.ordre.ensembles_c60_existence_close import est_essai
-from bourbaki.ordre.ensembles_c60_realisation import (
+from bourbaki.ordre.iii_2_bon_ordre.recurrence_transfinie.ensembles_recurrence_transfinie import _graphe_R
+from bourbaki.ordre.iii_2_bon_ordre.recurrence_transfinie.ensembles_c60_existence_close import est_essai
+from bourbaki.ordre.iii_2_bon_ordre.recurrence_transfinie.ensembles_c60_realisation import (
     clause_P2, clause_P3, clause_P4,
 )
-from bourbaki.ordre.ensembles_recursion_transfinie_existence import couverture_totale
-from bourbaki.ordre.ensembles_c60_existence_close import couvert_essai
-from bourbaki.ordre.ensembles_c60_clauses import (
+from bourbaki.ordre.iii_2_bon_ordre.recurrence_transfinie.ensembles_recursion_transfinie_existence import couverture_totale
+from bourbaki.ordre.iii_2_bon_ordre.recurrence_transfinie.ensembles_c60_existence_close import couvert_essai
+from bourbaki.ordre.iii_2_bon_ordre.recurrence_transfinie.ensembles_c60_clauses import (
     coincidence_segment_realise,
     recursion_segment_realise, clause_P4_ambiant,
     couverture_segment_realise, clause_P3_ambiant,

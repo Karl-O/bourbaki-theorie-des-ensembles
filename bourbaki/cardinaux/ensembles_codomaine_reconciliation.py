@@ -45,7 +45,7 @@ from bourbaki.logique.formule import (
 )
 from bourbaki.logique import noyau_abrege as N
 from bourbaki.ensembles import ensembles_abrege as E
-from bourbaki.ordre import ensembles_ordre_vocab as V
+from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis import ensembles_ordre_vocab as V
 from bourbaki.logique.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
     instancie, equivalence_avant, equivalence_arriere,
@@ -294,7 +294,7 @@ def _chi_dans_B(chi, B, A, j_hole_unused=None):
     χ(t)[y]∈A (valeur_dans_but_surjectif, surjectivité image=A) ; A⊂B ⇒ χ(t)[y]∈B ;
     pont y→j (valeur_j_egal_y) ⇒ χ(t)[j]∈B."""
     from bourbaki.cardinaux.ensembles_iso_ordre_composee import valeur_dans_but_surjectif
-    from bourbaki.ordre.ensembles_valeur_bridge import valeur_j_egal_y
+    from bourbaki.ordre.iii_1_relations_ordre.isomorphismes_ordre.ensembles_valeur_bridge import valeur_j_egal_y
     vchi, vB, vA = _t(chi), _t(B), _t(A)
     vt = var("t")
     ct_y = E.valeur(vchi, vt)               # χ(t)[y]
@@ -328,7 +328,7 @@ def _strict_croissante_depuis_iso_into(chi, B, A, Rp):
     from bourbaki.cardinaux.ensembles_iso_unicite_finale import (
         _compat_yv, _inj_hyp, iso_donne_strict_croissant,
     )
-    from bourbaki.ordre.ensembles_ordre_vocab import compatible_ordre
+    from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis.ensembles_ordre_vocab import compatible_ordre
     Rpf = _R_de(Rp)
     vchi, vB, vA = _t(chi), _t(B), _t(A)
     iso = V.est_isomorphisme_ordre(vchi, vB, vA, Rpf, Rpf, "a", "b")   # 1 hyp (binders a,b)
@@ -388,7 +388,7 @@ def segment_inclus_par_iso(chi, A, B, Rp, F, a="a", t="t"):
     l4 = lemme_4_sous_domaine(Rp, vF, vB, vchi)  # hyps : bo(R',F), inclus(B,F), map, strict crois
     #   décharge la map self χ:B→B et la stricte croissance  (bo(R',F)+inclus(B,F) restent)
     from bourbaki.cardinaux.ensembles_lemme4_croissante import _f_dans_E
-    from bourbaki.ordre.ensembles_ordre_monotone import est_strictement_croissante
+    from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis.ensembles_ordre_monotone import est_strictement_croissante
     l4 = N.modus_ponens(fdans, N.loi_deduction(_f_dans_E(vchi, vB), l4))
     l4 = N.modus_ponens(scr, N.loi_deduction(
         est_strictement_croissante(var(Rp), var(Rp), vchi, vB, vB), l4))
@@ -415,7 +415,7 @@ def segment_inclus_par_iso(chi, A, B, Rp, F, a="a", t="t"):
 def _chi_t_in_A(vchi, vB, vA, vt, Ht):
     """sous {dom χ=B, image(χ,B)=A, t∈B} ⊢ χ(t)[j]∈A  (valeur_dans_but_surjectif + pont y→j)."""
     from bourbaki.cardinaux.ensembles_iso_ordre_composee import valeur_dans_but_surjectif
-    from bourbaki.ordre.ensembles_valeur_bridge import valeur_j_egal_y
+    from bourbaki.ordre.iii_1_relations_ordre.isomorphismes_ordre.ensembles_valeur_bridge import valeur_j_egal_y
     ct_y = E.valeur(vchi, vt)
     ct_j = E.valeur(vchi, vt, b="j")
     ct_in_A = valeur_dans_but_surjectif(vchi, vB, vA, vt)       # χ(t)[y]∈A
@@ -473,7 +473,7 @@ def codomaine_egal_image(phi1="phi1", phi2="phi2", S1="S1", T1="T1", S2="S2",
         segments_abstraits_comparables,
     )
     from bourbaki.logique.tactiques.tactiques_abrege2 import cas
-    from bourbaki.ordre.ensembles_ordre_relation import inclusion_antisymetrique
+    from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis.ensembles_ordre_relation import inclusion_antisymetrique
 
     Rf, Rpf = _R_de(R), _R_de(Rp)
     vphi1, vphi2, vS1, vT1, vS2, vF = _t(phi1), _t(phi2), _t(S1), _t(T1), _t(S2), _t(F)

@@ -165,7 +165,7 @@ def non_surjective_donne_point_rate(g="G", b="b", e="E"):
       • avec image(G,b) ⊂ E, l'ANTISYMÉTRIE de ⊂ (inclusion_antisymetrique = A1)
         donnerait image(G,b) = E, CONTREDISANT image(G,b) ≠ E.
     Donc ∃q ∈ E hors de l'image.  INCONDITIONNEL, réutilisable."""
-    from bourbaki.ordre.ensembles_ordre_relation import inclusion_antisymetrique
+    from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis.ensembles_ordre_relation import inclusion_antisymetrique
     vG, vb, vE = _t(g), _t(b), _t(e)
     img = E.image(vG, vb)                                    # image(G,b)
     vq = var("q")

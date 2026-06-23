@@ -45,9 +45,9 @@ from bourbaki.logique.tactiques.tactiques_abrege2 import (
     equivalence_symetrie, instancie)
 from bourbaki.ensembles.fonctions.ensembles_fonctions import valeur_dans_graphe
 from bourbaki.ensembles.fonctions.ensembles_fonctions_composee import composition_valeur
-from bourbaki.ordre.ensembles_ordre_vocab import (est_isomorphisme_ordre,
+from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis.ensembles_ordre_vocab import (est_isomorphisme_ordre,
                                                   compatible_ordre)
-from bourbaki.ordre.ensembles_pont_binder import pont_compatible
+from bourbaki.ordre.iii_1_relations_ordre.isomorphismes_ordre.ensembles_pont_binder import pont_compatible
 from bourbaki.cardinaux.ensembles_cardinaux import est_bijection_de
 from bourbaki.cardinaux.ensembles_composee_bijection import composee_bijection_conjoints
 

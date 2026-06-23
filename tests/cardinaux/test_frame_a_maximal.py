@@ -13,8 +13,8 @@ from bourbaki.entiers.ensembles_infinis import est_infini_ensemble
 from bourbaki.cardinaux.ensembles_hessenberg_hard import frame_pair, frame_ordre
 from bourbaki.cardinaux.ensembles_chaine_temoin_abstrait import union_premiere
 from bourbaki.cardinaux.ensembles_frame_inductif_assemblage import m_dans_frame_universel
-from bourbaki.ordre.ensembles_zorn import est_inductif, enonce_non_vide
-from bourbaki.ordre.ensembles_ordre_relation import element_maximal, est_ordre
+from bourbaki.ordre.iii_2_bon_ordre.zorn_zermelo.ensembles_zorn import est_inductif, enonce_non_vide
+from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis.ensembles_ordre_relation import element_maximal, est_ordre
 from bourbaki.cardinaux.ensembles_frame_a_maximal import (
     est_infini_union_chaine, frame_inductif_clean, frame_a_maximal,
 )

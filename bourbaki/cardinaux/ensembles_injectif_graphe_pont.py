@@ -44,7 +44,7 @@ from bourbaki.logique.tactiques.tactiques_abrege_quantif import (
 from bourbaki.logique.tactiques.tactiques_abrege_egalite import (
     symetrie, composer_egalites,
 )
-from bourbaki.ordre.ensembles_c60_final import couple_donne_valeur
+from bourbaki.ordre.iii_2_bon_ordre.recurrence_transfinie.ensembles_c60_final import couple_donne_valeur
 from bourbaki.cardinaux.ensembles_recollement_famille_injectif import injectif_graphe
 
 

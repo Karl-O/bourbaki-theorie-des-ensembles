@@ -49,11 +49,11 @@ from bourbaki.logique.tactiques.tactiques_abrege_quantif import (
     existe_elimination, congruence_existe, alpha_existe, monotonie_existe,
 )
 from bourbaki.logique.tactiques.tactiques_abrege_egalite import symetrie as _sym
-from bourbaki.ordre.ensembles_ordre_relation import (
+from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis.ensembles_ordre_relation import (
     est_ordre, reflexivite_sur, antisymetrie, transitivite_rel, totalement_ordonne,
     majorant, borne_superieure, element_maximal,
 )
-from bourbaki.ordre.ensembles_zorn import (
+from bourbaki.ordre.iii_2_bon_ordre.zorn_zermelo.ensembles_zorn import (
     chaine, est_inductif, enonce_non_vide,
 )
 
@@ -671,7 +671,7 @@ def _zorn_instancie(X, Y):
 
     zorn_theoreme() (CLOS) instancié à G:=ΓI(X,Y), E:=Inj(X,Y) via des PIVOTS frais
     g0,e0 (motif _bw_strict_contra_terme) pour éviter toute capture de X,Y."""
-    from bourbaki.ordre.ensembles_zorn_theoreme import zorn_theoreme
+    from bourbaki.ordre.iii_2_bon_ordre.zorn_zermelo.ensembles_zorn_theoreme import zorn_theoreme
     g0, e0 = "_cg0", "_ce0"
     vg0, ve0 = var(g0), var(e0)
     Gam0, Inj0 = Gamma(vg0, ve0), Inj(vg0, ve0)
@@ -781,7 +781,7 @@ def _sous_propre_temoin(A, B, hAB, hAneB, z="z"):
     ¬(∀z)(z∈B⇒z∈A), d'où (∃z)¬(z∈B⇒z∈A) ⇔ (∃z)(z∈B et z∉A)."""
     from bourbaki.logique.tactiques.tactiques_abrege2 import dne
     from bourbaki.ensembles.ensembles_theoremes import extensionnalite_appliquee
-    from bourbaki.ordre.ensembles_bourbaki_witt_chaine import _ex_falso, _refute_self, _neg_impl_equiv
+    from bourbaki.ordre.iii_2_bon_ordre.zorn_zermelo.ensembles_bourbaki_witt_chaine import _ex_falso, _refute_self, _neg_impl_equiv
     vA, vB = _terme(A), _terme(B)
     vz = var(z)
     BsubA = inclus(vB, vA)                                   # B⊂A = (∀z)(z∈B⇒z∈A)
@@ -842,7 +842,7 @@ def _pas_dans_dom(g, x0, y0, b="yb"):
     """⊢ { x₀∉dom g } ⊢ ¬( (x₀, b)∈g )  pour tout TERME b.
 
     Si (x₀,b)∈g alors (∃y)((x₀,y)∈g) (témoin b), donc x₀∈dom g — contredit x₀∉dom g."""
-    from bourbaki.ordre.ensembles_bourbaki_witt_chaine import _ex_falso, _refute_self
+    from bourbaki.ordre.iii_2_bon_ordre.zorn_zermelo.ensembles_bourbaki_witt_chaine import _ex_falso, _refute_self
     vg, vx0, vb = _terme(g), _terme(x0), _terme(b)
     Hnd = N.assume(non(appartient(vx0, E.dom(vg))))         # x₀∉dom g
     Hin = N.assume(appartient(E.couple(vx0, vb), vg))      # (x₀,b)∈g
@@ -856,7 +856,7 @@ def _pas_dans_img(g, x0, y0, a="xa"):
     """⊢ { y₀∉img g } ⊢ ¬( (a, y₀)∈g )  pour tout TERME a.
 
     Si (a,y₀)∈g alors (∃x)((x,y₀)∈g) (témoin a), donc y₀∈img g — contredit y₀∉img g."""
-    from bourbaki.ordre.ensembles_bourbaki_witt_chaine import _ex_falso, _refute_self
+    from bourbaki.ordre.iii_2_bon_ordre.zorn_zermelo.ensembles_bourbaki_witt_chaine import _ex_falso, _refute_self
     vg, vy0, va = _terme(g), _terme(y0), _terme(a)
     Hni = N.assume(non(appartient(vy0, E.img(vg))))        # y₀∉img g
     Hin = N.assume(appartient(E.couple(va, vy0), vg))     # (a,y₀)∈g
@@ -886,7 +886,7 @@ def _ext_fonctionnel(X, Y, g, x0, y0, Hxnd, u="u", v="v", z="z"):
 
     Cas (g,g): g fonctionnel. Cas mixtes (g,c0)/(c0,g): u=x₀ ⇒ (x₀,·)∈g, contredit
     x₀∉dom g (vacuité). Cas (c0,c0): v=y₀=z."""
-    from bourbaki.ordre.ensembles_bourbaki_witt_chaine import _ex_falso, _refute_self
+    from bourbaki.ordre.iii_2_bon_ordre.zorn_zermelo.ensembles_bourbaki_witt_chaine import _ex_falso, _refute_self
     vg, vx0, vy0 = _terme(g), _terme(x0), _terme(y0)
     vu, vv, vz = var(u), var(v), var(z)
     c0 = E.couple(vx0, vy0)
@@ -950,7 +950,7 @@ def _ext_injectif(X, Y, g, x0, y0, Hynd, a="a", b="b", ap="ap"):
 
     Cas (g,g): g injectif. Cas mixtes (g,c0)/(c0,g): b=y₀ ⇒ (·,y₀)∈g, contredit
     y₀∉img g (vacuité). Cas (c0,c0): a=x₀=a'."""
-    from bourbaki.ordre.ensembles_bourbaki_witt_chaine import _ex_falso, _refute_self
+    from bourbaki.ordre.iii_2_bon_ordre.zorn_zermelo.ensembles_bourbaki_witt_chaine import _ex_falso, _refute_self
     from bourbaki.logique.tactiques.tactiques_abrege_egalite import composer_egalites
     vg, vx0, vy0 = _terme(g), _terme(x0), _terme(y0)
     va, vb, vap = var(a), var(b), var(ap)
@@ -1058,7 +1058,7 @@ def _g_ne_ext(g, x0, y0, Hxnd):
 
     (x₀,y₀)∈D ; si g=D alors (x₀,y₀)∈g (Leibniz), donc (∃y)((x₀,y)∈g), donc
     x₀∈dom g — contredit x₀∉dom g."""
-    from bourbaki.ordre.ensembles_bourbaki_witt_chaine import _ex_falso, _refute_self
+    from bourbaki.ordre.iii_2_bon_ordre.zorn_zermelo.ensembles_bourbaki_witt_chaine import _ex_falso, _refute_self
     vg, vx0, vy0 = _terme(g), _terme(x0), _terme(y0)
     c0 = E.couple(vx0, vy0)
     D = _ext(g, x0, y0)
@@ -1107,7 +1107,7 @@ def _extension_contredit_maximal(X, Y, g, x0, y0, Hmax, Hgsub, Hfg, Hig,
     FALSE = (g=D) à partir de la maximalité, contredite par g≠D ; pratiquement on
     renvoie ⊢ Φ pour Φ arbitraire passé en `but` (via _ex_falso).  Ici on expose
     plutôt directement la conjonction contradictoire via maximalité→D=g, g≠D."""
-    from bourbaki.ordre.ensembles_bourbaki_witt_chaine import _ex_falso
+    from bourbaki.ordre.iii_2_bon_ordre.zorn_zermelo.ensembles_bourbaki_witt_chaine import _ex_falso
     vX, vY, vg = _terme(X), _terme(Y), _terme(g)
     Gam, Inj_set = Gamma(vX, vY), Inj(vX, vY)
     D = _ext(g, x0, y0)
@@ -1138,7 +1138,7 @@ def maximal_dom_ou_img(X="X", Y="Y", g="g", x0="x0", y0="y0", z="z"):
     dom g⊂X, img g⊂Y ; les sous-ensembles propres fournissent x₀∈X∖dom g et
     y₀∈Y∖img g ; alors g∪{(x₀,y₀)}∈Inj est STRICTEMENT plus grand que g
     (_extension_contredit_maximal), ce qui contredit la maximalité (D=g et g≠D)."""
-    from bourbaki.ordre.ensembles_bourbaki_witt_chaine import _ex_falso
+    from bourbaki.ordre.iii_2_bon_ordre.zorn_zermelo.ensembles_bourbaki_witt_chaine import _ex_falso
     vX, vY, vg = var(X), var(Y), var(g)
     Gam, Inj_set = Gamma(vX, vY), Inj(vX, vY)
     Hmax = N.assume(element_maximal(Gam, Inj_set, vg, "x"))   # element_maximal(ΓI,Inj,g)

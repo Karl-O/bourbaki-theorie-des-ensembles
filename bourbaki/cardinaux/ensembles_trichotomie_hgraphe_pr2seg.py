@@ -50,7 +50,7 @@ from bourbaki.logique.formule import (
 )
 from bourbaki.logique import noyau_abrege as N
 from bourbaki.ensembles import ensembles_abrege as E
-from bourbaki.ordre import ensembles_ordre_vocab as V
+from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis import ensembles_ordre_vocab as V
 from bourbaki.logique.tactiques.tactiques_abrege import syllogisme
 from bourbaki.logique.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
@@ -65,7 +65,7 @@ from bourbaki.ensembles.familles.ensembles_produit import (
     _instance_produit, couple_dans_produit_ssi,
 )
 from bourbaki.ensembles.fonctions.ensembles_valeur_codomaine import couple_valeur_dans_graphe
-from bourbaki.ordre.ensembles_valeur_bridge import valeur_y_egal_j
+from bourbaki.ordre.iii_1_relations_ordre.isomorphismes_ordre.ensembles_valeur_bridge import valeur_y_egal_j
 from bourbaki.cardinaux import ensembles_trichotomie_scaffold as TS
 from bourbaki.cardinaux import ensembles_trichotomie_scaffold_maximalite as M
 from bourbaki.cardinaux import ensembles_maximalite_close as MAX

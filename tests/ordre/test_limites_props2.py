@@ -12,8 +12,8 @@ from bourbaki.logique.formule import (
 from bourbaki.logique import noyau_abrege as N
 from bourbaki.ensembles import ensembles_abrege as E
 from bourbaki.ensembles.familles import ensembles_limites as L
-from bourbaki.ordre import ensembles_limites_canoniques as C
-from bourbaki.ordre import ensembles_limites_props2 as P2
+from bourbaki.ordre.iii_7_limites import ensembles_limites_canoniques as C
+from bourbaki.ordre.iii_7_limites import ensembles_limites_props2 as P2
 
 
 def _leq():

@@ -14,11 +14,11 @@ Rien n'est postulé : M chaîne et le point fixe sont DÉMONTRÉS (.est_clos vé
 """
 from bourbaki.logique.formule import var
 from bourbaki.ensembles import ensembles_abrege as E
-from bourbaki.ordre.ensembles_ordre_relation import totalement_ordonne
-from bourbaki.ordre.ensembles_bourbaki_witt import (
+from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis.ensembles_ordre_relation import totalement_ordonne
+from bourbaki.ordre.iii_2_bon_ordre.zorn_zermelo.ensembles_bourbaki_witt import (
     M, est_tour, M_est_une_chaine as ENONCE_CHAINE, bourbaki_witt as ENONCE_BW,
 )
-from bourbaki.ordre import ensembles_bourbaki_witt_chaine as W
+from bourbaki.ordre.iii_2_bon_ordre.zorn_zermelo import ensembles_bourbaki_witt_chaine as W
 
 
 G, Es, P, A, Cc = var("G"), var("E"), var("p"), var("a"), var("c")
@@ -121,7 +121,7 @@ def test_M_est_une_chaine_egale_enonce():
 def test_M_est_une_chaine_hyps_structurelles():
     # conditionné aux SEULES hypothèses structurelles (comme point_fixe_de_sup) ;
     # M chaîne n'est JAMAIS postulé (pas clos « gratuitement »).
-    from bourbaki.ordre.ensembles_ordre_relation import est_ordre
+    from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis.ensembles_ordre_relation import est_ordre
     t = W.M_est_une_chaine()
     assert est_ordre(G, Es) in t.hypotheses
     assert not t.est_clos
@@ -136,7 +136,7 @@ def test_bourbaki_witt_theoreme_CLOS():
 
 def test_bourbaki_witt_avec_temoin_dans_E():
     from bourbaki.logique.formule import existe, et, egal, appartient
-    from bourbaki.ordre.ensembles_bourbaki_witt import pval
+    from bourbaki.ordre.iii_2_bon_ordre.zorn_zermelo.ensembles_bourbaki_witt import pval
     t = W.bourbaki_witt_theoreme(avec_E=True)
     assert t.est_clos
     # conclusion renforcée : (∃s)(s∈E et p(s)=s)
@@ -157,5 +157,5 @@ def test_bw_strict_contradiction_CLOS():
 
 
 def test_zorn_via_bw_enonce_est_redite():
-    from bourbaki.ordre.ensembles_zorn import zorn
+    from bourbaki.ordre.iii_2_bon_ordre.zorn_zermelo.ensembles_zorn import zorn
     assert W.zorn_via_bw_enonce(G, Es) == zorn(G, Es)

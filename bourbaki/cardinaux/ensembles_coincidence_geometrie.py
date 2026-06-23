@@ -27,7 +27,7 @@ from bourbaki.logique.tactiques.tactiques_abrege2 import (
     equivalence_avant, instancie, conjonction_intro,
     conjonction_elim_gauche, conjonction_elim_droite,
 )
-from bourbaki.ordre.ensembles_valeur_bridge import valeur_j_egal_y
+from bourbaki.ordre.iii_1_relations_ordre.isomorphismes_ordre.ensembles_valeur_bridge import valeur_j_egal_y
 from bourbaki.ensembles.fonctions.ensembles_valeur_codomaine import valeur_dans_codomaine
 from bourbaki.ensembles.fonctions.ensembles_fonctions_composee import composition_valeur
 
@@ -165,7 +165,7 @@ def retraction_phi(phi="phi", S="S", T="T", x="x"):
     from bourbaki.ensembles.fonctions.ensembles_fonctions import (
         valeur_dans_graphe, valeur_caracterisation)
     from bourbaki.ensembles.fonctions.ensembles_reciproque import couple_reciproque
-    from bourbaki.ordre.ensembles_valeur_bridge import valeur_y_egal_j
+    from bourbaki.ordre.iii_1_relations_ordre.isomorphismes_ordre.ensembles_valeur_bridge import valeur_y_egal_j
     vphi, vS, vT, vx, vy = var(phi), var(S), var(T), var(x), var("y")
     Phinv = E.reciproque(vphi)
     Hx = N.assume(appartient(vx, vS))            # x∈S
@@ -275,7 +275,7 @@ def raccord_phip(phi="phi", phip="phip", S="S", T="T", u="u"):
     #   chaîne : φ'(c(u)[j])[j] = φ'(c(u)[j])[y] = φ'(φ'⁻¹(φ(u))[y])[y] = φ(u)[y]
     lhs_eq_phiuy = composer_egalites(composer_egalites(lhs_jy, lhsy_eq_seclhs), sec)   # φ'(c(u)[j])[j] = φ(u)[y]
     #   φ(u)[y] = φ(u)[j]   (pont inverse)
-    from bourbaki.ordre.ensembles_valeur_bridge import valeur_y_egal_j
+    from bourbaki.ordre.iii_1_relations_ordre.isomorphismes_ordre.ensembles_valeur_bridge import valeur_y_egal_j
     lhs_eq_phiuj = composer_egalites(lhs_eq_phiuy, valeur_y_egal_j(vphi, vu))   # φ'(c(u)[j])[j] = φ(u)[j]
 
     body = N.loi_deduction(appartient(vu, vS), lhs_eq_phiuj)
@@ -319,7 +319,7 @@ def retraction_kc(phi="phi", phip="phip", S="S", T="T", x="x"):
     from bourbaki.logique.tactiques.tactiques_abrege2 import equivalence_arriere
     from bourbaki.cardinaux.ensembles_iso_ordre_reciproque import section_reciproque
     from bourbaki.ensembles.fonctions.ensembles_composee_valeurs import composition_valeur_t
-    from bourbaki.ordre.ensembles_valeur_bridge import valeur_y_egal_j
+    from bourbaki.ordre.iii_1_relations_ordre.isomorphismes_ordre.ensembles_valeur_bridge import valeur_y_egal_j
     vphi, vphip, vS, vT, vx, vy = _t(phi), _t(phip), _t(S), _t(T), var(x), var("y")
     PhiInv = E.reciproque(vphi)               # φ⁻¹
     PhipInv = E.reciproque(vphip)             # φ'⁻¹
@@ -486,7 +486,7 @@ def _coincidence_univ_assemble(base, phi2, S1, u):
     réécrit (φ2|S1)(u)=φ2(u) (restriction_valeur + ponts j↔y) ⊢ (∀u)(u∈S1⇒φ1(u)=φ2(u))."""
     from bourbaki.logique.tactiques.tactiques_abrege_egalite import composer_egalites
     from bourbaki.logique.tactiques.tactiques_abrege2 import instancie as _i
-    from bourbaki.ordre.ensembles_valeur_bridge import valeur_y_egal_j
+    from bourbaki.ordre.iii_1_relations_ordre.isomorphismes_ordre.ensembles_valeur_bridge import valeur_y_egal_j
     from bourbaki.cardinaux.ensembles_cantor_bernstein_bij import restriction_valeur
     vphi2, vS1, vu = var(phi2), var(S1), var(u)
     phi2S1 = E.restriction(vphi2, vS1)
@@ -557,7 +557,7 @@ def coincidence_close_isos(phi="phi", phip="phip", S="S", T="T", u="u", E_set="E
     from bourbaki.cardinaux.ensembles_iso_ordre_reciproque import reciproque_isomorphisme_ordre
     from bourbaki.cardinaux.ensembles_bijection import reciproque_fonctionnelle, reciproque_domaine
     from bourbaki.cardinaux.ensembles_coincidence_decharge import _Rgraphe
-    from bourbaki.ordre.ensembles_ordre_vocab import est_isomorphisme_ordre as _Viso
+    from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis.ensembles_ordre_vocab import est_isomorphisme_ordre as _Viso
     Rf, Rpf = _Rgraphe("R"), _Rgraphe("Rp")
 
     def _decharge(thm, base):                                # MP : remplace thm.conclusion (∈base) par les hyps de thm

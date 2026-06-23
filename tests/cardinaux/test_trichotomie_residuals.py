@@ -22,7 +22,7 @@ INVARIANT : theorie_ensembles() = 22.  Rien postulé.  Conclusions NON vacueuses
 """
 from bourbaki.logique.formule import var, appartient, egal, inclus
 from bourbaki.ensembles import ensembles_abrege as E
-from bourbaki.ordre import ensembles_ordre_vocab as V
+from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis import ensembles_ordre_vocab as V
 from bourbaki.cardinaux import ensembles_trichotomie_residuals as RES
 from bourbaki.cardinaux import ensembles_trichotomie_dom_segment as DS
 from bourbaki.cardinaux import ensembles_fusion_depuis_coincidence_app as FDA

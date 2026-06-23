@@ -7,7 +7,7 @@ de la maximalité (D=E ou I=F) et des deux segments, on conclut la trichotomie S
 from bourbaki.logique.formule import var, egal, ou, appartient
 from bourbaki.ensembles import ensembles_abrege as E
 from bourbaki.cardinaux import ensembles_trichotomie_maillon_final as MF
-from bourbaki.ordre import ensembles_iso_ordre_canon as C
+from bourbaki.ordre.iii_1_relations_ordre.isomorphismes_ordre import ensembles_iso_ordre_canon as C
 
 
 def _Rf(g):
@@ -52,7 +52,7 @@ def test_maillon_final_h_chaine_les_pieces_commitees():
     # les 2 hypothèses d'iso (h, h⁻¹) ne sont PLUS là (déchargées sur les pièces commitées)
     import bourbaki.cardinaux.ensembles_trichotomie_scaffold as TS
     from bourbaki.cardinaux.ensembles_trichotomie_maillon_final import _R_de
-    from bourbaki.ordre import ensembles_iso_ordre_canon as C
+    from bourbaki.ordre.iii_1_relations_ordre.isomorphismes_ordre import ensembles_iso_ordre_canon as C
     h = TS.h_iso_max("E", "R", "F", "Rp")
     Rf, Rpf = _R_de("R"), _R_de("Rp")
     iso_h = C.est_isomorphisme_ordre_canon(h, E.dom(h), E.img(h), Rf, Rpf)

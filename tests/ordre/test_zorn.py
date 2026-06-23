@@ -7,8 +7,8 @@ définitions se construisent bien et coïncident avec la forme Bourbaki).
 from bourbaki.logique.formule import (
     var, et, impl, appartient, pourtout, existe, inclus,
 )
-from bourbaki.ordre import ensembles_ordre_relation as O
-from bourbaki.ordre import ensembles_zorn as Z
+from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis import ensembles_ordre_relation as O
+from bourbaki.ordre.iii_2_bon_ordre.zorn_zermelo import ensembles_zorn as Z
 
 
 G, Es, C, A = var("G"), var("E"), var("C"), var("A")

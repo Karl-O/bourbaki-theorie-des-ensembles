@@ -8,8 +8,8 @@ import pytest
 
 from bourbaki.logique.formule import var, egal, impl, appartient, pourtout, existe
 from bourbaki.ensembles.ensembles_abrege import theorie_ensembles, est_bien_ordonne
-from bourbaki.ordre.ensembles_c60_pont import essais_bien_formes, rule_codomain
-from bourbaki.ordre.ensembles_recurrence_transfinie import _graphe_R
+from bourbaki.ordre.iii_2_bon_ordre.recurrence_transfinie.ensembles_c60_pont import essais_bien_formes, rule_codomain
+from bourbaki.ordre.iii_2_bon_ordre.recurrence_transfinie.ensembles_recurrence_transfinie import _graphe_R
 from bourbaki.entiers.ensembles_c62_recursion import (
     c62_recursion_sur_N, c62_cible, regle_iteration, c63_iteration_sur_N,
 )
