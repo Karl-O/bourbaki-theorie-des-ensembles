@@ -162,7 +162,7 @@ Priorise: perf_risque faible + difficulte facile d abord. [ ] = a faire, [x] = f
 - lemmes: ensembles_familles_algebre:_inst_reunion, ensembles_chap2_props_restantes:famille_reparam, ensembles_chap2_props_restantes:axiome_valeur_reparam, ensembles_chap2_props_restantes:_membre_eq, ensembles_abrege:reunion_famille, ensembles_abrege:valeur_famille, ensembles_theoremes:egalite_par_extension, tactiques_abrege_quantif:congruence_existe
 - fichier: C:/Users/KARL/OneDrive/Bureau/Apprendre/Livre/Bourbakie/Theorie_des_ensembles/V9/bourbaki/ensembles/familles/ii_4_reunion_intersection_familles/ii_4_1_definitions_algebre/ensembles_familles_assoc_reun
 
-## [ ] diagonale_dans_exposant — x̃ ∈ E^I et Δ ⊂ E^I (la diagonale vit bien dans le produit E^I)  (faible/moyen)
+## [x] diagonale_dans_exposant — x̃ ∈ E^I et Δ ⊂ E^I (la diagonale vit bien dans le produit E^I)  (faible/moyen)
 - secteur: II.5 — Produit d'une famille d | E.II.5.3 (la diagonale Δ est « une partie du produit E^I »)
 - statut: MANQUANT — le texte Bourbaki affirme « les graphes des applications constantes forment une partie Δ du produit E^I » mais aucun lemme ne certifie x̃∈E^I ni l'inclusion Δ⊂E^I. diagonale_produit (=image
 - enonce: Soit E un ensemble, I un ensemble d'indices. (a) Pour tout x∈E, x̃ ∈ E^I (= exposant(I,E)). (b) Δ ⊂ E^I, où Δ = {x̃ | x∈E}. Formes : ⊢ (x∈E) ⇒ ( x̃ ∈ exposant(I,E) ) ; et ⊢ Δ ⊂ exposant(I,E).
