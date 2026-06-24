@@ -1,0 +1,119 @@
+\section{Session du 24 juin 2026 --- épluchage PDF intégral et comblages}
+
+\textbf{Épluchage page-par-page.} Les quatre chapitres du livre ont été confrontés,
+notion par notion, au code certifié, à partir du PDF lu page par page. Bilan dans
+\texttt{COUVERTURE.md} : \textbf{707 notions recensées}, dont $305$ closes ($43\,\%$)
+et $501$ présentes (closes ou partielles, $71\,\%$) ; sur les $644$ notions
+formalisables (hors métamathématique subsumée par le noyau), $47\,\%$ closes et
+$78\,\%$ présentes. Aucun écart majeur sur les chapitres~I et~IV ; le chapitre~IV
+s'est révélé quasi clos (ses manquants renvoient à d'autres volumes).
+
+Les huit résultats ci-dessous comblent des manquants réels de cet épluchage. Chacun
+a été \emph{vérifié indépendamment} (reconstruction de la conclusion attendue,
+contrôle de clôture, invariant \texttt{theorie\_ensembles()==22}) avant commit.
+
+\subsection{§II.1 --- Pas d'ensemble de Russell ; caractérisation du singleton}
+\textbf{Énoncé (Bourbaki, E~II.3--4).} La relation $x\notin x$ n'est pas
+collectivisante : $\neg\,\mathrm{Coll}_x(x\notin x)$. De plus
+$x\in X \Leftrightarrow \{x\}\subset X$.
+
+\textbf{Formalisé.} $\mathrm{non}(\mathrm{coll}(x,\ x\notin x))$ et
+$\mathrm{equiv}(x\in X,\ \{x\}\subset X)$.
+Module : \texttt{.../ii\_1\_axiomes\_algebre/ensembles\_theoremes.py}.
+
+\textbf{Preuve (\Nstar).} Russell : par l'absurde, \texttt{existe\_temoin} sur
+$\mathrm{Coll}$, instanciation au témoin $y_0$ donne $y_0\in y_0\Leftrightarrow\neg(y_0\in y_0)$,
+réfutée par le lemme propositionnel $\neg(P\Leftrightarrow\neg P)$ (construit ici).
+Singleton-inclusion : double sens via \texttt{singleton\_membre} et le schéma~$S6$.
+
+\textbf{Statut.} CLOS ; \texttt{theorie\_ensembles()==22}.
+
+\subsection{§III.1.5 --- Proposition 2 : connexion de Galois}
+\textbf{Énoncé (Bourbaki, E~III.7--8).} Pour $u,v$ décroissantes avec $v\circ u\geq\mathrm{id}$
+et $u\circ v\geq\mathrm{id}$ : $u\circ v\circ u = u$ (et $v\circ u\circ v = v$).
+
+\textbf{Formalisé.} Première égalité $u\circ v\circ u=u$ : $\;(\forall x)(x\in E\Rightarrow w(x)=u(x))$,
+$w$ représentant le composite. Module :
+\texttt{.../iii\_1\_5\_applications\_croissantes/ensembles\_prop2\_galois.py}.
+
+\textbf{Preuve (\Nstar).} $u(v(u(x)))\leq u(x)$ ($u$ décroissante appliquée à $v(u(x))\geq x$)
+et $u(x)\leq u(v(u(x)))$ (Galois en $x'{:=}u(x)$) ; antisymétrie ; transport par
+\texttt{composer\_egalites}.
+
+\textbf{Statut.} CLOS sous $7$ hypothèses honnêtes. \emph{Fidélité} : la décroissance
+de~$v$, non load-bearing pour cette égalité, a été retirée (cf.\ \texttt{DECISIONS.md}).
+
+\subsection{§II.5 --- Proposition 8 : distributivité $\bigcup\bigcap\subset\bigcap\bigcup$}
+\textbf{Énoncé (Bourbaki, E~II.35--36).}
+$\bigcup_{\lambda\in L}\bigl(\bigcap_{\iota\in J_\lambda}X_{\lambda,\iota}\bigr)
+\subset \bigcap_{f\in I}\bigl(\bigcup_{\lambda\in L}X_{\lambda,f(\lambda)}\bigr)$, $I=\prod_\lambda J_\lambda$.
+
+\textbf{Formalisé.} L'inclusion directe (ponctuelle, sans choix) ; la réciproque
+consomme l'axiome du choix et est hors cible. Module :
+\texttt{.../ii\_5\_6\_7\_algebre\_produit/ensembles\_prop8\_distrib\_directe\_ii5.py}.
+
+\textbf{Preuve (\Nstar).} Inclusion $=(\forall z)$\,; témoin $\lambda_0$ par
+\texttt{existe\_elimination}, projection $f(\lambda_0)\in J_{\lambda_0}$, élimination de
+l'intersection puis introduction de la réunion. Familles externes opaques nommées par
+trois axiomes définitionnels~C54 portés par une théorie locale (mécanisme établi,
+cf.\ cardinaux/exposant) : \texttt{theorie\_ensembles()} reste à~$22$.
+
+\textbf{Statut.} CLOS (extension définitionnelle C54).
+
+\subsection{§III.2.1 --- Proposition 2 : strictité $S_x\subsetneq S_y$}
+\textbf{Énoncé (Bourbaki, E~III.15--16).} Dans un ensemble bien ordonné, $x<y$
+entraîne $S_x\subsetneq S_y$ ; $x\mapsto S_x$ est injective.
+
+\textbf{Formalisé.} $S_x\subset S_y\ \wedge\ (x\in S_y\wedge x\notin S_x)$ (la
+strictité, faute de primitive, comme inclusion large $+$ témoin d'écart). Module :
+\texttt{.../bon\_ordre\_segments/ensembles\_segment\_extremite\_injectif.py}.
+
+\textbf{Preuve (\Nstar).} \texttt{conjonction\_intro} de deux théorèmes déjà clos
+(\texttt{seg\_strict\_monotone\_de\_bon\_ordre} et \texttt{seg\_strict\_propre}) ;
+l'hypothèse $R\{x,y\}$ fusionne.
+
+\textbf{Statut.} CLOS sous $4$ hypothèses honnêtes $\{$bon ordre$,\ x\in E,\ x\leq y,\ x\neq y\}$.
+
+\subsection{§III.1.12 --- Proposition 12 : critère de borne supérieure (ordre total)}
+\textbf{Énoncé (Bourbaki, E~III.14).} $E$ totalement ordonné, $X\subset E$, $b\in E$ :
+$b=\sup X$ ssi (1°) $b$ majore $X$ et (2°) tout $c<b$ est dépassé par un $x\in X$ avec $c<x\leq b$.
+
+\textbf{Formalisé.} L'équivalence $\mathrm{borne\_sup}(G,X,b,E)\Leftrightarrow(\text{1°}\wedge\text{2°})$,
+les deux sens. Module :
+\texttt{.../iii\_1\_12\_totalement\_ordonnes/ensembles\_prop12\_sup\_total.py}.
+
+\textbf{Preuve (\Nstar).} Totalité $+$ antisymétrie (gabarit
+\texttt{maximal\_est\_plus\_grand\_si\_total}) ; sens~$\Rightarrow$ par contraposée,
+sens~$\Leftarrow$ par témoin. \emph{Fidélité} : le strict $c<x$ ($c\neq x$) est
+\emph{obligatoire} --- sans lui l'équivalence est fausse (contre-exemple
+$E=\{0,1,2\}$) et le noyau la refuse (cf.\ \texttt{DECISIONS.md}).
+
+\textbf{Statut.} CLOS sous $3$ hypothèses honnêtes.
+
+\subsection{§II.5 --- Proposition 10 : $\bigcap_\kappa\prod_\iota X = \prod_\iota\bigcap_\kappa X$}
+\textbf{Énoncé (Bourbaki, E~II.37).} Pour $K\neq\emptyset$ :
+$\bigcap_{\kappa\in K}\bigl(\prod_{\iota\in I}X_{\iota,\kappa}\bigr)
+= \prod_{\iota\in I}\bigl(\bigcap_{\kappa\in K}X_{\iota,\kappa}\bigr)$.
+
+\textbf{Formalisé.} L'égalité \emph{pleine} (les deux inclusions, par extensionnalité~$A1$),
+version $K$ générale, sans choix. Module :
+\texttt{.../ii\_5\_6\_7\_algebre\_produit/ensembles\_prop10\_inter\_produit\_ii5.py}.
+
+\textbf{Preuve (\Nstar).} Biconditionnel d'appartenance par double permutation de
+quantificateurs $(\forall\kappa)(\forall\iota)\leftrightarrow(\forall\iota)(\forall\kappa)$,
+borné par le bloc fonctionnel/domaine ; $K\neq\emptyset$ load-bearing (témoin $\kappa_0$).
+
+\textbf{Statut.} CLOS ($0$ hyp.\ ; $4$ antécédents honnêtes déchargés en implication).
+
+\subsection{§III.2.1 --- Proposition 2 : sens large $S_x\subset S_y$}
+\textbf{Énoncé (Bourbaki, E~III.15).} Dans un ensemble bien ordonné, $x\leq y$
+entraîne $S_x\subset S_y$.
+
+\textbf{Formalisé.} $\mathrm{est\_bien\_ordonne}(R,E)\Rightarrow(R\{x,y\}\Rightarrow S_x\subset S_y)$,
+ré-exposition nommée en section~III.2 d'un théorème déjà clos en aval. Module :
+\texttt{.../bon\_ordre\_segments/ensembles\_segment\_extremite\_monotone.py}.
+
+\textbf{Preuve (\Nstar).} Double \texttt{loi\_deduction} sur
+\texttt{seg\_strict\_monotone\_de\_bon\_ordre} ; aucune hypothèse parasite.
+
+\textbf{Statut.} CLOS.
