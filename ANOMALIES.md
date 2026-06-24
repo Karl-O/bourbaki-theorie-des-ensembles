@@ -54,3 +54,6 @@ Le corps de cantor_deux_exp levait NotImplementedError avec un commentaire prete
 - A FAIRE (1 fois, debloque (22)(23) et les autres) : prouver couple_decomposition
   (z∈E×F ⇒ z=(pr1 z, pr2 z)) puis un lemme produit_egalite_par_couples
   ((∀ couple) (u,v)∈A ⇔ (u,v)∈B, A,B⊂E×F ⇒ A=B). Ensuite remonter les couple-level en egalites d'ensembles.
+
+### RESOLU (2026-06-24) : ecart de portee des produits
+- Brique produit_egalite_par_couples + couple_decomposition (ii_2_couples_produit/ensembles_produit_extensionnalite.py) livree -> (22) est desormais une EGALITE D'ENSEMBLES pleine. La meme brique permet d'upgrader (23) (X×Y)n(X'×Y')=(XnX')×(YnY') et les autres egalites de produits du couple-level vers l'ensembliste. Caveat binder : z != 'w' (w reserve par composer_egalites/symetrie).
