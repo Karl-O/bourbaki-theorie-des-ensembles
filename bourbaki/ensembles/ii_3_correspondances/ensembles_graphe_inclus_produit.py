@@ -41,15 +41,19 @@ réutilisation de théorèmes existants).
 from __future__ import annotations
 
 from bourbaki.logique.i_1_termes_relations.formule import (
-    Terme, var, impl, appartient, inclus, pourtout)
+    Terme, var, egal, non, impl, appartient, inclus, pourtout)
 from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     conjonction_intro, equivalence_arriere, equivalence_avant, instancie)
+from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import (
+    congruence_terme, composer_egalites)
+from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import (
+    extensionnalite_appliquee)
 from bourbaki.ensembles.ii_2_couples_produit.ensembles_couple_caracterisation import (
     est_couple, caracterisation_couple)
 from bourbaki.ensembles.familles.ii_2_produit_deux_ensembles.ensembles_produit import (
-    couple_dans_produit_ssi)
+    couple_dans_produit_ssi, produit_vide_si)
 from bourbaki.ensembles.fonctions.ii_3_general.ensembles_extensionnalite import (
     couple_dans_dom)
 
@@ -138,5 +142,101 @@ def graphe_inclus_produit_cible(g="G"):
     return inclus(vg, E.produit(E.dom(vg), E.img(vg)))
 
 
+# ── Corollaire E II.10 : une projection vide force G = ∅ ───────────────────────
+# Bourbaki (E II.10, §3, n°1) : « Si l'un des deux ensembles pr₁G, pr₂G est vide,
+# on a donc G = ∅ (II, p. 8, prop. 2). »  C'est l'application immédiate de
+# G ⊂ (pr₁G)×(pr₂G) (graphe_inclus_produit) au fait qu'un produit dont un facteur
+# est vide est vide (Prop. 2 = E.II.34, ici produit_vide_si), puis « X⊂∅ ⇒ X=∅ ».
+
+def _vide_inclus(t):
+    """⊢ ∅ ⊂ T  (le vide inclus dans tout ensemble : z∈∅ ⇒ z∈T par ex falso).
+
+    Motif identique à `ensembles_vide.vide_ssi_sans_element` : de ⊢¬(z∈∅)
+    (AXIOME_VIDE), S2 donne ¬(z∈∅)∨(z∈T) = (z∈∅ ⇒ z∈T), puis généralisation."""
+    vz = var("z")
+    n_in = instancie(N.axiome(E.theorie_ensembles(), E.AXIOME_VIDE), vz)   # ¬(z∈∅)
+    return N.generalisation("z", N.modus_ponens(
+        n_in, N.s2(non(appartient(vz, E.VIDE)), appartient(vz, t))))       # ∅ ⊂ T
+
+
+def _sous_ensemble_du_vide_est_vide(thm_sub_vide, t):
+    """Γ ⊢ T⊂∅  ⟹  Γ ⊢ T=∅.   (∅⊂T toujours, puis extensionnalité A1.)"""
+    ext = extensionnalite_appliquee(t, E.VIDE)                  # (T⊂∅ et ∅⊂T) ⇒ T=∅
+    return N.modus_ponens(conjonction_intro(thm_sub_vide, _vide_inclus(t)), ext)
+
+
+def _produit_facteur_vide(autre, gauche):
+    """⊢ (A × B) = ∅  où le facteur ∅ est A (gauche=True : ∅×autre) ou B (autre×∅).
+
+    Instance close de `produit_vide_si` (⊢ (A=∅ ou B=∅) ⇒ A×B=∅) : on généralise
+    ses variables libres A, B puis on instancie aux termes voulus, et on décharge
+    par le disjoint correspondant (∅=∅, par réflexivité, replacé du bon côté)."""
+    a, b = (E.VIDE, autre) if gauche else (autre, E.VIDE)
+    gen = N.generalisation("B", N.generalisation("A", produit_vide_si("A", "B")))
+    inst = instancie(instancie(gen, b), a)                      # (A=∅ ou B=∅) ⇒ A×B=∅
+    refl = N.reflexivite(E.VIDE)                                # ∅=∅
+    if gauche:                                                  # ∅=∅ ⇒ (∅=∅ ou B=∅)
+        disj = N.modus_ponens(refl, N.s2(egal(a, E.VIDE), egal(b, E.VIDE)))
+    else:                                                       # ∅=∅ ⇒ (B=∅ ou ∅=∅) ⇒ (A=∅ ou B=∅)
+        droite = N.modus_ponens(refl, N.s2(egal(b, E.VIDE), egal(a, E.VIDE)))
+        disj = N.modus_ponens(droite, N.s3(egal(b, E.VIDE), egal(a, E.VIDE)))
+    return N.modus_ponens(disj, inst)                          # A×B = ∅
+
+
+def projection_vide_implique_graphe_vide(g="G"):
+    """{ est_graphe(G), pr₁G = ∅ } ⊢ G = ∅.   (Corollaire E II.10, §3, n°1.)
+
+    « Si pr₁G = ∅, on a donc G = ∅. »  pr₁G = dom(G).  Clos SOUS les deux
+    hypothèses HONNÊTES est_graphe(G) (= « G est un ensemble de couples ») et
+    dom(G) = ∅ (la prémisse du corollaire) ; la conclusion G=∅ n'y figure pas.
+
+    STRATÉGIE.  graphe_inclus_produit donne G ⊂ dom(G)×img(G).  Sous dom(G)=∅ :
+    dom(G)×img(G) = ∅×img(G) [congruence_terme] = ∅ [produit_vide_si, ∅ absorbant].
+    D'où G ⊂ ∅ [S6], puis G=∅ (tout sous-ensemble du vide est vide)."""
+    vg = _T(g)
+    incl = graphe_inclus_produit(vg)                           # {est_graphe G} ⊢ G⊂dom G×img G
+    h_dom = N.assume(egal(E.dom(vg), E.VIDE))                  # dom G = ∅
+
+    # dom G×img G = ∅×img G [congruence] = ∅ [∅ absorbant] ⇒ dom G×img G = ∅
+    eq1 = N.modus_ponens(h_dom, congruence_terme(            # dom G×img G = ∅×img G
+        E.dom(vg), E.VIDE, E.produit(var("w"), E.img(vg)), "w"))
+    eq2 = _produit_facteur_vide(E.img(vg), gauche=True)          # ∅×img G = ∅
+    eq_prod = composer_egalites(eq1, eq2)                     # dom G×img G = ∅
+
+    return _conclure_g_vide(vg, incl, eq_prod, E.produit(E.dom(vg), E.img(vg)))
+
+
+def projection_image_vide_implique_graphe_vide(g="G"):
+    """{ est_graphe(G), pr₂G = ∅ } ⊢ G = ∅.   (Corollaire E II.10, duale.)
+
+    « Si pr₂G = ∅, on a donc G = ∅. »  pr₂G = img(G).  Dual de
+    `projection_vide_implique_graphe_vide` : sous img(G)=∅, dom(G)×img(G) =
+    dom(G)×∅ [congruence] = ∅ [∅ absorbant à droite]."""
+    vg = _T(g)
+    incl = graphe_inclus_produit(vg)                           # {est_graphe G} ⊢ G⊂dom G×img G
+    h_img = N.assume(egal(E.img(vg), E.VIDE))                  # img G = ∅
+
+    eq1 = N.modus_ponens(h_img, congruence_terme(            # dom G×img G = dom G×∅
+        E.img(vg), E.VIDE, E.produit(E.dom(vg), var("w")), "w"))
+    eq2 = _produit_facteur_vide(E.dom(vg), gauche=False)         # dom G×∅ = ∅
+    eq_prod = composer_egalites(eq1, eq2)                     # dom G×img G = ∅
+
+    return _conclure_g_vide(vg, incl, eq_prod, E.produit(E.dom(vg), E.img(vg)))
+
+
+def _conclure_g_vide(vg, incl, eq_prod, prod):
+    """De {Γ ⊢ G⊂prod} et {Δ ⊢ prod=∅}, conclure Γ∪Δ ⊢ G=∅  (réécriture S6 + ∅)."""
+    s6 = N.modus_ponens(eq_prod, N.s6(prod, E.VIDE, "w", inclus(vg, var("w"))))
+    g_sub_vide = N.modus_ponens(incl, equivalence_avant(s6))   # G ⊂ ∅
+    return _sous_ensemble_du_vide_est_vide(g_sub_vide, vg)     # G = ∅
+
+
+def projection_vide_implique_graphe_vide_cible(g="G"):
+    """Énoncé visé du corollaire (pour vérification stricte) : G = ∅."""
+    return egal(_T(g), E.VIDE)
+
+
 __all__ = ["est_graphe", "couple_dans_img", "graphe_inclus_produit",
-           "graphe_inclus_produit_cible"]
+           "graphe_inclus_produit_cible", "projection_vide_implique_graphe_vide",
+           "projection_image_vide_implique_graphe_vide",
+           "projection_vide_implique_graphe_vide_cible"]
