@@ -5,7 +5,7 @@
   "pct_pause": 100,
   "repere_pct": 38,
   "repere_note": "Utilisateur a 38% au moment de poser le garde-fou (depuis la derniere pause/reset de la fenetre 5h).",
-  "tokens_subagent_depuis_repere": 161554,
+  "tokens_subagent_depuis_repere": 260426,
   "calibre": false,
   "statut": "ACTIF -- FENETRE 5h REINITIALISEE (apres reset session 18h40). Compteur remis a 0. Session precedente : 1580659 tok subagent (38->>=100%, 7 theoremes + audit). Nouveau repere % a etablir au prochain checkpoint utilisateur. Plafond 100%. Rappel : le compteur subagent sous-estime (boucle principale non comptee) ; redemander le % tous les ~3 comblages.",
   "statut_note": "REPRISE 2026-06-24 : l'utilisateur a RELEVE le plafond a 100% (« on peut aller jusqu'a 100 » ; « je te dis » = il previendra quand stop). On reprend les comblages. taux reel ~19870 tok/pt (segment 55->74) ; seuil 100% ~= 1822419 tok subagent ; on etait a 1305799 (74%). Continuer jusqu'a ~100% ou stop utilisateur ; redemander le % tous les ~3 comblages (le compteur subagent-only sous-estime).",
