@@ -31,3 +31,15 @@ Le corps de cantor_deux_exp levait NotImplementedError avec un commentaire prete
 
 ## 2026-06-24 retraction_est_injection (II.3.8) ECARTEE
 - L audit fan-out w1k1qywh0 a lui-meme signale que l enonce "une retraction est une injection" se reduit, sous forme close, soit a retraction_implique_injective (deja fait), soit a une tautologie P=>P (est_retraction(R,F,A) et est_section(F,R,A) sont la meme formule). Aucun contenu nouveau non vide certifiable sans postuler la surjectivite. Cible ecartee pour preserver l integrite (jamais de tautologie deguisee en theoreme). Le contenu reel est deja couvert par retraction_implique_injective.
+
+## prop10_inter_produits (II.5.6) -- agent coupe, preuve cassee (2026-06-24)
+- Agent aebdb1b33210af3c8 coupe (limite de session probable) en plein debogage. A laisse un
+  module de 317 lignes (>300) SANS test, dont la preuve NE SE CONSTRUIT PAS : appeler le
+  theoreme leve "modus ponens : mineure != antecedent" (~ligne 194, _inclusion_avant ;
+  mismatch de binders dans la permutation de quantificateurs).
+- LECON : l'assert de verification etait A L'INTERIEUR de la fonction (ne s'execute qu'a
+  l'appel), pas au niveau module -> un import reussi NE PROUVE RIEN. Toujours APPELER le
+  theoreme (ou lancer le test) avant de juger un orphelin "certifie".
+- Orphelin supprime (jamais commiter une preuve cassee). Cible prop10 (distributivite
+  produit/intersection, egalite complete) RESTE A FAIRE : permutation de quantificateurs
+  delicate ; a re-deleguer a frais, ou livrer la forme inclusion seule (plus simple).
