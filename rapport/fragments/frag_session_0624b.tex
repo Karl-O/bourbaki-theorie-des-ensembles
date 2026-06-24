@@ -1,0 +1,51 @@
+\section{Compléments (suite) --- manquants larges de l'audit}
+
+Après épuisement du plan ciblé, les résultats suivants comblent des manquants
+identifiés par les cartes d'audit (\texttt{COUVERTURE\_CHAP\_II/III.md}), au-delà du
+terrain balisé. Chacun a été vérifié indépendamment avant commit.
+
+\subsection{§II.1 --- Antitonie du complément}
+\textbf{Énoncé (Bourbaki, E~II.6, nº7).} « Si $A$ et $B$ sont des parties de $E$, les
+relations $A\subset B$ et $\complement_E B\subset\complement_E A$ sont équivalentes. »
+
+\textbf{Formalisé.} $\{A\subset E,\ B\subset E\}\vdash\bigl(A\subset B \Leftrightarrow
+(E\setminus B)\subset(E\setminus A)\bigr)$. Module :
+\texttt{.../ii\_1\_axiomes\_algebre/ensembles\_inclusion\_treillis.py}.
+
+\textbf{Preuve (\Nstar).} Sens $\Rightarrow$ inconditionnel (contraposition membre à
+membre). Sens $\Leftarrow$ via \texttt{complement\_involution} ($\complement\complement=\mathrm{id}$,
+qui porte l'hypothèse honnête $X\subset E$) réécrite par congruence $S6$.
+
+\textbf{Statut.} CLOS sous $\{A\subset E,\ B\subset E\}$ ; \texttt{theorie\_ensembles()==22}.
+
+\subsection{§III.1.2 --- Proposition 1 : caractérisation d'un ordre par son graphe}
+\textbf{Énoncé (Bourbaki, E~III.2).} « Pour qu'une correspondance $\Gamma=(G,E,E)$ soit
+un ordre sur $E$, il faut et il suffit que (a) $G\circ G=G$ et (b) $G\cap\overset{-1}{G}=\Delta$
+(diagonale de $E\times E$). »
+
+\textbf{Formalisé --- l'équivalence complète.}
+\[
+  \{\,\mathrm{champ}(G,E)\,\}\ \vdash\ \Bigl(\mathrm{est\_ordre}(G,E)\ \Leftrightarrow\
+  \bigl(G\circ G=G\ \text{et}\ G\cap\overset{-1}{G}=\Delta_E\bigr)\Bigr),
+\]
+où $\mathrm{champ}(G,E):=G\subset E\times E$ et $\Delta_E=\mathrm{graphe\_identite}(E)$.
+Modules : \texttt{.../iii\_1\_2\_caracterisation\_ordre/ensembles\_prop1\_caracterisation.py}
+(sens direct) et \texttt{ensembles\_prop1\_reciproque.py} (réciproque + équivalence).
+
+\textbf{Preuve (\Nstar).} Algèbre de graphes au niveau couple (\texttt{couple\_composee},
+\texttt{couple\_reciproque}, $\Delta_E$ via \texttt{membre\_graphe\_terme} : $(a,b)\in\Delta_E
+\Leftrightarrow(a\in E\ \text{et}\ b=a)$), puis extensionnalité $A1$ pour chaque égalité.
+\emph{Sens direct} : transitivité $\Rightarrow G\circ G\subset G$ ; réflexivité (via le
+champ, $\Delta_E\subset G\Rightarrow G=\Delta_E\circ G\subset G\circ G$) ; antisymétrie
+$+$ réflexivité $\Leftrightarrow G\cap\overset{-1}{G}=\Delta_E$. \emph{Réciproque} : les
+deux égalités redonnent transitivité, antisymétrie et réflexivité ; elle \emph{n'utilise
+pas} le champ (l'accès à $E$ passe par le membership de $\Delta_E$).
+
+\textbf{Fidélité / point technique.} La condition de champ $G\subset E\times E$, inhérente
+à la correspondance $\Gamma=(G,E,E)$ mais non encodée par le prédicat $\mathrm{est\_ordre}$,
+est ajoutée comme \emph{hypothèse honnête} (load-bearing pour le seul sens direct).
+$\mathrm{graphe\_identite}(E)$ laissant un liant libre, la réciproque conclut sur des
+muettes $u,v,s$ qu'un lemme de renommage ramène aux liants par défaut, de sorte que
+l'équivalence porte exactement $\mathrm{est\_ordre}(G,E)$.
+
+\textbf{Statut.} CLOS (équivalence sous $\{\mathrm{champ}(G,E)\}$) ; \texttt{theorie\_ensembles()==22}.
