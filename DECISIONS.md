@@ -155,6 +155,18 @@ au sens de la 1re egalite (theoreme strictement plus fort, fidele a la preuve). 
 duale v∘u∘v=v (donc Prop 2 complete sous 8 hyps) reste a faire pour le resultat nomme integral.
 Module : bourbaki/ordre/iii_1_relations_ordre/iii_1_5_applications_croissantes/ensembles_prop2_galois.py.
 
+### III.2 Prop 2 + III.1.12 Prop 12 (reprise plafond 100%)
+segment_extremite_strictement_croissant (E III.15-16) : x<y⇒S_x⊊S_y, conjonction de 2 briques closes
+(seg_strict_monotone + seg_strict_propre), clos mod. 4 hyps. Verifie en reconstruisant la cible depuis
+les briques memes.
+borne_sup_critere_total (E III.14, Prop 12) : critere de sup en ordre total, equivalence double sens
+close mod. 3 hyps. LECON DE FIDELITE : ma spec initiale codait « c<x » SANS le strict (c≠x), ce qui rend
+l'equivalence FAUSSE (contre-ex E={0,1,2}, X={1}, b=2 : 2 majore {1} et tout c≤2 est « depasse » par
+1≤2, or sup{1}=1≠2). Le NOYAU a refuse de prouver le faux (le sens ⇐ ne passe pas) ; l'agent a diagnostique
+et retabli le « < » strict (c≠x), fidele au PDF et vrai. Confirme que le noyau LCF est le filet de
+soundness ultime : une spec erronee ne produit pas un faux theoreme, elle bloque. Verifie independamment
+(reconstruction COMPLETE de l'equivalence avec strict == thm.conclusion ; 3 hyps ; theorie==22).
+
 ### II.1 : Russell + singleton-inclusion
 ¬Coll_x(x∉x) (E II.3, pas d'ensemble de Russell ; lemme propositionnel ¬(P⇔¬P) construit) et
 x∈X⇔{x}⊂X (E II.4) ajoutes a ii_1/ensembles_theoremes.py, CLOS, verifies independamment.
