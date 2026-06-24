@@ -67,7 +67,7 @@ Format : `## [ ] <nom>` a cocher `## [x]` APRES commit. Verifier l'existence des
 - lemmes: RÉUTILISER : image_reciproque_symetrique + image_reciproque_transitive (C:/Users/KARL/OneDrive/Bureau/Apprendre/Livre/Bourbakie/Theorie_des_ensembles/V9/bourbaki/ensembles/ii_6_equivalence/ensembles_quotient_complements.py l.292, l.311) ; modèle d'assemblage intersection_relation_equivalence (ensembles_quotient_props_graphe.py l.348) ; prédicats est_relation_equivalence l.384 / est_relation_equivalence_dans l.395 dans ensembles_abrege.py. Tactique conjonction_intro (tactiques_abrege2.py).
 - fichier: bourbaki/ensembles/ii_6_equivalence/ii_6_6_relation_induite/ensembles_image_reciproque_reflexive.py
 
-## [ ] plus_petit_est_unique_minimal  (faible/facile)
+## [x] plus_petit_est_unique_minimal  (faible/facile)
 - secteur: III.1  | E.III.1.7 (remarque après Déf. 4 : « a est l'unique élément minimal de E »)
 - statut: PARTIEL→complément. plus_petit_est_minimal est DÉJÀ clos (ensembles_ordre.py niveau relation R, et ensembles_ordre_relation.py niveau graphe), mais l'UNICITÉ comme élément minimal (« a plus petit ⇒ a est le SEUL élément minimal de E ») n'est PAS formalisée : grep 'unique.*minimal' ⇒ rien. PRÉREQUIS PRÉSENTS : plus_petit_element, element_minimal (graphe, ensembles_ordre_relation.py).
 - enonce: { antisymetrie(G), plus_petit_element(G,E,a), element_minimal(G,E,m) } ⊢ m=a.  Énoncé Bourbaki : si E admet un plus petit élément a, alors a est l'unique élément minimal de E (tout élément minimal coïncide avec a). [CLOS : conclusion m=a ; les trois prémisses sont des hypothèses honnêtes.]
