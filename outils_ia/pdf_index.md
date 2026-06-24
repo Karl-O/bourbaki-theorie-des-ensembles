@@ -18,7 +18,7 @@ PDF='../V6/1) Theorie Des Ensembles.pdf'
 |---|---|---|
 | **Ch I** (logique) | phys = `E I.p` | E I.50 = phys 50 |
 | **Ch II** (ensembles) | phys = `E II.p` + 51 | E II.1 ≈ phys 52 |
-| **Ch III** (ordre/cardinaux) | phys = `E III.p` + 102 | E III.1 ≈ phys 103 |
+| **Ch III** (ordre/cardinaux) | phys = `E III.p` + 103 | E III.6 = phys 109, E III.7 = phys 110 (en-têtes vérifiés 2026-06-24) |
 | **Ch IV** (structures) | phys = `E IV.p` + 202 | E IV.101 = phys 303 |
 | **Résumé** (E.R.) | phys = `E.R.p` + 303 | E.R.3 = phys 306 |
 
