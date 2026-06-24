@@ -43,7 +43,7 @@ Format : `## [ ] <nom>` a cocher `## [x]` APRES commit. Verifier l'existence des
 - lemmes: C:/Users/KARL/OneDrive/Bureau/Apprendre/Livre/Bourbakie/Theorie_des_ensembles/V9/bourbaki/ensembles/familles/ii_5_produit_famille/ii_5_definitions/ensembles_produit_famille.py (membre_produit_famille, projection_dans_facteur, produit_fonctionnel, produit_domaine) ; image directe d'une partie : GREP C:/Users/KARL/OneDrive/Bureau/Apprendre/Livre/Bourbakie/Theorie_des_ensembles/V9/bourbaki/ensembles/fonctions (membre_image / image_directe / E.image — à vérifier ; modèle d'usage dans ext_canonique_graphe_membre de ii_5_1_extension_canonique/ensembles_extension_canonique.py) ; ensembles_abrege as E (produit_famille, valeur, valeur_famille).
 - fichier: bourbaki/ensembles/familles/ii_5_produit_famille/ii_5_4_projection_partielle/ensembles_produit_inclus_projections_ii5.py
 
-## [ ] relation_induite_transitive  (faible/facile)
+## [x] relation_induite_transitive  (faible/facile)
 - secteur: II.6  | E.II.6.6 (Déf. relation induite R_A)
 - statut: PARTIEL — seule relation_induite_symetrique (R sym ⊢ R_A sym) est close dans ensembles_quotient_complements.py (l.199). La version transitive R_A manque ; le module documente explicitement R_A symétrique mais PAS R_A transitive dans sa liste de lemmes (l.39). Notion relation_induite(R,a) DÉFINIE (l.170).
 - enonce: {R transitive} ⊢ (∀x)(∀y)(∀z)((R_A{x,y} et R_A{y,z}) ⇒ R_A{x,z}), où R_A{x,y} := (x∈A et y∈A et R{x,y}). Énoncé : est_transitive(relation_induite(R, A), x, y, z), clos modulo l'hypothèse N.assume(E.est_transitive(R,...)).
@@ -51,7 +51,7 @@ Format : `## [ ] <nom>` a cocher `## [x]` APRES commit. Verifier l'existence des
 - lemmes: RÉUTILISER : C:/Users/KARL/OneDrive/Bureau/Apprendre/Livre/Bourbakie/Theorie_des_ensembles/V9/bourbaki/ensembles/ii_6_equivalence/ensembles_quotient_complements.py (relation_induite l.170, modèle relation_induite_symetrique l.199) ; C:/Users/KARL/OneDrive/Bureau/Apprendre/Livre/Bourbakie/Theorie_des_ensembles/V9/bourbaki/ensembles/ii_1_axiomes_algebre/ensembles_abrege.py (est_transitive l.376, rel_graphe l.401). Tactiques : bourbaki/logique/i_2_criteres_C/tactiques/tactiques_abrege2.py (conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite, instancie).
 - fichier: bourbaki/ensembles/ii_6_equivalence/ii_6_6_relation_induite/ensembles_relation_induite_equivalence.py
 
-## [ ] relation_induite_relation_equivalence  (faible/facile)
+## [x] relation_induite_relation_equivalence  (faible/facile)
 - secteur: II.6  | E.II.6.6 (Déf. relation induite R_A)
 - statut: MANQUANT — assemblage final absent. est_relation_equivalence(R) = symétrie ET transitivité (ensembles_abrege.py l.384-386). relation_induite_symetrique existe déjà (clos) ; il ne reste qu'à recoller avec relation_induite_transitive (cible précédente) via conjonction_intro. Aucun assemblage R_A relation d'équivalence n'existe.
 - enonce: {R symétrique, R transitive} ⊢ est_relation_equivalence(relation_induite(R, A), x, y, z) = (est_symetrique(R_A) ET est_transitive(R_A)). Conclusion LITTÉRALEMENT le prédicat est_relation_equivalence(R_A), clos modulo {R sym, R trans}.
