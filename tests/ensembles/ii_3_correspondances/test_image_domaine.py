@@ -8,10 +8,11 @@ theorie_ensembles() == 22.
 """
 from __future__ import annotations
 
-from bourbaki.logique.i_1_termes_relations.formule import var, egal
+from bourbaki.logique.i_1_termes_relations.formule import var, egal, inclus
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ensembles.ii_3_correspondances.ensembles_image_domaine import (
-    image_domaine_egale_img, image_domaine_egale_img_cible)
+    image_domaine_egale_img, image_domaine_egale_img_cible,
+    image_egale_img_si_domaine_inclus, image_egale_img_si_domaine_inclus_cible)
 
 
 def test_image_domaine_conclusion():
@@ -28,6 +29,25 @@ def test_image_domaine_clos():
     # résultat CLOS : 0 hypothèse non déchargée (inconditionnel).
     assert t.hypotheses == frozenset()
     assert t.est_clos
+
+
+def test_image_egale_img_si_domaine_inclus_conclusion():
+    vG, vA = var("G"), var("A")
+    t = image_egale_img_si_domaine_inclus("G", "A")
+    # conclusion reconstruite : G⟨A⟩ = pr₂G = egal(image(G, A), img G).
+    cible = egal(E.image(vG, vA), E.img(vG))
+    assert t.conclusion == cible
+    assert t.conclusion == image_egale_img_si_domaine_inclus_cible("G", "A")
+
+
+def test_image_egale_img_si_domaine_inclus_hypothese_honnete():
+    vG, vA = var("G"), var("A")
+    t = image_egale_img_si_domaine_inclus("G", "A")
+    # hypothèse effective UNIQUE : pr₁G ⊂ A = inclus(dom G, A).
+    assert t.hypotheses == frozenset({inclus(E.dom(vG), vA)})
+    # honnêteté : la conclusion n'est PAS dans les hypothèses, et le thm n'est PAS clos.
+    assert t.conclusion not in t.hypotheses
+    assert not t.est_clos
 
 
 def test_theorie_invariant_22():
