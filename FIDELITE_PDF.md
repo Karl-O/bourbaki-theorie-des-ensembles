@@ -249,3 +249,6 @@ _pages lues : PDF physiques 337-340 = E.R.34, E.R.35, E.R.36, E.R.37 (rendus out
 | §8.5–6 (E.R.36) — Isomorphes / isomorphie / isomorphisme : σ' sur E',F | E.R.36 (haut) + E.R.37, §8 items 5–6 (= IV.1.5) | formalise_clos | fidele |
 | §8.6 — Axiomes contradictoires : un système d'axiomes définissant T es | E.R.37, §8 item 6 (= IV.1.4 fin) | manquant | non_verifiable |
 | §8.7 — Théorie univalente / multivalente : si deux structures satisfai | E.R.37, §8 item 7 (= IV.1.5 univalence) | formalise_partiel | ecart_mineur |
+
+## COMBLÉS (2026-06-24)
+- §1 item 14 : ∁∁X=X (1), X∪∁X=E & X∩∁X=∅ (3), X∩E=X (4), X∪E=E (5), E=∁∅ (a) -> ensembles_difference_identites.py (calés PDF E.R.4). ∅=∁E = difference_self deja present.
