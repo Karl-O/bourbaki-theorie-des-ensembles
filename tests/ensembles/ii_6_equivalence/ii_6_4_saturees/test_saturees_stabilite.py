@@ -8,9 +8,13 @@ moins ; anti-tautologie : conclusion ∉ hypothèses).  theorie_ensembles() == 2
 """
 from bourbaki.logique.i_1_termes_relations.formule import var
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
+from bourbaki.ensembles.ii_6_equivalence.ii_6_4_saturees.ensembles_sature_partie import (
+    relation_dans,
+)
 from bourbaki.ensembles.ii_6_equivalence.ii_6_4_saturees.ensembles_saturees_stabilite import (
     cible_reunion_saturee, cible_intersection_saturee,
     reunion_de_saturees_est_saturee, intersection_de_saturees_est_saturee,
+    cible_complementaire_saturee, complementaire_de_saturee_est_saturee,
 )
 
 
@@ -43,9 +47,29 @@ def test_intersection_conclusion_et_hypotheses():
     assert th.conclusion not in th.hypotheses
 
 
+def _hyps_complementaire_attendues():
+    A, E_, G = var("A"), var("E"), var("G")
+    return frozenset({
+        E.est_saturee(A, G, A, x="x"),                 # A saturée pour R
+        E.est_symetrique(E.rel_graphe(G), "a", "b"),   # G symétrique (graphe)
+        relation_dans(G, E_),                          # G relation dans E
+    })
+
+
+def test_complementaire_conclusion_et_hypotheses():
+    th = complementaire_de_saturee_est_saturee()
+    # conclusion == est_saturee(E∖A, G)  (cible Bourbaki, liants x, y)
+    assert th.conclusion == cible_complementaire_saturee()
+    # hypothèses == {A saturée, G symétrique, G relation dans E}  (exactement)
+    assert th.hypotheses == _hyps_complementaire_attendues()
+    # anti-tautologie : la conclusion n'est pas une simple hypothèse
+    assert th.conclusion not in th.hypotheses
+
+
 def test_determinisme():
     """Le noyau est déterministe : reconstruction identique (aucun Theoreme fabriqué)."""
-    for f in (reunion_de_saturees_est_saturee, intersection_de_saturees_est_saturee):
+    for f in (reunion_de_saturees_est_saturee, intersection_de_saturees_est_saturee,
+              complementaire_de_saturee_est_saturee):
         a, b = f(), f()
         assert a.conclusion == b.conclusion
         assert a.hypotheses == b.hypotheses
