@@ -1,0 +1,97 @@
+% =============================================================================
+%  Compléments — campagne v3 (résultats faisables additionnels)
+%  Fragment inclus par main.tex (\input). Blocs subsection seulement.
+% =============================================================================
+
+\subsection{§II.3.8 --- Théorème 1 f) (rétractions et sections)}
+\textbf{Énoncé (Bourbaki).} Volet f) du Théorème 1 : la descente d'injectivité de
+$f'$ vers $f''=f'\circ f$, et le rôle de rétraction de $f\circ r''$.
+
+\textbf{Formalisé.} Deux théorèmes, forme \emph{repliée}, tous deux CLOS :
+$\mathrm{injective\_dans}(F'',A) \Rightarrow (\forall x)(\forall x')((x\in A \wedge x'\in A \wedge f''(x)=f''(x')) \Rightarrow x=x')$ ;
+et $\mathrm{est\_retraction}(R'',F'',A) \Rightarrow ((x\in A) \Rightarrow f(r''(f''(x)))=f(x))$. \\
+Module : \texttt{bourbaki/ensembles/fonctions/ii\_3\_8\_retractions\_sections/ensembles\_theoreme1\_f.py}.
+
+\textbf{Preuve (\Nstar).} Duals exacts de c)/e) et a) : \texttt{assume},
+\texttt{instancie}, \texttt{modus\_ponens}, \texttt{loi\_deduction},
+\texttt{generalisation}, \texttt{congruence\_terme}. La forme repliée évite
+l'introduction des gardes de typage C46 qu'exigerait le dépliage de $f''$.
+
+\textbf{Statut.} CLOS (0 hypothèse) pour les deux ; \texttt{theorie\_ensembles()==22}.
+
+\subsection{§II.4.2 --- Monotonie décroissante de l'intersection en l'indice}
+\textbf{Énoncé (Bourbaki).} Si $J\subset I$, alors
+$\bigcap_{\iota\in I}X_\iota \subset \bigcap_{\iota\in J}X_\iota$.
+
+\textbf{Formalisé.} Cible : $(J\subset I) \Rightarrow (\bigcap_{\iota\in I}X_\iota \subset \bigcap_{\iota\in J}X_\iota)$. \\
+Module : \texttt{.../ii\_4\_reunion\_intersection\_familles/ii\_4\_2\_proprietes/ensembles\_familles\_mono\_indice\_inter.py}.
+
+\textbf{Preuve (\Nstar).} Dual universel ($\forall$, sans témoin) de
+\texttt{reunion\_incluse\_sous\_indices} : on restreint le quantificateur via
+$J\subset I$, \texttt{equivalence\_avant}/\texttt{arriere} de la caractérisation
+de $\bigcap$, double \texttt{generalisation}.
+
+\textbf{Statut.} CLOS ; \texttt{theorie\_ensembles()==22}.
+
+\subsection{§II.5.4 --- Un facteur vide annule le produit (Cor.\ 2)}
+\textbf{Énoncé (Bourbaki).} Si l'un des facteurs est vide, le produit l'est :
+$(\alpha\in I \wedge X_\alpha=\emptyset) \Rightarrow \prod_{\iota\in I}X_\iota=\emptyset$.
+
+\textbf{Formalisé.} Cible identique, CLOSE. \\
+Module : \texttt{.../ii\_5\_produit\_famille/ii\_5\_4\_projection\_partielle/ensembles\_produit\_vide\_ii5.py}.
+
+\textbf{Preuve (\Nstar).} On établit $(\forall F)\neg(F\in\prod)$ :
+\texttt{projection\_dans\_facteur} donne $\mathrm{pr}_\alpha(F)\in X_\alpha$,
+la congruence le long de $X_\alpha=\emptyset$ donne $\mathrm{pr}_\alpha(F)\in\emptyset$,
+contradiction avec l'axiome du vide ; puis le critère $X=\emptyset \Leftrightarrow$ « sans élément ».
+
+\textbf{Statut.} CLOS ; \texttt{theorie\_ensembles()==22}.
+
+\subsection{§II.5.3 --- La coordonnée d'un élément d'une partie du produit}
+\textbf{Énoncé (Bourbaki).} Remarque $A\subset\prod_\iota \mathrm{pr}_\iota\langle A\rangle$
+(toute partie du produit est incluse dans le produit de ses projections).
+
+\textbf{Formalisé.} Brique \emph{pointwise} CLOSE :
+$(A\subset\prod(f,I) \wedge F\in A \wedge \alpha\in I) \Rightarrow \mathrm{pr}_\alpha(F)\in X_\alpha$. \\
+Module : \texttt{.../ii\_5\_4\_projection\_partielle/ensembles\_produit\_inclus\_projections\_ii5.py}.
+
+\textbf{Preuve (\Nstar).} Instanciation de l'inclusion en $F$, puis
+\texttt{projection\_dans\_facteur}. La forme globale exigerait la notion d'image
+directe par $\mathrm{pr}_\iota$, absente du dépôt (résidu honnête documenté).
+
+\textbf{Statut.} CLOS ; \texttt{theorie\_ensembles()==22}.
+
+\subsection{§II.6.6 --- Relation induite et image réciproque (équivalence)}
+\textbf{Énoncé (Bourbaki).} La relation induite $R_A$ sur une partie $A$, et
+l'image réciproque $S\circ\varphi$, héritent du caractère d'équivalence.
+
+\textbf{Formalisé.} Quatre théorèmes (clos sous hypothèses honnêtes) :
+$R$ transitive $\Rightarrow R_A$ transitive ; $R$ sym.\ et trans.\ $\Rightarrow R_A$
+relation d'équivalence ; $S$ sym.\ et trans.\ $\Rightarrow S\circ\varphi$ relation
+d'équivalence ; et la réflexivité-dans-$E$ de $S\circ\varphi$ sous
+$S$ réflexive et $\varphi:E\to F$. \\
+Modules : \texttt{.../ii\_6\_equivalence/ii\_6\_6\_relation\_induite/ensembles\_relation\_induite\_equivalence.py}
+et \texttt{.../ensembles\_image\_reciproque\_reflexive.py}.
+
+\textbf{Preuve (\Nstar).} Transitivité par décomposition / instanciation ×3 /
+\texttt{conjonction\_intro} ; assemblages par \texttt{conjonction\_intro} des
+briques sym.\ et trans.\ existantes ; réflexivité par double implication et
+\texttt{equivalence\_arriere} de la réflexivité de $S$ instanciée en $\varphi(x)$.
+
+\textbf{Statut.} CLOS sous hypothèses honnêtes ; \texttt{theorie\_ensembles()==22}.
+Création du sous-dossier \texttt{ii\_6\_6\_relation\_induite/} et réorganisation
+$\leq 10$ (\texttt{ii\_6\_5\_decomposition/}) pour respecter la règle de structure.
+
+\subsection{§III.1.7 --- Le plus petit élément est l'unique élément minimal}
+\textbf{Énoncé (Bourbaki).} Si $E$ admet un plus petit élément $a$, tout élément
+minimal $m$ de $E$ coïncide avec $a$.
+
+\textbf{Formalisé.} Cible : $m=a$, sous
+$\{\mathrm{plus\_petit\_element}(G,E,a),\ \mathrm{element\_minimal}(G,E,m)\}$. \\
+Module : \texttt{.../iii\_1\_relations\_ordre/iii\_1\_7\_plus\_grand\_plus\_petit/ensembles\_plus\_petit\_unique\_minimal.py}.
+
+\textbf{Preuve (\Nstar).} $a$ minore $E$ instancié en $m$ donne $(a,m)\in G$ ; la
+minimalité de $m$ instanciée en $a$ donne $a=m$ ; \texttt{symetrie}. L'antisymétrie
+n'est pas load-bearing et n'est donc pas une hypothèse.
+
+\textbf{Statut.} CLOS sous hypothèses honnêtes ; \texttt{theorie\_ensembles()==22}.
