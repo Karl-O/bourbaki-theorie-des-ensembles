@@ -8,7 +8,7 @@ from bourbaki.logique.i_1_termes_relations.formule import (var, et, impl, appart
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.structures.iv_2_morphismes_structures_derivees import ensembles_structures_residus as R
 from bourbaki.structures.iv_2_morphismes_structures_derivees import ensembles_universel_morphismes as M
-from bourbaki.ensembles.ii_6_equivalence import ensembles_decomposition_quotient as D
+from bourbaki.ensembles.ii_6_equivalence.ii_6_5_decomposition import ensembles_decomposition_quotient as D
 
 
 # ════════════════════════════════════════════════════════════════════════════

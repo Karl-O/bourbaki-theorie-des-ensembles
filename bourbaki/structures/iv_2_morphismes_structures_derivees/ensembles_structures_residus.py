@@ -16,7 +16,7 @@ notion du §IV.2 encore explicitement REPORTÉE (cf. la docstring de
 
 DISTINCTION avec II.6.5 (déjà couvert).  La décomposition ENSEMBLISTE f = j ∘ g ∘ φ
 (g bijective, φ surjective, j injective) est DÉFINIE et factorisée dans
-`bourbaki.ensembles.ii_6_equivalence.ensembles_decomposition_quotient`
+`bourbaki.ensembles.ii_6_equivalence.ii_6_5_decomposition.ensembles_decomposition_quotient`
 (`decomposition_canonique`, `bijection_induite`, `surjection_canonique`,
 `injection_canonique`).  On RÉUTILISE ces graphes ici.  Le RÉSIDU §IV.2.5 est le
 contenu STRUCTUREL nouveau : g (A/R → f(A)) est un σ-MORPHISME pour les structures
@@ -52,7 +52,7 @@ from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite)
 from bourbaki.structures.iv_2_morphismes_structures_derivees.ensembles_universel_morphismes import (
     est_morphisme, _morph_defaut, _t)
-from bourbaki.ensembles.ii_6_equivalence.ensembles_decomposition_quotient import (
+from bourbaki.ensembles.ii_6_equivalence.ii_6_5_decomposition.ensembles_decomposition_quotient import (
     relation_egalite_valeurs, surjection_canonique, injection_canonique,
     bijection_induite, decomposition_canonique)
 

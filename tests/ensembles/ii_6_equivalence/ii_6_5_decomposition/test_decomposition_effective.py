@@ -8,7 +8,7 @@ from __future__ import annotations
 
 from bourbaki.logique.i_1_termes_relations.formule import (var, tau, egal, et, impl, appartient, pourtout)
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.ensembles.ii_6_equivalence import ensembles_decomposition_effective as D
+from bourbaki.ensembles.ii_6_equivalence.ii_6_5_decomposition import ensembles_decomposition_effective as D
 
 # liants frais utilisés par le module (verrou liant valeur) — à refléter dans les
 # formules de référence des tests.
