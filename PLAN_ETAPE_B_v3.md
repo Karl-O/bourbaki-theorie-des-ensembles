@@ -59,7 +59,7 @@ Format : `## [ ] <nom>` a cocher `## [x]` APRES commit. Verifier l'existence des
 - lemmes: RÉUTILISER (même dossier/module) : relation_induite_symetrique (ensembles_quotient_complements.py l.199) ; relation_induite_transitive (cible 1, à créer dans le même nouveau module) ; modèle d'assemblage intersection_relation_equivalence dans C:/Users/KARL/OneDrive/Bureau/Apprendre/Livre/Bourbakie/Theorie_des_ensembles/V9/bourbaki/ensembles/ii_6_equivalence/ensembles_quotient_props_graphe.py l.348. Prédicat cible est_relation_equivalence dans ensembles_abrege.py l.384.
 - fichier: bourbaki/ensembles/ii_6_equivalence/ii_6_6_relation_induite/ensembles_relation_induite_equivalence.py
 
-## [ ] image_reciproque_relation_equivalence  (faible/facile)
+## [x] image_reciproque_relation_equivalence  (faible/facile)
 - secteur: II.6  | E.II.6.6 (image réciproque S∘φ relation d'équivalence)
 - statut: MANQUANT — assemblage final absent. Les trois briques (sym l.292, trans l.311 déjà closes ; refl = cible 3) une fois réunies donnent la relation d'équivalence. Bourbaki affirme (E.II.6.6) que l'image réciproque d'une relation d'équivalence est bien une relation d'équivalence (réflexive/symétrique/transitive) ; l'implémentation note ce fait sans le prouver assemblé.
 - enonce: {S symétrique, S transitive} ⊢ est_relation_equivalence(image_reciproque_relation(S, phi), x, y, z) = (est_symetrique(S∘φ) ET est_transitive(S∘φ)). Conclusion LITTÉRALEMENT est_relation_equivalence(S∘φ), clos modulo {S sym, S trans}. (Sur la forme NON gardée image_reciproque_relation(S,phi) l.225, cohérente avec les deux lemmes existants qui l'emploient.)
@@ -123,7 +123,7 @@ Format : `## [ ] <nom>` a cocher `## [x]` APRES commit. Verifier l'existence des
 - lemmes: C:/Users/KARL/OneDrive/Bureau/Apprendre/Livre/Bourbakie/Theorie_des_ensembles/V9/bourbaki/ensembles/familles/ii_4_reunion_intersection_familles/ii_4_1_definitions_algebre/ensembles_familles.py (membre_reunion_famille, membre_inter_famille, reunion_famille_intro, inter_famille_elim — TOUS vérifiés présents) ; C:/Users/KARL/OneDrive/Bureau/Apprendre/Livre/Bourbakie/Theorie_des_ensembles/V9/bourbaki/ensembles/familles/ii_5_produit_famille/ii_5_definitions/ensembles_produit_famille.py (projection_dans_facteur) ; ensembles_abrege as E (reunion_famille, inter_famille, produit_famille, valeur_famille, valeur). Pour existe_elimination : grep tactiques_abrege* (existe_elimination / existe_temoin).
 - fichier: bourbaki/ensembles/familles/ii_5_produit_famille/ii_5_6_7_algebre_produit/ensembles_prop8_distrib_directe_ii5.py
 
-## [ ] image_reciproque_reflexive  (faible/moyen)
+## [x] image_reciproque_reflexive  (faible/moyen)
 - secteur: II.6  | E.II.6.6 (Déf. image réciproque S∘φ ; réflexivité E.II.6.1)
 - statut: PARTIEL — image_reciproque_symetrique (l.292) et image_reciproque_transitive (l.311) sont closes dans ensembles_quotient_complements.py. La réflexivité-dans-E de S∘φ MANQUE (liste de lemmes l.40-41 ne mentionne que sym/trans). Notions image_reciproque_relation_dans(S,phi,e) (l.239) DÉFINIE. C'est la dernière brique pour « S∘φ relation d'équivalence DANS E ».
 - enonce: {S réflexive dans F} ⊢ (∀x)((S∘φ)_E{x,x} ⇔ x∈E), où (S∘φ)_E{x,y} := (x∈E et y∈E et S{φ(x),φ(y)}) [forme image_reciproque_relation_dans] et la réflexivité-dans-E est est_reflexive_dans(SP_E, E, x). HYPOTHÈSE HONNÊTE supplémentaire : (∀x)(x∈E ⇒ φ(x)∈F) (φ application de E dans F) pour le sens ⇐. Énoncé conditionnel : est_reflexive_dans(image_reciproque_relation_dans(S,phi,E), E, x), clos modulo {S réflexive dans F, φ:E→F}.
