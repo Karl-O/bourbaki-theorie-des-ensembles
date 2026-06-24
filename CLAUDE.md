@@ -48,9 +48,18 @@ Trois sources, sous `../V6/` (depuis `V9/`) :
    implémentation Python + choix algorithmiques + figures) → `../V6/V8/main.pdf`. **C'est le MODÈLE de
    style** du rapport V9 ci-dessous.
 
-Pour chaque résultat : lire le `Texte.tex` (V7) et le `rapport.tex` (V8) correspondants, et faire
-**coïncider exactement** l'énoncé/la preuve formalisés. En cas de conflit LaTeX/PDF, **le noyau tranche**
-(cf. la preuve LaTeX du Th2 qui diffère du PDF) ; consigner l'écart dans `ANOMALIES.md`.
+**FIDÉLITÉ MAXIMALE (exigée par l'utilisateur, 2026-06-24) — toute notion calée sur le PDF.**
+Pour CHAQUE notion (définition, axiome, critère, proposition, théorème, corollaire), **lire
+DIRECTEMENT la page du PDF du livre** (`pages:` via Read) en plus du `Texte.tex` (V7) et du
+`rapport.tex` (V8), et faire **coïncider exactement** l'énoncé formalisé avec le texte de Bourbaki.
+Le noyau garantit la *soundness* (aucun faux théorème) mais PAS la *fidélité* (énoncé == Bourbaki) :
+celle-ci repose sur cette relecture. Auditer aussi les notions **déjà formalisées** (surtout les
+définitions) contre le PDF. En cas de conflit : le **PDF prime pour la fidélité**, le **noyau tranche
+pour la soundness** (cf. la preuve LaTeX du Th2 qui diffère du PDF) ; consigner tout écart dans
+`ANOMALIES.md`.
+
+**Calibrage §→page PDF** (établi le 2026-06-24) : voir `outils_ia/pdf_index.md` (mapping
+section Bourbaki → page physique du PDF de 349 pages).
 
 ## Livrable : rapport V9 (LaTeX façon livre Bourbaki)
 Maintenir dans **`V9/rapport/`** un document LaTeX multi-parties expliquant TOUT le projet, agencé comme
