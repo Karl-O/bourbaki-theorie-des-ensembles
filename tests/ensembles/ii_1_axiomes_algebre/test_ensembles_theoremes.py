@@ -1,15 +1,17 @@
 """Tests V9 — théorèmes du chapitre II utilisant A1 (extensionnalité) et A2 (paire)."""
 from __future__ import annotations
 
-from bourbaki.logique.i_1_termes_relations.formule import var, egal, inclus, et, impl, ou, non, appartient, equiv, pourtout, afficher_f
-from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege import paire, singleton, VIDE, reunion, intersection
+from bourbaki.logique.i_1_termes_relations.formule import var, egal, inclus, et, impl, ou, non, appartient, equiv, pourtout, coll, afficher_f
+from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege import paire, singleton, VIDE, reunion, intersection, theorie_ensembles
 from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import (extensionnalite_appliquee, existence_paire,
                                  unicite_par_extension, unicite_paire,
                                  appartient_paire_gauche, appartient_paire_droite,
                                  appartient_singleton, vide_sans_element,
                                  commutativite_paire, inclusion_reunion_gauche,
                                  commutativite_reunion, inclusion_intersection_gauche,
-                                 commutativite_intersection)
+                                 commutativite_intersection,
+                                 appartient_singleton_inclus,
+                                 non_collectivisante_appartenance_propre)
 
 
 def test_extensionnalite_appliquee():
@@ -90,3 +92,25 @@ def test_commutativite_intersection():
     a, b = var("a"), var("b")
     t = commutativite_intersection("a", "b")
     assert t.conclusion == egal(intersection(a, b), intersection(b, a)) and t.est_clos
+
+
+def test_appartient_singleton_inclus():
+    # E.II.4 : ⊢ (x ∈ X) ⇔ ({x} ⊂ X)   (clos, énoncé verbatim Bourbaki)
+    t = appartient_singleton_inclus("x", "X")
+    cible = equiv(appartient(var("x"), var("X")),
+                  inclus(singleton(var("x")), var("X")))
+    assert t.conclusion == cible
+    assert t.est_clos and t.hypotheses == frozenset()
+
+
+def test_non_collectivisante_appartenance_propre():
+    # E.II.3 n°4 : ⊢ ¬ Coll_x(x ∉ x)   (x∉x n'est pas collectivisante ; clos)
+    t = non_collectivisante_appartenance_propre("x")
+    cible = non(coll("x", non(appartient(var("x"), var("x")))))
+    assert t.conclusion == cible
+    assert t.est_clos and t.hypotheses == frozenset()
+
+
+def test_invariant_22_axiomes():
+    # invariant du projet : aucun axiome ajouté par ces théorèmes
+    assert len(theorie_ensembles().axiomes) == 22

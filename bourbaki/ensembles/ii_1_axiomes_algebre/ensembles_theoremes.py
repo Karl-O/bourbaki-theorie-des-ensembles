@@ -5,11 +5,13 @@ A1, A2 sont les axiomes verbatim ; les théorèmes en découlent par instanciati
 """
 from __future__ import annotations
 
-from bourbaki.logique.i_1_termes_relations.formule import Terme, var, egal, ou, et, appartient, equiv, pourtout
+from bourbaki.logique.i_1_termes_relations.formule import (Terme, var, tau, egal, ou, et, non, impl, appartient, equiv,
+                     pourtout, inclus, coll)
 from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import syllogisme
-from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (instancie, conjonction_intro, comm_ou, comm_et,
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (instancie, conjonction_intro,
+                               comm_ou, comm_et, contraposition,
                                projection_gauche, conjonction_elim_gauche,
                                conjonction_elim_droite, equivalence_avant,
                                equivalence_arriere, equivalence_symetrie,
@@ -191,10 +193,95 @@ def unicite_paire(a="a", b="b", u="u", v="v"):
     return unicite_par_extension(u, v, R)
 
 
+def _singleton_membre(a, c):
+    """⊢ (a ∈ {c}) ⇔ (a = c).  (re-démontré localement — ii_2 importe ii_1.)
+
+    {c} = {c,c} : instance de l'axiome de la paire + idempotence de ∨ (S1/S2).
+    """
+    eq = egal(a, c)
+    inst = _instance_paire(c, c, a)                    # (a∈{c,c}) ⇔ (a=c ∨ a=c)
+    idem = conjonction_intro(N.s1(eq), N.s2(eq, eq))   # (a=c ∨ a=c) ⇔ (a=c)
+    return equivalence_transitivite(inst, idem)        # (a∈{c}) ⇔ (a=c)
+
+
+def appartient_singleton_inclus(x="x", X="X"):
+    """⊢ (x ∈ X) ⇔ ({x} ⊂ X).  (E.II.4 : « x∈X est équivalente à {x}⊂X ».)
+
+    ⇐ : de {x}⊂X = (∀z)(z∈{x}⇒z∈X), instancier z:=x ; comme ⊢ x∈{x}, MP ⇒ x∈X.
+    ⇒ : de x∈X, prouver (∀z)(z∈{x}⇒z∈X) : pour z, supposer z∈{x} ; via (z∈{x}⇔z=x)
+        on tire z=x, puis par S6/Leibniz (z=x ⇒ ((z∈X)⇔(x∈X))) on transporte x∈X
+        en z∈X ; décharger ⇒ (z∈{x}⇒z∈X) ; généraliser z ⇒ {x}⊂X.
+    """
+    vx, vX, vz = var(x), var(X), var("z")
+    sx = E.singleton(vx)
+    incl = inclus(sx, vX)                               # {x} ⊂ X = (∀z)(z∈{x}⇒z∈X)
+
+    # ── sens ⇐ : {x}⊂X ⇒ x∈X ────────────────────────────────────────────────
+    h_incl = N.assume(incl)
+    inst_x = instancie(h_incl, vx)                     # {H} ⊢ (x∈{x} ⇒ x∈X)
+    x_dans_X = N.modus_ponens(appartient_singleton(x), inst_x)  # {H} ⊢ x∈X
+    sens_arriere = N.loi_deduction(incl, x_dans_X)     # ⊢ ({x}⊂X) ⇒ (x∈X)
+
+    # ── sens ⇒ : x∈X ⇒ {x}⊂X ────────────────────────────────────────────────
+    h_xX = N.assume(appartient(vx, vX))                # x∈X
+    h_zx = N.assume(appartient(vz, sx))                # z∈{x}
+    z_eg_x = N.modus_ponens(h_zx, equivalence_avant(_singleton_membre(vz, vx)))  # z=x
+    leib = N.s6(vz, vx, "w", appartient(var("w"), vX)) # (z=x) ⇒ ((z∈X) ⇔ (x∈X))
+    eq_zx = N.modus_ponens(z_eg_x, leib)               # (z∈X) ⇔ (x∈X)
+    z_dans_X = N.modus_ponens(h_xX, equivalence_arriere(eq_zx))  # {x∈X, z∈{x}} ⊢ z∈X
+    imp_z = N.loi_deduction(appartient(vz, sx), z_dans_X)        # {x∈X} ⊢ (z∈{x}⇒z∈X)
+    gen = N.generalisation("z", imp_z)                 # {x∈X} ⊢ (∀z)(z∈{x}⇒z∈X) = {x}⊂X
+    sens_avant = N.loi_deduction(appartient(vx, vX), gen)        # ⊢ (x∈X) ⇒ ({x}⊂X)
+
+    return conjonction_intro(sens_avant, sens_arriere)  # ⊢ (x∈X) ⇔ ({x}⊂X)
+
+
+def non_collectivisante_appartenance_propre(x="x"):
+    """⊢ ¬ Coll_x(x ∉ x).  (E.II.3, n°4 : la relation x∉x n'est pas collectivisante.)
+
+    Évitement bourbakiste du paradoxe de Russell (PAS d'« ensemble de Russell »).
+    Par l'absurde : on suppose H = Coll_x(¬(x∈x)) = (∃y)(∀x)(x∈y ⇔ ¬(x∈x)).
+    Témoin y0 = τy(...) (existe_temoin) ; instancier x:=y0 donne l'équivalence
+    paradoxale (y0∈y0) ⇔ ¬(y0∈y0).  Le lemme propositionnel ⊢ ¬(P⇔¬P) (tautologie)
+    fournit la contradiction ; on décharge H ⇒ ⊢ ¬H.  La conclusion ne contient pas
+    y0 (témoin éliminé), donc la preuve est CLOSE.
+    """
+    f = non(appartient(var(x), var(x)))                # ¬(x∈x)
+    H = coll(x, f)                                      # (∃y)(∀x)(x∈y ⇔ ¬(x∈x))
+    y = H.lieur                                         # variable-témoin liée ('y')
+    corps = H.sous[0]                                   # (∀x)(x∈y ⇔ ¬(x∈x))
+
+    # existe_temoin : ⊢ (∃y)corps ⇒ (τy(corps)|y)corps  (témoin canonique t0 = τy(corps))
+    h_H = N.assume(H)
+    inst_corps = N.modus_ponens(h_H, N.existe_temoin(corps, y))  # {H} ⊢ (∀x)(x∈t0 ⇔ ¬(x∈x))
+    t0 = tau(y, corps)                                 # le témoin τy(corps)
+    equ = instancie(inst_corps, t0)                    # {H} ⊢ (t0∈t0) ⇔ ¬(t0∈t0)
+    P = appartient(t0, t0)                             # P := t0∈t0
+    return _non_equiv_negation(P, equ, H)              # ⊢ ¬H  (réduction à l'absurde)
+
+
+def _non_equiv_negation(P, thm_para, H):
+    """De {H} ⊢ (P ⇔ ¬P), déduire ⊢ ¬H.  (lemme ⊢ ¬(P⇔¬P) appliqué sous H.)
+
+    Sous H : P⇒¬P (avant) et ¬P⇒P (arrière).  De P⇒¬P = ¬P∨¬P, S1 ⇒ {H}⊢¬P ;
+    puis ¬P⇒P ⇒ {H}⊢P.  On décharge : ⊢ H⇒¬P et ⊢ H⇒P ; contraposée + syllogisme
+    donnent ⊢ H⇒¬H = ¬H∨¬H, et S1 ⇒ ⊢ ¬H.
+    """
+    p_imp_np = equivalence_avant(thm_para)             # {H} ⊢ P ⇒ ¬P  = ¬P ∨ ¬P
+    np = N.modus_ponens(p_imp_np, N.s1(non(P)))        # {H} ⊢ ¬P
+    p = N.modus_ponens(np, equivalence_arriere(thm_para))   # {H} ⊢ P
+    H_imp_p = N.loi_deduction(H, p)                    # ⊢ H ⇒ P
+    H_imp_np = N.loi_deduction(H, np)                  # ⊢ H ⇒ ¬P
+    np_imp_nH = contraposition(H_imp_p)                # ⊢ ¬P ⇒ ¬H
+    H_imp_nH = syllogisme(H_imp_np, np_imp_nH)         # ⊢ H ⇒ ¬H  = ¬H ∨ ¬H
+    return N.modus_ponens(H_imp_nH, N.s1(non(H)))      # ⊢ ¬H
+
+
 __all__ = ["extensionnalite_appliquee", "existence_paire",
            "egalite_par_extension", "unicite_par_extension", "unicite_paire",
            "commutativite_paire", "appartient_paire_gauche", "appartient_paire_droite",
            "appartient_singleton", "vide_sans_element",
            "inclusion_reunion_gauche", "commutativite_reunion",
            "inclusion_intersection_gauche", "commutativite_intersection",
-           "couple_egal_si_composantes"]
+           "couple_egal_si_composantes",
+           "appartient_singleton_inclus", "non_collectivisante_appartenance_propre"]

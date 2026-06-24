@@ -5,13 +5,17 @@
   "pct_pause": 80,
   "repere_pct": 38,
   "repere_note": "Utilisateur a 38% au moment de poser le garde-fou (depuis la derniere pause/reset de la fenetre 5h).",
-  "tokens_subagent_depuis_repere": 928270,
-  "calibre": false,
-  "taux_tokens_par_pct": null,
-  "seuil_pause_tokens": null,
+  "tokens_subagent_depuis_repere": 1046455,
+  "calibre": true,
+  "repere2_pct": 55,
+  "taux_tokens_par_pct": 54604,
+  "seuil_pause_tokens": 2293373,
+  "estimation_pct_courant": 55,
+  "relecture_pct_conseillee_a_tokens": 1500000,
+  "caveat": "taux calibre sur subagent_tokens UNIQUEMENT ; la conso reelle inclut aussi la boucle principale (non comptee) => estimation_pct est un PLANCHER, le reel monte un peu plus vite. Re-demander le % vers 1.5M tokens pour recalibrer. 80% (2293373 tok) = arret dur.",
   "lectures_pct": [
     {"pct": 38, "tokens_depuis_repere": 0, "note": "repere initial"},
-    {"pct": null, "tokens_depuis_repere": 928270, "note": "apres fan-out audit Ch I+IV (wfvn3moxp, 12 agents Sonnet) -- EN ATTENTE du % utilisateur pour calibrer"}
+    {"pct": 55, "tokens_depuis_repere": 928270, "note": "apres fan-out audit Ch I+IV (wfvn3moxp). CALIBRAGE: taux=928270/(55-38)=54604 tok/pt; seuil 80% = 54604*42 = 2293373 tok"}
   ],
   "procedure": [
     "1. A chaque agent/workflow termine : ajouter son subagent_tokens a tokens_subagent_depuis_repere.",
