@@ -1,0 +1,51 @@
+\section{Compléments (nuit) --- correspondances et parties saturées}
+
+Poursuite du comblage des manquants set-théoriques nets (cartes d'audit). Chaque
+résultat vérifié indépendamment ; \texttt{theorie\_ensembles()==22} ; primitives
+\Nstar{} uniquement.
+
+\subsection{§II.2 --- Caractérisation du couple}
+\textbf{Énoncé (Bourbaki, E~II.7).} $z=(x,y)\Leftrightarrow\bigl(z\text{ est un couple}
+\ \text{et}\ x=\mathrm{pr}_1 z\ \text{et}\ y=\mathrm{pr}_2 z\bigr)$.
+
+\textbf{Formalisé (CLOS).} L'équivalence, « $z$ couple » $:=(\exists a)(\exists b)(z=(a,b))$
+inline. Le piège de capture (les lettres $x,y$ de l'énoncé coïncident avec les liants
+$\tau$ de $\mathrm{pr}_1,\mathrm{pr}_2$) est levé par des \emph{témoins canoniques}
+(variables libres $\subseteq\{z\}$). Module : \texttt{.../ii\_2\_couples\_produit/ensembles\_couple\_caracterisation.py}.
+
+\subsection{§II.3 --- Correspondances : domaine, image, produit (E~II.10--11)}
+Cluster de cinq résultats, conditionnés (le cas échéant) par l'hypothèse honnête
+$\mathrm{est\_graphe}(G):=(\forall z)(z\in G\Rightarrow z\text{ couple})$, dans
+\texttt{.../ii\_3\_correspondances/}.
+\begin{itemize}
+  \item $G\subset \mathrm{pr}_1G\times\mathrm{pr}_2G$ (tout ensemble de couples est partie d'un produit) ;
+  \item $G\langle\mathrm{pr}_1G\rangle=\mathrm{pr}_2G$ (image du domaine $=$ ensemble des valeurs), \emph{inconditionnel} ;
+  \item $\mathrm{pr}_1G=\varnothing\ (\text{resp. }\mathrm{pr}_2G=\varnothing)\Rightarrow G=\varnothing$ ;
+  \item corollaire $A\supset\mathrm{pr}_1G\Rightarrow G\langle A\rangle=\mathrm{pr}_2G$ ;
+  \item involution $(G^{-1})^{-1}=G$ (le champ $\mathrm{est\_graphe}$ est load-bearing
+        pour $G\subset(G^{-1})^{-1}$).
+\end{itemize}
+\textbf{Preuves (\Nstar).} Algèbre de couples (\texttt{couple\_reciproque},
+\texttt{couple\_dans\_dom/img}, \texttt{couple\_dans\_produit}), images
+(\texttt{\_inst\_image}, \texttt{image\_dans\_img}, \texttt{image\_croissante}),
+extensionnalité $A1$. Domaine/image-ensemble : $\mathrm{pr}_1G=\mathrm{dom}(G)$,
+$\mathrm{pr}_2G=\mathrm{img}(G)$ (axiomes \texttt{DOM}/\texttt{IMG}).
+
+\subsection{§II.6.4 --- Stabilité des parties saturées (E~II.43--44)}
+\textbf{Énoncé (Bourbaki).} Si $A,B$ (resp. une famille $(X_\iota)$) sont saturées pour
+$R$, alors $A\cup B$, $A\cap B$, $\complement_E A$ (resp. $\bigcup X_\iota$,
+$\bigcap X_\iota$) sont saturées.
+
+\textbf{Formalisé.} Cinq théorèmes, $\mathrm{est\_saturee}(C,G)=(\forall x)(\forall y)
+((x\in C\ \text{et}\ (x,y)\in G)\Rightarrow y\in C)$ :
+\begin{itemize}
+  \item $A,B$ saturées $\vdash A\cup B$, $A\cap B$ saturées (cas binaire) ;
+  \item $A$ saturée, $G$ symétrique, $G$ relation dans $E$ $\vdash \complement_E A$ saturée
+        (les trois hypothèses load-bearing : symétrie pour $(y,x)\in G$, relation-dans pour $y\in E$) ;
+  \item $(\forall\iota)(\iota\in I\Rightarrow X_\iota$ saturée$)\vdash\bigcup X_\iota$,
+        $\bigcap X_\iota$ saturées (version famille, énoncé général).
+\end{itemize}
+Modules : \texttt{.../ii\_6\_equivalence/ii\_6\_4\_saturees/ensembles\_saturees\_stabilite.py}
+et \texttt{ensembles\_saturees\_famille.py}.
+
+\textbf{Statut.} Tous CLOS (ou clos modulo hypothèses honnêtes) ; \texttt{theorie\_ensembles()==22}.
