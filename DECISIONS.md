@@ -132,3 +132,31 @@ Profilage de trois_impair (proof cardinal ~400s, outils_ia/profil_hotspot.txt) :
 - FAIT : memoisation subst_t/subst_f (lru_cache borne 1M) = gain 28% (551->397s), sound (fonction pure, sanity logique verte). Commitee.
 - MUR : aller plus loin = refonte du noyau/tactiques (representation, partage, memoisation des theoremes) -> RISQUE sur la frontiere de confiance, HORS SCOPE d'une nuit autonome. Les preuves cardinales arithmetiques profondes (Hessenberg Lemme 2, trois_puiss_impair, division euclidienne, bon ordre cardinaux) restent donc PARTIELLES/MANQUANTES, documentees, perf-bloquees.
 - PIVOT : concentrer ETAPE B sur les ~100+ resultats de l'audit NON bloques par cette perf (II.3 fonctions, II.4 familles, II.5 produits, II.6 equivalence, III.1 ordre, III.2 bon ordre : set/order-theoriques, peu/pas de cardinaux profonds). Fan-out de planification puis delegation d'implementation, un resultat a la fois, certifie noyau.
+
+
+## 2026-06-24 - Epluchage PDF Ch I-IV + comblages (boucle autonome, garde-fou budget)
+
+Audit page-par-page des 4 chapitres (workflow wfvn3moxp, 12 agents schema-valides) -> COUVERTURE.md :
+707 notions, 305 closes (43%), 501 presentes (71%) ; sur 644 formalisables (hors meta subsumee
+noyau) 47% closes, 78% presentes. Ch IV quasi clos (manquants = exemples renvoyant a d'autres
+volumes). Garde-fou budget calibre (outils_ia/budget_tracker.json) : 928k tok = 38->55%, taux
+54604 tok/pt, pause a 80% = 2293373 tok.
+
+### Prop 2 Galois (E III.7-8) : retrait d'une hypothese non load-bearing
+Bourbaki enonce 8 antecedents (u, v DECROISSANTES + 2 inegalites v(u(x))>=x et u(v(x'))>=x') et
+conclut u∘v∘u=u ET v∘u∘v=v. DECISION : on formalise la PREMIERE egalite u∘v∘u=u sous 7 hypotheses,
+en RETIRANT « v decroissante » -- la preuve Bourbaki de la 1re egalite ne la consomme PAS (« la
+seconde s'etablit de meme » : c'est la DUALE qui l'utilise). Garder est_decroissante(v) eut ete une
+hyp INERTE = padding. Coherent avec « conditionnel honnete » (hyps = antecedents reellement
+consommes ; aucune parasite ; conclusion jamais en hypothese). Verifie INDEPENDAMMENT (cible
+reconstruite via API publique E.valeur, 7 hyps, theorie==22). Contraste avec assoc_inter_famille (hyp
+inerte J_λ≠∅ GARDEE car elle touchait la convention ∩_∅=E) : ici retirer v-decroissante ne change rien
+au sens de la 1re egalite (theoreme strictement plus fort, fidele a la preuve). SUITE OPTIONNELLE : la
+duale v∘u∘v=v (donc Prop 2 complete sous 8 hyps) reste a faire pour le resultat nomme integral.
+Module : bourbaki/ordre/iii_1_relations_ordre/iii_1_5_applications_croissantes/ensembles_prop2_galois.py.
+
+### II.1 : Russell + singleton-inclusion
+¬Coll_x(x∉x) (E II.3, pas d'ensemble de Russell ; lemme propositionnel ¬(P⇔¬P) construit) et
+x∈X⇔{x}⊂X (E II.4) ajoutes a ii_1/ensembles_theoremes.py, CLOS, verifies independamment.
+Lecon reconfirmee : l'audit a des FAUX NEGATIFS (z∈{x}⇔z=x etait deja fait = singleton_membre) ->
+TOUJOURS verifier l'absence reelle dans le code avant de deleguer un comblage.
