@@ -252,3 +252,6 @@ _pages lues : PDF physiques 337-340 = E.R.34, E.R.35, E.R.36, E.R.37 (rendus out
 
 ## COMBLÉS (2026-06-24)
 - §1 item 14 : ∁∁X=X (1), X∪∁X=E & X∩∁X=∅ (3), X∩E=X (4), X∪E=E (5), E=∁∅ (a) -> ensembles_difference_identites.py (calés PDF E.R.4). ∅=∁E = difference_self deja present.
+
+## ECARTS MAJEURS RESOLUS (2026-06-24)
+- (22) (X×Y)u(X'×Y)=(XuX')×Y et (23) (X×Y)n(X'×Y')=(XnX')×(YnY') : desormais EGALITES D'ENSEMBLES pleines (brique produit_egalite_par_couples). Restent (24)(25)(26) et l'ecart majeur f^-1 distributif (forme conditionnelle honnete).
