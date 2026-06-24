@@ -23,7 +23,15 @@ PUIS manquants larges de l'audit :
 - **II.3 (correspondances, E II.10–11)** : `G ⊂ pr₁G×pr₂G` (`7e8db55`) ; `G⟨pr₁G⟩=pr₂G`
   (`b9bb471`) ; projection vide ⇒ `G=∅` principal+dual (`1898b4d`) ; corollaire
   `A⊃pr₁G ⇒ G⟨A⟩=pr₂G` (`5981b0e`) ; involution `(G⁻¹)⁻¹=G` (`6d51891`).
-- **Rapport LaTeX** `V9/rapport/` à jour (fragments session + suite), compilé 19 p. (`bd9f248`).
+- **II.6.4 (parties saturées, E II.43–44)** — cluster complet : `A∪B`, `A∩B` saturées
+  (`3901929`) ; `∁_E A` saturée sous {symétrie, relation-dans} (`3a99fe0`) ; version FAMILLE
+  `⋃X_ι`, `⋂X_ι` saturées (`20303c5`).
+- **Rapport LaTeX** `V9/rapport/` à jour, compilé **20 p.** (`f2f2e6a`).
+
+**≈ 28 résultats certifiés** au total. Areas set-théoriques fondamentales **confirmées
+quasi complètes** par sondage exhaustif (correspondances, composition, réciproque, images,
+algèbre de familles, De Morgan, associativité, monotonie, parties saturées) — les clusters
+nets restants y sont **épuisés**.
 
 ## 2. État du « reste à faire » (honnête)
 
