@@ -43,3 +43,14 @@ Le corps de cantor_deux_exp levait NotImplementedError avec un commentaire prete
 - Orphelin supprime (jamais commiter une preuve cassee). Cible prop10 (distributivite
   produit/intersection, egalite complete) RESTE A FAIRE : permutation de quantificateurs
   delicate ; a re-deleguer a frais, ou livrer la forme inclusion seule (plus simple).
+
+## Egalites de PRODUITS au niveau couple (ecart de portee systematique) (2026-06-24)
+- Les formules d'egalite d'ensembles sur les produits (E.R.12 : (22) (X×Y)∪(X'×Y)=(X∪X')×Y,
+  (23) (X×Y)∩(X'×Y')=(X∩X')×(Y∩Y'), etc.) sont formalisees au niveau APPARTENANCE D'UN COUPLE
+  ((u,v)∈lhs ⇔ (u,v)∈rhs), PAS comme egalite d'ensembles pleine (∀z, z couple ou non).
+- Raison : il manque la brique << tout z∈E×F est un couple z=(pr1 z, pr2 z) >> + l'extensionnalite
+  poussant les ∃p,q de AXIOME_PRODUIT a travers ∨/∧. Le module dual ensembles_produit_distributif.py
+  a le meme report (docstring l.17-18).
+- A FAIRE (1 fois, debloque (22)(23) et les autres) : prouver couple_decomposition
+  (z∈E×F ⇒ z=(pr1 z, pr2 z)) puis un lemme produit_egalite_par_couples
+  ((∀ couple) (u,v)∈A ⇔ (u,v)∈B, A,B⊂E×F ⇒ A=B). Ensuite remonter les couple-level en egalites d'ensembles.
