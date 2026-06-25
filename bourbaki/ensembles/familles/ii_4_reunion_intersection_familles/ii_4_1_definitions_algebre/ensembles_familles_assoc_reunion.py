@@ -87,6 +87,7 @@ def _membre_eq(t1, t2, eq_thm, z):
 # Proposition 2, 1re formule — ASSOCIATIVITÉ de la réunion  (E.II.4.2).
 #   {couverture (a) , domaine (b)} ⊢ ⋃_{λ∈L} X_λ = ⋃_{λ∈L}( ⋃_{ι∈J_λ} X_ι ).
 # ══════════════════════════════════════════════════════════════════════════════
+# @livre Ch.II §4.2 Prop.2 | E II.24 L.10-23 | PDF p.75
 def associativite_reunion_famille(x="X", j="J", l="L"):
     """{(a) couverture , (b) domaine} ⊢ ⋃_{λ∈L} X_λ = ⋃_{λ∈L}(⋃_{ι∈J_λ} X_ι).
 

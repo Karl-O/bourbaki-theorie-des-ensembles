@@ -61,6 +61,7 @@ def cible_image_difference_injective(f="f", a="A", x="X"):
     return impl(injective(vf), egal(lhs, rhs))
 
 
+# @livre Ch.II §4.5 Cor.- | E II.27 L.27-31 | PDF p.78
 def image_difference_injective(f="f", a="A", x="X"):
     """⊢ Injective(f) ⇒ f⟨A∖X⟩ = f⟨A⟩ ∖ f⟨X⟩.   (E.II.27, Cor. Prop. 6 ; CLOS, 0 hyp.)
 

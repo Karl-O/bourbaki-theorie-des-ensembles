@@ -73,6 +73,7 @@ def _inst_inter(f, i, z):
 # ══════════════════════════════════════════════════════════════════════════════
 # BORNES — propriété fondamentale ⋂_{ι∈I} X_ι ⊂ X_α ⊂ ⋃_{ι∈I} X_ι   (E.II.4.1).
 # ══════════════════════════════════════════════════════════════════════════════
+# @livre Ch.II §4.1 Prop.- | E II.23 L.13-20 | PDF p.74
 def inter_incluse_terme(f="X", i="I", a="a"):
     """{α∈I} ⊢ ⋂_{ι∈I} X_ι ⊂ X_α.   (E.II.4.1 — l'intersection est sous chaque terme.)
 
@@ -92,6 +93,7 @@ def inter_incluse_terme(f="X", i="I", a="a"):
     return N.loi_deduction(a_in, incl)
 
 
+# @livre Ch.II §4.1 Prop.- | E II.22 L.31-36 | PDF p.73
 def terme_inclus_reunion(f="X", i="I", a="a"):
     """{α∈I} ⊢ X_α ⊂ ⋃_{ι∈I} X_ι.   (E.II.4.1 — chaque terme est sous la réunion.)
 
@@ -112,6 +114,7 @@ def terme_inclus_reunion(f="X", i="I", a="a"):
     return N.loi_deduction(a_in, incl)
 
 
+# @livre Ch.II §4.1 Prop.- | E II.23 L.13-20 | PDF p.74
 def inter_incluse_reunion(f="X", i="I", a="a"):
     """{α∈I} ⊢ ⋂_{ι∈I} X_ι ⊂ ⋃_{ι∈I} X_ι.   (E.II.4.1 — I≠∅ via α∈I.)
 
@@ -138,6 +141,7 @@ def inter_incluse_reunion(f="X", i="I", a="a"):
 # ══════════════════════════════════════════════════════════════════════════════
 # MONOTONIE EN L'ENSEMBLE D'INDICES   (E.II.4.2, croissance J ↦ ⋃_{ι∈J} X_ι).
 # ══════════════════════════════════════════════════════════════════════════════
+# @livre Ch.II §4.2 Prop.- | E II.24 L.5-7 | PDF p.75
 def reunion_incluse_sous_indices(f="X", j="J", i="I"):
     """{J ⊂ I} ⊢ ⋃_{ι∈J} X_ι ⊂ ⋃_{ι∈I} X_ι.   (E.II.4.2 — monotonie en l'indice.)
 
@@ -173,6 +177,7 @@ def reunion_incluse_sous_indices(f="X", j="J", i="I"):
 # Prop. 4 (1re formule) — IMAGE RÉCIPROQUE d'une RÉUNION   (E.II.4, Prop. 4).
 #   f⁻¹⟨⋃_{ι∈I} Y_ι⟩ = ⋃_{ι∈I} f⁻¹⟨Y_ι⟩       (INCONDITIONNELLE).
 # ══════════════════════════════════════════════════════════════════════════════
+# @livre Ch.II §4.3 Prop.4 | E II.25 L.32-40 | PDF p.76
 def image_reciproque_reunion_famille(g="f", f="Y", i="I"):
     """⊢ f⁻¹⟨ ⋃_{ι∈I} Y_ι ⟩ = ⋃_{ι∈I} f⁻¹⟨Y_ι⟩.   (E.II.4, Prop. 4, 1re formule.)
 

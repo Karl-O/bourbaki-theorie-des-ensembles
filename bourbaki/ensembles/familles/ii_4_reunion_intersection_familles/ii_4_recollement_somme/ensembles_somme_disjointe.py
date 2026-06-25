@@ -91,6 +91,7 @@ def somme_disjointe(a, b):
                      E.produit(vb, E.singleton(UN)))
 
 
+# @livre Ch.II §4.8 Def.8 | E II.30 L.1-3 | PDF p.81
 def somme_disjointe_reunion(a="A", b="B"):
     """⊢ (A⊔B) = ((A×{0}) ∪ (B×{1})).   (la déf. est littéralement cette réunion ;
     réflexivité — sert d'ancrage de forme, conclusion EXACTE, clos.)"""
@@ -99,6 +100,7 @@ def somme_disjointe_reunion(a="A", b="B"):
 
 
 # ── Membership : décomposition par la réunion (AXIOME_REUNION) ────────────────
+# @livre Ch.II §4.8 Def.8 | E II.30 L.1-3 | PDF p.81
 def membre_somme_reunion(a="A", b="B", z="z"):
     """⊢ (z ∈ A⊔B) ⇔ ((z ∈ A×{0}) ou (z ∈ B×{1})).   (z : nom ou terme sans x,y.)
 
@@ -123,6 +125,7 @@ def _dans_singleton(c):
 
 
 # ── Injections canoniques : u↦(u,0), v↦(v,1) ──────────────────────────────────
+# @livre Ch.II §4.8 Def.8 | E II.30 L.1-3 | PDF p.81
 def injection_gauche_dans_somme(u="u", a="A", b="B"):
     """⊢ (u ∈ A) ⇒ ((u, 0) ∈ A⊔B).   (injection canonique de gauche ; clos.)"""
     vu, va, vb = _t(u), _t(a), _t(b)
@@ -138,6 +141,7 @@ def injection_gauche_dans_somme(u="u", a="A", b="B"):
     return N.loi_deduction(appartient(vu, va), in_somme)
 
 
+# @livre Ch.II §4.8 Def.8 | E II.30 L.1-3 | PDF p.81
 def injection_droite_dans_somme(v="v", a="A", b="B"):
     """⊢ (v ∈ B) ⇒ ((v, 1) ∈ A⊔B).   (injection canonique de droite ; clos.)"""
     vv, va, vb = _t(v), _t(a), _t(b)
@@ -199,6 +203,7 @@ def _membre_produit_singleton(a, c, z, u="u"):
 
 
 # ── Caractérisation complète de l'appartenance à A⊔B ──────────────────────────
+# @livre Ch.II §4.8 Def.8 | E II.30 L.1-3 | PDF p.81
 def membre_somme_caracterise(a="A", b="B", z="z"):
     """⊢ (z ∈ A⊔B) ⇔ ((∃u)(u∈A et z=(u,0)) ou (∃v)(v∈B et z=(v,1))).
 

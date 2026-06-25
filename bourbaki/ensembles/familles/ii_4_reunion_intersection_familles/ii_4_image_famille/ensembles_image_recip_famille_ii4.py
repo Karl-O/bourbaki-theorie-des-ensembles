@@ -177,6 +177,7 @@ def _val_image(g, fam, i):
 # Prop. 6 (E.II.27) — IMAGE RÉCIPROQUE d'une DIFFÉRENCE.
 #   f⁻¹⟨B∖Y⟩ = f⁻¹⟨B⟩ ∖ f⁻¹⟨Y⟩
 # ══════════════════════════════════════════════════════════════════════════════
+# @livre Ch.II §4.5 Prop.6 | E II.27 L.20-26 | PDF p.78
 def image_recip_diff_arriere(g="f", b="B", y="Y"):
     """⊢ f⁻¹⟨B⟩ ∖ f⁻¹⟨Y⟩ ⊂ f⁻¹⟨B∖Y⟩.   (Prop. 6, sens ⊃ — INCONDITIONNEL.)
 
@@ -220,6 +221,7 @@ def image_recip_diff_arriere(g="f", b="B", y="Y"):
     return N.generalisation("z", N.loi_deduction(appartient(va, L), aR_final))
 
 
+# @livre Ch.II §4.5 Prop.6 | E II.27 L.20-26 | PDF p.78
 def image_recip_diff_avant(g="f", b="B", y="Y"):
     """{Fonctionnelle(f)} ⊢ f⁻¹⟨B∖Y⟩ ⊂ f⁻¹⟨B⟩ ∖ f⁻¹⟨Y⟩.   (Prop. 6, sens ⊂.)
 
@@ -272,6 +274,7 @@ def image_recip_diff_avant(g="f", b="B", y="Y"):
     return N.loi_deduction(fonctionnelle(vg), incl)
 
 
+# @livre Ch.II §4.5 Prop.6 | E II.27 L.20-26 | PDF p.78
 def image_recip_difference(g="f", b="B", y="Y"):
     """{Fonctionnelle(f)} ⊢ f⁻¹⟨B∖Y⟩ = f⁻¹⟨B⟩ ∖ f⁻¹⟨Y⟩.   (E.II.27, Prop. 6.)
 
@@ -306,6 +309,7 @@ def _membre_fam_recip(g, fam, i, a):
     return etr(membre_eq, membre_image_recip(vg, Yi, va))
 
 
+# @livre Ch.II §4.3 Prop.4 | E II.25 L.21-31 | PDF p.76
 def image_recip_inter_incluse(g="f", fam="Y", i="I"):
     """⊢ f⁻¹⟨⋂_ι Y_ι⟩ ⊂ ⋂_ι f⁻¹⟨Y_ι⟩.   (Prop. 4, sens ⊂ — INCONDITIONNEL.)
 
@@ -341,6 +345,7 @@ def image_recip_inter_incluse(g="f", fam="Y", i="I"):
     return N.generalisation("z", N.loi_deduction(appartient(va, L), a_R_final))
 
 
+# @livre Ch.II §4.3 Prop.4 | E II.25 L.21-31 | PDF p.76
 def image_recip_inter_arriere(g="f", fam="Y", i="I", a="alpha"):
     """{Fonctionnelle(f), α∈I} ⊢ ⋂_ι f⁻¹⟨Y_ι⟩ ⊂ f⁻¹⟨⋂_ι Y_ι⟩.   (Prop. 4, sens ⊃.)
 
@@ -395,6 +400,7 @@ def image_recip_inter_arriere(g="f", fam="Y", i="I", a="alpha"):
     return N.loi_deduction(fonctionnelle(vg), N.loi_deduction(appartient(valpha, vI), incl))
 
 
+# @livre Ch.II §4.3 Prop.4 | E II.25 L.21-31 | PDF p.76
 def image_recip_inter_egal(g="f", fam="Y", i="I", a="alpha"):
     """{Fonctionnelle(f), α∈I} ⊢ f⁻¹⟨⋂_ι Y_ι⟩ = ⋂_ι f⁻¹⟨Y_ι⟩.   (E.II.25, Prop. 4.)
 
@@ -444,6 +450,7 @@ def _membre_fam_image(g, fam, i, y):
     return etr(membre_eq, _inst_image(vg, Xi, vy))
 
 
+# @livre Ch.II §4.3 Prop.3 | E II.25 L.4-19 | PDF p.76
 def image_reunion_egal(g="G", fam="X", i="I"):
     """⊢ Γ⟨⋃_ι X_ι⟩ = ⋃_ι Γ⟨X_ι⟩.   (E.II.25, Prop. 3, 1re formule — INCONDITIONNELLE.)
 
@@ -483,6 +490,7 @@ def image_reunion_egal(g="G", fam="X", i="I"):
                                  E.reunion_famille(fam_im, vI))
 
 
+# @livre Ch.II §4.3 Prop.3 | E II.25 L.4-19 | PDF p.76
 def image_inter_incluse(g="G", fam="X", i="I"):
     """⊢ Γ⟨⋂_ι X_ι⟩ ⊂ ⋂_ι Γ⟨X_ι⟩.   (E.II.25, Prop. 3, 2e formule — INCONDITIONNELLE.)
 
@@ -533,6 +541,7 @@ def _assoc_et_droite(a, b, c):
 # Cor. de la Prop. 4 (E.II.25) — IMAGE DIRECTE d'une INTERSECTION sous INJECTION.
 #   {Injective(f)} ⊢ Γ⟨⋂X⟩ = ⋂Γ⟨X_ι⟩
 # ══════════════════════════════════════════════════════════════════════════════
+# @livre Ch.II §4.3 Cor.- | E II.25 L.41-47 | PDF p.76
 def image_inter_arriere_si_inj(g="G", fam="X", i="I", a="alpha"):
     """{Injective(f), α∈I} ⊢ ⋂_ι Γ⟨X_ι⟩ ⊂ Γ⟨⋂_ι X_ι⟩.   (Cor. Prop. 4, sens ⊃.)
 
@@ -597,6 +606,7 @@ def _membre_fam_image_b(g, fam, i, y, xb):
     return etr(base, alpha_existe("x", xb, body0))
 
 
+# @livre Ch.II §4.3 Cor.- | E II.25 L.41-47 | PDF p.76
 def image_inter_egal_si_injective(g="G", fam="X", i="I", a="alpha"):
     """{Injective(f), α∈I} ⊢ Γ⟨⋂_ι X_ι⟩ = ⋂_ι Γ⟨X_ι⟩.   (E.II.25, Cor. de la Prop. 4.)
 
@@ -632,6 +642,7 @@ def cible_image_recip_reunion(g="f", fam="Y", i="I"):
     return egal(image_recip(vg, reun), E.reunion_famille(fam_r, vI))
 
 
+# @livre Ch.II §4.3 Prop.4 | E II.25 L.21-31 | PDF p.76
 def image_recip_reunion_egal(g="f", fam="Y", i="I"):
     """⊢ f⁻¹⟨⋃_ι Y_ι⟩ = ⋃_ι f⁻¹⟨Y_ι⟩.   (E.II.25, Prop. 4, 1re formule — INCONDITIONNELLE.)
 

@@ -42,16 +42,19 @@ def _inst_inter(f, i, z):
     return instancie(instancie(instancie(ax, f), i), z)
 
 
+# @livre Ch.II §4.1 Def.1 | E II.22 L.31-36 | PDF p.73
 def membre_reunion_famille(f="f", i="I", z="z"):
     """⊢ (z ∈ ⋃_{ι∈I} X_ι) ⇔ (∃i)(i∈I et z∈X_i).   (E.II.4.1, Déf. 1 — appartenance.)"""
     return _inst_reunion(var(f), var(i), var(z))
 
 
+# @livre Ch.II §4.1 Def.2 | E II.22 L.49-53 | PDF p.73
 def membre_inter_famille(f="f", i="I", z="z"):
     """⊢ (z ∈ ⋂_{ι∈I} X_ι) ⇔ (∀i)(i∈I ⇒ z∈X_i).   (E.II.4.1, Déf. 2 — appartenance.)"""
     return _inst_inter(var(f), var(i), var(z))
 
 
+# @livre Ch.II §4.1 Def.1 | E II.22 L.31-36 | PDF p.73
 def reunion_famille_intro(f="f", i="I", a="a", z="z"):
     """⊢ ((a∈I) et (z∈X_a)) ⇒ (z ∈ ⋃_{ι∈I} X_ι).   (un élément d'un X_a est dans ⋃.)"""
     vf, vI, va, vz = var(f), var(i), var(a), var(z)
@@ -64,6 +67,7 @@ def reunion_famille_intro(f="f", i="I", a="a", z="z"):
     return N.loi_deduction(body, zU)
 
 
+# @livre Ch.II §4.1 Def.2 | E II.22 L.49-53 | PDF p.73
 def inter_famille_elim(f="f", i="I", a="a", z="z"):
     """⊢ (z ∈ ⋂_{ι∈I} X_ι) ⇒ ((a∈I) ⇒ (z∈X_a)).   (l'intersection est incluse dans chaque X_a.)"""
     vf, vI, va, vz = var(f), var(i), var(a), var(z)
@@ -73,6 +77,7 @@ def inter_famille_elim(f="f", i="I", a="a", z="z"):
     return N.loi_deduction(appartient(vz, E.inter_famille(vf, vI)), inst)
 
 
+# @livre Ch.II §4.2 Prop.- | E II.24 L.1-4 | PDF p.75
 def monotonie_reunion_famille(f="f", g="g", i="I"):
     """⊢ ((∀i)(X_i ⊂ Y_i)) ⇒ (⋃_{ι∈I} X_ι ⊂ ⋃_{ι∈I} Y_ι).   (§II.4.2, monotonie de ⋃.)
 
@@ -95,6 +100,7 @@ def monotonie_reunion_famille(f="f", g="g", i="I"):
     return N.loi_deduction(hyp, gen)
 
 
+# @livre Ch.II §4.2 Prop.- | E II.24 L.1-4 | PDF p.75
 def monotonie_inter_famille(f="f", g="g", i="I"):
     """⊢ ((∀i)(X_i ⊂ Y_i)) ⇒ (⋂_{ι∈I} X_ι ⊂ ⋂_{ι∈I} Y_ι).   (§II.4.2, monotonie de ⋂.)"""
     vf, vg, vI, vz, vi = var(f), var(g), var(i), var("z"), var("i")
@@ -116,6 +122,7 @@ def monotonie_inter_famille(f="f", g="g", i="I"):
     return N.loi_deduction(hyp, gen)
 
 
+# @livre Ch.II §4.1 Rem.- | E II.22 L.38-40 | PDF p.73
 def reunion_famille_vide(f="f"):
     """⊢ ⋃_{ι∈∅} X_ι = ∅.   (note de la Déf. 1 : réunion sur l'ensemble d'indices vide.)"""
     vf, vz, vi = var(f), var("z"), var("i")

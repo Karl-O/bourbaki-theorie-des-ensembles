@@ -47,6 +47,7 @@ def cible_inter_inf_universelle(f="X", i="I", a="A"):
     return _enonce(var(f), var(i), var(a))
 
 
+# @livre Ch.II §4.1 Prop.- | E II.23 L.13-20 | PDF p.74
 def inter_inf_universelle(f="X", i="I", a="A"):
     """⊢ ( A ⊂ ⋂_{ι∈I} X_ι ) ⟺ ( (∀i)(i∈I ⇒ A ⊂ X_i) ).   (E.II.4.1, inf de la famille.)
 

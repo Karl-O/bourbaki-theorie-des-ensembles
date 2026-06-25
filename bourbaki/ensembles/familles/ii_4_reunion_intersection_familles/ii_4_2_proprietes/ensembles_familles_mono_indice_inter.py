@@ -43,6 +43,7 @@ def _inst_inter(f, i, z):
 # ══════════════════════════════════════════════════════════════════════════════
 # MONOTONIE EN L'ENSEMBLE D'INDICES (décroissance J ↦ ⋂_{ι∈J} X_ι).   (E.II.4.2.)
 # ══════════════════════════════════════════════════════════════════════════════
+# @livre Ch.II §4.2 Prop.- | E II.24 L.5-7 | PDF p.75
 def inter_incluse_sous_indices(f="X", j="J", i="I"):
     """{J ⊂ I} ⊢ ⋂_{ι∈I} X_ι ⊂ ⋂_{ι∈J} X_ι.   (E.II.4.2 — décroissance en l'indice.)
 

@@ -41,6 +41,7 @@ def _t(v):
     return v if isinstance(v, Terme) else var(v)
 
 
+# @livre Ch.II §4.1 Prop.1 | E II.23 L.28-50 | PDF p.74
 def reparam_inter_incluse(f="X", phi="phi", i="I", k="K"):
     """⊢ (∀κ)(κ∈K⇒φ(κ)∈I)  ⇒  ( ⋂_{ι∈I} X_ι ⊂ ⋂_{κ∈K} X_{φ(κ)} ).
        (E.II.4, Prop. 1 dual — sens « ⊃ », n'utilise QUE le domaine.)   [domaine]
@@ -93,6 +94,7 @@ def _cible(f="X", phi="phi", i="I", k="K"):
     return impl(et(dom_hyp, surj_hyp), egal(interY, interX))
 
 
+# @livre Ch.II §4.1 Prop.1 | E II.23 L.28-50 | PDF p.74
 def reparam_inter_egal_si_surjectif(f="X", phi="phi", i="I", k="K"):
     """{φ : K→I (∀κ∈K φ(κ)∈I)  et  φ surjective sur I (∀ι∈I ∃κ∈K φ(κ)=ι)}
         ⊢  ⋂_{κ∈K} X_{φ(κ)} = ⋂_{ι∈I} X_ι.   (E.II.4, Prop. 1 dual VERBATIM.)

@@ -54,6 +54,7 @@ def cible_reunion_sup_universelle(f="X", i="I", a="A"):
     return _enonce(var(f), var(i), var(a))
 
 
+# @livre Ch.II §4.1 Prop.- | E II.22 L.31-36 | PDF p.73
 def reunion_sup_universelle(f="X", i="I", a="A"):
     """⊢ ( ⋃_{ι∈I} X_ι ⊂ A ) ⟺ ( (∀i)(i∈I ⇒ X_i ⊂ A) ).   (E.II.4.1, sup de la famille.)
 

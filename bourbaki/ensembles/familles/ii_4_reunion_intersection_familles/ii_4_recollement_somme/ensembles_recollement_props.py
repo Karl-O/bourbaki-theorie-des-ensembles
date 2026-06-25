@@ -108,6 +108,7 @@ def _inst_reunion_famille(fam, i, z):
 # ══════════════════════════════════════════════════════════════════════════════
 # Prop 7.1 — Recollement sur un RECOUVREMENT (cœur : coïncidence par valeurs).
 # ══════════════════════════════════════════════════════════════════════════════
+# @livre Ch.II §4.6 Prop.7 | E II.28 L.27-36 | PDF p.79
 def recollement_recouvrement_valeur(f="F", g="G", e="E", fam="X", i="I"):
     """⊢ ((E ⊂ ⋃_{ι∈I} X_ι) et (∀ι)(∀x)((x∈E∩X_ι) ⇒ f(x)=g(x)))
             ⇒ (∀x)((x∈E) ⇒ f(x)=g(x)).     (E.II.4, Prop. 7.1 — cœur valeur.)
@@ -154,6 +155,7 @@ def recollement_recouvrement_valeur(f="F", g="G", e="E", fam="X", i="I"):
     return N.loi_deduction(et(cover, local), gen)
 
 
+# @livre Ch.II §4.6 Prop.7 | E II.28 L.27-36 | PDF p.79
 def recollement_recouvrement(f="F", g="G", e="E", fam="X", i="I"):
     """⊢ ((E ⊂ dom F) et (E ⊂ dom G) et (E ⊂ ⋃_{ι∈I} X_ι)
          et (∀ι)(∀x)((x∈E∩X_ι) ⇒ f(x)=g(x)))  ⇒  coincident(F, G, E).
@@ -190,6 +192,7 @@ def recollement_recouvrement(f="F", g="G", e="E", fam="X", i="I"):
 # ══════════════════════════════════════════════════════════════════════════════
 # Prop 7.2 / Prop 8 — RECOLLEMENT BINAIRE (cas |I|=2 ; moteur de l'infra).
 # ══════════════════════════════════════════════════════════════════════════════
+# @livre Ch.II §4.7 Prop.8 | E II.29 L.14-22 | PDF p.80
 def recollement_binaire_fonctionnel(g="G", h="H"):
     """{func G, func H, (∀u)¬(u∈domG et u∈domH)} ⊢ func(G∪H).   (E.II.4, Prop. 7.2/8 —
     EXISTENCE du recollement au rang binaire.)  Ré-export de reunion_graphes_
@@ -200,6 +203,7 @@ def recollement_binaire_fonctionnel(g="G", h="H"):
     return reunion_graphes_fonctionnelle(g, h)
 
 
+# @livre Ch.II §4.7 Prop.8 | E II.29 L.14-22 | PDF p.80
 def recollement_binaire_prolonge_gauche(g="G", h="H"):
     """⊢ G ⊂ G∪H.   (G∪H PROLONGE G : tout couple de G est dans G∪H — E.II.4, Prop.
     7.2/8 : « le recollement prolonge chaque fonction ».)"""
@@ -213,6 +217,7 @@ def recollement_binaire_prolonge_gauche(g="G", h="H"):
     return N.generalisation("z", N.loi_deduction(appartient(vz, vg), inGuH))
 
 
+# @livre Ch.II §4.7 Prop.8 | E II.29 L.14-22 | PDF p.80
 def recollement_binaire_prolonge_droite(g="G", h="H"):
     """⊢ H ⊂ G∪H.   (G∪H prolonge aussi H — symétrique.)"""
     vg, vh, vz = _t(g), _t(h), var("z")
@@ -226,6 +231,7 @@ def recollement_binaire_prolonge_droite(g="G", h="H"):
     return N.generalisation("z", N.loi_deduction(appartient(vz, vh), inGuH))
 
 
+# @livre Ch.II §4.7 Prop.8 | E II.29 L.14-22 | PDF p.80
 def recollement_binaire_valeur_gauche(g="G", h="H", u="u"):
     """{func G, func H, dom disjoints, u∈dom G} ⊢ (G∪H)(u) = G(u).   (le recollement
     coïncide PAR VALEUR avec G sur dom G — ré-export valeur_reunion_gauche.)"""
@@ -234,6 +240,7 @@ def recollement_binaire_valeur_gauche(g="G", h="H", u="u"):
     return valeur_reunion_gauche(g, h, u)
 
 
+# @livre Ch.II §4.7 Prop.8 | E II.29 L.14-22 | PDF p.80
 def recollement_binaire_valeur_droite(g="G", h="H", u="u"):
     """{func G, func H, dom disjoints, u∈dom H} ⊢ (G∪H)(u) = H(u).   (idem côté H.)"""
     from bourbaki.ensembles.fonctions.hors_ii_3.iii_3_recollement.ensembles_recollement_bijection import (
@@ -241,6 +248,7 @@ def recollement_binaire_valeur_droite(g="G", h="H", u="u"):
     return valeur_reunion_droite(g, h, u)
 
 
+# @livre Ch.II §4.7 Prop.8 | E II.29 L.14-22 | PDF p.80
 def recollement_binaire_unicite(p="P", q="Q"):
     """⊢ (P = Q) ⇒ (∀x)((x ∈ dom P) ⇒ p(x) = q(x)).   (UNICITÉ du recollement, E.II.4,
     Prop. 7.2/8 : « il existe une fonction et une seule … » — deux recollements de
@@ -253,6 +261,7 @@ def recollement_binaire_unicite(p="P", q="Q"):
 # ══════════════════════════════════════════════════════════════════════════════
 # Prop 9 — Existence d'une RÉUNION DISJOINTE (rang binaire : copies marquées).
 # ══════════════════════════════════════════════════════════════════════════════
+# @livre Ch.II §4.8 Prop.9 | E II.29 L.34-41 | PDF p.80
 def reunion_disjointe_binaire_disjoints(a="A", b="B"):
     """⊢ ((A×{0}) ∩ (B×{1})) = ∅.   (E.II.4, Prop. 9 au rang binaire : les copies
     marquées A×{0} et B×{1} sont MUTUELLEMENT DISJOINTES.)
@@ -287,6 +296,7 @@ def reunion_disjointe_binaire_disjoints(a="A", b="B"):
         equivalence_arriere(vide_ssi_sans_element(inter)))  # inter=∅
 
 
+# @livre Ch.II §4.8 Prop.9 | E II.29 L.34-41 | PDF p.80
 def reunion_disjointe_binaire_reunion(a="A", b="B"):
     """⊢ (A⊔B) = ((A×{0}) ∪ (B×{1})).   (E.II.4, Prop. 9 au rang binaire : A⊔B EST la
     réunion des copies marquées disjointes ; réflexivité de la définition.)
@@ -312,6 +322,7 @@ def bijection_canonique_reunion_somme(a="A", b="B"):
     return recollement(gA, gB)
 
 
+# @livre Ch.II §4.8 Prop.10 | E II.30 L.4-7 | PDF p.81
 def reunion_equipotente_somme_si_bijection(a="A", b="B"):
     """{est_bijection_de(W, A∪B, A⊔B)} ⊢ Eq(A ∪ B, A ⊔ B).   (E.II.4, Prop. 10 au rang
     binaire, CONDITIONNEL.)

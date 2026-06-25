@@ -91,6 +91,7 @@ def cible_image_reunion_binaire(f="f", b="B", y="Y"):
     return egal(gauche, droite)
 
 
+# @livre Ch.II §4.5 Prop.3 | E II.27 L.16-18 | PDF p.78
 def image_reunion_binaire(f="f", b="B", y="Y"):
     """⊢ f⟨B∪Y⟩ = f⟨B⟩ ∪ f⟨Y⟩.   (E.II.27 binaire — CLOS, 0 hyp, INCOND.)"""
     vf, vb, vy = _t(f), _t(b), _t(y)
@@ -157,6 +158,7 @@ def cible_image_reciproque_inter_binaire(f="f", b="B", y="Y"):
     return impl(E.est_fonctionnel(vf), egal(lhs, rhs))
 
 
+# @livre Ch.II §4.5 Prop.4 | E II.27 L.21-23 | PDF p.78
 def image_reciproque_inter_binaire(f="f", b="B", y="Y"):
     """⊢ est_fonctionnel(f) ⇒ f⁻¹⟨B∩Y⟩ = f⁻¹⟨B⟩ ∩ f⁻¹⟨Y⟩.   (E.II.27 ; CLOS, 0 hyp.)
 
@@ -271,6 +273,7 @@ def cible_image_inter_inclusion(f="f", b="B", y="Y"):
     return E.inclus(lhs, rhs)
 
 
+# @livre Ch.II §4.3 Prop.3 | E II.25 L.7-13 | PDF p.76
 def image_inter_inclusion(f="f", b="B", y="Y"):
     """⊢ f⟨B∩Y⟩ ⊂ f⟨B⟩ ∩ f⟨Y⟩.   (E.II.25 — CLOS, 0 hyp, INCONDITIONNEL.)
 
@@ -324,6 +327,7 @@ def cible_image_reciproque_difference(f="f", b="B", y="Y"):
     return impl(E.est_fonctionnel(vf), egal(lhs, rhs))
 
 
+# @livre Ch.II §4.5 Prop.6 | E II.27 L.20-26 | PDF p.78
 def image_reciproque_difference(f="f", b="B", y="Y"):
     """⊢ est_fonctionnel(f) ⇒ f⁻¹⟨B∖Y⟩ = f⁻¹⟨B⟩ ∖ f⁻¹⟨Y⟩.   (E.II.27 ; CLOS, 0 hyp.)
 

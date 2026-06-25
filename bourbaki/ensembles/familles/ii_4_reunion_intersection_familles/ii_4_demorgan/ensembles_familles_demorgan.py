@@ -123,6 +123,7 @@ def _membre_compl(e, f, i, z):
 
 
 # ── De Morgan des familles ───────────────────────────────────────────────────
+# @livre Ch.II §4.4 Prop.5 | E II.26 L.3-15 | PDF p.77
 def de_morgan_inter_famille(e="E", f="f", i="I"):
     """⊢ E∖(⋂_{ι∈I} X_ι) = ⋃_{ι∈I} (E∖X_ι).   (E.II.4, Prop. 5, seconde formule.)
 
@@ -192,6 +193,7 @@ def _distrib_et_pourtout(p, ii, q, idx):
     return conjonction_intro(fwd, bwd)
 
 
+# @livre Ch.II §4.4 Prop.5 | E II.26 L.3-15 | PDF p.77
 def de_morgan_reunion_famille(e="E", f="f", i="I"):
     """{(∃ι)(ι∈I)} ⊢ E∖(⋃_{ι∈I} X_ι) = ⋂_{ι∈I} (E∖X_ι).
 

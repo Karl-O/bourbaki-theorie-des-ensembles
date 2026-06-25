@@ -62,6 +62,7 @@ def cible_image_reciproque_reunion_binaire(f="f", b="B", y="Y"):
     return egal(gauche, droite)
 
 
+# @livre Ch.II §4.5 Prop.4 | E II.27 L.16-18 | PDF p.78
 def image_reciproque_reunion_binaire(f="f", b="B", y="Y"):
     """⊢ f⁻¹⟨B∪Y⟩ = f⁻¹⟨B⟩ ∪ f⁻¹⟨Y⟩.   (E.II.27 binaire — CLOS, 0 hyp, INCOND.)"""
     vf, vb, vy = _t(f), _t(b), _t(y)

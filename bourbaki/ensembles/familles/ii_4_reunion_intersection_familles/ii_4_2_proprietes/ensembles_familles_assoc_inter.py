@@ -99,6 +99,7 @@ def _membre_eq(t1, t2, eq_thm, z):
 #   {(a) couverture , (b) domaine , (c) non-vacuité} ⊢
 #       ⋂_{λ∈L} X_λ = ⋂_{λ∈L}( ⋂_{ι∈J_λ} X_ι ).
 # ══════════════════════════════════════════════════════════════════════════════
+# @livre Ch.II §4.2 Prop.2 | E II.24 L.10-23 | PDF p.75
 def associativite_inter_famille(x="X", j="J", l="L"):
     """{(a) couverture , (b) domaine , (c) non-vacuité} ⊢
         ⋂_{λ∈L} X_λ = ⋂_{λ∈L}(⋂_{ι∈J_λ} X_ι).

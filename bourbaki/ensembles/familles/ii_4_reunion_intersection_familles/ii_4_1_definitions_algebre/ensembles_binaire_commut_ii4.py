@@ -43,6 +43,7 @@ def cible_commutativite_reunion_binaire(a="A", b="B"):
     return egal(E.reunion(vA, vB), E.reunion(vB, vA))
 
 
+# @livre Ch.II §4.5 Prop.- | E II.26 L.36-37 | PDF p.77
 def commutativite_reunion_binaire(a="A", b="B"):
     """⊢ A ∪ B = B ∪ A.   (§II.4.5 — CLOS, 0 hyp, INCONDITIONNEL.)"""
     vA, vB, vz = _t(a), _t(b), var("z")
@@ -70,6 +71,7 @@ def cible_commutativite_inter_binaire(a="A", b="B"):
     return egal(E.intersection(vA, vB), E.intersection(vB, vA))
 
 
+# @livre Ch.II §4.5 Prop.- | E II.26 L.36-37 | PDF p.77
 def commutativite_inter_binaire(a="A", b="B"):
     """⊢ A ∩ B = B ∩ A.   (§II.4.5 — CLOS, 0 hyp, INCONDITIONNEL.)"""
     vA, vB, vz = _t(a), _t(b), var("z")
