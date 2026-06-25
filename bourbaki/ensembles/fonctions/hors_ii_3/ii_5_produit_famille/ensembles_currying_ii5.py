@@ -74,6 +74,7 @@ def but(a="A", b="B", c="C"):
 # ═══════════════════════════════════════════════════════════════════════════════
 #  PROPOSITION 3 §5 — CURRYING : 𝓕(B×C;A) ≅ 𝓕(C;𝓕(B;A))  (bijection canonique)
 # ═══════════════════════════════════════════════════════════════════════════════
+# @livre Ch.II §5.2 Prop.3 | E II.31 L.34-36 | PDF p.82
 def prop3_currying_bijection(a="A", b="B", c="C"):
     """⊢ equipotent( 𝓕(B×C;A) , 𝓕(C;𝓕(B;A)) ).   (PROPOSITION 3, E II.31.)
 

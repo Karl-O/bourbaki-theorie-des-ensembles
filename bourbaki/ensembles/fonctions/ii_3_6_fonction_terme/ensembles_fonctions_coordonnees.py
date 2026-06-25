@@ -45,6 +45,7 @@ from bourbaki.ensembles.fonctions.ii_3_6_fonction_terme.ensembles_fonction_terme
 _LIANT_COUPLE = "c0"
 
 
+# @livre Ch.II §3.6 Ex.2 | E II.16 L.18-21 | PDF p.67
 def premiere_fonction_coordonnee(g, z=_LIANT_COUPLE):
     """Première fonction coordonnée sur G : z ↦ pr₁z (z∈G, pr₁z∈pr₁G)  (E.II.3.6, Ex 2).
 
@@ -56,6 +57,7 @@ def premiere_fonction_coordonnee(g, z=_LIANT_COUPLE):
     return E.fonction_terme(g, E.pr1(vz), E.dom(g), z)
 
 
+# @livre Ch.II §3.6 Ex.2 | E II.16 L.18-21 | PDF p.67
 def seconde_fonction_coordonnee(g, z=_LIANT_COUPLE):
     """Seconde fonction coordonnée sur G : z ↦ pr₂z (z∈G, pr₂z∈pr₂G)  (E.II.3.6, Ex 2).
 
@@ -69,6 +71,7 @@ def seconde_fonction_coordonnee(g, z=_LIANT_COUPLE):
 # ─────────────────────────────────────────────────────────────────────────────
 # PROPRIÉTÉS — le graphe de chaque fonction coordonnée est FONCTIONNEL (C54)
 # ─────────────────────────────────────────────────────────────────────────────
+# @livre Ch.II §3.6 Crit.54 | E II.16 L.18-21 | PDF p.67
 def premiere_coordonnee_fonctionnelle(g="G", z=_LIANT_COUPLE):
     """⊢ le graphe de la première fonction coordonnée sur G est fonctionnel  (C54).
 
@@ -79,6 +82,7 @@ def premiere_coordonnee_fonctionnelle(g="G", z=_LIANT_COUPLE):
     return graphe_terme_fonctionnel(vG, E.pr1(vz), z, "y")
 
 
+# @livre Ch.II §3.6 Crit.54 | E II.16 L.18-21 | PDF p.67
 def seconde_coordonnee_fonctionnelle(g="G", z=_LIANT_COUPLE):
     """⊢ le graphe de la seconde fonction coordonnée sur G est fonctionnel  (C54).
     (T = pr₂z, liant « c0 ».)"""

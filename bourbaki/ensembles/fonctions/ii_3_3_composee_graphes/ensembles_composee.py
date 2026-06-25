@@ -31,6 +31,7 @@ def _tc(t):
     return t if isinstance(t, Terme) else var(t)
 
 
+# @livre Ch.II §3.3 Def.6 | E II.11 L.27-29 | PDF p.62
 def couple_composee(gp="Gp", g="G", x="x", z="z"):
     """⊢ ((x,z) ∈ G'∘G) ⇔ (∃y)((x,y)∈G et (y,z)∈G').   (x, z distincts de p, r, y.)"""
     vGp, vG, vx, vz = _tc(gp), _tc(g), _tc(x), _tc(z)
@@ -63,6 +64,7 @@ def couple_composee(gp="Gp", g="G", x="x", z="z"):
     return equivalence_transitivite(inst, conjonction_intro(avant, arriere))
 
 
+# @livre Ch.II §3.3 Prop.5 | E II.12 L.18-19 | PDF p.63
 def image_composee(gp="Gp", g="G", aa="A"):
     """⊢ (G'∘G)⟨A⟩ = G'⟨G⟨A⟩⟩.   (Proposition 5, E.II.42 ; réagencement C33.)
 

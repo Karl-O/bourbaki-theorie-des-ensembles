@@ -43,6 +43,7 @@ from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
 # ─────────────────────────────────────────────────────────────────────────────
 # §II.3.5 — DÉFINITIONS
 # ─────────────────────────────────────────────────────────────────────────────
+# @livre Ch.II §3.5 Def.- | E II.15 L.10-11 | PDF p.66
 def est_sous_famille(f, g):
     """« f est une sous-famille de g » := F ⊂ G  (E.II.3.5).
 
@@ -53,6 +54,7 @@ def est_sous_famille(f, g):
     return inclus(f, g)
 
 
+# @livre Ch.II §3.5 Def.- | E II.15 L.8-11 | PDF p.66
 def est_sous_famille_buts(f, g, b, d):
     """« f est une sous-famille de g (forme précise, avec arrivées B ⊂ D) » (E.II.3.5).
 
@@ -66,6 +68,7 @@ def est_sous_famille_buts(f, g, b, d):
 # PROPRIÉTÉS — la sous-famille est l'ordre par inclusion des graphes (miroir du
 # prolongement) ; toutes CLOSES.
 # ─────────────────────────────────────────────────────────────────────────────
+# @livre Ch.II §3.5 Prop.- | E II.15 L.10-11 | PDF p.66
 def sous_famille_reflexive(f="F"):
     """⊢ F ⊂ F.   (Toute famille est une sous-famille d'elle-même — E.II.3.5.)"""
     vF, vz = var(f), var("z")
@@ -73,12 +76,14 @@ def sous_famille_reflexive(f="F"):
     return N.generalisation("z", a_implique_a(appartient(vz, vF)))
 
 
+# @livre Ch.II §3.5 Prop.- | E II.15 L.10-11 | PDF p.66
 def sous_famille_transitive(f="F", g="G", h="H"):
     """⊢ ((F⊂G) et (G⊂H)) ⇒ (F⊂H).   (La sous-famille est transitive : une
     sous-famille d'une sous-famille de g est une sous-famille de g — E.II.3.5.)"""
     return inclusion_transitive(f, g, h)
 
 
+# @livre Ch.II §3.5 Prop.- | E II.15 L.10-11 | PDF p.66
 def sous_famille_est_prolongement_converse(f="F", g="G"):
     """⊢ est_sous_famille(f, g) ⇔ prolonge(g, f).
 

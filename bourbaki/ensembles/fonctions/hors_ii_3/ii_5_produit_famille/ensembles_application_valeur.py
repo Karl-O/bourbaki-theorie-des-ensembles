@@ -94,6 +94,7 @@ def _exposant_conjoints(vG, vE, vF, h_G_in_exp):
 # ═══════════════════════════════════════════════════════════════════════════════
 # (1)  valeur_application_dans_but :  f(x) = G(x) ∈ F
 # ═══════════════════════════════════════════════════════════════════════════════
+# @livre Ch.II §5.2 Lem.- | E II.31 L.3-13 | PDF p.82
 def valeur_application_dans_but(f="f", e="E", but="F", x="x"):
     """{f ∈ 𝓕(E;F), x ∈ E} ⊢ valeur(graphe_de(f), x) ∈ F.
 
@@ -202,6 +203,7 @@ def _conjoints_graphe(vG, vE, vF, h_G_in_exp):
     return func, graphe, domeq
 
 
+# @livre Ch.II §5.2 Lem.- | E II.31 L.3-13 | PDF p.82
 def application_egale_par_valeurs(f="f", g="g", e="E", but="F"):
     """{f ∈ 𝓕(E;F), g ∈ 𝓕(E;F),
         (∀x)(x∈E ⇒ valeur(graphe_de(f),x)=valeur(graphe_de(g),x))} ⊢ f = g.

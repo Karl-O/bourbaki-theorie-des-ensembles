@@ -40,6 +40,7 @@ def _inst_composee(gp, g, w):
     return instancie(instancie(instancie(ax, gp), g), w)
 
 
+# @livre Ch.II §3.3 Prop.3 | E II.12 L.1-2 | PDF p.63
 def reciproque_composee(gp="Gp", g="G"):
     """⊢ (Gp∘G)⁻¹ = G⁻¹ ∘ Gp⁻¹.   (Proposition 3, E.II.42 ; SANS hypothèses.)"""
     vGp, vG = var(gp), var(g)

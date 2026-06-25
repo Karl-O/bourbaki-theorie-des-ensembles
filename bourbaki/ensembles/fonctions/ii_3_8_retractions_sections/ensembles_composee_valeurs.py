@@ -40,6 +40,7 @@ def _symetrie_thm(thm_eq):
     return N.modus_ponens(thm_eq, symetrie(t, u))
 
 
+# @livre Ch.II §3.8 Lem.- | E II.19 L.27-37 | PDF p.70
 def composition_valeur_t(tG, tF, tx):
     """⊢ (tG∘tF)(x) = tG(tF(x))   (version TERMES de composition_valeur).
 

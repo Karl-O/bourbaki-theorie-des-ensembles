@@ -63,6 +63,7 @@ def cible_inclus_image_reciproque_image(f="f", x="X"):
     return inclus(vx, E.image(E.reciproque(vf), E.image(vf, vx)))
 
 
+# @livre Ch.R §2.10 Prop.- | E.R.9 L.31-31 | PDF p.312
 def inclus_image_reciproque_image(f="f", x="X"):
     """⊢ H_app(X,f) ⇒ X ⊂ f⁻¹⟨f⟨X⟩⟩.   (E.R.9, §2 item 10, formule (18).)
 

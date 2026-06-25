@@ -44,6 +44,7 @@ def _expand_mid(gpn, gn, t1, t2, mid):
     return equivalence_transitivite(e, alpha_existe(rhs.lieur, mid, rhs.sous[0]))
 
 
+# @livre Ch.II §3.3 Prop.4 | E II.12 L.5-14 | PDF p.63
 def composee_associative(g1="G1", g2="G2", g3="G3"):
     """⊢ (G3∘G2)∘G1 = G3∘(G2∘G1).   (Proposition 4, E.II.42.)"""
     G1, G2, G3 = var(g1), var(g2), var(g3)

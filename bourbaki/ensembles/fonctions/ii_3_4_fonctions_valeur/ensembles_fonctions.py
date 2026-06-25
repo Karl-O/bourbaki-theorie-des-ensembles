@@ -18,6 +18,7 @@ def _t(v):
     return v if isinstance(v, Terme) else var(v)
 
 
+# @livre Ch.II §3.4 Def.9 | E II.13 L.24-31 | PDF p.64
 def valeur_dans_graphe(f="F", x="x"):
     """{(∃y)((x,y)∈F)} ⊢ (x, f(x)) ∈ F.   (f, x : noms OU termes ; x dans le domaine.)"""
     vF, vx, vy = _t(f), _t(x), var("y")
@@ -26,6 +27,7 @@ def valeur_dans_graphe(f="F", x="x"):
     return N.modus_ponens(dom_hyp, N.existe_temoin(r, "y"))   # (x, f(x))∈F
 
 
+# @livre Ch.II §3.4 Crit.C46 | E II.13 L.32-33 | PDF p.64
 def valeur_caracterisation(f="F", x="x"):
     """{F fonctionnel, (∃y)((x,y)∈F)} ⊢ ((x,y) ∈ F) ⇔ (y = f(x)).   (C46 ; f,x noms ou termes.)"""
     vF, vx, vy = _t(f), _t(x), var("y")

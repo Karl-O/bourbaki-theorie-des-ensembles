@@ -38,6 +38,7 @@ def _inst_restriction(f, x, z):
     return instancie(instancie(instancie(ax, f), x), z)
 
 
+# @livre Ch.II §3.5 Prop.- | E II.15 L.12-18 | PDF p.66
 def couple_restriction(f="F", x="X", u="u", v="v"):
     """⊢ ((u,v) ∈ f|X) ⇔ (u∈X et (u,v)∈F).   (E.II.45 ; u, v distincts de p, q.)"""
     vF, vX, vu, vv, vp, vq = var(f), var(x), var(u), var(v), var("p"), var("q")
@@ -79,6 +80,7 @@ def couple_restriction(f="F", x="X", u="u", v="v"):
     return equivalence_transitivite(inst, conjonction_intro(avant, arriere))
 
 
+# @livre Ch.II §3.5 Prop.- | E II.15 L.16-17 | PDF p.66
 def restriction_incluse(f="F", x="X"):
     """⊢ f|X ⊂ F.   (Le graphe de la restriction est inclus dans celui de f : F est
     un prolongement de f|X — « une fonction est un prolongement de ses restrictions ».)"""
@@ -98,6 +100,7 @@ def restriction_incluse(f="F", x="X"):
     return N.generalisation("z", z_imp)                            # f|X ⊂ F
 
 
+# @livre Ch.II §3.5 Prop.- | E II.15 L.6-11 | PDF p.66
 def prolongement_reflexif(f="F"):
     """⊢ F ⊂ F.   (toute fonction est un prolongement d'elle-même.)"""
     vF, vz = var(f), var("z")
@@ -105,11 +108,13 @@ def prolongement_reflexif(f="F"):
     return N.generalisation("z", a_implique_a(appartient(vz, vF)))
 
 
+# @livre Ch.II §3.5 Prop.- | E II.15 L.6-11 | PDF p.66
 def prolongement_transitif(f="F", g="G", h="H"):
     """⊢ ((F⊂G) et (G⊂H)) ⇒ (F⊂H).   (le prolongement est transitif.)"""
     return inclusion_transitive(f, g, h)
 
 
+# @livre Ch.II §3.5 Prop.- | E II.15 L.3-3 | PDF p.66
 def coincidence_meme_graphe(f="F", g="G", x="x"):
     """⊢ (F = G) ⇒ (∀x)(x∈dom F ⇒ f(x)=g(x)).
 

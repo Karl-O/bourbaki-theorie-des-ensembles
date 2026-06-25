@@ -33,6 +33,7 @@ def _t(v):
     return v if isinstance(v, Terme) else var(v)
 
 
+# @livre Ch.II §3.4 Lem.- | E II.13 L.24-33 | PDF p.64
 def couple_valeur_dans_graphe(g="G", e="E", x="x"):
     """{dom G = E, x ∈ E} ⊢ (x, G(x)) ∈ G.
 
@@ -55,6 +56,7 @@ def couple_valeur_dans_graphe(g="G", e="E", x="x"):
         N.loi_deduction(existe("y", appartient(E.couple(vx, vy), vG)), cpl))  # (x,G(x))∈G
 
 
+# @livre Ch.II §3.4 Lem.- | E II.13 L.24-33 | PDF p.64
 def valeur_dans_codomaine(g="G", e="E", f="F", x="x"):
     """{G ⊂ E×F, dom G = E, x ∈ E} ⊢ G(x) ∈ F.
 

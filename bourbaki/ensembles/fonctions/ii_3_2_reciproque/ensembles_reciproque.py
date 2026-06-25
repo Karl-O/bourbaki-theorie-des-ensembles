@@ -41,6 +41,7 @@ def _inst_recip(g, z):
     return instancie(instancie(ax, g), z)
 
 
+# @livre Ch.II §3.2 Def.5 | E II.11 L.13-14 | PDF p.62
 def couple_reciproque(g="G", u="u", v="v"):
     """⊢ ((u,v) ∈ G⁻¹) ⇔ ((v,u) ∈ G).   (E.II.41 ; u, v noms OU termes, distincts de p, q.)"""
     from bourbaki.logique.i_1_termes_relations.formule import Terme
@@ -75,6 +76,7 @@ def couple_reciproque(g="G", u="u", v="v"):
     return equivalence_transitivite(inst, conjonction_intro(avant, arriere))
 
 
+# @livre Ch.II §3.2 Rem.- | E II.11 L.16-17 | PDF p.62
 def pr1_reciproque(g="G"):
     """⊢ pr₁(G⁻¹) = pr₂G.   (E.II.41 ; dom(G⁻¹) = img(G), SANS hypothèses.)
 
@@ -98,6 +100,7 @@ def pr1_reciproque(g="G"):
     return egalite_par_extension(char_dom, char_img, E.dom(Grec), E.img(vG))
 
 
+# @livre Ch.II §3.2 Rem.- | E II.11 L.16-17 | PDF p.62
 def pr2_reciproque(g="G"):
     """⊢ pr₂(G⁻¹) = pr₁G.   (E.II.41 ; img(G⁻¹) = dom(G), SANS hypothèses.)
 
@@ -133,6 +136,7 @@ def _inst_produit(gx, gy, z):
     return instancie(instancie(instancie(ax, gx), gy), z)
 
 
+# @livre Ch.II §3.2 Rem.- | E II.11 L.17-18 | PDF p.62
 def reciproque_produit(x="X", y="Y"):
     """⊢ (X×Y)⁻¹ = Y×X.   (E.II.41 : « réciproque d'un produit », SANS hypothèses.)
 

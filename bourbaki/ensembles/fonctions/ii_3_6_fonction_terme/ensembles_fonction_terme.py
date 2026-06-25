@@ -37,6 +37,7 @@ def _inst_axiome(a, t, w, x="x", y="y"):
     return instancie(ax, w)
 
 
+# @livre Ch.II §3.6 Crit.54 | E II.15 L.31-35 | PDF p.66
 def membre_graphe_terme(a="A", t=None, u="u", v="v", x="x", y="y"):
     """⊢ ((u,v) ∈ F) ⇔ (u∈A et v=T[u]),   F = graphe_terme(A,T).
 
@@ -91,6 +92,7 @@ def membre_graphe_terme(a="A", t=None, u="u", v="v", x="x", y="y"):
     return equivalence_transitivite(inst, eq_ex)                  # ((u,v)∈F) ⇔ (u∈A et v=T[u])
 
 
+# @livre Ch.II §3.6 Crit.54 | E II.15 L.31-35 | PDF p.66
 def graphe_terme_fonctionnel(a="A", t=None, x="x", y="y"):
     """⊢ F est fonctionnel,   F = graphe_terme(A,T).   (Critère C54, cœur.)
 

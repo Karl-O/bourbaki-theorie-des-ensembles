@@ -32,6 +32,7 @@ from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (conjonc
 from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import symetrie, composer_egalites, congruence_terme
 
 
+# @livre Ch.II §3.8 Prop.8 | E II.18 L.15-19 | PDF p.69
 def retraction_implique_injective(r="R", f="F", a="A", u="u", up="up"):
     """⊢ (r rétraction associée à f) ⇒ (f injective sur A).   (Prop. 8, sens direct.)
 
@@ -63,6 +64,7 @@ def retraction_implique_injective(r="R", f="F", a="A", u="u", up="up"):
     return N.loi_deduction(E.est_retraction(vR, vF, vA), gen)
 
 
+# @livre Ch.II §3.8 Prop.8 | E II.18 L.17-19 | PDF p.69
 def section_construite_par_tau(f="F", b="B"):
     """⊢ (∀y)(y∈B ⇒ (∃x)(y=f(x))) ⇒ (∀y)(y∈B ⇒ f(s(y))=y), où s := y ↦ τx(y=f(x)).
        (Prop. 8, sens réciproque, cas surjectif — CONSTRUCTION EFFECTIVE de la

@@ -15,6 +15,7 @@ from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import existe_elim
 from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import couple_egal_implique_composantes
 
 
+# @livre Ch.II §2.1 Lem.- | E II.7 L.17-21 | PDF p.58
 def tau_egal(a="a", x="x"):
     """⊢ τx(x=a) = a.   (le τ d'une relation équivalente à x=a vaut a.)"""
     va, vx = var(a), var(x)
@@ -22,6 +23,7 @@ def tau_egal(a="a", x="x"):
     return N.modus_ponens(ex, N.existe_temoin(egal(vx, va), x))         # τx(x=a)=a
 
 
+# @livre Ch.II §2.1 Def.- | E II.7 L.17-29 | PDF p.58
 def projection_premiere(u="u", v="v"):
     """⊢ pr₁((u,v)) = u.   (u, v distincts de x, y.)"""
     vu, vv, vx, vy = var(u), var(v), var("x"), var("y")
@@ -44,6 +46,7 @@ def projection_premiere(u="u", v="v"):
     return composer_egalites(tau_eq, tau_egal(u, "x"))        # pr₁((u,v)) = u
 
 
+# @livre Ch.II §2.1 Def.- | E II.7 L.17-29 | PDF p.58
 def projection_seconde(u="u", v="v"):
     """⊢ pr₂((u,v)) = v.   (u, v distincts de x, y.)"""
     vu, vv, vx, vy = var(u), var(v), var("x"), var("y")

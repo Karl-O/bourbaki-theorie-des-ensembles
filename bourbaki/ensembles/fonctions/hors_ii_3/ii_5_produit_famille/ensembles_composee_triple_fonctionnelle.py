@@ -43,6 +43,7 @@ def _composee_fonctionnelle_t(tG, tF):
     return instancie(instancie(gen, tG), tF)               # ordre : G d'abord (extérieur), puis F
 
 
+# @livre Ch.II §5.2 Prop.2 | E II.31 L.14-17 | PDF p.82
 def composee_triple_fonctionnelle(f="F", g="G", h="H"):
     """⊢ ( F fonctionnel et G fonctionnel et H fonctionnel ) ⇒ ( (H∘(G∘F)) fonctionnel ).
 

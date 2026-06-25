@@ -22,6 +22,7 @@ def _tc(t):
     return t if isinstance(t, Terme) else var(t)
 
 
+# @livre Ch.II §3.7 Prop.6 | E II.16 L.22-23 | PDF p.67
 def composee_fonctionnelle(g="G", f="F"):
     """⊢ ((F fonctionnel) et (G fonctionnel)) ⇒ (G∘F fonctionnel).   (Proposition 6, E.II.46.)"""
     vG, vF = _tc(g), _tc(f)
@@ -59,6 +60,7 @@ def composee_fonctionnelle(g="G", f="F"):
     return N.loi_deduction(et(E.est_fonctionnel(vF), E.est_fonctionnel(vG)), gen)
 
 
+# @livre Ch.II §3.7 Demo.- | E II.16 L.24-30 | PDF p.67
 def composee_intro(vG, vF, t1, t2, w, thm_fw, thm_wg):
     """De ⊢(t1,w)∈F et ⊢(w,t2)∈G, déduire ⊢ (t1,t2) ∈ G∘F   (introduction dans la composée)."""
     vy, vp, vr = var("y"), var("p"), var("r")
