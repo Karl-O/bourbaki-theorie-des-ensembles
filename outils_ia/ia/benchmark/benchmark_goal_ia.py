@@ -14,10 +14,10 @@ from bourbaki.logique.i_1_termes_relations.propositions import A, B, C, D, E, SI
 from bourbaki.logique.i_1_termes_relations.lecture import est_relation  # noqa: F401  (cohérence d'API)
 from bourbaki.logique.i_2_criteres_C.noyau import noyau
 from bourbaki.logique.i_2_criteres_C.tactiques.tactiques import antecedent_consequent
-from outils_ia.chercheur import _est_implication
-from outils_ia.prouveur_goal import _rels, _instances, _macros, prouver
-from outils_ia.encodeur import traits_paire_seq, traits_alignement
-from outils_ia.modele import RegressionLogistique
+from outils_ia.ia.chercheur import _est_implication
+from outils_ia.ia.prouveur_goal import _rels, _instances, _macros, prouver
+from outils_ia.ia.encodeur import traits_paire_seq, traits_alignement
+from outils_ia.ia.modele import RegressionLogistique
 
 
 def _seeds(but, hyps, sig):

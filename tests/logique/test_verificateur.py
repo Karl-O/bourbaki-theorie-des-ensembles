@@ -12,7 +12,7 @@ from __future__ import annotations
 from bourbaki.assemblage.assemblage import Assemblage, implication
 from bourbaki.logique.i_1_termes_relations.notation import lire_formule, afficher
 from bourbaki.logique.verification.verificateur_preuve import executer_preuve, prouver_par_llm
-from outils_ia.exemples_livre import verifier_tous
+from outils_ia.ia.exemples_livre import verifier_tous
 
 A = Assemblage(("=", "a", "b"))
 

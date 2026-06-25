@@ -11,8 +11,8 @@ from __future__ import annotations
 
 from bourbaki.assemblage.assemblage import negation, implication, disjonction
 from bourbaki.logique.i_1_termes_relations.propositions import SIG_PROP, A, B, C, D
-from outils_ia.chercheur import vocabulaire, instances_schemas, saturer_mp
-from outils_ia.encodeur import encoder
+from outils_ia.ia.chercheur import vocabulaire, instances_schemas, saturer_mp
+from outils_ia.ia.encodeur import encoder
 from bourbaki.logique.i_2_criteres_C.tactiques import tactiques as _T
 from bourbaki.logique.i_2_criteres_C.tactiques import tactiques_prop as _P
 from bourbaki.logique.i_4_egalitaires.tactiques_egalite import reflexivite, symetrie, transitivite

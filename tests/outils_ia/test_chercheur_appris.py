@@ -7,7 +7,7 @@ from __future__ import annotations
 
 from bourbaki.assemblage.assemblage import Assemblage, disjonction, implication
 from bourbaki.logique.i_2_criteres_C.noyau import noyau
-from outils_ia.chercheur_appris import TableProbas, ChercheurAppris, prouver_appris
+from outils_ia.ia.chercheur_appris import TableProbas, ChercheurAppris, prouver_appris
 
 A = Assemblage(("=", "a", "b"))
 B = Assemblage(("=", "b", "c"))

@@ -2,7 +2,7 @@
 
 Synthèse de l'**épluchage page-par-page du texte principal** (Chap. I–IV), chaque notion du
 livre confrontée au code certifié par le noyau LCF. Source = PDF du livre lu page par page
-(cf. `outils_ia/pdf_index.md`). Cartes détaillées : `COUVERTURE_CHAP_{I,II,III,IV}.md`.
+(cf. `outils_ia/pdf/pdf_index.md`). Cartes détaillées : `COUVERTURE_CHAP_{I,II,III,IV}.md`.
 
 Date : 2026-06-24.
 

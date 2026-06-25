@@ -2,4 +2,4 @@ __pycache__/
 *.pyc
 *.pyo
 .pytest_cache/
-outils_ia/pdf_pages/
+outils_ia/pdf/pdf_pages/

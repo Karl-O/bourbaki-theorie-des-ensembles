@@ -2,7 +2,7 @@
 from __future__ import annotations
 
 from bourbaki.assemblage.assemblage import Assemblage, implication, negation
-from outils_ia.encodeur import encoder, traits_paire, TRAITS
+from outils_ia.ia.encodeur import encoder, traits_paire, TRAITS
 
 A = Assemblage(("=", "a", "b"))
 

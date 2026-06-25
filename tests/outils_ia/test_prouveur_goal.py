@@ -10,8 +10,8 @@ from __future__ import annotations
 from bourbaki.assemblage.assemblage import implication, negation, disjonction
 from bourbaki.logique.i_1_termes_relations.propositions import A, B, C, D, SIG_PROP
 from bourbaki.logique.i_2_criteres_C.noyau import noyau
-from outils_ia import prouveur_goal
-from outils_ia.chercheur_ia import prouver_guide
+from outils_ia.ia import prouveur_goal
+from outils_ia.ia.chercheur_ia import prouver_guide
 
 
 def _p(but, **kw):

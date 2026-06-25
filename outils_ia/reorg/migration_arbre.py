@@ -35,7 +35,7 @@ import sys
 from pathlib import Path
 
 ROOT = Path.cwd()
-MOVES_JSON = ROOT / "outils_ia" / "reorg_moves.json"
+MOVES_JSON = ROOT / "outils_ia" / "reorg" / "reorg_moves.json"
 
 
 def _dotted(path: str):

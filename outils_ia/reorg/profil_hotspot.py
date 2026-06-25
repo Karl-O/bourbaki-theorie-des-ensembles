@@ -3,7 +3,7 @@
 
 Usage : python outils_ia/profil_hotspot.py  (depuis V9/) — profile trois_impair
 (le proof cardinal non-récursif ~400s) et écrit le top des fonctions dans
-outils_ia/profil_hotspot.txt (par tottime ET cumulative).
+outils_ia/reorg/profil_hotspot.txt (par tottime ET cumulative).
 """
 import cProfile
 import importlib
@@ -33,5 +33,5 @@ s.write("---- par tottime (temps propre, hors sous-appels) ----\n")
 ps.sort_stats("tottime").print_stats(30)
 s.write("\n---- par cumulative (temps total avec sous-appels) ----\n")
 ps.sort_stats("cumulative").print_stats(25)
-Path("outils_ia/profil_hotspot.txt").write_text(s.getvalue(), encoding="utf-8")
-print("profil écrit dans outils_ia/profil_hotspot.txt")
+Path("outils_ia/reorg/profil_hotspot.txt").write_text(s.getvalue(), encoding="utf-8")
+print("profil écrit dans outils_ia/reorg/profil_hotspot.txt")

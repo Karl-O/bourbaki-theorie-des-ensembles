@@ -23,9 +23,9 @@ from bourbaki.logique.i_1_termes_relations.propositions import SIG_PROP, A, B, C
 from bourbaki.logique.i_1_termes_relations.lecture import est_relation
 from bourbaki.logique.i_2_criteres_C.noyau import noyau
 from bourbaki.logique.i_2_criteres_C.tactiques.tactiques import antecedent_consequent
-from outils_ia.chercheur import vocabulaire, instances_schemas, _est_implication
-from outils_ia.encodeur import traits_paire_seq, encoder_sequence, _sequence_canonique
-from outils_ia.modele import RegressionLogistique
+from outils_ia.ia.chercheur import vocabulaire, instances_schemas, _est_implication
+from outils_ia.ia.encodeur import traits_paire_seq, encoder_sequence, _sequence_canonique
+from outils_ia.ia.modele import RegressionLogistique
 
 
 def _dist(a: tuple, b: tuple) -> int:

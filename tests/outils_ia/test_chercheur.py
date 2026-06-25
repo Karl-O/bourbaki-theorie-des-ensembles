@@ -11,7 +11,7 @@ from __future__ import annotations
 
 from bourbaki.assemblage.assemblage import Assemblage, disjonction, implication
 from bourbaki.logique.i_2_criteres_C.noyau import noyau
-from outils_ia.chercheur import Prouveur, saturer_mp
+from outils_ia.ia.chercheur import Prouveur, saturer_mp
 
 A = Assemblage(("=", "a", "b"))
 B = Assemblage(("=", "b", "c"))

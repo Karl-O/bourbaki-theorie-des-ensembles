@@ -33,7 +33,7 @@ coïncider avec « vérifié par la machine ». Un résultat n'est *FAIT* que s'
 - **Chap. IV** Structures : IV.1 structures/isomorphismes · IV.2 morphismes/structures dérivées · IV.3 applications universelles
 
 ## Suivi de couverture
-La couverture réelle est suivie hors de `outils_ia/couverture.py` (périmé). Audit du 2026-06-23 :
+La couverture réelle est suivie hors de `outils_ia/audit/couverture.py` (périmé). Audit du 2026-06-23 :
 ~85 % des définitions, mais propositions ~38 %, théorèmes nommés ~26 % réellement clos
 (beaucoup de PARTIEL : cas binaire seul, « modulo résidus honnêtes », niveau valeurs, terme opaque).
 Gros chantiers ouverts : Hessenberg a²=a (III.6), bon ordre des cardinaux (III.3), Cantor 2^a>a,
@@ -56,9 +56,9 @@ Le noyau garantit la *soundness* (aucun faux théorème) mais PAS la *fidélité
 celle-ci repose sur cette relecture. Auditer aussi les notions **déjà formalisées** (surtout les
 définitions) contre le PDF. En cas de conflit : le **PDF prime pour la fidélité**, le **noyau tranche
 pour la soundness** (cf. la preuve LaTeX du Th2 qui diffère du PDF) ; consigner tout écart dans
-`ANOMALIES.md`.
+`docs/journal/ANOMALIES.md`.
 
-**Calibrage §→page PDF** (établi le 2026-06-24) : voir `outils_ia/pdf_index.md` (mapping
+**Calibrage §→page PDF** (établi le 2026-06-24) : voir `outils_ia/pdf/pdf_index.md` (mapping
 section Bourbaki → page physique du PDF de 349 pages).
 
 ## Traçabilité livre — marqueur `@livre` (page + lignes de CHAQUE notion)
@@ -83,7 +83,8 @@ de trous.*
 
 **Règle.** Toute notion écrite ou auditée **à partir de maintenant** reçoit son `@livre`. Le
 retrofit de l'existant se fait **section par section** (passe 1 : poser les `@livre` depuis le PDF ;
-passe 2 : trier + lister les trous). Un outil `outils_ia/` collationnera les `@livre` → carte de trous.
+passe 2 : trier + lister les trous). L'outil `outils_ia/audit/gen_trous_livre.py` collationne les
+`@livre` (tri chapitre/page/ligne, signale les intervalles non couverts ; option `--md`).
 
 ## Livrable : rapport V9 (LaTeX façon livre Bourbaki)
 Maintenir dans **`V9/rapport/`** un document LaTeX multi-parties expliquant TOUT le projet, agencé comme

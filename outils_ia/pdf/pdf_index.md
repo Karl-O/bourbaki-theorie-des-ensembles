@@ -9,9 +9,9 @@ PDF : `../V6/1) Theorie Des Ensembles.pdf` — **349 pages, SCAN pur** (aucune c
 ```
 PP='/c/Users/KARL/AppData/Local/Programs/MiKTeX/miktex/bin/x64/pdftoppm'
 PDF='../V6/1) Theorie Des Ensembles.pdf'
-"$PP" -png -f <PREM> -l <DERN> -r 150 "$PDF" outils_ia/pdf_pages/p   # -> p-<NN>.png, puis Read
+"$PP" -png -f <PREM> -l <DERN> -r 150 "$PDF" outils_ia/pdf/pdf_pages/p   # -> p-<NN>.png, puis Read
 ```
-(`outils_ia/pdf_pages/` est gitignored.)
+(`outils_ia/pdf/pdf_pages/` est gitignored.)
 
 ## Décalages page-imprimée → page-physique (à confirmer en lisant l'en-tête ± 1-2)
 | Chapitre | formule | ancre vérifiée |
