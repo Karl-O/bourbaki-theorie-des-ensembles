@@ -105,6 +105,7 @@ def cible_intersection_saturee(a="A", b="B", g="G"):
     return E.est_saturee(c, vg, c, x="x")
 
 
+# @livre Ch.II §6.4 Prop.- | E II.43 L.31-32 | PDF p.94
 def reunion_de_saturees_est_saturee(a="A", b="B", g="G"):
     """{est_saturee(A,G), est_saturee(B,G)} ⊢ est_saturee( A∪B, G )
     (E.II.43, cas binaire ; clos mod. hyp.).
@@ -156,6 +157,7 @@ def reunion_de_saturees_est_saturee(a="A", b="B", g="G"):
     return N.generalisation("x", N.generalisation("y", body_imp))
 
 
+# @livre Ch.II §6.4 Prop.- | E II.43 L.31-32 | PDF p.94
 def intersection_de_saturees_est_saturee(a="A", b="B", g="G"):
     """{est_saturee(A,G), est_saturee(B,G)} ⊢ est_saturee( A∩B, G )
     (E.II.43, cas binaire ; clos mod. hyp.).
@@ -213,6 +215,7 @@ def cible_complementaire_saturee(a="A", e="E", g="G"):
     return E.est_saturee(c, vg, c, x="x")
 
 
+# @livre Ch.II §6.4 Prop.- | E II.43 L.32-33 | PDF p.94
 def complementaire_de_saturee_est_saturee(a="A", e="E", g="G"):
     """{est_saturee(A,G), G symétrique, G relation dans E} ⊢ est_saturee( E∖A, G )
     (E.II.43, complémentaire ; clos mod. hyp.).
