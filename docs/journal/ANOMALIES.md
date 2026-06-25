@@ -121,3 +121,39 @@ Trou de couverture structurel (E IV.26) : les EXEMPLES du livre -- Extension d'u
 (IV), Completion d'un espace uniforme (V), Groupes topologiques libres (VII), Stone-Cech -- n'ont
 AUCUNE def Python (releve de topologie/algebre hors theorie des ensembles pure). A inscrire comme
 trous structurels assumes dans la carte de couverture Chap IV.
+
+## BUG DE CAPTURE DE LIANT dans `est_reticule` / `borne_superieure` (2026-06-25, A CORRIGER)
+Decouvert en tentant `totalement_ordonne_implique_reticule` (PLAN_ETAPE_C). L'agent a REFUSE de
+bricoler ; capture CONFIRMEE empiriquement (libres_f).
+
+**Le bug.** `borne_superieure(G, A, m, E, x="x", y="y")` (ensembles_ordre_relation.py L.169) :
+  borne_superieure(G,A,m,E) := majorant(G,A,m,E)  et  (∀y)(majorant(G,A,y,E) ⇒ (m,y)∈G)
+le 6e parametre `y` est le liant du « plus petit majorant ». Or `admet_borne_sup_inf`
+(ensembles_ordre_monotone.py L.159) appelle `borne_superieure(G, {x,y}, vs, E, u)` : il passe `u`
+pour le liant de `majorant` (OK, pas de capture la), MAIS **laisse le 6e au defaut `"y"`**. Comme la
+paire passee est `paire(var('x'), var('y'))` (les `x,y` du `(∀x)(∀y)` externe de `est_reticule`), le
+`(∀y)` du « plus petit majorant » **CAPTURE le `y` de la paire**. La clause devient
+`(∀y)(y majore {x,**y**} ⇒ (s,y)∈G)` au lieu de `(∀m)(m majore {x,y_externe} ⇒ (s,m)∈G)`.
+Idem `borne_inferieure` / « plus grand minorant ». Verifie : `libres_f(borne_superieure(G,{x,y},m,E))`
+ne contient PAS la bonne structure ; sur l'exemple canonique du treillis (chaine a<b<c) la clause
+capturee est insatisfiable. **`est_reticule(G,E)` est donc MALFORME** (≠ « reticule » de Bourbaki).
+
+**Impact.**
+- BLOQUE `totalement_ordonne_implique_reticule` (E III.14) : conclusion = est_reticule(G,E) malformee,
+  non prouvable honnetement. Cible remise a APRES correctif (cf. PLAN_ETAPE_C).
+- FIDELITE de `reticule_implique_filtrant_droite_gauche` (commit 0c2e720, III.1.11) : SOUNDNESS intacte
+  (certifie noyau), mais il ASSUME est_reticule et n'en extrait que le `majorant` (sain) — son
+  hypothese est partiellement malformee, possiblement vacante pour un vrai treillis. A RE-VERIFIER /
+  re-aligner apres correctif.
+- Autres appelants de borne_superieure/inferieure/admet_borne_sup_inf/est_reticule (~12 fichiers :
+  cardinaux sup, Zorn/Bourbaki-Witt, bornes_sup §III.1, prop12_sup_total, ordre_treillis_props) : le bug
+  ne mord QUE si A contient des variables libres coincidant avec les liants par defaut x/y ; beaucoup
+  utilisent d'autres conventions (liants frais, ex. prop12 = "ys12") et sont probablement SAINS — mais
+  TOUS a re-verifier apres correctif.
+
+**Correctif recommande (tache dediee, NON rushee en tick autonome — touche une def centrale + suite
+complete a re-verter, tests lents cardinaux/Zorn inclus).** Rendre `borne_superieure`/`borne_inferieure`
+capture-safe : freshir automatiquement le liant « plus petit/grand » s'il apparait libre dans A/m
+(via libres_f) ; OU a minima, dans `admet_borne_sup_inf`, passer un liant frais distinct de x/y/u pour
+le 6e arg. Puis re-aligner `reticule_implique_filtrant` (_bs/_bi + test) sur la nouvelle structure, et
+lancer la suite COMPLETE verte avant commit. theorie==22 inchange (correctif structurel de def, 0 axiome).
