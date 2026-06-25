@@ -61,6 +61,7 @@ def _rel_defaut(nom):
 
 
 # ── préservation de la relation (clause clé du σ-morphisme relationnel) ────────
+# @livre Ch.IV §2.1 Def.- | E IV.11 L.22-35 | PDF p.214
 def preserve_relation(f, e, r, rp, u="u", v="v"):
     """« f préserve R vers R' sur E » := (∀u)(∀v)((u∈E et v∈E et R{u,v}) ⇒
         R'{f(u), f(v)}).   (Déf. IV.2.1, Ex.1 ; III.1.5 application croissante.)"""
@@ -71,6 +72,7 @@ def preserve_relation(f, e, r, rp, u="u", v="v"):
              rp(fu, fv))))
 
 
+# @livre Ch.IV §2.1 Def.- | E IV.11 L.31-35 | PDF p.214
 def est_morphisme(f, e, ep, r, rp):
     """« f est un σ-morphisme de (E,R) dans (E',R') » := f est une application
     (graphe fonctionnel défini sur E, image ⊂ E') ET f préserve R vers R'
@@ -85,6 +87,7 @@ def est_morphisme(f, e, ep, r, rp):
 
 
 # ── « plus fine » (IV.2.2) au niveau objet ────────────────────────────────────
+# @livre Ch.IV §2.2 Def.- | E IV.13 L.4-6 | PDF p.216
 def plus_fine_morphisme(e, r1, r2):
     """« 𝒮₁ plus fine que 𝒮₂ sur E » := id_E : (E,R₁)→(E,R₂) est un morphisme
     (IV.2.2).  Au niveau objet relationnel : Δ_E préserve R₁ vers R₂."""
@@ -94,6 +97,7 @@ def plus_fine_morphisme(e, r1, r2):
 
 
 # ── THÉORÈME : l'identité préserve R (cœur de « id est un morphisme ») ─────────
+# @livre Ch.IV §2.2 Prop.- | E IV.13 L.19-21 | PDF p.216
 def identite_preserve(e="E", r=None, u="u", v="v"):
     """⊢ preserve_relation(Δ_E, E, R, R).   (IV.2.2 : RÉFLEXIVITÉ de « plus fine »
     via MO_III ; « l'application identique est un morphisme ».)
@@ -132,6 +136,7 @@ def identite_preserve(e="E", r=None, u="u", v="v"):
     return N.generalisation(u, N.generalisation(v, inner))
 
 
+# @livre Ch.IV §2.2 Prop.- | E IV.13 L.19-21 | PDF p.216
 def identite_est_morphisme(e="E", r=None):
     """⊢ est_morphisme(Δ_E, E, E, R, R).   (IV.2.2 ; « id est un morphisme »,
     réflexivité de « plus fine ».)  Conjugue le noyau fonctionnel de Δ_E
@@ -143,6 +148,7 @@ def identite_est_morphisme(e="E", r=None):
 
 
 # ── THÉORÈME (MO_II) : la composée préserve la relation (cœur POINTWISE) ───────
+# @livre Ch.IV §2.1 Crit.MO_II | E IV.11 L.25-27 | PDF p.214
 def composee_preserve(g="G", f="F", e="E", ep="Ep", r=None, rp=None, rpp=None,
                       u="u", v="v"):
     """⊢ (u∈E et v∈E et R{u,v}) ⇒ R''{(G∘F)(u),(G∘F)(v)}   (forme POINTWISE)

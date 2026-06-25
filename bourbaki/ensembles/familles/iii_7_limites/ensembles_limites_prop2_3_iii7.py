@@ -75,6 +75,7 @@ def _gleq():
 # ════════════════════════════════════════════════════════════════════════════
 #  Terme  u = lim← u_α : E → E'  et son AXIOME DÉFINITIONNEL (LU)
 # ════════════════════════════════════════════════════════════════════════════
+# @livre Ch.III §7.2 Def.- | E III.54 L.1-5 | PDF p.157
 def lim_proj_u(EfamE, fE, EfamF, fF, u):
     """u = lim← u_α : E=lim←E_α → E'=lim←E'_α  (terme du graphe, Prop.2/Cor.1).
 
@@ -87,6 +88,7 @@ def lim_proj_u_valeur(EfamE, fE, EfamF, fF, u, z):
     return E.valeur(lim_proj_u(EfamE, fE, EfamF, fF, u), z)
 
 
+# @livre Ch.III §7.2 Prop.2 | E III.54 L.39-40 | PDF p.157
 def axiome_lim_proj_u(EfamE, fE, EfamF, fF, u, leq, i, a="a", z="z"):
     """AXIOME définitionnel (LU) de la valeur de u=lim←u_α (E.III.7.2, preuve Prop.2) :
         (∀α)(∀z)( (α∈I et z∈lim←E_α) ⇒ pr_α(u(z)) = u_α(pr_α z) ).
@@ -113,6 +115,7 @@ def theorie_lim_proj_u(EfamE, fE, EfamF, fF, u, leq, i):
 # ════════════════════════════════════════════════════════════════════════════
 #  (LU) instancié — la α-coordonnée de u(z)
 # ════════════════════════════════════════════════════════════════════════════
+# @livre Ch.III §7.2 Prop.2 | E III.54 L.39-40 | PDF p.157
 def lim_u_coordonnee(EfamE="E", fE="f", EfamF="Ep", fF="fp", u="u", leq=None, i="I",
                      a="a", z="z"):
     """{ α∈I, z∈lim←E_α } ⊢ pr_α(u(z)) = u_α(pr_α z).   (LU) instancié.
@@ -134,6 +137,7 @@ def lim_u_coordonnee(EfamE="E", fE="f", EfamF="Ep", fF="fp", u="u", leq=None, i=
 # ════════════════════════════════════════════════════════════════════════════
 #  CŒUR : u(y)=u(z) ⟹ u_α(pr_α y) = u_α(pr_α z)  (par coordonnée)
 # ════════════════════════════════════════════════════════════════════════════
+# @livre Ch.III §7.2 Cor.- | E III.54 L.41-42 | PDF p.157
 def lim_u_coordonnee_egale(EfamE="E", fE="f", EfamF="Ep", fF="fp", u="u", leq=None,
                            i="I", a="a", y="yy", z="zz"):
     """{ α∈I, y∈lim←, z∈lim←, u(y)=u(z) } ⊢ u_α(pr_α y) = u_α(pr_α z).
@@ -172,6 +176,7 @@ def lim_u_coordonnee_egale(EfamE="E", fE="f", EfamF="Ep", fF="fp", u="u", leq=No
 # ════════════════════════════════════════════════════════════════════════════
 #  u_α injective ⟹ pr_α y = pr_α z  (par coordonnée)
 # ════════════════════════════════════════════════════════════════════════════
+# @livre Ch.III §7.2 Cor.- | E III.54 L.41-42 | PDF p.157
 def lim_u_projection_egale(EfamE="E", fE="f", EfamF="Ep", fF="fp", u="u", leq=None,
                            i="I", Efam_alpha="Ea", a="a", y="yy", z="zz"):
     """{ α∈I, y∈lim←, z∈lim←, u(y)=u(z),  u_α injective sur E_α,
@@ -207,6 +212,7 @@ def lim_u_projection_egale(EfamE="E", fE="f", EfamF="Ep", fF="fp", u="u", leq=No
 # ════════════════════════════════════════════════════════════════════════════
 #  COROLLAIRE Prop. 2 — u_α injective (∀α) ⟹ u injective : y = z
 # ════════════════════════════════════════════════════════════════════════════
+# @livre Ch.III §7.2 Cor.- | E III.54 L.41-42 | PDF p.157
 def prop2_injectivite(EfamE="E", fE="f", EfamF="Ep", fF="fp", u="u", leq=None,
                       i="I", a="a", y="yy", z="zz"):
     """{ (∀α)( α∈I ⇒ ( u_α injective sur E_α ) ) ;
@@ -279,6 +285,7 @@ def prop2_injectivite(EfamE="E", fE="f", EfamF="Ep", fF="fp", u="u", leq=None,
 #  cofinalité, pour tout λ∈I il existe α∈J avec λ≤α, et la relation (1) propage
 #  l'égalité : pr_λ x = f_{λα}(pr_α x) = f_{λα}(pr_α x') = pr_λ x'.
 # ════════════════════════════════════════════════════════════════════════════
+# @livre Ch.III §7.2 Prop.3 | E III.55 L.6-13 | PDF p.158
 def prop3_g_coordonnee_egale(Efam="E", f="f", leq=None, i="I", J="J",
                              x="xx", xp="xp", a="a"):
     """{ α∈J, x∈lim←_I, x'∈lim←_I, g(x)=g(x') } ⊢ pr_α x = pr_α x'.
@@ -334,6 +341,7 @@ def _canon_proj_au_point(Efam, f, leq, i, a_terme, z_terme):
     return N.modus_ponens(conjonction_intro(Hz, Ha), inst)
 
 
+# @livre Ch.III §7.2 Prop.3 | E III.55 L.6-13 | PDF p.158
 def prop3_g_injective_pointwise(Efam="E", f="f", leq=None, i="I", J="J",
                                 lam="lam", a="a", x="xx", xp="xp"):
     """{ λ∈I, α∈J, λ≤α, x∈lim←_I, x'∈lim←_I, g(x)=g(x') } ⊢ pr_λ x = pr_λ x'.

@@ -100,3 +100,24 @@ Trou de couverture confirme (IV.1) : les **criteres CST1-CST7** (E IV.2-10) ne s
 comme enonces NOMMES autonomes -- seulement cites en docstring et derives conditionnellement
 (CST2/CST5 avec CST1/CST2/CST3 en hypotheses reportees). A inscrire dans la carte de couverture
 Chap IV (candidats d'implementation futurs, comme les trous logique ci-dessus).
+
+## Docstrings Chap IV §3 : mauvaise pagination interne (2026-06-25, NON corrige)
+En posant les @livre des modules `bourbaki/structures/ensembles_universel_applications.py` et
+`ensembles_structures_complements.py` (applications universelles), l'agent a constate -- et j'ai
+verifie a l'en-tete imprime -- que leurs docstrings renvoient de facon repetee a de FAUSSES pages :
+elles citent « IV.3, p. 16 » / « IV.3.1 » / « IV.3.2 » pour (QM)/(AU)/(CU)/CST22/CST23, alors que
+le **§3 APPLICATIONS UNIVERSELLES commence reellement a E IV.22 (PDF p.225)**, pas E IV.16 (p.219,
+qui est encore §2 « Structure induite », CST11/CST12). Localisations reelles verifiees a l'en-tete :
+§3.1 (QM_I/QM_II)/alpha-application = E IV.22 (p.225) ; (AU)/(AU_I')/(AU_II') = E IV.23 (p.226) ;
+(CU_I/CU_II)/Sigma-permise = E IV.23 (p.226) ; (CU_III)/CST22/CST23 = E IV.24 (p.227) ; exemples
+(libre/corps fractions/produit tensoriel) = E IV.25 (p.228) ; Stone-Cech = E IV.26 (p.229). Les
+**marqueurs @livre sont poses sur ces pages REELLES** (verifiables) ; seules les DOCSTRINGS gardent
+l'ancienne pagination fausse -> a corriger lors d'une passe de fidelite docstrings (separee, car
+toucher au code/docstring sort du perimetre @livre-only). Idem : la def `solution_isomorphisme_unique`
+cite « IV, p. 12, CST8 » (CST8 est bien a E IV.12/p.215, confirme), mais formalise un contenu expose
+a E IV.23/p.226 qui INVOQUE CST8 ; le marqueur pointe sur l'enonce CST8 (E IV.12).
+
+Trou de couverture structurel (E IV.26) : les EXEMPLES du livre -- Extension d'un anneau d'operateurs
+(IV), Completion d'un espace uniforme (V), Groupes topologiques libres (VII), Stone-Cech -- n'ont
+AUCUNE def Python (releve de topologie/algebre hors theorie des ensembles pure). A inscrire comme
+trous structurels assumes dans la carte de couverture Chap IV.

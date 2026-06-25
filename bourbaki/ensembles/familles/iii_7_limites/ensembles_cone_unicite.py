@@ -158,6 +158,7 @@ def coords_donnent_projections(Efam="E", f="f", leq=None, i="I", z="zp1", zp="zp
     return N.generalisation(zp, N.generalisation(z, lemme))        # (∀z)(∀z')(HYP⇒proj_eq)
 
 
+# @livre Ch.III §7.2 Prop.1 | E III.53 L.5-6 | PDF p.156
 def cone_unicite(Efam="E", f="f", u="u", up="up", leq=None, i="I", ff="F",
                  a="a", y="yy"):
     """{ u ∈ 𝓕(F;lim←), u' ∈ 𝓕(F;lim←),

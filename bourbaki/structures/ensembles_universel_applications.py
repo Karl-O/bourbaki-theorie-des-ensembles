@@ -78,6 +78,7 @@ def donnees_probleme(e, sigma_ens=None, morph=None, alpha=None):
 
 
 # ── axiomes (QM_I), (QM_II) de la donnée α ────────────────────────────────────
+# @livre Ch.IV §3.1 Ax.QM_I | E IV.22 L.38-38 | PDF p.225
 def axiome_QM_I(e, f, s, alpha=None, phi="phi"):
     """(QM_I) : « α{x,s} ⊂ 𝓕(E ; x) est vraie dans 𝒯_Σ ».  Toute α-application de E
     dans (F,S) est une application de E dans F.  Codé
@@ -91,6 +92,7 @@ def axiome_QM_I(e, f, s, alpha=None, phi="phi"):
                              appartient(vphi, E.applications(ve, f))))
 
 
+# @livre Ch.IV §3.1 Ax.QM_II | E IV.22 L.39-42 | PDF p.225
 def axiome_QM_II(e, f, fp, s, sp, morphf, alpha=None, morph=None, phi="phi"):
     """(QM_II) : si f est un morphisme de (F,S) dans (F',S'), alors φ ∈ α[F,S]
     entraîne f∘φ ∈ α[F',S']  (IV.3.1).  Codé, à f = `morphf` (terme) fixé :
@@ -109,6 +111,7 @@ def axiome_QM_II(e, f, fp, s, sp, morphf, alpha=None, morph=None, phi="phi"):
 # ════════════════════════════════════════════════════════════════════════════
 #  α-application
 # ════════════════════════════════════════════════════════════════════════════
+# @livre Ch.IV §3.1 Def.- | E IV.22 L.43-44 | PDF p.225
 def est_alpha_application(e, f, s, phi, alpha=None):
     """« φ est une α-application de E dans (F muni de s) » := φ ∈ α[x, s]  (IV.3.1).
     Porté par le prédicat abstrait alpha(F, S, φ)."""
@@ -134,6 +137,7 @@ def corps_factorisation(fe, se, phi_e, f, s, phi, mor, morph=None):
     return et(morph(fe, se, f, s, mor), egal(_t(phi), E.composee(mor, phi_e)))
 
 
+# @livre Ch.IV §3.1 Def.AU_I' | E IV.23 L.23-24 | PDF p.226
 def AU_corps(fe, se, phi_e, f, s, phi, mor="f", morph=None):
     """(∃ mor)(corps) — pour UNE α-application φ donnée dans (F,S) : existence d'un
     morphisme factorisant.  (Composante d'existence de (AU), cf. (AU_I′).)"""
@@ -141,6 +145,7 @@ def AU_corps(fe, se, phi_e, f, s, phi, mor="f", morph=None):
     return existe(mor, corps_factorisation(fe, se, phi_e, f, s, phi, vmor, morph))
 
 
+# @livre Ch.IV §3.1 Def.AU_II' | E IV.23 L.25-26 | PDF p.226
 def AU_unicite(fe, se, phi_e, f, s, phi, mor="f", mor2="fp", morph=None):
     """(∀mor)(∀mor')((corps{mor} et corps{mor'}) ⇒ mor=mor') — unicité du morphisme
     factorisant pour UNE α-application φ donnée.  (Composante d'unicité de (AU).)"""
@@ -150,6 +155,7 @@ def AU_unicite(fe, se, phi_e, f, s, phi, mor="f", mor2="fp", morph=None):
     return pourtout(mor, pourtout(mor2, impl(et(c1, c2), egal(vmor, vmor2))))
 
 
+# @livre Ch.IV §3.1 Def.AU | E IV.23 L.1-2 | PDF p.226
 def est_universel(fe, se, phi_e, f, s, phi, mor="f", mor2="fp", morph=None):
     """(AU) pour UNE α-application φ donnée dans (F,S) : « il existe un morphisme et
     UN SEUL mor : F_E → F tel que φ = mor∘φ_E »  (IV.3.1).  Codé existence-unique
@@ -158,6 +164,7 @@ def est_universel(fe, se, phi_e, f, s, phi, mor="f", mor2="fp", morph=None):
               AU_unicite(fe, se, phi_e, f, s, phi, mor, mor2, morph))
 
 
+# @livre Ch.IV §3.1 Def.- | E IV.23 L.3-5 | PDF p.226
 def est_solution(fe, se, phi_e, sigma_ens=None, morph=None, alpha=None,
                  f="F", s="S", phi="phi", mor="f", mor2="fp"):
     """« (F_E, φ_E) est solution du problème d'application universelle pour E »
@@ -212,6 +219,7 @@ def existence_et_unicite_impliquent_au(fe="FE", se="SE", phi_e="phiE", f="F",
 # ════════════════════════════════════════════════════════════════════════════
 #  CST23 — α-applications séparant les éléments de E
 # ════════════════════════════════════════════════════════════════════════════
+# @livre Ch.IV §3.2 Crit.CST23 | E IV.24 L.38-39 | PDF p.227
 def separent_les_elements(e, sigma_ens=None, alpha=None,
                           f="F", s="S", phi="phi", x="x", y="y"):
     """« les α-applications séparent les éléments de E » (IV.3.1, CST23) := pour tout
@@ -232,6 +240,7 @@ def separent_les_elements(e, sigma_ens=None, alpha=None,
     return pourtout(x, pourtout(y, impl(hyp, interne)))
 
 
+# @livre Ch.IV §3.2 Crit.CST23 | E IV.24 L.38-39 | PDF p.227
 def phi_E_injective(e, phi_e, x="x", y="y"):
     """« φ_E est une injection de E dans F_E » (CST23, énoncé équivalent) := pour
     tous x,y ∈ E, φ_E(x) = φ_E(y) ⇒ x = y.  Codé
@@ -245,6 +254,7 @@ def phi_E_injective(e, phi_e, x="x", y="y"):
 # ════════════════════════════════════════════════════════════════════════════
 #  Σ-ENSEMBLE LIBRE ENGENDRÉ par E (cas algébrique, α = 𝓕(E ; x))
 # ════════════════════════════════════════════════════════════════════════════
+# @livre Ch.IV §3.3 Ex.I | E IV.25 L.13-26 | PDF p.228
 def alpha_libre(e):
     """Cas du Σ-ensemble libre (IV.3.1) : Σ espèce algébrique, morphismes =
     homomorphismes, α-applications = applications QUELCONQUES de E dans x :
@@ -254,6 +264,7 @@ def alpha_libre(e):
     return lambda f, s, phi: appartient(_t(phi), E.applications(ve, f))
 
 
+# @livre Ch.IV §3.3 Ex.I | E IV.25 L.13-26 | PDF p.228
 def est_libre_engendre(e, fe, se, phi_e, sigma_ens=None, morph=None,
                        f="F", s="S", phi="phi", mor="f", mor2="fp"):
     """« (F_E, φ_E) est le Σ-ensemble libre engendré par E » (IV.3.1) := solution du
@@ -265,6 +276,7 @@ def est_libre_engendre(e, fe, se, phi_e, sigma_ens=None, morph=None,
 
 
 # ── exemples ILLUSTRATIFS (termes opaques, documentés) ────────────────────────
+# @livre Ch.IV §3.3 Ex.II | E IV.25 L.27-38 | PDF p.228
 def corps_des_fractions(anneau, partie_mult):
     """Corps des fractions d'un anneau intègre E (S = E∖{0}) — ILLUSTRATIF.  Terme
     OPAQUE : la construction (Σ = anneaux commutatifs, α = homomorphismes inversant
@@ -272,12 +284,14 @@ def corps_des_fractions(anneau, partie_mult):
     return app("corps_fractions", _t(anneau), _t(partie_mult))
 
 
+# @livre Ch.IV §3.3 Ex.III | E IV.25 L.39-41 | PDF p.228
 def produit_tensoriel(a, b, anneau):
     """Produit tensoriel A ⊗_C B de deux C-modules — ILLUSTRATIF.  Terme OPAQUE :
     Σ = C-modules, α = applications bilinéaires.  Construction REPORTÉE (algèbre)."""
     return app("produit_tensoriel", _t(a), _t(b), _t(anneau))
 
 
+# @livre Ch.IV §3.3 Ex.VI | E IV.26 L.26-40 | PDF p.229
 def compactifie_stone_cech(espace):
     """Compactifié de Stone-Čech d'un espace régulier — ILLUSTRATIF.  Terme OPAQUE :
     Σ = espaces compacts, α = applications continues vers un compact.  REPORTÉ

@@ -84,6 +84,7 @@ def cone_u_valeur(u, a, y):
     return E.valeur(cone_u(u, a), y)
 
 
+# @livre Ch.III §7.2 Prop.1 | E III.53 L.5-6 | PDF p.156
 def cone_canonique(Efam, f, u):
     """Terme (graphe) de l'application canonique u : F → E = lim← E_α  (Prop. 1).
 
@@ -101,6 +102,7 @@ def cone_canonique_valeur(Efam, f, u, y):
 # ════════════════════════════════════════════════════════════════════════════
 #  DÉFINITION — compatibilité de la famille-cône  (relation (5), au niveau valeurs)
 # ════════════════════════════════════════════════════════════════════════════
+# @livre Ch.III §7.2 Prop.1 | E III.53 L.1-3 | PDF p.156
 def cone_compatible(f, u, leq, i, ff, a="a", b="b", y="yy"):
     """« (u_α : F → E_α) est compatible avec (f_{αβ}) » (Prop. 1, relation (5)) :=
         (∀α)(∀β)(∀y)( (α∈I et β∈I et α≤β et y∈F) ⇒ f_{αβ}(u_β(y)) = u_α(y) ).
@@ -119,6 +121,7 @@ def cone_compatible(f, u, leq, i, ff, a="a", b="b", y="yy"):
 # ════════════════════════════════════════════════════════════════════════════
 #  AXIOME DÉFINITIONNEL de l'application canonique u  (★)  : pr_α(u(y)) = u_α(y)
 # ════════════════════════════════════════════════════════════════════════════
+# @livre Ch.III §7.2 Prop.1 | E III.53 L.10-11 | PDF p.156
 def axiome_cone_canonique(Efam, f, u, leq, i, ff, a="a", y="yy"):
     """AXIOME définitionnel (★) de l'application canonique u : F → E (Prop. 1) :
         (∀α)(∀y)( (α∈I et y∈F) ⇒ pr_α(u(y)) = u_α(y) ).
@@ -142,6 +145,7 @@ def theorie_cone_canonique(Efam, f, u, leq, i, ff):
 # ════════════════════════════════════════════════════════════════════════════
 #  THÉORÈMES DIRECTS
 # ════════════════════════════════════════════════════════════════════════════
+# @livre Ch.III §7.2 Prop.1 | E III.53 L.1-3 | PDF p.156
 def cone_compatibilite(f="f", u="u", leq=None, i="I", ff="F", a="a", b="b", y="yy"):
     """{ (u_α) compatible } ⊢ (α,β∈I et α≤β et y∈F) ⇒ f_{αβ}(u_β(y)) = u_α(y).
 
@@ -154,6 +158,7 @@ def cone_compatibilite(f="f", u="u", leq=None, i="I", ff="F", a="a", b="b", y="y
     return instancie(instancie(instancie(H, va), vb), vy)
 
 
+# @livre Ch.III §7.2 Prop.1 | E III.53 L.10-11 | PDF p.156
 def cone_coordonnee_valeur(Efam="E", f="f", u="u", leq=None, i="I", ff="F",
                            a="a", y="yy"):
     """{ α∈I, y∈F } ⊢ pr_α(u(y)) = u_α(y).   (★) instancié — la α-coordonnée de u(y).
@@ -172,6 +177,7 @@ def cone_coordonnee_valeur(Efam="E", f="f", u="u", leq=None, i="I", ff="F",
     return N.modus_ponens(conjonction_intro(Ha, Hy), inst)   # pr_α(u(y)) = u_α(y)
 
 
+# @livre Ch.III §7.2 Prop.1 | E III.53 L.12-15 | PDF p.156
 def cone_condition_1(Efam="E", f="f", u="u", leq=None, i="I", ff="F",
                      a="a", b="b", y="yy"):
     """{ (u_α) compatible, α,β∈I, α≤β, y∈F } ⊢ pr_α(u(y)) = f_{αβ}(pr_β(u(y))).
@@ -210,6 +216,7 @@ def cone_condition_1(Efam="E", f="f", u="u", leq=None, i="I", ff="F",
     return composer_egalites(ch1, cong)                                       # pr_α(u(y))=f_{αβ}(pr_β(u(y)))
 
 
+# @livre Ch.III §7.2 Prop.1 | E III.53 L.12-15 | PDF p.156
 def cone_image_dans_limite(Efam="E", f="f", u="u", leq=None, i="I", ff="F",
                            y="yy", a="a", b="b"):
     """{ (u_α) compatible, u(y)∈∏_α E_α, y∈F } ⊢ u(y) ∈ lim←.
@@ -271,6 +278,7 @@ def _canonique_proj_valeur_terme(Efam, f, leq, i, va, terme):
     return N.modus_ponens(conjonction_intro(Hz, Ha), inst)
 
 
+# @livre Ch.III §7.2 Prop.1 | E III.53 L.6-6 | PDF p.156
 def cone_relation_6(Efam="E", f="f", u="u", leq=None, i="I", ff="F", a="a", y="yy"):
     """{ u(y)∈lim←, α∈I, y∈F } ⊢ f_α(u(y)) = u_α(y).   (Prop. 1, relation (6).)
 
@@ -290,6 +298,7 @@ def cone_relation_6(Efam="E", f="f", u="u", leq=None, i="I", ff="F", a="a", y="y
     return composer_egalites(fa, coord)                       # f_α(u(y)) = u_α(y)
 
 
+# @livre Ch.III §7.2 Prop.1 | E III.53 L.5-6 | PDF p.156
 def cone_existence(Efam="E", f="f", u="u", leq=None, i="I", ff="F",
                    a="a", b="b", y="yy"):
     """{ (u_α) compatible, u(y)∈∏, α∈I, y∈F } ⊢ f_α(u(y)) = u_α(y).
@@ -321,6 +330,7 @@ def cone_existence(Efam="E", f="f", u="u", leq=None, i="I", ff="F",
     return N.modus_ponens(in_lim, rel6_imp)                   # f_α(u(y)) = u_α(y)
 
 
+# @livre Ch.III §7.2 Prop.1 | E III.53 L.5-6 | PDF p.156
 def cone_existence_forall(Efam="E", f="f", u="u", leq=None, i="I", ff="F",
                           a="a", b="b", y="yy"):
     """{ (u_α) compatible, u(y)∈∏, y∈F } ⊢ (∀α)( α∈I ⇒ f_α(u(y)) = u_α(y) ).

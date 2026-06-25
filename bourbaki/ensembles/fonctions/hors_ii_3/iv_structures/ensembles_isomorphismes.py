@@ -54,6 +54,7 @@ from bourbaki.cardinaux.iii_3_equipotence_cardinaux.equipotence.ensembles_equipo
 
 
 # ── Compatibilité d'une bijection avec deux relations ─────────────────────────
+# @livre Ch.IV §1.5 Def.- | E IV.6 L.7-11 | PDF p.209
 def compatible(f, e, r, rp, x="a", y="b"):
     """« f compatible avec R, R' sur E » := (∀x)(∀y)((x∈E et y∈E) ⇒
         (R{x,y} ⇔ R'{f(x), f(y)})).   (clause (4) de IV.1.5, cas relationnel ;
@@ -66,6 +67,7 @@ def compatible(f, e, r, rp, x="a", y="b"):
              equiv(r(vx, vy), rp(fx, fy)))))
 
 
+# @livre Ch.IV §1.5 Def.- | E IV.6 L.7-11 | PDF p.209
 def est_isomorphisme(f, e, ep, r, rp):
     """« (f) est un isomorphisme de (E,R) sur (E',R') » := F est le graphe d'une
     bijection de E sur E', ET f est compatible avec R, R'   (IV.1.5, cas objet
@@ -73,6 +75,7 @@ def est_isomorphisme(f, e, ep, r, rp):
     return et(est_bijection_de(f, e, ep), compatible(f, e, r, rp))
 
 
+# @livre Ch.IV §1.5 Crit.CST5 | E IV.6 L.35-38 | PDF p.209
 def structure_transportee(f, r, u="u", v="v"):
     """R'{u,v} := R{f⁻¹(u), f⁻¹(v)} — structure relationnelle TRANSPORTÉE par la
     bijection de graphe F (IV.1.5, transport de structure ; cas objet).
@@ -83,6 +86,7 @@ def structure_transportee(f, r, u="u", v="v"):
     return lambda tu, tv: r(E.valeur(finv, tu), E.valeur(finv, tv))
 
 
+# @livre Ch.IV §1.5 Def.- | E IV.6 L.18-20 | PDF p.209
 def sont_isomorphes(e, ep, r, rp, f="F"):
     """« (E,R) et (E',R') sont isomorphes » := (∃F) est_isomorphisme(F,E,E',R,R')
     (IV.1.5).  Relation entre structures — réflexive (cf. isomorphes_reflexive)."""

@@ -73,6 +73,7 @@ def transition_valeur(fab, t):
 # ════════════════════════════════════════════════════════════════════════════
 #  DÉFINITIONS — conditions LP / LI
 # ════════════════════════════════════════════════════════════════════════════
+# @livre Ch.III §7.1 Def.- | E III.52 L.1-12 | PDF p.155
 def cocycle_projectif(f, leq, i, a="a", b="b", g="g", x="x"):
     """(LP_I) cocycle : (∀α∀β∀γ)((α,β,γ∈I et α≤β et β≤γ) ⇒ f_{αγ}=f_{αβ}∘f_{βγ}).
 
@@ -86,6 +87,7 @@ def cocycle_projectif(f, leq, i, a="a", b="b", g="g", x="x"):
     return pourtout(a, pourtout(b, pourtout(g, impl(hyp, concl))))
 
 
+# @livre Ch.III §7.1 Def.- | E III.52 L.1-12 | PDF p.155
 def identite_projectif(f, leq, i, a="a", x="x"):
     """(LP_II) identité : (∀α)(α∈I ⇒ (∀x)(f_{αα}(x)=x))   (f_{αα}=Id_{E_α}, lu au
     niveau des valeurs).  (E.III.7.1, LP_II.)"""
@@ -94,6 +96,7 @@ def identite_projectif(f, leq, i, a="a", x="x"):
         pourtout(x, egal(transition_valeur(appl_proj(f, va, va), vx), vx))))
 
 
+# @livre Ch.III §7.1 Def.- | E III.52 L.1-12 | PDF p.155
 def est_systeme_projectif(f, leq, i, a="a", b="b", g="g", x="x"):
     """« (E_α, f_{αβ}) est un système projectif d'ensembles relatif à I » :=
     (LP_I) et (LP_II).  I est préordonné par leq.  (E.III.7.1, Définition.)"""
@@ -101,6 +104,7 @@ def est_systeme_projectif(f, leq, i, a="a", b="b", g="g", x="x"):
               identite_projectif(f, leq, i, a, x))
 
 
+# @livre Ch.III §7.5 Def.- | E III.61 L.3-4 | PDF p.164
 def cocycle_inductif(f, leq, i, a="a", b="b", g="g", x="x"):
     """(LI_I) cocycle : (∀α∀β∀γ)((α,β,γ∈I et α≤β et β≤γ) ⇒ f_{γα}=f_{γβ}∘f_{βα}).
 
@@ -113,6 +117,7 @@ def cocycle_inductif(f, leq, i, a="a", b="b", g="g", x="x"):
     return pourtout(a, pourtout(b, pourtout(g, impl(hyp, concl))))
 
 
+# @livre Ch.III §7.5 Def.- | E III.61 L.3-4 | PDF p.164
 def identite_inductif(f, leq, i, a="a", x="x"):
     """(LI_II) identité : (∀α)(α∈I ⇒ (∀x)(f_{αα}(x)=x)).  (E.III.7.5, LI_II.)"""
     va, vx = var(a), var(x)
@@ -120,6 +125,7 @@ def identite_inductif(f, leq, i, a="a", x="x"):
         pourtout(x, egal(transition_valeur(appl_ind(f, va, va), vx), vx))))
 
 
+# @livre Ch.III §7.5 Def.- | E III.61 L.1-31 | PDF p.164
 def est_systeme_inductif(f, leq, i, a="a", b="b", g="g", x="x"):
     """« (E_α, f_{βα}) est un système inductif d'ensembles relatif à I (filtrant à
     droite) » := I filtrant à droite et (LI_I) et (LI_II).  (E.III.7.5, Déf.)"""
@@ -131,6 +137,7 @@ def est_systeme_inductif(f, leq, i, a="a", b="b", g="g", x="x"):
 # ════════════════════════════════════════════════════════════════════════════
 #  TERME limite projective + axiome d'appartenance (condition (1))
 # ════════════════════════════════════════════════════════════════════════════
+# @livre Ch.III §7.1 Def.- | E III.52 L.1-7 | PDF p.155
 def lim_proj(Efam, f):
     """lim←_{α∈I} (E_α, f_{αβ})  :  partie du produit ∏_α E_α des x vérifiant (1).
 
@@ -148,6 +155,7 @@ def _condition_1(f, leq, i, z, a="a", b="b"):
         egal(pra, transition_valeur(appl_proj(f, va, vb), prb)))))
 
 
+# @livre Ch.III §7.1 Def.- | E III.52 L.4-4 | PDF p.155
 def axiome_lim_proj(Efam, f, leq, i):
     """AXIOME définitionnel de la limite projective (E.III.7.1, formule (1)) :
       (∀z)( z ∈ lim←  ⇔  ( z ∈ ∏_α E_α  et  condition (1) ) ).
@@ -257,6 +265,7 @@ def identite_valeur_inductif(f="f", leq=None, i="I", a="a", x="x"):
 
 
 # ── appartenance à la limite projective : caractérisation + relation (1)/(2) ──
+# @livre Ch.III §7.1 Def.- | E III.52 L.4-4 | PDF p.155
 def appartient_limite_projective(Efam="E", f="f", leq=None, i="I", z="z"):
     """⊢ (z ∈ lim←)  ⇔  ( z ∈ ∏_α E_α  et  (∀α∀β)((α,β∈I et α≤β) ⇒ pr_α z=f_{αβ}(pr_β z)) ).
 
@@ -269,6 +278,7 @@ def appartient_limite_projective(Efam="E", f="f", leq=None, i="I", z="z"):
     return instancie(ax, vz)
 
 
+# @livre Ch.III §7.1 Def.- | E III.52 L.4-11 | PDF p.155
 def limite_projective_relation_1(Efam="E", f="f", leq=None, i="I", z="z",
                                  a="a", b="b"):
     """{z ∈ lim←} ⊢ (α,β∈I et α≤β) ⇒ pr_α z = f_{αβ}(pr_β z).

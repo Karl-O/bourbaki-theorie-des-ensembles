@@ -106,6 +106,7 @@ def _canon_proj_au_point(Efam, f, leq, i, a_terme, z_terme):
 # ════════════════════════════════════════════════════════════════════════════
 #  1.  FORMULE (4) : g'' = g' ∘ g  (transitivité), lue coordonnée par coordonnée.
 # ════════════════════════════════════════════════════════════════════════════
+# @livre Ch.III §7.1 Def.- | E III.52 L.44-46 | PDF p.155
 def formule_4_coordonnee(Efam="E", f="f", leq=None, i="I", J="J", Jp="Jp",
                          x="xx", a="a"):
     """{ α∈J' ,  α∈J ,  x∈lim←_I ,  g(x)∈lim←_J } ⊢ pr_α(g''(x)) = pr_α(g'(g(x))).
@@ -160,6 +161,7 @@ def formule_4_coordonnee(Efam="E", f="f", leq=None, i="I", J="J", Jp="Jp",
 # ════════════════════════════════════════════════════════════════════════════
 #  2.  PROPOSITION 4 (E.III.57) — pas-clé de la condition recollée (14)+(15)⇒(1).
 # ════════════════════════════════════════════════════════════════════════════
+# @livre Ch.III §7.3 Prop.4 | E III.57 L.8-12 | PDF p.160
 def prop4_condition_recollee(Efam="E", fL="fL", hL="hL", fIL="fIL", leq=None,
                              i="I", a="a", b="b", lam="lam", mu="mu", z="zz"):
     """{ (15) en (α,β,λ) :  pr^λ_α(z) = f^λ_{αβ}(pr^λ_β(z)) ;

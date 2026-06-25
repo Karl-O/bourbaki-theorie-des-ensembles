@@ -73,6 +73,7 @@ def _induit_defaut(nom="InduitSigma"):
 # ════════════════════════════════════════════════════════════════════════════
 #  IV.3.2 — PARTIE Σ-PERMISE
 # ════════════════════════════════════════════════════════════════════════════
+# @livre Ch.IV §3.2 Def.- | E IV.23 L.42-43 | PDF p.226
 def est_partie_sigma_permise(f, s, g, induit=None):
     """« la partie G du Σ-ensemble (F,S) est Σ-PERMISE » (IV.3.2, p. 16).
 
@@ -93,6 +94,7 @@ def est_partie_sigma_permise(f, s, g, induit=None):
 # ════════════════════════════════════════════════════════════════════════════
 #  CONDITIONS (CU_I), (CU_II), (CU_III)  — hypothèses du critère CST22
 # ════════════════════════════════════════════════════════════════════════════
+# @livre Ch.IV §3.2 Def.CU_I | E IV.23 L.36-37 | PDF p.226
 def condition_CU_I(i, ff, sf, sigma_ens=None, struct_prod="Sprod", iota="iota"):
     """(CU_I) : « Sur tout produit d'une famille de Σ-ensembles, il existe une
     structure produit d'espèce Σ »  (IV.3, p. 16).
@@ -111,6 +113,7 @@ def condition_CU_I(i, ff, sf, sigma_ens=None, struct_prod="Sprod", iota="iota"):
     return impl(hyp, sigma_ens(prod, sp))
 
 
+# @livre Ch.IV §3.2 Def.CU_II | E IV.23 L.38-41 | PDF p.226
 def condition_CU_II(e, i, ff, sf, phif, struct_prod="Sprod", alpha=None,
                     sigma_ens=None, phi_prod="phiprod", iota="iota"):
     """(CU_II) : « Soit (F_ι)_{ι∈I} une famille de Σ-ensembles, et pour tout ι ∈ I
@@ -135,6 +138,7 @@ def condition_CU_II(e, i, ff, sf, phif, struct_prod="Sprod", alpha=None,
     return impl(hyp, alpha(prod, sp, phip))
 
 
+# @livre Ch.IV §3.2 Def.CU_III | E IV.24 L.1-5 | PDF p.227
 def possibilite_sigma_permise(a, e, f, s, phi, sigma_ens=None, alpha=None,
                               morph=None, induit=None, g="G", g2="Gp",
                               mor="f", mor2="fp"):
@@ -186,6 +190,7 @@ def possibilite_sigma_permise(a, e, f, s, phi, sigma_ens=None, alpha=None,
     return existe(g, corps)
 
 
+# @livre Ch.IV §3.2 Def.CU_III | E IV.24 L.1-5 | PDF p.227
 def condition_CU_III(a, e, sigma_ens=None, alpha=None, morph=None, induit=None,
                      f="F", s="S", phi="phi", g="G"):
     """(CU_III) (= condition CUₘ « à possibilité Σ-permise ») : « Il existe un cardinal
@@ -210,6 +215,7 @@ def condition_CU_III(a, e, sigma_ens=None, alpha=None, morph=None, induit=None,
     return pourtout(f, pourtout(s, pourtout(phi, impl(hyp, corps))))
 
 
+# @livre Ch.IV §3.2 Def.CU_III | E IV.24 L.1-5 | PDF p.227
 def cardinal_a_possibilite_sigma_permise(e, sigma_ens=None, alpha=None,
                                          morph=None, induit=None, a="a",
                                          f="F", s="S", phi="phi", g="G"):
@@ -229,6 +235,7 @@ def cardinal_a_possibilite_sigma_permise(e, sigma_ens=None, alpha=None,
 # ════════════════════════════════════════════════════════════════════════════
 #  CRITÈRE CST22 — existence d'une solution
 # ════════════════════════════════════════════════════════════════════════════
+# @livre Ch.IV §3.2 Crit.CST22 | E IV.24 L.7-9 | PDF p.227
 def hypotheses_CST22(e, i, ff, sf, phif, a, sigma_ens=None, morph=None,
                      alpha=None, induit=None):
     """Conjonction des trois conditions (CU_I) et (CU_II) et (CU_III), hypothèses du
@@ -244,6 +251,7 @@ def hypotheses_CST22(e, i, ff, sf, phif, a, sigma_ens=None, morph=None,
     return et(et(cu1, cu2), cu3)
 
 
+# @livre Ch.IV §3.2 Crit.CST22 | E IV.24 L.7-9 | PDF p.227
 def conclusion_CST22(fe, se, phi_e, sigma_ens=None, morph=None, alpha=None):
     """Conclusion du critère CST22 : « le problème d'application universelle pour E
     admet une solution » := il existe un Σ-ensemble (F_E,S_E) et une α-application
@@ -252,6 +260,7 @@ def conclusion_CST22(fe, se, phi_e, sigma_ens=None, morph=None, alpha=None):
     return est_solution(fe, se, phi_e, sigma_ens=sigma_ens, morph=morph, alpha=alpha)
 
 
+# @livre Ch.IV §3.2 Crit.CST22 | E IV.24 L.7-9 | PDF p.227
 def critere_CST22(e, i, ff, sf, phif, a, fe, se, phi_e, sigma_ens=None,
                   morph=None, alpha=None, induit=None):
     """Critère CST22 (IV.3) — forme ÉNONCÉE : « Si (CU_I) à (CU_III) sont vérifiées,
@@ -312,6 +321,7 @@ def cst22_extrait_CU_III(e="E", i="I0", ff=None, sf=None, phif=None, a="a",
 # ════════════════════════════════════════════════════════════════════════════
 #  CRITÈRE CST8 — unicité de la solution à un isomorphisme unique près
 # ════════════════════════════════════════════════════════════════════════════
+# @livre Ch.IV §2.1 Crit.CST8 | E IV.12 L.26-29 | PDF p.215
 def solution_isomorphisme_unique(fe, se, phi_e, fep, sep, phi_ep, morph=None,
                                  mor="f1", mor2="f2"):
     """Critère CST8 (IV.3) — « unicité à un isomorphisme unique près » : si (F_E,φ_E)

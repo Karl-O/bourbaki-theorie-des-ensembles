@@ -73,6 +73,7 @@ def corps_factorisation(morph, fact, f="f"):
 
 
 # ── (AU_I′) : (∃f)(morph(f) et fact(f)) ───────────────────────────────────────
+# @livre Ch.IV §3.2 Crit.- | E IV.23 L.19-20 | PDF p.226
 def au_i_prime(morph, fact, f="f"):
     """(AU_I′) : « il existe un morphisme f de F_E dans F tel que φ = f∘φ_E »
     (Texte.tex §IV.3.1).  Codé (∃f)(morph(f) et fact(f))."""
@@ -80,6 +81,7 @@ def au_i_prime(morph, fact, f="f"):
 
 
 # ── (AU_II′) : (∀f)(∀f')((corps{f} et corps{f'}) ⇒ f=f') ──────────────────────
+# @livre Ch.IV §3.2 Crit.- | E IV.23 L.21-22 | PDF p.226
 def au_ii_prime(morph, fact, f="f", g="fp"):
     """(AU_II′) : « deux morphismes f, f' de F_E dans F qui coïncident dans φ_E(E)
     sont égaux » (Texte.tex §IV.3.1).  Au niveau du corps : deux factorisations de
@@ -91,6 +93,7 @@ def au_ii_prime(morph, fact, f="f", g="fp"):
 
 
 # ── (AU) : (∃!f)(morph(f) et fact(f)) = (AU_I′) et (AU_II′) ────────────────────
+# @livre Ch.IV §3.2 Def.- | E IV.23 L.1-2 | PDF p.226
 def est_universel(morph, fact, f="f", g="fp"):
     """(AU) : « il existe un morphisme et UN SEUL f de F_E dans F tel que φ = f∘φ_E »
     (Texte.tex §IV.3.1, condition d'universalité).  Codé comme l'existence-unique de
@@ -100,6 +103,7 @@ def est_universel(morph, fact, f="f", g="fp"):
 
 
 # ── THÉORÈME : (AU) ⟹ (AU_I′)  (« (AU) entraîne (AU_I′) ») ─────────────────────
+# @livre Ch.IV §3.2 Demo.- | E IV.23 L.24-25 | PDF p.226
 def au_implique_au_i_prime(morph, fact, f="f", g="fp"):
     """⊢ (AU) ⇒ (AU_I′).   (Texte.tex : « il est clair que (AU) entraîne (AU_I′) ».)
 
