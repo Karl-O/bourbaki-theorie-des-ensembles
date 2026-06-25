@@ -18,8 +18,8 @@ PDF='../V6/1) Theorie Des Ensembles.pdf'
 |---|---|---|
 | **Ch I** (logique) | phys = `E I.p` | E I.50 = phys 50 |
 | **Ch II** (ensembles) | phys = `E II.p` + 51 | E II.1 ≈ phys 52 |
-| **Ch III** (ordre/cardinaux) | phys = `E III.p` + 103 | E III.6 = phys 109, E III.7 = phys 110 (en-têtes vérifiés 2026-06-24) |
-| **Ch IV** (structures) | phys = `E IV.p` + 202 | E IV.101 = phys 303 |
+| **Ch III** (ordre/cardinaux) | phys = `E III.p` + 103 | E III.6=109, E III.7=110, E III.66=169 (en-têtes vérifiés). ⚠ dérive +104 dans la queue exercices (E III.99 biblio = phys 203), hors domaine formalisé |
+| **Ch IV** (structures) | phys = `E IV.p` + 203 | E IV.1=204, E IV.2=205, E IV.3=206 (en-têtes vérifiés 2026-06-25 ; l'ancien +202 était FAUX d'1 cran) |
 | **Résumé** (E.R.) | phys = `E.R.p` + 303 | E.R.3 = phys 306 |
 
 ⚠ **Le texte principal a les ÉNONCÉS + les DÉMONSTRATIONS + est COMPLET.** Le Résumé des
@@ -49,7 +49,7 @@ exhaustif → s'en servir seulement comme repère rapide, JAMAIS comme liste de 
   9.classes d'objets équiv. E II.47
 - Exercices §1-6 : E II.49-51
 
-### CHAPITRE III — Ensembles ordonnés, cardinaux, entiers (E III.1 ; phys ≈ E III.p+102)
+### CHAPITRE III — Ensembles ordonnés, cardinaux, entiers (E III.1 ; phys = E III.p+103)
 - §1 Relations d'ordre (E III.1) : 1.déf ordre E III.1 · 2.préordre E III.2 · 3.notations E III.4 ·
   4.sous-ens./produit ordonnés E III.5 · 5.applications croissantes E III.7 ·
   6.max/min E III.8 · 7.plus grand/petit élément E III.8 · 8.majorants/minorants E III.9 ·
@@ -72,7 +72,7 @@ exhaustif → s'en servir seulement comme repère rapide, JAMAIS comme liste de 
   6.systèmes ind. E III.62 · 7.double ind. E III.66
 - Exercices §1-7 : E III.69-94 · Note historique : E III.97
 
-### CHAPITRE IV — Structures (E IV.1 ; phys ≈ E IV.p+202)
+### CHAPITRE IV — Structures (E IV.1 ; phys = E IV.p+203)
 - §1 Structures et isomorphismes (E IV.1) : 1.échelons E IV.1 · 2.extensions canoniques E IV.2 ·
   3.relations transportables E IV.3 · 4.espèces de structure E IV.4 · 5.isomorphismes/transport E IV.6 ·
   6.déduction E IV.7 · 7.espèces équivalentes E IV.9

@@ -79,7 +79,8 @@ de trous.*
 - `<Type>` ∈ {`Def`,`Ax`,`Crit`,`Prop`,`Th`,`Cor`,`Lem`,`Sch`,`Rem`,`Ex`,`Demo`} ; `<num>` = n° Bourbaki (sinon `-`).
 - `<repère Bourbaki>` = repère imprimé du livre, ex. `E III.2` (E = pagination interne du livre).
 - `L.<l1>-<l2>` = lignes sur CETTE page (une démo placée ailleurs a son **propre** `@livre`).
-- `PDF p.<phys>` = page physique du scan. Offsets : Ch I `+0`, II `+51`, III `+103`, IV `+202`, Résumé `+303`.
+- `PDF p.<phys>` = page physique du scan. Offsets : Ch I `+0`, II `+51`, III `+103`, IV `+203`, Résumé `+303`.
+  (Ancres vérifiées en-tête : E III.7=p.110, E III.66=p.169 ; E IV.1=p.204, E IV.2=p.205, E IV.3=p.206. Ces offsets sont des **ancres** : toujours confirmer l'en-tête imprimé de la page rendue, car la pagination peut dériver d'1 page dans une queue d'exercices.)
 - Exemple : `# @livre Ch.III §1.2 Prop.1 | E III.2 L.3-14 | PDF p.109`
 
 **Règle.** Toute notion écrite ou auditée **à partir de maintenant** reçoit son `@livre`. Le

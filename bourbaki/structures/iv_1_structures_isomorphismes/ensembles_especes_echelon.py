@@ -37,6 +37,7 @@ from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 # ─────────────────────────────────────────────────────────────────────────────
 # §IV.1.1 — SCHÉMA DE CONSTRUCTION D'ÉCHELON (objet méta)
 # ─────────────────────────────────────────────────────────────────────────────
+# @livre Ch.IV §1.1 Def.- | E IV.1 L.6-12 | PDF p.204
 @dataclass(frozen=True)
 class Schema:
     """Schéma de construction d'échelon (IV.1.1) — REPRÉSENTATION.
@@ -61,6 +62,7 @@ class Schema:
         return len(self.couples)
 
 
+# @livre Ch.IV §1.1 Def.- | E IV.1 L.6-9 | PDF p.204
 def schema_valide(s: Schema) -> bool:
     """Vrai ssi `s` satisfait les conditions a)/b) de IV.1.1.
 
@@ -87,6 +89,7 @@ def schema_valide(s: Schema) -> bool:
     return True
 
 
+# @livre Ch.IV §1.1 Def.- | E IV.1 L.10-12 | PDF p.204
 def schema_nb_termes(s: Schema) -> int:
     """n = le plus grand des entiers b_i figurant dans les couples (0,b_i) (IV.1.1).
 
@@ -123,6 +126,7 @@ def schema_relation() -> Schema:
 # ─────────────────────────────────────────────────────────────────────────────
 # §IV.1.1 — CONSTRUCTION D'ÉCHELON et ÉCHELON S(E₁,…,Eₙ) (interprétation objet)
 # ─────────────────────────────────────────────────────────────────────────────
+# @livre Ch.IV §1.1 Def.- | E IV.1 L.13-20 | PDF p.204
 def construction_echelon(s: Schema, bases: Sequence) -> list:
     """Construction d'échelon, de schéma S, sur E₁,…,Eₙ (IV.1.1).
 
@@ -144,6 +148,7 @@ def construction_echelon(s: Schema, bases: Sequence) -> list:
     return A
 
 
+# @livre Ch.IV §1.1 Def.- | E IV.2 L.1-4 | PDF p.205
 def echelon(s: Schema, bases: Sequence):
     """Échelon de schéma S sur les ensembles de base E₁,…,Eₙ (IV.1.1).
 
@@ -163,6 +168,7 @@ def echelon(s: Schema, bases: Sequence):
 # produit de deux applications) sont laissées OPAQUES au niveau objet : termes
 # neufs app("ext_parties", g) et app("produit_app", g, h).  Représentationnel :
 # leur caractérisation propre (E.II) n'est pas requise pour INTRODUIRE la notion.
+# @livre Ch.IV §1.2 Def.- | E IV.2 L.22-23 | PDF p.205
 def ext_parties(g):
     """Extension canonique ḡ de g aux ensembles de parties (IV.1.2 b)) — OPAQUE.
 
@@ -170,6 +176,7 @@ def ext_parties(g):
     return app("ext_parties", g)
 
 
+# @livre Ch.IV §1.2 Def.- | E IV.2 L.24-25 | PDF p.205
 def produit_applications(g, h):
     """Extension canonique g×h à A_a×A_b (IV.1.2 c)) — OPAQUE.
 
@@ -177,6 +184,7 @@ def produit_applications(g, h):
     return app("produit_app", g, h)
 
 
+# @livre Ch.IV §1.2 Def.- | E IV.2 L.13-28 | PDF p.205
 def extension_canonique(s: Schema, applis: Sequence):
     """Extension canonique, de schéma S, des applications f₁,…,fₙ (IV.1.2).
 

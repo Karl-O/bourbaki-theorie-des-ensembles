@@ -52,6 +52,7 @@ def _t(s):
 # ─────────────────────────────────────────────────────────────────────────────
 # §IV.1.6 — TERME INTRINSÈQUE pour s, de type T
 # ─────────────────────────────────────────────────────────────────────────────
+# @livre Ch.IV §1.6 Def.- | E IV.7 L.29-34 | PDF p.210
 def terme_intrinseque_type(V: Callable, sigma: Espece, bases: Sequence, s,
                            T_schema: Schema):
     """Condition 1° du terme intrinsèque (IV.1.6) : V{x₁,…,xₙ,s} ∈ T(x₁,…,xₙ,A₁,…,A_m).
@@ -68,6 +69,7 @@ def terme_intrinseque_type(V: Callable, sigma: Espece, bases: Sequence, s,
     return appartient(V(list(bases), s), echelon(T_schema, socle))
 
 
+# @livre Ch.IV §1.6 Def.- | E IV.7 L.35-40 | PDF p.210
 def terme_intrinseque_equivariance(V: Callable, sigma: Espece, bases: Sequence,
                                    y_bases: Sequence, s, f_bij: Sequence,
                                    T_schema: Schema):
@@ -91,6 +93,7 @@ def terme_intrinseque_equivariance(V: Callable, sigma: Espece, bases: Sequence,
     return egal(Vy, E.valeur(extT, Vx))
 
 
+# @livre Ch.IV §1.6 Def.- | E IV.7 L.29-40 | PDF p.210
 def est_terme_intrinseque(V: Callable, sigma: Espece, bases: Sequence,
                           y_bases: Sequence, s, f_bij: Sequence, T_schema: Schema):
     """« V est intrinsèque pour s, de type T » (IV.1.6) — instance objet (f,y).
@@ -106,6 +109,7 @@ def est_terme_intrinseque(V: Callable, sigma: Espece, bases: Sequence,
 # ─────────────────────────────────────────────────────────────────────────────
 # §IV.1.6 — PROCÉDÉ DE DÉDUCTION d'une structure d'espèce Θ à partir de Σ
 # ─────────────────────────────────────────────────────────────────────────────
+# @livre Ch.IV §1.6 Def.- | E IV.8 L.12-15 | PDF p.211
 def structure_deduite(P: Callable, bases: Sequence, s):
     """Structure d'espèce Θ déduite de s par le procédé P (IV.1.6).
 
@@ -115,6 +119,7 @@ def structure_deduite(P: Callable, bases: Sequence, s):
     return P(list(bases), s)
 
 
+# @livre Ch.IV §1.6 Def.- | E IV.8 L.7-11 | PDF p.211
 def est_procede_deduction(theta: Espece, P: Callable, U_termes: Sequence[Callable],
                           bases: Sequence, s):
     """« (P, U₁,…,U_r) est un procédé de déduction d'une structure d'espèce Θ à
@@ -138,6 +143,7 @@ def est_procede_deduction(theta: Espece, P: Callable, U_termes: Sequence[Callabl
 # ─────────────────────────────────────────────────────────────────────────────
 # §IV.1.6 — STRUCTURE SOUS-JACENTE (cas U_j = certaines des lettres x_j)
 # ─────────────────────────────────────────────────────────────────────────────
+# @livre Ch.IV §1.6 Def.- | E IV.8 L.24-26 | PDF p.211
 def projection_base(j: int):
     """Le terme intrinsèque U_j = x_j (j-ième base principale) — PRÉDICAT callable.
 
@@ -148,6 +154,7 @@ def projection_base(j: int):
     return lambda bases, s: bases[j - 1]
 
 
+# @livre Ch.IV §1.6 Def.- | E IV.8 L.24-26 | PDF p.211
 def est_structure_sous_jacente(theta: Espece, P: Callable, indices: Sequence[int],
                                bases: Sequence, s):
     """« la structure d'espèce Θ déduite de s par P est SOUS-JACENTE à s » (IV.1.6).
@@ -196,6 +203,7 @@ def structure_sous_jacente_intrinseque(j: int, sigma: Espece, bases="auto", s="s
 # ─────────────────────────────────────────────────────────────────────────────
 # §IV.1.6, Exemple 3 — ESPÈCE PLUS RICHE
 # ─────────────────────────────────────────────────────────────────────────────
+# @livre Ch.IV §1.6 Ex.3 | E IV.9 L.4-8 | PDF p.212
 def espece_plus_riche_axiome(sigma: Espece, theta: Espece, bases: Sequence, s):
     """Clause d'implication des axiomes de l'« espèce plus riche » (IV.1.6, Ex 3).
 
@@ -210,6 +218,7 @@ def espece_plus_riche_axiome(sigma: Espece, theta: Espece, bases: Sequence, s):
     return impl(sigma.axiome(list(bases), s), theta.axiome(list(bases), s))
 
 
+# @livre Ch.IV §1.6 Ex.3 | E IV.9 L.4-8 | PDF p.212
 def est_plus_riche(sigma: Espece, theta: Espece, bases: Sequence, s):
     """« Σ est plus riche que Θ » (IV.1.6, Exemple 3).
 
@@ -235,6 +244,7 @@ def est_plus_riche(sigma: Espece, theta: Espece, bases: Sequence, s):
 # ─────────────────────────────────────────────────────────────────────────────
 # §IV.1.7 — ESPÈCES DE STRUCTURE ÉQUIVALENTES
 # ─────────────────────────────────────────────────────────────────────────────
+# @livre Ch.IV §1.7 Def.- | E IV.9 L.33-35 | PDF p.212
 def equivalence_especes_aller(P: Callable, Q: Callable, bases: Sequence, s):
     """Clause aller de l'équivalence d'espèces (IV.1.7, 3°) : Q{x,P{x,s}} = s.
 
@@ -245,6 +255,7 @@ def equivalence_especes_aller(P: Callable, Q: Callable, bases: Sequence, s):
     return egal(QPs, _t(s))
 
 
+# @livre Ch.IV §1.7 Def.- | E IV.9 L.35-37 | PDF p.212
 def equivalence_especes_retour(P: Callable, Q: Callable, bases: Sequence, t):
     """Clause retour de l'équivalence d'espèces (IV.1.7, 3°) : P{x,Q{x,t}} = t.
 
@@ -255,6 +266,7 @@ def equivalence_especes_retour(P: Callable, Q: Callable, bases: Sequence, t):
     return egal(PQt, _t(t))
 
 
+# @livre Ch.IV §1.7 Def.- | E IV.9 L.28-39 | PDF p.212
 def sont_especes_equivalentes(P: Callable, Q: Callable, bases: Sequence, s, t):
     """« Σ et Θ sont équivalentes par l'intermédiaire des procédés P et Q » (IV.1.7).
 

@@ -77,3 +77,26 @@ outils_ia/audit/gen_trous_livre.py), deux anomalies sont apparues :
    E I.26 L.24-30 ; E I.27 L.8-30 ; E I.28 L.14-17 (entre c17 et c18) ; E I.31 L.17-26 (C24?,
    entre c23_ou et c25_premier). A COMBLER par une passe d'implementation (UN agent a la fois,
    jamais pendant une autre tache d'agent ; primitives N.* only, theorie==22, enonce==livre).
+
+## Offset PDF du Chap IV corrige : +202 -> +203 (2026-06-25)
+En posant les @livre du Chap IV (IV.1 structures/isomorphismes), un ecart d'offset PDF a ete
+detecte puis verifie par lecture directe des en-tetes imprimes :
+- **PDF p.203 = `E III.99` (BIBLIOGRAPHIE, fin Chap III)**, PAS du Chap IV.
+- **PDF p.204 = `CHAPITRE IV / Structures`, §1, « 1. Echelons » = `E IV.1`** ; p.205 = `E IV.2`
+  (CST1/CST2) ; p.206 = `E IV.3` (CST3). Donc **offset Chap IV = +203**, pas +202.
+L'ancien `+202` (CLAUDE.md, pdf_index.md, et l'enonce de mission) etait **FAUX d'1 cran** ;
+son ancre « E IV.101 = phys 303 » etait fantaisiste (le Chap IV n'a pas 101 pages). CORRIGE dans
+CLAUDE.md et outils_ia/pdf/pdf_index.md. Les 32 marqueurs IV.1 sont cales sur la page physique
+REELLE (E IV.p / PDF p.(p+203)), donc verifiables. Tout le Chap IV restant + le stray
+`ensembles/fonctions/hors_ii_3/iv_structures` doivent utiliser +203.
+
+Constat connexe : **derive de pagination dans le Chap III**. E III.7 = phys 110 et E III.66 =
+phys 169 donnent +103 (verifie en-tetes) sur TOUT le domaine formalise (E III.1-66), mais la
+biblio E III.99 = phys 203 donne +104 : une page non numerotee est inseree dans la queue
+exercices (E III.67-99), HORS domaine formalise. Aucun marqueur Chap III commite n'est affecte
+(verifie : tous a +103, jusqu'a E III.66=169). Rien a corriger cote code.
+
+Trou de couverture confirme (IV.1) : les **criteres CST1-CST7** (E IV.2-10) ne sont PAS formalises
+comme enonces NOMMES autonomes -- seulement cites en docstring et derives conditionnellement
+(CST2/CST5 avec CST1/CST2/CST3 en hypotheses reportees). A inscrire dans la carte de couverture
+Chap IV (candidats d'implementation futurs, comme les trous logique ci-dessus).

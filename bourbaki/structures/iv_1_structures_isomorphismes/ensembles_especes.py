@@ -42,6 +42,7 @@ from bourbaki.structures.iv_1_structures_isomorphismes.ensembles_especes_typific
 # ─────────────────────────────────────────────────────────────────────────────
 # §IV.1.4 — ESPÈCE DE STRUCTURE Σ (objet méta)
 # ─────────────────────────────────────────────────────────────────────────────
+# @livre Ch.IV §1.4 Def.- | E IV.4 L.2-17 | PDF p.207
 @dataclass(frozen=True)
 class Espece:
     """Espèce de structure Σ dans 𝒯 (IV.1.4) — REPRÉSENTATION.
@@ -69,6 +70,7 @@ class Espece:
         return len(self.auxiliaires)
 
 
+# @livre Ch.IV §1.4 Def.- | E IV.4 L.11-14 | PDF p.207
 def caracterisation_typique(sigma: Espece, bases: Sequence, s):
     """Caractérisation typique T{E₁,…,Eₙ, s} de Σ (IV.1.4, 3°).
 
@@ -78,6 +80,7 @@ def caracterisation_typique(sigma: Espece, bases: Sequence, s):
     return appartient(s, echelon(sigma.schema, socle))
 
 
+# @livre Ch.IV §1.4 Def.- | E IV.4 L.22-27 | PDF p.207
 def est_structure_espece(sigma: Espece, bases: Sequence, U):
     """« U est une structure d'espèce Σ sur les bases E₁,…,Eₙ » (IV.1.4).
 
@@ -90,6 +93,7 @@ def est_structure_espece(sigma: Espece, bases: Sequence, U):
 # ─────────────────────────────────────────────────────────────────────────────
 # §IV.1.5 — ISOMORPHISME, TRANSPORT, AUTOMORPHISME
 # ─────────────────────────────────────────────────────────────────────────────
+# @livre Ch.IV §1.5 Def.- | E IV.6 L.11-11 | PDF p.209
 def structure_transportee(sigma: Espece, f_bij: Sequence, U):
     """Structure transportée U' = ⟨f₁,…,fₙ,Id₁,…,Id_m⟩^S(U) (IV.1.5, transport).
 
@@ -108,6 +112,7 @@ def _clauses_bijections(f_bij, bases, basesp):
             for f, e, ep in zip(f_bij, bases, basesp)]
 
 
+# @livre Ch.IV §1.5 Def.- | E IV.6 L.8-12 | PDF p.209
 def est_isomorphisme(sigma: Espece, f_bij: Sequence, bases: Sequence,
                      basesp: Sequence, U, Up):
     """« (f₁,…,fₙ) est un isomorphisme de (E,U) sur (E',U') » (IV.1.5, relation (4)).
@@ -124,6 +129,7 @@ def est_isomorphisme(sigma: Espece, f_bij: Sequence, bases: Sequence,
     return _conj(bij + [eq4])
 
 
+# @livre Ch.IV §1.5 Def.- | E IV.6 L.19-21 | PDF p.209
 def sont_isomorphes(sigma: Espece, bases: Sequence, basesp: Sequence, U, Up,
                     noms_f: Optional[Sequence[str]] = None):
     """« (E',U') sont isomorphes à (E,U) » (IV.1.5).
@@ -141,12 +147,14 @@ def sont_isomorphes(sigma: Espece, bases: Sequence, basesp: Sequence, U, Up,
 
 
 # « structures isomorphes » : synonyme (IV.1.5) de sont_isomorphes pour les U,U'.
+# @livre Ch.IV §1.5 Def.- | E IV.6 L.19-21 | PDF p.209
 def structures_isomorphes(sigma: Espece, bases, basesp, U, Up, noms_f=None):
     """« Les structures U et U' sont isomorphes » (IV.1.5) — synonyme de
     sont_isomorphes (existence d'un isomorphisme de l'un sur l'autre)."""
     return sont_isomorphes(sigma, bases, basesp, U, Up, noms_f)
 
 
+# @livre Ch.IV §1.5 Def.- | E IV.6 L.28-29 | PDF p.209
 def est_automorphisme(sigma: Espece, f_bij: Sequence, bases: Sequence, U):
     """« (f₁,…,fₙ) est un automorphisme de E₁,…,Eₙ » (IV.1.5).
 
@@ -155,6 +163,7 @@ def est_automorphisme(sigma: Espece, f_bij: Sequence, bases: Sequence, U):
     return est_isomorphisme(sigma, f_bij, bases, bases, U, U)
 
 
+# @livre Ch.IV §1.5 Def.- | E IV.7 L.11-12 | PDF p.210
 def est_univalente(sigma: Espece):
     """Espèce de structure univalente (IV.1.5) — REPRÉSENTATIONNEL.
 

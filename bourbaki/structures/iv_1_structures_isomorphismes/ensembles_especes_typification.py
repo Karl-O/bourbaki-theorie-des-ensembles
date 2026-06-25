@@ -38,6 +38,7 @@ def _conj(formules):
     return out
 
 
+# @livre Ch.IV §1.3 Def.- | E IV.3 L.7-14 | PDF p.206
 def typification(s_lettres: Sequence, schemas: Sequence[Schema],
                  x_bases: Sequence, A_aux: Sequence = ()):
     """Typification T{x₁,…,xₙ, s₁,…,s_p} (IV.1.3).
@@ -57,6 +58,7 @@ def typification(s_lettres: Sequence, schemas: Sequence[Schema],
     return _conj(clauses)
 
 
+# @livre Ch.IV §1.3 Def.- | E IV.3 L.29-29 | PDF p.206
 def structures_transportees(s_lettres: Sequence, schemas: Sequence[Schema],
                             f_bij: Sequence, A_aux: Sequence = ()):
     """Liste des structures transportées s_j' (relation (3) de IV.1.3).
@@ -74,6 +76,7 @@ def structures_transportees(s_lettres: Sequence, schemas: Sequence[Schema],
     return out
 
 
+# @livre Ch.IV §1.3 Def.- | E IV.3 L.15-29 | PDF p.206
 def relation_transportable_instance(R, s_lettres, schemas, x_bases, y_bases,
                                     f_bij, A_aux=()):
     """Instance objet de la transportabilité de R pour la typification T (IV.1.3).
