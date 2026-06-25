@@ -67,6 +67,7 @@ def _base_puissance_dans_NN(base_terme, fini_base, n="npdt"):
     return out
 
 
+# @livre Ch.III §5.1 Cor.3 | E III.36 L.18-20 | PDF p.139
 def deux_puissance_dans_NN(n="npdt"):
     """🎯 ⊢ Fini(n) ⇒ Fini( 2^n ).   (CLOS, 0 hyp, theorie=22.)
 
@@ -75,6 +76,7 @@ def deux_puissance_dans_NN(n="npdt"):
     return _base_puissance_dans_NN(DEUX, fini_deux(), n)
 
 
+# @livre Ch.III §5.1 Cor.3 | E III.36 L.18-20 | PDF p.139
 def trois_puissance_dans_NN(n="npdt"):
     """🎯 ⊢ Fini(n) ⇒ Fini( 3^n ).   (CLOS, 0 hyp, theorie=22.)
 

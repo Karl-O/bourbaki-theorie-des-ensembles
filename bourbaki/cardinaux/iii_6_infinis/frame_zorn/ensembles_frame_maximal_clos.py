@@ -116,6 +116,7 @@ def frame_a_maximal_clos(E_set="E"):
 # ════════════════════════════════════════════════════════════════════════════
 #  hessenberg_a_carre_egal_a_0hyp — a²=a sous les 2 mêmes résidus de Zorn.
 # ════════════════════════════════════════════════════════════════════════════
+# @livre Ch.III §6.3 Th.2 | E III.47 L.30-31 | PDF p.150
 def hessenberg_a_carre_egal_a_0hyp(E_set="E"):
     """🎯 ⊢ est_infini(Card E) ⇒ Card E·Card E = Card E  (enonce_hessenberg(E)),
     sous EXACTEMENT les 2 résidus honnêtes de Zorn (H1=𝔉≠∅, H2=frame-inductivité).

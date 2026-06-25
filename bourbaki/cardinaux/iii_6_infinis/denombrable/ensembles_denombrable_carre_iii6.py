@@ -105,6 +105,7 @@ def NN_inf_egal_NN_carre():
 # ════════════════════════════════════════════════════════════════════════════
 #  ASSEMBLAGE CANTOR–BERNSTEIN — `denombrable_carre` sous l'UNIQUE résidu (B).
 # ════════════════════════════════════════════════════════════════════════════
+# @livre Ch.III §6.3 Lem.2 | E III.48 L.5-23 | PDF p.151
 def denombrable_carre():
     """⊢ inf_egal_card(ℕ×ℕ, ℕ)  ⇒  Eq(ℕ×ℕ, ℕ).   (CLOS sous 1 hyp résiduelle SATISFIABLE.)
 

@@ -278,6 +278,7 @@ def _produit_binaire_entier_t(x, y):
     return instancie(instancie(gen, _t(x)), _t(y))
 
 
+# @livre Ch.III §5.1 Cor.3 | E III.36 L.18-20 | PDF p.139
 def puissance_entiers_ferme(a="apuf", b="bpuf", n="npuf", k="kpuf"):
     """🎯 G2 — ⊢ ( B0(a) et (∀m) B(a,m) ) ⇒ ( (Fini a et Fini b) ⇒ Fini(a^b) ).
 

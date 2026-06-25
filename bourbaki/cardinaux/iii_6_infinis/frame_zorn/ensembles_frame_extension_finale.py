@@ -707,6 +707,7 @@ def card_S0_egal_card_E_cible(S="S0", E_set="E"):
 #      Branche Card S₀=Card E (card_S0_egal_card_E) + Card(S₀×S₀)=Card S₀
 #      (maximal_carre_egal) sur hessenberg_aa_egal_de_maximal.
 # ════════════════════════════════════════════════════════════════════════════
+# @livre Ch.III §6.3 Th.2 | E III.47 L.30-31 | PDF p.150
 def hessenberg_a_carre_egal_a(E_set="E", S="S0"):
     """{ Card S₀ ≤ Card E,  ¬(Card S₀ < Card E),  Card(S₀×S₀)=Card S₀ }
         ⊢ est_infini(Card E) ⇒ ( Card E · Card E = Card E ).   [hyps HONNÊTES].

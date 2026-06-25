@@ -76,6 +76,7 @@ def lemme_3_conditionnelle_close(a="a"):
     return N.loi_deduction(L3, red)                         # ⊢ ( L3 ⇒ cible )   [CLOS]
 
 
+# @livre Ch.III §3.2 Th.1 | E III.24 L.10-16 | PDF p.127
 def L4_cardinaux_bien_ordonnes(a="a"):
     """🎯 LEMME L4 (CIBLE DE LA MISSION) :
 

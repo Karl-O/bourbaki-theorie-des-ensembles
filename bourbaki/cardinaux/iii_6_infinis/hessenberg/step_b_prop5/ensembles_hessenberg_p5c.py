@@ -682,6 +682,7 @@ def _unpack_maximal_meq(E_set, derive, mfresh="mmx", Sf="Smx", phif="phimx"):
 # ════════════════════════════════════════════════════════════════════════════
 #  P5c — ASSEMBLAGE FINAL a²=a, conclusion E-seule via _unpack_maximal_meq.
 # ════════════════════════════════════════════════════════════════════════════
+# @livre Ch.III §6.3 Th.2 | E III.47 L.28-30 | PDF p.150
 def hessenberg_a_carre_egal_a_REEL(E_set="E"):
     """🎯🎯 THÉORÈME 2 (HESSENBERG) : ⊢ est_infini(Card E) ⇒ Card E·Card E = Card E,
     conclusion E-SEULE (5ᵉ grand théorème).

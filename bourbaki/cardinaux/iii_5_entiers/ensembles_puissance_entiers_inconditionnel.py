@@ -120,6 +120,7 @@ def B_preuve(a="apuf", n="npuf"):
 # ══════════════════════════════════════════════════════════════════════════════
 #  🎯  L'ÉNONCÉ PROPRE INCONDITIONNEL
 # ══════════════════════════════════════════════════════════════════════════════
+# @livre Ch.III §5.1 Cor.3 | E III.36 L.18-20 | PDF p.139
 def puissance_entiers_ferme_inconditionnel(a="apuf", b="bpuf"):
     """🎯 ⊢ ( Fini a et Fini b ) ⇒ Fini( a^b ).   (Cor. 3 §III.5.1, INCONDITIONNEL.)
 

@@ -359,6 +359,7 @@ def _ou_droite(thm_q, p):
     return N.modus_ponens(N.modus_ponens(thm_q, N.s2(q, p)), N.s3(q, p))
 
 
+# @livre Ch.III §5.6 Th.1 | E III.39 L.12-23 | PDF p.142
 def division_par_deux(n="nd2", k="kpd2"):
     """🎯🎯 ⊢ est_fini(n) ⇒ (∃k)( est_fini(k) et ( n = 2·k ou n = 2·k+1 ) ).
 
@@ -407,6 +408,7 @@ def impair_decompose_cible(n="nid"):
     return impl(et(est_fini(vn), est_impair_propre(vn)), _decomp_impair(vn))
 
 
+# @livre Ch.III §5.6 Def.1 | E III.39 L.42-43 | PDF p.142
 def impair_decompose(n="nid"):
     """🎯 ⊢ ( est_fini(n) et est_impair_propre(n) ) ⇒ (∃k)( Fini k et n = 2·k+1 ).
 
@@ -687,6 +689,7 @@ def pair_neq_impair_cible(a="apni", b="bpni2"):
                 non(egal(deux_fois(va), successeur(deux_fois(vb)))))
 
 
+# @livre Ch.III §5.6 Def.1 | E III.39 L.42-43 | PDF p.142
 def pair_neq_impair(a="apni", b="bpni2", k="kpni"):
     """🎯 ⊢ (Fini a et Fini b) ⇒ ¬( 2·a = 2·b+1 ).   ( « pair ≠ impair ». )
 
@@ -733,6 +736,7 @@ def deux_k_plus_un_impair_cible(k="kdki"):
     return impl(est_fini(vk), est_impair_propre(successeur(deux_fois(vk))))
 
 
+# @livre Ch.III §5.6 Def.1 | E III.39 L.42-43 | PDF p.142
 def deux_k_plus_un_impair(k="kdki"):
     """🎯 ⊢ est_fini(k) ⇒ ¬( 2 | (2·k+1) ).   ( 2·k+1 := succ(2·k) est IMPAIR. )
 
@@ -770,6 +774,7 @@ def deux_k_plus_un_impair(k="kdki"):
     return res
 
 
+# @livre Ch.III §5.6 Def.1 | E III.39 L.42-43 | PDF p.142
 def un_impair():
     """🎯 ⊢ est_impair_propre(1).   ( ¬( 2 | 1 ). )
 
@@ -1068,6 +1073,7 @@ def _afi_eq_succ2M(va, vi, vj, fa, fi, fj, a_eq, b_eq):
     return chain, aj_i      # chain : a·succ(2j) = succ(2·(a·j+i)) ;  M = a·j+i
 
 
+# @livre Ch.III §5.6 Def.1 | E III.39 L.42-43 | PDF p.142
 def impair_fois_impair(a="aifi", b="bifi"):
     """🎯 ⊢ (Fini a et Fini b et impair a et impair b) ⇒ impair( a·b ).
 

@@ -273,6 +273,7 @@ def recollement_h(a="A", b="B", f="f", g="g"):
 # ════════════════════════════════════════════════════════════════════════════
 #  ÉTAPE 4 — CANTOR–BERNSTEIN  (GRAND PRIX : antisymétrie de ≤)
 # ════════════════════════════════════════════════════════════════════════════
+# @livre Ch.III §3.2 Cor.2 | E III.25 L.13-15 | PDF p.128
 def cantor_bernstein(a="A", b="B", f="f", g="g"):
     """⊢ (inf_egal_card(a,b) et inf_egal_card(b,a)) ⇒ equipotent(a,b).
 
