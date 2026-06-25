@@ -162,6 +162,7 @@ def cofinale_singleton_implique_plus_grand(G="Gcf", E_set="Ecf", a="acf"):
 # ════════════════════════════════════════════════════════════════════════════
 #  ÉQUIVALENCE — sous a∈E, plus grand élément ⟺ {a} cofinale à E
 # ════════════════════════════════════════════════════════════════════════════
+# @livre Ch.III §1.8 Rem.- | E III.9 L.15-21 | PDF p.112
 def plus_grand_equivaut_cofinale_singleton(G="Gcf", E_set="Ecf", a="acf"):
     """🎯 { a∈E } ⊢ ( plus_grand_element(G,E,a) ⇔ est_cofinale(R_G, {a}, E) ).
 

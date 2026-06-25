@@ -274,6 +274,7 @@ def intersection_reciproque_est_diagonale(g="G", e="E"):
     return N.modus_ponens(conjonction_intro(incl_inter_id, incl_id_inter), ext)   # G∩G⁻¹ = Δ_E
 
 
+# @livre Ch.III §1.2 Prop.1 | E III.2 L.19-36 | PDF p.105
 def caracterisation_ordre_sens_direct(g="G", e="E"):
     """{ est_ordre(G,E), G⊆E×E } ⊢ (composee(G,G)=G  et  inter(G,G⁻¹)=Δ_E).
 

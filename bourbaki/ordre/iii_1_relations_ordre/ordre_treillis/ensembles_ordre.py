@@ -101,6 +101,7 @@ def preordre_oppose_est_preordre(R, x="x", y="y", z="z"):
 
 
 # ── §III.1.7 — unicité du plus grand / plus petit élément ─────────────────────
+# @livre Ch.III §1.7 Rem.- | E III.8 L.24-26 | PDF p.111
 def unicite_plus_grand_element(R, e="E", a="a", b="b", x="x"):
     """{ R antisymétrique, a plus grand élt de E, b plus grand élt de E } ⊢ a=b.
 
@@ -122,6 +123,7 @@ def unicite_plus_grand_element(R, e="E", a="a", b="b", x="x"):
     return N.modus_ponens(b_eq_a, symetrie(vb, va))             # a=b
 
 
+# @livre Ch.III §1.7 Rem.- | E III.8 L.24-26 | PDF p.111
 def unicite_plus_petit_element(R, e="E", a="a", b="b", x="x"):
     """{ R antisymétrique, a plus petit élt, b plus petit élt } ⊢ a=b.  (E.III.1.7, dual.)"""
     ve, va, vb = _terme(e), _terme(a), _terme(b)
@@ -137,6 +139,7 @@ def unicite_plus_petit_element(R, e="E", a="a", b="b", x="x"):
 
 
 # ── §III.1.6-1.7 — plus grand ⟹ maximal, plus petit ⟹ minimal ────────────────
+# @livre Ch.III §1.7 Rem.- | E III.8 L.36-38 | PDF p.111
 def plus_grand_est_maximal(R, e="E", a="a", x="x"):
     """{ R antisymétrique, a plus grand élt de E } ⊢ a élément maximal de E.
 
@@ -159,6 +162,7 @@ def plus_grand_est_maximal(R, e="E", a="a", x="x"):
     return conjonction_intro(a_in, N.generalisation(x, body))
 
 
+# @livre Ch.III §1.7 Rem.- | E III.8 L.36-38 | PDF p.111
 def plus_petit_est_minimal(R, e="E", a="a", x="x"):
     """{ R antisymétrique, a plus petit élt de E } ⊢ a élément minimal de E.  (dual.)"""
     ve, va, vx = _terme(e), _terme(a), var(x)
@@ -178,6 +182,7 @@ def plus_petit_est_minimal(R, e="E", a="a", x="x"):
 
 
 # ── §III.1.8 — un minorant de X minore toute partie de X ──────────────────────
+# @livre Ch.III §1.8 Rem.- | E III.9 L.30-32 | PDF p.112
 def minorant_partie(R, X="X", Y="Y", a="a", y="y"):
     """{ a minore X, Y⊂X } ⊢ a minore Y.   (« un minorant de X est aussi minorant de
     toute partie de X », E.III.1.8.)"""
@@ -192,6 +197,7 @@ def minorant_partie(R, X="X", Y="Y", a="a", y="y"):
     return N.generalisation(y, body)                           # (∀y)(y∈Y⇒R{a,y}) = a minore Y
 
 
+# @livre Ch.III §1.8 Rem.- | E III.9 L.30-32 | PDF p.112
 def majorant_partie(R, X="X", Y="Y", a="a", y="y"):
     """{ a majore X, Y⊂X } ⊢ a majore Y.   (E.III.1.8, dual.)"""
     vX, vY, va, vy = _terme(X), _terme(Y), _terme(a), var(y)

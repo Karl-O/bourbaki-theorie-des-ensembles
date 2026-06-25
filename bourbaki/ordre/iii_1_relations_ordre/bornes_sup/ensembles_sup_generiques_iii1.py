@@ -87,6 +87,7 @@ def majorant_de_sur_partie(G="G", A="A", B="B", E_set="E", m="m", x="x"):
 # ════════════════════════════════════════════════════════════════════════════
 #  PROPOSITION 5 (E.III.10) — A⊂B ⇒ sup A ≤ sup B
 # ════════════════════════════════════════════════════════════════════════════
+# @livre Ch.III §1.9 Prop.5 | E III.10 L.31-34 | PDF p.113
 def sup_monotone_inclusion(G="G", A="A", B="B", E_set="E", m="m", n="n",
                            x="x", y="y"):
     """{ A⊂B,  borne_superieure(G,A,m,E),  borne_superieure(G,B,n,E) }
@@ -114,6 +115,7 @@ def sup_monotone_inclusion(G="G", A="A", B="B", E_set="E", m="m", n="n",
     return mn
 
 
+# @livre Ch.III §1.9 Cor.- | E III.11 L.5-9 | PDF p.114
 def sup_sous_famille_le(G="G", A="A", B="B", E_set="E", m="m", n="n",
                         x="x", y="y"):
     """COROLLAIRE de Prop 5 : « la borne supérieure d'une SOUS-FAMILLE est ≤ à la
@@ -174,6 +176,7 @@ def majorant_de_sur_domine(G="G", A="A", B="B", E_set="E", m="m", x="x", u="u",
 # ════════════════════════════════════════════════════════════════════════════
 #  PROPOSITION 6 (E.III.10) — x_ι ≤ y_ι (∀ι) ⇒ sup x_ι ≤ sup y_ι
 # ════════════════════════════════════════════════════════════════════════════
+# @livre Ch.III §1.9 Prop.6 | E III.11 L.10-16 | PDF p.114
 def sup_monotone_termes(G="G", A="A", B="B", E_set="E", m="m", n="n",
                         x="x", y="y", u="u", t="t", z="z"):
     """{ transitivite_rel(G), domine(A,B),
@@ -205,6 +208,7 @@ def sup_monotone_termes(G="G", A="A", B="B", E_set="E", m="m", n="n",
 # ════════════════════════════════════════════════════════════════════════════
 #  PROPOSITION 9 (E.III.12) — sup dans un sous-ensemble ordonné F⊂E
 # ════════════════════════════════════════════════════════════════════════════
+# @livre Ch.III §1.9 Prop.9 | E III.12 L.20-26 | PDF p.115
 def sup_induit_sur_partie(G="G", A="A", E_set="E", F="F", m="m", x="x", y="y"):
     """{ borne_superieure(G,A,m,E),  m∈F,
          (∀y)(majorant(G,A,y,F) ⇒ (m,y)∈G) }  ⊢ borne_superieure(G,A,m,F).

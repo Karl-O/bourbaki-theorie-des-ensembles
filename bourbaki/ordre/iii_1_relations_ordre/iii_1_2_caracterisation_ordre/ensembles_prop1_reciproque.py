@@ -256,6 +256,7 @@ def _renomme_est_ordre(g, e, x="u", y="v", z="s"):
     return conjonction_intro(conjonction_intro(refl, antis), trans)   # est_ordre(G,E) défaut
 
 
+# @livre Ch.III §1.2 Prop.1 | E III.2 L.19-36 | PDF p.105
 def proposition1_equivalence(g="G", e="E"):
     """{ champ(G,E) } ⊢ ( est_ordre(G,E)  ⇔  (composee(G,G)=G et inter(G,G⁻¹)=Δ_E) ).
 

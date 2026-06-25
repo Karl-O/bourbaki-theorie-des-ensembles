@@ -73,6 +73,7 @@ def _filtrant_droite_G(G, E_set):
 # ════════════════════════════════════════════════════════════════════════════
 #  PROPOSITION 10 (E.III.1.10) — maximal + filtrant à droite ⇒ plus grand
 # ════════════════════════════════════════════════════════════════════════════
+# @livre Ch.III §1.10 Prop.10 | E III.13 L.6-9 | PDF p.116
 def maximal_filtrant_est_plus_grand(G="Gmf", E_set="Emf", a="amf",
                                      x="xmf", y="ymf", z="zmf"):
     """🎯 { est_ordre(G,E), filtrant_droite_G(G,E), element_maximal(G,E,a) }

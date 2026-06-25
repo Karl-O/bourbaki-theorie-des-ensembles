@@ -381,6 +381,7 @@ def _sous_lemme_universel(S="S", T="C", Y="Y", M="M"):
     return pourtout(T, sous_lemme_partie_finie_dans_membre(S, T, Y, M))
 
 
+# @livre Ch.III §4.5 Th.1 | E III.35 L.7-8 | PDF p.138
 def Tukey_theoreme(S="S", m="m", T="Tchain", x="x", y="y", z="z", Y="Y", M="M"):
     """⊢ ( de_caractere_fini(𝔖,E) et 𝔖≠∅ et (∀𝔗)sous_lemme(𝔖,𝔗) )
          ⇒ (∃m) element_maximal(Incl, 𝔖, m).

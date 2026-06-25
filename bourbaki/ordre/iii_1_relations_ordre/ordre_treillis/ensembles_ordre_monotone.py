@@ -170,6 +170,7 @@ def admet_borne_sup_inf(G, x, y, E_set="E", s="s", i="i", u="u"):
            borne_inferieure(G, P, vi, E_set, u))))
 
 
+# @livre Ch.III §1.11 Def.8 | E III.13 L.15-18 | PDF p.116
 def est_reticule(G, E_set="E", x="x", y="y", z="z", s="s", i="i", u="u"):
     """est_reticule(G,E) := est_ordre(G,E) et
         (∀x)(∀y)((x∈E et y∈E) ⇒

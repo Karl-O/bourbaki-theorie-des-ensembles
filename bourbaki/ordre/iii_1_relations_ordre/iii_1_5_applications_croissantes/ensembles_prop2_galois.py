@@ -117,6 +117,7 @@ def _compose_uvu(w, u, v, E_set, x="x"):
                             egal(_val(w, vx), _val(u, _val(v, _val(u, vx))))))
 
 
+# @livre Ch.III §1.5 Prop.2 | E III.7 L.45-46 (énoncé) ; preuve E III.8 L.1-7 | PDF p.110
 def galois_uvu_egale_u(G="G", Gp="Gp", u="u", v="v", w="wc",
                        E_set="E", Ep_set="Ep", x="x", y="y", t="t"):
     """{ est_decroissante(G,G',u,E,E'),

@@ -40,6 +40,7 @@ def _terme(t):
     return t if isinstance(t, Terme) else var(t)
 
 
+# @livre Ch.III §1.7 Rem.- | E III.8 L.34-35 | PDF p.111
 def plus_petit_est_unique_minimal(G, E_set="E", a="a", m="m", x="x"):
     """{ plus_petit_element(G,E,a), element_minimal(G,E,m) } ⊢ m=a.
 

@@ -304,6 +304,7 @@ def _preuve_pas_total(G, E_set, htot, P, X="Xrec", x="xrec", z="zpgT", m="m_pgf"
     return res
 
 
+# @livre Ch.III §4.4 Prop.3 | E III.34 L.13-17 | PDF p.137
 def prop3_total(G="Gpgt", E_set="Epgt", X="Xpgt", m="m_pgf"):
     """🎯 ⊢ prop3_total_enonce(G,E).   (Prop. 3 §III.4, variante totalement ordonnée.)
 
@@ -361,6 +362,7 @@ def cor1_total_enonce(G, E_set, m="m_pgf"):
                 existe(m, _pge(G, vE, var(m))))
 
 
+# @livre Ch.III §4.4 Cor.1 | E III.34 L.30-31 | PDF p.137
 def cor1_total(G="Gpgt", E_set="Epgt", m="m_pgf"):
     """🎯 ⊢ cor1_total_enonce(G,E).   (Cor. 1 §III.4, partie plus grand élément.)
 
@@ -537,6 +539,7 @@ def _preuve_pas_filtrant(G, E_set, hord, hfilt, P, X="Xrec", x="xrec", m="m_mjf"
     return res
 
 
+# @livre Ch.III §4.4 Prop.3 | E III.34 L.13-17 | PDF p.137
 def prop3_filtrant(G="Gmjt", E_set="Emjt", X="Xmjt", m="m_mjf"):
     """🎯 ⊢ prop3_filtrant_enonce(G,E).   (Prop. 3 §III.4, variante filtrante à droite.)
 
@@ -885,6 +888,7 @@ def cor2_enonce(G, E_set, m="m_emf"):
                 existe(m, _emax(G, vE, var(m))))
 
 
+# @livre Ch.III §4.4 Cor.2 | E III.34 L.33-34 | PDF p.137
 def cor2_maximal(G="Gemf", E_set="Eemf", X="Xemf", m="m_emf"):
     """🎯 ⊢ cor2_enonce(G,E).   (Corollaire 2 §III.4 — élément maximal, ordre PARTIEL.)
 

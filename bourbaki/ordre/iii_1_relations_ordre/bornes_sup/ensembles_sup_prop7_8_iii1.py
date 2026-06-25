@@ -78,6 +78,7 @@ def _majorants_communs(G, A, B, m, E_set, x="x"):
     return et(majorant(G, A, m, E_set, x), majorant(G, B, m, E_set, x))
 
 
+# @livre Ch.III §1.9 Prop.7 | E III.11 L.17-31 | PDF p.114
 def borne_sup_reunion_iff(G="G", A="A", B="B", E_set="E", m="m", x="x", y="y"):
     """⊢ borne_superieure(G, A∪B, m, E)
           ⟺ ( (majorant(G,A,m,E) et majorant(G,B,m,E))

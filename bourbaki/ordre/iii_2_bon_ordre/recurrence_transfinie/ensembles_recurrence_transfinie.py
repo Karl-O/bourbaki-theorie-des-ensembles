@@ -205,6 +205,7 @@ def conclusion_transfinie(P, e, x="x"):
     return pourtout(x, impl(appartient(vx, _t(e)), P(vx)))
 
 
+# @livre Ch.III §2.2 Crit.59 | E III.18 L.5-9 | PDF p.121
 def recurrence_transfinie(P, R, e, x="x", y="y"):
     """Énoncé du PRINCIPE DE RÉCURRENCE TRANSFINIE (Critère C59, E.III.2) :
 
@@ -389,6 +390,7 @@ def coincidence_solutions(vf, vg, e, x="x"):
     return conclusion_transfinie(P, e, x)
 
 
+# @livre Ch.III §2.2 Crit.60 | E III.18 L.20-24 | PDF p.121
 def recursion_transfinie_unicite(vf, vg, e="E", G="G", x0="x0tf", y="ytf",
                                  ebind="Eax", xbind="xAax"):
     """⊢ { est_bien_ordonne(R,E),  regle_coherente_sur_segments(vf,vg,R,E) } ⊢

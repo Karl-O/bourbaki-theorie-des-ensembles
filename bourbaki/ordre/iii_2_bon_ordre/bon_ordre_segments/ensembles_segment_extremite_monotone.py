@@ -77,6 +77,7 @@ def _t(t):
 # ════════════════════════════════════════════════════════════════════════════
 #  🎯 PROPOSITION 2 — SENS LARGE : x≤y ⟹ S_x ⊂ S_y  (théorème NOMMÉ III.2, CLOS).
 # ════════════════════════════════════════════════════════════════════════════
+# @livre Ch.III §2.1 Prop.2 | E III.16 L.21-30 | PDF p.119
 def segment_extremite_monotone(R="R", E_="E", x="x", y="y"):
     """⊢ est_bien_ordonne(R,E)
             ⇒ ( R{x,y} ⇒ inclus(seg(E,R,x), seg(E,R,y)) ).        [CLOS, 0 hyp]

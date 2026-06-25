@@ -88,6 +88,7 @@ def chaine(G, E_set, C, x="x", y="y", z="z"):
     return et(inclus(vC, vE), totalement_ordonne(G, vC, x, y, z))
 
 
+# @livre Ch.III §2.4 Def.3 | E III.20 L.18-19 | PDF p.123
 def est_inductif(G, E_set, C="C", m="m", x="x", y="y", z="z"):
     """est_inductif(G,E) := est_ordre(G,E)
         et (∀C)(chaine(G,E,C) ⇒ (∃m) majorant(G,C,m,E)).
@@ -105,6 +106,7 @@ def enonce_non_vide(E_set, x="x"):
     return existe(x, appartient(var(x), _terme(E_set)))
 
 
+# @livre Ch.III §2.4 Th.2 | E III.20 L.33-34 | PDF p.123
 def zorn(G, E_set, m="m", C="C", x="x", y="y", z="z"):
     """zorn(G,E) := (est_ordre(G,E) et est_inductif(G,E) et E≠∅)
         ⇒ (∃m) element_maximal(G,E,m).

@@ -418,6 +418,7 @@ def sous_lemme_universel_preuve(S="S", T="T", Y="Y", M="Mtk", M0="M0tk",
     return N.generalisation(T, body)
 
 
+# @livre Ch.III §4.5 Th.1 | E III.35 L.7-8 | PDF p.138
 def Tukey_theoreme_complet(S="S", m="m", T="Tchain", x="x", y="y", z="z",
                            Y="Y", M="M"):
     """⊢ ( de_caractere_fini(𝔖,E) et 𝔖≠∅

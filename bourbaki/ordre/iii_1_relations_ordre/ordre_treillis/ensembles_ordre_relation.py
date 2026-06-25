@@ -82,6 +82,7 @@ def est_ordre(G, E_set, x="x", y="y", z="z"):
               transitivite_rel(G, x, y, z))
 
 
+# @livre Ch.III §1.12 Def.9 | E III.13 L.31-34 | PDF p.116
 def totalement_ordonne(G, E_set, x="x", y="y", z="z"):
     """totalement_ordonne(G,E) := est_ordre(G,E) et
         (∀x)(∀y)((x∈E et y∈E) ⇒ ((x,y)∈G ou (y,x)∈G)).
@@ -99,6 +100,7 @@ def totalement_ordonne(G, E_set, x="x", y="y", z="z"):
 #  DÉFINITIONS — majorant / minorant, plus grand / plus petit, borne sup,
 #  élément maximal / minimal  (E.III.1.7-1.8, graphe G, sous-ensemble A de E)
 # ════════════════════════════════════════════════════════════════════════════
+# @livre Ch.III §1.8 Def.5 | E III.9 L.22-25 | PDF p.112
 def majorant(G, A, m, E_set, x="x"):
     """majorant(G,A,m,E) := m∈E et (∀x)(x∈A ⇒ (x,m)∈G).
 
@@ -109,6 +111,7 @@ def majorant(G, A, m, E_set, x="x"):
               pourtout(x, impl(appartient(vx, vA), _couple_dans(vx, vm, G))))
 
 
+# @livre Ch.III §1.8 Def.5 | E III.9 L.22-25 | PDF p.112
 def minorant(G, A, m, E_set, x="x"):
     """minorant(G,A,m,E) := m∈E et (∀x)(x∈A ⇒ (m,x)∈G).
 
@@ -118,6 +121,7 @@ def minorant(G, A, m, E_set, x="x"):
               pourtout(x, impl(appartient(vx, vA), _couple_dans(vm, vx, G))))
 
 
+# @livre Ch.III §1.7 Def.4 | E III.8 L.30-32 | PDF p.111
 def plus_grand_element(G, A, m, x="x"):
     """plus_grand_element(G,A,m) := m∈A et (∀x)(x∈A ⇒ (x,m)∈G).
 
@@ -128,6 +132,7 @@ def plus_grand_element(G, A, m, x="x"):
               pourtout(x, impl(appartient(vx, vA), _couple_dans(vx, vm, G))))
 
 
+# @livre Ch.III §1.7 Def.4 | E III.8 L.30-32 | PDF p.111
 def plus_petit_element(G, A, m, x="x"):
     """plus_petit_element(G,A,m) := m∈A et (∀x)(x∈A ⇒ (m,x)∈G).
 
@@ -137,6 +142,7 @@ def plus_petit_element(G, A, m, x="x"):
               pourtout(x, impl(appartient(vx, vA), _couple_dans(vm, vx, G))))
 
 
+# @livre Ch.III §1.6 Def.3 | E III.8 L.10-12 | PDF p.111
 def element_maximal(G, A, m, x="x"):
     """element_maximal(G,A,m) := m∈A et (∀x)((x∈A et (m,x)∈G) ⇒ x=m).
 
@@ -148,6 +154,7 @@ def element_maximal(G, A, m, x="x"):
                                egal(vx, vm))))
 
 
+# @livre Ch.III §1.6 Def.3 | E III.8 L.10-12 | PDF p.111
 def element_minimal(G, A, m, x="x"):
     """element_minimal(G,A,m) := m∈A et (∀x)((x∈A et (x,m)∈G) ⇒ x=m).
 
@@ -158,6 +165,7 @@ def element_minimal(G, A, m, x="x"):
                                egal(vx, vm))))
 
 
+# @livre Ch.III §1.9 Def.6 | E III.10 L.4-8 | PDF p.113
 def borne_superieure(G, A, m, E_set, x="x", y="y"):
     """borne_superieure(G,A,m,E) := « m est le plus petit majorant de A dans E »
         = majorant(G,A,m,E)  et  (∀y)(majorant(G,A,y,E) ⇒ (m,y)∈G).
@@ -170,6 +178,7 @@ def borne_superieure(G, A, m, E_set, x="x", y="y"):
     return et(est_maj_m, plus_petit)
 
 
+# @livre Ch.III §1.9 Def.6 | E III.10 L.4-8 | PDF p.113
 def borne_inferieure(G, A, m, E_set, x="x", y="y"):
     """borne_inferieure(G,A,m,E) := « m est le plus grand minorant de A dans E »
         = minorant(G,A,m,E)  et  (∀y)(minorant(G,A,y,E) ⇒ (y,m)∈G).
@@ -320,6 +329,7 @@ def plus_petit_element_unique(G, A, a="a", b="b", x="x", y="y"):
     return N.modus_ponens(conjonction_intro(ab, ba), antisym_ab)
 
 
+# @livre Ch.III §1.7 Rem.- | E III.8 L.36-38 | PDF p.111
 def plus_grand_est_maximal(G, A, m="m", x="x", y="y"):
     """{ antisymetrie(G), m plus grand élt de A } ⊢ element_maximal(G,A,m).
 
@@ -343,6 +353,7 @@ def plus_grand_est_maximal(G, A, m="m", x="x", y="y"):
     return conjonction_intro(m_in, N.generalisation(x, body))
 
 
+# @livre Ch.III §1.7 Rem.- | E III.8 L.36-38 | PDF p.111
 def plus_petit_est_minimal(G, A, m="m", x="x", y="y"):
     """{ antisymetrie(G), m plus petit élt de A } ⊢ element_minimal(G,A,m).
     (E.III.1.6-1.7, dual.)"""
@@ -387,6 +398,7 @@ def plus_petit_est_minorant(G, A, E_set="E", m="m", x="x"):
     return conjonction_intro(m_in_E, m_min)               # minorant(G,A,m,E)
 
 
+# @livre Ch.III §1.9 Rem.- | E III.10 L.9-10 | PDF p.113
 def plus_grand_est_borne_superieure(G, A, E_set="E", m="m", x="x", y="y"):
     """{ A⊂E, m plus grand élt de A } ⊢ borne_superieure(G,A,m,E).
 
@@ -454,6 +466,7 @@ def ordre_induit_sur_partie(G, E_set="E", A="A", x="x", y="y", z="z"):
     return conjonction_intro(conjonction_intro(refl_A, antisym), trans)
 
 
+# @livre Ch.III §1.12 Ex.1 | E III.14 L.10-11 | PDF p.117
 def totalement_ordonne_partie(G, E_set="E", A="A", x="x", y="y", z="z"):
     """{ totalement_ordonne(G,E), A⊂E } ⊢ totalement_ordonne(G,A).
 

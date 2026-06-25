@@ -55,6 +55,7 @@ def _force_premisse(body_seg, vx, vy, thm_x_in, thm_y_in, thm_yx):
     return N.modus_ponens(premisse, inst)
 
 
+# @livre Ch.III §2.1 Def.2 | E III.16 L.10-13 | PDF p.119
 def segment_de_segment_est_segment(R, S="S", T="T", e="E", x="x", y="y"):
     """{ est_segment(S,R,E), est_segment(T,R,S) } ⊢ est_segment(T,R,E).
 

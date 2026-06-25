@@ -34,6 +34,7 @@ def _terme(t):
 
 
 # ── §III.2.1, Définition 1 — un ensemble bien ordonné est ordonné ─────────────
+# @livre Ch.III §2.1 Def.1 | E III.15 L.30-32 | PDF p.118
 def bien_ordonne_est_ordonne(R, e="E"):
     """⊢ est_bien_ordonne(R,E) ⇒ est_relation_ordre_dans(R,E).
 
@@ -47,6 +48,7 @@ def bien_ordonne_est_ordonne(R, e="E"):
 
 
 # ── §III.2.1, Définition 2 — segments triviaux et clôture ─────────────────────
+# @livre Ch.III §2.1 Def.2 | E III.16 L.8-13 | PDF p.119
 def ensemble_est_segment(R, e="E", x="x", y="y"):
     """⊢ E est un segment de E   (E.III.2.1 : « E lui-même est un segment de E »).
 
@@ -72,6 +74,7 @@ def _a_implique_a(f):
     return a_implique_a(f)
 
 
+# @livre Ch.III §2.1 Def.2 | E III.16 L.8-13 | PDF p.119
 def vide_est_segment(R, e="E", x="x", y="y"):
     """⊢ ∅ est un segment de E   (E.III.2.1 : « l'ensemble vide est un segment de E »).
 
@@ -98,6 +101,7 @@ def vide_est_segment(R, e="E", x="x", y="y"):
     return conjonction_intro(sub, body)
 
 
+# @livre Ch.III §2.1 Def.2 | E III.16 L.8-9 | PDF p.119
 def segment_inclus(R, S="S", e="E", x="x", y="y"):
     """⊢ est_segment(S,R,E) ⇒ S⊂E   (la première composante de la Définition 2)."""
     vS, ve = _terme(S), _terme(e)
@@ -107,6 +111,7 @@ def segment_inclus(R, S="S", e="E", x="x", y="y"):
 
 
 # ── §III.2.1 — « toute intersection / réunion de segments est un segment » ────
+# @livre Ch.III §2.1 Def.2 | E III.16 L.10-13 | PDF p.119
 def intersection_segments_segment(R, A="A", B="B", e="E", x="x", y="y"):
     """⊢ (est_segment(A,R,E) et est_segment(B,R,E)) ⇒ est_segment(A∩B,R,E).
 
@@ -151,6 +156,7 @@ def intersection_segments_segment(R, A="A", B="B", e="E", x="x", y="y"):
     return N.loi_deduction(hyp, concl)
 
 
+# @livre Ch.III §2.1 Def.2 | E III.16 L.10-13 | PDF p.119
 def reunion_segments_segment(R, A="A", B="B", e="E", x="x", y="y"):
     """⊢ (est_segment(A,R,E) et est_segment(B,R,E)) ⇒ est_segment(A∪B,R,E).
 

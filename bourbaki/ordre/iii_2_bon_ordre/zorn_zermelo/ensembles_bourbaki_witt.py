@@ -401,6 +401,7 @@ def point_fixe_de_sup(G="G", E_set="E", p="p", a="a", s="s", x="x", y="y"):
 # ════════════════════════════════════════════════════════════════════════════
 #  ÉNONCÉS — Bourbaki–Witt et Zorn  (DÉFINITIONS d'énoncés, PAS des preuves)
 # ════════════════════════════════════════════════════════════════════════════
+# @livre Ch.III §2.3 Lem.3 | E III.19 L.11-18 | PDF p.122
 def bourbaki_witt(G, E_set, p, a, s="s", x="x", y="y", z="z"):
     """bourbaki_witt(G,E,p,a) :=
         ( est_ordre(G,E) ∧ chaine_complet(G,E) ∧ application_dans(E,p)

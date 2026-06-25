@@ -266,6 +266,7 @@ def _temoin_contradiction(G, X, b, E_set, antisym, y_maj_body, cible):
 # ════════════════════════════════════════════════════════════════════════════
 #  PROPOSITION 12 (E.III.1.14) — assemblage des deux sens
 # ════════════════════════════════════════════════════════════════════════════
+# @livre Ch.III §1.12 Prop.12 | E III.14 L.27-37 | PDF p.117
 def borne_sup_critere_total(G="Gs12", X="Xs12", b="bs12", E_set="Es12",
                             x="xs12tot", y="ys12tot", z="zs12tot"):
     """🎯 { totalement_ordonne(G,E), X⊂E, b∈E }

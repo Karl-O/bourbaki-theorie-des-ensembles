@@ -85,6 +85,7 @@ _GRAPHE_LEQ_DEFAUT = var("Gleq")
 # ════════════════════════════════════════════════════════════════════════════
 #  PROJECTIF — application canonique f_α : E → E_α  (E.III.7.1, formules (2))
 # ════════════════════════════════════════════════════════════════════════════
+# @livre Ch.III §7.1 Def.- | E III.52 L.13-15 | PDF p.155
 def f_canon_proj(Efam, f, a):
     """Graphe de l'application canonique f_α : E → E_α  (E = lim← E_α).
 
@@ -134,6 +135,7 @@ def canonique_proj_valeur(Efam="E", f="f", leq=None, i="I", a="a", z="z"):
     return N.modus_ponens(conjonction_intro(Hz, Ha), inst)   # f_α(z)=pr_α z
 
 
+# @livre Ch.III §7.1 Prop.- | E III.52 L.16-18 | PDF p.155
 def relation_2_projective(Efam="E", f="f", leq=None, i="I", a="a", b="b", z="z"):
     """{z∈lim←, α,β∈I, α≤β} ⊢ f_α(z) = f_{αβ}(f_β(z)).   (E.III.7.1, formule (2).)
 
@@ -171,6 +173,7 @@ def relation_2_projective(Efam="E", f="f", leq=None, i="I", a="a", b="b", z="z")
 #  PROJECTIF — système projectif d'APPLICATIONS + limite lim← u_α
 #  (E.III.7.2, Cor.1 ; Déf. « système projectif d'applications »)
 # ════════════════════════════════════════════════════════════════════════════
+# @livre Ch.III §7.2 Def.- | E III.54 L.1-3 | PDF p.157
 def est_systeme_projectif_applications(u, f, g, leq, i, a="a", b="b"):
     """« (u_α) est un système projectif d'applications de (E_α,f_{αβ}) dans
     (F_α,g_{αβ}) » := (∀α∀β)((α,β∈I et α≤β) ⇒ u_α∘f_{αβ} = g_{αβ}∘u_β).
@@ -192,6 +195,7 @@ def u_indice(u, a):
     return app("u_indice", u, a)
 
 
+# @livre Ch.III §7.2 Def.- | E III.54 L.3-5 | PDF p.157
 def lim_proj_applications(EfamE, fE, EfamF, fF, u):
     """u = lim← u_α : E → F  (limite projective de la famille (u_α), Cor.1 §III.7.2).
 
@@ -203,6 +207,7 @@ def lim_proj_applications(EfamE, fE, EfamF, fF, u):
 # ════════════════════════════════════════════════════════════════════════════
 #  PROJECTIF — système projectif de PARTIES  (E.III.7.1, formule (8))
 # ════════════════════════════════════════════════════════════════════════════
+# @livre Ch.III §7.2 Def.- | E III.54 L.20-23 | PDF p.157
 def est_systeme_projectif_parties(M, f, leq, i, a="a", b="b"):
     """« (M_α) est un système projectif de parties des E_α » :=
     (∀α∀β)((α,β∈I et α≤β) ⇒ f_{αβ}⟨M_β⟩ ⊂ M_α).
@@ -224,6 +229,7 @@ def M_indice(M, a):
     return app("M_indice", M, a)
 
 
+# @livre Ch.III §7.2 Def.- | E III.54 L.24-26 | PDF p.157
 def lim_proj_parties(M, f):
     """lim← M_α  (limite projective du système de parties (M_α,g_{αβ})).
 
@@ -242,6 +248,7 @@ def restriction_systeme_indices(Efam, f, J):
     return app("restr_indices", Efam, f, J)
 
 
+# @livre Ch.III §7.2 Def.- | E III.52 L.27-32 | PDF p.155
 def application_canonique_g(Efam, f, J):
     """g : E → E'  (E=lim←_I, E'=lim←_J), application CANONIQUE de la restriction à J.
 
@@ -279,6 +286,7 @@ def lambda_indice(x):
     return app("lambda_ind", x)
 
 
+# @livre Ch.III §7.5 Def.- | E III.61 L.9-15 | PDF p.164
 def relation_coherence_inductive(f, leq, i, x, y, g="g"):
     """R{x,y} := (∃γ)( γ∈I et γ≥λ(x) et γ≥λ(y) et f_{γ,λ(x)}(x) = f_{γ,λ(y)}(y) ).
 
@@ -312,6 +320,7 @@ def graphe_coherence(f, i, gleq=None):
     return app("graphe_coherence", f, i, gleq)
 
 
+# @livre Ch.III §7.5 Def.- | E III.61 L.23-27 | PDF p.164
 def lim_ind(Efam, f, i, gleq=None):
     """E = lim→_{α∈I} (E_α, f_{βα}) := G/R  (limite inductive, E.III.7.5).
 
@@ -331,6 +340,7 @@ def somme_systeme_inductif(Efam, i):
 
 
 # ── INDUCTIF — application canonique f_α : E_α → E  (E.III.7.5, formule (22)) ──
+# @livre Ch.III §7.5 Def.- | E III.61 L.31-34 | PDF p.164
 def f_canon_ind(Efam, f, i, gleq=None):
     """Graphe de l'application canonique f_α : E_α → E  (E = lim→ E_α = G/R).
 
@@ -399,6 +409,7 @@ def canonique_ind_valeur(Efam="E", f="f", i="I", gleq=None, a="a", x="x"):
 #  INDUCTIF — système inductif d'APPLICATIONS + limite lim→ u_α
 #  (E.III.7.6, Cor.1)
 # ════════════════════════════════════════════════════════════════════════════
+# @livre Ch.III §7.6 Def.- | E III.63 L.29-31 | PDF p.166
 def est_systeme_inductif_applications(u, f, g, leq, i, a="a", b="b"):
     """« (u_α) est un système inductif d'applications de (E_α,f_{βα}) dans
     (F_α,g_{βα}) » := (∀α∀β)((α,β∈I et α≤β) ⇒ u_β∘f_{βα} = g_{βα}∘u_α).
@@ -414,6 +425,7 @@ def est_systeme_inductif_applications(u, f, g, leq, i, a="a", b="b"):
     return pourtout(a, pourtout(b, impl(hyp, concl)))
 
 
+# @livre Ch.III §7.6 Def.- | E III.63 L.31-33 | PDF p.166
 def lim_ind_applications(EfamE, fE, EfamF, fF, u, i, gleq=None):
     """u = lim→ u_α : E → F  (limite inductive de la famille (u_α), Cor.1 §III.7.6).
 
@@ -428,6 +440,7 @@ def lim_ind_applications(EfamE, fE, EfamF, fF, u, i, gleq=None):
 # ════════════════════════════════════════════════════════════════════════════
 #  INDUCTIF — système inductif de PARTIES  (E.III.7.6, Cor. de la Prop. 7)
 # ════════════════════════════════════════════════════════════════════════════
+# @livre Ch.III §7.6 Def.- | E III.64 L.24-26 | PDF p.167
 def est_systeme_inductif_parties(M, f, leq, i, a="a", b="b"):
     """« (M_α) est un système inductif de parties des E_α » :=
     (∀α∀β)((α,β∈I et α≤β) ⇒ f_{βα}⟨M_α⟩ ⊂ M_β).

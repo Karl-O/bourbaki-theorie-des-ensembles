@@ -695,6 +695,7 @@ def heredite_couverture_realisee(Dfam, vval, vh, G="G", e="E",
     return res
 
 
+# @livre Ch.III §2.2 Crit.60 | E III.18 L.20-24 | PDF p.121
 def recursion_transfinie_existence(Dfam, vval, vh, G="G", e="E",
                                    x="x0tf", y="ytf", z="zess", p="pess",
                                    ebind="Eax", xbind="xAax"):

@@ -135,6 +135,7 @@ def w_indice_proj(u, v, a):
 #  lim←(v∘u) = (lim← v)∘(lim← u), au niveau du cœur algébrique : la famille
 #  composée w_α=v_α∘u_α est encore un système projectif d'applications.
 # ════════════════════════════════════════════════════════════════════════════
+# @livre Ch.III §7.2 Cor.2 | E III.54 L.5-12 | PDF p.157
 def composition_projective_valeur(u="u", v="v", f="f", g="g", h="h",
                                   a="a", b="b", x="x"):
     """⊢ { DIAG_proj^u(α,β,x), DIAG_proj^v(α,β,u_β(x)) }
@@ -176,6 +177,7 @@ def composition_projective_valeur(u="u", v="v", f="f", g="g", h="h",
     return composer_egalites(step1, H2)         # v_α(u_α(f_{αβ}(x))) = h_{αβ}(v_β(u_β(x)))
 
 
+# @livre Ch.III §7.6 Cor.2 | E III.64 L.1-9 | PDF p.167
 def composition_inductive_valeur(u="u", v="v", f="f", g="g", h="h",
                                  a="a", b="b", x="x"):
     """⊢ { DIAG_ind^u(α,β,x), DIAG_ind^v(α,β,u_α(x)) }
@@ -285,6 +287,7 @@ def composition_inductive_sous_commute(u="u", v="v", f="f", g="g", h="h",
 #  PROPOSITION 1 (1°) — FACTORISATION (6) u_α = f_α∘u  &  UNICITÉ ponctuelle
 #  (le contenu LOGIQUE de l'unicité, §III.7.2 ; l'EXISTENCE = REPORTÉE)
 # ════════════════════════════════════════════════════════════════════════════
+# @livre Ch.III §7.2 Prop.1 | E III.53 L.6-8 | PDF p.156
 def critere_separation_proj(u, F, i, y="y", z="z", a="a"):
     """SÉPARATION (Prop.1 2°, §III.7.2) :=
         (∀y∀z)((y,z∈F et y≠z) ⇒ (∃α)(α∈I et u_α(y) ≠ u_α(z))).
@@ -299,6 +302,7 @@ def critere_separation_proj(u, F, i, y="y", z="z", a="a"):
         existe(a, et(appartient(va, _t(i)), non(egal(uy, uz)))))))
 
 
+# @livre Ch.III §7.2 Prop.1 | E III.53 L.3-5 | PDF p.156
 def factorisation_valeur_proj(u="u", Efam="E", f="f", i="I", a="a", t="t"):
     """{ pour tout α : u_α(t) = f_α(u(t)) }  ⊢  u_α(t) = f_α(u(t)).
 
@@ -315,6 +319,7 @@ def factorisation_valeur_proj(u="u", Efam="E", f="f", i="I", a="a", t="t"):
     return instancie(instancie(Hfact, va), vt)         # u_α(t) = f_α(u(t))
 
 
+# @livre Ch.III §7.2 Prop.1 | E III.52 L.30-32 | PDF p.155
 def unicite_factorisation_ponctuelle(u="u", up="up", Efam="E", f="f", i="I",
                                      a="a", t="t"):
     """{ u_α(t)=f_α(u(t)) (∀α,t),  u_α(t)=f_α(u'(t)) (∀α,t) }

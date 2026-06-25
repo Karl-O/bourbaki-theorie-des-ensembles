@@ -61,6 +61,7 @@ def _R_de(R):
 # ════════════════════════════════════════════════════════════════════════════
 #  🎯 Un bon ordre est total.
 # ════════════════════════════════════════════════════════════════════════════
+# @livre Ch.III §2.1 Rem.- | E III.15 L.33-35 | PDF p.118
 def bien_ordonne_est_total(R="R", E_set="E", x="x", y="y"):
     """⊢ { est_bien_ordonne(R,E) } ⊢ est_totalement_ordonne(R,E).
 

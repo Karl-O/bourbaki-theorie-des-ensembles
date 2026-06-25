@@ -163,6 +163,7 @@ def borne_inferieure_unique(G, A, E_set="E", a="a", b="b", x="x", y="y"):
     return N.modus_ponens(conjonction_intro(ab, ba), antisym_ab)
 
 
+# @livre Ch.III §1.9 Rem.- | E III.10 L.9-10 | PDF p.113
 def plus_petit_est_borne_inferieure(G, A, E_set="E", m="m", x="x", y="y"):
     """{ A⊂E, m plus petit élt de A } ⊢ borne_inferieure(G,A,m,E).
 
@@ -452,6 +453,7 @@ def _rg(G):
     return lambda u, v: appartient(E.couple(u, v), _terme(G))
 
 
+# @livre Ch.III §1.13 Def.- | E III.14 L.27-31 | PDF p.117
 def axiome_intervalle_ferme(G="G", e="E", a="a", b="b", x="x"):
     """⊢-schéma : (∀E)(∀a)(∀b)(∀x)( x∈[a,b] ⇔ (x∈E et (a,x)∈G et (x,b)∈G) ).
     (E.III.1.13, [a,b]={x∈E | a≤x et x≤b}.)  Légitimé par S8 (sélection dans E)+A1.
@@ -488,6 +490,7 @@ def intervalle_ferme_a_dans(G="G", e="E", a="a", b="b", x="x"):
     return N.modus_ponens(rhs, equivalence_arriere(ax_inst))   # a∈[a,b]
 
 
+# @livre Ch.III §1.13 Rem.- | E III.15 L.1-2 | PDF p.118
 def intervalle_ferme_non_vide_si_a_inf_b(G="G", e="E", a="a", b="b", x="x", z="z"):
     """{ a∈E, (a,a)∈G, (a,b)∈G } ⊢ ¬([a,b] = ∅).
 
@@ -649,6 +652,7 @@ def _prop11_dec_cas_neq(Hsd, x_in, y_in, Hneq, comp_disj, fx_eq_fy, vx, vy, f, G
     return cas(comp_disj, casB1, casB2)
 
 
+# @livre Ch.III §1.12 Prop.11 | E III.14 L.27-31 | PDF p.117
 def strictement_monotone_injective_graphe(G="G", Gp="Gp", f="f", E_set="E",
                                           x="x", y="y", z="z"):
     """{ totalement_ordonne(G,E),

@@ -83,6 +83,7 @@ def _gleq():
 #  Si u factorise les u_α (u_α=f_α∘u, donnée pointwise (6)), la famille (u_α) satisfait
 #  AUTOMATIQUEMENT la condition de cône (5)  f_{αβ}∘u_β=u_α.
 # ════════════════════════════════════════════════════════════════════════════
+# @livre Ch.III §7.2 Prop.1 | E III.53 L.1-3 | PDF p.156
 def factorisation_compatible_transitions(u="u", Efam="E", f="f", leq=None, i="I",
                                          a="a", b="b", t="t"):
     """{ u_α(t)=f_α(u(t)) (∀α,t) ;  u(t)∈lim← ;  α,β∈I ;  α≤β }
@@ -204,6 +205,7 @@ def _canon_proj_au_point(Efam, f, leq, i, a_terme, z_terme):
 #      SENS FACILE : le diagramme de définition de lim← u / lim→ u, lu pointwise,
 #      se propage le long des transitions.
 # ════════════════════════════════════════════════════════════════════════════
+# @livre Ch.III §7.2 Cor.1 | E III.53 L.22-30 | PDF p.156
 def passage_limite_proj(u="u", EfamE="E", fE="f", EfamF="F", gF="g", leq=None, i="I",
                         a="a", b="b", z="z"):
     """{ g_α(u(z)) = u_α(f_α(z))  (∀α,z) ;  α,β∈I ;  α≤β ;  u(z)∈lim←F ;
@@ -237,6 +239,7 @@ def passage_limite_proj(u="u", EfamE="E", fE="f", EfamF="F", gF="g", leq=None, i
         g_b_uz, ub_fbz, E.valeur(gab, var("w")), "w"))
 
 
+# @livre Ch.III §7.6 Cor.1 | E III.63 L.5-18 | PDF p.166
 def passage_limite_ind(u="u", EfamE="E", fE="f", EfamF="F", gF="g", leq=None, i="I",
                        a="a", b="b", x="x"):
     """{ u(f_α(x)) = g_α(u_α(x))  (∀α,x) ;  les transitions f_{βα} bien posées }
@@ -291,6 +294,7 @@ def cofinal_canonique_coordonnee(Efam="E", f="f", leq=None, i="I", J="J",
     return N.modus_ponens(conjonction_intro(Hx, Ha), inst)   # pr_α(g(x)) = f_α(x)
 
 
+# @livre Ch.III §7.2 Prop.3 | E III.55 L.3-11 | PDF p.158
 def cofinal_canonique_compatible(Efam="E", f="f", leq=None, i="I", J="J",
                                  x="x", a="a", b="b"):
     """{ x∈lim←_I ;  α,β∈J ⊂ I ;  α≤β } ⊢ pr_α(g(x)) = f_{αβ}(pr_β(g(x))).
@@ -334,6 +338,7 @@ def cofinal_canonique_compatible(Efam="E", f="f", leq=None, i="I", J="J",
 #  4.  COFINAL ⇒ CANONIQUE INDUCTIVE : SURJECTIVITÉ « SENS FACILE » (Prop. 8 facile)
 #      f_α(x)=Cl_R(x) : la classe de tout x∈E_α est ATTEINTE par f_α.
 # ════════════════════════════════════════════════════════════════════════════
+# @livre Ch.III §7.7 Prop.8 | E III.66 L.5-13 | PDF p.169
 def canonique_ind_atteint(Efam="E", f="f", i="I", gleq=None, a="a", x="x"):
     """{ α∈I ;  x∈E_α } ⊢ (∃v)( v = x  et  f_α(v) = Cl_R(x) ).
 

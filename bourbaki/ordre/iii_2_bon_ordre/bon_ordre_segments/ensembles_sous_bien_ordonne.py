@@ -47,6 +47,7 @@ def _terme(t):
     return t if isinstance(t, Terme) else var(t)
 
 
+# @livre Ch.III §2.1 Ex.2 | E III.15 L.40-41 | PDF p.118
 def sous_ensemble_bien_ordonne(R, E_="E", S="S",
                                x="x", y="y", z="z", X="X", a="a", w="w"):
     """⊢ { est_bien_ordonne(R, E),  inclus(S, E) }  ⊢  est_bien_ordonne(R_S, S),

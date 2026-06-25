@@ -2588,6 +2588,7 @@ def est_bien_ordonne_graphe(G, e, x="x", y="y", z="z", X="X", a="a", w="w"):
     return E.est_bien_ordonne(R_de(_terme(G)), _terme(e), x, y, z, X, a, w)
 
 
+# @livre Ch.III §2.3 Th.1 | E III.20 L.9-10 | PDF p.123
 def zermelo(X="X", M="M", R="R"):
     """⊢ (∃R) est_bien_ordonne(R_R, X).
 

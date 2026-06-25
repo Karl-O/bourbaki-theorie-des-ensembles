@@ -1260,6 +1260,7 @@ def _bw_strict_contra_terme(G, E_set):
     return th
 
 
+# @livre Ch.III §2.4 Th.2 | E III.20 L.33-34 | PDF p.123
 def zorn_theoreme(G="G", E_set="E", m="m", C="C", x="x", y="y", z="z"):
     """⊢ ( est_ordre(G,E) et est_inductif(G,E) et E≠∅ ) ⇒ (∃m) element_maximal(G,E,m).
 

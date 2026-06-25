@@ -84,6 +84,7 @@ def _t(t):
 # ════════════════════════════════════════════════════════════════════════════
 #  🎯 PROPOSITION 2 — STRICTITÉ de x ↦ S_x : S_x ⊊ S_y pour x<y.
 # ════════════════════════════════════════════════════════════════════════════
+# @livre Ch.III §2.1 Prop.2 | E III.16 L.21-30 | PDF p.119
 def segment_extremite_strictement_croissant(R="R", E_="E", x="x", y="y"):
     """⊢ { est_bien_ordonne(R,E),  x∈E,  R{x,y},  x≠y }
             ⊢ ( seg(E,R,x) ⊂ seg(E,R,y)

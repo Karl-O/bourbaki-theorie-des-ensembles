@@ -66,11 +66,13 @@ def _strict(R):
 #  INTERVALLES manquants  (E.III.1.13)
 #  Termes opaques collectivisants ; caractérisés par axiomes de membership.
 # ════════════════════════════════════════════════════════════════════════════
+# @livre Ch.III §1.13 Def.- | E III.14 L.31-36 | PDF p.117
 def intervalle_semi_ouvert_droite(R, e, a, b):
     """[a, b[ := { x∈E | a≤x et x<b }  (intervalle semi-ouvert à droite, E.III.1.13)."""
     return app("interv_fo", _terme(e), _terme(a), _terme(b))
 
 
+# @livre Ch.III §1.13 Def.- | E III.14 L.31-36 | PDF p.117
 def intervalle_semi_ouvert_gauche(R, e, a, b):
     """]a, b] := { x∈E | a<x et x≤b }  (intervalle semi-ouvert à gauche, E.III.1.13)."""
     return app("interv_of", _terme(e), _terme(a), _terme(b))
@@ -225,6 +227,7 @@ def relation_adjoint(R, e, a):
     return lambda x, y: ou(R(x, y), et(egal(y, va), appartient(x, vEp)))
 
 
+# @livre Ch.III §1.7 Prop.3 | E III.9 L.4-9 | PDF p.112
 def est_adjonction_plus_grand(R, Rp, e, a, x="x"):
     """est_adjonction_plus_grand(R,R',E,a) := « R' est un ordre sur E'=E∪{a} qui
         induit R sur E et pour lequel a est le plus grand élément de E' » :

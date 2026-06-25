@@ -215,6 +215,7 @@ def image_reciproque_indice(u, a, xp):
     return E.image(E.reciproque(ua), E.singleton(xpa))
 
 
+# @livre Ch.III §7.2 Prop.2 | E III.54 L.28-31 | PDF p.157
 def systeme_image_reciproque(u, xp):
     """((u_α)^{-1}(x'_α))_α : la donnée du système de PARTIES image réciproque de
     x'=(x'_α) par le système projectif d'applications (u_α)  (Prop. 2, §III.7.2).
@@ -252,6 +253,7 @@ def image_directe_indice(u, a, M):
     return E.image(ua, Ma)
 
 
+# @livre Ch.III §7.6 Cor.- | E III.64 L.22-26 | PDF p.167
 def systeme_image_directe(u, M):
     """(u_α⟨M_α⟩)_α : la donnée du système de PARTIES image directe du système de
     parties (M_α) par le système d'applications (u_α).

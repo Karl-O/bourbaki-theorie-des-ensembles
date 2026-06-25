@@ -89,6 +89,7 @@ def _graphe_R(G):
 # ════════════════════════════════════════════════════════════════════════════
 #  ORDINAL — définition représentationnelle (type d'ordre d'un bon ordre)
 # ════════════════════════════════════════════════════════════════════════════
+# @livre Ch.III §2.1 Def.1 | E III.15 L.41-43 | PDF p.118
 def est_ordinal(e, R, x="x", y="y", z="z", X="X", a="a", w="w"):
     """est_ordinal(E, R) := est_bien_ordonne(R, E).
 
@@ -101,6 +102,7 @@ def est_ordinal(e, R, x="x", y="y", z="z", X="X", a="a", w="w"):
     return E.est_bien_ordonne(R, _terme(e), x, y, z, X, a, w)
 
 
+# @livre Ch.III §2.5 Th.3 | E III.21 L.16-21 | PDF p.124
 def meme_ordinal(e, R, ep, Rp, f="f", x="x", y="y"):
     """meme_ordinal(E, R, E', R') := sont_isomorphes_ordre(E, E', R, R').
 
@@ -111,6 +113,7 @@ def meme_ordinal(e, R, ep, Rp, f="f", x="x", y="y"):
     return V.sont_isomorphes_ordre(_terme(e), _terme(ep), R, Rp, f, x, y)
 
 
+# @livre Ch.III §3.1 Def.2 | E III.23 L.32-33 | PDF p.126
 def ordinal_de(e, R, z="Z", f="f", x="x", y="y"):
     """ordinal_de(E, R) := τ_Z ( sont_isomorphes_ordre(E, Z, R, R_Z) ).
 
@@ -133,6 +136,7 @@ def ordinal_de(e, R, z="Z", f="f", x="x", y="y"):
 # ════════════════════════════════════════════════════════════════════════════
 #  SEGMENT INITIAL d'un bon ordre  (E.III.2.1 — segment + segment d'extrémité)
 # ════════════════════════════════════════════════════════════════════════════
+# @livre Ch.III §2.1 Def.2 | E III.16 L.8-9 | PDF p.119
 def est_segment_initial(S, e, R, x="x", y="y"):
     """est_segment_initial(S, E, R) := est_segment(S, R, E).
 
@@ -143,6 +147,7 @@ def est_segment_initial(S, e, R, x="x", y="y"):
     return E.est_segment(_terme(S), R, _terme(e), x, y)
 
 
+# @livre Ch.III §2.1 Prop.1 | E III.16 L.19-21 | PDF p.119
 def segment_initial_extremite(e, R, a):
     """segment_initial_extremite(E, R, a) := segment_extremite(R, E, a) = ]←, a[.
 
@@ -152,6 +157,7 @@ def segment_initial_extremite(e, R, a):
     return E.segment_extremite(R, _terme(e), _terme(a))
 
 
+# @livre Ch.III §2.1 Prop.1 | E III.16 L.11-17 | PDF p.119
 def est_segment_propre(S, e, R, x="x", y="y"):
     """est_segment_propre(S, E, R) := est_segment(S, R, E)  et  S ≠ E.
 
@@ -165,6 +171,7 @@ def est_segment_propre(S, e, R, x="x", y="y"):
 # ════════════════════════════════════════════════════════════════════════════
 #  COMPARAISON DES ORDINAUX  (par segments — E.III.2, Théorème 3)
 # ════════════════════════════════════════════════════════════════════════════
+# @livre Ch.III §2.5 Th.3 | E III.21 L.16-21 | PDF p.124
 def ordinal_inferieur_ou_egal(e, R, ep, Rp, S="S", f="f", x="x", y="y"):
     """ordinal_inferieur_ou_egal(E,R,E',R') :⟺ (∃S)( S est un segment de E'  et
         sont_isomorphes_ordre(E, S, R, R'|_S) ).
@@ -180,6 +187,7 @@ def ordinal_inferieur_ou_egal(e, R, ep, Rp, S="S", f="f", x="x", y="y"):
                         V.sont_isomorphes_ordre(ve, vS, R, Rp, f, x, y)))
 
 
+# @livre Ch.III §2.5 Th.3 | E III.21 L.16-21 | PDF p.124
 def ordinal_strictement_inferieur(e, R, ep, Rp, S="S", f="f", x="x", y="y"):
     """ordinal_strictement_inferieur(E,R,E',R') :⟺ (∃S)( S segment PROPRE de E'
         (S⊂E', S≠E')  et  sont_isomorphes_ordre(E, S, R, R'|_S) ).
@@ -195,6 +203,7 @@ def ordinal_strictement_inferieur(e, R, ep, Rp, S="S", f="f", x="x", y="y"):
 
 
 # ── TRICHOTOMIE (Théorème 3, E.III.2) — ÉNONCÉ posé, PREUVE REPORTÉE ──────────
+# @livre Ch.III §2.5 Th.3 | E III.21 L.16-21 | PDF p.124
 def trichotomie_ordinaux(e, R, ep, Rp, S="S", f="f", x="x", y="y"):
     """ÉNONCÉ (Théorème 3, E.III.2) de la TRICHOTOMIE des ordinaux :
 
@@ -212,6 +221,7 @@ def trichotomie_ordinaux(e, R, ep, Rp, S="S", f="f", x="x", y="y"):
 # ════════════════════════════════════════════════════════════════════════════
 #  ORDINAL INITIAL  (lien aux cardinaux — exercices §III.6)
 # ════════════════════════════════════════════════════════════════════════════
+# @livre Ch.III §6.1 Def.- | E III.45 L.5-6 | PDF p.148
 def est_ordinal_initial(e, R, ep="Ep", Rp="Rp", S="S", f="f", x="x", y="y"):
     """est_ordinal_initial(E, R) := est_bien_ordonne(R, E)  et  il n'existe AUCUN
         ordinal STRICTEMENT plus petit qui soit ÉQUIPOTENT à (E,R) :
@@ -233,6 +243,7 @@ def est_ordinal_initial(e, R, ep="Ep", Rp="Rp", S="S", f="f", x="x", y="y"):
     return pourtout(ep, impl(et(bo, strict), pas_equip))
 
 
+# @livre Ch.III §6.1 Def.- | E III.45 L.5-6 | PDF p.148
 def ordinal_initial_du_cardinal(c, z="Z", f="f", x="x", y="y"):
     """ordinal_initial_du_cardinal(𝔠) := τ_Z ( est_ordinal_initial(Z, R_Z)  et
         Card(Z) = 𝔠 ).
