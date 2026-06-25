@@ -16,6 +16,7 @@ from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (instanc
                                conjonction_elim_droite, equivalence_avant, equivalence_arriere)
 
 
+# @livre Ch.I §4.3 Crit.31 | E I.34 L.20-22 | PDF p.34
 def monotonie_pour_tout(thm_rs, x):
     """⊢ R⇒S (x non libre dans Γ) ⟹ Γ ⊢ (∀x)R ⇒ (∀x)S.  (demi-C31, ∀.)"""
     r, s = antecedent_consequent(thm_rs.conclusion)
@@ -26,6 +27,7 @@ def monotonie_pour_tout(thm_rs, x):
     return N.loi_deduction(pourtout(x, r), gen)
 
 
+# @livre Ch.I §4.3 Crit.31 | E I.34 L.20-22 | PDF p.34
 def monotonie_existe(thm_rs, x):
     """⊢ R⇒S (x non libre dans Γ) ⟹ Γ ⊢ (∃x)R ⇒ (∃x)S.  (demi-C31, ∃.)
 
@@ -53,6 +55,7 @@ def existe_elimination(thm_rc, x):
     return syllogisme(monotonie_existe(thm_rc, x), existe_vacuous(c, x))
 
 
+# @livre Ch.I §4.3 Crit.31 | E I.34 L.20-22 | PDF p.34
 def congruence_pour_tout(thm_eq, x):
     """⊢ (R⇔S) (x non libre dans Γ) ⟹ Γ ⊢ (∀x)R ⇔ (∀x)S."""
     avant = monotonie_pour_tout(equivalence_avant(thm_eq), x)
@@ -60,6 +63,7 @@ def congruence_pour_tout(thm_eq, x):
     return conjonction_intro(avant, arriere)
 
 
+# @livre Ch.I §4.3 Crit.31 | E I.34 L.20-22 | PDF p.34
 def congruence_existe(thm_eq, x):
     """⊢ (R⇔S) (x non libre dans Γ) ⟹ Γ ⊢ (∃x)R ⇔ (∃x)S."""
     avant = monotonie_existe(equivalence_avant(thm_eq), x)
@@ -67,6 +71,7 @@ def congruence_existe(thm_eq, x):
     return conjonction_intro(avant, arriere)
 
 
+# @livre Ch.I §4.3 Crit.33 | E I.35 L.8-12 | PDF p.35
 def et_existe_droite(p, y, q):
     """⊢ (P et (∃y)Q) ⇔ (∃y)(P et Q)   (y non libre dans P).   (C33, distribution et/∃.)"""
     if y in libres_f(p):
@@ -82,6 +87,7 @@ def et_existe_droite(p, y, q):
     return conjonction_intro(fwd, bwd)
 
 
+# @livre Ch.I §4.3 Crit.33 | E I.35 L.8-12 | PDF p.35
 def et_existe_gauche(y, q, p):
     """⊢ ((∃y)Q et P) ⇔ (∃y)(Q et P)   (y non libre dans P).   (C33, variante gauche.)"""
     if y in libres_f(p):
@@ -97,6 +103,7 @@ def et_existe_gauche(y, q, p):
     return conjonction_intro(fwd, bwd)
 
 
+# @livre Ch.I §4.3 Crit.34 | E I.35 L.21-25 | PDF p.35
 def existe_commute(x, y, r):
     """⊢ (∃x)(∃y)R ⇔ (∃y)(∃x)R   (commutation de deux ∃).   (C33.)"""
     def sens(a, b):     # (∃a)(∃b)R ⇒ (∃b)(∃a)R

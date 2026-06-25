@@ -20,6 +20,7 @@ from bourbaki.assemblage.assemblage import (Assemblage, substitution_b_x_a as su
                         negation, disjonction, implication, egalite)
 
 
+# @livre Ch.I §1.2 Crit.1 | E I.17 L.9-10 | PDF p.17
 def cs1(a, b, x, xp) -> bool:
     """x'∉A ⟹ (B|x')(x'|x)A = (B|x)A."""
     if xp in lettres(a):
@@ -27,6 +28,7 @@ def cs1(a, b, x, xp) -> bool:
     return sub(b, xp, sub(Assemblage((xp,)), x, a)) == sub(b, x, a)
 
 
+# @livre Ch.I §1.2 Crit.2 | E I.17 L.11-13 | PDF p.17
 def cs2(a, b, c, x, y) -> bool:
     """x≠y, y∉B ⟹ (B|x)(C|y)A = ((B|x)C | y)(B|x)A."""
     if x == y or y in lettres(b):
@@ -35,6 +37,7 @@ def cs2(a, b, c, x, y) -> bool:
     return sub(b, x, sub(c, y, a)) == sub(cp, y, sub(b, x, a))
 
 
+# @livre Ch.I §1.2 Crit.3 | E I.17 L.14-15 | PDF p.17
 def cs3(a, x, xp) -> bool:
     """x'∉A ⟹ τ_x(A) = τ_x'((x'|x)A)."""
     if xp in lettres(a):
@@ -42,6 +45,7 @@ def cs3(a, x, xp) -> bool:
     return tau_x(a, x) == tau_x(sub(Assemblage((xp,)), x, a), xp)
 
 
+# @livre Ch.I §1.2 Crit.4 | E I.17 L.16-17 | PDF p.17
 def cs4(a, b, x, y) -> bool:
     """x∉B, x≠y ⟹ (B|y)τ_x(A) = τ_x((B|y)A)."""
     if x == y or x in lettres(b):
@@ -49,21 +53,25 @@ def cs4(a, b, x, y) -> bool:
     return sub(b, y, tau_x(a, x)) == tau_x(sub(b, y, a), x)
 
 
+# @livre Ch.I §1.2 Crit.5 | E I.17 L.18-21 | PDF p.17
 def cs5_negation(a, c, x) -> bool:
     """(C|x)(¬A) = ¬(C|x)A."""
     return sub(c, x, negation(a)) == negation(sub(c, x, a))
 
 
+# @livre Ch.I §1.2 Crit.5 | E I.17 L.18-21 | PDF p.17
 def cs5_disjonction(a, b, c, x) -> bool:
     """(C|x)(A∨B) = (C|x)A ∨ (C|x)B."""
     return sub(c, x, disjonction(a, b)) == disjonction(sub(c, x, a), sub(c, x, b))
 
 
+# @livre Ch.I §1.2 Crit.5 | E I.17 L.18-21 | PDF p.17
 def cs5_implication(a, b, c, x) -> bool:
     """(C|x)(A⇒B) = (C|x)A ⇒ (C|x)B."""
     return sub(c, x, implication(a, b)) == implication(sub(c, x, a), sub(c, x, b))
 
 
+# @livre Ch.I §1.2 Crit.5 | E I.17 L.18-21 | PDF p.17
 def cs5_signe(t, u, c, x) -> bool:
     """(C|x)(= t u) = (= (C|x)t (C|x)u)  (signe spécifique = de poids 2)."""
     return sub(c, x, egalite(t, u)) == egalite(sub(c, x, t), sub(c, x, u))

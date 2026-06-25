@@ -26,6 +26,7 @@ def _ab_ba(thm_eq, sig):
     return equivalence_avant(thm_eq, sig), equivalence_arriere(thm_eq, sig)
 
 
+# @livre Ch.I §3.5 Crit.23 | E I.31 L.13-16 | PDF p.31
 def c23_impl_droite(thm_eq, c, sig=DEFAUT):
     """{A⇔B} ⊢ (A⇒C) ⇔ (B⇒C)."""
     ab, ba = _ab_ba(thm_eq, sig)
@@ -37,6 +38,7 @@ def c23_impl_droite(thm_eq, c, sig=DEFAUT):
     return conjonction_intro(av, ar, sig)
 
 
+# @livre Ch.I §3.5 Crit.23 | E I.31 L.13-16 | PDF p.31
 def c23_impl_gauche(thm_eq, c, sig=DEFAUT):
     """{A⇔B} ⊢ (C⇒A) ⇔ (C⇒B)."""
     ab, ba = _ab_ba(thm_eq, sig)
@@ -48,6 +50,7 @@ def c23_impl_gauche(thm_eq, c, sig=DEFAUT):
     return conjonction_intro(av, ar, sig)
 
 
+# @livre Ch.I §3.5 Crit.23 | E I.31 L.13-16 | PDF p.31
 def c23_et(thm_eq, c, sig=DEFAUT):
     """{A⇔B} ⊢ (A et C) ⇔ (B et C)."""
     ab, ba = _ab_ba(thm_eq, sig)
@@ -61,6 +64,7 @@ def c23_et(thm_eq, c, sig=DEFAUT):
     return conjonction_intro(sens(ab, a, b), sens(ba, b, a), sig)
 
 
+# @livre Ch.I §3.5 Crit.23 | E I.31 L.13-16 | PDF p.31
 def c23_ou(thm_eq, c, sig=DEFAUT):
     """{A⇔B} ⊢ (A ou C) ⇔ (B ou C)."""
     ab, ba = _ab_ba(thm_eq, sig)
@@ -69,11 +73,13 @@ def c23_ou(thm_eq, c, sig=DEFAUT):
 
 # ── C24 : équivalences classiques (closes) ────────────────────────────────────
 
+# @livre Ch.I §3.5 Crit.24 | E I.31 L.18 | PDF p.31
 def c24_contraposition(a, b, sig=DEFAUT):
     """⊢ (A⇒B) ⇔ ((¬B)⇒(¬A))."""
     return conjonction_intro(K.c12(a, b, sig), K.c17(a, b, sig), sig)
 
 
+# @livre Ch.I §3.5 Crit.24 | E I.31 L.19 | PDF p.31
 def c24_idem_et(a, sig=DEFAUT):
     """⊢ (A et A) ⇔ A."""
     av = projection_gauche(a, a, sig)
@@ -82,11 +88,13 @@ def c24_idem_et(a, sig=DEFAUT):
     return conjonction_intro(av, ar, sig)
 
 
+# @livre Ch.I §3.5 Crit.24 | E I.31 L.22 | PDF p.31
 def c24_idem_ou(a, sig=DEFAUT):
     """⊢ (A ou A) ⇔ A."""
     return conjonction_intro(noyau.s1(a, sig), noyau.s2(a, a, sig), sig)
 
 
+# @livre Ch.I §3.5 Crit.24 | E I.31 L.19 | PDF p.31
 def c24_comm_et(a, b, sig=DEFAUT):
     """⊢ (A et B) ⇔ (B et A)."""
     def sens(x, y):
@@ -97,11 +105,13 @@ def c24_comm_et(a, b, sig=DEFAUT):
     return conjonction_intro(sens(a, b), sens(b, a), sig)
 
 
+# @livre Ch.I §3.5 Crit.24 | E I.31 L.22 | PDF p.31
 def c24_comm_ou(a, b, sig=DEFAUT):
     """⊢ (A ou B) ⇔ (B ou A)."""
     return conjonction_intro(noyau.s3(a, b, sig), noyau.s3(b, a, sig), sig)
 
 
+# @livre Ch.I §3.5 Crit.24 | E I.31 L.26 | PDF p.31
 def c24_ou_implique(a, b, sig=DEFAUT):
     """⊢ (A ou B) ⇔ ((¬A) ⇒ B)."""
     av = mono_gauche(double_negation_intro(a, sig), b, sig)   # (A∨B)⇒(¬¬A∨B)
@@ -111,6 +121,7 @@ def c24_ou_implique(a, b, sig=DEFAUT):
 
 # ── C28 : ¬(∀x)R ⇔ (∃x)(¬R) ───────────────────────────────────────────────────
 
+# @livre Ch.I §4.1 Crit.28 | E I.33 L.5-6 | PDF p.33
 def c28(r, x="x", sig=DEFAUT):
     """⊢ ¬(∀x)R ⇔ (∃x)(¬R).  (car ¬(∀x)R EST ¬¬(∃x)¬R ; double négation.)"""
     return K.c24_double_negation(existe(x, negation(r)), sig)

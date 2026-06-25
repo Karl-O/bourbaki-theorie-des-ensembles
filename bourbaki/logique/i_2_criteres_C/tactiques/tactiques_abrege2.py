@@ -12,36 +12,43 @@ from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege import anteceden
 
 
 # ── monotonie de ∨, affaiblissement ───────────────────────────────────────────
+# @livre Ch.I §3 Crit.- | E I.25 L.13-15 | PDF p.25
 def mono_droite(thm_pq, c):
     p, q = antecedent_consequent(thm_pq.conclusion)
     return N.modus_ponens(thm_pq, N.s4(p, q, c))
 
 
+# @livre Ch.I §3 Crit.- | E I.25 L.11-15 | PDF p.25
 def mono_gauche(thm_pq, c):
     p, q = antecedent_consequent(thm_pq.conclusion)
     return syllogisme(syllogisme(N.s3(p, c), mono_droite(thm_pq, c)), N.s3(c, q))
 
 
+# @livre Ch.I §3 Crit.9 | E I.26 L.11 | PDF p.26
 def affaiblissement(thm, a):
     x = thm.conclusion
     return N.modus_ponens(N.modus_ponens(thm, N.s2(x, non(a))), N.s3(x, non(a)))
 
 
 # ── double négation, contraposition ───────────────────────────────────────────
+# @livre Ch.I §3 Crit.11 | E I.26 L.18 | PDF p.26
 def dni(a):
     return N.modus_ponens(a_implique_a(non(a)), N.s3(non(non(a)), non(a)))
 
 
+# @livre Ch.I §3 Crit.16 | E I.28 L.7 | PDF p.28
 def dne(a):
     return N.modus_ponens(a_implique_a(a), mono_gauche(dni(non(a)), a))
 
 
+# @livre Ch.I §3 Crit.12 | E I.26 L.21-23 | PDF p.26
 def contraposition(thm_pq):
     p, q = antecedent_consequent(thm_pq.conclusion)
     comm = N.modus_ponens(thm_pq, N.s3(non(p), q))
     return N.modus_ponens(comm, mono_gauche(dni(q), non(p)))
 
 
+# @livre Ch.I §3 Crit.- | E I.27 L.6-7 | PDF p.27
 def distribution(t_a_bc, t_ab):
     a, _ = antecedent_consequent(t_ab.conclusion)
     h = N.assume(a)
@@ -49,11 +56,13 @@ def distribution(t_a_bc, t_ab):
     return N.loi_deduction(a, hc)
 
 
+# @livre Ch.I §3 Crit.24 | E I.31 L.24 | PDF p.31
 def disj_syll_thm(p, q):
     return mono_gauche(dni(p), q)
 
 
 # ── conjonction (intro + élim) ────────────────────────────────────────────────
+# @livre Ch.I §3 Crit.20 | E I.29 L.20 | PDF p.29
 def conjonction_intro(ta, tb):
     a, b = ta.conclusion, tb.conclusion
     nnA = N.modus_ponens(ta, dni(a))
@@ -72,42 +81,50 @@ def composantes_conjonction(c):
     return g.sous[0], d.sous[0]
 
 
+# @livre Ch.I §3 Crit.21 | E I.29 L.25-26 | PDF p.29
 def projection_gauche(a, b):
     return syllogisme(contraposition(N.s2(non(a), non(b))), dne(a))
 
 
+# @livre Ch.I §3 Crit.21 | E I.29 L.25-26 | PDF p.29
 def projection_droite(a, b):
     t = syllogisme(N.s2(non(b), non(a)), N.s3(non(b), non(a)))
     return syllogisme(contraposition(t), dne(b))
 
 
+# @livre Ch.I §3 Crit.21 | E I.29 L.25-26 | PDF p.29
 def conjonction_elim_gauche(thm):
     a, b = composantes_conjonction(thm.conclusion)
     return N.modus_ponens(thm, projection_gauche(a, b))
 
 
+# @livre Ch.I §3 Crit.21 | E I.29 L.25-26 | PDF p.29
 def conjonction_elim_droite(thm):
     a, b = composantes_conjonction(thm.conclusion)
     return N.modus_ponens(thm, projection_droite(a, b))
 
 
 # ── ∀-élimination (C30, cas T = x) ────────────────────────────────────────────
+# @livre Ch.I §4 Crit.30 | E I.34 L.10-11 | PDF p.34
 def instanciation_en_x(r, x):
     """⊢ (∀x)R ⇒ R."""
     s5 = N.s5(non(r), var(x), x)                       # ⊢ ¬R ⇒ (∃x)¬R
     return syllogisme(contraposition(s5), dne(r))      # ⊢ (∀x)R ⇒ R
 
 
+# @livre Ch.I §3 Crit.24 | E I.31 L.20 | PDF p.31
 def comm_ou(p, q):
     """⊢ (P ∨ Q) ⇔ (Q ∨ P)."""
     return conjonction_intro(N.s3(p, q), N.s3(q, p))
 
 
+# @livre Ch.I §3 Crit.10 | E I.26 L.15 | PDF p.26
 def tiers_exclu(p):
     """⊢ P ∨ ¬P  (principe du tiers exclu)."""
     return N.modus_ponens(a_implique_a(p), N.s3(non(p), p))   # (¬P∨P) → (P∨¬P)
 
 
+# @livre Ch.I §3 Crit.24 | E I.31 L.17 | PDF p.31
 def comm_et(p, q):
     """⊢ (P et Q) ⇔ (Q et P)."""
     def sens(x, y):
@@ -117,6 +134,7 @@ def comm_et(p, q):
     return conjonction_intro(sens(p, q), sens(q, p))
 
 
+# @livre Ch.I §3 Crit.23 | E I.31 L.11-14 | PDF p.31
 def ou_congruence(thm_a, thm_b):
     """⊢ (A⇔A'), ⊢ (B⇔B') ⟹ ⊢ (A∨B) ⇔ (A'∨B')."""
     a, ap = antecedent_consequent(conjonction_elim_gauche(thm_a).conclusion)
@@ -128,12 +146,14 @@ def ou_congruence(thm_a, thm_b):
     return conjonction_intro(fwd, bwd)
 
 
+# @livre Ch.I §3 Crit.23 | E I.31 L.11-14 | PDF p.31
 def equiv_neg(thm_pq):
     """⊢ (P⇔Q) ⟹ ⊢ (¬P ⇔ ¬Q)  (congruence de la négation)."""
     return conjonction_intro(contraposition(conjonction_elim_droite(thm_pq)),
                              contraposition(conjonction_elim_gauche(thm_pq)))
 
 
+# @livre Ch.I §3 Crit.24 | E I.31 L.19 | PDF p.31
 def demorgan_ou(p, q):
     """⊢ ¬(P∨Q) ⇔ (¬P et ¬Q).   (loi de De Morgan ; et(¬P,¬Q)=¬(¬¬P∨¬¬Q).)"""
     dnP = conjonction_intro(dne(p), dni(p))            # ¬¬P ⇔ P
@@ -142,12 +162,14 @@ def demorgan_ou(p, q):
     return conjonction_intro(conjonction_elim_droite(eq), conjonction_elim_gauche(eq))  # symétrisé
 
 
+# @livre Ch.I §3 Crit.24 | E I.31 L.19 | PDF p.31
 def demorgan_et(p, q):
     """⊢ ¬(P et Q) ⇔ (¬P ∨ ¬Q).   (¬(P et Q) = ¬¬(¬P∨¬Q).)"""
     x = ou(non(p), non(q))
     return conjonction_intro(dne(x), dni(x))           # ¬¬X ⇔ X  = ¬(P et Q) ⇔ (¬P∨¬Q)
 
 
+# @livre Ch.I §3 Crit.24 | E I.31 L.22 | PDF p.31
 def et_ou_distrib(p, q, r):
     """⊢ (P et (Q∨R)) ⇔ ((P et Q) ∨ (P et R))   (distribution de et sur ∨)."""
     h = N.assume(et(p, ou(q, r)))
@@ -169,6 +191,7 @@ def et_ou_distrib(p, q, r):
     return conjonction_intro(fwd, bwd)
 
 
+# @livre Ch.I §3 Crit.24 | E I.31 L.18 | PDF p.31
 def assoc_et(p, q, r):
     """⊢ (P et (Q et R)) ⇔ ((P et Q) et R)."""
     h1 = N.assume(et(p, et(q, r)))
@@ -184,6 +207,7 @@ def assoc_et(p, q, r):
     return conjonction_intro(fwd, bwd)
 
 
+# @livre Ch.I §3 Crit.18 | E I.28 L.18-19 | PDF p.28
 def cas(thm_disj, thm_ac, thm_bc):
     """Γ⊢(A∨B), Δ⊢(A⇒C), Θ⊢(B⇒C) ⟹ Γ∪Δ∪Θ ⊢ C.  (élimination de ∨, preuve par cas.)"""
     a, b = thm_disj.conclusion.sous
@@ -194,6 +218,7 @@ def cas(thm_disj, thm_ac, thm_bc):
     return N.modus_ponens(thm_disj, chaine)
 
 
+# @livre Ch.I §3 Crit.23 | E I.31 L.11-14 | PDF p.31
 def et_congruence_droite(p, thm_eq):
     """⊢ (Q⇔Q') ⟹ ⊢ (P et Q) ⇔ (P et Q').   (congruence du et, conjonct droit.)"""
     q, qp = antecedent_consequent(equivalence_avant(thm_eq).conclusion)
@@ -206,6 +231,7 @@ def et_congruence_droite(p, thm_eq):
     return conjonction_intro(fwd, bwd)
 
 
+# @livre Ch.I §3 Crit.23 | E I.31 L.11-14 | PDF p.31
 def et_congruence_gauche(thm_eq, p):
     """⊢ (Q⇔Q') ⟹ ⊢ (Q et P) ⇔ (Q' et P).   (congruence du et, conjonct gauche.)"""
     q, qp = antecedent_consequent(equivalence_avant(thm_eq).conclusion)
@@ -218,21 +244,25 @@ def et_congruence_gauche(thm_eq, p):
     return conjonction_intro(fwd, bwd)
 
 
+# @livre Ch.I §3 Crit.- | E I.30 L.34-37 | PDF p.30
 def equivalence_avant(thm_eq):
     """Γ ⊢ (A⇔B) ⟹ Γ ⊢ (A⇒B)."""
     return conjonction_elim_gauche(thm_eq)
 
 
+# @livre Ch.I §3 Crit.- | E I.30 L.34-37 | PDF p.30
 def equivalence_arriere(thm_eq):
     """Γ ⊢ (A⇔B) ⟹ Γ ⊢ (B⇒A)."""
     return conjonction_elim_droite(thm_eq)
 
 
+# @livre Ch.I §3 Crit.22 | E I.31 L.8-10 | PDF p.31
 def equivalence_symetrie(thm_eq):
     """Γ ⊢ (A⇔B) ⟹ Γ ⊢ (B⇔A)."""
     return conjonction_intro(equivalence_arriere(thm_eq), equivalence_avant(thm_eq))
 
 
+# @livre Ch.I §3 Crit.22 | E I.31 L.8-10 | PDF p.31
 def equivalence_transitivite(thm_ab, thm_bc):
     """⊢ (A⇔B), ⊢ (B⇔C) ⟹ ⊢ (A⇔C)."""
     ac = syllogisme(equivalence_avant(thm_ab), equivalence_avant(thm_bc))
@@ -240,6 +270,7 @@ def equivalence_transitivite(thm_ab, thm_bc):
     return conjonction_intro(ac, ca)
 
 
+# @livre Ch.I §4 Crit.30 | E I.34 L.10-11 | PDF p.34
 def instanciation(r, t, x):
     """⊢ (∀x)R ⇒ (T|x)R.  C30 général (terme T quelconque)."""
     s5 = N.s5(non(r), t, x)                            # ⊢ (T|x)¬R ⇒ (∃x)¬R
@@ -253,6 +284,7 @@ def _peler_pourtout(f):
     return f.sous[0].lieur, f.sous[0].sous[0].sous[0]
 
 
+# @livre Ch.I §4 Crit.30 | E I.34 L.10-11 | PDF p.34
 def instancie(thm_forall, t):
     """Γ ⊢ (∀x)R  ⟹  Γ ⊢ (T|x)R.  (∀-élimination à un terme T.)"""
     x, r = _peler_pourtout(thm_forall.conclusion)
@@ -260,6 +292,7 @@ def instancie(thm_forall, t):
 
 
 # ── Chapitre II — transitivité de l'inclusion ─────────────────────────────────
+# @livre Ch.II §1.2 Prop.2 | E II.2 L.33 | PDF p.53
 def inclusion_transitive(a="a", b="b", c="c"):
     """⊢ ((a ⊂ b) et (b ⊂ c)) ⇒ (a ⊂ c)."""
     va, vb, vc, z = var(a), var(b), var(c), "z"

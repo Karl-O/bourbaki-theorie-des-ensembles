@@ -21,6 +21,7 @@ from bourbaki.logique.i_2_criteres_C.tactiques.tactiques import (
 )
 
 
+# @livre Ch.I §3 Crit.11 | E I.26 L.18 | PDF p.26
 def double_negation_intro(a: Assemblage, sig: Signature = DEFAUT) -> Theoreme:
     """⊢ A ⇒ ¬¬A.  (¬A⇒¬A est ¬¬A∨¬A ; on commute par S3.)"""
     t = a_implique_a(negation(a), sig)          # ⊢ ¬A⇒¬A  =  ¬¬A ∨ ¬A
@@ -28,6 +29,7 @@ def double_negation_intro(a: Assemblage, sig: Signature = DEFAUT) -> Theoreme:
     return noyau.modus_ponens(t, s3, sig)       # ⊢ ¬A∨¬¬A  =  A⇒¬¬A
 
 
+# @livre Ch.I §3 Crit.16 | E I.28 L.7 | PDF p.28
 def double_negation_elim(a: Assemblage, sig: Signature = DEFAUT) -> Theoreme:
     """⊢ ¬¬A ⇒ A.  (À partir de ¬A∨A et de ¬A⇒¬¬¬A, mono-gauche.)"""
     em = a_implique_a(a, sig)                   # ⊢ A⇒A  =  ¬A ∨ A
@@ -36,6 +38,7 @@ def double_negation_elim(a: Assemblage, sig: Signature = DEFAUT) -> Theoreme:
     return noyau.modus_ponens(em, lm, sig)      # ⊢ ¬¬¬A∨A  =  ¬¬A⇒A
 
 
+# @livre Ch.I §3 Crit.12 | E I.26 L.21-23 | PDF p.26
 def contraposition(thm_pq: Theoreme, sig: Signature = DEFAUT) -> Theoreme:
     """⊢ P⇒Q  ⟹  ⊢ ¬Q ⇒ ¬P.  Constructive (S3 + mono-gauche + dni)."""
     p, q = antecedent_consequent(thm_pq.conclusion, sig)
@@ -44,12 +47,14 @@ def contraposition(thm_pq: Theoreme, sig: Signature = DEFAUT) -> Theoreme:
     return noyau.modus_ponens(comm, lm, sig)    # ⊢ ¬¬Q∨¬P  =  ¬Q⇒¬P
 
 
+# @livre Ch.I §3 Crit.24 | E I.31 L.24 | PDF p.31
 def syllogisme_disjonctif(p: Assemblage, q: Assemblage,
                           sig: Signature = DEFAUT) -> Theoreme:
     """⊢ (P∨Q) ⇒ (¬P ⇒ Q).  (mono-gauche de dni : ¬P⇒Q = ¬¬P∨Q.)"""
     return mono_gauche(double_negation_intro(p, sig), q, sig)
 
 
+# @livre Ch.I §3 Crit.20 | E I.29 L.20 | PDF p.29
 def conjonction_intro(thm_a: Theoreme, thm_b: Theoreme,
                       sig: Signature = DEFAUT) -> Theoreme:
     """⊢ A,  ⊢ B  ⟹  ⊢ (A et B).  (A et B = ¬(¬A∨¬B).)
@@ -69,6 +74,7 @@ def conjonction_intro(thm_a: Theoreme, thm_b: Theoreme,
     return noyau.modus_ponens(nnB, contra, sig)                          # ⊢ ¬H = A et B
 
 
+# @livre Ch.I §3 Crit.- | E I.30 L.34-37 | PDF p.30
 def equivalence_reflexive(a: Assemblage, sig: Signature = DEFAUT) -> Theoreme:
     """⊢ A ⇔ A.  (= (A⇒A) et (A⇒A), conjonction de deux A⇒A.)"""
     aa = a_implique_a(a, sig)
@@ -89,12 +95,14 @@ def composantes_conjonction(c: Assemblage, sig: Signature = DEFAUT
     return vers_assemblage(g.enfants[0]), vers_assemblage(d.enfants[0])
 
 
+# @livre Ch.I §3 Crit.21 | E I.29 L.25-26 | PDF p.29
 def projection_gauche(a: Assemblage, b: Assemblage, sig: Signature = DEFAUT) -> Theoreme:
     """⊢ (A et B) ⇒ A.  (contraposée de S2 ¬A⇒(¬A∨¬B), puis DNE.)"""
     s2 = noyau.s2(negation(a), negation(b), sig)            # ¬A⇒(¬A∨¬B)
     return syllogisme(contraposition(s2, sig), double_negation_elim(a, sig), sig)
 
 
+# @livre Ch.I §3 Crit.21 | E I.29 L.25-26 | PDF p.29
 def projection_droite(a: Assemblage, b: Assemblage, sig: Signature = DEFAUT) -> Theoreme:
     """⊢ (A et B) ⇒ B."""
     t = syllogisme(noyau.s2(negation(b), negation(a), sig),
@@ -102,28 +110,33 @@ def projection_droite(a: Assemblage, b: Assemblage, sig: Signature = DEFAUT) -> 
     return syllogisme(contraposition(t, sig), double_negation_elim(b, sig), sig)
 
 
+# @livre Ch.I §3 Crit.21 | E I.29 L.25-26 | PDF p.29
 def conjonction_elim_gauche(thm: Theoreme, sig: Signature = DEFAUT) -> Theoreme:
     """Γ ⊢ (A et B)  ⟹  Γ ⊢ A."""
     a, b = composantes_conjonction(thm.conclusion, sig)
     return noyau.modus_ponens(thm, projection_gauche(a, b, sig), sig)
 
 
+# @livre Ch.I §3 Crit.21 | E I.29 L.25-26 | PDF p.29
 def conjonction_elim_droite(thm: Theoreme, sig: Signature = DEFAUT) -> Theoreme:
     """Γ ⊢ (A et B)  ⟹  Γ ⊢ B."""
     a, b = composantes_conjonction(thm.conclusion, sig)
     return noyau.modus_ponens(thm, projection_droite(a, b, sig), sig)
 
 
+# @livre Ch.I §3 Crit.- | E I.30 L.34-37 | PDF p.30
 def equivalence_avant(thm_equiv: Theoreme, sig: Signature = DEFAUT) -> Theoreme:
     """Γ ⊢ (A ⇔ B)  ⟹  Γ ⊢ (A ⇒ B).  (projection gauche de la conjonction.)"""
     return conjonction_elim_gauche(thm_equiv, sig)
 
 
+# @livre Ch.I §3 Crit.- | E I.30 L.34-37 | PDF p.30
 def equivalence_arriere(thm_equiv: Theoreme, sig: Signature = DEFAUT) -> Theoreme:
     """Γ ⊢ (A ⇔ B)  ⟹  Γ ⊢ (B ⇒ A)."""
     return conjonction_elim_droite(thm_equiv, sig)
 
 
+# @livre Ch.I §3 Crit.- | E I.30 L.34-37 | PDF p.30
 def equivalence_modus(thm_equiv: Theoreme, thm_a: Theoreme,
                       sig: Signature = DEFAUT) -> Theoreme:
     """Γ ⊢ (A ⇔ B),  Δ ⊢ A  ⟹  Γ∪Δ ⊢ B."""
@@ -132,12 +145,14 @@ def equivalence_modus(thm_equiv: Theoreme, thm_a: Theoreme,
 
 # ── Théorèmes propositionnels nommés (clos) ──────────────────────────────────
 
+# @livre Ch.I §3 Crit.10 | E I.26 L.15 | PDF p.26
 def tiers_exclu(a: Assemblage, sig: Signature = DEFAUT) -> Theoreme:
     """⊢ A ∨ ¬A.  (de A⇒A = ¬A∨A, commuté par S3.)"""
     return noyau.modus_ponens(a_implique_a(a, sig),
                               noyau.s3(negation(a), a, sig), sig)
 
 
+# @livre Ch.I §3 Crit.12 | E I.26 L.21-23 | PDF p.26
 def contraposition_theoreme(a: Assemblage, b: Assemblage,
                             sig: Signature = DEFAUT) -> Theoreme:
     """⊢ (A ⇒ B) ⇒ (¬B ⇒ ¬A).  (contraposition internalisée via C6.)"""

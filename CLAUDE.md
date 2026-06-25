@@ -15,7 +15,8 @@ coïncider avec « vérifié par la machine ». Un résultat n'est *FAIT* que s'
 - Invariant : `theorie_ensembles()` doit valoir **22 axiomes**. N'en ajouter aucun à la légère.
 
 ## Conventions de structure
-1. **Un fichier = une responsabilité, ≤ 300 lignes.**
+1. **Un fichier = une responsabilité, ≤ 300 lignes** (la limite vise la complexité du *code* ;
+   les lignes de commentaire de traçabilité `@livre` n'entrent pas dans ce compte).
 2. **≤ 10 entrées par dossier** (fichiers + sous-dossiers **confondus**). Dès qu'un dossier
    atteint 10, on l'**éclate en sous-dossiers nommés d'après la section du livre**.
 3. **L'arborescence calque la table des matières du livre** (chapitre → section → sous-section

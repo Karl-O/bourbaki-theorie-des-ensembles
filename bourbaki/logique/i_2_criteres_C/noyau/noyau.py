@@ -105,32 +105,37 @@ def assume(a: Assemblage, sig: Signature = DEFAUT) -> Theoreme:
     return Theoreme(frozenset({a}), a, "hypothèse", _CLE)
 
 
+# @livre Ch.I §3.1 Sch.1 | E I.25 L.6 | PDF p.25
 def s1(r: Assemblage, sig: Signature = DEFAUT) -> Theoreme:
-    """⊢ (R ∨ R) ⇒ R. PDF p.~33."""
+    """⊢ (R ∨ R) ⇒ R. E I.25 (§3, théories logiques)."""
     _exiger_relations(sig, r)
     return Theoreme(frozenset(), implication(disjonction(r, r), r), "S1", _CLE)
 
 
+# @livre Ch.I §3.1 Sch.2 | E I.25 L.7 | PDF p.25
 def s2(r: Assemblage, s: Assemblage, sig: Signature = DEFAUT) -> Theoreme:
-    """⊢ R ⇒ (R ∨ S). PDF p.~34."""
+    """⊢ R ⇒ (R ∨ S). E I.25 (§3)."""
     _exiger_relations(sig, r, s)
     return Theoreme(frozenset(), implication(r, disjonction(r, s)), "S2", _CLE)
 
 
+# @livre Ch.I §3.1 Sch.3 | E I.25 L.8-9 | PDF p.25
 def s3(r: Assemblage, s: Assemblage, sig: Signature = DEFAUT) -> Theoreme:
-    """⊢ (R ∨ S) ⇒ (S ∨ R). PDF p.~34."""
+    """⊢ (R ∨ S) ⇒ (S ∨ R). E I.25 (§3)."""
     _exiger_relations(sig, r, s)
     return Theoreme(frozenset(), implication(disjonction(r, s), disjonction(s, r)),
                     "S3", _CLE)
 
 
+# @livre Ch.I §3.1 Sch.4 | E I.25 L.10-12 | PDF p.25
 def s4(r: Assemblage, s: Assemblage, t: Assemblage, sig: Signature = DEFAUT) -> Theoreme:
-    """⊢ (R ⇒ S) ⇒ ((T ∨ R) ⇒ (T ∨ S)). PDF p.~34."""
+    """⊢ (R ⇒ S) ⇒ ((T ∨ R) ⇒ (T ∨ S)). E I.25 (§3)."""
     _exiger_relations(sig, r, s, t)
     interne = implication(disjonction(t, r), disjonction(t, s))
     return Theoreme(frozenset(), implication(implication(r, s), interne), "S4", _CLE)
 
 
+# @livre Ch.I §4.2 Sch.5 | E I.33 L.10-11 | PDF p.33
 def s5(r: Assemblage, t: Assemblage, x: str, sig: Signature = DEFAUT) -> Theoreme:
     """⊢ (T|x)R ⇒ (∃x)R. PDF p.~33 (§I.4.2). R relation, T terme, x lettre."""
     if not est_relation(r, sig):
@@ -143,6 +148,7 @@ def s5(r: Assemblage, t: Assemblage, x: str, sig: Signature = DEFAUT) -> Theorem
     return Theoreme(frozenset(), concl, "S5", _CLE)
 
 
+# @livre Ch.I §5.1 Sch.6 | E I.38 L.20-21 | PDF p.38
 def s6(t: Assemblage, u: Assemblage, x: str, r: Assemblage,
        sig: Signature = DEFAUT) -> Theoreme:
     """⊢ (T=U) ⇒ ((T|x)R ⇔ (U|x)R). PDF p.~38 (§I.5.1). T,U termes, R relation."""
@@ -156,6 +162,7 @@ def s6(t: Assemblage, u: Assemblage, x: str, r: Assemblage,
     return Theoreme(frozenset(), implication(egalite(t, u), equiv), "S6", _CLE)
 
 
+# @livre Ch.I §5.1 Sch.7 | E I.38 L.22-24 | PDF p.38
 def s7(r: Assemblage, s: Assemblage, x: str, sig: Signature = DEFAUT) -> Theoreme:
     """⊢ (∀x)(R ⇔ S) ⇒ (τ_x(R) = τ_x(S)). PDF p.~38 (§I.5.1). R,S relations."""
     if not (est_relation(r, sig) and est_relation(s, sig)):

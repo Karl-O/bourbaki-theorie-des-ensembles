@@ -25,6 +25,7 @@ from bourbaki.logique.i_4_egalitaires.tactiques_egalite import instanciation, in
 from bourbaki.logique.i_2_criteres_C.criteres import criteres_C as K
 
 
+# @livre Ch.I §4.3 Crit.31 | E I.34 L.20-22 | PDF p.34
 def monotonie_existe(thm_rs, x, sig=DEFAUT):
     """⊢ R⇒S  ⟹  ⊢ (∃x)R ⇒ (∃x)S."""
     r, s = antecedent_consequent(thm_rs.conclusion, sig)
@@ -34,6 +35,7 @@ def monotonie_existe(thm_rs, x, sig=DEFAUT):
     return syllogisme(mid, noyau.s5(s, t, x, sig), sig)        # ⊢ (∃x)R ⇒ (∃x)S
 
 
+# @livre Ch.I §4.3 Crit.31 | E I.34 L.20-22 | PDF p.34
 def monotonie_pour_tout(thm_rs, x, sig=DEFAUT):
     """⊢ R⇒S  ⟹  ⊢ (∀x)R ⇒ (∀x)S."""
     r, s = antecedent_consequent(thm_rs.conclusion, sig)
@@ -44,18 +46,21 @@ def monotonie_pour_tout(thm_rs, x, sig=DEFAUT):
                                noyau.generalisation(x, hs, sig), sig)  # ⊢ (∀x)R⇒(∀x)S
 
 
+# @livre Ch.I §4.3 Crit.31 | E I.34 L.20-22 | PDF p.34
 def congruence_existe(thm_eq, x, sig=DEFAUT):
     """⊢ R⇔S  ⟹  ⊢ (∃x)R ⇔ (∃x)S."""
     return conjonction_intro(monotonie_existe(equivalence_avant(thm_eq, sig), x, sig),
                              monotonie_existe(equivalence_arriere(thm_eq, sig), x, sig), sig)
 
 
+# @livre Ch.I §4.3 Crit.31 | E I.34 L.20-22 | PDF p.34
 def congruence_pour_tout(thm_eq, x, sig=DEFAUT):
     """⊢ R⇔S  ⟹  ⊢ (∀x)R ⇔ (∀x)S."""
     return conjonction_intro(monotonie_pour_tout(equivalence_avant(thm_eq, sig), x, sig),
                              monotonie_pour_tout(equivalence_arriere(thm_eq, sig), x, sig), sig)
 
 
+# @livre Ch.I §4.3 Crit.29 | E I.33 L.30-31 | PDF p.33
 def c29(r, x, sig=DEFAUT):
     """⊢ ¬(∃x)R ⇔ (∀x)(¬R).  (congruence-∃ sur R⇔¬¬R, puis négation et symétrie.)"""
     cong = congruence_existe(K.c24_double_negation(r, sig), x, sig)  # (∃x)¬¬R ⇔ (∃x)R

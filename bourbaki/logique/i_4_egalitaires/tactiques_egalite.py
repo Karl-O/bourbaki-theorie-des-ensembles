@@ -25,6 +25,7 @@ from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_prop import (
 )
 
 
+# @livre Ch.I §4 Crit.30 | E I.34 L.10-11 | PDF p.34
 def instanciation_en_x(r: Assemblage, x: str, sig: Signature = DEFAUT) -> Theoreme:
     """⊢ (∀x)R ⇒ R.  Cas T = x du critère C30 ((x|x)R = R).
 
@@ -36,6 +37,7 @@ def instanciation_en_x(r: Assemblage, x: str, sig: Signature = DEFAUT) -> Theore
     return syllogisme(contra, double_negation_elim(r, sig), sig)  # ⊢ (∀x)R ⇒ R
 
 
+# @livre Ch.I §4 Crit.30 | E I.34 L.10-11 | PDF p.34
 def instanciation(r: Assemblage, t: Assemblage, x: str, sig: Signature = DEFAUT) -> Theoreme:
     """⊢ (∀x)R ⇒ (T|x)R.  C30 GÉNÉRAL (terme T quelconque). PDF E.I.34.
 
@@ -49,6 +51,7 @@ def instanciation(r: Assemblage, t: Assemblage, x: str, sig: Signature = DEFAUT)
     return syllogisme(contra, double_negation_elim(tr, sig), sig)  # ⊢ (∀x)R ⇒ (T|x)R
 
 
+# @livre Ch.I §5.2 Th.1 | E I.39 L.22-28 | PDF p.39
 def reflexivite(x: str = "x", sig: Signature = DEFAUT) -> Theoreme:
     """⊢ x = x.  Théorème 1 (E.I.39), preuve Bourbaki reconstruite pas à pas.
 
@@ -75,6 +78,7 @@ def reflexivite(x: str = "x", sig: Signature = DEFAUT) -> Theoreme:
     return noyau.modus_ponens(forall_S, inst, sig)    # ⊢ S = (x = x)
 
 
+# @livre Ch.I §5.2 Th.1 | E I.39 L.30-30 | PDF p.39
 def reflexivite_terme(t: Assemblage, sig: Signature = DEFAUT) -> Theoreme:
     """⊢ T = T pour un TERME T quelconque (terme composé, pas seulement une lettre).
 
@@ -86,6 +90,7 @@ def reflexivite_terme(t: Assemblage, sig: Signature = DEFAUT) -> Theoreme:
     return noyau.modus_ponens(gen, instanciation(xx, t, "x", sig), sig)  # ⊢ T = T
 
 
+# @livre Ch.I §5.2 Crit.44 | E I.40 L.5-7 | PDF p.40
 def c44(t: Assemblage, u: Assemblage, v: Assemblage, w: str,
         sig: Signature = DEFAUT) -> Theoreme:
     """⊢ (T = U) ⇒ (V{T} = V{U}).  Substitutivité de = pour les termes (C44).
@@ -112,6 +117,7 @@ def importation(thm: Theoreme, sig: Signature = DEFAUT) -> Theoreme:
     return noyau.loi_deduction(conjonction(a, b), hc, sig)
 
 
+# @livre Ch.I §5.2 Th.2 | E I.39 L.33-37 | PDF p.39
 def symetrie(x: str = "x", y: str = "y", sig: Signature = DEFAUT) -> Theoreme:
     """⊢ (x = y) ⇒ (y = x).  Théorème 2 (E.I.40), preuve Bourbaki.
 
@@ -127,6 +133,7 @@ def symetrie(x: str = "x", y: str = "y", sig: Signature = DEFAUT) -> Theoreme:
     return noyau.loi_deduction(Sxy, yx, sig)          # ⊢ (x=y) ⇒ (y=x)
 
 
+# @livre Ch.I §5.2 Th.3 | E I.40 L.1-4 | PDF p.40
 def transitivite(x: str = "x", y: str = "y", z: str = "z",
                  sig: Signature = DEFAUT) -> Theoreme:
     """⊢ ((x=y) et (y=z)) ⇒ (x=z).  Théorème 3 (E.I.40), preuve Bourbaki.

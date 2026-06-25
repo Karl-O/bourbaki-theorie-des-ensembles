@@ -72,6 +72,7 @@ class Rapport:
         return f"✗ échec{loc} : {self.message}"
 
 
+# @livre Ch.I §2.2 Def.- | E I.22 L.15-26 | PDF p.22
 def executer_preuve(script: str, but, sig: Signature = DEFAUT) -> Rapport:
     """Rejoue le script dans le noyau. Renvoie un Rapport (certifié ou ligne fautive)."""
     env: dict = {}
@@ -116,6 +117,7 @@ def executer_preuve(script: str, but, sig: Signature = DEFAUT) -> Rapport:
     return Rapport(False, derniere, None, "aucun pas ne conclut le but")
 
 
+# @livre Ch.I §2.2 Def.- | E I.22 L.15-26 | PDF p.22
 def prouver_par_llm(but, proposeur, sig: Signature = DEFAUT, essais: int = 1) -> Rapport:
     """Demande un script à `proposeur` (str→str) puis le vérifie. Hook IA/LLM.
 

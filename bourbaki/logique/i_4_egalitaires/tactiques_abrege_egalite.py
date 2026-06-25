@@ -11,6 +11,7 @@ from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import equivalence_avant, equivalence_arriere
 
 
+# @livre Ch.I §5.2 Th.2 | E I.39 L.33-37 | PDF p.39
 def symetrie(t, u):
     """⊢ (T = U) ⇒ (U = T).  (Théorème 2, E.I.40.)"""
     # R{w} := (w = T) ; (T|w)R = (T=T), (U|w)R = (U=T).
@@ -22,6 +23,7 @@ def symetrie(t, u):
     return N.loi_deduction(egal(t, u), res)
 
 
+# @livre Ch.I §5.2 Th.3 | E I.40 L.1-4 | PDF p.40
 def transitivite(t, u, v):
     """⊢ ((T=U) et (U=V)) ⇒ (T=V).  (Théorème 3, E.I.40.) — forme à 2 prémisses."""
     # via S6 : R{w} := (T = w) ; de U=V on tire (T=U) ⇔ (T=V).
@@ -34,6 +36,7 @@ def transitivite(t, u, v):
     return ttv                                         # hypothèses {T=U, U=V}
 
 
+# @livre Ch.I §5.2 Th.3 | E I.40 L.1-4 | PDF p.40
 def composer_egalites(thm_tu, thm_uv):
     """Γ⊢(T=U), Δ⊢(U=V) ⟹ Γ∪Δ ⊢ (T=V).  (transitivité appliquée à deux preuves.)"""
     t, u = thm_tu.conclusion.termes
@@ -46,6 +49,7 @@ def composer_egalites(thm_tu, thm_uv):
     return N.modus_ponens(thm_tu, equivalence_avant(eq))
 
 
+# @livre Ch.I §5.2 Crit.44 | E I.40 L.5-7 | PDF p.40
 def congruence_terme(t, u, v, w="w"):
     """⊢ (T = U) ⇒ (V{T} = V{U}).  Substitutivité de = pour les termes (C44).
 

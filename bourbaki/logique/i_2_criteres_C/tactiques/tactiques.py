@@ -35,6 +35,7 @@ def antecedent_consequent(impl: Assemblage, sig: Signature = DEFAUT
 
 # ── Tactiques constructives (S1–S4 + MP uniquement) ───────────────────────────
 
+# @livre Ch.I §3 Crit.9 | E I.26 L.11 | PDF p.26
 def affaiblissement(thm: Theoreme, a: Assemblage, sig: Signature = DEFAUT) -> Theoreme:
     """Γ ⊢ X  ⟹  Γ ⊢ (A ⇒ X).  Constructive (S2, S3, MP).
 
@@ -48,11 +49,13 @@ def affaiblissement(thm: Theoreme, a: Assemblage, sig: Signature = DEFAUT) -> Th
 
 # ── Tactiques via la loi de déduction (C6) ─────────────────────────────────────
 
+# @livre Ch.I §3 Crit.8 | E I.26 L.8 | PDF p.26
 def a_implique_a(a: Assemblage, sig: Signature = DEFAUT) -> Theoreme:
     """⊢ A ⇒ A.  Via C6 : de A⊢A par déduction.  (C8 chez Bourbaki.)"""
     return noyau.loi_deduction(a, noyau.assume(a, sig), sig)
 
 
+# @livre Ch.I §3 Crit.6 | E I.25 L.32-33 | PDF p.25
 def syllogisme(thm_ab: Theoreme, thm_bc: Theoreme, sig: Signature = DEFAUT) -> Theoreme:
     """⊢ A⇒B,  ⊢ B⇒C  ⟹  ⊢ A⇒C.  (Transitivité de ⇒, via C6.)
 
@@ -65,6 +68,7 @@ def syllogisme(thm_ab: Theoreme, thm_bc: Theoreme, sig: Signature = DEFAUT) -> T
     return noyau.loi_deduction(a, hc, sig)         # ⊢ A⇒C
 
 
+# @livre Ch.I §3 Crit.- | E I.27 L.6-7 | PDF p.27
 def distribution(thm_a_bc: Theoreme, thm_ab: Theoreme,
                  sig: Signature = DEFAUT) -> Theoreme:
     """⊢ A⇒(B⇒C),  ⊢ A⇒B  ⟹  ⊢ A⇒C.  (Combinateur S, via C6.)
@@ -80,6 +84,7 @@ def distribution(thm_a_bc: Theoreme, thm_ab: Theoreme,
     return noyau.loi_deduction(a, hc, sig)
 
 
+# @livre Ch.I §3 Crit.13 | E I.26 L.31-33 | PDF p.26
 def importation(a: Assemblage, b: Assemblage, c: Assemblage,
                 sig: Signature = DEFAUT) -> Theoreme:
     """Règle d'enchaînement : de A⊢(B⇒C) on récupère ⊢ A⇒(B⇒C) etc.
@@ -97,12 +102,14 @@ def importation(a: Assemblage, b: Assemblage, c: Assemblage,
     return noyau.loi_deduction(implication(a, b), t2, sig) # ⊢ (A⇒B)⇒((B⇒C)⇒(A⇒C))
 
 
+# @livre Ch.I §3 Crit.- | E I.25 L.13-15 | PDF p.25
 def mono_droite(thm_pq: Theoreme, c: Assemblage, sig: Signature = DEFAUT) -> Theoreme:
     """⊢ P⇒Q  ⟹  ⊢ (C∨P) ⇒ (C∨Q).  Constructive (S4 + MP)."""
     p, q = antecedent_consequent(thm_pq.conclusion, sig)
     return noyau.modus_ponens(thm_pq, noyau.s4(p, q, c, sig), sig)
 
 
+# @livre Ch.I §3 Crit.- | E I.25 L.11-15 | PDF p.25
 def mono_gauche(thm_pq: Theoreme, c: Assemblage, sig: Signature = DEFAUT) -> Theoreme:
     """⊢ P⇒Q  ⟹  ⊢ (P∨C) ⇒ (Q∨C).  Constructive (S3 + S4 + syllogisme)."""
     p, q = antecedent_consequent(thm_pq.conclusion, sig)

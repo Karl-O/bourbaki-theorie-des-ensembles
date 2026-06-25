@@ -29,27 +29,33 @@ def _sorte(a, sig):
         return None
 
 
+# @livre Ch.I §1.4 Crit.1 | E I.19 L.10 | PDF p.19
 def cf1(a, b, sig=DEFAUT) -> bool:
     return est_relation(a, sig) and est_relation(b, sig) and est_relation(disjonction(a, b), sig)
 
 
+# @livre Ch.I §1.4 Crit.2 | E I.19 L.20 | PDF p.19
 def cf2(a, sig=DEFAUT) -> bool:
     return est_relation(a, sig) and est_relation(negation(a), sig)
 
 
+# @livre Ch.I §1.4 Crit.3 | E I.19 L.21 | PDF p.19
 def cf3(a, x, sig=DEFAUT) -> bool:
     return est_relation(a, sig) and est_terme(tau_x(a, x), sig)
 
 
+# @livre Ch.I §1.4 Crit.4 | E I.19 L.22-23 | PDF p.19
 def cf4(t, u, sig=DEFAUT) -> bool:
     """Signe spécifique relationnel de poids 2 (= ici) appliqué à deux termes."""
     return est_terme(t, sig) and est_terme(u, sig) and est_relation(egalite(t, u), sig)
 
 
+# @livre Ch.I §1.4 Crit.5 | E I.19 L.25 | PDF p.19
 def cf5(a, b, sig=DEFAUT) -> bool:
     return est_relation(a, sig) and est_relation(b, sig) and est_relation(implication(a, b), sig)
 
 
+# @livre Ch.I §1.4 Crit.6 | E I.19 L.26-28 | PDF p.19
 def cf6(a, x, y, sig=DEFAUT) -> bool:
     """y∉A ⟹ (y|x)A garde l'espèce de A."""
     if y in lettres(a):
@@ -58,12 +64,14 @@ def cf6(a, x, y, sig=DEFAUT) -> bool:
     return s is not None and _sorte(sub(Assemblage((y,)), x, a), sig) == s
 
 
+# @livre Ch.I §1.4 Crit.7 | E I.20 L.4-5 | PDF p.20
 def cf7(a, x, y, sig=DEFAUT) -> bool:
     """(y|x)A garde l'espèce de A (x, y lettres quelconques)."""
     s = _sorte(a, sig)
     return s is not None and _sorte(sub(Assemblage((y,)), x, a), sig) == s
 
 
+# @livre Ch.I §1.4 Crit.8 | E I.20 L.28-29 | PDF p.20
 def cf8(a, x, t, sig=DEFAUT) -> bool:
     """T terme ⟹ (T|x)A garde l'espèce de A."""
     if not est_terme(t, sig):

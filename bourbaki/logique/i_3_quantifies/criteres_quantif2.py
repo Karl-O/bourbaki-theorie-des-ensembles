@@ -17,6 +17,7 @@ from bourbaki.logique.i_2_criteres_C.criteres import criteres_C as K
 from bourbaki.logique.i_2_criteres_C.criteres import criteres_C_suite2 as KS2
 
 
+# @livre Ch.I §4.3 Crit.34 | E I.35 L.21-25 | PDF p.35
 def c34_pour_tout(r, x, y, sig=DEFAUT):
     """⊢ (∀x)(∀y)R ⇔ (∀y)(∀x)R."""
     def sens(a, b):
@@ -29,6 +30,7 @@ def c34_pour_tout(r, x, y, sig=DEFAUT):
     return conjonction_intro(sens(x, y), sens(y, x), sig)
 
 
+# @livre Ch.I §4.3 Crit.34 | E I.35 L.21-25 | PDF p.35
 def c34_existe(r, x, y, sig=DEFAUT):
     """⊢ (∃x)(∃y)R ⇔ (∃y)(∃x)R.  (quantificateur vacant collapsé syntaxiquement.)"""
     def sens(a, b):
@@ -37,6 +39,7 @@ def c34_existe(r, x, y, sig=DEFAUT):
     return conjonction_intro(sens(x, y), sens(y, x), sig)
 
 
+# @livre Ch.I §4.4 Crit.35 | E I.36 L.23-24 | PDF p.36
 def c35(a, r, x, sig=DEFAUT):
     """⊢ (∀_A x)R ⇔ (∀x)(A ⇒ R).  ((∀_A x)R := ¬(∃x)(A et ¬R).)"""
     # (A et ¬R) ⇔ ¬(A⇒R)  [c24_et_non]  →  sous (∃x)  →  négation
@@ -44,6 +47,7 @@ def c35(a, r, x, sig=DEFAUT):
     return K.c23_negation(cong, sig)
 
 
+# @livre Ch.I §4.4 Crit.38 | E I.37 L.15-18 | PDF p.37
 def c38_1(a, r, x, sig=DEFAUT):
     """⊢ ¬(∀_A x)R ⇔ (∃_A x)(¬R).  (car ¬(∀_A x)R = ¬¬(∃_A x)¬R, double négation.)"""
     ex_a_notr = existe(x, conjonction(a, negation(r)))     # (∃_A x)¬R
