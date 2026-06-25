@@ -57,3 +57,23 @@ Le corps de cantor_deux_exp levait NotImplementedError avec un commentaire prete
 
 ### RESOLU (2026-06-24) : ecart de portee des produits
 - Brique produit_egalite_par_couples + couple_decomposition (ii_2_couples_produit/ensembles_produit_extensionnalite.py) livree -> (22) est desormais une EGALITE D'ENSEMBLES pleine. La meme brique permet d'upgrader (23) (X×Y)n(X'×Y')=(XnX')×(YnY') et les autres egalites de produits du couple-level vers l'ensembliste. Caveat binder : z != 'w' (w reserve par composer_egalites/symetrie).
+
+## Retrofit @livre Chap II (2026-06-25) -- deux constats a traiter
+Pendant la pose des marqueurs @livre (passe 1) et le passage du detecteur de trous (passe 2,
+outils_ia/audit/gen_trous_livre.py), deux anomalies sont apparues :
+
+1. **Marqueurs @livre sur de l'infra LLM (E I.22 / logique).** Les def `executer_preuve` et
+   `prouver_par_llm` portent un `# @livre Ch.I §2.2 Def.-` mais ce sont des fonctions
+   d'INFRASTRUCTURE (exécution de preuve / appel LLM), pas des notions Bourbaki. A RECLASSER :
+   soit retirer le @livre (ce ne sont pas des notions du livre), soit -- si le module illustre
+   vraiment la notion de << demonstration >> (§2.2) -- le retagger en Demo/Rem explicite. Le
+   detecteur les compte a tort comme couverture de E I.22.
+
+2. **7 vrais candidats de trous en logique (criteres C non formalises entre deux nommes).**
+   gen_trous_livre sur bourbaki/logique signale, entre critères nommés consécutifs, des
+   intervalles non couverts qui correspondent a des criteres Bourbaki PROBABLEMENT pas encore
+   formalises (a confirmer page par page) : CF5 (entre cf4 et cf6, E I.19 L.24-25) ; gros trou
+   E I.20 L.6-27 (entre cf7 et cf8) ; E I.25 L.16-31 (entre mono_droite et syllogisme, C7-C11?) ;
+   E I.26 L.24-30 ; E I.27 L.8-30 ; E I.28 L.14-17 (entre c17 et c18) ; E I.31 L.17-26 (C24?,
+   entre c23_ou et c25_premier). A COMBLER par une passe d'implementation (UN agent a la fois,
+   jamais pendant une autre tache d'agent ; primitives N.* only, theorie==22, enonce==livre).
