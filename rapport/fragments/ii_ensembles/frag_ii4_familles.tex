@@ -85,3 +85,18 @@ $G_\lambda = \bigcup_{\iota\in J_\lambda} X_\iota$. L'égalité finale provient 
 (\exists\lambda)(\lambda\in L \wedge \iota\in J_\lambda))$, \emph{domaine}~$(\forall\lambda)(\forall\iota)
 ((\lambda\in L \wedge \iota\in J_\lambda) \Rightarrow \iota\in L)\}$ ; la conclusion est l'égalité verbatim
 (jamais prise en hypothèse) et n'est pas vacue ; \texttt{theorie\_ensembles()==22}.
+
+
+\subsection{§II.4.2 --- Monotonie décroissante de l'intersection en l'indice}
+\textbf{Énoncé (Bourbaki).} Si $J\subset I$, alors
+$\bigcap_{\iota\in I}X_\iota \subset \bigcap_{\iota\in J}X_\iota$.
+
+\textbf{Formalisé.} Cible : $(J\subset I) \Rightarrow (\bigcap_{\iota\in I}X_\iota \subset \bigcap_{\iota\in J}X_\iota)$. \\
+Module : \texttt{.../ii\_4\_reunion\_intersection\_familles/ii\_4\_2\_proprietes/ensembles\_familles\_mono\_indice\_inter.py}.
+
+\textbf{Preuve (\Nstar).} Dual universel ($\forall$, sans témoin) de
+\texttt{reunion\_incluse\_sous\_indices} : on restreint le quantificateur via
+$J\subset I$, \texttt{equivalence\_avant}/\texttt{arriere} de la caractérisation
+de $\bigcap$, double \texttt{generalisation}.
+
+\textbf{Statut.} CLOS ; \texttt{theorie\_ensembles()==22}.

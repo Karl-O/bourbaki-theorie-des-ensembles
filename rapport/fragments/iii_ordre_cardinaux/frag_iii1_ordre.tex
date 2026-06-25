@@ -27,3 +27,48 @@ Module : \texttt{bourbaki/ordre/iii\_1\_relations\_ordre/ordre\_treillis/ensembl
 \textbf{Preuve (\Nstar).} L'axiome de membership de $\intEE{\cdot}{\cdot}$ vit dans la théorie dédiée \texttt{theorie\_intervalle\_ferme} et est déchargé par \texttt{N.axiome}, puis \texttt{instancie} en $(E,a,b,x)$ et $(E,c,d,x)$. Le lemme \texttt{\_instance\_intersection} (via \texttt{AXIOME\_INTER} de \texttt{theorie\_ensembles}) donne $x\in X\cap Y \iff (x\in X \wedge x\in Y)$. Sens $\Rightarrow$ : \texttt{assume} $x\in\intEE{a}{b}\cap\intEE{c}{d}$, puis \texttt{equivalence\_avant} + \texttt{modus\_ponens} + \texttt{conjonction\_elim} extraient $x\in E$, $a\le x$, $c\le x$, $x\le b$, $x\le d$, recombinés par \texttt{conjonction\_intro}. Sens $\Leftarrow$ : on reconstruit les deux memberships et on réinjecte par \texttt{equivalence\_arriere} dans les axiomes puis dans l'intersection. \texttt{conjonction\_intro} des deux sens donne l'équivalence, \texttt{generalisation} en $x$ ferme.
 
 \textbf{Statut.} CLOS (0 hypothèse) : l'unique axiome de $\intEE{\cdot}{\cdot}$ est interne à \texttt{theorie\_intervalle\_ferme} (S8+A1) et l'intersection emploie l'\texttt{AXIOME\_INTER} déjà compté ; \texttt{theorie\_ensembles()==22}. Résidu honnête documenté : la forme treillis $\intEE{a}{b}\cap\intEE{c}{d}=\intEE{\sup(a,c)}{\inf(b,d)}$ n'est pas prouvée (elle exige l'existence de $\sup$/$\inf$ de paires) ; la forme membership ci-dessus est la caractérisation order-théorique complète et exacte.
+
+\subsection{§III.1.5 --- Proposition 2 : connexion de Galois}
+\textbf{Énoncé (Bourbaki, E~III.7--8).} Pour $u,v$ décroissantes avec $v\circ u\geq\mathrm{id}$
+et $u\circ v\geq\mathrm{id}$ : $u\circ v\circ u = u$ (et $v\circ u\circ v = v$).
+
+\textbf{Formalisé.} Première égalité $u\circ v\circ u=u$ : $\;(\forall x)(x\in E\Rightarrow w(x)=u(x))$,
+$w$ représentant le composite. Module :
+\texttt{.../iii\_1\_5\_applications\_croissantes/ensembles\_prop2\_galois.py}.
+
+\textbf{Preuve (\Nstar).} $u(v(u(x)))\leq u(x)$ ($u$ décroissante appliquée à $v(u(x))\geq x$)
+et $u(x)\leq u(v(u(x)))$ (Galois en $x'{:=}u(x)$) ; antisymétrie ; transport par
+\texttt{composer\_egalites}.
+
+\textbf{Statut.} CLOS sous $7$ hypothèses honnêtes. \emph{Fidélité} : la décroissance
+de~$v$, non load-bearing pour cette égalité, a été retirée (cf.\ \texttt{DECISIONS.md}).
+
+\subsection{§III.1.7 --- Le plus petit élément est l'unique élément minimal}
+\textbf{Énoncé (Bourbaki).} Si $E$ admet un plus petit élément $a$, tout élément
+minimal $m$ de $E$ coïncide avec $a$.
+
+\textbf{Formalisé.} Cible : $m=a$, sous
+$\{\mathrm{plus\_petit\_element}(G,E,a),\ \mathrm{element\_minimal}(G,E,m)\}$. \\
+Module : \texttt{.../iii\_1\_relations\_ordre/iii\_1\_7\_plus\_grand\_plus\_petit/ensembles\_plus\_petit\_unique\_minimal.py}.
+
+\textbf{Preuve (\Nstar).} $a$ minore $E$ instancié en $m$ donne $(a,m)\in G$ ; la
+minimalité de $m$ instanciée en $a$ donne $a=m$ ; \texttt{symetrie}. L'antisymétrie
+n'est pas load-bearing et n'est donc pas une hypothèse.
+
+\textbf{Statut.} CLOS sous hypothèses honnêtes ; \texttt{theorie\_ensembles()==22}.
+
+\subsection{§III.1.12 --- Proposition 12 : critère de borne supérieure (ordre total)}
+\textbf{Énoncé (Bourbaki, E~III.14).} $E$ totalement ordonné, $X\subset E$, $b\in E$ :
+$b=\sup X$ ssi (1°) $b$ majore $X$ et (2°) tout $c<b$ est dépassé par un $x\in X$ avec $c<x\leq b$.
+
+\textbf{Formalisé.} L'équivalence $\mathrm{borne\_sup}(G,X,b,E)\Leftrightarrow(\text{1°}\wedge\text{2°})$,
+les deux sens. Module :
+\texttt{.../iii\_1\_12\_totalement\_ordonnes/ensembles\_prop12\_sup\_total.py}.
+
+\textbf{Preuve (\Nstar).} Totalité $+$ antisymétrie (gabarit
+\texttt{maximal\_est\_plus\_grand\_si\_total}) ; sens~$\Rightarrow$ par contraposée,
+sens~$\Leftarrow$ par témoin. \emph{Fidélité} : le strict $c<x$ ($c\neq x$) est
+\emph{obligatoire} --- sans lui l'équivalence est fausse (contre-exemple
+$E=\{0,1,2\}$) et le noyau la refuse (cf.\ \texttt{DECISIONS.md}).
+
+\textbf{Statut.} CLOS sous $3$ hypothèses honnêtes.

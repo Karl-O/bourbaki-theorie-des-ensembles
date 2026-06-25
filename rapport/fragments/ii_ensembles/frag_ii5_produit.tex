@@ -29,3 +29,64 @@ Module : \texttt{bourbaki/ensembles/familles/ii\_5\_produit\_famille/ii\_5\_4\_p
 \textbf{Preuve (\Nstar).} On \texttt{assume} la conjonction des quatre antécédents (associée à gauche) et on extrait l'inclusion, $\alpha\in I$, $F\in\prod(f,I)$ et $F(\alpha)=a$ par \texttt{conjonction\_elim\_gauche/droite}. L'inclusion $\prod(f,I)\subset\prod(g,I)=(\forall z)(z\in\prod(f,I)\Rightarrow z\in\prod(g,I))$ est \texttt{instancie}-ée en $z:=F$, et \texttt{modus\_ponens} avec $F\in\prod(f,I)$ donne $F\in\prod(g,I)$. \texttt{projection\_dans\_facteur} sur $\prod(g,I)$ fournit $F\in\prod(g,I)\Rightarrow(\alpha\in I\Rightarrow F(\alpha)\in Y_\alpha)$, déchargée par deux \texttt{modus\_ponens} en $F(\alpha)\in Y_\alpha$. Enfin Leibniz (S6 sur $R:=(w\in Y_\alpha)$, lettre fraîche) transporte $F(\alpha)=a$ en $F(\alpha)\in Y_\alpha\Leftrightarrow a\in Y_\alpha$ ; \texttt{equivalence\_avant} donne $a\in Y_\alpha$, et \texttt{loi\_deduction} décharge la conjonction en implication close.
 
 \textbf{Statut.} CLOS (0 hypothèse) : les quatre antécédents sont déchargés en implication (\texttt{est\_clos}). Le témoin $F\in\prod(f,I)$ avec $F(\alpha)=a$ encapsule la surjectivité de $\mathrm{pr}_\alpha$ (Cor.~1, reçue en hypothèse et non postulée) ; le caractère conditionnel est ainsi porté par l'antécédent, jamais par la conclusion ni par une hypothèse pendante. \texttt{theorie\_ensembles()==22}.
+
+
+\subsection{§II.5.4 --- Un facteur vide annule le produit (Cor.\ 2)}
+\textbf{Énoncé (Bourbaki).} Si l'un des facteurs est vide, le produit l'est :
+$(\alpha\in I \wedge X_\alpha=\emptyset) \Rightarrow \prod_{\iota\in I}X_\iota=\emptyset$.
+
+\textbf{Formalisé.} Cible identique, CLOSE. \\
+Module : \texttt{.../ii\_5\_produit\_famille/ii\_5\_4\_projection\_partielle/ensembles\_produit\_vide\_ii5.py}.
+
+\textbf{Preuve (\Nstar).} On établit $(\forall F)\neg(F\in\prod)$ :
+\texttt{projection\_dans\_facteur} donne $\mathrm{pr}_\alpha(F)\in X_\alpha$,
+la congruence le long de $X_\alpha=\emptyset$ donne $\mathrm{pr}_\alpha(F)\in\emptyset$,
+contradiction avec l'axiome du vide ; puis le critère $X=\emptyset \Leftrightarrow$ « sans élément ».
+
+\textbf{Statut.} CLOS ; \texttt{theorie\_ensembles()==22}.
+
+\subsection{§II.5.3 --- La coordonnée d'un élément d'une partie du produit}
+\textbf{Énoncé (Bourbaki).} Remarque $A\subset\prod_\iota \mathrm{pr}_\iota\langle A\rangle$
+(toute partie du produit est incluse dans le produit de ses projections).
+
+\textbf{Formalisé.} Brique \emph{pointwise} CLOSE :
+$(A\subset\prod(f,I) \wedge F\in A \wedge \alpha\in I) \Rightarrow \mathrm{pr}_\alpha(F)\in X_\alpha$. \\
+Module : \texttt{.../ii\_5\_4\_projection\_partielle/ensembles\_produit\_inclus\_projections\_ii5.py}.
+
+\textbf{Preuve (\Nstar).} Instanciation de l'inclusion en $F$, puis
+\texttt{projection\_dans\_facteur}. La forme globale exigerait la notion d'image
+directe par $\mathrm{pr}_\iota$, absente du dépôt (résidu honnête documenté).
+
+\textbf{Statut.} CLOS ; \texttt{theorie\_ensembles()==22}.
+
+\subsection{§II.5 --- Proposition 8 : distributivité $\bigcup\bigcap\subset\bigcap\bigcup$}
+\textbf{Énoncé (Bourbaki, E~II.35--36).}
+$\bigcup_{\lambda\in L}\bigl(\bigcap_{\iota\in J_\lambda}X_{\lambda,\iota}\bigr)
+\subset \bigcap_{f\in I}\bigl(\bigcup_{\lambda\in L}X_{\lambda,f(\lambda)}\bigr)$, $I=\prod_\lambda J_\lambda$.
+
+\textbf{Formalisé.} L'inclusion directe (ponctuelle, sans choix) ; la réciproque
+consomme l'axiome du choix et est hors cible. Module :
+\texttt{.../ii\_5\_6\_7\_algebre\_produit/ensembles\_prop8\_distrib\_directe\_ii5.py}.
+
+\textbf{Preuve (\Nstar).} Inclusion $=(\forall z)$\,; témoin $\lambda_0$ par
+\texttt{existe\_elimination}, projection $f(\lambda_0)\in J_{\lambda_0}$, élimination de
+l'intersection puis introduction de la réunion. Familles externes opaques nommées par
+trois axiomes définitionnels~C54 portés par une théorie locale (mécanisme établi,
+cf.\ cardinaux/exposant) : \texttt{theorie\_ensembles()} reste à~$22$.
+
+\textbf{Statut.} CLOS (extension définitionnelle C54).
+
+\subsection{§II.5 --- Proposition 10 : $\bigcap_\kappa\prod_\iota X = \prod_\iota\bigcap_\kappa X$}
+\textbf{Énoncé (Bourbaki, E~II.37).} Pour $K\neq\emptyset$ :
+$\bigcap_{\kappa\in K}\bigl(\prod_{\iota\in I}X_{\iota,\kappa}\bigr)
+= \prod_{\iota\in I}\bigl(\bigcap_{\kappa\in K}X_{\iota,\kappa}\bigr)$.
+
+\textbf{Formalisé.} L'égalité \emph{pleine} (les deux inclusions, par extensionnalité~$A1$),
+version $K$ générale, sans choix. Module :
+\texttt{.../ii\_5\_6\_7\_algebre\_produit/ensembles\_prop10\_inter\_produit\_ii5.py}.
+
+\textbf{Preuve (\Nstar).} Biconditionnel d'appartenance par double permutation de
+quantificateurs $(\forall\kappa)(\forall\iota)\leftrightarrow(\forall\iota)(\forall\kappa)$,
+borné par le bloc fonctionnel/domaine ; $K\neq\emptyset$ load-bearing (témoin $\kappa_0$).
+
+\textbf{Statut.} CLOS ($0$ hyp.\ ; $4$ antécédents honnêtes déchargés en implication).

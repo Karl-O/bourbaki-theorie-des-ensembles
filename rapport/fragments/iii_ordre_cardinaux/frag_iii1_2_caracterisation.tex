@@ -1,22 +1,7 @@
-\section{Antitonie du complément et caractérisation d'un ordre (II.1, III.1.2)}
-
-Après épuisement du plan ciblé, les résultats suivants comblent des manquants
-identifiés par les cartes d'audit (\texttt{COUVERTURE\_CHAP\_II/III.md}), au-delà du
-terrain balisé. Chacun a été vérifié indépendamment avant commit.
-
-\subsection{§II.1 --- Antitonie du complément}
-\textbf{Énoncé (Bourbaki, E~II.6, nº7).} « Si $A$ et $B$ sont des parties de $E$, les
-relations $A\subset B$ et $\complement_E B\subset\complement_E A$ sont équivalentes. »
-
-\textbf{Formalisé.} $\{A\subset E,\ B\subset E\}\vdash\bigl(A\subset B \Leftrightarrow
-(E\setminus B)\subset(E\setminus A)\bigr)$. Module :
-\texttt{.../ii\_1\_axiomes\_algebre/ensembles\_inclusion\_treillis.py}.
-
-\textbf{Preuve (\Nstar).} Sens $\Rightarrow$ inconditionnel (contraposition membre à
-membre). Sens $\Leftarrow$ via \texttt{complement\_involution} ($\complement\complement=\mathrm{id}$,
-qui porte l'hypothèse honnête $X\subset E$) réécrite par congruence $S6$.
-
-\textbf{Statut.} CLOS sous $\{A\subset E,\ B\subset E\}$ ; \texttt{theorie\_ensembles()==22}.
+% =============================================================================
+%  §III.1.2 — Caractérisation d'un ordre par son graphe
+%  Fragment inclus par main.tex (\input). Bloc subsection seulement.
+% =============================================================================
 
 \subsection{§III.1.2 --- Proposition 1 : caractérisation d'un ordre par son graphe}
 \textbf{Énoncé (Bourbaki, E~III.2).} « Pour qu'une correspondance $\Gamma=(G,E,E)$ soit

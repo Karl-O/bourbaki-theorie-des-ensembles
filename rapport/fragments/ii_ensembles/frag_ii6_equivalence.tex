@@ -83,3 +83,43 @@ $E$ (i.e.\ $(\forall a)(\forall b)((a,b)\in G \Rightarrow b\in E)$) $\}$ ; sym e
 par \texttt{relation\_implique\_classe\_egale}, « $G$ relation dans $E$ » donne le $y\in E$ requis par
 le sens $\Leftarrow$ de l'axiome. Séquent = ces trois hypothèses exactement (anti-affaibli),
 conclusion $\notin$ hypothèses ; \texttt{theorie\_ensembles()==22}.
+
+\subsection{§II.6.4 --- Stabilité des parties saturées (E~II.43--44)}
+\textbf{Énoncé (Bourbaki).} Si $A,B$ (resp. une famille $(X_\iota)$) sont saturées pour
+$R$, alors $A\cup B$, $A\cap B$, $\complement_E A$ (resp. $\bigcup X_\iota$,
+$\bigcap X_\iota$) sont saturées.
+
+\textbf{Formalisé.} Cinq théorèmes, $\mathrm{est\_saturee}(C,G)=(\forall x)(\forall y)
+((x\in C\ \text{et}\ (x,y)\in G)\Rightarrow y\in C)$ :
+\begin{itemize}
+  \item $A,B$ saturées $\vdash A\cup B$, $A\cap B$ saturées (cas binaire) ;
+  \item $A$ saturée, $G$ symétrique, $G$ relation dans $E$ $\vdash \complement_E A$ saturée
+        (les trois hypothèses load-bearing : symétrie pour $(y,x)\in G$, relation-dans pour $y\in E$) ;
+  \item $(\forall\iota)(\iota\in I\Rightarrow X_\iota$ saturée$)\vdash\bigcup X_\iota$,
+        $\bigcap X_\iota$ saturées (version famille, énoncé général).
+\end{itemize}
+Modules : \texttt{.../ii\_6\_equivalence/ii\_6\_4\_saturees/ensembles\_saturees\_stabilite.py}
+et \texttt{ensembles\_saturees\_famille.py}.
+
+\textbf{Statut.} Tous CLOS (ou clos modulo hypothèses honnêtes) ; \texttt{theorie\_ensembles()==22}.
+
+\subsection{§II.6.6 --- Relation induite et image réciproque (équivalence)}
+\textbf{Énoncé (Bourbaki).} La relation induite $R_A$ sur une partie $A$, et
+l'image réciproque $S\circ\varphi$, héritent du caractère d'équivalence.
+
+\textbf{Formalisé.} Quatre théorèmes (clos sous hypothèses honnêtes) :
+$R$ transitive $\Rightarrow R_A$ transitive ; $R$ sym.\ et trans.\ $\Rightarrow R_A$
+relation d'équivalence ; $S$ sym.\ et trans.\ $\Rightarrow S\circ\varphi$ relation
+d'équivalence ; et la réflexivité-dans-$E$ de $S\circ\varphi$ sous
+$S$ réflexive et $\varphi:E\to F$. \\
+Modules : \texttt{.../ii\_6\_equivalence/ii\_6\_6\_relation\_induite/ensembles\_relation\_induite\_equivalence.py}
+et \texttt{.../ensembles\_image\_reciproque\_reflexive.py}.
+
+\textbf{Preuve (\Nstar).} Transitivité par décomposition / instanciation ×3 /
+\texttt{conjonction\_intro} ; assemblages par \texttt{conjonction\_intro} des
+briques sym.\ et trans.\ existantes ; réflexivité par double implication et
+\texttt{equivalence\_arriere} de la réflexivité de $S$ instanciée en $\varphi(x)$.
+
+\textbf{Statut.} CLOS sous hypothèses honnêtes ; \texttt{theorie\_ensembles()==22}.
+Création du sous-dossier \texttt{ii\_6\_6\_relation\_induite/} et réorganisation
+$\leq 10$ (\texttt{ii\_6\_5\_decomposition/}) pour respecter la règle de structure.

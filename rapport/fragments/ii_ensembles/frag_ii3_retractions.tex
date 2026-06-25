@@ -27,3 +27,19 @@ Module : \texttt{bourbaki/ensembles/fonctions/ii\_3\_8\_retractions\_sections/en
 \textbf{Preuve (\Nstar).} On \texttt{assume} $\texttt{injective\_dans}(F',B) : (\forall u)(\forall u')((u\in B \wedge u'\in B \wedge F'(u)=F'(u')) \Rightarrow u=u')$ et on l'\texttt{instancie} (double) au couple $(f(x), f(x'))$. On \texttt{assume} l'hypothèse de typage C46 honnête $happlique := (\forall v)(v\in A \Rightarrow f(v)\in B)$. Sous l'antécédent gardé $(x\in A \wedge x'\in A) \wedge f'(f(x))=f'(f(x'))$ (\texttt{assume}), \texttt{conjonction\_elim\_gauche/droite} extraient $x\in A$, $x'\in A$, l'égalité ; \texttt{instancie}~+~\texttt{modus\_ponens} sur $happlique$ dérivent inline $f(x)\in B$, $f(x')\in B$ (motif \texttt{\_cv\_point}). \texttt{conjonction\_intro} reconstruit l'antécédent de l'instance d'injectivité, et \texttt{modus\_ponens} conclut $f(x)=f(x')$. \texttt{loi\_deduction} referme l'implication interne, \texttt{generalisation} $\times 2$ sur « $x' $», « $x$ » (rien de libre en $x, x'$), puis \texttt{loi\_deduction} décharge $\texttt{injective\_dans}(F',B)$ dans l'implication externe.
 
 \textbf{Statut.} CLOS sous hypothèse honnête $\{\,(\forall v)(v\in A \Rightarrow f(v)\in B)\,\}$ (la seule résiduelle : la donnée « $f : A \to B$ » du \theoreme~1 ; \texttt{injective\_dans}(F',B) est déchargée dans l'implication externe, la conclusion n'est pas en hypothèse) ; \texttt{theorie\_ensembles()==22}. Le test atteste \texttt{not est\_clos} (séquent honnête $happlique$ résiduel) ; la preuve complète de e) ($f'$ bijection $+$ réciproque $f'^{-1}$, pont valeurs$\leftrightarrow$graphe) reste reportée.
+
+\subsection{§II.3.8 --- Théorème 1 f) (rétractions et sections)}
+\textbf{Énoncé (Bourbaki).} Volet f) du Théorème 1 : la descente d'injectivité de
+$f'$ vers $f''=f'\circ f$, et le rôle de rétraction de $f\circ r''$.
+
+\textbf{Formalisé.} Deux théorèmes, forme \emph{repliée}, tous deux CLOS :
+$\mathrm{injective\_dans}(F'',A) \Rightarrow (\forall x)(\forall x')((x\in A \wedge x'\in A \wedge f''(x)=f''(x')) \Rightarrow x=x')$ ;
+et $\mathrm{est\_retraction}(R'',F'',A) \Rightarrow ((x\in A) \Rightarrow f(r''(f''(x)))=f(x))$. \\
+Module : \texttt{bourbaki/ensembles/fonctions/ii\_3\_8\_retractions\_sections/ensembles\_theoreme1\_f.py}.
+
+\textbf{Preuve (\Nstar).} Duals exacts de c)/e) et a) : \texttt{assume},
+\texttt{instancie}, \texttt{modus\_ponens}, \texttt{loi\_deduction},
+\texttt{generalisation}, \texttt{congruence\_terme}. La forme repliée évite
+l'introduction des gardes de typage C46 qu'exigerait le dépliage de $f''$.
+
+\textbf{Statut.} CLOS (0 hypothèse) pour les deux ; \texttt{theorie\_ensembles()==22}.

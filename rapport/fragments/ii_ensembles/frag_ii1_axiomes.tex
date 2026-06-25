@@ -1,0 +1,34 @@
+% =============================================================================
+%  §II.1 — Collectivisantes et algèbre des ensembles
+%  Fragment inclus par main.tex (\input). Blocs subsection seulement.
+% =============================================================================
+
+\subsection{§II.1 --- Pas d'ensemble de Russell ; caractérisation du singleton}
+\textbf{Énoncé (Bourbaki, E~II.3--4).} La relation $x\notin x$ n'est pas
+collectivisante : $\neg\,\mathrm{Coll}_x(x\notin x)$. De plus
+$x\in X \Leftrightarrow \{x\}\subset X$.
+
+\textbf{Formalisé.} $\mathrm{non}(\mathrm{coll}(x,\ x\notin x))$ et
+$\mathrm{equiv}(x\in X,\ \{x\}\subset X)$.
+Module : \texttt{.../ii\_1\_axiomes\_algebre/ensembles\_theoremes.py}.
+
+\textbf{Preuve (\Nstar).} Russell : par l'absurde, \texttt{existe\_temoin} sur
+$\mathrm{Coll}$, instanciation au témoin $y_0$ donne $y_0\in y_0\Leftrightarrow\neg(y_0\in y_0)$,
+réfutée par le lemme propositionnel $\neg(P\Leftrightarrow\neg P)$ (construit ici).
+Singleton-inclusion : double sens via \texttt{singleton\_membre} et le schéma~$S6$.
+
+\textbf{Statut.} CLOS ; \texttt{theorie\_ensembles()==22}.
+
+\subsection{§II.1 --- Antitonie du complément}
+\textbf{Énoncé (Bourbaki, E~II.6, nº7).} « Si $A$ et $B$ sont des parties de $E$, les
+relations $A\subset B$ et $\complement_E B\subset\complement_E A$ sont équivalentes. »
+
+\textbf{Formalisé.} $\{A\subset E,\ B\subset E\}\vdash\bigl(A\subset B \Leftrightarrow
+(E\setminus B)\subset(E\setminus A)\bigr)$. Module :
+\texttt{.../ii\_1\_axiomes\_algebre/ensembles\_inclusion\_treillis.py}.
+
+\textbf{Preuve (\Nstar).} Sens $\Rightarrow$ inconditionnel (contraposition membre à
+membre). Sens $\Leftarrow$ via \texttt{complement\_involution} ($\complement\complement=\mathrm{id}$,
+qui porte l'hypothèse honnête $X\subset E$) réécrite par congruence $S6$.
+
+\textbf{Statut.} CLOS sous $\{A\subset E,\ B\subset E\}$ ; \texttt{theorie\_ensembles()==22}.

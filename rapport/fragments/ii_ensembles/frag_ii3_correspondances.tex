@@ -1,0 +1,22 @@
+% =============================================================================
+%  §II.3 — Correspondances : domaine, image, produit
+%  Fragment inclus par main.tex (\input). Blocs subsection seulement.
+% =============================================================================
+
+\subsection{§II.3 --- Correspondances : domaine, image, produit (E~II.10--11)}
+Cluster de cinq résultats, conditionnés (le cas échéant) par l'hypothèse honnête
+$\mathrm{est\_graphe}(G):=(\forall z)(z\in G\Rightarrow z\text{ couple})$, dans
+\texttt{.../ii\_3\_correspondances/}.
+\begin{itemize}
+  \item $G\subset \mathrm{pr}_1G\times\mathrm{pr}_2G$ (tout ensemble de couples est partie d'un produit) ;
+  \item $G\langle\mathrm{pr}_1G\rangle=\mathrm{pr}_2G$ (image du domaine $=$ ensemble des valeurs), \emph{inconditionnel} ;
+  \item $\mathrm{pr}_1G=\varnothing\ (\text{resp. }\mathrm{pr}_2G=\varnothing)\Rightarrow G=\varnothing$ ;
+  \item corollaire $A\supset\mathrm{pr}_1G\Rightarrow G\langle A\rangle=\mathrm{pr}_2G$ ;
+  \item involution $(G^{-1})^{-1}=G$ (le champ $\mathrm{est\_graphe}$ est load-bearing
+        pour $G\subset(G^{-1})^{-1}$).
+\end{itemize}
+\textbf{Preuves (\Nstar).} Algèbre de couples (\texttt{couple\_reciproque},
+\texttt{couple\_dans\_dom/img}, \texttt{couple\_dans\_produit}), images
+(\texttt{\_inst\_image}, \texttt{image\_dans\_img}, \texttt{image\_croissante}),
+extensionnalité $A1$. Domaine/image-ensemble : $\mathrm{pr}_1G=\mathrm{dom}(G)$,
+$\mathrm{pr}_2G=\mathrm{img}(G)$ (axiomes \texttt{DOM}/\texttt{IMG}).
