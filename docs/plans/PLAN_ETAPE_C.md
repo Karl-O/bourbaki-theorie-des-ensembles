@@ -36,7 +36,7 @@ Re-verifier l'absence (grep) au debut de chaque delegation (un import reussi ne 
 - lemmes: ii_1_axiomes_algebre/ensembles_theoremes.py (non_collectivisante_appartenance_propre L.256 ; _non_equiv_negation L.280) ; formule.py (coll, existe, pourtout, appartient) ; N.s5/N.existe_temoin
 - fichier: bourbaki/ensembles/ii_1_axiomes_algebre/ensembles_pas_ensemble_universel.py
 
-## [ ] galois_vuv_egale_v  (faible/moyen)  [secteur III.1.7]
+## [x] galois_vuv_egale_v  (faible/moyen)  [secteur III.1.7]  — FAIT (test 7 passed + primal 5 vert, theorie==22)
 - repere: E III.7-8 Prop.2 (2e egalite) | PDF p.110-111
 - statut: PARTIEL (ensembles_prop2_galois.py n'a QUE la 1re egalite galois_uvu_egale_u)
 - enonce: avec les hyps Galois (v decroissante, u(v(x'))>=x', v(u(x))>=x, nommage w=v∘u∘v, antisymetrie(G)) : `|- (∀x')(x'∈E' => w(x')=v(x'))`. Prop.2 seconde egalite v∘u∘v=v ; Bourbaki : « la seconde s'etablit de meme ».
