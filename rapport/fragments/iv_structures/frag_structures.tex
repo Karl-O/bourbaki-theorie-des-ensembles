@@ -1,0 +1,121 @@
+% =============================================================================
+%  Partie IV — Structures (Chapitre IV)
+% =============================================================================
+\section{Espèces de structures, isomorphismes, morphismes (IV)}
+
+Le chapitre~IV introduit les \emph{espèces de structures} \textbf{sans nouvel
+axiome} : ce sont des extensions définitionnelles de la théorie des ensembles.
+La formalisation y certifie le \emph{squelette déductif} des critères de
+transport de structure (CST1--CST23 de Bourbaki). Le choix d'ingénierie est
+explicite et fidèle à la stratification : les schémas de transport (CST1--CST3,
+les relations $(\mathrm{MO}_{\mathrm{II}})$, $(\mathrm{MO}_{\mathrm{III}})$, et
+la \emph{transportabilité} de la relation typique) sont fournis comme
+\textbf{hypothèses honnêtes explicites}, jamais postulés en axiomes
+--- \texttt{theorie\_ensembles()==22} reste vrai. Le statut dominant
+« conditionnel honnête » dit donc : \emph{si les schémas de transport valent,
+alors tel critère en découle}. Le c\oe ur $\sigma/\Sigma$ (récurrence sur le
+schéma d'échelon) et l'existence effective des structures transportées sont
+signalés comme résidus (\S\,Statut).
+
+\subsection{IV.1 --- Espèces, isomorphismes, transport de structure}
+
+\textbf{Transport et isomorphisme.} Si $f=(f_1,\dots,f_n)$ est une famille de
+bijections $E_i\!\to\!E_i'$, alors $f$ est un isomorphisme de $(E,U)$ sur
+$(E,U')$ où $U'=\langle f\rangle^{S}(U)$ est la structure transportée
+(\texttt{transport\_donne\_isomorphisme}, c\oe ur objet de CST5). La trivialité
+de réflexivité $U'=U'$ de la clause $(4)$ est, elle, \emph{close}
+(\texttt{transport\_egalite}).
+
+\textbf{Groupoïde des isomorphismes.} Les propriétés de groupoïde sont
+certifiées (toutes \emph{conditionnelles honnêtes}, modules
+\texttt{ensembles\_transport\_iso\_props.py} et \texttt{ensembles\_structures\_props.py}) :
+\begin{itemize}
+  \item \emph{réflexivité} : $\langle\Delta_E\rangle^{S}(U)=U \vdash$
+        $(E,U)$ est isomorphe à lui-même, et $\Delta_E$ est un automorphisme ;
+  \item \emph{réciproque} (CST3) : $\bigl(\langle f\rangle^{S}\bigr)^{-1}=
+        \langle f^{-1}\rangle^{S}$, d'où « la réciproque d'un isomorphisme est un
+        isomorphisme » ;
+  \item \emph{composition} (CST4) : la composée de deux isomorphismes est un
+        isomorphisme ($\langle g\circ f\rangle^{S}=\langle g\rangle^{S}\circ
+        \langle f\rangle^{S}$ en prémisse) ;
+  \item \emph{unicité du transport} (CST5) : deux structures transportées par le
+        même isomorphisme coïncident ($V=V'$).
+\end{itemize}
+
+\textbf{Déduction d'espèces (IV.1.6--7).} La fonctorialité de la déduction
+(CST6 : un isomorphisme se transporte en isomorphisme de l'espèce déduite) et
+l'équivalence des isomorphismes pour des espèces équivalentes (CST7) sont
+certifiées conditionnellement.
+
+\subsection{IV.2 --- Morphismes et structures dérivées}
+
+La section la plus fournie. Le préordre « \emph{plus fine} » sur les structures
+de même base est certifié \textbf{réflexif} et \textbf{transitif} (IV.2.2,
+d'après $(\mathrm{MO}_{\mathrm{III}})$ et $(\mathrm{MO}_{\mathrm{II}})$), la
+transitivité pleine étant obtenue après normalisation $\Delta_E\circ\Delta_E=
+\Delta_E$. La composée de deux $\sigma$-morphismes est un $\sigma$-morphisme
+($(\mathrm{MO}_{\mathrm{II}})$).
+
+\textbf{Structures universelles (initiales, finales).} Les sens « faciles » de
+$(\mathrm{IN})$ et $(\mathrm{FI})$ sont prouvés (la structure initiale rend les
+$f_\iota$ des morphismes ; dual pour la finale), puis l'\textbf{unicité} :
+\begin{itemize}
+  \item deux structures initiales sont \emph{mutuellement plus fines}, d'où
+        $\mathcal{I}=\mathcal{I}'$ sous antisymétrie (\textbf{CST9}) ; dual
+        $\mathcal{F}=\mathcal{F}'$ (\textbf{CST18}) ;
+  \item transitivité des structures \emph{initiales} (CST10), \emph{induites}
+        (CST11), \emph{finales} (CST19), \emph{quotient} (CST21) --- chacune
+        ramenée à un palier d'égalité ;
+  \item \textbf{CST12} (restriction d'un morphisme aux sous-structures) et
+        \textbf{CST20} (passage des morphismes aux quotients), duaux l'un de
+        l'autre.
+\end{itemize}
+
+\textbf{Produits et graphes.} La structure produit : associativité (CST13),
+compatibilité produit/sous-structure (CST14), image réciproque du produit
+(CST15) ; une \emph{famille} de morphismes définit un morphisme dans le produit
+(\textbf{CST16}) ; et un morphisme est caractérisé par son graphe
+(\textbf{CST17}). Enfin la \emph{décomposition canonique} d'une application
+(IV.2.5) fournit des lemmes d'extraction \textbf{clos}
+(\texttt{ensembles\_structures\_residus.py}).
+
+\subsection{IV.3 --- Applications universelles}
+
+L'équivalence définissant une application universelle est \textbf{close} :
+\[
+  (\mathrm{AU})\ \Longleftrightarrow\ (\mathrm{AU}_{\mathrm I}')\wedge
+  (\mathrm{AU}_{\mathrm{II}}')
+\]
+(existence d'une factorisation et unicité ; modules
+\texttt{ensembles\_universel\_applications.py}, trois théorèmes clos). L'unicité
+de la solution universelle \emph{à un unique isomorphisme près} (CST8) est
+certifiée conditionnellement, et les extractions logiques de l'hypothèse de
+CST22 ($\mathrm{CU}_{\mathrm I}$, $\mathrm{CU}_{\mathrm{III}}$) sont closes
+(\texttt{ensembles\_structures\_complements.py}, E~IV.16).
+
+\subsection{Statut et résidus honnêtes}
+
+Sont \textbf{certifiés clos} : la trivialité de transport, l'équivalence
+$(\mathrm{AU})\Leftrightarrow(\mathrm{AU}_{\mathrm I}')\wedge(\mathrm{AU}_{\mathrm{II}}')$,
+et les lemmes d'extraction (décomposition canonique, CU de CST22). Sont
+\textbf{conditionnels honnêtes} la quasi-totalité des critères CST, les schémas
+de transport étant prémisses explicites. Sont \textbf{reportés}, et présentés
+comme tels :
+\begin{itemize}
+  \item la \emph{transportabilité effective} de la relation typique $R$ --- donc
+        l'\emph{existence} même des structures transportées, initiales, finales,
+        induites et quotient (\textbf{CST22}) ;
+  \item les preuves \emph{par récurrence sur le schéma d'échelon} (fonctorialité
+        effective de l'extension d'échelon, CST1--CST3 dans leur version
+        constructive) ;
+  \item \textbf{CST23} dans sa forme pleine (le lemme de contraposition
+        ponctuelle présent n'en est \emph{pas} le contenu, seulement le squelette
+        logique).
+\end{itemize}
+
+\textbf{Piège neutralisé.} Un lemme $\langle\,\cdot\,\rangle$ se réduisant à une
+tautologie $P\Leftrightarrow P$
+(\texttt{\_est\_iso\_morph\_reflexivite\_triviale}) a été identifié et maintenu
+\emph{hors} de l'interface publique (\texttt{\_\_all\_\_}) : il n'est jamais
+présenté comme le critère $(\mathrm{MO}_{\mathrm{III}})$, conformément à la règle
+« aucune tautologie déguisée en théorème » (cf.\ annexe, Journal des erreurs).
