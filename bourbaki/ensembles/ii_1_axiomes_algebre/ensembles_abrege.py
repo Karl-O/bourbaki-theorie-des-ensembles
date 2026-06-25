@@ -364,6 +364,7 @@ def injective_dans(f, a, u="u", up="up"):
 # Une « relation R{x, y} » est modélisée par une fonction Python R : (Terme, Terme)
 # → Formule (Bourbaki : R est une relation où figurent les lettres x, y).  Les
 # définitions de la section sont les énoncés VERBATIM, construits sur cette R.
+# @livre Ch.II §6.1 Def.- | E II.39 L.29-30 | PDF p.90
 def est_symetrique(R, x="x", y="y"):
     """« R symétrique (par rapport à x, y) » := (∀x)(∀y)(R{x,y} ⇒ R{y,x})  (E.II.6.1).
 
@@ -373,6 +374,7 @@ def est_symetrique(R, x="x", y="y"):
     return pourtout(x, pourtout(y, impl(R(vx, vy), R(vy, vx))))
 
 
+# @livre Ch.II §6.1 Def.- | E II.39 L.34-35 | PDF p.90
 def est_transitive(R, x="x", y="y", z="z"):
     """« R transitive (par rapport à x, y) » := (∀x)(∀y)(∀z)((R{x,y} et R{y,z}) ⇒ R{x,z})
     (E.II.6.1 ; z ne figure pas dans R)."""
@@ -381,17 +383,20 @@ def est_transitive(R, x="x", y="y", z="z"):
         impl(et(R(vx, vy), R(vy, vz)), R(vx, vz)))))
 
 
+# @livre Ch.II §6.1 Def.- | E II.40 L.4-5 | PDF p.91
 def est_relation_equivalence(R, x="x", y="y", z="z"):
     """« R{x,y} est une relation d'équivalence » := R symétrique ET transitive  (E.II.6.1)."""
     return et(est_symetrique(R, x, y), est_transitive(R, x, y, z))
 
 
+# @livre Ch.II §6.1 Def.- | E II.40 L.11-13 | PDF p.91
 def est_reflexive_dans(R, e, x="x"):
     """« R réflexive dans E » := (∀x)(R{x,x} ⇔ x∈E)  (E.II.6.1 ; x ne figure pas dans E)."""
     vx = var(x)
     return pourtout(x, equiv(R(vx, vx), appartient(vx, e)))
 
 
+# @livre Ch.II §6.1 Def.- | E II.40 L.15-16 | PDF p.91
 def est_relation_equivalence_dans(R, e, x="x", y="y", z="z"):
     """« R relation d'équivalence dans E » := relation d'équivalence ET réflexive dans E
     (E.II.6.1)."""
@@ -410,6 +415,7 @@ def _terme_var(t):
     return t if isinstance(t, Terme) else var(t)
 
 
+# @livre Ch.II §6.2 Def.- | E II.41 L.25-26 | PDF p.92
 def classe(g, x):
     """Cl_R(x) := G⟨{x}⟩ = {y∈E | R{x,y}}  (classe d'équivalence de x, E.II.6.2).
 
@@ -417,11 +423,13 @@ def classe(g, x):
     return image(g, singleton(_terme_var(x)))
 
 
+# @livre Ch.II §6.2 Def.- | E II.41 L.29-31 | PDF p.92
 def quotient(g, e):
     """E/R := { C ∈ P(E) | (∃x)(x∈E et C = Cl_R(x)) }  (ensemble quotient, E.II.6.2)."""
     return app("quotient", g, e)
 
 
+# @livre Ch.II §6.2 Def.- | E II.41 L.31-33 | PDF p.92
 def application_canonique(g, e):
     """p : E → E/R,  p(x) := Cl_R(x)  (application canonique, E.II.6.2).
 
@@ -429,6 +437,7 @@ def application_canonique(g, e):
     return app("appcanon", g, e)
 
 
+# @livre Ch.II §6.3 Def.- | E II.42 L.34-37 | PDF p.93
 def est_compatible(P, R, x="x", y="y"):
     """« P{x} compatible avec R{x,x'} (par rapport à x) »
        := (∀x)(∀y)((P{x} et R{x,y}) ⇒ P{y})  (E.II.6.3 ; y ne figure ni dans P ni dans R)."""
@@ -443,12 +452,14 @@ def relation_quotient(P, e, g, t="t", x="x"):
               existe(x, et(appartient(vx, vt), P(vx))))
 
 
+# @livre Ch.II §6.4 Def.- | E II.43 L.16-19 | PDF p.94
 def est_saturee(a, g, e, x="x"):
     """« A saturée pour R » := la relation x∈A est compatible (par rapport à x) avec R
     (E.II.6.4) ; équivaut à (∀x)(x∈A ⇒ Cl_R(x) ⊂ A)."""
     return est_compatible(lambda t: appartient(t, a), rel_graphe(g), x)
 
 
+# @livre Ch.II §6.4 Def.- | E II.43 L.22-34 | PDF p.94
 def sature(a, p):
     """Ã := p⁻¹⟨p⟨A⟩⟩  (saturé de A pour R, plus petite partie saturée contenant A, E.II.6.4)."""
     return image(reciproque(p), image(p, a))
@@ -462,6 +473,7 @@ def est_compatible_application(f, R, x="x", xp="xp"):
     return pourtout(x, pourtout(xp, impl(R(vx, vxp), egal(valeur(f, vx), valeur(f, vxp)))))
 
 
+# @livre Ch.II §6.2 Def.- | E II.41 L.17-19 | PDF p.92
 def relation_associee_fonction(f, x="x", y="y"):
     """Relation d'équivalence associée à f : R{x,y} := (x∈E et y∈E et f(x)=f(y))  (E.II.6.2).
 

@@ -72,6 +72,7 @@ def _ou_et_distrib(q, qp, p):
     return conjonction_intro(fwd, bwd)
 
 
+# @livre Ch.II §R.3 Prop.22 | E.R.12 L.20-21 | PDF p.315
 def couple_dans_produit_distrib_reunion_premier_facteur(
         u="u", v="v", a="X", b="Xp", c="Y"):
     """⊢ ((u,v) ∈ (X×Y)∪(X'×Y)) ⇔ ((u,v) ∈ (X∪X')×Y).

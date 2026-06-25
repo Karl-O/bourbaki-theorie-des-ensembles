@@ -64,6 +64,7 @@ def cible_projection_c55(g="G", e="E", a="a", b="b"):
     return equiv(egal(pa, pb), R(va, vb))
 
 
+# @livre Ch.II §6.2 Crit.C55 | E II.41 L.34-36 | PDF p.92
 def projection_c55(g="G", e="E", a="a", b="b", x="x", z="z"):
     """{R réflexive dans E, R sym, R trans, b∈E, p(a)=Cl_R(a), p(b)=Cl_R(b)}
        ⊢ ( p(a)=p(b) ) ⇔ ( R{a,b} )   (E.II.6.2, critère C55 ; clos mod. hyp.).

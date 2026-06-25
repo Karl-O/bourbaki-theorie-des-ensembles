@@ -58,6 +58,7 @@ def _T(v):
     return v if isinstance(v, Terme) else var(v)
 
 
+# @livre Ch.II §3.1 Rem.- | E II.10 L.36 | PDF p.61
 def image_domaine_egale_img(g="G"):
     """⊢ G⟨pr₁G⟩ = pr₂G   (= image(G, dom G) = img G).   (Bourbaki E II.10, §3, n°1.)
 
@@ -138,6 +139,7 @@ def _image_croissante_terme(vG, vX, vY):
     return N.loi_deduction(inclus(vX, vY), N.generalisation("z", z_imp))
 
 
+# @livre Ch.II §3.1 Cor.- | E II.11 L.1 | PDF p.62
 def image_egale_img_si_domaine_inclus(g="G", a="A"):
     """{ pr₁G ⊂ A } ⊢ G⟨A⟩ = pr₂G.   (Bourbaki E II.11, corollaire de la Prop. 2.)
 

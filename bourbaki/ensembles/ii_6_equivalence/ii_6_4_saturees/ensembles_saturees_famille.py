@@ -112,7 +112,7 @@ def cible_inter_famille_saturee(x="X", i="I", g="G"):
     return E.est_saturee(c, vg, c, x="x")
 
 
-# @livre Ch.II §6.4 Prop.- | E II.43 L.31-32 | PDF p.94
+# @livre Ch.II §6.4 Prop.- | E II.43 L.30-31 | PDF p.94
 def famille_de_saturees_reunion(x="X", i="I", g="G"):
     """{(∀i)(i∈I ⇒ est_saturee(X_i, G))} ⊢ est_saturee( ⋃_{ι∈I} X_ι, G )
     (E.II.43, énoncé général famille — réunion ; clos mod. hyp.).
@@ -163,7 +163,7 @@ def famille_de_saturees_reunion(x="X", i="I", g="G"):
     return N.generalisation("x", N.generalisation("y", body_imp))
 
 
-# @livre Ch.II §6.4 Prop.- | E II.43 L.31-32 | PDF p.94
+# @livre Ch.II §6.4 Prop.- | E II.43 L.30-31 | PDF p.94
 def famille_de_saturees_inter(x="X", i="I", g="G"):
     """{(∀i)(i∈I ⇒ est_saturee(X_i, G))} ⊢ est_saturee( ⋂_{ι∈I} X_ι, G )
     (E.II.43, énoncé général famille — intersection ; clos mod. hyp.).

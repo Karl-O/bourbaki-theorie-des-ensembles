@@ -104,6 +104,7 @@ def _egal_classes_depuis_equiv(eqv_z, A, B, z="z"):
 # ═════════════════════════════════════════════════════════════════════════════
 # §6.2 — Classes d'équivalence : x∈Cl(x), et x R y ⇔ Cl(x)=Cl(y)
 # ═════════════════════════════════════════════════════════════════════════════
+# @livre Ch.II §6.2 Rem.- | E II.41 L.25 | PDF p.92
 def appartient_classe(g="G", a="a", e="E", x="x"):
     """{R réflexive dans E, a∈E} ⊢ a ∈ Cl_R(a)   (E.II.6.2 ; clos mod. hyp.).
 
@@ -123,6 +124,7 @@ def appartient_classe(g="G", a="a", e="E", x="x"):
     return N.modus_ponens(raa, equivalence_arriere(cm_a))     # a∈Cl(a)
 
 
+# @livre Ch.II §6.2 Crit.C55 | E II.41 L.34-36 | PDF p.92
 def relation_implique_classe_egale(g="G", a="a", b="b", z="z"):
     """{R symétrique, R transitive} ⊢ R{a,b} ⇒ Cl_R(a)=Cl_R(b)   (E.II.6.2 ; clos mod. hyp.).
 
@@ -160,6 +162,7 @@ def relation_implique_classe_egale(g="G", a="a", b="b", z="z"):
     return N.loi_deduction(R(va, vb), eq_cl)                  # R{a,b} ⇒ Cl(a)=Cl(b)
 
 
+# @livre Ch.II §6.2 Crit.C55 | E II.41 L.34-36 | PDF p.92
 def classe_egale_implique_relation(g="G", a="a", b="b", e="E", x="x"):
     """{R réflexive dans E, b∈E} ⊢ Cl_R(a)=Cl_R(b) ⇒ R{a,b}   (E.II.6.2 ; clos mod. hyp.).
 
@@ -186,6 +189,7 @@ def classe_egale_implique_relation(g="G", a="a", b="b", e="E", x="x"):
     return N.loi_deduction(egal(cla, clb), rab)              # Cl(a)=Cl(b) ⇒ R{a,b}
 
 
+# @livre Ch.II §6.2 Crit.C55 | E II.41 L.34-36 | PDF p.92
 def relation_ssi_classe_egale(g="G", a="a", b="b", e="E", x="x", z="z"):
     """{R réflexive dans E, R sym, R trans, b∈E} ⊢ R{a,b} ⇔ Cl_R(a)=Cl_R(b)
     (E.II.6.2 ; clos mod. hyp.).
@@ -203,6 +207,7 @@ def relation_ssi_classe_egale(g="G", a="a", b="b", e="E", x="x", z="z"):
 # ═════════════════════════════════════════════════════════════════════════════
 # PARTITION : deux classes qui se rencontrent sont égales (donc égales ou disjointes)
 # ═════════════════════════════════════════════════════════════════════════════
+# @livre Ch.II §6.2 Rem.- | E II.42 L.17-23 | PDF p.93
 def classes_se_rencontrent_egales(g="G", a="a", b="b", z="z", w="wc"):
     """{R symétrique, R transitive}
        ⊢ (∃z)( z∈Cl_R(a) et z∈Cl_R(b) ) ⇒ Cl_R(a)=Cl_R(b)   (E.II.6.2 ; clos mod. hyp.).
@@ -238,6 +243,7 @@ def classes_se_rencontrent_egales(g="G", a="a", b="b", z="z", w="wc"):
 # ═════════════════════════════════════════════════════════════════════════════
 # PROJECTION CANONIQUE p : E→E/R,  p(x)=Cl_R(x)
 # ═════════════════════════════════════════════════════════════════════════════
+# @livre Ch.II §6.2 Crit.C55 | E II.41 L.34-36 | PDF p.92
 def projection_valeur_classe(g="G", e="E", a="a", b="b"):
     """{p(a)=Cl_R(a), p(b)=Cl_R(b)} ⊢ ( p(a)=p(b) ) ⇔ ( Cl_R(a)=Cl_R(b) )
     (E.II.6.2 ; clos mod. hyp.).
@@ -291,6 +297,7 @@ def relation_intersection(R, Rp):
     return S
 
 
+# @livre Ch.II §6.1 Rem.- | E II.40 L.5-6 | PDF p.91
 def intersection_symetrique(R=None, Rp=None, x="x", y="y"):
     """{R symétrique, R' symétrique} ⊢ (R∩R') symétrique   (§II.6 ; clos mod. hyp.).
 
@@ -315,6 +322,7 @@ def intersection_symetrique(R=None, Rp=None, x="x", y="y"):
     return N.generalisation(x, N.generalisation(y, imp))
 
 
+# @livre Ch.II §6.1 Rem.- | E II.40 L.5-6 | PDF p.91
 def intersection_transitive(R=None, Rp=None, x="x", y="y", z="z"):
     """{R transitive, R' transitive} ⊢ (R∩R') transitive   (§II.6 ; clos mod. hyp.).
 
@@ -345,6 +353,7 @@ def intersection_transitive(R=None, Rp=None, x="x", y="y", z="z"):
     return N.generalisation(x, N.generalisation(y, N.generalisation(z, imp)))
 
 
+# @livre Ch.II §6.1 Rem.- | E II.40 L.5-6 | PDF p.91
 def intersection_relation_equivalence(R=None, Rp=None, x="x", y="y", z="z"):
     """{R éq., R' éq.} ⊢ (R∩R') relation d'équivalence   (§II.6 ; clos mod. hyp.).
 

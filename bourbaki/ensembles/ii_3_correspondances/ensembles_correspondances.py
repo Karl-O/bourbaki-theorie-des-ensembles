@@ -32,6 +32,7 @@ def _inst_img(g, y):
     return instancie(instancie(ax, g), y)
 
 
+# @livre Ch.II §3.1 Prop.2 | E II.10 L.38-39 | PDF p.61
 def image_croissante(g="G", xx="X", yy="Y"):
     """⊢ (X ⊂ Y) ⇒ (G⟨X⟩ ⊂ G⟨Y⟩).   (Proposition 2, E.II.40.)"""
     vG, vX, vY, vx, vz = var(g), var(xx), var(yy), var("x"), var("z")
@@ -48,6 +49,7 @@ def image_croissante(g="G", xx="X", yy="Y"):
     return N.loi_deduction(inclus(vX, vY), N.generalisation("z", z_imp))
 
 
+# @livre Ch.II §3.1 Rem.- | E II.10 L.34-35 | PDF p.61
 def image_dans_img(g="G", xx="X"):
     """⊢ G⟨X⟩ ⊂ pr₂G.   (toute image directe est incluse dans l'ensemble des valeurs.)"""
     vG, vX, vx, vz = var(g), var(xx), var("x"), var("z")
@@ -58,6 +60,7 @@ def image_dans_img(g="G", xx="X"):
     return N.generalisation("z", z_imp)                       # G⟨X⟩ ⊂ pr₂G
 
 
+# @livre Ch.II §3.1 Rem.- | E II.10 L.36 | PDF p.61
 def image_vide(g="G"):
     """⊢ G⟨∅⟩ = ∅.   (l'image directe de l'ensemble vide est vide.)"""
     vG, vx, vz = var(g), var("x"), var("z")
@@ -72,6 +75,7 @@ def image_vide(g="G"):
                           equivalence_arriere(vide_ssi_sans_element(E.image(vG, E.VIDE))))
 
 
+# @livre Ch.II §3.1 Def.4 | E II.11 L.2-5 | PDF p.62
 def coupe_membre(g="G", a="a"):
     """⊢ (y ∈ G⟨{a}⟩) ⇔ ((a,y) ∈ G).   (coupe suivant a, E.II.40 ; via C43/Leibniz.)"""
     vG, va, vx, vy = var(g), var(a), var("x"), var("y")

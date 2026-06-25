@@ -77,6 +77,7 @@ def _sym(eq_thm):
 #   si X_ι = X_κ pour tout (ι,κ), alors  ⋃_{ι∈I}X_ι = X_α  et  ⋂_{ι∈I}X_ι = X_α
 #   pour tout α∈I.
 # ══════════════════════════════════════════════════════════════════════════════
+# @livre Ch.II §4.1 Cor.- | E II.23 L.29-31 | PDF p.74
 def reunion_constante(f="X", i="I", a="a"):
     """{(∀ι)(∀κ)(X_ι = X_κ) ,  α∈I} ⊢ ⋃_{ι∈I} X_ι = X_α.   (Cor. Prop. 1, E.II.4.1.)
 
@@ -121,6 +122,7 @@ def reunion_constante(f="X", i="I", a="a"):
     return N.loi_deduction(hyp, egal_th)
 
 
+# @livre Ch.II §4.1 Cor.- | E II.23 L.29-31 | PDF p.74
 def inter_constante(f="X", i="I", a="a"):
     """{(∀ι)(∀κ)(X_ι = X_κ) ,  α∈I} ⊢ ⋂_{ι∈I} X_ι = X_α.   (Cor. Prop. 1, E.II.4.1.)
 
@@ -190,6 +192,7 @@ def _val_reparam(f, phi, k):
     return instancie(ax, _t(k))
 
 
+# @livre Ch.II §4.1 Prop.1 | E II.23 L.16-17 | PDF p.74
 def reparam_reunion_incluse(f="X", phi="phi", i="I", k="K"):
     """⊢ ⋃_{κ∈K} X_{φ(κ)} ⊂ ⋃_{ι∈I} X_ι.   (E.II.4, Prop. 1 — sens facile.)
 
@@ -242,6 +245,7 @@ def reparam_reunion_incluse(f="X", phi="phi", i="I", k="K"):
     return N.loi_deduction(dom_hyp, incl)
 
 
+# @livre Ch.II §4.1 Prop.1 | E II.23 L.16-17 | PDF p.74
 def reparam_reunion_egal_si_surjectif(f="X", phi="phi", i="I", k="K"):
     """{φ : K→I (∀κ∈K φ(κ)∈I)  et  φ surjective sur I (∀ι∈I ∃κ∈K φ(κ)=ι)}
         ⊢  ⋃_{κ∈K} X_{φ(κ)} = ⋃_{ι∈I} X_ι.   (E.II.4, Prop. 1 VERBATIM.)

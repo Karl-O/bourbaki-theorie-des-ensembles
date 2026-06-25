@@ -46,6 +46,7 @@ def _tv(t):
 # ════════════════════════════════════════════════════════════════════════════
 # Théorème 1 — R_A transitive   (hérite de la transitivité de R)
 # ════════════════════════════════════════════════════════════════════════════
+# @livre Ch.II §6.6 Def.- | E II.45 L.9-11 | PDF p.96
 def relation_induite_transitive(R=None, a="A", x="x", y="y", z="z"):
     """{R transitive} ⊢ (∀x)(∀y)(∀z)((R_A{x,y} et R_A{y,z}) ⇒ R_A{x,z})
     (R_A transitive ; clos mod. hyp.).
@@ -81,6 +82,7 @@ def relation_induite_transitive(R=None, a="A", x="x", y="y", z="z"):
 # ════════════════════════════════════════════════════════════════════════════
 # Théorème 2 — R_A relation d'équivalence   (symétrie + transitivité héritées)
 # ════════════════════════════════════════════════════════════════════════════
+# @livre Ch.II §6.6 Def.- | E II.45 L.9-11 | PDF p.96
 def relation_induite_relation_equivalence(R=None, a="A", x="x", y="y", z="z"):
     """{R symétrique, R transitive} ⊢ R_A relation d'équivalence  (E.II.6.6 ; clos mod. hyp.).
 

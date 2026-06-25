@@ -40,6 +40,7 @@ def _dup_et(p, q, r):
     return conjonction_intro(fwd, bwd)
 
 
+# @livre Ch.R §1.14 Prop.(8) | E.R.4 L.27 | PDF p.307
 def de_morgan_reunion(e="E", a="A", b="B"):
     """⊢ E∖(A∪B) = (E∖A)∩(E∖B)."""
     vE, vA, vB, vz = var(e), var(a), var(b), var("z")
@@ -61,6 +62,7 @@ def de_morgan_reunion(e="E", a="A", b="B"):
                                  E.intersection(E.difference(vE, vA), E.difference(vE, vB)))
 
 
+# @livre Ch.R §1.14 Prop.(8) | E.R.4 L.27 | PDF p.307
 def de_morgan_inter(e="E", a="A", b="B"):
     """⊢ E∖(A∩B) = (E∖A)∪(E∖B)."""
     vE, vA, vB, vz = var(e), var(a), var(b), var("z")

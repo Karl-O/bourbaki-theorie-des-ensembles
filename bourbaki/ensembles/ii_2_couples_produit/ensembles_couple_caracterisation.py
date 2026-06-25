@@ -61,6 +61,7 @@ def _T(v):
 _A, _B = "a", "b"
 
 
+# @livre Ch.II §2.1 Def.- | E II.7 L.14 | PDF p.58
 def est_couple(vz):
     """« z est un couple » := (∃a)(∃b)(z = (a, b))  (E II.7, exprimé inline)."""
     va, vb = var(_A), var(_B)
@@ -140,6 +141,7 @@ def _pr2_de_couple(vz):
     return composer_egalites(pr2z_pr2ab, _proj2_terme(va, vb))               # pr₂z = b
 
 
+# @livre Ch.II §2.1 Prop.- | E II.7 L.22-23 | PDF p.58
 def caracterisation_couple(x="x", y="y", z="z"):
     """⊢ ( z = (x, y) )  ⇔  ( z est un couple  et  x = pr₁z  et  y = pr₂z ).
 

@@ -50,6 +50,7 @@ def _tv(t):
 # ════════════════════════════════════════════════════════════════════════════
 # Théorème 1 — S∘φ relation d'équivalence   (symétrie + transitivité héritées)
 # ════════════════════════════════════════════════════════════════════════════
+# @livre Ch.II §6.6 Def.- | E II.45 L.3-8 | PDF p.96
 def image_reciproque_relation_equivalence(S=None, phi="phi", x="x", y="y", z="z"):
     """{S symétrique, S transitive} ⊢ S∘φ relation d'équivalence  (E.II.6.6 ; clos mod. hyp.).
 
@@ -70,6 +71,7 @@ def image_reciproque_relation_equivalence(S=None, phi="phi", x="x", y="y", z="z"
 # ════════════════════════════════════════════════════════════════════════════
 # Théorème 2 — (S∘φ)_E réflexive dans E   (héritée de la réflexivité de S dans F)
 # ════════════════════════════════════════════════════════════════════════════
+# @livre Ch.II §6.6 Def.- | E II.45 L.3-8 | PDF p.96
 def image_reciproque_reflexive(S=None, phi="phi", e="E", f="F", x="x"):
     """{S réflexive dans F, φ:E→F} ⊢ (S∘φ)_E réflexive dans E  (E.II.6.6 ; clos mod. hyp.).
 

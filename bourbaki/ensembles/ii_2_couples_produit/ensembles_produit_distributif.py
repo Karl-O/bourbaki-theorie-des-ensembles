@@ -61,6 +61,7 @@ def _et_et_distrib(p, q, r):
     return conjonction_intro(fwd, bwd)
 
 
+# @livre Ch.II §R.3 Rem.- | E.R.12 L.20-21 | PDF p.315
 def couple_dans_produit_distributif_reunion(u="u", v="v", a="A", b="B", c="C"):
     """⊢ ((u,v) ∈ A×(B∪C)) ⇔ ((u,v) ∈ (A×B)∪(A×C)).   (cœur de A×(B∪C)=(A×B)∪(A×C), E.II.2.)"""
     vu, vv, vA, vB, vC = _t(u), _t(v), _t(a), _t(b), _t(c)
@@ -82,6 +83,7 @@ def couple_dans_produit_distributif_reunion(u="u", v="v", a="A", b="B", c="C"):
         equivalence_transitivite(e1, e2), e3), e4), e5)
 
 
+# @livre Ch.II §R.3 Rem.- | E.R.12 L.22-23 | PDF p.315
 def couple_dans_produit_distributif_intersection(u="u", v="v", a="A", b="B", c="C"):
     """⊢ ((u,v) ∈ A×(B∩C)) ⇔ ((u,v) ∈ (A×B)∩(A×C)).   (cœur de A×(B∩C)=(A×B)∩(A×C), E.II.2.)"""
     vu, vv, vA, vB, vC = _t(u), _t(v), _t(a), _t(b), _t(c)
@@ -122,6 +124,7 @@ def _reshuffle4(p, q, r, s):
     return conjonction_intro(fwd, bwd)
 
 
+# @livre Ch.II §R.3 Prop.23 | E.R.12 L.22-23 | PDF p.315
 def couple_dans_intersection_produits(u="u", v="v", a="A", b="B", c="C", d="D"):
     """⊢ ((u,v) ∈ (A×B)∩(C×D)) ⇔ ((u,v) ∈ (A∩C)×(B∩D)).   (E.II.2 : (A×B)∩(C×D)=(A∩C)×(B∩D).)"""
     vu, vv, vA, vB, vC, vD = _t(u), _t(v), _t(a), _t(b), _t(c), _t(d)

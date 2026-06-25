@@ -69,6 +69,7 @@ def _hole(*termes):
 
 
 # ── 1. Identité « z est un couple » sur un produit ────────────────────────────
+# @livre Ch.II §R.3 Prop.26 | E.R.12 L.28-29 | PDF p.315
 def couple_decomposition(a="X", b="Y", z="z"):
     """⊢ (z ∈ X×Y) ⇒ z = (pr₁z, pr₂z).
 
@@ -155,6 +156,7 @@ def _inclusion_par_couples(src, tgt, ve, vf, h_src_amb, h_couples):
     return N.generalisation("z", N.loi_deduction(appartient(vz, vS), z_in_tgt))
 
 
+# @livre Ch.II §R.3 Rem.- | E.R.12 L.13-14 | PDF p.315
 def produit_egalite_par_couples(a="A", b="B", e="E", f="F", u="u", v="v"):
     """⊢ ( A⊂E×F ∧ B⊂E×F ∧ (∀u)(∀v)((u,v)∈A ⇔ (u,v)∈B) ) ⇒ A=B.
 
@@ -196,6 +198,7 @@ def produit_egalite_par_couples_cible(a="A", b="B", e="E", f="F", u="u", v="v"):
 
 
 # ── 3. Formule (22) en ÉGALITÉ D'ENSEMBLES ────────────────────────────────────
+# @livre Ch.II §R.3 Prop.22 | E.R.12 L.20-21 | PDF p.315
 def produit_distrib_reunion_premier_facteur_ensembliste(
         a="X", b="Xp", c="Y", e="E", f="F"):
     """⊢ ( X⊂E ∧ X'⊂E ∧ Y⊂F ) ⇒ (X×Y)∪(X'×Y) = (X∪X')×Y.

@@ -90,6 +90,7 @@ def cible_equivalence(g="G", x="x", y="y", z="z"):
 # ═════════════════════════════════════════════════════════════════════════════
 # (b)  G = G⁻¹  ⟹  R symétrique
 # ═════════════════════════════════════════════════════════════════════════════
+# @livre Ch.II §6.1 Prop.1 | E II.41 L.3-5 | PDF p.92
 def gamma_symetrique_si_egal_reciproque(g="G", x="x", y="y", w="w"):
     """{G = G⁻¹} ⊢ est_symetrique(rel_graphe(G))   (Proposition 1 (b), E.II.6.1).
 
@@ -119,6 +120,7 @@ def gamma_symetrique_si_egal_reciproque(g="G", x="x", y="y", w="w"):
 # ═════════════════════════════════════════════════════════════════════════════
 # (c)  G∘G ⊂ G  ⟹  R transitive
 # ═════════════════════════════════════════════════════════════════════════════
+# @livre Ch.II §6.1 Prop.1 | E II.41 L.3-5 | PDF p.92
 def gamma_transitive_si_composee_incluse(g="G", x="x", y="y", z="z"):
     """{G∘G ⊂ G} ⊢ est_transitive(rel_graphe(G))   (Proposition 1 (c), E.II.6.1).
 
@@ -153,6 +155,7 @@ def gamma_transitive_si_composee_incluse(g="G", x="x", y="y", z="z"):
 # ═════════════════════════════════════════════════════════════════════════════
 # Assemblage — {G = G⁻¹, G∘G ⊂ G} ⊢ est_relation_equivalence(R)
 # ═════════════════════════════════════════════════════════════════════════════
+# @livre Ch.II §6.1 Prop.1 | E II.41 L.3-5 | PDF p.92
 def prop1_reciproque_equivalence(g="G", x="x", y="y", z="z", w="w"):
     """{G = G⁻¹, G∘G ⊂ G} ⊢ est_relation_equivalence(rel_graphe(G)).
 

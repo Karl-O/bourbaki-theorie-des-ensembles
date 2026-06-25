@@ -65,6 +65,7 @@ def _tv(t):
 # ════════════════════════════════════════════════════════════════════════════
 # 1.  Système de représentants des classes suivant R  (E.II.6.2, Déf.)
 # ════════════════════════════════════════════════════════════════════════════
+# @livre Ch.II §6.2 Def.- | E II.42 L.28-33 | PDF p.93
 def est_systeme_representants(S, g, e):
     """« S est un système de représentants des classes suivant R »  (E.II.6.2).
 
@@ -85,6 +86,7 @@ def est_systeme_representants(S, g, e):
               E.est_bijective(p_S, vS, E.quotient(vg, ve)))
 
 
+# @livre Ch.II §6.2 Def.- | E II.42 L.30-33 | PDF p.93
 def injection_representants(r, g, e):
     """« r est un système de représentants (forme injection r : E/R → E) »  (E.II.6.2).
 
@@ -105,6 +107,7 @@ def injection_representants(r, g, e):
 # ════════════════════════════════════════════════════════════════════════════
 # 2.  Application compatible avec R et S ; applications déduites  (E.II.6.5)
 # ════════════════════════════════════════════════════════════════════════════
+# @livre Ch.II §6.5 Def.- | E II.44 L.33-37 | PDF p.95
 def est_compatible_RS(f, R, S, x="x", xp="xp"):
     """« f compatible avec les relations d'équivalence R et S »  (E.II.6.5, Déf.).
 
@@ -120,6 +123,7 @@ def est_compatible_RS(f, R, S, x="x", xp="xp"):
         impl(R(vx, vxp), S(E.valeur(vf, vx), E.valeur(vf, vxp)))))
 
 
+# @livre Ch.II §6.5 Def.- | E II.44 L.22 | PDF p.95
 def application_deduite_quotient(f, p, h):
     """« h est déduite de f par passage au quotient suivant R » := f = h ∘ p  (E.II.6.5).
 
@@ -131,6 +135,7 @@ def application_deduite_quotient(f, p, h):
     return egal(_tv(f), E.composee(_tv(h), _tv(p)))
 
 
+# @livre Ch.II §6.5 Def.- | E II.45 L.1-2 | PDF p.96
 def application_deduite_quotients(f, u, v, h):
     """« h est déduite de f par passage aux quotients suivant R et S » := v∘f = h∘u
     (E.II.6.5, Déf.).
@@ -142,6 +147,7 @@ def application_deduite_quotients(f, u, v, h):
     return egal(E.composee(vv, vf), E.composee(vh, vu))
 
 
+# @livre Ch.II §6.5 Def.- | E II.44 L.33-37 | PDF p.95
 def compatible_RS_via_v(f="f", R=None, S=None, v="v", x="x", xp="xp"):
     """{f compat. R,S} ⊢ (∀x)(∀x')(R{x,x'} ⇒ (S∘v applied) …)  — lecture « v∘f compat. R ».
 
@@ -167,6 +173,7 @@ def compatible_RS_via_v(f="f", R=None, S=None, v="v", x="x", xp="xp"):
 # ════════════════════════════════════════════════════════════════════════════
 # 3.  Relation induite R_A sur une partie A de E  (E.II.6.6, Déf.)
 # ════════════════════════════════════════════════════════════════════════════
+# @livre Ch.II §6.6 Def.- | E II.45 L.9-11 | PDF p.96
 def relation_induite(R, a):
     """R_A{x,y} := (x∈A et y∈A et R{x,y})  (relation d'équivalence induite par R
     dans A, E.II.6.6, Déf.).
@@ -180,6 +187,7 @@ def relation_induite(R, a):
     return rel
 
 
+# @livre Ch.II §6.6 Rem.- | E II.45 L.9-11 | PDF p.96
 def relation_induite_implique(R=None, a="A", x="x", y="y"):
     """⊢ (∀x)(∀y)(R_A{x,y} ⇒ R{x,y})  (la relation induite est plus fine que R ; clos).
 
@@ -196,6 +204,7 @@ def relation_induite_implique(R=None, a="A", x="x", y="y"):
     return N.generalisation(x, N.generalisation(y, imp))
 
 
+# @livre Ch.II §6.6 Rem.- | E II.45 L.9-11 | PDF p.96
 def relation_induite_symetrique(R=None, a="A", x="x", y="y"):
     """{R symétrique} ⊢ (∀x)(∀y)(R_A{x,y} ⇒ R_A{y,x})  (R_A symétrique ; clos mod. hyp.).
 
@@ -222,6 +231,7 @@ def relation_induite_symetrique(R=None, a="A", x="x", y="y"):
 # ════════════════════════════════════════════════════════════════════════════
 # 4.  Image réciproque d'une relation par une application  (E.II.6.6, Déf.)
 # ════════════════════════════════════════════════════════════════════════════
+# @livre Ch.II §6.6 Def.- | E II.45 L.5-6 | PDF p.96
 def image_reciproque_relation(S, phi):
     """(S∘φ){x,y} := S{φ(x), φ(y)}  (image réciproque de S par φ, E.II.6.6, Déf.).
 
@@ -236,6 +246,7 @@ def image_reciproque_relation(S, phi):
     return rel
 
 
+# @livre Ch.II §6.6 Def.- | E II.45 L.3-8 | PDF p.96
 def image_reciproque_relation_dans(S, phi, e):
     """Forme gardée par E : (S∘φ){x,y} := (x∈E et y∈E et S{φ(x),φ(y)})  (E.II.6.6).
 
@@ -249,6 +260,7 @@ def image_reciproque_relation_dans(S, phi, e):
     return rel
 
 
+# @livre Ch.II §6.6 Def.- | E II.45 L.3-8 | PDF p.96
 def graphe_image_reciproque_relation(S, phi, e):
     """Graphe S∘φ := {(x,y)∈E×E | S{φ(x),φ(y)}}  (codage, E.II.6.6).
 
@@ -279,6 +291,7 @@ def theorie_graphe_image_reciproque(gS="GS", phi="phi", e="E", w="w", x="x", y="
                      [axiome_graphe_image_reciproque(gS, phi, e, w, x, y)])
 
 
+# @livre Ch.II §6.6 Def.- | E II.45 L.3-8 | PDF p.96
 def membre_graphe_image_reciproque(gS="GS", phi="phi", e="E", w="w", x="x", y="y"):
     """⊢ (w∈(S∘φ)) ⇔ ∃x∃y(…)  (instance de l'axiome de membership ; clos).
 
@@ -289,6 +302,7 @@ def membre_graphe_image_reciproque(gS="GS", phi="phi", e="E", w="w", x="x", y="y
     return instancie(ax, vw)
 
 
+# @livre Ch.II §6.6 Rem.- | E II.45 L.3-8 | PDF p.96
 def image_reciproque_symetrique(S=None, phi="phi", x="x", y="y"):
     """{S symétrique} ⊢ (∀x)(∀y)((S∘φ){x,y} ⇒ (S∘φ){y,x})  ((S∘φ) symétrique ; clos mod. hyp.).
 
@@ -308,6 +322,7 @@ def image_reciproque_symetrique(S=None, phi="phi", x="x", y="y"):
     return N.generalisation(x, N.generalisation(y, dimp))
 
 
+# @livre Ch.II §6.6 Rem.- | E II.45 L.3-8 | PDF p.96
 def image_reciproque_transitive(S=None, phi="phi", x="x", y="y", z="z"):
     """{S transitive} ⊢ (∀x)(∀y)(∀z)(((S∘φ){x,y} et (S∘φ){y,z}) ⇒ (S∘φ){x,z})
     ((S∘φ) transitive ; clos mod. hyp.).
@@ -331,6 +346,7 @@ def image_reciproque_transitive(S=None, phi="phi", x="x", y="y", z="z"):
 # ════════════════════════════════════════════════════════════════════════════
 # 5.  Ensemble des classes d'objets équivalents  E_R  (E.II.6.9, Déf.)
 # ════════════════════════════════════════════════════════════════════════════
+# @livre Ch.II §6.9 Def.- | E II.47 L.17 | PDF p.98
 def classe_objets(R, x, y="y"):
     """θ{x} := τ_y(R{x,y})  (classe d'objets équivalents à x, E.II.6.9 ; R sans graphe).
 
@@ -339,6 +355,7 @@ def classe_objets(R, x, y="y"):
     return E.classe_objets(R, x, y)
 
 
+# @livre Ch.II §6.9 Def.- | E II.47 L.27-37 | PDF p.98
 def ensemble_classes_objets(R, T):
     """E_R := { z | (∃x)(x∈T et R{x,x} et z = θ{x}) }  (ensemble des classes d'objets
     équivalents, E.II.6.9, Déf.).
@@ -370,6 +387,7 @@ def theorie_ensemble_classes_objets(R, T="T", z="z", x="x"):
                      [axiome_ensemble_classes_objets(R, T, z, x)])
 
 
+# @livre Ch.II §6.9 Def.- | E II.47 L.27-37 | PDF p.98
 def membre_ensemble_classes_objets(R, T="T", z="z", x="x"):
     """⊢ (z∈E_R) ⇔ (∃x)(x∈T et R{x,x} et z=θ{x})  (instance de l'axiome ; clos).
 
@@ -381,6 +399,7 @@ def membre_ensemble_classes_objets(R, T="T", z="z", x="x"):
     return instancie(ax, vz)
 
 
+# @livre Ch.II §6.9 Rem.- | E II.47 L.17-18 | PDF p.98
 def classe_objets_unicite(R=None, x="x", xp="xp", y="y"):
     """{R relation d'équivalence (sym.+trans.)} ⊢ R{x,x'} ⇒ θ{x}=θ{x'}  (E.II.6.9 ; clos mod. hyp.).
 

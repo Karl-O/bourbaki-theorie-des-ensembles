@@ -130,6 +130,7 @@ def _absorption_et(p, q):
 # ════════════════════════════════════════════════════════════════════════════
 #  ÉGALITÉS ENSEMBLISTES  (E.II.1)
 # ════════════════════════════════════════════════════════════════════════════
+# @livre Ch.R §1.13 Rem.- | E.R.4 L.7-8 | PDF p.307
 def associativite_reunion(a="A", b="B", c="C"):
     """⊢ (A∪B)∪C = A∪(B∪C)."""
     va, vb, vc, vz = _t(a), _t(b), _t(c), var("z")
@@ -145,6 +146,7 @@ def associativite_reunion(a="A", b="B", c="C"):
     return egalite_par_extension(char_u, char_v, E.reunion(AB, vc), E.reunion(va, BC))
 
 
+# @livre Ch.R §1.13 Rem.- | E.R.4 L.7-8 | PDF p.307
 def associativite_intersection(a="A", b="B", c="C"):
     """⊢ (A∩B)∩C = A∩(B∩C)."""
     va, vb, vc, vz = _t(a), _t(b), _t(c), var("z")
@@ -160,6 +162,7 @@ def associativite_intersection(a="A", b="B", c="C"):
     return egalite_par_extension(char_u, char_v, E.intersection(AB, vc), E.intersection(va, BC))
 
 
+# @livre Ch.R §1.14 Prop.(2) | E.R.4 L.20 | PDF p.307
 def idempotence_reunion(a="A"):
     """⊢ A∪A = A."""
     va, vz = _t(a), var("z")
@@ -170,6 +173,7 @@ def idempotence_reunion(a="A"):
     return egalite_par_extension(char_u, char_v, E.reunion(va, va), va)
 
 
+# @livre Ch.R §1.14 Prop.(2) | E.R.4 L.20 | PDF p.307
 def idempotence_intersection(a="A"):
     """⊢ A∩A = A."""
     va, vz = _t(a), var("z")
@@ -180,6 +184,7 @@ def idempotence_intersection(a="A"):
     return egalite_par_extension(char_u, char_v, E.intersection(va, va), va)
 
 
+# @livre Ch.R §1.13 Rem.- | E.R.4 L.7-8 | PDF p.307
 def absorption_reunion(a="A", b="B"):
     """⊢ A∪(A∩B) = A."""
     va, vb, vz = _t(a), _t(b), var("z")
@@ -193,6 +198,7 @@ def absorption_reunion(a="A", b="B"):
     return egalite_par_extension(char_u, char_v, E.reunion(va, AB), va)
 
 
+# @livre Ch.R §1.13 Rem.- | E.R.4 L.7-8 | PDF p.307
 def absorption_intersection(a="A", b="B"):
     """⊢ A∩(A∪B) = A."""
     va, vb, vz = _t(a), _t(b), var("z")
@@ -231,6 +237,7 @@ def _ou_et_distrib(p, q, r):
     return conjonction_intro(fwd, bwd)
 
 
+# @livre Ch.R §1.13 Rem.- | E.R.4 L.7-8 | PDF p.307
 def distributivite_intersection_reunion(a="A", b="B", c="C"):
     """⊢ A∩(B∪C) = (A∩B)∪(A∩C)   (distributivité de ∩ sur ∪, E.II.1)."""
     va, vb, vc, vz = _t(a), _t(b), _t(c), var("z")
@@ -246,6 +253,7 @@ def distributivite_intersection_reunion(a="A", b="B", c="C"):
                                  E.reunion(E.intersection(va, vb), E.intersection(va, vc)))
 
 
+# @livre Ch.R §1.13 Rem.- | E.R.4 L.7-8 | PDF p.307
 def distributivite_reunion_intersection(a="A", b="B", c="C"):
     """⊢ A∪(B∩C) = (A∪B)∩(A∪C)   (distributivité de ∪ sur ∩, E.II.1)."""
     va, vb, vc, vz = _t(a), _t(b), _t(c), var("z")
@@ -262,6 +270,7 @@ def distributivite_reunion_intersection(a="A", b="B", c="C"):
                                  E.intersection(E.reunion(va, vb), E.reunion(va, vc)))
 
 
+# @livre Ch.R §1.14 Prop.(8) | E.R.4 L.27 | PDF p.307
 def de_morgan_complement_reunion(e="E", a="A", b="B"):
     """⊢ E∖(A∪B) = (E∖A)∩(E∖B)   (De Morgan, complément relatif, E.II.1)."""
     vE, va, vb, vz = _t(e), _t(a), _t(b), var("z")
@@ -281,6 +290,7 @@ def de_morgan_complement_reunion(e="E", a="A", b="B"):
                                  E.intersection(DEA, DEB))
 
 
+# @livre Ch.R §1.14 Prop.(8) | E.R.4 L.27 | PDF p.307
 def de_morgan_complement_intersection(e="E", a="A", b="B"):
     """⊢ E∖(A∩B) = (E∖A)∪(E∖B)   (De Morgan, complément relatif, E.II.1)."""
     vE, va, vb, vz = _t(e), _t(a), _t(b), var("z")

@@ -115,6 +115,7 @@ def _memes_couples_23(vX, vXp, vY, vYp, u="u", v="v"):
 
 
 # ── FORMULE (23) en ÉGALITÉ D'ENSEMBLES ───────────────────────────────────────
+# @livre Ch.II §R.3 Prop.23 | E.R.12 L.22-23 | PDF p.315
 def produit_inter_ensembliste(a="X", b="Xp", c="Y", d="Yp", e="E", f="F"):
     """⊢ ( X⊂E ∧ X'⊂E ∧ Y⊂F ∧ Y'⊂F ) ⇒ (X×Y)∩(X'×Y') = (X∩X')×(Y∩Y').
 

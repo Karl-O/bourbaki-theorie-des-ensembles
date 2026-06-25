@@ -86,6 +86,7 @@ def membres_t_R_lies(g, t, x="x", a="a"):
                                         R(va, vx))))
 
 
+# @livre Ch.II §6.3 Crit.C56 | E II.43 L.3-6 | PDF p.94
 def c56_quotient_existe_ssi_pourtout(P=None, g="G", t="t", x="x", a="a", yc="yc"):
     """C56 (E.II.6.3) — cœur du passage au quotient ; clos modulo hyp.
 
@@ -152,6 +153,7 @@ def c56_quotient_existe_ssi_pourtout(P=None, g="G", t="t", x="x", a="a", yc="yc"
 # ═══════════════════════════════════════════════════════════════════════════════
 # C57 — bien-définition de h (sens « il suffit » : f compatible ⇒ h existe)
 # ═══════════════════════════════════════════════════════════════════════════════
+# @livre Ch.II §6.5 Crit.C57 | E II.44 L.17-21 | PDF p.95
 def c57_bien_definie(f="f", g="G", e="E", x="x", y="yb"):
     """C57 (E.II.6.5), bien-définition de h(p(x)):=f(x) ; clos modulo hyp.
 

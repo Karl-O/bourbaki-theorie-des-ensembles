@@ -69,6 +69,7 @@ def _t(v):
 # ═══════════════════════════════════════════════════════════════════════════════
 # 1.  factorisation_valeur :  f = h∘p  ⊢  f(x) = h(p(x))   (C57, identité de valeur)
 # ═══════════════════════════════════════════════════════════════════════════════
+# @livre Ch.II §6.5 Crit.C57 | E II.44 L.17-21 | PDF p.95
 def factorisation_valeur(f="f", h="h", p="P", x="x"):
     """{f = h∘p (graphes), C46(h∘p,x)} ⊢ valeur(f, x) = h(p(x)).   (C57, niveau valeur.)
 
@@ -96,6 +97,7 @@ def factorisation_valeur(f="f", h="h", p="P", x="x"):
 # ═══════════════════════════════════════════════════════════════════════════════
 # 2.  factorisation ⇒ compatible :  p(x)=p(y) ⇒ f(x)=f(y)   (C57, sens DUR)
 # ═══════════════════════════════════════════════════════════════════════════════
+# @livre Ch.II §6.5 Crit.C57 | E II.44 L.17-21 | PDF p.95
 def factorisation_implique_compatible(f="f", h="h", p="P", x="x", y="yb"):
     """{f = h∘p, C46(h∘p,x), C46(h∘p,y)} ⊢ (p(x)=p(y)) ⇒ (f(x)=f(y)).   (C57, sens dur.)
 
@@ -121,6 +123,7 @@ def factorisation_implique_compatible(f="f", h="h", p="P", x="x", y="yb"):
     return N.loi_deduction(egal(px, py), chain)    # (p(x)=p(y)) ⇒ (f(x)=f(y))
 
 
+# @livre Ch.II §6.2 Def.- | E II.41 L.17-19 | PDF p.92
 def relation_Rp(p):
     """R_p{x,y} := p(x) = p(y)  (relation d'équivalence associée à p, lue par valeurs).
 
@@ -146,6 +149,7 @@ def domaine_total(g, e, x="x"):
     return pourtout(x, impl(appartient(vx, ve), _dom_point(vg, vx)))
 
 
+# @livre Ch.II §6.5 Crit.C57 | E II.44 L.17-21 | PDF p.95
 def factorisation_compatible_Rp(f="f", h="h", p="P", e="E", quot="Q", x="x", y="yb"):
     """{f = h∘p,  p définie sur E,  h définie sur Q=E/R,  (∀x)(x∈E ⇒ p(x)∈Q),
         h∘p fonctionnel}
@@ -214,6 +218,7 @@ def factorisation_compatible_Rp(f="f", h="h", p="P", e="E", quot="Q", x="x", y="
 # ═══════════════════════════════════════════════════════════════════════════════
 # 3.  décomposition canonique EFFECTIVE au niveau des valeurs  f = i∘b∘p  (E.II.6.5)
 # ═══════════════════════════════════════════════════════════════════════════════
+# @livre Ch.II §6.5 Def.- | E II.44 L.23-32 | PDF p.95
 def decomposition_valeur(F="F", b="b", p="P", i="i", x="x"):
     """{F = i∘(b∘p) (graphes), C46 imbriquées} ⊢ valeur(F, x) = i(b(p(x))).
 
@@ -249,6 +254,7 @@ def decomposition_valeur(F="F", b="b", p="P", i="i", x="x"):
 # ═══════════════════════════════════════════════════════════════════════════════
 # 4.  UNICITÉ de l'application déduite (propriété universelle du quotient)
 # ═══════════════════════════════════════════════════════════════════════════════
+# @livre Ch.II §6.5 Crit.C57 | E II.44 L.20 | PDF p.95
 def factorisation_meme_valeurs(h="h", hp="hp", p="P", f="f", x="x"):
     """{f = h∘p, f = h'∘p, C46(h∘p,x), C46(h'∘p,x)} ⊢ h(p(x)) = h'(p(x)).
 
@@ -297,6 +303,7 @@ def coincidence_ponctuelle_graphe(gh, ghp, p, x="x"):
     return pourtout(x, egal(E.valeur(vgh, px), E.valeur(vghp, px)))
 
 
+# @livre Ch.II §6.5 Crit.C57 | E II.44 L.20 | PDF p.95
 def coincidence_sur_quotient(h="h", hp="hp", p="P", quot="Q", t="x", x="xa"):
     """{p surjective ponctuelle (E sur Q),
         (∀x)( gh(p(x)) = gh'(p(x)) )   [coïncidence ponctuelle des graphes]}
@@ -336,6 +343,7 @@ def coincidence_sur_quotient(h="h", hp="hp", p="P", quot="Q", t="x", x="xa"):
     return N.generalisation(t, imp_t)               # (∀t)(t∈Q ⇒ gh(t)=gh'(t))
 
 
+# @livre Ch.II §6.5 Crit.C57 | E II.44 L.20 | PDF p.95
 def factorisation_unique(h="h", hp="hp", p="P", but="F", quot="Q", t="x", x="xa"):
     """{h∈𝓕(Q;F), h'∈𝓕(Q;F),
         p surjective ponctuelle (E sur Q),

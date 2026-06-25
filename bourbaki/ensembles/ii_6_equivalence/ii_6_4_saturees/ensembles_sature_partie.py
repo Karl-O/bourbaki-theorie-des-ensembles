@@ -125,6 +125,7 @@ def _mem_cform(p, b, pt):
     return equivalence_transitivite(m2, ren)               # ⇔ (∃c)(c∈B et (pt,c)∈p)
 
 
+# @livre Ch.II §6.4 Def.- | E II.43 L.27-29 | PDF p.94
 def sature_partie_saturee(g="G", e="E", b="B"):
     """{R sym, R trans, G relation dans E} ⊢ est_saturee( p⁻¹⟨B⟩, G )
     (E.II.6.4 ; clos mod. hyp.).

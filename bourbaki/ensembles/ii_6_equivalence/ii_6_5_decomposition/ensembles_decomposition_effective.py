@@ -93,6 +93,7 @@ def _Rf_corps(vf, va, vw, ve):
 # ═══════════════════════════════════════════════════════════════════════════════
 # 0.  La classe Cl_{R_f}(x), codée par la classe d'objets θ_{R_f}(x)  (E.II.6.9)
 # ═══════════════════════════════════════════════════════════════════════════════
+# @livre Ch.II §6.9 Def.- | E II.47 L.16-39 | PDF p.98
 def classe_objets_Rf(f, x, e=None, w="w"):
     """θ_{R_f}(x) := τ_w(R_f{x,w})  (classe de x suivant R_f, forme « classe d'objets »).
 
@@ -108,6 +109,7 @@ def classe_objets_Rf(f, x, e=None, w="w"):
 # ═══════════════════════════════════════════════════════════════════════════════
 # 1.  CŒUR : f(x)=f(y) ⇒ Cl(x)=Cl(y)   « par définition de R_f »  (INCONDITIONNEL)
 # ═══════════════════════════════════════════════════════════════════════════════
+# @livre Ch.II §6.5 Prop.- | E II.44 L.25-28 | PDF p.95
 def passage_quotient_Rf(f="f", e=None, x="x", y="y", w="w"):
     """⊢ ( (x∈E et y∈E) et f(x)=f(y) ) ⇒ θ_{R_f}(x) = θ_{R_f}(y).   (CLOS, E.II.6.5.)
 
@@ -181,6 +183,7 @@ def relation_valeur_b(f, b, x, e=None, w="w"):
     return egal(_valb(vb, classe_objets_Rf(vf, x, e=ve, w=w)), _valf(vf, x))
 
 
+# @livre Ch.II §6.5 Prop.- | E II.44 L.25-28 | PDF p.95
 def b_injective_valeurs(f="f", b="b", e=None, x="x", y="y", w="w"):
     """{ b(θ(x)) = f(x),  b(θ(y)) = f(y) }
        ⊢ ( (x∈E et y∈E) et b(θ(x)) = b(θ(y)) ) ⇒ θ(x) = θ(y).   (E.II.6.5.)
@@ -246,6 +249,7 @@ def pont_valeurs_b(f, b, e=None, x="x", w="w"):
                                  _valf(vf, vx))))
 
 
+# @livre Ch.II §6.5 Prop.- | E II.44 L.25-28 | PDF p.95
 def b_injective_via_pont(f="f", b="b", e=None, x="x", y="y", w="w"):
     """{ (∀a)( a∈E ⇒ b(θ(a)) = f(a) ) }
        ⊢ (∀x)(∀y)( ( (x∈E et y∈E) et b(θ(x)) = b(θ(y)) ) ⇒ θ(x) = θ(y) ).

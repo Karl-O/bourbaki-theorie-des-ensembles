@@ -63,6 +63,7 @@ def _T(v):
     return v if isinstance(v, Terme) else var(v)
 
 
+# @livre Ch.II §3.1 Def.1 | E II.9 L.9-12 | PDF p.60
 def est_graphe(g):
     """« G est un ensemble de couples » := (∀z)(z ∈ G ⇒ est_couple(z))  (E II.7/II.37).
 
@@ -77,6 +78,7 @@ def _inst_img(g, y):
     return instancie(instancie(ax, g), y)
 
 
+# @livre Ch.II §3.1 Prop.1 | E II.9 L.27-29 | PDF p.60
 def couple_dans_img(g, x, y):
     """{(x,y) ∈ G} ⊢ y ∈ pr₂G = img G.   (la 2ᵈᵉ coordonnée d'un couple de G est une
     valeur ; symétrique de couple_dans_dom.  g, x, y : noms OU termes.)"""
@@ -88,6 +90,7 @@ def couple_dans_img(g, x, y):
     return N.modus_ponens(exists_x, equivalence_arriere(car))  # y∈img G
 
 
+# @livre Ch.II §3.1 Rem.- | E II.10 L.1-2 | PDF p.61
 def graphe_inclus_produit(g="G"):
     """{ est_graphe(G) } ⊢ G ⊂ (pr₁G) × (pr₂G).   (Bourbaki E II.10, §3, n°1.)
 
@@ -183,6 +186,7 @@ def _produit_facteur_vide(autre, gauche):
     return N.modus_ponens(disj, inst)                          # A×B = ∅
 
 
+# @livre Ch.II §3.1 Cor.- | E II.10 L.2-3 | PDF p.61
 def projection_vide_implique_graphe_vide(g="G"):
     """{ est_graphe(G), pr₁G = ∅ } ⊢ G = ∅.   (Corollaire E II.10, §3, n°1.)
 
@@ -206,6 +210,7 @@ def projection_vide_implique_graphe_vide(g="G"):
     return _conclure_g_vide(vg, incl, eq_prod, E.produit(E.dom(vg), E.img(vg)))
 
 
+# @livre Ch.II §3.1 Cor.- | E II.10 L.2-3 | PDF p.61
 def projection_image_vide_implique_graphe_vide(g="G"):
     """{ est_graphe(G), pr₂G = ∅ } ⊢ G = ∅.   (Corollaire E II.10, duale.)
 

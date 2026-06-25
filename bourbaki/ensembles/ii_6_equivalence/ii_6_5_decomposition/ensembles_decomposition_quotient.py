@@ -53,6 +53,7 @@ def _tv(t):
 # ════════════════════════════════════════════════════════════════════════════
 # 1.  Relation d'égalité-des-valeurs R_f associée à une application f (E.II.6.2)
 # ════════════════════════════════════════════════════════════════════════════
+# @livre Ch.II §6.2 Def.- | E II.41 L.17-19 | PDF p.92
 def relation_egalite_valeurs(f, x="x", y="y"):
     """R_f{x,y} := « x∈E et y∈E et f(x)=f(y) »  (E=dom f), la relation d'équivalence
     associée à f  (E.II.6.2).  Renvoie une fonction (Terme, Terme) → Formule.
@@ -62,6 +63,7 @@ def relation_egalite_valeurs(f, x="x", y="y"):
 
 
 # ── R_f est une relation d'équivalence dans dom f (lemmes directs) ─────────────
+# @livre Ch.II §6.2 Prop.- | E II.41 L.17-18 | PDF p.92
 def rf_symetrique(f="f", x="x", y="y"):
     """⊢ R_f symétrique : (∀x)(∀y)(R_f{x,y} ⇒ R_f{y,x})  (E.II.6.2 ; clos).
 
@@ -81,6 +83,7 @@ def rf_symetrique(f="f", x="x", y="y"):
     return N.generalisation(x, N.generalisation(y, imp))
 
 
+# @livre Ch.II §6.2 Prop.- | E II.41 L.17-18 | PDF p.92
 def rf_transitive(f="f", x="x", y="y", z="z"):
     """⊢ R_f transitive : (∀x)(∀y)(∀z)((R_f{x,y} et R_f{y,z}) ⇒ R_f{x,z})  (E.II.6.2 ; clos).
 
@@ -102,6 +105,7 @@ def rf_transitive(f="f", x="x", y="y", z="z"):
     return N.generalisation(x, N.generalisation(y, N.generalisation(z, imp)))
 
 
+# @livre Ch.II §6.2 Prop.- | E II.41 L.17-18 | PDF p.92
 def rf_reflexive_dans_dom(f="f", x="x"):
     """⊢ R_f réflexive dans E=dom f : (∀x)(R_f{x,x} ⇔ x∈dom f)  (E.II.6.2 ; clos).
 
@@ -124,6 +128,7 @@ def rf_reflexive_dans_dom(f="f", x="x"):
     return N.generalisation(x, eqv)
 
 
+# @livre Ch.II §6.2 Prop.- | E II.41 L.17-19 | PDF p.92
 def rf_relation_equivalence_dans(f="f", x="x", y="y", z="z"):
     """⊢ R_f est une relation d'équivalence dans dom f  (E.II.6.2 ; clos).
 
@@ -143,6 +148,7 @@ def rf_relation_equivalence_dans(f="f", x="x", y="y", z="z"):
 #   – b : bijection induite  E/R_f → f⟨E⟩      (graphe `bijection_induite`, ci-dessous)
 #   – i : injection canonique f⟨E⟩ → F         (graphe `injection_canonique` = Δ)
 
+# @livre Ch.II §6.2 Def.- | E II.41 L.30-33 | PDF p.92
 def surjection_canonique(g, e):
     """Graphe de la surjection canonique p : E → E/R, p(x) = Cl_R(x)  (E.II.6.2).
 
@@ -151,6 +157,7 @@ def surjection_canonique(g, e):
     return E.application_canonique(g, e)
 
 
+# @livre Ch.II §6.5 Def.- | E II.44 L.23-32 | PDF p.95
 def injection_canonique(b):
     """Graphe de l'injection canonique i : B → F, i(y) = y  (B ⊂ F)  (E.II.6.5).
 
@@ -160,6 +167,7 @@ def injection_canonique(b):
     return E.diagonale(_tv(b))
 
 
+# @livre Ch.II §6.5 Def.- | E II.44 L.28-32 | PDF p.95
 def bijection_induite(g, e, f):
     """Graphe de la bijection induite b : E/R_f → f⟨E⟩, b(Cl_{R_f}(x)) = f(x)  (E.II.6.5).
 
@@ -170,6 +178,7 @@ def bijection_induite(g, e, f):
     return app("bij_induite", g, _tv(e), _tv(f))
 
 
+# @livre Ch.II §6.5 Ax.- | E II.44 L.28-32 | PDF p.95
 def axiome_bijection_induite(g="G", e="E", f="f", w="w", x="x"):
     """⊢-schéma : (∀w)(w ∈ b ⇔ (∃x)(x∈E et w = (Cl_R(x), f(x))))  (membership, S8+A1).
 
@@ -188,6 +197,7 @@ def theorie_bijection_induite(g="G", e="E", f="f", w="w", x="x"):
     return N.Theorie("Bijection-induite", [axiome_bijection_induite(g, e, f, w, x)])
 
 
+# @livre Ch.II §6.5 Prop.- | E II.44 L.28-32 | PDF p.95
 def membre_bijection_induite(g="G", e="E", f="f", w="w", x="x"):
     """⊢ (w ∈ b) ⇔ (∃x)(x∈E et w = (Cl_R(x), f(x)))  (instance de l'axiome ; clos).
 
@@ -198,6 +208,7 @@ def membre_bijection_induite(g="G", e="E", f="f", w="w", x="x"):
     return instancie(ax, vw)
 
 
+# @livre Ch.II §6.5 Def.- | E II.44 L.23-32 | PDF p.95
 def decomposition_canonique(f, g, e, but, x="x"):
     """« f = i ∘ b ∘ p »  (décomposition canonique de f, E.II.6.5) — PRÉDICAT.
 
@@ -224,6 +235,7 @@ def decomposition_canonique(f, g, e, but, x="x"):
 # ════════════════════════════════════════════════════════════════════════════
 # 3.  Quotient R/S de deux relations d'équivalence (S plus fine que R) (E.II.6.7)
 # ════════════════════════════════════════════════════════════════════════════
+# @livre Ch.II §6.7 Def.- | E II.46 L.3-9 | PDF p.97
 def relation_quotient_RS(R, S, e=None, t="t", tp="tp", x="x", y="y"):
     """(R/S){t,t'} := la relation induite sur E/S  (E.II.6.7), forme « classe d'objets ».
 
@@ -248,6 +260,7 @@ def relation_quotient_RS(R, S, e=None, t="t", tp="tp", x="x", y="y"):
     return rel
 
 
+# @livre Ch.II §6.7 Def.- | E II.46 L.3-9 | PDF p.97
 def relation_quotient_RS_graphe(R, gS, t="t", tp="tp", x="x", y="y"):
     """Variante GRAPHE : (R/S){t,t'} avec S donnée par son graphe gS (Cl_S = G⟨{·}⟩).
 
@@ -264,6 +277,7 @@ def relation_quotient_RS_graphe(R, gS, t="t", tp="tp", x="x", y="y"):
     return rel
 
 
+# @livre Ch.II §6.7 Def.- | E II.45 L.21-23 | PDF p.96
 def quotient_bien_pose(R=None, S=None, x="x", y="y"):
     """{S plus fine que R} ⊢ (∀x)(∀y)(S{x,y} ⇒ R{x,y})  (bien-fondé de R/S, E.II.6.7 ; clos modulo hyp.).
 
@@ -279,6 +293,7 @@ def quotient_bien_pose(R=None, S=None, x="x", y="y"):
     return hyp                                    # conclusion = la formule, hyp identique
 
 
+# @livre Ch.II §6.7 Prop.- | E II.45 L.21-23 | PDF p.96
 def quotient_bien_pose_instance(R=None, S=None, a="a", b="b", x="x", y="y"):
     """{S plus fine que R} ⊢ S{a,b} ⇒ R{a,b}  (instance ponctuelle ; E.II.6.7).
 

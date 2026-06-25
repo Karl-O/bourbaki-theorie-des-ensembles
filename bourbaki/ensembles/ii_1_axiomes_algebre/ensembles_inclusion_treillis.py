@@ -52,6 +52,7 @@ def _oui_d(a, b):
     return syllogisme(N.s2(b, a), N.s3(b, a))
 
 
+# @livre Ch.R §1.14 Prop.(d) | E.R.4 L.28-30 | PDF p.307
 def inclusion_ssi_intersection_egale(a="A", b="B"):
     """⊢ (A ⊂ B) ⇔ (A∩B = A)."""
     va, vb, vz = _t(a), _t(b), var("z")
@@ -76,6 +77,7 @@ def inclusion_ssi_intersection_egale(a="A", b="B"):
     return conjonction_intro(imp1, imp2)
 
 
+# @livre Ch.R §1.14 Prop.(d) | E.R.4 L.28-30 | PDF p.307
 def inclusion_ssi_reunion_egale(a="A", b="B"):
     """⊢ (A ⊂ B) ⇔ (A∪B = B)."""
     va, vb, vz = _t(a), _t(b), var("z")
@@ -123,6 +125,7 @@ def _antitone_impl(a, b):
     return N.loi_deduction(inclus(va, vb), gen)
 
 
+# @livre Ch.II §1.7 Prop.- | E II.6 L.21-22 | PDF p.57
 def antitonie_complement(a="A", b="B", e="E"):
     """⊢ (A ⊂ B) ⇔ ((E∖B) ⊂ (E∖A))   sous (A⊂E, B⊂E)   (E.II.6, nº7).
 

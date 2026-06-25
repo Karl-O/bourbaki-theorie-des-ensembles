@@ -44,6 +44,7 @@ def _instance_diff(e, x, z):
     return instancie(instancie(instancie(N.axiome(E.theorie_ensembles(), E.AXIOME_DIFF), e), x), z)
 
 
+# @livre Ch.II §1.7 Rem.- | E II.6 L.14-17 | PDF p.57
 def intersection_difference_associe(a="A", b="B", c="C"):
     """⊢ A∩(B∖C) = (A∩B)∖C."""
     va, vb, vc, vz = _t(a), _t(b), _t(c), var("z")
@@ -59,6 +60,7 @@ def intersection_difference_associe(a="A", b="B", c="C"):
                                  E.difference(E.intersection(va, vb), vc))
 
 
+# @livre Ch.II §1.7 Rem.- | E II.6 L.14-17 | PDF p.57
 def difference_reunion(a="A", b="B", c="C"):
     """⊢ (A∖B)∖C = A∖(B∪C)."""
     va, vb, vc, vz = _t(a), _t(b), _t(c), var("z")
@@ -112,6 +114,7 @@ def _inc_z(vX, vE, vz):
     return instancie(N.assume(inclus(vX, vE)), vz)
 
 
+# @livre Ch.R §1.14 Prop.(a) | E.R.4 L.17 | PDF p.307
 def difference_vide(e="E"):
     """⊢ E∖∅ = E   (item a : E = ∁∅ ; INCONDITIONNEL).
 
@@ -130,6 +133,7 @@ def difference_vide(e="E"):
     return egalite_par_extension(char_u, char_v, E.difference(vE, E.VIDE), vE)
 
 
+# @livre Ch.R §1.14 Prop.(3) | E.R.4 L.21 | PDF p.307
 def inter_complement_vide(x="X", e="E"):
     """⊢ X∩(E∖X) = ∅   (item (3) droite : X∩(∁X) = ∅ ; INCONDITIONNEL).
 
@@ -157,6 +161,7 @@ def inter_complement_vide(x="X", e="E"):
                                  E.intersection(vX, E.difference(vE, vX)), E.VIDE)
 
 
+# @livre Ch.R §1.14 Prop.(4) | E.R.4 L.22 | PDF p.307
 def inter_ambiant_neutre(x="X", e="E"):
     """⊢ X∩E = X   sous (X⊂E)   (item (4) : X∩E = X).
 
@@ -174,6 +179,7 @@ def inter_ambiant_neutre(x="X", e="E"):
     return egalite_par_extension(char_u, char_v, E.intersection(vX, vE), vX)
 
 
+# @livre Ch.R §1.14 Prop.(5) | E.R.4 L.23 | PDF p.307
 def reunion_ambiant_absorbe(x="X", e="E"):
     """⊢ X∪E = E   sous (X⊂E)   (item (5) : X∪E = E).
 
@@ -191,6 +197,7 @@ def reunion_ambiant_absorbe(x="X", e="E"):
     return egalite_par_extension(char_u, char_v, E.reunion(vX, vE), vE)
 
 
+# @livre Ch.R §1.14 Prop.(3) | E.R.4 L.21 | PDF p.307
 def reunion_complement_plein(x="X", e="E"):
     """⊢ X∪(E∖X) = E   sous (X⊂E)   (item (3) gauche : X∪(∁X) = E).
 
@@ -219,6 +226,7 @@ def reunion_complement_plein(x="X", e="E"):
                                  E.reunion(vX, E.difference(vE, vX)), vE)
 
 
+# @livre Ch.II §1.7 Prop.- | E II.6 L.18-20 | PDF p.57
 def complement_involution(x="X", e="E"):
     """⊢ E∖(E∖X) = X   sous (X⊂E)   (item (1) : ∁(∁X) = X).
 

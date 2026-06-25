@@ -83,6 +83,7 @@ def relation_produit_couples(R, Rp):
     return S
 
 
+# @livre Ch.II §6.8 Def.- | E II.46 L.21-22 | PDF p.97
 def produit_symetrique(R=None, Rp=None, u="u", v="v"):
     """{R symétrique, R' symétrique} ⊢ (R×R') symétrique  (II.6.8 ; clos mod. hyp.).
 
@@ -112,6 +113,7 @@ def produit_symetrique(R=None, Rp=None, u="u", v="v"):
     return N.generalisation(u, N.generalisation(v, imp))
 
 
+# @livre Ch.II §6.8 Def.- | E II.46 L.21-22 | PDF p.97
 def produit_transitive(R=None, Rp=None, u="u", v="v", w="wb"):
     """{R transitive, R' transitive} ⊢ (R×R') transitive  (II.6.8 ; clos mod. hyp.).
 
@@ -147,6 +149,7 @@ def produit_transitive(R=None, Rp=None, u="u", v="v", w="wb"):
     return N.generalisation(u, N.generalisation(v, N.generalisation(w, imp)))
 
 
+# @livre Ch.II §6.8 Def.- | E II.46 L.21-22 | PDF p.97
 def produit_relation_equivalence(R=None, Rp=None, u="u", v="v", w="wb"):
     """{R éq., R' éq.} ⊢ (R×R') relation d'équivalence  (II.6.8 ; clos mod. hyp.).
 
@@ -183,6 +186,7 @@ def _relation_induite(R, a):
     return rel
 
 
+# @livre Ch.II §6.6 Def.- | E II.45 L.9-11 | PDF p.96
 def induite_transitive(R=None, a="A", x="x", y="y", z="z"):
     """{R transitive} ⊢ (∀x)(∀y)(∀z)((R_A{x,y} et R_A{y,z}) ⇒ R_A{x,z})
     (R_A transitive ; II.6.6 ; clos mod. hyp.).
@@ -210,6 +214,7 @@ def induite_transitive(R=None, a="A", x="x", y="y", z="z"):
     return N.generalisation(x, N.generalisation(y, N.generalisation(z, imp)))
 
 
+# @livre Ch.II §6.6 Def.- | E II.45 L.9-11 | PDF p.96
 def induite_reflexive_dans(R=None, a="A", e="E", x="x"):
     """{R réflexive dans E, (∀x)(x∈A ⇒ x∈E)} ⊢ (∀x)( R_A{x,x} ⇔ x∈A )
     (R_A réflexive dans A ; II.6.6 ; clos mod. hyp.).
@@ -242,6 +247,7 @@ def induite_reflexive_dans(R=None, a="A", e="E", x="x"):
     return N.generalisation(x, eqv)
 
 
+# @livre Ch.II §6.6 Def.- | E II.45 L.9-11 | PDF p.96
 def induite_relation_equivalence(R=None, a="A", x="x", y="y", z="z"):
     """{R symétrique, R transitive} ⊢ R_A relation d'équivalence  (II.6.6 ; clos mod. hyp.).
 
@@ -278,6 +284,7 @@ def induite_relation_equivalence(R=None, a="A", x="x", y="y", z="z"):
 # que R (R{x,y}⇒R{x,y}).  Transitive : si S plus fine T et T plus fine R, alors S
 # plus fine R (composition d'implications).
 
+# @livre Ch.II §6.7 Def.- | E II.45 L.21-23 | PDF p.96
 def plus_fine_reflexive(R=None, x="x", y="y"):
     """⊢ R plus fine que R  (II.6.7 ; INCONDITIONNEL).
 
@@ -291,6 +298,7 @@ def plus_fine_reflexive(R=None, x="x", y="y"):
     return N.generalisation(x, N.generalisation(y, imp))
 
 
+# @livre Ch.II §6.7 Def.- | E II.45 L.21-23 | PDF p.96
 def plus_fine_transitive(S=None, T=None, R=None, x="x", y="y"):
     """{S plus fine que T, T plus fine que R} ⊢ S plus fine que R  (II.6.7 ; clos mod. hyp.).
 
@@ -322,6 +330,7 @@ def plus_fine_transitive(S=None, T=None, R=None, x="x", y="y"):
 #                       = (∀x)(∀y)((x∈A et (x,y)∈G) ⇒ y∈A)   (II.6.4).
 # C'est exactement « A close par R » (la classe de tout x∈A reste dans A).
 
+# @livre Ch.II §6.4 Def.- | E II.43 L.15-18 | PDF p.94
 def saturee_implique_classe_incluse(g="G", a="A", x="x", y="y"):
     """{A saturée pour R} ⊢ (∀x)(∀y)( (x∈A et R{x,y}) ⇒ y∈A )
     (une partie saturée est close par R ; II.6.4 ; clos mod. hyp.).

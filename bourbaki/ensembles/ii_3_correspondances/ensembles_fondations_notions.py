@@ -40,6 +40,7 @@ def _t(v):
 
 
 # ── §II.3.1, Déf. 1 — Correspondance Γ = (G, A, B) ────────────────────────────
+# @livre Ch.II §3.1 Def.2 | E II.10 L.6-8 | PDF p.61
 def est_une_correspondance(g, a, b):
     """« (G, A, B) est une correspondance de A dans B » := G ⊂ A×B   (E.II.3.1, Déf. 1).
 
@@ -50,12 +51,14 @@ def est_une_correspondance(g, a, b):
     return E.inclus(_t(g), E.produit(_t(a), _t(b)))
 
 
+# @livre Ch.II §3.1 Def.2 | E II.10 L.6-8 | PDF p.61
 def correspondance(g, a, b):
     """Γ := (G, A, B) = ((G, A), B)  (le triple « correspondance », E.II.3.1)."""
     return E.couple(E.couple(_t(g), _t(a)), _t(b))
 
 
 # ── §II.3.4, Déf. 9 — Graphe fonctionnel / fonction ───────────────────────────
+# @livre Ch.II §3.4 Def.9 | E II.13 L.25-26 | PDF p.64
 def est_un_graphe_fonctionnel(g):
     """« G est un graphe fonctionnel » := (∀u)(∀v)(∀z)(((u,v)∈G et (u,z)∈G) ⇒ v=z)
     (E.II.3.4, Déf. 9 ; au plus une valeur par antécédent).
@@ -65,6 +68,7 @@ def est_un_graphe_fonctionnel(g):
     return E.est_fonctionnel(_t(g))
 
 
+# @livre Ch.II §3.4 Def.9 | E II.13 L.25-29 | PDF p.64
 def est_une_fonction(f):
     """« F est une fonction » := F est un graphe fonctionnel   (E.II.3.4, Déf. 9).
 
@@ -74,6 +78,7 @@ def est_une_fonction(f):
 
 
 # ── §II.3.4 + §II.5.2 — Application de A dans B ───────────────────────────────
+# @livre Ch.II §3.4 Def.- | E II.14 L.4-7 | PDF p.65
 def est_application(f, a, b):
     """« F est (le graphe d')une application de A dans B » :=
         F graphe fonctionnel  ET  dom F = A  ET  F ⊂ A×B          (E.II.3.4 / E.II.5.2).
@@ -88,6 +93,7 @@ def est_application(f, a, b):
 
 
 # ── §II.3.4 — Application identique Id_A : x ↦ x ──────────────────────────────
+# @livre Ch.II §3.4 Def.8 | E II.13 L.18-19 | PDF p.64
 def graphe_identite(a, x="x"):
     """Graphe de Id_A := {(x, x) | x∈A}  (= la diagonale Δ_A, E.III.3.1).
 
@@ -97,6 +103,7 @@ def graphe_identite(a, x="x"):
     return E.graphe_terme(_t(a), var(x), x)
 
 
+# @livre Ch.II §3.4 Def.8 | E II.13 L.20-21 | PDF p.64
 def application_identique(a, x="x"):
     """Id_A := (x ↦ x sur A)  =  (graphe Δ_A, A, A)   (application identique, E.II.3.4).
 
@@ -107,6 +114,7 @@ def application_identique(a, x="x"):
 
 
 # ── Lemme direct (introduction « par construction ») ──────────────────────────
+# @livre Ch.II §3.4 Def.8 | E II.13 L.18-21 | PDF p.64
 def application_identique_est_application(a="A", x="x"):
     """⊢ graphe-Id_A ⊂ A×A.   (le graphe de l'identité est inclus dans A×A.)
 

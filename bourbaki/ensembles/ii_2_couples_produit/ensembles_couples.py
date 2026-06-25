@@ -24,6 +24,7 @@ from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import couple_e
 
 
 # ── Lemmes d'appartenance / injectivité ───────────────────────────────────────
+# @livre Ch.II §2.1 Lem.- | E II.7 L.5-10 | PDF p.58
 def singleton_membre(a, c):
     """⊢ (a ∈ {c}) ⇔ (a = c).   ({c} = {c,c}, axiome de la paire + idempotence ∨.)"""
     eq = egal(a, c)
@@ -32,6 +33,7 @@ def singleton_membre(a, c):
     return equivalence_transitivite(inst, idem)        # (a∈{c}) ⇔ (a=c)
 
 
+# @livre Ch.II §2.1 Lem.- | E II.7 L.5-6 | PDF p.58
 def singleton_injectif(x="x", xp="xp"):
     """⊢ ({x} = {x'}) ⇒ (x = x').   (x, x' : noms OU termes.)"""
     vx, vxp = _T(x), _T(xp)
@@ -44,6 +46,7 @@ def singleton_injectif(x="x", xp="xp"):
     return N.loi_deduction(egal(sx, sxp), eq)
 
 
+# @livre Ch.II §2.1 Lem.- | E II.7 L.7-9 | PDF p.58
 def singleton_egale_paire(c="c", a="a", b="b"):
     """⊢ ({c} = {a,b}) ⇒ (a=c et b=c).   (c, a, b : noms OU termes.)"""
     vc, va, vb = _T(c), _T(a), _T(b)
@@ -62,6 +65,7 @@ def singleton_egale_paire(c="c", a="a", b="b"):
 
 
 # ── Appartenance à une paire de TERMES quelconques ────────────────────────────
+# @livre Ch.II §2.1 Lem.- | E II.7 L.5-10 | PDF p.58
 def membre_paire_gauche(t, u):
     """⊢ t ∈ {t, u}  (t, u termes quelconques)."""
     c = _instance_paire(t, u, t)                       # (t∈{t,u}) ⇔ (t=t ∨ t=u)
@@ -69,6 +73,7 @@ def membre_paire_gauche(t, u):
     return N.modus_ponens(ortt, equivalence_arriere(c))
 
 
+# @livre Ch.II §2.1 Lem.- | E II.7 L.5-10 | PDF p.58
 def membre_paire_droite(t, u):
     """⊢ u ∈ {t, u}  (t, u termes quelconques)."""
     c = _instance_paire(t, u, u)                       # (u∈{t,u}) ⇔ (u=t ∨ u=u)
@@ -78,6 +83,7 @@ def membre_paire_droite(t, u):
 
 
 # ── Cancellation des paires : {a,b}={a,c} ⇒ b=c ───────────────────────────────
+# @livre Ch.II §2.1 Lem.- | E II.7 L.8-9 | PDF p.58
 def paire_cancellation(ta, tb, tc):
     """⊢ ({a,b} = {a,c}) ⇒ (b = c)  (a, b, c termes ; coordonnée commune à gauche)."""
     pab, pac = E.paire(ta, tb), E.paire(ta, tc)
@@ -102,6 +108,7 @@ def paire_cancellation(ta, tb, tc):
 
 
 # ── Proposition 1, sens difficile ─────────────────────────────────────────────
+# @livre Ch.II §2.1 Prop.1 | E II.7 L.3-10 | PDF p.58
 def couple_egal_implique_composantes(x="x", y="y", xp="xp", yp="yp"):
     """⊢ ((x,y)=(x',y')) ⇒ (x=x' et y=y').  (sens difficile de la Proposition 1 ; noms OU termes.)"""
     vx, vy, vxp, vyp = _T(x), _T(y), _T(xp), _T(yp)
@@ -140,6 +147,7 @@ def couple_egal_implique_composantes(x="x", y="y", xp="xp", yp="yp"):
     return N.loi_deduction(egal(gauche, droite), conjonction_intro(x_eq, y_eq))
 
 
+# @livre Ch.II §2.1 Prop.1 | E II.7 L.3-4 | PDF p.58
 def proposition_1(x="x", y="y", xp="xp", yp="yp"):
     """⊢ ((x,y)=(x',y')) ⇔ (x=x' et y=y').  (Proposition 1, E.II.30 — énoncé complet.)"""
     dur = couple_egal_implique_composantes(x, y, xp, yp)   # ⇒
