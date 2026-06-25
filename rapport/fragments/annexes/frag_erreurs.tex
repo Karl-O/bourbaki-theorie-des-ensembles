@@ -1,0 +1,132 @@
+% =============================================================================
+%  Annexe — Journal des erreurs & leçons méthodologiques
+% =============================================================================
+\section{Journal des erreurs \& leçons}
+
+Cette annexe est un livrable à part entière : elle consigne les impasses et
+leurs corrections comme \emph{données d'apprentissage} pour la construction
+future de théories. Chaque entrée donne la situation, l'erreur, la correction,
+et la leçon transposable.
+
+\subsection{Le noyau est le filet de soundness ultime : une spec fausse \emph{bloque}}
+
+\textbf{Épisode (III.1.12, Prop 12 --- critère de sup en ordre total).} La
+spécification initiale codait la condition « $c<x$ » \emph{sans} le strict (donc
+$(c,x)\in G$ au lieu de $c\neq x$). Cela rend l'équivalence \textbf{fausse}
+(contre-exemple $E=\{0,1,2\}$, $X=\{1\}$, $b=2$ : $2$ majore $\{1\}$ et tout
+$c\leq 2$ est « dépassé » par $1$, or $\sup\{1\}=1\neq 2$). Le noyau a
+\emph{refusé} de prouver le sens $\Leftarrow$ ; l'erreur a été diagnostiquée et
+le « $<$ » strict rétabli, fidèle au PDF.
+
+\textbf{Leçon.} Une spécification erronée ne produit jamais un faux théorème :
+elle \emph{empêche} la preuve. La fidélité (énoncé $=$ Bourbaki) reste à la
+charge du relecteur, mais la soundness est inviolable. C'est l'argument central
+en faveur de l'architecture LCF.
+
+\subsection{Un import qui réussit ne prouve rien}
+
+\textbf{Épisode (II.5.6, prop10 --- distributivité produit/intersection).} Un
+agent interrompu a laissé un module de 317 lignes (${>}300$), sans test, dont la
+preuve \emph{ne se construit pas} : appeler le théorème lève « modus ponens :
+mineure $\neq$ antécédent » (mismatch de liants dans une permutation de
+quantificateurs). L'assertion de vérification était \emph{à l'intérieur} de la
+fonction --- elle ne s'exécute qu'à l'appel.
+
+\textbf{Leçon.} Toujours \emph{appeler} le théorème (ou lancer son test) avant de
+juger un orphelin « certifié » : la construction est paresseuse, un import vert
+ne garantit rien. Ne jamais committer une preuve non exécutée. L'orphelin a été
+supprimé puis la cible re-livrée proprement.
+
+\subsection{Hypothèses honnêtes : retirer l'inerte, garder le load-bearing}
+
+\textbf{Épisode (III.1.5, Prop 2 de Galois).} Bourbaki énonce huit antécédents
+et conclut $u\circ v\circ u=u$ \emph{et} $v\circ u\circ v=v$. On formalise la
+première égalité sous \emph{sept} hypothèses, en \textbf{retirant} « $v$
+décroissante » : la preuve de la première égalité ne la consomme pas (« la
+seconde s'établit de même » --- c'est la \emph{duale} qui l'utilise). La garder
+eût été du \emph{padding} inerte.
+
+\textbf{Contraste.} Pour $\texttt{assoc\_inter\_famille}$, l'hypothèse
+$J_\lambda\neq\varnothing$, pourtant inerte en apparence, a été \emph{gardée} :
+elle touche la convention $\bigcap_\varnothing = E$, donc elle est en réalité
+load-bearing pour la fidélité. \textbf{Leçon.} Les hypothèses d'un théorème
+conditionnel sont \emph{exactement} les antécédents réellement consommés ---
+ni padding inerte, ni hypothèse silencieusement nécessaire omise.
+
+\subsection{Ne jamais déguiser une tautologie en théorème}
+
+\textbf{Épisode (II.3.8, « une rétraction est une injection »).} Sous forme
+close, l'énoncé se réduit soit à un résultat déjà acquis
+($\texttt{retraction\_implique\_injective}$), soit à une tautologie $P\Rightarrow
+P$ (les prédicats $\texttt{est\_retraction}$ et $\texttt{est\_section}$ sont la
+même formule). Cible \textbf{écartée}. \textbf{Leçon.} Un théorème dont la
+conclusion figure déjà parmi ses hypothèses n'apporte rien : on l'écarte plutôt
+que de gonfler le compte de « faits ».
+
+\subsection{L'écart de portée : niveau couple vs égalité d'ensembles}
+
+\textbf{Épisode (E.R.12, égalités de produits).} Les identités du type
+$(X\times Y)\cup(X'\times Y)=(X\cup X')\times Y$ étaient d'abord prouvées au
+niveau \emph{appartenance d'un couple} ($\forall(u,v),\ (u,v)\in A\Leftrightarrow
+(u,v)\in B$), pas comme \emph{égalité d'ensembles} pleine (quantifiée sur un $z$
+quelconque). Il manquait la brique « tout $z\in E\times F$ est un couple
+$z=(\mathrm{pr}_1 z,\mathrm{pr}_2 z)$ ».
+
+\textbf{Correction.} Une fois prouvés $\texttt{couple\_decomposition}$ et
+$\texttt{produit\_egalite\_par\_couples}$, toutes les identités sont remontées au
+niveau ensembliste. \textbf{Leçon.} Surveiller la \emph{portée} exacte de
+l'énoncé : une formalisation « presque » correcte (sur les couples) n'est pas
+l'énoncé de Bourbaki (sur les ensembles) ; une seule brique d'extensionnalité
+débloque toute une famille de résultats. (Caveat de liant : $z\neq\texttt{w}$,
+réservé par $\texttt{symetrie}$/$\texttt{composer\_egalites}$.)
+
+\subsection{Capture de variable : $\alpha$-renommage et trous réservés}
+
+\textbf{Épisode.} Les lemmes sur le couple manipulent $\tau$ avec des liants
+internes ($p,q$ pour $\texttt{couple\_reciproque}$ ; $x,y$ des projections
+coïncidant avec les liants de l'énoncé). D'où des captures silencieuses.
+\textbf{Correction.} $\alpha$-renommage systématique (témoins canoniques à
+variables libres contrôlées), et réservation de trous ($\texttt{w}$) par les
+tactiques d'égalité. \textbf{Leçon.} En présence de $\tau$ et de substitution,
+la capture est le piège n°1 : nommer les liants de façon disjointe et le
+vérifier, plutôt que d'y faire confiance.
+
+\subsection{Outils transactionnels : jamais d'état partiel cassé}
+
+\textbf{Épisode (migration de l'arborescence).} L'outil pré-créait les
+\texttt{\_\_init\_\_.py} \emph{avant} les \texttt{git mv} $\to$ collision $\to$
+\emph{migration partielle = dépôt cassé} ; pire, des \texttt{git mv} restés
+\emph{staged} ont été aspirés par un commit ultérieur (HEAD contaminé), récupéré
+par \texttt{git reset -{}-hard}. \textbf{Correction.} L'outil est devenu
+\textbf{transactionnel} : préflight (arbre git propre, sources présentes,
+destinations libres) puis application protégée par \emph{rollback} automatique à
+la moindre exception. \textbf{Leçon.} Tout script qui mute le dépôt fait
+préflight $+$ rollback : on n'a jamais un demi-déplacement irrécupérable.
+
+\subsection{Gater les invariants de structure, pas seulement la compilation}
+
+\textbf{Épisode.} Le dossier $\texttt{ensembles/}$ s'est retrouvé à 11 entrées
+(${>}10$), non détecté car la migration n'était gatée qu'à la \emph{collecte}
+pytest. \textbf{Leçon.} Un invariant structurel ($\leq 10$ entrées/dossier,
+$\leq 300$ lignes/fichier, $\texttt{theorie==22}$) doit être \emph{gaté
+explicitement} à chaque étape : ce que l'on ne mesure pas dérive en silence.
+
+\subsection{Les audits ont des faux négatifs}
+
+\textbf{Épisode.} Plusieurs cibles « manquantes » signalées par l'audit étaient
+déjà faites sous un autre nom ($z\in\{x\}\Leftrightarrow z=x$ $=$
+$\texttt{singleton\_membre}$ ; $\mathrm{dom}(G^{-1})=\mathrm{img}(G)$ ; \dots).
+\textbf{Leçon.} Toujours vérifier l'\emph{absence réelle} dans le code (recherche
+par motif) avant de déléguer un comblage --- sinon on reprouve l'acquis.
+
+\subsection{Le mur de performance : mesurer, puis documenter honnêtement}
+
+\textbf{Épisode.} Le profilage d'une preuve cardinale ($\sim 400$\,s) montre un
+coût \emph{algorithmique} (hachage $=70\,\%$ du temps, $\sim 4{,}3\times10^{8}$
+appels), non un point chaud cachable : les tactiques s'étendent sur les
+abréviations ($\Rightarrow$, $\wedge$, $\forall$) contenant le terme cardinal
+profond. La mémoïsation de la substitution gagne $28\,\%$ ; aller plus loin
+exigerait une refonte du noyau --- risque sur la frontière de confiance.
+\textbf{Leçon.} Mesurer avant d'optimiser ; ne jamais affaiblir une vérification
+du noyau pour gagner de la vitesse ; et documenter un résultat \emph{bloqué par
+la performance} comme tel, plutôt que de le forcer ou de le masquer.

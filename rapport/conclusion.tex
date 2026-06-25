@@ -4,10 +4,13 @@
 \section*{Conclusion}
 \addcontentsline{toc}{section}{Conclusion}
 
-\paragraph{Bilan de la campagne} Vingt cibles ont été closes (vingt-cinq
-théorèmes certifiés), réparties sur les chapitres~II (correspondances, familles,
-produits, équivalences) et~III (ordre, bon ordre, cardinaux). Chaque résultat a
-franchi le même contrôle : preuve construite uniquement par les primitives
+\paragraph{État de la tour} Ce rapport présente la formalisation \emph{selon la
+tour des théories} : la théorie logique (Partie~I) sert de base, la théorie des
+ensembles (Partie~II) l'augmente de ses axiomes propres, et l'ordre, les
+cardinaux puis les structures (Parties~III--IV) en sont des extensions. Une
+trentaine de cibles ont été closes à travers les chapitres~II et~III
+(correspondances, familles, produits, équivalences ; ordre, bon ordre,
+cardinaux). Chaque résultat a franchi le même contrôle : preuve construite uniquement par les primitives
 \Nstar{}, conclusion strictement égale (au renommage des liants $\tau$ près) à
 l'énoncé de Bourbaki, hypothèses réduites aux antécédents honnêtes load-bearing,
 invariant \texttt{theorie\_ensembles() == 22} préservé, et test miroir au vert.
@@ -47,6 +50,16 @@ par un \emph{timeout}.
 \paragraph{Suites} Le moissonnage de l'audit de couverture identifie d'autres
 cibles faisables (compléments du Théorème~1 sur les rétractions/sections, lois
 de De~Morgan pour les familles, décomposition canonique d'une application,
-propriétés order-théoriques du bon ordre) qui prolongeront la campagne selon le
+propriétés order-théoriques du bon ordre) qui prolongeront le corpus selon le
 même protocole. L'horizon reste la couverture intégrale du livre, les résultats
 cardinaux profonds attendant un progrès sur le c\oe ur de substitution.
+
+\paragraph{Vers une IA bâtisseuse de théories} Au-delà du livre certifié, la
+finalité du projet est un \emph{substrat d'apprentissage} : le corpus consigne
+non seulement les preuves, mais la \emph{construction} de chaque couche de la
+tour, le \emph{pourquoi} de chaque choix, et les \emph{erreurs} corrigées
+(annexe « Journal des erreurs \& leçons »). Une spécification fausse refusée par
+le noyau, une hypothèse inerte retirée, une tautologie écartée, une capture de
+variable déjouée : autant de données de première classe pour une intelligence
+appelée, à terme, à construire des théories elle-même à partir d'axiomes ---
+dans le respect de la même discipline de stratification et de certification.

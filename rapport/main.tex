@@ -134,46 +134,75 @@
 \clearpage
 
 % =============================================================================
-%  Résultats certifiés (campagne « ÉTAPE B »).
-%  Un fragment par section du livre — voir fragments/.
+%  Le rapport suit la TOUR DES THÉORIES (cf. avant-propos), pas l'ordre du
+%  travail. Un fragment par section du livre — voir fragments/<partie>/.
 % =============================================================================
 
-\part{Théorie des ensembles}
+\part{La théorie logique}
+\input{fragments/i_logique/frag_logique}
+
+\part{La théorie des ensembles}
 
 \section{Correspondances et fonctions (II.3)}
-\input{fragments/frag_ii3_retractions}
+\input{fragments/ii_ensembles/frag_ii3_retractions}
 
 \section{Réunion et intersection d'une famille d'ensembles (II.4)}
-\input{fragments/frag_ii4_familles}
+\input{fragments/ii_ensembles/frag_ii4_familles}
 
 \section{Produit d'une famille d'ensembles (II.5)}
-\input{fragments/frag_ii5_produit}
+\input{fragments/ii_ensembles/frag_ii5_produit}
 
 \section{Relations d'équivalence (II.6)}
-\input{fragments/frag_ii6_equivalence}
+\input{fragments/ii_ensembles/frag_ii6_equivalence}
 
 \part{Ensembles ordonnés, cardinaux, entiers}
 
 \section{Relations d'ordre, ensembles ordonnés (III.1)}
-\input{fragments/frag_iii1_ordre}
+\input{fragments/iii_ordre_cardinaux/frag_iii1_ordre}
 
 \section{Ensembles bien ordonnés (III.2)}
-\input{fragments/frag_iii2_bonordre}
+\input{fragments/iii_ordre_cardinaux/frag_iii2_bonordre}
 
 \section{Ensembles équipotents, cardinaux (III.3)}
-\input{fragments/frag_iii3_cardinaux}
+\input{fragments/iii_ordre_cardinaux/frag_iii3_cardinaux}
 
-\section{Compléments (campagne v3)}
-\input{fragments/frag_v3_complements}
+\part{Structures}
+
+\section{Espèces de structures, isomorphismes, morphismes (IV.1--IV.2)}
+Les notions du chapitre~IV --- espèces de structures et isomorphismes (IV.1) ;
+morphismes, structures dérivées et critères de transport CST1/CST2 (IV.2) ;
+applications universelles --- sont formalisées et certifiées dans le code
+(\texttt{bourbaki/structures/}), suivant la même discipline (énoncé calé sur le
+PDF, primitives \Nstar{}, \texttt{theorie\_ensembles()==22}). Leur rédaction
+détaillée dans ce rapport est en préparation.
+
+% ---- Compléments (à refondre par section dans une passe ultérieure) ----
+\part*{Compléments certifiés}
+\addcontentsline{toc}{part}{Compléments certifiés}
+\markboth{Compléments}{Compléments}
+
+Les fragments ci-dessous regroupent des résultats certifiés dont la ventilation
+fine par section du livre reste à effectuer (ils sont, en l'état, organisés par
+campagne). Leur contenu est intégralement certifié et sera fondu dans les
+parties~II et~III lors d'une passe ultérieure.
+
+\section{Compléments faisables (campagne v3)}
+\input{fragments/complements/frag_v3_complements}
 
 \clearpage
-\input{fragments/frag_session_0624}
+\input{fragments/complements/frag_session_0624}
 
 \clearpage
-\input{fragments/frag_session_0624b}
+\input{fragments/complements/frag_session_0624b}
 
 \clearpage
-\input{fragments/frag_session_0625}
+\input{fragments/complements/frag_session_0625}
+
+% ---- Annexes ----
+\part*{Annexes}
+\addcontentsline{toc}{part}{Annexes}
+\markboth{Annexes}{Annexes}
+\input{fragments/annexes/frag_erreurs}
 
 \clearpage
 \input{conclusion}

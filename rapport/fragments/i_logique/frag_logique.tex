@@ -1,0 +1,93 @@
+% =============================================================================
+%  Partie I — La théorie logique (Chapitre I)
+% =============================================================================
+\section{Le langage et les schémas logiques (I.1--I.4)}
+
+La base de la tour est la \emph{théorie logique} : un langage formel et sept
+schémas d'axiomes, sans aucun axiome propre aux ensembles. Tout ce qui s'y
+démontre vaut dans \emph{toute} théorie plus forte. C'est ici, et nulle part
+ailleurs, qu'on prouve les lois du calcul propositionnel et des quantificateurs.
+
+\subsection{Le langage : assemblages, $\tau$, signes (I.1)}
+
+Un objet est un \emph{assemblage de signes}, soit un \emph{terme} (il désigne un
+objet), soit une \emph{relation} (elle est vraie ou fausse). Les signes
+primitifs sont logiques ($\neg$, $\vee$, et l'opérateur $\tau$), relationnels
+($=$, $\in$), et des lettres. Bourbaki ne prend pas les quantificateurs comme
+primitifs : il prend le \textbf{$\tau$ de Hilbert}. Pour une relation $R$, le
+terme $\tau_x(R)$ désigne « un objet $x$ tel que $R$, s'il en existe un ». Tout
+le reste en est \emph{défini} :
+\[
+  (\exists x)\,R \;:=\; \bigl(\tau_x(R)\mid x\bigr)R,
+  \qquad
+  (\forall x)\,R \;:=\; \neg(\exists x)\,\neg R,
+\]
+\[
+  R\Rightarrow S \;:=\; (\neg R)\vee S,
+  \quad
+  R\wedge S \;:=\; \neg(\neg R\vee\neg S),
+  \quad
+  R\Leftrightarrow S \;:=\; (R\Rightarrow S)\wedge(S\Rightarrow R).
+\]
+Le module \texttt{assemblage} réalise les assemblages comme structures
+immuables et hachables (égalité et hachage en $O(1)$ après interning), la
+substitution $(T\mid x)R$, et les prédicats de lecture
+($\texttt{est\_terme}$, $\texttt{est\_relation}$) qui valident la bonne
+formation. Conséquence notable : le $\tau$ encode l'\emph{axiome du choix} dans
+le langage même --- la théorie est « choisie » dès le départ.
+
+\subsection{Les sept schémas (I.3, I.5)}
+
+Les seuls axiomes logiques sont les schémas \texttt{s1}--\texttt{s7} du noyau
+(PDF p.~33--38) :
+\[
+\begin{array}{ll}
+  \text{S1} & (R\vee R)\Rightarrow R \\
+  \text{S2} & R\Rightarrow(R\vee S) \\
+  \text{S3} & (R\vee S)\Rightarrow(S\vee R) \\
+  \text{S4} & (R\Rightarrow S)\Rightarrow\bigl((T\vee R)\Rightarrow(T\vee S)\bigr) \\
+  \text{S5} & (T\mid x)R \Rightarrow (\exists x)R \\
+  \text{S6} & (T=U)\Rightarrow\bigl((T\mid x)R \Leftrightarrow (U\mid x)R\bigr) \\
+  \text{S7} & (\forall x)(R\Leftrightarrow S)\Rightarrow \tau_x(R)=\tau_x(S) \\
+\end{array}
+\]
+S1--S4 sont le calcul propositionnel ; S5 gouverne le $\tau$ (un témoin suffit
+à l'existence) ; S6--S7 sont les schémas \emph{égalitaires} (substitutivité de
+Leibniz et extensionnalité du $\tau$). Dans le noyau, chacun est une fonction
+qui \emph{construit} l'assemblage du schéma et le scelle en \theoreme{} clos ---
+aucune théorie en argument : ce sont les briques universelles.
+
+\subsection{La règle d'inférence et les critères dérivés (I.2)}
+
+Le noyau ne possède qu'\emph{une} règle d'inférence de base, le
+\textbf{détachement} (critère C1) :
+\[
+  \Gamma\vdash R \quad\text{et}\quad \Delta\vdash(R\Rightarrow S)
+  \qquad\Longrightarrow\qquad \Gamma\cup\Delta\vdash S.
+\]
+Le \texttt{modus\_ponens} du noyau le réalise \emph{honnêtement} : il décode la
+majeure comme l'assemblage $\vee\,\neg R\,S$, vérifie que la mineure coïncide
+avec $R$, puis reconstruit $S$ et réunit les hypothèses. Deux autres règles sont
+admises comme \emph{primitives de confiance}, car leur validité est un critère
+que Bourbaki démontre : la \textbf{déduction} $\texttt{loi\_deduction}$ (C6 :
+de $\Gamma\vdash B$ déduire $\Gamma\setminus\{A\}\vdash(A\Rightarrow B)$) et la
+\textbf{généralisation} $\texttt{generalisation}$ (C27 : de $\Gamma\vdash R$,
+avec $x$ non libre dans $\Gamma$, déduire $\Gamma\vdash(\forall x)R$). Tout le
+reste des critères C de Bourbaki (raisonnement par l'absurde, contraposition,
+transitivité de $\Rightarrow$, échanges de quantificateurs) est \emph{dérivé} au
+sein de la théorie logique, par composition de ces primitives --- jamais ajouté
+à la base de confiance.
+
+\subsection{Ce qui est formalisé dans la théorie logique}
+
+Vivent dans cette couche, et y sont prouvés \emph{sans aucun axiome ensembliste} :
+les lois propositionnelles usuelles (idempotence, commutativité/associativité
+de $\vee$ et $\wedge$, lois de De~Morgan logiques, tiers exclu, double
+négation), les règles de la déduction et de la généralisation comme lemmes
+réutilisables, et les manipulations de quantificateurs (introduction/élimination
+du $\forall$ et du $\exists$, échange de quantificateurs de même nature). Le
+lemme propositionnel $\neg(P\Leftrightarrow\neg P)$, par exemple, est construit
+ici --- et c'est lui qui, une fois remonté en théorie des ensembles, interdit
+l'ensemble de Russell (Partie~II). C'est l'illustration de l'héritage vers le
+haut : un fait logique, prouvé une seule fois au plus bas, sert tel quel à tous
+les étages supérieurs.
