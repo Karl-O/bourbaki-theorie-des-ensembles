@@ -23,7 +23,7 @@ from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_prop import (
 
 # ── Théorèmes clos ────────────────────────────────────────────────────────────
 
-# @livre Ch.I §3.2 Crit.7 | E I.26 L.5 | PDF p.26
+# @livre Ch.I §3.2 Crit.7 | E I.26 L.5-5 | PDF p.26
 def c7(a, b, sig=DEFAUT):
     """⊢ B ⇒ (A ∨ B).  (S2, S3, syllogisme.)"""
     return syllogisme(noyau.s2(b, a, sig), noyau.s3(b, a, sig), sig)
@@ -46,7 +46,7 @@ def c17(a, b, sig=DEFAUT):
     return noyau.loi_deduction(implication(negation(b), negation(a)), t, sig)
 
 
-# @livre Ch.I §3.5 Crit.24 | E I.31 L.18 | PDF p.31
+# @livre Ch.I §3.5 Crit.24 | E I.31 L.18-18 | PDF p.31
 def c24_double_negation(a, sig=DEFAUT):
     """⊢ (¬¬A) ⇔ A.  (un représentant de la liste C24.)"""
     return conjonction_intro(double_negation_elim(a, sig),

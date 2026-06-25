@@ -254,7 +254,7 @@ def decomposition_valeur(F="F", b="b", p="P", i="i", x="x"):
 # ═══════════════════════════════════════════════════════════════════════════════
 # 4.  UNICITÉ de l'application déduite (propriété universelle du quotient)
 # ═══════════════════════════════════════════════════════════════════════════════
-# @livre Ch.II §6.5 Crit.C57 | E II.44 L.20 | PDF p.95
+# @livre Ch.II §6.5 Crit.C57 | E II.44 L.20-20 | PDF p.95
 def factorisation_meme_valeurs(h="h", hp="hp", p="P", f="f", x="x"):
     """{f = h∘p, f = h'∘p, C46(h∘p,x), C46(h'∘p,x)} ⊢ h(p(x)) = h'(p(x)).
 
@@ -303,7 +303,7 @@ def coincidence_ponctuelle_graphe(gh, ghp, p, x="x"):
     return pourtout(x, egal(E.valeur(vgh, px), E.valeur(vghp, px)))
 
 
-# @livre Ch.II §6.5 Crit.C57 | E II.44 L.20 | PDF p.95
+# @livre Ch.II §6.5 Crit.C57 | E II.44 L.20-20 | PDF p.95
 def coincidence_sur_quotient(h="h", hp="hp", p="P", quot="Q", t="x", x="xa"):
     """{p surjective ponctuelle (E sur Q),
         (∀x)( gh(p(x)) = gh'(p(x)) )   [coïncidence ponctuelle des graphes]}
@@ -343,7 +343,7 @@ def coincidence_sur_quotient(h="h", hp="hp", p="P", quot="Q", t="x", x="xa"):
     return N.generalisation(t, imp_t)               # (∀t)(t∈Q ⇒ gh(t)=gh'(t))
 
 
-# @livre Ch.II §6.5 Crit.C57 | E II.44 L.20 | PDF p.95
+# @livre Ch.II §6.5 Crit.C57 | E II.44 L.20-20 | PDF p.95
 def factorisation_unique(h="h", hp="hp", p="P", but="F", quot="Q", t="x", x="xa"):
     """{h∈𝓕(Q;F), h'∈𝓕(Q;F),
         p surjective ponctuelle (E sur Q),

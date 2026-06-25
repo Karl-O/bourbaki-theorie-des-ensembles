@@ -31,7 +31,7 @@ def extensionnalite_appliquee(a="a", b="b"):
     return instancie(instancie(a1, _terme(a)), _terme(b))
 
 
-# @livre Ch.II §1.5 Ax.A2 | E II.4 L.16 | PDF p.55
+# @livre Ch.II §1.5 Ax.A2 | E II.4 L.16-16 | PDF p.55
 def existence_paire(a="a", b="b"):
     """⊢ Coll_z(z=a ou z=b).  Instance de A2 : la paire {a,b} existe."""
     a2 = N.axiome(E.theorie_ensembles(), E.A2)         # ⊢ (∀x)(∀y) Coll_z(z=x ou z=y)
@@ -69,7 +69,7 @@ def appartient_singleton(a="a"):
     return appartient_paire_gauche(a, a)
 
 
-# @livre Ch.II §1.7 Th.1 | E II.6 L.30 | PDF p.57
+# @livre Ch.II §1.7 Th.1 | E II.6 L.30-30 | PDF p.57
 def vide_sans_element(a="a"):
     """⊢ ¬(a ∈ ∅)."""
     ax = N.axiome(E.theorie_ensembles(), E.AXIOME_VIDE)   # (∀z)¬(z∈∅)
@@ -107,7 +107,7 @@ def _instance_reunion(a, b, z):
     return instancie(instancie(instancie(ax, a), b), z)
 
 
-# @livre Ch.R §1.14 Prop.(7) | E.R.4 L.26 | PDF p.307
+# @livre Ch.R §1.14 Prop.(7) | E.R.4 L.26-26 | PDF p.307
 def inclusion_reunion_gauche(a="a", b="b"):
     """⊢ a ⊂ (a∪b)."""
     va, vb, vz = var(a), var(b), var("z")
@@ -117,7 +117,7 @@ def inclusion_reunion_gauche(a="a", b="b"):
     return N.generalisation("z", imp)                   # ⊢ a ⊂ (a∪b)
 
 
-# @livre Ch.R §1.14 Prop.(6) | E.R.4 L.25 | PDF p.307
+# @livre Ch.R §1.14 Prop.(6) | E.R.4 L.25-25 | PDF p.307
 def commutativite_reunion(a="a", b="b"):
     """⊢ (a∪b) = (b∪a)."""
     va, vb, vz = var(a), var(b), var("z")
@@ -136,7 +136,7 @@ def _instance_intersection(a, b, z):
     return instancie(instancie(instancie(ax, a), b), z)
 
 
-# @livre Ch.R §1.14 Prop.(7) | E.R.4 L.26 | PDF p.307
+# @livre Ch.R §1.14 Prop.(7) | E.R.4 L.26-26 | PDF p.307
 def inclusion_intersection_gauche(a="a", b="b"):
     """⊢ a∩b ⊂ a."""
     va, vb, vz = var(a), var(b), var("z")
@@ -146,7 +146,7 @@ def inclusion_intersection_gauche(a="a", b="b"):
     return N.generalisation("z", imp)                   # ⊢ a∩b ⊂ a
 
 
-# @livre Ch.R §1.14 Prop.(6) | E.R.4 L.25 | PDF p.307
+# @livre Ch.R §1.14 Prop.(6) | E.R.4 L.25-25 | PDF p.307
 def commutativite_intersection(a="a", b="b"):
     """⊢ (a∩b) = (b∩a)."""
     va, vb, vz = var(a), var(b), var("z")
@@ -219,7 +219,7 @@ def _singleton_membre(a, c):
     return equivalence_transitivite(inst, idem)        # (a∈{c}) ⇔ (a=c)
 
 
-# @livre Ch.II §1.5 Def.2 | E II.4 L.29 | PDF p.55
+# @livre Ch.II §1.5 Def.2 | E II.4 L.29-29 | PDF p.55
 def appartient_singleton_inclus(x="x", X="X"):
     """⊢ (x ∈ X) ⇔ ({x} ⊂ X).  (E.II.4 : « x∈X est équivalente à {x}⊂X ».)
 

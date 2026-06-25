@@ -104,7 +104,7 @@ def _egal_classes_depuis_equiv(eqv_z, A, B, z="z"):
 # ═════════════════════════════════════════════════════════════════════════════
 # §6.2 — Classes d'équivalence : x∈Cl(x), et x R y ⇔ Cl(x)=Cl(y)
 # ═════════════════════════════════════════════════════════════════════════════
-# @livre Ch.II §6.2 Rem.- | E II.41 L.25 | PDF p.92
+# @livre Ch.II §6.2 Rem.- | E II.41 L.25-25 | PDF p.92
 def appartient_classe(g="G", a="a", e="E", x="x"):
     """{R réflexive dans E, a∈E} ⊢ a ∈ Cl_R(a)   (E.II.6.2 ; clos mod. hyp.).
 

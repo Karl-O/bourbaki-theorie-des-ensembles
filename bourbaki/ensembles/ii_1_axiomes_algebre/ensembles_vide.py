@@ -16,7 +16,7 @@ from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import congruence_
 from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import extensionnalite_appliquee
 
 
-# @livre Ch.II §1.7 Th.1 | E II.6 L.29 | PDF p.57
+# @livre Ch.II §1.7 Th.1 | E II.6 L.29-29 | PDF p.57
 def vide_ssi_sans_element(a="A"):
     """⊢ (A = ∅) ⇔ (∀z)¬(z ∈ A).   (a : variable-nom ou terme quelconque sans z libre.)
 
@@ -54,7 +54,7 @@ def _equiv_neg(thm_pq):
                              contraposition(equivalence_avant(thm_pq)))
 
 
-# @livre Ch.II §1.7 Th.1 | E II.6 L.29 | PDF p.57
+# @livre Ch.II §1.7 Th.1 | E II.6 L.29-29 | PDF p.57
 def non_vide_ssi_element(a="A"):
     """⊢ ¬(A = ∅) ⇔ (∃z)(z ∈ A).   (a : variable-nom ou terme sans z libre.)"""
     vA, vz = (a if isinstance(a, Terme) else var(a)), var("z")

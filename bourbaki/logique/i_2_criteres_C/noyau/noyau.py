@@ -105,14 +105,14 @@ def assume(a: Assemblage, sig: Signature = DEFAUT) -> Theoreme:
     return Theoreme(frozenset({a}), a, "hypothèse", _CLE)
 
 
-# @livre Ch.I §3.1 Sch.1 | E I.25 L.6 | PDF p.25
+# @livre Ch.I §3.1 Sch.1 | E I.25 L.6-6 | PDF p.25
 def s1(r: Assemblage, sig: Signature = DEFAUT) -> Theoreme:
     """⊢ (R ∨ R) ⇒ R. E I.25 (§3, théories logiques)."""
     _exiger_relations(sig, r)
     return Theoreme(frozenset(), implication(disjonction(r, r), r), "S1", _CLE)
 
 
-# @livre Ch.I §3.1 Sch.2 | E I.25 L.7 | PDF p.25
+# @livre Ch.I §3.1 Sch.2 | E I.25 L.7-7 | PDF p.25
 def s2(r: Assemblage, s: Assemblage, sig: Signature = DEFAUT) -> Theoreme:
     """⊢ R ⇒ (R ∨ S). E I.25 (§3)."""
     _exiger_relations(sig, r, s)

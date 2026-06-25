@@ -123,7 +123,7 @@ def est_compatible_RS(f, R, S, x="x", xp="xp"):
         impl(R(vx, vxp), S(E.valeur(vf, vx), E.valeur(vf, vxp)))))
 
 
-# @livre Ch.II §6.5 Def.- | E II.44 L.22 | PDF p.95
+# @livre Ch.II §6.5 Def.- | E II.44 L.22-22 | PDF p.95
 def application_deduite_quotient(f, p, h):
     """« h est déduite de f par passage au quotient suivant R » := f = h ∘ p  (E.II.6.5).
 
@@ -346,7 +346,7 @@ def image_reciproque_transitive(S=None, phi="phi", x="x", y="y", z="z"):
 # ════════════════════════════════════════════════════════════════════════════
 # 5.  Ensemble des classes d'objets équivalents  E_R  (E.II.6.9, Déf.)
 # ════════════════════════════════════════════════════════════════════════════
-# @livre Ch.II §6.9 Def.- | E II.47 L.17 | PDF p.98
+# @livre Ch.II §6.9 Def.- | E II.47 L.17-17 | PDF p.98
 def classe_objets(R, x, y="y"):
     """θ{x} := τ_y(R{x,y})  (classe d'objets équivalents à x, E.II.6.9 ; R sans graphe).
 

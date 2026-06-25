@@ -35,7 +35,7 @@ def antecedent_consequent(impl: Assemblage, sig: Signature = DEFAUT
 
 # ── Tactiques constructives (S1–S4 + MP uniquement) ───────────────────────────
 
-# @livre Ch.I §3 Crit.9 | E I.26 L.11 | PDF p.26
+# @livre Ch.I §3 Crit.9 | E I.26 L.11-11 | PDF p.26
 def affaiblissement(thm: Theoreme, a: Assemblage, sig: Signature = DEFAUT) -> Theoreme:
     """Γ ⊢ X  ⟹  Γ ⊢ (A ⇒ X).  Constructive (S2, S3, MP).
 
@@ -49,7 +49,7 @@ def affaiblissement(thm: Theoreme, a: Assemblage, sig: Signature = DEFAUT) -> Th
 
 # ── Tactiques via la loi de déduction (C6) ─────────────────────────────────────
 
-# @livre Ch.I §3 Crit.8 | E I.26 L.8 | PDF p.26
+# @livre Ch.I §3 Crit.8 | E I.26 L.8-8 | PDF p.26
 def a_implique_a(a: Assemblage, sig: Signature = DEFAUT) -> Theoreme:
     """⊢ A ⇒ A.  Via C6 : de A⊢A par déduction.  (C8 chez Bourbaki.)"""
     return noyau.loi_deduction(a, noyau.assume(a, sig), sig)

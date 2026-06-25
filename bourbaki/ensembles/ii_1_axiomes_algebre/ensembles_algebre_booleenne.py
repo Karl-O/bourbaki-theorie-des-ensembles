@@ -162,7 +162,7 @@ def associativite_intersection(a="A", b="B", c="C"):
     return egalite_par_extension(char_u, char_v, E.intersection(AB, vc), E.intersection(va, BC))
 
 
-# @livre Ch.R §1.14 Prop.(2) | E.R.4 L.20 | PDF p.307
+# @livre Ch.R §1.14 Prop.(2) | E.R.4 L.20-20 | PDF p.307
 def idempotence_reunion(a="A"):
     """⊢ A∪A = A."""
     va, vz = _t(a), var("z")
@@ -173,7 +173,7 @@ def idempotence_reunion(a="A"):
     return egalite_par_extension(char_u, char_v, E.reunion(va, va), va)
 
 
-# @livre Ch.R §1.14 Prop.(2) | E.R.4 L.20 | PDF p.307
+# @livre Ch.R §1.14 Prop.(2) | E.R.4 L.20-20 | PDF p.307
 def idempotence_intersection(a="A"):
     """⊢ A∩A = A."""
     va, vz = _t(a), var("z")
@@ -270,7 +270,7 @@ def distributivite_reunion_intersection(a="A", b="B", c="C"):
                                  E.intersection(E.reunion(va, vb), E.reunion(va, vc)))
 
 
-# @livre Ch.R §1.14 Prop.(8) | E.R.4 L.27 | PDF p.307
+# @livre Ch.R §1.14 Prop.(8) | E.R.4 L.27-27 | PDF p.307
 def de_morgan_complement_reunion(e="E", a="A", b="B"):
     """⊢ E∖(A∪B) = (E∖A)∩(E∖B)   (De Morgan, complément relatif, E.II.1)."""
     vE, va, vb, vz = _t(e), _t(a), _t(b), var("z")
@@ -290,7 +290,7 @@ def de_morgan_complement_reunion(e="E", a="A", b="B"):
                                  E.intersection(DEA, DEB))
 
 
-# @livre Ch.R §1.14 Prop.(8) | E.R.4 L.27 | PDF p.307
+# @livre Ch.R §1.14 Prop.(8) | E.R.4 L.27-27 | PDF p.307
 def de_morgan_complement_intersection(e="E", a="A", b="B"):
     """⊢ E∖(A∩B) = (E∖A)∪(E∖B)   (De Morgan, complément relatif, E.II.1)."""
     vE, va, vb, vz = _t(e), _t(a), _t(b), var("z")

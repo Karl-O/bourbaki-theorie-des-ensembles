@@ -60,7 +60,7 @@ def image_dans_img(g="G", xx="X"):
     return N.generalisation("z", z_imp)                       # G⟨X⟩ ⊂ pr₂G
 
 
-# @livre Ch.II §3.1 Rem.- | E II.10 L.36 | PDF p.61
+# @livre Ch.II §3.1 Rem.- | E II.10 L.36-36 | PDF p.61
 def image_vide(g="G"):
     """⊢ G⟨∅⟩ = ∅.   (l'image directe de l'ensemble vide est vide.)"""
     vG, vx, vz = var(g), var("x"), var("z")

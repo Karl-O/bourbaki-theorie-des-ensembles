@@ -65,7 +65,7 @@ def _cible(f="f", i="I", aa="A", ff="F", alpha="alpha"):
     return impl(hyp, appartient(pr_alpha_F, X_alpha))
 
 
-# @livre Ch.II §5.3 Rem. | E II.32 L.27-31 | PDF p.83
+# @livre Ch.II §5.3 Rem.- | E II.32 L.27-31 | PDF p.83
 def coordonnee_dans_facteur(f="f", i="I", aa="A", ff="F", alpha="alpha"):
     """⊢ ( A ⊂ ∏(f,I) ∧ F∈A ∧ α∈I ) ⇒ ( pr_α(F) ∈ X_α ).
        (§II.5.3, remarque A ⊂ ∏_ι pr_ι⟨A⟩ : la brique pointwise.)        [POINTWISE]

@@ -17,7 +17,7 @@ def antecedent_consequent(f):
     return f.sous[0].sous[0], f.sous[1]
 
 
-# @livre Ch.I §3 Crit.8 | E I.26 L.8 | PDF p.26
+# @livre Ch.I §3 Crit.8 | E I.26 L.8-8 | PDF p.26
 def a_implique_a(a):
     """⊢ A ⇒ A.  (assume A, décharge.)"""
     return N.loi_deduction(a, N.assume(a))
@@ -33,7 +33,7 @@ def syllogisme(thm_ab, thm_bc):
 
 # ── Chapitre II — premier théorème : réflexivité de ⊂ ─────────────────────────
 
-# @livre Ch.II §1.2 Prop.1 | E II.2 L.30 | PDF p.53
+# @livre Ch.II §1.2 Prop.1 | E II.2 L.30-30 | PDF p.53
 def inclusion_reflexive(x: str = "x"):
     """⊢ x ⊂ x.  (x⊂x = (∀z)(z∈x ⇒ z∈x) = généralisation de z∈x ⇒ z∈x.)"""
     z = "z" if x != "z" else "y"

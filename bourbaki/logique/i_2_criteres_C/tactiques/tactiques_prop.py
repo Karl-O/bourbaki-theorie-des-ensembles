@@ -21,7 +21,7 @@ from bourbaki.logique.i_2_criteres_C.tactiques.tactiques import (
 )
 
 
-# @livre Ch.I §3 Crit.11 | E I.26 L.18 | PDF p.26
+# @livre Ch.I §3 Crit.11 | E I.26 L.18-18 | PDF p.26
 def double_negation_intro(a: Assemblage, sig: Signature = DEFAUT) -> Theoreme:
     """⊢ A ⇒ ¬¬A.  (¬A⇒¬A est ¬¬A∨¬A ; on commute par S3.)"""
     t = a_implique_a(negation(a), sig)          # ⊢ ¬A⇒¬A  =  ¬¬A ∨ ¬A
@@ -29,7 +29,7 @@ def double_negation_intro(a: Assemblage, sig: Signature = DEFAUT) -> Theoreme:
     return noyau.modus_ponens(t, s3, sig)       # ⊢ ¬A∨¬¬A  =  A⇒¬¬A
 
 
-# @livre Ch.I §3 Crit.16 | E I.28 L.7 | PDF p.28
+# @livre Ch.I §3 Crit.16 | E I.28 L.7-7 | PDF p.28
 def double_negation_elim(a: Assemblage, sig: Signature = DEFAUT) -> Theoreme:
     """⊢ ¬¬A ⇒ A.  (À partir de ¬A∨A et de ¬A⇒¬¬¬A, mono-gauche.)"""
     em = a_implique_a(a, sig)                   # ⊢ A⇒A  =  ¬A ∨ A
@@ -47,14 +47,14 @@ def contraposition(thm_pq: Theoreme, sig: Signature = DEFAUT) -> Theoreme:
     return noyau.modus_ponens(comm, lm, sig)    # ⊢ ¬¬Q∨¬P  =  ¬Q⇒¬P
 
 
-# @livre Ch.I §3 Crit.24 | E I.31 L.24 | PDF p.31
+# @livre Ch.I §3 Crit.24 | E I.31 L.24-24 | PDF p.31
 def syllogisme_disjonctif(p: Assemblage, q: Assemblage,
                           sig: Signature = DEFAUT) -> Theoreme:
     """⊢ (P∨Q) ⇒ (¬P ⇒ Q).  (mono-gauche de dni : ¬P⇒Q = ¬¬P∨Q.)"""
     return mono_gauche(double_negation_intro(p, sig), q, sig)
 
 
-# @livre Ch.I §3 Crit.20 | E I.29 L.20 | PDF p.29
+# @livre Ch.I §3 Crit.20 | E I.29 L.20-20 | PDF p.29
 def conjonction_intro(thm_a: Theoreme, thm_b: Theoreme,
                       sig: Signature = DEFAUT) -> Theoreme:
     """⊢ A,  ⊢ B  ⟹  ⊢ (A et B).  (A et B = ¬(¬A∨¬B).)
@@ -145,7 +145,7 @@ def equivalence_modus(thm_equiv: Theoreme, thm_a: Theoreme,
 
 # ── Théorèmes propositionnels nommés (clos) ──────────────────────────────────
 
-# @livre Ch.I §3 Crit.10 | E I.26 L.15 | PDF p.26
+# @livre Ch.I §3 Crit.10 | E I.26 L.15-15 | PDF p.26
 def tiers_exclu(a: Assemblage, sig: Signature = DEFAUT) -> Theoreme:
     """⊢ A ∨ ¬A.  (de A⇒A = ¬A∨A, commuté par S3.)"""
     return noyau.modus_ponens(a_implique_a(a, sig),

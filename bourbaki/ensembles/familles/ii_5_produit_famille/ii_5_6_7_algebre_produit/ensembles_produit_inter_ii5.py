@@ -156,7 +156,7 @@ def _inclusion_arriere(vf, vg, vh, vI, hH, ff="G", iota="i"):
 
 
 # ── théorème principal ────────────────────────────────────────────────────────
-# @livre Ch.II §5.6 Cor. | E II.38 L.6-13 | PDF p.89
+# @livre Ch.II §5.6 Cor.- | E II.38 L.6-13 | PDF p.89
 def produit_inter_egal_inter_produits(f="f", g="g", h="h", i="I"):
     """⊢ ( (∀ι)(ι∈I ⇒ Z_ι = X_ι ∩ Y_ι) ) ⇒ ( ∏Z = (∏X) ∩ (∏Y) ).
        (§II.5, corollaire Prop. 9 — commutation produit/intersection, version binaire.)

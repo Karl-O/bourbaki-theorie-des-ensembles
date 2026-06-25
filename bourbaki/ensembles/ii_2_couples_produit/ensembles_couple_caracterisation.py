@@ -61,7 +61,7 @@ def _T(v):
 _A, _B = "a", "b"
 
 
-# @livre Ch.II §2.1 Def.- | E II.7 L.14 | PDF p.58
+# @livre Ch.II §2.1 Def.- | E II.7 L.14-14 | PDF p.58
 def est_couple(vz):
     """« z est un couple » := (∃a)(∃b)(z = (a, b))  (E II.7, exprimé inline)."""
     va, vb = var(_A), var(_B)

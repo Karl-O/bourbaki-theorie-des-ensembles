@@ -52,7 +52,7 @@ def _efq(notP_thm, q):
     return syllogisme(syllogisme(dni(P), contraposition(h)), dne(q))   # P ⇒ Q
 
 
-# @livre Ch.R §1.14 Prop.(4) | E.R.4 L.22 | PDF p.307
+# @livre Ch.R §1.14 Prop.(4) | E.R.4 L.22-22 | PDF p.307
 def reunion_vide_neutre(a="A"):
     """⊢ A∪∅ = A   (∅ neutre pour la réunion)."""
     va, vz = _t(a), var("z")
@@ -66,7 +66,7 @@ def reunion_vide_neutre(a="A"):
     return egalite_par_extension(char_u, char_v, E.reunion(va, E.VIDE), va)
 
 
-# @livre Ch.R §1.14 Prop.(5) | E.R.4 L.23 | PDF p.307
+# @livre Ch.R §1.14 Prop.(5) | E.R.4 L.23-23 | PDF p.307
 def intersection_vide(a="A"):
     """⊢ A∩∅ = ∅   (∅ absorbant pour l'intersection)."""
     va, vz = _t(a), var("z")
@@ -95,7 +95,7 @@ def difference_vide_neutre(a="A"):
     return egalite_par_extension(char_u, char_v, E.difference(va, E.VIDE), va)
 
 
-# @livre Ch.II §1.7 Th.1 | E II.6 L.30 | PDF p.57
+# @livre Ch.II §1.7 Th.1 | E II.6 L.30-30 | PDF p.57
 def difference_self(a="A"):
     """⊢ A∖A = ∅."""
     va, vz = _t(a), var("z")

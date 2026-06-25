@@ -114,7 +114,7 @@ def _inc_z(vX, vE, vz):
     return instancie(N.assume(inclus(vX, vE)), vz)
 
 
-# @livre Ch.R §1.14 Prop.(a) | E.R.4 L.17 | PDF p.307
+# @livre Ch.R §1.14 Prop.(a) | E.R.4 L.17-17 | PDF p.307
 def difference_vide(e="E"):
     """⊢ E∖∅ = E   (item a : E = ∁∅ ; INCONDITIONNEL).
 
@@ -133,7 +133,7 @@ def difference_vide(e="E"):
     return egalite_par_extension(char_u, char_v, E.difference(vE, E.VIDE), vE)
 
 
-# @livre Ch.R §1.14 Prop.(3) | E.R.4 L.21 | PDF p.307
+# @livre Ch.R §1.14 Prop.(3) | E.R.4 L.21-21 | PDF p.307
 def inter_complement_vide(x="X", e="E"):
     """⊢ X∩(E∖X) = ∅   (item (3) droite : X∩(∁X) = ∅ ; INCONDITIONNEL).
 
@@ -161,7 +161,7 @@ def inter_complement_vide(x="X", e="E"):
                                  E.intersection(vX, E.difference(vE, vX)), E.VIDE)
 
 
-# @livre Ch.R §1.14 Prop.(4) | E.R.4 L.22 | PDF p.307
+# @livre Ch.R §1.14 Prop.(4) | E.R.4 L.22-22 | PDF p.307
 def inter_ambiant_neutre(x="X", e="E"):
     """⊢ X∩E = X   sous (X⊂E)   (item (4) : X∩E = X).
 
@@ -179,7 +179,7 @@ def inter_ambiant_neutre(x="X", e="E"):
     return egalite_par_extension(char_u, char_v, E.intersection(vX, vE), vX)
 
 
-# @livre Ch.R §1.14 Prop.(5) | E.R.4 L.23 | PDF p.307
+# @livre Ch.R §1.14 Prop.(5) | E.R.4 L.23-23 | PDF p.307
 def reunion_ambiant_absorbe(x="X", e="E"):
     """⊢ X∪E = E   sous (X⊂E)   (item (5) : X∪E = E).
 
@@ -197,7 +197,7 @@ def reunion_ambiant_absorbe(x="X", e="E"):
     return egalite_par_extension(char_u, char_v, E.reunion(vX, vE), vE)
 
 
-# @livre Ch.R §1.14 Prop.(3) | E.R.4 L.21 | PDF p.307
+# @livre Ch.R §1.14 Prop.(3) | E.R.4 L.21-21 | PDF p.307
 def reunion_complement_plein(x="X", e="E"):
     """⊢ X∪(E∖X) = E   sous (X⊂E)   (item (3) gauche : X∪(∁X) = E).
 

@@ -122,7 +122,7 @@ def coord_image_produit(g="g", i="I", f="f", iota="iota", kappa="kappa"):
 # u_f = f (extensionnalité) : ∏ Id = Id.  Ici on livre l'égalité COORDONNÉE
 # (u_f(κ)=f(κ)) sous l'hypothèse explicite g_κ(f(κ))=f(κ) (= « g_κ vaut Id en f(κ) »).
 
-# @livre Ch.II §5.7 Cor. | E II.39 L.6-15 | PDF p.90
+# @livre Ch.II §5.7 Cor.- | E II.39 L.6-15 | PDF p.90
 def coord_identite(g="g", i="I", f="f", iota="iota", kappa="kappa"):
     """⊢ ( κ∈I et g_κ(f(κ))=f(κ) ) ⇒ ( u_f(κ) = f(κ) ).   (§5.7 : ∏ Id = Id, coord.)
        [CONDITIONNEL — hyp. g_κ(f(κ))=f(κ) = identité de g_κ en f(κ).]

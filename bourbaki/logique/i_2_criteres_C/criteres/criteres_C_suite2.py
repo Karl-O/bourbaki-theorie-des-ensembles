@@ -17,7 +17,7 @@ from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_prop import (double_neg
 from bourbaki.logique.i_2_criteres_C.criteres import criteres_C as K
 
 
-# @livre Ch.I §3.5 Crit.24 | E I.31 L.20 | PDF p.31
+# @livre Ch.I §3.5 Crit.24 | E I.31 L.20-20 | PDF p.31
 def c24_assoc_et(a, b, c, sig=DEFAUT):
     """⊢ (A et (B et C)) ⇔ ((A et B) et C)."""
     def avant():
@@ -41,7 +41,7 @@ def c24_assoc_et(a, b, c, sig=DEFAUT):
     return conjonction_intro(avant(), arriere(), sig)
 
 
-# @livre Ch.I §3.5 Crit.24 | E I.31 L.21 | PDF p.31
+# @livre Ch.I §3.5 Crit.24 | E I.31 L.21-21 | PDF p.31
 def c24_demorgan(a, b, sig=DEFAUT):
     """⊢ (A ou B) ⇔ ¬((¬A) et (¬B)).  (¬A et ¬B = ¬(¬¬A∨¬¬B).)"""
     naa, nnb = negation(negation(a)), negation(negation(b))
@@ -57,7 +57,7 @@ def c24_demorgan(a, b, sig=DEFAUT):
     return conjonction_intro(av, ar, sig)
 
 
-# @livre Ch.I §3.5 Crit.24 | E I.31 L.26 | PDF p.31
+# @livre Ch.I §3.5 Crit.24 | E I.31 L.26-26 | PDF p.31
 def c24_et_non(a, b, sig=DEFAUT):
     """⊢ (A et ¬B) ⇔ ¬(A ⇒ B).  (A et ¬B = ¬(¬A∨¬¬B) ; A⇒B = ¬A∨B.)"""
     av = contraposition(mono_droite(double_negation_intro(b, sig), negation(a), sig), sig)

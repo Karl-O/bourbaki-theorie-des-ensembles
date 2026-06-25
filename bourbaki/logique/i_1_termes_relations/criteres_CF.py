@@ -29,17 +29,17 @@ def _sorte(a, sig):
         return None
 
 
-# @livre Ch.I §1.4 Crit.1 | E I.19 L.10 | PDF p.19
+# @livre Ch.I §1.4 Crit.1 | E I.19 L.10-10 | PDF p.19
 def cf1(a, b, sig=DEFAUT) -> bool:
     return est_relation(a, sig) and est_relation(b, sig) and est_relation(disjonction(a, b), sig)
 
 
-# @livre Ch.I §1.4 Crit.2 | E I.19 L.20 | PDF p.19
+# @livre Ch.I §1.4 Crit.2 | E I.19 L.20-20 | PDF p.19
 def cf2(a, sig=DEFAUT) -> bool:
     return est_relation(a, sig) and est_relation(negation(a), sig)
 
 
-# @livre Ch.I §1.4 Crit.3 | E I.19 L.21 | PDF p.19
+# @livre Ch.I §1.4 Crit.3 | E I.19 L.21-21 | PDF p.19
 def cf3(a, x, sig=DEFAUT) -> bool:
     return est_relation(a, sig) and est_terme(tau_x(a, x), sig)
 
@@ -50,7 +50,7 @@ def cf4(t, u, sig=DEFAUT) -> bool:
     return est_terme(t, sig) and est_terme(u, sig) and est_relation(egalite(t, u), sig)
 
 
-# @livre Ch.I §1.4 Crit.5 | E I.19 L.25 | PDF p.19
+# @livre Ch.I §1.4 Crit.5 | E I.19 L.25-25 | PDF p.19
 def cf5(a, b, sig=DEFAUT) -> bool:
     return est_relation(a, sig) and est_relation(b, sig) and est_relation(implication(a, b), sig)
 

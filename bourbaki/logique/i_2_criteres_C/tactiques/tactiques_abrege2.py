@@ -24,19 +24,19 @@ def mono_gauche(thm_pq, c):
     return syllogisme(syllogisme(N.s3(p, c), mono_droite(thm_pq, c)), N.s3(c, q))
 
 
-# @livre Ch.I §3 Crit.9 | E I.26 L.11 | PDF p.26
+# @livre Ch.I §3 Crit.9 | E I.26 L.11-11 | PDF p.26
 def affaiblissement(thm, a):
     x = thm.conclusion
     return N.modus_ponens(N.modus_ponens(thm, N.s2(x, non(a))), N.s3(x, non(a)))
 
 
 # ── double négation, contraposition ───────────────────────────────────────────
-# @livre Ch.I §3 Crit.11 | E I.26 L.18 | PDF p.26
+# @livre Ch.I §3 Crit.11 | E I.26 L.18-18 | PDF p.26
 def dni(a):
     return N.modus_ponens(a_implique_a(non(a)), N.s3(non(non(a)), non(a)))
 
 
-# @livre Ch.I §3 Crit.16 | E I.28 L.7 | PDF p.28
+# @livre Ch.I §3 Crit.16 | E I.28 L.7-7 | PDF p.28
 def dne(a):
     return N.modus_ponens(a_implique_a(a), mono_gauche(dni(non(a)), a))
 
@@ -56,13 +56,13 @@ def distribution(t_a_bc, t_ab):
     return N.loi_deduction(a, hc)
 
 
-# @livre Ch.I §3 Crit.24 | E I.31 L.24 | PDF p.31
+# @livre Ch.I §3 Crit.24 | E I.31 L.24-24 | PDF p.31
 def disj_syll_thm(p, q):
     return mono_gauche(dni(p), q)
 
 
 # ── conjonction (intro + élim) ────────────────────────────────────────────────
-# @livre Ch.I §3 Crit.20 | E I.29 L.20 | PDF p.29
+# @livre Ch.I §3 Crit.20 | E I.29 L.20-20 | PDF p.29
 def conjonction_intro(ta, tb):
     a, b = ta.conclusion, tb.conclusion
     nnA = N.modus_ponens(ta, dni(a))
@@ -112,19 +112,19 @@ def instanciation_en_x(r, x):
     return syllogisme(contraposition(s5), dne(r))      # ⊢ (∀x)R ⇒ R
 
 
-# @livre Ch.I §3 Crit.24 | E I.31 L.20 | PDF p.31
+# @livre Ch.I §3 Crit.24 | E I.31 L.20-20 | PDF p.31
 def comm_ou(p, q):
     """⊢ (P ∨ Q) ⇔ (Q ∨ P)."""
     return conjonction_intro(N.s3(p, q), N.s3(q, p))
 
 
-# @livre Ch.I §3 Crit.10 | E I.26 L.15 | PDF p.26
+# @livre Ch.I §3 Crit.10 | E I.26 L.15-15 | PDF p.26
 def tiers_exclu(p):
     """⊢ P ∨ ¬P  (principe du tiers exclu)."""
     return N.modus_ponens(a_implique_a(p), N.s3(non(p), p))   # (¬P∨P) → (P∨¬P)
 
 
-# @livre Ch.I §3 Crit.24 | E I.31 L.17 | PDF p.31
+# @livre Ch.I §3 Crit.24 | E I.31 L.17-17 | PDF p.31
 def comm_et(p, q):
     """⊢ (P et Q) ⇔ (Q et P)."""
     def sens(x, y):
@@ -153,7 +153,7 @@ def equiv_neg(thm_pq):
                              contraposition(conjonction_elim_gauche(thm_pq)))
 
 
-# @livre Ch.I §3 Crit.24 | E I.31 L.19 | PDF p.31
+# @livre Ch.I §3 Crit.24 | E I.31 L.19-19 | PDF p.31
 def demorgan_ou(p, q):
     """⊢ ¬(P∨Q) ⇔ (¬P et ¬Q).   (loi de De Morgan ; et(¬P,¬Q)=¬(¬¬P∨¬¬Q).)"""
     dnP = conjonction_intro(dne(p), dni(p))            # ¬¬P ⇔ P
@@ -162,14 +162,14 @@ def demorgan_ou(p, q):
     return conjonction_intro(conjonction_elim_droite(eq), conjonction_elim_gauche(eq))  # symétrisé
 
 
-# @livre Ch.I §3 Crit.24 | E I.31 L.19 | PDF p.31
+# @livre Ch.I §3 Crit.24 | E I.31 L.19-19 | PDF p.31
 def demorgan_et(p, q):
     """⊢ ¬(P et Q) ⇔ (¬P ∨ ¬Q).   (¬(P et Q) = ¬¬(¬P∨¬Q).)"""
     x = ou(non(p), non(q))
     return conjonction_intro(dne(x), dni(x))           # ¬¬X ⇔ X  = ¬(P et Q) ⇔ (¬P∨¬Q)
 
 
-# @livre Ch.I §3 Crit.24 | E I.31 L.22 | PDF p.31
+# @livre Ch.I §3 Crit.24 | E I.31 L.22-22 | PDF p.31
 def et_ou_distrib(p, q, r):
     """⊢ (P et (Q∨R)) ⇔ ((P et Q) ∨ (P et R))   (distribution de et sur ∨)."""
     h = N.assume(et(p, ou(q, r)))
@@ -191,7 +191,7 @@ def et_ou_distrib(p, q, r):
     return conjonction_intro(fwd, bwd)
 
 
-# @livre Ch.I §3 Crit.24 | E I.31 L.18 | PDF p.31
+# @livre Ch.I §3 Crit.24 | E I.31 L.18-18 | PDF p.31
 def assoc_et(p, q, r):
     """⊢ (P et (Q et R)) ⇔ ((P et Q) et R)."""
     h1 = N.assume(et(p, et(q, r)))
@@ -292,7 +292,7 @@ def instancie(thm_forall, t):
 
 
 # ── Chapitre II — transitivité de l'inclusion ─────────────────────────────────
-# @livre Ch.II §1.2 Prop.2 | E II.2 L.33 | PDF p.53
+# @livre Ch.II §1.2 Prop.2 | E II.2 L.33-33 | PDF p.53
 def inclusion_transitive(a="a", b="b", c="c"):
     """⊢ ((a ⊂ b) et (b ⊂ c)) ⇒ (a ⊂ c)."""
     va, vb, vc, z = var(a), var(b), var(c), "z"
