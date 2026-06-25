@@ -119,6 +119,7 @@ def _inclus_terme_dans_produit(vI, vE, vx, iota):
     return N.generalisation("z", imp)                          # x̃ ⊂ I×E   [hyp x∈E]
 
 
+# @livre Ch.II §5.3 Def.- | E II.33 L.18-22 | PDF p.84
 def diagonale_terme_dans_exposant(e="E", i="I", x="x", iota="iota"):
     """⊢ (x ∈ E) ⇒ ( x̃ ∈ E^I ).   (§II.5.3 : le graphe constant ι↦x est dans E^I.)
 
@@ -157,6 +158,7 @@ def cible_diagonale_incluse_exposant(e="E", i="I", x="xa", iota="iota"):
     return inclus(Delta, E.exposant(vI, vE))
 
 
+# @livre Ch.II §5.3 Def.- | E II.33 L.18-22 | PDF p.84
 def diagonale_incluse_exposant(e="E", i="I", x="xa", iota="iota"):
     """⊢ Δ ⊂ E^I.   (§II.5.3 : la diagonale est une partie du produit E^I.)
 

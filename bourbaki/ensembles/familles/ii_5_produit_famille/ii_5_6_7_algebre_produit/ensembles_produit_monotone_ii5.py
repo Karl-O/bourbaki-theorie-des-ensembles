@@ -44,6 +44,7 @@ def _cible(f="f", g="g", i="I"):
     return _enonce(f, g, i)
 
 
+# @livre Ch.II §5.4 Cor.3 | E II.34 L.40-44 | PDF p.85
 def produit_monotone(f="f", g="g", i="I", ff="F"):
     """⊢ ((∀ι)(ι∈I ⇒ Xι⊂Yι)) ⇒ (∏(f,I) ⊂ ∏(g,I)).   (§II.5, Prop.10, sens direct.)"""
     vf, vg, vI, vF = var(f), var(g), var(i), var(ff)

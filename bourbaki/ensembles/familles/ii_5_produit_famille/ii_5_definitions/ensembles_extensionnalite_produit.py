@@ -96,6 +96,7 @@ def _valeurs_depuis_projections(vf, vI, vx, vy, dom_x_eq_I, h_proj, val_bnd="x")
     return N.generalisation(val_bnd, imp)  # (∀x)(x∈dom x_pt ⇒ valeur(x_pt,x)=valeur(y_pt,x))
 
 
+# @livre Ch.II §5.3 Def.1 | E II.32 L.16-23 | PDF p.83
 def extensionnalite_produit(f="f", i="I", x_pt="x_pt", y_pt="y_pt", idx="i"):
     """⊢ ( x ∈ ∏_{ι∈I} X_ι  et  y ∈ ∏  et  est_un_graphe(x)  et  est_un_graphe(y)
           et  (∀ι)(ι∈I ⇒ pr_ι(x) = pr_ι(y)) )  ⇒  x = y.

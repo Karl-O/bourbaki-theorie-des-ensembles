@@ -93,6 +93,7 @@ def _t(v):
 #   À i fixé : i∈I ⇒ (F(i)∈X_i  et  X_i⊂Y_i)  ⇒ F(i)∈Y_i.  Donc
 #   (∀i)(i∈I⇒F(i)∈Y_i), d'où F∈∏(g,I).  L'inclusion ∏(f,I)⊂∏(g,I) suit.
 
+# @livre Ch.II §5.4 Cor.3 | E II.34 L.40-44 | PDF p.85
 def produit_monotone_facteurs(f="f", g="g", i="I", ff="F", iota="i"):
     """⊢ (∀ι)(ι∈I ⇒ X_ι⊂Y_ι) ⇒ ( ∏_{ι∈I}X_ι ⊂ ∏_{ι∈I}Y_ι ).
        (§5.4, Cor. 3 de la Prop. 6 — monotonie du produit.)            [INCONDITIONNEL]
@@ -145,6 +146,7 @@ def produit_monotone_facteurs(f="f", g="g", i="I", ff="F", iota="i"):
     return N.loi_deduction(H, incl_z)                    # ⊢ H ⇒ (∏f ⊂ ∏g)
 
 
+# @livre Ch.II §5.4 Cor.3 | E II.34 L.40-44 | PDF p.85
 def facteurs_egaux_donne_inclus(f="f", g="g", i="I", ff="F", iota="i"):
     """⊢ (∀ι)(ι∈I ⇒ X_ι=Y_ι) ⇒ ( ∏_{ι∈I}X_ι ⊂ ∏_{ι∈I}Y_ι ).
        (§5.4, corollaire : facteurs égaux ⇒ produits inclus.)          [INCONDITIONNEL]
@@ -227,6 +229,7 @@ def _comp(a, b):
     return E.composee(_t(a), _t(b))
 
 
+# @livre Ch.II §5.3 Prop.4 | E II.33 L.7-11 | PDF p.84
 def reparametrage_injectif(ff="F", fp="Fp", u="U", v="V", prod="P"):
     """⊢ ( F∈P et F'∈P et (F∘U)∘V=F et (F'∘U)∘V=F' et F∘U=F'∘U ) ⇒ F=F'.
        (§5.3, Prop. 4 : F↦F∘U injective — moitié injective.)           [CONDITIONNEL]
@@ -286,6 +289,7 @@ def assoc(f, prod_assoc="QQ"):
     return app("assoc_partition", _t(f))
 
 
+# @livre Ch.II §5.5 Prop.7 | E II.35 L.4-11 | PDF p.86
 def associativite_via_inverse(ff="F", pi="PI", pipi="PIPI"):
     """⊢ ( F∈∏_I et assoc(F)∈∏∏ et recoller(assoc(F))=F ) ⇒ (∃H)( H∈∏∏ et recoller(H)=F ).
        (§5.5, Prop. 7 : surjectivité de l'inverse d'associativité.)    [CONDITIONNEL]
@@ -318,6 +322,7 @@ def associativite_via_inverse(ff="F", pi="PI", pipi="PIPI"):
 # AXIOME_INTER_FAM : z∈⋂_K X_κ ⇔ (∀κ)(κ∈K⇒z∈X_κ) ; on instancie κ=κ₀ et on
 # décharge κ₀∈K.
 
+# @livre Ch.II §5.6 Lem.- | E II.37 L.40-45 | PDF p.88
 def inter_famille_incluse_facteur(h_fam="h", k="K", kappa="k0", z="z"):
     """⊢ (κ₀∈K) ⇒ ( ⋂_{κ∈K}X_κ ⊂ X_{κ₀} ).   (§5.6 : ⋂ incluse dans chaque membre.)
        [INCONDITIONNEL]
@@ -354,6 +359,7 @@ def inter_famille_incluse_facteur(h_fam="h", k="K", kappa="k0", z="z"):
 # intersections), on a G(ι)∈⋂_κ X_{ι,κ}, donc G(ι)∈X_{ι,κ₀} pour κ₀∈K, d'où
 # G∈∏_{ι∈I}X_{·,κ₀}.
 
+# @livre Ch.II §5.6 Prop.10 | E II.37 L.40-45 | PDF p.88
 def produit_distrib_inter_membre(f_inter="W", g_kappa="V", i="I", k="K",
                                  ff="G", iota="i", kappa="k0"):
     """⊢ ( G∈∏_{ι∈I}(⋂_{κ∈K}X_{ι,κ}) et κ₀∈K

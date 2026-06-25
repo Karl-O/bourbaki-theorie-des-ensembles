@@ -60,6 +60,7 @@ def _t(v):
 # ════════════════════════════════════════════════════════════════════════════
 # §5.4 — Prop. 6 : choix-τ dans un facteur non vide                  [INCONDITIONNEL]
 # ════════════════════════════════════════════════════════════════════════════
+# @livre Ch.II §5.4 Prop.6 | E II.34 L.1-9 | PDF p.85
 def facteur_temoin(f="f", i="iota"):
     """⊢ ¬(X_ι = ∅) ⇒ ( τ_w(w ∈ X_ι) ∈ X_ι ).   (§5.4, Prop. 6 : choix-τ.)  [INCOND.]
 
@@ -76,6 +77,7 @@ def facteur_temoin(f="f", i="iota"):
 # ════════════════════════════════════════════════════════════════════════════
 # §5.4 — Cor. 2 (sens facile) : ∏≠∅ ⇒ chaque facteur ≠∅             [INCONDITIONNEL]
 # ════════════════════════════════════════════════════════════════════════════
+# @livre Ch.II §5.4 Cor.2 | E II.34 L.18-25 | PDF p.85
 def facteur_non_vide_si_membre(f="f", i="I", ff="F", iota="iota"):
     """⊢ ( F ∈ ∏_I et ι ∈ I ) ⇒ ¬( X_ι = ∅ ).   (§5.4, Cor. 2, sens « ∏≠∅ ⇒ X_ι≠∅ ».)
        [INCONDITIONNEL]
@@ -103,6 +105,7 @@ def facteur_non_vide_si_membre(f="f", i="I", ff="F", iota="iota"):
 # ════════════════════════════════════════════════════════════════════════════
 # §5.4 — Prop. 5 : pr_J surjective (réduction au prolongement)        [CONDITIONNEL]
 # ════════════════════════════════════════════════════════════════════════════
+# @livre Ch.II §5.4 Prop.5 | E II.33 L.48-51 | PDF p.84
 def pr_J_surjective_via_prolongement(f="f", i="I", j="J", g="G", ff="F"):
     """⊢ ( G∈∏_J  et  F∈∏_I  et  F|J = G ) ⇒ (∃P)( P∈∏_I  et  pr_J(P) = G ).
        (§5.4, Prop. 5 : pr_J : ∏_I → ∏_J surjective si tous X_ι≠∅.)      [CONDITIONNEL]

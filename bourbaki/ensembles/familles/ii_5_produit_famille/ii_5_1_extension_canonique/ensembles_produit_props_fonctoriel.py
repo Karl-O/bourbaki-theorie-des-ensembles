@@ -53,6 +53,7 @@ def _t(v):
 # ════════════════════════════════════════════════════════════════════════════
 # 1.  Caractérisation graphe du foncteur ∏ g_ι                       [INCONDITIONNEL]
 # ════════════════════════════════════════════════════════════════════════════
+# @livre Ch.II §5.7 Def.2 | E II.38 L.25-37 | PDF p.89
 def ext_produit_membre(g="g", i="I", x_fam="X", iota="iota", fp="fp", w="w"):
     """⊢ (w ∈ ∏g_ι) ⇔ (∃fp)( fp ∈ ∏X_ι et w=(fp, u_{fp}) ).   (§5.7, Déf. 2.)  [INCOND.]
 
@@ -97,6 +98,7 @@ def image_term(g, i, f, iota="iota"):
     return E.graphe_terme(_t(i), _T_image(g, f, iota), iota)
 
 
+# @livre Ch.II §5.7 Def.2 | E II.38 L.38-44 | PDF p.89
 def coord_image_produit(g="g", i="I", f="f", iota="iota", kappa="kappa"):
     """⊢ (κ ∈ I) ⇒ ( u_f(κ) = g_κ(f(κ)) ).   (§5.7, Déf. 2 : κ-ème coordonnée de u_f.)
        [INCONDITIONNEL]
@@ -120,6 +122,7 @@ def coord_image_produit(g="g", i="I", f="f", iota="iota", kappa="kappa"):
 # u_f = f (extensionnalité) : ∏ Id = Id.  Ici on livre l'égalité COORDONNÉE
 # (u_f(κ)=f(κ)) sous l'hypothèse explicite g_κ(f(κ))=f(κ) (= « g_κ vaut Id en f(κ) »).
 
+# @livre Ch.II §5.7 Cor. | E II.39 L.6-15 | PDF p.90
 def coord_identite(g="g", i="I", f="f", iota="iota", kappa="kappa"):
     """⊢ ( κ∈I et g_κ(f(κ))=f(κ) ) ⇒ ( u_f(κ) = f(κ) ).   (§5.7 : ∏ Id = Id, coord.)
        [CONDITIONNEL — hyp. g_κ(f(κ))=f(κ) = identité de g_κ en f(κ).]
@@ -155,6 +158,7 @@ def coord_identite(g="g", i="I", f="f", iota="iota", kappa="kappa"):
 # certifiées ; les hypothèses de fonctionnalité de composition_valeur_t restent
 # en prémisses (on n'invoque pas la Prop. 6 sur des termes).
 
+# @livre Ch.II §5.7 Prop.11 | E II.38 L.45-52 | PDF p.89
 def coord_fonctorialite(gp="gp", g="g", h="h", i="I", f="f", iota="iota", kappa="kappa"):
     """⊢ ( κ∈I  et  h_κ(f(κ)) = g'_κ(g_κ(f(κ)))  et  v(κ) = g_κ(f(κ)) )
          ⇒  u^{h}_f(κ) = g'_κ( v(κ) )    où  v = u^{g}_f = (∏g)(f).

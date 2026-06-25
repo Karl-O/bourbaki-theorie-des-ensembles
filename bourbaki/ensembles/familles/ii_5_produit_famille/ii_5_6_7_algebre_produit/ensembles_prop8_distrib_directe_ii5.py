@@ -144,6 +144,7 @@ def _cible(xx="XX", j="J", L="L", gl="GL", gr="GR"):
 
 
 # ── théorème principal ────────────────────────────────────────────────────────
+# @livre Ch.II §5.6 Prop.8 | E II.35 L.43-52 | PDF p.86
 def distributivite_reunion_inter_inclusion_directe(
         xx="XX", j="J", L="L", gl="GL", grin="GRin", gr="GR", ff="f"):
     """⊢ ⋃_{λ∈L}(⋂_{ι∈J_λ}X_{λ,ι}) ⊂ ⋂_{f∈I}(⋃_{λ∈L}X_{λ,f(λ)}),  I = ∏_{λ∈L}J_λ.

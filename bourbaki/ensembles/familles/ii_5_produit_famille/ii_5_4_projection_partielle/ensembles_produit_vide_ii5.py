@@ -56,6 +56,7 @@ def _congruence_appartient(t, a, b, w="w"):
     return N.loi_deduction(egal(a, b), equivalence_avant(equ))
 
 
+# @livre Ch.II §5.4 Cor.2 | E II.34 L.18-25 | PDF p.85
 def cor2_facteur_vide_donne_produit_vide(f="f", i="I", a="a", ff="F"):
     """⊢ ( (α∈I) ∧ (X_α=∅) ) ⇒ ( ∏_{ι∈I} X_ι = ∅ ).   (E.II.5.4, Cor. 2, sens utile.)
 

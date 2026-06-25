@@ -46,11 +46,13 @@ def _inst_parties(x, y):
     return instancie(instancie(ax, x), y)
 
 
+# @livre Ch.II §5.1 Ax.3 | E II.30 L.17-21 | PDF p.81
 def membre_parties(x="X", y="Y"):
     """⊢ (Y ∈ P(X)) ⇔ (Y ⊂ X).   (axiome A3 instancié, E.II.5.1.)"""
     return _inst_parties(var(x), var(y))
 
 
+# @livre Ch.II §5.1 Prop.- | E II.30 L.18-21 | PDF p.81
 def vide_dans_parties(x="X"):
     """⊢ ∅ ∈ P(X).   (l'ensemble vide est partie de tout ensemble.)"""
     vX, vz = var(x), var("z")
@@ -62,6 +64,7 @@ def vide_dans_parties(x="X"):
     return N.modus_ponens(vide_sub, equivalence_arriere(_inst_parties(vX, E.VIDE)))
 
 
+# @livre Ch.II §5.1 Prop.- | E II.30 L.18-21 | PDF p.81
 def ensemble_dans_parties(x="X"):
     """⊢ X ∈ P(X).   (X est partie de lui-même.)"""
     vX = var(x)
@@ -69,6 +72,7 @@ def ensemble_dans_parties(x="X"):
     return N.modus_ponens(refl, equivalence_arriere(_inst_parties(vX, vX)))
 
 
+# @livre Ch.II §5.1 Prop.- | E II.30 L.22-25 | PDF p.81
 def parties_croissante(x="X", xp="Xp"):
     """⊢ (X ⊂ X') ⇒ (P(X) ⊂ P(X')).   (E.II.5.1 : X⊂X' entraîne P(X)⊂P(X').)
 
@@ -98,12 +102,14 @@ def _inst_produit(f, i, ff):
     return instancie(instancie(instancie(ax, f), i), ff)
 
 
+# @livre Ch.II §5.3 Def.1 | E II.32 L.16-23 | PDF p.83
 def membre_produit_famille(f="f", i="I", ff="F"):
     """⊢ (F ∈ ∏_{ι∈I} X_ι) ⇔ ( F fonctionnel ∧ dom F = I ∧ (∀ι)(ι∈I ⇒ F(ι)∈X_ι) ).
        (Déf. 1, E.II.5.3 — caractérisation de l'appartenance au produit.)"""
     return _inst_produit(var(f), var(i), var(ff))
 
 
+# @livre Ch.II §5.3 Def.1 | E II.32 L.16-23 | PDF p.83
 def produit_fonctionnel(f="f", i="I", ff="F"):
     """⊢ (F ∈ ∏_{ι∈I} X_ι) ⇒ (F est un graphe fonctionnel).   (élément du produit.)"""
     vf, vI, vF = var(f), var(i), var(ff)
@@ -113,6 +119,7 @@ def produit_fonctionnel(f="f", i="I", ff="F"):
     return N.loi_deduction(appartient(vF, E.produit_famille(vf, vI)), fonctionnel)
 
 
+# @livre Ch.II §5.3 Def.1 | E II.32 L.16-23 | PDF p.83
 def produit_domaine(f="f", i="I", ff="F"):
     """⊢ (F ∈ ∏_{ι∈I} X_ι) ⇒ (dom F = I).   (l'ensemble de définition est I.)"""
     vf, vI, vF = var(f), var(i), var(ff)
@@ -122,6 +129,7 @@ def produit_domaine(f="f", i="I", ff="F"):
     return N.loi_deduction(appartient(vF, E.produit_famille(vf, vI)), domaine)
 
 
+# @livre Ch.II §5.3 Def.1 | E II.32 L.24-26 | PDF p.83
 def projection_dans_facteur(f="f", i="I", ff="F", a="a"):
     """⊢ (F ∈ ∏_{ι∈I} X_ι) ⇒ ((α ∈ I) ⇒ (pr_α(F) ∈ X_α)).   (E.II.5.3 : pr_ι : ∏ → X_ι.)
 

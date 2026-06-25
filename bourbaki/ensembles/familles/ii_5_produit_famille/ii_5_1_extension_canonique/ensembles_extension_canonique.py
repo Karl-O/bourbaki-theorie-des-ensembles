@@ -100,6 +100,7 @@ def extension_canonique(g, a, b, xi="Xi"):
     return E.fonction_terme(E.parties(_t(a)), E.image(_t(g), vXi), E.parties(_t(b)), xi)
 
 
+# @livre Ch.II §5.1 Def.- | E II.30 L.26-31 | PDF p.81
 def ext_canonique_graphe_membre(g="G", a="A", xi="Xi"):
     """⊢ w ∈ graphe(Γ̂) ⇔ (∃Xi)(∃y)(w=(Xi,y) et Xi∈P(A) et y=G⟨Xi⟩).   (§5.1, C54.)
 
@@ -112,6 +113,7 @@ def ext_canonique_graphe_membre(g="G", a="A", xi="Xi"):
     return instancie(ax, var("w"))
 
 
+# @livre Ch.II §5.1 Def.- | E II.30 L.26-31 | PDF p.81
 def ext_canonique_valeur(g="G", a="A", x="X", xi="Xi"):
     """⊢ (X ∈ P(A)) ⇒ ((X, G⟨X⟩) ∈ graphe(Γ̂)).   (§5.1 : Γ̂(X) = G⟨X⟩, niveau graphe.)
 
@@ -188,6 +190,7 @@ def diagonale_produit(e, i, x="xa", iota="iota"):
     return E.image(graphe_application_diagonale(e, i, x, iota), _t(e))
 
 
+# @livre Ch.II §5.3 Def.- | E II.33 L.18-22 | PDF p.84
 def diagonale_valeur(i="I", x="x", iota="iota"):
     """⊢ w ∈ x̃ ⇔ (∃ι)(∃y)(w=(ι,y) et ι∈I et y=x).   (§5.3 : x̃ = graphe de ι↦x.)
 
@@ -199,6 +202,7 @@ def diagonale_valeur(i="I", x="x", iota="iota"):
     return instancie(ax, var("w"))
 
 
+# @livre Ch.II §5.3 Def.- | E II.33 L.18-22 | PDF p.84
 def diag_application_membre(e="E", i="I", x="xa", iota="iota"):
     """⊢ w ∈ graphe(diag) ⇔ (∃xa)(∃y)(w=(xa,y) et xa∈E et y=x̃).   (§5.3 : x↦x̃.)
 
@@ -210,6 +214,7 @@ def diag_application_membre(e="E", i="I", x="xa", iota="iota"):
     return instancie(ax, var("w"))
 
 
+# @livre Ch.II §5.3 Def.- | E II.33 L.18-22 | PDF p.84
 def membre_diagonale(e="E", i="I", x="xa", iota="iota"):
     """⊢ (z ∈ Δ) ⇔ (∃x)(x∈E et (x,z)∈graphe(diag)).   (§5.3 : Δ = graphe(diag)⟨E⟩.)
 
@@ -256,6 +261,7 @@ def graphe_projection_J(fam, i, j, ff="F"):
                           projection_J(vF, _t(j)), ff)
 
 
+# @livre Ch.II §5.4 Def.- | E II.33 L.42-47 | PDF p.84
 def pr_partiel_valeur(ff="F", j="J"):
     """⊢ pr_J(F) = F|J.   (§5.4 : la projection d'indice J est la restriction à J.)
 
@@ -263,6 +269,7 @@ def pr_partiel_valeur(ff="F", j="J"):
     return N.reflexivite(projection_J(var(ff), var(j)))
 
 
+# @livre Ch.II §5.4 Def.- | E II.33 L.40-44 | PDF p.84
 def membre_produit_partiel(f="f", j="J", ff="G"):
     """⊢ (G ∈ ∏_{ι∈J} X_ι) ⇔ ( G fonctionnel ∧ dom G = J ∧ (∀ι)(ι∈J ⇒ G(ι)∈X_ι) ).
        (§5.4 — caractérisation de l'appartenance au produit partiel.)
@@ -273,6 +280,7 @@ def membre_produit_partiel(f="f", j="J", ff="G"):
     return instancie(instancie(instancie(ax, vf), vJ), vG)
 
 
+# @livre Ch.II §5.4 Def.- | E II.33 L.40-44 | PDF p.84
 def restriction_dans_produit_partiel(f="f", j="J", ff="G"):
     """⊢ (G ∈ ∏_{ι∈J} X_ι) ⇒ (dom G = J).   (un élément du produit partiel a domaine J.)"""
     vf, vJ, vG = var(f), var(j), var(ff)
@@ -341,6 +349,7 @@ def theorie_extension_produit(g, i, x_fam, iota="iota", fp="fp", w="w"):
                      [axiome_extension_produit(g, i, x_fam, iota, fp, w)])
 
 
+# @livre Ch.II §5.7 Def.2 | E II.38 L.25-37 | PDF p.89
 def ext_produit_valeur(g="g", i="I", x_fam="X", f="f", iota="iota", fp="fp", w="w"):
     """⊢ (f ∈ ∏X_ι) ⇒ ((f, u_f) ∈ ∏g_ι)   où  u_f = graphe(ι↦g_ι(f(ι))).   (§5.7, Déf. 2.)
 

@@ -57,6 +57,7 @@ def _symetrise_sous_quantif(h, vf, vg, vI, iota="i"):
                           equivalence_avant(alpha_pour_tout("a", iota, membre)))
 
 
+# @livre Ch.II §5.4 Cor.3 | E II.34 L.40-44 | PDF p.85
 def produit_egal_si_facteurs_egaux(f="f", g="g", i="I"):
     """⊢ ((∀ι)(ι∈I ⇒ X_ι=Y_ι)) ⇒ (∏(f,I) = ∏(g,I)).   (§II.5, corollaire Prop.10.)"""
     vf, vg, vI = var(f), var(g), var(i)

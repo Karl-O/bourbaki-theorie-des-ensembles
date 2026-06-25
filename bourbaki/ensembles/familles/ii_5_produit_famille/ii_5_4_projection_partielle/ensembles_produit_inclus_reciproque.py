@@ -75,6 +75,7 @@ def _cible(f="f", g="g", i="I", ff="F", alpha="alpha", a="a"):
     return impl(hyp, appartient(va, Y_alpha))
 
 
+# @livre Ch.II §5.4 Cor.3 | E II.34 L.32-44 | PDF p.85
 def facteur_inclus_si_produit_inclus(f="f", g="g", i="I", ff="F",
                                      alpha="alpha", a="a"):
     """⊢ ( ∏(f,I)⊂∏(g,I) ∧ α∈I ∧ F∈∏(f,I) ∧ F(α)=a ) ⇒ ( a ∈ Y_α ).

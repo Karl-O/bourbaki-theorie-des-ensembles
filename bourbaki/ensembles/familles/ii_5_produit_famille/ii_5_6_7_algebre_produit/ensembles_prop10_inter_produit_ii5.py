@@ -99,6 +99,7 @@ def _cible(p="P", phi="Phi", col="COL", row="ROW", i="I", k="K"):
 
 
 # ── théorème principal ────────────────────────────────────────────────────────
+# @livre Ch.II §5.6 Prop.10 | E II.37 L.40-45 | PDF p.88
 def inter_produit_egal_produit_inter(p="P", phi="Phi", col="COL", row="ROW",
                                      i="I", k="K", ff="F"):
     """⊢ ( K≠∅ ∧ (∀κ)(κ∈K⇒P_κ=∏_ι X_{ι,κ}) ∧ (∀ι)(ι∈I⇒Φ_ι=⋂_κ X_{ι,κ}) ∧ H_coh )

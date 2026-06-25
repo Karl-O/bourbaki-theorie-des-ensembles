@@ -70,6 +70,7 @@ def _t(v):
 # Or `image_composee` (E.II.42, déjà prouvé) donne (G'∘G)⟨X⟩ = G'⟨G⟨X⟩⟩.  Donc
 # les deux extensions coïncident en chaque X — c'est l'identité voulue.
 
+# @livre Ch.II §5.1 Def.- | E II.30 L.27-31 | PDF p.81
 def ext_compose_valeur(gp="Gp", g="G", x="X"):
     """⊢ (G'∘G)⟨X⟩ = G'⟨G⟨X⟩⟩.   (§5.1 : (Γ'∘Γ)^ = Γ̂'∘Γ̂, lu sur les valeurs.)  [INCOND.]
 
@@ -93,6 +94,7 @@ def hyp_retraction_ensembliste(r, g, x):
     return egal(E.image(_t(r), E.image(_t(g), _t(x))), _t(x))
 
 
+# @livre Ch.II §5.1 Prop.1 | E II.30 L.32-39 | PDF p.81
 def ext_canonique_injective(r="R", g="G", a="A", x="X", xp="Xp"):
     """⊢ ( X∈P(A) et X'∈P(A) et R⟨G⟨X⟩⟩=X et R⟨G⟨X'⟩⟩=X' et G⟨X⟩=G⟨X'⟩ ) ⇒ X=X'.
        (§5.1, Prop. 1.2° : f̂ injective si f injective.)                 [CONDITIONNEL]
@@ -147,6 +149,7 @@ def hyp_section_ensembliste(g, s, y):
     return egal(E.image(_t(g), E.image(_t(s), _t(y))), _t(y))
 
 
+# @livre Ch.II §5.1 Prop.1 | E II.30 L.32-39 | PDF p.81
 def ext_canonique_surjective(g="G", s="S", a="A", b="B", y="Y"):
     """⊢ ( Y∈P(B) et S⟨Y⟩∈P(A) et G⟨S⟨Y⟩⟩=Y ) ⇒ (∃X)( X∈P(A) et G⟨X⟩=Y ).
        (§5.1, Prop. 1.1° : f̂ surjective si f surjective.)               [CONDITIONNEL]

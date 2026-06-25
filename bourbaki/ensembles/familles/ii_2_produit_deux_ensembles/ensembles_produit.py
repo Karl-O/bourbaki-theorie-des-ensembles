@@ -27,6 +27,7 @@ def _instance_produit(gx, gy, z):
     return instancie(instancie(instancie(ax, gx), gy), z)
 
 
+# @livre Ch.II §2.2 Prop.2 | E II.8 L.35-49 | PDF p.59
 def produit_inclusion_facile(a="A", b="B", ap="Ap", bp="Bp"):
     """⊢ ((A'⊂A) et (B'⊂B)) ⇒ (A'×B' ⊂ A×B).  (Proposition 2, sens direct.)"""
     vA, vB, vAp, vBp = var(a), var(b), var(ap), var(bp)
@@ -54,6 +55,7 @@ def produit_inclusion_facile(a="A", b="B", ap="Ap", bp="Bp"):
     return N.loi_deduction(hyp, gen)
 
 
+# @livre Ch.II §2.2 Th.1 | E II.8 L.10-31 | PDF p.59
 def couple_dans_produit(u="u", v="v", a="A", b="B"):
     """⊢ (u∈A et v∈B) ⇒ ((u,v) ∈ A×B).   (u, v distincts de x, y.)"""
     vu, vv, vA, vB = var(u), var(v), var(a), var(b)
@@ -72,6 +74,7 @@ def couple_dans_produit(u="u", v="v", a="A", b="B"):
     return N.loi_deduction(et(appartient(vu, vA), appartient(vv, vB)), dans)
 
 
+# @livre Ch.II §2.2 Th.1 | E II.8 L.10-31 | PDF p.59
 def couple_dans_produit_ssi(u="u", v="v", a="A", b="B"):
     """⊢ ((u,v) ∈ A×B) ⇔ (u∈A et v∈B).   (u, v noms OU termes, distincts de p, q.)"""
     from bourbaki.logique.i_1_termes_relations.formule import Terme
@@ -115,6 +118,7 @@ def couple_dans_produit_ssi(u="u", v="v", a="A", b="B"):
     return equivalence_transitivite(inst, conjonction_intro(avant, arriere))
 
 
+# @livre Ch.II §2.2 Th.1 | E II.8 L.32-34 | PDF p.59
 def produit_projections(a="A", b="B", z="z"):
     """⊢ (z ∈ A×B) ⇒ (pr₁z ∈ A et pr₂z ∈ B).   (z appartient au produit ⇒ ses
     projections sont dans les facteurs — sens utilisé dans les Prop. 2-3.
@@ -146,6 +150,7 @@ def produit_projections(a="A", b="B", z="z"):
     return syllogisme(equivalence_avant(inst), chaine)          # z∈A×B ⇒ (pr₁z∈A et pr₂z∈B)
 
 
+# @livre Ch.II §2.2 Prop.2 | E II.8 L.49-58 | PDF p.59
 def produit_inclusion_reciproque_gauche(a="A", b="B", ap="Ap", bp="Bp"):
     """⊢ (B'≠∅) ⇒ ((A'×B' ⊂ A×B) ⇒ (A' ⊂ A)).   (Proposition 2, réciproque, à gauche.)"""
     vA, vB, vAp, vBp = var(a), var(b), var(ap), var(bp)
@@ -172,6 +177,7 @@ def produit_inclusion_reciproque_gauche(a="A", b="B", ap="Ap", bp="Bp"):
         N.loi_deduction(inclus(E.produit(vAp, vBp), E.produit(vA, vB)), a_sub))
 
 
+# @livre Ch.II §2.2 Prop.2 | E II.8 L.49-58 | PDF p.59
 def produit_inclusion_reciproque_droite(a="A", b="B", ap="Ap", bp="Bp"):
     """⊢ (A'≠∅) ⇒ ((A'×B' ⊂ A×B) ⇒ (B' ⊂ B)).   (Proposition 2, réciproque, à droite.)"""
     vA, vB, vAp, vBp = var(a), var(b), var(ap), var(bp)
@@ -197,6 +203,7 @@ def produit_inclusion_reciproque_droite(a="A", b="B", ap="Ap", bp="Bp"):
         N.loi_deduction(inclus(E.produit(vAp, vBp), E.produit(vA, vB)), b_sub))
 
 
+# @livre Ch.II §2.2 Prop.3 | E II.8 L.59-63 | PDF p.59
 def produit_vide_si(a="A", b="B"):
     """⊢ (A=∅ ou B=∅) ⇒ A×B=∅.   (Proposition 3, sens ⇐.)"""
     vA, vB, vz = var(a), var(b), var("z")
@@ -218,6 +225,7 @@ def produit_vide_si(a="A", b="B"):
     return N.loi_deduction(disj, cas(hd, brA, brB))
 
 
+# @livre Ch.II §2.2 Prop.3 | E II.8 L.59-63 | PDF p.59
 def produit_vide_dur(a="A", b="B"):
     """⊢ A×B=∅ ⇒ (A=∅ ou B=∅).   (Proposition 3, sens ⇒.)"""
     vA, vB, vz, vv = var(a), var(b), var("z"), var("v")
@@ -244,6 +252,7 @@ def produit_vide_dur(a="A", b="B"):
     return N.loi_deduction(prod_vide, cas(te, brA, brB))
 
 
+# @livre Ch.II §2.2 Prop.3 | E II.8 L.59-63 | PDF p.59
 def produit_vide(a="A", b="B"):
     """⊢ (A×B = ∅) ⇔ (A = ∅ ou B = ∅).   (Proposition 3, E.II.34.)"""
     return conjonction_intro(produit_vide_dur(a, b), produit_vide_si(a, b))

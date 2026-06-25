@@ -72,6 +72,7 @@ def cible_diagonale_injective(e="E", i="I", x="x", y="yy", alpha="alpha", iota="
     return impl(hyp, egal(vx, vy))
 
 
+# @livre Ch.II §5.3 Def.- | E II.33 L.20-22 | PDF p.84
 def diagonale_injective(e="E", i="I", x="x", y="yy", alpha="alpha", iota="iota"):
     """⊢ ( α∈I et x∈E et y∈E et x̃ = ỹ ) ⇒ x = y.   (§II.5.3 : x↦x̃ est une injection.)
 
