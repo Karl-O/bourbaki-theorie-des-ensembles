@@ -102,6 +102,7 @@ def aleph0():
 # ═══════════════════════════════════════════════════════════════════════════════
 # Déf. 1 — ensemble infini / cardinal infini   (§III.6.1)
 # ═══════════════════════════════════════════════════════════════════════════════
+# @livre Ch.III §6.1 Def.1 | E III.45 L.3-4 | PDF p.148
 def est_infini(a):
     """est_infini(𝔞) := ¬Fini(𝔞)   (un cardinal est infini s'il n'est pas un entier, Déf. 1).
 
@@ -137,6 +138,7 @@ def theorie_infini():
 # ═══════════════════════════════════════════════════════════════════════════════
 # Déf. 2 — suite, suite infinie   (§III.6.1)
 # ═══════════════════════════════════════════════════════════════════════════════
+# @livre Ch.III §6.1 Def.2 | E III.45 L.33-36 | PDF p.148
 def est_suite(f, i):
     """« (x_n)_{n∈I} est une suite » := I ⊂ N   (famille indexée par une partie de N, Déf. 2).
 
@@ -154,6 +156,7 @@ def est_suite_infinie(f, i):
 # ═══════════════════════════════════════════════════════════════════════════════
 # Déf. 3 — ensemble dénombrable   (§III.6.4)
 # ═══════════════════════════════════════════════════════════════════════════════
+# @livre Ch.III §6.4 Def.3 | E III.49 L.30-31 | PDF p.152
 def est_denombrable(e, y="Y"):
     """est_denombrable(E) := (∃Y)(Y ⊂ N et Eq(E, Y))   (Déf. 3, VERBATIM).
 
@@ -174,6 +177,7 @@ def est_denombrable_card(e):
 # ═══════════════════════════════════════════════════════════════════════════════
 # Déf. 4 — puissance du continu   (§III.6.4)
 # ═══════════════════════════════════════════════════════════════════════════════
+# @livre Ch.III §6.4 Def.4 | E III.50 L.34-35 | PDF p.153
 def a_puissance_continu(e):
     """a_puissance_continu(E) := Eq(E, P(N))   (Déf. 4, VERBATIM).
 
@@ -189,6 +193,7 @@ def puissance_continu():
 # ═══════════════════════════════════════════════════════════════════════════════
 # Déf. 5 — suite stationnaire   (§III.6.5)
 # ═══════════════════════════════════════════════════════════════════════════════
+# @livre Ch.III §6.5 Def.5 | E III.50 L.43-45 | PDF p.153
 def est_stationnaire(f, m="m", n="n"):
     """est_stationnaire((x_n)) := (∃m)(m entier et (∀n)((n entier et m≤n) ⇒ x_n=x_m))
        (Déf. 5, VERBATIM : « il existe un entier m tel que x_n = x_m pour tout n ≥ m »).
@@ -205,6 +210,7 @@ def est_stationnaire(f, m="m", n="n"):
 # ═══════════════════════════════════════════════════════════════════════════════
 # Ensemble noethérien   (§III.6.5, après Cor. 2 de la Prop. 6)
 # ═══════════════════════════════════════════════════════════════════════════════
+# @livre Ch.III §6.5 Def.- | E III.51 L.25-26 | PDF p.154
 def est_noetherien(R, e, X="X", a="a", w="w"):
     """« E ordonné par R est noethérien » (§III.6.5) :=
        toute partie non vide de E a un élément MAXIMAL :

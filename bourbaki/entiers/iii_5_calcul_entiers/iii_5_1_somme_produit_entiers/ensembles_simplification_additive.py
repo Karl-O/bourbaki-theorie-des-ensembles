@@ -303,6 +303,7 @@ def simplification_additive_finie_enonce(a="aSA", C="cSA", Cp="cpSA"):
     return impl(est_entier(va), P(va))
 
 
+# @livre Ch.III §5.2 Cor.3 | E III.37 L.14-19 | PDF p.140
 def simplification_additive_finie(a="aSA", C="cSA", Cp="cpSA", k="kpredSA"):
     """🎯🎯 ⊢ est_entier(a) ⇒ (∀c)(∀c')( (card c et card c' et a+c=a+c') ⇒ c=c' ).
        (THÉORÈME CLOS, 0 hyp — la simplifiabilité additive des entiers, Cor. 3 §III.5.)
@@ -351,6 +352,7 @@ def soustraction_unicite_close_enonce(a="aSU", c="cSU", cp="cpSU", b="bSU"):
     return impl(ante, egal(vc, vcp))
 
 
+# @livre Ch.III §5.2 Cor.4 | E III.37 L.21-23 | PDF p.140
 def soustraction_unicite_close(a="aSU", c="cSU", cp="cpSU", b="bSU", k="kpredSU"):
     """🎯 ⊢ ( est_entier(a) et card c et card c' et a+c=b et a+c'=b ) ⇒ c=c'.
        (CLOS, 0 hyp — l'UNICITÉ de la différence des entiers, Cor. 4 §III.5, résidu

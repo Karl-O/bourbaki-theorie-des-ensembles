@@ -79,6 +79,7 @@ def _injective_sous_hyps(va, vx, vxp, h_ent, h_cx, h_cxp, k):
     return N.loi_deduction(egal(ax, axp), x_eq_xp)          # (a+x=a+x') ⇒ (x=x')
 
 
+# @livre Ch.III §5.3 Prop.4 | E III.37 L.32-35 | PDF p.140
 def prop4_translation_injective(a="aP4", x="xP4", xp="xpP4", k="kP4inj"):
     """🎯 ⊢ ( est_entier(a) et card x et card x' ) ⇒ ( a+x = a+x' ⇒ x = x' ).
        (CLOS, 0 hyp — INJECTIVITÉ de la translation par un entier, Prop. 4 §III.5.)"""
@@ -108,6 +109,7 @@ def prop4_translation_stricte_enonce(a="aP4", x="xP4", xp="xpP4"):
     return impl(ante, impl(inf_strict_card(vx, vxp), inf_strict_card(ax, axp)))
 
 
+# @livre Ch.III §5.3 Prop.4 | E III.37 L.32-35 | PDF p.140
 def prop4_translation_stricte(a="aP4", x="xP4", xp="xpP4", k="kP4str"):
     """🎯 ⊢ ( est_entier(a) et card x et card x' ) ⇒ ( x < x' ⇒ a+x < a+x' ).
        (CLOS, 0 hyp — STRICTE CROISSANCE de la translation par un entier, Prop. 4 §III.5.)

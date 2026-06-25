@@ -239,6 +239,7 @@ def fini_total_est_bien_ordonne_enonce(G, E_set, x="x", y="y", z="z", X="Sbo", a
     return impl(hyp, est_bien_ordonne_graphe(vG, vE, x, y, z, X, a, w))
 
 
+# @livre Ch.III §5.3 Prop.6 | E III.38 L.21-26 | PDF p.141
 def fini_total_est_bien_ordonne(G="Gbo", E_set="Ebo",
                                 x="x", y="y", z="z", X="Sbo", a="a", w="w"):
     """🎯 ⊢ ( est_relation_ordre_dans(R_G,E) et totalement_ordonne(G,E) et est_fini_ensemble(E) )

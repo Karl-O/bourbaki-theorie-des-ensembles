@@ -108,6 +108,7 @@ def resolution_trichotomie_enonce():
     return _pieces()[3]
 
 
+# @livre Ch.III §5.3 Prop.6 | E III.38 L.21-29 | PDF p.141
 def prop6_iso_existe():
     """🎯 PROPOSITION 6 §III.5 — iso existence, route Bourbaki Th3 + Prop1.
 

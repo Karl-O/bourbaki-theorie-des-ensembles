@@ -470,6 +470,7 @@ def _pont_inf_egal_card(tX, tE):
     return N.loi_deduction(inf_egal_card(tX, tE), le_cX_cE)          # (X≤E) ⇒ (Card X ≤ Card E)
 
 
+# @livre Ch.III §4.2 Cor.1 | E III.31 L.33-33 | PDF p.134
 def cor1_partie_finie_est_finie_conditionnel(X="X", Eens="E"):
     """⊢ ( (∀a)(∀n) fini_downward(a,n) ) ⇒ ( ( X ⊂ E et E fini ) ⇒ X fini ).
 

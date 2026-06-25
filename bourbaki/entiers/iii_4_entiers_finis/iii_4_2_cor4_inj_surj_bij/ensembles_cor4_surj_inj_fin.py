@@ -107,6 +107,7 @@ def cor4_surj_implique_inj_enonce(f="fc4", s="Sc4", Eens="Ec4", Fens="Fc4"):
     return impl(ante, est_injection_de(vf, vE, vF))
 
 
+# @livre Ch.III §4.2 Cor.4 | E III.32 L.4-21 | PDF p.135
 def cor4_surj_implique_inj(f="fc4", s="Sc4", Eens="Ec4", Fens="Fc4"):
     """🎯 ⊢ ( f application E→F ; s section de f sur F ; s application F→E ;
               fini(E) ; Card F=Card E ; s rétraction de f sur E )

@@ -84,6 +84,7 @@ def section_finie_implique_bijective_enonce(s="Sc4", f="fc4", Eens="Ec4", Fens="
     return impl(ante, E.est_bijective(vS, vF, vE))
 
 
+# @livre Ch.III §4.2 Cor.4 | E III.32 L.4-21 | PDF p.135
 def section_finie_implique_bijective(s="Sc4", f="fc4", Eens="Ec4", Fens="Fc4"):
     """🎯 ⊢ ( s section de f sur F ; s:F→E application ; fini(E) ; Card F=Card E )
               ⇒ est_bijective(s, F, E).   (CLOS, 0 hyp.)

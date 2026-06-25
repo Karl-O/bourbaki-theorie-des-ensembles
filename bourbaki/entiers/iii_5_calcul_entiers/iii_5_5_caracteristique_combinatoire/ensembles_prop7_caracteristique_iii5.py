@@ -60,6 +60,7 @@ def _t(v):
 
 
 # ── valeur φ_S(x)  (terme) ───────────────────────────────────────────────────
+# @livre Ch.III §5.5 Def.- | E III.38 L.41-43 | PDF p.141
 def phi(S, E_, x):
     """φ_S(x) := valeur de l'application caractéristique de la partie S de E en x."""
     return E.valeur(fonction_caracteristique(_t(S), _t(E_)), _t(x))
@@ -132,6 +133,7 @@ def symetrie_appliquee(eq):
 
 
 # ── (2)  φ_{A∩B}(x) = φ_A(x)·φ_B(x)   (E III.39, (2)) ─────────────────────────
+# @livre Ch.III §5.5 Prop.7 | E III.39 L.5-6 | PDF p.142
 def carac_intersection(x="x", A="A", B="B", E_="E"):
     """⊢  H ⇒ ( φ_{A∩B}(x) = φ_A(x) · φ_B(x) )   (Prop. 7, (2), E III.39).
 
@@ -249,6 +251,7 @@ def _two_sided_eq(eqL1, eqL2, eqR1, eqR2, eqArith, op):
 
 
 # ── (1)  φ_{E−A}(x) + φ_A(x) = 1   (E III.39, (1), forme symétrique sans « − ») ─
+# @livre Ch.III §5.5 Prop.7 | E III.39 L.4-4 | PDF p.142
 def carac_complement(x="x", A="A", E_="E"):
     """⊢  H ⇒ ( φ_{E−A}(x) + φ_A(x) = 1 )   (Prop. 7, (1), E III.39).
 
@@ -318,6 +321,7 @@ def _two_to_un(eqL, eqR, eqArith, op):
 
 
 # ── (3)  φ_{A∪B}(x) + φ_{A∩B}(x) = φ_A(x) + φ_B(x)   (E III.39, (3)) ───────────
+# @livre Ch.III §5.5 Prop.7 | E III.39 L.7-7 | PDF p.142
 def carac_union(x="x", A="A", B="B", E_="E"):
     """⊢  H ⇒ ( φ_{A∪B}(x) + φ_{A∩B}(x) = φ_A(x) + φ_B(x) )  (Prop. 7, (3), E III.39).
 

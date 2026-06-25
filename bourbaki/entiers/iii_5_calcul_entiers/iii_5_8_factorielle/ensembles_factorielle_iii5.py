@@ -76,6 +76,7 @@ def _cut(thm, hyp, preuve_hyp):
 
 
 # ── caractérisation récursive (les deux prémisses honnêtes) ───────────────────
+# @livre Ch.III §5.8 Def.2 | E III.41 L.22-26 | PDF p.144
 def factorielle_zero_relation(f):
     """(R0)  f(0) = 1.   (1 = UN = successeur(0), un cardinal fini.)"""
     return egal(f(ZERO), UN)

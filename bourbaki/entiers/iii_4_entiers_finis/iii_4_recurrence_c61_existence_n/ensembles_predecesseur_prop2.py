@@ -397,6 +397,7 @@ def _k_inf_strict_m_t(m_term, k_term):
 # ════════════════════════════════════════════════════════════════════════════
 #  🎯 PROPOSITION 2 (E.III.5) — predecesseur_fini_universel
 # ════════════════════════════════════════════════════════════════════════════
+# @livre Ch.III §4.2 Demo.2 | E III.31 L.33-43 | PDF p.134
 def predecesseur_fini_universel_preuve(m="mpred", k="kpred", x0="x0pred"):
     """🎯🎯 ⊢ predecesseur_fini_universel().   (THÉORÈME CLOS, 0 hyp.)
 

@@ -77,6 +77,7 @@ def cor4_inj_implique_surj_enonce(f="f4", Eens="E4", Fens="F4"):
     return impl(ante, E.est_surjective(vf, vE, vF))
 
 
+# @livre Ch.III §4.2 Cor.4 | E III.32 L.4-21 | PDF p.135
 def cor4_inj_implique_surj(f="f4", Eens="E4", Fens="F4"):
     """🎯🎯 ⊢ ( est_injection_de(f,E,F) et est_fini_ensemble(F) et Card E=Card F )
                 ⇒ est_surjective(f, E, F).   (CLOS, 0 hyp.)

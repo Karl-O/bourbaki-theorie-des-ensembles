@@ -249,6 +249,7 @@ def cor2_partie_propre_inf_strict_enonce(X="Xpe", Eens="Epe"):
     return impl(ante, inf_strict_card(cardinal(vX), cardinal(vE)))
 
 
+# @livre Ch.III §4.2 Cor.2 | E III.31 L.35-41 | PDF p.134
 def cor2_partie_propre_inf_strict(X="Xpe", Eens="Epe"):
     """🎯 ⊢ ( X⊂E et ¬(X=E) et est_fini_ensemble(E) ) ⇒ Card X < Card E.   (CLOS, 0 hyp.)
 

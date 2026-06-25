@@ -81,6 +81,7 @@ def prop5_intervalle_general_enonce(a="ag5", b="bg5"):
     return impl(premisse, egal(cardinal(seg_ab), successeur(bprime)))
 
 
+# @livre Ch.III §5.3 Prop.5 | E III.38 L.1-3 | PDF p.141
 def prop5_intervalle_general(a="ag5", b="bg5"):
     """⊢ ( est_entier a et est_entier b et a≤b et est_entier(b−a)
             et Eq([0,b−a],[a,b]) )  ⇒  Card([a,b]) = (b−a) + 1.
@@ -125,6 +126,7 @@ def prop5_intervalle_general(a="ag5", b="bg5"):
 
 
 # ── BRIQUE INCONDITIONNELLE (épine) : a + (b − a) = b ─────────────────────────
+# @livre Ch.III §5.2 Cor.4 | E III.37 L.21-23 | PDF p.140
 def somme_diff_egale_grand(a="ag5", b="bg5"):
     """⊢ ( est_entier a et est_entier b et a≤b ) ⇒ ( a + (b−a) = b ).  (Cor. 4 §III.5.)
 

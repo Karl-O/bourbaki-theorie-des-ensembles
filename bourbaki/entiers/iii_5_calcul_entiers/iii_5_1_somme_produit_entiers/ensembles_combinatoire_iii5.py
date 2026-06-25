@@ -265,6 +265,7 @@ def _preuve_step_somme(a, hfa, n="nsom"):
     return N.generalisation(n, body)
 
 
+# @livre Ch.III §5.1 Prop.1 | E III.35 L.25-34 | PDF p.138
 def somme_binaire_entier(a="asbe", b="bsbe", n="nsbe", k="kpred"):
     """🎯 ⊢ (Fini a et Fini b) ⇒ Fini(somme_cardinale_binaire(a, b)).
 

@@ -258,6 +258,7 @@ def fini_successeur_implique_fini(a="a"):
 # ═══════════════════════════════════════════════════════════════════════════════
 # PROPOSITION 1 (COMPLÈTE) :  ⊢ est_cardinal(𝔞) ⇒ (Fini(𝔞) ⇔ Fini(𝔞 + 1))
 # ═══════════════════════════════════════════════════════════════════════════════
+# @livre Ch.III §4.1 Prop.1 | E III.31 L.17-18 | PDF p.134
 def fini_ssi_fini_successeur(a="a"):
     """⊢ est_cardinal(𝔞) ⇒ (Fini(𝔞) ⇔ Fini(𝔞 + 1)).   (PROPOSITION 1, E.III.4.1.)
 

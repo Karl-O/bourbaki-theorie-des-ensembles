@@ -75,6 +75,7 @@ def _est_cardinal_Xa(a):
 # ══════════════════════════════════════════════════════════════════════════════
 #  LE τ CANONIQUE  :  b − a := μ c.( b = a + c )
 # ══════════════════════════════════════════════════════════════════════════════
+# @livre Ch.III §5.2 Def.- | E III.37 L.28-30 | PDF p.140
 def diff_somme(b, a, c="c"):
     """b − a := τ c.( b = a + c )   (la VRAIE différence, terme caractérisable).
 
@@ -160,6 +161,7 @@ def soustraction_caracterisation_enonce(a="a", b="b", c="c"):
                 egal(somme_cardinale_binaire(va, diff), vb))
 
 
+# @livre Ch.III §5.2 Cor.4 | E III.37 L.21-25 | PDF p.140
 def soustraction_caracterisation(a="a", b="b", c="c"):
     """🎯 ⊢ ( est_cardinal(a) et est_cardinal(b) et a ≤ b ) ⇒ ( a + (b−a) = b ).  (CLOS.)
 
@@ -196,6 +198,7 @@ def soustraction_unicite_enonce(a="a", c="c", cp="cp", b="b"):
                 egal(vc, vcp))
 
 
+# @livre Ch.III §5.2 Cor.4 | E III.37 L.21-23 | PDF p.140
 def soustraction_unicite(a="a", c="c", cp="cp", b="b"):
     """⊢ ( a+c=b et a+cp=b et (a+c=a+cp ⇒ c=cp) ) ⇒ ( c = cp ).  (CLOS, hyp honnête.)
 

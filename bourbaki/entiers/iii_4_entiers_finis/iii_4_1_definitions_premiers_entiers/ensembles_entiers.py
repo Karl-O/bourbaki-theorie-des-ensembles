@@ -59,6 +59,7 @@ def _t(t):
 
 
 # ── Successeur 𝔞 ↦ 𝔞 + 1  (E.III.4.1, Implémentation FIDÈLE) ───────────────────
+# @livre Ch.III §4.1 Def.1 | E III.30 L.39-41 | PDF p.133
 def successeur(a):
     """𝔞 + 1 := 𝔞 + Card({∅}) := somme_cardinale_binaire(𝔞, {∅}) = Card(𝔞 ⊔ {∅}).
 
@@ -79,6 +80,7 @@ QUATRE = successeur(TROIS)       # 4 = 3 + 1
 
 
 # ── Déf. 1 : « 𝔞 est fini » / « 𝔞 est un entier naturel » ─────────────────────
+# @livre Ch.III §4.1 Def.1 | E III.30 L.39-41 | PDF p.133
 def est_fini(a):
     """Fini(𝔞) := (𝔞 est un cardinal) ∧ (𝔞 ≠ 𝔞 + 1)   (E.III.4.1, Déf. 1).
 
@@ -86,6 +88,7 @@ def est_fini(a):
     return et(est_cardinal(a), non(egal(a, successeur(a))))
 
 
+# @livre Ch.III §4.1 Def.1 | E III.30 L.39-41 | PDF p.133
 def est_entier(a):
     """« 𝔞 est un entier (naturel) » := Fini(𝔞)   (E.III.4.1, Déf. 1).
 
@@ -95,6 +98,7 @@ def est_entier(a):
 
 
 # ── Déf. 1 (suite) : « l'ensemble E est fini » ────────────────────────────────
+# @livre Ch.III §4.1 Def.1 | E III.31 L.1-3 | PDF p.134
 def est_fini_ensemble(e):
     """« E est fini » := Fini(Card(E))   (E.III.4.1, Déf. 1).
 
@@ -102,12 +106,14 @@ def est_fini_ensemble(e):
     return est_fini(cardinal(e))
 
 
+# @livre Ch.III §4.1 Def.1 | E III.31 L.1-2 | PDF p.134
 def nombre_d_elements(e):
     """Card(E) = « le nombre d'éléments de E » (terme, défini quand E est fini)."""
     return cardinal(e)
 
 
 # ── Déf. 1 (suite) : « la famille (X_ι) est finie » ───────────────────────────
+# @livre Ch.III §4.1 Def.1 | E III.31 L.5-5 | PDF p.134
 def famille_finie(i):
     """« une famille est finie » := son ensemble d'indices I est fini (E.III.4.1).
 

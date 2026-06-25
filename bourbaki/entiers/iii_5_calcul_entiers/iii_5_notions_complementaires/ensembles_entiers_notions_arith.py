@@ -149,6 +149,7 @@ def condition_division_euclidienne(a, b, q, r):
 # ═══════════════════════════════════════════════════════════════════════════════
 # §III.5.1 — Corollaire 3 : puissance sur les entiers  a^b
 # ═══════════════════════════════════════════════════════════════════════════════
+# @livre Ch.III §5.1 Cor.3 | E III.36 L.18-21 | PDF p.139
 def puissance_entiers(a, b):
     """a^b := exponentiation cardinale de a par b   (E.III.5.1, Cor. 3 ; E.III.3.5, Déf. 4).
 

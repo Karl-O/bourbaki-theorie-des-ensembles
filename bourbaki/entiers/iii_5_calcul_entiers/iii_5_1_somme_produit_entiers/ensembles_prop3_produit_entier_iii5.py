@@ -212,6 +212,7 @@ def _somme_binaire_entier_t(x, y):
     return instancie(instancie(gen, _tt(x)), _tt(y))
 
 
+# @livre Ch.III §5.1 Prop.1 | E III.35 L.25-34 | PDF p.138
 def produit_binaire_entier(a="apbe", b="bpbe", n="npbe", k="kpbe"):
     """🎯 ⊢ (Fini a et Fini b) ⇒ Fini(produit_cardinal_binaire(a, b)).
 

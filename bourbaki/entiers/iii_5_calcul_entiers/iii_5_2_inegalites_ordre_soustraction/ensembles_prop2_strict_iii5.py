@@ -317,6 +317,7 @@ def _est_cardinal_zero():
 # ══════════════════════════════════════════════════════════════════════════════
 #  🎯🎯 PROPOSITION 2 §III.5.2 — ÉQUIVALENCE COMPLÈTE
 # ══════════════════════════════════════════════════════════════════════════════
+# @livre Ch.III §5.2 Prop.2 | E III.36 L.33-37 | PDF p.139
 def prop2_strict_equivalence(a="aP2", b="bP2", c="cP2"):
     """🎯🎯 ⊢ ( est_entier(a) et est_entier(b) )
                 ⇒ ( a < b  ⟺  (∃c)( est_entier(c) et c≠0 et b = a+c ) ).   (CLOS.)

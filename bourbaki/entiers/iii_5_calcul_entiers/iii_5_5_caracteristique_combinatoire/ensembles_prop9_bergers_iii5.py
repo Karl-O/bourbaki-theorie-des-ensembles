@@ -56,6 +56,7 @@ def _t(v):
     return v if isinstance(v, Terme) else var(v)
 
 
+# @livre Ch.III §5.8 Prop.9 | E III.41 L.18-21 | PDF p.144
 def bergers_binaire_fibres(e0="E0", e1="E1", a="A"):
     """⊢ (Card E₀ = a et Card E₁ = a) ⇒ Card(E₀ ⊔ E₁) = somme_cardinale_binaire(a, a).
 

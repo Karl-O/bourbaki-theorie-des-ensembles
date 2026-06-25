@@ -690,6 +690,7 @@ def prop5_intervalle_zero_enonce(b="b"):
     return impl(est_entier(vb), _P(vb))
 
 
+# @livre Ch.III §5.3 Prop.5 | E III.38 L.1-11 | PDF p.141
 def prop5_intervalle_zero(b="b"):
     """🎯🎯 ⊢ est_entier(b) ⇒ Card([0,b]) = successeur(b).   (CLOS, 0 hyp.)
 
@@ -759,6 +760,7 @@ def prop4_translation_bien_definie_enonce(a="a", b="b", x="x"):
                 appartient(ax, E.intervalle_entiers(va, ab)))
 
 
+# @livre Ch.III §5.3 Prop.4 | E III.37 L.32-35 | PDF p.140
 def prop4_translation_bien_definie(a="a", b="b", x="x"):
     """🎯 ⊢ ( est_cardinal(a) et x∈[0,b] ) ⇒ ( a+x ∈ [a, a+b] ).   (CLOS, 0 hyp.)
 

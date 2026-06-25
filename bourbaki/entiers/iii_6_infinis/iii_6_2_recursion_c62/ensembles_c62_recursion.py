@@ -87,6 +87,7 @@ def _t(t):
 # ════════════════════════════════════════════════════════════════════════════
 #  🎯 C62 — récursion sur (ℕ, ≤), forme « couverture par essais » de C60.
 # ════════════════════════════════════════════════════════════════════════════
+# @livre Ch.III §6.2 Crit.C62 | E III.46 L.18-23 | PDF p.149
 def c62_recursion_sur_N(vh, e="Enat", G="Gle", V="Uval",
                         x="x0tf", y="ytf", z="zess", q="qwf", w="wwf"):
     """🎯🎯 C62 (E.III.6.2) sur (ℕ, ≤) — C60 spécialisé :
@@ -180,6 +181,7 @@ def regle_iteration(S, a):
     return T
 
 
+# @livre Ch.III §6.2 Crit.C63 | E III.46 L.26-30 | PDF p.149
 def c63_iteration_sur_N(S, a, e="Enat", G="Gle", V="Vval63",
                         x="x0tf", y="ytf", z="zess", q="qwf", w="wwf"):
     """🎯🎯 C63 (E.III.6.2) sur (ℕ, ≤) — C62 spécialisé à la RÈGLE D'ITÉRATION :

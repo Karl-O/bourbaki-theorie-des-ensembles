@@ -250,6 +250,7 @@ def prop4_surjective_enonce(a="aP4surj", b="bP4surj", y="yP4surj", u="uP4surj"):
                              egal(somme_cardinale_binaire(va, var(u)), vy))))
 
 
+# @livre Ch.III §5.3 Prop.4 | E III.37 L.32-35 | PDF p.140
 def prop4_surjective(a="aP4surj", b="bP4surj", y="yP4surj", u="uP4surj"):
     """🎯 ⊢ ( est_entier a et est_entier b et y∈[a,a+b] ) ⇒
               (∃u)( u∈[0,b] et a+u = y ).   (CLOS, 0 hyp — SURJECTIVITÉ, Prop. 4 §III.5.)
@@ -361,6 +362,7 @@ def prop4_ordre_iso_enonce(a="aP4iso", b="bP4iso", x="xP4iso", xp="xpP4iso",
                 et(et(et(bd, st), inj), surj))
 
 
+# @livre Ch.III §5.3 Prop.4 | E III.37 L.32-35 | PDF p.140
 def prop4_ordre_iso(a="aP4iso", b="bP4iso", x="xP4iso", xp="xpP4iso",
                     y="yP4iso", u="uP4iso"):
     """🎯 ⊢ ( est_entier a et est_entier b ) ⇒

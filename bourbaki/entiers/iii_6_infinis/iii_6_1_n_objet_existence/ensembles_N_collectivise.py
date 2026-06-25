@@ -473,6 +473,7 @@ def _aligner_pour_tout(thm_all, cible, x):
     return N.generalisation(bndr, equ2)                 # (∀x)(x∈S ⇔ Fini*) = cible
 
 
+# @livre Ch.III §6.1 Th.1 | E III.45 L.24-25 | PDF p.148
 def N_collectivise(a="a", x="x", Y="y"):
     """🎯 THÉORÈME 1, E.III.6.1 — « Fini(x) est collectivisante ».
 

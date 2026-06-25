@@ -86,6 +86,7 @@ def _corps_coll(x="x", Y="y"):
 # ════════════════════════════════════════════════════════════════════════════
 #  🎯 DÉFINITION — ℕ comme TERME (le τ du corps collectivisant)
 # ════════════════════════════════════════════════════════════════════════════
+# @livre Ch.III §6.1 Def.- | E III.45 L.26-29 | PDF p.148
 def ensemble_NN(x="x", Y="y"):
     """🎯 ℕ := τ y ( (∀x)( x ∈ y ⇔ Fini x ) ).   (TERME CLOS — l'ensemble des entiers.)
 

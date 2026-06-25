@@ -69,6 +69,7 @@ def intervalle_un_n(i):
     return intervalle_entiers(UN, longueur_suite(_t(i)))
 
 
+# @livre Ch.III §5.4 Def.- | E III.38 L.16-18 | PDF p.141
 def kieme_terme(t, i, k):
     """t_{f(k)} := le k-ième terme de la suite finie (t_i)_{i∈I}, pour k ∈ [1, n]
        (E.III.5.4).
@@ -80,6 +81,7 @@ def kieme_terme(t, i, k):
     return E.valeur(_t(t), E.valeur(f, _t(k)))
 
 
+# @livre Ch.III §5.4 Def.- | E III.38 L.18-20 | PDF p.141
 def premier_terme(t, i):
     """t_{f(1)} := le premier terme de la suite finie (t_i)_{i∈I}   (E.III.5.4).
 
@@ -88,6 +90,7 @@ def premier_terme(t, i):
     return kieme_terme(t, i, UN)
 
 
+# @livre Ch.III §5.4 Def.- | E III.38 L.18-20 | PDF p.141
 def dernier_terme(t, i):
     """t_{f(n)} := le dernier terme de la suite finie (t_i)_{i∈I}, n = longueur
        (E.III.5.4).

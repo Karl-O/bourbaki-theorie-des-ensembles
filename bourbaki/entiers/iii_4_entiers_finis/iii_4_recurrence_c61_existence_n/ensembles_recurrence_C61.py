@@ -339,6 +339,7 @@ def _fini_implique_P(P, n="n"):
     return pourtout(n, impl(est_fini(vn), P(vn)))
 
 
+# @livre Ch.III §4.3 Crit.C61 | E III.32 L.22-30 | PDF p.135
 def principe_recurrence(P, n="n"):
     """Énoncé du PRINCIPE DE RÉCURRENCE (Critère C61) pour le prédicat P :
         ( P[0]  et  (∀n)((Fini n et P[n]) ⇒ P[n+1]) )  ⇒  (∀n)( Fini n ⇒ P[n] ).

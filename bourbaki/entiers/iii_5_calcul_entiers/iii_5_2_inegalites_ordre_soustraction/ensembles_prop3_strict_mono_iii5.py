@@ -266,6 +266,7 @@ def produit_strict_monotone_enonce(a="aP3", b="bP3", c="cP3"):
 # ══════════════════════════════════════════════════════════════════════════════
 #  🎯 SOMME : a < b ⇒ a+c < b+c
 # ══════════════════════════════════════════════════════════════════════════════
+# @livre Ch.III §5.2 Prop.3 | E III.36 L.39-46 | PDF p.139
 def somme_strict_monotone(a="aP3", b="bP3", c="cP3", d="dP3"):
     """🎯 ⊢ ( est_entier a et est_entier b et est_entier c et a<b ) ⇒ a+c < b+c.   (CLOS.)
 
@@ -336,6 +337,7 @@ def somme_strict_monotone(a="aP3", b="bP3", c="cP3", d="dP3"):
 # ══════════════════════════════════════════════════════════════════════════════
 #  🎯 PRODUIT : (c≠0 et a<b) ⇒ a·c < b·c
 # ══════════════════════════════════════════════════════════════════════════════
+# @livre Ch.III §5.2 Prop.3 | E III.36 L.39-46 | PDF p.139
 def produit_strict_monotone(a="aP3", b="bP3", c="cP3", d="dP3"):
     """🎯 ⊢ ( est_entier a et est_entier b et est_entier c et c≠0 et a<b ) ⇒ a·c < b·c.  (CLOS.)
 

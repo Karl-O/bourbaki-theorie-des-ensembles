@@ -165,6 +165,7 @@ def predecesseur_fini(m, k="kpred"):
                          inf_strict_card(vk, vm)))
 
 
+# @livre Ch.III §4.2 Prop.2 | E III.31 L.29-32 | PDF p.134
 def predecesseur_fini_universel(m="mpred", k="kpred"):
     """Énoncé UNIVERSEL « tout entier ≠ 0 est un successeur » (Bourbaki Prop. 2 §III.5) :
         (∀m)( ( Fini m et ¬(m = 0) ) ⇒ (∃k)( m = k+1 et est_cardinal(k) et k < m ) ).
@@ -445,6 +446,7 @@ def _refl_le(t):
 # ════════════════════════════════════════════════════════════════════════════
 #  PREUVE GÉNÉRIQUE — principe_recurrence(P, n) par plus-petit-contre-exemple.
 # ════════════════════════════════════════════════════════════════════════════
+# @livre Ch.III §4.3 Demo.C61 | E III.32 L.31-43 | PDF p.135
 def principe_recurrence_preuve(P, n="n", n0="n0pr", mbind="mApr", k="kpred"):
     """⊢ { predecesseur_fini_universel } ⊢ principe_recurrence(P, n).
 

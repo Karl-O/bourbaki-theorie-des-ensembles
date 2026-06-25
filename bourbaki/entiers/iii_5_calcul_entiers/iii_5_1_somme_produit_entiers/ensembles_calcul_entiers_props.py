@@ -154,6 +154,7 @@ def le_ens_implique_le_card(tX, tY):
 #  puis Card(A⊔C) ≤ Card(B₁⊔D) (pont).  C'est EXACTEMENT a+c ≤ b+d, où le « + » est la
 #  somme cardinale binaire somme_cardinale_binaire = Card(·⊔·).
 # ════════════════════════════════════════════════════════════════════════════
+# @livre Ch.III §5.2 Prop.3 | E III.36 L.39-46 | PDF p.139
 def somme_binaire_monotone(a="a", b="b", c="c", d="d"):
     """⊢ ( a ≤ b et c ≤ d ) ⇒ ( a+c ≤ b+d ).   (MONOTONIE de + ; Prop. 3 cas binaire ; INCONDITIONNEL.)
 
@@ -244,6 +245,7 @@ def inf_egal_somme_droite_binaire(a="a", b="b"):
     return N.modus_ponens(le_ens, le_ens_implique_le_card(vb, ab))   # Card b ≤ Card(a⊔b) = a+b
 
 
+# @livre Ch.III §5.2 Prop.2 | E III.36 L.33-37 | PDF p.139
 def prop2_somme_implique_inf_egal(a="a", b="b", c="c"):
     """⊢ ( est_cardinal(a) et b = a+c ) ⇒ ( a ≤ b ).   (Proposition 2, sens ⇐ ; INCONDITIONNEL.)
 

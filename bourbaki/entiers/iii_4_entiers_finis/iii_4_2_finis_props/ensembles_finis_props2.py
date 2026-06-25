@@ -227,6 +227,7 @@ def sous_ensemble_card_inf_egal(X="X", Eens="E"):
 #  Corollaire 2, voisin de la Prop. 8 / cardinal_pas_entre (surgery « retrait d'un
 #  point »).  On la DÉCHARGE en hypothèse explicite ISOLÉE, jamais postulée.
 # ════════════════════════════════════════════════════════════════════════════
+# @livre Ch.III §4.2 Cor.2 | E III.31 L.35-41 | PDF p.134
 def cor2_partie_stricte_card_strict_cond(X="X", Eens="E"):
     """⊢ ( (X⊂E et X≠E et E fini) ⇒ Card X ≠ Card E )
             ⇒ ( ( X⊂E et X≠E et E fini ) ⇒ Card X < Card E ).
@@ -348,6 +349,7 @@ def image_card_inf_egal_but(f="f", Eens="E", Co="Co"):
     return sous_ensemble_card_inf_egal(img, vCo)          # (image⊂Co) ⇒ Card(image) ≤ Card Co
 
 
+# @livre Ch.III §4.2 Cor.3 | E III.32 L.1-3 | PDF p.135
 def cor3_image_finie_cond(f="f", Eens="E", F="F"):
     """⊢ ( ( E fini ⇒ image(f,E) ≤ E )   [surjection canonique E ↠ f(E) ⇒ ≤, report]
             et ( (image(f,E) ≤ E et E fini) ⇒ image(f,E) fini )   [Cor. 1, report] )
