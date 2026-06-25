@@ -95,6 +95,7 @@ def _defaults_in(af, sf, ff, morph):
     return af, sf, ff, _morph(morph)
 
 
+# @livre Ch.IV §2.1 Ax.- | E IV.11 L.32-36 | PDF p.214
 def id_est_morphisme(e, s, morph=None):
     """Formule « id_E = Δ_E est un σ-morphisme de (E,𝒮) dans (E,𝒮) » — instance d'
     (MO_III) (réflexivité de « plus fine », IV.2.2).  PRÉMISSE structurelle EXPLICITE,
@@ -130,6 +131,7 @@ def _cotes_equiv(thm_eq):
     return antecedent_consequent(equivalence_avant(thm_eq).conclusion)
 
 
+# @livre Ch.IV §2.3 Crit.CST10 | E IV.14 L.40-46 | PDF p.217
 def initiale_transitive_un_sens(e="E", struct_I="I", struct_J="J", i="I0",
                                 af=None, sf=None, ff=None, hf=None, morph=None):
     """{ (IN_𝓘) pour la famille (A_ι,𝒮_ι,f_ι),
@@ -181,6 +183,7 @@ def initiale_transitive_un_sens(e="E", struct_I="I", struct_J="J", i="I0",
     return N.modus_ponens(rhs_f_thm, equivalence_arriere(eqI))  # ⊢ morph(E,𝓘',E,𝓘,id) = plus_fine(E,𝓘',𝓘)
 
 
+# @livre Ch.IV §2.3 Crit.CST10 | E IV.14 L.40-46 | PDF p.217
 def cst10_initiales_egales(e="E", struct_I="I", struct_J="J", i="I0",
                            af=None, sf=None, ff=None, hf=None, morph=None):
     """CST10 — « ces propositions entraînent 𝓘 = 𝓘' » (les deux structures initiales
@@ -227,6 +230,7 @@ def _carac_imrec(e, struct, a, s, f, ep, sp, g, morph):
     return equiv(lhs, rhs)
 
 
+# @livre Ch.IV §2.4 Crit.CST11 | E IV.16 L.18-21 | PDF p.219
 def image_reciproque_par_composition(a="A", s="S", b="B", c="C",
                                      g="g", h="h", k="k", ep="Ep", sp="Sp",
                                      struct_I="SI", struct_J="SJ", morph=None):
@@ -289,6 +293,7 @@ def image_reciproque_par_composition(a="A", s="S", b="B", c="C",
 # ════════════════════════════════════════════════════════════════════════════
 #  3.  CST19 — TRANSITIVITÉ DES STRUCTURES FINALES  (DUAL de CST10 via (FI))
 # ════════════════════════════════════════════════════════════════════════════
+# @livre Ch.IV §2.5 Crit.CST19 | E IV.20 L.2-11 | PDF p.223
 def finale_transitive_un_sens(e="E", struct_F="F", struct_G="G", i="I0",
                               af=None, sf=None, gf=None, hf=None, morph=None):
     """{ (FI_𝓕) pour (A_ι,𝒮_ι,g_ι), (FI_𝓕') pour (B_λ,𝒮'_λ,h_λ),
@@ -329,6 +334,7 @@ def finale_transitive_un_sens(e="E", struct_F="F", struct_G="G", i="I0",
     return N.modus_ponens(rhs_g_thm, equivalence_arriere(eqF))  # ⊢ morph(E,𝓕,E,𝓕',id) = plus_fine(E,𝓕,𝓕')
 
 
+# @livre Ch.IV §2.5 Crit.CST19 | E IV.20 L.2-11 | PDF p.223
 def cst19_finales_egales(e="E", struct_F="F", struct_G="G", i="I0",
                          af=None, sf=None, gf=None, hf=None, morph=None):
     """CST19 — « ces propositions entraînent 𝓕 = 𝓕' ».  DUAL de `cst10_initiales_egales`.

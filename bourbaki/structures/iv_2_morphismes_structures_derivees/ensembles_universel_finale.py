@@ -33,6 +33,7 @@ from bourbaki.structures.iv_2_morphismes_structures_derivees.ensembles_universel
 #
 #  Donnée : famille (A_ι, 𝒮_ι, g_ι)_{ι∈I}, ensemble E, g_ι : A_ι → E.
 #
+# @livre Ch.IV §2.5 Def.- | E IV.19 L.12-19 | PDF p.222
 def propriete_FI(e, struct_F, i, af, sf, gf, ep="Ep", sp="Sp", f="f",
                  morph=None, iota="iota"):
     """(FI) — propriété caractéristique de la structure finale 𝓕 sur E (IV.2) :
@@ -54,12 +55,14 @@ def propriete_FI(e, struct_F, i, af, sf, gf, ep="Ep", sp="Sp", f="f",
     return pourtout(ep, pourtout(sp, pourtout(f, equiv(lhs, rhs))))
 
 
+# @livre Ch.IV §2.5 Def.- | E IV.19 L.6-11 | PDF p.222
 def est_structure_finale(e, struct_F, i, af, sf, gf, morph=None):
     """« 𝓕 est structure finale pour la famille (A_ι, 𝒮_ι, g_ι)_{ι∈I} » := 𝓕 est
     une structure d'espèce Σ sur E vérifiant (FI)  (Déf. IV.2, structure finale)."""
     return propriete_FI(e, struct_F, i, af, sf, gf, morph=morph)
 
 
+# @livre Ch.IV §2.5 Crit.CST18 | E IV.19 L.20-25 | PDF p.222
 def chaque_g_iota_morphisme(e, struct_F, i, af, sf, gf, morph=None, iota="iota"):
     """« chaque g_ι est un morphisme de (A_ι,𝒮_ι) dans (E,𝓕) »  (la propriété dont
     CST18 affirme que la finale est la PLUS FINE).  Codé
@@ -71,6 +74,7 @@ def chaque_g_iota_morphisme(e, struct_F, i, af, sf, gf, morph=None, iota="iota")
 
 
 # ── THÉORÈME (cœur de FI, sens facile, DUAL de l'initiale) ─────────────────────
+# @livre Ch.IV §2.5 Crit.CST18 | E IV.19 L.26-35 | PDF p.222
 def finale_implique_g_iota_morphisme(e="E", struct_F="F", i="I0",
                                      af=None, sf=None, gf=None, morph=None,
                                      iota="iota"):
@@ -109,6 +113,7 @@ def _struct_image_directe(a, s, f):
     return app("image_directe_struct", a, s, f)
 
 
+# @livre Ch.IV §2.6 Def.- | E IV.21 L.5-8 | PDF p.224
 def image_directe_structure(a, s, f, e, ep="Ep", sp="Sp", g="g", morph=None):
     """« structure image directe par f de 𝒮 » (IV.2) : structure finale pour le SEUL
     triplet (A, 𝒮, f) avec f : A → E (cas I singleton).  Caractérisée par (FI) à un
@@ -124,6 +129,7 @@ def image_directe_structure(a, s, f, e, ep="Ep", sp="Sp", g="g", morph=None):
 
 
 # ── structure quotient ────────────────────────────────────────────────────────
+# @livre Ch.IV §2.6 Def.- | E IV.21 L.9-15 | PDF p.224
 def structure_quotient(a, s, R, morph=None):
     """« structure quotient de 𝒮 par la relation d'équivalence R » (IV.2) := image
     directe de 𝒮 par l'application canonique φ : A → A/R = E.

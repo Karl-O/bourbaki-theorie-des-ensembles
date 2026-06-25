@@ -115,6 +115,7 @@ def _conj(formules):
 #  « ⟨h⟩^T(P{E,𝒮}) = P{E',𝒮'} ».  La clause (4) EST la transportabilité du procédé P
 #  (IV.1.6, preuve par récurrence sur T — REPORTÉE) : hyp. explicite.
 #
+# @livre Ch.IV §1.6 Crit.CST6 | E IV.8 L.17-23 | PDF p.211
 def cst6_deduction_isomorphisme(theta: Espece, h="h", F="F", Fp="Fp",
                                 pES="P_ES", pEpSp="P_EpSp"):
     """{ est_bijection_de(h, F, F')                        (h bijection des échelons),
@@ -176,6 +177,7 @@ def cst6_deduction_isomorphisme(theta: Espece, h="h", F="F", Fp="Fp",
 #  les deux isomorphismes sont équivalents.  ⚠ DISTINCT du piège mo3 : on relie deux
 #  notions DIFFÉRENTES (Σ et Θ), pas une notion à sa propre définition.
 #
+# @livre Ch.IV §1.7 Crit.CST7 | E IV.10 L.1-5 | PDF p.213
 def cst7_iso_ssi_deduit(sigma: Espece, theta: Espece, f="f", e="E", ep="Ep",
                         u="U", up="Up", pU="P_U", pUp="P_Up"):
     """{ ( ⟨f⟩^S(U) = U' )  ⟺  ( ⟨f⟩^T(P{U}) = P{U'} )      (CST6/équivalence d'espèces :
@@ -255,6 +257,7 @@ def cst7_iso_ssi_deduit(sigma: Espece, theta: Espece, f="f", e="E", ep="Ep",
 #  On RÉUTILISE `initiales_mutuellement_plus_fines` (CST9) avec les deux structures 𝓘,𝓘'
 #  et on décharge l'antisymétrie comme hyp. explicite — strictement le schéma de CST9.
 #
+# @livre Ch.IV §2.3 Crit.CST10 | E IV.14 L.40-46 | PDF p.217
 def cst10_initiales_egales(e="E", struct_I="I", struct_J="J", i="I0",
                            af=None, sf=None, ff=None, morph=None):
     """{(IN_𝓘), (IN_𝓘'), id morph (E,𝓘)→(E,𝓘), id morph (E,𝓘')→(E,𝓘'),
@@ -303,6 +306,7 @@ def cst10_initiales_egales(e="E", struct_I="I", struct_J="J", i="I0",
 #  l'égalité au MÊME transporté ⟨j_C⟩^S(𝒮) (factorisation des injections, hyp.).
 #  Cœur d'unicité, MÊME schéma que CST5 (`cst5_unicite_transport`) : transitivité de =.
 #
+# @livre Ch.IV §2.4 Crit.CST11 | E IV.16 L.18-21 | PDF p.219
 def cst11_induites_egales(a="A", b="B", c="C", s="S", ind_directe="indAC",
                           ind_iteree="indBC", j="jC"):
     """{ ind_AC = ⟨j_C⟩^S(𝒮),   ind_BC = ⟨j_C⟩^S(𝒮)  }   ⊢   ind_AC = ind_BC.
@@ -359,6 +363,7 @@ def cst11_induites_egales(a="A", b="B", c="C", s="S", ind_directe="indAC",
 #  produit des structures induites 𝒮'_ι coïncident.  Cœur d'unicité (DUAL de CST11) :
 #  les deux valent le même transporté (induite et produit commutent, hyp.) ⇒ égales.
 #
+# @livre Ch.IV §2.4 Crit.CST14 | E IV.17 L.9-16 | PDF p.220
 def cst14_produit_induite_egales(prod_induite="SprodB", induite_prod="SindB",
                                  commun="Scommun"):
     """{ S_indB = S_commun,   S_prodB = S_commun }   ⊢   S_indB = S_prodB.

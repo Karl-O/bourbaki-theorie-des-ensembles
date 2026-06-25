@@ -60,6 +60,7 @@ from bourbaki.ensembles.ii_6_equivalence.ii_6_5_decomposition.ensembles_decompos
 # ════════════════════════════════════════════════════════════════════════════
 #  Données dérivées de la décomposition (IV.2.5) — réutilisées de II.6.5 / IV.2
 # ════════════════════════════════════════════════════════════════════════════
+# @livre Ch.IV §2.6 Def.- | E IV.21 L.23-25 | PDF p.224
 def relation_du_morphisme(f, x="x", y="y"):
     """R{x,y} := « f(x) = f(y) » (avec x,y ∈ A) — la relation d'équivalence associée
     au morphisme f  (IV.2.5).  Identique à la relation d'égalité-des-valeurs R_f de
@@ -68,6 +69,7 @@ def relation_du_morphisme(f, x="x", y="y"):
     return relation_egalite_valeurs(f, x, y)
 
 
+# @livre Ch.IV §2.6 Def.- | E IV.21 L.25-26 | PDF p.224
 def application_canonique_phi(f, a):
     """Graphe de φ : A → A/R, l'application canonique de A sur A/R  (IV.2.5).
 
@@ -79,6 +81,7 @@ def application_canonique_phi(f, a):
     return surjection_canonique(gR, va)
 
 
+# @livre Ch.IV §2.6 Def.- | E IV.21 L.26-27 | PDF p.224
 def injection_canonique_j(f, a, b):
     """Graphe de j : f(A) → B, l'injection canonique de f(A) dans B  (IV.2.5).
 
@@ -88,6 +91,7 @@ def injection_canonique_j(f, a, b):
     return injection_canonique(E.image(vf, va))
 
 
+# @livre Ch.IV §2.6 Def.- | E IV.21 L.28-31 | PDF p.224
 def bijection_g(f, a):
     """Graphe de g : A/R → f(A), la bijection associée à f  (IV.2.5).
 
@@ -109,6 +113,7 @@ def _graphe_R(f, a):
 
 
 # ── structures dérivées 𝒮₀ (quotient) et 𝒮'₀ (induite) — IV.2 ──────────────────
+# @livre Ch.IV §2.6 Def.- | E IV.21 L.31-32 | PDF p.224
 def structure_quotient_S0(a, s, f):
     """𝒮₀ — structure quotient de 𝒮 par R sur A/R  (IV.2.5), terme dérivé (IV.2).
 
@@ -120,6 +125,7 @@ def structure_quotient_S0(a, s, f):
     return app("structure_quotient", va, vs, gR)
 
 
+# @livre Ch.IV §2.6 Def.- | E IV.21 L.32-33 | PDF p.224
 def structure_induite_S0prime(b, sp, f, a):
     """𝒮'₀ — structure induite par 𝒮' sur f(A) ⊂ B  (IV.2.5), terme dérivé (IV.2).
 
@@ -133,6 +139,7 @@ def structure_induite_S0prime(b, sp, f, a):
 # ════════════════════════════════════════════════════════════════════════════
 #  IV.2.5 — g est un σ-morphisme (le contenu STRUCTUREL nouveau)
 # ════════════════════════════════════════════════════════════════════════════
+# @livre Ch.IV §2.6 Prop.- | E IV.21 L.31-37 | PDF p.224
 def g_est_morphisme(a, s, b, sp, f, morph=None):
     """« g est un σ-morphisme de (A/R, 𝒮₀) dans (f(A), 𝒮'₀) »  (conclusion IV.2.5).
 
@@ -198,6 +205,7 @@ def hypotheses_decomposition(a, s, b, sp, f, morph=None):
 # ════════════════════════════════════════════════════════════════════════════
 #  IV.2.5 — ÉNONCÉ COMPLET : décomposition canonique d'un morphisme
 # ════════════════════════════════════════════════════════════════════════════
+# @livre Ch.IV §2.6 Def.- | E IV.21 L.30-31 | PDF p.224
 def decomposition_ensembliste(f, a, b):
     """« f = j ∘ g ∘ φ »  (la décomposition canonique ENSEMBLISTE, II.6.5) — RAPPEL.
 
@@ -209,6 +217,7 @@ def decomposition_ensembliste(f, a, b):
     return decomposition_canonique(vf, gR, va, vb)
 
 
+# @livre Ch.IV §2.6 Prop.- | E IV.21 L.23-37 | PDF p.224
 def decomposition_canonique_morphisme(a, s, b, sp, f, morph=None):
     """ÉNONCÉ FIDÈLE de IV.2.5 (décomposition canonique d'un morphisme) :
 

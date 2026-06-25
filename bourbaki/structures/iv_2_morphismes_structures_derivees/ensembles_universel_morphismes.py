@@ -60,6 +60,7 @@ def _morph_defaut(nom="Mor"):
 # ════════════════════════════════════════════════════════════════════════════
 #  IV.2.1 — σ-morphisme
 # ════════════════════════════════════════════════════════════════════════════
+# @livre Ch.IV §2.1 Def.- | E IV.11 L.37-44 | PDF p.214
 def est_morphisme(e1, s1, e2, s2, f, morph=None):
     """« f est un σ-morphisme de (e1, muni de s1) dans (e2, muni de s2) » (Déf.
     IV.2.1).  On exprime f ∈ σ{x,y,s,t} ; ici σ[e1,e2,s1,s2] est porté par le
@@ -70,6 +71,7 @@ def est_morphisme(e1, s1, e2, s2, f, morph=None):
     return morph(e1, s1, e2, s2, f)
 
 
+# @livre Ch.IV §2.1 Def.- | E IV.11 L.39-43 | PDF p.214
 def ensemble_morphismes(e1, s1, e2, s2, sigma="Sig"):
     """σ[E, E', 𝒮, 𝒮'] — l'ensemble (terme) des σ-morphismes de E dans E'
     (IV.2.1).  Terme opaque app(sigma, e1,s1,e2,s2) ; (MO_I) ⟹ σ[…] ⊂ 𝓕(E;E')."""
@@ -80,6 +82,7 @@ def ensemble_morphismes(e1, s1, e2, s2, sigma="Sig"):
 # ════════════════════════════════════════════════════════════════════════════
 #  IV.2.2 — structure plus fine / moins fine, comparables, strictement plus fine
 # ════════════════════════════════════════════════════════════════════════════
+# @livre Ch.IV §2.2 Def.- | E IV.13 L.4-8 | PDF p.216
 def plus_fine(e, s1, s2, morph=None):
     """« 𝒮₁ est plus fine que 𝒮₂ (sur E) » := l'application identique de E, muni
     de 𝒮₁, sur E, muni de 𝒮₂, est un morphisme   (Déf. IV.2.2).
@@ -88,6 +91,7 @@ def plus_fine(e, s1, s2, morph=None):
     return est_morphisme(ve, s1, ve, s2, E.diagonale(ve), morph)
 
 
+# @livre Ch.IV §2.2 Def.- | E IV.13 L.5-6 | PDF p.216
 def moins_fine(e, s1, s2, morph=None):
     """« 𝒮₁ est moins fine que 𝒮₂ » := « 𝒮₂ est plus fine que 𝒮₁ »  (IV.2.2).
     C'est cette relation qui est une relation d'ORDRE sur les structures sur E
@@ -95,6 +99,7 @@ def moins_fine(e, s1, s2, morph=None):
     return plus_fine(e, s2, s1, morph)
 
 
+# @livre Ch.IV §2.2 Def.- | E IV.13 L.22-25 | PDF p.216
 def comparables(e, s1, s2, morph=None):
     """« 𝒮₁ et 𝒮₂ sont comparables » := l'une est plus fine que l'autre (IV.2.2).
     Codé : plus_fine(E,𝒮₁,𝒮₂) ∨ plus_fine(E,𝒮₂,𝒮₁)."""
@@ -102,6 +107,7 @@ def comparables(e, s1, s2, morph=None):
     return ou(plus_fine(e, s1, s2, morph), plus_fine(e, s2, s1, morph))
 
 
+# @livre Ch.IV §2.2 Def.- | E IV.13 L.25-27 | PDF p.216
 def strictement_plus_fine(e, s1, s2, morph=None):
     """« 𝒮₁ est strictement plus fine que 𝒮₂ » := 𝒮₁ plus fine que 𝒮₂ ET 𝒮₁ ≠ 𝒮₂
     (IV.2.2)."""
@@ -115,6 +121,7 @@ def _t(s):
 
 
 # ── THÉORÈME (IV.2.2) : « moins fine » est RÉFLEXIVE — via MO_III/identité ──────
+# @livre Ch.IV §2.2 Prop.- | E IV.13 L.16-21 | PDF p.216
 def moins_fine_reflexive(e="E", s="S", morph=None):
     """⊢ plus_fine(E, 𝒮, 𝒮)  (réflexivité de « plus/moins fine », IV.2.2).
 
@@ -147,6 +154,7 @@ def moins_fine_reflexive(e="E", s="S", morph=None):
 #     • sf(ι)  : la structure 𝒮_ι       (terme opaque) ;
 #     • ff(ι)  : l'application f_ι : E → A_ι   (terme : son graphe).
 #
+# @livre Ch.IV §2.3 Def.- | E IV.14 L.14-23 | PDF p.217
 def propriete_IN(e, struct_I, i, af, sf, ff, ep="Ep", sp="Sp", g="g",
                  morph=None, iota="iota"):
     """(IN) — propriété caractéristique de la structure initiale 𝓘 sur E (IV.2) :
@@ -168,6 +176,7 @@ def propriete_IN(e, struct_I, i, af, sf, ff, ep="Ep", sp="Sp", g="g",
     return pourtout(ep, pourtout(sp, pourtout(g, equiv(lhs, rhs))))
 
 
+# @livre Ch.IV §2.3 Def.- | E IV.14 L.9-13 | PDF p.217
 def est_structure_initiale(e, struct_I, i, af, sf, ff, morph=None):
     """« 𝓘 est structure initiale pour la famille (A_ι, 𝒮_ι, f_ι)_{ι∈I} » :=
     𝓘 est une structure d'espèce Σ sur E vérifiant (IN)  (Déf. IV.2, structure
@@ -176,6 +185,7 @@ def est_structure_initiale(e, struct_I, i, af, sf, ff, morph=None):
     return propriete_IN(e, struct_I, i, af, sf, ff, morph=morph)
 
 
+# @livre Ch.IV §2.3 Crit.CST9 | E IV.14 L.24-30 | PDF p.217
 def chaque_f_iota_morphisme(e, struct_I, i, af, sf, ff, morph=None, iota="iota"):
     """« chaque f_ι est un morphisme de (E,𝓘) dans (A_ι,𝒮_ι) »  (la propriété dont
     CST9 affirme que l'initiale est la MOINS FINE).  Codé
@@ -187,6 +197,7 @@ def chaque_f_iota_morphisme(e, struct_I, i, af, sf, ff, morph=None, iota="iota")
 
 
 # ── THÉORÈME (cœur de IN, sens facile) : 𝓘 vérifiant IN ⇒ chaque f_ι morphisme ──
+# @livre Ch.IV §2.3 Crit.CST9 | E IV.14 L.31-40 | PDF p.217
 def initiale_implique_f_iota_morphisme(e="E", struct_I="I", i="I0",
                                        af=None, sf=None, ff=None, morph=None,
                                        iota="iota"):
@@ -228,6 +239,7 @@ def initiale_implique_f_iota_morphisme(e="E", struct_I="I", i="I0",
 
 
 # ── image réciproque / structure induite (cas |I| = 1) ─────────────────────────
+# @livre Ch.IV §2.4 Def.- | E IV.15 L.38-41 | PDF p.218
 def image_reciproque_structure(e, a, s, f, ep="Ep", sp="Sp", g="g", morph=None,
                                iota="iota"):
     """« structure image réciproque par f de 𝒮 » (IV.2) : structure initiale pour
@@ -252,6 +264,7 @@ def _struct_image_reciproque(a, s, f):
     return app("image_reciproque_struct", a, s, f)
 
 
+# @livre Ch.IV §2.4 Def.- | E IV.16 L.1-5 | PDF p.219
 def structure_induite(a, s, b, j=None, morph=None):
     """« structure induite par 𝒮 sur B » (B ⊂ A) := image réciproque de 𝒮 par
     l'injection canonique j : B → A  (IV.2).  L'injection canonique de B dans A est
@@ -263,6 +276,7 @@ def structure_induite(a, s, b, j=None, morph=None):
     return image_reciproque_structure(vb, a, s, j, morph=morph)
 
 
+# @livre Ch.IV §2.4 Def.- | E IV.16 L.33-39 | PDF p.219
 def structure_produit(i, af, sf, e=None, prf=None, morph=None, iota="iota"):
     """« structure produit des 𝒮_ι » := structure initiale pour la famille
     (A_ι, 𝒮_ι, pr_ι)_{ι∈I} sur E = ∏_ι A_ι  (IV.2), pr_ι la projection.

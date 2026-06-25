@@ -93,6 +93,7 @@ def _transporte(schema, f, U):
 #  par transitivité de =, ⟨f⁻¹⟩^S ∘ ⟨f⟩^S = Id.  C'est exactement « ⟨f⁻¹⟩^S est l'inverse
 #  à gauche de ⟨f⟩^S », i.e. le contenu de CST3 (réciprocité).
 #
+# @livre Ch.IV §1.2 Crit.CST1 | E IV.2 L.39-41 | PDF p.205
 def axiome_CST1_composition(schema, f, g, U):
     """(CST1) instancié — FONCTORIALITÉ de l'extension d'échelon (IV.1.2) :
         ⟨g∘f⟩^S(U) = ⟨g⟩^S(⟨f⟩^S(U))   (forme appliquée à U).
@@ -104,12 +105,14 @@ def axiome_CST1_composition(schema, f, g, U):
     return egal(lhs, rhs)
 
 
+# @livre Ch.IV §1.2 Crit.CST1 | E IV.2 L.39-41 | PDF p.205
 def axiome_CST1_identite(schema, e, U):
     """(CST1 à l'identité) instancié — ⟨Δ_E⟩^S(U) = U (l'extension de l'identité est
     l'identité, IV.1.2).  Hypothèse EXPLICITE."""
     return egal(_transporte(schema, E.diagonale(_t(e)), U), _t(U))
 
 
+# @livre Ch.IV §1.2 Crit.CST3 | E IV.3 L.1-5 | PDF p.206
 def cst3_reciproque_transport(schema="S", f="f", e="E", ep="Ep", u="U"):
     """CST3 (cœur logique de la RÉCIPROQUE du transport, IV.1.2).
 
@@ -297,6 +300,7 @@ def _struct_induite(s, base):
     return app("struct_induite", _t(s), _t(base))
 
 
+# @livre Ch.IV §2.4 Crit.CST12 | E IV.16 L.22-26 | PDF p.219
 def cst12_restriction_morphisme(a="A", s="S", ap="Ap", sp="Sp", b="B", bp="Bp",
                                 f="f", morph=None):
     """CST12 (cœur logique, IV.2) — RESTRICTION D'UN MORPHISME AUX SOUS-STRUCTURES.
@@ -376,6 +380,7 @@ def _struct_quotient(s, quo):
     return app("struct_quotient", _t(s), _t(quo))
 
 
+# @livre Ch.IV §2.6 Crit.CST20 | E IV.21 L.29-33 | PDF p.224
 def cst20_passage_quotient(a="A", s="S", ap="Ap", sp="Sp", r="R", rp="Rp",
                            f="f", morph=None):
     """CST20 (cœur logique, IV.2) — PASSAGE DES MORPHISMES AUX QUOTIENTS.

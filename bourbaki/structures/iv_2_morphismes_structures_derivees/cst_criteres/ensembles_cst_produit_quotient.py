@@ -85,6 +85,7 @@ def _defaults_in(af, sf, ff, morph):
 #  DÉFINIT la structure produit.  On certifie le sens « si chaque f_ι = pr_ι∘f est un
 #  morphisme alors f est un morphisme » (le sens « utile » du critère CST16).
 #
+# @livre Ch.IV §2.4 Crit.CST16 | E IV.18 L.4-8 | PDF p.221
 def cst16_famille_morphismes_produit(ep="Ep", sp="Sp", e="E", struct_P="P",
                                      i="I0", f="f", af=None, sf=None,
                                      prf=None, morph=None, iota="iota"):
@@ -149,6 +150,7 @@ def cst16_famille_morphismes_produit(ep="Ep", sp="Sp", e="E", struct_P="P",
 #  du produit, l'autre comme initiale des g_ι) sont mutuellement plus fines, donc égales
 #  par antisymétrie (MO_III).  On RÉUTILISE `cst10_initiales_egales` spécialisé.
 #
+# @livre Ch.IV §2.4 Crit.CST15 | E IV.17 L.26-31 | PDF p.220
 def cst15_imrec_produit_egales(ep="Ep", struct_R="R", struct_J="J", i="I0",
                                af=None, sf=None, gf=None, morph=None):
     """{ (IN_𝓡) pour 𝓡 = image réciproque de 𝒫 par g (vue comme initiale de la famille
@@ -192,6 +194,7 @@ def cst15_imrec_produit_egales(ep="Ep", struct_R="R", struct_J="J", i="I0",
 #  près) pour la MÊME famille de projections composées (pr_ι = pr_{ι,J_λ}∘pr_{J_λ}) ;
 #  elles sont mutuellement plus fines, donc égales par antisymétrie (MO_III).
 #
+# @livre Ch.IV §2.4 Crit.CST13 | E IV.17 L.1-6 | PDF p.220
 def cst13_produit_associatif_egales(e="E", struct_P="P", struct_Pp="Pp", i="I0",
                                     af=None, sf=None, ff=None, morph=None):
     """{ (IN_𝒫) pour le produit total 𝒫 sur E = ∏_{ι∈I} E_ι (famille (E_ι,𝒮_ι,pr_ι)),
@@ -243,6 +246,7 @@ def est_iso_morph(e, s, ep, sp, f, morph=None):
               morph(vep, vsp, ve, vs, E.reciproque(vf)))
 
 
+# @livre Ch.IV §2.4 Crit.CST17 | E IV.18 L.40-46 | PDF p.221
 def cst17_morphisme_caracterise_par_graphe(a="A", sa="SA", fgr="F", sf="SF",
                                            pr1="pr1", morph=None):
     """{ M  := « pr₁ est un morphisme de (F, 𝒮_F induite) dans (A, 𝒮_A) »,
@@ -294,6 +298,7 @@ def cst17_morphisme_caracterise_par_graphe(a="A", sa="SA", fgr="F", sf="SF",
 #  canoniques se composent φ_S = φ_{R'}∘φ_R), donc sont mutuellement plus fines et égales
 #  par antisymétrie (MO_III).
 #
+# @livre Ch.IV §2.6 Crit.CST21 | E IV.22 L.1-7 | PDF p.225
 def cst21_quotients_egales(e="E", struct_F="F", struct_G="G", i="I0",
                            af=None, sf=None, gf=None, morph=None):
     """{ (FI_𝒬) pour 𝒬 = quotient-de-quotient ((A/R)/R'), structure finale via la

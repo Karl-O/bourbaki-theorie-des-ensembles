@@ -73,6 +73,7 @@ def _defaults(af, sf, ff, morph):
     return af, sf, ff, morph
 
 
+# @livre Ch.IV §2.1 Ax.- | E IV.11 L.32-36 | PDF p.214
 def id_est_morphisme(e, s, morph=None):
     """Formule « id_E = Δ_E est un σ-morphisme de (E,𝒮) dans (E,𝒮) ».  C'est
     l'instance d'(MO_III) (réflexivité de « plus fine », IV.2.2) — une HYPOTHÈSE
@@ -98,6 +99,7 @@ def id_est_morphisme(e, s, morph=None):
 #  𝓘 = 𝓘'.  On démontre ici la conjonction des deux « plus fine » (l'antisymétrie
 #  ⇒ 𝓘=𝓘' est le palier MO_III, fourni en hypothèse explicite).
 #
+# @livre Ch.IV §2.3 Crit.CST9 | E IV.14 L.24-30 | PDF p.217
 def initiales_mutuellement_plus_fines(e="E", struct_I="I", struct_J="J",
                                       i="I0", af=None, sf=None, ff=None,
                                       morph=None):
@@ -150,6 +152,7 @@ def initiales_mutuellement_plus_fines(e="E", struct_I="I", struct_J="J",
     return conjonction_intro(pf_IJ, pf_JI)
 
 
+# @livre Ch.IV §2.3 Crit.CST9 | E IV.14 L.24-30 | PDF p.217
 def cst9_unicite_initiale(e="E", struct_I="I", struct_J="J", i="I0",
                           af=None, sf=None, ff=None, morph=None):
     """CST9 — UNICITÉ de la structure initiale (forme complète, antisymétrie en
@@ -175,6 +178,7 @@ def cst9_unicite_initiale(e="E", struct_I="I", struct_J="J", i="I0",
 # ════════════════════════════════════════════════════════════════════════════
 #  CST18 — UNICITÉ de la structure FINALE  (DUAL de CST9 via (FI))
 # ════════════════════════════════════════════════════════════════════════════
+# @livre Ch.IV §2.5 Crit.CST18 | E IV.19 L.20-25 | PDF p.222
 def finales_mutuellement_plus_fines(e="E", struct_F="F", struct_G="G",
                                     i="I0", af=None, sf=None, gf=None,
                                     morph=None):
@@ -214,6 +218,7 @@ def finales_mutuellement_plus_fines(e="E", struct_F="F", struct_G="G",
     return conjonction_intro(pf_FG, pf_GF)
 
 
+# @livre Ch.IV §2.5 Crit.CST18 | E IV.19 L.20-25 | PDF p.222
 def cst18_unicite_finale(e="E", struct_F="F", struct_G="G", i="I0",
                          af=None, sf=None, gf=None, morph=None):
     """CST18 — UNICITÉ de la structure finale.  DUAL de `cst9_unicite_initiale`.
@@ -237,6 +242,7 @@ def cst18_unicite_finale(e="E", struct_F="F", struct_G="G", i="I0",
 #  composition).  Lorsque f est un ISOMORPHISME, « transporter » un morphisme par f
 #  revient à le composer ; on certifie ici le cœur (MO_II) sous forme paramétrée.
 #
+# @livre Ch.IV §2.1 Ax.- | E IV.11 L.28-31 | PDF p.214
 def axiome_MO_II(e, s, ep, sp, epp, spp, f, g, morph=None):
     """(MO_II) instancié — formule « (morph(E,𝒮,E',𝒮',f) et morph(E',𝒮',E'',𝒮'',g))
     ⇒ morph(E,𝒮,E'',𝒮'', g∘f) »  (stabilité par composition, axiome-schéma IV.2.1).
@@ -249,6 +255,7 @@ def axiome_MO_II(e, s, ep, sp, epp, spp, f, g, morph=None):
     return impl(et(m1, m2), morph(e, s, epp, spp, E.composee(g, f)))
 
 
+# @livre Ch.IV §1.5 Crit.CST4 | E IV.6 L.24-27 | PDF p.209
 def transport_preserve_morphisme(e="E", s="S", ep="Ep", sp="Sp",
                                  epp="Epp", spp="Spp", f="f", g="g", morph=None):
     """{(MO_II) instancié, morph(E,𝒮,E',𝒮',f), morph(E',𝒮',E'',𝒮'',g)}
@@ -272,6 +279,7 @@ def transport_preserve_morphisme(e="E", s="S", ep="Ep", sp="Sp",
     return N.modus_ponens(conj, h_mo2)         # morph(E,𝒮,E'',𝒮'', g∘f)
 
 
+# @livre Ch.IV §1.5 Crit.CST4 | E IV.6 L.24-27 | PDF p.209
 def cst4_compose_isos_morphisme_aller(e="E", s="S", ep="Ep", sp="Sp",
                                       epp="Epp", spp="Spp", f="f", g="g",
                                       morph=None):
@@ -295,6 +303,7 @@ def cst4_compose_isos_morphisme_aller(e="E", s="S", ep="Ep", sp="Sp",
 #    donc deux V vérifiant (4) sont égaux.  Cœur logique : (4) est une ÉGALITÉ
 #    V = ⟨f,Id⟩^S(U), d'où l'unicité par transitivité de =.
 #
+# @livre Ch.IV §1.5 Def.- | E IV.6 L.11-11 | PDF p.209
 def relation_transport_iso(e, u, ep, v, f, schema="S"):
     """Relation (4) de l'isomorphisme (IV.1.5) : « (f) est un isomorphisme de (E,U)
     sur (E',V) » := V = ⟨f, Id⟩^S(U)  — l'extension canonique de schéma S appliquée à
@@ -304,6 +313,7 @@ def relation_transport_iso(e, u, ep, v, f, schema="S"):
     return egal(vv, transporte)
 
 
+# @livre Ch.IV §1.5 Crit.CST5 | E IV.6 L.43-46 | PDF p.209
 def cst5_unicite_transport(e="E", u="U", ep="Ep", v="V", v2="V2", f="f",
                            schema="S"):
     """CST5 (UNICITÉ du transport) — cœur logique.
@@ -351,6 +361,7 @@ def _morph(morph):
     return morph if morph is not None else _morph_defaut()
 
 
+# @livre Ch.IV §3.2 Crit.CST22 | E IV.24 L.7-9 | PDF p.227
 def factorisation_unique_des_solutions(fe="FE", se="SE", phi_e="phiE",
                                        fep="FEp", sep="SEp", phi_ep="phiEp",
                                        f1="f1", f2="f2", morph=None):

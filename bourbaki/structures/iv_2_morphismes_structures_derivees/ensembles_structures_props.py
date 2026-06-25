@@ -77,6 +77,7 @@ def _morph(morph):
     return morph if morph is not None else _morph_defaut()
 
 
+# @livre Ch.IV §2.1 Ax.- | E IV.11 L.28-31 | PDF p.214
 def axiome_MO_II(e, s, ep, sp, epp, spp, f, g, morph=None):
     """(MO_II) instancié (IV.2.1, axiome de stabilité par composition) — Formule
        « (morph(E,𝒮,E',𝒮',f) et morph(E',𝒮',E'',𝒮'',g)) ⇒ morph(E,𝒮,E'',𝒮'', g∘f) ».
@@ -99,6 +100,7 @@ def axiome_MO_II(e, s, ep, sp, epp, spp, f, g, morph=None):
 # ════════════════════════════════════════════════════════════════════════════
 #  1.  COMPOSITION DE MORPHISMES EST UN MORPHISME  (axiome (MO_II), IV.2.1)
 # ════════════════════════════════════════════════════════════════════════════
+# @livre Ch.IV §2.1 Ax.- | E IV.11 L.28-31 | PDF p.214
 def composee_morphismes_est_morphisme(e="E", s="S", ep="Ep", sp="Sp",
                                       epp="Epp", spp="Spp", f="f", g="g",
                                       morph=None):
@@ -128,6 +130,7 @@ def composee_morphismes_est_morphisme(e="E", s="S", ep="Ep", sp="Sp",
 #  Réflexivité + transitivité = PRÉORDRE (l'antisymétrie, qui donne l'ordre, dépend de
 #  (MO_III) et est fournie en hypothèse explicite ailleurs, cf. CST9/CST18).
 #
+# @livre Ch.IV §2.1 Ax.- | E IV.11 L.32-36 | PDF p.214
 def id_est_morphisme(e, s, morph=None):
     """Formule « id_E = Δ_E est un σ-morphisme de (E,𝒮) dans (E,𝒮) ».  Instance d'
     (MO_III) (toute identité est un morphisme — c'est même un isomorphisme) ; PRÉMISSE
