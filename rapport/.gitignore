@@ -1,4 +1,6 @@
 # Artefacts de compilation LaTeX (régénérés par latexmk -pdf main.tex)
+# latexmk les écrit désormais dans build/ (voir .latexmkrc) ; on ignore le dossier.
+build/
 *.aux
 *.fls
 *.fdb_latexmk

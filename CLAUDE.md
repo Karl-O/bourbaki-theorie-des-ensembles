@@ -61,6 +61,30 @@ pour la soundness** (cf. la preuve LaTeX du Th2 qui diffère du PDF) ; consigner
 **Calibrage §→page PDF** (établi le 2026-06-24) : voir `outils_ia/pdf_index.md` (mapping
 section Bourbaki → page physique du PDF de 349 pages).
 
+## Traçabilité livre — marqueur `@livre` (page + lignes de CHAQUE notion)
+**But (exigé par l'utilisateur, 2026-06-25).** Chaque notion formalisée (définition, axiome,
+critère, proposition, théorème, **démonstration**, corollaire) porte **une ligne machine-lisible**
+qui la cale exactement sur le livre : repère Bourbaki + **intervalle de lignes** + page physique du
+PDF. Méthode en deux passes : (1) lire le livre et écrire en **notant la position** de chaque
+notion ; (2) repasser, et en **triant tout par (chapitre, page, ligne)**, faire apparaître les
+**trous** — un intervalle de lignes non couvert = une notion oubliée. *La citation EST le détecteur
+de trous.*
+
+**Format exact** (commentaire Python, juste au-dessus de la `def` de la notion) :
+```
+# @livre Ch.<C> §<s>.<ss> <Type>.<num> | <repère Bourbaki> L.<l1>-<l2> | PDF p.<phys>
+```
+- `<C>` = `I`..`IV` (ou `R` pour le Résumé) ; `<s>.<ss>` = section.sous-section (ex. `1.2`).
+- `<Type>` ∈ {`Def`,`Ax`,`Crit`,`Prop`,`Th`,`Cor`,`Lem`,`Sch`,`Rem`,`Ex`,`Demo`} ; `<num>` = n° Bourbaki (sinon `-`).
+- `<repère Bourbaki>` = repère imprimé du livre, ex. `E III.2` (E = pagination interne du livre).
+- `L.<l1>-<l2>` = lignes sur CETTE page (une démo placée ailleurs a son **propre** `@livre`).
+- `PDF p.<phys>` = page physique du scan. Offsets : Ch I `+0`, II `+51`, III `+103`, IV `+202`, Résumé `+303`.
+- Exemple : `# @livre Ch.III §1.2 Prop.1 | E III.2 L.3-14 | PDF p.109`
+
+**Règle.** Toute notion écrite ou auditée **à partir de maintenant** reçoit son `@livre`. Le
+retrofit de l'existant se fait **section par section** (passe 1 : poser les `@livre` depuis le PDF ;
+passe 2 : trier + lister les trous). Un outil `outils_ia/` collationnera les `@livre` → carte de trous.
+
 ## Livrable : rapport V9 (LaTeX façon livre Bourbaki)
 Maintenir dans **`V9/rapport/`** un document LaTeX multi-parties expliquant TOUT le projet, agencé comme
 le livre (Chapitre → Section → Sous-section), dans le **même style que `V6/V8/main.tex`** : pour chaque
