@@ -310,6 +310,7 @@ def eq_produit_un(a="A"):
     return N.modus_ponens(bij, N.s5(est_bijection_de(var("F"), A1, vA), P, "F"))
 
 
+# @livre Ch.III §3.4 Cor.1 | E III.27 L.52-52 | PDF p.130
 def produit_cardinal_un(a="A"):
     """⊢ Card(A×{∅}) = Card(A).   (a·1 = a, E.III.3.3 ; 1 = Card({∅}).)
 

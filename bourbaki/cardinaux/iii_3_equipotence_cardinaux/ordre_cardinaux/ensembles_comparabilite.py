@@ -1410,6 +1410,7 @@ def g_reciproque_injecte_Y_dans_X(X="X", Y="Y", g="g"):
 # ════════════════════════════════════════════════════════════════════════════
 #  🎯 LE THÉORÈME DE COMPARABILITÉ DES CARDINAUX  (E.III.3 — l'ordre ≤ est total)
 # ════════════════════════════════════════════════════════════════════════════
+# @livre Ch.III §3.2 Cor.1 | E III.25 L.13-14 | PDF p.128
 def comparabilite_cardinaux(X="X", Y="Y", g="g", m="m"):
     """⊢ inf_egal_card(X, Y) OU inf_egal_card(Y, X).
 

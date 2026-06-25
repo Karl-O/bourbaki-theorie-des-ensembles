@@ -391,6 +391,7 @@ def inf_egal_psi(a="A", b="B", c="C"):
 # ═══════════════════════════════════════════════════════════════════════════════
 #  CLÔTURE INCONDITIONNELLE DE LA PROPOSITION 9  (Cantor–Bernstein)
 # ═══════════════════════════════════════════════════════════════════════════════
+# @livre Ch.III §3.5 Prop.9 | E III.28 L.22-23 | PDF p.131
 def prop9_close(a="A", b="B", c="C"):
     """⊢ Card(𝓕(B⊔C; A)) = Card(𝓕(B;A) × 𝓕(C;A))   INCONDITIONNEL   (= cible_prop9_exp_somme).
 

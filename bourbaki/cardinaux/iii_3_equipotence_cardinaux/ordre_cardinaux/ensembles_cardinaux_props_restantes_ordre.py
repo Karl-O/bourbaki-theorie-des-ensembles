@@ -161,6 +161,7 @@ def _prop1_direct_t(tX, tY):
 # ══════════════════════════════════════════════════════════════════════════════
 #  ASSEMBLAGE : « ≤ est un ordre total sur les cardinaux »
 # ══════════════════════════════════════════════════════════════════════════════
+# @livre Ch.III §3.2 Th.1 | E III.24 L.18-21 | PDF p.127
 def cardinaux_ordre_total():
     """⊢  ((∀X) X≤X)
         et ((∀X∀Y∀Z)((X≤Y et Y≤Z)⇒X≤Z))

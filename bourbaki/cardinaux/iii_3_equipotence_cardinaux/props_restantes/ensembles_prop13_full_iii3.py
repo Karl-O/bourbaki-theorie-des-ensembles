@@ -282,6 +282,7 @@ def prop13_equivalence_enonce(a="Ap13", b="Bp13", c="Cp13"):
                 equiv(inf_egal_card(vb, va), rhs))
 
 
+# @livre Ch.III §3.6 Prop.13 | E III.29 L.50-54 | PDF p.132
 def prop13_equivalence(a="Ap13", b="Bp13", c="Cp13"):
     """🎯🎯 ⊢ ( est_cardinal(a) et est_cardinal(b) )
                 ⇒ ( b ≤ a  ⟺  (∃c)( est_cardinal(c) et a = b + c ) ).   (CLOS.)

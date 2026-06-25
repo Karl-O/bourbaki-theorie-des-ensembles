@@ -61,6 +61,7 @@ def relation_cardinal_inf_egal(x, a):
     return et(est_cardinal(_t(x)), inf_egal_card(_t(x), _t(a)))
 
 
+# @livre Ch.III §3.2 Rem.- | E III.25 L.18-24 | PDF p.128
 def ensemble_cardinaux_inf_egal(a):
     """Ensemble des cardinaux ≤ a := {x | x cardinal et x ≤ a}  (E.III.3.2, Remarque).
 
@@ -121,6 +122,7 @@ def plus_petit_majorant_cardinaux(b, f, i, c="c", iota="iota"):
     return pourtout(c, impl(hyp, inf_egal_card(vb, vc)))
 
 
+# @livre Ch.III §3.2 Def.- | E III.25 L.42-44 | PDF p.128
 def est_borne_superieure_cardinaux(b, f, i, c="c", iota="iota"):
     """« b = sup_{ι∈I} a_ι » : b est la borne supérieure de la famille de cardinaux
     (a_ι)_{ι∈I}  (E.III.3.2, après Prop 2).

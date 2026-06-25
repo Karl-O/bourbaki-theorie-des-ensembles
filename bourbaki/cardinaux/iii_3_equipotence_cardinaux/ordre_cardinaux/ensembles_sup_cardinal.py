@@ -293,6 +293,7 @@ def majorants_inclus_interv(F="Fsup", a="a"):
 # ═══════════════════════════════════════════════════════════════════════════════
 #  LE THÉORÈME — existence de la borne supérieure (Prop 2, forme ensembliste)
 # ═══════════════════════════════════════════════════════════════════════════════
+# @livre Ch.III §3.2 Prop.2 | E III.25 L.25-37 | PDF p.128
 def borne_superieure_existe(F="Fsup", a="a"):
     """⊢ { est_cardinal(a),  F⊂[0,a] }  ⊢  (∃s) est_borne_superieure_ensemble(s,F,a).
 

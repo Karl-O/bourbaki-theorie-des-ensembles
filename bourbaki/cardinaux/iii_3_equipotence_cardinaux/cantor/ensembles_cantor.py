@@ -462,6 +462,7 @@ def cantor_distinct(x="X"):
                           N.s1(non(egal(vX, PX))))            # ⊢ ¬(X = P(X))
 
 
+# @livre Ch.III §3.5 Th.2 | E III.30 L.18-19 | PDF p.133
 def cantor_strict(x="X"):
     """⊢ X < P(X).   (THÉORÈME DE CANTOR, E.III.3 : Card X < Card P(X).)
 

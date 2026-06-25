@@ -112,6 +112,7 @@ def cas2_h2(a="A", b="B", h=_H, tau=_TAU):
 # PROPOSITION 8 INCONDITIONNELLE :  ⊢ (succ A = succ B) ⇒ (Card A = Card B)
 # ═══════════════════════════════════════════════════════════════════════════════
 @functools.lru_cache(maxsize=None)
+# @livre Ch.III §3.4 Prop.8 | E III.28 L.5-10 | PDF p.131
 def prop8_successeur_injectif(a="A", b="B", h=_H, tau=_TAU):
     """⊢ (successeur(A) = successeur(B)) ⇒ (Card A = Card B).   (PROPOSITION 8, E.III.3.4.)
 

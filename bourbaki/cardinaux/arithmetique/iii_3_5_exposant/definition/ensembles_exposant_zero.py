@@ -201,6 +201,7 @@ def exposant_zero_base_egale_zero(a="A"):
     return N.loi_deduction(non(egal(vA, E.VIDE)), card_eq)   # ¬(A=∅) ⇒ Card(𝓕(A;∅))=Card(∅)
 
 
+# @livre Ch.III §3.5 Prop.11 | E III.29 L.13-14 | PDF p.132
 def exposant_cardinal_zero_base(a="A"):
     """⊢ ¬(A = ∅) ⇒ exposant_cardinal_binaire(∅, A) = Card(∅).   (0^a = 0 sur l'OPÉRATEUR.)
 

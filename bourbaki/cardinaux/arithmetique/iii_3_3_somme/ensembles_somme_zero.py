@@ -220,6 +220,7 @@ def eq_somme_zero_neutre(b="B"):
 
 
 # ── Card(∅⊔B) = Card(B)  =  0 + b = b  (niveau CARDINAL) ──────────────────────
+# @livre Ch.III §3.4 Cor.1 | E III.27 L.52-52 | PDF p.130
 def card_somme_zero_neutre(b="B"):
     """⊢ Card(∅⊔B) = Card(B).   (0 ÉLÉMENT NEUTRE de la somme cardinale : 0 + b = b.)
 

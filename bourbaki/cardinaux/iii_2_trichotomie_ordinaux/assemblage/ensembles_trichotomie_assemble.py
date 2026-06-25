@@ -178,6 +178,7 @@ def _seg_img_form(E_set, R, F_set, Rp, xb, yb):
 # ════════════════════════════════════════════════════════════════════════════
 #  🎯 ASSEMBLAGE MAXIMAL : maximalité + segments dom DÉCHARGÉS.
 # ════════════════════════════════════════════════════════════════════════════
+# @livre Ch.III §2.5 Th.3 | E III.21 L.18-22 | PDF p.124
 def trichotomie_ordinaux_canon_prouve(E_set="E", R="R", F_set="F", Rp="Rp"):
     """⊢ trichotomie_ordinaux_canon(E,R,F,Rp)  (== maillon_final_cible) sous le RÉSIDU
     STRUCTUREL HONNÊTE { bo(R,E), bo(Rp,F), residu_univ_app, val_dans_F, h_graphe_hyp,

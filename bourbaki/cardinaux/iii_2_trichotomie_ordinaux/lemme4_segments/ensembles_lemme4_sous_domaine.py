@@ -189,6 +189,7 @@ def A_vide(R="R", E_set="E", S="S", f="f"):
 # ════════════════════════════════════════════════════════════════════════════
 #  STAGE 3 — LEMME 4 (sous-domaine) :  x∈S ⇒ R{x, f(x)}.
 # ════════════════════════════════════════════════════════════════════════════
+# @livre Ch.III §2.5 Lem.4 | E III.22 L.5-7 | PDF p.125
 def lemme_4_sous_domaine(R="R", E="E", S="S", f="f", x="x"):
     """⊢ { est_bien_ordonne(R,E), inclus(S,E), (∀t)(t∈S⇒f(t)∈S), f strict crois. S→S }
             ⊢ (∀x)( x∈S ⇒ R{x, f(x)} ).

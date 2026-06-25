@@ -158,6 +158,7 @@ def eq_but_son_cardinal(famF="famF", i="I"):
 # ═══════════════════════════════════════════════════════════════════════════════
 #  RÉDUCTION DU COROLLAIRE 2 À L'ÉQUIPOTENCE  (Prop. 1 sens direct)   (CLOS, 0 hyp)
 # ═══════════════════════════════════════════════════════════════════════════════
+# @livre Ch.III §3.5 Cor.2 | E III.29 L.1-5 | PDF p.132
 def cor2_via_eq(famF="famF", famA="famA", i="I", b="B"):
     """⊢ Eq( 𝓕(B;∏A) , ∏famF ) ⇒ ( Card(𝓕(B;∏A)) = Card(∏famF) ).
 

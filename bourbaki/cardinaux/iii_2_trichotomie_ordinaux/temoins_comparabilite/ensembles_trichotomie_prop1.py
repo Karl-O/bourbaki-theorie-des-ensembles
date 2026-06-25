@@ -185,6 +185,7 @@ def cible_prop1(R="R", e="E", d="D", x="x"):
 # ════════════════════════════════════════════════════════════════════════════
 #  🎯 PROPOSITION 1 §III.2 — segment propre = ]←, min(E∖D)[.
 # ════════════════════════════════════════════════════════════════════════════
+# @livre Ch.III §2.1 Prop.1 | E III.16 L.14-15 | PDF p.119
 def prop1_segment_propre(R="R", e="E", d="D", x="x", w="w"):
     """⊢ { est_bien_ordonne(R,E), est_segment(D,R,E), D≠E }
             ⊢ (∃x)( est_plus_petit_element(R, E∖D, x) et D = seg(R,E,x) ).

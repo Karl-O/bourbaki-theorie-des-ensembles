@@ -137,6 +137,7 @@ def prop7_produit_nul(a="A", b="B"):
     return equivalence_transitivite(e1, equivalence_transitivite(e2, e3))
 
 
+# @livre Ch.III §3.4 Prop.7 | E III.28 L.3-5 | PDF p.131
 def prop7_produit_non_nul(a="A", b="B"):
     """⊢ ¬(Card(A×B) = Card ∅) ⟺ (¬(Card A = Card ∅) et ¬(Card B = Card ∅)).
 

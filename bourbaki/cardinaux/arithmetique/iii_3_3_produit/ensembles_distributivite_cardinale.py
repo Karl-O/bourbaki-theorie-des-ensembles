@@ -670,6 +670,7 @@ def eq_distributivite(a="A", b="B", c="C"):
     return N.modus_ponens(bij, N.s5(est_bijection_de(var("F"), Dom, Cod), D, "F"))
 
 
+# @livre Ch.III §3.3 Cor.- | E III.27 L.19-19 | PDF p.130
 def distributivite_cardinale(a="A", b="B", c="C"):
     """⊢ Card(A×(B⊔C)) = Card((A×B)⊔(A×C)).   (a·(b+c) = a·b + a·c, E.III.3.3, Prop. 3.)
 

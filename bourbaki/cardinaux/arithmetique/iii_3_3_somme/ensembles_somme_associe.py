@@ -1317,6 +1317,7 @@ def eq_somme_associatif(a="A", b="B", c="C"):
     return N.modus_ponens(bij, N.s5(est_bijection_de(var("F"), ABC, ABCd), K, "F"))
 
 
+# @livre Ch.III §3.3 Cor.- | E III.27 L.17-17 | PDF p.130
 def somme_cardinale_associative(a="A", b="B", c="C"):
     """⊢ Card((A⊔B)⊔C) = Card(A⊔(B⊔C)).   (associativité a+(b+c)=(a+b)+c, Cor. de Prop. 5.)
 

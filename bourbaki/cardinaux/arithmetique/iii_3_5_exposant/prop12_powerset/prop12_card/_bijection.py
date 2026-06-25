@@ -307,6 +307,7 @@ def powerset_equipotent_applications(x="X"):
     return N.modus_ponens(bij, N.s5(corps, _W(vX), "F"))   # (∃F)est_bijection_de(F,𝔓X,𝓕(X;2))
 
 
+# @livre Ch.III §3.5 Prop.12 | E III.29 L.19-29 | PDF p.132
 def card_parties_egale_deux_exp(x="X"):
     """⊢ Card(𝔓X) = exposant_cardinal_binaire(2, X) = 2^Card X.   (PROPOSITION 12.)
 

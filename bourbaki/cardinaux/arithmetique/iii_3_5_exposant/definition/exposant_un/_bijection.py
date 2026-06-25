@@ -369,6 +369,7 @@ def exposant_un_egale(a="A"):
     return N.modus_ponens(eq, prop1)           # Card(𝓕({∅};A)) = Card(A) = a^1 = a
 
 
+# @livre Ch.III §3.5 Prop.11 | E III.29 L.13-14 | PDF p.132
 def exposant_cardinal_un_egale(a="a"):
     """⊢ a ^ 1 = Card(A).   (= a ; PROPOSITION 11, a^1 = a, sur l'OPÉRATEUR
     exposant_cardinal_un pour A quelconque.  CLOS.)

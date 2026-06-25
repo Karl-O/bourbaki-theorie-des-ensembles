@@ -50,6 +50,7 @@ def _T(v):
 
 
 # ── PROPOSITION 3 (E III.25) — surjection X↠Y ⇒ Card(Y) ≤ Card(X) ─────────────
+# @livre Ch.III §3.2 Prop.3 | E III.25 L.42-45 | PDF p.128
 def prop3_surjection_inf_egal(s="S", f="F", x="X", y="Y"):
     """⊢_{s section de f sur Y ; s fonctionnel ; dom s=Y ; image(s,Y)⊂X}
          (Y ≤ X)   c.-à-d.  inf_egal_card(Y, X), soit Card(Y) ≤ Card(X).
@@ -91,6 +92,7 @@ def cible_prop3_surjection_inf_egal(x="X", y="Y"):
 
 
 # ── PROPOSITION 4, COROLLAIRE (E III.26) — Card(⋃ E_ι) ≤ ∑ Card(E_ι) ──────────
+# @livre Ch.III §3.3 Cor.- | E III.26 L.13-16 | PDF p.129
 def prop4cor_card_reunion_inf_egal_somme(g="G", u="U", fam="A", i="I"):
     """⊢_{g section de la surjection canonique (⊔E_ι)↠U ; g:U→⊔E_ι application}
          (Card(U) ≤ ∑_{ι∈I} Card(E_ι))

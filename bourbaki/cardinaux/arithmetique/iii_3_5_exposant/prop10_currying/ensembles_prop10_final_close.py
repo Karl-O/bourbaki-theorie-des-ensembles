@@ -31,6 +31,7 @@ def _t(v):
     return v if isinstance(v, Terme) else var(v)
 
 
+# @livre Ch.III §3.5 Cor.3 | E III.29 L.6-9 | PDF p.132
 def prop10_close(a="A", b="B", c="C"):
     """⊢ Card(𝓕(B×C; A)) = Card(𝓕(C; 𝓕(B;A))).   (PROP 10, E.III.3.5 ; a^(b·c)=(a^b)^c.)
 

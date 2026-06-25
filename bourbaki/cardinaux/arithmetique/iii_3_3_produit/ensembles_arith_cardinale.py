@@ -55,6 +55,7 @@ def _t(v):
 
 
 # ── Le produit cardinal BINAIRE  a·b := Card(a×b)  (E.III.3.3, Déf. 3, deux indices) ──
+# @livre Ch.III §3.3 Def.3 | E III.25 L.33-39 | PDF p.128
 def produit_cardinal_binaire(a, b):
     """a · b := Card(a × b)   (produit cardinal binaire, E.III.3.3, Déf. 3).
 
@@ -141,6 +142,7 @@ def produit_cardinal_bien_defini(x="X", y="Y", a="A", b="B"):
 
 
 # ── (2) COMMUTATIVITÉ du produit cardinal ─────────────────────────────────────
+# @livre Ch.III §3.3 Cor.- | E III.27 L.13-16 | PDF p.130
 def produit_cardinal_commutatif(x="X", y="Y"):
     """⊢ Card(X×Y) = Card(Y×X).   (= produit_cardinal_binaire(X,Y)
                                      = produit_cardinal_binaire(Y,X) ;
@@ -512,6 +514,7 @@ def eq_produit_associatif(x="X", y="Y", z="Z"):
 
 
 # ── (3.5) ASSOCIATIVITÉ DU PRODUIT CARDINAL : Card((X×Y)×Z) = Card(X×(Y×Z)) ────
+# @livre Ch.III §3.3 Cor.- | E III.27 L.17-18 | PDF p.130
 def produit_cardinal_associatif(x="X", y="Y", z="Z"):
     """⊢ Card((X×Y)×Z) = Card(X×(Y×Z)).   (associativité a·(b·c) = (a·b)·c, E.III.3.3.)
 

@@ -44,6 +44,7 @@ def est_bijection_de(F, X, Y):
               E.est_bijective(F, X, Y))
 
 
+# @livre Ch.III §3.1 Def.1 | E III.23 L.15-17 | PDF p.126
 def equipotent(X, Y):
     """Eq(X, Y) := (∃F)(F est le graphe d'une bijection de X sur Y)   (E.III.3.1, Déf. 1).
 
@@ -53,6 +54,7 @@ def equipotent(X, Y):
 
 
 # ── Déf. 2 : Cardinal Card(X) = τ_Z(Eq(X, Z)) ─────────────────────────────────
+# @livre Ch.III §3.1 Def.2 | E III.23 L.34-35 | PDF p.126
 def cardinal(X, z="Z"):
     """Card(X) := τ_Z(Eq(X, Z))   (cardinal / puissance de X, E.III.3.1, Déf. 2).
 
@@ -98,6 +100,7 @@ def inf_strict_card(x, y):
     return et(inf_egal_card(x, y), non(egal(x, y)))
 
 
+# @livre Ch.III §3.2 Th.1 | E III.24 L.11-14 | PDF p.127
 def relation_ordre_cardinaux(x, y):
     """R{x, y} du Théorème 1 : « x et y sont des cardinaux et x est équipotent à
        une partie de y », codée x≤y :⇔ (∃f)(f injection de x dans y) (E.III.3.2).
@@ -108,6 +111,7 @@ def relation_ordre_cardinaux(x, y):
 
 
 # ── Déf. 3-4 : somme, produit, exposant de cardinaux ──────────────────────────
+# @livre Ch.III §3.3 Def.3 | E III.25 L.40-43 | PDF p.128
 def somme_cardinale(f, i):
     """∑_{ι∈I} a_ι := Card(⨆_{ι∈I} a_ι) = Card(somme de la famille)   (E.III.3.3, Déf. 3).
 
@@ -115,6 +119,7 @@ def somme_cardinale(f, i):
     return cardinal(E.somme_famille(f, i))
 
 
+# @livre Ch.III §3.3 Def.3 | E III.25 L.40-43 | PDF p.128
 def produit_cardinal(f, i):
     """∏_{ι∈I} a_ι := Card(∏_{ι∈I} a_ι) = Card(produit de la famille)   (E.III.3.3, Déf. 3).
 
@@ -122,6 +127,7 @@ def produit_cardinal(f, i):
     return cardinal(E.produit_famille(f, i))
 
 
+# @livre Ch.III §3.5 Def.4 | E III.28 L.20-21 | PDF p.131
 def exposant_cardinal(a, b):
     """a^b := Card(a^b) = Card({f | f : b → a})   (exponentiation, E.III.3.4, Déf. 4).
 

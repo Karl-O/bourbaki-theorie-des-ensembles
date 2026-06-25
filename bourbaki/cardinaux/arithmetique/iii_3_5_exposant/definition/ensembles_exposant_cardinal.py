@@ -49,6 +49,7 @@ def _t(v):
 # ═══════════════════════════════════════════════════════════════════════════════
 # Le cardinal a^b := Card(𝓕(b;a))  (E.III.3, Déf. 4)
 # ═══════════════════════════════════════════════════════════════════════════════
+# @livre Ch.III §3.5 Def.4 | E III.28 L.16-17 | PDF p.131
 def exposant_cardinal_binaire(a, b):
     """a ^ b := Card(𝓕(b; a))   (exponentiation cardinale, E.III.3.5, Déf. 4).
 
@@ -336,6 +337,7 @@ def exposant_zero_egale_un(f="B"):
     return N.modus_ponens(eq, prop1)                   # Card(𝓕(∅;F)) = Card({∅}) = a^0 = 1
 
 
+# @livre Ch.III §3.5 Prop.11 | E III.29 L.13-14 | PDF p.132
 def exposant_cardinal_zero_egale_un(a="a"):
     """⊢ a ^ 0 = Card({∅}).   (= 1 ; PROPOSITION 11, a^0 = 1, formulée sur l'OPÉRATEUR
     exposant_cardinal_binaire pour un cardinal a quelconque.  CLOS.)

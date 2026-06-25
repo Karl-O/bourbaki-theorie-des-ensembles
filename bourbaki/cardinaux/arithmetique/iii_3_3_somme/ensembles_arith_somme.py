@@ -90,6 +90,7 @@ def _prop1_direct_t(tU, tV):
 # INTERNES des projections pr₁/pr₂ du terme somme (E.couple(pr1(k,"a","b"),…)) ;
 # passer var("a")/var("b") comme A₁/B₁ y provoquerait une capture.  « A », « B »
 # sont libres de toute collision.
+# @livre Ch.III §3.3 Def.3 | E III.25 L.33-39 | PDF p.128
 def somme_disjointe_cardinal(x="X", y="Y", a="A", b="B"):
     """⊢ (Card X = a et Card Y = b) ⇒ Card(X⊔Y) = somme_cardinale_binaire(a, b).
 
@@ -124,6 +125,7 @@ def somme_disjointe_cardinal(x="X", y="Y", a="A", b="B"):
 
 
 # ── (2) COMMUTATIVITÉ de la somme cardinale ───────────────────────────────────
+# @livre Ch.III §3.3 Cor.- | E III.27 L.13-15 | PDF p.130
 def somme_cardinale_commutative(a="A", b="B"):
     """⊢ Card(A⊔B) = Card(B⊔A).   (= somme_cardinale_binaire(A,B)
                                      = somme_cardinale_binaire(B,A) ;

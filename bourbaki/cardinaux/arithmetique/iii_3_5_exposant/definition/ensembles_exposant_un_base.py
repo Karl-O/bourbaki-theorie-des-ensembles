@@ -407,6 +407,7 @@ def exposant_un_base_egale(a="A"):
     return N.modus_ponens(eq, prop1)            # Card(𝓕(A;{∅})) = Card({∅}) = 1^a = 1
 
 
+# @livre Ch.III §3.5 Prop.11 | E III.29 L.13-14 | PDF p.132
 def exposant_cardinal_un_base_egale(a="A"):
     """⊢ 1 ^ a = Card({∅}).   (= 1 ; PROPOSITION 11, 1^a = 1, sur l'OPÉRATEUR
     exposant_cardinal_un_base pour A quelconque.  CLOS.)

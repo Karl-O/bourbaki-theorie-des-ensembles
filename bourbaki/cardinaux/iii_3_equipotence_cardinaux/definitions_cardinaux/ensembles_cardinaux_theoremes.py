@@ -79,6 +79,7 @@ def equipotent_si_cardinal_egal(x="X", y="Y"):
     return N.loi_deduction(egal(cX, cY), exy)
 
 
+# @livre Ch.III §3.1 Prop.1 | E III.23 L.42-43 | PDF p.126
 def proposition_1_cardinaux(x="X", y="Y"):
     """⊢ Eq(X, Y) ⇔ (Card X = Card Y).   (Proposition 1 COMPLÈTE, E.III.3.1.)"""
     return conjonction_intro(cardinal_egal_si_equipotent(x, y),
