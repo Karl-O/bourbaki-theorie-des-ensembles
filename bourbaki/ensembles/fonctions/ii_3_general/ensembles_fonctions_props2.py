@@ -74,6 +74,7 @@ def _decharge(thm, paires):
 
 
 # ── THÉORÈME 1 b) — la composée de deux surjections est une surjection ─────────
+# @livre Ch.II §3.8 Th.1 | E II.19 L.16-17 | PDF p.70
 def composee_surjections(f="F", g="G", x="X", y="Y", z="Z"):
     """⊢ (est_surjective(F,X,Y) et est_surjective(G,Y,Z)) ⇒ est_surjective(G∘F,X,Z).
 
@@ -106,6 +107,7 @@ def cible_composee_surjections(f="F", g="G", x="X", y="Y", z="Z"):
 
 
 # ── THÉORÈME 1 a+b) — la composée de deux bijections (au sens §II.49) ──────────
+# @livre Ch.II §3.8 Th.1 | E II.19 L.14-17 | PDF p.70
 def composee_bijectives(f="F", g="G", x="X", y="Y", z="Z"):
     """⊢_{F,G func, dom F=X, dom G=Y}
        (est_bijective(F,X,Y) et est_bijective(G,Y,Z)) ⇒ est_bijective(G∘F, X, Z).
@@ -171,6 +173,7 @@ def hypotheses_composee_bijectives(f="F", g="G", x="X", y="Y"):
 
 
 # ── §II.3.3 — image directe par une composée de correspondances (PONCTUEL) ─────
+# @livre Ch.II §3.3 Prop.5 | E II.12 L.18-19 | PDF p.63
 def image_composee_membre(gp="Gp", g="G", aa="A"):
     """⊢ (z ∈ (G'∘G)⟨A⟩) ⇔ (∃y)(y ∈ G⟨A⟩ et (y,z) ∈ G').   (§II.3.3, forme ponctuelle.)
 
@@ -229,6 +232,7 @@ def cible_image_composee_membre(gp="Gp", g="G", aa="A"):
 
 
 # ── §II.3 — Lien fonction de deux arguments ↔ application partielle (VALEUR) ────
+# @livre Ch.II §3.9 Def.- | E II.21 L.8-10 | PDF p.72
 def coupe_couple_membre(g="G", a="a", b="b"):
     """⊢ (z ∈ G⟨{(a,b)}⟩) ⇔ (((a,b),z) ∈ G).   (coupe en le COUPLE (a,b), §II.3.)
 
@@ -268,6 +272,7 @@ def cible_coupe_couple_membre(g="G", a="a", b="b"):
                  appartient(E.couple(pair, vz), vG))
 
 
+# @livre Ch.II §3.9 Def.- | E II.21 L.6-7 | PDF p.72
 def valeur_deux_arguments(g="G", a="a", b="b"):
     """⊢_{G fonctionnel, (a,b)∈dom G}  (((a,b),z) ∈ G) ⇔ (z = G((a,b))).   (§II.3, valeur.)
 

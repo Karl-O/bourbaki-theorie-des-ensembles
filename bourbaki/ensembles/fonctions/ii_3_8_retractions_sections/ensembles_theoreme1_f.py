@@ -52,6 +52,7 @@ def _T(v):
 
 
 # ── THÉORÈME 1 f) — descente d'injectivité de f'' = f'∘f vers f (VALEURS) ──────
+# @livre Ch.II §3.8 Th.1 | E II.19 L.24-25 | PDF p.70
 def theoreme1_f_injective_valeur(f="F", fp="Fp", a="A"):
     """⊢  injective_dans(F'', A) ⇒
             (∀x)(∀x')( (x∈A ∧ x'∈A ∧ f''(x) = f''(x'))  ⇒  x = x' ),
@@ -116,6 +117,7 @@ def hypotheses_theoreme1_f_injective_valeur():
 
 
 # ── THÉORÈME 1 f) — rétraction de f'' = f'∘f propagée sur f (VALEURS) ──────────
+# @livre Ch.II §3.8 Th.1 | E II.19 L.24-25 | PDF p.70
 def theoreme1_f_retraction_valeur(r="Rpp", f="F", fp="Fp", a="A"):
     """⊢_{R'' rétraction de F'' sur A}  (x∈A) ⇒ f(r''(f''(x))) = f(x),
     où F'' = E.composee(F', F).

@@ -55,6 +55,7 @@ def _t(v):
 
 
 # ── PREMIÈRE PROJECTION : pr₁F = A ────────────────────────────────────────────
+# @livre Ch.II §3.6 Crit.54 | E II.15 L.32-32 | PDF p.66
 def projection_premiere(a="A", t=None, x="x", y="y", z="z"):
     """⊢ dom(graphe_terme(A,T)) = A.   (pr₁F = A, première moitié de C54.)
 
@@ -66,6 +67,7 @@ def projection_premiere(a="A", t=None, x="x", y="y", z="z"):
 
 
 # ── SECONDE PROJECTION : image(F,A) ⊂ C  pour C contenant les T[u] ────────────
+# @livre Ch.II §3.6 Crit.54 | E II.15 L.32-33 | PDF p.66
 def image_terme_incluse(a="A", t=None, c="C", x="x", y="y"):
     """{(∀u)(u∈A ⇒ T[u]∈C)} ⊢ image(graphe_terme(A,T), A) ⊂ C.
 
@@ -127,6 +129,7 @@ def image_terme_incluse(a="A", t=None, c="C", x="x", y="y"):
     return N.generalisation("z", imp)                          # image(F,A) ⊂ C   [hyp ∀u…]
 
 
+# @livre Ch.II §3.6 Crit.54 | E II.15 L.32-33 | PDF p.66
 def img_terme_incluse(a="A", t=None, c="C", x="x", y="y"):
     """{(∀u)(u∈A ⇒ T[u]∈C)} ⊢ img(graphe_terme(A,T)) ⊂ C.
 

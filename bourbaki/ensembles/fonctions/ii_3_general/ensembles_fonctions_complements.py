@@ -47,6 +47,7 @@ def _t(v):
 
 
 # ── E.II.3.2 — Coupe de G suivant x ──────────────────────────────────────────
+# @livre Ch.II §3.2 Def.4 | E II.11 L.2-3 | PDF p.62
 def coupe(g, x):
     """G{x} := G⟨{x}⟩ = {y | (x,y)∈G}   (coupe de G suivant x, E.II.3.2).
 
@@ -58,6 +59,7 @@ def coupe(g, x):
     return E.image(_t(g), E.singleton(_t(x)))
 
 
+# @livre Ch.II §3.2 Def.4 | E II.11 L.4-5 | PDF p.62
 def coupe_caracterisation(g="G", a="a"):
     """⊢ (y ∈ G{a}) ⇔ ((a,y) ∈ G).   (caractérisation de la coupe suivant a, E.II.3.2.)
 
@@ -70,6 +72,7 @@ def coupe_caracterisation(g="G", a="a"):
 
 
 # ── E.II.3.4 — Permutation : bijection de A sur lui-même ──────────────────────
+# @livre Ch.II §3.4 Def.- | E II.17 L.8-9 | PDF p.68
 def est_permutation(f, a):
     """« F (graphe) est une permutation de A » := F bijection de A sur A   (E.II.3.4).
 
@@ -80,6 +83,7 @@ def est_permutation(f, a):
     return E.est_bijective(_t(f), _t(a), _t(a))
 
 
+# @livre Ch.II §3.4 Def.- | E II.17 L.8-9 | PDF p.68
 def est_permutation_triple(f, a):
     """« (F, A, A) est une permutation de A » : variante exposant aussi
     l'appartenance applicative (F application de A dans A) + bijectivité   (E.II.3.4).
@@ -92,6 +96,7 @@ def est_permutation_triple(f, a):
 
 
 # ── E.II.3 — Fonction de deux arguments ──────────────────────────────────────
+# @livre Ch.II §3.9 Def.- | E II.21 L.4-5 | PDF p.72
 def est_fonction_deux_arguments(f, a, b):
     """« F est une fonction de deux arguments (dans A×B) » :=
         F est une application dont le domaine est contenu dans A×B   (E.II.3).
@@ -104,6 +109,7 @@ def est_fonction_deux_arguments(f, a, b):
     return et(E.est_fonctionnel(vF), inclus(E.dom(vF), E.produit(vA, vB)))
 
 
+# @livre Ch.II §3.9 Def.- | E II.21 L.6-7 | PDF p.72
 def valeur_deux_arguments(f, x, y):
     """f(x, y) := f((x, y)) = valeur(F, (x,y))   (valeur d'une fonction de deux args).
 
@@ -113,6 +119,7 @@ def valeur_deux_arguments(f, x, y):
 
 
 # ── E.II.3 — Applications partielles ──────────────────────────────────────────
+# @livre Ch.II §3.9 Def.- | E II.21 L.10-13 | PDF p.72
 def application_partielle_seconde(f, a, c, y0, x="x"):
     """x ↦ f(x, y₀) (x∈A, y₀ fixé) := fonction-terme (graphe {(x, f(x,y₀)) | x∈A}, A, C)
     (application partielle relative à y₀, E.II.3).
@@ -127,6 +134,7 @@ def application_partielle_seconde(f, a, c, y0, x="x"):
     return E.fonction_terme(_t(a), T, _t(c), x)
 
 
+# @livre Ch.II §3.9 Def.- | E II.21 L.10-13 | PDF p.72
 def application_partielle_seconde_terme(f, y0, x="x"):
     """Le TERME-valeur partiel x ↦ f(x, y₀) (sans contrainte de source/but) :
     renvoie simplement le terme f((x, y₀)) à x libre   (application partielle, forme terme).
@@ -136,6 +144,7 @@ def application_partielle_seconde_terme(f, y0, x="x"):
     return E.valeur(_t(f), E.couple(var(x), _t(y0)))
 
 
+# @livre Ch.II §3.9 Def.- | E II.21 L.13-16 | PDF p.72
 def application_partielle_premiere_terme(f, x0, y="y"):
     """Le TERME-valeur partiel y ↦ f(x₀, y) (à x₀ fixé) : terme f((x₀, y)) à y libre
     (application partielle relative à x₀, E.II.3)."""
@@ -143,6 +152,7 @@ def application_partielle_premiere_terme(f, x0, y="y"):
 
 
 # ── E.II.3.2 / II.3.3 — Réciproque et composée de CORRESPONDANCES (triples) ───
+# @livre Ch.II §3.2 Def.- | E II.11 L.19-24 | PDF p.62
 def correspondance_reciproque(gamma_graphe, a, b):
     """Γ⁻¹ := (G⁻¹, B, A)   pour Γ = (G, A, B)   (correspondance réciproque, E.II.3.2).
 
@@ -153,6 +163,7 @@ def correspondance_reciproque(gamma_graphe, a, b):
     return correspondance(E.reciproque(_t(gamma_graphe)), _t(b), _t(a))
 
 
+# @livre Ch.II §3.3 Def.7 | E II.13 L.10-13 | PDF p.64
 def correspondance_composee(h, gamma2_dep, c, g, a, gamma1_dep):
     """(H, B, C) ∘ (G, A, B) := (H∘G, A, C)   (composée de correspondances, E.II.3.3).
 
@@ -164,6 +175,7 @@ def correspondance_composee(h, gamma2_dep, c, g, a, gamma1_dep):
     return correspondance(E.composee(_t(h), _t(g)), _t(a), _t(c))
 
 
+# @livre Ch.II §3.3 Def.7 | E II.13 L.10-13 | PDF p.64
 def correspondance_composee_simple(h, g, a, c):
     """(H∘G, A, C) — composée de correspondances, signature allégée   (E.II.3.3).
 

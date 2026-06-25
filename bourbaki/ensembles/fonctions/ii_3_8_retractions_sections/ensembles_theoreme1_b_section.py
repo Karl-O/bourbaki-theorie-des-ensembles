@@ -37,6 +37,7 @@ def _T(v):
 
 
 # ── THÉORÈME 1 b) — composition des sections (niveau VALEURS, forme matricielle) ─
+# @livre Ch.II §3.8 Th.1 | E II.19 L.16-17 | PDF p.70
 def theoreme1_b_section_valeur(s="S", sp="Sp", f="F", fp="Fp", b="B", c="C"):
     """⊢_{S section de F sur B, S' section de F' sur C, s'(z)∈B}
         (z∈C) ⇒ f'(f(s(s'(z)))) = z.   (Théorème 1 b, partie « s∘s' section de f'' ».)

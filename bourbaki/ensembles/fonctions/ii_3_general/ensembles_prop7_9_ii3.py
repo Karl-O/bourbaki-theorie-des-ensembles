@@ -66,6 +66,7 @@ def _graphe_injectif(f, u="u", v="v", z="z"):
              egal(vv, vz)))))
 
 
+# @livre Ch.II §3.7 Prop.7 | E II.17 L.25-26 | PDF p.68
 def reciproque_fonctionnel_ssi_injectif(f="F"):
     """⊢ est_fonctionnel(F⁻¹) ⇔ F injectif (graphe).   (Prop. 7, cœur — CLOS, 0 hyp.)
 
@@ -117,11 +118,13 @@ def cible_reciproque_fonctionnel_ssi_injectif(f="F"):
     return equiv(E.est_fonctionnel(E.reciproque(vF)), _graphe_injectif(vF))
 
 
+# @livre Ch.II §3.7 Prop.7 | E II.17 L.25-26 | PDF p.68
 def reciproque_fonctionnel_implique_injectif(f="F"):
     """⊢ est_fonctionnel(F⁻¹) ⇒ F injectif (graphe).   (Prop. 7, condition NÉCESSAIRE.)"""
     return equivalence_avant(reciproque_fonctionnel_ssi_injectif(f))
 
 
+# @livre Ch.II §3.7 Prop.7 | E II.17 L.25-26 | PDF p.68
 def injectif_implique_reciproque_fonctionnel(f="F"):
     """⊢ F injectif (graphe) ⇒ est_fonctionnel(F⁻¹).   (Prop. 7, condition SUFFISANTE.)"""
     return equivalence_arriere(reciproque_fonctionnel_ssi_injectif(f))
@@ -139,6 +142,7 @@ def _compatible(g, f, e, a="a", b="b"):
         egal(E.valeur(f, va), E.valeur(f, vb)))))
 
 
+# @livre Ch.II §3.8 Prop.9 | E II.20 L.10-14 | PDF p.71
 def prop9a_factorisation_valeur(g="G", f="F", s="S", e="E", ff="FF"):
     """⊢_{s section de g sur F, u=g(x), u∈F, s(u)∈E, x∈E, f compatible avec g sur E}
         f(s(u)) = f(x).   (Prop. 9 a, factorisation h=f∘s, niveau valeurs.)
@@ -186,6 +190,7 @@ def cible_prop9a_factorisation_valeur(f="F", s="S"):
 
 
 # ── PROPOSITION 9 b) — factorisation f = g∘h (sens réciproque constructif) ──────
+# @livre Ch.II §3.8 Prop.9 | E II.20 L.16-19 | PDF p.71
 def prop9b_factorisation_valeur(g="G", f="F", r="R", gg="GG", c="C"):
     """⊢_{r rétraction de g sur GG, f(x)=g(y(x)), r rétr. appliquée à y(x)}
         ... g(r(f(x))) = f(x).   (Prop. 9 b, factorisation h=r∘f, niveau valeurs.)

@@ -167,6 +167,7 @@ def _valeur_carac_sous(vS, vx, vy, h_src_func, x_in_domS):
     return N.modus_ponens(ex_y, N.modus_ponens(h_src_func, imp))
 
 
+# @livre Ch.II §3.5 Def.- | E II.15 L.6-10 | PDF p.66
 def graphe_egal_par_valeurs(f="F", g="G"):
     """⊢ ( F fonctionnel et G fonctionnel et F graphe et G graphe
           et dom F = dom G et (∀x)(x∈dom F ⇒ F(x)=G(x)) )  ⇒  F = G.

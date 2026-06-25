@@ -150,6 +150,7 @@ def _involution_contient(vg):
     return N.generalisation("z", imp)                          # {est_graphe G} ⊢ G ⊂ (G⁻¹)⁻¹
 
 
+# @livre Ch.II §3.2 Def.5 | E II.11 L.16-17 | PDF p.62
 def reciproque_involution(g="G"):
     """{ est_graphe(G) } ⊢ (G⁻¹)⁻¹ = G.   (Bourbaki E II.11, Déf. 5.)
 

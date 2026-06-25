@@ -45,6 +45,7 @@ def _T(v):
 
 
 # ── THÉORÈME 1 e) — descente d'injectivité de f' vers f (niveau VALEURS) ──────
+# @livre Ch.II §3.8 Th.1 | E II.19 L.22-23 | PDF p.70
 def theoreme1_e_injective_valeur(f="F", fp="Fp", a="A", b="B"):
     """⊢_{(∀v)(v∈A ⇒ f(v)∈B)}  injective_dans(F', B) ⇒
             (∀x)(∀x')( (x∈A ∧ x'∈A ∧ f'(f(x)) = f'(f(x')))  ⇒  f(x) = f(x') ).

@@ -75,6 +75,7 @@ def _membre_implique_dom(f, x, a, u_in_a, hdom):
 
 
 # ── PROPOSITION 8 — sens direct, CAS SURJECTIF ────────────────────────────────
+# @livre Ch.II §3.8 Prop.8 | E II.18 L.16-17 | PDF p.69
 def section_implique_surjective_valeur(s="S", f="F", b="B"):
     """⊢ (s section associée à f) ⇒ (∀y)(y∈B ⇒ (∃x)(f(x) = y)).   (Prop. 8 direct, surjectif.)
 
@@ -129,6 +130,7 @@ def _cv_point(vFp, vF, vA, vB, uu, uu_inA, hdomF, hdomFp, happlique):
     return cv
 
 
+# @livre Ch.II §3.8 Th.1 | E II.19 L.18-19 | PDF p.70
 def theoreme1_c_injective(f="F", fp="Fp", a="A", b="B"):
     """⊢_{F'∘F func, dom F=A, dom F'=B, (∀v∈A)f(v)∈B, F'∘F inj/A}  injective_dans(F, A).
 
@@ -178,6 +180,7 @@ def cible_theoreme1_c_injective(f="F", a="A"):
 
 
 # ── THÉORÈME 1 a) — composition d'injections (RÉUTILISE composee_injective) ────
+# @livre Ch.II §3.8 Th.1 | E II.19 L.14-15 | PDF p.70
 def theoreme1_a_injective(fp="Fp", f="F", a="A", b="B"):
     """⊢_{F,F' func, dom F=A, image(F,A)=B, dom F'=B, F inj/A, F' inj/B}
        injective_dans(F'∘F, A).   (Théorème 1 a, partie « f'' injection ».)
@@ -197,6 +200,7 @@ def cible_theoreme1_a_injective(fp="Fp", f="F", a="A"):
 
 
 # ── THÉORÈME 1 a) — composition des rétractions (niveau VALEURS, forme matricielle) ─
+# @livre Ch.II §3.8 Th.1 | E II.19 L.14-15 | PDF p.70
 def theoreme1_a_retraction_valeur(r="R", rp="Rp", f="F", fp="Fp", a="A", b="B"):
     """⊢_{R rétr. de F sur A, R' rétr. de F' sur B, f(x)∈B}
         (x∈A) ⇒ r(r'(f'(f(x)))) = x.   (Théorème 1 a, partie « r∘r' rétraction de f'' ».)
@@ -251,6 +255,7 @@ def cible_theoreme1_a_retraction_valeur(r="R", rp="Rp", f="F", fp="Fp", a="A"):
 
 
 # ── THÉORÈME 1 d) — f'' = f'∘f surjective ⇒ f' surjective (niveau VALEURS) ─────
+# @livre Ch.II §3.8 Th.1 | E II.19 L.20-21 | PDF p.70
 def theoreme1_d_surjective_valeur(f="F", fp="Fp", c="C"):
     """⊢ [(∀z)(z∈C ⇒ (∃x)(f'(f(x)) = z))] ⇒ [(∀z)(z∈C ⇒ (∃y)(f'(y) = z))].
 
@@ -293,6 +298,7 @@ def cible_theoreme1_d_surjective_valeur(f="F", fp="Fp", c="C"):
 
 
 # ── COROLLAIRE — g∘f = Id_A, f∘g = Id_B ⇒ f, g injectives, g = f⁻¹ ─────────────
+# @livre Ch.II §3.8 Cor.- | E II.18 L.34-36 | PDF p.69
 def corollaire_f_injective(g="G", f="F", a="A"):
     """⊢ (g∘f = Id_A) ⇒ f injective sur A.   (Corollaire, partie « f injective ».)
 
@@ -303,6 +309,7 @@ def corollaire_f_injective(g="G", f="F", a="A"):
     return retraction_implique_injective(g, f, a)
 
 
+# @livre Ch.II §3.8 Cor.- | E II.18 L.34-36 | PDF p.69
 def corollaire_g_injective(g="G", f="F", b="B"):
     """⊢ (f∘g = Id_B) ⇒ g injective sur B.   (Corollaire, partie « g injective ».)
 

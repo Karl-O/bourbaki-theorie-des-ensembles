@@ -48,6 +48,7 @@ def _eqsym(thm):
 
 
 # ── UNICITÉ de la section — forme VALEURS-IMAGES ──────────────────────────────
+# @livre Ch.II §3.8 Rem.- | E II.19 L.6-11 | PDF p.70
 def section_unique_par_image(s="S", sp="Sp", f="F", b="B"):
     """⊢_{S section de F sur B, S' section de F sur B}
         (∀y)(y∈B ⇒ f(s(y)) = f(s'(y))).   (Déf. 11, unicité au niveau des valeurs.)

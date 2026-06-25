@@ -76,6 +76,7 @@ def composee_intro(vG, vF, t1, t2, w, thm_fw, thm_wg):
     return N.modus_ponens(full, equivalence_arriere(inst))
 
 
+# @livre Ch.II §3.7 Demo.- | E II.16 L.32-33 | PDF p.67
 def composition_valeur(g="G", f="F", x="x"):
     """⊢ (g∘f)(x) = g(f(x))   sous {F fonctionnel, G fonctionnel, x∈dom F, f(x)∈dom G}.
 

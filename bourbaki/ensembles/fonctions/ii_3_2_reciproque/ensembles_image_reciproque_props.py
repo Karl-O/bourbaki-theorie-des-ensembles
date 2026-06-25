@@ -118,6 +118,7 @@ def cible_image_image_reciproque_inclus(f="f", y="Y"):
     return inclus(E.image(vf, E.image(E.reciproque(vf), vy)), vy)
 
 
+# @livre Ch.R §2.10 Prop.- | E.R.9 L.32-32 | PDF p.312
 def image_image_reciproque_inclus(f="f", y="Y"):
     """⊢ est_fonctionnel(f) ⇒ f⟨f⁻¹⟨Y⟩⟩ ⊂ Y.   (E.R.9, §2 item 10, formule (19).)
 

@@ -60,6 +60,7 @@ def cible_reciproque_compose_identite_valeur(f="F", a="A", x="x"):
     return impl(appartient(vx, vA), egal(rof, vx))
 
 
+# @livre Ch.II §3.7 Prop.7 | E II.17 L.32-33 | PDF p.68
 def reciproque_compose_identite_valeur(f="F", a="A", x="x"):
     """{F⁻¹ rétraction de F sur A, F⁻¹∘F fonctionnel, x∈domF, f(x)∈domF⁻¹}
         ⊢ (x ∈ A) ⇒ (F⁻¹∘F)(x) = x.

@@ -65,6 +65,7 @@ def composition_valeur_t(tG, tF, tx):
     return N.modus_ponens(eq1, symetrie(gfx, gof))      # (g∘f)(x) = g(f(x))
 
 
+# @livre Ch.II §3.3 Prop.4 | E II.12 L.5-6 | PDF p.63
 def composee_associee_droite_valeur(h="H", g="G", f="F", x="x"):
     """⊢ (h∘(g∘f))(x) = h(g(f(x))).   (réduction « à droite » au niveau des valeurs.)
 
@@ -84,6 +85,7 @@ def composee_associee_droite_valeur(h="H", g="G", f="F", x="x"):
     return composer_egalites(R1, cong)                  # (h∘(g∘f))(x) = h(g(f(x)))
 
 
+# @livre Ch.II §3.8 Def.11 | E II.18 L.37-39 | PDF p.69
 def retraction_compose_valeur(r="R", f="F", a="A", x="x"):
     """{est_retraction(R,F,A), F func, R func, x∈domF, f(x)∈domR} ⊢ (x∈A) ⇒ ((r∘f)(x) = x).
 
