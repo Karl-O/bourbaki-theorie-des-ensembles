@@ -157,3 +157,14 @@ capture-safe : freshir automatiquement le liant « plus petit/grand » s'il appa
 (via libres_f) ; OU a minima, dans `admet_borne_sup_inf`, passer un liant frais distinct de x/y/u pour
 le 6e arg. Puis re-aligner `reticule_implique_filtrant` (_bs/_bi + test) sur la nouvelle structure, et
 lancer la suite COMPLETE verte avant commit. theorie==22 inchange (correctif structurel de def, 0 axiome).
+
+**→ CORRIGE le 2026-06-26.** Option minimale retenue (perimetre PROUVE etroit : `est_reticule`/
+`admet_borne_sup_inf` ne sont consommes que par 3 fichiers — reticule_filtrant + 2 tests — TOUS dans
+`ordre/` ; `borne_superieure` n'est PAS modifie, donc ses appelants directs cardinaux/Zorn restent
+byte-identiques). `admet_borne_sup_inf` passe desormais un liant FRAIS `"mbs"`/`"mbi"` au 6e arg de
+borne_superieure/inferieure ; `reticule_implique_filtrant._bs/_bi` + `test_admet_borne_sup_inf_forme`
+re-alignes. CAPTURE ELIMINEE, verifiee par substitution : `admet(G,x,y,E)[y:=z] == admet(G,x,z,E)`
+(et idem x) -> le y/x de la paire est cohérent dans toute la formule, y compris la clause « plus petit
+majorant ». Non-regression : `tests/ordre/` ENTIER vert (Zorn + bornes_sup inclus), test reticule_filtrant
+vert (la preuve re-ferme avec les nouveaux liants), `theorie==22`. La fidelite de
+`reticule_implique_filtrant` est donc retablie (il assume desormais le vrai « reticule » de Bourbaki).

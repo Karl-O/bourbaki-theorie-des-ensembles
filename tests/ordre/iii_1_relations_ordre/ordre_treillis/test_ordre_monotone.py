@@ -77,7 +77,8 @@ def test_admet_borne_sup_inf_forme():
     P = E.paire(x, y)
     s, i = var("s"), var("i")
     cible = existe("s", existe("i",
-        et(borne_superieure(G, P, s, Es, "u"), borne_inferieure(G, P, i, Es, "u"))))
+        et(borne_superieure(G, P, s, Es, "u", "mbs"),
+           borne_inferieure(G, P, i, Es, "u", "mbi"))))
     assert M.admet_borne_sup_inf(G, x, y, Es) == cible
 
 

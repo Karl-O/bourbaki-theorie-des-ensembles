@@ -175,19 +175,21 @@ def reticule_implique_filtrant_droite_gauche(G="G", E_set="E", x="x", y="y"):
 
 # ── helpers locaux — bornes sup/inf aux liants par défaut, et un côté filtrant ──
 def _bs(G, A, m, E_set):
-    """borne_superieure(G,A,m,E) avec liants internes par défaut (u pour {x,y})."""
+    """borne_superieure(G,A,m,E) aux MÊMES liants que admet_borne_sup_inf : majorant
+    sur "u", « plus petit majorant » sur le liant frais "mbs" (cf. ANOMALIES capture)."""
     from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis.ensembles_ordre_relation import (
         borne_superieure,
     )
-    return borne_superieure(G, A, m, E_set, _U)
+    return borne_superieure(G, A, m, E_set, _U, "mbs")
 
 
 def _bi(G, A, m, E_set):
-    """borne_inferieure(G,A,m,E) avec liants internes par défaut (u pour {x,y})."""
+    """borne_inferieure(G,A,m,E) aux MÊMES liants que admet_borne_sup_inf : minorant
+    sur "u", « plus grand minorant » sur le liant frais "mbi" (cf. ANOMALIES capture)."""
     from bourbaki.ordre.iii_1_relations_ordre.ordre_treillis.ensembles_ordre_relation import (
         borne_inferieure,
     )
-    return borne_inferieure(G, A, m, E_set, _U)
+    return borne_inferieure(G, A, m, E_set, _U, "mbi")
 
 
 def _cote_filtrant(G, E_set, vx, vy, paire_xy, borne_thm, temoin, gauche):

@@ -165,9 +165,14 @@ def admet_borne_sup_inf(G, x, y, E_set="E", s="s", i="i", u="u"):
     vx, vy = _terme(x), _terme(y)
     P = E.paire(vx, vy)
     vs, vi = var(s), var(i)
+    # Liant FRAIS "mbs"/"mbi" pour le quantificateur « plus petit majorant / plus
+    # grand minorant » (6e arg de borne_superieure/inferieure).  SANS lui, le défaut
+    # "y" du 6e arg CAPTURE le y de la paire {x,y} ci-dessus : la clause « plus petit
+    # majorant » devient « ∀y (y majore {x,y} ⇒ …) » au lieu de « ∀m (m majore {x,y}
+    # ⇒ …) », rendant est_reticule MALFORMÉ (cf. docs/journal/ANOMALIES.md 2026-06-25).
     return existe(s, existe(i,
-        et(borne_superieure(G, P, vs, E_set, u),
-           borne_inferieure(G, P, vi, E_set, u))))
+        et(borne_superieure(G, P, vs, E_set, u, "mbs"),
+           borne_inferieure(G, P, vi, E_set, u, "mbi"))))
 
 
 # @livre Ch.III §1.11 Def.8 | E III.13 L.15-18 | PDF p.116
