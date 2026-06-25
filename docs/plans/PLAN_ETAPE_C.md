@@ -20,7 +20,7 @@ Re-verifier l'absence (grep) au debut de chaque delegation (un import reussi ne 
 - lemmes: tactiques_prop.py (equivalence_reflexive L.78) ; formule.py (coll L.125) ; N.generalisation/s5/modus_ponens (usages s5 : cardinaux/arithmetique/iii_3_3_produit/ensembles_arith_cardinale.py L.468-472)
 - fichier: bourbaki/ensembles/ii_1_axiomes_algebre/ensembles_appartenance_coll.py
 
-## [ ] reticule_implique_filtrant_droite_gauche  (faible/facile)  [secteur III.1.11]
+## [x] reticule_implique_filtrant_droite_gauche  (faible/facile)  [secteur III.1.11]  — FAIT (commit ci-dessous ; test 4 passed, theorie==22)
 - repere: E III.13 (Remarque apres Def.8) | PDF p.116
 - statut: MANQUANT (grep 'reticule.*filtrant' = 0)
 - enonce: `{ est_reticule(G,E) } |- ( filtrant_droite_G(G,E) et filtrant_gauche_G(G,E) )`. Bourbaki : « Un ensemble ordonne reticule est evidemment filtrant a droite et a gauche. »
