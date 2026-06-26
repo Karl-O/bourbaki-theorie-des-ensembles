@@ -5,6 +5,7 @@ Une relation R{x,y} est une fonction Python (Terme, Terme) → Formule (cf. §II
 Théorèmes :
  - ordre_oppose_est_ordre        : R ordre ⟹ R^op ordre        (§1.1, Exemple 3)
  - preordre_oppose_est_preordre  : R préordre ⟹ R^op préordre  (§1.2)
+ - preordre_equivalence_associee : R préordre ⟹ S=R∧R^op équivalence (§1.2, E III.3)
  - unicite_plus_grand_element    : antisym. ⟹ ≤ 1 plus grand élt (§1.7)
  - unicite_plus_petit_element    : antisym. ⟹ ≤ 1 plus petit élt (§1.7, dual)
  - plus_grand_est_maximal        : plus grand élt ⟹ élt maximal  (§1.6-1.7)
@@ -98,6 +99,52 @@ def preordre_oppose_est_preordre(R, x="x", y="y", z="z"):
     op_ref = N.generalisation(x, N.generalisation(y, op_ref_body))
 
     return N.loi_deduction(hyp, conjonction_intro(op_tr, op_ref))
+
+
+# ── §III.1.2 — la relation associée à un préordre est une équivalence ─────────
+# @livre Ch.III §1.2 Rem.- | E III.3 L.16-18 | PDF p.106
+def preordre_equivalence_associee(R, x="x", y="y", z="z"):
+    """⊢ est_relation_preordre(R) ⇒ est_relation_equivalence(S), S{x,y}:=R{x,y} et R{y,x}.
+
+    « Si R{x,y} est une relation de préordre dans un ensemble E, la relation
+    S{x,y} = (R{x,y} et R{y,x}) est une relation d'équivalence dans E. »  (E.III.1.2,
+    p.106 ; « Mais en tout cas la relation (R{x,y} et R{y,x}) est une relation
+    d'équivalence S{x,y} ».)
+
+    PREUVE (purement logique ; aucun axiome ; theorie==22) :
+      • S SYMÉTRIQUE — sans hypothèse sur R : S{x,y}=(R{x,y} et R{y,x}) ⇒ (R{y,x} et
+        R{x,y})=S{y,x} par simple commutation de la conjonction.
+      • S TRANSITIVE — via la transitivité de R (conjonct gauche du préordre) : de
+        S{x,y} et S{y,z} on extrait R{x,y},R{y,x},R{y,z},R{z,y} ; transitivité de R en
+        (x,y,z) donne R{x,z}, en (z,y,x) donne R{z,x} ; d'où S{x,z}=(R{x,z} et R{z,x}).
+      La réflexivité du préordre N'intervient PAS (équivalence II.6.1 = sym. ∧ trans.) ;
+      la transitivité de S exige RÉELLEMENT celle de R (pas de tautologie déguisée)."""
+    S = lambda a, b: et(R(a, b), R(b, a))            # relation associée S = R ∧ R^op
+    vx, vy, vz = var(x), var(y), var(z)
+    hyp = E.est_relation_preordre(R, x, y, z)
+    H = N.assume(hyp)
+    Htr = conjonction_elim_gauche(H)                 # ordre_transitif(R) = est_transitive(R)
+
+    # (1) S symétrique : (∀x)(∀y)(S{x,y} ⇒ S{y,x}) — pur, hors hypothèse sur R.
+    hS = N.assume(S(vx, vy))                          # S{x,y} = R{x,y} et R{y,x}
+    sym_swap = conjonction_intro(conjonction_elim_droite(hS),
+                                 conjonction_elim_gauche(hS))   # R{y,x} et R{x,y} = S{y,x}
+    sym_body = N.loi_deduction(S(vx, vy), sym_swap)   # S{x,y} ⇒ S{y,x}
+    sym_S = N.generalisation(x, N.generalisation(y, sym_body))
+
+    # (2) S transitive : (∀x)(∀y)(∀z)((S{x,y} et S{y,z}) ⇒ S{x,z}).
+    hT = N.assume(et(S(vx, vy), S(vy, vz)))
+    Sxy = conjonction_elim_gauche(hT); Syz = conjonction_elim_droite(hT)
+    Rxy = conjonction_elim_gauche(Sxy); Ryx = conjonction_elim_droite(Sxy)
+    Ryz = conjonction_elim_gauche(Syz); Rzy = conjonction_elim_droite(Syz)
+    Rxz = N.modus_ponens(conjonction_intro(Rxy, Ryz), _inst3(Htr, vx, vy, vz))  # R{x,z}
+    Rzx = N.modus_ponens(conjonction_intro(Rzy, Ryx), _inst3(Htr, vz, vy, vx))  # R{z,x}
+    tr_body = N.loi_deduction(et(S(vx, vy), S(vy, vz)),
+                              conjonction_intro(Rxz, Rzx))       # (S{x,y} et S{y,z}) ⇒ S{x,z}
+    tr_S = N.generalisation(x, N.generalisation(y, N.generalisation(z, tr_body)))
+
+    concl = conjonction_intro(sym_S, tr_S)            # est_relation_equivalence(S)
+    return N.loi_deduction(hyp, concl)                # ⊢ préordre(R) ⇒ équivalence(S)
 
 
 # ── §III.1.7 — unicité du plus grand / plus petit élément ─────────────────────
@@ -216,6 +263,7 @@ def _inst_inclus(thm_sub, t):
 
 
 __all__ = ["ordre_oppose_est_ordre", "preordre_oppose_est_preordre",
+           "preordre_equivalence_associee",
            "unicite_plus_grand_element", "unicite_plus_petit_element",
            "plus_grand_est_maximal", "plus_petit_est_minimal",
            "minorant_partie", "majorant_partie"]

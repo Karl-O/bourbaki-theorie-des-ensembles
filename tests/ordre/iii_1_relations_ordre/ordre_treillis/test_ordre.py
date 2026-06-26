@@ -27,6 +27,18 @@ def test_preordre_oppose_est_preordre():
     assert th.conclusion == cible
 
 
+# ── §1.2, E III.3 — la relation associée à un préordre est une équivalence ────
+def test_preordre_equivalence_associee():
+    th = O.preordre_equivalence_associee(_R)
+    assert th.est_clos                              # ⊢ préordre(R) ⇒ équivalence(S), clos
+    assert len(E.theorie_ensembles().axiomes) == 22  # aucun axiome créé
+    S = lambda a, b: et(_R(a, b), _R(b, a))         # S = R ∧ R^op (reconstruit indépendamment)
+    cible = impl(E.est_relation_preordre(_R), E.est_relation_equivalence(S))
+    assert th.conclusion == cible                   # conclusion == cible LITTÉRALE
+    # non-trivial : antécédent et conséquent distincts (pas un P⇒P)
+    assert E.est_relation_preordre(_R) != E.est_relation_equivalence(S)
+
+
 # ── §1.7 — unicité du plus grand / plus petit élément ─────────────────────────
 def test_unicite_plus_grand_element():
     th = O.unicite_plus_grand_element(_R)
