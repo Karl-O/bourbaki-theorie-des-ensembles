@@ -31,6 +31,17 @@ théorème, vérif indépendante (cible reconstruite depuis primitives BRUTES) A
 - **Prop.11 (E III.14) « strictement monotone ⇒ injective »** : déclaré « absent » par l'agent C, mais
   EXISTE et est CLOS : `ordre_treillis/ensembles_ordre_treillis_props.py:656` (`strictement_monotone_injective_graphe`,
   + variantes croissante/décroissante). Leçon : re-vérifier chaque « absent ».
+- **Définition des 4 types d'intervalle (E III.14)** : déclarée « absente » par l'agent C, mais les
+  4 types EXISTENT — `intervalle_ferme`/`intervalle_ouvert` (`ensembles_abrege.py:664,669`),
+  `intervalle_semi_ouvert_droite`/`_gauche` (`ordre_treillis/ensembles_ordre_vocab.py:70,76`), + variantes
+  illimitées. 2e faux positif de l'agent C → les agents d'audit SUR-DÉCLARENT « absent » massivement.
+
+## BILAN §1 (2026-06-26) : essentiellement CLOS.
+Agent B (E III.6–10) : 0 absent. Agents A/C (E III.1–5, 11–14) : la quasi-totalité des « absents » sont
+des faux positifs (Prop.11, intervalles présents) OU des fidélité-@livre (faits) OU 1 vraie cible faite
+(preordre→équivalence). Reste : candidats doutex (C58) / lourds (familles sup indexées). → Pour le
+prochain lot, AUDITER UNE SECTION MOINS COUVERTE (Chap III §3 cardinaux, §5 entiers, §7 limites) plutôt
+que §1 ; toujours re-vérifier chaque « absent » par grep+Read avant d'implémenter.
 
 ## Cibles candidates À VÉRIFIER (absence non confirmée — re-grep + Read avant de déléguer)
 - **C58 / conditions (RO_I–RO_IV)** [E III.4] : l'agent A donne une transcription DOUTEUSE des
