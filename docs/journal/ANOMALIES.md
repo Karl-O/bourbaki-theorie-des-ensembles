@@ -168,3 +168,17 @@ re-alignes. CAPTURE ELIMINEE, verifiee par substitution : `admet(G,x,y,E)[y:=z] 
 majorant ». Non-regression : `tests/ordre/` ENTIER vert (Zorn + bornes_sup inclus), test reticule_filtrant
 vert (la preuve re-ferme avec les nouveaux liants), `theorie==22`. La fidelite de
 `reticule_implique_filtrant` est donc retablie (il assume desormais le vrai « reticule » de Bourbaki).
+
+## 2026-06-26 — Ecart de fidelite (mineur, documente) : heritage ordre point-par-point (E III.6)
+
+`iii_1_6_ordre_produit/ensembles_ordre_applications.py` formalise la DEF `ordre_pointwise`
+(f<=g <=> (∀x∈E) f(x)<=g(x), E III.6, **presente VERBATIM** sur la page) + deux HERITAGES :
+reflexivite et transitivite, chacun CLOS sous `{ est_ordre(GF,F) }` (verif independante :
+conclusion==cible reconstruite depuis primitives, hyps=={est_ordre}, est_clos=False, theorie==22).
+
+**Ecart :** Bourbaki affirme sur E III.6 que l'ordre produit « est une relation d'ordre, comme on le
+verifie aisement », SANS detailler separement reflexivite et transitivite pour le cas point-par-point.
+Les deux theoremes d'heritage sont donc un **developpement fidele** du « c'est un ordre » du livre, pas
+la citation d'une Remarque dediee. Leur `@livre` pointe honnetement vers ce « comme on le verifie
+aisement » (E III.6 L.31-33) plutot que vers un enonce Rem. distinct. Pas de sur-attribution : la DEF,
+elle, est litterale. Antisymetrie globale (extensionnalite des applications) volontairement HORS scope.

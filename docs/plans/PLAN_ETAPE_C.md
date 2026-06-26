@@ -44,7 +44,7 @@ Re-verifier l'absence (grep) au debut de chaque delegation (un import reussi ne 
 - lemmes: iii_1_5_applications_croissantes/ensembles_prop2_galois.py (galois_uvu_egale_u = patron miroir + helpers) ; ensembles_ordre_monotone.py (est_decroissante) ; ensembles_ordre_relation.py (antisymetrie) ; tactiques_abrege_egalite.py (composer_egalites)
 - fichier: bourbaki/ordre/iii_1_relations_ordre/iii_1_5_applications_croissantes/ensembles_prop2_galois_dual.py
 
-## [ ] ordre_applications_pointwise  (faible/moyen)  [secteur III.1.6]
+## [x] ordre_applications_pointwise  (faible/moyen)  [secteur III.1.6]  — FAIT (2026-06-26 ; déf ordre_pointwise + héritage réfl/trans clos sous {est_ordre} ; verif indep concl==cible, theorie==22 ; écart fidélité héritage = ANOMALIES 2026-06-26 ; antisym hors scope)
 - repere: E III.6 (Remarque, ordre sur F(E;F)) ; cf E III.13 Ex.4 | PDF p.109, p.116
 - statut: MANQUANT (grep 0)
 - enonce: definir `ordre_pointwise(GF,F,f,g,E) := (∀x)(x∈E => (f(x),g(x))∈GF)` PUIS prouver heritage REFLEXIVITE `{est_ordre(GF,F)} |- (∀f)((∀x)(x∈E=>f(x)∈F) => ordre_pointwise(GF,F,f,f,E))` et TRANSITIVITE `{est_ordre(GF,F)} |- (ordre_pointwise(f,g) et ordre_pointwise(g,h)) => ordre_pointwise(f,h)`. Bourbaki E III.6 : f<=g <=> (∀x∈E) f(x)<=g(x).
