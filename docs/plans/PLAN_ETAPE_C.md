@@ -60,7 +60,7 @@ Re-verifier l'absence (grep) au debut de chaque delegation (un import reussi ne 
 - lemmes: fonctions/ii_3_3_composee_graphes/ensembles_composee.py (couple_composee L.35 ; image_composee L.68 patron) ; ensembles_abrege.py (composee, AXIOME_COMPOSEE, inclus) ; N.assume/instancie/loi_deduction/generalisation/existe_temoin
 - fichier: bourbaki/ensembles/ii_3_correspondances/ii_3_reciproque_composee/ensembles_composee_monotone.py
 
-## [ ] totalement_ordonne_implique_reticule  (moyen)  [secteur III.1.12]  — DEBLOQUE (bug capture est_reticule corrige 2026-06-26) ; faisable maintenant
+## [x] totalement_ordonne_implique_reticule  (moyen)  [secteur III.1.12]  — FAIT (2026-06-26 ; E III.14 ; 10 passed, theorie==22 ; verif indep : conclusion==est_reticule, hyps=={est_ordre,totalite}, sans parasite/vacuite)
 - repere: E III.14 (Remarque apres Ex. Def.9) | PDF p.117
 - statut: MANQUANT (grep 0)
 - enonce: `{ est_ordre(G,E), totalite(G,E) } |- est_reticule(G,E)`, totalite=(∀x∀y)((x∈E et y∈E)=>((x,y)∈G ou (y,x)∈G)). Bourbaki E III.14 : « Un ensemble totalement ordonne est reticule et a fortiori filtrant a droite et a gauche. »
