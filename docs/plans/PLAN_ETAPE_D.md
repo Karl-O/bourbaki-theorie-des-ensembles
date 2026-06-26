@@ -40,7 +40,7 @@ thématiques `bourbaki/ensembles/` (ii_1_algebre_booleenne / ii_1 selon le thèm
 - enonce: `|- ( (Z⊂X) et (Z⊂Y) ) ⇔ (Z ⊂ X∩Y)`  et  `|- ( (X⊂Z) et (Y⊂Z) ) ⇔ (X∪Y ⊂ Z)`.
 - note audit: absent au niveau binaire (existe en version FAMILLES ii_4 sup/inf univ — possible spécialisation). VÉRIFIER d'abord si dérivable trivialement de la version familles.
 
-## [ ] resume_trace  [E.R.5 n°16 | PDF p.308]
+## [x] resume_trace  [E.R.5 n°16 | PDF p.308]  — FAIT (2026-06-26 ; déf trace(X,A)=A∩X + 3 identités : (1)∪-distrib clos, (2)∩ clos (idempotence), (3)∁ sous {inclus(A,E)} honnête ; verif indep concls==cibles, theorie==22, pur 22-ax ; ii_1_algebre_booleenne/ 8→9)
 - enonce: déf `trace(X,A) := A∩X` + identités `(X∪Y)_A=X_A∪Y_A`, `(X∩Y)_A=X_A∩Y_A`, `∁_A X_A=(∁_E X)_A`.
 - note audit: absent (déf + 3 props, NOUVELLE). Plus lourd (une déf + 3 lemmes) — découper.
 
