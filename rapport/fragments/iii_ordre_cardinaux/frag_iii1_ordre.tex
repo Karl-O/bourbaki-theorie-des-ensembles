@@ -72,3 +72,17 @@ sens~$\Leftarrow$ par témoin. \emph{Fidélité} : le strict $c<x$ ($c\neq x$) e
 $E=\{0,1,2\}$) et le noyau la refuse (cf.\ \texttt{DECISIONS.md}).
 
 \textbf{Statut.} CLOS sous $3$ hypothèses honnêtes.
+
+\subsection{§III.1.2 --- Relation d'équivalence associée à un préordre}
+\textbf{Énoncé (Bourbaki, E~III.3).} « Si $R\{x,y\}$ est une relation de préordre dans $E$,
+la relation $S\{x,y\}=(R\{x,y\}\ \text{et}\ R\{y,x\})$ est une relation d'équivalence dans $E$. »
+
+\textbf{Formalisé (CLOS).} $\vdash\mathrm{est\_relation\_preordre}(R)\Rightarrow
+\mathrm{est\_relation\_equivalence}(S)$, $S:=R\wedge R^{\mathrm{op}}$. Module :
+\texttt{.../iii\_1\_relations\_ordre/ordre\_treillis/ensembles\_ordre.py}.
+
+\textbf{Preuve (\Nstar).} $S$ symétrique $=$ commutation de la conjonction (\emph{sans} hypothèse) ;
+$S$ transitive $=$ transitivité de $R$ instanciée en $(x,y,z)$ et $(z,y,x)$. La réflexivité du
+préordre n'intervient pas (équivalence II.6.1 $=$ sym.\ $\wedge$ trans.).
+
+\textbf{Statut.} CLOS (implication close) ; \texttt{theorie\_ensembles()==22}.

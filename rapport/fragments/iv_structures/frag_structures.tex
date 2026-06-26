@@ -119,3 +119,23 @@ tautologie $P\Leftrightarrow P$
 \emph{hors} de l'interface publique (\texttt{\_\_all\_\_}) : il n'est jamais
 présenté comme le critère $(\mathrm{MO}_{\mathrm{III}})$, conformément à la règle
 « aucune tautologie déguisée en théorème » (cf.\ annexe, Journal des erreurs).
+
+\subsection{§IV.2 --- CST8 : un morphisme inversible est un isomorphisme}
+\textbf{Énoncé (Bourbaki, E~IV.12, §2.1).} « Soit $f$ un $\sigma$-morphisme de $E$ dans $E'$,
+$g$ un $\sigma$-morphisme de $E'$ dans $E$. Si $g\circ f=\mathrm{Id}_E$ et $f\circ g=\mathrm{Id}_{E'}$,
+$f$ est un isomorphisme de $E$ sur $E'$ et $g$ l'isomorphisme réciproque. »
+
+\textbf{Formalisé.} $\{\,\mathrm{morph}(E,\mathscr S,E',\mathscr S',f),\
+\mathrm{morph}(E',\mathscr S',E,\mathscr S,g),\ g=f^{-1}\,\}\vdash
+\mathrm{est\_iso\_morph}(E,\mathscr S,E',\mathscr S',f)$. L'inversibilité bilatère
+$g\circ f=\mathrm{Id}$, $f\circ g=\mathrm{Id}$ est résumée fidèlement par son conséquent
+$g=f^{-1}$ (corollaire II, p.\,18, brique reportée comme CST3/12/20). Module :
+\texttt{.../iv\_2\_morphismes\_structures\_derivees/ensembles\_cst8\_inversible\_iso.py}.
+
+\textbf{Preuve (\Nstar).} $S6$/Leibniz réécrit $\mathrm{morph}(\dots,g)$ en
+$\mathrm{morph}(\dots,f^{-1})$ ; conjonction avec $\mathrm{morph}(\dots,f)$. \emph{Fidélité} :
+le \emph{vrai} CST8 (E~IV.12, §2.1) était \emph{absent} --- les fonctions code nommées « CST8 »
+encodaient en réalité l'unicité de la solution universelle (§IV.3.1, E~IV.23) ; l'étiquette
+\texttt{@livre} fautive a été corrigée.
+
+\textbf{Statut.} CLOS sous $3$ hypothèses ; \texttt{theorie\_ensembles()==22}.

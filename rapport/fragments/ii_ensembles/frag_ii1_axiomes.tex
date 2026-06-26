@@ -32,3 +32,20 @@ membre). Sens $\Leftarrow$ via \texttt{complement\_involution} ($\complement\com
 qui porte l'hypothèse honnête $X\subset E$) réécrite par congruence $S6$.
 
 \textbf{Statut.} CLOS sous $\{A\subset E,\ B\subset E\}$ ; \texttt{theorie\_ensembles()==22}.
+
+\subsection{§II.1 --- Théorèmes de l'ensemble vide}
+\textbf{Énoncé (Bourbaki, E~II.6, nº7).} « On a les théorèmes $x\notin\emptyset$,
+$\emptyset\subset X$, [\dots] ; la relation $X\subset\emptyset$ est équivalente à
+$X=\emptyset$. Si $R\{x\}$ est une relation, $(\forall x)((x\in\emptyset)\Rightarrow R\{x\})$
+est vraie. »
+
+\textbf{Formalisé (CLOS).} Trois théorèmes nommés, jusqu'ici seulement dérivés \emph{inline} :
+$\vdash\emptyset\subset X$ (\texttt{vide\_inclus\_partout}), $\vdash(X\subset\emptyset)
+\Leftrightarrow(X=\emptyset)$ (\texttt{sous\_ensemble\_vide\_ssi\_egal}), et
+$\vdash(\forall x)((x\in\emptyset)\Rightarrow R\{x\})$ (\texttt{vacuite\_sur\_vide}). Module :
+\texttt{.../ii\_1\_axiomes\_algebre/ensembles\_vide.py}.
+
+\textbf{Preuve (\Nstar).} \emph{Ex falso} sur l'axiome du vide ($\neg(z\in\emptyset)$ par $S2$) ;
+le sens $\Rightarrow$ de l'équivalence par extensionnalité $A1$, le sens $\Leftarrow$ par Leibniz $S6$.
+
+\textbf{Statut.} CLOS ; \texttt{theorie\_ensembles()==22}.

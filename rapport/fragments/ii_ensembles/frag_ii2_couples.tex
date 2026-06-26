@@ -11,3 +11,12 @@
 inline. Le piège de capture (les lettres $x,y$ de l'énoncé coïncident avec les liants
 $\tau$ de $\mathrm{pr}_1,\mathrm{pr}_2$) est levé par des \emph{témoins canoniques}
 (variables libres $\subseteq\{z\}$). Module : \texttt{.../ii\_2\_couples\_produit/ensembles\_couple\_caracterisation.py}.
+
+\subsection{§II.2 --- $z=(\mathrm{pr}_1 z,\mathrm{pr}_2 z)\Leftrightarrow z$ couple}
+\textbf{Énoncé (Bourbaki, E~II.7).} « La relation $z=(\mathrm{pr}_1(z),\mathrm{pr}_2(z))$
+est équivalente à "$z$ est un couple". »
+
+\textbf{Formalisé (CLOS).} Corollaire de la caractérisation précédente, instanciée en
+$x:=\mathrm{pr}_1 z$ et $y:=\mathrm{pr}_2 z$ : le membre droit $\bigl(z\text{ couple}\wedge
+\mathrm{pr}_1 z=\mathrm{pr}_1 z\wedge\mathrm{pr}_2 z=\mathrm{pr}_2 z\bigr)$ se réduit à
+« $z$ couple » par réflexivité des deux égalités. \texttt{couple\_egal\_projections}.
