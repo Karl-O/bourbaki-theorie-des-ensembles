@@ -1,7 +1,7 @@
 # Carte de couverture `@livre`
 
-- Marqueurs : **892**
-- Trous intra-page potentiels : **170**
+- Marqueurs : **908**
+- Trous intra-page potentiels : **178**
 
 | Chap | Repère | PDF | Lignes | § | Type | Notion |
 |------|--------|-----|--------|---|------|--------|
@@ -127,6 +127,12 @@
 | I | E I.35 | p.35 | L.21-25 | 4.3 | Crit.34 | `existe_commute` |
 | I | E I.36 | p.36 | L.23-24 | 4.4 | Crit.35 | `c35` |
 | I | E I.37 | p.37 | L.15-18 | 4.4 | Crit.38 | `c38_1` |
+| I | E I.37 | p.37 | L.18-26 | 4.4 | Crit.39 | `c39_existe_typique` |
+| I | E I.37 | p.37 | L.18-26 | 4.4 | Crit.39 | `c39_pourtout_typique` |
+| I | E I.37 | p.37 | L.28-33 | 4.4 | Crit.40 | `c40_existe_typique` |
+| I | E I.37 | p.37 | L.28-33 | 4.4 | Crit.40 | `c40_pourtout_typique` |
+| I | E I.37 | p.37 | L.35-41 | 4.4 | Crit.42 | `c42_existe_typique` |
+| I | E I.37 | p.37 | L.35-41 | 4.4 | Crit.42 | `c42_pourtout_typique` |
 | I | E I.38 | p.38 | L.20-21 | 5.1 | Sch.6 | `s6` |
 | I | E I.38 | p.38 | L.22-24 | 5.1 | Sch.7 | `s7` |
 | I | E I.39 | p.39 | L.22-28 | 5.2 | Th.1 | `reflexivite` |
@@ -138,12 +144,15 @@
 | I | E I.40 | p.40 | L.1-4 | 5.2 | Th.3 | `transitivite` |
 | I | E I.40 | p.40 | L.5-7 | 5.2 | Crit.44 | `congruence_terme` |
 | I | E I.40 | p.40 | L.5-7 | 5.2 | Crit.44 | `c44` |
+| I | E I.40 | p.40 | L.34-46 | 5.3 | Def.- | `relation_univoque_x` |
+| I | E I.41 | p.41 | L.5-13 | 5.3 | Crit.45 | `c45_avant` |
 | II | E II.2 | p.53 | L.30-30 | 1.2 | Prop.1 | `inclusion_reflexive` |
 | II | E II.2 | p.53 | L.33-33 | 1.2 | Prop.2 | `inclusion_transitive` |
 | II | E II.3 | p.54 | L.1-2 | 1.3 | Ax.A1 | `extensionnalite_appliquee` |
 | II | E II.3 | p.54 | L.8-15 | 1.4 | Crit.C48 | `egalite_par_extension` |
 | II | E II.3 | p.54 | L.8-15 | 1.4 | Crit.C48 | `unicite_par_extension` |
 | II | E II.3 | p.54 | L.30-31 | 1.4 | Ex.2 | `non_collectivisante_appartenance_propre` |
+| II | E II.3 | p.54 | L.45-45 | 1.4 | Ex.1 | `appartenance_collectivisante` |
 | II | E II.4 | p.55 | L.16-16 | 1.5 | Ax.A2 | `existence_paire` |
 | II | E II.4 | p.55 | L.19-20 | 1.5 | Def.2 | `unicite_paire` |
 | II | E II.4 | p.55 | L.21-22 | 1.5 | Def.2 | `appartient_paire_gauche` |
@@ -151,6 +160,7 @@
 | II | E II.4 | p.55 | L.21-22 | 1.5 | Def.2 | `commutativite_paire` |
 | II | E II.4 | p.55 | L.27-29 | 1.5 | Def.2 | `appartient_singleton` |
 | II | E II.4 | p.55 | L.29-29 | 1.5 | Def.2 | `appartient_singleton_inclus` |
+| II | E II.6 L.34-35 → E II.7 | p.57 | L.1-2 | 1.7 | Rem.- | `pas_ensemble_universel` |
 | II | E II.6 | p.57 | L.14-17 | 1.7 | Rem.- | `intersection_difference_associe` |
 | II | E II.6 | p.57 | L.14-17 | 1.7 | Rem.- | `difference_reunion` |
 | II | E II.6 | p.57 | L.14-17 | 1.7 | Rem.- | `difference_vide_neutre` |
@@ -210,6 +220,7 @@
 | II | E II.12 | p.63 | L.5-14 | 3.3 | Prop.4 | `composee_associative` |
 | II | E II.12 | p.63 | L.18-19 | 3.3 | Prop.5 | `image_composee` |
 | II | E II.12 | p.63 | L.18-19 | 3.3 | Prop.5 | `image_composee_membre` |
+| II | E II.13 | p.64 | L.3-5 | 3.3 | Rem.- | `composee_monotone` |
 | II | E II.13 | p.64 | L.10-13 | 3.3 | Def.7 | `correspondance_composee` |
 | II | E II.13 | p.64 | L.10-13 | 3.3 | Def.7 | `correspondance_composee_simple` |
 | II | E II.13 | p.64 | L.18-19 | 3.4 | Def.8 | `graphe_identite` |
@@ -489,6 +500,9 @@
 | II | E.R.12 | p.315 | L.28-29 | R.3 | Prop.26 | `couple_decomposition` |
 | III | E III.2 | p.105 | L.19-36 | 1.2 | Prop.1 | `caracterisation_ordre_sens_direct` |
 | III | E III.2 | p.105 | L.19-36 | 1.2 | Prop.1 | `proposition1_equivalence` |
+| III | E III.6 | p.109 | L.31-33 | 1.6 | Rem.- | `pointwise_reflexif` |
+| III | E III.6 | p.109 | L.31-33 | 1.6 | Rem.- | `pointwise_transitif` |
+| III | E III.6 | p.109 | L.41-49 | 1.6 | Rem.- | `ordre_pointwise` |
 | III | E III.7 L.45-46 (énoncé) ; preuve E III.8 | p.110 | L.1-7 | 1.5 | Prop.2 | `galois_uvu_egale_u` |
 | III | E III.8 | p.111 | L.10-12 | 1.6 | Def.3 | `element_maximal` |
 | III | E III.8 | p.111 | L.10-12 | 1.6 | Def.3 | `element_minimal` |
@@ -519,8 +533,10 @@
 | III | E III.12 | p.115 | L.20-26 | 1.9 | Prop.9 | `sup_induit_sur_partie` |
 | III | E III.13 | p.116 | L.6-9 | 1.10 | Prop.10 | `maximal_filtrant_est_plus_grand` |
 | III | E III.13 | p.116 | L.15-18 | 1.11 | Def.8 | `est_reticule` |
+| III | E III.13 | p.116 | L.19-21 | 1.11 | Rem.- | `reticule_implique_filtrant_droite_gauche` |
 | III | E III.13 | p.116 | L.31-34 | 1.12 | Def.9 | `totalement_ordonne` |
 | III | E III.14 | p.117 | L.10-11 | 1.12 | Ex.1 | `totalement_ordonne_partie` |
+| III | E III.14 | p.117 | L.23-24 | 1.12 | Rem.- | `totalement_ordonne_implique_reticule` |
 | III | E III.14 | p.117 | L.27-31 | 1.13 | Def.- | `axiome_intervalle_ferme` |
 | III | E III.14 | p.117 | L.27-31 | 1.12 | Prop.11 | `strictement_monotone_injective_graphe` |
 | III | E III.14 | p.117 | L.27-37 | 1.12 | Prop.12 | `borne_sup_critere_total` |
@@ -889,10 +905,10 @@
 | R | E.R.4 | p.307 | L.25-25 | 1.14 | Prop.(6) | `commutativite_intersection` |
 | R | E.R.4 | p.307 | L.26-26 | 1.14 | Prop.(7) | `inclusion_reunion_gauche` |
 | R | E.R.4 | p.307 | L.26-26 | 1.14 | Prop.(7) | `inclusion_intersection_gauche` |
-| R | E.R.4 | p.307 | L.27-27 | 1.14 | Prop.(8) | `de_morgan_complement_reunion` |
-| R | E.R.4 | p.307 | L.27-27 | 1.14 | Prop.(8) | `de_morgan_complement_intersection` |
 | R | E.R.4 | p.307 | L.27-27 | 1.14 | Prop.(8) | `de_morgan_reunion` |
 | R | E.R.4 | p.307 | L.27-27 | 1.14 | Prop.(8) | `de_morgan_inter` |
+| R | E.R.4 | p.307 | L.27-27 | 1.14 | Prop.(8) | `de_morgan_complement_reunion` |
+| R | E.R.4 | p.307 | L.27-27 | 1.14 | Prop.(8) | `de_morgan_complement_intersection` |
 | R | E.R.4 | p.307 | L.28-30 | 1.14 | Prop.(d) | `inclusion_ssi_intersection_egale` |
 | R | E.R.4 | p.307 | L.28-30 | 1.14 | Prop.(d) | `inclusion_ssi_reunion_egale` |
 | R | E.R.9 | p.312 | L.31-31 | 2.10 | Prop.- | `inclus_image_reciproque_image` |
@@ -920,13 +936,18 @@
 - **Ch.I PDF p.33** : L.12-29 non couvert (entre `s5` et `c29`)
 - **Ch.I PDF p.34** : L.12-19 non couvert (entre `instanciation` et `monotonie_existe`)
 - **Ch.I PDF p.35** : L.13-20 non couvert (entre `et_existe_gauche` et `c34_pour_tout`)
+- **Ch.I PDF p.37** : L.27-27 non couvert (entre `c39_pourtout_typique` et `c40_existe_typique`)
+- **Ch.I PDF p.37** : L.34-34 non couvert (entre `c40_pourtout_typique` et `c42_existe_typique`)
 - **Ch.I PDF p.39** : L.29-29 non couvert (entre `reflexivite` et `reflexivite_terme`)
 - **Ch.I PDF p.39** : L.31-32 non couvert (entre `reflexivite_terme` et `symetrie`)
+- **Ch.I PDF p.40** : L.8-33 non couvert (entre `c44` et `relation_univoque_x`)
 - **Ch.II PDF p.53** : L.31-32 non couvert (entre `inclusion_reflexive` et `inclusion_transitive`)
 - **Ch.II PDF p.54** : L.3-7 non couvert (entre `extensionnalite_appliquee` et `egalite_par_extension`)
 - **Ch.II PDF p.54** : L.16-29 non couvert (entre `unicite_par_extension` et `non_collectivisante_appartenance_propre`)
+- **Ch.II PDF p.54** : L.32-44 non couvert (entre `non_collectivisante_appartenance_propre` et `appartenance_collectivisante`)
 - **Ch.II PDF p.55** : L.17-18 non couvert (entre `existence_paire` et `unicite_paire`)
 - **Ch.II PDF p.55** : L.23-26 non couvert (entre `commutativite_paire` et `appartient_singleton`)
+- **Ch.II PDF p.57** : L.3-13 non couvert (entre `pas_ensemble_universel` et `intersection_difference_associe`)
 - **Ch.II PDF p.57** : L.23-28 non couvert (entre `antitonie_complement` et `vide_ssi_sans_element`)
 - **Ch.II PDF p.58** : L.10-13 non couvert (entre `paire_cancellation` et `est_couple`)
 - **Ch.II PDF p.58** : L.15-16 non couvert (entre `est_couple` et `tau_egal`)
@@ -939,6 +960,7 @@
 - **Ch.II PDF p.62** : L.25-26 non couvert (entre `correspondance_reciproque` et `couple_composee`)
 - **Ch.II PDF p.63** : L.3-4 non couvert (entre `reciproque_composee` et `composee_associee_droite_valeur`)
 - **Ch.II PDF p.63** : L.15-17 non couvert (entre `composee_associative` et `image_composee`)
+- **Ch.II PDF p.64** : L.6-9 non couvert (entre `composee_monotone` et `correspondance_composee`)
 - **Ch.II PDF p.64** : L.14-17 non couvert (entre `correspondance_composee_simple` et `graphe_identite`)
 - **Ch.II PDF p.64** : L.22-23 non couvert (entre `application_identique` et `valeur_dans_graphe`)
 - **Ch.II PDF p.64** : L.30-31 non couvert (entre `est_une_fonction` et `valeur_caracterisation`)
@@ -985,6 +1007,7 @@
 - **Ch.II PDF p.98** : L.19-26 non couvert (entre `classe_objets_unicite` et `ensemble_classes_objets`)
 - **Ch.II PDF p.315** : L.15-19 non couvert (entre `produit_egalite_par_couples` et `couple_dans_produit_distrib_reunion_premier_facteur`)
 - **Ch.II PDF p.315** : L.24-27 non couvert (entre `produit_inter_ensembliste` et `couple_decomposition`)
+- **Ch.III PDF p.109** : L.34-40 non couvert (entre `pointwise_transitif` et `ordre_pointwise`)
 - **Ch.III PDF p.111** : L.13-23 non couvert (entre `element_minimal` et `unicite_plus_grand_element`)
 - **Ch.III PDF p.111** : L.27-29 non couvert (entre `unicite_plus_petit_element` et `plus_grand_element`)
 - **Ch.III PDF p.111** : L.33-33 non couvert (entre `plus_petit_element` et `plus_petit_est_unique_minimal`)
@@ -992,8 +1015,9 @@
 - **Ch.III PDF p.112** : L.26-29 non couvert (entre `minorant` et `minorant_partie`)
 - **Ch.III PDF p.113** : L.11-26 non couvert (entre `plus_petit_est_borne_inferieure` et `inf_le_sup`)
 - **Ch.III PDF p.116** : L.10-14 non couvert (entre `maximal_filtrant_est_plus_grand` et `est_reticule`)
-- **Ch.III PDF p.116** : L.19-30 non couvert (entre `est_reticule` et `totalement_ordonne`)
-- **Ch.III PDF p.117** : L.12-26 non couvert (entre `totalement_ordonne_partie` et `axiome_intervalle_ferme`)
+- **Ch.III PDF p.116** : L.22-30 non couvert (entre `reticule_implique_filtrant_droite_gauche` et `totalement_ordonne`)
+- **Ch.III PDF p.117** : L.12-22 non couvert (entre `totalement_ordonne_partie` et `totalement_ordonne_implique_reticule`)
+- **Ch.III PDF p.117** : L.25-26 non couvert (entre `totalement_ordonne_implique_reticule` et `axiome_intervalle_ferme`)
 - **Ch.III PDF p.118** : L.3-9 non couvert (entre `intervalle_ferme_non_vide_si_a_inf_b` et `intersection_intervalles_fermes`)
 - **Ch.III PDF p.118** : L.14-29 non couvert (entre `intersection_intervalles_fermes` et `bien_ordonne_est_ordonne`)
 - **Ch.III PDF p.118** : L.36-39 non couvert (entre `bien_ordonne_est_total` et `sous_ensemble_bien_ordonne`)
