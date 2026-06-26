@@ -43,7 +43,7 @@ from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
-    equivalence_avant)
+    equivalence_avant, equivalence_arriere)
 from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import existe_elimination
 from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import (
     symetrie, composer_egalites, congruence_terme)
@@ -223,4 +223,32 @@ def caracterisation_couple_cible(x="x", y="y", z="z"):
     return equiv(egal(vz, E.couple(vx, vy)), droite)
 
 
-__all__ = ["est_couple", "caracterisation_couple", "caracterisation_couple_cible"]
+# @livre Ch.II §2.1 Prop.- | E II.7 L.25-26 | PDF p.58
+def couple_egal_projections(z="z"):
+    """⊢ ( z = (pr₁z, pr₂z) )  ⇔  ( z est un couple ).   (E II.7, §2.1, n°1.)
+
+    Bourbaki : « la relation z = (pr₁(z), pr₂(z)) est équivalente à "z est un
+    couple" ».  COROLLAIRE de `caracterisation_couple` instanciée en x:=pr₁z,
+    y:=pr₂z : son membre droit (est_couple(z) et pr₁z=pr₁z et pr₂z=pr₂z) se réduit
+    à est_couple(z) (les deux égalités sont des réflexivités).  Clos ; theorie==22.
+    z : nom OU terme ; doit être ≠ a, b, c, w (témoins/trous internes hérités de
+    `caracterisation_couple`)."""
+    vz = _T(z)
+    char = caracterisation_couple(E.pr1(vz), E.pr2(vz), vz)   # z=(pr₁z,pr₂z) ⇔ (couple ∧ pr₁z=pr₁z ∧ pr₂z=pr₂z)
+    gauche = egal(vz, E.couple(E.pr1(vz), E.pr2(vz)))
+    # ⇒ : z=(pr₁z,pr₂z) ⇒ est_couple(z) (projeter le membre droit sur son 1er conjoint)
+    h1 = N.assume(gauche)
+    droite = N.modus_ponens(h1, equivalence_avant(char))
+    ec = conjonction_elim_gauche(conjonction_elim_gauche(droite))   # est_couple(z)
+    fwd = N.loi_deduction(gauche, ec)
+    # ⇐ : est_couple(z) ⇒ z=(pr₁z,pr₂z) (regreffer les deux réflexivités)
+    h2 = N.assume(est_couple(vz))
+    droite_built = conjonction_intro(conjonction_intro(h2, N.reflexivite(E.pr1(vz))),
+                                     N.reflexivite(E.pr2(vz)))
+    zeq = N.modus_ponens(droite_built, equivalence_arriere(char))   # z=(pr₁z,pr₂z)
+    bwd = N.loi_deduction(est_couple(vz), zeq)
+    return conjonction_intro(fwd, bwd)                              # (z=(pr₁z,pr₂z)) ⇔ couple
+
+
+__all__ = ["est_couple", "caracterisation_couple", "caracterisation_couple_cible",
+           "couple_egal_projections"]

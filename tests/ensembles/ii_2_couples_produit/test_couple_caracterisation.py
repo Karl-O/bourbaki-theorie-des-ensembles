@@ -57,3 +57,25 @@ def _droite():
     x, y, z = var("x"), var("y"), var("z")
     est_couple = existe("a", existe("b", egal(z, E.couple(var("a"), var("b")))))
     return et(et(est_couple, egal(x, E.pr1(z))), egal(y, E.pr2(z)))
+
+
+# ── E II.7 §2.1 : z = (pr₁z, pr₂z) ⇔ « z est un couple » ──────────────────────
+def test_couple_egal_projections():
+    t = M.couple_egal_projections()
+    assert t.est_clos and not t.hypotheses
+    assert len(E.theorie_ensembles().axiomes) == 22
+    z = var("z")
+    # cible reconstruite À LA MAIN : (z=(pr₁z,pr₂z)) ⇔ (∃a)(∃b)(z=(a,b))
+    est_couple = existe("a", existe("b", egal(z, E.couple(var("a"), var("b")))))
+    gauche = egal(z, E.couple(E.pr1(z), E.pr2(z)))
+    assert t.conclusion == equiv(gauche, est_couple)
+    # non-tautologie : les deux membres sont distincts
+    assert gauche != est_couple
+
+
+def test_couple_egal_projections_parametrable():
+    t = M.couple_egal_projections(z="t")
+    vt = var("t")
+    est_couple = existe("a", existe("b", egal(vt, E.couple(var("a"), var("b")))))
+    assert t.est_clos
+    assert t.conclusion == equiv(egal(vt, E.couple(E.pr1(vt), E.pr2(vt))), est_couple)
