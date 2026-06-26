@@ -88,6 +88,7 @@ def _cut(thm, hyp, preuve_hyp):
 # ════════════════════════════════════════════════════════════════════════════
 #  DÉFINITION 1 (E.III.1.5) — croissante / décroissante / monotone
 # ════════════════════════════════════════════════════════════════════════════
+# @livre Ch.III §1.5 Def.1 | E III.7 L.5-7 | PDF p.110
 def est_croissante(G, Gp, f, E_set="E", Ep_set="Ep", x="x", y="y"):
     """est_croissante(G,G',f,E,E') :=
         (∀x)(∀y)((x∈E et y∈E et (x,y)∈G) ⇒ (f(x),f(y))∈G').
@@ -99,6 +100,7 @@ def est_croissante(G, Gp, f, E_set="E", Ep_set="Ep", x="x", y="y"):
     return pourtout(x, pourtout(y, impl(hyp, concl)))
 
 
+# @livre Ch.III §1.5 Def.1 | E III.7 L.7-8 | PDF p.110
 def est_decroissante(G, Gp, f, E_set="E", Ep_set="Ep", x="x", y="y"):
     """est_decroissante(G,G',f,E,E') :=
         (∀x)(∀y)((x∈E et y∈E et (x,y)∈G) ⇒ (f(y),f(x))∈G').
@@ -110,6 +112,7 @@ def est_decroissante(G, Gp, f, E_set="E", Ep_set="Ep", x="x", y="y"):
     return pourtout(x, pourtout(y, impl(hyp, concl)))
 
 
+# @livre Ch.III §1.5 Def.1 | E III.7 L.8-9 | PDF p.110
 def est_monotone(G, Gp, f, E_set="E", Ep_set="Ep", x="x", y="y"):
     """est_monotone(G,G',f,E,E') := est_croissante ou est_decroissante.
 
@@ -121,6 +124,7 @@ def est_monotone(G, Gp, f, E_set="E", Ep_set="Ep", x="x", y="y"):
 # ════════════════════════════════════════════════════════════════════════════
 #  DÉFINITION 2 (E.III.1.5) — strictement croissante / décroissante / monotone
 # ════════════════════════════════════════════════════════════════════════════
+# @livre Ch.III §1.5 Def.2 | E III.7 L.17-18 | PDF p.110
 def est_strictement_croissante(G, Gp, f, E_set="E", Ep_set="Ep", x="x", y="y"):
     """est_strictement_croissante(G,G',f,E,E') :=
         (∀x)(∀y)((x∈E et y∈E et x<y) ⇒ f(x)<f(y)),
@@ -133,6 +137,7 @@ def est_strictement_croissante(G, Gp, f, E_set="E", Ep_set="Ep", x="x", y="y"):
     return pourtout(x, pourtout(y, impl(hyp, concl)))
 
 
+# @livre Ch.III §1.5 Def.2 | E III.7 L.18-20 | PDF p.110
 def est_strictement_decroissante(G, Gp, f, E_set="E", Ep_set="Ep", x="x", y="y"):
     """est_strictement_decroissante(G,G',f,E,E') :=
         (∀x)(∀y)((x∈E et y∈E et x<y) ⇒ f(y)<f(x)).
@@ -144,6 +149,7 @@ def est_strictement_decroissante(G, Gp, f, E_set="E", Ep_set="Ep", x="x", y="y")
     return pourtout(x, pourtout(y, impl(hyp, concl)))
 
 
+# @livre Ch.III §1.5 Def.2 | E III.7 L.20-21 | PDF p.110
 def est_strictement_monotone(G, Gp, f, E_set="E", Ep_set="Ep", x="x", y="y"):
     """est_strictement_monotone(G,G',f,E,E') :=
         est_strictement_croissante ou est_strictement_decroissante.

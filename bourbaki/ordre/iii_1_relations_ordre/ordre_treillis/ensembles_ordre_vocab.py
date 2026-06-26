@@ -183,6 +183,7 @@ def sont_isomorphes_ordre(e, ep, R, Rp, f="f", x="x", y="y"):
 #  ORDRE PRODUIT / produit d'ensembles ordonnés  (E.III.1.4)
 #  R_ι = fonction Python ι ↦ (relation ≤_ι).  x, y ∈ F = ∏_ι E_ι.
 # ════════════════════════════════════════════════════════════════════════════
+# @livre Ch.III §1.4 Def.- | E III.6 L.27-35 | PDF p.109
 def ordre_produit(Rfam, I, x_pt, y_pt, i="i"):
     """ordre_produit(R,I)(x,y) := (∀ι)(ι∈I ⇒ pr_ι(x) ≤_ι pr_ι(y)).
 

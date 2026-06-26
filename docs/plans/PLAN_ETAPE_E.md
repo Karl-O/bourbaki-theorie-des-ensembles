@@ -44,12 +44,14 @@ théorème, vérif indépendante (cible reconstruite depuis primitives BRUTES) A
   (`iii_1_12_totalement_ordonnes/ensembles_intervalles_prop13.py`) ; la DÉF formelle des 4 intervalles
   [a,b]/]a,b[/[a,b[/]a,b] serait absente — vérifier puis rendre E III.14 pour les énoncés exacts.
 
-## Fidélité — @livre à AJOUTER (vérifier l'énoncé/numéro contre le PDF AVANT, cf. leçon CST8 :
-##   un @livre faux est PIRE qu'absent)
-- `ordre_treillis/ensembles_ordre_monotone.py` : `est_croissante` (Def.1, ~E III.7) et
-  `est_strictement_croissante` (Def.2, ~E III.7) — sans @livre.
-- `ordre_treillis/ensembles_ordre_vocab.py:186` : `ordre_produit` (~E III.6) — sans @livre.
-  → rendre E III.6–7 (p.109–110), confirmer Type/num/lignes, puis poser les marqueurs.
+## [x] Fidélité — @livre AJOUTÉS (2026-06-26 ; PDF E III.6–7 rendu+lu AVANT, cf. leçon CST8)
+- PDF confirmé : §1.5 « Applications croissantes » = E III.7/p.110 (Déf.1 croissante/décroissante/
+  monotone ; Déf.2 strict×3) ; §1.4 « Produit d'ensembles ordonnés » = E III.6/p.109 (ordre produit).
+- `ensembles_ordre_monotone.py` : 6 marqueurs posés — est_croissante/decroissante/monotone (Def.1,
+  E III.7) + est_strictement_croissante/decroissante/monotone (Def.2, E III.7).
+- `ensembles_ordre_vocab.py:186` : ordre_produit (Def.- §1.4, E III.6).
+- 93 tests ordre_treillis verts ; marqueurs bien formés (grep). [Prop.11 « strict monotone ⇒ injective »
+  confirmée à E III.14 par le renvoi de E III.7 « cf. III, p.14, prop.11 ».]
 
 ## Reporté (méta / lourd)
 - Prop.7 recouvrement GÉNÉRAL, Prop.8 produit ordonné (résidu honnête) : machinerie familles/produit.
