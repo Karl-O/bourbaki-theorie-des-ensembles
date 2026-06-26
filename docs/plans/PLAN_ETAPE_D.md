@@ -44,7 +44,7 @@ thématiques `bourbaki/ensembles/` (ii_1_algebre_booleenne / ii_1 selon le thèm
 - enonce: déf `trace(X,A) := A∩X` + identités `(X∪Y)_A=X_A∪Y_A`, `(X∩Y)_A=X_A∩Y_A`, `∁_A X_A=(∁_E X)_A`.
 - note audit: absent (déf + 3 props, NOUVELLE). Plus lourd (une déf + 3 lemmes) — découper.
 
-## [ ] resume_fonction_constante  [E.R.6 §2 n°3 | PDF p.309]
+## [x] resume_fonction_constante  [E.R.6 §2 n°3 | PDF p.309]  — FAIT (2026-06-26 ; déf fonction_constante=fonction_terme(E,a,C) + graphe fonctionnel (clos, dépend théorie dédiée theorie_graphe_terme héritée — documenté) + valeur=a sous {u∈E} ; 2 propriétés == les 2 assertions verbatim de n°3 ; verif indep, theorie==22 ; ii_3_6_fonction_terme/)
 - enonce: déf fonction constante (valeur a ; relation fonctionnelle y=a).
 - note audit: absent (ni `est_constante` ni fonction constante). Cible simple : définition dédiée. (Chap II.3 fonctions.)
 
