@@ -24,7 +24,7 @@ thématiques `bourbaki/ensembles/` (ii_1_algebre_booleenne / ii_1 selon le thèm
 - note audit: absent (grep négatif). Cible logique : S6/Leibniz (⇒) + extensionnalité/instanciation X:={y} ou X∋x (⇐).
 - fichier: à placer (Chap II ; vérifier cap dossier). PDF p.306 (offset Résumé +303 → E.R.3).
 
-## [ ] resume_disjonction_complement  [E.R.4 n°14e | PDF p.307]
+## [x] resume_disjonction_complement  [E.R.4 n°14e | PDF p.307]  — FAIT (2026-06-26 ; {inclus(X,E)} |- (X∩Y=∅ ⇔ X⊂∁_E Y) ; hyp X⊂E HONNÊTE = contexte « parties de E » du n°14 ; verif indep concl==cible, theorie==22, pur 22-ax. 3e terme Y⊂∁X non ajouté.)
 - enonce: `|- (X∩Y=∅) ⇔ (X⊂∁Y)`  (+ ⇔ (Y⊂∁X) si faisable d'un bloc).
 - note audit: absent. Extensionnalité + lois du complément déjà présentes (ii_1_algebre_booleenne).
 
