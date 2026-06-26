@@ -36,7 +36,7 @@ thématiques `bourbaki/ensembles/` (ii_1_algebre_booleenne / ii_1 selon le thèm
 - enonce: `|- (X⊂Y) ⇒ ( (X∪Z ⊂ Y∪Z) et (X∩Z ⊂ Y∩Z) )`  (monotonie de ∪/∩).
 - note audit: absent au niveau binaire. Suit des lois de treillis des parties.
 
-## [ ] resume_inf_sup_universel_binaire  [E.R.5 n°14i | PDF p.308]
+## [x] resume_inf_sup_universel_binaire  [E.R.5 n°14i | PDF p.308]  — FAIT (2026-06-26 ; 2 théorèmes clos : inf (Z⊂X et Z⊂Y⇔Z⊂X∩Y) + sup (X⊂Z et Y⊂Z⇔X∪Y⊂Z) ; verif indep concl==cible, est_clos, theorie==22, pur 22-ax ; ii_1_algebre_booleenne/)
 - enonce: `|- ( (Z⊂X) et (Z⊂Y) ) ⇔ (Z ⊂ X∩Y)`  et  `|- ( (X⊂Z) et (Y⊂Z) ) ⇔ (X∪Y ⊂ Z)`.
 - note audit: absent au niveau binaire (existe en version FAMILLES ii_4 sup/inf univ — possible spécialisation). VÉRIFIER d'abord si dérivable trivialement de la version familles.
 
