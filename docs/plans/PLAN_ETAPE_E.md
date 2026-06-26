@@ -66,3 +66,31 @@ que §1 ; toujours re-vérifier chaque « absent » par grep+Read avant d'implé
 
 ## Reporté (méta / lourd)
 - Prop.7 recouvrement GÉNÉRAL, Prop.8 produit ordonné (résidu honnête) : machinerie familles/produit.
+
+---
+
+## Lot Chap II — théorèmes nommés comblés (2026-06-26, travail en continu)
+Après confirmation que §III.1 est saturé (faux positifs en série), bascule sur Chap II ; PDF lu page
+par page (E II.6, E II.7) et chaque cible re-vérifiée par grep AVANT implémentation.
+- [x] **E II.6 §7 — théorèmes de l'ensemble vide** (`ii_1_axiomes_algebre/ensembles_vide.py`) :
+  `vide_inclus_partout` (⊢ ∅⊂X), `sous_ensemble_vide_ssi_egal` (⊢ X⊂∅ ⇔ X=∅),
+  `vacuite_sur_vide` (⊢ (∀x)(x∈∅⇒R{x})). Clos, theorie==22, vérif indep depuis primitives brutes.
+- [x] **E II.7 §2.1 — `couple_egal_projections`** (⊢ z=(pr₁z,pr₂z) ⇔ « z est un couple ») :
+  corollaire de `caracterisation_couple` instanciée en pr₁z/pr₂z (collapse réflexif). Clos.
+
+### Faux positifs confirmés (déjà présents) — Chap II
+- `caracterisation_couple` (z=(x,y) ⇔ couple ∧ x=pr₁z ∧ y=pr₂z) : DÉJÀ clos (card disait « absente »).
+- `antitonie_complement` (A⊂B ⇔ ∁B⊂∁A) : DÉJÀ clos. `composee_monotone` (E II.13) : fait cette session.
+
+### Gaps RÉELS restants near-here (NON triviaux — à traiter avec la bonne technique)
+- **E II.7 #5 — `(∃y)(z=(x,y)) ⇔ x=pr₁z` (sous z couple)** : CAPTURE-DUR. La distribution C33 réintroduit
+  `(∃y)(y=pr₂z)` à côté de pr₂z=τy(...), et le x libre entre en collision avec le liant x de pr₁z=τx(...).
+  Le black-box via `caracterisation_couple` NE SUFFIT PAS. Exige la technique des TÉMOINS CANONIQUES
+  (noms frais ≠ x,y,a,b,c,w) comme `caracterisation_couple` elle-même (~40 lignes). Reporté, pas trivial.
+- C26 (∀x R ⇔ (τ_x(¬R)|x)R), C43 (Leibniz T=U⟹R{T}⇔R{U}) : **n/a — SUBSUMÉS par le noyau**
+  (C43 = s6/s7 ; C26 = définition de ∀ via τ). Ne PAS « implémenter » : classer non_applicable.
+
+> BILAN du lot : les résultats nommés TRACTABLES de E II.6 §7 et E II.7 §2.1 sont comblés. Le voisinage
+> immédiat restant est soit capture-dur (témoins canoniques requis) soit subsumé-noyau. Pour le prochain
+> lot : viser une section à vrais petits résultats non-capture (ex. Chap II §3 fonctions, §6 équivalence)
+> ou attaquer #5 avec la technique des témoins canoniques.
