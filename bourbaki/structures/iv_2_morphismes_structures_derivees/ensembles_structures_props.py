@@ -374,7 +374,9 @@ def composee_isomorphismes_est_isomorphisme(sigma, e="E", ep="Ep", epp="Epp",
 
 
 # ════════════════════════════════════════════════════════════════════════════
-#  5.  UNICITÉ (À ISOMORPHISME UNIQUE PRÈS) DE LA SOLUTION UNIVERSELLE  (CST8, IV.3.1)
+#  5.  UNICITÉ (À ISOMORPHISME UNIQUE PRÈS) DE LA SOLUTION UNIVERSELLE  (§IV.3.1, E IV.23)
+#      Conséquence de (AU) + critère CST8 d'INVERSIBILITÉ (IV.12) — ⚠ PAS le critère CST8
+#      lui-même (fragment : conclut seulement l'inversibilité croisée f₂∘f₁=Id, f₁∘f₂=Id).
 # ════════════════════════════════════════════════════════════════════════════
 def solution_universelle_iso_unique(fe="FE", se="SE", phi_e="phiE",
                                     fep="FEp", sep="SEp", phi_ep="phiEp",
@@ -385,7 +387,8 @@ def solution_universelle_iso_unique(fe="FE", se="SE", phi_e="phiE",
         ⊢  f₂∘f₁ = Id_{F_E}  et  f₁∘f₂ = Id_{F_E'}.
 
     « LA SOLUTION D'UN PROBLÈME D'APPLICATION UNIVERSELLE EST UNIQUE À UN ISOMORPHISME
-    UNIQUE PRÈS QUAND ELLE EXISTE » (IV.3.1, critère CST8 / IV p. 12).  Si (F_E,φ_E) et
+    UNIQUE PRÈS QUAND ELLE EXISTE » (§IV.3.1, E IV.23 ; démontré via le critère CST8
+    d'inversibilité, IV p. 12 — ce résultat n'est pas lui-même CST8).  Si (F_E,φ_E) et
     (F_E',φ_E') sont deux solutions, il existe des morphismes croisés f₁,f₂ avec
     φ_E'=f₁∘φ_E et φ_E=f₂∘φ_E' ; alors f₂∘f₁=Id_{F_E} et f₁∘f₂=Id_{F_E'}, donc f₁ est un
     isomorphisme de F_E sur F_E' et f₂ son réciproque.

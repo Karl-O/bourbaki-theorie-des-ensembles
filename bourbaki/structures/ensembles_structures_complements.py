@@ -319,12 +319,17 @@ def cst22_extrait_CU_III(e="E", i="I0", ff=None, sf=None, phif=None, a="a",
 
 
 # ════════════════════════════════════════════════════════════════════════════
-#  CRITÈRE CST8 — unicité de la solution à un isomorphisme unique près
+#  §IV.3.1 — UNICITÉ (à un isomorphisme unique près) de la solution universelle
+#  Résultat NON numéroté de §3.1 (E IV.23) ; conséquence de (AU) + du critère CST8
+#  d'INVERSIBILITÉ (IV.12).  ⚠ N'EST PAS le critère CST8 lui-même (CST8 = « un
+#  morphisme inversible est un iso », E IV.12 §2.1 ; cf. ensembles_cst8_inversible_iso).
 # ════════════════════════════════════════════════════════════════════════════
-# @livre Ch.IV §2.1 Crit.CST8 | E IV.12 L.26-29 | PDF p.215
+# @livre Ch.IV §3.1 Cor.- | E IV.23 L.6-18 | PDF p.226
 def solution_isomorphisme_unique(fe, se, phi_e, fep, sep, phi_ep, morph=None,
                                  mor="f1", mor2="f2"):
-    """Critère CST8 (IV.3) — « unicité à un isomorphisme unique près » : si (F_E,φ_E)
+    """§IV.3.1 — « unicité à un isomorphisme unique près » de la solution universelle
+    (résultat de §3.1, démontré DANS le livre via le critère CST8 d'inversibilité,
+    IV p.12 — ce résultat n'est PAS lui-même CST8) : si (F_E,φ_E)
     et (F_E',φ_E') sont deux solutions du problème pour E, il existe un morphisme
     unique f₁ : F_E → F_E' et un morphisme unique f₂ : F_E' → F_E avec φ_E' = f₁∘φ_E
     et φ_E = f₂∘φ_E' ; alors f₂∘f₁ = Id_{F_E} et f₁∘f₂ = Id_{F_E'}, donc f₁ est un

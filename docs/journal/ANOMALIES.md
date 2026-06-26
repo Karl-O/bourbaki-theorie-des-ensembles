@@ -233,3 +233,22 @@ PAS le CST8 d'inversibilite de §IV.2.1 :
 A auditer cote PDF (rendre E IV.27 / p.~230) pour confirmer si Bourbaki nomme effectivement « CST8 » le
 critere d'unicite de §IV.3, ou si c'est une derive interne du code. Le module neuf documente deja ce
 mismatch dans son docstring.
+
+**→ RESOLU le 2026-06-26 (PDF verifie).** Rendu E IV.22-23 (PDF p.225-226) : §IV.3.1 « Ensembles et
+applications universels » commence en E IV.22 ; le resultat d'unicite (« Soient (F'_E,φ'_E) et
+(F''_E,φ''_E) deux solutions… une solution… est UNIQUE A UN ISOMORPHISME UNIQUE PRES ») est en **E IV.23**.
+Bourbaki l'y demontre EN INVOQUANT le critere CST8 : « **Par suite (IV, p. 12, critere CST8)**, f₁ est un
+isomorphisme… ». Donc (a) CST8 = bien le critere d'INVERSIBILITE de E IV.12 §2.1 (confirme aussi par la
+Remarque de E IV.22 : « la conclusion resulte du critere CST8 ») ; (b) le resultat d'unicite de §IV.3.1
+**n'est PAS numerote CST8** — il l'utilise comme outil. Ce n'etait donc PAS « E IV.27 » (l'estimation de
+l'agent etait erronee ; pdf_index : §3.1 = E IV.22, §3.2 existence = E IV.23-… ; offset Ch IV +203).
+CORRECTIONS appliquees :
+- `ensembles_structures_complements.py` `solution_isomorphisme_unique` : @livre FAUTIF
+  `§2.1 Crit.CST8 | E IV.12 | p.215` → **`§3.1 Cor.- | E IV.23 L.6-18 | PDF p.226`** (calé sur les defs
+  (AU)/(AU_I')/(AU_II') deja citees a E IV.23 dans `ensembles_universel_applications.py`). Bandeau +
+  1re ligne de docstring de-misnommes (« §IV.3.1 unicite, PAS le critere CST8 »).
+- `ensembles_structures_props.py` `solution_universelle_iso_unique` (fragment : conclut seulement
+  l'inversibilite croisee, pas de @livre machine) : bandeau « (CST8, IV.3.1) » → « (§IV.3.1, E IV.23 ;
+  conséquence de CST8, PAS le critere lui-meme) ».
+Plus aucune collision de citation : `E IV.12 p.215` = UNIQUEMENT le vrai CST8
+(`ensembles_cst8_inversible_iso.py`). 172 tests structures verts (edits commentaire/docstring seulement).
