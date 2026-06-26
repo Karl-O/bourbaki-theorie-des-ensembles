@@ -19,7 +19,7 @@ Règle (comme ETAPE C) : implémenter UNE cible à la fois, preuve CLOSE (primit
 *Ces résultats sont du contenu Chap II.1 (algèbre des parties) résumé en E.R ; les placer dans les dossiers
 thématiques `bourbaki/ensembles/` (ii_1_algebre_booleenne / ii_1 selon le thème), PAS un dossier « Résumé ».*
 
-## [ ] resume_egalite_leibniz_parties  [E.R.3 n°11 | PDF p.306]
+## [x] resume_egalite_leibniz_parties  [E.R.3 n°11 | PDF p.306]  — FAIT (2026-06-26 ; |- ((x=y)⇔(∀X)(x∈X⇒y∈X)) clos ; S6 pour ⇒, témoin {x}+appartient_singleton pour ⇐ ; verif indep concl==cible, est_clos, theorie==22, pur 22-ax ; ii_1_algebre_booleenne/)
 - enonce: `|- (x=y) ⇔ (∀X)((x∈X) ⇒ (y∈X))`  (égalité = appartenir aux mêmes parties).
 - note audit: absent (grep négatif). Cible logique : S6/Leibniz (⇒) + extensionnalité/instanciation X:={y} ou X∋x (⇐).
 - fichier: à placer (Chap II ; vérifier cap dossier). PDF p.306 (offset Résumé +303 → E.R.3).
