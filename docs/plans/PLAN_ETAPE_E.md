@@ -83,10 +83,20 @@ par page (E II.6, E II.7) et chaque cible re-vérifiée par grep AVANT implémen
 - `antitonie_complement` (A⊂B ⇔ ∁B⊂∁A) : DÉJÀ clos. `composee_monotone` (E II.13) : fait cette session.
 
 ### Gaps RÉELS restants near-here (NON triviaux — à traiter avec la bonne technique)
-- **E II.7 #5 — `(∃y)(z=(x,y)) ⇔ x=pr₁z` (sous z couple)** : CAPTURE-DUR. La distribution C33 réintroduit
-  `(∃y)(y=pr₂z)` à côté de pr₂z=τy(...), et le x libre entre en collision avec le liant x de pr₁z=τx(...).
-  Le black-box via `caracterisation_couple` NE SUFFIT PAS. Exige la technique des TÉMOINS CANONIQUES
-  (noms frais ≠ x,y,a,b,c,w) comme `caracterisation_couple` elle-même (~40 lignes). Reporté, pas trivial.
+- **E II.7 #5 — `(∃y)(z=(x,y)) ⇔ x=pr₁z` (sous z couple)** : CAPTURE-DUR. **4 approches essayées,
+  diagnostic précis (2026-06-26) :**
+  1. distribution C33 `et_existe_droite` → `(∃y)(y=pr₂z)` à côté de pr₂z=τy(...) : mismatch α.
+  2. `proposition_1(x, y, pr₁z, pr₂z)` → `couple_egal_implique_composantes` capture sur les τ-args.
+  3. #8 + `congruence_terme` pour bâtir z=(x,pr₂z) → renommage-α de pr₂z (combinaison pr₁z+pr₂z).
+  4. **témoins canoniques cap_a,cap_b (b-liés) — BÂTIT un théorème VALIDE** (est_clos=False, hyp={couple},
+     theorie==22), MAIS conclusion structurellement ASYMÉTRIQUE : le sens ⇒ (via `caracterisation_couple` +
+     `existe_elimination` sur "y") produit `x=pr₁z` avec le liant τ RENOMMÉ en `@0` (l'∃y externe entre en
+     conflit avec le ∃y interne de pr₁z=τx((∃y)…) → α-renommage), alors que le sens ⇐ garde le liant `x`.
+     `@0`-pr₁z ≠ structurellement `x`-pr₁z ⇒ pas un `equiv(A,B)` propre.
+  **VOIE DE FIX (à tenter) :** dans le sens ⇒, appeler `caracterisation_couple(x, "y2", z)` (2ᵉ composante
+  ≠ "y", donc l'∃-élim sur "y2" ne conflit PAS avec le ∃y interne de pr₁z → pas de renommage), puis
+  `alpha_existe` pour normaliser `(∃y2)(z=(x,y2))` en `(∃y)(z=(x,y))` sur LES DEUX sens. ~40 lignes,
+  α-management soigné. Le sens ⇐ par témoins canoniques cap_a/cap_b MARCHE déjà (validé).
 - C26 (∀x R ⇔ (τ_x(¬R)|x)R), C43 (Leibniz T=U⟹R{T}⇔R{U}) : **n/a — SUBSUMÉS par le noyau**
   (C43 = s6/s7 ; C26 = définition de ∀ via τ). Ne PAS « implémenter » : classer non_applicable.
 
