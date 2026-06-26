@@ -9,7 +9,7 @@ from bourbaki.logique.i_1_termes_relations.formule import Terme, var, egal, non,
 from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (conjonction_intro, equivalence_avant, equivalence_arriere,
                                equivalence_transitivite, contraposition, dni, dne,
-                               instanciation_en_x)
+                               instanciation_en_x, instancie)
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import symetrie
 from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import congruence_existe
@@ -102,5 +102,19 @@ def sous_ensemble_vide_ssi_egal(x="X"):
     return conjonction_intro(fwd, bwd)                                  # (X⊂∅) ⇔ (X=∅)
 
 
+# @livre Ch.II §1.7 Th.- | E II.6 L.38-39 | PDF p.57
+def vacuite_sur_vide(R, x="x"):
+    """⊢ (∀x)((x∈∅) ⇒ R{x}).   (E II.6 §7 : « Si R{x} est une relation, la relation
+    (∀x)((x∈∅)⇒R{x}) est vraie ».)
+
+    EX FALSO paramétré : ¬(x∈∅) [AXIOME_VIDE instancié] ⇒ (x∈∅ ⇒ R{x}) par S2,
+    généralisé sur x.  R = relation (callable Terme↦Formule).  Clos ; theorie==22."""
+    vx = var(x)
+    nx0 = instancie(N.axiome(E.theorie_ensembles(), E.AXIOME_VIDE), vx)   # ¬(x∈∅)
+    body = N.modus_ponens(nx0, N.s2(non(appartient(vx, E.VIDE)), R(vx)))  # x∈∅ ⇒ R{x}
+    return N.generalisation(x, body)                                     # (∀x)(x∈∅⇒R{x})
+
+
 __all__ = ["vide_ssi_sans_element", "non_vide_ssi_element",
-           "vide_inclus_partout", "sous_ensemble_vide_ssi_egal"]
+           "vide_inclus_partout", "sous_ensemble_vide_ssi_egal",
+           "vacuite_sur_vide"]

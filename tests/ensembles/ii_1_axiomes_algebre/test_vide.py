@@ -5,7 +5,8 @@ from bourbaki.logique.i_1_termes_relations.formule import var, egal, non, impl, 
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege import VIDE
 from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_vide import (
-    vide_ssi_sans_element, vide_inclus_partout, sous_ensemble_vide_ssi_egal)
+    vide_ssi_sans_element, vide_inclus_partout, sous_ensemble_vide_ssi_egal,
+    vacuite_sur_vide)
 
 
 def test_vide_ssi_sans_element():
@@ -35,3 +36,14 @@ def test_sous_ensemble_vide_ssi_egal():
     assert t.est_clos and t.hypotheses == frozenset()
     assert len(E.theorie_ensembles().axiomes) == 22
     assert inclus(vX, VIDE) != egal(vX, VIDE)          # non-tautologie
+
+
+# ── E II.6 §7 : (∀x)(x∈∅ ⇒ R{x}) (ex falso sur ∅) ─────────────────────────────
+def test_vacuite_sur_vide():
+    R = lambda u: appartient(u, var("Y"))              # relation-test R{x} := x∈Y
+    vx = var("x")
+    t = vacuite_sur_vide(R, "x")
+    cible = pourtout("x", impl(appartient(vx, VIDE), R(vx)))   # (∀x)(x∈∅ ⇒ x∈Y)
+    assert t.conclusion == cible
+    assert t.est_clos and t.hypotheses == frozenset()
+    assert len(E.theorie_ensembles().axiomes) == 22
