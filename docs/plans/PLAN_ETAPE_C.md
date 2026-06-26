@@ -12,7 +12,7 @@ Re-verifier l'absence (grep) au debut de chaque delegation (un import reussi ne 
 
 ---
 
-## [ ] appartenance_collectivisante  (faible/facile)  [secteur II.1.4]
+## [x] appartenance_collectivisante  (faible/facile)  [secteur II.1.4]  — FAIT (2026-06-26 ; concl==Coll_x(x∈y), est_clos, existentiel non-tautologique, theorie==22 ; PURE 22-ax témoin Y=y, AUCUNE théorie dédiée/S8). Correction fidélité : repère réel = E II.3 / PDF p.54 (pas E II.4/p.55).
 - repere: E II.4 (n°4, Exemple 1) | PDF p.54-55
 - statut: MANQUANT
 - enonce: `{} |- Coll_x(x in y)` c.-a-d. `(existe Y)(pourtout x)((x in Y) <=> (x in y))` (la relation x∈y est collectivisante en x ; temoin = y).
