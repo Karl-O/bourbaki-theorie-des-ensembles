@@ -5,7 +5,7 @@ littérale annoncée, les deux membres DIFFÈRENT (non trivial), theorie = 22.
 """
 from bourbaki.logique.i_1_termes_relations.formule import var, egal
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-import bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_algebre_booleenne as M
+import bourbaki.ensembles.ii_1_axiomes_algebre.ii_1_algebre_booleenne.ensembles_algebre_booleenne as M
 
 A, B, C, Ev = var("A"), var("B"), var("C"), var("E")
 U, I, D = E.reunion, E.intersection, E.difference

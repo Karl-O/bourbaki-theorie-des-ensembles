@@ -545,7 +545,7 @@ def _prouver_dom_disj(vphi0, vS, vU, dom0, inter_SU, inter_US):
     from bourbaki.cardinaux.iii_6_infinis.hessenberg.coeur.ensembles_cadre_plat import (
         _bloc_produit_disjoint, _n_commun_de_disjoint, commutativite_intersection_t,
     )
-    from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_algebre_booleenne import (
+    from bourbaki.ensembles.ii_1_axiomes_algebre.ii_1_algebre_booleenne.ensembles_algebre_booleenne import (
         distributivite_intersection_reunion,
     )
     from bourbaki.cardinaux.ensembles_cantor_bernstein_final._recollement import (

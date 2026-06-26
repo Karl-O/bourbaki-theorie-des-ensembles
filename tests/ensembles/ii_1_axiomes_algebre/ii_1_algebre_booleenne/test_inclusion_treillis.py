@@ -5,7 +5,7 @@ les deux membres DIFFÈRENT, theorie = 22.
 """
 from bourbaki.logique.i_1_termes_relations.formule import var, equiv, inclus, egal
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-import bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_inclusion_treillis as M
+import bourbaki.ensembles.ii_1_axiomes_algebre.ii_1_algebre_booleenne.ensembles_inclusion_treillis as M
 
 A, B, Ev = var("A"), var("B"), var("E")
 

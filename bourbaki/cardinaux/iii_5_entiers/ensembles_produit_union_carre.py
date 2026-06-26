@@ -269,7 +269,7 @@ def produit_union_droite(a="A", b="B", c="C", z="z"):
 def produit_union_carre(a="A", b="B", z="z"):
     """⊢ (A∪B)×(A∪B) = (A×A)∪((A×B)∪((B×A)∪(B×B))).   [CLOS, 0 hyp]."""
     from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import congruence_terme, composer_egalites
-    from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_algebre_booleenne import associativite_reunion
+    from bourbaki.ensembles.ii_1_axiomes_algebre.ii_1_algebre_booleenne.ensembles_algebre_booleenne import associativite_reunion
     vA, vB = _t(a), _t(b)
     AB = E.reunion(vA, vB)
     AA, AxB, BxA, BB = (E.produit(vA, vA), E.produit(vA, vB),

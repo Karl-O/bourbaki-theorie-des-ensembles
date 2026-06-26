@@ -40,7 +40,7 @@ from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import (
 from bourbaki.ensembles.familles.ii_2_produit_deux_ensembles.ensembles_produit import _instance_produit
 from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import couple_egal_implique_composantes
 from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import egalite_par_extension
-from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_algebre_booleenne import (
+from bourbaki.ensembles.ii_1_axiomes_algebre.ii_1_algebre_booleenne.ensembles_algebre_booleenne import (
     _instance_inter, distributivite_intersection_reunion,
 )
 from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import cardinal, est_cardinal
