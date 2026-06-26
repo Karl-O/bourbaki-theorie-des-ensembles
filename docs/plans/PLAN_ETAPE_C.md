@@ -28,7 +28,7 @@ Re-verifier l'absence (grep) au debut de chaque delegation (un import reussi ne 
 - lemmes: ordre_treillis/ensembles_ordre_monotone.py (est_reticule, admet_borne_sup_inf) ; ensembles_ordre_relation.py (borne_superieure/inferieure, majorant, minorant) ; ii_2_couples_produit/ensembles_couples.py (membre_paire_gauche/droite) ; ensembles_abrege.py (est_filtrant_droite/gauche, paire) ; iii_1_8_filtrants/ensembles_prop10_maximal_filtrant.py (_filtrant_droite_G, existe_elimination)
 - fichier: bourbaki/ordre/iii_1_relations_ordre/iii_1_11_reticules/ensembles_reticule_filtrant.py
 
-## [ ] non_existence_ensemble_universel  (faible/moyen)  [secteur II.1.7]
+## [x] non_existence_ensemble_universel  (faible/moyen)  [secteur II.1.7]  — FAIT (2026-06-26 ; E II.6 ; concl==¬(∃X)(∀x)(x∈X) sans τ libre, theorie==22). DÉPEND du schéma S8 (Russell {x∈X0|x∉x}) via théorie dédiée = preuve même de Bourbaki C52 ; voir ANOMALIES 2026-06-26 (« certifié » = 22 ax + instances S8 revues)
 - repere: E II.6 (n°7, Remarque) | PDF p.57
 - statut: MANQUANT
 - enonce: `{} |- non (existe X)(pourtout x)(x in X)` (pas d'ensemble dont tout objet est element).

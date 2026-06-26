@@ -182,3 +182,28 @@ Les deux theoremes d'heritage sont donc un **developpement fidele** du « c'est 
 la citation d'une Remarque dediee. Leur `@livre` pointe honnetement vers ce « comme on le verifie
 aisement » (E III.6 L.31-33) plutot que vers un enonce Rem. distinct. Pas de sur-attribution : la DEF,
 elle, est litterale. Antisymetrie globale (extensionnalite des applications) volontairement HORS scope.
+
+## 2026-06-26 — IMPORTANT (frontiere de confiance) : "pas d'ensemble universel" depend du SCHEMA S8
+
+`ii_1_collectivisantes/ensembles_pas_ensemble_universel.py` prouve `⊢ ¬(∃X)(∀x)(x∈X)` (E II.6 Rem.,
+enonce VERBATIM ; conclusion verifiee == cible, sans τ libre). MAIS ce theoreme N'EST PAS derivable des
+22 axiomes seuls : former l'ensemble de Russell `{x∈X0 | x∉x}` du pretendu ensemble universel exige le
+**schema de selection S8** (c'est la preuve MEME de Bourbaki, E II.7 : « toute relation serait
+collectivisante d'apres C52 » — C52 = consequence de S8). L'agent a CORRECTEMENT refuse la version
+litterale « zero axiome » (impossible) et porte S8 par une **theorie dediee parametree**
+`_theorie_russell_dans(X0)`, exactement comme `theorie_diagonale_cantor` (Cantor) — mecanisme present
+dans **41 fichiers** (Cantor, C61 recurrence, recurrence transfinie, powerset…).
+
+**Propriete du noyau a connaitre (verifiee dans noyau.py:177) :** `N.axiome(theorie, A)` renvoie
+`Theoreme(frozenset(), A, ...)` — un theoreme CLOS (0 hypothese) — pour TOUT `A` figurant dans la
+`theorie` passee, la theorie n'etant gardee que dans la **chaine de justification** (pas dans
+`hypotheses`/`est_clos`/`==`/le check `theorie==22`). **Consequence :** `est_clos==True` et
+`theorie_ensembles()==22` ne capturent PAS les dependances aux axiomes de theories dediees (instances S8).
+La soundness de chaque tel axiome repose donc sur une **revue humaine/agent** qu'il s'agit bien d'une
+instance LEGITIME de S8/A1 — ici verifie : `(∀x)(x∈R0 ⇔ (x∈X0 et x∉x))` = comprehension bornee
+`{x∈X0 | x∉x}`, meme forme que la diagonale de Cantor. **Lecture honnete de "certifie" dans ce projet :**
+« derivable des 22 axiomes + instances de schema S8/A1 revues », pas « des 22 axiomes seuls ». C'est un
+argument concret pour un **verificateur croise externe** (cf. discussion durcissement du noyau) : un
+second checker devrait recenser les axiomes de theories dediees employes et confirmer que chacun est une
+instance de schema admissible. Pas un bug — une propriete de conception (S8 est un vrai schema de
+Bourbaki) — mais a tracer explicitement pour le corpus.
