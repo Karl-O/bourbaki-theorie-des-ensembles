@@ -51,13 +51,15 @@ thématiques `bourbaki/ensembles/` (ii_1_algebre_booleenne / ii_1 selon le thèm
 ---
 
 ## Chap IV — cible logique propre
-## [ ] cst8_inversibilite_implique_iso  [E IV.12 CST8 | PDF p.215]
-- enonce: `{ f σ-morphisme E→E', g σ-morphisme E'→E, g∘f=Id_E, f∘g=Id_E' } |- f isomorphisme de E sur E' (et g l'iso réciproque)`.
-- ⚠️ MISMATCH ÉTIQUETTE à corriger : les fonctions code nommées `CST8` (solution_isomorphisme_unique,
-  solution_universelle_iso_unique, @livre E IV.12) encodent en fait le CST8 « unicité de la solution universelle
-  à iso près » (IV.3.1, p.235) — énoncé DIFFÉRENT. Le vrai CST8 « inversibilité ⟹ iso » (E IV.12, IV.2.1) est
-  ABSENT. Auditer/corriger les @livre fautifs en même temps.
-- fichier: bourbaki/structures/iv_2_morphismes_structures_derivees/ (vérifier cap).
+## [x] cst8_inversibilite_implique_iso  [E IV.12 CST8 | PDF p.215]  — FAIT (2026-06-26)
+- FAIT : `iv_2_morphismes_structures_derivees/ensembles_cst8_inversible_iso.py` :
+  `{ morph(E,𝒮,E',𝒮',f), morph(E',𝒮',E,𝒮,g), g=f⁻¹ } |- est_iso_morph(E,𝒮,E',𝒮',f) = morph(f) ∧ morph(f⁻¹)`.
+  Inversibilité bilatère résumée fidèlement par son conséquent `g=f⁻¹` (= corollaire II.18, brique reportée
+  comme CST3/12/20). Vérif indép : conclusion==cible reconstruite depuis primitives BRUTES, hyps EXACTES=ces 3,
+  est_clos=False (conditionnel), theorie==22, pas de _CLE/Theoreme/N.Theorie, 5 tests verts, dossier 8/10.
+- ⚠️ MISMATCH ÉTIQUETTE rapporté dans ANOMALIES (2026-06-26), NON corrigé : deux fonctions nommées `CST8`
+  (`ensembles_structures_complements.py:324` avec @livre fautif E IV.12 p.215 ; `ensembles_structures_props.py:377`)
+  encodent en fait le critère IV.3.1 « unicité solution universelle à iso près ». À auditer côté PDF (E IV.27/p.~230).
 
 ---
 

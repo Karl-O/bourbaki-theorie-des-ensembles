@@ -207,3 +207,29 @@ argument concret pour un **verificateur croise externe** (cf. discussion durciss
 second checker devrait recenser les axiomes de theories dediees employes et confirmer que chacun est une
 instance de schema admissible. Pas un bug — une propriete de conception (S8 est un vrai schema de
 Bourbaki) — mais a tracer explicitement pour le corpus.
+
+## 2026-06-26 — Ecart d'ETIQUETTE "CST8" : DEUX fonctions nommees CST8 encodent en fait IV.3.1
+
+Le vrai **CST8 de §IV.2.1** (E IV.12 : « un σ-morphisme inversible bilatere est un isomorphisme, et
+l'inverse est l'iso reciproque ») etait **ABSENT**. Il est desormais formalise dans
+`iv_2_morphismes_structures_derivees/ensembles_cst8_inversible_iso.py` (`cst8_morphisme_inversible_est_iso`,
+clos-conditionnel : `{morph(E,𝒮,E',𝒮',f), morph(E',𝒮',E,𝒮,g), g=f⁻¹} ⊢ est_iso_morph(E,𝒮,E',𝒮',f)`,
+verifie : conclusion==cible reconstruite depuis primitives brutes, hyps EXACTES = ces 3, theorie==22,
+5 tests verts). La clause d'inversibilite bilatere `g∘f=Id_E ∧ f∘g=Id_E'` est resumee FIDELEMENT par
+son consequent `g = f⁻¹` (= contenu du **corollaire II p.18**, caracterisation des bijections par
+inverse bilatere), fourni en hypothese EXPLICITE — meme convention de « brique reportee » que CST3/CST12/CST20.
+
+**MISMATCH a corriger (rapporte, NON corrige a ce stade) :** deux fonctions code portent le nom « CST8 »
+mais encodent le critere IV.3.1 (« unicite de la solution universelle a un isomorphisme unique pres »),
+PAS le CST8 d'inversibilite de §IV.2.1 :
+- `bourbaki/structures/ensembles_structures_complements.py:324` (`solution_isomorphisme_unique`) porte un
+  `@livre` FAUTIF `Ch.IV §2.1 Crit.CST8 | E IV.12 | PDF p.215` alors que son propre docstring dit
+  « Critere CST8 (IV.3) ». Correction suggeree : `Ch.IV §3.1 Crit.CST8 | E IV.27 | PDF p.~230` (page a
+  confirmer sur le PDF avant de figer — offset Ch IV +203 place IV.3 vers p.227+).
+- `bourbaki/structures/iv_2_morphismes_structures_derivees/ensembles_structures_props.py:377-379`
+  (`solution_universelle_iso_unique`) : bandeau commentaire `CST8, IV.3.1` correct sur le fond (c'est
+  IV.3.1) mais nom « CST8 » en collision avec le vrai CST8 de §IV.2.1. Pas de `@livre` machine-lisible
+  fautif ici ; nom ambigu a clarifier.
+A auditer cote PDF (rendre E IV.27 / p.~230) pour confirmer si Bourbaki nomme effectivement « CST8 » le
+critere d'unicite de §IV.3, ou si c'est une derive interne du code. Le module neuf documente deja ce
+mismatch dans son docstring.
