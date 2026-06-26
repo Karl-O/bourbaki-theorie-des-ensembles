@@ -67,4 +67,40 @@ def non_vide_ssi_element(a="A"):
     return equivalence_transitivite(neg_vide, bridge)  # ¬(A=∅) ⇔ (∃z)(z∈A)
 
 
-__all__ = ["vide_ssi_sans_element", "non_vide_ssi_element"]
+# @livre Ch.II §1.7 Th.- | E II.6 L.36-37 | PDF p.57
+def vide_inclus_partout(x="X"):
+    """⊢ ∅ ⊂ X.   (E II.6 §7 : « On a les théorèmes x∉∅, ∅⊂X, … ».)
+
+    EX FALSO : ¬(z∈∅) [AXIOME_VIDE] donne (z∈∅ ⇒ z∈X) par S2, généralisé sur z.
+    Aucune hypothèse (clos) ; theorie==22.  x : nom de variable ou terme sans z libre."""
+    vX = x if isinstance(x, Terme) else var(x)
+    vz = var("z")
+    ax_vide = N.axiome(E.theorie_ensembles(), E.AXIOME_VIDE)        # (∀z)¬(z∈∅)
+    nz0 = N.modus_ponens(ax_vide, instanciation_en_x(non(appartient(vz, E.VIDE)), "z"))  # ¬(z∈∅)
+    body = N.modus_ponens(nz0, N.s2(non(appartient(vz, E.VIDE)), appartient(vz, vX)))    # z∈∅ ⇒ z∈X
+    return N.generalisation("z", body)                             # (∀z)(z∈∅⇒z∈X) = ∅⊂X
+
+
+# @livre Ch.II §1.7 Th.- | E II.6 L.37-38 | PDF p.57
+def sous_ensemble_vide_ssi_egal(x="X"):
+    """⊢ (X ⊂ ∅) ⇔ (X = ∅).   (E II.6 §7 : « la relation X⊂∅ est équivalente à X=∅ ».)
+
+    ⇒ : de X⊂∅ et ∅⊂X (`vide_inclus_partout`), l'extensionnalité A1 donne X=∅.
+    ⇐ : de X=∅, Leibniz (S6) donne (z∈X ⇔ z∈∅), d'où z∈X⇒z∈∅ ; généralisé = X⊂∅.
+    Clos (est_clos=True) ; theorie==22."""
+    vX, vz = (x if isinstance(x, Terme) else var(x)), var("z")
+    # ── ⇒ : X⊂∅ ⇒ X=∅ (extensionnalité) ────────────────────────────────────────
+    h = N.assume(inclus(vX, E.VIDE))
+    fwd_concl = N.modus_ponens(conjonction_intro(h, vide_inclus_partout(vX)),
+                               extensionnalite_appliquee(vX, E.VIDE))   # X=∅
+    fwd = N.loi_deduction(inclus(vX, E.VIDE), fwd_concl)                 # (X⊂∅) ⇒ (X=∅)
+    # ── ⇐ : X=∅ ⇒ X⊂∅ (Leibniz sur l'appartenance) ─────────────────────────────
+    he = N.assume(egal(vX, E.VIDE))
+    eqv_app = N.modus_ponens(he, N.s6(vX, E.VIDE, "W", appartient(vz, var("W"))))  # z∈X ⇔ z∈∅
+    X_sub_vide = N.generalisation("z", equivalence_avant(eqv_app))       # X⊂∅
+    bwd = N.loi_deduction(egal(vX, E.VIDE), X_sub_vide)                  # (X=∅) ⇒ (X⊂∅)
+    return conjonction_intro(fwd, bwd)                                  # (X⊂∅) ⇔ (X=∅)
+
+
+__all__ = ["vide_ssi_sans_element", "non_vide_ssi_element",
+           "vide_inclus_partout", "sous_ensemble_vide_ssi_egal"]
