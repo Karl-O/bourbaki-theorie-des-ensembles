@@ -28,7 +28,7 @@ thématiques `bourbaki/ensembles/` (ii_1_algebre_booleenne / ii_1 selon le thèm
 - enonce: `|- (X∩Y=∅) ⇔ (X⊂∁Y)`  (+ ⇔ (Y⊂∁X) si faisable d'un bloc).
 - note audit: absent. Extensionnalité + lois du complément déjà présentes (ii_1_algebre_booleenne).
 
-## [ ] resume_recouvrement_complement  [E.R.4 n°14f | PDF p.307]
+## [x] resume_recouvrement_complement  [E.R.4 n°14f | PDF p.307]  — FAIT (2026-06-26 ; {X⊂E,Y⊂E} |- (X∪Y=E ⇔ ∁_E X⊂Y) ; 2 hyps honnêtes (X∪Y⊂E exige les deux) ; verif indep concl==cible, theorie==22, pur 22-ax)
 - enonce: `|- (X∪Y=E) ⇔ (∁X⊂Y)`  (dual de 14e).
 - note audit: absent. Dual ; mêmes lemmes.
 
