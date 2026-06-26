@@ -92,7 +92,7 @@ Re-verifier l'absence (grep) au debut de chaque delegation (un import reussi ne 
 - lemmes: criteres_quantif2.py (c34_pour_tout L.21, c34_existe L.34, c35 L.43) ; tactiques_abrege_quantif.py (existe_commute L.107, et_existe_droite L.75, et_existe_gauche L.91) ; congruence_quantif.py (congruence_pour_tout L.57, congruence_existe L.50) ; criteres_C.py (c22_transitivite L.96)
 - fichier: bourbaki/logique/i_3_quantifies/criteres_typiques_c39_c42.py
 
-## [ ] c45_univoque_avant  (moyen)  [secteur I.5.3]
+## [x] c45_univoque_avant  (moyen)  [secteur I.5.3]  — FAIT (2026-06-26 ; déf univoque E I.40 + sens direct C45 E I.41 ; verif indep concl==impl(R,x=τ_x(R)), hyps=={univoque(R)}, (x|x)R==R structurel ; sens réciproque hors scope)
 - repere: E I.41 L.5-13 | PDF p.41
 - statut: MANQUANT (ni def univoque ni c45)
 - enonce: `relation_univoque_x(R) := (∀y)(∀z)(((y|x)R et (z|x)R) => (y=z))` (« il existe au plus un x tel que R », E I.40) PUIS sens direct C45 : `{ relation_univoque_x(R) } |- R => (x = tau_x(R))`. (Sens reciproque hors scope.)
