@@ -68,7 +68,7 @@ Re-verifier l'absence (grep) au debut de chaque delegation (un import reussi ne 
 - lemmes: ensembles_ordre_monotone.py (est_reticule, admet_borne_sup_inf) ; ensembles_ordre_relation.py (borne_sup/inf, majorant/minorant) ; ensembles_couples.py (membre_paire_*, _instance_paire) ; ensembles_abrege.py (est_totalement_ordonne) ; iii_1_12_totalement_ordonnes/ensembles_prop12_sup_total.py (cas/tiers_exclu)
 - fichier: bourbaki/ordre/iii_1_relations_ordre/iii_1_12_totalement_ordonnes/ensembles_total_implique_reticule.py
 
-## [ ] c39_existe_typique  (faible/moyen)  [secteur I.4.4]
+## [x] c39_existe_typique  (faible/moyen)  [secteur I.4.4]  — FAIT (2026-06-26 ; ∃ et ∀ ; verif indep concl==cible, hyps=={A⇒(R⇒S)})
 - repere: E I.37 L.18-26 | PDF p.37
 - statut: MANQUANT
 - enonce: `{ A=>(R=>S) } |- (E_A x)R => (E_A x)S` et `(A_A x)R => (A_A x)S`, ou (E_A x)R:=(∃x)(A et R), (A_A x)R:=non(∃x)(A et non R).
@@ -76,7 +76,7 @@ Re-verifier l'absence (grep) au debut de chaque delegation (un import reussi ne 
 - lemmes: congruence_quantif.py (monotonie_existe L.29) ; criteres_C.py (c23_negation L.104) ; tactiques_prop.py (conjonction_intro L.58, contraposition) ; criteres_quantif2.py (c35 L.43, patron) ; assemblage.py (conjonction, existe, negation)
 - fichier: bourbaki/logique/i_3_quantifies/criteres_typiques_c39_c42.py
 
-## [ ] c40_existe_ou_typique  (moyen)  [secteur I.4.4]
+## [x] c40_existe_ou_typique  (moyen)  [secteur I.4.4]  — FAIT (2026-06-26 ; ∃/ou et ∀/et ; clos ; verif indep concl==cible)
 - repere: E I.37 L.28-33 | PDF p.37
 - statut: MANQUANT
 - enonce: `|- (A_A x)(R et S) <=> ((A_A x)R et (A_A x)S)` et `|- (E_A x)(R ou S) <=> ((E_A x)R ou (E_A x)S)`.
@@ -84,7 +84,7 @@ Re-verifier l'absence (grep) au debut de chaque delegation (un import reussi ne 
 - lemmes: congruence_quantif.py (congruence_existe L.50, congruence_pour_tout L.57, monotonie_existe L.29) ; criteres_quantif2.py (c35 L.43) ; criteres_C.py (c22_transitivite L.96, c18 L.79) ; tactiques_abrege2.py (_et_ou_distrib L.174)
 - fichier: bourbaki/logique/i_3_quantifies/criteres_typiques_c39_c42.py
 
-## [ ] c42_commute_typique  (moyen)  [secteur I.4.4]
+## [x] c42_commute_typique  (moyen)  [secteur I.4.4]  — FAIT (2026-06-26 ; ∀∀ et ∃∃ ; clos ; verif indep concl==cible). RESTE : 3e ligne C42 (∃_A x)(∀_B y)R ⇒ (∀_B y)(∃_A x)R (implication simple, hors périmètre) — suivi éventuel.
 - repere: E I.37 L.35-41 | PDF p.37
 - statut: MANQUANT
 - enonce: si x∉B et y∉A : `|- (A_A x)(A_B y)R <=> (A_B y)(A_A x)R` et `|- (E_A x)(E_B y)R <=> (E_B y)(E_A x)R`.
