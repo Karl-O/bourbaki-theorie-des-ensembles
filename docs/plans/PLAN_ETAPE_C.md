@@ -52,7 +52,7 @@ Re-verifier l'absence (grep) au debut de chaque delegation (un import reussi ne 
 - lemmes: ensembles_ordre_relation.py (est_ordre, reflexivite_sur, transitivite) ; ensembles_ordre_monotone.py (composee_croissantes_est_croissante = patron _val/instanciation) ; ensembles_abrege.py (valeur)
 - fichier: bourbaki/ordre/iii_1_relations_ordre/iii_1_6_ordre_produit/ensembles_ordre_applications.py
 
-## [ ] monotonie_composee_graphes  (moyen)  [secteur II.3.3]
+## [x] monotonie_composee_graphes  (moyen)  [secteur II.3.3]  — FAIT (2026-06-26 ; E II.13 ; verif indep concl==inclus(G1'∘G1,G2'∘G2) générique, hyps=={inclus(G1,G2),inclus(G1',G2')}, theorie==22 ; passage w→couple via AXIOME_COMPOSEE, pas de variante couple-à-couple)
 - repere: E II.13 (n°3, Remarque) | PDF p.64
 - statut: MANQUANT
 - enonce: `{G1 ⊂ G2, G1' ⊂ G2'} |- (G1'∘G1) ⊂ (G2'∘G2)` (monotonie de la composee de graphes).
