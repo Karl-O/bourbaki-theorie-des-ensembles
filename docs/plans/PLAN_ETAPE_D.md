@@ -32,7 +32,7 @@ thématiques `bourbaki/ensembles/` (ii_1_algebre_booleenne / ii_1 selon le thèm
 - enonce: `|- (X∪Y=E) ⇔ (∁X⊂Y)`  (dual de 14e).
 - note audit: absent. Dual ; mêmes lemmes.
 
-## [ ] resume_monotonie_union_inter  [E.R.5 n°14h | PDF p.308]
+## [x] resume_monotonie_union_inter  [E.R.5 n°14h | PDF p.308]  — FAIT (2026-06-26 ; verif indep concl==(X∪Z⊂Y∪Z et X∩Z⊂Y∩Z), hyps=={inclus(X,Y)}, theorie==22, pur 22-ax via AXIOME_REUNION/INTER ; ii_1_algebre_booleenne/)
 - enonce: `|- (X⊂Y) ⇒ ( (X∪Z ⊂ Y∪Z) et (X∩Z ⊂ Y∩Z) )`  (monotonie de ∪/∩).
 - note audit: absent au niveau binaire. Suit des lois de treillis des parties.
 
