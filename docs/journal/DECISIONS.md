@@ -185,3 +185,19 @@ fonctionnelles). ⇒ = `c45_avant(R,"x")` (univocité → R⇒x=τx R, et τx(R)
 la projection → zéro renommage. RÈGLE : ne jamais bricoler un τ-fonctionnel à la main quand un critère C
 le caractérise ; chercher d'abord le critère que Bourbaki invoque. Les deux hypothèses sont fidèles
 (« fonctionnelle » = univoque + existe) ; univoque(R) est elle-même fermable via la Proposition 1 (résidu).
+
+### II.3.8 dualité rétraction↔section (E II.19) : REJETÉE (tautologie déguisée) — 2026-06-30
+Un agent-scout a trouvé et formalisé le « pont » `est_retraction(R,F,A) ⇒ est_section(F,R,A)`
+(et dual), 5 tests verts, clos, theorie==22, énoncé==livre. **Re-vérification superviseur :
+REJET, non commité.** Raison : les deux prédicats sont LITTÉRALEMENT la même condition r∘f=Id ;
+le « théorème » est `P ⇒ α-renommage(P)` (vérifié : `alpha_egal(est_retraction(R,F,A),
+est_section(F,R,A,y='z'))==True`). C'est une **tautologie déguisée** (règle « aucune tautologie
+déguisée en théorème » ; cf. précédent `_est_iso_morph_reflexivite_triviale` gardé hors `__all__`).
+Bourbaki lui-même la donne comme immédiate. Aucune version non-triviale possible (rien à sauver).
+- BONUS : l'agent a re-trouvé le **collision-y connue** de `est_section` (liant ∀ défaut « y » ∩
+  τ-muette « y » de `valeur` → formule dégradée ; `est_retraction` y échappe car liant « x »).
+  DÉJÀ documentée (`ensembles_section_unique.py:23`) et gérée au cas par cas ; PAS de fix global
+  (52 sites, `valeur` « y » rétro-compatible projet) — hors scope.
+- LEÇON RE-CONFIRMÉE : la re-vérification indépendante du travail d'agent N'EST PAS optionnelle —
+  « 5 tests verts / FAIT » de l'agent aurait committé une tautologie. §II.3.4-3.8 = SATURÉE
+  (seul « trou » trouvé = α-trivial). Frontière réelle = chantiers cardinaux (lourds/lents).
