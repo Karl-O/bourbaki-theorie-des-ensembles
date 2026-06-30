@@ -667,9 +667,20 @@ donnée d'arrangement non-miroir dans le corpus), pas 30 (aucun contexte AST hor
 pas 31 (enrichir la grammaire ne paie plus), pas 32 (même la cible — le signal parfait — est inexploitable
 à n=2 et dégrade la référence). **VERROU = DONNÉES**, ni outillage ni modèle ni signal.
 
+**Arc (2) niveau TACTIQUE — SCOPÉ (pas 38) → MÊME mur de données.** Probe-first (cf. `SCOPING_TACTIQUE.md`) :
+le corpus tactique = 24 preuves / 350 pas / **71 tactiques** (30 hapax). La brique nouvelle = un classifieur
+de la tactique `fn` ; or **cross-validé (GroupKFold/preuve) il n'atteint que 18 % top-1 = la baseline
+marginale** (le 47 % bigramme était in-sample). → le niveau tactique a PLUS de pas mais PLUS de classes +
+parcimonie → **même verrou de données**. Le construire reproduirait le diagnostic. **Non prioritaire avant
+d'agrandir le corpus.** (7ᵉ fois que prober-d'abord évite une grosse brique vouée au mur.)
+
+**Constat MÉTA (le plus important)** : la contrainte liante de TOUT le méta-algo est la **TAILLE DU
+CORPUS**, confirmée sur DEUX frames indépendants (term-arrangement pas 28-32, tactique pas 38). La cure est
+unique et HORS boucle outils_ia.
+
 **Directions (hors boucle outils_ia)** :
-- **FORMALISER plus de preuves d'arrangement** dans `bourbaki/` (≥3-4 par schéma `composee/diagonale`) =
-  la cure DIRECTE : donne au ranker de quoi apprendre l'appariement candidat↔but (la cible, déjà codable,
-  redeviendrait alors le bon levier) ;
-- **niveau TACTIQUE** (régénérer des pas-tactiques, pas seulement des termes) ;
-- **GFlowNet / diffusion sur le DAG** de dérivations (la vision DDPM→marche discrète du projet).
+- **FORMALISER plus de preuves** dans `bourbaki/` (le projet principal) = la cure DIRECTE et universelle :
+  avec un corpus plus grand, le ranker TreeNN, le classifieur `fn` ET la cible (codée pas 32, en historique
+  git) redeviennent des leviers payants. Pour l'effet miroir : ≥3-4 preuves par schéma `composee/diagonale` ;
+- **niveau TACTIQUE** et **GFlowNet/diffusion DAG** : structurellement faisables mais encore plus
+  data-hungry → à reprendre APRÈS l'agrandissement du corpus.
