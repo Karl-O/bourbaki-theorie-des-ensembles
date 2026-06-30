@@ -80,7 +80,33 @@ def _est_theoreme(obj) -> bool:
     return type(obj).__name__ == "Theoreme" and hasattr(obj, "conclusion")
 
 
-def exporter_module(modname: str, records: list[dict]) -> tuple[int, int]:
+def _appel(fn):
+    """Appelle fn avec ses args par défaut ; sinon tente des témoins génériques.
+
+    Beaucoup de fonctions-théorème ont une signature tout-défaut (f(x="x")) → fn().
+    Celles qui exigent des relations/termes (f(a, r, s, x)) : on essaie des TÉMOINS
+    génériques — une relation atomique fraîche par paramètre « relationnel », un nom
+    par paramètre « lettre » — pour augmenter la couverture du dataset."""
+    try:
+        return fn()
+    except TypeError:
+        pass
+    import inspect as _i
+    from bourbaki.logique.i_1_termes_relations.formule import var, appartient
+    sig = _i.signature(fn)
+    args = []
+    for k, (nom, p) in enumerate(sig.parameters.items()):
+        if p.default is not _i.Parameter.empty:
+            break
+        # heuristique : 1-lettre minuscule courante => nom de lettre ; sinon relation atomique
+        if nom in ("x", "y", "z", "u", "v", "w", "t", "i", "k"):
+            args.append(nom)
+        else:                                          # relation/terme témoin frais
+            args.append(appartient(var(f"a{k}"), var(f"E{k}")))
+    return fn(*args)
+
+
+def exporter_module(modname: str, records: list[dict], trace: bool = True) -> tuple[int, int]:
     """Ajoute un record par fonction-théorème appelable du module. (faits, sautés)."""
     mod = importlib.import_module(modname)
     fichier = inspect.getsourcefile(mod)
@@ -95,16 +121,21 @@ def exporter_module(modname: str, records: list[dict]) -> tuple[int, int]:
         if name.endswith("_cible") or name.startswith("theorie_") or name.startswith("axiome_"):
             continue
         try:
-            thm, steps = tracer_theoreme(fn)             # appel + trajectoire pas-à-pas
+            if trace:
+                thm, steps = tracer_theoreme(lambda: _appel(fn))   # appel + trajectoire
+            else:
+                thm, steps = _appel(fn), None
         except Exception:
             sautes += 1
             continue
         if not _est_theoreme(thm):
             sautes += 1
             continue
-        rule_hist: dict[str, int] = {}
-        for st in steps:
-            rule_hist[st["rule"]] = rule_hist.get(st["rule"], 0) + 1
+        rule_hist = None
+        if steps is not None:
+            rule_hist = {}
+            for st in steps:
+                rule_hist[st["rule"]] = rule_hist.get(st["rule"], 0) + 1
         # vérif : si un companion <name>_cible existe, comparer conclusion == cible
         verified = None
         cible_fn = getattr(mod, name + "_cible", None) or getattr(mod, "cible_" + name, None)
@@ -130,23 +161,56 @@ def exporter_module(modname: str, records: list[dict]) -> tuple[int, int]:
             "hypotheses_ast": sorted(repr(h) for h in thm.hypotheses),
             "proof_src": proof_src,
             "verified": verified,
-            "trace_len": len(steps),                     # nb de pas primitifs (profondeur DAG)
-            "rule_hist": rule_hist,                      # histogramme des règles noyau
+            "trace_len": (len(steps) if steps is not None else None),  # profondeur DAG
+            "rule_hist": rule_hist,                       # histogramme des règles noyau
         })
         faits += 1
     return faits, sautes
 
 
+def _decouvrir(packages: list[str]) -> list[str]:
+    """Liste les modules `bourbaki...` sous chaque package (récursif), pour l'export large.
+
+    `packages` = noms de packages importables (ex. 'bourbaki.ensembles'). On marche
+    le dossier du package et on renvoie les noms de modules `.py` (hors __init__,
+    __pycache__). ÉVITE les cardinaux/entiers lents si non listés explicitement."""
+    import pkgutil
+    mods: list[str] = []
+    for pkgname in packages:
+        try:
+            pkg = importlib.import_module(pkgname)
+        except Exception:
+            continue
+        for info in pkgutil.walk_packages(pkg.__path__, pkgname + "."):
+            if not info.ispkg and "__pycache__" not in info.name:
+                mods.append(info.name)
+    return sorted(set(mods))
+
+
+# Packages « rapides » par défaut pour --discover (logique + ensembles + ordre III.1 ;
+# PAS cardinaux/entiers, imports lents).
+PACKAGES_FAST = ["bourbaki.logique", "bourbaki.ensembles", "bourbaki.ordre",
+                 "bourbaki.structures"]
+
+
 def main(argv: list[str]) -> int:
-    modules = argv[1:] or MODULES_FAST
+    args = argv[1:]
+    trace = "--no-trace" not in args
+    args = [a for a in args if a != "--no-trace"]
+    if args and args[0] == "--discover":
+        packages = args[1:] or PACKAGES_FAST
+        modules = _decouvrir(packages)
+        print(f"# --discover : {len(modules)} modules sous {packages} "
+              f"(trace={'on' if trace else 'off'})", file=sys.stderr)
+    else:
+        modules = args or MODULES_FAST
     records: list[dict] = []
     faits_tot = sautes_tot = 0
     for m in modules:
         try:
-            f, s = exporter_module(m, records)
+            f, s = exporter_module(m, records, trace=trace)
             faits_tot += f
             sautes_tot += s
-            print(f"# {m}: {f} théorèmes, {s} sautés", file=sys.stderr)
         except Exception as e:                           # import cassé / module absent
             print(f"# {m}: ERREUR {type(e).__name__}: {e}", file=sys.stderr)
     for r in records:

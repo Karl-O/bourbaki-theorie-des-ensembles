@@ -1,0 +1,3 @@
+# Corpus complets régénérables (gros) — NE PAS committer ; régénérables via export_corpus.py --discover
+corpus_full.jsonl
+*_full.jsonl

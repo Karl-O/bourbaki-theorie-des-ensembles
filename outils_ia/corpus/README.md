@@ -54,7 +54,20 @@ C'est la donnée idéale pour diffusion discrète / GFlowNet : **forward** = eff
 **reverse** = les reconstruire, **kernel** = filtre de validité à chaque pas. Voir mémoire
 `meta-algo-diffusion-marche`.
 
-## Aussi à exporter (passes ultérieures)
-- les **traces d'erreurs** (`DECISIONS.md`/`ANOMALIES.md` : tautologies rejetées, verrous-τ,
-  captures) = exemples NÉGATIFS / marches mortes étiquetées ;
-- l'arbre `@livre` complet (chapitre→§→page) = structure conditionnelle (le « prompt » = le but).
+## Export large + exemples négatifs (pas 3, FAIT)
+
+- **Export large** : `export_corpus.py --discover [packages]` auto-découvre tous les
+  modules sous des packages (défaut : `logique`, `ensembles`, `ordre`, `structures` —
+  PAS cardinaux/entiers, lents). `--no-trace` pour la vitesse (pas de trajectoire).
+  Les fonctions-théorème à ARGUMENTS sont appelées via des témoins génériques (`_appel`).
+  Mesure : `logique`+`ensembles` ⇒ **282 théorèmes** (97 modules, 0 erreur d'import).
+  Le corpus complet (`corpus_full.jsonl`) est **gitignoré** (régénérable, gros).
+- **Exemples négatifs** : `export_erreurs.py` parse `DECISIONS.md`/`ANOMALIES.md` en JSONL
+  de **marches mortes étiquetées** (`tautologie-rejetee`, `verrou-tau`, `choix-bloque`,
+  `fidelite`, `lecon`…). Échantillon `erreurs_sample.jsonl`. Données pour PÉNALISER ces
+  patterns côté générateur (le « pourquoi » des erreurs, documenté, devient de la donnée).
+
+## Passes ultérieures
+- arbre `@livre` complet (chapitre→§→page) = structure conditionnelle (le « prompt » = le but) ;
+- 1ʳᵉ analyse stats du dataset (distrib `trace_len`, règles, profondeur, réutilisation de
+  lemmes) pour calibrer le générateur (GFlowNet/diffusion).
