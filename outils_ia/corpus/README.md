@@ -245,10 +245,37 @@ arguments-termes** (le noyau validant), ce que la **récupération/copie ne peut
 **confirme le besoin d'un générateur APPRIS** (et explique pourquoi). `python
 outils_ia/corpus/proto_macro_noyau.py [module…]`.
 
+## Substituer les arguments-termes (pas 17, FAIT) — `proto_macro_termes.py`
+
+Test DIRECT de l'hypothèse « macro = template paramétré » : on étend le transplant de bloc pour
+substituer AUSSI les **littéraux-chaînes** du bloc donneur (les `'x'`/`'y'` nommant les variables
+liées) vers les chaînes locales de P, pas seulement les variables Python. Mesure côte-à-côte sur les
+mêmes 103 blocs (donneuse ≠ P), noyau validant :
+
+| | variables seules (pas 16-suite) | **+ substitution des termes** |
+|---|---|---|
+| `projection` (pr1/pr2 symétriques) | 0 % | **15 %** |
+| `identite` | 0 % | 0 % |
+| `diagonale` (5 preuves) | 1 % | 1 % |
+| **TOTAL** | **0 % (1/103)** | **5 % (6/103)** |
+
+**Le lift est réel mais localisé** : la substitution atomique rescape les cas SYMÉTRIQUES (projection
+`'x'↔'y'`) mais pas le reste. Cause (deux macros inspectées) : les arguments d'une macro sont des
+**SOUS-TERMES STRUCTURÉS** (arbres d'expression), pas des atomes —
+- identite : `…E.composee(vG, E.diagonale(vA))…` vs `…E.composee(E.diagonale(vB), vG)…` (la forme du
+  sous-terme change : ordre composée/diagonale) ;
+- diagonale : `egal(cple, E.couple(vu, vu))` vs `egal(var('u'), vz)` (sous-termes entièrement
+  différents ; `vu` variable vs `var('u')` appel).
+
+**Conclusion (la plus précise jusqu'ici).** Une macro est un template paramétré par des **termes
+STRUCTURÉS** ; l'instancier = **synthétiser des arbres d'expression** (le noyau validant), ce que ni
+le renommage de variables ni la substitution d'atomes ne peuvent faire (plafond 5–15 %). Cela ne
+**confirme** pas seulement le besoin d'un générateur APPRIS : ça en **spécifie le TYPE DE SORTIE** —
+des termes structurés. `python outils_ia/corpus/proto_macro_termes.py [module…]`.
+
 ## Ce qui reste = enrichir le générateur appris (torch/sklearn dispo)
-- pas 17 : **substituer les arguments-termes** d'une macro (chaînes nommant les variables liées,
-  objets locaux) — pas juste les variables Python — et re-mesurer le transfert de bloc (test direct
-  de l'hypothèse « template paramétré ») ;
-- générateur d'ARGUMENTS appris (le squelette-macro est donné, le modèle remplit les slots-termes,
-  noyau filtrant) = le vrai cœur generate-and-verify multi-pas ;
-- mise à l'échelle BEAM (K plus grand, preuves plus longues) ; niveau TACTIQUE ; GFlowNet/diffusion.
+- pas 18 : **générateur de TERMES appris** — squelette-macro donné, le modèle SYNTHÉTISE les
+  sous-termes (arbres d'expression) des slots, le noyau filtrant = le vrai cœur generate-and-verify
+  multi-pas (sortie = termes structurés, cf. pas 17) ;
+- mise à l'échelle BEAM (K plus grand, preuves plus longues) ; niveau TACTIQUE ; GFlowNet/diffusion ;
+  passage à torch (embeddings d'AST de termes) pour la synthèse.
