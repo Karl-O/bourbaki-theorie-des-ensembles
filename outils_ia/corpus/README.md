@@ -143,7 +143,39 @@ L'itératif **double K=2 et ×5 K=3** : recalculer après chaque remplissage ré
 d'assignation multi-trous. C'est la marche guidée multi-pas, le noyau ne jugeant qu'à la fin
 (generate(politique) + verify(noyau)).
 
+## Bibliothèque INTER-preuves (pas 14, FAIT) — `proto_inter_preuves.py` : vocabulaire PARTAGÉ
+
+Jusqu'ici la « bibliothèque » candidate = les pas de la preuve COURANTE seulement → on
+**recombine UNE preuve**, on ne génère pas. Ici on construit un **pool PARTAGÉ** (tous les pas
+de TOUTES les preuves du module) et son **vocabulaire de TEMPLATES** = les couples
+*(tactique, arité)* distincts. On teste alors si un trou (suppression 1-pas) se comble par une
+brique venue d'AILLEURS, sous deux régimes — le NOYAU validant (OK == cible) :
+- **VERBATIM** — ré-insérer le pas étranger tel quel ;
+- **TEMPLATE-TRANSPLANT** — *régénérer* le pas depuis un template + **recherche de binding
+  local** (renommer la sortie vers la variable manquante = data-flow, re-lier les lectures aux
+  variables locales disponibles ; on ne re-lie que les variables proof-locales, les tactiques/`N`
+  restent intactes ; bornes : ≤2 lectures re-liées, budget dur d'essais/trou car la
+  ré-exécution-noyau par variante coûte 1–70 ms selon la preuve).
+
+Mesure (modules **multi-preuves** légers `projection` + `identite`, **36 trous**) :
+
+| régime | comblés | lecture |
+|---|---|---|
+| local (oracle, sanity) | 36 (100 %) | la preuve est réparable par sa propre brique |
+| **VERBATIM** (pas étranger tel quel) | **0 (0 %)** | un pas littéral ne transfère JAMAIS : les variables diffèrent |
+| **TEMPLATE-TRANSPLANT** | **16 (44 %)** | le pas se **régénère** depuis le vocabulaire de templates + binding |
+| dont **tactique ÉTRANGÈRE** (signature absente de la preuve) | **0 (0 %)** | ces modules homogènes n'importent aucune tactique *nouvelle* |
+
+**Ce que ça établit.** Le vocabulaire partagé opère au niveau **(tactique + binding)**, pas du
+statement littéral : régénérer ≠ recaler verbatim (0 % → 44 %). C'est le 1er pas concret vers
+*générer* un pas hors de la preuve courante. **Limite honnête** : sur ces preuves symétriques, la
+tactique du pas supprimé est toujours DÉJÀ employée ailleurs dans la même preuve (« tactique
+étrangère » = 0 %) — l'**import d'une tactique genuinement absente** reste à démontrer sur un
+module **hétérogène** (testbed `diagonale_couple`, 6 preuves variées ; mesuré au tick suivant car
+ses preuves lourdes — `couple_diagonale` = 6707 pas primitifs — coûtent ~20–30 ms par essai-noyau).
+`python outils_ia/corpus/proto_inter_preuves.py [module…]`.
+
 ## Ce qui reste = enrichir le générateur appris (torch/sklearn dispo)
+- IMPORT d'une tactique ÉTRANGÈRE : module hétérogène + binding-search élargi (pas 14 suite) ;
 - BEAM search (au lieu de greedy top-1) + features plus riches pour relever K=3 ;
-- bibliothèque INTER-preuves (générer un pas hors des statements de la preuve courante) ;
 - niveau TACTIQUE (STATS.md) ; library-learning ; GFlowNet/diffusion ; mise à l'échelle données.

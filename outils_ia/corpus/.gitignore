@@ -1,3 +1,6 @@
 # Corpus complets régénérables (gros) — NE PAS committer ; régénérables via export_corpus.py --discover
 corpus_full.jsonl
 *_full.jsonl
+
+# Sorties temporaires de mesure (runs longs en arrière-plan)
+_*.out
