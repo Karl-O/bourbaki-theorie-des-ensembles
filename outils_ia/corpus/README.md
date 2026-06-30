@@ -130,13 +130,20 @@ généralise, et est robuste cross-modèle**. C'est l'embryon du générateur ; 
 
 On supprime K pas et on RECONSTRUIT en chaînant la repair-policy apprise (top-1 par trou)
 + filtre noyau final = generate(politique)+verify(noyau), testé sur preuves TENUES À L'ÉCART :
-- **K=1 : 100 %** reconstruites (15/15) — single-step excellent ;
-- **K=2 : 40 %** · **K=3 : 13 %** — la chute mesure l'**ambiguïté d'assignation multi-trous**
-  (le data-flow ne lie pas un candidat à UN trou précis quand plusieurs manquent).
-Diagnostic clair → prochain gain : reconstruction **itérative** (remplir le trou le plus sûr
-d'abord, RECALCULER, recommencer) plutôt qu'indépendante ; puis beam search / GFlowNet.
+remplissage **INDÉPENDANT** (top-1 par trou) vs **ITÉRATIF** (greedy + recompute : remplir le
+trou de plus haute confiance d'abord, RECALCULER, recommencer) — sur preuves tenues à l'écart :
+
+| K (pas supprimés) | indépendant | **itératif (pas 13)** |
+|---|---|---|
+| 1 | 100 % | 100 % |
+| 2 | 41 % | **79 %** |
+| 3 | 4 %  | **20 %** |
+
+L'itératif **double K=2 et ×5 K=3** : recalculer après chaque remplissage réduit l'ambiguïté
+d'assignation multi-trous. C'est la marche guidée multi-pas, le noyau ne jugeant qu'à la fin
+(generate(politique) + verify(noyau)).
 
 ## Ce qui reste = enrichir le générateur appris (torch/sklearn dispo)
-- reconstruction ITÉRATIVE (greedy + recompute) pour relever K=2,3 ; puis beam / GFlowNet ;
+- BEAM search (au lieu de greedy top-1) + features plus riches pour relever K=3 ;
 - bibliothèque INTER-preuves (générer un pas hors des statements de la preuve courante) ;
-- niveau TACTIQUE (STATS.md) ; library-learning ; mise à l'échelle des données (gitignoré).
+- niveau TACTIQUE (STATS.md) ; library-learning ; GFlowNet/diffusion ; mise à l'échelle données.

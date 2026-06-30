@@ -117,12 +117,44 @@ def reconstruire(mod, name, fdef, body, start, model, vec, K, rng) -> bool:
         scores = model.predict_proba(vec.transform([_feats(remaining, idx, c) for c in pool]))[:, 1]
         choix[g] = pool[int(np.argmax(scores))]           # top-1 du modèle pour ce trou
     # reconstruire le corps complet : statements gardés + candidats choisis aux trous
-    recon, gi = [], 0
+    recon = [choix[i] if i in choix else body[i] for i in range(len(body))]
+    return _statut(mod, name, _rebuild(fdef, recon), cible) == "OK"
+
+
+def _partial(body, gaps, filled, g):
+    """Corps partiel : gardés + candidats DÉJÀ remplis ; trous non-remplis ôtés ;
+    `g` laissé comme HOLE. Renvoie (statements, indice d'insertion de g)."""
+    stmts, idx_g = [], None
     for i in range(len(body)):
-        if i in choix:
-            recon.append(choix[i])
-        else:
-            recon.append(body[i])
+        if i == g:
+            idx_g = len(stmts)                            # le trou g est ici
+            continue
+        if i in gaps and i not in filled:
+            continue                                      # autre trou non-rempli : toujours manquant
+        stmts.append(filled[i] if i in filled else body[i])
+    return stmts, idx_g
+
+
+def reconstruire_iteratif(mod, name, fdef, body, start, model, vec, K, rng):
+    """Greedy + recompute : remplir le trou de plus haute confiance, recalculer, recommencer."""
+    cible = _cible_de(mod, name)
+    pool = body[start:]
+    positions = list(range(start, len(body)))
+    if len(positions) < K:
+        return None
+    gaps = sorted(rng.sample(positions, K))
+    filled, restants = {}, set(gaps)
+    while restants:
+        best = (-1.0, None, None)                          # (score, gap, candidat)
+        for g in restants:
+            stmts, idx_g = _partial(body, gaps, filled, g)
+            scores = model.predict_proba(vec.transform([_feats(stmts, idx_g, c) for c in pool]))[:, 1]
+            j = int(np.argmax(scores))
+            if scores[j] > best[0]:
+                best = (float(scores[j]), g, pool[j])
+        filled[best[1]] = best[2]                          # remplir le trou le plus sûr
+        restants.discard(best[1])
+    recon = [filled[i] if i in filled else body[i] for i in range(len(body))]
     return _statut(mod, name, _rebuild(fdef, recon), cible) == "OK"
 
 
@@ -134,7 +166,8 @@ def main(argv):
     model = RandomForestClassifier(n_estimators=200, class_weight="balanced", random_state=0).fit(Xv, y)
     print(f"# train : {len(y)} exemples, {y.sum()} (+) | test sur preuves TENUES À L'ÉCART")
     rng = random.Random(20260630)
-    par_K = {1: [0, 0], 2: [0, 0], 3: [0, 0]}             # K -> [succès, total]
+    indep = {1: [0, 0], 2: [0, 0], 3: [0, 0]}            # K -> [succès, total]
+    iterv = {1: [0, 0], 2: [0, 0], 3: [0, 0]}
     for modname in TEST:
         try:
             mod = importlib.import_module(modname)
@@ -142,18 +175,23 @@ def main(argv):
             continue
         for name, fdef, body, start in _theoremes(mod):
             for K in (1, 2, 3):
-                for _ in range(5):                        # 5 essais aléatoires par (théorème, K)
-                    ok = reconstruire(mod, name, fdef, body, start, model, vec, K, rng)
-                    if ok is None:
-                        continue
-                    par_K[K][1] += 1
-                    par_K[K][0] += int(ok)
-    print("\n[séquentiel] reconstruction valide (noyau OK) par nb de pas supprimés K :")
-    for K, (s, t) in par_K.items():
-        if t:
-            print(f"    K={K} : {s}/{t} reconstruites  ({100*s//t}%)")
-    print("# = marche guidée multi-pas : la politique apprise propose, le noyau valide à la fin.")
-    print("# (K=1 ≈ parfait ; la chute avec K mesure l'ambiguïté d'assignation multi-trous.)")
+                for _ in range(8):                        # 8 essais aléatoires par (théorème, K)
+                    a = reconstruire(mod, name, fdef, body, start, model, vec, K, rng)
+                    b = reconstruire_iteratif(mod, name, fdef, body, start, model, vec, K, rng)
+                    if a is not None:
+                        indep[K][1] += 1
+                        indep[K][0] += int(a)
+                    if b is not None:
+                        iterv[K][1] += 1
+                        iterv[K][0] += int(b)
+    print("\n[séquentiel] reconstruction valide (noyau OK) — INDÉPENDANT vs ITÉRATIF (greedy+recompute) :")
+    for K in (1, 2, 3):
+        si, ti = indep[K]
+        sj, tj = iterv[K]
+        if ti and tj:
+            print(f"    K={K} : indép {si}/{ti} ({100*si//ti}%)  →  itératif {sj}/{tj} ({100*sj//tj}%)")
+    print("# = marche guidée multi-pas : remplir le trou le plus sûr d'abord + recalculer relève K≥2.")
+    print("# (le noyau ne juge qu'à la fin : generate(politique) + verify(noyau).)")
     return 0
 
 
