@@ -45,6 +45,9 @@ from repair_learned import _assignes                           # noqa: E402
 PST.MAXT = 1500          # pool objets ≤1500 (+ formes ≤1500) ; le terme-oracle depth-2 doit y être
 CAP = 200                # budget FIXE d'essais-noyau par bloc
 E = 2                    # ensemble de graines
+HOLDOUT = "module"       # "module" (pas 27 : module test jamais vu → TreeNN 50 %) | "proof" (pas 28 :
+#                          leave-one-out — sur les 2 preuves MIROIR d'identite, 0 % car la sœur tenue
+#                          DANS le train est ADVERSARIALE : même contexte, arrangement opposé. cf README.
 TRAIN = [                # modules d'ENTRAÎNEMENT (distincts du test)
     "bourbaki.ensembles.ii_2_couples_produit.ensembles_projection_fonctionnelle",
     "bourbaki.ensembles.ii_3_correspondances.ensembles_diagonale_couple",
@@ -112,16 +115,12 @@ def regen_e2e(mod, P, infoP, occ, L, pool, vars_locales, nets, use_tree):
     return False
 
 
-def main(argv):
-    print(f"# entraînement TreeNN (ensemble {E}) sur {len(TRAIN)} modules d'ENTRAÎNEMENT…",
-          file=sys.stderr)
-    train_slots = collecte_slots(TRAIN)                        # remplit CF_VOCAB
-    nets = [_entraine(train_slots, seed=sd) for sd in range(E)]
-    print(f"# TreeNN entraîné ({len(train_slots)} slots train) | test end-to-end sur preuves TENUES À L'ÉCART",
-          file=sys.stderr)
-
-    tot = {"blocs": 0, "in_gram": 0, "brut": 0, "tree": 0}
-    for modname in TEST:
+def collecte_named(modnames, exclude=None):
+    """Comme proto_synth_torch.collecte_slots mais TAGGE le nom de la preuve et peut en EXCLURE une
+    (leave-one-out proof-level). Remplit CF_VOCAB. Réutilise la même logique de slots in-grammaire."""
+    slots = []
+    gid = 0
+    for modname in modnames:
         mod, proofs = _proofs(modname)
         if not proofs:
             continue
@@ -133,57 +132,120 @@ def main(argv):
                     ng[tuple(sg[i:i + nl])].add(nm)
         macros = {m for m, pr in ng.items() if len(pr) >= 2}
         for P in proofs:
-            if P in TEST_LOURD:
+            if P in TEST_LOURD or P == exclude:
                 continue
+            gid += 1
             fdef, body, start, sigs = proofs[P]
             params = {a.arg for a in fdef.args.args}
             va = {v for st in body[start:] for v in _assignes(st)} | params
             sa = {s for s in _str_consts(body) if s.isidentifier() and len(s) <= 3}
             pool = synth_termes(va, sa)
-            pd = set(ast.dump(t) for t in pool)
+            pd = [ast.dump(t) for t in pool]
             seen = set()
             for macro in macros:
                 for occ in _occurrences(sigs, macro):
-                    key = (P, occ, len(macro))
-                    if key in seen:
+                    if (occ, len(macro)) in seen:
                         continue
-                    seen.add(key)
+                    seen.add((occ, len(macro)))
                     L = len(macro)
                     block = body[start + occ:start + occ + L]
-                    # slots + couverture grammaire
-                    slots, in_gram = [], True
-                    for st in block:
-                        call = next((n for n in ast.walk(st) if isinstance(n, ast.Call)), None)
-                        if call is None:
-                            continue
-                        for k in _slots(call):
-                            slots.append(1)
-                            if ast.dump(call.args[k]) not in pd:
-                                in_gram = False
-                    if not slots or len(slots) > 2:
-                        continue
-                    tot["blocs"] += 1
-                    if not in_gram:
-                        continue
-                    tot["in_gram"] += 1
-                    # diagnostic : rang TreeNN de l'oracle de chaque slot (brut = position pool)
                     manq, disp, _ = _ctx_trou(proofs[P], occ, L, vl)
                     outs = {v for st in block for v in _assignes(st)}
-                    rangs = []
                     for st in block:
                         call = next((n for n in ast.walk(st) if isinstance(n, ast.Call)), None)
                         if call is None:
                             continue
+                        cf = _head(call)
                         for k in _slots(call):
                             od = ast.dump(call.args[k])
-                            bi = [ast.dump(t) for t in pool].index(od)
-                            order = _ordre(pool, nets, _head(call), k, manq, disp, outs, True)
-                            rangs.append((bi + 1, order.index(bi) + 1))     # (rang brut, rang TreeNN)
-                    tot["brut"] += int(bool(regen_e2e(mod, P, proofs[P], occ, L, pool, vl, nets, False)))
-                    tot["tree"] += int(bool(regen_e2e(mod, P, proofs[P], occ, L, pool, vl, nets, True)))
-                    print(f"#   bloc {P}@{occ} (L={L}) rangs(brut,tree)={rangs} : "
-                          f"brut={tot['brut']} tree={tot['tree']} / in_gram={tot['in_gram']}", file=sys.stderr)
-    print(f"\n# pas 27 — RÉGÉNÉRATION END-TO-END (CAP={CAP}, noyau validant) sur preuves TENUES À L'ÉCART :")
+                            if od not in pd:
+                                continue
+                            CF_VOCAB.setdefault(cf, len(CF_VOCAB) + 1)
+                            slots.append({"cf": cf, "pos": k, "manq": manq, "disp": disp,
+                                          "outs": outs, "pool": pool, "pos_idx": pd.index(od),
+                                          "group": gid, "proof": P})
+    return slots
+
+
+def _eval_proof(modname, P, nets, tot):
+    """Évalue tous les blocs in-grammaire (≤2 slots) de la preuve P avec les nets fournis."""
+    mod, proofs = _proofs(modname)
+    vl = {v for _, b, s, _ in proofs.values() for st in b[s:] for v in _assignes(st)}
+    ng = defaultdict(set)
+    for nm, (_, _, _, sg) in proofs.items():
+        for nl in NS:
+            for i in range(len(sg) - nl + 1):
+                ng[tuple(sg[i:i + nl])].add(nm)
+    macros = {m for m, pr in ng.items() if len(pr) >= 2}
+    fdef, body, start, sigs = proofs[P]
+    params = {a.arg for a in fdef.args.args}
+    va = {v for st in body[start:] for v in _assignes(st)} | params
+    sa = {s for s in _str_consts(body) if s.isidentifier() and len(s) <= 3}
+    pool = synth_termes(va, sa)
+    pd = set(ast.dump(t) for t in pool)
+    seen = set()
+    for macro in macros:
+        for occ in _occurrences(sigs, macro):
+            key = (P, occ, len(macro))
+            if key in seen:
+                continue
+            seen.add(key)
+            L = len(macro)
+            block = body[start + occ:start + occ + L]
+            slots, in_gram = [], True
+            for st in block:
+                call = next((n for n in ast.walk(st) if isinstance(n, ast.Call)), None)
+                if call is None:
+                    continue
+                for k in _slots(call):
+                    slots.append(1)
+                    if ast.dump(call.args[k]) not in pd:
+                        in_gram = False
+            if not slots or len(slots) > 2:
+                continue
+            tot["blocs"] += 1
+            if not in_gram:
+                continue
+            tot["in_gram"] += 1
+            manq, disp, _ = _ctx_trou(proofs[P], occ, L, vl)
+            outs = {v for st in block for v in _assignes(st)}
+            rangs = []
+            for st in block:
+                call = next((n for n in ast.walk(st) if isinstance(n, ast.Call)), None)
+                if call is None:
+                    continue
+                for k in _slots(call):
+                    od = ast.dump(call.args[k])
+                    bi = [ast.dump(t) for t in pool].index(od)
+                    order = _ordre(pool, nets, _head(call), k, manq, disp, outs, True)
+                    rangs.append((bi + 1, order.index(bi) + 1))
+            tot["brut"] += int(bool(regen_e2e(mod, P, proofs[P], occ, L, pool, vl, nets, False)))
+            tot["tree"] += int(bool(regen_e2e(mod, P, proofs[P], occ, L, pool, vl, nets, True)))
+            print(f"#   [{HOLDOUT}] bloc {P}@{occ} (L={L}) rangs(brut,tree)={rangs} : "
+                  f"brut={tot['brut']} tree={tot['tree']} / in_gram={tot['in_gram']}", file=sys.stderr)
+
+
+def main(argv):
+    tot = {"blocs": 0, "in_gram": 0, "brut": 0, "tree": 0}
+    if HOLDOUT == "module":
+        print(f"# [module] entraînement TreeNN sur {len(TRAIN)} modules (test JAMAIS vu)…", file=sys.stderr)
+        nets = [_entraine(collecte_named(TRAIN), seed=sd) for sd in range(E)]
+        for modname in TEST:
+            _, proofs = _proofs(modname)
+            for P in proofs:
+                if P not in TEST_LOURD:
+                    _eval_proof(modname, P, nets, tot)
+    else:  # proof-level : pour CHAQUE preuve test, ré-entraîner en l'EXCLUANT (module vu via les sœurs)
+        allmods = TRAIN + TEST
+        for modname in TEST:
+            _, proofs = _proofs(modname)
+            for P in proofs:
+                if P in TEST_LOURD:
+                    continue
+                print(f"# [proof] ré-entraînement TreeNN en excluant {P}…", file=sys.stderr)
+                nets = [_entraine(collecte_named(allmods, exclude=P), seed=sd) for sd in range(E)]
+                _eval_proof(modname, P, nets, tot)
+    print(f"\n# pas 28 — RÉGÉNÉRATION END-TO-END (holdout={HOLDOUT}, CAP={CAP}, noyau validant) :")
     ig = tot["in_gram"]
     print(f"# {tot['blocs']} blocs (≤2 slots) ; {ig} FULLY in-grammaire (grammaire enrichie pas 23-26).")
     if ig:

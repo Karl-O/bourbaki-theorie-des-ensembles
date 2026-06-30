@@ -503,9 +503,31 @@ rangs (178-245, pas médiane 1) reflètent la difficulté de généraliser à un
 proof-level (module présent dans le corpus, cas réaliste) devrait faire bien mieux.
 `python outils_ia/corpus/proto_synth_e2e.py`.
 
+## Holdout proof-level → l'effet MIROIR ADVERSARIAL (pas 28, FAIT) — résultat contre-intuitif
+
+On attendait que le holdout proof-level (le module du bloc PRÉSENT dans le corpus, 1 preuve tenue à
+l'écart = cas « réaliste ») batte le holdout module de pas 27 (50 %). `proto_synth_e2e.py` avec
+`HOLDOUT="proof"` ré-entraîne le TreeNN en EXCLUANT la preuve testée (collecte locale `collecte_named`
+taggée par preuve + leave-one-out). Résultat **INVERSE et instructif** :
+
+| bloc (identite, depth-2) | rang brut | TreeNN holdout MODULE (pas 27) | TreeNN holdout PROOF (pas 28) |
+|---|---|---|---|
+| diagonale_composee_neutre | 1034 | **178** ✅ | 931 ❌ |
+| composee_diagonale_neutre | 562 | 245 ❌ | 625 ❌ |
+
+**Proof-level : BRUT 0 % → TreeNN 0 %** — les DEUX preuves rangent PLUS MAL avec leur sœur dans le
+train. Cause (vérifiée : pool identique, sœur correctement incluse, +3 slots 169→172, pas un bug) : les
+2 preuves d'identite sont des **MIROIRS** (`composee∘diagonale` vs `diagonale∘composee`) → la sœur tenue
+DANS l'entraînement est un **exemple ADVERSARIAL** : même contexte de slot (cf + data-flow), arrangement
+OPPOSÉ → le modèle apprend à classer haut le terme-miroir et rate le terme du test. **Finding : avec des
+preuves miroir, PLUS de données NUIT** ; les outliers systématiques de pas 22 sont exactement ces
+arrangements-miroir que le ranker doit DISTINGUER. (Caveat : n=2 preuves + TreeNN instable → à confirmer
+sur plus de preuves non-miroir.) Le 50 % de pas 27 (holdout module) reste le résultat de référence.
+
 ## Ce qui reste
-- pas 28 : **holdout proof-level** (module présent, 1 preuve tenue à l'écart = cas réaliste) → viser un
-  taux end-to-end nettement > 50 % ; et CAP plus large / BEAM pour rattraper composee_diagonale (rang 245) ;
+- pas 29 : **plus de preuves NON-miroir** utilisant composee/diagonale/couple (au-delà des 2 jumelles
+  d'identite) → donner au ranker de quoi apprendre à DISTINGUER les arrangements (lever l'effet miroir) ;
+  et CAP/BEAM plus large pour rattraper les rangs 178-245 ;
 - grammaire de preuve RÉCURSIVE (proof-terms deep restants : conjonction_intro imbriqué, chaînes
   equivalence/modus_ponens) pour couvrir > 64 % et débloquer plus de blocs end-to-end ;
-- mise à l'échelle BEAM (K plus grand) ; niveau TACTIQUE ; GFlowNet/diffusion.
+- niveau TACTIQUE ; GFlowNet/diffusion.
