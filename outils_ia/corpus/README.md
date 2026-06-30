@@ -300,9 +300,32 @@ ne sont pas atteints par l'énumération brute : le terme-oracle EST générable
 policy rangeait les tactiques : rang 1.00 vs 8.82). `python outils_ia/corpus/proto_synth_termes.py
 [module…]` (défaut = projection ; modules profonds = gros budget + pas 19).
 
+## Prior appris sur la synthèse (pas 19, FAIT) — `proto_synth_prior.py` : ranger les termes
+
+Le pas 18 a mesuré le mur (terme-oracle au rang ~561). Ici on APPREND à ranger les candidats. Pour
+chaque slot-terme, on génère le pool (synth_termes) et on entraîne un classifieur à prédire « ce
+candidat est-il le terme attendu ? » depuis des features de CONTEXTE (tactique appelante + position
+d'argument ; profondeur/forme/taille du terme ; data-flow : leaves ∈ variables manquantes/disponibles
+/sorties du bloc). **Astuce clé : l'oracle de label est GRATUIT** (égalité au terme réel de P au même
+slot) → AUCUN appel-noyau pour l'entraînement. **GroupKFold par PREUVE** (test sur preuves jamais vues).
+
+Mesure (projection + identite + diagonale, **47 slots in-grammaire**, 117 500 candidat-features) :
+
+| | rang du bon terme | appels-noyau |
+|---|---|---|
+| énumération brute | **396** (médiane 41) | référence |
+| **prior LogReg** | **140** | **−65 %** |
+| prior RandomForest | 271 | −32 % |
+
+Le prior **coupe 65 % des appels-noyau** à la synthèse en apprenant à préférer les termes **petits et
+data-flow-pertinents** (`nnodes` 0.26, `natoms` 0.13, `df_disp` 0.09 = features-clés). **Honnêteté** :
+le ranking de termes STRUCTURÉS est plus dur que celui des tactiques (pas 8, rang 1.00) — features
+shallow plafonnent à ~rang 140, pas ~1 ; résoudre l'**arrangement exact** des variables (ex.
+`composee(vG,diag(vA))` vs `composee(vA,diag(vG))`, mêmes compteurs) demande des modèles STRUCTURÉS
+(embeddings d'AST, torch). `python outils_ia/corpus/proto_synth_prior.py [module…]`.
+
 ## Ce qui reste = enrichir le générateur appris (torch/sklearn dispo)
-- pas 19 : **PRIOR APPRIS sur la synthèse de termes** — un modèle qui RANGE les termes candidats
-  (contexte du slot : tactique, voisins, data-flow, types) pour amener le bon terme en tête →
-  rendre tractable la synthèse depth-2 (le terme-oracle passe du rang 561 au rang ~1) ;
-- mise à l'échelle BEAM (K plus grand, preuves plus longues) ; niveau TACTIQUE ; GFlowNet/diffusion ;
-  passage à torch (embeddings d'AST de termes) pour la synthèse et le ranking.
+- pas 20 : **brancher le prior dans la synthèse** (ranger le pool par P(correct) avant le filtre
+  noyau) → mesurer le gain end-to-end sur les blocs depth-2 (identite/diagonale) ;
+- modèle STRUCTURÉ pour le ranking exact (embeddings d'AST de termes, torch) → viser le rang ~1 ;
+- mise à l'échelle BEAM (K plus grand) ; niveau TACTIQUE ; GFlowNet/diffusion.
