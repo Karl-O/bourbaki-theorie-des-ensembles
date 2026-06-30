@@ -398,11 +398,37 @@ celle du TreeNN (185)**. Cause MESURÉE : `_leaf_vec` encode tout `Constant` à 
 (`[0,1,0,0,0,1]`) → le TreeNN ne distingue PAS `'y'` de `'x'`, il les ÉGALISE, et le bon littéral peut
 tomber loin dans l'égalité ; le shallow gagne via ses features explicites. C'est le levier de pas 24.
 
+## Grammaire enrichie : formules et/2 (pas 24, FAIT) — couverture 47 %
+
+**Probe d'abord (économise un tick)** : pour les 49 slots-littéraux, la chaîne (`'x'`,`'y'`…) n'est
+**JAMAIS** dans le data-flow (0/49) et ne concourt qu'à ~3 candidats → le bon littéral est
+**UNDERDETERMINÉ** par les features de feuille (shallow comme TreeNN ne peuvent qu'appliquer un prior
+position/cf). Donc on **n'ajoute PAS** de feature data-flow sur `Constant` (idée RÉFUTÉE par la mesure) ;
+on vise la famille suivante **structurellement déterminée** : `et/2` (20 slots, `et(P, Gxz)` où P, Gxz
+sont de vraies variables-formule présentes dans le data-flow).
+
+Grammaire : **couche FORMULES `et/2` sur atomes-Name**, construite à PART avec un **QUOTA réservé**
+(≤ 20 % du budget), **non réinjectée** dans la couche objets (sinon `composee(et(…))` explose). TreeNN :
+poids de constructeur `et` dédié. Couverture **39 % → 47 %** (96 → **116/243** slots ; les 20 et-slots
+entrent). Re-run `proto_synth_torch` (113 slots rangés) :
+
+| ranker | médiane | top-5 | moyenne |
+|---|---|---|---|
+| brut | 26 | 0 % | 359 |
+| shallow (LogReg) | 7 | 44 % | 121 |
+| **neuronal (TreeNN)** | **1** | **67 %** | 151 |
+
+Bilan : la **moyenne du TreeNN baisse** (185 → 151, objectif pas 22 atteint) et la **médiane 1** tient ;
+le top-5 passe 80 % → 67 % car les et-slots sont une famille **PLUS DURE** (choisir la bonne paire
+`(P,Gxz)` parmi ~150 et-termes, vs 3 littéraux) — mais le TreeNN y reste le **meilleur** (médiane 1,
+top-5 67 % vs shallow 44 % vs brut 0 %). Les outliers restants (mean 151 ≳ shallow 121) = mêmes échecs
+SYSTÉMATIQUES de généralisation (**9 preuves seulement**) → le prochain levier est plus de DONNÉES.
+
 ## Ce qui reste = enrichir le générateur appris (torch/sklearn dispo)
-- pas 24 : **features data-flow sur les feuilles `Constant`** du TreeNN — un littéral `'y'` est un NOM
-  de variable liée : tester `node.value ∈ manquantes/disponibles/sorties` (comme pour les `Name`) pour
-  que le TreeNN distingue les noms pertinents et écrase sa moyenne (185 → viser ≤ shallow 27) ;
-- enrichir ENCORE la grammaire : `et/2` (20 slots), `conjonction_intro/2`, `symetrie/1` (avec poids de
-  constructeur dédiés au TreeNN) → viser couverture > 50 % ;
+- pas 25 : **plus de DONNÉES** (le goulot résiduel = 9 preuves) — formaliser/inclure d'autres modules
+  II.3/II.4 produisant `composee/diagonale/couple/var/et`, ou augmenter par renommage cohérent, pour
+  écraser les outliers SYSTÉMATIQUES (mean) sans toucher au réseau ;
+- enrichir ENCORE la grammaire : `conjonction_intro/2`, `symetrie/1`, `equivalence_*` (poids TreeNN
+  dédiés) → viser couverture > 60 % ;
 - rebrancher pas 20 (synthèse guidée) avec le TreeNN comme ranker → régénération end-to-end depth-2 ;
 - mise à l'échelle BEAM (K plus grand) ; niveau TACTIQUE ; GFlowNet/diffusion.

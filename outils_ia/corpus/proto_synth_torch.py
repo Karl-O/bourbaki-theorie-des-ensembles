@@ -126,6 +126,7 @@ class TreeEnc(nn.Module):
         self.diag = nn.Linear(d, d)
         self.comp = nn.Linear(2 * d, d)
         self.coup = nn.Linear(2 * d, d)
+        self.et = nn.Linear(2 * d, d)               # pas 24 : constructeur formule et/2
 
     def enc(self, node, ctx):
         manq, disp, outs = ctx
@@ -144,6 +145,9 @@ class TreeEnc(nn.Module):
             if h == "couple":
                 return torch.relu(self.coup(torch.cat([self.enc(node.args[0], ctx),
                                                        self.enc(node.args[1], ctx)])))
+            if h == "et":
+                return torch.relu(self.et(torch.cat([self.enc(node.args[0], ctx),
+                                                     self.enc(node.args[1], ctx)])))
         return torch.zeros(self.d)
 
 

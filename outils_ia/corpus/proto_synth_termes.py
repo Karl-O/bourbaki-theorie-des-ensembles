@@ -93,7 +93,19 @@ def synth_termes(var_atoms, str_atoms, prof=PROF):
                 break
         if len(pool) >= MAXT:
             break
-    return pool[:MAXT]
+    # pas 24 : COUCHE FORMULES — et/2 sur atomes-Name (formules nommées, ex. et(P, Gxz)). Bornée
+    # (Name×Name seulement, NON réinjectée dans la couche objets → pas d'explosion combinatoire) ;
+    # ses arguments sont de vraies variables data-flow → le TreeNN les distingue (≠ littéraux nus).
+    # Construite à PART avec un QUOTA réservé, sinon l'explosion objet la tronque (elle est tardive).
+    noms = [_name(v) for v in sorted(var_atoms)]
+    forms = []
+    for a, b in itertools.product(noms, repeat=2):
+        d = ast.dump(_fn_call("et", [a, b]))
+        if d not in vus:
+            vus.add(d)
+            forms.append(_fn_call("et", [a, b]))
+    qf = min(len(forms), max(1, MAXT // 5))                     # réserve ≤ 20 % du budget aux formules
+    return pool[:MAXT - qf] + forms[:qf]
 
 
 def _slots(call):
