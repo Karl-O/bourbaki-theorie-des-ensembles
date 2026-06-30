@@ -91,3 +91,21 @@ ici --- et c'est lui qui, une fois remonté en théorie des ensembles, interdit
 l'ensemble de Russell (Partie~II). C'est l'illustration de l'héritage vers le
 haut : un fait logique, prouvé une seule fois au plus bas, sert tel quel à tous
 les étages supérieurs.
+
+\subsection{Quantificateurs typiques : le critère C41 (I.4.4)}
+Les quantificateurs \emph{typiques} (relativisés à une relation $A$) sont
+$(\exists_A x)R:=(\exists x)(A\wedge R)$ et $(\forall_A x)R:=\neg(\exists x)(A\wedge\neg R)$.
+Leurs critères $C39$ (monotonie), $C40$ (distribution sur $\wedge/\vee$) et $C42$
+(commutation) sont formalisés clos ; le présent jalon ajoute le \textbf{critère
+$C41$} (E~I.37), seul absent de la série, pour une lettre $x$ \emph{ne figurant pas
+dans $R$} :
+\[
+  (\forall_A x)(R\vee S)\Leftrightarrow\bigl(R\vee(\forall_A x)S\bigr),\qquad
+  (\exists_A x)(R\wedge S)\Leftrightarrow\bigl(R\wedge(\exists_A x)S\bigr).
+\]
+\textbf{Preuve (\Nstar).} Le cas $\exists$ est l'extraction du facteur $R$ via le
+critère $C33$ (\texttt{et\_existe\_droite}, $x\notin R$) précédé d'un réarrangement
+de la conjonction sous $(\exists x)$ ; le cas $\forall$ en est le \emph{dual} par
+De~Morgan (sur $\neg R,\neg S$) et double négation. Clos (théorèmes purs), la
+fraîcheur $x\notin R$ étant load-bearing (refus explicite sinon). Module
+\texttt{.../i\_3\_quantifies/criteres\_typiques\_c41.py}.

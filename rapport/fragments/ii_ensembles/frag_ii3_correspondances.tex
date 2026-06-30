@@ -20,3 +20,25 @@ $\mathrm{est\_graphe}(G):=(\forall z)(z\in G\Rightarrow z\text{ couple})$, dans
 (\texttt{\_inst\_image}, \texttt{image\_dans\_img}, \texttt{image\_croissante}),
 extensionnalité $A1$. Domaine/image-ensemble : $\mathrm{pr}_1G=\mathrm{dom}(G)$,
 $\mathrm{pr}_2G=\mathrm{img}(G)$ (axiomes \texttt{DOM}/\texttt{IMG}).
+
+\subsection{§II.3 --- Composition : monotonie ; diagonale et identité (E~II.13)}
+\textbf{Monotonie de la composée (Remarque, E~II.13).}
+$\{\,G_1\subset G_2,\ G_1'\subset G_2'\,\}\vdash G_1'\circ G_1\subset G_2'\circ G_2$
+(\texttt{composee\_monotone}). Un couple $(p,r)\in G_1'\circ G_1$ provient d'un
+$y$ avec $(p,y)\in G_1$, $(y,r)\in G_1'$ ; les inclusions instanciées en ces couples
+donnent $(p,y)\in G_2$, $(y,r)\in G_2'$, d'où $(p,r)\in G_2'\circ G_2$
+(axiome \texttt{COMPOSEE}, $\exists$-éliminations propres sur $p,r,y$).
+Conditionnel honnête (2~hypothèses).
+
+\textbf{Diagonale $\Delta_X$ (graphe de $\mathrm{Id}_X$, Déf.~8, E~II.13).} Deux résultats,
+\emph{clos} (module \texttt{.../ii\_3\_correspondances/ensembles\_diagonale\_couple.py}) :
+\begin{itemize}
+  \item caractérisation au couple $\bigl((a,b)\in\Delta_X\bigr)\Leftrightarrow
+        (a\in X\ \text{et}\ a=b)$ (\texttt{couple\_diagonale}) --- l'analogue, pour
+        $\Delta$, de \texttt{couple\_reciproque}/\texttt{couple\_composee} ; preuve
+        par l'axiome \texttt{DIAGONALE} et la Proposition~1 sur $(a,b)=(u,u)$ ;
+  \item $\Delta_X^{-1}=\Delta_X$ (« $\mathrm{Id}_X$ est sa propre réciproque »,
+        \texttt{diagonale\_auto\_reciproque}) --- \emph{inconditionnel} : $\Delta_X^{-1}$
+        et $\Delta_X$ ne contiennent que des couples, double inclusion via les deux
+        briques ci-dessus puis extensionnalité $A1$.
+\end{itemize}
