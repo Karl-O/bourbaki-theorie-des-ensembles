@@ -157,25 +157,34 @@ brique venue d'AILLEURS, sous deux régimes — le NOYAU validant (OK == cible) 
   restent intactes ; bornes : ≤2 lectures re-liées, budget dur d'essais/trou car la
   ré-exécution-noyau par variante coûte 1–70 ms selon la preuve).
 
-Mesure (modules **multi-preuves** légers `projection` + `identite`, **36 trous**) :
+Mesure sur **97 trous** = `projection` + `identite` (multi-preuves symétriques, 36) **et**
+`diagonale_couple` (5 preuves HÉTÉROGÈNES : projections, composées, réciproque ; 61 — la 6ᵉ,
+`couple_diagonale` = 6707 pas primitifs, exclue car ~20–30 ms/essai-noyau × milliers d'essais) :
 
-| régime | comblés | lecture |
+| régime | comblés / 97 | lecture |
 |---|---|---|
-| local (oracle, sanity) | 36 (100 %) | la preuve est réparable par sa propre brique |
-| **VERBATIM** (pas étranger tel quel) | **0 (0 %)** | un pas littéral ne transfère JAMAIS : les variables diffèrent |
-| **TEMPLATE-TRANSPLANT** | **16 (44 %)** | le pas se **régénère** depuis le vocabulaire de templates + binding |
-| dont **tactique ÉTRANGÈRE** (signature absente de la preuve) | **0 (0 %)** | ces modules homogènes n'importent aucune tactique *nouvelle* |
+| local (oracle, sanity) | 97 (100 %) | la preuve est réparable par sa propre brique |
+| **VERBATIM** (pas étranger tel quel) | **1 (1 %)** | un pas littéral ne transfère quasi JAMAIS : les variables diffèrent |
+| **TEMPLATE-TRANSPLANT** | **33 (34 %)** | le pas se **régénère** depuis le vocabulaire de templates + binding |
+| dont **tactique ÉTRANGÈRE** (signature absente de la preuve) | **0 (0 %)** | jamais besoin d'une tactique que la preuve n'emploie pas déjà |
 
-**Ce que ça établit.** Le vocabulaire partagé opère au niveau **(tactique + binding)**, pas du
-statement littéral : régénérer ≠ recaler verbatim (0 % → 44 %). C'est le 1er pas concret vers
-*générer* un pas hors de la preuve courante. **Limite honnête** : sur ces preuves symétriques, la
-tactique du pas supprimé est toujours DÉJÀ employée ailleurs dans la même preuve (« tactique
-étrangère » = 0 %) — l'**import d'une tactique genuinement absente** reste à démontrer sur un
-module **hétérogène** (testbed `diagonale_couple`, 6 preuves variées ; mesuré au tick suivant car
-ses preuves lourdes — `couple_diagonale` = 6707 pas primitifs — coûtent ~20–30 ms par essai-noyau).
-`python outils_ia/corpus/proto_inter_preuves.py [module…]`.
+**Ce que ça établit (résultat net, pas seulement positif).**
+1. Le vocabulaire partagé opère au niveau **(tactique + binding)**, pas du statement littéral :
+   régénérer ≠ recaler verbatim (**1 % → 34 %**). C'est le 1er pas concret vers *générer* un pas
+   hors des statements de la preuve courante (le noyau validant), pas permuter une preuve.
+2. **L'import d'une tactique genuinement étrangère = 0 %**, et ce **même sur le module hétérogène**
+   (les templates étrangers sont essayés EN PREMIER et échouent tous ; seuls des *self-templates*
+   re-bindés régénèrent le pas). Conclusion : dans ce corpus, le **multiset de tactiques de chaque
+   preuve se suffit** — le gain d'une bibliothèque inter-preuves vient du **re-binding de tactiques
+   COMMUNES** (partager un *prior* de binding entre preuves), pas de l'import de tactiques neuves.
+
+**Conséquence design** : le levier inter-preuves prometteur n'est pas l'import 1-pas d'une tactique
+absente (rendement nul ici) mais (i) un **prior de binding** partagé qui réduit la recherche, et
+(ii) le **library-learning** = abstraire des **macros multi-pas récurrentes** entre preuves (≠ un
+seul pas). `python outils_ia/corpus/proto_inter_preuves.py [module…]`.
 
 ## Ce qui reste = enrichir le générateur appris (torch/sklearn dispo)
-- IMPORT d'une tactique ÉTRANGÈRE : module hétérogène + binding-search élargi (pas 14 suite) ;
+- LIBRARY-LEARNING : abstraire les **macros multi-pas** récurrentes entre preuves (le vrai levier
+  inter-preuves, cf. pas 14 : l'import 1-pas d'une tactique étrangère a un rendement nul) ;
 - BEAM search (au lieu de greedy top-1) + features plus riches pour relever K=3 ;
-- niveau TACTIQUE (STATS.md) ; library-learning ; GFlowNet/diffusion ; mise à l'échelle données.
+- niveau TACTIQUE (STATS.md) ; prior de binding partagé ; GFlowNet/diffusion ; mise à l'échelle.
