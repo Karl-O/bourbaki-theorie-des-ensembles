@@ -113,17 +113,18 @@ candidat fournit-il la variable manquante ?), prédit quel candidat répare. On 
 candidats par P(repair) et on n'appelle le noyau que sur les mieux classés.
 
 Mesure (5 modules, 2547 candidat-insertions, 12 théorèmes, **GroupKFold = test sur preuves
-JAMAIS vues**) :
-- accuracy CV **0.990** ;
-- rang moyen de la 1ʳᵉ vraie réparation : **1.19** (modèle) vs **8.82** (brute-force aléatoire)
-  → **87 % d'appels-noyau en moins**.
+JAMAIS vues**), features enrichies (data-flow + n_args/uses_N/n_assignes/pos) :
+- **LogReg accuracy CV 0.998** | **RandomForest 0.999** (robuste, pas un artefact d'un modèle) ;
+- rang moyen de la 1ʳᵉ vraie réparation : **1.00** (modèle classe le bon repair EN TÊTE à
+  chaque fois) vs **8.82** (brute-force) → **89 % d'appels-noyau en moins** ;
+- **importance des features (RandomForest)** : `fournit_manquante` (data-flow) = **0.69**,
+  écrasant tout le reste → on a QUANTIFIÉ ce que le modèle apprend.
 
-Le signal décisif est le **data-flow** (le pas supprimé définissait une variable lue plus
-loin ; le candidat qui la re-fournit est la réparation) — un feature quasi-heuristique que
-le modèle apprend à pondérer avec le contexte tactique. Le NOYAU reste l'oracle exact qui
-valide. → la politique apprise **bat la force brute et généralise**. C'est l'embryon du
-générateur ; reste à l'enrichir (features tactiques, niveau-tactique, GFlowNet/diffusion,
-torch dispo).
+Le signal décisif est donc la **structure data-flow** de la preuve (le pas supprimé
+définissait une variable lue plus loin ; le candidat qui la re-fournit est la réparation).
+Le NOYAU reste l'oracle exact qui valide. → la politique apprise **bat la force brute,
+généralise, et est robuste cross-modèle**. C'est l'embryon du générateur ; reste à l'enrichir
+(politique séquentielle, niveau-tactique, bibliothèque inter-preuves, GFlowNet/diffusion ; torch dispo).
 
 ## Ce qui reste = enrichir le générateur appris (torch/sklearn dispo)
 - features plus riches (arguments, types de tactiques, contexte DAG) + niveau TACTIQUE (STATS.md) ;

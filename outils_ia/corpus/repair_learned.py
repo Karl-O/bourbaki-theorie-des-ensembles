@@ -42,6 +42,7 @@ if str(_ICI) not in sys.path:
 import numpy as np                                       # noqa: E402
 from sklearn.feature_extraction import DictVectorizer    # noqa: E402
 from sklearn.linear_model import LogisticRegression      # noqa: E402
+from sklearn.ensemble import RandomForestClassifier      # noqa: E402
 from sklearn.model_selection import GroupKFold           # noqa: E402
 
 from proto_mutation_verify import _cible_de, _rebuild    # noqa: E402
@@ -85,6 +86,23 @@ def _charges(stmt) -> set:
     return {n.id for n in ast.walk(stmt) if isinstance(n, ast.Name) and isinstance(n.ctx, ast.Load)}
 
 
+def _n_args(stmt) -> int:
+    """Nb d'arguments du 1ᵉ appel (taille de la tactique)."""
+    for node in ast.walk(stmt):
+        if isinstance(node, ast.Call):
+            return len(node.args) + len(node.keywords)
+    return 0
+
+
+def _uses_N(stmt) -> int:
+    """1 si le statement appelle une primitive noyau N.* (vs une tactique helper)."""
+    for node in ast.walk(stmt):
+        if (isinstance(node, ast.Attribute) and isinstance(node.value, ast.Name)
+                and node.value.id == "N"):
+            return 1
+    return 0
+
+
 def collecter(modnames):
     """(liste de features-dict, labels, groupes-théorème, méta) sur tous les modules."""
     X, y, groups, meta = [], [], [], []
@@ -123,7 +141,11 @@ def collecter(modnames):
                     feats = {"cand_fn": _fn_principale(cand), "prev_fn": prev_fn,
                              "next_fn": next_fn, "pos_ratio": round(i / n, 2),
                              # 1 si le candidat ASSIGNE une variable manquante = signal data-flow
-                             "fournit_manquante": int(bool(_assignes(cand) & manquantes))}
+                             "fournit_manquante": int(bool(_assignes(cand) & manquantes)),
+                             # features plus riches (taille/forme de la tactique candidate)
+                             "n_args": _n_args(cand), "uses_N": _uses_N(cand),
+                             "n_assignes": len(_assignes(cand)),
+                             "n_manquantes": len(manquantes)}
                     essai = corrompu[:i] + [cand] + corrompu[i:]
                     lab = int(_statut(mod, name, _rebuild(fdef, essai), cible) == "OK")
                     X.append(feats)
@@ -145,31 +167,48 @@ def main(argv):
     print(f"# {len(y)} exemples (candidat-insertions) | {y.sum()} réparations (+) | "
           f"{len(set(groups))} théorèmes | {Xv.shape[1]} features")
 
-    # validation croisée par théorème (GroupKFold) — aucune fuite
     gkf = GroupKFold(n_splits=min(5, len(set(groups))))
-    accs, rangs_modele, rangs_brute = [], [], []
-    for tr, te in gkf.split(Xv, y, groups):
-        clf = LogisticRegression(max_iter=1000, class_weight="balanced")
-        clf.fit(Xv[tr], y[tr])
-        accs.append(clf.score(Xv[te], y[te]))
-        # rang du 1ᵉ vrai repair par (théorème, position) du fold test
-        scores = clf.predict_proba(Xv[te])[:, 1]
-        par_trou = {}
-        for j, idx in enumerate(te):
-            name, pos, is_oracle = meta[idx]
-            par_trou.setdefault((name, pos), []).append((scores[j], y[idx]))
-        for cands in par_trou.values():
-            if not any(lab for _, lab in cands):
-                continue
-            ordre = sorted(cands, key=lambda c: -c[0])               # rangé par le modèle
-            rangs_modele.append(next(r for r, (_, lab) in enumerate(ordre, 1) if lab))
-            rangs_brute.append((len(cands) + 1) / 2)                 # rang attendu aléatoire
-    print(f"\n[learned] accuracy CV (GroupKFold) : {np.mean(accs):.3f}")
-    print(f"[learned] RANG MOYEN du 1ᵉ vrai repair : modèle {np.mean(rangs_modele):.2f} "
-          f"vs brute-force aléatoire {np.mean(rangs_brute):.2f}  "
-          f"→ {100*(1-np.mean(rangs_modele)/np.mean(rangs_brute)):.0f}% d'appels-noyau en moins")
-    print("# = 1ᵉ politique APPRISE : le prior trouve la réparation plus tôt que la force brute,")
-    print("#   le noyau restant l'oracle exact qui valide. Embryon du reverse process appris.")
+
+    def evalue(fabrique):
+        """GroupKFold (sans fuite) → (accuracy moyenne, rang moyen du 1ᵉ vrai repair, rang brute)."""
+        accs, rmod, rbrute = [], [], []
+        for tr, te in gkf.split(Xv, y, groups):
+            clf = fabrique()
+            clf.fit(Xv[tr], y[tr])
+            accs.append(clf.score(Xv[te], y[te]))
+            scores = clf.predict_proba(Xv[te])[:, 1]
+            par_trou = {}
+            for j, idx in enumerate(te):
+                name, pos, _ = meta[idx]
+                par_trou.setdefault((name, pos), []).append((scores[j], y[idx]))
+            for cands in par_trou.values():
+                if not any(lab for _, lab in cands):
+                    continue
+                ordre = sorted(cands, key=lambda c: -c[0])
+                rmod.append(next(r for r, (_, lab) in enumerate(ordre, 1) if lab))
+                rbrute.append((len(cands) + 1) / 2)
+        return float(np.mean(accs)), float(np.mean(rmod)), float(np.mean(rbrute))
+
+    modeles = {
+        "LogReg":       lambda: LogisticRegression(max_iter=1000, class_weight="balanced"),
+        "RandomForest": lambda: RandomForestClassifier(n_estimators=120, class_weight="balanced",
+                                                       random_state=0),
+    }
+    print()
+    for nom, fab in modeles.items():
+        acc, rmod, rbrute = evalue(fab)
+        print(f"[{nom:<12}] accuracy CV {acc:.3f} | rang vrai-repair {rmod:.2f} vs brute {rbrute:.2f} "
+              f"→ {100*(1-rmod/rbrute):.0f}% d'appels-noyau en moins")
+
+    # importance des features (RandomForest sur tout) — QUOI le modèle exploite
+    rf = RandomForestClassifier(n_estimators=200, class_weight="balanced", random_state=0).fit(Xv, y)
+    imp = sorted(zip(vec.get_feature_names_out(), rf.feature_importances_),
+                 key=lambda t: -t[1])[:8]
+    print("\n[importance features] (RandomForest) :")
+    for nom, w in imp:
+        print(f"    {nom:<28} {w:.3f}")
+    print("# → confirme que le signal DATA-FLOW (fournit_manquante) domine ; le modèle apprend")
+    print("#   à pointer la tactique qui re-fournit la variable manquante, le noyau validant.")
     return 0
 
 
