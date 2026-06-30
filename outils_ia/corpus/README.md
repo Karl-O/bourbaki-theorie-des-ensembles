@@ -599,12 +599,36 @@ le bloc à rang 178 passe à 245, > CAP 200 → 50 %→0 %), agissant comme du B
 plusieurs exemples d'arrangement. (Le code cible→AST→TreeEnc est dans l'historique git, prêt à resservir
 quand le corpus d'arrangement grandira.)
 
-## Bilan du pivot (pas 14→32) & directions
+## Consolidation end-to-end leave-one-module-out (pas 33) — HEADLINE robuste
+
+Le 50 % de pas 27 reposait sur 2 blocs MIROIR d'identite (échantillon minuscule). `proto_synth_lomo.py`
+mesure le taux end-to-end CORPUS-WIDE : pour CHAQUE module, TreeNN entraîné sur les 5 autres (holdout
+module complet), régénération **kernel-validée** de SES blocs in-gram (≤2 slots), CAP=200. Le run révèle
+aussi bien plus de blocs que la vue identite (projection en a 20, dont des depth-3) :
+
+| module (holdout) | blocs | BRUT | TreeNN |
+|---|---|---|---|
+| projection_fonctionnelle | 20 | 10 % | **30 %** |
+| identite_neutre | 2 | 0 % | 50 % |
+| diagonale_couple | 8 | 0 % | 25 % |
+| produit_extensionnalite | 11 | 0 % | 27 % |
+| image_reciproque_props | 2 | 0 % | 0 % |
+| fonctions_props2 | 0 | — (0 bloc ≤2 slots) | — |
+| **TOTAL corpus** | **43** | **4 %** | **27 %** |
+
+**HEADLINE robuste : 27 % end-to-end sur 43 blocs across corpus (vs 4 % brut)** — le TreeNN régénère
+**~7× plus** que l'énumération brute, kernel-validé, sous holdout MODULE complet. Bien plus représentatif
+que « 50 % sur 2 blocs ». (Le 50 % d'identite tient comme cas particulier ; l'effet miroir de pas 28 est
+spécifique au holdout PROOF — tenir une sœur miroir DANS le train — pas au holdout module.)
+`python outils_ia/corpus/proto_synth_lomo.py`.
+
+## Bilan du pivot (pas 14→33) & directions
 
 **Acquis** : le generate-and-verify appris FONCTIONNE — synthèse de termes structurés + ranker TreeNN
-(médiane 1, top-5 ~70 %) + **noyau validant** → **régénération end-to-end depth-2 réelle 50 %** (holdout
-module, pas 27), 1ʳᵉ preuve concrète que « l'IA crée, le noyau certifie » marche sur ce corpus. Grammaire
-19 %→64 %.
+(médiane 1, top-5 ~70 %) + **noyau validant** → **régénération end-to-end réelle 27 % sur 43 blocs
+across corpus (vs 4 % brut), ~7×** (leave-one-module-out kernel-validé, pas 33 ; 50 % sur les 2 blocs
+d'identite en cas particulier, pas 27). 1ʳᵉ preuve concrète, ROBUSTE, que « l'IA crée, le noyau
+certifie » marche sur ce corpus. Grammaire 19 %→64 %.
 
 **Limite, diagnostiquée sur 5 angles indépendants** = l'**effet miroir** (arrangements opposés
 `composee(a,diag)` vs `composee(diag,a)`) : pas 28 (la sœur au train est adversariale), pas 29 (aucune
