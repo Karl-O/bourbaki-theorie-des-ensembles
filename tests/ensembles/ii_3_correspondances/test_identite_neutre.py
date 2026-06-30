@@ -1,0 +1,21 @@
+"""Tests §II.3 — neutralité de Id pour la composition (Bourbaki E II.13, Déf.8 : Γ∘Id_A=Γ).
+
+On APPELLE le théorème : conditionnel HONNÊTE (est_clos==False, hypothèses ==
+{ est_graphe(G), pr₁G⊂A } reconstruites à la main), conclusion == cible G∘Δ_A=G
+(rebuild raw : composee, diagonale), theorie == 22.
+"""
+from bourbaki.logique.i_1_termes_relations.formule import var, egal, inclus
+from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
+from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege import theorie_ensembles
+from bourbaki.ensembles.ii_3_correspondances.ensembles_graphe_inclus_produit import est_graphe
+import bourbaki.ensembles.ii_3_correspondances.ensembles_identite_neutre as M
+
+
+def test_composee_diagonale_neutre():
+    t = M.composee_diagonale_neutre()
+    G, A = var("G"), var("A")
+    cible = egal(E.composee(G, E.diagonale(A)), G)
+    assert t.conclusion == cible == M.composee_diagonale_neutre_cible()
+    assert not t.est_clos                                 # conditionnel honnête
+    assert set(t.hypotheses) == {est_graphe(G), inclus(E.dom(G), A)}
+    assert len(theorie_ensembles().axiomes) == 22
