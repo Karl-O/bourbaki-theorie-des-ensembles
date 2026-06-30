@@ -4,9 +4,10 @@ from __future__ import annotations
 from bourbaki.logique.i_1_termes_relations.formule import var, egal, non, impl, appartient, pourtout, equiv, inclus
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_abrege import VIDE
+from bourbaki.logique.i_1_termes_relations.formule import et
 from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_vide import (
     vide_ssi_sans_element, vide_inclus_partout, sous_ensemble_vide_ssi_egal,
-    vacuite_sur_vide)
+    vacuite_sur_vide, vide_relation_fonctionnelle)
 
 
 def test_vide_ssi_sans_element():
@@ -47,3 +48,19 @@ def test_vacuite_sur_vide():
     assert t.conclusion == cible
     assert t.est_clos and t.hypotheses == frozenset()
     assert len(E.theorie_ensembles().axiomes) == 22
+
+
+# ── E II.6 §7, Théorème 1 : (∀x)(x∉X) est fonctionnelle (univoque) en X ───────
+def test_vide_relation_fonctionnelle():
+    t = vide_relation_fonctionnelle()
+    # cible reconstruite depuis primitives BRUTES : l'univocité en X
+    #   (∀Y)(∀Z)( ((∀x)(x∉Y) et (∀x)(x∉Z)) ⇒ Y=Z )
+    def sans(V):
+        return pourtout("x", non(appartient(var("x"), var(V))))
+    cible = pourtout("Y", pourtout("Z", impl(
+        et(sans("Y"), sans("Z")), egal(var("Y"), var("Z")))))
+    assert t.conclusion == cible
+    assert t.est_clos and t.hypotheses == frozenset()   # CLOS : univocité pure
+    assert len(E.theorie_ensembles().axiomes) == 22
+    # non-tautologie : l'antécédent n'est pas le conséquent
+    assert et(sans("Y"), sans("Z")) != egal(var("Y"), var("Z"))

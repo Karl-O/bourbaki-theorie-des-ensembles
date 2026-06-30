@@ -5,18 +5,20 @@ backward = double inclusion (ex falso + axiome du vide) puis extensionnalité A1
 """
 from __future__ import annotations
 
-from bourbaki.logique.i_1_termes_relations.formule import Terme, var, egal, non, impl, appartient, pourtout, existe, inclus
+from bourbaki.logique.i_1_termes_relations.formule import Terme, var, egal, et, non, impl, appartient, pourtout, existe, inclus
 from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
-from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (conjonction_intro, equivalence_avant, equivalence_arriere,
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (conjonction_intro, conjonction_elim_gauche,
+                               conjonction_elim_droite, equivalence_avant, equivalence_arriere,
                                equivalence_transitivite, contraposition, dni, dne,
                                instanciation_en_x, instancie)
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import symetrie
 from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import congruence_existe
+from bourbaki.logique.i_4_egalitaires.relations_fonctionnelles_c45 import relation_univoque_x
 from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import extensionnalite_appliquee
 
 
-# @livre Ch.II §1.7 Th.1 | E II.6 L.29-29 | PDF p.57
+# @livre Ch.II §1.7 Rem.- | E II.6 L.30-30 | PDF p.57
 def vide_ssi_sans_element(a="A"):
     """⊢ (A = ∅) ⇔ (∀z)¬(z ∈ A).   (a : variable-nom ou terme quelconque sans z libre.)
 
@@ -54,7 +56,7 @@ def _equiv_neg(thm_pq):
                              contraposition(equivalence_avant(thm_pq)))
 
 
-# @livre Ch.II §1.7 Th.1 | E II.6 L.29-29 | PDF p.57
+# @livre Ch.II §1.7 Rem.- | E II.6 L.30-30 | PDF p.57
 def non_vide_ssi_element(a="A"):
     """⊢ ¬(A = ∅) ⇔ (∃z)(z ∈ A).   (a : variable-nom ou terme sans z libre.)"""
     vA, vz = (a if isinstance(a, Terme) else var(a)), var("z")
@@ -115,6 +117,47 @@ def vacuite_sur_vide(R, x="x"):
     return N.generalisation(x, body)                                     # (∀x)(x∈∅⇒R{x})
 
 
+def _R_vide():
+    """La relation Bourbaki « (∀x)(x∉X) » (X fonctionnelle), liant interne « x »."""
+    return pourtout("x", non(appartient(var("x"), var("X"))))
+
+
+# @livre Ch.II §1.7 Th.1 | E II.6 L.24-27 | PDF p.57
+def vide_relation_fonctionnelle():
+    """⊢ relation_univoque_X( (∀x)(x∉X) ).   THÉORÈME 1 (Bourbaki E II.6, nº7).
+
+    « La relation (∀x)(x∉X) est FONCTIONNELLE en X » — c'est ce théorème qui
+    LÉGITIME la définition ∅ := τX((∀x)(x∉X)).  « Fonctionnelle » = UNIVOQUE
+    (au plus un) ∧ EXISTE (au moins un).  On certifie ici le contenu non-trivial,
+    l'UNIVOCITÉ, par la preuve EXACTE de Bourbaki (« en vertu de l'axiome
+    d'extensionnalité, … donc univoque ») ; l'EXISTENCE est l'axiome du vide
+    (AXIOME_VIDE, dont ∅ est le témoin — Bourbaki : « (∀x)(x∉∁_Y Y) est vraie »).
+
+    Preuve de l'univocité : deux ensembles vides Y, Z se contiennent mutuellement
+    (EX FALSO : de z∉Y on tire z∈Y ⇒ z∈Z par S2, généralisé = Y⊂Z ; idem Z⊂Y),
+    donc Y = Z par l'extensionnalité A1.  CLOS (0 hypothèse) ; theorie==22."""
+    vY, vZ, vz = var("Y"), var("Z"), var("z")
+    hypY = pourtout("x", non(appartient(var("x"), vY)))   # (∀x)(x∉Y) = (Y|X)R
+    hypZ = pourtout("x", non(appartient(var("x"), vZ)))   # (∀x)(x∉Z) = (Z|X)R
+    conj = N.assume(et(hypY, hypZ))
+    hY, hZ = conjonction_elim_gauche(conj), conjonction_elim_droite(conj)
+    # Y⊂Z et Z⊂Y par EX FALSO (S2) sur z∉Y, z∉Z, généralisés sur z :
+    YsubZ = N.generalisation("z", N.modus_ponens(
+        instancie(hY, vz), N.s2(non(appartient(vz, vY)), appartient(vz, vZ))))
+    ZsubY = N.generalisation("z", N.modus_ponens(
+        instancie(hZ, vz), N.s2(non(appartient(vz, vZ)), appartient(vz, vY))))
+    YeqZ = N.modus_ponens(conjonction_intro(YsubZ, ZsubY),
+                          extensionnalite_appliquee(vY, vZ))   # Y = Z (A1)
+    imp = N.loi_deduction(et(hypY, hypZ), YeqZ)                # (… et …) ⇒ Y=Z
+    return N.generalisation("Y", N.generalisation("Z", imp))   # (∀Y)(∀Z)(…)
+
+
+def vide_relation_fonctionnelle_cible():
+    """Énoncé visé : « (∀x)(x∉X) est univoque en X » (vérification stricte)."""
+    return relation_univoque_x(_R_vide(), "X", "Y", "Z")
+
+
 __all__ = ["vide_ssi_sans_element", "non_vide_ssi_element",
            "vide_inclus_partout", "sous_ensemble_vide_ssi_egal",
-           "vacuite_sur_vide"]
+           "vacuite_sur_vide", "vide_relation_fonctionnelle",
+           "vide_relation_fonctionnelle_cible"]

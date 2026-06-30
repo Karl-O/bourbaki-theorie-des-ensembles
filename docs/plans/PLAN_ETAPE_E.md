@@ -77,6 +77,15 @@ par page (E II.6, E II.7) et chaque cible re-vérifiée par grep AVANT implémen
   `vacuite_sur_vide` (⊢ (∀x)(x∈∅⇒R{x})). Clos, theorie==22, vérif indep depuis primitives brutes.
 - [x] **E II.7 §2.1 — `couple_egal_projections`** (⊢ z=(pr₁z,pr₂z) ⇔ « z est un couple ») :
   corollaire de `caracterisation_couple` instanciée en pr₁z/pr₂z (collapse réflexif). Clos.
+- [x] **E II.7 §2.1 — `pr1/pr2_caracterisation`** (#5, voir RÉSOLU plus bas) : caractérisation
+  fonctionnelle des projections via C45. Conditionnels honnêtes, 3 tests. (2026-06-30)
+- [x] **E II.6 §7, Théorème 1 — `vide_relation_fonctionnelle`** (écart MAJEUR du coverage map comblé) :
+  ⊢ univocité de « (∀x)(x∉X) » en X (= ce qui FONDE ∅ := τX((∀x)(x∉X))). Preuve EXACTE de Bourbaki
+  (deux vides mutuellement inclus par ex falso → A1). CLOS, conclusion==cible (rebuild raw), theorie==22.
+  Existence = AXIOME_VIDE (∅ témoin). Module `ii_1/ensembles_vide.py`. (2026-06-30)
+  + FIDÉLITÉ : corrigé 2 marqueurs `@livre` fautifs — `vide_ssi_sans_element` et `non_vide_ssi_element`
+  étaient étiquetés `Th.1 L.29` alors qu'ils encodent la REMARQUE « (∀x)(x∉X) ⇔ X=∅ » (L.30), PAS le
+  Théorème 1 (fonctionnalité, L.24) ; reclassés `Rem.- L.30`. (leçon CST8 : un @livre faux corrompt gen_trous.)
 
 ### Faux positifs confirmés (déjà présents) — Chap II
 - `caracterisation_couple` (z=(x,y) ⇔ couple ∧ x=pr₁z ∧ y=pr₂z) : DÉJÀ clos (card disait « absente »).
