@@ -49,3 +49,23 @@ $\vdash(\forall x)((x\in\emptyset)\Rightarrow R\{x\})$ (\texttt{vacuite\_sur\_vi
 le sens $\Rightarrow$ de l'équivalence par extensionnalité $A1$, le sens $\Leftarrow$ par Leibniz $S6$.
 
 \textbf{Statut.} CLOS ; \texttt{theorie\_ensembles()==22}.
+
+\subsection{§II.1 --- Théorème 1 : $(\forall x)(x\notin X)$ est fonctionnelle en $X$ (ce qui fonde $\emptyset$)}
+\textbf{Énoncé (Bourbaki, E~II.6, nº7, Théorème 1).} « La relation $(\forall x)(x\notin X)$ est
+\emph{fonctionnelle} en $X$. » C'est ce théorème qui légitime la définition
+$\emptyset:=\tau_X\bigl((\forall x)(x\notin X)\bigr)$ du symbole fonctionnel « ensemble vide ».
+
+\textbf{Formalisé (CLOS).} $\vdash\mathrm{univoque}_X\bigl((\forall x)(x\notin X)\bigr)$, soit
+$(\forall Y)(\forall Z)\bigl(((\forall x)(x\notin Y)\wedge(\forall x)(x\notin Z))\Rightarrow Y=Z\bigr)$.
+On certifie le contenu non trivial --- l'\textbf{univocité} (au plus un ensemble vide) --- l'existence
+(au moins un) étant l'axiome du vide ($\emptyset$ témoin ; Bourbaki : « $(\forall x)(x\notin\complement_Y Y)$
+est vraie »). Module : \texttt{.../ii\_1\_axiomes\_algebre/ensembles\_vide.py}.
+
+\textbf{Preuve (\Nstar).} \emph{Preuve exacte de Bourbaki} : deux ensembles vides $Y,Z$ se contiennent
+mutuellement (\emph{ex falso} : de $z\notin Y$ on tire $z\in Y\Rightarrow z\in Z$ par $S2$, généralisé
+$=Y\subset Z$ ; idem $Z\subset Y$), donc $Y=Z$ « en vertu de l'axiome d'extensionnalité » $A1$.
+
+\textbf{Statut.} CLOS ($0$ hypothèse) ; \texttt{theorie\_ensembles()==22}. \emph{Fidélité} : l'audit a
+relevé que \texttt{vide\_ssi\_sans\_element} ($X{=}\emptyset\Leftrightarrow(\forall z)(z\notin X)$) était
+étiqueté à tort « Théorème~1 » alors qu'il code la \emph{Remarque} « $\Leftrightarrow X=\emptyset$ »
+(E~II.6 L.30) --- marqueur \texttt{@livre} reclassé.

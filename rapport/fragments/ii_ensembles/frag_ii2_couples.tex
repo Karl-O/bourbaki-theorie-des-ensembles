@@ -20,3 +20,30 @@ est équivalente à "$z$ est un couple". »
 $x:=\mathrm{pr}_1 z$ et $y:=\mathrm{pr}_2 z$ : le membre droit $\bigl(z\text{ couple}\wedge
 \mathrm{pr}_1 z=\mathrm{pr}_1 z\wedge\mathrm{pr}_2 z=\mathrm{pr}_2 z\bigr)$ se réduit à
 « $z$ couple » par réflexivité des deux égalités. \texttt{couple\_egal\_projections}.
+
+\subsection{§II.2 --- Caractérisation fonctionnelle des projections (le « verrou-$\tau$ » levé par C45)}
+\textbf{Énoncé (Bourbaki, E~II.7).} « Si $z$ est un couple, la relation
+$(\exists y)(z=(x,y))$ est donc équivalente à $x=\mathrm{pr}_1 z$ et la relation
+$(\exists x)(z=(x,y))$ à $y=\mathrm{pr}_2 z$ \emph{(I, p.~41)}. » C'est la propriété qui
+\emph{caractérise} la première (resp.\ seconde) projection : $\mathrm{pr}_1 z$ est
+\emph{l'unique} $x$ tel que $(\exists y)(z=(x,y))$, lorsqu'il existe.
+
+\textbf{Formalisé.} $\{\,\mathrm{univoque}_x(R_1),\ \text{« $z$ couple »}\,\}\vdash
+(\exists y)(z=(x,y))\Leftrightarrow x=\mathrm{pr}_1 z$, avec $R_1\{x\}:=(\exists y)(z=(x,y))$ et
+$\mathrm{pr}_1 z=\tau_x(R_1)$ ; dual pour $\mathrm{pr}_2$. Module :
+\texttt{.../ii\_2\_couples\_produit/ensembles\_projection\_fonctionnelle.py}.
+
+\textbf{Preuve (\Nstar).} Ce résultat avait été classé « capture-dur » après quatre tentatives
+\emph{structurelles} (toute $\exists$-élimination d'un conséquent portant $\mathrm{pr}_1 z=\tau_x(\dots)$
+$\alpha$-renomme son liant). La voie \textbf{fidèle} est exactement celle que Bourbaki cite
+(« $(\mathrm{I},\ \mathrm{p.}\ 41)$ ») : le critère \textbf{C45} des relations fonctionnelles.
+Sens $\Rightarrow$ $=$ \texttt{c45\_avant}$(R_1,x)$ : $\{\mathrm{univoque}(R_1)\}\vdash R_1\Rightarrow(x=\tau_x R_1)$,
+et $\tau_x(R_1)\equiv\mathrm{pr}_1 z$ (même assemblage). Sens $\Leftarrow$ $=$ $S6$ (Leibniz,
+$(\mathrm{pr}_1 z{=}x)\Rightarrow((\mathrm{pr}_1 z|x)R_1\Leftrightarrow R_1)$) recollé à
+\texttt{existe\_temoin} (identité-$\tau$, $(\exists x)R_1\Rightarrow(\mathrm{pr}_1 z|x)R_1$) : les deux
+$(\mathrm{pr}_1 z|x)R_1$ sont le \emph{même} terme, donc \textbf{aucun renommage}. \emph{Leçon}
+(\texttt{DECISIONS.md}) : pour un $\tau$-fonctionnel, ne jamais bricoler les $\tau$-termes à la main ---
+le noyau construit $\tau_x(R)$ en interne, structurellement égal à la projection.
+
+\textbf{Statut.} CLOS sous $2$ hypothèses honnêtes ($\mathrm{univoque}(R)$ découle de la Prop.~1, résidu ;
+existence $=$ « $z$ couple ») ; \texttt{theorie\_ensembles()==22}.
