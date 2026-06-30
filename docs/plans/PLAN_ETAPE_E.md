@@ -83,8 +83,22 @@ par page (E II.6, E II.7) et chaque cible re-vérifiée par grep AVANT implémen
 - `antitonie_complement` (A⊂B ⇔ ∁B⊂∁A) : DÉJÀ clos. `composee_monotone` (E II.13) : fait cette session.
 
 ### Gaps RÉELS restants near-here (NON triviaux — à traiter avec la bonne technique)
-- **E II.7 #5 — `(∃y)(z=(x,y)) ⇔ x=pr₁z` (sous z couple)** : CAPTURE-DUR. **4 approches essayées,
-  diagnostic précis (2026-06-26) :**
+- **E II.7 #5 — `(∃y)(z=(x,y)) ⇔ x=pr₁z` (sous z couple)** : ✅ **RÉSOLU (2026-06-30)** — module
+  `ii_2_couples_produit/ensembles_projection_fonctionnelle.py` (`pr1_caracterisation` + dual
+  `pr2_caracterisation`). **Le piège « capture-dur » était un FAUX problème de technique : la voie
+  FIDÈLE est le critère C45 (relations fonctionnelles, E I.41), que Bourbaki CITE lui-même
+  (« (I, p. 41) »), PAS du grappillage structurel α.** Résultat : conditionnel honnête
+  `{ univoque_x(R₁), est_couple(z) } ⊢ R₁ ⇔ x=pr₁z`, conclusion==cible STRUCTURELLE, theorie==22,
+  3 tests verts (hyps reconstruites à la main). Détail :
+  - ⇒ = `c45_avant(R₁,"x")` : `{univoque(R₁)} ⊢ R₁ ⇒ (x=τx R₁)` ; or `τx(R₁) ≡ pr₁z` (même assemblage).
+  - ⇐ = `s6(pr₁z,x,"x",R₁)` (Leibniz : `(pr₁z=x)⇒((pr₁z|x)R₁⇔R₁)`) recollé à `existe_temoin(R₁,"x")`
+    (`(∃x)R₁ ⇒ (pr₁z|x)R₁`) ; les deux `(pr₁z|x)R₁` sont le MÊME `subst_f(τx R₁,"x",R₁)` → 0 renommage.
+  - dual pr₂ : `existe_commute` ramène `est_couple=(∃x)(∃y)` à `(∃y)(∃x)=(∃y)R₂`.
+  **LEÇON (vaut pour tout τ-fonctionnel) :** quand Bourbaki dit « R est FONCTIONNELLE par rapport à x »,
+  ne PAS bricoler les τ-termes à la main → utiliser directement C45/existe_temoin (le noyau construit
+  τx(R) en interne, structurellement égal à la projection). Les 4 approches structurelles ci-dessous
+  étaient la mauvaise piste (conservées pour mémoire).
+  diagnostic des 4 approches structurelles (2026-06-26, OBSOLÈTE — voir RÉSOLU ci-dessus) :
   1. distribution C33 `et_existe_droite` → `(∃y)(y=pr₂z)` à côté de pr₂z=τy(...) : mismatch α.
   2. `proposition_1(x, y, pr₁z, pr₂z)` → `couple_egal_implique_composantes` capture sur les τ-args.
   3. #8 + `congruence_terme` pour bâtir z=(x,pr₂z) → renommage-α de pr₂z (combinaison pr₁z+pr₂z).

@@ -172,3 +172,16 @@ soundness ultime : une spec erronee ne produit pas un faux theoreme, elle bloque
 x∈X⇔{x}⊂X (E II.4) ajoutes a ii_1/ensembles_theoremes.py, CLOS, verifies independamment.
 Lecon reconfirmee : l'audit a des FAUX NEGATIFS (z∈{x}⇔z=x etait deja fait = singleton_membre) ->
 TOUJOURS verifier l'absence reelle dans le code avant de deleguer un comblage.
+
+### II.2 #5 : caractérisation fonctionnelle des projections (E II.7) — via C45, pas de grappillage τ
+`(∃y)(z=(x,y)) ⇔ x=pr₁z` (sous « z couple ») et son dual pr₂ : ajoutés à
+ii_2_couples_produit/ensembles_projection_fonctionnelle.py. Conditionnels HONNÊTES
+`{ univoque(R), est_couple(z) } ⊢ R ⇔ x=pr₁z`, conclusion==cible structurelle, theorie==22, 3 tests.
+LEÇON D'ARCHITECTURE (réutilisable pour tout τ-fonctionnel) : ce résultat avait été classé « capture-dur »
+après 4 approches structurelles ratées (∃-élim d'un conséquent portant pr₁z=τx(...) → α-renommage du liant).
+La vraie voie est celle que Bourbaki CITE lui-même (« (I, p. 41) ») : le critère C45 (relations
+fonctionnelles). ⇒ = `c45_avant(R,"x")` (univocité → R⇒x=τx R, et τx(R)≡pr₁z) ; ⇐ = `s6` (Leibniz) +
+`existe_temoin` (identité-τ, existence). Le noyau construit τx(R) EN INTERNE, structurellement identique à
+la projection → zéro renommage. RÈGLE : ne jamais bricoler un τ-fonctionnel à la main quand un critère C
+le caractérise ; chercher d'abord le critère que Bourbaki invoque. Les deux hypothèses sont fidèles
+(« fonctionnelle » = univoque + existe) ; univoque(R) est elle-même fermable via la Proposition 1 (résidu).
