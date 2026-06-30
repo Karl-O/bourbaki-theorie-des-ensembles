@@ -1,5 +1,17 @@
 # PLAN ETAPE E — audit FRAIS Chap III §1 (relations d'ordre, E III.1–14)
 
+## Lot §II.2–II.3 (2026-06-30) — audit page-par-page + comblage
+PDF lu (E II.7, E II.8, E II.13) ; chaque cible re-vérifiée par grep+Read AVANT.
+- **E II.8 §2.2 produit — SATURÉ** (faux positifs map) : Th.1 = `couple_dans_produit*`, Prop.2 =
+  `produit_inclusion_*`, Prop.3 = `produit_vide*`. Rien à combler.
+- **E II.3 réciproque/composée — SATURÉ** : `(G⁻¹)⁻¹=G` = `reciproque_involution`,
+  `(G'∘G)⁻¹=G⁻¹∘G'⁻¹` = `reciproque_composee` (Prop.3), `(G'∘G)⟨A⟩=G'⟨G⟨A⟩⟩` = `image_composee`
+  (Prop.5) — tous DÉJÀ faits (le coverage map les listait « manquant » : STALE).
+- [x] **E II.13 Rem. — `composee_monotone`** (GENUINE gap comblé) : `{G1⊂G2, G1'⊂G2'} ⊢ G1'∘G1 ⊂ G2'∘G2`.
+  Conditionnel honnête, conclusion==cible (rebuild raw), 2 hyps exactes, theorie==22, 2 tests.
+  Patron calqué sur `_involution_incluse` (∃-élim couple-structure p,r,y propres). (2026-06-30)
+
+
 Audit fan-out 3 lecteurs (Explore) du 2026-06-26, pages **E III.1–14** (PDF p.104–117), confronté
 à `bourbaki/ordre/`. But : régénérer une liste de cibles EXACTE (les cartes COUVERTURE_* de
 2026-06-24 et les PLAN_ETAPE_B/C/D sont CLOS/périmés — la plupart des manquants listés sont depuis
