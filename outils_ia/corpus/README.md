@@ -374,9 +374,35 @@ correspondances/image/reciproque **n'ajoute AUCUN slot in-grammaire** (leurs ter
 d'autres constructeurs). **Le goulot de DONNÉES est le goulot de GRAMMAIRE** : seuls 3 modules
 produisent des termes `composee/diagonale/couple/var`. → le vrai levier est d'**enrichir la grammaire**.
 
+## Grammaire enrichie : littéraux de noms (pas 23, FAIT) — la couverture double
+
+Diagnostic pas 22 = le goulot est la grammaire. **Inspection des 243 slots** des 3 modules : seuls
+**47 (19 %) in-grammaire** ; le plus gros manque = **49 slots `const` profondeur 0** = des LITTÉRAUX
+nus de noms de variables liées (`'y'`, `'w'`…) que les primitives `s5/s6/symetrie/existe_temoin`
+prennent en argument. La grammaire générait `var('y')` mais **jamais le `'y'` nu**.
+
+Correctif (1 ligne) : émettre les `str_atoms` aussi en **`ast.Constant` nus** (pas seulement dans
+`var(·)`). Coût pool ≈ nul (quelques feuilles) ; zéro changement au TreeNN (`_leaf_vec` gère déjà
+`Constant`). Résultat — couverture **19 % → 39 %** (47 → **96/243** slots) ; le corpus de ranking
+**DOUBLE** (47 → 97 slots). Re-run `proto_synth_torch` sur le corpus élargi :
+
+| ranker | médiane | top-5 | moyenne |
+|---|---|---|---|
+| brut | 24 | 0 % | 214 |
+| shallow (LogReg) | 1 | 70 % | **27** |
+| **neuronal (TreeNN)** | **1** | **80 %** | 185 |
+
+**Le top-5 du TreeNN monte 60 % → 80 %**, médiane 1 tenue : plus de données = meilleure couverture,
+**hypothèse pas 22 CONFIRMÉE**. MAIS finding nouveau : sur ce corpus la **moyenne du shallow (27) bat
+celle du TreeNN (185)**. Cause MESURÉE : `_leaf_vec` encode tout `Constant` à l'identique
+(`[0,1,0,0,0,1]`) → le TreeNN ne distingue PAS `'y'` de `'x'`, il les ÉGALISE, et le bon littéral peut
+tomber loin dans l'égalité ; le shallow gagne via ses features explicites. C'est le levier de pas 24.
+
 ## Ce qui reste = enrichir le générateur appris (torch/sklearn dispo)
-- pas 23 : **ENRICHIR LA GRAMMAIRE** de termes (constructeurs manquants : `conjonction_intro`,
-  `appliquer`, lemmes-helpers) → plus de slots in-grammaire = plus de DONNÉES (stabilise la moyenne)
-  ET plus de couverture (> 6/10, cf. pas 20) ;
+- pas 24 : **features data-flow sur les feuilles `Constant`** du TreeNN — un littéral `'y'` est un NOM
+  de variable liée : tester `node.value ∈ manquantes/disponibles/sorties` (comme pour les `Name`) pour
+  que le TreeNN distingue les noms pertinents et écrase sa moyenne (185 → viser ≤ shallow 27) ;
+- enrichir ENCORE la grammaire : `et/2` (20 slots), `conjonction_intro/2`, `symetrie/1` (avec poids de
+  constructeur dédiés au TreeNN) → viser couverture > 50 % ;
 - rebrancher pas 20 (synthèse guidée) avec le TreeNN comme ranker → régénération end-to-end depth-2 ;
 - mise à l'échelle BEAM (K plus grand) ; niveau TACTIQUE ; GFlowNet/diffusion.

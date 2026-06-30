@@ -68,8 +68,11 @@ def synth_termes(var_atoms, str_atoms, prof=PROF):
     """Énumère des termes depuis le vocabulaire local de P (profondeur ≤ prof), borné à MAXT.
     Chaque tour combine TOUS les niveaux accumulés (pas seulement le précédent) → génère aussi
     les termes de profondeur mixte (ex. composee(atome, diagonale(atome)))."""
-    base = [_name(v) for v in sorted(var_atoms)] + [_fn_call("var", [ast.Constant(s)])
-                                                    for s in sorted(str_atoms)]
+    base = ([_name(v) for v in sorted(var_atoms)]
+            + [_fn_call("var", [ast.Constant(s)]) for s in sorted(str_atoms)]
+            # pas 23 : noms de variables liées en LITTÉRAUX nus ('y', 'w'…) — slots des primitives
+            # s5/s6/symetrie/existe_temoin qui prennent une chaîne-nom (49 slots/243 hors grammaire).
+            + [ast.Constant(s) for s in sorted(str_atoms)])
     pool = list(base)
     vus = {ast.dump(t) for t in pool}
 
