@@ -452,10 +452,38 @@ intrinsèquement PLUS DURE que les termes-objets depth-2 (où le TreeNN touchait
 plus HONNÊTE, pas une régression du modèle. Pour la régénération END-TO-END (le but), la moyenne basse
 (61 ≪ 117 shallow ≪ 471 brut) borne le **pire-cas de budget** : c'est le gain qui compte.
 
-## Ce qui reste = enrichir le générateur appris (torch/sklearn dispo)
-- pas 26 : enrichir ENCORE la grammaire (`conjonction_intro/2`, `symetrie/1`, `equivalence_*`,
-  `et(inclus,inclus)` depth-2 ; poids TreeNN dédiés) → viser couverture > 60 % et débloquer encore des
-  modules (graphe_inclus_produit etc.) = plus de preuves → continuer à faire baisser la moyenne ;
-- rebrancher pas 20 (synthèse guidée) avec le TreeNN comme ranker (au lieu du LogReg) → régénération
-  end-to-end depth-2 à budget fixe : avec moyenne 61 / top-5 55 %, viser un taux > 0 % mesurable ;
+## Grammaire enrichie : proof-terms plats (pas 26, FAIT) — couverture 64 %, médiane 1 restaurée
+
+Probe des têtes encore hors-grammaire (après pas 25) → 4 cibles PLATES, args déjà en base :
+`equivalence_avant/1` (×9), `E.est_un_couple/1` (×5), `N.existe_temoin/2` (Name, littéral ; ×6),
+`symetrie/2` (var-litt. ∪ Name ; ×10). [Le RESTE — `conjonction_intro` IMBRIQUÉ,
+`equivalence_transitivite(_inst_dom…)`, `et_congruence(couple_diagonale…)`,
+`equivalence_arriere(modus_ponens…)` — est DEEP/récursif ou helper module-spécifique → exige une
+grammaire de preuve RÉCURSIVE, hors de cette couche plate ; documenté comme reste.]
+
+Ajout (4 constructeurs + poids TreeNN dédiés `un1/exte/sym`). **Fix de budget** : les formules reçoivent
+un budget **ADDITIF** (`pool[:MAXT]` objets + `forms[:MAXT]`), sinon le quota fractionnaire tronquait des
+`couple/2` profonds (couvert 13→9) puis les `et/inclus` tardifs. Couverture **51 % → 64 %** (126 → 156
+slots sur les 3 modules de référence ; couple restauré à 13). Re-run `proto_synth_torch` (178 slots de
+ranking, 12 preuves, pool ~2500) :
+
+| ranker | médiane | top-5 | moyenne |
+|---|---|---|---|
+| brut | 1004 | 0 % | 930 |
+| shallow (LogReg) | 21 | 46 % | 98 |
+| **neuronal (TreeNN)** | **1** | **69 %** | 87 |
+
+Gain net sur pas 25 : **médiane 5 → 1** (restaurée) et **top-5 55 → 69 %** — les nouvelles familles
+(`symetrie(var,Name)`, `existe_temoin(Name,litt.)`) ont une structure DISTINCTIVE que le TreeNN classe
+en tête. La moyenne remonte un peu (61 → 87) car le pool a grossi (le brut EXPLOSE à 930), mais le
+TreeNN (87) bat désormais le shallow (98) AUSSI sur la moyenne, et reste ≪ brut. Le brut s'effondre
+(médiane 1004) : sans modèle la synthèse est intractable — tout l'intérêt du ranker structuré.
+
+## Ce qui reste = passer à l'END-TO-END (torch/sklearn dispo)
+- pas 27 (LE but) : **rebrancher `proto_synth_guide`** (synthèse end-to-end, kernel validant) avec le
+  TreeNN comme ranker au lieu du LogReg + grammaire enrichie → régénération end-to-end depth-2 à BUDGET
+  FIXE. Avec médiane 1 / top-5 69 % / moyenne 87, viser un taux **> 0 %** mesurable = le vrai
+  generate-and-verify ;
+- grammaire de preuve RÉCURSIVE (les proof-terms deep restants : conjonction_intro imbriqué, chaînes
+  equivalence/modus_ponens) si l'end-to-end le réclame ;
 - mise à l'échelle BEAM (K plus grand) ; niveau TACTIQUE ; GFlowNet/diffusion.

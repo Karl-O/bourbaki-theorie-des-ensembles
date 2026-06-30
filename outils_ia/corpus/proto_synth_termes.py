@@ -93,13 +93,18 @@ def synth_termes(var_atoms, str_atoms, prof=PROF):
                 break
         if len(pool) >= MAXT:
             break
-    # pas 24-25 : COUCHE FORMULES/PREUVE sur atomes-Name (NON réinjectée dans la couche objets →
+    # pas 24-26 : COUCHE FORMULES/PREUVE sur atomes-Name (NON réinjectée dans la couche objets →
     # pas d'explosion ; args = vraies variables data-flow → le TreeNN les distingue ≠ littéraux nus).
-    # Construite à PART avec QUOTA réservé (sinon l'explosion objet la tronque, elle est tardive) :
-    #  · pas 24 : et/2 (formules nommées, ex. et(P, Gxz)) ;
-    #  · pas 25 : inclus/2 (relations) + conjonction_elim_gauche/droite (proof-terms unaires, ex.
-    #    conjonction_elim_gauche(ha) — 19 slots hors grammaire des modules à couples/produit).
+    # Construite à PART avec QUOTA réservé (sinon l'explosion objet la tronque, elle est tardive).
+    # Ordre = haute valeur d'abord (les unaires cheap survivent à la troncature de quota). On respecte
+    # la FORME exacte du foncteur (E./N./nu) sinon ast.dump ne matche pas l'oracle.
+    #  · pas 24 : et/2 ;  pas 25 : inclus/2 + conjonction_elim_gauche/droite/1 ;
+    #  · pas 26 : equivalence_avant/1, E.est_un_couple/1, N.existe_temoin/2 (Name, littéral),
+    #    symetrie/2 (sur Names ∪ var-littéraux). [Les DEEP/récursifs — conjonction_intro imbriqué,
+    #    equivalence_transitivite(_inst_dom…), et_congruence(couple_diagonale…) — exigent une grammaire
+    #    de preuve RÉCURSIVE, hors scope de cette couche plate ; documentés comme reste.]
     noms = [_name(v) for v in sorted(var_atoms)]
+    varterms = [_fn_call("var", [ast.Constant(s)]) for s in sorted(str_atoms)]
     forms = []
 
     def _aj_form(t):
@@ -108,14 +113,24 @@ def synth_termes(var_atoms, str_atoms, prof=PROF):
             vus.add(d)
             forms.append(t)
 
-    for fn in ("conjonction_elim_gauche", "conjonction_elim_droite"):  # proof-terms unaires (cheap)
+    for fn in ("conjonction_elim_gauche", "conjonction_elim_droite", "equivalence_avant"):  # unaires nus
         for a in noms:
             _aj_form(_fn_call(fn, [a]))
-    for a, b in itertools.product(noms, repeat=2):                     # binaires Name×Name
+    for a in noms:                                                     # E.est_un_couple/1
+        _aj_form(_attr_call("E", "est_un_couple", [a]))
+    for a in noms:                                                     # N.existe_temoin/2 (Name, littéral)
+        for s in sorted(str_atoms):
+            _aj_form(_attr_call("N", "existe_temoin", [a, ast.Constant(s)]))
+    for a, b in itertools.product(noms + varterms, repeat=2):          # symetrie/2 (atomes ∪ var-litt.)
+        _aj_form(_fn_call("symetrie", [a, b]))
+    for a, b in itertools.product(noms, repeat=2):                     # binaires relation/formule
         _aj_form(_fn_call("inclus", [a, b]))
         _aj_form(_fn_call("et", [a, b]))
-    qf = min(len(forms), max(1, MAXT // 3))                            # réserve ≤ 1/3 du budget
-    return pool[:MAXT - qf] + forms[:qf]
+    # budget SÉPARÉ : les objets gardent MAXT entier (aucune régression de troncature), les formules
+    # s'AJOUTENT (≤ MAXT). Le combinatoire des formules est O(|noms|²) → borné (~1k ici), donc rien
+    # n'est tronqué en pratique ; pool total ≤ 2·MAXT, borné. (Avant : un quota fractionnaire volait
+    # aux objets — couple/2 13→9 — puis aux et/inclus tardifs ; ce budget additif évite les deux.)
+    return pool[:MAXT] + forms[:MAXT]
 
 
 def _slots(call):

@@ -131,6 +131,9 @@ class TreeEnc(nn.Module):
         self.et = nn.Linear(2 * d, d)               # pas 24 : constructeur formule et/2
         self.incl = nn.Linear(2 * d, d)             # pas 25 : relation inclus/2
         self.elim = nn.Linear(d, d)                 # pas 25 : proof-terms conjonction_elim_*/1
+        self.un1 = nn.Linear(d, d)                  # pas 26 : unaires equivalence_avant/est_un_couple
+        self.exte = nn.Linear(2 * d, d)             # pas 26 : existe_temoin/2
+        self.sym = nn.Linear(2 * d, d)              # pas 26 : symetrie/2
 
     def enc(self, node, ctx):
         manq, disp, outs = ctx
@@ -157,6 +160,14 @@ class TreeEnc(nn.Module):
                                                        self.enc(node.args[1], ctx)])))
             if h in ("conjonction_elim_gauche", "conjonction_elim_droite"):
                 return torch.relu(self.elim(self.enc(node.args[0], ctx)))
+            if h in ("equivalence_avant", "est_un_couple"):
+                return torch.relu(self.un1(self.enc(node.args[0], ctx)))
+            if h == "existe_temoin":
+                return torch.relu(self.exte(torch.cat([self.enc(node.args[0], ctx),
+                                                       self.enc(node.args[1], ctx)])))
+            if h == "symetrie":
+                return torch.relu(self.sym(torch.cat([self.enc(node.args[0], ctx),
+                                                      self.enc(node.args[1], ctx)])))
         return torch.zeros(self.d)
 
 
