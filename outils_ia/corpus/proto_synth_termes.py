@@ -93,18 +93,28 @@ def synth_termes(var_atoms, str_atoms, prof=PROF):
                 break
         if len(pool) >= MAXT:
             break
-    # pas 24 : COUCHE FORMULES — et/2 sur atomes-Name (formules nommées, ex. et(P, Gxz)). Bornée
-    # (Name×Name seulement, NON réinjectée dans la couche objets → pas d'explosion combinatoire) ;
-    # ses arguments sont de vraies variables data-flow → le TreeNN les distingue (≠ littéraux nus).
-    # Construite à PART avec un QUOTA réservé, sinon l'explosion objet la tronque (elle est tardive).
+    # pas 24-25 : COUCHE FORMULES/PREUVE sur atomes-Name (NON réinjectée dans la couche objets →
+    # pas d'explosion ; args = vraies variables data-flow → le TreeNN les distingue ≠ littéraux nus).
+    # Construite à PART avec QUOTA réservé (sinon l'explosion objet la tronque, elle est tardive) :
+    #  · pas 24 : et/2 (formules nommées, ex. et(P, Gxz)) ;
+    #  · pas 25 : inclus/2 (relations) + conjonction_elim_gauche/droite (proof-terms unaires, ex.
+    #    conjonction_elim_gauche(ha) — 19 slots hors grammaire des modules à couples/produit).
     noms = [_name(v) for v in sorted(var_atoms)]
     forms = []
-    for a, b in itertools.product(noms, repeat=2):
-        d = ast.dump(_fn_call("et", [a, b]))
+
+    def _aj_form(t):
+        d = ast.dump(t)
         if d not in vus:
             vus.add(d)
-            forms.append(_fn_call("et", [a, b]))
-    qf = min(len(forms), max(1, MAXT // 5))                     # réserve ≤ 20 % du budget aux formules
+            forms.append(t)
+
+    for fn in ("conjonction_elim_gauche", "conjonction_elim_droite"):  # proof-terms unaires (cheap)
+        for a in noms:
+            _aj_form(_fn_call(fn, [a]))
+    for a, b in itertools.product(noms, repeat=2):                     # binaires Name×Name
+        _aj_form(_fn_call("inclus", [a, b]))
+        _aj_form(_fn_call("et", [a, b]))
+    qf = min(len(forms), max(1, MAXT // 3))                            # réserve ≤ 1/3 du budget
     return pool[:MAXT - qf] + forms[:qf]
 
 

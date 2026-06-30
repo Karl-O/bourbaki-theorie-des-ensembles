@@ -424,11 +424,38 @@ le top-5 passe 80 % → 67 % car les et-slots sont une famille **PLUS DURE** (ch
 top-5 67 % vs shallow 44 % vs brut 0 %). Les outliers restants (mean 151 ≳ shallow 121) = mêmes échecs
 SYSTÉMATIQUES de généralisation (**9 preuves seulement**) → le prochain levier est plus de DONNÉES.
 
+## Plus de données via plus de constructeurs (pas 25, FAIT) — la moyenne s'effondre
+
+Objectif : plus de DONNÉES (goulot résiduel = 9 preuves). Re-test de l'élargissement de modules de
+pas 22 AVEC la grammaire enrichie : sur **16 modules candidats, toujours 0 slot in-grammaire ajouté**
+(la plupart n'ont aucune macro intra-module ; ceux qui en ont — ex. `produit_extensionnalite`, 30 slots
+— utilisent ENCORE d'autres constructeurs). Le levier « plus de modules » est donc **RÉFUTÉ une 2e
+fois**. MAIS la probe des têtes hors-grammaire de ces modules révèle le vrai manque : **`conjonction_
+elim_gauche/1` ×19** (proof-term unaire sur une hypothèse-Name) et **`inclus/2`**.
+
+Ajout (couche proof/relation, bornée à quota ≤⅓) : `conjonction_elim_gauche/droite/1`, `inclus/2` +
+poids TreeNN dédiés. Effet : (a) couverture des 3 modules **47 % → 51 %** (126 slots) ; (b) le module
+`produit_extensionnalite` passe de **0 → 19 slots in-grammaire** = **+3 preuves DÉBLOQUÉES** (9 → 12),
+ce que pas 22 croyait impossible — *enrichir la grammaire débloque AUSSI de nouvelles preuves*. Re-run
+`proto_synth_torch` (140 slots, 12 preuves) :
+
+| ranker | médiane | top-5 | moyenne |
+|---|---|---|---|
+| brut | 42 | 0 % | 471 |
+| shallow (LogReg) | 14 | 46 % | 117 |
+| **neuronal (TreeNN)** | **5** | 55 % | **61** |
+
+**La MOYENNE du TreeNN s'effondre 151 → 61** (objectif des outliers systématiques de pas 22 ENFIN
+atteint) : plus de preuves diverses + la nouvelle famille range modérément bien. Compromis : médiane
+1 → 5, top-5 67 → 55 %, car la famille débloquée (choisir LA bonne hypothèse parmi ~|atomes|) est
+intrinsèquement PLUS DURE que les termes-objets depth-2 (où le TreeNN touchait médiane 1) — benchmark
+plus HONNÊTE, pas une régression du modèle. Pour la régénération END-TO-END (le but), la moyenne basse
+(61 ≪ 117 shallow ≪ 471 brut) borne le **pire-cas de budget** : c'est le gain qui compte.
+
 ## Ce qui reste = enrichir le générateur appris (torch/sklearn dispo)
-- pas 25 : **plus de DONNÉES** (le goulot résiduel = 9 preuves) — formaliser/inclure d'autres modules
-  II.3/II.4 produisant `composee/diagonale/couple/var/et`, ou augmenter par renommage cohérent, pour
-  écraser les outliers SYSTÉMATIQUES (mean) sans toucher au réseau ;
-- enrichir ENCORE la grammaire : `conjonction_intro/2`, `symetrie/1`, `equivalence_*` (poids TreeNN
-  dédiés) → viser couverture > 60 % ;
-- rebrancher pas 20 (synthèse guidée) avec le TreeNN comme ranker → régénération end-to-end depth-2 ;
+- pas 26 : enrichir ENCORE la grammaire (`conjonction_intro/2`, `symetrie/1`, `equivalence_*`,
+  `et(inclus,inclus)` depth-2 ; poids TreeNN dédiés) → viser couverture > 60 % et débloquer encore des
+  modules (graphe_inclus_produit etc.) = plus de preuves → continuer à faire baisser la moyenne ;
+- rebrancher pas 20 (synthèse guidée) avec le TreeNN comme ranker (au lieu du LogReg) → régénération
+  end-to-end depth-2 à budget fixe : avec moyenne 61 / top-5 55 %, viser un taux > 0 % mesurable ;
 - mise à l'échelle BEAM (K plus grand) ; niveau TACTIQUE ; GFlowNet/diffusion.

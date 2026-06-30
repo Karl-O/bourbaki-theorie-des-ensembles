@@ -44,13 +44,15 @@ from proto_macro_termes import _str_consts, _ctx_trou        # noqa: E402
 from repair_learned import _assignes                         # noqa: E402
 
 PST.MAXT = 1500
-# NB (pas 22) : élargir à correspondances/image_domaine/couple_caracterisation/reciproque n'ajoute
-# AUCUN slot in-grammaire (leurs termes utilisent d'autres constructeurs) → le goulot de DONNÉES est
-# le goulot de GRAMMAIRE. Seuls ces 3 modules produisent des termes composee/diagonale/couple/var.
+# pas 22→25 : élargir les modules n'ajoutait AUCUN slot in-grammaire TANT QUE la grammaire était
+# étroite (composee/diagonale/couple/var) ; une fois enrichie (const+et+inclus+conjonction_elim_*,
+# pas 23-25), produit_extensionnalite passe de 0 à 19 slots in-grammaire → +3 preuves de DONNÉES.
+# Le goulot était bien GRAMMAIRE, et l'enrichir débloque AUSSI de nouvelles preuves.
 MODULES = [
     "bourbaki.ensembles.ii_2_couples_produit.ensembles_projection_fonctionnelle",
     "bourbaki.ensembles.ii_3_correspondances.ensembles_identite_neutre",
     "bourbaki.ensembles.ii_3_correspondances.ensembles_diagonale_couple",
+    "bourbaki.ensembles.ii_2_couples_produit.ensembles_produit_extensionnalite",  # pas 25 (débloqué)
 ]
 CF_VOCAB = {}           # tactique appelante -> index (rempli à la collecte)
 
@@ -127,6 +129,8 @@ class TreeEnc(nn.Module):
         self.comp = nn.Linear(2 * d, d)
         self.coup = nn.Linear(2 * d, d)
         self.et = nn.Linear(2 * d, d)               # pas 24 : constructeur formule et/2
+        self.incl = nn.Linear(2 * d, d)             # pas 25 : relation inclus/2
+        self.elim = nn.Linear(d, d)                 # pas 25 : proof-terms conjonction_elim_*/1
 
     def enc(self, node, ctx):
         manq, disp, outs = ctx
@@ -148,6 +152,11 @@ class TreeEnc(nn.Module):
             if h == "et":
                 return torch.relu(self.et(torch.cat([self.enc(node.args[0], ctx),
                                                      self.enc(node.args[1], ctx)])))
+            if h == "inclus":
+                return torch.relu(self.incl(torch.cat([self.enc(node.args[0], ctx),
+                                                       self.enc(node.args[1], ctx)])))
+            if h in ("conjonction_elim_gauche", "conjonction_elim_droite"):
+                return torch.relu(self.elim(self.enc(node.args[0], ctx)))
         return torch.zeros(self.d)
 
 
