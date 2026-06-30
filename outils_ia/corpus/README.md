@@ -105,8 +105,27 @@ forward (corrompre + filtre, 85 % rejeté) · dataset de paires (corrompu→vali
 chute avec K) · reverse (réparer = chercher + filtre, 100 % récupérable). Le mécanisme
 generate-and-verify FONCTIONNE end-to-end.
 
-## Ce qui reste = le GÉNÉRATEUR APPRIS (vrai projet ML, données prêtes)
-- remplacer la recherche brute-force du repaireur par une POLITIQUE apprise (GFlowNet sur
-  DAG de tactiques / diffusion discrète), entraînée sur les paires (corrompu→parent) ;
-- passer au niveau TACTIQUE (cf. STATS.md) ; bibliothèque inter-preuves ; library-learning ;
-- mettre à l'échelle la génération de données (plus de modules) pour un vrai jeu d'entraînement.
+## Repaireur APPRIS (pas 8-9, FAIT) — `repair_learned.py` — « ça apprend à marcher »
+
+Premier composant APPRIS du reverse process : un classifieur sklearn (LogisticRegression)
+qui, vu le CONTEXTE d'un trou (tactiques voisines + position + **signal data-flow** : le
+candidat fournit-il la variable manquante ?), prédit quel candidat répare. On range les
+candidats par P(repair) et on n'appelle le noyau que sur les mieux classés.
+
+Mesure (5 modules, 2547 candidat-insertions, 12 théorèmes, **GroupKFold = test sur preuves
+JAMAIS vues**) :
+- accuracy CV **0.990** ;
+- rang moyen de la 1ʳᵉ vraie réparation : **1.19** (modèle) vs **8.82** (brute-force aléatoire)
+  → **87 % d'appels-noyau en moins**.
+
+Le signal décisif est le **data-flow** (le pas supprimé définissait une variable lue plus
+loin ; le candidat qui la re-fournit est la réparation) — un feature quasi-heuristique que
+le modèle apprend à pondérer avec le contexte tactique. Le NOYAU reste l'oracle exact qui
+valide. → la politique apprise **bat la force brute et généralise**. C'est l'embryon du
+générateur ; reste à l'enrichir (features tactiques, niveau-tactique, GFlowNet/diffusion,
+torch dispo).
+
+## Ce qui reste = enrichir le générateur appris (torch/sklearn dispo)
+- features plus riches (arguments, types de tactiques, contexte DAG) + niveau TACTIQUE (STATS.md) ;
+- politique séquentielle (réparer plusieurs pas / générer de zéro) : GFlowNet sur DAG / diffusion ;
+- bibliothèque inter-preuves + library-learning ; mise à l'échelle des données (gitignoré).
