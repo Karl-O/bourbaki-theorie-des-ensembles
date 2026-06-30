@@ -191,9 +191,34 @@ absente (rendement nul ici) mais (i) un **prior de binding** partagé qui rédui
 (ii) le **library-learning** = abstraire des **macros multi-pas récurrentes** entre preuves (≠ un
 seul pas). `python outils_ia/corpus/proto_inter_preuves.py [module…]`.
 
+## Library-learning : macros multi-pas (pas 16, FAIT) — `proto_library_learning.py`
+
+Le pas 14 a tranché : un pas ISOLÉ d'une autre preuve ne transfère pas (verbatim ~0 %, import de
+tactique étrangère 0 %). Le levier, c'est le **bloc MULTI-pas récurrent**. Une *macro* = une
+sous-séquence contiguë de signatures *(tactique, arité)* qui réapparaît dans plusieurs preuves
+(elle porte son propre flot-de-données interne → vrai morceau de vocabulaire partagé). Analyse
+**AST pure** (aucun exec-noyau → 4 s sur tout le corpus logique+ensembles) :
+
+- **Corpus** : 97 modules → **458 preuves** (≥2 pas), **4121 pas de tactique**.
+- **Macros inter-preuves** (n-gramme dans ≥2 preuves, n=2..4) : **1223**, dont **840 INTER-modules**
+  (≥2 modules distincts) = partage réel, pas répétition intra-fichier.
+- **Compression** : **82 % des pas** sont absorbés par une macro ; une preuve = *pas-libres +
+  appels-macro* → longueur **0.45×** l'originale. Une **petite** bibliothèque suffit déjà :
+  top-10 macros couvrent **26 %** des pas, top-25 **39 %**, top-50 **48 %**.
+- **Top macros** = motifs Bourbaki reconnaissables : `assume → modus_ponens` (100 preuves / 51 mod),
+  `modus_ponens → modus_ponens`, `modus_ponens → loi_deduction`, `conjonction_elim_gauche →
+  conjonction_elim_droite` (scinder une conjonction), `loi_deduction → generalisation` (décharger
+  puis généraliser), `generalisation → egalite_par_extension`…
+
+**Ce que ça établit** : contrairement au 1-pas (transfert nul, pas 14), le vocabulaire **multi-pas**
+est massivement PARTAGÉ (840 macros inter-modules couvrant 82 % des pas). C'est la cible naturelle
+du générateur : émettre des MACROS (blocs), pas des primitives isolées — trajectoires courtes,
+vocabulaire riche (cf. l'insight niveau-tactique de STATS.md). `python
+outils_ia/corpus/proto_library_learning.py [package…]`.
+
 ## Ce qui reste = enrichir le générateur appris (torch/sklearn dispo)
-- LIBRARY-LEARNING : abstraire les **macros multi-pas** récurrentes entre preuves (le vrai levier
-  inter-preuves, cf. pas 14 : l'import 1-pas d'une tactique étrangère a un rendement nul) ;
-- mise à l'échelle BEAM : K plus grand + preuves plus longues/variées (le beam sature à 100 %
-  jusqu'à K=4 sur ce petit test ; mesurer sa frontière sur un corpus plus large) ;
-- niveau TACTIQUE (STATS.md) ; prior de binding partagé ; GFlowNet/diffusion ; mise à l'échelle.
+- pas 16-suite : **valider une macro par le NOYAU** — supprimer un bloc multi-pas correspondant à
+  une macro et le RÉGÉNÉRER (macro re-bindée localement, noyau validant le bloc) = vocabulaire
+  multi-pas certifié (là où le 1-pas échouait) ;
+- prior de binding PARTAGÉ entre preuves (réduire la recherche de binding du pas 14) ;
+- mise à l'échelle BEAM (K plus grand, preuves plus longues) ; niveau TACTIQUE ; GFlowNet/diffusion.
