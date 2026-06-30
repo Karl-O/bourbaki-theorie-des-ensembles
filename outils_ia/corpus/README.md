@@ -549,11 +549,32 @@ Le seul levier restant pour l'arrangement/miroir est (a) **FORMALISER plus de pr
 données diverses : encoder le RESTE du bloc / le but, pas seulement le slot). Le **50 % end-to-end de
 pas 27** (holdout module) reste la référence.
 
-## Ce qui reste
-- pas 30 : **modèle à CONTEXTE plus riche** — le ranker ne voit que (terme candidat ⊕ cf ⊕ data-flow du
-  slot) ; pour distinguer composee(a,diag(b)) de diag(composee(…)) sous holdout, encoder le RESTE du bloc
-  (statements voisins / but visé) → seul levier modélisation contre l'effet miroir sans nouvelles données ;
-- grammaire de preuve RÉCURSIVE (proof-terms deep : conjonction_intro imbriqué, chaînes equivalence/
-  modus_ponens) pour couvrir > 64 % et débloquer plus de blocs end-to-end ;
+## Contexte du BUT (pas 30, FAIT → RÉFUTÉ, reverté)
+
+Seul levier modélisation contre l'effet miroir SANS nouvelles données : encoder le BUT de la preuve dans
+le Scorer (embedding agrégé des termes structurés présents AILLEURS dans la preuve, hors du bloc, par le
+même TreeEnc). **PROBE D'ABORD** (économise 13 min) : pour les 2 preuves MIROIR d'identite, HORS du bloc
+tenu à l'écart il n'y a QUE `_tc`×2 — **IDENTIQUE pour les deux jumelles**. Le bloc EST quasi toute la
+preuve → **aucun contexte AST ne distingue les miroirs** (seule la cible RUNTIME diffère, hors de la
+représentation du TreeNN). Donc le contexte-du-but ne PEUT PAS aider le miroir.
+
+Sur le RESTE du corpus 94 % des slots ont un contexte non vide → on mesure quand même l'agrégat (run
+13 min, 211 slots) : TreeNN **médiane 1 / top-5 69 % / moyenne 132** = IDENTIQUE au sans-contexte de pas 29
+(1 / 70 % / 130, dans le bruit). → le contexte-du-but n'aide **NI le miroir NI l'agrégat**. **Levier
+modélisation RÉFUTÉ** (reverté : complexité inutile). Confirme pas 29 : le goulot est la **DONNÉE**
+(diversité d'arrangements), pas le contexte du modèle. Cures restantes : formaliser plus de preuves
+d'arrangement (HORS loop) OU encoder la CIBLE kernel (assemblage runtime, ≠ AST — effort séparé).
+
+## Bilan & ce qui reste
+
+**Acquis du pivot (pas 14→30)** : le generate-and-verify appris FONCTIONNE — synthèse de termes structurés
++ ranker TreeNN (médiane 1, top-5 ~70 %) + noyau validant → **régénération end-to-end depth-2 réelle 50 %**
+(holdout module, pas 27). Grammaire 19 %→64 %. Limite caractérisée : l'**effet miroir** (pas 28) = des
+arrangements opposés indistinguables par le contexte AST (pas 30) faute de **données d'arrangement
+diverses** (pas 29) — verrou de DONNÉES, pas d'outillage ni de modèle.
+- pas 31 : grammaire de preuve RÉCURSIVE (proof-terms deep : `conjonction_intro` imbriqué, chaînes
+  equivalence/modus_ponens) pour couvrir > 64 % et débloquer plus de blocs end-to-end ;
+- encoder la **CIBLE kernel** (le but réel, assemblage runtime) comme contexte — seul signal qui distingue
+  les miroirs, mais hors représentation AST (featuriser l'assemblage / sa chaîne) ;
 - (hors loop) FORMALISER plus de preuves d'arrangement dans `bourbaki/` = la vraie cure du mur de données ;
 - niveau TACTIQUE ; GFlowNet/diffusion.
