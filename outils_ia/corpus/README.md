@@ -89,8 +89,24 @@ recalé par la cible). `python outils_ia/corpus/proto_mutation_verify.py [module
 97 % rejetés — exactement le *noising schedule* de la diffusion. Échantillon
 `paires_corruption_sample.jsonl` ; graine fixe (reproductible).
 
-## Passes ultérieures
-- amorcer le *reverse* : un repaireur (même trivial : ré-essayer des tactiques de la
-  bibliothèque à l'emplacement corrompu, garder celle que le noyau accepte) = 1ᵉ « débruitage » ;
-- arbre `@livre` complet (chapitre→§→page) = structure conditionnelle (le « prompt » = le but) ;
-- passer du niveau ligne-de-code au niveau TACTIQUE (cf. STATS.md) pour l'espace de génération.
+## Reverse process : repaireur 1-pas (pas 7, FAIT) — `proto_repair.py`
+
+Le pas de DÉBRUITAGE atomique : une preuve corrompue par suppression d'un pas → chercher
+dans la bibliothèque quel candidat, ré-inséré, fait re-accepter le noyau. Mesure
+(`diagonale_couple`) : 79 corruptions, **1193 essais filtrés**, **100 % récupérées** par
+recherche+noyau (l'oracle passe toujours ; tout le reste rejeté) ; 0 réparation alternative
+(pool local minimal → preuves « tendues »). = la brique du *reverse process*, encore en
+brute-force (pas appris).
+
+## Proof-of-concept COMPLET (pas 1→7)
+
+Les DEUX directions de la diffusion sont démontrées, **noyau = oracle exact partout** :
+forward (corrompre + filtre, 85 % rejeté) · dataset de paires (corrompu→valide, validité
+chute avec K) · reverse (réparer = chercher + filtre, 100 % récupérable). Le mécanisme
+generate-and-verify FONCTIONNE end-to-end.
+
+## Ce qui reste = le GÉNÉRATEUR APPRIS (vrai projet ML, données prêtes)
+- remplacer la recherche brute-force du repaireur par une POLITIQUE apprise (GFlowNet sur
+  DAG de tactiques / diffusion discrète), entraînée sur les paires (corrompu→parent) ;
+- passer au niveau TACTIQUE (cf. STATS.md) ; bibliothèque inter-preuves ; library-learning ;
+- mettre à l'échelle la génération de données (plus de modules) pour un vrai jeu d'entraînement.
