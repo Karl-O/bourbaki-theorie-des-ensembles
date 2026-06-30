@@ -47,3 +47,14 @@ def test_projections_diagonale():
     assert t1.est_clos and not t1.hypotheses
     assert t2.est_clos and not t2.hypotheses
     assert len(theorie_ensembles().axiomes) == 22
+
+
+def test_composee_diagonale():
+    """⊢ ((x,z)∈G∘Δ_A) ⇔ (x∈A et (x,z)∈G)  (cœur de Γ∘Id_A=Γ, E II.13 Déf.8) — CLOS."""
+    G, A, x, z = var("G"), var("A"), var("x"), var("z")
+    t = M.couple_composee_diagonale()
+    cible = equiv(appartient(E.couple(x, z), E.composee(G, E.diagonale(A))),
+                  et(appartient(x, A), appartient(E.couple(x, z), G)))
+    assert t.conclusion == cible == M.couple_composee_diagonale_cible()
+    assert t.est_clos and not t.hypotheses
+    assert len(theorie_ensembles().axiomes) == 22

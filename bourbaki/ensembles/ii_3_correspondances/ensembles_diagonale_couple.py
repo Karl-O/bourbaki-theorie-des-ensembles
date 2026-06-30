@@ -26,13 +26,15 @@ from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
-    equivalence_avant, equivalence_arriere, equivalence_transitivite, instancie)
+    equivalence_avant, equivalence_arriere, equivalence_transitivite, instancie,
+    et_congruence_gauche)
 from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import (
     existe_elimination, alpha_existe, congruence_existe)
 from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import (
     symetrie, composer_egalites, congruence_terme)
 from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import proposition_1
 from bourbaki.ensembles.fonctions.ii_3_2_reciproque.ensembles_reciproque import couple_reciproque
+from bourbaki.ensembles.fonctions.ii_3_3_composee_graphes.ensembles_composee import couple_composee
 from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import (
     extensionnalite_appliquee, egalite_par_extension)
 
@@ -217,6 +219,42 @@ def pr2_diagonale(x="X"):
     char_X = N.generalisation("z", conjonction_intro(N.loi_deduction(P, N.assume(P)),
                                                      N.loi_deduction(P, N.assume(P))))
     return egalite_par_extension(char_img, char_X, E.img(E.diagonale(vX)), vX)
+
+
+# @livre Ch.II §3.3 Def.8 | E II.13 L.25-26 | PDF p.64
+def couple_composee_diagonale(g="G", a="A", x="x", z="z"):
+    """⊢ ((x,z) ∈ G∘Δ_A) ⇔ (x∈A et (x,z)∈G).   (E II.13, Déf. 8 ; cœur de Γ∘Id_A=Γ.)
+
+    Composer à droite par l'identité Δ_A = restreindre le domaine de G à A.  Brique
+    pour « Γ∘Id_A = Γ » (lorsque A ⊇ pr₁G).  x, z, a, g : noms OU termes (≠ y, d0, w)."""
+    vG, vA, vx, vz = _tc(g), _tc(a), _tc(x), _tc(z)
+    Gyz = appartient(E.couple(var("y"), vz), vG)
+    cc = couple_composee(vG, E.diagonale(vA), vx, vz)    # ((x,z)∈G∘Δ_A) ⇔ (∃y)((x,y)∈Δ_A et (y,z)∈G)
+    cong = congruence_existe(et_congruence_gauche(couple_diagonale(vx, "y", vA), Gyz), "y")
+    #  ⇔ (∃y)((x∈A et x=y) et (y,z)∈G)
+    # collapse (témoin y:=x ; substitution Leibniz sur (·,z)∈G) :
+    P, Gxz = appartient(vx, vA), appartient(E.couple(vx, vz), vG)
+    body = et(et(P, egal(vx, var("y"))), Gyz)
+    hb = N.assume(body)
+    left = conjonction_elim_gauche(hb)
+    xz = N.modus_ponens(conjonction_elim_droite(hb), equivalence_arriere(N.modus_ponens(
+        conjonction_elim_droite(left), N.s6(vx, var("y"), "w", appartient(E.couple(var("w"), vz), vG)))))
+    fwd = existe_elimination(N.loi_deduction(body,
+        conjonction_intro(conjonction_elim_gauche(left), xz)), "y")          # (∃y)body ⇒ (x∈A et (x,z)∈G)
+    h2 = N.assume(et(P, Gxz))
+    ex = N.modus_ponens(conjonction_intro(
+        conjonction_intro(conjonction_elim_gauche(h2), N.reflexivite(vx)),
+        conjonction_elim_droite(h2)), N.s5(body, vx, "y"))                   # (∃y)body
+    bwd = N.loi_deduction(et(P, Gxz), ex)
+    collapse = conjonction_intro(fwd, bwd)
+    return equivalence_transitivite(equivalence_transitivite(cc, cong), collapse)
+
+
+def couple_composee_diagonale_cible(g="G", a="A", x="x", z="z"):
+    """Énoncé visé : ((x,z)∈G∘Δ_A) ⇔ (x∈A et (x,z)∈G)."""
+    vG, vA, vx, vz = _tc(g), _tc(a), _tc(x), _tc(z)
+    return equiv(appartient(E.couple(vx, vz), E.composee(vG, E.diagonale(vA))),
+                 et(appartient(vx, vA), appartient(E.couple(vx, vz), vG)))
 
 
 def pr1_diagonale_cible(x="X"):
