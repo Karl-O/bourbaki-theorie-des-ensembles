@@ -57,6 +57,11 @@ chaque sortie certifiée par le noyau. 1ʳᵉ démonstration concrète et robust
 | fonctions_props2 | 0 | (0 bloc ≤2 slots) | — |
 | **TOTAL** | **43** | **4 %** | **27 %** |
 
+**Sensibilité au budget (pas 36, `proto_synth_capcurve.py`, leave-one-module-out, 43 blocs)** : le BRUT
+reste PLAT à **4 %** (oracles depth-2 au rang ~1000+, inatteignables) ; le TreeNN MONTE avec le budget —
+CAP 50/100/200/300/400 → **13 / 25 / 32 / 39 / 41 %**. Le ranker structuré rend le budget-noyau UTILE
+(le noyau = vérificateur gratuit) : **41 % à CAP=400 SANS plus de données**. (Variance ±5 % E=1 vs E=2.)
+
 ## 4. La limite : l'EFFET MIROIR — un verrou de DONNÉES (diagnostiqué sur 5 angles)
 
 Les 2 preuves d'identite sont des **miroirs** : `composee(vG, diagonale(vA))` vs `composee(diagonale(vB), vG)`

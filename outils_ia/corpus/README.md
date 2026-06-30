@@ -622,7 +622,28 @@ que « 50 % sur 2 blocs ». (Le 50 % d'identite tient comme cas particulier ; l'
 spécifique au holdout PROOF — tenir une sœur miroir DANS le train — pas au holdout module.)
 `python outils_ia/corpus/proto_synth_lomo.py`.
 
-## Bilan du pivot (pas 14→33) & directions
+## Sensibilité au budget : pousser le taux SANS plus de données (pas 36)
+
+Arc (1) : combien de blocs deviennent atteignables si on dépense plus d'essais-noyau ? `regen_e2e`
+instrumenté renvoie l'INDICE n du 1er succès noyau ; un seul run leave-one-module-out à CAP_MAX=400
+(`proto_synth_capcurve.py`, E=1) donne la courbe d'un coup (bloc régénéré à un CAP si n ≤ CAP) :
+
+| CAP | BRUT | TreeNN |
+|---|---|---|
+| 50 | 4 % | 13 % |
+| 100 | 4 % | 25 % |
+| 200 | 4 % | 32 % |
+| 300 | 4 % | 39 % |
+| 400 | 4 % | **41 %** |
+
+**Le BRUT reste PLAT à 4 %** quel que soit le budget (les oracles depth-2 sont au rang ~1000+,
+inatteignables par énumération) ; **le TreeNN MONTE 13 %→41 %** (CAP 50→400). → le **ranker structuré
+rend le budget UTILE** : le noyau étant le vérificateur gratuit, dépenser plus d'essais atteint plus de
+blocs **sans aucune donnée nouvelle** (41 % à CAP=400). (32 % @200 ici vs 27 % pas 33 = E=1 vs E=2 +
+variance ±5 % sur ce petit corpus ; la FORME de la courbe — montée monotone, brut plat — est le résultat
+robuste.) `python outils_ia/corpus/proto_synth_capcurve.py`.
+
+## Bilan du pivot (pas 14→36) & directions
 
 **Acquis** : le generate-and-verify appris FONCTIONNE — synthèse de termes structurés + ranker TreeNN
 (médiane 1, top-5 ~70 %) + **noyau validant** → **régénération end-to-end réelle 27 % sur 43 blocs

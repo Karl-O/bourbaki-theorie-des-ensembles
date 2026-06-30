@@ -109,10 +109,10 @@ def regen_e2e(mod, P, infoP, occ, L, pool, vars_locales, nets, use_tree):
         recon = body[:absj] + newblock + body[absj + L:]
         n += 1
         if _statut(mod, P, _rebuild(fdef, recon), cible) == "OK":
-            return True
+            return n                                            # pas 36 : indice du 1er succès (bool(n)=True)
         if n >= CAP:
             break
-    return False
+    return None                                                # échec dans le budget (bool(None)=False)
 
 
 def collecte_named(modnames, exclude=None):
@@ -219,9 +219,13 @@ def _eval_proof(modname, P, nets, tot):
                     bi = [ast.dump(t) for t in pool].index(od)
                     order = _ordre(pool, nets, _head(call), k, manq, disp, outs, True)
                     rangs.append((bi + 1, order.index(bi) + 1))
-            tot["brut"] += int(bool(regen_e2e(mod, P, proofs[P], occ, L, pool, vl, nets, False)))
-            tot["tree"] += int(bool(regen_e2e(mod, P, proofs[P], occ, L, pool, vl, nets, True)))
-            print(f"#   [{HOLDOUT}] bloc {P}@{occ} (L={L}) rangs(brut,tree)={rangs} : "
+            bn = regen_e2e(mod, P, proofs[P], occ, L, pool, vl, nets, False)
+            tn = regen_e2e(mod, P, proofs[P], occ, L, pool, vl, nets, True)
+            tot["brut"] += int(bool(bn))
+            tot["tree"] += int(bool(tn))
+            tot.setdefault("brut_ns", []).append(bn)           # pas 36 : indice succès (None si échec)
+            tot.setdefault("tree_ns", []).append(tn)
+            print(f"#   [{HOLDOUT}] bloc {P}@{occ} (L={L}) rangs(brut,tree)={rangs} n(b,t)=({bn},{tn}) : "
                   f"brut={tot['brut']} tree={tot['tree']} / in_gram={tot['in_gram']}", file=sys.stderr)
 
 
