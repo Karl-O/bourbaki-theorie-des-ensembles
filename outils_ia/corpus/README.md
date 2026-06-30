@@ -324,8 +324,27 @@ shallow plafonnent à ~rang 140, pas ~1 ; résoudre l'**arrangement exact** des 
 `composee(vG,diag(vA))` vs `composee(vA,diag(vG))`, mêmes compteurs) demande des modèles STRUCTURÉS
 (embeddings d'AST, torch). `python outils_ia/corpus/proto_synth_prior.py [module…]`.
 
+## Synthèse guidée end-to-end (pas 20, FAIT) — `proto_synth_guide.py`
+
+On BRANCHE le prior (pas 19) dans la synthèse : on range le pool de candidats par P(correct) AVANT
+le filtre noyau, à BUDGET FIXE (CAP=200 essais-noyau/bloc), et on mesure la régénération de bloc —
+BRUTE vs PRIOR — sur identite (depth-2) TENU À L'ÉCART (prior entraîné sur projection+diagonale).
+
+**Résultat NÉGATIF à DOUBLE CAUSE, mesuré :**
+- **couverture grammaire** : seulement **6/10 slots** sont dans la grammaire de termes ; les 4 autres
+  exigent des constructeurs non couverts (`conjonction_intro`, lemmes-helpers) → insynthétisables ;
+- **plafond de ranking** : pour les slots in-grammaire, le bon terme est au rang brut **798**, et le
+  prior shallow le remonte seulement à **557** (−30 %) — toujours ≫ CAP=200 ;
+- **régénération end-to-end** (2 blocs FULLY in-grammaire) : **BRUTE 0 % → PRIOR 0 %**.
+
+Le prior AIDE (rang −30 %) mais ne FRANCHIT pas le budget pour le depth-2 ; et la grammaire est trop
+étroite. Conclusion : les deux verrous restants sont (1) une **grammaire de termes plus large** et
+(2) un **modèle de ranking STRUCTURÉ** (les features shallow ne pincent pas l'arrangement exact).
+`python outils_ia/corpus/proto_synth_guide.py`.
+
 ## Ce qui reste = enrichir le générateur appris (torch/sklearn dispo)
-- pas 20 : **brancher le prior dans la synthèse** (ranger le pool par P(correct) avant le filtre
-  noyau) → mesurer le gain end-to-end sur les blocs depth-2 (identite/diagonale) ;
-- modèle STRUCTURÉ pour le ranking exact (embeddings d'AST de termes, torch) → viser le rang ~1 ;
+- pas 21 : **modèle STRUCTURÉ** (embeddings d'AST de termes, torch) pour le ranking exact → viser le
+  rang ~1 (les features shallow plafonnent vers ~500-rang sur depth-2) ;
+- **grammaire de termes enrichie** (constructeurs/lemmes manquants : conjonction_intro, etc.) pour
+  monter la couverture des slots au-delà de 6/10 ;
 - mise à l'échelle BEAM (K plus grand) ; niveau TACTIQUE ; GFlowNet/diffusion.
