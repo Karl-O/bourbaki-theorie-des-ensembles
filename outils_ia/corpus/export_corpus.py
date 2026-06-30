@@ -45,6 +45,11 @@ from pathlib import Path
 _V9 = Path(__file__).resolve().parents[2]
 if str(_V9) not in sys.path:
     sys.path.insert(0, str(_V9))
+_ICI = Path(__file__).resolve().parent
+if str(_ICI) not in sys.path:
+    sys.path.insert(0, str(_ICI))
+
+from trace_preuve import tracer_theoreme   # noqa: E402  (tracer la trajectoire pas-à-pas)
 
 _LIVRE_RE = re.compile(r"#\s*@livre\s+(.+)")
 
@@ -90,13 +95,16 @@ def exporter_module(modname: str, records: list[dict]) -> tuple[int, int]:
         if name.endswith("_cible") or name.startswith("theorie_") or name.startswith("axiome_"):
             continue
         try:
-            thm = fn()                                   # appel avec args par défaut
+            thm, steps = tracer_theoreme(fn)             # appel + trajectoire pas-à-pas
         except Exception:
             sautes += 1
             continue
         if not _est_theoreme(thm):
             sautes += 1
             continue
+        rule_hist: dict[str, int] = {}
+        for st in steps:
+            rule_hist[st["rule"]] = rule_hist.get(st["rule"], 0) + 1
         # vérif : si un companion <name>_cible existe, comparer conclusion == cible
         verified = None
         cible_fn = getattr(mod, name + "_cible", None) or getattr(mod, "cible_" + name, None)
@@ -122,6 +130,8 @@ def exporter_module(modname: str, records: list[dict]) -> tuple[int, int]:
             "hypotheses_ast": sorted(repr(h) for h in thm.hypotheses),
             "proof_src": proof_src,
             "verified": verified,
+            "trace_len": len(steps),                     # nb de pas primitifs (profondeur DAG)
+            "rule_hist": rule_hist,                      # histogramme des règles noyau
         })
         faits += 1
     return faits, sautes

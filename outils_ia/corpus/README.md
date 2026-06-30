@@ -32,18 +32,26 @@ Sans argument : liste « fast » par défaut (évite les imports cardinaux 13-18
 `corpus_sample.jsonl` = échantillon de démonstration (22 théorèmes, 8 modules fast).
 Le corpus complet est **régénérable** (ne pas le committer en entier — volumineux).
 
-## Limite V1 et étape suivante (la vraie « marche sur le DAG »)
+## Trajectoire pas-à-pas — la « marche sur le DAG » (pas 2, FAIT)
 
 `Theoreme` ne stocke que `(hypotheses, conclusion, justification)` — **pas ses
-prémisses**. Donc le DAG d'inférence fin n'est pas dans l'objet ; cette V1 capture la
-preuve au niveau **programme** (source). C'est déjà une paire (but → programme) utilisable
-(cadre code-génération / GFlowNet sur tactiques).
+prémisses**. Pour obtenir le DAG fin, `trace_preuve.py` **observe le noyau** : il
+enveloppe temporairement les primitives `N.*` (observateur pur, soundness intacte — il
+appelle la vraie primitive et la consigne, sans pouvoir forger de `Theoreme`) et
+enregistre chaque pas `{i, rule, inputs:[indices], concl, clos}` = la trajectoire
+primitive-par-primitive.
 
-**Étape suivante** : instrumenter les primitives `N.*` (wrapper de journalisation) pour
-enregistrer, à chaque construction, le tuple `(règle, théorèmes-entrée, théorème-sortie)`.
-On obtient alors la **trajectoire pas-à-pas** = la marche sur le DAG de dérivation, donnée
-idéale pour une diffusion discrète / GFlowNet (forward = effacer des pas, reverse = les
-reconstruire, kernel = filtre de validité à chaque pas). Voir mémoire
+```
+python outils_ia/corpus/trace_preuve.py <module> <fonction>   # affiche le DAG
+```
+`export_corpus.py` intègre un **résumé** par théorème : `trace_len` (nb de pas primitifs
+= profondeur DAG) et `rule_hist` (histogramme des règles). Échantillon 8 modules :
+**205 861 pas primitifs**, médiane ≈5 557 pas/théorème (ex. `couple_diagonale` = 6 707 pas) ;
+règles dominantes `modus_ponens`, `assume`, `loi_deduction`, `s3`. La trajectoire COMPLÈTE
+(avec AST par pas) est volumineuse → régénérée à la demande, pas committée.
+
+C'est la donnée idéale pour diffusion discrète / GFlowNet : **forward** = effacer des pas,
+**reverse** = les reconstruire, **kernel** = filtre de validité à chaque pas. Voir mémoire
 `meta-algo-diffusion-marche`.
 
 ## Aussi à exporter (passes ultérieures)
