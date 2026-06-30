@@ -90,3 +90,33 @@ quantificateurs $(\forall\kappa)(\forall\iota)\leftrightarrow(\forall\iota)(\for
 borné par le bloc fonctionnel/domaine ; $K\neq\emptyset$ load-bearing (témoin $\kappa_0$).
 
 \textbf{Statut.} CLOS ($0$ hyp.\ ; $4$ antécédents honnêtes déchargés en implication).
+
+\subsection{§II.5 --- Corollaire de la Prop.~8 : distributivité à deux familles (sans choix)}
+\textbf{Énoncé (Bourbaki, E~II.36).} Pour deux familles $(X_\iota)_{\iota\in I}$,
+$(Y_\kappa)_{\kappa\in K}$ d'ensembles d'indices non vides :
+\[
+  \Bigl(\bigcap_{\iota\in I}X_\iota\Bigr)\cup\Bigl(\bigcap_{\kappa\in K}Y_\kappa\Bigr)
+  =\bigcap_{(\iota,\kappa)\in I\times K}\!\!(X_\iota\cup Y_\kappa),\quad(1)\qquad
+  \Bigl(\bigcup_{\iota\in I}X_\iota\Bigr)\cap\Bigl(\bigcup_{\kappa\in K}Y_\kappa\Bigr)
+  =\bigcup_{(\iota,\kappa)\in I\times K}\!\!(X_\iota\cap Y_\kappa).\quad(2)
+\]
+
+\textbf{Formalisé.} Les \emph{deux} formules, \emph{égalités pleines}, modules
+\texttt{ensembles\_cor\_prop8\_deux\_familles\_ii5.py} (1) et
+\texttt{...\_reunion\_ii5.py} (2). \emph{Point clé de fidélité} : Bourbaki démontre ces
+formules \emph{en cas particulier de la Prop.~8} (via la bijection $\prod_\lambda J_\lambda
+\simeq I\times K$), or le sens « $\supset$ » de la Prop.~8 générale \textbf{consomme l'axiome
+du choix}. Pour \emph{deux} familles ($L=\{1,2\}$), aucune fonction de choix n'est requise :
+on en donne une preuve \textbf{directe sans choix} --- pour (1), le sens $\supset$ par
+\emph{tiers exclu} (cas $(\forall\iota)(x\in X_\iota)$ / témoin $\iota_0$ avec
+$x\notin X_{\iota_0}$) ; pour (2), \emph{aucun} tiers exclu (les deux sens ponctuels).
+
+\textbf{Preuve (\Nstar).} La famille externe sur $I\times K$ (opaque) est nommée par
+paramètre $Z$ et caractérisée \emph{sur les couples explicites} par un axiome-schéma C54
+porté par une théorie \emph{locale} (\texttt{theorie\_cor\_distrib}), hors
+\texttt{theorie\_ensembles()} : celle-ci reste à~$22$. Double inclusion + extensionnalité~$A1$.
+
+\textbf{Statut.} CLOS (les deux formules ; $0$ hyp.). \emph{Note d'ingénierie} : modules
+produits par agents délégués puis \textbf{re-vérifiés indépendamment} (cible reconstruite
+depuis les primitives brutes, \texttt{theorie==22}, tests, énoncé recalé sur le PDF p.\,87)
+avant intégration --- « un import qui passe ne prouve rien ».
