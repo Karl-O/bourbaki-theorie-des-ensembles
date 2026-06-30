@@ -21,16 +21,18 @@ theorie_ensembles() INCHANGÉE (= 22) : AXIOME_DIAGONALE déjà compté.
 from __future__ import annotations
 
 from bourbaki.logique.i_1_termes_relations.formule import (
-    Terme, var, egal, et, appartient, equiv)
+    Terme, var, egal, et, appartient, equiv, existe, inclus)
 from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
     equivalence_avant, equivalence_arriere, equivalence_transitivite, instancie)
-from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import existe_elimination
+from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import existe_elimination, alpha_existe
 from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import (
     symetrie, composer_egalites, congruence_terme)
 from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import proposition_1
+from bourbaki.ensembles.fonctions.ii_3_2_reciproque.ensembles_reciproque import couple_reciproque
+from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import extensionnalite_appliquee
 
 
 def _tc(t):
@@ -41,6 +43,12 @@ def _inst_diag(vX, z):
     """⊢ (z∈Δ_X) ⇔ (∃d0)(d0∈X et z=(d0,d0)).   (instance de AXIOME_DIAGONALE.)"""
     ax = N.axiome(E.theorie_ensembles(), E.AXIOME_DIAGONALE)
     return instancie(instancie(ax, vX), z)
+
+
+def _inst_recip(vG, z):
+    """⊢ (z∈G⁻¹) ⇔ (∃p)(∃q)(z=(p,q) et (q,p)∈G).   (instance de AXIOME_RECIP.)"""
+    ax = N.axiome(E.theorie_ensembles(), E.AXIOME_RECIP)
+    return instancie(instancie(ax, vG), z)
 
 
 # @livre Ch.II §3.3 Def.8 | E II.13 L.18-20 | PDF p.64
@@ -84,4 +92,69 @@ def couple_diagonale_cible(a="a", b="b", x="X"):
                  et(appartient(va, vX), egal(va, vb)))
 
 
-__all__ = ["couple_diagonale", "couple_diagonale_cible"]
+def _diag_recip_incl(vX):
+    """⊢ Δ_X⁻¹ ⊂ Δ_X   (INCONDITIONNEL : Δ_X⁻¹ ne contient que des (q,q), q∈X)."""
+    vz, vp, vq = var("z"), var("p"), var("q")
+    Dr = E.reciproque(E.diagonale(vX))
+    rec = _inst_recip(E.diagonale(vX), vz)                # z∈Δ_X⁻¹ ⇔ (∃p)(∃q)(z=(p,q) et (q,p)∈Δ_X)
+    body = et(egal(vz, E.couple(vp, vq)), appartient(E.couple(vq, vp), E.diagonale(vX)))
+    hb = N.assume(body)
+    # (q,p)∈Δ_X ⇒ q∈X et q=p :
+    qp = N.modus_ponens(conjonction_elim_droite(hb), equivalence_avant(couple_diagonale(vq, vp, vX)))
+    q_in, q_eq_p = conjonction_elim_gauche(qp), conjonction_elim_droite(qp)
+    # z = (p,q) = (q,q)   (p=q par symétrie de q=p, congruence sur 1ʳᵉ coord) :
+    pq_qq = N.modus_ponens(N.modus_ponens(q_eq_p, symetrie(vq, vp)),           # p=q
+                           congruence_terme(vp, vq, E.couple(var("w"), vq), w="w"))  # (p,q)=(q,q)
+    z_qq = composer_egalites(conjonction_elim_gauche(hb), pq_qq)               # z=(q,q)
+    # (q,q)∈Δ_X  [couple_diagonale ⇐ : q∈X et q=q] :
+    qq_in = N.modus_ponens(conjonction_intro(q_in, N.reflexivite(vq)),
+                           equivalence_arriere(couple_diagonale(vq, vq, vX)))
+    z_in = N.modus_ponens(qq_in, equivalence_arriere(                          # z∈Δ_X
+        N.modus_ponens(z_qq, N.s6(vz, E.couple(vq, vq), "w", appartient(var("w"), E.diagonale(vX))))))
+    elim = existe_elimination(existe_elimination(N.loi_deduction(body, z_in), "q"), "p")
+    z_in2 = N.modus_ponens(N.modus_ponens(N.assume(appartient(vz, Dr)), equivalence_avant(rec)), elim)
+    return N.generalisation("z", N.loi_deduction(appartient(vz, Dr), z_in2))   # Δ_X⁻¹ ⊂ Δ_X
+
+
+def _diag_recip_contient(vX):
+    """⊢ Δ_X ⊂ Δ_X⁻¹   (INCONDITIONNEL : Δ_X ne contient que des (u,u), symétriques)."""
+    vz, vu = var("z"), var("u")                          # témoin « u » (≠ d0, w internes de couple_diagonale)
+    Dr = E.reciproque(E.diagonale(vX))
+    inner_d0 = et(appartient(var("d0"), vX), egal(vz, E.couple(var("d0"), var("d0"))))
+    dia = equivalence_transitivite(_inst_diag(vX, vz),    # z∈Δ_X ⇔ (∃u)(u∈X et z=(u,u))
+                                   alpha_existe("d0", "u", inner_d0))
+    body = et(appartient(vu, vX), egal(vz, E.couple(vu, vu)))
+    hb = N.assume(body)
+    u_in = conjonction_elim_gauche(hb)
+    # (u,u)∈Δ_X  puis (u,u)∈Δ_X⁻¹  [couple_reciproque(Δ_X,u,u) : (u,u)∈Δ_X⁻¹ ⇔ (u,u)∈Δ_X] :
+    uu_in_d = N.modus_ponens(conjonction_intro(u_in, N.reflexivite(vu)),
+                             equivalence_arriere(couple_diagonale(vu, vu, vX)))   # (u,u)∈Δ_X
+    uu_in_r = N.modus_ponens(uu_in_d, equivalence_arriere(couple_reciproque(E.diagonale(vX), "u", "u")))
+    z_in = N.modus_ponens(uu_in_r, equivalence_arriere(                          # z∈Δ_X⁻¹
+        N.modus_ponens(conjonction_elim_droite(hb),
+                       N.s6(vz, E.couple(vu, vu), "w", appartient(var("w"), Dr)))))
+    elim = existe_elimination(N.loi_deduction(body, z_in), "u")
+    z_in2 = N.modus_ponens(N.modus_ponens(N.assume(appartient(vz, E.diagonale(vX))),
+                                          equivalence_avant(dia)), elim)
+    return N.generalisation("z", N.loi_deduction(appartient(vz, E.diagonale(vX)), z_in2))  # Δ_X ⊂ Δ_X⁻¹
+
+
+# @livre Ch.II §3.3 Def.8 | E II.13 L.23-24 | PDF p.64
+def diagonale_auto_reciproque(x="X"):
+    """⊢ Δ_X⁻¹ = Δ_X.   (Bourbaki E II.13, Déf. 8 : « Id_X est sa propre réciproque ».)
+
+    INCONDITIONNEL : Δ_X⁻¹ et Δ_X ne contiennent que des couples ; double inclusion
+    (via `couple_diagonale` / `couple_reciproque`) puis extensionnalité A1."""
+    vX = _tc(x)
+    ext = extensionnalite_appliquee(E.reciproque(E.diagonale(vX)), E.diagonale(vX))
+    return N.modus_ponens(conjonction_intro(_diag_recip_incl(vX), _diag_recip_contient(vX)), ext)
+
+
+def diagonale_auto_reciproque_cible(x="X"):
+    """Énoncé visé : Δ_X⁻¹ = Δ_X."""
+    vX = _tc(x)
+    return egal(E.reciproque(E.diagonale(vX)), E.diagonale(vX))
+
+
+__all__ = ["couple_diagonale", "couple_diagonale_cible",
+           "diagonale_auto_reciproque", "diagonale_auto_reciproque_cible"]

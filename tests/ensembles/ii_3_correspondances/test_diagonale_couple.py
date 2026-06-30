@@ -26,3 +26,13 @@ def test_couple_diagonale_non_tautologie():
     gauche = appartient(E.couple(a, b), E.diagonale(X))
     droite = et(appartient(a, X), egal(a, b))
     assert gauche != droite
+
+
+def test_diagonale_auto_reciproque():
+    """⊢ Δ_X⁻¹ = Δ_X  (Id_X est sa propre réciproque, E II.13 Déf.8) — CLOS."""
+    t = M.diagonale_auto_reciproque()
+    X = var("X")
+    cible = egal(E.reciproque(E.diagonale(X)), E.diagonale(X))
+    assert t.conclusion == cible == M.diagonale_auto_reciproque_cible()
+    assert t.est_clos and not t.hypotheses           # inconditionnel
+    assert len(theorie_ensembles().axiomes) == 22
