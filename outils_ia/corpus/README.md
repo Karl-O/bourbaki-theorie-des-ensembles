@@ -363,12 +363,20 @@ Rang du bon terme (47 slots in-grammaire tenus à l'écart, ~1500 candidats/slot
 60 %** — là où le shallow plafonnait (38 %) et le brut échouait (0 %). L'**encodage de la structure
 capture l'arrangement** des variables que les features superficielles ne voyaient pas. Implication
 end-to-end : à **budget 5 essais-noyau**, on régénérerait **60 %** des slots depth-2 (vs ~0 % brut,
-cf. pas 20). **Honnêteté** : la MOYENNE reste instable (quelques slots ratés sur 47 slots / 6 preuves
-= surapprentissage, corpus minuscule ; légère variance CPU-threading) → la robustesse viendra de PLUS
-de données. `python outils_ia/corpus/proto_synth_torch.py [module…]`.
+cf. pas 20). `python outils_ia/corpus/proto_synth_torch.py [module…]`.
+
+**Stabilisation tentée (pas 22)** : on a ajouté **dropout + L2 + ENSEMBLE de graines** et tenté
+d'**élargir les modules** — la médiane (1) et le top-5 (~60 %) restent robustes, mais la **MOYENNE ne
+baisse pas** (~360-430). Diagnostic : (1) les outliers sont **SYSTÉMATIQUES** (une preuve tenue à
+l'écart dont la structure des termes n'apparaît dans aucune preuve d'entraînement → tous ses slots
+ratés), PAS du bruit de graine que l'ensemble pourrait moyenner ; (2) élargir à
+correspondances/image/reciproque **n'ajoute AUCUN slot in-grammaire** (leurs termes utilisent
+d'autres constructeurs). **Le goulot de DONNÉES est le goulot de GRAMMAIRE** : seuls 3 modules
+produisent des termes `composee/diagonale/couple/var`. → le vrai levier est d'**enrichir la grammaire**.
 
 ## Ce qui reste = enrichir le générateur appris (torch/sklearn dispo)
-- pas 22 : **plus de données + régularisation** (stabiliser la moyenne du TreeNN) et **grammaire de
-  termes enrichie** (conjonction_intro + helpers → couverture des slots > 6/10) ;
-- rebrancher pas 20 (synthèse guidée) avec le TreeNN → mesurer la régénération end-to-end depth-2 ;
+- pas 23 : **ENRICHIR LA GRAMMAIRE** de termes (constructeurs manquants : `conjonction_intro`,
+  `appliquer`, lemmes-helpers) → plus de slots in-grammaire = plus de DONNÉES (stabilise la moyenne)
+  ET plus de couverture (> 6/10, cf. pas 20) ;
+- rebrancher pas 20 (synthèse guidée) avec le TreeNN comme ranker → régénération end-to-end depth-2 ;
 - mise à l'échelle BEAM (K plus grand) ; niveau TACTIQUE ; GFlowNet/diffusion.

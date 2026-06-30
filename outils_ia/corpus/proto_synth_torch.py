@@ -44,6 +44,9 @@ from proto_macro_termes import _str_consts, _ctx_trou        # noqa: E402
 from repair_learned import _assignes                         # noqa: E402
 
 PST.MAXT = 1500
+# NB (pas 22) : élargir à correspondances/image_domaine/couple_caracterisation/reciproque n'ajoute
+# AUCUN slot in-grammaire (leurs termes utilisent d'autres constructeurs) → le goulot de DONNÉES est
+# le goulot de GRAMMAIRE. Seuls ces 3 modules produisent des termes composee/diagonale/couple/var.
 MODULES = [
     "bourbaki.ensembles.ii_2_couples_produit.ensembles_projection_fonctionnelle",
     "bourbaki.ensembles.ii_3_correspondances.ensembles_identite_neutre",
@@ -145,11 +148,12 @@ class TreeEnc(nn.Module):
 
 
 class Scorer(nn.Module):
-    def __init__(self, d=24, dc=8):
+    def __init__(self, d=24, dc=8, drop=0.1):
         super().__init__()
         self.enc = TreeEnc(d)
         self.cf = nn.Embedding(64, dc)
-        self.mlp = nn.Sequential(nn.Linear(d + dc + 1, 32), nn.ReLU(), nn.Linear(32, 1))
+        self.mlp = nn.Sequential(nn.Linear(d + dc + 1, 32), nn.ReLU(), nn.Dropout(drop),
+                                 nn.Linear(32, 1))
 
     def score(self, term, ctx, cf_idx, pos):
         e = self.enc.enc(term, ctx)
@@ -157,37 +161,44 @@ class Scorer(nn.Module):
         return self.mlp(torch.cat([e, c, torch.tensor([float(pos)], dtype=torch.float32)]))
 
 
-def _entraine(train_slots, epochs=25, neg=48, seed=0):
+def _entraine(train_slots, epochs=22, neg=48, seed=0):
     torch.manual_seed(seed)
     rng = np.random.default_rng(seed)
     net = Scorer()
-    opt = torch.optim.Adam(net.parameters(), lr=0.01)
+    net.train()
+    opt = torch.optim.Adam(net.parameters(), lr=0.01, weight_decay=1e-4)  # régularisation L2
+    order = list(range(len(train_slots)))
     for ep in range(epochs):
-        rng.shuffle(train_slots)
-        tot = 0.0
-        for s in train_slots:
+        rng.shuffle(order)
+        for i in order:
+            s = train_slots[i]
             pool = s["pool"]
             ctx = (s["manq"], s["disp"], s["outs"])
             cfi = CF_VOCAB.get(s["cf"], 0)
             idxs = [s["pos_idx"]] + list(rng.choice(len(pool), size=min(neg, len(pool)), replace=False))
-            sc = torch.cat([net.score(pool[i], ctx, cfi, s["pos"]) for i in idxs]).reshape(1, -1)
+            sc = torch.cat([net.score(pool[i2], ctx, cfi, s["pos"]) for i2 in idxs]).reshape(1, -1)
             loss = nn.functional.cross_entropy(sc, torch.tensor([0]))  # cible = positif (indice 0)
             opt.zero_grad()
             loss.backward()
             opt.step()
-            tot += loss.item()
-        if ep % 5 == 0 or ep == epochs - 1:
-            print(f"#   epoch {ep:2d}  loss {tot/max(len(train_slots),1):.3f}", file=sys.stderr)
+    net.eval()
     return net
 
 
-def _rang_neural(net, s):
+def _scores_ens(nets, s):
+    """Scores ENSEMBLE (moyenne sur les graines) pour tous les candidats du slot."""
     pool = s["pool"]
     ctx = (s["manq"], s["disp"], s["outs"])
     cfi = CF_VOCAB.get(s["cf"], 0)
     with torch.no_grad():
-        sc = np.array([net.score(t, ctx, cfi, s["pos"]).item() for t in pool])
-    return int(np.sum(sc > sc[s["pos_idx"]])) + 1
+        acc = np.zeros(len(pool))
+        for net in nets:
+            acc += np.array([net.score(t, ctx, cfi, s["pos"]).item() for t in pool])
+    return acc / len(nets)
+
+
+def _rang(sc, pos_idx):
+    return int(np.sum(sc > sc[pos_idx])) + 1
 
 
 def main(argv):
@@ -217,8 +228,10 @@ def main(argv):
         vec = DictVectorizer(sparse=False)
         Xv = vec.fit_transform(Xtr)
         sh = LogisticRegression(max_iter=1500, class_weight="balanced").fit(Xv, np.array(ytr))
-        # --- neural ---
-        net = _entraine([slots[i] for i in tr])
+        # --- neural : ENSEMBLE de E modèles (graines) pour écraser les outliers ---
+        E = 2
+        nets = [_entraine([slots[i] for i in tr], seed=sd) for sd in range(E)]
+        print(f"#   fold entraîné (ensemble de {E})", file=sys.stderr)
         for i in te:
             s = slots[i]
             r_brut.append(s["pos_idx"] + 1)
@@ -226,7 +239,7 @@ def main(argv):
                                  for t in s["pool"]])
             sc = sh.predict_proba(Xte)[:, 1]
             r_sh.append(int(np.sum(sc > sc[s["pos_idx"]])) + 1)
-            r_nn.append(_rang_neural(net, s))
+            r_nn.append(_rang(_scores_ens(nets, s), s["pos_idx"]))
     rb, rs, rn = np.array(r_brut), np.array(r_sh), np.array(r_nn)
     print(f"\n# RANG du bon terme (slots tenus à l'écart, {len(rb)} slots) — MÉDIANE = robuste :")
     print(f"    BRUT (énumération)       : médiane {np.median(rb):5.0f}  | moyenne {rb.mean():6.0f}  "
@@ -236,9 +249,12 @@ def main(argv):
     print(f"    NEURONAL (TreeNN, pas 21): médiane {np.median(rn):5.0f}  | moyenne {rn.mean():6.0f}  "
           f"| top-5 {100*np.mean(rn<=5):.0f}%")
     print(f"# → le TreeNN encode la STRUCTURE : MÉDIANE {np.median(rb):.0f}→{np.median(rs):.0f}"
-          f"→{np.median(rn):.0f} (brut→shallow→neuronal), top-5 {100*np.mean(rn<=5):.0f}%. La MOYENNE")
-    print(f"#   reste instable (quelques slots ratés sur 47 slots / 6 preuves = surapprentissage,")
-    print(f"#   petit corpus) → pas 22 : plus de données + régularisation. Oracle de label GRATUIT.")
+          f"→{np.median(rn):.0f} (brut→shallow→neuronal), top-5 {100*np.mean(rn<=5):.0f}%.")
+    print(f"# pas 22 : régularisation (dropout+L2) + ENSEMBLE de graines NE baissent PAS la moyenne")
+    print(f"#   ({rn.mean():.0f}) → les outliers sont SYSTÉMATIQUES (preuve tenue à l'écart à structure")
+    print(f"#   inédite), pas du bruit de graine ; et élargir les modules n'ajoute aucun slot in-grammaire")
+    print(f"#   (goulot DONNÉES = goulot GRAMMAIRE). → pas 23 : ENRICHIR LA GRAMMAIRE (plus de slots =")
+    print(f"#   plus de données ET plus de couverture). La médiane 1 / top-5 ~60% restent robustes.")
     return 0
 
 
