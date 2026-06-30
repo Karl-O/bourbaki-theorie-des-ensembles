@@ -479,11 +479,33 @@ en tête. La moyenne remonte un peu (61 → 87) car le pool a grossi (le brut EX
 TreeNN (87) bat désormais le shallow (98) AUSSI sur la moyenne, et reste ≪ brut. Le brut s'effondre
 (médiane 1004) : sans modèle la synthèse est intractable — tout l'intérêt du ranker structuré.
 
-## Ce qui reste = passer à l'END-TO-END (torch/sklearn dispo)
-- pas 27 (LE but) : **rebrancher `proto_synth_guide`** (synthèse end-to-end, kernel validant) avec le
-  TreeNN comme ranker au lieu du LogReg + grammaire enrichie → régénération end-to-end depth-2 à BUDGET
-  FIXE. Avec médiane 1 / top-5 69 % / moyenne 87, viser un taux **> 0 %** mesurable = le vrai
-  generate-and-verify ;
-- grammaire de preuve RÉCURSIVE (les proof-terms deep restants : conjonction_intro imbriqué, chaînes
-  equivalence/modus_ponens) si l'end-to-end le réclame ;
+## Régénération END-TO-END guidée par le TreeNN (pas 27, FAIT) — le generate-and-verify MARCHE
+
+LE but de l'arc : non plus mesurer le RANG (pas 21-26) mais RÉGÉNÉRER réellement des blocs tenus à
+l'écart en synthétisant leurs slots-termes, **NOYAU validant**. `proto_synth_e2e.py` entraîne le TreeNN
+sur des modules d'ENTRAÎNEMENT, range le pool par score TreeNN, et essaie les mieux classés à BUDGET
+FIXE (CAP=200 essais-noyau/bloc) jusqu'à `_statut == OK`. Test = identite (depth-2) en **HOLDOUT MODULE
+COMPLET** (jamais vu à l'entraînement = le cas le plus dur, outliers systématiques de pas 22).
+
+Diagnostic d'abord (harness correct) : remplir un bloc avec les termes-ORACLE du pool → **noyau OK** ;
+donc tout échec = pur problème de RANG (oracle au-delà du budget). Résultat (2 blocs in-grammaire) :
+
+| bloc (identite, depth-2) | rang brut | rang TreeNN | régénéré (CAP 200) |
+|---|---|---|---|
+| diagonale_composee_neutre | 1034 | **178** | ✅ oui |
+| composee_diagonale_neutre | 562 | 245 | ❌ (juste hors budget) |
+
+**END-TO-END : BRUT 0 % → TreeNN 50 %** (1/2 blocs). C'est la **1re régénération depth-2 RÉELLE**
+guidée par le modèle structuré, kernel-validée : le TreeNN comprime le rang de l'oracle (1034 → 178,
+562 → 245), rendant la synthèse TRACTABLE là où l'énumération brute (CAP ≥ 1034) échoue. Le
+**generate-and-verify appris fonctionne end-to-end**. Caveat honnête : sous holdout MODULE complet, les
+rangs (178-245, pas médiane 1) reflètent la difficulté de généraliser à un module JAMAIS vu ; le holdout
+proof-level (module présent dans le corpus, cas réaliste) devrait faire bien mieux.
+`python outils_ia/corpus/proto_synth_e2e.py`.
+
+## Ce qui reste
+- pas 28 : **holdout proof-level** (module présent, 1 preuve tenue à l'écart = cas réaliste) → viser un
+  taux end-to-end nettement > 50 % ; et CAP plus large / BEAM pour rattraper composee_diagonale (rang 245) ;
+- grammaire de preuve RÉCURSIVE (proof-terms deep restants : conjonction_intro imbriqué, chaînes
+  equivalence/modus_ponens) pour couvrir > 64 % et débloquer plus de blocs end-to-end ;
 - mise à l'échelle BEAM (K plus grand) ; niveau TACTIQUE ; GFlowNet/diffusion.
