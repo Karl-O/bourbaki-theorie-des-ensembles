@@ -67,7 +67,19 @@ C'est la donnée idéale pour diffusion discrète / GFlowNet : **forward** = eff
   `fidelite`, `lecon`…). Échantillon `erreurs_sample.jsonl`. Données pour PÉNALISER ces
   patterns côté générateur (le « pourquoi » des erreurs, documenté, devient de la donnée).
 
+## Proto generate-and-verify (pas 5, FAIT) — `proto_mutation_verify.py`
+
+Premier bout-à-bout du générateur. On CORROMPT une preuve valide d'un cran (supprimer
+un pas / échanger deux pas = le *forward process* de la diffusion) et le NOYAU tranche :
+`ERROR` (le code casse) · `WRONG` (s'exécute mais ≠ cible — rejeté) · `OK` (encore correct
+= pas redondant). Mesure (module `diagonale_couple`, 6 théorèmes) : **152 mutants 1-pas,
+85 % rejetés** par noyau+cible. Chaque rejet = une **paire (corrompu → valide)** pour
+entraîner le *reverse process* (débruitage = réparer la preuve) ; chaque `OK` = slack local.
+Soundness intacte : un mutant ne fabrique jamais un faux théorème (juste un vrai différent,
+recalé par la cible). `python outils_ia/corpus/proto_mutation_verify.py [module] [noms...]`.
+
 ## Passes ultérieures
-- arbre `@livre` complet (chapitre→§→page) = structure conditionnelle (le « prompt » = le but) ;
-- 1ʳᵉ analyse stats du dataset (distrib `trace_len`, règles, profondeur, réutilisation de
-  lemmes) pour calibrer le générateur (GFlowNet/diffusion).
+- générer un VRAI dataset de paires (corrompu→valide) multi-pas (corruption progressive) ;
+- amorcer le *reverse* : un repaireur (même trivial : essayer les tactiques de la bibliothèque
+  à l'emplacement corrompu, garder celle que le noyau accepte) = 1ᵉ « débruitage » ;
+- arbre `@livre` complet (chapitre→§→page) = structure conditionnelle (le « prompt » = le but).
