@@ -126,7 +126,17 @@ Le NOYAU reste l'oracle exact qui valide. → la politique apprise **bat la forc
 généralise, et est robuste cross-modèle**. C'est l'embryon du générateur ; reste à l'enrichir
 (politique séquentielle, niveau-tactique, bibliothèque inter-preuves, GFlowNet/diffusion ; torch dispo).
 
+## Politique SÉQUENTIELLE (pas 12, FAIT) — `proto_sequential.py` : la marche guidée multi-pas
+
+On supprime K pas et on RECONSTRUIT en chaînant la repair-policy apprise (top-1 par trou)
++ filtre noyau final = generate(politique)+verify(noyau), testé sur preuves TENUES À L'ÉCART :
+- **K=1 : 100 %** reconstruites (15/15) — single-step excellent ;
+- **K=2 : 40 %** · **K=3 : 13 %** — la chute mesure l'**ambiguïté d'assignation multi-trous**
+  (le data-flow ne lie pas un candidat à UN trou précis quand plusieurs manquent).
+Diagnostic clair → prochain gain : reconstruction **itérative** (remplir le trou le plus sûr
+d'abord, RECALCULER, recommencer) plutôt qu'indépendante ; puis beam search / GFlowNet.
+
 ## Ce qui reste = enrichir le générateur appris (torch/sklearn dispo)
-- features plus riches (arguments, types de tactiques, contexte DAG) + niveau TACTIQUE (STATS.md) ;
-- politique séquentielle (réparer plusieurs pas / générer de zéro) : GFlowNet sur DAG / diffusion ;
-- bibliothèque inter-preuves + library-learning ; mise à l'échelle des données (gitignoré).
+- reconstruction ITÉRATIVE (greedy + recompute) pour relever K=2,3 ; puis beam / GFlowNet ;
+- bibliothèque INTER-preuves (générer un pas hors des statements de la preuve courante) ;
+- niveau TACTIQUE (STATS.md) ; library-learning ; mise à l'échelle des données (gitignoré).
