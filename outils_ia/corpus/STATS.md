@@ -99,6 +99,12 @@ python outils_ia/corpus/proto_synth_lomo.py      # leave-one-module-out (27 % / 
 Corpus de données gitignorés (régénérables) ; les outils `.py` sont versionnés. Runs kernel BORNÉS
 (CAP) ; `couple_diagonale` (6707 pas) écarté via `TEST_LOURD`.
 
+**Cohérence vérifiée (pas 35)** après les reverts pas 30-32 : `proto_synth_termes` redonne **11 %**
+(2/18, exact) ; `proto_synth_prior` LogReg **557 vs brut 1241** (−55 % appels-noyau ; chiffres reflétant
+la grammaire enrichie — 156 slots — vs les figures historiques pas 19 à grammaire étroite) ;
+`proto_synth_lomo` redonne **27 % / 43 blocs** (pas 33) ; tous les protos importent ; `theorie==22`.
+Aucune régression.
+
 ## 7. Directions (au-delà de la boucle outils_ia)
 
 1. **Formaliser plus de preuves d'arrangement** dans `bourbaki/` (≥3-4 par schéma `composee/diagonale`) =
