@@ -653,7 +653,7 @@ régression** (blocs denses-bas) → **non implémenté**. **Arc (1) CONCLU** : 
 principal ; le reste de la marge exige un **meilleur ranker** (= plus de données/grammaire = le mur de
 données). PROBER avant de coder a, ici encore, évité une complexité à faible rendement.
 
-## Bilan du pivot (pas 14→36) & directions
+## Bilan du pivot (pas 14→41) & directions
 
 **Acquis** : le generate-and-verify appris FONCTIONNE — synthèse de termes structurés + ranker TreeNN
 (médiane 1, top-5 ~70 %) + **noyau validant** → **régénération end-to-end réelle 27 % sur 43 blocs
@@ -674,9 +674,33 @@ marginale** (le 47 % bigramme était in-sample). → le niveau tactique a PLUS d
 parcimonie → **même verrou de données**. Le construire reproduirait le diagnostic. **Non prioritaire avant
 d'agrandir le corpus.** (7ᵉ fois que prober-d'abord évite une grosse brique vouée au mur.)
 
+**Arc (3) génération FORWARD — SCOPÉ (pas 39-41) → DÉMONTRÉ complet (négatif + positif).** La génération
+forward (appliquer des tactiques aux faits dispo → faits NOUVEAUX kernel-validés, sans oracle tenu à
+l'écart) est le vrai but « créer des théories » et n'a PAS de problème de généralisation supervisée. Probé
+proprement (cf. `SCOPING_FORWARD.md`, `proto_forward_probe.py`, `proto_forward_positif.py`) :
+- **pas 39 — tactique RECOMBINANTE** (`conjonction_intro`) : fire en P² mais sortie **100 % triviale**
+  (`A∧B`/`sym(A)`/`A∨B` de connus). Conclusion initiale « forward erre » — mais testée sur 1 seule tactique,
+  donc **trop hâtive** (corrigée en pas 40).
+- **pas 40 — tactiques de CONTENU** (`composer_egalites`, `equivalence_transitivite`, `modus_ponens`) sur
+  **150 théorèmes CLOS** (logique+ensembles ; 37 égalités, 35 équiv, 47 implications) : **feasible = 0** pour
+  les 3. Structurel (diag vérifié) : membres-droits ∩ membres-gauches = 0 pour `=` (la biblio prouve des
+  RÉDUCTIONS complexe→simple, les simples ne re-réduisent pas) ; antécédents ∩ conclusions-prouvées = 0 pour
+  `⇒` (antécédents = conditions à ASSUMER). Sur la biblio des faits clos, les tactiques de contenu **ne
+  firent pas du tout**.
+- **pas 41 — CONTRÔLE POSITIF** (le négatif n'est rigoureux que confronté à un positif) : AST statique de
+  **621 fichiers** `bourbaki/` → **6679 call-sites de tactiques de contenu** (`composer_egalites` **701 dont
+  114 chaînes IMBRIQUÉES**, `equivalence_transitivite` 400, `syllogisme` 299, `congruence_terme` 265,
+  `instancie` 3498) ; + 6 proofs `ensembles` exécutées LIVE, **100 % FIRE ✓**. Les MÊMES tactiques qui firent
+  0× sur la biblio déconnectée firent **701× guidées par un but**. CONTRASTE : `composer_egalites` 0 %
+  déconnecté vs 100 % guidé → **`feasible=0` est STRUCTUREL, pas un artefact** ; **le guidage ≡ le contexte à
+  termes-partagés que le but induit**. Découvrir du non-trivial exige donc un guidage = valeur d'intérêt
+  apprise → **data-limité** (3ᵉ frame du mur). (8ᵉ fois que prober — mes PROPRES résultats inclus — évite une
+  conclusion hâtive.)
+
 **Constat MÉTA (le plus important)** : la contrainte liante de TOUT le méta-algo est la **TAILLE DU
-CORPUS**, confirmée sur DEUX frames indépendants (term-arrangement pas 28-32, tactique pas 38). La cure est
-unique et HORS boucle outils_ia.
+CORPUS**, confirmée sur **TROIS frames indépendants** (term-arrangement pas 28-32, tactique pas 38, forward
+pas 39-41 — ce dernier avec négatif `feasible=0` ET positif 6679 firings). La cure est unique et HORS boucle
+outils_ia.
 
 **Directions (hors boucle outils_ia)** :
 - **FORMALISER plus de preuves** dans `bourbaki/` (le projet principal) = la cure DIRECTE et universelle :
