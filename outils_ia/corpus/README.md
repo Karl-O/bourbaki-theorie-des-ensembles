@@ -273,9 +273,36 @@ le renommage de variables ni la substitution d'atomes ne peuvent faire (plafond 
 **confirme** pas seulement le besoin d'un générateur APPRIS : ça en **spécifie le TYPE DE SORTIE** —
 des termes structurés. `python outils_ia/corpus/proto_macro_termes.py [module…]`.
 
+## Synthèse de termes (pas 18, FAIT) — `proto_synth_termes.py` : la 1re vraie GÉNÉRATION
+
+Conséquence directe de pas 17 : pour un bloc-macro supprimé, on garde le SQUELETTE (les appels-
+tactiques = la macro) mais au lieu de COPIER les termes du donneur, on **SYNTHÉTISE** les slots-
+termes depuis le vocabulaire LOCAL de P — atomes (variables locales + `var('<noms liés>')`),
+constructeurs (`E.composee/2`, `E.diagonale/1`, `E.couple/2`) appliqués à profondeur ≤2 — et le
+NOYAU filtre. C'est la 1re fois qu'on **construit du contenu neuf**, pas qu'on recombine l'existant.
+
+**Démonstration end-to-end** (projection, budget suffisant) : **2/18 blocs synthétisables régénérés
+par SYNTHÈSE (11 %)** — au-dessus du plafond 5 % de la copie (pas 17) et du 1 % variables-seules. Le
+noyau a accepté un bloc dont le terme a été **fabriqué**, pas copié (vérif directe) :
+
+| | bloc |
+|---|---|
+| donneur (pr2) | `eq = egal(var('y'), pr2z)` ; `h_eq = N.assume(eq)` |
+| **SYNTHÉTISÉ** (accepté noyau, pr1) | `eq = egal(var('x'), pr1z)` ; `h_eq = N.assume(eq)` |
+
+→ le synthétiseur a **construit** `egal(var('x'), pr1z)` à partir du vocabulaire de P (le nom lié
+`'x'`, la variable `pr1z`), il n'a PAS recopié le `var('y'), pr2z` du donneur.
+
+**Le mur, mesuré.** Les slots PROFONDS (ex. identite `E.composee(vG, E.diagonale(vA))`, depth-2)
+ne sont pas atteints par l'énumération brute : le terme-oracle EST générable mais il **arrive au rang
+561 sur 7265 candidats** — l'énumération est exponentielle. Avec un budget tractable → ~0 % ; il faut
+**ranger** les candidats. C'est la motivation MESURÉE du prior appris (exactement comme la repair-
+policy rangeait les tactiques : rang 1.00 vs 8.82). `python outils_ia/corpus/proto_synth_termes.py
+[module…]` (défaut = projection ; modules profonds = gros budget + pas 19).
+
 ## Ce qui reste = enrichir le générateur appris (torch/sklearn dispo)
-- pas 18 : **générateur de TERMES appris** — squelette-macro donné, le modèle SYNTHÉTISE les
-  sous-termes (arbres d'expression) des slots, le noyau filtrant = le vrai cœur generate-and-verify
-  multi-pas (sortie = termes structurés, cf. pas 17) ;
+- pas 19 : **PRIOR APPRIS sur la synthèse de termes** — un modèle qui RANGE les termes candidats
+  (contexte du slot : tactique, voisins, data-flow, types) pour amener le bon terme en tête →
+  rendre tractable la synthèse depth-2 (le terme-oracle passe du rang 561 au rang ~1) ;
 - mise à l'échelle BEAM (K plus grand, preuves plus longues) ; niveau TACTIQUE ; GFlowNet/diffusion ;
-  passage à torch (embeddings d'AST de termes) pour la synthèse.
+  passage à torch (embeddings d'AST de termes) pour la synthèse et le ranking.
