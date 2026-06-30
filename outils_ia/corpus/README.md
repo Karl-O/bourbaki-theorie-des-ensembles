@@ -78,8 +78,19 @@ entraîner le *reverse process* (débruitage = réparer la preuve) ; chaque `OK`
 Soundness intacte : un mutant ne fabrique jamais un faux théorème (juste un vrai différent,
 recalé par la cible). `python outils_ia/corpus/proto_mutation_verify.py [module] [noms...]`.
 
+## Dataset de paires (corrompu → valide) — forward process (pas 6, FAIT)
+
+`gen_paires_corruption.py` engendre des TRAJECTOIRES de corruption progressive (x0 valide
+→ x1 → … → xK, k corruptions 1-pas), le noyau étiquetant chaque état. JSONL par état :
+`{valide_src (x0), parent_src (x_{k-1}), corrompu_src (xk), n_corruptions, statut: OK|WRONG|ERROR}`.
+→ donnée du *reverse process* : **(corrompu → parent)** = un pas de débruitage (cadre diffusion),
+**(corrompu → valide)** = débruitage complet ; `statut` = récompense dense du noyau. Mesure
+(`diagonale_couple`) : la validité CHUTE avec la profondeur (K=1 : 5 % valides → K≥2 : ~0 %),
+97 % rejetés — exactement le *noising schedule* de la diffusion. Échantillon
+`paires_corruption_sample.jsonl` ; graine fixe (reproductible).
+
 ## Passes ultérieures
-- générer un VRAI dataset de paires (corrompu→valide) multi-pas (corruption progressive) ;
-- amorcer le *reverse* : un repaireur (même trivial : essayer les tactiques de la bibliothèque
-  à l'emplacement corrompu, garder celle que le noyau accepte) = 1ᵉ « débruitage » ;
-- arbre `@livre` complet (chapitre→§→page) = structure conditionnelle (le « prompt » = le but).
+- amorcer le *reverse* : un repaireur (même trivial : ré-essayer des tactiques de la
+  bibliothèque à l'emplacement corrompu, garder celle que le noyau accepte) = 1ᵉ « débruitage » ;
+- arbre `@livre` complet (chapitre→§→page) = structure conditionnelle (le « prompt » = le but) ;
+- passer du niveau ligne-de-code au niveau TACTIQUE (cf. STATS.md) pour l'espace de génération.
