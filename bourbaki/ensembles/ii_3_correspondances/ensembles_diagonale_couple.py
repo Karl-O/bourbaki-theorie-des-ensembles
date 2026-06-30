@@ -27,12 +27,14 @@ from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
     equivalence_avant, equivalence_arriere, equivalence_transitivite, instancie)
-from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import existe_elimination, alpha_existe
+from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import (
+    existe_elimination, alpha_existe, congruence_existe)
 from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import (
     symetrie, composer_egalites, congruence_terme)
 from bourbaki.ensembles.ii_2_couples_produit.ensembles_couples import proposition_1
 from bourbaki.ensembles.fonctions.ii_3_2_reciproque.ensembles_reciproque import couple_reciproque
-from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import extensionnalite_appliquee
+from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import (
+    extensionnalite_appliquee, egalite_par_extension)
 
 
 def _tc(t):
@@ -49,6 +51,16 @@ def _inst_recip(vG, z):
     """⊢ (z∈G⁻¹) ⇔ (∃p)(∃q)(z=(p,q) et (q,p)∈G).   (instance de AXIOME_RECIP.)"""
     ax = N.axiome(E.theorie_ensembles(), E.AXIOME_RECIP)
     return instancie(instancie(ax, vG), z)
+
+
+def _inst_dom(vG, z):
+    """⊢ (z∈pr₁G) ⇔ (∃y)((z,y)∈G).   (instance de AXIOME_DOM ; liant 'y'.)"""
+    return instancie(instancie(N.axiome(E.theorie_ensembles(), E.AXIOME_DOM), vG), z)
+
+
+def _inst_img(vG, z):
+    """⊢ (z∈pr₂G) ⇔ (∃x)((x,z)∈G).   (instance de AXIOME_IMG ; liant 'x'.)"""
+    return instancie(instancie(N.axiome(E.theorie_ensembles(), E.AXIOME_IMG), vG), z)
 
 
 # @livre Ch.II §3.3 Def.8 | E II.13 L.18-20 | PDF p.64
@@ -156,5 +168,68 @@ def diagonale_auto_reciproque_cible(x="X"):
     return egal(E.reciproque(E.diagonale(vX)), E.diagonale(vX))
 
 
+# @livre Ch.II §3.3 Def.8 | E II.13 L.21-22 | PDF p.64
+def pr1_diagonale(x="X"):
+    """⊢ pr₁Δ_X = X.   (Bourbaki E II.13, Déf. 8 : « pr₁Δ_A = pr₂Δ_A = A ».)
+
+    pr₁Δ_X = dom(Δ_X) = { z | (∃y)((z,y)∈Δ_X) } = { z | (∃y)(z∈X et z=y) } = X."""
+    vX, vz = _tc(x), var("z")
+    # z∈pr₁Δ_X ⇔ (∃y)((z,y)∈Δ_X) ⇔ (∃y)(z∈X et z=y) ⇔ z∈X
+    cd = congruence_existe(couple_diagonale(vz, "y", vX), "y")     # (∃y)((z,y)∈Δ_X) ⇔ (∃y)(z∈X et z=y)
+    # collapse (∃y)(z∈X et z=y) ⇔ z∈X  (z∈X constant en y ; témoin y:=z) :
+    P = appartient(vz, vX)
+    body = et(P, egal(vz, var("y")))
+    bwd = N.loi_deduction(P, N.modus_ponens(
+        conjonction_intro(N.assume(P), N.reflexivite(vz)), N.s5(body, vz, "y")))  # P ⇒ (∃y)body
+    fwd = existe_elimination(N.loi_deduction(body, conjonction_elim_gauche(N.assume(body))), "y")
+    collapse = conjonction_intro(fwd, bwd)
+    char1 = equivalence_transitivite(equivalence_transitivite(_inst_dom(E.diagonale(vX), vz), cd), collapse)
+    char_dom = N.generalisation("z", char1)
+    char_X = N.generalisation("z", conjonction_intro(N.loi_deduction(P, N.assume(P)),
+                                                      N.loi_deduction(P, N.assume(P))))  # (∀z)(z∈X⇔z∈X)
+    return egalite_par_extension(char_dom, char_X, E.dom(E.diagonale(vX)), vX)
+
+
+# @livre Ch.II §3.3 Def.8 | E II.13 L.21-22 | PDF p.64
+def pr2_diagonale(x="X"):
+    """⊢ pr₂Δ_X = X.   (Bourbaki E II.13, Déf. 8 ; dual de `pr1_diagonale`.)
+
+    pr₂Δ_X = img(Δ_X) = { z | (∃u)((u,z)∈Δ_X) } = { z | (∃u)(u∈X et u=z) } = X."""
+    vX, vz = _tc(x), var("z")
+    # z∈pr₂Δ_X ⇔ (∃u)((u,z)∈Δ_X) ⇔ (∃u)(u∈X et u=z) ⇔ z∈X
+    # liant de AXIOME_IMG = "x" ; on travaille avec « u » (≠ d0, w) par α-renommage.
+    img0 = _inst_img(E.diagonale(vX), vz)                          # z∈pr₂Δ_X ⇔ (∃x)((x,z)∈Δ_X)
+    img_u = equivalence_transitivite(img0, alpha_existe(
+        "x", "u", appartient(E.couple(var("x"), vz), E.diagonale(vX))))   # ⇔ (∃u)((u,z)∈Δ_X)
+    cd = congruence_existe(couple_diagonale("u", vz, vX), "u")     # (∃u)((u,z)∈Δ_X) ⇔ (∃u)(u∈X et u=z)
+    # collapse (∃u)(u∈X et u=z) ⇔ z∈X  (substitution u:=z, Leibniz sur ∈) :
+    body = et(appartient(var("u"), vX), egal(var("u"), vz))
+    hb = N.assume(body)
+    fwd_body = N.modus_ponens(conjonction_elim_gauche(hb), equivalence_avant(N.modus_ponens(
+        conjonction_elim_droite(hb), N.s6(var("u"), vz, "w", appartient(var("w"), vX)))))  # z∈X
+    fwd = existe_elimination(N.loi_deduction(body, fwd_body), "u")
+    bwd = N.loi_deduction(appartient(vz, vX), N.modus_ponens(
+        conjonction_intro(N.assume(appartient(vz, vX)), N.reflexivite(vz)), N.s5(body, vz, "u")))
+    collapse = conjonction_intro(fwd, bwd)
+    char1 = equivalence_transitivite(equivalence_transitivite(img_u, cd), collapse)
+    char_img = N.generalisation("z", char1)
+    P = appartient(vz, vX)
+    char_X = N.generalisation("z", conjonction_intro(N.loi_deduction(P, N.assume(P)),
+                                                     N.loi_deduction(P, N.assume(P))))
+    return egalite_par_extension(char_img, char_X, E.img(E.diagonale(vX)), vX)
+
+
+def pr1_diagonale_cible(x="X"):
+    """Énoncé visé : pr₁Δ_X = X."""
+    return egal(E.dom(E.diagonale(_tc(x))), _tc(x))
+
+
+def pr2_diagonale_cible(x="X"):
+    """Énoncé visé : pr₂Δ_X = X."""
+    return egal(E.img(E.diagonale(_tc(x))), _tc(x))
+
+
 __all__ = ["couple_diagonale", "couple_diagonale_cible",
-           "diagonale_auto_reciproque", "diagonale_auto_reciproque_cible"]
+           "diagonale_auto_reciproque", "diagonale_auto_reciproque_cible",
+           "pr1_diagonale", "pr1_diagonale_cible",
+           "pr2_diagonale", "pr2_diagonale_cible"]

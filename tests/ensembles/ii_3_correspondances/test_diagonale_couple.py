@@ -36,3 +36,14 @@ def test_diagonale_auto_reciproque():
     assert t.conclusion == cible == M.diagonale_auto_reciproque_cible()
     assert t.est_clos and not t.hypotheses           # inconditionnel
     assert len(theorie_ensembles().axiomes) == 22
+
+
+def test_projections_diagonale():
+    """⊢ pr₁Δ_X = X  et  pr₂Δ_X = X  (E II.13 Déf.8) — CLOS."""
+    X = var("X")
+    t1, t2 = M.pr1_diagonale(), M.pr2_diagonale()
+    assert t1.conclusion == egal(E.dom(E.diagonale(X)), X) == M.pr1_diagonale_cible()
+    assert t2.conclusion == egal(E.img(E.diagonale(X)), X) == M.pr2_diagonale_cible()
+    assert t1.est_clos and not t1.hypotheses
+    assert t2.est_clos and not t2.hypotheses
+    assert len(theorie_ensembles().axiomes) == 22
