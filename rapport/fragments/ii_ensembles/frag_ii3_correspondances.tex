@@ -40,5 +40,27 @@ Conditionnel honnête (2~hypothèses).
   \item $\Delta_X^{-1}=\Delta_X$ (« $\mathrm{Id}_X$ est sa propre réciproque »,
         \texttt{diagonale\_auto\_reciproque}) --- \emph{inconditionnel} : $\Delta_X^{-1}$
         et $\Delta_X$ ne contiennent que des couples, double inclusion via les deux
-        briques ci-dessus puis extensionnalité $A1$.
+        briques ci-dessus puis extensionnalité $A1$ ;
+  \item $\mathrm{pr}_1\Delta_X=\mathrm{pr}_2\Delta_X=X$ (\texttt{pr1/pr2\_diagonale}) ---
+        $\mathrm{dom}(\Delta_X)=\{z\mid(\exists y)(z\in X\wedge z=y)\}=X$ (effondrement
+        du témoin), via la caractérisation au couple et \texttt{egalite\_par\_extension} ;
+  \item composition avec l'identité, au couple :
+        $\bigl((x,z)\in G\circ\Delta_A\bigr)\Leftrightarrow(x\in A\wedge(x,z)\in G)$ et le
+        dual $\bigl((x,z)\in\Delta_B\circ G\bigr)\Leftrightarrow((x,z)\in G\wedge z\in B)$
+        (\texttt{couple\_composee\_diagonale}, \texttt{diagonale\_composee\_couple}).
 \end{itemize}
+
+\textbf{Neutralité de l'identité (Déf.~8, E~II.13) : $\Gamma\circ\mathrm{Id}_A=
+\mathrm{Id}_B\circ\Gamma=\Gamma$.} Au niveau des graphes, module
+\texttt{.../ii\_3\_correspondances/ensembles\_identite\_neutre.py} :
+\[
+  \{\,\mathrm{est\_graphe}(G),\ \mathrm{pr}_1G\subset A\,\}\vdash G\circ\Delta_A=G,
+  \qquad
+  \{\,\mathrm{est\_graphe}(G),\ \mathrm{pr}_2G\subset B\,\}\vdash \Delta_B\circ G=G.
+\]
+\textbf{Preuve (\Nstar).} Aboutissement des briques au couple. Inclusion
+$G\circ\Delta_A\subset G$ \emph{inconditionnelle} (l'étape $(p,y)\in\Delta_A$ force
+$y=p$, d'où $(p,r)\in G$) ; $G\subset G\circ\Delta_A$ utilise $\mathrm{est\_graphe}(G)$
+(tout $z\in G$ est un couple $(a,b)$) et $\mathrm{pr}_1G\subset A$ (pour $a\in A$),
+puis recompose par \texttt{couple\_composee\_diagonale} ; extensionnalité $A1$.
+Conditionnels honnêtes (les deux hypothèses sont load-bearing). $\mathrm{theorie}=22$.
