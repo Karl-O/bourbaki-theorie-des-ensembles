@@ -579,15 +579,42 @@ génération de 504 termes) ; (2) comme les et-slots (pas 24), c'est un ranking 
 encore plus marginal. **ROI faible vs le mur de données** → reverté (pas de complexité budget-fragile à
 faible gain). Le levier décisif demeure la DONNÉE / l'encodage de la cible kernel.
 
-## Bilan & ce qui reste
+## Encoder la CIBLE kernel (pas 32, le signal EXISTE mais data-limité → reverté)
 
-**Acquis du pivot (pas 14→31)** : le generate-and-verify appris FONCTIONNE — synthèse de termes structurés
-+ ranker TreeNN (médiane 1, top-5 ~70 %) + noyau validant → **régénération end-to-end depth-2 réelle 50 %**
-(holdout module, pas 27). Grammaire 19 %→64 %. Limite caractérisée et TRIANGULÉE : l'**effet miroir**
-(pas 28) = arrangements opposés indistinguables par le contexte AST (pas 30), faute de **données
-d'arrangement diverses** (pas 29) ; enrichir la grammaire au-delà ne paie plus (pas 31). **Verrou de
-DONNÉES**, pas d'outillage ni de modèle — diagnostic robuste sur 4 angles indépendants.
-- encoder la **CIBLE kernel** (le but réel, assemblage runtime) comme contexte — seul signal qui distingue
-  les miroirs, mais hors représentation AST (featuriser l'assemblage / sa chaîne) = pas 32 ;
-- (hors loop) FORMALISER plus de preuves d'arrangement dans `bourbaki/` = la vraie cure du mur de données ;
-- niveau TACTIQUE ; GFlowNet/diffusion.
+Le SEUL signal qui distingue les miroirs : hors du bloc les 2 preuves sont identiques, mais leur **CIBLE**
+(but) diffère. PROBE : `str(_cible_de)` donne `Formule`/`Terme` (tag 'app'/'var', `.nom`, `.args`) →
+**distincte** pour les miroirs : `composee(G, diagonale(A))` vs `composee(diagonale(B), G)`. Convertie en
+AST (`_terme_to_ast`) et encodée par le **MÊME TreeEnc** (appariement structurel candidat↔but), branchée
+au Scorer (goal_emb). Smoke : les 2 cibles donnent des embeddings DIFFÉRENTS (‖Δ‖=0.275). MAIS mesure :
+
+| holdout | sans cible | avec cible |
+|---|---|---|
+| proof-level (miroir) | rangs 625/931 → 0 % | rangs 852/593 → **0 %** (miroir NON cassé) |
+| module (réf. 50 %) | rangs 245/**178** → **50 %** | rangs 207/245 → **0 %** (RÉGRESSION) |
+
+**Le signal EST là et EST encodé, mais à n=2 le modèle ne peut PAS APPRENDRE l'appariement candidat↔but
+depuis 1 seul exemple-miroir** → la cible n'aide pas (proof) et **dégrade même** la référence (module :
+le bloc à rang 178 passe à 245, > CAP 200 → 50 %→0 %), agissant comme du BRUIT. → **reverté**. C'est la
+**5ᵉ et plus forte confirmation du mur de données** : même le signal PARFAIT est inexploitable sans
+plusieurs exemples d'arrangement. (Le code cible→AST→TreeEnc est dans l'historique git, prêt à resservir
+quand le corpus d'arrangement grandira.)
+
+## Bilan du pivot (pas 14→32) & directions
+
+**Acquis** : le generate-and-verify appris FONCTIONNE — synthèse de termes structurés + ranker TreeNN
+(médiane 1, top-5 ~70 %) + **noyau validant** → **régénération end-to-end depth-2 réelle 50 %** (holdout
+module, pas 27), 1ʳᵉ preuve concrète que « l'IA crée, le noyau certifie » marche sur ce corpus. Grammaire
+19 %→64 %.
+
+**Limite, diagnostiquée sur 5 angles indépendants** = l'**effet miroir** (arrangements opposés
+`composee(a,diag)` vs `composee(diag,a)`) : pas 28 (la sœur au train est adversariale), pas 29 (aucune
+donnée d'arrangement non-miroir dans le corpus), pas 30 (aucun contexte AST hors-bloc ne les distingue),
+pas 31 (enrichir la grammaire ne paie plus), pas 32 (même la cible — le signal parfait — est inexploitable
+à n=2 et dégrade la référence). **VERROU = DONNÉES**, ni outillage ni modèle ni signal.
+
+**Directions (hors boucle outils_ia)** :
+- **FORMALISER plus de preuves d'arrangement** dans `bourbaki/` (≥3-4 par schéma `composee/diagonale`) =
+  la cure DIRECTE : donne au ranker de quoi apprendre l'appariement candidat↔but (la cible, déjà codable,
+  redeviendrait alors le bon levier) ;
+- **niveau TACTIQUE** (régénérer des pas-tactiques, pas seulement des termes) ;
+- **GFlowNet / diffusion sur le DAG** de dérivations (la vision DDPM→marche discrète du projet).
