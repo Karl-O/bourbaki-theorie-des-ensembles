@@ -126,22 +126,30 @@ Le NOYAU reste l'oracle exact qui valide. → la politique apprise **bat la forc
 généralise, et est robuste cross-modèle**. C'est l'embryon du générateur ; reste à l'enrichir
 (politique séquentielle, niveau-tactique, bibliothèque inter-preuves, GFlowNet/diffusion ; torch dispo).
 
-## Politique SÉQUENTIELLE (pas 12, FAIT) — `proto_sequential.py` : la marche guidée multi-pas
+## Politique SÉQUENTIELLE (pas 12-13-15, FAIT) — `proto_sequential.py` : la marche guidée multi-pas
 
-On supprime K pas et on RECONSTRUIT en chaînant la repair-policy apprise (top-1 par trou)
-+ filtre noyau final = generate(politique)+verify(noyau), testé sur preuves TENUES À L'ÉCART :
-remplissage **INDÉPENDANT** (top-1 par trou) vs **ITÉRATIF** (greedy + recompute : remplir le
-trou de plus haute confiance d'abord, RECALCULER, recommencer) — sur preuves tenues à l'écart :
+On supprime K pas et on RECONSTRUIT en chaînant la repair-policy apprise + filtre noyau final
+= generate(politique)+verify(noyau), testé sur preuves **TENUES À L'ÉCART**. Trois stratégies :
+- **INDÉPENDANT** — top-1 du modèle par trou, sans interaction ;
+- **ITÉRATIF** (pas 13) — greedy + recompute : remplir le trou de plus haute confiance d'abord,
+  RECALCULER les features (les manquantes diminuent), recommencer ;
+- **BEAM** B=4 (pas 15) — garder les **B reconstructions partielles** les plus probables (somme de
+  log-probas) ; à chaque pas, étendre chaque beam par les B meilleurs candidats de chaque trou et
+  ne conserver que les B meilleurs états. Le NOYAU ne juge QU'À LA FIN, sur les ≤B beams complets.
 
-| K (pas supprimés) | indépendant | **itératif (pas 13)** |
-|---|---|---|
-| 1 | 100 % | 100 % |
-| 2 | 41 % | **79 %** |
-| 3 | 4 %  | **20 %** |
+| K (pas supprimés) | indépendant | itératif (pas 13) | **beam B=4 (pas 15)** |
+|---|---|---|---|
+| 1 | 100 % | 100 % | **100 %** |
+| 2 | 45 % | 83 % | **100 %** |
+| 3 | 8 %  | 29 % | **100 %** |
+| 4 | 0 %  | 62 % | **100 %** |
+| 5 | 0 %  | 25 % | **75 %** |
 
-L'itératif **double K=2 et ×5 K=3** : recalculer après chaque remplissage réduit l'ambiguïté
-d'assignation multi-trous. C'est la marche guidée multi-pas, le noyau ne jugeant qu'à la fin
-(generate(politique) + verify(noyau)).
+(K≤3 : 24 essais = 3 preuves × 8 ; K=4-5 : 8 essais — seule `composee_monotone` a ≥4 pas.)
+L'itératif relève déjà K≥2 ; le **BEAM tient 100 % jusqu'à K=4** et ne fléchit qu'à **K=5 (75 %)**,
+là où l'indépendant est à 0 % dès K=4. Garder B trajectoires lève l'ambiguïté d'assignation
+multi-trous bien au-delà du greedy ; le noyau ne juge qu'à la fin (≤B appels) =
+generate(politique) + verify(noyau). Frontière visible (pas de saturation triviale) à K=5.
 
 ## Bibliothèque INTER-preuves (pas 14, FAIT) — `proto_inter_preuves.py` : vocabulaire PARTAGÉ
 
@@ -186,5 +194,6 @@ seul pas). `python outils_ia/corpus/proto_inter_preuves.py [module…]`.
 ## Ce qui reste = enrichir le générateur appris (torch/sklearn dispo)
 - LIBRARY-LEARNING : abstraire les **macros multi-pas** récurrentes entre preuves (le vrai levier
   inter-preuves, cf. pas 14 : l'import 1-pas d'une tactique étrangère a un rendement nul) ;
-- BEAM search (au lieu de greedy top-1) + features plus riches pour relever K=3 ;
+- mise à l'échelle BEAM : K plus grand + preuves plus longues/variées (le beam sature à 100 %
+  jusqu'à K=4 sur ce petit test ; mesurer sa frontière sur un corpus plus large) ;
 - niveau TACTIQUE (STATS.md) ; prior de binding partagé ; GFlowNet/diffusion ; mise à l'échelle.

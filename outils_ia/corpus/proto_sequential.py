@@ -158,6 +158,41 @@ def reconstruire_iteratif(mod, name, fdef, body, start, model, vec, K, rng):
     return _statut(mod, name, _rebuild(fdef, recon), cible) == "OK"
 
 
+def reconstruire_beam(mod, name, fdef, body, start, model, vec, K, rng, B=4):
+    """BEAM search (pas 15) : au lieu de s'engager sur UNE trajectoire (greedy top-1), garder les
+    B reconstructions partielles les plus probables. À chaque pas : pour chaque beam, pour chaque
+    trou restant, étendre par les B meilleurs candidats du modèle ; ne conserver que les B états
+    de plus haut score (somme de log-probas). Le NOYAU ne juge QU'À LA FIN, sur les ≤B beams
+    complets — succès si l'un valide. Lève l'ambiguïté multi-trous mieux que le greedy à 1 chemin."""
+    cible = _cible_de(mod, name)
+    pool = body[start:]
+    positions = list(range(start, len(body)))
+    if len(positions) < K:
+        return None
+    gaps = sorted(rng.sample(positions, K))
+    beam = [(0.0, {}, frozenset(gaps))]                    # (score, filled: {gap->idx pool}, restants)
+    for _ in range(K):
+        enfants = {}                                       # clé = frozenset(filled.items()) → meilleur état
+        for score, filled, restants in beam:
+            filled_stmts = {g: pool[ci] for g, ci in filled.items()}
+            for g in restants:
+                stmts, idx_g = _partial(body, gaps, filled_stmts, g)
+                probs = model.predict_proba(vec.transform([_feats(stmts, idx_g, c) for c in pool]))[:, 1]
+                for ci in np.argsort(probs)[::-1][:B]:     # B meilleurs candidats pour ce trou
+                    nf = dict(filled)
+                    nf[g] = int(ci)
+                    cle = frozenset(nf.items())
+                    s2 = score + float(np.log(probs[ci] + 1e-9))
+                    if cle not in enfants or enfants[cle][0] < s2:
+                        enfants[cle] = (s2, nf, restants - {g})
+        beam = sorted(enfants.values(), key=lambda e: -e[0])[:B]
+    for score, filled, restants in beam:                   # vérifier les beams complets (≤B appels noyau)
+        recon = [pool[filled[i]] if i in filled else body[i] for i in range(len(body))]
+        if _statut(mod, name, _rebuild(fdef, recon), cible) == "OK":
+            return True
+    return False
+
+
 def main(argv):
     print("# entraînement repair-policy (RandomForest) sur modules d'entraînement…", file=sys.stderr)
     X, y = collecte_train(TRAIN)
@@ -166,32 +201,36 @@ def main(argv):
     model = RandomForestClassifier(n_estimators=200, class_weight="balanced", random_state=0).fit(Xv, y)
     print(f"# train : {len(y)} exemples, {y.sum()} (+) | test sur preuves TENUES À L'ÉCART")
     rng = random.Random(20260630)
-    indep = {1: [0, 0], 2: [0, 0], 3: [0, 0]}            # K -> [succès, total]
-    iterv = {1: [0, 0], 2: [0, 0], 3: [0, 0]}
+    KS = (1, 2, 3, 4, 5)                                  # on pousse jusqu'à K=5 pour trouver la frontière
+    indep = {k: [0, 0] for k in KS}                       # K -> [succès, total]
+    iterv = {k: [0, 0] for k in KS}
+    beam = {k: [0, 0] for k in KS}
     for modname in TEST:
         try:
             mod = importlib.import_module(modname)
         except Exception:
             continue
         for name, fdef, body, start in _theoremes(mod):
-            for K in (1, 2, 3):
+            for K in KS:
                 for _ in range(8):                        # 8 essais aléatoires par (théorème, K)
                     a = reconstruire(mod, name, fdef, body, start, model, vec, K, rng)
                     b = reconstruire_iteratif(mod, name, fdef, body, start, model, vec, K, rng)
-                    if a is not None:
-                        indep[K][1] += 1
-                        indep[K][0] += int(a)
-                    if b is not None:
-                        iterv[K][1] += 1
-                        iterv[K][0] += int(b)
-    print("\n[séquentiel] reconstruction valide (noyau OK) — INDÉPENDANT vs ITÉRATIF (greedy+recompute) :")
-    for K in (1, 2, 3):
+                    c = reconstruire_beam(mod, name, fdef, body, start, model, vec, K, rng, B=4)
+                    for res, acc in ((a, indep), (b, iterv), (c, beam)):
+                        if res is not None:
+                            acc[K][1] += 1
+                            acc[K][0] += int(res)
+    print("\n[séquentiel] reconstruction valide (noyau OK) — INDÉPENDANT vs ITÉRATIF vs BEAM(B=4) :")
+    for K in KS:
         si, ti = indep[K]
         sj, tj = iterv[K]
-        if ti and tj:
-            print(f"    K={K} : indép {si}/{ti} ({100*si//ti}%)  →  itératif {sj}/{tj} ({100*sj//tj}%)")
-    print("# = marche guidée multi-pas : remplir le trou le plus sûr d'abord + recalculer relève K≥2.")
-    print("# (le noyau ne juge qu'à la fin : generate(politique) + verify(noyau).)")
+        sk, tk = beam[K]
+        if ti and tj and tk:
+            print(f"    K={K} : indép {si:>2}/{ti} ({100*si//ti:>3}%)  →  itératif {sj:>2}/{tj} "
+                  f"({100*sj//tj:>3}%)  →  beam {sk:>2}/{tk} ({100*sk//tk:>3}%)")
+    print("# = marche guidée multi-pas : greedy+recompute relève déjà K≥2 ; le BEAM garde les B")
+    print("# trajectoires les plus probables (noyau juge ≤B beams complets à la fin) pour relever K=3.")
+    print("# (generate(politique) + verify(noyau) : le noyau ne juge qu'à la fin.)")
     return 0
 
 
