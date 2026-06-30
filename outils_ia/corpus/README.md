@@ -342,9 +342,33 @@ Le prior AIDE (rang −30 %) mais ne FRANCHIT pas le budget pour le depth-2 ; et
 (2) un **modèle de ranking STRUCTURÉ** (les features shallow ne pincent pas l'arrangement exact).
 `python outils_ia/corpus/proto_synth_guide.py`.
 
+## Modèle STRUCTURÉ torch (pas 21, FAIT) — `proto_synth_torch.py` : le ranking neuronal
+
+Le shallow (pas 19-20) plafonne car il agrège (il ne voit pas l'ARRANGEMENT : quelle variable à
+quelle position). Ici un petit **TreeNN** encode l'AST RÉCURSIVEMENT : chaque feuille porte ses
+features data-flow (∈ manquantes/disponibles/sorties), chaque constructeur (`composee/diagonale/
+couple/var`) COMPOSE ses enfants avec des poids propres → l'embedding connaît la STRUCTURE. Un MLP
+score (terme ⊕ contexte-slot). Entraînement **ranking listwise** par slot (softmax, cible = terme
+réel de P = oracle GRATUIT), **GroupKFold par PREUVE**. Petit modèle CPU, ~80 s.
+
+Rang du bon terme (47 slots in-grammaire tenus à l'écart, ~1500 candidats/slot) :
+
+| ranker | **médiane** | top-5 | moyenne |
+|---|---|---|---|
+| brut (énumération) | 41 | 0 % | 396 |
+| shallow (LogReg, pas 19) | 20 | 38 % | 123 |
+| **neuronal (TreeNN, pas 21)** | **1** | **60 %** | 433 (instable) |
+
+**Le TreeNN met le bon terme en TÊTE pour la moitié des slots** (médiane 1) et dans le **top-5 pour
+60 %** — là où le shallow plafonnait (38 %) et le brut échouait (0 %). L'**encodage de la structure
+capture l'arrangement** des variables que les features superficielles ne voyaient pas. Implication
+end-to-end : à **budget 5 essais-noyau**, on régénérerait **60 %** des slots depth-2 (vs ~0 % brut,
+cf. pas 20). **Honnêteté** : la MOYENNE reste instable (quelques slots ratés sur 47 slots / 6 preuves
+= surapprentissage, corpus minuscule ; légère variance CPU-threading) → la robustesse viendra de PLUS
+de données. `python outils_ia/corpus/proto_synth_torch.py [module…]`.
+
 ## Ce qui reste = enrichir le générateur appris (torch/sklearn dispo)
-- pas 21 : **modèle STRUCTURÉ** (embeddings d'AST de termes, torch) pour le ranking exact → viser le
-  rang ~1 (les features shallow plafonnent vers ~500-rang sur depth-2) ;
-- **grammaire de termes enrichie** (constructeurs/lemmes manquants : conjonction_intro, etc.) pour
-  monter la couverture des slots au-delà de 6/10 ;
+- pas 22 : **plus de données + régularisation** (stabiliser la moyenne du TreeNN) et **grammaire de
+  termes enrichie** (conjonction_intro + helpers → couverture des slots > 6/10) ;
+- rebrancher pas 20 (synthèse guidée) avec le TreeNN → mesurer la régénération end-to-end depth-2 ;
 - mise à l'échelle BEAM (K plus grand) ; niveau TACTIQUE ; GFlowNet/diffusion.
