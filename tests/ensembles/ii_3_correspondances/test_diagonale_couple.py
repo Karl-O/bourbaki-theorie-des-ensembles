@@ -58,3 +58,14 @@ def test_composee_diagonale():
     assert t.conclusion == cible == M.couple_composee_diagonale_cible()
     assert t.est_clos and not t.hypotheses
     assert len(theorie_ensembles().axiomes) == 22
+
+
+def test_diagonale_composee():
+    """⊢ ((x,z)∈Δ_B∘G) ⇔ ((x,z)∈G et z∈B)  (dual : Id à gauche, E II.13 Déf.8) — CLOS."""
+    G, B, x, z = var("G"), var("B"), var("x"), var("z")
+    t = M.diagonale_composee_couple()
+    cible = equiv(appartient(E.couple(x, z), E.composee(E.diagonale(B), G)),
+                  et(appartient(E.couple(x, z), G), appartient(z, B)))
+    assert t.conclusion == cible == M.diagonale_composee_couple_cible()
+    assert t.est_clos and not t.hypotheses
+    assert len(theorie_ensembles().axiomes) == 22

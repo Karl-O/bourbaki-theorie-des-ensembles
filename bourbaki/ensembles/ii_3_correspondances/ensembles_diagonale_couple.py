@@ -27,7 +27,7 @@ from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
     equivalence_avant, equivalence_arriere, equivalence_transitivite, instancie,
-    et_congruence_gauche)
+    et_congruence_gauche, et_congruence_droite)
 from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import (
     existe_elimination, alpha_existe, congruence_existe)
 from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import (
@@ -257,6 +257,43 @@ def couple_composee_diagonale_cible(g="G", a="A", x="x", z="z"):
                  et(appartient(vx, vA), appartient(E.couple(vx, vz), vG)))
 
 
+# @livre Ch.II §3.3 Def.8 | E II.13 L.25-26 | PDF p.64
+def diagonale_composee_couple(g="G", b="B", x="x", z="z"):
+    """⊢ ((x,z) ∈ Δ_B∘G) ⇔ ((x,z)∈G et z∈B).   (E II.13, Déf. 8 ; dual : Id à gauche.)
+
+    Composer à gauche par l'identité Δ_B = restreindre l'image de G à B.  Brique
+    pour « Id_B∘Γ = Γ » (lorsque B ⊇ pr₂G).  x, z, b, g : noms OU termes (≠ y, d0, w)."""
+    vG, vB, vx, vz = _tc(g), _tc(b), _tc(x), _tc(z)
+    Gxy = appartient(E.couple(vx, var("y")), vG)
+    cc = couple_composee(E.diagonale(vB), vG, vx, vz)    # ((x,z)∈Δ_B∘G) ⇔ (∃y)((x,y)∈G et (y,z)∈Δ_B)
+    cong = congruence_existe(et_congruence_droite(Gxy, couple_diagonale(var("y"), vz, vB)), "y")
+    #  ⇔ (∃y)((x,y)∈G et (y∈B et y=z))
+    # collapse (témoin y:=z ; substitutions Leibniz sur (x,·)∈G et ·∈B) :
+    Gxz, zB = appartient(E.couple(vx, vz), vG), appartient(vz, vB)
+    body = et(Gxy, et(appartient(var("y"), vB), egal(var("y"), vz)))
+    hb = N.assume(body)
+    right = conjonction_elim_droite(hb)                 # y∈B et y=z
+    y_eq_z = conjonction_elim_droite(right)
+    xz = N.modus_ponens(conjonction_elim_gauche(hb), equivalence_avant(N.modus_ponens(
+        y_eq_z, N.s6(var("y"), vz, "w", appartient(E.couple(vx, var("w")), vG)))))   # (x,z)∈G
+    z_in_B = N.modus_ponens(conjonction_elim_gauche(right), equivalence_avant(N.modus_ponens(
+        y_eq_z, N.s6(var("y"), vz, "w", appartient(var("w"), vB)))))                 # z∈B
+    fwd = existe_elimination(N.loi_deduction(body, conjonction_intro(xz, z_in_B)), "y")
+    h2 = N.assume(et(Gxz, zB))
+    ex = N.modus_ponens(conjonction_intro(conjonction_elim_gauche(h2),
+        conjonction_intro(conjonction_elim_droite(h2), N.reflexivite(vz))), N.s5(body, vz, "y"))
+    bwd = N.loi_deduction(et(Gxz, zB), ex)
+    collapse = conjonction_intro(fwd, bwd)
+    return equivalence_transitivite(equivalence_transitivite(cc, cong), collapse)
+
+
+def diagonale_composee_couple_cible(g="G", b="B", x="x", z="z"):
+    """Énoncé visé : ((x,z)∈Δ_B∘G) ⇔ ((x,z)∈G et z∈B)."""
+    vG, vB, vx, vz = _tc(g), _tc(b), _tc(x), _tc(z)
+    return equiv(appartient(E.couple(vx, vz), E.composee(E.diagonale(vB), vG)),
+                 et(appartient(E.couple(vx, vz), vG), appartient(vz, vB)))
+
+
 def pr1_diagonale_cible(x="X"):
     """Énoncé visé : pr₁Δ_X = X."""
     return egal(E.dom(E.diagonale(_tc(x))), _tc(x))
@@ -270,4 +307,6 @@ def pr2_diagonale_cible(x="X"):
 __all__ = ["couple_diagonale", "couple_diagonale_cible",
            "diagonale_auto_reciproque", "diagonale_auto_reciproque_cible",
            "pr1_diagonale", "pr1_diagonale_cible",
-           "pr2_diagonale", "pr2_diagonale_cible"]
+           "pr2_diagonale", "pr2_diagonale_cible",
+           "couple_composee_diagonale", "couple_composee_diagonale_cible",
+           "diagonale_composee_couple", "diagonale_composee_couple_cible"]
