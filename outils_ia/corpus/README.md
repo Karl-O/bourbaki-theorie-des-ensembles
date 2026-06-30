@@ -643,6 +643,16 @@ blocs **sans aucune donnée nouvelle** (41 % à CAP=400). (32 % @200 ici vs 27 %
 variance ±5 % sur ce petit corpus ; la FORME de la courbe — montée monotone, brut plat — est le résultat
 robuste.) `python outils_ia/corpus/proto_synth_capcurve.py`.
 
+**2ᵉ sous-levier — recherche 2-slots (pas 37, PROBÉ → marginal, NON implémenté).** Les blocs 2-slots
+(20/43) sont gatés non par `T=32` mais par le tri rang-SOMME plafonné à CAP (portée ≈ √(2·CAP) ≈ 28 par
+slot). Probe (gratuite, depuis la sortie pas 36) : 17/20 échouent ; un BEAM « cross » (fixer le slot
+facile — médiane 1 — au top et balayer l'autre) n'en rattraperait que **2** (les blocs (rang≈2, rang≈41/44)) ;
+les **15 autres ont les DEUX slots à rang moyen-haut** (285/285, 655, 900…) = limités par la QUALITÉ DU
+RANKER, inatteignables par toute recherche à CAP≤400. → search-lever **marginal (~+5 %) + risque de
+régression** (blocs denses-bas) → **non implémenté**. **Arc (1) CONCLU** : le budget (27→41 %) est le gain
+principal ; le reste de la marge exige un **meilleur ranker** (= plus de données/grammaire = le mur de
+données). PROBER avant de coder a, ici encore, évité une complexité à faible rendement.
+
 ## Bilan du pivot (pas 14→36) & directions
 
 **Acquis** : le generate-and-verify appris FONCTIONNE — synthèse de termes structurés + ranker TreeNN
