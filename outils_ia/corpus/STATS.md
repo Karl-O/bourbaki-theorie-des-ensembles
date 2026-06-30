@@ -114,8 +114,13 @@ Aucune régression.
 
 **La contrainte liante de TOUT le méta-algo est la TAILLE/DIVERSITÉ DU CORPUS**, confirmée sur **3 frames
 indépendants** : (1) régénération de TERMES — effet miroir (pas 28-32) ; (2) régénération de TACTIQUES —
-classifieur `fn` 18 % = baseline (pas 38, `SCOPING_TACTIQUE.md`) ; (3) génération FORWARD — erre/trivial
-sans guidage, data-limité avec (pas 39, `SCOPING_FORWARD.md`). Aucun frame in-scope n'échappe au mur.
+classifieur `fn` 18 % = baseline (pas 38, `SCOPING_TACTIQUE.md`) ; (3) génération FORWARD (pas 39-40,
+`SCOPING_FORWARD.md`, `proto_forward_probe.py`) — **2 régimes, aucun ne découvre de contenu sans guidage** :
+tactiques RECOMBINANTES (conjonction/symétrie) firent en P² mais 100 % trivial ; tactiques de CONTENU
+(transitivité =/⇔, modus ponens) **firent 0 fois** sur les 150 théorèmes clos (membres-droits ∩ gauches = 0
+pour `=` ; antécédents ∩ conclusions = 0 pour ⇒ — résultats nommés indépendants, rien ne chaîne). Découvrir
+du non-trivial exige un BUT/contexte à termes-partagés ou une valeur d'intérêt apprise = **data-limité**.
+Aucun frame in-scope n'échappe au mur — confirmé MÉCANIQUEMENT, pas seulement « ça erre ».
 
 **Cure unique et HORS boucle outils_ia** :
 1. **Formaliser plus de preuves** dans `bourbaki/` (le projet principal) = la cure DIRECTE et universelle.
