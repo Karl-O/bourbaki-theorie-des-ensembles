@@ -524,10 +524,36 @@ preuves miroir, PLUS de données NUIT** ; les outliers systématiques de pas 22 
 arrangements-miroir que le ranker doit DISTINGUER. (Caveat : n=2 preuves + TreeNN instable → à confirmer
 sur plus de preuves non-miroir.) Le 50 % de pas 27 (holdout module) reste le résultat de référence.
 
+## Plus de données NON-miroir : le mur est l'ARRANGEMENT (pas 29, FAIT)
+
+Pour casser l'effet miroir (pas 28), il faudrait des preuves d'ARRANGEMENT (composee/diagonale/couple)
+NON-jumelles. **SCAN de 21 modules candidats** (ii_3 correspondances, fonctions.ii_3 composée/réciproque,
+ii_2 couples) : **AUCUN n'ajoute de slot d'arrangement in-grammaire** (la plupart sans macro intra-module ;
+ceux qui en ont — ex. `fonctions_props2` 5 preuves — utilisent et/conjonction_elim/equivalence_avant/const,
+PAS composee/diagonale/couple). → **la donnée pour distinguer les arrangements n'existe pas dans le corpus
+formalisé** : le goulot arrangement/miroir est un MUR DE DONNÉES fondamental, pas un manque d'outillage.
+
+On ajoute tout de même les 2 modules les plus riches en slots NON-arrangement (`fonctions_props2` +21,
+`image_reciproque_props` +12) au corpus de ranking (4→6 modules, 12→17 preuves, 178→211 slots) pour tester
+si plus de données DIVERSES aide la robustesse générale :
+
+| corpus | médiane | top-5 | moyenne |
+|---|---|---|---|
+| 4 modules (pas 26) | 1 | 69 % | 87 |
+| 6 modules (pas 29) | 1 | 70 % | 130 |
+
+**Médiane 1 / top-5 70 % TIENNENT, mais la moyenne ne baisse PAS (87 → 130** ; le pool grossit, brut
+médiane 1509). Conclusion : plus de données NON-arrangement n'aide ni le ranking général ni le cas miroir.
+Le seul levier restant pour l'arrangement/miroir est (a) **FORMALISER plus de preuves d'arrangement**
+(`bourbaki/`, HORS outils_ia) ou (b) un **MODÈLE à CONTEXTE plus riche** (distinguer les arrangements sans
+données diverses : encoder le RESTE du bloc / le but, pas seulement le slot). Le **50 % end-to-end de
+pas 27** (holdout module) reste la référence.
+
 ## Ce qui reste
-- pas 29 : **plus de preuves NON-miroir** utilisant composee/diagonale/couple (au-delà des 2 jumelles
-  d'identite) → donner au ranker de quoi apprendre à DISTINGUER les arrangements (lever l'effet miroir) ;
-  et CAP/BEAM plus large pour rattraper les rangs 178-245 ;
-- grammaire de preuve RÉCURSIVE (proof-terms deep restants : conjonction_intro imbriqué, chaînes
-  equivalence/modus_ponens) pour couvrir > 64 % et débloquer plus de blocs end-to-end ;
+- pas 30 : **modèle à CONTEXTE plus riche** — le ranker ne voit que (terme candidat ⊕ cf ⊕ data-flow du
+  slot) ; pour distinguer composee(a,diag(b)) de diag(composee(…)) sous holdout, encoder le RESTE du bloc
+  (statements voisins / but visé) → seul levier modélisation contre l'effet miroir sans nouvelles données ;
+- grammaire de preuve RÉCURSIVE (proof-terms deep : conjonction_intro imbriqué, chaînes equivalence/
+  modus_ponens) pour couvrir > 64 % et débloquer plus de blocs end-to-end ;
+- (hors loop) FORMALISER plus de preuves d'arrangement dans `bourbaki/` = la vraie cure du mur de données ;
 - niveau TACTIQUE ; GFlowNet/diffusion.
