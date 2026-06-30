@@ -565,16 +565,29 @@ modélisation RÉFUTÉ** (reverté : complexité inutile). Confirme pas 29 : le 
 (diversité d'arrangements), pas le contexte du modèle. Cures restantes : formaliser plus de preuves
 d'arrangement (HORS loop) OU encoder la CIBLE kernel (assemblage runtime, ≠ AST — effort séparé).
 
+## Grammaire de preuve : conjonction_intro (pas 31, TENTÉ → reverté)
+
+Les ~36 % slots hors grammaire incluent `conjonction_intro` (27 slots). **PROBE des arités** (avant de
+coder) : contrairement à l'hypothèse « deep récursif », les oracles RÉELS sont surtout **Name×Name**
+(ex. `conjonction_intro(fz_in_imgX, fz_z_recip)`) — pas d'imbrication, 2 Names déjà en grammaire. Donc
+générables par une couche PLATE `conjonction_intro/2` sur noms (comme et/inclus). MAIS : (1) c'est une
+**3ᵉ famille Name×Name** (|noms|²≈576) qui **déborde le budget `forms[:MAXT]`** — l'oracle est tronqué
+quand son `Name_i` est tard dans l'ordre trié (diagnostiqué : `conjonction_intro` 0/27 in-gram malgré
+génération de 504 termes) ; (2) comme les et-slots (pas 24), c'est un ranking DUR (bonne paire parmi
+576) → couverture en hausse mais END-TO-END probablement inchangé. Les autres bloqueurs
+(`reflexivite`×10, `loi_deduction`, `assume`, `_neutre_*`) = encore plus de constructeurs pour un gain
+encore plus marginal. **ROI faible vs le mur de données** → reverté (pas de complexité budget-fragile à
+faible gain). Le levier décisif demeure la DONNÉE / l'encodage de la cible kernel.
+
 ## Bilan & ce qui reste
 
-**Acquis du pivot (pas 14→30)** : le generate-and-verify appris FONCTIONNE — synthèse de termes structurés
+**Acquis du pivot (pas 14→31)** : le generate-and-verify appris FONCTIONNE — synthèse de termes structurés
 + ranker TreeNN (médiane 1, top-5 ~70 %) + noyau validant → **régénération end-to-end depth-2 réelle 50 %**
-(holdout module, pas 27). Grammaire 19 %→64 %. Limite caractérisée : l'**effet miroir** (pas 28) = des
-arrangements opposés indistinguables par le contexte AST (pas 30) faute de **données d'arrangement
-diverses** (pas 29) — verrou de DONNÉES, pas d'outillage ni de modèle.
-- pas 31 : grammaire de preuve RÉCURSIVE (proof-terms deep : `conjonction_intro` imbriqué, chaînes
-  equivalence/modus_ponens) pour couvrir > 64 % et débloquer plus de blocs end-to-end ;
+(holdout module, pas 27). Grammaire 19 %→64 %. Limite caractérisée et TRIANGULÉE : l'**effet miroir**
+(pas 28) = arrangements opposés indistinguables par le contexte AST (pas 30), faute de **données
+d'arrangement diverses** (pas 29) ; enrichir la grammaire au-delà ne paie plus (pas 31). **Verrou de
+DONNÉES**, pas d'outillage ni de modèle — diagnostic robuste sur 4 angles indépendants.
 - encoder la **CIBLE kernel** (le but réel, assemblage runtime) comme contexte — seul signal qui distingue
-  les miroirs, mais hors représentation AST (featuriser l'assemblage / sa chaîne) ;
+  les miroirs, mais hors représentation AST (featuriser l'assemblage / sa chaîne) = pas 32 ;
 - (hors loop) FORMALISER plus de preuves d'arrangement dans `bourbaki/` = la vraie cure du mur de données ;
 - niveau TACTIQUE ; GFlowNet/diffusion.
