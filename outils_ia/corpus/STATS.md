@@ -110,10 +110,20 @@ la grammaire enrichie — 156 slots — vs les figures historiques pas 19 à gra
 `proto_synth_lomo` redonne **27 % / 43 blocs** (pas 33) ; tous les protos importent ; `theorie==22`.
 Aucune régression.
 
-## 7. Directions (au-delà de la boucle outils_ia)
+## 7. Constat méta FINAL & directions (méta-algo in-scope EXHAUSTIVEMENT bouclé)
 
-1. **Formaliser plus de preuves d'arrangement** dans `bourbaki/` (≥3-4 par schéma `composee/diagonale`) =
-   la cure DIRECTE du verrou de données → le ranker apprend l'appariement candidat↔but (la cible, déjà
-   codée en pas 32 et dans l'historique git, redevient alors le bon levier).
-2. **Niveau TACTIQUE** : régénérer des pas-tactiques entiers (pas seulement des termes), cf. §2.
-3. **GFlowNet / diffusion sur le DAG** de dérivations (la vision DDPM→marche discrète + noyau-récompense).
+**La contrainte liante de TOUT le méta-algo est la TAILLE/DIVERSITÉ DU CORPUS**, confirmée sur **3 frames
+indépendants** : (1) régénération de TERMES — effet miroir (pas 28-32) ; (2) régénération de TACTIQUES —
+classifieur `fn` 18 % = baseline (pas 38, `SCOPING_TACTIQUE.md`) ; (3) génération FORWARD — erre/trivial
+sans guidage, data-limité avec (pas 39, `SCOPING_FORWARD.md`). Aucun frame in-scope n'échappe au mur.
+
+**Cure unique et HORS boucle outils_ia** :
+1. **Formaliser plus de preuves** dans `bourbaki/` (le projet principal) = la cure DIRECTE et universelle.
+   Avec un corpus plus grand : le ranker TreeNN, le classifieur `fn`, ET la cible (codée pas 32, en
+   historique git) redeviennent des leviers PAYANTS. Pour l'effet miroir : ≥3-4 preuves par schéma
+   `composee/diagonale` en arrangements variés (non-miroir).
+2. **Niveau TACTIQUE** (§2) et **GFlowNet/diffusion sur le DAG** (vision DDPM→marche discrète) :
+   structurellement faisables, encore plus data-hungry → à reprendre APRÈS l'agrandissement du corpus.
+
+Le méta-algo in-scope fournit dès maintenant le **substrat appris prêt** (synthèse de termes, TreeNN,
+end-to-end kernel-validé, encodage de cible) qui paiera mécaniquement dès que le corpus grandit.
