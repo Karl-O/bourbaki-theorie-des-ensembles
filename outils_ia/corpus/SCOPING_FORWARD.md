@@ -58,7 +58,45 @@ Diagnostic (`--diag`, structurel — vérifié, pas un bug de détecteur) :
 > une heuristique d'intérêt (apprise). C'est exactement le guidage dont on teste la nécessité : le probe
 > mesure donc fidèlement si les faits du corpus chaînent « tels quels ». Ils ne chaînent pas.
 
-## Verdict (NUANCÉ, 2 régimes de tactiques)
+## Probe C (pas 41) — CONTRÔLE POSITIF : les mêmes tactiques FIRENT, guidées par un but
+
+Le négatif (feasible=0) n'est rigoureux que confronté à un **positif** : les mêmes tactiques de contenu
+FIRENT-elles dans le contexte LOCAL d'une vraie preuve, où le but met en place les termes partagés ?
+`proto_forward_positif.py` — (A) parse AST statique de **621 fichiers** `bourbaki/` (pas d'exécution → ne
+pend pas sur cardinaux ; pas de monkeypatch) ; (B) exécution légère de proofs `ensembles`.
+
+**(A) Call-sites de tactiques de contenu (le corpus en réalise massivement) :**
+
+| tactique de contenu | appels | nature |
+|---|---|---|
+| `composer_egalites` (= transitive) | **701** | dont **114 IMBRIQUÉS** (chaînes multi-maillons `c(c(a,b),d)`) |
+| `equivalence_transitivite` | 400 | chaînage ⇔ |
+| `syllogisme` (R⇒S, S⇒T → R⇒T) | 299 | chaînage ⇒ |
+| `congruence_terme` (T=U → V{T}=V{U}) | 265 | substitutivité = |
+| `instancie` (∀x R → (T\|x)R) | 3498 | ∀-élimination (instancie un universel) |
+| `equivalence_avant` (A⇔B → A⇒B) | 1516 | décomposition (brique, ≠ chaînage pur) |
+
+Chaînage de contenu STRICT (transitivité =/⇔, syllogisme, congruence) = **1665 appels** ; + `instancie`
+3498. Par chapitre : cardinaux 3418, ensembles 1493, ordre 964, entiers 651, logique 90, structures 63.
+
+**(B) Exécution live (preuve renvoie un `Theoreme` valide ⟹ tous ses appels de contenu ont FIRÉ) :**
+6 proofs `ensembles` exécutées, **100 % `FIRE ✓`**, 22 appels de contenu firés in-context. Ex. :
+`prop9b_factorisation_valeur` = `instancie×1 + congruence_terme×2 + composer_egalites×2` → `=`-Theoreme
+valide ; `image_composee_membre` = `equivalence_transitivite×6` → Theoreme valide. **Ce sont les MÊMES
+modules `ensembles`** dont les théorèmes CLOS EXPORTÉS ne chaînaient pas (feasible=0, pas 40) : en
+interne, leurs preuves chaînent abondamment car le but a monté le contexte à termes-partagés.
+
+**LE CONTRASTE (cœur du contrôle positif) :**
+
+| régime | `composer_egalites` | fire-rate |
+|---|---|---|
+| bibliothèque DÉCONNECTÉE (faits clos, pas 40) | 0 / 1332 paires | **0 %** |
+| contexte DIRIGÉ-PAR-BUT (vraies preuves, pas 41) | 701 appels (114 chaînes) | **100 %** (chaque appel exige la coïncidence du maillon, fournie par le but) |
+
+→ `feasible=0` n'est **PAS un artefact d'outillage** mais une propriété STRUCTURELLE : la même tactique
+fire **0× déconnectée, 100 % guidée**. **Le guidage ≡ le contexte à termes-partagés que le but induit.**
+
+## Verdict (NUANCÉ, 2 régimes de tactiques + contrôle positif)
 
 La génération forward **non-guidée** se scinde en deux régimes, et AUCUN ne découvre de contenu :
 
@@ -82,8 +120,10 @@ corpus, et le probe pas-40 **résout** l'inquiétude « conclusion trop hâtive 
 La contrainte liante de TOUT le méta-algo in-scope est la **TAILLE / DIVERSITÉ DU CORPUS** :
 1. **régénération de TERMES** (pas 28-32) : effet miroir = mur de données d'arrangement ;
 2. **régénération de TACTIQUES** (pas 38) : classifieur `fn` 18 % top-1 = baseline (sparsité 71 classes) ;
-3. **génération FORWARD** (pas 39-40) : recombinant → trivial ; contenu → ne fire pas sur la biblio des
-   faits clos (réductions indépendantes) → exige guidage = but/valeur apprise → data-limité.
+3. **génération FORWARD** (pas 39-41) : recombinant → trivial ; contenu → ne fire pas sur la biblio des
+   faits clos (réductions indépendantes) ; **contrôle positif** : les mêmes tactiques firent 6679× dans
+   les vraies preuves (guidées par un but) → le guidage ≡ contexte à termes-partagés → valeur d'intérêt
+   apprise → **data-limité**. Frame forward DÉMONTRÉ complet (négatif feasible=0 + positif 6679 firings).
 
 **Acquis solide** : generate-and-verify MARCHE (régénération end-to-end 27→41 %, kernel-validé). **Cure
 unique et HORS boucle outils_ia** : agrandir le corpus = **formaliser plus de preuves dans `bourbaki/`**
