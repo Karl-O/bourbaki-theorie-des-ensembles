@@ -12,10 +12,22 @@ import bourbaki.ensembles.ii_3_correspondances.ensembles_identite_neutre as M
 
 
 def test_composee_diagonale_neutre():
+    """⊢ G∘Δ_A = G  sous { est_graphe(G), pr₁G⊂A }  (Γ∘Id_A=Γ)."""
     t = M.composee_diagonale_neutre()
     G, A = var("G"), var("A")
     cible = egal(E.composee(G, E.diagonale(A)), G)
     assert t.conclusion == cible == M.composee_diagonale_neutre_cible()
     assert not t.est_clos                                 # conditionnel honnête
     assert set(t.hypotheses) == {est_graphe(G), inclus(E.dom(G), A)}
+    assert len(theorie_ensembles().axiomes) == 22
+
+
+def test_diagonale_composee_neutre():
+    """⊢ Δ_B∘G = G  sous { est_graphe(G), pr₂G⊂B }  (Id_B∘Γ=Γ, dual)."""
+    t = M.diagonale_composee_neutre()
+    G, B = var("G"), var("B")
+    cible = egal(E.composee(E.diagonale(B), G), G)
+    assert t.conclusion == cible == M.diagonale_composee_neutre_cible()
+    assert not t.est_clos
+    assert set(t.hypotheses) == {est_graphe(G), inclus(E.img(G), B)}
     assert len(theorie_ensembles().axiomes) == 22

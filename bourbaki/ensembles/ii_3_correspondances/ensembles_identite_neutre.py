@@ -34,7 +34,7 @@ from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
 from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import existe_elimination
 from bourbaki.ensembles.ii_3_correspondances.ensembles_graphe_inclus_produit import est_graphe
 from bourbaki.ensembles.ii_3_correspondances.ensembles_diagonale_couple import (
-    couple_diagonale, couple_composee_diagonale)
+    couple_diagonale, couple_composee_diagonale, diagonale_composee_couple)
 from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import extensionnalite_appliquee
 
 
@@ -51,6 +51,11 @@ def _inst_composee(vGp, vG, z):
 def _inst_dom(vG, z):
     """⊢ (z∈pr₁G) ⇔ (∃y)((z,y)∈G)."""
     return instancie(instancie(N.axiome(E.theorie_ensembles(), E.AXIOME_DOM), vG), z)
+
+
+def _inst_img(vG, z):
+    """⊢ (z∈pr₂G) ⇔ (∃x)((x,z)∈G)."""
+    return instancie(instancie(N.axiome(E.theorie_ensembles(), E.AXIOME_IMG), vG), z)
 
 
 def _neutre_incluse(vG, vA):
@@ -119,4 +124,71 @@ def composee_diagonale_neutre_cible(g="G", a="A"):
     return egal(E.composee(vG, E.diagonale(vA)), vG)
 
 
-__all__ = ["composee_diagonale_neutre", "composee_diagonale_neutre_cible"]
+# ── DUAL : Id_B∘Γ = Γ  (neutralité à GAUCHE ; Δ_B∘G = G) ──────────────────────
+def _neutre_g_incluse(vG, vB):
+    """⊢ Δ_B∘G ⊂ G   (INCONDITIONNEL)."""
+    vz, vp, vr = var("z"), var("p"), var("r")
+    C = E.composee(E.diagonale(vB), vG)
+    comp = _inst_composee(E.diagonale(vB), vG, vz)       # z∈Δ_B∘G ⇔ (∃p)(∃r)(z=(p,r) et (∃y)((p,y)∈G et (y,r)∈Δ_B))
+    inner = et(appartient(E.couple(vp, var("y")), vG),
+               appartient(E.couple(var("y"), vr), E.diagonale(vB)))
+    body = et(egal(vz, E.couple(vp, vr)), existe("y", inner))
+    hb = N.assume(body)
+    z_eq = conjonction_elim_gauche(hb)
+    h_inner = N.assume(inner)
+    y_eq_r = conjonction_elim_droite(N.modus_ponens(conjonction_elim_droite(h_inner),
+        equivalence_avant(couple_diagonale(var("y"), vr, vB))))                  # y=r
+    pr_in_G_i = N.modus_ponens(conjonction_elim_gauche(h_inner), equivalence_avant(
+        N.modus_ponens(y_eq_r, N.s6(var("y"), vr, "w", appartient(E.couple(vp, var("w")), vG)))))
+    pr_in_G = N.modus_ponens(conjonction_elim_droite(hb),
+                             existe_elimination(N.loi_deduction(inner, pr_in_G_i), "y"))
+    z_in_G = N.modus_ponens(pr_in_G, equivalence_arriere(
+        N.modus_ponens(z_eq, N.s6(vz, E.couple(vp, vr), "w", appartient(var("w"), vG)))))
+    elim = existe_elimination(existe_elimination(N.loi_deduction(body, z_in_G), "r"), "p")
+    z_in_G2 = N.modus_ponens(N.modus_ponens(N.assume(appartient(vz, C)), equivalence_avant(comp)), elim)
+    return N.generalisation("z", N.loi_deduction(appartient(vz, C), z_in_G2))
+
+
+def _neutre_g_contient(vG, vB):
+    """⊢ G ⊂ Δ_B∘G   sous { est_graphe(G), pr₂G ⊂ B }."""
+    vz, va, vb = var("z"), var("a"), var("b")
+    C = E.composee(E.diagonale(vB), vG)
+    h_graphe = N.assume(est_graphe(vG))
+    h_img = N.assume(inclus(E.img(vG), vB))              # pr₂G ⊂ B
+    h_z = N.assume(appartient(vz, vG))
+    ec = N.modus_ponens(h_z, instancie(h_graphe, vz))
+    h_eq = N.assume(egal(vz, E.couple(va, vb)))
+    ab_in_G = N.modus_ponens(h_z, equivalence_avant(
+        N.modus_ponens(h_eq, N.s6(vz, E.couple(va, vb), "w", appartient(var("w"), vG)))))
+    b_in_img = N.modus_ponens(                            # b∈pr₂G (témoin x=a)
+        N.modus_ponens(ab_in_G, N.s5(appartient(E.couple(var("x"), vb), vG), va, "x")),
+        equivalence_arriere(_inst_img(vG, vb)))
+    b_in_B = N.modus_ponens(b_in_img, instancie(h_img, vb))   # b∈B (pr₂G⊂B)
+    ab_in_C = N.modus_ponens(conjonction_intro(ab_in_G, b_in_B),
+        equivalence_arriere(diagonale_composee_couple(vG, vB, va, vb)))   # (a,b)∈Δ_B∘G
+    z_in_C = N.modus_ponens(ab_in_C, equivalence_arriere(
+        N.modus_ponens(h_eq, N.s6(vz, E.couple(va, vb), "w", appartient(var("w"), C)))))
+    elim = existe_elimination(existe_elimination(
+        N.loi_deduction(egal(vz, E.couple(va, vb)), z_in_C), "b"), "a")
+    z_in_C2 = N.modus_ponens(ec, elim)
+    return N.generalisation("z", N.loi_deduction(appartient(vz, vG), z_in_C2))
+
+
+# @livre Ch.II §3.3 Def.8 | E II.13 L.25-26 | PDF p.64
+def diagonale_composee_neutre(g="G", b="B"):
+    """⊢ Δ_B∘G = G   sous { est_graphe(G), pr₂G ⊂ B }.   (Bourbaki E II.13 : Id_B∘Γ = Γ.)
+
+    Dual de `composee_diagonale_neutre`.  g, b : noms OU termes (≠ internes)."""
+    vG, vB = _tc(g), _tc(b)
+    ext = extensionnalite_appliquee(E.composee(E.diagonale(vB), vG), vG)
+    return N.modus_ponens(conjonction_intro(_neutre_g_incluse(vG, vB), _neutre_g_contient(vG, vB)), ext)
+
+
+def diagonale_composee_neutre_cible(g="G", b="B"):
+    """Énoncé visé : Δ_B∘G = G."""
+    vG, vB = _tc(g), _tc(b)
+    return egal(E.composee(E.diagonale(vB), vG), vG)
+
+
+__all__ = ["composee_diagonale_neutre", "composee_diagonale_neutre_cible",
+           "diagonale_composee_neutre", "diagonale_composee_neutre_cible"]
