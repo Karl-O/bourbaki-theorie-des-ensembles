@@ -216,9 +216,39 @@ du générateur : émettre des MACROS (blocs), pas des primitives isolées — t
 vocabulaire riche (cf. l'insight niveau-tactique de STATS.md). `python
 outils_ia/corpus/proto_library_learning.py [package…]`.
 
+## Valider une macro par le NOYAU (pas 16-suite, FAIT) — `proto_macro_noyau.py`
+
+Test décisif : un bloc multi-pas se RÉGÉNÈRE-t-il depuis une AUTRE preuve, le noyau certifiant ?
+Protocole : preuve TEST P contenant une macro → supprimer son bloc de L pas ; preuve DONNEUSE Q≠P
+contenant la même macro → transplanter SON bloc concret dans le trou de P, re-bindé (m sorties → m
+variables manquantes via data-flow, internes → noms frais, entrées → variables locales par binding),
+noyau validant le P reconstruit.
+
+**Résultat : 1 / 103 blocs régénérés (≈ 0 %)** — copier le bloc concret d'une autre preuve + renommer
+les variables Python ne reproduit **quasi jamais** la cible. **Et la cause est prouvée** (en
+inspectant deux instances de la macro `c45_avant/4 → egal/2`) :
+
+| | bloc concret |
+|---|---|
+| `pr1_caracterisation` | `fwd = c45_avant(R, 'x', 'u', 'v')` ; `eq = egal(var('x'), pr1z)` |
+| `pr2_caracterisation` | `fwd = c45_avant(R, 'y', 'u', 'v')` ; `eq = egal(var('y'), pr2z)` |
+
+Les instances diffèrent au **niveau TERME** : des **littéraux** (`'x'` vs `'y'` = noms de variables
+liées encodés en chaînes) et des **objets propres à la preuve** (`pr1z` vs `pr2z`) — que le renommage
+de variables Python ne substitue PAS. Le bloc copié calcule donc le résultat de l'autre preuve → rejeté.
+
+**Conclusion (capitale pour le design).** Le 1-pas (pas 14) ET le bloc multi-pas (pas 16-suite)
+échouent au transfert par copie+renommage, **pour la même raison** : une macro est un **TEMPLATE
+PARAMÉTRÉ sur ses arguments-termes**, pas un fragment copiable. Le vocabulaire partagé (1223 macros,
+pas 16) est un **squelette structurel abstrait** ; l'employer exige de **SYNTHÉTISER les
+arguments-termes** (le noyau validant), ce que la **récupération/copie ne peut pas faire** → ça
+**confirme le besoin d'un générateur APPRIS** (et explique pourquoi). `python
+outils_ia/corpus/proto_macro_noyau.py [module…]`.
+
 ## Ce qui reste = enrichir le générateur appris (torch/sklearn dispo)
-- pas 16-suite : **valider une macro par le NOYAU** — supprimer un bloc multi-pas correspondant à
-  une macro et le RÉGÉNÉRER (macro re-bindée localement, noyau validant le bloc) = vocabulaire
-  multi-pas certifié (là où le 1-pas échouait) ;
-- prior de binding PARTAGÉ entre preuves (réduire la recherche de binding du pas 14) ;
+- pas 17 : **substituer les arguments-termes** d'une macro (chaînes nommant les variables liées,
+  objets locaux) — pas juste les variables Python — et re-mesurer le transfert de bloc (test direct
+  de l'hypothèse « template paramétré ») ;
+- générateur d'ARGUMENTS appris (le squelette-macro est donné, le modèle remplit les slots-termes,
+  noyau filtrant) = le vrai cœur generate-and-verify multi-pas ;
 - mise à l'échelle BEAM (K plus grand, preuves plus longues) ; niveau TACTIQUE ; GFlowNet/diffusion.
