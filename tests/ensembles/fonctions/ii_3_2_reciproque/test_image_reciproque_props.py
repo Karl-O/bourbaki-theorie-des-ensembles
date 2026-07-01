@@ -11,7 +11,9 @@ from bourbaki.logique.i_1_termes_relations.formule import (
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.ensembles.fonctions.ii_3_2_reciproque.ensembles_image_reciproque_props import (
     inclus_image_reciproque_image, cible_inclus_image_reciproque_image,
-    image_image_reciproque_inclus, cible_image_image_reciproque_inclus)
+    image_image_reciproque_inclus, cible_image_image_reciproque_inclus,
+    image_reciproque_image_inclus_si_injective,
+    cible_image_reciproque_image_inclus_si_injective)
 
 
 def test_theorie_22_axiomes():
@@ -38,4 +40,12 @@ def test_image_image_reciproque_inclus_19():
     # ⊢ est_fonctionnel(f) ⇒ (f⟨f⁻¹⟨Y⟩⟩ ⊂ Y)
     assert th.conclusion == impl(E.est_fonctionnel(vf), cible)
     assert th.hypotheses == frozenset()            # clos
+    assert len(E.theorie_ensembles().axiomes) == 22
+
+
+def test_image_reciproque_image_inclus_si_injective():
+    """Réciproque de (18) sous f injective : ⊢ est_fonctionnel(f⁻¹) ⇒ f⁻¹⟨f⟨X⟩⟩ ⊂ X."""
+    th = image_reciproque_image_inclus_si_injective()
+    assert th.hypotheses == frozenset()            # clos
+    assert th.conclusion == cible_image_reciproque_image_inclus_si_injective()
     assert len(E.theorie_ensembles().axiomes) == 22

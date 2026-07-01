@@ -180,7 +180,68 @@ def image_image_reciproque_inclus(f="f", y="Y"):
     return N.loi_deduction(E.est_fonctionnel(vf), incl)
 
 
+# ════════════════════════════════════════════════════════════════════════════
+#  RÉCIPROQUE de (18) sous INJECTIVITÉ : f⁻¹⟨f⟨X⟩⟩ ⊂ X   (⇒ f⁻¹⟨f⟨X⟩⟩ = X).
+# ════════════════════════════════════════════════════════════════════════════
+def cible_image_reciproque_image_inclus_si_injective(f="f", x="X"):
+    from bourbaki.logique.i_1_termes_relations.formule import inclus
+    vf, vx = _t(f), _t(x)
+    return impl(E.est_fonctionnel(E.reciproque(vf)),
+                inclus(E.image(E.reciproque(vf), E.image(vf, vx)), vx))
+
+
+# @livre Ch.R §2.10 Prop.- | E.R.9 L.31-31 | PDF p.312
+def image_reciproque_image_inclus_si_injective(f="f", x="X"):
+    """⊢ est_fonctionnel(f⁻¹) ⇒ f⁻¹⟨f⟨X⟩⟩ ⊂ X.   (réciproque de (18) sous f injective.)
+
+    « f injective » = f⁻¹ fonctionnel (univalence de f⁻¹).  z∈f⁻¹⟨f⟨X⟩⟩ ⇒ (∃w)(w∈f⟨X⟩ et
+    (w,z)∈f⁻¹) ; w∈f⟨X⟩ ⇒ (∃x')(x'∈X et (x',w)∈f) ⇒ (w,x')∈f⁻¹ [couple_reciproque] ;
+    univalence de f⁻¹ : (w,z)∈f⁻¹ et (w,x')∈f⁻¹ ⇒ z=x' ; d'où z=x'∈X.  Miroir de (19)
+    sur f⁻¹.  Combinée à (18) [inclus_image_reciproque_image], donne f⁻¹⟨f⟨X⟩⟩ = X."""
+    vf, vx = _t(f), _t(x)
+    vz, vw, vxp = var("z"), var("m"), var("xp")          # « m » (≠ « w », liant interne de couple_egal_…)
+    recipf = E.reciproque(vf)
+    imgX = E.image(vf, vx)
+    lhs = E.image(recipf, imgX)                          # f⁻¹⟨f⟨X⟩⟩
+
+    hinj = N.assume(E.est_fonctionnel(recipf))           # f injective (f⁻¹ fonctionnel)
+    h_z = N.assume(appartient(vz, lhs))                  # z ∈ f⁻¹⟨f⟨X⟩⟩
+
+    mem_recip = membre_image_reciproque(vf, imgX, vz)    # z∈lhs ⇔ (∃x)(x∈f⟨X⟩ et (x,z)∈f⁻¹)
+    body_w = lambda u: et(appartient(u, imgX), appartient(E.couple(u, vz), recipf))
+    ex_w0 = N.modus_ponens(h_z, equivalence_avant(mem_recip))
+    ex_w = N.modus_ponens(ex_w0, equivalence_avant(alpha_existe("x", "m", body_w(var("x")))))
+
+    hbw = N.assume(body_w(vw))
+    w_in_imgX = conjonction_elim_gauche(hbw)             # w ∈ f⟨X⟩
+    wz_recip = conjonction_elim_droite(hbw)              # (w,z) ∈ f⁻¹
+
+    mem_img = membre_image(vf, vx, vw)                   # w∈f⟨X⟩ ⇔ (∃x)(x∈X et (x,w)∈f)
+    body_xp = lambda u: et(appartient(u, vx), appartient(E.couple(u, vw), vf))
+    ex_xp0 = N.modus_ponens(w_in_imgX, equivalence_avant(mem_img))
+    ex_xp = N.modus_ponens(ex_xp0, equivalence_avant(alpha_existe("x", "xp", body_xp(var("x")))))
+
+    hbxp = N.assume(body_xp(vxp))
+    xp_in_X = conjonction_elim_gauche(hbxp)              # x' ∈ X
+    xpw_f = conjonction_elim_droite(hbxp)                # (x',w) ∈ f
+    wxp_recip = N.modus_ponens(xpw_f, equivalence_arriere(couple_reciproque(vf, vw, vxp)))  # (w,x')∈f⁻¹
+    univ = instancie(instancie(instancie(hinj, vw), vz), vxp)   # ((w,z)∈f⁻¹ et (w,x')∈f⁻¹)⇒z=x'
+    z_eq_xp = N.modus_ponens(conjonction_intro(wz_recip, wxp_recip), univ)   # z = x'
+    z_in_X = N.modus_ponens(xp_in_X, equivalence_arriere(
+        N.modus_ponens(z_eq_xp, N.s6(vz, vxp, "ww", appartient(var("ww"), vx)))))   # z ∈ X
+
+    imp_xp = existe_elimination(N.loi_deduction(body_xp(vxp), z_in_X), "xp")
+    z_under_w = N.modus_ponens(ex_xp, imp_xp)
+    imp_w = existe_elimination(N.loi_deduction(body_w(vw), z_under_w), "m")
+    z_final = N.modus_ponens(ex_w, imp_w)
+
+    incl = N.generalisation("z", N.loi_deduction(appartient(vz, lhs), z_final))
+    return N.loi_deduction(E.est_fonctionnel(recipf), incl)
+
+
 __all__ = [
     "inclus_image_reciproque_image", "cible_inclus_image_reciproque_image",
     "image_image_reciproque_inclus", "cible_image_image_reciproque_inclus",
+    "image_reciproque_image_inclus_si_injective",
+    "cible_image_reciproque_image_inclus_si_injective",
 ]

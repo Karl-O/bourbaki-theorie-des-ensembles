@@ -62,8 +62,13 @@ Restantes tractables (present=NON confirmé en code) :
 5. **Eq(E,F) ⇒ Eq(𝔓E,𝔓F)** — Résumé §7 item 1. ⏳ EN COURS : recon (2 agents) confirme
    ABSENT ; témoin H=graphe_terme(𝔓E, f⟨Y⟩, 'Y') ; FONDATION CLOSE (pilier 1 fonctionnel,
    pilier 2 dom=𝔓E, valeur H(Y)=f⟨Y⟩ — image(·,·) est ATOMIQUE donc pas de capture-τ).
-   RESTE : pilier 3 (f inj ⇒ f⟨Y⟩=f⟨Y'⟩⇒Y=Y') + pilier 4 (f surj ⇒ ∀Z⊂F ∃Y f⟨Y⟩=Z, via
-   sélection S8) — algèbre d'image (liants AXIOME_IMAGE « x ») ; puis assemblage + ∃-intro.
+   PILIER 3 amorcé : `image_reciproque_image_inclus_si_injective` (f⁻¹⟨f⟨X⟩⟩⊂X sous
+   est_fonctionnel(f⁻¹)=f injective) CLOS dans `ii_3_2_reciproque/ensembles_image_reciproque_props.py`
+   — miroir de (19) sur f⁻¹ ; combiné à (18) donne f⁻¹⟨f⟨X⟩⟩=X ⇒ f⟨Y⟩=f⟨Y'⟩⇒Y=Y'.
+   Piège : couple_reciproque appelle couple_egal_implique_composantes qui lie « w » →
+   ne PAS nommer un témoin « w » (renommé « m »).
+   RESTE : assembler pilier 3 (f⁻¹(f(X))=X + congruence) + pilier 4 (f surj ⇒ ∀Z⊂F ∃Y
+   f⟨Y⟩=Z via sélection S8) + assemblage est_bijection_de + ∃-intro.
 6. **⋂_{ι∈∅}X_ι = E** — Résumé §4 (40) — DÉLICAT : l'axiome AXIOME_INTER_FAM omet x∈E (écart connu).
 DÉJÀ FAITS (audit disait manquant) : assoc (E×F)×G≅E×(F×G) `eq_produit_associatif` ;
 invariance produit `eq_produit_invariant` ; bon ordre cardinaux `cardinaux_bien_ordonnes_close` ;
