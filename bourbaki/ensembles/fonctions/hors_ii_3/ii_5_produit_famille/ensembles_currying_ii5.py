@@ -20,11 +20,16 @@ On l'assemble par CANTOR–BERNSTEIN sur les deux injections curry/uncurry (stri
 le schéma de `prop10_close`, mais on s'arrête au niveau ENSEMBLISTE Eq(·,·), avant de
 passer aux cardinaux).  Rien postulé ; theorie_ensembles INCHANGÉE (22 axiomes).
 
-PROPOSITION 2 (E II.31, n° 2) — REPORTÉE (résidu HONNÊTE, non fermée cette passe).
+PROPOSITION 2 (E II.31, n° 2).
   Énoncé : u : E'→E, v : F→F' ; la fonction f ↦ v∘f∘u de 𝓕(E;F) dans 𝓕(E';F') est
   injective si u surjective & v injective, surjective si u injective & v surjective ;
   bijective (Cor) si u,v bijectives.  La PREUVE de Bourbaki est par retraction/section
   (1° : s section de u, r rétraction de v ⇒ r∘(v∘f∘u)∘s = f ; 2° en miroir).
+  CAS 1° (injectif) : FAIT et CLOS, forme extensionnelle rétraction/section au niveau
+  des graphes, dans `ensembles_conjugaison_prop2_ii5.prop2_conjugaison_injective`
+  (contourne le verrou-τ ci-dessous en n'évaluant jamais un composé en un point-τ :
+  quantifier sur un point générique puis instancier au point-section).  Restent
+  REPORTÉS : le cas 2° (surjectif, dual) et l'OBJET-conjugaison lui-même.
   VERROU : la CONSTRUCTION du graphe-terme de la conjugaison f ↦ v∘f∘u (recomposition
   d'applications EMBALLÉES, bien-définition + injectivité back-and-forth) est exactement
   le « verrou dur » DÉJÀ documenté et REPORTÉ dans
