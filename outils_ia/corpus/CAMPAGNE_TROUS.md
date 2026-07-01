@@ -59,29 +59,40 @@ Restantes tractables (present=NON confirmé en code) :
 4. ✅ **Familles `(X_ι)` croissantes/décroissantes de parties** — Résumé §6 item 12
    FAIT (`familles/ii_4_reunion_intersection_familles/ensembles_famille_monotone.py` :
    2 défs via valeur_famille + inclus, + 2 th de dépliage CLOS).
-5. **Eq(E,F) ⇒ Eq(𝔓E,𝔓F)** — Résumé §7 item 1. ⏳ EN COURS : recon (2 agents) confirme
-   ABSENT ; témoin H=graphe_terme(𝔓E, f⟨Y⟩, 'Y') ; FONDATION CLOSE (pilier 1 fonctionnel,
-   pilier 2 dom=𝔓E, valeur H(Y)=f⟨Y⟩ — image(·,·) est ATOMIQUE donc pas de capture-τ).
-   PILIER 3 amorcé : `image_reciproque_image_inclus_si_injective` (f⁻¹⟨f⟨X⟩⟩⊂X sous
-   est_fonctionnel(f⁻¹)=f injective) CLOS dans `ii_3_2_reciproque/ensembles_image_reciproque_props.py`
-   — miroir de (19) sur f⁻¹ ; combiné à (18) donne f⁻¹⟨f⟨X⟩⟩=X ⇒ f⟨Y⟩=f⟨Y'⟩⇒Y=Y'.
-   Piège : couple_reciproque appelle couple_egal_implique_composantes qui lie « w » →
-   ne PAS nommer un témoin « w » (renommé « m »).
-   PILIER 3 CLOS : `H_injective` (⊢ H_app(E,f) ⇒ f⁻¹func ⇒ injective_dans(H,𝔓E)) via
-   f⁻¹(f(Y))=Y + congruence. Piliers 1,2,3 + valeur FAITS. CŒURS piliers 3+4 clos
-   (f⁻¹∘f=Id, f∘f⁻¹=Id sur 𝔓) + f⁻¹⟨Z⟩⊂E — tous dans ensembles_image_reciproque_props.py.
-   RESTE : ASSEMBLAGE pilier 4 image(H,𝔓E)=𝔓F (témoin Y=f⁻¹⟨Z⟩) + est_bijection_de + ∃-intro.
-   ⚠️ LEÇON PILIER 4 (assemblage repoussé) — NŒUD DE LIANTS : l'élément-image est FORCÉ à
-   « z » par extensionnalite_appliquee/inclus (A1 lie « z »), mais « z » collisionne avec
-   (a) les liants internes des lemmes appelés, et (b) le liant auto-frais de inclus(f⁻¹⟨z⟩,E)
-   puisque z est LIBRE dans f⁻¹⟨z⟩. Correctifs à appliquer au prochain tick : (1) beaucoup de
-   lemmes n'acceptent QUE des NOMS, pas des termes → wrapper term-version par
-   generalisation+instanciation (fait `_mgt` pour membre_graphe_terme ; idem image_croissante
-   [passer des noms], image_reciproque_inclus_domaine [SET=nom≠« z », puis généraliser]) ;
-   (2) nommer l'élément-image autrement que « z » et construire l'inclus final avec un liant
-   EXPLICITE cohérent (ne pas dépendre de l'auto-fraîcheur). Bâtir d'abord tous les
-   term-wrappers, PUIS assembler. Piège récurrent : couple_reciproque/couple_egal_implique_
-   composantes lient « w ».
+5. ✅ **Eq(E,F) ⇒ Eq(𝔓E,𝔓F)** — Résumé §7 item 1 — **FAIT / THÉORÈME CLOS**
+   (`parties_equipotentes/ensembles_parties_equipotentes.py`, `equipotent_parties` :
+   ⊢ Eq(E,G)⇒Eq(𝔓E,𝔓G), 0 hyp, énoncé==Bourbaki, theorie==22 ; 7 tests verts, commits
+   5dd3580 pilier 4 + f8073cf assemblage). Témoin H=graphe_terme(𝔓E, f⟨Y⟩,'Y'). Piliers :
+   1 fonctionnel / 2 dom=𝔓E (inconditionnels, image(·,·) ATOMIQUE ⇒ pas de capture-τ) ;
+   3 injective via f⁻¹∘f=Id sur les parties (`image_reciproque_image_egal_si_injective`)+A1 ;
+   4 image via f∘f⁻¹=Id (`image_image_reciproque_egal_si_surjective`)+A1, témoin Y=f⁻¹⟨Z⟩.
+   ⭐ **LEÇON PILIER 4 — comment DÉNOUER le nœud de liants « z » (technique réutilisable).**
+   Problème : dans une double inclusion via A1 (`extensionnalite_appliquee`), l'élément est
+   VERROUILLÉ au liant de A1 = « z » (A1 encode ⊂ avec `inclus(...,z='z')`). Mais « z »
+   collisionne avec (a) le liant interne « z » de `est_fonctionnel` (3ᵉ variable), et (b) le
+   liant par défaut « z » de `inclus` dans les antécédents Z⊂f⟨E⟩ des lemmes de surjectivité,
+   et (c) l'auto-fraîcheur de inclus(f⁻¹⟨z⟩,E) car z est LIBRE dans f⁻¹⟨z⟩. La substitution
+   du noyau, PRUDENTE, α-renomme alors des liants en « @0 » qui ne s'alignent plus entre
+   sous-preuves bâties indépendamment (MP « mineure ≠ antécédent »).
+   **FIX qui marche** : mener TOUT le raisonnement-témoin de la direction ⊃ avec un élément
+   NEUTRE « p » (jamais « z ») — zéro collision partout — pour prouver `⊢ p∈PF ⇒ p∈im(H,𝔓E)`,
+   PUIS renommer le liant en « z » seulement au tout dernier `generalisation` via
+   `generalisation("z", instancie(generalisation("p", corps_p), var("z")))`. Marche parce
+   que les DEUX membres (p∈PF, p∈im) sont ATOMIQUES → aucun liant interne à renommer, donc
+   ∀z(...) reconstruit == `inclus(PF, imgHPE, 'z')` exactement (ce qu'attend A1). La direction
+   ⊂ (membres atomiques aussi) tolère « z » directement.
+   ⭐ **Term-wrappers indispensables** (lemmes n'acceptant que des NOMS → généraliser+instancier
+   un SET-nom ≠ élément) : `_mgt` (membre_graphe_terme), `_recip_inclus_E` (f⁻¹⟨Z⟩⊂E),
+   `_feq_surj` (f∘f⁻¹=Id) — le SET interne est « Zs » (≠ « z »/« p »), d'où pas de capture.
+   ⭐ **Assemblage final (bridges RÉUTILISÉS, tous déjà en dépôt — vérifier-en-code paie)** :
+   `couple_valeur_dans_graphe` (H_app depuis dom f=E) ; `reciproque_fonctionnelle`
+   ({func f,dom f=E,inj(f,E)}⊢func(f⁻¹), = Prop.7) ; `bijection_de_conjoints` (assembleur pur
+   des 4 conjoints en est_bijection_de) ; S5 pour ∃-intro + `existe_elimination` pour extraire
+   f. **Hygiène de liants de `equipotent`** : Eq(X,Y)=(∃F)bij(F,X,Y) lie « F » → le codomaine
+   ne doit PAS s'appeler « F » (sinon capturé) ⇒ 2ᵉ ensemble nommé « G » ; et le témoin de
+   Eq(E,G) est α-renommé « F »→« f » (`alpha_existe`) pour que H=graphe_H(f,E) soit sans « F ».
+   Piège persistant : couple_reciproque/couple_egal_implique_composantes lient « w » (ne pas
+   nommer un témoin « w »).
 6. **⋂_{ι∈∅}X_ι = E** — Résumé §4 (40) — DÉLICAT : l'axiome AXIOME_INTER_FAM omet x∈E (écart connu).
 DÉJÀ FAITS (audit disait manquant) : assoc (E×F)×G≅E×(F×G) `eq_produit_associatif` ;
 invariance produit `eq_produit_invariant` ; bon ordre cardinaux `cardinaux_bien_ordonnes_close` ;
@@ -111,3 +122,4 @@ itérées f^n (dépend récursion entiers).
 | 2026-07-01 | **(25) pr₁⟨X×Y⟩=X (Y≠∅) + dual** | absent → **FORMALISÉ CLOS** | `ensembles_projection_produit.py` + test (piège : couple_dans_produit n'accepte que des NOMS → couple_dans_produit_ssi qui prend des termes) |
 | 2026-07-01 | **Application majorée/minorée/bornée + bornes** | absent → **FORMALISÉ CLOS** | `ensembles_application_bornee.py` (5 défs + 4 th) ; ordre_treillis atteint 10 entrées |
 | 2026-07-01 | **Familles croissantes/décroissantes de parties** | absent → **FORMALISÉ CLOS** | `ensembles_famille_monotone.py` (2 défs + 2 th) ; piège : pourtout a tag « non » (¬∃¬), pas « pourtout » |
+| 2026-07-01 | **Eq(E,F)⇒Eq(𝔓E,𝔓F)** (Résumé §7.1) | absent → **THÉORÈME CLOS** | `equipotent_parties` (commits 5dd3580+f8073cf) ; nœud de liants « z » du pilier 4 levé par élément NEUTRE « p » + renommage-au-generalisation-final ; assemblage via couple_valeur_dans_graphe + reciproque_fonctionnelle + bijection_de_conjoints + S5 ; 7 tests verts |
