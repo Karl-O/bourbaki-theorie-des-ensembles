@@ -1,4 +1,4 @@
-"""Résumé §7 item 1 — Eq(E,F) ⇒ Eq(𝔓(E), 𝔓(F))  (EN CONSTRUCTION).
+"""Résumé §7 item 1 — Eq(E,F) ⇒ Eq(𝔓(E), 𝔓(F))  (THÉORÈME CLOS).
 
 « Si E et F sont équipotents, 𝔓(E) et 𝔓(F) sont équipotents » (E.R.32 item 1).
 Stratégie : d'une bijection f : E → F, l'application A ↦ f⟨A⟩ est une bijection de
@@ -8,18 +8,20 @@ et on prouve est_bijection_de(H, 𝔓E, 𝔓F) par les quatre piliers (fonctionn
 injectif, image), puis Eq(𝔓E,𝔓F) par ∃-introduction du témoin H et élimination du
 témoin f de Eq(E,F).
 
-ÉTAT (2026-07-01) : FONDATION posée et CERTIFIÉE — le témoin H, sa fonctionnalité
-(pilier 1), son domaine 𝔓(E) (pilier 2) et sa valeur H(Y)=f⟨Y⟩ sont clos (image(·,·)
-est un terme ATOMIQUE, donc AUCUNE capture-τ dans graphe_terme, contrairement à valeur).
-RESTENT à assembler : pilier 3 (injectivité : f injective ⇒ f⟨Y⟩=f⟨Y'⟩ ⇒ Y=Y', par
-image-injective + A1) et pilier 4 (image : f surjective ⇒ ∀Z⊂F ∃Y⊂E f⟨Y⟩=Z, par
-sélection S8 Y={x∈E | f(x)∈Z} + double inclusion) — cœur d'algèbre d'image (liants
-AXIOME_IMAGE « x »).  Rien postulé ; theorie_ensembles INCHANGÉE (22 axiomes).
+ÉTAT (2026-07-01) : COMPLET — `equipotent_parties` CLOS (0 hyp, énoncé == Bourbaki,
+theorie_ensembles == 22).  Les quatre piliers sont certifiés :
+  • H_fonctionnel / H_domaine : inconditionnels (image(·,·) ATOMIQUE ⇒ aucune capture-τ) ;
+  • H_injective : f⁻¹∘f = Id sur les parties (image-réciproque-image) + A1 ;
+  • H_image : f∘f⁻¹ = Id sur les parties (surjectivité) + A1, témoin Y = f⁻¹⟨Z⟩.
+NŒUD DE LIANTS « z » du pilier 4 levé en menant la direction ⊃ avec un élément NEUTRE
+« p » (zéro collision), le liant n'étant renommé « z » (imposé par A1) qu'au
+generalisation final.  Assemblage : couple_valeur_dans_graphe (H_app) +
+reciproque_fonctionnelle (f⁻¹ fonctionnel) + bijection_de_conjoints + S5.  Rien postulé.
 """
 from __future__ import annotations
 
 from bourbaki.logique.i_1_termes_relations.formule import (
-    Terme, var, egal, et, impl, appartient, pourtout, inclus)
+    Terme, var, egal, et, impl, appartient, pourtout, inclus, existe)
 from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
@@ -242,5 +244,74 @@ def cible_H_image(f="f", e="E", f_set="F"):
                egal(E.image(graphe_H(vf, ve), E.parties(ve)), E.parties(vF)))))
 
 
+# @livre Ch.R §7 Prop.1 | E R.32 item 1 | PDF p.335
+def equipotent_parties(e="E", g_set="G"):
+    """⊢ Eq(E, G) ⇒ Eq(𝔓E, 𝔓G).   (Résumé §7, Prop. 1 — ASSEMBLAGE FINAL.)
+
+    D'une bijection f : E→G on fabrique H : A ↦ f⟨A⟩, bijection 𝔓E→𝔓G, attestée
+    par les quatre piliers (H_fonctionnel, H_domaine, H_injective, H_image) — les
+    deux derniers déchargés par les faits extraits de est_bijection_de(f,E,G) :
+      • H_app(E,f) ← couple_valeur_dans_graphe (dom f=E) ;
+      • est_fonctionnel(f⁻¹) ← reciproque_fonctionnelle (func f, dom f=E, inj(f,E)).
+    Puis Eq(𝔓E,𝔓G) par S5 (témoin H), et décharge du témoin f par existe_elim.
+
+    Le 2ᵉ ensemble est nommé « G » (non « F ») : Eq(X,Y)=(∃F)… lie « F », donc un
+    « F » dans le codomaine serait capturé.  On α-renomme aussi le témoin de
+    Eq(E,G) en « f » (≠ liant « F ») pour que H = graphe_H(f,E) soit sans « F »."""
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import (
+        est_bijection_de, equipotent)
+    from bourbaki.cardinaux.arithmetique.iii_3_5_exposant.prop9_exp_somme.ensembles_prop9_cloture import (
+        bijection_de_conjoints)
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.equipotence.ensembles_bijection import (
+        reciproque_fonctionnelle)
+    from bourbaki.ensembles.fonctions.ii_3_4_fonctions_valeur.ensembles_valeur_codomaine import (
+        couple_valeur_dans_graphe)
+    ve, vG = _t(e), _t(g_set)
+    PE, PG, vf = E.parties(ve), E.parties(vG), var("f")
+    H = graphe_H(vf, ve)
+
+    # Eq(E,G) = (∃F)bij(F,E,G) ; α-renomme F→f pour un témoin sans « F »
+    heq = N.assume(equipotent(ve, vG))
+    ren = alpha_existe("F", "f", est_bijection_de(var("F"), ve, vG))
+    heq_f = N.modus_ponens(heq, equivalence_avant(ren))                     # (∃f)bij(f,E,G)
+
+    hbij = N.assume(est_bijection_de(vf, ve, vG))
+    fd, bijv = conjonction_elim_gauche(hbij), conjonction_elim_droite(hbij)
+    c1 = conjonction_elim_gauche(fd)                                        # est_fonctionnel(f)
+    c2 = conjonction_elim_droite(fd)                                        # dom f = E
+    c3 = conjonction_elim_gauche(bijv)                                      # injective_dans(f,E)
+    c4 = conjonction_elim_droite(bijv)                                      # image(f,E) = G
+
+    # H_app(E,f)  ←  dom f = E
+    vx = var("x")
+    happ_dom = N.generalisation("x", N.loi_deduction(appartient(vx, ve),
+        couple_valeur_dans_graphe(vf, ve, vx)))                            # {dom f=E} ⊢ H_app
+    happ = N.modus_ponens(c2, N.loi_deduction(egal(E.dom(vf), ve), happ_dom))
+
+    # est_fonctionnel(f⁻¹)  ←  {func f, dom f=E, inj(f,E)}
+    rf = N.loi_deduction(E.est_fonctionnel(vf), N.loi_deduction(egal(E.dom(vf), ve),
+        N.loi_deduction(E.injective_dans(vf, ve), reciproque_fonctionnelle(vf, ve))))
+    recfunc = N.modus_ponens(c3, N.modus_ponens(c2, N.modus_ponens(c1, rf)))
+
+    # quatre piliers, tous sous Γ = {bij(f,E,G)}
+    inj_H = N.modus_ponens(recfunc, N.modus_ponens(happ, H_injective(vf, ve)))
+    img_H = N.modus_ponens(c4, N.modus_ponens(c2, N.modus_ponens(c1, H_image(vf, ve, vG))))
+    bijH = bijection_de_conjoints(H_fonctionnel(vf, ve), H_domaine(vf, ve), inj_H, img_H)
+
+    # ∃-intro (témoin H) puis élimination du témoin f
+    eqP = N.modus_ponens(bijH, N.s5(est_bijection_de(var("F"), PE, PG), H, "F"))
+    concl = N.modus_ponens(heq_f,
+        existe_elimination(N.loi_deduction(est_bijection_de(vf, ve, vG), eqP), "f"))
+    return N.loi_deduction(equipotent(ve, vG), concl)
+
+
+def cible_equipotent_parties(e="E", g_set="G"):
+    """Conclusion attendue : Eq(E,G) ⇒ Eq(𝔓E, 𝔓G)."""
+    from bourbaki.cardinaux.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import equipotent
+    ve, vG = _t(e), _t(g_set)
+    return impl(equipotent(ve, vG), equipotent(E.parties(ve), E.parties(vG)))
+
+
 __all__ = ["graphe_H", "H_fonctionnel", "H_domaine", "H_valeur", "cible_H_valeur",
-           "H_injective", "cible_H_injective", "H_image", "cible_H_image"]
+           "H_injective", "cible_H_injective", "H_image", "cible_H_image",
+           "equipotent_parties", "cible_equipotent_parties"]

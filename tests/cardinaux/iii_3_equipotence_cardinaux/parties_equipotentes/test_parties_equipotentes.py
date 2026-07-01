@@ -42,3 +42,11 @@ def test_pilier4_H_image():
     assert th.est_clos and len(th.hypotheses) == 0
     assert th.conclusion == M.cible_H_image()
     assert len(E.theorie_ensembles().axiomes) == 22
+
+
+def test_equipotent_parties():
+    """THÉORÈME (Résumé §7.1) : ⊢ Eq(E,G) ⇒ Eq(𝔓E, 𝔓G)  (assemblage des 4 piliers)."""
+    th = M.equipotent_parties()
+    assert th.est_clos and len(th.hypotheses) == 0
+    assert th.conclusion == M.cible_equipotent_parties()
+    assert len(E.theorie_ensembles().axiomes) == 22
