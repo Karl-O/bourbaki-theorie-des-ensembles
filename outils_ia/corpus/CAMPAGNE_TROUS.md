@@ -45,7 +45,9 @@ FAIT ✅ : **Triplet (a,b,c)=((a,b),c) + 3 projections** (`ii_2_couples_produit/
 `triplet_projection_1/2/3` CLOS). ⚠️ ii_2_couples_produit atteint 10 entrées → prochaine
 addition II.2 = créer un sous-dossier.
 Restantes tractables (present=NON confirmé en code) :
-1. **(24) pr₁⁻¹(X)=X×F** et **(25) si Y≠∅, pr₁(X×Y)=X** — Résumé §3 items 3e-f.
+1. **(24) pr₁⁻¹(X)=X×F** — Résumé §3 item 3e (image réciproque de projection).
+   ✅ (25) `pr₁⟨X×Y⟩=X` (Y≠∅) + dual `pr₂⟨X×Y⟩=Y` (X≠∅) FAIT
+   (`ii_3_correspondances/ensembles_projection_produit.py`, `pr1_produit`/`pr2_produit` CLOS).
 2. **(17) f⁻¹(Y)=f⁻¹(Y∩f(E))** — Résumé §2 item 7.
 3. **Application majorée/minorée/bornée + borne sup d'une application** — Résumé §6 item 7
    (majorant/borne_superieure existent sur ENSEMBLES ; étendre aux applications via image f(A)).
@@ -78,3 +80,4 @@ itérées f^n (dépend récursion entiers).
 | 2026-07-01 | Symétrie canonique E×F≅F×E | déjà CLOS (2e faux positif) | aucune ; loggé |
 | 2026-07-01 | Passe batch 7 agents (present/absent EN CODE) | liste absente définitive | queue mise à jour |
 | 2026-07-01 | **Triplet + 3 projections** | absent → **FORMALISÉ CLOS** | `ensembles_triplet.py` + test (51 verts) |
+| 2026-07-01 | **(25) pr₁⟨X×Y⟩=X (Y≠∅) + dual** | absent → **FORMALISÉ CLOS** | `ensembles_projection_produit.py` + test (piège : couple_dans_produit n'accepte que des NOMS → couple_dans_produit_ssi qui prend des termes) |
