@@ -273,6 +273,59 @@ def image_reciproque_image_egal_si_injective(f="f", x="X"):
     return N.loi_deduction(hp_app, N.loi_deduction(E.est_fonctionnel(recipf), eq))
 
 
+# ════════════════════════════════════════════════════════════════════════════
+#  RÉCIPROQUE de (19) sous SURJECTIVITÉ : Z ⊂ f⟨f⁻¹⟨Z⟩⟩   (⇒ f⟨f⁻¹⟨Z⟩⟩=Z).
+# ════════════════════════════════════════════════════════════════════════════
+def cible_image_image_reciproque_contient_si_surjective(f="f", z="Z", e="E"):
+    from bourbaki.logique.i_1_termes_relations.formule import inclus
+    vf, vz_set, ve = _t(f), _t(z), _t(e)
+    return impl(inclus(vz_set, E.image(vf, ve)),
+                inclus(vz_set, E.image(vf, E.image(E.reciproque(vf), vz_set))))
+
+
+# @livre Ch.R §2.10 Prop.- | E.R.9 L.32-32 | PDF p.312
+def image_image_reciproque_contient_si_surjective(f="f", z="Z", e="E"):
+    """⊢ Z ⊂ f⟨E⟩ ⇒ Z ⊂ f⟨f⁻¹⟨Z⟩⟩.   (réciproque de (19) sous f surjective sur Z.)
+
+    z∈Z⊂f⟨E⟩ ⇒ (∃n)(n∈E et (n,z)∈f) ; alors (z,n)∈f⁻¹ [couple_reciproque] et z∈Z donnent
+    n∈f⁻¹⟨Z⟩ ; avec (n,z)∈f, z∈f⟨f⁻¹⟨Z⟩⟩.  Miroir de la réciproque de (18) sur l'image
+    directe.  Combinée à (19), donne f⟨f⁻¹⟨Z⟩⟩ = Z (cœur de la surjectivité de A↦f⟨A⟩)."""
+    from bourbaki.logique.i_1_termes_relations.formule import inclus
+    vf, vZ, ve = _t(f), _t(z), _t(e)
+    vz, vn = var("z"), var("n")
+    recipZ = E.image(E.reciproque(vf), vZ)               # f⁻¹⟨Z⟩
+    goal = E.image(vf, recipZ)                            # f⟨f⁻¹⟨Z⟩⟩
+    imgE = E.image(vf, ve)                               # f⟨E⟩
+
+    h_zsub = N.assume(inclus(vZ, imgE))                  # Z ⊂ f⟨E⟩
+    hz = N.assume(appartient(vz, vZ))                    # z ∈ Z
+    z_in_imgE = N.modus_ponens(hz, instancie(h_zsub, vz))            # z ∈ f⟨E⟩
+
+    mem_imgE = membre_image(vf, ve, vz)                  # z∈f⟨E⟩ ⇔ (∃x)(x∈E et (x,z)∈f)
+    body_n = lambda u: et(appartient(u, ve), appartient(E.couple(u, vz), vf))
+    ex_n0 = N.modus_ponens(z_in_imgE, equivalence_avant(mem_imgE))
+    ex_n = N.modus_ponens(ex_n0, equivalence_avant(alpha_existe("x", "n", body_n(var("x")))))
+
+    hbn = N.assume(body_n(vn))
+    nz_f = conjonction_elim_droite(hbn)                  # (n,z) ∈ f
+    zn_recip = N.modus_ponens(nz_f, equivalence_arriere(couple_reciproque(vf, vz, vn)))  # (z,n)∈f⁻¹
+
+    mem_recip = membre_image_reciproque(vf, vZ, vn)      # n∈f⁻¹⟨Z⟩ ⇔ (∃x)(x∈Z et (x,n)∈f⁻¹)
+    body_wz = lambda u: et(appartient(u, vZ), appartient(E.couple(u, vn), E.reciproque(vf)))
+    ex_wz = N.modus_ponens(conjonction_intro(hz, zn_recip), N.s5(body_wz(var("x")), vz, "x"))
+    n_in_recipZ = N.modus_ponens(ex_wz, equivalence_arriere(mem_recip))   # n ∈ f⁻¹⟨Z⟩
+
+    mem_img2 = membre_image(vf, recipZ, vz)             # z∈f⟨f⁻¹⟨Z⟩⟩ ⇔ (∃x)(x∈f⁻¹⟨Z⟩ et (x,z)∈f)
+    body_img2 = lambda u: et(appartient(u, recipZ), appartient(E.couple(u, vz), vf))
+    ex_img2 = N.modus_ponens(conjonction_intro(n_in_recipZ, nz_f), N.s5(body_img2(var("x")), vn, "x"))
+    z_in_goal = N.modus_ponens(ex_img2, equivalence_arriere(mem_img2))    # z ∈ f⟨f⁻¹⟨Z⟩⟩
+
+    imp_n = existe_elimination(N.loi_deduction(body_n(vn), z_in_goal), "n")
+    z_final = N.modus_ponens(ex_n, imp_n)
+    incl = N.generalisation("z", N.loi_deduction(appartient(vz, vZ), z_final))
+    return N.loi_deduction(inclus(vZ, imgE), incl)
+
+
 __all__ = [
     "inclus_image_reciproque_image", "cible_inclus_image_reciproque_image",
     "image_image_reciproque_inclus", "cible_image_image_reciproque_inclus",
@@ -280,4 +333,6 @@ __all__ = [
     "cible_image_reciproque_image_inclus_si_injective",
     "image_reciproque_image_egal_si_injective",
     "cible_image_reciproque_image_egal_si_injective",
+    "image_image_reciproque_contient_si_surjective",
+    "cible_image_image_reciproque_contient_si_surjective",
 ]
