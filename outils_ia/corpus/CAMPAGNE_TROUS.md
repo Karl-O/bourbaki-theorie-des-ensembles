@@ -67,8 +67,10 @@ Restantes tractables (present=NON confirmé en code) :
    — miroir de (19) sur f⁻¹ ; combiné à (18) donne f⁻¹⟨f⟨X⟩⟩=X ⇒ f⟨Y⟩=f⟨Y'⟩⇒Y=Y'.
    Piège : couple_reciproque appelle couple_egal_implique_composantes qui lie « w » →
    ne PAS nommer un témoin « w » (renommé « m »).
-   RESTE : assembler pilier 3 (f⁻¹(f(X))=X + congruence) + pilier 4 (f surj ⇒ ∀Z⊂F ∃Y
-   f⟨Y⟩=Z via sélection S8) + assemblage est_bijection_de + ∃-intro.
+   PILIER 3 CLOS : `H_injective` (⊢ H_app(E,f) ⇒ f⁻¹func ⇒ injective_dans(H,𝔓E)) via
+   f⁻¹(f(Y))=Y + congruence. Piliers 1,2,3 + valeur FAITS.
+   RESTE : pilier 4 (f surj ⇒ image(H,𝔓E)=𝔓F, via sélection S8 Y={x∈E|f(x)∈Z}) +
+   assemblage est_bijection_de + ∃-intro + pont injective_dans⟺f⁻¹fonctionnel.
 6. **⋂_{ι∈∅}X_ι = E** — Résumé §4 (40) — DÉLICAT : l'axiome AXIOME_INTER_FAM omet x∈E (écart connu).
 DÉJÀ FAITS (audit disait manquant) : assoc (E×F)×G≅E×(F×G) `eq_produit_associatif` ;
 invariance produit `eq_produit_invariant` ; bon ordre cardinaux `cardinaux_bien_ordonnes_close` ;

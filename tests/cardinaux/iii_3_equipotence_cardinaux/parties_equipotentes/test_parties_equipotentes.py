@@ -26,3 +26,11 @@ def test_H_valeur():
     assert len(th.hypotheses) == 1           # Y0 ∈ 𝔓(E)
     assert th.conclusion == M.cible_H_valeur()
     assert len(E.theorie_ensembles().axiomes) == 22
+
+
+def test_pilier3_H_injective():
+    """⊢ H_app(E,f) ⇒ est_fonctionnel(f⁻¹) ⇒ injective_dans(H, 𝔓E)."""
+    th = M.H_injective()
+    assert th.est_clos and len(th.hypotheses) == 0
+    assert th.conclusion == M.cible_H_injective()
+    assert len(E.theorie_ensembles().axiomes) == 22

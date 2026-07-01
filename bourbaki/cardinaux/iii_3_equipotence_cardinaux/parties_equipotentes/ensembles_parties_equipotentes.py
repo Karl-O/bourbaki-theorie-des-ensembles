@@ -18,16 +18,50 @@ AXIOME_IMAGE « x »).  Rien postulé ; theorie_ensembles INCHANGÉE (22 axiomes
 """
 from __future__ import annotations
 
-from bourbaki.logique.i_1_termes_relations.formule import Terme, var, egal
+from bourbaki.logique.i_1_termes_relations.formule import (
+    Terme, var, egal, et, impl, appartient, pourtout)
+from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
+    conjonction_elim_gauche, conjonction_elim_droite, instancie, equivalence_avant)
+from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import (
+    symetrie, composer_egalites, congruence_terme)
 from bourbaki.ensembles.fonctions.ii_3_6_fonction_terme.ensembles_fonction_terme import (
     graphe_terme_fonctionnel)
 from bourbaki.cardinaux.iii_3_equipotence_cardinaux.cantor.ensembles_cantor import (
     graphe_terme_valeur, graphe_terme_domaine)
+from bourbaki.cardinaux.arithmetique.iii_3_5_exposant.prop12_powerset.ensembles_powerset_deux import (
+    membre_parties_t)
+from bourbaki.ensembles.fonctions.ii_3_2_reciproque.ensembles_image_reciproque_props import (
+    image_reciproque_image_egal_si_injective)
 
 
 def _t(v):
     return v if isinstance(v, Terme) else var(v)
+
+
+def _hyp_app(vf, vX):
+    """H_app(X,f) := (∀x)(x∈X ⇒ (x,f(x))∈f)   (f applicative sur X)."""
+    vx = var("x")
+    return pourtout("x", impl(appartient(vx, vX),
+                              appartient(E.couple(vx, E.valeur(vf, vx)), vf)))
+
+
+def _derive_happ(vf, vsub, hAppE_thm, sub_incl_E):
+    """{H_app(E,f), sub⊂E} ⊢ H_app(sub,f).   (restriction de l'applicativité.)"""
+    vx = var("x")
+    hx = N.assume(appartient(vx, vsub))
+    x_E = N.modus_ponens(hx, instancie(sub_incl_E, vx))          # x∈E  (sub⊂E)
+    xfx_f = N.modus_ponens(x_E, instancie(hAppE_thm, vx))        # (x,f(x))∈f  (H_app(E))
+    return N.generalisation("x", N.loi_deduction(appartient(vx, vsub), xfx_f))
+
+
+def _eq_recip_image(vf, vsub, ve, hAppE_thm, hInjF_thm, sub_PE):
+    """{H_app(E,f), f⁻¹ fonctionnel, sub∈𝔓E} ⊢ f⁻¹⟨f⟨sub⟩⟩ = sub."""
+    sub_incl_E = N.modus_ponens(sub_PE, equivalence_avant(membre_parties_t(vsub, ve)))  # sub⊂E
+    happ_sub = _derive_happ(vf, vsub, hAppE_thm, sub_incl_E)     # H_app(sub,f)
+    lemma = image_reciproque_image_egal_si_injective(vf, vsub)   # H_app⇒f⁻¹func⇒ f⁻¹⟨f⟨sub⟩⟩=sub
+    return N.modus_ponens(hInjF_thm, N.modus_ponens(happ_sub, lemma))
 
 
 def graphe_H(f="f", e="E"):
@@ -60,4 +94,53 @@ def cible_H_valeur(f="f", e="E", pt="Y0"):
     return egal(E.valeur(graphe_H(vf, ve), vpt), E.image(vf, vpt))
 
 
-__all__ = ["graphe_H", "H_fonctionnel", "H_domaine", "H_valeur", "cible_H_valeur"]
+# @livre Ch.R §7 Prop.1 | E R.32 item 1 (pilier 3 : H injective) | PDF p.335
+def H_injective(f="f", e="E"):
+    """⊢ H_app(E,f) ⇒ est_fonctionnel(f⁻¹) ⇒ injective_dans(H, 𝔓(E)).   (pilier 3.)
+
+    H(Y)=f⟨Y⟩ ; sous H(Y)=H(Y') : f⟨Y⟩=f⟨Y'⟩ ⇒ f⁻¹⟨f⟨Y⟩⟩=f⁻¹⟨f⟨Y'⟩⟩ [congruence] ;
+    or f⁻¹⟨f⟨Y⟩⟩=Y et f⁻¹⟨f⟨Y'⟩⟩=Y' [f injective, f⁻¹∘f=Id sur 𝔓], d'où Y=Y'."""
+    vf, ve = _t(f), _t(e)
+    PE, recipf, H = E.parties(ve), E.reciproque(vf), graphe_H(vf, ve)
+    vu, vup = var("u"), var("up")
+
+    hAppE = N.assume(_hyp_app(vf, ve))                    # f applicative sur E
+    hInjF = N.assume(E.est_fonctionnel(recipf))          # f injective (f⁻¹ fonctionnel)
+
+    ant = et(et(appartient(vu, PE), appartient(vup, PE)),
+             egal(E.valeur(H, vu), E.valeur(H, vup)))
+    hant = N.assume(ant)
+    u_PE = conjonction_elim_gauche(conjonction_elim_gauche(hant))     # u∈𝔓E
+    up_PE = conjonction_elim_droite(conjonction_elim_gauche(hant))    # u'∈𝔓E
+    Hu_Hup = conjonction_elim_droite(hant)                            # H(u)=H(u')
+
+    Hu = N.modus_ponens(u_PE, N.loi_deduction(appartient(vu, PE), H_valeur(vf, ve, "u")))   # H(u)=f⟨u⟩
+    Hup = N.modus_ponens(up_PE, N.loi_deduction(appartient(vup, PE), H_valeur(vf, ve, "up")))  # H(u')=f⟨u'⟩
+    fu, fup = E.image(vf, vu), E.image(vf, vup)
+    # f⟨u⟩ = H(u) = H(u') = f⟨u'⟩
+    fu_fup = composer_egalites(composer_egalites(
+        N.modus_ponens(Hu, symetrie(E.valeur(H, vu), fu)), Hu_Hup), Hup)
+    # congruence f⁻¹⟨·⟩ : f⁻¹⟨f⟨u⟩⟩ = f⁻¹⟨f⟨u'⟩⟩
+    cong = N.modus_ponens(fu_fup, congruence_terme(fu, fup, E.image(recipf, var("w"))))
+    equ = _eq_recip_image(vf, vu, ve, hAppE, hInjF, u_PE)             # f⁻¹⟨f⟨u⟩⟩=u
+    equp = _eq_recip_image(vf, vup, ve, hAppE, hInjF, up_PE)          # f⁻¹⟨f⟨u'⟩⟩=u'
+    recFu = E.image(recipf, fu)
+    # u = f⁻¹⟨f⟨u⟩⟩ = f⁻¹⟨f⟨u'⟩⟩ = u'
+    u_up = composer_egalites(composer_egalites(
+        N.modus_ponens(equ, symetrie(recFu, vu)), cong), equp)
+
+    gen = N.generalisation("u", N.generalisation("up", N.loi_deduction(ant, u_up)))
+    return N.loi_deduction(_hyp_app(vf, ve),
+                           N.loi_deduction(E.est_fonctionnel(recipf), gen))
+
+
+def cible_H_injective(f="f", e="E"):
+    """Conclusion attendue : H_app(E,f) ⇒ est_fonctionnel(f⁻¹) ⇒ injective_dans(H, 𝔓E)."""
+    vf, ve = _t(f), _t(e)
+    return impl(_hyp_app(vf, ve),
+                impl(E.est_fonctionnel(E.reciproque(vf)),
+                     E.injective_dans(graphe_H(vf, ve), E.parties(ve))))
+
+
+__all__ = ["graphe_H", "H_fonctionnel", "H_domaine", "H_valeur", "cible_H_valeur",
+           "H_injective", "cible_H_injective"]
