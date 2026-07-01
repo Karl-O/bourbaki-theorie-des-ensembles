@@ -26,7 +26,7 @@ theorie_ensembles() inchangée (22 axiomes) : aucun axiome fabriqué, que des N.
 from __future__ import annotations
 
 from bourbaki.logique.i_1_termes_relations.formule import (
-    var, et, egal, appartient, impl, pourtout, Terme)
+    var, et, egal, appartient, impl, pourtout, inclus, Terme)
 from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
@@ -326,6 +326,36 @@ def image_image_reciproque_contient_si_surjective(f="f", z="Z", e="E"):
     return N.loi_deduction(inclus(vZ, imgE), incl)
 
 
+# ════════════════════════════════════════════════════════════════════════════
+#  ÉGALITÉ f⟨f⁻¹⟨Z⟩⟩ = Z   sous  { est_fonctionnel(f),  Z ⊂ f⟨E⟩ }.
+# ════════════════════════════════════════════════════════════════════════════
+def cible_image_image_reciproque_egal_si_surjective(f="f", z="Z", e="E"):
+    vf, vZ, ve = _t(f), _t(z), _t(e)
+    return impl(E.est_fonctionnel(vf),
+                impl(inclus(vZ, E.image(vf, ve)),
+                     egal(E.image(vf, E.image(E.reciproque(vf), vZ)), vZ)))
+
+
+# @livre Ch.R §2.10 Prop.- | E.R.9 L.32-32 | PDF p.312
+def image_image_reciproque_egal_si_surjective(f="f", z="Z", e="E"):
+    """⊢ est_fonctionnel(f) ⇒ Z ⊂ f⟨E⟩ ⇒ f⟨f⁻¹⟨Z⟩⟩ = Z.
+
+    Double inclusion (A1) : f⟨f⁻¹⟨Z⟩⟩ ⊂ Z [(19), sous f fonctionnelle] et
+    Z ⊂ f⟨f⁻¹⟨Z⟩⟩ [réciproque sous f surjective sur Z].  « f surjective ⇒ f∘f⁻¹ = Id
+    sur les parties » : le témoin Y = f⁻¹⟨Z⟩ (avec f⟨Y⟩=Z) résout la surjectivité de
+    A ↦ f⟨A⟩ (Eq(𝔓E,𝔓F))."""
+    vf, vZ, ve = _t(f), _t(z), _t(e)
+    lhs = E.image(vf, E.image(E.reciproque(vf), vZ))     # f⟨f⁻¹⟨Z⟩⟩
+    incl_sub = N.modus_ponens(N.assume(E.est_fonctionnel(vf)),
+                              image_image_reciproque_inclus(vf, vZ))       # f⟨f⁻¹⟨Z⟩⟩ ⊂ Z
+    incl_sup = N.modus_ponens(N.assume(inclus(vZ, E.image(vf, ve))),
+                              image_image_reciproque_contient_si_surjective(vf, vZ, ve))  # Z ⊂ f⟨f⁻¹⟨Z⟩⟩
+    eq = N.modus_ponens(conjonction_intro(incl_sub, incl_sup),
+                        extensionnalite_appliquee(lhs, vZ))                # f⟨f⁻¹⟨Z⟩⟩ = Z
+    return N.loi_deduction(E.est_fonctionnel(vf),
+                           N.loi_deduction(inclus(vZ, E.image(vf, ve)), eq))
+
+
 __all__ = [
     "inclus_image_reciproque_image", "cible_inclus_image_reciproque_image",
     "image_image_reciproque_inclus", "cible_image_image_reciproque_inclus",
@@ -335,4 +365,6 @@ __all__ = [
     "cible_image_reciproque_image_egal_si_injective",
     "image_image_reciproque_contient_si_surjective",
     "cible_image_image_reciproque_contient_si_surjective",
+    "image_image_reciproque_egal_si_surjective",
+    "cible_image_image_reciproque_egal_si_surjective",
 ]
