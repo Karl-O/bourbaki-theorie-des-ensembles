@@ -68,9 +68,20 @@ Restantes tractables (present=NON confirmé en code) :
    Piège : couple_reciproque appelle couple_egal_implique_composantes qui lie « w » →
    ne PAS nommer un témoin « w » (renommé « m »).
    PILIER 3 CLOS : `H_injective` (⊢ H_app(E,f) ⇒ f⁻¹func ⇒ injective_dans(H,𝔓E)) via
-   f⁻¹(f(Y))=Y + congruence. Piliers 1,2,3 + valeur FAITS.
-   RESTE : pilier 4 (f surj ⇒ image(H,𝔓E)=𝔓F, via sélection S8 Y={x∈E|f(x)∈Z}) +
-   assemblage est_bijection_de + ∃-intro + pont injective_dans⟺f⁻¹fonctionnel.
+   f⁻¹(f(Y))=Y + congruence. Piliers 1,2,3 + valeur FAITS. CŒURS piliers 3+4 clos
+   (f⁻¹∘f=Id, f∘f⁻¹=Id sur 𝔓) + f⁻¹⟨Z⟩⊂E — tous dans ensembles_image_reciproque_props.py.
+   RESTE : ASSEMBLAGE pilier 4 image(H,𝔓E)=𝔓F (témoin Y=f⁻¹⟨Z⟩) + est_bijection_de + ∃-intro.
+   ⚠️ LEÇON PILIER 4 (assemblage repoussé) — NŒUD DE LIANTS : l'élément-image est FORCÉ à
+   « z » par extensionnalite_appliquee/inclus (A1 lie « z »), mais « z » collisionne avec
+   (a) les liants internes des lemmes appelés, et (b) le liant auto-frais de inclus(f⁻¹⟨z⟩,E)
+   puisque z est LIBRE dans f⁻¹⟨z⟩. Correctifs à appliquer au prochain tick : (1) beaucoup de
+   lemmes n'acceptent QUE des NOMS, pas des termes → wrapper term-version par
+   generalisation+instanciation (fait `_mgt` pour membre_graphe_terme ; idem image_croissante
+   [passer des noms], image_reciproque_inclus_domaine [SET=nom≠« z », puis généraliser]) ;
+   (2) nommer l'élément-image autrement que « z » et construire l'inclus final avec un liant
+   EXPLICITE cohérent (ne pas dépendre de l'auto-fraîcheur). Bâtir d'abord tous les
+   term-wrappers, PUIS assembler. Piège récurrent : couple_reciproque/couple_egal_implique_
+   composantes lient « w ».
 6. **⋂_{ι∈∅}X_ι = E** — Résumé §4 (40) — DÉLICAT : l'axiome AXIOME_INTER_FAM omet x∈E (écart connu).
 DÉJÀ FAITS (audit disait manquant) : assoc (E×F)×G≅E×(F×G) `eq_produit_associatif` ;
 invariance produit `eq_produit_invariant` ; bon ordre cardinaux `cardinaux_bien_ordonnes_close` ;
