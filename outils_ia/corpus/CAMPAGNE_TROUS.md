@@ -27,7 +27,18 @@ formaliser sur la foi d'un doc de couverture.
 - Algèbre du complémentaire (5 lois) — `ii_1_axiomes_algebre/` (+ `ii_1_algebre_booleenne/`).
 - `est_permutation`, `est_permutation_triple` — `fonctions/ii_3_general/ensembles_fonctions_complements.py`.
 - Involution de la réciproque (G⁻¹)⁻¹=G — `fonctions/ii_3_2_reciproque/ensembles_reciproque_involution.py`.
+- **Symétrie canonique E×F≅F×E** — `eq_produit_commute` (CLOS, vérifié) dans
+  `cardinaux/arithmetique/iii_3_3_produit/ensembles_produit_commute.py` (+ swap_graphe_*).
+  ⚠️ 2e FAUX POSITIF d'affilée (FIDELITE_PDF l.137 disait « manquant »). Le code prime.
 - (Rappel session : II.5 Prop.2 conjugaison 1°+2° + `retraction_construite_par_tau`, cf. git.)
+
+## LEÇON N°2 (2026-07-01) — la phase « tractable » est PLUS avancée que tout doc
+2 cibles « faciles » d'affilée (complément, symétrie canonique) = déjà closes. Le vrai
+front est probablement les résidus DURS (famille B). STRATÉGIE : au lieu de recon 1-par-1
+(coûteux, retombe sur du déjà-fait), faire UNE passe de vérification-batch multi-agent
+(present/absent EN CODE) sur toutes les cibles tractables restantes → liste absente
+définitive, puis formaliser sans surprise. Ne PAS relancer de recon sur une cible sans
+avoir d'abord vérifié le CODE (pas le doc).
 
 ## File d'attente — cibles grep-ABSENTES (à confirmer par recon puis formaliser)
 Priorité tractabilité (Résumé / II.2–II.3) :
