@@ -143,11 +143,16 @@ itérées f^n (dépend récursion entiers).
 | 2026-07-01 | **Prop.2 Corollaire bijectif** (§II.5.2 E II.31) | **BLOQUÉ (REPORTÉ confirmé)** | Vérif ultracode (workflow 5 agents) : PAS un assemblage tractable malgré 1er recon optimiste. 1° needs s=section(u)+r=retraction(v) ; 2° needs rp=retraction(u)+sp=section(v) → 4 maps. section/retraction_construite_par_tau émettent le témoin τ INLINÉ (u(τx(y=u(x)))=y), ≠ le composé OPAQUE valeur(u,valeur(s,p)) de H8/H10 (s symbole libre) → PAS α-égaux, MP impossible. Emballer le τ-témoin en OBJET-graphe section re-déclenche le verrou-τ. Le pont image↔valeur (1 des 2 bloqueurs) est MAINTENANT fait ; RESTE le bloqueur OBJET-τ. NE PAS retenter l'assemblage naïf |
 | 2026-07-01 | **section_compose_valeur** (§II.3.8 Déf.11) | absent(REPORTÉ) → **CLOS** | commit d53a089 : (u∈B)⇒(f∘s)(u)=u, dual carbone de retraction_compose_valeur. Piège levé : est_section défaut lie « y »=liant interne de valeur → self-capture ; passer y=point « u ». Ajouté dans ensembles_composee_valeurs.py ; 3 tests verts |
 
-### File d'attente VÉRIFIÉE-ABSENTE (hunt multi-modal 6 agents, 2026-07-01) — prêts pour prochains ticks
-Classés par le workflow (tous grep-vérifiés absents en code) :
-1. **image_reunion_famille** (E II.25 Prop.3) — EASY haute valeur : f⟨⋃X_ι⟩=⋃f⟨X_ι⟩ ; binaire déjà certifié, généraliser via AXIOME_REUNION_FAM + membre_reunion_famille. **MEILLEUR next.**
-2. **image_inter_famille_inclusion** (E II.25 Prop.4) — EASY : f⟨⋂X_ι⟩⊂⋂f⟨X_ι⟩, dual, via inter_famille_elim.
-3. **monotonie_reunion_sous_indices_image** (E II.25) — EASY : J⊂I ⇒ f⟨⋃_J X_ι⟩⊂f⟨⋃_I X_ι⟩ (composition de 2 monotonies déjà prouvées).
-4. **composition_diagonale_neutre_valeur_droit** (E II.13) — MODÉRÉ : (f∘id_A)(x)=f(x) ; exige lemme intermédiaire valeur_diagonale_identite (depuis couple_diagonale).
-5. ⚠️ **composition_associative_valeur** (E II.16 Th.1) — classé easy MAIS risque τ RÉEL : membre gauche (h∘g)∘f exige composition_valeur_t en un point-valeur τ → capture « y » REPORTÉE. À traiter avec la technique liant-frais.
-6. **equipotent_singletons** (E III.23) — EASY mais import cardinaux LOURD (tests 13-18 min) ; réserver à un tick payant déjà le coût cardinaux.
+### File d'attente du hunt (6 agents, 2026-07-01) — ⚠️ RÉVISÉE après verify-in-code
+**LEÇON : le hunt-workflow a produit des FAUX POSITIFS** (agents ont grep le nom proposé, pas
+les variantes → raté des lemmes existants sous d'autres noms dans ii_4_image_famille). LEÇON N°1
+s'applique AUSSI à la sortie des agents/workflows : re-grep le CONTENU avant de formaliser.
+1. ~~image_reunion_famille~~ **FAUX POSITIF** — déjà clos = `image_reunion_egal` (Γ⟨⋃X⟩=⋃Γ⟨X⟩, ii_4_image_famille).
+2. ~~image_inter_famille_inclusion~~ **FAUX POSITIF** — déjà clos = `image_inter_incluse` (Γ⟨⋂X⟩⊂⋂Γ⟨X⟩, idem).
+3. **monotonie_reunion_sous_indices_image** — grep négatif (peut-être absent) ; NON re-vérifié à fond, se méfier.
+4. ✅ **f∘id=f / id∘f=f au niveau VALEUR** — **FAIT** (commit 48988e0) : `composee_diagonale_neutre_valeur`
+   (G∘Δ_A)(x)=G(x) + dual, corollaires de Leibniz des neutralités-graphe. Bien plus simple que le
+   plan « moderate » du hunt (pas besoin de composition_valeur_t : congruence directe sous valeur(·,x)).
+5. ⚠️ **composition_associative_valeur** — risque τ RÉEL (composition_valeur_t en point-valeur τ, capture « y »). Technique liant-frais requise. NON vérifié absent à fond.
+6. **equipotent_singletons** (E III.23) — import cardinaux LOURD (tests 13-18 min) ; NON vérifié.
+→ Reste à re-vérifier-en-code #3, #5, #6 avant tout effort. Les gains rapides fonctions/valeurs sont quasi saturés.
