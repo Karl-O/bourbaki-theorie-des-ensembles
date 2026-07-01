@@ -109,5 +109,40 @@ def retraction_compose_valeur(r="R", f="F", a="A", x="x"):
     return N.loi_deduction(appartient(vx, vA), chained)  # (x∈A) ⇒ (r∘f)(x)=x
 
 
+# @livre Ch.II §3.8 Def.11 | E II.18-19 (dual de retraction_compose_valeur) | PDF p.69
+def section_compose_valeur(s="S", f="F", b="B", x="u"):
+    """{est_section(S,F,B), F∘S func, u∈domS, s(u)∈domF} ⊢ (u∈B) ⇒ ((f∘s)(u) = u).
+
+    Dual EXACT de `retraction_compose_valeur` : relie la définition matricielle
+    f∘s = Id_B (E.II.48, Déf. 11 : (∀y∈B) f(s(y))=y) au niveau « composée » :
+    (f∘s)(u) = f(s(u)) (composition_valeur) puis f(s(u))=u (instance de est_section).
+    Donc (f∘s)(u)=u sur B — l'identité Id_B lue sur les valeurs.  Point « u » ≠ « y »
+    (liant interne de valeur et liant de est_section) pour éviter la capture."""
+    vS, vF, vB, vx = var(s), var(f), var(b), var(x)
+    comp = E.composee(vF, vS)                            # F∘S
+    su = E.valeur(vS, vx)                                # s(u)
+    fsu = E.valeur(vF, su)                               # f(s(u))
+    fos = E.valeur(comp, vx)                             # (f∘s)(u)
+    # (f∘s)(u) = f(s(u))   (composition_valeur ; hyps fonctionnels/domaines)
+    cv = composition_valeur_t(vF, vS, vx)               # (f∘s)(u) = f(s(u))
+    # f(s(u)) = u   à partir de est_section(S,F,B) sous u∈B
+    # liant « u » (=point) ≠ « y » : sinon valeur(S,y)=τy((y,y)∈S) se self-capture
+    hsec = N.assume(E.est_section(vS, vF, vB, y=x))     # (∀u)(u∈B ⇒ f(s(u))=u)
+    inst = instancie(hsec, vx)                          # u∈B ⇒ f(s(u))=u
+    hub = N.assume(appartient(vx, vB))
+    eq_fsu_u = N.modus_ponens(hub, inst)                # {sec, u∈B} ⊢ f(s(u))=u
+    chained = composer_egalites(cv, eq_fsu_u)           # (f∘s)(u) = u
+    return N.loi_deduction(appartient(vx, vB), chained)  # (u∈B) ⇒ (f∘s)(u)=u
+
+
+def cible_section_compose_valeur(s="S", f="F", b="B", x="u"):
+    """Conclusion attendue : (u∈B) ⇒ ((f∘s)(u) = u)  [(f∘s)(u) lu comme UN graphe]."""
+    from bourbaki.logique.i_1_termes_relations.formule import impl
+    vS, vF, vB, vx = var(s), var(f), var(b), var(x)
+    fos = E.valeur(E.composee(vF, vS), vx)
+    return impl(appartient(vx, vB), egal(fos, vx))
+
+
 __all__ = ["composition_valeur_t", "composee_associee_droite_valeur",
-           "retraction_compose_valeur"]
+           "retraction_compose_valeur", "section_compose_valeur",
+           "cible_section_compose_valeur"]
