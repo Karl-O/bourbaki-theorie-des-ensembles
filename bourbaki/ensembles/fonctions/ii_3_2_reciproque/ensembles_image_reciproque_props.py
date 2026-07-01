@@ -38,6 +38,7 @@ from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_image_f
     membre_image, membre_image_reciproque)
 from bourbaki.ensembles.fonctions.ii_3_2_reciproque.ensembles_reciproque import couple_reciproque
 from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import extensionnalite_appliquee
+from bourbaki.ensembles.fonctions.ii_3_general.ensembles_extensionnalite import couple_dans_dom
 
 
 def _t(v):
@@ -356,6 +357,40 @@ def image_image_reciproque_egal_si_surjective(f="f", z="Z", e="E"):
                            N.loi_deduction(inclus(vZ, E.image(vf, ve)), eq))
 
 
+# ════════════════════════════════════════════════════════════════════════════
+#  f⁻¹⟨Z⟩ ⊂ E   (l'image réciproque est incluse dans le domaine).
+# ════════════════════════════════════════════════════════════════════════════
+def cible_image_reciproque_inclus_domaine(f="f", z="Z", e="E"):
+    vf, vZ, ve = _t(f), _t(z), _t(e)
+    return impl(egal(E.dom(vf), ve), inclus(E.image(E.reciproque(vf), vZ), ve))
+
+
+# @livre Ch.II §3.2 Rem.- | E II.11 L.16-17 | PDF p.62
+def image_reciproque_inclus_domaine(f="f", z="Z", e="E"):
+    """⊢ dom f = E ⇒ f⁻¹⟨Z⟩ ⊂ E.   (tout antécédent est dans le domaine.)"""
+    vf, vZ, ve = _t(f), _t(z), _t(e)
+    vz, vn = var("z"), var("n")
+    recipZ = E.image(E.reciproque(vf), vZ)               # f⁻¹⟨Z⟩
+    hdom = N.assume(egal(E.dom(vf), ve))                 # dom f = E
+    hz = N.assume(appartient(vz, recipZ))                # z ∈ f⁻¹⟨Z⟩
+
+    mem = membre_image_reciproque(vf, vZ, vz)            # z∈f⁻¹⟨Z⟩ ⇔ (∃x)(x∈Z et (x,z)∈f⁻¹)
+    body_n = lambda u: et(appartient(u, vZ), appartient(E.couple(u, vz), E.reciproque(vf)))
+    ex_n = N.modus_ponens(N.modus_ponens(hz, equivalence_avant(mem)),
+                          equivalence_avant(alpha_existe("x", "n", body_n(var("x")))))   # (∃n)body_n
+    hbn = N.assume(body_n(vn))
+    nz_recip = conjonction_elim_droite(hbn)              # (n,z) ∈ f⁻¹
+    zn_f = N.modus_ponens(nz_recip, equivalence_avant(couple_reciproque(vf, vn, vz)))    # (z,n) ∈ f
+    z_dom = N.modus_ponens(zn_f, N.loi_deduction(
+        appartient(E.couple(vz, vn), vf), couple_dans_dom(vf, vz, vn)))                  # z ∈ dom f
+    z_E = N.modus_ponens(z_dom, equivalence_avant(
+        N.modus_ponens(hdom, N.s6(E.dom(vf), ve, "ww", appartient(vz, var("ww"))))))     # z ∈ E
+    imp_n = existe_elimination(N.loi_deduction(body_n(vn), z_E), "n")
+    z_final = N.modus_ponens(ex_n, imp_n)
+    incl = N.generalisation("z", N.loi_deduction(appartient(vz, recipZ), z_final))
+    return N.loi_deduction(egal(E.dom(vf), ve), incl)
+
+
 __all__ = [
     "inclus_image_reciproque_image", "cible_inclus_image_reciproque_image",
     "image_image_reciproque_inclus", "cible_image_image_reciproque_inclus",
@@ -367,4 +402,5 @@ __all__ = [
     "cible_image_image_reciproque_contient_si_surjective",
     "image_image_reciproque_egal_si_surjective",
     "cible_image_image_reciproque_egal_si_surjective",
+    "image_reciproque_inclus_domaine", "cible_image_reciproque_inclus_domaine",
 ]

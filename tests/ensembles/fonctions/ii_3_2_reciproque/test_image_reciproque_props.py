@@ -19,7 +19,9 @@ from bourbaki.ensembles.fonctions.ii_3_2_reciproque.ensembles_image_reciproque_p
     image_image_reciproque_contient_si_surjective,
     cible_image_image_reciproque_contient_si_surjective,
     image_image_reciproque_egal_si_surjective,
-    cible_image_image_reciproque_egal_si_surjective)
+    cible_image_image_reciproque_egal_si_surjective,
+    image_reciproque_inclus_domaine,
+    cible_image_reciproque_inclus_domaine)
 
 
 def test_theorie_22_axiomes():
@@ -78,4 +80,12 @@ def test_image_image_reciproque_egal_si_surjective():
     th = image_image_reciproque_egal_si_surjective()
     assert th.hypotheses == frozenset()            # clos
     assert th.conclusion == cible_image_image_reciproque_egal_si_surjective()
+    assert len(E.theorie_ensembles().axiomes) == 22
+
+
+def test_image_reciproque_inclus_domaine():
+    """⊢ dom f = E ⇒ f⁻¹⟨Z⟩ ⊂ E."""
+    th = image_reciproque_inclus_domaine()
+    assert th.hypotheses == frozenset()            # clos
+    assert th.conclusion == cible_image_reciproque_inclus_domaine()
     assert len(E.theorie_ensembles().axiomes) == 22
