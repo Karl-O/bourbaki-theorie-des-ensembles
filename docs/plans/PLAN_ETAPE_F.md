@@ -20,10 +20,15 @@ la trichotomie close, soit dépendent de la machinerie lourde. Re-vérifié : `e
 → Section non prioritaire pour le flux continu (lourde, tests lents).
 
 ## §II.5 — Produit d'une famille : **17/18 ; 2 candidats re-vérifiés**
-- **[GAP1] Prop.2 (E II.31)** — « f ↦ v∘f∘u injective » : RÉSIDU DUR documenté
-  (`ensembles_currying_ii5.py` : VERROU = construction du graphe-terme de la conjugaison
-  f↦v∘f∘u). La composition d'injections elle-même est close (`theoreme1_a_injective`).
-  → Pas un comblage rapide ; reporté avec le verrou τ.
+- **[GAP1] Prop.2 (E II.31)** — « f ↦ v∘f∘u injective/surjective » : **FAIT et CLOS
+  le 2026-07-01**, les DEUX sens, forme rétraction/section au niveau des graphes :
+  1° injectif `ensembles_conjugaison_prop2_ii5.prop2_conjugaison_injective` (extensionnel,
+  quantifier-générique-puis-instancier — jamais de composé évalué en point-τ) ;
+  2° surjectif `ensembles_conjugaison_prop2_surj_ii5.prop2_conjugaison_surjective`
+  (témoin `graphe_terme(E, s'(g(r'(x))), 'x')` à liants FRAIS = levée du « verrou liant
+  valeur »). Prérequis comblé : `retraction_construite_par_tau` (Prop.8 réciproque injectif).
+  → Reste REPORTÉ : l'OBJET-conjugaison f↦v∘f∘u lui-même (application-triple), et le
+  Corollaire bijectif (assemblage 1°+2° sous u,v bijectives). Verrou-τ résiduel circonscrit.
 - **[GAP2] Cor. de Prop.8 (deux familles, E II.36 p.87)** —
   `(⋂_ι X_ι)∪(⋂_κ Y_κ) = ⋂_{(ι,κ)∈I×K}(X_ι∪Y_κ)` : GENUINE.
   **Tractable (choice-free dans LES DEUX SENS pour deux familles)** : le sens ⊃, exclu pour
@@ -37,7 +42,8 @@ la trichotomie close, soit dépendent de la machinerie lourde. Re-vérifié : `e
 
 ## Conclusion stratégique
 Foundational (I.1-4, II.1-6, III.1-2) **saturé** pour les gains rapides. Frontière réelle =
-chantiers modérés-lourds : **II.5 GAP2** (en cours), II.5 conjugation-verrou, et les gros
-chantiers cardinaux (Hessenberg a²=a III.6, Cantor 2^a>a, division euclidienne III.5 — lents,
-13-18 min/test). Les prochains ticks visent ces chantiers documentés, plus de chasse au
-gain-rapide (le fan-out l'a confirmée vaine).
+chantiers modérés-lourds : **II.5 GAP2** (fait, cf. `ensembles_cor_prop8_deux_familles*`),
+**II.5 Prop.2 conjugation** (fait 1°+2° le 2026-07-01, seul l'OBJET-conjugaison + Cor bijectif
+restent), et les gros chantiers cardinaux (Hessenberg a²=a III.6, Cantor 2^a>a, division
+euclidienne III.5 — lents, 13-18 min/test). Les prochains ticks visent ces chantiers documentés,
+plus de chasse au gain-rapide (le fan-out l'a confirmée vaine).
