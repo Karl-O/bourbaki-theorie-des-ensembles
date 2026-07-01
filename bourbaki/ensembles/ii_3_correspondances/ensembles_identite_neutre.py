@@ -32,6 +32,7 @@ from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
     equivalence_avant, equivalence_arriere, instancie)
 from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import existe_elimination
+from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import congruence_terme
 from bourbaki.ensembles.ii_3_correspondances.ensembles_graphe_inclus_produit import est_graphe
 from bourbaki.ensembles.ii_3_correspondances.ensembles_diagonale_couple import (
     couple_diagonale, couple_composee_diagonale, diagonale_composee_couple)
@@ -190,5 +191,44 @@ def diagonale_composee_neutre_cible(g="G", b="B"):
     return egal(E.composee(E.diagonale(vB), vG), vG)
 
 
+# ── Neutralité au niveau VALEUR (corollaires de Leibniz sous valeur(·, x)) ─────
+# @livre Ch.II §3.3 Def.8 | E II.13 L.25-26 (f∘id=f au niveau valeur) | PDF p.64
+def composee_diagonale_neutre_valeur(g="G", a="A", x="x"):
+    """⊢ (G∘Δ_A)(x) = G(x)   sous { est_graphe(G), pr₁G ⊂ A }.  (Id_A neutre à droite, valeurs.)
+
+    Corollaire de `composee_diagonale_neutre` (G∘Δ_A = G) par congruence de Leibniz
+    sous valeur(·, x).  Lève le REPORTÉ « f∘id = f au niveau valeur » (requis §IV.2,
+    ensembles_structures_derivees_props)."""
+    vG, vA, vx = _tc(g), _tc(a), _tc(x)
+    comp = E.composee(vG, E.diagonale(vA))
+    neutre = composee_diagonale_neutre(vG, vA)           # G∘Δ_A = G  {est_graphe(G), pr₁G⊂A}
+    return N.modus_ponens(neutre, congruence_terme(comp, vG, E.valeur(var("w"), vx)))
+
+
+def composee_diagonale_neutre_valeur_cible(g="G", a="A", x="x"):
+    """Énoncé visé : (G∘Δ_A)(x) = G(x)."""
+    vG, vA, vx = _tc(g), _tc(a), _tc(x)
+    return egal(E.valeur(E.composee(vG, E.diagonale(vA)), vx), E.valeur(vG, vx))
+
+
+# @livre Ch.II §3.3 Def.8 | E II.13 L.25-26 (id∘f=f au niveau valeur) | PDF p.64
+def diagonale_composee_neutre_valeur(g="G", b="B", x="x"):
+    """⊢ (Δ_B∘G)(x) = G(x)   sous { est_graphe(G), pr₂G ⊂ B }.  (Id_B neutre à gauche, valeurs.)
+
+    Dual : corollaire de `diagonale_composee_neutre` (Δ_B∘G = G) par congruence."""
+    vG, vB, vx = _tc(g), _tc(b), _tc(x)
+    comp = E.composee(E.diagonale(vB), vG)
+    neutre = diagonale_composee_neutre(vG, vB)           # Δ_B∘G = G  {est_graphe(G), pr₂G⊂B}
+    return N.modus_ponens(neutre, congruence_terme(comp, vG, E.valeur(var("w"), vx)))
+
+
+def diagonale_composee_neutre_valeur_cible(g="G", b="B", x="x"):
+    """Énoncé visé : (Δ_B∘G)(x) = G(x)."""
+    vG, vB, vx = _tc(g), _tc(b), _tc(x)
+    return egal(E.valeur(E.composee(E.diagonale(vB), vG), vx), E.valeur(vG, vx))
+
+
 __all__ = ["composee_diagonale_neutre", "composee_diagonale_neutre_cible",
-           "diagonale_composee_neutre", "diagonale_composee_neutre_cible"]
+           "diagonale_composee_neutre", "diagonale_composee_neutre_cible",
+           "composee_diagonale_neutre_valeur", "composee_diagonale_neutre_valeur_cible",
+           "diagonale_composee_neutre_valeur", "diagonale_composee_neutre_valeur_cible"]

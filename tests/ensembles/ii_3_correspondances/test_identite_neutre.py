@@ -31,3 +31,23 @@ def test_diagonale_composee_neutre():
     assert not t.est_clos
     assert set(t.hypotheses) == {est_graphe(G), inclus(E.img(G), B)}
     assert len(theorie_ensembles().axiomes) == 22
+
+
+def test_composee_diagonale_neutre_valeur():
+    """⊢ (G∘Δ_A)(x) = G(x)  sous { est_graphe(G), pr₁G⊂A }  (f∘id=f, niveau valeur)."""
+    t = M.composee_diagonale_neutre_valeur()
+    G, A, x = var("G"), var("A"), var("x")
+    cible = egal(E.valeur(E.composee(G, E.diagonale(A)), x), E.valeur(G, x))
+    assert t.conclusion == cible == M.composee_diagonale_neutre_valeur_cible()
+    assert set(t.hypotheses) == {est_graphe(G), inclus(E.dom(G), A)}
+    assert len(theorie_ensembles().axiomes) == 22
+
+
+def test_diagonale_composee_neutre_valeur():
+    """⊢ (Δ_B∘G)(x) = G(x)  sous { est_graphe(G), pr₂G⊂B }  (id∘f=f, niveau valeur, dual)."""
+    t = M.diagonale_composee_neutre_valeur()
+    G, B, x = var("G"), var("B"), var("x")
+    cible = egal(E.valeur(E.composee(E.diagonale(B), G), x), E.valeur(G, x))
+    assert t.conclusion == cible == M.diagonale_composee_neutre_valeur_cible()
+    assert set(t.hypotheses) == {est_graphe(G), inclus(E.img(G), B)}
+    assert len(theorie_ensembles().axiomes) == 22
