@@ -49,8 +49,9 @@ Restantes tractables (present=NON confirmé en code) :
    ✅ (25) `pr₁⟨X×Y⟩=X` (Y≠∅) + dual `pr₂⟨X×Y⟩=Y` (X≠∅) FAIT
    (`ii_3_correspondances/ensembles_projection_produit.py`, `pr1_produit`/`pr2_produit` CLOS).
 2. **(17) f⁻¹(Y)=f⁻¹(Y∩f(E))** — Résumé §2 item 7.
-3. **Application majorée/minorée/bornée + borne sup d'une application** — Résumé §6 item 7
-   (majorant/borne_superieure existent sur ENSEMBLES ; étendre aux applications via image f(A)).
+3. ✅ **Application majorée/minorée/bornée + borne sup/inf d'application** — Résumé §6 item 7
+   FAIT (`ordre/iii_1_relations_ordre/ordre_treillis/ensembles_application_bornee.py` :
+   5 défs via img F + 4 th CLOS : borne sup⇒majorée, bornée⇒majorée/minorée…).
 4. **Familles `(X_ι)` croissantes/décroissantes de parties** — Résumé §6 item 12
    (est_croissante/monotone existent sur applications ; spécialiser aux familles I→𝔓(E) pour ⊂).
 5. **Eq(E,F) ⇒ Eq(𝔓E,𝔓F)** — Résumé §7 item 1 (construire bijection 𝔓E→𝔓F par image directe).
@@ -81,3 +82,4 @@ itérées f^n (dépend récursion entiers).
 | 2026-07-01 | Passe batch 7 agents (present/absent EN CODE) | liste absente définitive | queue mise à jour |
 | 2026-07-01 | **Triplet + 3 projections** | absent → **FORMALISÉ CLOS** | `ensembles_triplet.py` + test (51 verts) |
 | 2026-07-01 | **(25) pr₁⟨X×Y⟩=X (Y≠∅) + dual** | absent → **FORMALISÉ CLOS** | `ensembles_projection_produit.py` + test (piège : couple_dans_produit n'accepte que des NOMS → couple_dans_produit_ssi qui prend des termes) |
+| 2026-07-01 | **Application majorée/minorée/bornée + bornes** | absent → **FORMALISÉ CLOS** | `ensembles_application_bornee.py` (5 défs + 4 th) ; ordre_treillis atteint 10 entrées |
