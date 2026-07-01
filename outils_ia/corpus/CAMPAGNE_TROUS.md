@@ -40,15 +40,27 @@ front est probablement les résidus DURS (famille B). STRATÉGIE : au lieu de re
 définitive, puis formaliser sans surprise. Ne PAS relancer de recon sur une cible sans
 avoir d'abord vérifié le CODE (pas le doc).
 
-## File d'attente — cibles grep-ABSENTES (à confirmer par recon puis formaliser)
-Priorité tractabilité (Résumé / II.2–II.3) :
-1. **Symétrie canonique `E×F ≅ F×E`** via (x,y)↦(y,x) — Résumé §3 item 4 (PDF p.137). [EN RECON]
-2. **Produit ternaire `E×F×G` + triplets + assoc. canonique** — Résumé §3 item 12 (p.139).
-3. **Itérées `f^n`** — Résumé §2 item 11 (p.113) — dépend récursion entiers (plus lourd).
-4. **Application majorée/minorée/bornée + borne sup d'une application** — Résumé §6 item 7 (p.221).
-5. **Familles `(X_ι)` croissantes/décroissantes de parties** — Résumé §6 item 12 (p.223).
+## File d'attente — cibles VÉRIFIÉES ABSENTES EN CODE (passe batch 7 agents, 2026-07-01)
+FAIT ✅ : **Triplet (a,b,c)=((a,b),c) + 3 projections** (`ii_2_couples_produit/ensembles_triplet.py`,
+`triplet_projection_1/2/3` CLOS). ⚠️ ii_2_couples_produit atteint 10 entrées → prochaine
+addition II.2 = créer un sous-dossier.
+Restantes tractables (present=NON confirmé en code) :
+1. **(24) pr₁⁻¹(X)=X×F** et **(25) si Y≠∅, pr₁(X×Y)=X** — Résumé §3 items 3e-f.
+2. **(17) f⁻¹(Y)=f⁻¹(Y∩f(E))** — Résumé §2 item 7.
+3. **Application majorée/minorée/bornée + borne sup d'une application** — Résumé §6 item 7
+   (majorant/borne_superieure existent sur ENSEMBLES ; étendre aux applications via image f(A)).
+4. **Familles `(X_ι)` croissantes/décroissantes de parties** — Résumé §6 item 12
+   (est_croissante/monotone existent sur applications ; spécialiser aux familles I→𝔓(E) pour ⊂).
+5. **Eq(E,F) ⇒ Eq(𝔓E,𝔓F)** — Résumé §7 item 1 (construire bijection 𝔓E→𝔓F par image directe).
+6. **⋂_{ι∈∅}X_ι = E** — Résumé §4 (40) — DÉLICAT : l'axiome AXIOME_INTER_FAM omet x∈E (écart connu).
+DÉJÀ FAITS (audit disait manquant) : assoc (E×F)×G≅E×(F×G) `eq_produit_associatif` ;
+invariance produit `eq_produit_invariant` ; bon ordre cardinaux `cardinaux_bien_ordonnes_close` ;
+(14)(18)(19) réciproque ; (22)(23)(26) produit ; C56/C57 ; Prop.1 équivalence.
+OUI_PARTIEL (à compléter) : bijection {a}×F→F (seulement équipotence) ; (47-48) pointwise ;
+bijectivité effective des quotients (E/R, décomposition canonique) — reportée « théorèmes durs ».
 Puis résidus durs (audit famille B) : objet-conjugaison II.5 ; division euclidienne III.5.6
-(dossier vide) ; Hessenberg a²=a inconditionnel III.6.3 ; limites III.7 ; cœur σ/Σ (Ch IV).
+(dossier vide) ; Hessenberg a²=a inconditionnel III.6.3 ; limites III.7 ; cœur σ/Σ (Ch IV) ;
+itérées f^n (dépend récursion entiers).
 
 ## Méthode multi-agent qui marche (pour le système IA)
 - **Recon fan-out** (agents Explore, lecture seule) : pinner l'API exacte + énoncés fidèles +
@@ -63,4 +75,6 @@ Puis résidus durs (audit famille B) : objet-conjugaison II.5 ; division euclidi
 |------|-------|---------|--------|
 | 2026-07-01 | Complément (5 lois) | déjà CLOS (faux positif audit) | aucune ; loggé |
 | 2026-07-01 | permutation, involution récip. | déjà présents | aucune ; loggé |
-| 2026-07-01 | Symétrie canonique E×F≅F×E | grep-absent | recon lancé |
+| 2026-07-01 | Symétrie canonique E×F≅F×E | déjà CLOS (2e faux positif) | aucune ; loggé |
+| 2026-07-01 | Passe batch 7 agents (present/absent EN CODE) | liste absente définitive | queue mise à jour |
+| 2026-07-01 | **Triplet + 3 projections** | absent → **FORMALISÉ CLOS** | `ensembles_triplet.py` + test (51 verts) |
