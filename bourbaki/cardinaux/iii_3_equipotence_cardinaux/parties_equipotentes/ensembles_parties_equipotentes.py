@@ -19,25 +19,53 @@ AXIOME_IMAGE « x »).  Rien postulé ; theorie_ensembles INCHANGÉE (22 axiomes
 from __future__ import annotations
 
 from bourbaki.logique.i_1_termes_relations.formule import (
-    Terme, var, egal, et, impl, appartient, pourtout)
+    Terme, var, egal, et, impl, appartient, pourtout, inclus)
 from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
-    conjonction_elim_gauche, conjonction_elim_droite, instancie, equivalence_avant)
+    conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite, instancie,
+    equivalence_avant, equivalence_arriere)
+from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import (
+    existe_elimination, alpha_existe)
 from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import (
     symetrie, composer_egalites, congruence_terme)
+from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import extensionnalite_appliquee
 from bourbaki.ensembles.fonctions.ii_3_6_fonction_terme.ensembles_fonction_terme import (
-    graphe_terme_fonctionnel)
+    graphe_terme_fonctionnel, membre_graphe_terme)
+from bourbaki.ensembles.ii_3_correspondances.ensembles_correspondances import image_croissante
 from bourbaki.cardinaux.iii_3_equipotence_cardinaux.cantor.ensembles_cantor import (
     graphe_terme_valeur, graphe_terme_domaine)
 from bourbaki.cardinaux.arithmetique.iii_3_5_exposant.prop12_powerset.ensembles_powerset_deux import (
-    membre_parties_t)
+    membre_parties_t, partie_dans_parties)
+from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_image_famille.ensembles_image_algebre_binaire_ii4 import (
+    membre_image)
 from bourbaki.ensembles.fonctions.ii_3_2_reciproque.ensembles_image_reciproque_props import (
-    image_reciproque_image_egal_si_injective)
+    image_reciproque_image_egal_si_injective, image_image_reciproque_egal_si_surjective,
+    image_reciproque_inclus_domaine)
 
 
 def _t(v):
     return v if isinstance(v, Terme) else var(v)
+
+
+def _mgt(a, t, u_term, v_term, x="Y", y="y"):
+    """⊢ ((u,v)∈graphe_terme(a,t,x)) ⇔ (u∈a et v=t[u])  pour des TERMES u, v.
+    (membre_graphe_terme n'accepte que des NOMS → généralisation + instanciation.)"""
+    base = membre_graphe_terme(a, t, "uu", "vv", x, y)
+    g = N.generalisation("uu", N.generalisation("vv", base))
+    return instancie(instancie(g, u_term), v_term)
+
+
+def _recip_inclus_E(vf, Z_term, ve):
+    """⊢ dom f = E ⇒ f⁻¹⟨Z⟩ ⊂ E  pour un TERME Z  (évite la collision de liant « z »)."""
+    base = image_reciproque_inclus_domaine(vf, var("Zs"), ve)   # SET « Zs » ≠ liant interne « z »
+    return instancie(N.generalisation("Zs", base), Z_term)
+
+
+def _feq_surj(vf, Z_term, ve):
+    """⊢ est_fonctionnel(f) ⇒ Z⊂f⟨E⟩ ⇒ f⟨f⁻¹⟨Z⟩⟩=Z  pour un TERME Z  (évite « z »)."""
+    base = image_image_reciproque_egal_si_surjective(vf, var("Zs"), ve)
+    return instancie(N.generalisation("Zs", base), Z_term)
 
 
 def _hyp_app(vf, vX):
@@ -142,5 +170,77 @@ def cible_H_injective(f="f", e="E"):
                      E.injective_dans(graphe_H(vf, ve), E.parties(ve))))
 
 
+# @livre Ch.R §7 Prop.1 | E R.32 item 1 (pilier 4 : image(H,𝔓E)=𝔓F) | PDF p.335
+def H_image(f="f", e="E", f_set="F"):
+    """⊢ est_fonctionnel(f) ⇒ dom f=E ⇒ f⟨E⟩=F ⇒ image(H, 𝔓E) = 𝔓(F).   (pilier 4.)
+
+    ⊂ : Z∈im(H,𝔓E) ⇒ Z=f⟨S⟩ (S⊂E) ⇒ f⟨S⟩⊂f⟨E⟩=F ⇒ Z∈𝔓F.
+    ⊃ : Z∈𝔓F ⇒ Z⊂F=f⟨E⟩ ; le témoin S=f⁻¹⟨Z⟩⊂E vérifie f⟨S⟩=Z [f∘f⁻¹=Id], d'où
+        (S,Z)∈H et Z∈im(H,𝔓E).  Double inclusion (A1).  (f, e = NOMS.)"""
+    vf, ve, vF = _t(f), _t(e), _t(f_set)
+    fname = f if isinstance(f, str) else f.nom           # image_croissante n'accepte que des NOMS
+    ename = e if isinstance(e, str) else e.nom
+    PE, PF, H = E.parties(ve), E.parties(vF), graphe_H(vf, ve)
+    imgHPE = E.image(H, PE)
+    Tim = E.image(vf, var("Y"))                          # terme définissant H : f⟨Y⟩
+    vz = var("z")
+
+    hFunc = N.assume(E.est_fonctionnel(vf))
+    hDom = N.assume(egal(E.dom(vf), ve))
+    hImg = N.assume(egal(E.image(vf, ve), vF))
+
+    # ── image(H,𝔓E) ⊂ 𝔓F ──
+    memH = membre_image(H, PE, vz)                       # z∈im(H,𝔓E) ⇔ (∃x)(x∈𝔓E et (x,z)∈H)
+    bodyS = lambda u: et(appartient(u, PE), appartient(E.couple(u, vz), H))
+    exS = N.modus_ponens(N.modus_ponens(N.assume(appartient(vz, imgHPE)), equivalence_avant(memH)),
+                         equivalence_avant(alpha_existe("x", "S", bodyS(var("x")))))
+    vS = var("S")
+    hbS = N.assume(bodyS(vS))
+    S_PE = conjonction_elim_gauche(hbS)                  # S∈𝔓E
+    SZ_H = conjonction_elim_droite(hbS)                  # (S,z)∈H
+    z_eq_fS = conjonction_elim_droite(N.modus_ponens(SZ_H, equivalence_avant(_mgt(PE, Tim, vS, vz))))
+    fS = E.image(vf, vS)
+    S_sub_E = N.modus_ponens(S_PE, equivalence_avant(membre_parties_t(vS, ve)))       # S⊂E
+    fS_sub_F = N.modus_ponens(N.modus_ponens(S_sub_E, image_croissante(fname, "S", ename)),
+        equivalence_avant(N.modus_ponens(hImg, N.s6(E.image(vf, ve), vF, "w", inclus(fS, var("w"))))))
+    z_sub_F = N.modus_ponens(fS_sub_F, equivalence_arriere(
+        N.modus_ponens(z_eq_fS, N.s6(vz, fS, "w", inclus(var("w"), vF)))))            # z⊂F
+    z_PF = N.modus_ponens(z_sub_F, N.loi_deduction(inclus(vz, vF), partie_dans_parties(vz, vF)))
+    z_PF_final = N.modus_ponens(exS, existe_elimination(N.loi_deduction(bodyS(vS), z_PF), "S"))
+    incl1 = N.generalisation("z", N.loi_deduction(appartient(vz, imgHPE), z_PF_final))
+
+    # ── 𝔓F ⊂ image(H,𝔓E) ──  (élément neutre « p » : « z » collisionne avec est_fonctionnel
+    #    et le liant par défaut de inclus ; on renomme le liant en « z » à la toute fin.)
+    vp = var("p")
+    hpF = N.assume(appartient(vp, PF))
+    p_sub_F = N.modus_ponens(hpF, equivalence_avant(membre_parties_t(vp, vF)))        # p⊂F
+    Yw = E.image(E.reciproque(vf), vp)                   # témoin S = f⁻¹⟨p⟩
+    Yw_PE = N.modus_ponens(N.modus_ponens(hDom, _recip_inclus_E(vf, vp, ve)),
+        N.loi_deduction(inclus(Yw, ve), partie_dans_parties(Yw, ve)))                # f⁻¹⟨p⟩ ∈ 𝔓E
+    p_sub_imgE = N.modus_ponens(p_sub_F, equivalence_arriere(
+        N.modus_ponens(hImg, N.s6(E.image(vf, ve), vF, "w", inclus(vp, var("w"))))))  # p⊂f⟨E⟩
+    fYw_eq_p = N.modus_ponens(p_sub_imgE, N.modus_ponens(hFunc,
+        _feq_surj(vf, vp, ve)))                                                       # f⟨f⁻¹⟨p⟩⟩=p
+    p_eq_fYw = N.modus_ponens(fYw_eq_p, symetrie(E.image(vf, Yw), vp))                # p=f⟨f⁻¹⟨p⟩⟩
+    Yp_H = N.modus_ponens(conjonction_intro(Yw_PE, p_eq_fYw),
+                          equivalence_arriere(_mgt(PE, Tim, Yw, vp)))                 # (Yw,p)∈H
+    p_in_img = N.modus_ponens(N.modus_ponens(conjonction_intro(Yw_PE, Yp_H),
+        N.s5(et(appartient(var("x"), PE), appartient(E.couple(var("x"), vp), H)), Yw, "x")),
+        equivalence_arriere(membre_image(H, PE, vp)))                                # p∈im(H,𝔓E)
+    body_p = N.loi_deduction(appartient(vp, PF), p_in_img)                            # ⊢ p∈PF ⇒ p∈im
+    incl2 = N.generalisation("z", instancie(N.generalisation("p", body_p), vz))       # liant → « z »
+
+    eq = N.modus_ponens(conjonction_intro(incl1, incl2), extensionnalite_appliquee(imgHPE, PF))
+    return N.loi_deduction(E.est_fonctionnel(vf), N.loi_deduction(egal(E.dom(vf), ve),
+        N.loi_deduction(egal(E.image(vf, ve), vF), eq)))
+
+
+def cible_H_image(f="f", e="E", f_set="F"):
+    """Conclusion attendue : est_fonctionnel(f) ⇒ dom f=E ⇒ f⟨E⟩=F ⇒ image(H,𝔓E)=𝔓F."""
+    vf, ve, vF = _t(f), _t(e), _t(f_set)
+    return impl(E.est_fonctionnel(vf), impl(egal(E.dom(vf), ve), impl(egal(E.image(vf, ve), vF),
+               egal(E.image(graphe_H(vf, ve), E.parties(ve)), E.parties(vF)))))
+
+
 __all__ = ["graphe_H", "H_fonctionnel", "H_domaine", "H_valeur", "cible_H_valeur",
-           "H_injective", "cible_H_injective"]
+           "H_injective", "cible_H_injective", "H_image", "cible_H_image"]

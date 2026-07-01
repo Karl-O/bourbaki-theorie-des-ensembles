@@ -34,3 +34,11 @@ def test_pilier3_H_injective():
     assert th.est_clos and len(th.hypotheses) == 0
     assert th.conclusion == M.cible_H_injective()
     assert len(E.theorie_ensembles().axiomes) == 22
+
+
+def test_pilier4_H_image():
+    """⊢ est_fonctionnel(f) ⇒ dom f=E ⇒ f⟨E⟩=F ⇒ image(H, 𝔓E) = 𝔓F  (surjectivité de H)."""
+    th = M.H_image()
+    assert th.est_clos and len(th.hypotheses) == 0
+    assert th.conclusion == M.cible_H_image()
+    assert len(E.theorie_ensembles().axiomes) == 22
