@@ -13,7 +13,9 @@ from bourbaki.ensembles.fonctions.ii_3_2_reciproque.ensembles_image_reciproque_p
     inclus_image_reciproque_image, cible_inclus_image_reciproque_image,
     image_image_reciproque_inclus, cible_image_image_reciproque_inclus,
     image_reciproque_image_inclus_si_injective,
-    cible_image_reciproque_image_inclus_si_injective)
+    cible_image_reciproque_image_inclus_si_injective,
+    image_reciproque_image_egal_si_injective,
+    cible_image_reciproque_image_egal_si_injective)
 
 
 def test_theorie_22_axiomes():
@@ -48,4 +50,12 @@ def test_image_reciproque_image_inclus_si_injective():
     th = image_reciproque_image_inclus_si_injective()
     assert th.hypotheses == frozenset()            # clos
     assert th.conclusion == cible_image_reciproque_image_inclus_si_injective()
+    assert len(E.theorie_ensembles().axiomes) == 22
+
+
+def test_image_reciproque_image_egal_si_injective():
+    """⊢ H_app(X,f) ⇒ est_fonctionnel(f⁻¹) ⇒ f⁻¹⟨f⟨X⟩⟩ = X  (f⁻¹∘f = Id sur les parties)."""
+    th = image_reciproque_image_egal_si_injective()
+    assert th.hypotheses == frozenset()            # clos
+    assert th.conclusion == cible_image_reciproque_image_egal_si_injective()
     assert len(E.theorie_ensembles().axiomes) == 22

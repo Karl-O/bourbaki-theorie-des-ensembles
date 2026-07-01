@@ -26,7 +26,7 @@ theorie_ensembles() inchangée (22 axiomes) : aucun axiome fabriqué, que des N.
 from __future__ import annotations
 
 from bourbaki.logique.i_1_termes_relations.formule import (
-    var, et, appartient, impl, pourtout, Terme)
+    var, et, egal, appartient, impl, pourtout, Terme)
 from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
 from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (
@@ -37,6 +37,7 @@ from bourbaki.logique.i_3_quantifies.tactiques_abrege_quantif import (
 from bourbaki.ensembles.familles.ii_4_reunion_intersection_familles.ii_4_image_famille.ensembles_image_algebre_binaire_ii4 import (
     membre_image, membre_image_reciproque)
 from bourbaki.ensembles.fonctions.ii_3_2_reciproque.ensembles_reciproque import couple_reciproque
+from bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_theoremes import extensionnalite_appliquee
 
 
 def _t(v):
@@ -239,9 +240,44 @@ def image_reciproque_image_inclus_si_injective(f="f", x="X"):
     return N.loi_deduction(E.est_fonctionnel(recipf), incl)
 
 
+# ════════════════════════════════════════════════════════════════════════════
+#  ÉGALITÉ f⁻¹⟨f⟨X⟩⟩ = X   sous  { H_app(X,f),  f injective }.
+# ════════════════════════════════════════════════════════════════════════════
+def cible_image_reciproque_image_egal_si_injective(f="f", x="X"):
+    from bourbaki.logique.i_1_termes_relations.formule import inclus
+    vf, vx = _t(f), _t(x)
+    return impl(_hyp_applicative(vf, vx),
+                impl(E.est_fonctionnel(E.reciproque(vf)),
+                     egal(E.image(E.reciproque(vf), E.image(vf, vx)), vx)))
+
+
+# @livre Ch.R §2.10 Prop.- | E.R.9 L.31-31 | PDF p.312
+def image_reciproque_image_egal_si_injective(f="f", x="X"):
+    """⊢ H_app(X,f) ⇒ est_fonctionnel(f⁻¹) ⇒ f⁻¹⟨f⟨X⟩⟩ = X.
+
+    Double inclusion (extensionnalité A1) : X ⊂ f⁻¹⟨f⟨X⟩⟩ [(18), sous H_app] et
+    f⁻¹⟨f⟨X⟩⟩ ⊂ X [réciproque sous f injective].  C'est le fait « f injective ⇒
+    f⁻¹∘f = Id sur les parties », cœur de l'injectivité de A ↦ f⟨A⟩ (Eq(𝔓E,𝔓F))."""
+    from bourbaki.logique.i_1_termes_relations.formule import egal as _egal  # noqa
+    vf, vx = _t(f), _t(x)
+    recipf = E.reciproque(vf)
+    lhs = E.image(recipf, E.image(vf, vx))               # f⁻¹⟨f⟨X⟩⟩
+    hp_app = _hyp_applicative(vf, vx)
+
+    incl_Xsub = N.modus_ponens(N.assume(hp_app),
+                               inclus_image_reciproque_image(vf, vx))          # X ⊂ f⁻¹⟨f⟨X⟩⟩
+    incl_subX = N.modus_ponens(N.assume(E.est_fonctionnel(recipf)),
+                               image_reciproque_image_inclus_si_injective(vf, vx))  # f⁻¹⟨f⟨X⟩⟩ ⊂ X
+    eq = N.modus_ponens(conjonction_intro(incl_subX, incl_Xsub),
+                        extensionnalite_appliquee(lhs, vx))                     # f⁻¹⟨f⟨X⟩⟩ = X
+    return N.loi_deduction(hp_app, N.loi_deduction(E.est_fonctionnel(recipf), eq))
+
+
 __all__ = [
     "inclus_image_reciproque_image", "cible_inclus_image_reciproque_image",
     "image_image_reciproque_inclus", "cible_image_image_reciproque_inclus",
     "image_reciproque_image_inclus_si_injective",
     "cible_image_reciproque_image_inclus_si_injective",
+    "image_reciproque_image_egal_si_injective",
+    "cible_image_reciproque_image_egal_si_injective",
 ]
