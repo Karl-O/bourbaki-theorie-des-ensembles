@@ -48,7 +48,11 @@ Restantes tractables (present=NON confirmé en code) :
 1. **(24) pr₁⁻¹(X)=X×F** — Résumé §3 item 3e (image réciproque de projection).
    ✅ (25) `pr₁⟨X×Y⟩=X` (Y≠∅) + dual `pr₂⟨X×Y⟩=Y` (X≠∅) FAIT
    (`ii_3_correspondances/ensembles_projection_produit.py`, `pr1_produit`/`pr2_produit` CLOS).
-2. **(17) f⁻¹(Y)=f⁻¹(Y∩f(E))** — Résumé §2 item 7.
+2. ✅ **(17) f⁻¹(Y)=f⁻¹(Y∩img f)** — Résumé §2 item 7 FAIT
+   (`fonctions/ii_3_2_reciproque/ensembles_reciproque_intersection_image.py`, CLOS,
+   inconditionnel via img f = pr₂⟨f⟩). Piège : membre_image_reciproque lie « x » (=liant
+   AXIOME_IMAGE) → couple_dans_img casse (lie « x » aussi) ; contourné par couple_dans_dom
+   (liant « y ») sur f⁻¹ + pr1_reciproque (dom f⁻¹=img f).
 3. ✅ **Application majorée/minorée/bornée + borne sup/inf d'application** — Résumé §6 item 7
    FAIT (`ordre/iii_1_relations_ordre/ordre_treillis/ensembles_application_bornee.py` :
    5 défs via img F + 4 th CLOS : borne sup⇒majorée, bornée⇒majorée/minorée…).
