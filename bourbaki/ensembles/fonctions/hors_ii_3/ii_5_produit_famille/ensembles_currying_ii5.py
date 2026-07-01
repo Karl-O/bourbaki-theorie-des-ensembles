@@ -25,11 +25,12 @@ PROPOSITION 2 (E II.31, n° 2).
   injective si u surjective & v injective, surjective si u injective & v surjective ;
   bijective (Cor) si u,v bijectives.  La PREUVE de Bourbaki est par retraction/section
   (1° : s section de u, r rétraction de v ⇒ r∘(v∘f∘u)∘s = f ; 2° en miroir).
-  CAS 1° (injectif) : FAIT et CLOS, forme extensionnelle rétraction/section au niveau
-  des graphes, dans `ensembles_conjugaison_prop2_ii5.prop2_conjugaison_injective`
-  (contourne le verrou-τ ci-dessous en n'évaluant jamais un composé en un point-τ :
-  quantifier sur un point générique puis instancier au point-section).  Restent
-  REPORTÉS : le cas 2° (surjectif, dual) et l'OBJET-conjugaison lui-même.
+  CAS 1° (injectif) et CAS 2° (surjectif) : FAITS et CLOS, forme rétraction/section au
+  niveau des graphes, dans `ensembles_conjugaison_prop2_ii5.prop2_conjugaison_injective`
+  et `ensembles_conjugaison_prop2_surj_ii5.prop2_conjugaison_surjective` — tous deux
+  contournent le verrou-τ ci-dessous (1° : ne jamais évaluer un composé en un point-τ,
+  quantifier-générique-puis-instancier ; 2° : témoin graphe_terme à liants FRAIS, levée
+  du « verrou liant valeur »).  Reste REPORTÉ : l'OBJET-conjugaison f↦v∘f∘u lui-même.
   VERROU : la CONSTRUCTION du graphe-terme de la conjugaison f ↦ v∘f∘u (recomposition
   d'applications EMBALLÉES, bien-définition + injectivité back-and-forth) est exactement
   le « verrou dur » DÉJÀ documenté et REPORTÉ dans

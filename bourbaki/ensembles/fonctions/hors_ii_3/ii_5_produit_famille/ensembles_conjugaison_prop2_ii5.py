@@ -37,8 +37,9 @@ n'est jamais appelée, donc AUCUNE capture de liant.
 HYPOTHÈSES (toutes fidèles ; f₁,f₂ « applications » E→F au niveau graphe ; s : E→E'
 section de u ; r rétraction de v ; conjuguées ponctuellement égales) — cf. `_hypotheses`.
 Résultat CLOS (0 hypothèse non déchargée), rien postulé ; theorie_ensembles INCHANGÉE
-(22 axiomes).  Reste REPORTÉ : (2°) le cas surjectif (dual), et l'objet-conjugaison
-lui-même (verrou-τ).  Voir [[bourbaki-fidelite-pdf]].
+(22 axiomes).  Le cas (2°) surjectif est traité (dual) dans
+`ensembles_conjugaison_prop2_surj_ii5`.  Reste REPORTÉ : l'objet-conjugaison lui-même
+(verrou-τ).  Voir [[bourbaki-fidelite-pdf]], [[bourbaki-verrou-tau-contournement]].
 """
 from __future__ import annotations
 
