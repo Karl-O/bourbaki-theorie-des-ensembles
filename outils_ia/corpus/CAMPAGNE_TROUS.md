@@ -45,7 +45,22 @@ FAIT ✅ : **Triplet (a,b,c)=((a,b),c) + 3 projections** (`ii_2_couples_produit/
 `triplet_projection_1/2/3` CLOS). ⚠️ ii_2_couples_produit atteint 10 entrées → prochaine
 addition II.2 = créer un sous-dossier.
 Restantes tractables (present=NON confirmé en code) :
-1. **(24) pr₁⁻¹(X)=X×F** — Résumé §3 item 3e (image réciproque de projection).
+1. ✅ **(24) pr₁⁻¹(X)=X×F** — Résumé §3 item 3e — **FAIT / CLOS**
+   (`ii_3_2_reciproque/ensembles_projection_reciproque_produit.py`, `pr1_reciproque_produit` :
+   ⊢ X⊂E ⇒ image(reciproque(graphe_terme(E×F,pr₁(k),'k')), X) = X×F, 0 hyp, theorie==22 ;
+   commit 7980160, 2 tests verts).
+   ⭐ **LEÇON τ (réutilisable, distincte du nœud « z »)** — quand un LEMME lie un existentiel à
+   un nom fixe (ici `membre_image_reciproque` lie « x ») et qu'un TERME du graphe lie le MÊME
+   nom (pr₁(k)=τx(∃y(k=(x,y)))), la collision est fatale (couple_reciproque casse) ET le
+   renommage-α est IMPOSSIBLE (le round-trip x→s→x recapture le τx → liant « @0 » qui ne
+   s'aligne plus). FIX : ne PAS renommer l'existentiel ; construire le TERME (pr₁) avec un liant
+   FRAIS « i1 » via un portage binder-configurable du lemme de projection (`_proj1`), utilisé
+   PARTOUT de façon cohérente (terme de G, `_mgt`, reconstruction du couple). Les liants α-variant
+   NE sont PAS égaux dans ce noyau (τi1≠τx littéralement) → cohérence obligatoire. pr₂ garde son
+   liant par défaut car il n'apparaît JAMAIS sous l'existentiel. Rebinder final « t »→« z » (A1).
+   Pièges annexes : membre_image_reciproque/couple_reciproque renvoient des ÉQUIVALENCES → toujours
+   `equivalence_avant/arriere` avant un MP ; `_reconstruction_couple` ASSUME t∈A×B → décharger avec
+   le t∈A×B DÉRIVÉ (sinon « t libre dans une hypothèse » au generalisation).
    ✅ (25) `pr₁⟨X×Y⟩=X` (Y≠∅) + dual `pr₂⟨X×Y⟩=Y` (X≠∅) FAIT
    (`ii_3_correspondances/ensembles_projection_produit.py`, `pr1_produit`/`pr2_produit` CLOS).
 2. ✅ **(17) f⁻¹(Y)=f⁻¹(Y∩img f)** — Résumé §2 item 7 FAIT
@@ -123,3 +138,4 @@ itérées f^n (dépend récursion entiers).
 | 2026-07-01 | **Application majorée/minorée/bornée + bornes** | absent → **FORMALISÉ CLOS** | `ensembles_application_bornee.py` (5 défs + 4 th) ; ordre_treillis atteint 10 entrées |
 | 2026-07-01 | **Familles croissantes/décroissantes de parties** | absent → **FORMALISÉ CLOS** | `ensembles_famille_monotone.py` (2 défs + 2 th) ; piège : pourtout a tag « non » (¬∃¬), pas « pourtout » |
 | 2026-07-01 | **Eq(E,F)⇒Eq(𝔓E,𝔓F)** (Résumé §7.1) | absent → **THÉORÈME CLOS** | `equipotent_parties` (commits 5dd3580+f8073cf) ; nœud de liants « z » du pilier 4 levé par élément NEUTRE « p » + renommage-au-generalisation-final ; assemblage via couple_valeur_dans_graphe + reciproque_fonctionnelle + bijection_de_conjoints + S5 ; 7 tests verts |
+| 2026-07-01 | **(24) pr₁⁻¹(X)=X×F** (Résumé §3.3e) | absent → **CLOS** | `pr1_reciproque_produit` (commit 7980160) ; nœud τ (existentiel « x » de membre_image_reciproque vs τx de pr₁) levé par liant FRAIS « i1 » pour pr₁ (`_proj1` binder-configurable), α-rename impossible (recapture) ; 2 tests verts |
