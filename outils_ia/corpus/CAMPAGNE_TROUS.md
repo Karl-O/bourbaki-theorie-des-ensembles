@@ -156,3 +156,15 @@ s'applique AUSSI à la sortie des agents/workflows : re-grep le CONTENU avant de
 5. ⚠️ **composition_associative_valeur** — risque τ RÉEL (composition_valeur_t en point-valeur τ, capture « y »). Technique liant-frais requise. NON vérifié absent à fond.
 6. **equipotent_singletons** (E III.23) — import cardinaux LOURD (tests 13-18 min) ; NON vérifié.
 → Reste à re-vérifier-en-code #3, #5, #6 avant tout effort. Les gains rapides fonctions/valeurs sont quasi saturés.
+
+## CARTE EXACTE du front (re-vérifiée EN CODE, 2026-07-01) — les docs étaient STALE
+Audit fiable (exécution/grep du code, pas les docs) des « gros chantiers » :
+- **Cantor 2^a>a = FAIT** (`cantor_strict` ⊢ X<P(X) CLOS) ; **Hessenberg a²=a = ASSEMBLÉ**
+  (`hessenberg/assemblage_vrai`) ; **Cantor-Bernstein = FAIT** ; **divisibilité entiers = FAIT**
+  (`divise`/`est_diviseur`/`multiple_ssi_divise`, hors dossier iii_5_6 vide → « dossier vide » FAUX signal).
+- **VRAI trou restant = division euclidienne EXISTENCE** (a=bq+r,r<b, th.1 REPORTÉ) **BLOQUÉ** :
+  l'arithmétique binaire entière b·q+r n'est PAS un terme (`plus_ent`/`prod_ent` opaques) ⇒ exige de
+  bâtir toute l'arithmétique binaire entière d'abord (multi-chantier). Idem `puissance_entiers` a^b.
+- Partiels non exhaustivement audités : limites III.7 (familles), structures Ch IV (IV.1/IV.2).
+→ **Front rapide+medium SATURÉ.** Restant = deep-fondational (arith. entière→division) ou verrou-τ objet.
+Décision : campagne multi-tick entiers OU T1 set.mm (carte fiable). NE PAS re-auditer ces chantiers.
