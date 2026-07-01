@@ -27,8 +27,8 @@ from __future__ import annotations
 from bourbaki.logique.i_1_termes_relations.formule import (var, egal, et, appartient, impl, pourtout, existe, tau, subst_f)
 from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N
 from bourbaki.ensembles.ii_1_axiomes_algebre import ensembles_abrege as E
-from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (conjonction_elim_gauche, conjonction_elim_droite,
-                               instancie)
+from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import (conjonction_intro, conjonction_elim_gauche,
+                               conjonction_elim_droite, instancie)
 from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import symetrie, composer_egalites, congruence_terme
 
 
@@ -89,6 +89,55 @@ def section_construite_par_tau(f="F", b="B"):
     return N.loi_deduction(hyp_surj, gen)
 
 
+# @livre Ch.II §3.8 Prop.8 | E II.18 L.26-36 | PDF p.69
+def retraction_construite_par_tau(u="U", ep="Ep"):
+    """⊢ injective_dans(U,E') ⇒ (∀x')(x'∈E' ⇒ r'(u(x'))=x'), r':=z↦τw(w∈E' ∧ u(w)=z).
+       (Prop. 8, sens réciproque, cas INJECTIF — DUAL de section_construite_par_tau.)
+
+    Bourbaki construit la rétraction TOTALE par partition de B en f(A) et B∖f(A)
+    (E II.18, exige A≠∅).  On établit ici la PROPRIÉTÉ de rétraction r'∘u = Id_{E'}
+    (niveau action, comme est_retraction) pour le témoin-τ canonique
+    r'(z) = τw(w∈E' ∧ u(w)=z), SANS A≠∅ : sur l'image un antécédent existe toujours,
+    et l'injectivité force τw(w∈E' ∧ u(w)=u(x')) = x'.
+    Cœur : existe_temoin sur un témoin TYPÉ (w∈E') + application de injective_dans."""
+    vU, vEp = var(u), var(ep)
+    vw, vxp = var("w"), var("xp")
+    # R = (w∈E' et u(w)=u(x'))  ;  r'(u(x')) = τw R  (liant « w » ≠ « y »-τ de valeur)
+    R = et(appartient(vw, vEp), egal(E.valeur(vU, vw), E.valeur(vU, vxp)))
+    tw = tau("w", R)                                    # r'(u(x'))
+
+    hinj = N.assume(E.injective_dans(vU, vEp))
+    hxp = N.assume(appartient(vxp, vEp))
+
+    # (∃w)(w∈E' et u(w)=u(x'))  — témoin w := x'  (x'∈E' et u(x')=u(x'))
+    refl = N.reflexivite(E.valeur(vU, vxp))            # u(x') = u(x')
+    ex = N.modus_ponens(conjonction_intro(hxp, refl), N.s5(R, vxp, "w"))   # (∃w)R
+
+    # témoin canonique typé : τwR ∈ E'  et  u(τwR) = u(x')
+    wit = N.modus_ponens(ex, N.existe_temoin(R, "w"))  # (τwR|w)R
+    tw_in_Ep = conjonction_elim_gauche(wit)            # τwR ∈ E'
+    u_tw_eq = conjonction_elim_droite(wit)             # u(τwR) = u(x')
+
+    # injectivité : (τwR∈E' et x'∈E' et u(τwR)=u(x')) ⇒ τwR = x'
+    inst = instancie(instancie(hinj, tw), vxp)
+    ante = conjonction_intro(conjonction_intro(tw_in_Ep, hxp), u_tw_eq)
+    tw_eq_xp = N.modus_ponens(ante, inst)              # r'(u(x')) = x'
+
+    inner = N.loi_deduction(appartient(vxp, vEp), tw_eq_xp)   # x'∈E' ⇒ r'(u(x'))=x'
+    gen = N.generalisation("xp", inner)
+    return N.loi_deduction(E.injective_dans(vU, vEp), gen)
+
+
+def cible_retraction_construite_par_tau(u="U", ep="Ep"):
+    """Cible exacte de retraction_construite_par_tau (pour les tests)."""
+    vU, vEp = var(u), var(ep)
+    vw, vxp = var("w"), var("xp")
+    R = et(appartient(vw, vEp), egal(E.valeur(vU, vw), E.valeur(vU, vxp)))
+    tw = tau("w", R)
+    return impl(E.injective_dans(vU, vEp),
+                pourtout("xp", impl(appartient(vxp, vEp), egal(tw, vxp))))
+
+
 def cible_retraction_implique_injective(r="R", f="F", a="A"):
     """Cible exacte de retraction_implique_injective (pour les tests)."""
     return impl(E.est_retraction(var(r), var(f), var(a)),
@@ -111,4 +160,6 @@ def cible_section_construite_par_tau(f="F", b="B"):
 
 
 __all__ = ["retraction_implique_injective", "section_construite_par_tau",
-           "cible_retraction_implique_injective", "cible_section_construite_par_tau"]
+           "retraction_construite_par_tau",
+           "cible_retraction_implique_injective", "cible_section_construite_par_tau",
+           "cible_retraction_construite_par_tau"]

@@ -56,3 +56,21 @@ def test_prop8_section_construite_autres_lettres():
     th = RS.section_construite_par_tau("g", "E")
     assert th.est_clos
     assert th.conclusion == RS.cible_section_construite_par_tau("g", "E")
+
+
+# ── Proposition 8, sens réciproque (construction de la rétraction par τ, injectif) ──
+def test_prop8_retraction_construite_par_tau():
+    th = RS.retraction_construite_par_tau()
+    assert th.est_clos
+    assert th.conclusion == RS.cible_retraction_construite_par_tau()
+
+
+def test_prop8_retraction_construite_autres_lettres():
+    th = RS.retraction_construite_par_tau("u0", "A")
+    assert th.est_clos
+    assert th.conclusion == RS.cible_retraction_construite_par_tau("u0", "A")
+
+
+def test_prop8_retraction_construite_theorie_inchangee():
+    RS.retraction_construite_par_tau()
+    assert len(E.theorie_ensembles().axiomes) == 22
