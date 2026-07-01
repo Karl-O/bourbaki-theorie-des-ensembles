@@ -59,7 +59,11 @@ Restantes tractables (present=NON confirmé en code) :
 4. ✅ **Familles `(X_ι)` croissantes/décroissantes de parties** — Résumé §6 item 12
    FAIT (`familles/ii_4_reunion_intersection_familles/ensembles_famille_monotone.py` :
    2 défs via valeur_famille + inclus, + 2 th de dépliage CLOS).
-5. **Eq(E,F) ⇒ Eq(𝔓E,𝔓F)** — Résumé §7 item 1 (construire bijection 𝔓E→𝔓F par image directe).
+5. **Eq(E,F) ⇒ Eq(𝔓E,𝔓F)** — Résumé §7 item 1. ⏳ EN COURS : recon (2 agents) confirme
+   ABSENT ; témoin H=graphe_terme(𝔓E, f⟨Y⟩, 'Y') ; FONDATION CLOSE (pilier 1 fonctionnel,
+   pilier 2 dom=𝔓E, valeur H(Y)=f⟨Y⟩ — image(·,·) est ATOMIQUE donc pas de capture-τ).
+   RESTE : pilier 3 (f inj ⇒ f⟨Y⟩=f⟨Y'⟩⇒Y=Y') + pilier 4 (f surj ⇒ ∀Z⊂F ∃Y f⟨Y⟩=Z, via
+   sélection S8) — algèbre d'image (liants AXIOME_IMAGE « x ») ; puis assemblage + ∃-intro.
 6. **⋂_{ι∈∅}X_ι = E** — Résumé §4 (40) — DÉLICAT : l'axiome AXIOME_INTER_FAM omet x∈E (écart connu).
 DÉJÀ FAITS (audit disait manquant) : assoc (E×F)×G≅E×(F×G) `eq_produit_associatif` ;
 invariance produit `eq_produit_invariant` ; bon ordre cardinaux `cardinaux_bien_ordonnes_close` ;
