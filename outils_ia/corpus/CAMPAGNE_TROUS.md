@@ -52,8 +52,9 @@ Restantes tractables (present=NON confirmé en code) :
 3. ✅ **Application majorée/minorée/bornée + borne sup/inf d'application** — Résumé §6 item 7
    FAIT (`ordre/iii_1_relations_ordre/ordre_treillis/ensembles_application_bornee.py` :
    5 défs via img F + 4 th CLOS : borne sup⇒majorée, bornée⇒majorée/minorée…).
-4. **Familles `(X_ι)` croissantes/décroissantes de parties** — Résumé §6 item 12
-   (est_croissante/monotone existent sur applications ; spécialiser aux familles I→𝔓(E) pour ⊂).
+4. ✅ **Familles `(X_ι)` croissantes/décroissantes de parties** — Résumé §6 item 12
+   FAIT (`familles/ii_4_reunion_intersection_familles/ensembles_famille_monotone.py` :
+   2 défs via valeur_famille + inclus, + 2 th de dépliage CLOS).
 5. **Eq(E,F) ⇒ Eq(𝔓E,𝔓F)** — Résumé §7 item 1 (construire bijection 𝔓E→𝔓F par image directe).
 6. **⋂_{ι∈∅}X_ι = E** — Résumé §4 (40) — DÉLICAT : l'axiome AXIOME_INTER_FAM omet x∈E (écart connu).
 DÉJÀ FAITS (audit disait manquant) : assoc (E×F)×G≅E×(F×G) `eq_produit_associatif` ;
@@ -83,3 +84,4 @@ itérées f^n (dépend récursion entiers).
 | 2026-07-01 | **Triplet + 3 projections** | absent → **FORMALISÉ CLOS** | `ensembles_triplet.py` + test (51 verts) |
 | 2026-07-01 | **(25) pr₁⟨X×Y⟩=X (Y≠∅) + dual** | absent → **FORMALISÉ CLOS** | `ensembles_projection_produit.py` + test (piège : couple_dans_produit n'accepte que des NOMS → couple_dans_produit_ssi qui prend des termes) |
 | 2026-07-01 | **Application majorée/minorée/bornée + bornes** | absent → **FORMALISÉ CLOS** | `ensembles_application_bornee.py` (5 défs + 4 th) ; ordre_treillis atteint 10 entrées |
+| 2026-07-01 | **Familles croissantes/décroissantes de parties** | absent → **FORMALISÉ CLOS** | `ensembles_famille_monotone.py` (2 défs + 2 th) ; piège : pourtout a tag « non » (¬∃¬), pas « pourtout » |
