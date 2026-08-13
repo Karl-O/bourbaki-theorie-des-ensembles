@@ -41,7 +41,7 @@ if str(_ICI) not in sys.path:
 from export_corpus import _decouvrir                     # noqa: E402  (découverte de modules)
 from repair_learned import _fn_principale, _n_args       # noqa: E402
 
-PACKAGES = ["bourbaki.logique", "bourbaki.ensembles"]    # rapides (PAS cardinaux/entiers)
+PACKAGES = ["bourbaki.i_description_mathematique_formelle", "bourbaki.ii_theorie_des_ensembles"]    # rapides (PAS cardinaux/entiers)
 NS = (2, 3, 4)                                            # longueurs de macro minées
 
 

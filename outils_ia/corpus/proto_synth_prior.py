@@ -44,9 +44,9 @@ from repair_learned import _assignes                        # noqa: E402
 
 PST.MAXT = 2500          # gros pool (sans noyau : featurisation seule) pour inclure les termes depth-2
 MODULES = [
-    "bourbaki.ensembles.ii_2_couples_produit.ensembles_projection_fonctionnelle",
-    "bourbaki.ensembles.ii_3_correspondances.ensembles_identite_neutre",
-    "bourbaki.ensembles.ii_3_correspondances.ensembles_diagonale_couple",
+    "bourbaki.ii_theorie_des_ensembles.ii_2_couples.ii_2_1_definition_couples.ensembles_projection_fonctionnelle",
+    "bourbaki.ii_theorie_des_ensembles.ii_3_correspondances.ii_3_1_graphes_correspondances.ensembles_identite_neutre",
+    "bourbaki.ii_theorie_des_ensembles.ii_3_correspondances.ii_3_1_graphes_correspondances.ensembles_diagonale_couple",
 ]
 
 

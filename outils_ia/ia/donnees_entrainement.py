@@ -9,13 +9,13 @@ Représentation propre (cf. propositions.py) : A⇒A est ∨¬AA, A⇒B est ∨�
 """
 from __future__ import annotations
 
-from bourbaki.assemblage.assemblage import negation, implication, disjonction
-from bourbaki.logique.i_1_termes_relations.propositions import SIG_PROP, A, B, C, D
+from bourbaki.i_description_mathematique_formelle.assemblage import negation, implication, disjonction
+from bourbaki.i_description_mathematique_formelle.i_1_termes_relations.outil_propositions import SIG_PROP, A, B, C, D
 from outils_ia.ia.chercheur import vocabulaire, instances_schemas, saturer_mp
 from outils_ia.ia.encodeur import encoder
-from bourbaki.logique.i_2_criteres_C.tactiques import tactiques as _T
-from bourbaki.logique.i_2_criteres_C.tactiques import tactiques_prop as _P
-from bourbaki.logique.i_4_egalitaires.tactiques_egalite import reflexivite, symetrie, transitivite
+from bourbaki.i_description_mathematique_formelle.i_2_theoremes.tactiques import tactiques as _T
+from bourbaki.i_description_mathematique_formelle.i_2_theoremes.tactiques import tactiques_prop as _P
+from bourbaki.i_description_mathematique_formelle.i_5_theories_egalitaires.i_5_2_tactiques_egalite import reflexivite, symetrie, transitivite
 
 _ATOMES = [A, B, C]          # atomes propositionnels (∨¬AA, …)
 

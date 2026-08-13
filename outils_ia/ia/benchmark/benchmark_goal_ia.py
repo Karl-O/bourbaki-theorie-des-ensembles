@@ -9,11 +9,11 @@ vus). Chiffres réels ; chaque preuve reste certifiée par le noyau.
 """
 from __future__ import annotations
 
-from bourbaki.assemblage.assemblage import disjonction, negation
-from bourbaki.logique.i_1_termes_relations.propositions import A, B, C, D, E, SIG_PROP
-from bourbaki.logique.i_1_termes_relations.lecture import est_relation  # noqa: F401  (cohérence d'API)
-from bourbaki.logique.i_2_criteres_C.noyau import noyau
-from bourbaki.logique.i_2_criteres_C.tactiques.tactiques import antecedent_consequent
+from bourbaki.i_description_mathematique_formelle.assemblage import disjonction, negation
+from bourbaki.i_description_mathematique_formelle.i_1_termes_relations.outil_propositions import A, B, C, D, E, SIG_PROP
+from bourbaki.i_description_mathematique_formelle.i_1_termes_relations.i_1_app_lecture import est_relation  # noqa: F401  (cohérence d'API)
+from bourbaki.i_description_mathematique_formelle.i_2_theoremes.noyau import noyau
+from bourbaki.i_description_mathematique_formelle.i_2_theoremes.tactiques.tactiques import antecedent_consequent
 from outils_ia.ia.chercheur import _est_implication
 from outils_ia.ia.prouveur_goal import _rels, _instances, _macros, prouver
 from outils_ia.ia.encodeur import traits_paire_seq, traits_alignement

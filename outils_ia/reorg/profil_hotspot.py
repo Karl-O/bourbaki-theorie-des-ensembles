@@ -15,7 +15,7 @@ from pathlib import Path
 
 sys.path.insert(0, os.getcwd())  # V9/ (cwd) pour importer bourbaki hors pytest
 
-MOD = "bourbaki.cardinaux.iii_6_infinis.denombrable.ensembles_denombrable_injection_iii6"
+MOD = "bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_6_infinis.denombrable.ensembles_denombrable_injection_iii6"
 FN = "trois_impair"
 
 m = importlib.import_module(MOD)

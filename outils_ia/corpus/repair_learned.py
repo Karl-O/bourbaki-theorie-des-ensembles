@@ -49,11 +49,11 @@ from proto_mutation_verify import _cible_de, _rebuild    # noqa: E402
 from gen_paires_corruption import _statut                # noqa: E402
 
 MODULES = [
-    "bourbaki.ensembles.ii_3_correspondances.ensembles_diagonale_couple",
-    "bourbaki.ensembles.ii_3_correspondances.ensembles_identite_neutre",
-    "bourbaki.ensembles.ii_2_couples_produit.ensembles_projection_fonctionnelle",
-    "bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_vide",
-    "bourbaki.ensembles.fonctions.ii_3_3_composee_graphes.ensembles_composee_monotone",
+    "bourbaki.ii_theorie_des_ensembles.ii_3_correspondances.ii_3_1_graphes_correspondances.ensembles_diagonale_couple",
+    "bourbaki.ii_theorie_des_ensembles.ii_3_correspondances.ii_3_1_graphes_correspondances.ensembles_identite_neutre",
+    "bourbaki.ii_theorie_des_ensembles.ii_2_couples.ii_2_1_definition_couples.ensembles_projection_fonctionnelle",
+    "bourbaki.ii_theorie_des_ensembles.ii_1_relations_collectivisantes.ensembles_vide",
+    "bourbaki.ii_theorie_des_ensembles.ii_3_correspondances.ii_3_3_composee_graphes.ensembles_composee_monotone",
 ]
 
 

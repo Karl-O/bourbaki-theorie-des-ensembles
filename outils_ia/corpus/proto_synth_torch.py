@@ -49,16 +49,16 @@ PST.MAXT = 1500
 # pas 23-25), produit_extensionnalite passe de 0 à 19 slots in-grammaire → +3 preuves de DONNÉES.
 # Le goulot était bien GRAMMAIRE, et l'enrichir débloque AUSSI de nouvelles preuves.
 MODULES = [
-    "bourbaki.ensembles.ii_2_couples_produit.ensembles_projection_fonctionnelle",
-    "bourbaki.ensembles.ii_3_correspondances.ensembles_identite_neutre",
-    "bourbaki.ensembles.ii_3_correspondances.ensembles_diagonale_couple",
-    "bourbaki.ensembles.ii_2_couples_produit.ensembles_produit_extensionnalite",  # pas 25 (débloqué)
+    "bourbaki.ii_theorie_des_ensembles.ii_2_couples.ii_2_1_definition_couples.ensembles_projection_fonctionnelle",
+    "bourbaki.ii_theorie_des_ensembles.ii_3_correspondances.ii_3_1_graphes_correspondances.ensembles_identite_neutre",
+    "bourbaki.ii_theorie_des_ensembles.ii_3_correspondances.ii_3_1_graphes_correspondances.ensembles_diagonale_couple",
+    "bourbaki.ii_theorie_des_ensembles.ii_2_couples.ii_2_2_produit_deux_ensembles.ensembles_produit_extensionnalite",  # pas 25 (débloqué)
     # pas 29 : modules NON-arrangement riches en slots (scan : aucun module n'a de slots d'ARRANGEMENT
     # composee/diagonale/couple hors des 4 ci-dessus → la donnée pour casser l'effet miroir n'existe
     # PAS dans le corpus). Ceux-ci ajoutent et/conjonction_elim/const/equivalence_avant = + de DONNÉES
     # diverses pour la robustesse générale du ranker (≠ arrangement).
-    "bourbaki.ensembles.fonctions.ii_3_general.ensembles_fonctions_props2",          # +21 in-gram
-    "bourbaki.ensembles.fonctions.ii_3_2_reciproque.ensembles_image_reciproque_props",  # +12 in-gram
+    "bourbaki.ii_theorie_des_ensembles.ii_3_correspondances.ii_3_4_fonctions.ensembles_fonctions_props2",          # +21 in-gram
+    "bourbaki.ii_theorie_des_ensembles.ii_3_correspondances.ii_3_2_reciproque.ensembles_image_reciproque_props",  # +12 in-gram
 ]
 CF_VOCAB = {}           # tactique appelante -> index (rempli à la collecte)
 

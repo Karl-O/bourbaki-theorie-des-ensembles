@@ -44,10 +44,10 @@ from repair_learned import _assignes                         # noqa: E402
 PST.MAXT = 2000          # pool large (le terme-oracle depth-2 ~rang 561 doit y être)
 CAP = 200                # budget FIXE d'essais-noyau par bloc
 TRAIN = [
-    "bourbaki.ensembles.ii_2_couples_produit.ensembles_projection_fonctionnelle",
-    "bourbaki.ensembles.ii_3_correspondances.ensembles_diagonale_couple",
+    "bourbaki.ii_theorie_des_ensembles.ii_2_couples.ii_2_1_definition_couples.ensembles_projection_fonctionnelle",
+    "bourbaki.ii_theorie_des_ensembles.ii_3_correspondances.ii_3_1_graphes_correspondances.ensembles_diagonale_couple",
 ]
-TEST = ["bourbaki.ensembles.ii_3_correspondances.ensembles_identite_neutre"]   # depth-2, tenu à l'écart
+TEST = ["bourbaki.ii_theorie_des_ensembles.ii_3_correspondances.ii_3_1_graphes_correspondances.ensembles_identite_neutre"]   # depth-2, tenu à l'écart
 
 
 def _ranke_slot(pool, cf, k, manq, disp, outs, model, vec):

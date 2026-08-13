@@ -12,7 +12,7 @@ ROOT = os.path.dirname(os.path.abspath(__file__))
 
 # ── Correspondance module -> dossier cible (sous V9/) ─────────────────────────
 MAP = {
-    'assemblage': 'bourbaki/assemblage',
+    'assemblage': 'bourbaki/i_description_mathematique_formelle',
     # logique
     'formule': 'bourbaki/logique', 'noyau': 'bourbaki/logique',
     'noyau_abrege': 'bourbaki/logique', 'propositions': 'bourbaki/logique',

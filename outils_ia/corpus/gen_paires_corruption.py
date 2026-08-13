@@ -42,12 +42,26 @@ if str(_ICI) not in sys.path:
 
 from proto_mutation_verify import _mutants, _cible_de   # noqa: E402  (machinerie de mutation)
 
-_DEFAUT_MOD = "bourbaki.ensembles.ii_3_correspondances.ensembles_diagonale_couple"
+_DEFAUT_MOD = "bourbaki.ii_theorie_des_ensembles.ii_3_correspondances.ii_3_1_graphes_correspondances.ensembles_diagonale_couple"
+
+
+def _ns_gate(mod, name: str) -> dict:
+    """Namespace d'exécution du gate : COPIE du module, caches déclarés NEUTRALISÉS.
+
+    Un prouveur mémoïsé (`if k in _CACHE: return _CACHE[k]`) rendrait son théorème
+    en cache et le gate ne testerait RIEN — piège mesuré le 7 août 2026. Le module
+    déclare ses caches via `<name>_gate_caches = ("_CACHE", …)` ; ils sont vidés
+    dans la copie seulement (les caches réels du module restent intacts)."""
+    ns = dict(mod.__dict__)
+    for cn in getattr(mod, name + "_gate_caches", ()):
+        v = ns.get(cn)
+        ns[cn] = {} if isinstance(v, dict) else None
+    return ns
 
 
 def _statut(mod, name: str, src: str, cible) -> str:
     """OK (cible) | WRONG (autre/aucun théorème) | ERROR (code cassé)."""
-    ns = dict(mod.__dict__)
+    ns = _ns_gate(mod, name)
     try:
         exec(src, ns)
         out = ns[name]()
@@ -56,6 +70,28 @@ def _statut(mod, name: str, src: str, cible) -> str:
     if type(out).__name__ == "Theoreme" and cible is not None and out.conclusion == cible:
         return "OK"
     return "WRONG"
+
+
+def _statut_parametre(mod, name: str, src: str, instances) -> str:
+    """Comme `_statut`, pour un prouveur PARAMÉTRÉ (campagne du 7 août 2026).
+
+    `instances` = [(args, énoncé attendu), …] — les instances canoniques fournies
+    par la compagne `<name>_instances()` du module DÉFINISSANT. Le verdict exige
+    la conclusion exacte sur CHAQUE instance : une seule dérive = WRONG."""
+    ns = _ns_gate(mod, name)
+    try:
+        exec(src, ns)
+        fn = ns[name]
+    except Exception:
+        return "ERROR"
+    for args, cible in instances:
+        try:
+            out = fn(*args)
+        except Exception:
+            return "ERROR"
+        if type(out).__name__ != "Theoreme" or cible is None or out.conclusion != cible:
+            return "WRONG"
+    return "OK"
 
 
 def trajectoires(mod, name: str, ntraj: int, kmax: int, rng: random.Random):

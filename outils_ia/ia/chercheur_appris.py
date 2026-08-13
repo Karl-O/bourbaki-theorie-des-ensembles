@@ -19,11 +19,11 @@ import heapq
 import math
 from itertools import count
 
-from bourbaki.assemblage.assemblage import Assemblage
-from bourbaki.logique.i_1_termes_relations.lecture import Signature, DEFAUT
-from bourbaki.logique.i_2_criteres_C.noyau import noyau
-from bourbaki.logique.i_2_criteres_C.noyau.noyau import Theoreme
-from bourbaki.logique.i_2_criteres_C.tactiques.tactiques import antecedent_consequent
+from bourbaki.i_description_mathematique_formelle.assemblage import Assemblage
+from bourbaki.i_description_mathematique_formelle.i_1_termes_relations.i_1_app_lecture import Signature, DEFAUT
+from bourbaki.i_description_mathematique_formelle.i_2_theoremes.noyau import noyau
+from bourbaki.i_description_mathematique_formelle.i_2_theoremes.noyau.noyau import Theoreme
+from bourbaki.i_description_mathematique_formelle.i_2_theoremes.tactiques.tactiques import antecedent_consequent
 from outils_ia.ia.chercheur import vocabulaire, instances_schemas, _est_implication
 
 _FAMILLES = ("S1", "S2", "S3", "S4")

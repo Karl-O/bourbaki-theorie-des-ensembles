@@ -39,7 +39,7 @@ _V9 = Path(__file__).resolve().parents[2]
 if str(_V9) not in sys.path:
     sys.path.insert(0, str(_V9))
 
-_DEFAUT_MOD = "bourbaki.ensembles.ii_3_correspondances.ensembles_diagonale_couple"
+_DEFAUT_MOD = "bourbaki.ii_theorie_des_ensembles.ii_3_correspondances.ii_3_1_graphes_correspondances.ensembles_diagonale_couple"
 
 
 def _cible_de(mod, name):
@@ -49,6 +49,25 @@ def _cible_de(mod, name):
             return fn()
         except Exception:
             return None
+    return None
+
+
+def _instances_de(mod, name):
+    """Compagne `<name>_instances()` → [(args, énoncé attendu), …] ou None.
+
+    Contrat du gate PARAMÉTRÉ (7 août 2026) : instances canoniques PETITES,
+    énoncés construits par les combinateurs d'énoncé (jamais en re-prouvant).
+    La compagne vit dans le module qui DÉFINIT le prouveur — un ré-export ne
+    s'exécute pas sous son nom d'alias dans `_statut_parametre`."""
+    fn = getattr(mod, name + "_instances", None)
+    if not callable(fn):
+        return None
+    try:
+        insts = list(fn())
+    except Exception:
+        return None
+    if insts and all(len(x) == 2 and isinstance(x[0], tuple) for x in insts):
+        return insts
     return None
 
 

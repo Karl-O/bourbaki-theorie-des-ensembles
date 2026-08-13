@@ -48,8 +48,8 @@ from gen_paires_corruption import _statut                   # noqa: E402
 from repair_learned import _assignes, _charges, _fn_principale, _n_args  # noqa: E402
 
 MODULES = [
-    "bourbaki.ensembles.ii_3_correspondances.ensembles_diagonale_couple",
-    "bourbaki.ensembles.ii_3_correspondances.ensembles_identite_neutre",
+    "bourbaki.ii_theorie_des_ensembles.ii_3_correspondances.ii_3_1_graphes_correspondances.ensembles_diagonale_couple",
+    "bourbaki.ii_theorie_des_ensembles.ii_3_correspondances.ii_3_1_graphes_correspondances.ensembles_identite_neutre",
 ]
 
 

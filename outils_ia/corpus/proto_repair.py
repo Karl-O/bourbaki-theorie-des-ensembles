@@ -42,7 +42,7 @@ if str(_ICI) not in sys.path:
 from proto_mutation_verify import _cible_de, _rebuild   # noqa: E402
 from gen_paires_corruption import _statut               # noqa: E402
 
-_DEFAUT_MOD = "bourbaki.ensembles.ii_3_correspondances.ensembles_diagonale_couple"
+_DEFAUT_MOD = "bourbaki.ii_theorie_des_ensembles.ii_3_correspondances.ii_3_1_graphes_correspondances.ensembles_diagonale_couple"
 
 
 def reparer(mod, name: str) -> dict:

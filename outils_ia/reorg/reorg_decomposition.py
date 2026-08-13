@@ -8,8 +8,8 @@ import sys
 import pathlib
 
 V9 = pathlib.Path(sys.argv[1])
-OLD = "bourbaki.ensembles.ii_6_equivalence"
-SUB = "bourbaki.ensembles.ii_6_equivalence.ii_6_5_decomposition"
+OLD = "bourbaki.ii_theorie_des_ensembles.ii_6_relations_equivalence"
+SUB = "bourbaki.ii_theorie_des_ensembles.ii_6_relations_equivalence.ii_6_5_decomposition"
 MODS = ["ensembles_decomposition_effective", "ensembles_decomposition_quotient"]
 
 repls = []

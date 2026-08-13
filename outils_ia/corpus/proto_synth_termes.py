@@ -48,7 +48,7 @@ PROF = 3                 # profondeur de synthèse (3 = 2 tours de constructeurs
 # défaut = module RAPIDE (projection, ~1.3 ms/essai) qui DÉMONTRE la synthèse end-to-end ; les
 # modules à slots PROFONDS (identite/diagonale, terme-oracle au rang ~561/7265) exigent le prior
 # appris (pas 19) — les passer en argument explicite + gros budget si besoin.
-DEFAUT = ["bourbaki.ensembles.ii_2_couples_produit.ensembles_projection_fonctionnelle"]
+DEFAUT = ["bourbaki.ii_theorie_des_ensembles.ii_2_couples.ii_2_1_definition_couples.ensembles_projection_fonctionnelle"]
 
 
 def _name(s):

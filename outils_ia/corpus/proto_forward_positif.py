@@ -113,9 +113,9 @@ import importlib                                       # noqa: E402
 
 # modules ensembles LÉGERS qui appellent composer_egalites (cf. grep) — pas de cardinaux/ordre III.7
 DYN_MODULES = [
-    "bourbaki.ensembles.fonctions.ii_3_general.ensembles_prop7_9_ii3",
-    "bourbaki.ensembles.fonctions.ii_3_general.ensembles_fonctions_props2",
-    "bourbaki.ensembles.fonctions.ii_3_general.ensembles_extensionnalite",
+    "bourbaki.ii_theorie_des_ensembles.ii_3_correspondances.ii_3_7_composee_fonctions.ensembles_prop7_9_ii3",
+    "bourbaki.ii_theorie_des_ensembles.ii_3_correspondances.ii_3_4_fonctions.ensembles_fonctions_props2",
+    "bourbaki.ii_theorie_des_ensembles.ii_3_correspondances.ii_3_4_fonctions.ensembles_extensionnalite",
 ]
 
 

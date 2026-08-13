@@ -1,0 +1,108 @@
+CHANTIERS BOURBAKI V9 — CALIBRE « FABLE 5, NIVEAU MAX (6/6) »
+Liste complète, maj 25 juillet 2026 (après fix subst/verrou-tau + fonction factorielle + pont restriction)
+Critère : raisonnement profond, erreur = régression en cascade ou preuve infidèle, pièges de liants/alpha.
+
+POLITIQUE MUR (directive Karl, 25 juil) : un mur ne se contourne PAS — on le SURPASSE
+dans tous les cas : construire les briques manquantes, ouvrir la théorie dédiée qu'il
+faut, re-dériver les prérequis, récursivement, jusqu'à percer. On ne passe au chantier
+suivant qu'un mur PERCÉ (ou pour laisser tourner un build long en fond). Limite absolue
+inchangée : rien postulé, noyau intouché, theorie==22 — « surpasser » = construire
+l'infrastructure, jamais tricher. Une donnée non dérivable sur une VARIABLE (ex. bo sur
+Enat) se surpasse en INSTANCIANT au terme concret (ensemble_NN()) et en dérivant là.
+
+========================================================================
+A. DANS LA BOUCLE ACTUELLE (campagne MURS, par priorité)
+========================================================================
+
+✅ A1 FAIT (25 juil) — f(0)=1 [6 hyps] + f(succ n)=succ(succ n)·u([0,n]) [9 hyps, fallback].
+✅ A2 FAIT (25 juil) — unicite_fonction_c62 {bo,ebf,rc} + est_un_graphe(⋃𝔇_tot) CLOS ⇒ (∃!f).
+✅ A3 FAIT (25 juil) — bo_graphe_NN CLOS ; c62/fonction_recursion_NN sur le VRAI ℕ à 2 résidus
+   {essais_bien_formes, rule_codomain}. Détails/recettes : CAMPAGNE_DEMOS.md + mémoire c62-sur-nn.
+✅ A4 FAIT (25 juil) — LE MUR DES FAMILLES EST FERMÉ : S1 valuation Card-valuée débloquée ;
+   Déf.2 fidèle n!=∏_{i<n}(i+1) + récursion (n+1)!=n!·(n+1) (T1a-T1c) ; S3 recollement indexé
+   E ≅ ⊔ fibres + AXIOME_SOMME_FAM (théorie dédiée) ; T3b Σ_{ι∈I} a = a·I (Cor.2) ;
+   T2 BERGERS PLEIN Card(E)=c·F. Résiduels documentés au journal (Prop.4 B2-B4, T3a Prop5b,
+   0!=1-def2, bergers-équipotent). Hypothèses exactes : journal + docstrings.
+
+A1. FACTORIELLE — ÉQUATIONS SÉPARÉES  [ARCHIVE — voir ✅ ci-dessus]
+    - f(0)=1 : FAIT (tick 2, ensembles_factorielle_zero.py, 3 tests verts).
+    - Briques cas successeur : FAITES (tick 3A, ensembles_factorielle_succ.py).
+    - RESTE (tick 3B) : u_non_vide + chaîne finale factorielle_succ_fallback
+      avec la variante canonique regle_factorielle(zcard="Z") ;
+      conclusion attendue : f(succ n) = produit(succ(succ n), valeur(u, seg(succ n)))
+      sous hypothèses honnêtes {bo, ebf, rc, essais_restriction, succ n dans E,
+      seg(succ n)=[0,n], ZERO dans E, ZERO dans seg(succ n), est_entier(n)}.
+    - Piège d'indexation documenté : la règle déposée encode f(n)=(n+1)!.
+
+A2. UNICITÉ-GRAPHE => (EXISTE-UNIQUE f) POUR C62
+    - Théorème : deux graphes fonctionnels de même domaine et mêmes valeurs
+      sont ÉGAUX (extensionnalité sur les couples, motifs du pont restriction).
+    - Donne l'unicité de la fonction C62 (le « il existe UNE application » du livre).
+
+A3. BON ORDRE DE N — bo(<=, N) SUR LE TERME ensemble_NN()
+    - Étape 1 : RE-TESTER l'instanciation de C60-final au terme ensemble_NN()
+      (le blocage « binder interne du gluing » datait d'AVANT le fix subst —
+      docstring ensembles_c62_recursion.py lignes 60-65).
+    - Étape 2 si ça passe : dériver est_bien_ordonne(<=, N) pour un ensemble
+      NON borné (le bon ordre clos déposé ne couvre que les intervalles [0,a]).
+    - C'est le DERNIER résidu irréductible de C62 : le tomber rend la
+      factorielle « CLOS modulo données de règle » seulement.
+
+A4. FAMILLES INDEXÉES (LE GROS MUR)
+    - Def.2 du livre : n! := PRODUIT DE LA FAMILLE (i+1) pour i<n (E III.41
+      L.28-29, PDF p.144) — exige l'arithmétique des familles de cardinaux.
+    - Principe des bergers PLEIN (Prop.9 §5.8 : seul le coeur binaire est clos).
+    - Prop 5b (partition) + Prop 6 Cor 2 (famille constante) du §3.3.
+    - Débloque aussi : R/§3.3/§6.4 (items familles de la campagne).
+
+A5. RE-CARTAGE DES ITEMS « PAUSE CHANTIER » POST-FIX SUBST
+    - Re-vérifier un par un les 76 items suspendus de CAMPAGNE_DEMOS.md :
+      ceux bloqués par « verrou-tau / commutativité sur tau » sont peut-être
+      devenus de purs assemblages (leçon : « bloqué » faux 3 fois).
+    - Exigeant en jugement (vrai mur vs faux mur), d'où Fable max.
+
+========================================================================
+B. HORS BOUCLE — SESSIONS DÉDIÉES À DÉCLENCHER MANUELLEMENT
+   (même format que la session verrou-tau : supervision + suite complète)
+========================================================================
+
+B1. PONT RESTRICTION-EXACTE / sup_borne
+    - Exposer sup_borne / M(D u) (borne supérieure, III.1) dans ensembles_abrege
+      et corriger le fallback prev = u(dom u) de regle_factorielle/regle_iteration.
+    - Touche la définition d'un terme du livre + toute la chaîne C62 aval.
+    - Ferait passer les équations factorielle de la forme-fallback à la forme
+      exacte f(n+1) = (n+2) * f(n).
+
+B2. MUR « graphe_terme != 22 » (PRODUITS D'APPLICATIONS)
+    - Même famille de risques que le verrou-tau (machinerie de graphes).
+    - À re-diagnostiquer post-fix subst avant tout build.
+
+B3. ZORN / HESSENBERG RÉSIDUELS
+    - Limites projectives/inductives (§III.7), a*a=a général (§III.6),
+      chaînes maximales. Les preuves transfinies les plus longues du projet.
+
+B4. ARITHMÉTIQUE CARDINALE INFINIE (§6.4)
+    - Dépend de B3 (Zorn) + A4 (familles). Le mur le plus lointain.
+
+B5. CANTOR 2^a > a  +  BON ORDRE DES CARDINAUX (restes §III.3)
+    - Diagonalisation + trichotomie cardinale ; sensibles aux collisions
+      de liants (tau-cardinaux imbriqués).
+
+B6. CST1 / CST2 (CHAPITRE IV, STRUCTURES)
+    - Métathéorie des espèces de structures : transport, isomorphismes,
+      critères CST. Conceptuellement le plus délicat du livre.
+
+========================================================================
+C. RAPPEL — CE QUI N'A PAS BESOIN DE FABLE MAX
+========================================================================
+    - @livre, manifestes LIVRE.md, lancer des suites de tests, rapport V9,
+      re-vérifications d'items cartographiés, plomberie/scripts :
+      Sonnet 5 niveau 1-2 ou Opus 5 niveau 3-4.
+    - Boucles overnight longues : Opus 5 niveau 3-4 (quota).
+    - Règle : Fable 6/6 quand le coût d'une erreur est une régression
+      silencieuse ou une preuve subtilement infidèle.
+
+========================================================================
+Suivi vivant : outils_ia/corpus/CAMPAGNE_DEMOS.md (bilans en tête).
+Mémoires : bourbaki-factorielle-fonction, bourbaki-commute-ordre-dependant,
+bourbaki-frontiere-2026-06 (carte à re-générer après A5).

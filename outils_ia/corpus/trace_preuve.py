@@ -30,7 +30,7 @@ _V9 = Path(__file__).resolve().parents[2]
 if str(_V9) not in sys.path:
     sys.path.insert(0, str(_V9))
 
-from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N  # noqa: E402
+from bourbaki.i_description_mathematique_formelle.i_2_theoremes.noyau import noyau_abrege as N  # noqa: E402
 
 PRIMITIVES = ["assume", "s1", "s2", "s3", "s4", "s5", "s6", "s7", "existe_temoin",
               "reflexivite", "alpha_tau", "axiome", "modus_ponens", "loi_deduction",
@@ -101,7 +101,7 @@ if __name__ == "__main__":
     # démo : tracer un théorème et afficher la trajectoire
     import importlib
     modname = sys.argv[1] if len(sys.argv) > 1 else \
-        "bourbaki.ensembles.ii_3_correspondances.ensembles_diagonale_couple"
+        "bourbaki.ii_theorie_des_ensembles.ii_3_correspondances.ii_3_1_graphes_correspondances.ensembles_diagonale_couple"
     fnname = sys.argv[2] if len(sys.argv) > 2 else "couple_diagonale"
     fn = getattr(importlib.import_module(modname), fnname)
     thm, steps = tracer_theoreme(fn)

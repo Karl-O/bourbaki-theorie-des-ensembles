@@ -32,14 +32,14 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 import importlib                                      # noqa: E402
 
-from bourbaki.logique.i_2_criteres_C.noyau import noyau_abrege as N          # noqa: E402
-from bourbaki.logique.i_4_egalitaires.tactiques_abrege_egalite import composer_egalites  # noqa: E402
-from bourbaki.logique.i_2_criteres_C.tactiques.tactiques_abrege2 import equivalence_transitivite  # noqa: E402
+from bourbaki.i_description_mathematique_formelle.i_2_theoremes.noyau import noyau_abrege as N          # noqa: E402
+from bourbaki.i_description_mathematique_formelle.i_5_theories_egalitaires.i_5_2_tactiques_abrege_egalite import composer_egalites  # noqa: E402
+from bourbaki.i_description_mathematique_formelle.i_2_theoremes.tactiques.tactiques_abrege2 import equivalence_transitivite  # noqa: E402
 from export_corpus import _decouvrir               # noqa: E402
 
 # logique + ensembles : domaine riche en égalités/équivalences/implications et RAPIDE.
 # (ordre III.4/III.6/III.7 + structures : proofs lourdes à construire -> écartées du probe.)
-PACKAGES_PROBE = ["bourbaki.logique", "bourbaki.ensembles"]
+PACKAGES_PROBE = ["bourbaki.i_description_mathematique_formelle", "bourbaki.ii_theorie_des_ensembles"]
 
 
 # ── détecteurs de type de conclusion ─────────────────────────────────────────

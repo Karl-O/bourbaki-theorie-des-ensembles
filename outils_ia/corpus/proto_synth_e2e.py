@@ -49,11 +49,11 @@ HOLDOUT = "module"       # "module" (pas 27 : module test jamais vu → TreeNN 5
 #                          leave-one-out — sur les 2 preuves MIROIR d'identite, 0 % car la sœur tenue
 #                          DANS le train est ADVERSARIALE : même contexte, arrangement opposé. cf README.
 TRAIN = [                # modules d'ENTRAÎNEMENT (distincts du test)
-    "bourbaki.ensembles.ii_2_couples_produit.ensembles_projection_fonctionnelle",
-    "bourbaki.ensembles.ii_3_correspondances.ensembles_diagonale_couple",
-    "bourbaki.ensembles.ii_2_couples_produit.ensembles_produit_extensionnalite",
+    "bourbaki.ii_theorie_des_ensembles.ii_2_couples.ii_2_1_definition_couples.ensembles_projection_fonctionnelle",
+    "bourbaki.ii_theorie_des_ensembles.ii_3_correspondances.ii_3_1_graphes_correspondances.ensembles_diagonale_couple",
+    "bourbaki.ii_theorie_des_ensembles.ii_2_couples.ii_2_2_produit_deux_ensembles.ensembles_produit_extensionnalite",
 ]
-TEST = ["bourbaki.ensembles.ii_3_correspondances.ensembles_identite_neutre"]   # depth-2, tenu à l'écart
+TEST = ["bourbaki.ii_theorie_des_ensembles.ii_3_correspondances.ii_3_1_graphes_correspondances.ensembles_identite_neutre"]   # depth-2, tenu à l'écart
 
 
 def _ordre(pool, nets, cf, k, manq, disp, outs, use_tree):

@@ -33,8 +33,22 @@ _RE = re.compile(
     r"\s*\|\s*"
     r"(?P<repere>.+?)\s+"            # E II.43   (repère imprimé du livre)
     r"L\.(?P<l1>\d+)-(?P<l2>\d+)"    # L.31-32
-    r"\s*\|\s*"
+    r"[^|]*\|\s*"                    # tolère une note « (…) » avant le |
     r"PDF\s+p\.(?P<phys>\d+)"        # PDF p.94
+)
+
+# Variante SANS lignes : référence à un item du Résumé (E.R.29 item 12) ou à
+# une plage de pages (E II.18-19) — pas de L.x-y à collationner, mais la notion
+# est bien calée sur une page imprimée du livre.
+_RE_ITEM = re.compile(
+    r"#\s*@livre\s+"
+    r"Ch\.(?P<chap>\S+)\s+"
+    r"§(?P<sec>\S+)\s+"
+    r"(?P<type>\w+)\.(?P<num>\S+)"
+    r"\s*\|\s*"
+    r"(?P<repere>[^|]+?)"
+    r"\s*\|\s*"
+    r"PDF\s+p\.(?P<phys>\d+)"
 )
 
 # Ordre canonique des chapitres (pour le tri ; R = Résumé).

@@ -55,14 +55,14 @@ _LIVRE_RE = re.compile(r"#\s*@livre\s+(.+)")
 
 # Liste « fast » par défaut (imports légers, pas de cardinaux 13-18 min).
 MODULES_FAST = [
-    "bourbaki.ensembles.ii_2_couples_produit.ensembles_couples",
-    "bourbaki.ensembles.ii_2_couples_produit.ensembles_couple_caracterisation",
-    "bourbaki.ensembles.ii_2_couples_produit.ensembles_projection_fonctionnelle",
-    "bourbaki.ensembles.ii_1_axiomes_algebre.ensembles_vide",
-    "bourbaki.ensembles.ii_3_correspondances.ensembles_diagonale_couple",
-    "bourbaki.ensembles.ii_3_correspondances.ensembles_identite_neutre",
-    "bourbaki.ensembles.fonctions.ii_3_3_composee_graphes.ensembles_composee_monotone",
-    "bourbaki.logique.i_3_quantifies.criteres_typiques_c41",
+    "bourbaki.ii_theorie_des_ensembles.ii_2_couples.ii_2_1_definition_couples.ensembles_couples",
+    "bourbaki.ii_theorie_des_ensembles.ii_2_couples.ii_2_1_definition_couples.ensembles_couple_caracterisation",
+    "bourbaki.ii_theorie_des_ensembles.ii_2_couples.ii_2_1_definition_couples.ensembles_projection_fonctionnelle",
+    "bourbaki.ii_theorie_des_ensembles.ii_1_relations_collectivisantes.ensembles_vide",
+    "bourbaki.ii_theorie_des_ensembles.ii_3_correspondances.ii_3_1_graphes_correspondances.ensembles_diagonale_couple",
+    "bourbaki.ii_theorie_des_ensembles.ii_3_correspondances.ii_3_1_graphes_correspondances.ensembles_identite_neutre",
+    "bourbaki.ii_theorie_des_ensembles.ii_3_correspondances.ii_3_3_composee_graphes.ensembles_composee_monotone",
+    "bourbaki.i_description_mathematique_formelle.i_4_theories_quantifiees.i_4_4_criteres_typiques_c41",
 ]
 
 
@@ -92,7 +92,7 @@ def _appel(fn):
     except TypeError:
         pass
     import inspect as _i
-    from bourbaki.logique.i_1_termes_relations.formule import var, appartient
+    from bourbaki.i_description_mathematique_formelle.i_1_termes_relations.outil_formule import var, appartient
     sig = _i.signature(fn)
     args = []
     for k, (nom, p) in enumerate(sig.parameters.items()):
@@ -171,7 +171,7 @@ def exporter_module(modname: str, records: list[dict], trace: bool = True) -> tu
 def _decouvrir(packages: list[str]) -> list[str]:
     """Liste les modules `bourbaki...` sous chaque package (récursif), pour l'export large.
 
-    `packages` = noms de packages importables (ex. 'bourbaki.ensembles'). On marche
+    `packages` = noms de packages importables (ex. 'bourbaki.ii_theorie_des_ensembles'). On marche
     le dossier du package et on renvoie les noms de modules `.py` (hors __init__,
     __pycache__). ÉVITE les cardinaux/entiers lents si non listés explicitement."""
     import pkgutil
@@ -189,8 +189,8 @@ def _decouvrir(packages: list[str]) -> list[str]:
 
 # Packages « rapides » par défaut pour --discover (logique + ensembles + ordre III.1 ;
 # PAS cardinaux/entiers, imports lents).
-PACKAGES_FAST = ["bourbaki.logique", "bourbaki.ensembles", "bourbaki.ordre",
-                 "bourbaki.structures"]
+PACKAGES_FAST = ["bourbaki.i_description_mathematique_formelle", "bourbaki.ii_theorie_des_ensembles", "bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.ordre",
+                 "bourbaki.iv_structures"]
 
 
 def main(argv: list[str]) -> int:

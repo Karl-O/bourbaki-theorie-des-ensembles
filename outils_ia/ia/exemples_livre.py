@@ -70,9 +70,9 @@ EXEMPLES: list[tuple[str, str, str]] = [
 
 def verifier_tous(sig=None):
     """Vérifie chaque exemple par le noyau. Renvoie [(titre, Rapport), ...]."""
-    from bourbaki.logique.i_1_termes_relations.lecture import DEFAUT
-    from bourbaki.logique.i_1_termes_relations.notation import lire_formule
-    from bourbaki.logique.verification.verificateur_preuve import executer_preuve
+    from bourbaki.i_description_mathematique_formelle.i_1_termes_relations.i_1_app_lecture import DEFAUT
+    from bourbaki.i_description_mathematique_formelle.i_1_termes_relations.outil_notation import lire_formule
+    from bourbaki.i_description_mathematique_formelle.i_2_theoremes.verification.verificateur_preuve import executer_preuve
     sig = sig or DEFAUT
     resultats = []
     for titre, but_txt, script in EXEMPLES:
