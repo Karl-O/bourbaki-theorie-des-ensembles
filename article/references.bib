@@ -1,0 +1,282 @@
+% Genere le 2 aout 2026 depuis RELATED.md + FICHES_MENACES.md + sources/INDEX.md.
+% TODO S4 verification des auteurs : FAIT en deux passes (PDF locaux + pages en ligne).
+%
+% ETAT AU 2 AOUT 2026 — TOUTES LES ENTREES VERIFIEES :
+%   - 5 sur PDF local (sources/related_work/) : olsak2020invariant, m2f2026 (auteurs ET
+%     TITRE corriges : « Mathematical Literature at Scale »), learningtodisprove2026,
+%     atlas2026, goedelarchitect2026.
+%   - 10 sur pages arXiv / editeur (2 aout, WebFetch/WebSearch) : april2026,
+%     blueprintrepair2026 (auteur UNIQUE : Khrulev), selfmodifying2026, faithfulnessgap2026,
+%     formalrx2026, conjecturingsurvey2026 (Zhang & Tan, JCST 41(1):46-66),
+%     hou2025versions (1er auteur = LUAN, titre complet avec sous-titre Isabelle),
+%     faults2026, mathlibnetwork2026, contextengineering2026 (auteure UNIQUE : Vishnyakova).
+%   - knuckledragger : page GitHub du projet (pas d'arXiv).
+%   REGLE : les traces de verification vivent en COMMENTAIRES % (le champ note S'IMPRIME
+%   dans la bibliographie — n'y mettre que du bibliographique).
+
+@article{grimm2010gaia,
+  author = {Grimm, Jos{\'e}},
+  title = {Implementation of {Bourbaki}'s {Elements} of {Mathematics} in {Coq}: Part One, Theory of Sets},
+  journal = {Journal of Formalized Reasoning},
+  volume = {3}, number = {1}, year = {2010}
+}
+@article{mathias2002term,
+  author = {Mathias, Adrian R. D.},
+  title = {A Term of Length 4{,}523{,}659{,}424{,}929},
+  journal = {Synthese}, volume = {133}, pages = {75--86}, year = {2002}
+}
+@inproceedings{ringer2020replica,
+  author = {Ringer, Talia and Sanchez-Stern, Alex and Grossman, Dan and Lerner, Sorin},
+  title = {{REPLica}: {REPL} Instrumentation for {Coq} Analysis},
+  booktitle = {Proc.\ CPP}, year = {2020}
+}
+@inproceedings{ringer2018pumpkin,
+  author = {Ringer, Talia and Yazdani, Nathaniel and Leo, John and Grossman, Dan},
+  title = {Adapting Proof Automation to Adapt Proofs},
+  booktitle = {Proc.\ CPP}, year = {2018}
+}
+@inproceedings{first2023baldur,
+  author = {First, Emily and Rabe, Markus and Ringer, Talia and Brun, Yuriy},
+  title = {{Baldur}: Whole-Proof Generation and Repair with Large Language Models},
+  booktitle = {Proc.\ ESEC/FSE}, year = {2023}
+}
+@inproceedings{reichel2023proofrepair,
+  author = {Reichel, Tom and Henderson, R. and Touchet, Andrew and Gardner, Andrew and Ringer, Talia},
+  title = {Proof Repair Infrastructure for Supervised Models: Building a Large Proof Repair Dataset},
+  booktitle = {Proc.\ ITP}, year = {2023}
+}
+% Verifie sur arxiv.org/abs/2602.02990 (2 aout 2026).
+@misc{april2026,
+  author = {Wang, Evan and Chess, Simon and Lee, Daniel and Ge, Siyuan and
+            Mallavarapu, Ajit and Alper, Jarod and Ilin, Vasily},
+  title = {Learning to Repair {Lean} Proofs from Compiler Feedback},
+  howpublished = {arXiv:2602.02990}, year = {2026}
+}
+% Verifie sur arxiv.org/abs/2607.28110 (2 aout 2026) : auteur unique.
+@misc{blueprintrepair2026,
+  author = {Khrulev, Ruslan},
+  title = {{BlueprintRepair}: Typed Local Edits for Failed {Lean} Proof Blueprints},
+  howpublished = {arXiv:2607.28110}, year = {2026}
+}
+% Verifie contre sources/related_work/arxiv_2606.06468.pdf p.1 (2 aout 2026) ;
+% 17 auteurs au total, les quatre premiers listes.
+@misc{goedelarchitect2026,
+  author = {Chung, Jui-Hui and Cai, Ziyang and Li, Zihao and Yin, Qishuo and others},
+  title = {{Goedel-Architect}: Streamlining Formal Theorem Proving with Blueprint Generation and Refinement},
+  howpublished = {arXiv:2606.06468}, year = {2026}
+}
+% Verifie sur arxiv.org/abs/2607.17352 (2 aout 2026).
+@misc{selfmodifying2026,
+  author = {Li, Yuqing and Wu, Zeguan and Gan, Yu and Liu, Junyu},
+  title = {Self-Modifying {Lean} Proof Agents with Verifier-Grounded Benchmark Coevolution},
+  howpublished = {arXiv:2607.17352}, year = {2026}
+}
+% Verifie contre sources/related_work/arxiv_2605.29955.pdf p.1 (2 aout 2026).
+% ATTENTION : le systeme multi-agent s'appelle AutoformBot ; ATLAS est la BIBLIOTHEQUE
+% qu'il produit (le texte du par.7 respecte la distinction).
+@misc{atlas2026,
+  author = {Rammal, Ahmad and Patel, Niket and Gloeckle, Fabian and Hayat, Amaury and Kempe, Julia and Munos, R{\'e}mi and Arnal, Charles and Cabannes, Vivien},
+  title = {Formalizing Mathematics at Scale},
+  howpublished = {arXiv:2605.29955}, year = {2026}
+}
+% Verifie contre sources/related_work/arxiv_2602.17016.pdf p.1 (2 aout 2026).
+@misc{m2f2026,
+  author = {Wang, Zichen and Ma, Wanli and Ming, Zhenyu and Zhang, Gong and Yuan, Kun and Wen, Zaiwen},
+  title = {{M2F}: Automated Formalization of Mathematical Literature at Scale},
+  howpublished = {arXiv:2602.17016}, year = {2026}
+}
+% Verifie sur arxiv.org/abs/2606.16541 (2 aout 2026).
+@misc{faithfulnessgap2026,
+  author = {Mohammad, Noor Islam S. and Sheikh, Tamim},
+  title = {The Faithfulness Gap: Certifying Semantic Equivalence Between Natural-Language and Formal Mathematical Statements},
+  howpublished = {arXiv:2606.16541}, year = {2026}
+}
+% Verifie sur arxiv.org/abs/2607.04655 (2 aout 2026).
+@misc{formalrx2026,
+  author = {Wang, Haocheng and Huang, Baiyu and Wan, Yingjia and Zhu, Xiao and
+            Liu, Xiaoyang and Huang, Yinya and Guo, Zhijiang},
+  title = {{FormalRx}: Rectify and eXamine Semantic Failures in Autoformalization},
+  howpublished = {arXiv:2607.04655}, year = {2026}
+}
+@misc{proofnet2023,
+  author = {Azerbayev, Zhangir and Piotrowski, Bartosz and Schoelkopf, Hailey and Ayers, Edward W. and Radev, Dragomir and Avigad, Jeremy},
+  title = {{ProofNet}: Autoformalizing and Formally Proving Undergraduate-Level Mathematics},
+  howpublished = {arXiv:2302.12433}, year = {2023}
+}
+@article{adams2016auditing,
+  author = {Adams, Mark},
+  title = {Proof Auditing Formalised Mathematics},
+  journal = {Journal of Formalized Reasoning}, volume = {9}, number = {1}, year = {2016}
+}
+@inproceedings{schulz2017inconsistencies,
+  author = {Schulz, Stephan and Sutcliffe, Geoff and Urban, Josef and Pease, Adam},
+  title = {Detecting Inconsistencies in Large First-Order Knowledge Bases},
+  booktitle = {Proc.\ CADE}, year = {2017}
+}
+@inproceedings{guilloud2023lisa,
+  author = {Guilloud, Simon and Gambhir, Sankalp and Kun{\v c}ak, Viktor},
+  title = {{LISA} --- A Modern Proof System},
+  booktitle = {Proc.\ ITP}, year = {2023}
+}
+% Auteur et titre verifies sur la page GitHub du projet (2 aout 2026) ; pas d'arXiv.
+@misc{knuckledragger,
+  author = {Zucker, Philip},
+  title = {Knuckledragger: A Low Barrier Proof Assistant},
+  howpublished = {\url{https://github.com/philzook58/knuckledragger}}, year = {2024},
+  note = {Python proof assistant over {Z3}}
+}
+@misc{li2022entrenchment,
+  author = {Li, Xue and Bundy, Alan and Philalithis, Eugene},
+  title = {Signature Entrenchment and Conceptual Changes in Automated Theory Repair},
+  howpublished = {arXiv:2201.08340}, year = {2022}
+}
+@inproceedings{li2022abc,
+  author = {Li, Xue and Bundy, Alan},
+  title = {An Overview of the {ABC} Repair System for {Datalog}-like Theories},
+  booktitle = {IJCAI-HLC Workshop (CEUR Vol.\ 3227)}, year = {2022}
+}
+@inproceedings{troquard2018weakening,
+  author = {Troquard, Nicolas and Confalonieri, Roberto and Galliani, Pietro and Pe{\~n}aloza, Rafael and Porello, Daniele and Kutz, Oliver},
+  title = {Repairing Ontologies via Axiom Weakening},
+  booktitle = {Proc.\ AAAI}, year = {2018}
+}
+@article{agm1985,
+  author = {Alchourr{\'o}n, Carlos E. and G{\"a}rdenfors, Peter and Makinson, David},
+  title = {On the Logic of Theory Change: Partial Meet Contraction and Revision Functions},
+  journal = {Journal of Symbolic Logic}, volume = {50}, number = {2}, pages = {510--530}, year = {1985}
+}
+@phdthesis{pease2007lakatos,
+  author = {Pease, Alison},
+  title = {A Computational Model of {Lakatos}-style Reasoning},
+  school = {University of Edinburgh}, year = {2007}
+}
+@inproceedings{johansson2014hipster,
+  author = {Johansson, Moa and Ros{\'e}n, Dan and Smallbone, Nicholas and Claessen, Koen},
+  title = {Hipster: Integrating Theory Exploration in a Proof Assistant},
+  booktitle = {Proc.\ CICM}, year = {2014}
+}
+@inproceedings{blanchette2011nitpick,
+  author = {Blanchette, Jasmin C. and Bulwahn, Lukas and Nipkow, Tobias},
+  title = {Automatic Proof and Disproof in {Isabelle/HOL}},
+  booktitle = {Proc.\ FroCoS}, year = {2011}
+}
+% Verifie contre sources/related_work/arxiv_2603.19514.pdf p.1 (2 aout 2026).
+@misc{learningtodisprove2026,
+  author = {Li, Zenan and Li, Zhaoyu and Yang, Kaiyu and Ma, Xiaoxing and Su, Zhendong},
+  title = {Learning to Disprove: Formal Counterexample Generation with Large Language Models},
+  howpublished = {arXiv:2603.19514}, year = {2026}
+}
+% Verifie via link.springer.com/article/10.1007/s11390-026-6040-0 (2 aout 2026).
+@article{conjecturingsurvey2026,
+  author = {Zhang, Jian and Tan, Si-Cheng},
+  title = {Automated Conjecturing and Theorem Finding: A Survey},
+  journal = {Journal of Computer Science and Technology},
+  volume = {41}, number = {1}, pages = {46--66}, year = {2026},
+  note = {DOI 10.1007/s11390-026-6040-0}
+}
+% Verifie contre sources/related_work/arxiv_1911.12073.pdf p.1 (2 aout 2026).
+@inproceedings{olsak2020invariant,
+  author = {Ol{\v s}{\'a}k, Miroslav and Kaliszyk, Cezary and Urban, Josef},
+  title = {Property Invariant Embedding for Automated Reasoning},
+  booktitle = {Proc.\ ECAI}, year = {2020},
+  note = {arXiv:1911.12073}
+}
+@inproceedings{jakubuv2020enigma,
+  author = {Jakub{\r u}v, Jan and Chvalovsk{\'y}, Karel and Ol{\v s}{\'a}k, Miroslav and Piotrowski, Bartosz and Suda, Martin and Urban, Josef},
+  title = {{ENIGMA} Anonymous: Symbol-Independent Inference Guiding Machine},
+  booktitle = {Proc.\ IJCAR}, year = {2020}
+}
+@inproceedings{kaliszyk2015features,
+  author = {Kaliszyk, Cezary and Urban, Josef and Vysko{\v c}il, Ji{\v r}{\'\i}},
+  title = {Efficient Semantic Features for Automated Reasoning over Large Theories},
+  booktitle = {Proc.\ IJCAI}, year = {2015}
+}
+@inproceedings{alemi2016deepmath,
+  author = {Alemi, Alexander A. and Chollet, Fran{\c c}ois and Een, Niklas and Irving, Geoffrey and Szegedy, Christian and Urban, Josef},
+  title = {{DeepMath} --- Deep Sequence Models for Premise Selection},
+  booktitle = {Proc.\ NeurIPS}, year = {2016}
+}
+@inproceedings{mikula2023magnushammer,
+  author = {Miku{\l}a, Maciej and others},
+  title = {Magnushammer: A Transformer-Based Approach to Premise Selection},
+  booktitle = {Proc.\ ICLR}, year = {2024}
+}
+@article{shervashidze2011wl,
+  author = {Shervashidze, Nino and Schweitzer, Pascal and van Leeuwen, Erik Jan and Mehlhorn, Kurt and Borgwardt, Karsten M.},
+  title = {Weisfeiler-Lehman Graph Kernels},
+  journal = {Journal of Machine Learning Research}, volume = {12}, pages = {2539--2561}, year = {2011}
+}
+@inproceedings{yang2019coqgym,
+  author = {Yang, Kaiyu and Deng, Jia},
+  title = {Learning to Prove Theorems via Interacting with Proof Assistants},
+  booktitle = {Proc.\ ICML}, year = {2019}
+}
+@inproceedings{lample2022htps,
+  author = {Lample, Guillaume and Lachaux, Marie-Anne and Lavril, Thibaut and Martinet, Xavier and Hayat, Amaury and Ebner, Gabriel and Rodriguez, Aur{\'e}lien and Lacroix, Timoth{\'e}e},
+  title = {{HyperTree} Proof Search for Neural Theorem Proving},
+  booktitle = {Proc.\ NeurIPS}, year = {2022}
+}
+@misc{polu2020gptf,
+  author = {Polu, Stanislas and Sutskever, Ilya},
+  title = {Generative Language Modeling for Automated Theorem Proving},
+  howpublished = {arXiv:2009.03393}, year = {2020}
+}
+@misc{wang2023voyager,
+  author = {Wang, Guanzhi and Xie, Yuqi and Jiang, Yunfan and Mandlekar, Ajay and Xiao, Chaowei and Zhu, Yuke and Fan, Linxi and Anandkumar, Anima},
+  title = {Voyager: An Open-Ended Embodied Agent with Large Language Models},
+  howpublished = {arXiv:2305.16291}, year = {2023}
+}
+@inproceedings{ellis2021dreamcoder,
+  author = {Ellis, Kevin and Wong, Catherine and Nye, Maxwell and others},
+  title = {{DreamCoder}: Bootstrapping Inductive Program Synthesis with Wake-Sleep Library Learning},
+  booktitle = {Proc.\ PLDI}, year = {2021}
+}
+@article{aitken2000errors,
+  author = {Aitken, J. Stuart and Melham, Thomas F.},
+  title = {An Analysis of Errors in Interactive Proof Attempts},
+  journal = {Interacting with Computers}, volume = {12}, number = {6}, pages = {565--586}, year = {2000}
+}
+@inproceedings{petiot2016fails,
+  author = {Petiot, Guillaume and Kosmatov, Nikolai and Botella, Bernard and Giorgetti, Alain and Julliand, Jacques},
+  title = {Your Proof Fails? {Testing} Helps to Find the Reason},
+  booktitle = {Proc.\ TAP}, year = {2016}
+}
+@article{huang2023proof2test,
+  author = {Huang, Li and Meyer, Bertrand and others},
+  title = {A Failed Proof Can Yield a Useful Test},
+  journal = {Software Testing, Verification and Reliability}, year = {2023},
+  note = {arXiv:2208.09873}
+}
+% Verifie via conf.researchr.org/fse-2025 + Semantic Scholar (2 aout 2026) :
+% 1er auteur = Luan (pas Hou, qui est 3e) ; titre complet avec sous-titre.
+@article{hou2025versions,
+  author = {Luan, Xiaokun and San{\'a}n, David and Hou, Zhe and Xu, Qiyuan and
+            Liu, Chengwei and Cai, Yufan and Liu, Yang and Sun, Meng},
+  title = {Why the Proof Fails in Different Versions of Theorem Provers: An Empirical
+           Study of Compatibility Issues in {Isabelle}},
+  journal = {Proc.\ ACM Softw.\ Eng.\ (FSE)},
+  volume = {2}, pages = {1499--1521}, year = {2025}, note = {DOI 10.1145/3715787}
+}
+% Verifie sur arxiv.org/abs/2606.29493 (2 aout 2026).
+@misc{faults2026,
+  author = {Ammanamanchi, Pawan Sasanka and Bhat, Siddharth and Biderman, Stella},
+  title = {Faults in Our Formal Benchmarking: Dataset Defects and Evaluation Failures in {Lean} Theorem Proving},
+  howpublished = {arXiv:2606.29493}, year = {2026}
+}
+% Verifie sur arxiv.org/abs/2604.24797 (2 aout 2026).
+@misc{mathlibnetwork2026,
+  author = {Li, Xinze and Peng, Nanyun and Severini, Simone and Shafto, Patrick},
+  title = {The Network Structure of {Mathlib}},
+  howpublished = {arXiv:2604.24797}, year = {2026}
+}
+@misc{fde2026taxonomy,
+  author = {Kim, Jiun and Hwang, Hyuntae},
+  title = {Forward Deployed Engineering: A Taxonomy and Definition},
+  howpublished = {SSRN 6374660}, year = {2026}
+}
+% Verifie sur arxiv.org/abs/2603.09619 (2 aout 2026) : auteure unique.
+@misc{contextengineering2026,
+  author = {Vishnyakova, Vera V.},
+  title = {Context Engineering: From Prompts to Corporate Multi-Agent Architecture},
+  howpublished = {arXiv:2603.09619}, year = {2026}
+}
