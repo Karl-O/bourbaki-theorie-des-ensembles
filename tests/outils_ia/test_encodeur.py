@@ -1,7 +1,7 @@
 """Tests V9 — encodage des valeurs pures (assemblages) pour l'IA numérique."""
 from __future__ import annotations
 
-from bourbaki.assemblage.assemblage import Assemblage, implication, negation
+from bourbaki.i_description_mathematique_formelle.assemblage import Assemblage, implication, negation
 from outils_ia.ia.encodeur import encoder, traits_paire, TRAITS
 
 A = Assemblage(("=", "a", "b"))
@@ -28,7 +28,7 @@ def test_encoder_terme_vs_relation():
 
 
 def test_encoder_impl_reflexive():
-    from bourbaki.assemblage.assemblage import implication
+    from bourbaki.i_description_mathematique_formelle.assemblage import implication
     B = Assemblage(("=", "b", "c"))
     assert dict(zip(TRAITS, encoder(implication(A, A))))["impl_reflexive"] == 1
     assert dict(zip(TRAITS, encoder(implication(A, B))))["impl_reflexive"] == 0

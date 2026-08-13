@@ -1,0 +1,199 @@
+"""§II.3.1 — Image du domaine = ensemble des valeurs (Bourbaki E II.10).
+
+Énoncé Bourbaki VERBATIM (E II.10, §3, n°1, suite de la Déf. 3) :
+
+  « comme (x,y) ∈ G entraîne x ∈ pr₁G, on a  G⟨pr₁G⟩ = pr₂G. »
+
+RÉSULTAT (CLOS — 0 hypothèse, inconditionnel — certifié par le noyau LCF) :
+
+  ⊢  G⟨pr₁G⟩ = pr₂G        c.-à-d.   ⊢  image(G, dom G) = img G
+
+où image(G,X) = G⟨X⟩ (E.image), dom G = pr₁G (E.dom, AXIOME_DOM) et img G = pr₂G
+(E.img, AXIOME_IMG).  C'est une ÉGALITÉ d'ensembles, donc le résultat est clos
+(aucune prémisse honnête : tout couple de G ayant sa 1ᵉ coordonnée dans pr₁G,
+l'image du domaine épuise déjà l'ensemble des valeurs).
+
+STRATÉGIE (extensionnalité A1 = double inclusion sur G⟨pr₁G⟩ et pr₂G).
+
+  ⊆  G⟨pr₁G⟩ ⊂ pr₂G — c'est `image_dans_img(G, X)` instancié en X := dom G
+     (G⟨X⟩ ⊂ pr₂G pour TOUT X) ; direct.
+
+  ⊇  pr₂G ⊂ G⟨pr₁G⟩ — (∀y)(y∈pr₂G ⇒ y∈G⟨pr₁G⟩).  Soit y :
+       _inst_img : (y∈pr₂G) ⇔ (∃x)((x,y)∈G).
+       Pour chaque x : (x,y)∈G ⇒ x∈pr₁G  (couple_dans_dom = « x∈pr₁G entraîné par
+       (x,y)∈G », l'argument MÊME de Bourbaki) ; d'où (x,y)∈G ⇒ (x∈pr₁G et (x,y)∈G).
+       _inst_image (sens ⇐, témoin x) : (x∈pr₁G et (x,y)∈G) ⇒ y∈G⟨pr₁G⟩.
+       Composé : (x,y)∈G ⇒ y∈G⟨pr₁G⟩ ; existe_elimination(x) (y non lié) :
+       (∃x)((x,y)∈G) ⇒ y∈G⟨pr₁G⟩ ; précomposé par _inst_img (sens ⇒) :
+       y∈pr₂G ⇒ y∈G⟨pr₁G⟩ ; generalisation(y) ⇒ pr₂G ⊂ G⟨pr₁G⟩.
+
+  Puis extensionnalite_appliquee(G⟨pr₁G⟩, pr₂G) sur (⊆ et ⊇) ⇒ G⟨pr₁G⟩ = pr₂G.
+
+theorie_ensembles() INCHANGÉE (= 22) : aucun axiome ajouté (primitives N.* seules,
+réutilisation de théorèmes/lemmes existants).
+"""
+from __future__ import annotations
+
+from bourbaki.i_description_mathematique_formelle.i_1_termes_relations.outil_formule import (
+    Terme, var, egal, et, appartient, inclus)
+from bourbaki.i_description_mathematique_formelle.i_2_theoremes.noyau import noyau_abrege as N
+from bourbaki.ii_theorie_des_ensembles.ii_1_relations_collectivisantes import ensembles_abrege as E
+from bourbaki.i_description_mathematique_formelle.i_2_theoremes.tactiques.tactiques_abrege import syllogisme
+from bourbaki.i_description_mathematique_formelle.i_2_theoremes.tactiques.tactiques_abrege2 import (
+    conjonction_intro, equivalence_avant, equivalence_arriere, projection_droite)
+from bourbaki.i_description_mathematique_formelle.i_4_theories_quantifiees.i_4_3_tactiques_abrege_quantif import (
+    existe_elimination, monotonie_existe)
+from bourbaki.ii_theorie_des_ensembles.ii_1_relations_collectivisantes.ensembles_theoremes import (
+    extensionnalite_appliquee)
+from bourbaki.i_description_mathematique_formelle.i_2_theoremes.tactiques.tactiques_abrege2 import (
+    conjonction_elim_gauche, conjonction_elim_droite)
+from bourbaki.ii_theorie_des_ensembles.ii_3_correspondances.ii_3_1_graphes_correspondances.ensembles_correspondances import (
+    _inst_image, _inst_img, image_dans_img)
+from bourbaki.ii_theorie_des_ensembles.ii_3_correspondances.ii_3_4_fonctions.ensembles_extensionnalite import (
+    couple_dans_dom)
+
+
+def _T(v):
+    """Coercion nom → terme."""
+    return v if isinstance(v, Terme) else var(v)
+
+
+# @livre Ch.II §3.1 Rem.- | E II.10 L.36-36 | PDF p.61
+def image_domaine_egale_img(g="G"):
+    """⊢ G⟨pr₁G⟩ = pr₂G   (= image(G, dom G) = img G).   (Bourbaki E II.10, §3, n°1.)
+
+    CLOS (0 hypothèse, inconditionnel) : « comme (x,y)∈G entraîne x∈pr₁G, on a
+    G⟨pr₁G⟩ = pr₂G ».  Double inclusion (A1) : ⊆ = image_dans_img spécialisé à
+    X := dom G (toute image directe ⊂ pr₂G), ⊇ via couple_dans_dom
+    (l'entraînement de Bourbaki) + _inst_image.
+
+    NB : on RECONSTRUIT les inclusions avec des TERMES (X := dom G est un terme
+    composé, non un nom) ; les helpers `image_dans_img`/`inclus` attendent des
+    NOMS et re-wrappent via var() — on appelle donc directement _inst_image /
+    _inst_img (qui acceptent des termes via instancie) et generalisation."""
+    vG = _T(g)
+    vy = var("z")   # élément d'image générique ; nom "z" = liant canonique de `inclus`
+    domG = E.dom(vG)                                          # pr₁G
+    imgG = E.img(vG)                                          # pr₂G
+    imgDom = E.image(vG, domG)                                # G⟨pr₁G⟩
+
+    # ── ⊆ : G⟨pr₁G⟩ ⊂ pr₂G — spécialisation de image_dans_img à X := dom G ────────
+    # (z∈G⟨domG⟩ ⇒ z∈pr₂G) : (x∈domG et (x,z)∈G)⇒(x,z)∈G, ∃-monotone, via _inst_*.
+    vx = var("x")
+    proj = projection_droite(appartient(vx, domG),           # (x∈domG et (x,z)∈G)⇒(x,z)∈G
+                             appartient(E.couple(vx, vy), vG))
+    mono = monotonie_existe(proj, "x")                       # (∃x …domG)⇒(∃x (x,z)∈G)
+    z_imp = syllogisme(equivalence_avant(_inst_image(vG, domG, vy)),
+                       syllogisme(mono, equivalence_arriere(_inst_img(vG, vy))))
+    incl_avant = N.generalisation("z", z_imp)                # G⟨domG⟩ ⊂ pr₂G  (liant "z")
+
+    # ── ⊇ : pr₂G ⊂ G⟨pr₁G⟩ ───────────────────────────────────────────────────────
+    # Pour x quelconque : (x,z)∈G ⇒ x∈pr₁G  (couple_dans_dom, l'entraînement Bourbaki).
+    couple_xy = appartient(E.couple(vx, vy), vG)              # (x,z)∈G
+    h_xy = N.assume(couple_xy)
+    x_in_dom = N.modus_ponens(h_xy, N.loi_deduction(          # x∈pr₁G
+        couple_xy, couple_dans_dom(vG, vx, vy)))
+    # (x∈pr₁G et (x,z)∈G) ⇒ (∃x)(x∈pr₁G et (x,z)∈G) ⇒ z∈G⟨pr₁G⟩.
+    body = et(appartient(vx, domG), couple_xy)                # x∈domG et (x,z)∈G  (= (x|x)corps)
+    ex_body = N.modus_ponens(                                 # (∃x)(x∈domG et (x,z)∈G), témoin x
+        conjonction_intro(x_in_dom, h_xy), N.s5(body, vx, "x"))
+    car_img = _inst_image(vG, domG, vy)                       # z∈G⟨domG⟩ ⇔ (∃x)(x∈domG et (x,z)∈G)
+    z_in_imgDom = N.modus_ponens(ex_body, equivalence_arriere(car_img))  # z∈G⟨pr₁G⟩
+    couple_imp = N.loi_deduction(couple_xy, z_in_imgDom)      # (x,z)∈G ⇒ z∈G⟨pr₁G⟩
+    ex_imp = existe_elimination(couple_imp, "x")             # (∃x)(x,z)∈G ⇒ z∈G⟨pr₁G⟩
+    # Précompose par _inst_img (sens ⇒) : z∈pr₂G ⇒ (∃x)(x,z)∈G.
+    car_img2 = _inst_img(vG, vy)                              # (z∈pr₂G) ⇔ (∃x)((x,z)∈G)
+    z_imp2 = syllogisme(equivalence_avant(car_img2), ex_imp)  # z∈pr₂G ⇒ z∈G⟨pr₁G⟩
+    incl_arriere = N.generalisation("z", z_imp2)             # pr₂G ⊂ G⟨pr₁G⟩ (liant "z")
+
+    # ── A1 : (G⟨pr₁G⟩ ⊂ pr₂G  et  pr₂G ⊂ G⟨pr₁G⟩) ⇒ G⟨pr₁G⟩ = pr₂G ──────────────
+    return N.modus_ponens(conjonction_intro(incl_avant, incl_arriere),
+                          extensionnalite_appliquee(imgDom, imgG))
+
+
+def image_domaine_egale_img_cible(g="G"):
+    """Énoncé visé de `image_domaine_egale_img` (pour vérification stricte)."""
+    vG = _T(g)
+    return egal(E.image(vG, E.dom(vG)), E.img(vG))
+
+
+def _image_croissante_terme(vG, vX, vY):
+    """⊢ (X ⊂ Y) ⇒ (G⟨X⟩ ⊂ G⟨Y⟩)   pour des TERMES X, Y quelconques.
+
+    Recopie EXACTE du motif de `image_croissante` (Prop. 2, E.II.40), mais avec
+    X, Y reçus comme TERMES (et non re-wrappés par `var()` comme dans le helper
+    public dont les arguments sont des NOMS).  Indispensable ici car X := dom G
+    est un terme composé (pr₁G), pas une lettre."""
+    from bourbaki.i_description_mathematique_formelle.i_2_theoremes.tactiques.tactiques_abrege2 import instancie
+    vx, vz = var("x"), var("z")
+    h = N.assume(inclus(vX, vY))
+    xX_xY = instancie(h, vx)                                  # x∈X ⇒ x∈Y
+    ante = et(appartient(vx, vX), appartient(E.couple(vx, vz), vG))
+    ha = N.assume(ante)
+    conc = conjonction_intro(N.modus_ponens(conjonction_elim_gauche(ha), xX_xY),
+                             conjonction_elim_droite(ha))      # x∈Y et (x,z)∈G
+    inner = N.loi_deduction(ante, conc)
+    mono = monotonie_existe(inner, "x")                       # (∃x …X) ⇒ (∃x …Y)
+    z_imp = syllogisme(equivalence_avant(_inst_image(vG, vX, vz)),
+                       syllogisme(mono, equivalence_arriere(_inst_image(vG, vY, vz))))
+    return N.loi_deduction(inclus(vX, vY), N.generalisation("z", z_imp))
+
+
+# @livre Ch.II §3.1 Cor.- | E II.11 L.1-1 | PDF p.62
+def image_egale_img_si_domaine_inclus(g="G", a="A"):
+    """{ pr₁G ⊂ A } ⊢ G⟨A⟩ = pr₂G.   (Bourbaki E II.11, corollaire de la Prop. 2.)
+
+    Énoncé Bourbaki VERBATIM : « COROLLAIRE. — Si A ⊃ pr₁G, on a G⟨A⟩ = pr₂G. »
+    c.-à-d. (dom G ⊂ A) ⊢ image(G, A) = img(G), avec dom G = pr₁G, img G = pr₂G.
+
+    PREUVE CONDITIONNELLE-HONNÊTE : hypothèse effective unique { inclus(dom G, A) },
+    qui n'est PAS la conclusion (clôture sous hypothèse honnête).  Double inclusion
+    (extensionnalité A1) :
+
+      ⊆  G⟨A⟩ ⊂ pr₂G — INCONDITIONNEL : `image_dans_img(G, A)` (toute image directe
+         est incluse dans l'ensemble des valeurs ; vrai pour TOUT A).
+
+      ⊇  pr₂G ⊂ G⟨A⟩ — sous l'hypothèse dom G ⊂ A :
+         • `image_domaine_egale_img(G)` : G⟨dom G⟩ = pr₂G  (E II.10, inconditionnel) ;
+         • `_image_croissante_terme(G, dom G, A)` : (dom G ⊂ A) ⇒ (G⟨dom G⟩ ⊂ G⟨A⟩)
+           — Prop. 2 instanciée en X := dom G (terme), Y := A ;
+         • MP avec l'hypothèse ⇒ { dom G ⊂ A } ⊢ G⟨dom G⟩ ⊂ G⟨A⟩ ;
+         • réécriture G⟨dom G⟩ ↦ pr₂G via S6 (égalité ci-dessus) ⇒ pr₂G ⊂ G⟨A⟩.
+
+      Puis extensionnalite_appliquee(G⟨A⟩, pr₂G) sur (⊆ et ⊇) ⇒ G⟨A⟩ = pr₂G,
+      l'hypothèse dom G ⊂ A demeurant non déchargée (résultat conditionnel honnête).
+
+    theorie_ensembles() INCHANGÉE (= 22) : aucun axiome ajouté."""
+    vG = _T(g)
+    vA = _T(a)
+    domG = E.dom(vG)                                          # pr₁G
+    imgG = E.img(vG)                                          # pr₂G
+    imgA = E.image(vG, vA)                                    # G⟨A⟩
+    imgDom = E.image(vG, domG)                                # G⟨dom G⟩
+    hyp = inclus(domG, vA)                                    # pr₁G ⊂ A  (hypothèse honnête)
+
+    # ── ⊆ : G⟨A⟩ ⊂ pr₂G — inconditionnel (image_dans_img spécialisé à A) ──────────
+    incl_sub = image_dans_img(g, a)                           # G⟨A⟩ ⊂ pr₂G  (A est un nom)
+
+    # ── ⊇ : pr₂G ⊂ G⟨A⟩ — sous l'hypothèse dom G ⊂ A ─────────────────────────────
+    croiss = _image_croissante_terme(vG, domG, vA)           # (dom G⊂A)⇒(G⟨domG⟩⊂G⟨A⟩)
+    incl_dom_A = N.modus_ponens(N.assume(hyp), croiss)        # {hyp} ⊢ G⟨domG⟩ ⊂ G⟨A⟩
+    eq = image_domaine_egale_img(g)                           # G⟨domG⟩ = pr₂G  (E II.10)
+    # S6 : (G⟨domG⟩=pr₂G) ⇒ ((G⟨domG⟩⊂G⟨A⟩) ⇔ (pr₂G⊂G⟨A⟩)) ; réécrit le membre gauche.
+    reec = N.modus_ponens(eq, N.s6(imgDom, imgG, "w", inclus(var("w"), imgA)))
+    incl_sup = N.modus_ponens(incl_dom_A, equivalence_avant(reec))  # {hyp} ⊢ pr₂G ⊂ G⟨A⟩
+
+    # ── A1 : (G⟨A⟩ ⊂ pr₂G  et  pr₂G ⊂ G⟨A⟩) ⇒ G⟨A⟩ = pr₂G ; hyp non déchargée ────
+    return N.modus_ponens(conjonction_intro(incl_sub, incl_sup),
+                          extensionnalite_appliquee(imgA, imgG))
+
+
+def image_egale_img_si_domaine_inclus_cible(g="G", a="A"):
+    """Énoncé visé de `image_egale_img_si_domaine_inclus` (vérification stricte)."""
+    vG, vA = _T(g), _T(a)
+    return egal(E.image(vG, vA), E.img(vG))
+
+
+__all__ = ["image_domaine_egale_img", "image_domaine_egale_img_cible",
+           "image_egale_img_si_domaine_inclus",
+           "image_egale_img_si_domaine_inclus_cible"]

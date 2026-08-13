@@ -2,7 +2,7 @@
 \textbf{Énoncé (Bourbaki).} Soient $f : A \to B$, $f' : B \to C$ et $f'' = f' \circ f : A \to C$. Si $s$ est une section de $f$ (inverse à droite, $f \circ s = \mathrm{Id}_B$) et $s'$ une section de $f'$ ($f' \circ s' = \mathrm{Id}_C$), alors $s \circ s'$ est une section de $f''$ : $f'' \circ (s \circ s') = \mathrm{Id}_C$. C'est le dual exact de la composition des rétractions (a), gauche et droite échangées.
 
 \textbf{Formalisé.} Cible : $(z \in C) \Rightarrow f'(f(s(s'(z)))) = z$, lecture matricielle au niveau des valeurs (encodage Déf.~11) de « $s \circ s'$ section de $f' \circ f$ », composées dépliées $(g \circ h)(t) = g(h(t))$. \\
-Module : \texttt{bourbaki/ensembles/fonctions/ii\_3\_8\_retractions\_sections/ensembles\_theoreme1\_b\_section.py}.
+Module : \texttt{bourbaki/ii\_theorie\_des\_ensembles/ii\_3\_correspondances/ii\_3\_8\_retractions\_sections/ensembles\_theoreme1\_b\_section.py}.
 
 \textbf{Preuve (\Nstar).} On \texttt{assume} les deux hypothèses de section, liées sur un liant frais « $t$ » pour éviter la capture du $\tau y$ de valeur : $(\forall t\in B)\,f(s(t))=t$ et $(\forall t\in C)\,f'(s'(t))=t$. \texttt{instancie} la première au point $s'(z)$ puis \texttt{modus\_ponens} sous l'hypothèse $s'(z)\in B$ donne $f(s(s'(z)))=s'(z)$ ; la seconde instanciée en $z$ et déchargée par $z\in C$ donne $f'(s'(z))=z$. La congruence sous $f'(\cdot)$ (\texttt{congruence\_terme} + \texttt{modus\_ponens}) transporte la première égalité en $f'(f(s(s'(z))))=f'(s'(z))$, et \texttt{composer\_egalites} avec la seconde conclut $f'(f(s(s'(z))))=z$. \texttt{loi\_deduction} décharge $z\in C$ dans l'implication finale.
 
@@ -12,7 +12,7 @@ Module : \texttt{bourbaki/ensembles/fonctions/ii\_3\_8\_retractions\_sections/en
 \textbf{Énoncé (Bourbaki).} Deux sections $s, s'$ d'une même surjection $f : A \to B$ (inverses à droite) coïncident au niveau de leurs valeurs-images : pour tout $y \in B$, $f(s(y)) = f(s'(y))$. En effet $f \circ s = \mathrm{Id}_B = f \circ s'$, donc $f(s(y)) = y = f(s'(y))$.
 
 \textbf{Formalisé.} Cible : $(\forall y)(y \in B \Rightarrow f(s(y)) = f(s'(y)))$, forme valeurs-images. On NE prouve PAS $s = s'$ (égalité des graphes), qui exigerait $f$ injective et le pont valeurs$\leftrightarrow$graphe. \\
-Module : \texttt{bourbaki/ensembles/fonctions/ii\_3\_8\_retractions\_sections/ensembles\_section\_unique.py}.
+Module : \texttt{bourbaki/ii\_theorie\_des\_ensembles/ii\_3\_correspondances/ii\_3\_8\_retractions\_sections/ensembles\_section\_unique.py}.
 
 \textbf{Preuve (\Nstar).} On \texttt{assume} les deux sections, liées sur « $t$ » (anti-capture) : $(\forall t\in B)\,f(s(t))=t$ et $(\forall t\in B)\,f(s'(t))=t$. Sous $y\in B$ (\texttt{assume}), \texttt{instancie} + \texttt{modus\_ponens} sur chacune donne $f(s(y))=y$ et $f(s'(y))=y$. La \texttt{symetrie} de la seconde fournit $y=f(s'(y))$, et \texttt{composer\_egalites} (transitivité) conclut $f(s(y))=f(s'(y))$. \texttt{loi\_deduction} décharge $y\in B$, puis \texttt{generalisation} sur « $y$ » ferme le quantificateur.
 
@@ -22,7 +22,7 @@ Module : \texttt{bourbaki/ensembles/fonctions/ii\_3\_8\_retractions\_sections/en
 \textbf{Énoncé (Bourbaki).} \theoreme~1 e) : si $f'' = f' \circ f$ est une surjection et $f'$ une injection, alors $f$ est une surjection. On formalise la brique load-bearing et fidèle de e) : la descente d'injectivité de $f'$ vers $f$ au sens valeurs, soit « $f' \circ f$ injective (sur $A$) découle de l'injectivité de $f'$ », instanciation de l'injectivité gardée de $f'$ au couple $(f(x), f(x')) \in B^2$.
 
 \textbf{Formalisé.} Cible : $\texttt{injective\_dans}(F', B) \Rightarrow (\forall x)(\forall x')\bigl((x \in A \wedge x' \in A \wedge f'(f(x)) = f'(f(x'))) \Rightarrow f(x) = f(x')\bigr)$. \\
-Module : \texttt{bourbaki/ensembles/fonctions/ii\_3\_8\_retractions\_sections/ensembles\_theoreme1\_e.py}.
+Module : \texttt{bourbaki/ii\_theorie\_des\_ensembles/ii\_3\_correspondances/ii\_3\_8\_retractions\_sections/ensembles\_theoreme1\_e.py}.
 
 \textbf{Preuve (\Nstar).} On \texttt{assume} $\texttt{injective\_dans}(F',B) : (\forall u)(\forall u')((u\in B \wedge u'\in B \wedge F'(u)=F'(u')) \Rightarrow u=u')$ et on l'\texttt{instancie} (double) au couple $(f(x), f(x'))$. On \texttt{assume} l'hypothèse de typage C46 honnête $happlique := (\forall v)(v\in A \Rightarrow f(v)\in B)$. Sous l'antécédent gardé $(x\in A \wedge x'\in A) \wedge f'(f(x))=f'(f(x'))$ (\texttt{assume}), \texttt{conjonction\_elim\_gauche/droite} extraient $x\in A$, $x'\in A$, l'égalité ; \texttt{instancie}~+~\texttt{modus\_ponens} sur $happlique$ dérivent inline $f(x)\in B$, $f(x')\in B$ (motif \texttt{\_cv\_point}). \texttt{conjonction\_intro} reconstruit l'antécédent de l'instance d'injectivité, et \texttt{modus\_ponens} conclut $f(x)=f(x')$. \texttt{loi\_deduction} referme l'implication interne, \texttt{generalisation} $\times 2$ sur « $x' $», « $x$ » (rien de libre en $x, x'$), puis \texttt{loi\_deduction} décharge $\texttt{injective\_dans}(F',B)$ dans l'implication externe.
 
@@ -35,7 +35,7 @@ $f'$ vers $f''=f'\circ f$, et le rôle de rétraction de $f\circ r''$.
 \textbf{Formalisé.} Deux théorèmes, forme \emph{repliée}, tous deux CLOS :
 $\mathrm{injective\_dans}(F'',A) \Rightarrow (\forall x)(\forall x')((x\in A \wedge x'\in A \wedge f''(x)=f''(x')) \Rightarrow x=x')$ ;
 et $\mathrm{est\_retraction}(R'',F'',A) \Rightarrow ((x\in A) \Rightarrow f(r''(f''(x)))=f(x))$. \\
-Module : \texttt{bourbaki/ensembles/fonctions/ii\_3\_8\_retractions\_sections/ensembles\_theoreme1\_f.py}.
+Module : \texttt{bourbaki/ii\_theorie\_des\_ensembles/ii\_3\_correspondances/ii\_3\_8\_retractions\_sections/ensembles\_theoreme1\_f.py}.
 
 \textbf{Preuve (\Nstar).} Duals exacts de c)/e) et a) : \texttt{assume},
 \texttt{instancie}, \texttt{modus\_ponens}, \texttt{loi\_deduction},

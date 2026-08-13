@@ -8,7 +8,8 @@ coïncider avec « vérifié par la machine ». Un résultat n'est *FAIT* que s'
 (0 hypothèse non déchargée) et que son énoncé == celui de Bourbaki ; sinon il est *PARTIEL*.
 
 ## Frontière de confiance (ne JAMAIS la franchir)
-- Un `Theoreme` ne se crée qu'avec les **primitives du noyau** (`bourbaki/logique/noyau*.py`,
+- Un `Theoreme` ne se crée qu'avec les **primitives du noyau**
+  (`bourbaki/i_description_mathematique_formelle/i_2_theoremes/noyau/noyau*.py`,
   exposées via `N.*` : `assume, modus_ponens, loi_deduction, generalisation, existe_temoin,
   s1..s7, axiome, instancie`). **Jamais** de `_CLE`, de `Theoreme(...)` fabriqué à la main,
   de monkeypatch.
@@ -25,6 +26,22 @@ coïncider avec « vérifié par la machine ». Un résultat n'est *FAIT* que s'
 4. **`tests/` calque `bourbaki/` à l'identique** (même arbre, mêmes noms).
 5. **Tests verts avant d'avancer.**
 
+## Arborescence effective (depuis le 2026-07-02 : un paquet = un chapitre du livre)
+- `bourbaki/i_description_mathematique_formelle/` — Chap. I (couches assemblages + formules + noyau
+  réunies) : `i_1_termes_relations` (assemblage.py couche 0 + formule/lecture/notation/criteres_CS/CF),
+  `i_2_theoremes` (demonstration.py couche 0 + `noyau/` + `criteres/` + `tactiques/` + `verification/`),
+  `i_3_theories_logiques`, `i_4_theories_quantifiees` (ex `logique/i_3_quantifies`),
+  `i_5_theories_egalitaires` (ex `logique/i_4_egalitaires`). `assemblage.py` = façade de ré-exports.
+- `bourbaki/ii_theorie_des_ensembles/` — Chap. II : sections ii_1_relations_collectivisantes
+  (contient `ensembles_abrege.py`), ii_2_couples, ii_3_correspondances (9 sous-sections),
+  ii_4_reunion_intersection_famille, ii_5_produit_famille, ii_6_relations_equivalence.
+- `bourbaki/iii_ensembles_ordonnes_cardinaux_entiers/` — Chap. III : iii_1_relations_ordre,
+  iii_2_bien_ordonnes, iii_3_equipotence_cardinaux, iii_3_3_operations_cardinaux (ex `arithmetique`,
+  au top pour cause MAX_PATH), iii_4_entiers_finis, iii_5_calcul_entiers, iii_6_infinis, iii_7_limites.
+- `bourbaki/iv_structures/` — Chap. IV : iv_1, iv_2, iv_3_applications_universelles.
+⚠️ MAX_PATH Windows actif (LongPathsEnabled=0) : les chemins profonds du III frôlent 260 —
+tout renommage doit raccourcir ou rester neutre.
+
 ## Table des matières de référence (cible de l'arbre)
 - **Chap. I** Logique : I.1 termes/relations · I.2 critères déductifs C · I.3 quantifiés · I.4 égalitaires
 - **Chap. II** Ensembles : II.1 collectivisantes/axiomes · II.2 couples/produit · II.3 correspondances/fonctions ·
@@ -33,12 +50,39 @@ coïncider avec « vérifié par la machine ». Un résultat n'est *FAIT* que s'
   III.4 entiers/finis · III.5 calcul sur les entiers · III.6 ensembles infinis · III.7 limites proj./induct.
 - **Chap. IV** Structures : IV.1 structures/isomorphismes · IV.2 morphismes/structures dérivées · IV.3 applications universelles
 
-## Suivi de couverture
-La couverture réelle est suivie hors de `outils_ia/audit/couverture.py` (périmé). Audit du 2026-06-23 :
-~85 % des définitions, mais propositions ~38 %, théorèmes nommés ~26 % réellement clos
-(beaucoup de PARTIEL : cas binaire seul, « modulo résidus honnêtes », niveau valeurs, terme opaque).
-Gros chantiers ouverts : Hessenberg a²=a (III.6), bon ordre des cardinaux (III.3), Cantor 2^a>a,
-division euclidienne (III.5), limites (III.7), CST1/CST2 (IV).
+## Suivi de couverture  (mis à jour le 2026-08-04 — VÉRIFIÉ en code)
+`outils_ia/audit/couverture.py` est PÉRIMÉ : ne pas s'y fier. Deux outils font foi, à
+relancer après chaque session :
+- `python outils_ia/audit/gen_livre_manifestes.py` — couverture **page par page** du
+  livre. État au 2026-08-04 (fin de journée) : **les cinq parties « complet sur
+  l'intervalle »** (E I 14-46, E II 1-48, E III 2-66 + 87, E IV 1-26, E R 3-32),
+  **2147 notions**, 0 fichier à caler, 0 marqueur non conforme. ⚠️ « couvert » =
+  chaque page a ses notions formalisées et marquées `@livre` — **pas** que tout
+  est démontré.
+- `python outils_ia/audit/audit_reports.py` — croise les listes `REPORTES` avec les
+  `@livre` et signale les reports **PÉRIMÉS**. État : 45 reports, 6 suspects.
+  **Lancer cet outil AVANT d'attaquer un report, et TESTER EN CODE (import + appel)
+  qu'il est bien ouvert** : 4 reports périmés ont été trouvés en 24 h (Prop. 1 1°,
+  Prop. 1 2°, Prop. 10 III.1.10, Prop. 6 III.7.6) — on risque de réécrire un acquis.
+
+Gros chantiers : **FAITS** — Hessenberg a²=a (III.6), division euclidienne (III.5),
+trichotomie/bon ordre des cardinaux (III.3), Cantor, **CST1 + CST1-identité + CST2 +
+CST3 + capstone ⟨f⁻¹⟩^S∘⟨f⟩^S=Δ (IV.1.2)**, réversion/composition d'isomorphismes
+réelles (IV.1.5), **Prop. 6 §III.7.6 intégrale** (1° existence + unicité, 2°, 3°),
+**C57 II.6.5** (existence + unicité, sans axiome du choix), Prop. 1 §III.7.2,
+**décomposition canonique II.6.5** (`ensembles_pont_theta` :
+b_construite_injective 1 hyp, b_construite_surjective 2 hyps — vérifié en code),
+**Prop. 3 §III.7.2 — LES DEUX SENS, prouvés ET quantifiés**, sans axiome du choix
+(injectivité universelle 2 hyps, surjectivité universelle 4 hyps), plus
+**l'application canonique g CONSTRUITE** (`prop1_proj/ensembles_g_construite` :
+func + dom CLOS, et la formule (3) DÉMONTRÉE — l'axiome `axiome_canonique_g`
+est donc superflu).
+**OUVERTS** : 2ᵉ assertion de la Prop. 2 §III.7.2 (u⁻¹(x')=lim← M_α — exige le
+pont d'encodage famille-de-parties), Prop. 5 et Théorème 1 §III.7.4 (énoncés
+posés, preuves reportées), et la MIGRATION des consommateurs du terme opaque
+`application_canonique_g` vers `graphe_g` — mécanique, mais **prérequis** pour
+écrire `est_bijection_de(g, …)` : ne pas conjoindre des énoncés portant sur deux
+termes différents (garde consignée dans `ensembles_g_construite.REPORTES`).
 
 ## Documents de référence (la SPEC — le code doit y correspondre)
 Trois sources, sous `../V6/` (depuis `V9/`) :
@@ -76,7 +120,11 @@ de trous.*
 # @livre Ch.<C> §<s>.<ss> <Type>.<num> | <repère Bourbaki> L.<l1>-<l2> | PDF p.<phys>
 ```
 - `<C>` = `I`..`IV` (ou `R` pour le Résumé) ; `<s>.<ss>` = section.sous-section (ex. `1.2`).
-- `<Type>` ∈ {`Def`,`Ax`,`Crit`,`Prop`,`Th`,`Cor`,`Lem`,`Sch`,`Rem`,`Ex`,`Demo`} ; `<num>` = n° Bourbaki (sinon `-`).
+- `<Type>` ∈ {`Def`,`Ax`,`Crit`,`Prop`,`Th`,`Cor`,`Lem`,`Sch`,`Rem`,`Ex`,`Demo`,`Meta`} ; `<num>` = n° Bourbaki (sinon `-`).
+  `Meta` = métathéorème (résultat démontré SUR le formalisme, ex. signes initiaux E I.19) :
+  prose + preuve en commentaire, JAMAIS un `Theoreme` du noyau. Les blocs de PROSE du livre
+  (remarques intuitives, exemples non formalisables) reçoivent aussi leur `@livre` (`Rem`/`Ex`)
+  avec une note « prose, rien à formaliser » — ainsi CHAQUE ligne du livre est comptabilisée.
 - `<repère Bourbaki>` = repère imprimé du livre, ex. `E III.2` (E = pagination interne du livre).
 - `L.<l1>-<l2>` = lignes sur CETTE page (une démo placée ailleurs a son **propre** `@livre`).
 - `PDF p.<phys>` = page physique du scan. Offsets : Ch I `+0`, II `+51`, III `+103`, IV `+203`, Résumé `+303`.
@@ -87,6 +135,15 @@ de trous.*
 retrofit de l'existant se fait **section par section** (passe 1 : poser les `@livre` depuis le PDF ;
 passe 2 : trier + lister les trous). L'outil `outils_ia/audit/gen_trous_livre.py` collationne les
 `@livre` (tri chapitre/page/ligne, signale les intervalles non couverts ; option `--md`).
+
+**Manifestes par dossier — `LIVRE.md` (exigé par l'utilisateur, 2026-07-04).**
+`python outils_ia/audit/gen_livre_manifestes.py` écrit dans **chaque dossier** de `bourbaki/` un
+`LIVRE.md` généré (NE PAS éditer à la main) : notions du dossier triées par **page imprimée du
+livre** (le repère `E III.10` en haut de page — PAS la page du PDF) + lignes, fichiers **à caler**
+(sans `@livre` ; `__init__.py`/`outil_*.py` exclus), cumul des sous-dossiers, et bilan remonté
+récursivement jusqu'à `bourbaki/LIVRE.md` qui liste par chapitre les **pages du livre manquantes**
+— le verdict « rien d'oublié » se lit à la racine. Régénérer après chaque pose de `@livre`.
+Les `LIVRE.md` **ne comptent pas** dans la règle « ≤10 entrées par dossier » (fichiers générés).
 
 ## Livrable : rapport V9 (LaTeX façon livre Bourbaki)
 Maintenir dans **`V9/rapport/`** un document LaTeX multi-parties expliquant TOUT le projet, agencé comme

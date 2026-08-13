@@ -1,0 +1,133 @@
+% =============================================================================
+%  Annexe — Vers un système auto-améliorant (méta-niveau bâti sur le corpus)
+% =============================================================================
+\section{Vers un système auto-améliorant}
+
+Cette annexe documente un méta-niveau construit \emph{sur} le corpus formalisé :
+un système qui ne se contente pas de \emph{prouver} mais \emph{invente des
+notions} qu'on ne lui a pas données et \emph{trouve des problèmes qu'il résout},
+en boucle. Le noyau LCF y joue un rôle décisif et rare : c'est une \emph{fonction
+de récompense parfaite et gratuite}. « Le système découvre » n'entame donc jamais
+« aucun théorème faux » : chaque objet produit est certifié, l'invariant
+$\texttt{theorie}=22$ axiomes est préservé à chaque tour. Tout l'outillage vit
+dans \texttt{outils\_ia/corpus/} et ne mute pas \texttt{bourbaki/} (dry-run).
+
+\subsection{Deux axes, chacun avec son \emph{compounding}}
+
+Le système est un volant \emph{wake-sleep} à deux moitiés, chacune démontrant
+qu'elle \emph{compose} (bâtit sur ses propres sorties), et non qu'elle accumule.
+
+\paragraph{Axe abstraction (invente des notions)} Un mineur AST extrait les motifs
+de preuve récurrents inter-modules ; un \emph{anti-unificateur} (le dual du
+remplissage de trous d'un réseau de termes) aligne les instances $\alpha$-normalisées
+et \emph{détecte les positions divergentes} $=$ les paramètres d'une notion candidate
+(exactement les slots attendus : $\{\mathrm{pr}_1,\mathrm{pr}_2\}$, la famille des
+axiomes binaires, les littéraux de liants). Le motif paramétré est promu en
+\emph{tactique dérivée nommée}, prouvée \emph{une fois} par le noyau (elle reste
+dérivée $\to$ frontière intacte), puis gardée seulement si elle \emph{compresse
+strictement} le corpus re-typé qui \emph{repasse le noyau} (gate MDL, sinon
+rollback). \textbf{Compounding} : une notion promue vaut un pas ; à budget-noyau
+fixe (CAP), des preuves raccourcies passent sous le budget, et re-miner le corpus
+compressé fait émerger des \emph{macros d'ordre~2} (une notion employée dans un
+motif de plus haut niveau).
+
+\paragraph{Axe découverte (trouve et résout des problèmes)} Guidée par le
+\emph{terme partagé} --- le seul régime où le chaînage « fire » ---, tranchée par
+le noyau. \emph{Transitivité} : de $T_1\vdash A\Rightarrow B$ et
+$T_2\vdash B'\Rightarrow C$ avec $\sigma(B')=B$, on conjecture $A\Rightarrow\sigma(C)$,
+prouvée en quatre pas noyau ($\texttt{assume}$, deux $\texttt{modus\_ponens}$,
+$\texttt{loi\_deduction}$). \emph{Détachement} : de $T\vdash A\Rightarrow B$ et
+$K\vdash\varphi$ avec $\sigma(A)=\varphi$, on obtient $\sigma(B)$. Le
+\emph{matching relâché} unifie à $\sigma$ près (variables libres), $\sigma$ étant
+appliqué \emph{par le noyau} ($\texttt{generalisation}+\texttt{instancie}$) : la
+soundness est garantie car le noyau construit le théorème final et l'on vérifie sa
+conclusion --- un mauvais appariement ne peut que \emph{rater} une découverte,
+jamais en fabriquer une fausse. Une dédup $\alpha$-canonique et un tri par
+\emph{intérêt} (pont inter-modules, symboles disjoints, parcimonie) trient le flot.
+\textbf{Compounding} : en conjecture \emph{itérée}, les théorèmes du tour $t$
+deviennent des briques du tour $t{+}1$ $\to$ découverte en \emph{profondeur
+croissante}.
+
+\paragraph{Quatre régimes syntaxiques, reliés} Un stress-test sur des cibles dures
+(théorèmes non faits + exercices du livre) a livré le verdict structurel : la vraie
+ligne de partage n'est pas facile/difficile mais \emph{implication
+($\neg A\vee B$) contre tout le reste} ($=$, $\Leftrightarrow$, $\subset$,
+$\exists$) --- la majorité du contenu mathématique (égalités de graphes,
+caractérisations, algèbre des ensembles, \emph{tous} les exercices) était
+structurellement invisible au moteur. D'où l'extension, chaque régime recevant
+\emph{sa} transitivité dérivée au noyau : \emph{égalités} (via
+$\texttt{composer\_egalites}$ ; itérées, elles composent : $12\to19\to147$
+identités --- De Morgan composé, associativités croisées) ; \emph{équivalences}
+(huit pas noyau : projeter les deux sens, chaîner, recombiner par conjonction ;
+20 caractérisations telles que $x\in X \Leftrightarrow \{x\}\cup X=X$) ;
+\emph{inclusions} (six pas noyau, liant pris sur la cible). Le levier décisif est
+le \textbf{pont inter-régimes} $S6$ : de $\vdash B=C$ on dérive $\vdash B\subset C$
+et $\vdash C\subset B$ --- chaque égalité (du corpus \emph{ou découverte}) nourrit
+le régime $\subset$ : 6 inclusions-corpus seulement, mais $20\,102$ inclusions
+nouvelles via 434 dérivées du pont. L'explosion combinatoire a exigé le
+\textbf{filtre de subsomption} (anti-collapse façon POET, prédit puis construit) :
+une découverte qui n'est qu'une $\sigma$-instance d'un théorème universel connu
+($\varnothing\subset X\cup b$, instance de $\varnothing\subset X$) est écartée
+\emph{avant} composition. Enfin le régime $\exists$ : les existentiels, classés
+« hors de portée (exige un témoin) », sont solubles \emph{à l'envers} --- le témoin
+est déjà là : de $\vdash\varphi(t)$ clos, on \emph{abstrait} un sous-terme composite
+récurrent et l'on dérive $\vdash(\exists x)\,\varphi[t{\to}x]$ en un pas noyau
+($S5$ recalcule $(t|x)R$ et tranche --- une capture fait échouer proprement).
+Un tour complet couvre désormais les \textbf{cinq régimes} ($\Rightarrow$, $=$,
+$\Leftrightarrow$, $\subset$, $\exists$) : $20\,506$ découvertes certifiées
+(tour \#7), frontière intacte.
+
+\subsection{Résultats mesurés (corpus « rapide » : logique + ensembles)}
+
+\begin{center}
+\begin{tabular}{@{}lll@{}}
+\toprule
+Axe & Mesure & Résultat \\
+\midrule
+Abstraction & notions promues (gate noyau) & 2, gain MDL, 0 théorème faux \\
+Abstraction & compounding & $+2$ preuves sous CAP ; 18 macros d'ordre 2 \\
+Découverte $\Rightarrow$ & un tour & 106 théorèmes ; 101 ponts inter-modules \\
+Découverte $\Rightarrow$ & itérée (3 tours) & 106 / 109 (prof.\ 2) / 216 (prof.\ 3) $=$ 431 \\
+Découverte $=$ & itérée (3 tours) & $12/19/147 = 178$ identités (prof.\ $\geq 2$ : 166) \\
+Découverte $\Leftrightarrow$ & un tour & 20 caractérisations \\
+Découverte $\subset$ & pont $S6$ + subsomption & $20\,102$ inclusions (6 $\subset$-corpus + 434 pont) \\
+Découverte $\exists$ & $\exists$-intro par témoin ($S5$) & 100 théorèmes existentiels \\
+Tour complet & 5 régimes reliés (tour \#7) & $20\,506$ découvertes certifiées \\
+Frontière   & invariant & $\texttt{theorie}=22$ à chaque tour \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Un exemple de découverte profonde, certifiée close : $\mathrm{dom}(f)=E \Rightarrow
+\mathrm{im}(G,\mathrm{im}(G,\mathrm{im}(f^{-1},Z)))\subset\mathrm{im}(G,\mathrm{im}(G,E))$,
+obtenue en chaînant une découverte du tour précédent. \textbf{Honnêteté} : les
+gains d'abstraction restent \emph{petits} car le corpus rapide est petit --- le
+verrou est la taille du corpus, pas l'outillage ; le levier exogène demeure
+\emph{formaliser davantage}.
+
+\subsection{Le front-ouvert : la fécondité est \emph{relationnelle} (résultat négatif)}
+
+Reste la question qui sépare « lemme utile » de « notion féconde » : MDL et
+l'intérêt récompensent le \emph{présent} (fréquence, forme), pas la
+\emph{réutilisation future}. On a défini un signal de \emph{fécondité} $=$
+générativité en aval dans le DAG de découverte (combien de découvertes chaînent un
+théorème), puis \emph{testé s'il est prédictible a priori} :
+\emph{(i)} depuis la syntaxe seule $\to$ \textbf{négatif} (régression $R^2=-2{,}5$) ;
+\emph{(ii)} en ajoutant des degrés de \emph{connectivité} (chaînabilité unifiable) $\to$
+ces degrés \emph{dominent} l'importance et $R^2$ remonte de $-2{,}5$ à $-0{,}8$,
+mais reste négatif. \textbf{Leçon.} La fécondité est une propriété
+\emph{relationnelle} du graphe de dérivations, pas de la forme d'un énoncé : le
+degré local (un saut) en indique la direction mais ne suffit pas à la magnitude ;
+la prédire exactement exige la \emph{structure profonde} du graphe (voisinage
+multi-sauts, réseau de graphe). C'est un résultat de recherche honnête --- une
+impasse \emph{caractérisée}, consignée comme donnée pour la suite, au même titre
+que le journal des erreurs.
+
+\subsection{Ce que le noyau garantit}
+
+Toute la construction reste \emph{sûre sous auto-modification} : un
+\theoreme{} ne naît que des primitives $\Nstar$, aucun axiome n'est ajouté,
+$\texttt{theorie}=22$. Le système peut inventer, conjecturer, se réentraîner sur
+ses propres sorties : le noyau reste l'unique arbitre de vérité. C'est
+précisément ce qui rend l'auto-amélioration \emph{admissible} --- la garantie que
+les systèmes appris seuls n'ont pas.

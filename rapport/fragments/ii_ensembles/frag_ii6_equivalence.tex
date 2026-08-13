@@ -11,7 +11,7 @@ de la décomposition canonique).
 
 \textbf{Formalisé.} Cible : $\bigl(p(a) = p(b)\bigr) \Leftrightarrow R\{a,b\}$, avec
 $p = $ application canonique de graphe $G$ et $R = \mathrm{rel\_graphe}(G)$. \\
-Module : \texttt{bourbaki/ensembles/ii\_6\_equivalence/ensembles\_projection\_c55.py}.
+Module : \texttt{bourbaki/ii\_theorie\_des\_ensembles/ii\_6\_relations\_equivalence/ensembles\_projection\_c55.py}.
 
 \textbf{Preuve (\Nstar).} Pur recollage logique de deux maillons déjà clos, par transitivité
 d'équivalences sur le « milieu » commun $\Cl_R(a) = \Cl_R(b)$ (littéralement identique dans les
@@ -36,7 +36,7 @@ pour ces deux volets, puis leur assemblage en relation d'équivalence (symétrie
 \textbf{Formalisé.} Cibles : $G = G^{-1} \Rightarrow \mathrm{est\_symetrique}(R)$ ;
 $G \circ G \subset G \Rightarrow \mathrm{est\_transitive}(R)$ ; d'où
 $\{G = G^{-1},\ G \circ G \subset G\} \vdash \mathrm{est\_relation\_equivalence}(R)$. \\
-Module : \texttt{bourbaki/ensembles/ii\_6\_equivalence/ensembles\_proposition1\_gamma.py}.
+Module : \texttt{bourbaki/ii\_theorie\_des\_ensembles/ii\_6\_relations\_equivalence/ensembles\_proposition1\_gamma.py}.
 
 \textbf{Preuve (\Nstar).} \emph{Symétrie} : sous $G = G^{-1}$, on \texttt{assume} $(x,y) \in G$ ;
 la S6 (Leibniz) réécrit l'hypothèse en $(x,y)\in G \Leftrightarrow (x,y)\in G^{-1}$, puis
@@ -63,7 +63,7 @@ $\tilde{A}$ (cas $B = p\langle A\rangle$) l'est.
 \textbf{Formalisé.} Cible : $\mathrm{est\_saturee}\bigl(p^{-1}\langle B\rangle,\, G\bigr)$, soit
 $(\forall x)(\forall y)\bigl((x \in p^{-1}\langle B\rangle \ \wedge\ (x,y)\in G) \Rightarrow y \in p^{-1}\langle B\rangle\bigr)$,
 pour une partie $B$ quelconque du quotient (image réciproque pure, $p\langle A\rangle$ non déplié). \\
-Module : \texttt{bourbaki/ensembles/ii\_6\_equivalence/ii\_6\_4\_saturees/ensembles\_sature\_partie.py}.
+Module : \texttt{bourbaki/ii\_theorie\_des\_ensembles/ii\_6\_relations\_equivalence/ii\_6\_4\_saturees/ensembles\_sature\_partie.py}.
 
 \textbf{Preuve (\Nstar).} On prouve le corps instancié en deux points frais $s, t$, sous
 $(s \in p^{-1}\langle B\rangle \ \wedge\ (s,t)\in G)$ décomposé par \texttt{conjonction\_elim}.

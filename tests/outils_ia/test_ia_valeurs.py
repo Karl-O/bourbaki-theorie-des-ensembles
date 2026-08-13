@@ -9,8 +9,8 @@ Démo :  python V9/test_ia_valeurs.py
 """
 from __future__ import annotations
 
-from bourbaki.assemblage.assemblage import implication
-from bourbaki.logique.i_1_termes_relations.propositions import A, B, C, SIG_PROP
+from bourbaki.i_description_mathematique_formelle.assemblage import implication
+from bourbaki.i_description_mathematique_formelle.i_1_termes_relations.outil_propositions import A, B, C, SIG_PROP
 from outils_ia.ia.encodeur import encoder, encoder_sequence, TRAITS
 from outils_ia.ia.modele import RegressionLogistique
 from outils_ia.ia.donnees_entrainement import jeu_de_donnees

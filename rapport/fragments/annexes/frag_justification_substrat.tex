@@ -1,0 +1,249 @@
+% =============================================================================
+%  Annexe — Justification du substrat : pourquoi représenter les théories
+%  comme Bourbaki, au regard de l'objectif final (déposée le 31 juil. 2026)
+% =============================================================================
+\section{Justification du substrat : pourquoi des théories à la Bourbaki}
+
+L'objectif final du projet n'est pas de re-démontrer le livre : c'est une
+\emph{IA qui crée des théories pour résoudre des problèmes}, la formalisation
+et ses traces servant de substrat. Le choix de représentation --- des théories
+syntaxiques à la Bourbaki, vérifiées par un noyau LCF possédé --- doit donc se
+justifier \emph{à partir de cet objectif}, et non par fidélité d'antiquaire.
+Cette annexe dérive les exigences, mesure comment le substrat les satisfait,
+assume ses coûts, et traite honnêtement les alternatives.
+
+\subsection{Six exigences dérivées de l'objectif --- liste \emph{ouverte}}
+
+Une IA qui \emph{crée} des théories doit en proposer, travailler dedans,
+constater l'échec ou le succès, puis réviser. Cela impose \emph{au moins} :
+
+\begin{description}
+\item[R1 --- la théorie est une donnée.] Créable, modifiable, comparable,
+  jetable, \emph{par programme}. Si créer une théorie est un geste rare et
+  global, aucune exploration à grande échelle n'est possible.
+\item[R2 --- un vérificateur exact et infalsifiable.] C'est la fonction de
+  récompense de toute boucle d'apprentissage ; truquable, elle enseigne la
+  triche.
+\item[R3 --- la dette traçable.] Un résultat n'a de sens que \emph{relativement}
+  à ce que sa théorie suppose ; sans mesure de dette, vacuité et incohérence
+  restent invisibles.
+\item[R4 --- les objets inventés sont des termes.] Inventer un concept $=$
+  écrire et nommer un terme ; c'est ce qui rend la compression (MDL) et la
+  promotion de notions opérantes.
+\item[R5 --- un corpus de \emph{processus}.] Dérivations, échecs certifiés,
+  murs, réparations --- pas seulement des théorèmes finis.
+\item[R6 --- la métathéorie dans le système.] Pouvoir raisonner \emph{sur} la
+  démonstration (critères, schémas), pas seulement démontrer.
+\end{description}
+
+\subsection{Ce que le substrat Bourbaki--LCF satisfait, mesures à l'appui}
+
+\paragraph{R1.} Chez Bourbaki, une théorie est \emph{littéralement} une liste de
+signes, de schémas et d'axiomes explicites --- un objet syntaxique. Dans V9 :
+\texttt{Theorie(nom, axiomes)}, un objet léger ; l'inventaire du 26~juillet en
+recense \textbf{66} créées à la volée (théories dédiées, instances de S8/C54,
+sélections définissantes). Dans un assistant à fondation fixe (Coq, Lean), la
+logique ambiante est donnée une fois pour toutes ; « créer une théorie » n'est
+pas une opération du système, et l'axiome ajouté est une pollution globale.
+
+\paragraph{R4.} L'opérateur $\tau$ donne à chaque existentielle un témoin qui
+est un \emph{terme} de première classe : « le $x$ tel que $R$ » se nomme, se
+passe en argument, se réutilise. Le pipeline d'abstraction du système
+auto-améliorant (annexe précédente) --- anti-unification, promotion, gate MDL
+--- travaille précisément sur des termes nommables. Le bon patron interne
+existe : \texttt{terme\_plus\_grand} explicite le $\tau$ du plus grand élément
+\emph{en portant son ordre}, conformément à la note~2 de E~III.46.
+
+\paragraph{R6.} Les critères C1--C62 sont des théorèmes \emph{sur les théories},
+formalisés comme tels : C62 ne démontre pas la factorielle, il démontre que
+\emph{toute} définition récursive est légitime. C'est exactement le niveau de
+raisonnement dont une constructrice de théories a besoin.
+
+\paragraph{R2, R3, R5.} Ils ne viennent pas de Bourbaki mais de l'implémentation :
+le noyau LCF possédé (R2) ; l'outillage \texttt{outils\_ia/verite/} (R3) ---
+\texttt{axiomes\_consommes} mesure $Ax(D)$, la liste des axiomes réellement
+consommés par une dérivation, et la campagne de juillet a montré pourquoi c'est
+vital : un théorème annoncé « clos, 0~hypothèse » consommait \textbf{53} axiomes
+de théories dédiées, invisibles à la fois du compte d'hypothèses et de
+l'invariant des 22 ; le journal d'événements et les objets \texttt{Echec}
+certifiés (R5), qui font d'un raté un \emph{théorème sur l'espace de recherche}
+muni d'un certificat vérifiable et d'un périmètre calculé.
+
+\subsection{Le coût, assumé et chiffré}
+
+Le formalisme $\tau$ pris au pied de la lettre est matériellement impraticable :
+le terme « 1 » entièrement déplié compte $4\,523\,659\,424\,929$ signes
+(Mathias), environ $2{,}4\times10^{54}$ pour l'édition de 1970 (Solovay). Aucun
+langage d'implémentation n'y change rien : c'est la \emph{représentation} qui
+tranche. V9 assume un compromis documenté : construire l'axiome A1 en dépliage
+$\tau$ intégral lève un \texttt{MemoryError} ; les quantificateurs sont donc des
+\emph{abréviateurs au niveau de l'arbre}, la $\tau$-expansion restant la
+justification et non la représentation. Le coût résiduel est réel et mesuré
+(construction de $\mathbb{N}$ $\approx 5$~minutes par processus ; une même
+formule passe de $9\,388$ caractères sur variables à $86\,598$ sur termes clos)
+et s'atténue par la mémoïsation et le cache de termes (multiplicateur M2), sans
+toucher à la frontière de confiance. Ce coût \emph{achète} R4 : le témoin-terme
+et le prix du terme sont la même chose.
+
+\subsection{L'argument décisif est empirique : la semaine des trois chirurgies}
+
+Une IA qui crée des théories créera surtout des théories \emph{cassées}.
+L'environnement doit faire de « cette théorie est contradictoire » un événement
+\emph{mesurable, localisable et réparable} --- pas une catastrophe hors-système.
+Or la campagne du 26--31 juillet 2026 a exécuté trois fois le cycle complet :
+
+\begin{center}
+détecter (réfutation dérivée au noyau) $\to$ mesurer le périmètre (classes
+$\alpha$, grep, $Ax(D)$) $\to$ réparer l'axiome $\to$ prouver la réparation
+(l'absurde ne se dérive plus).
+\end{center}
+
+\begin{enumerate}
+\item \textbf{L'intersection} (26 juil.) : axiome calé sur le Résumé, sans la
+  condition $I\neq\varnothing$ ; réparé par la forme de sélection.
+\item \textbf{Le produit} (nuit du 26 au 27) : \texttt{AXIOME\_PRODUIT\_FAM}
+  avait perdu le conjoint du livre $F\subset I\times\bigcup X_\iota$ ; le corpus
+  démontrait, à zéro hypothèse, la négation de E~II.32. Réparation par
+  remplacement (le compte reste 22), vérifiée par égalité syntaxique à une cible
+  reconstruite à la main, puis par la suite entière : $3\,865$ tests, zéro
+  échec. Bénéfice structurel immédiat : deux hypothèses traînées depuis des
+  semaines sont devenues des théorèmes, et $0!=1$ (Déf.~2) est passé de
+  \emph{vacueux} à \emph{clos sans résidu} --- le squelette de la preuve
+  révoquée a été réhabilité tel quel, son hypothèse réfutable étant devenue un
+  théorème.
+\item \textbf{Le segment} (27--31 juil., migration en cours au moment où cette
+  annexe est déposée) : le terme \texttt{seg\_ext} ne portait pas sa relation
+  d'ordre ; deux axiomes incompatibles sur le \emph{même} terme, chacun admis à
+  zéro hypothèse, d'où $\vdash \varnothing\in\varnothing$ dérivé par gestes purs
+  du noyau. Leçon centrale : une \emph{garde} ne répare rien (un ordre et son
+  opposé la satisfont tous deux) ; l'axiome a perdu un \emph{paramètre}, la
+  réparation est structurelle ($\forall$-clôture sur le graphe porté par le
+  terme). Une passe AST a généralisé le diagnostic : 21~constructeurs de terme
+  perdent au moins un paramètre.
+\end{enumerate}
+
+À quoi s'ajoute la \emph{trichotomie des résidus} --- déchargeable ($A_{T_0}
+\vdash h$ : le mur était fantôme), réfutable ($A_{T_0}\vdash\lnot h$ : tout
+théorème portant $h$ est vacueux), indépendante (aucun des deux) --- qui est
+exactement le jugement qu'une constructrice de théories doit porter sur chaque
+hypothèse : \emph{ai-je besoin d'un axiome neuf, est-ce dérivable, ou est-ce que
+cela me tue ?} Les trois classes ont chacune un cas réel mesuré dans la même
+semaine.
+
+Ce cycle --- casse, diagnostic, chirurgie, preuve de guérison --- est
+impossible dans un assistant à fondation fixe : on ne « répare » pas les axiomes
+de Lean. Ici, c'est une opération normale, outillée et tracée. \textbf{Le corpus
+d'échecs de cette semaine n'est pas un sous-produit : c'est le programme
+d'entraînement.}
+
+\subsection{Les alternatives, traitées honnêtement}
+
+\paragraph{Coq/Lean (Gaia de J.~Grimm).} Forts sur R2 (vérification compilée,
+preuves vérifiées une fois puis mises en cache), faibles sur R1/R3 (fondation
+fixe, axiomes globaux). Gaia couvre le \emph{contenu} des chapitres II--III,
+exercices compris, précisément en \emph{contournant} le chapitre~I : Grimm pose
+Coq et l'axiomatisation de Simpson, et ne paie jamais le $\tau$. Complémentarité,
+pas concurrence : ses rapports, indexés sur la numérotation de Bourbaki, servent
+de carte de trous externe --- d'autant plus précieuse que nos propres documents
+de couverture ont été contredits par la mesure 78~fois en une seule journée.
+
+\paragraph{Metamath (set.mm).} Le concurrent le plus proche, et le plus sérieux :
+noyau minimal, substitution syntaxique, axiomes explicites, et le format le plus
+apprécié des provers par apprentissage précisément pour cette simplicité. Trois
+différences le séparent de l'objectif : pas de $\tau$ (pas de témoins-termes,
+R4 faible) ; une base monolithique plutôt que des théories-objets manipulées en
+masse (R1 partiel) ; et aucun corpus d'échecs --- personne n'y conserve ses
+ratés certifiés (R5 absent). La complémentarité prévue reste valable : miner
+set.mm pour les énoncés et le DAG de dépendances, jamais pour les pas de preuve
+(fondations différentes).
+
+\subsection{Conséquences stratégiques}
+
+\begin{enumerate}
+\item \textbf{Le chapitre IV n'est pas un chapitre parmi d'autres.} Les
+  structures --- isomorphismes, transport de structure --- sont le mécanisme par
+  lequel une théorie créée pour un problème s'applique à un autre : la moitié
+  « résoudre » de l'objectif. C'est aujourd'hui la zone la moins couverte du
+  dépôt ; après les réparations en cours, c'est là que l'objectif final pointe.
+\item \textbf{Les multiplicateurs M2/M3 ne sont pas du confort.} Le cache-rejeu
+  (termes d'abord --- sûr, gain $\sim$100$\times$ sur le poste dominant ---,
+  puis traces rejouées \emph{dans} le noyau, jamais de résurrection d'objets
+  \texttt{Theoreme} hors noyau) rend l'exploration massive payable ; les échecs
+  machine-lisibles sont la donnée d'apprentissage. La justification du substrat
+  et le plan des multiplicateurs sont le même document.
+\item \textbf{La discipline mesurée avant la vitesse.} Les leçons de la
+  campagne --- l'invariant « 22 » ne mesure pas $Ax(D)$ ; une docstring n'est
+  pas une preuve ; un terme doit porter tous ses paramètres et ses axiomes être
+  $\forall$-clos dessus --- sont mécanisables (passes AST, comparaison de
+  marqueurs, mesure de dette) et valent plus qu'un portage de langage : la
+  lenteur résiduelle est le prix du système formalisé, pas un défaut du code.
+\end{enumerate}
+
+\subsection{Sur la complétude de la liste : elle n'est pas certifiable, elle est chassable}
+
+Peut-on être certain qu'aucune exigence ne manque ? \textbf{Non}, et pour une
+raison de principe : « toute capacité requise par l'objectif est couverte par un
+$R_i$ » est une affirmation universelle sur un domaine ouvert --- même statut
+épistémique que la fidélité au livre : on peut \emph{prouver l'incomplétude}
+(en exhibant le manque), jamais la complétude. La liste est donc traitée comme
+tout objet de ce projet : \emph{révisable, sous journal}, avec trois chasses
+mécaniques aux manques.
+
+\begin{enumerate}
+\item \emph{Couverture du cycle} : décomposer la boucle (poser un problème
+  $\to$ créer $\to$ chercher $\to$ vérifier $\to$ diagnostiquer $\to$ réviser
+  $\to$ transférer) et vérifier que chaque flèche est portée par un $R_i$ ---
+  toute flèche orpheline est un manque.
+\item \emph{Chasse adverse} : construire un scénario satisfaisant tous les
+  $R_i$ et échouant quand même --- du test de mutation appliqué à la
+  spécification elle-même.
+\item \emph{Chasse empirique} : tout mur rencontré qui ne s'explique par la
+  violation d'aucun $R_i$ est un \emph{certificat d'incomplétude}, journalisé
+  comme les échecs de preuve.
+\end{enumerate}
+
+Ces chasses, exécutées le 31 juillet, ont \emph{immédiatement} montré que la
+liste R1--R6 était incomplète --- ce qui est la meilleure validation possible de
+la méthode. Quatre exigences supplémentaires en sont sorties :
+
+\begin{description}
+\item[R7 --- une source de \emph{couples} (théorie, problème) et un gradient
+  de difficulté.] L'objectif dit « pour \emph{résoudre des problèmes} » ; rien
+  dans R1--R6 ne garantit qu'il y en a, ni une mesure de progrès. Et un
+  problème n'existe jamais nu : c'est une formule à statut ouvert, qui n'a de
+  sens que \emph{dans} une théorie --- l'unité est le couple $(T,P)$, jamais
+  $P$ seul. Le livre fournit les couples d'amorçage (théorème numéroté
+  \emph{dans} la théorie du livre : la fidélité garantit qu'on pose les
+  problèmes du livre dans la théorie du livre) ; set.mm sert de carte externe ;
+  le conjectureur, de générateur. Conséquence structurante : dans $T$, un
+  problème a \emph{trois} sorties --- démontré, réfuté, ou \emph{indépendant}
+  --- et l'indépendance est précisément le moment où \emph{créer une théorie}
+  devient le seul coup légal (étendre $T$, ou passer à $T'$ qui interprète
+  $T$). Cas mesuré dans la campagne : les hypothèses HW/HN, indépendantes des
+  22 axiomes, ne se fermeront par aucun effort de preuve --- seule une
+  extension définitionnelle les atteint. R7, R9 et R10 sont ainsi le même
+  mécanisme vu de trois côtés : le problème vit dans une théorie, garde son
+  identité quand elle est révisée, et sa solution voyage entre théories.
+  [Flèche « poser un problème » orpheline.]
+\item[R8 --- des mouvements locaux et composables.] R2 rend la
+  \emph{vérification} bon marché ; rien ne dit que la \emph{proposition} l'est.
+  Une marche sur le DAG de dérivations exige des pas locaux ; or les collisions
+  de liants (\texttt{\_wrap4}, \texttt{\_inst\_gen}) mesurent une friction
+  réelle : l'instanciation, geste « local », peut échouer globalement.
+  [Friction mesurée.]
+\item[R9 --- l'identité à travers la révision.] Trois chirurgies d'axiomes en
+  une semaine, et trois fois la même question artisanale : \emph{qu'est-ce qui
+  survit ?} Une IA qui révise ses théories a besoin que ce soit une opération
+  du substrat (empreintes de dépendances du cache M2), pas un audit manuel.
+  [Murs de la campagne.]
+\item[R10 --- le transport entre théories.] Créer une théorie pour un problème
+  ne paie que si les résultats \emph{voyagent} : interprétations, morphismes,
+  transport de structure (chapitre IV). Rangé plus haut en « conséquence
+  stratégique », c'est en réalité une \emph{exigence}. [Flèche « transférer »
+  orpheline.]
+\end{description}
+
+La complétude n'est donc pas un état mais un \emph{régime} : aucun mode d'échec
+connu non couvert, plus une machine qui en cherche. Une liste qui se
+prétendrait fermée serait exactement le mensonge de docstring que ce projet
+traque partout ailleurs.

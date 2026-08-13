@@ -2,7 +2,7 @@
 \textbf{Énoncé (Bourbaki).} Soit $A \subset E$ une partie non vide d'un ensemble ordonné, admettant une borne inférieure $\inf A$ et une borne supérieure $\sup A$. Alors $\inf A \le \sup A$. L'hypothèse $A \neq \emptyset$ est essentielle : pour $A = \emptyset$ tout élément est à la fois minorant et majorant, et l'inégalité s'inverse.
 
 \textbf{Formalisé.} Cible : $(i,s) \in G$, avec la convention de graphe $x \le y := (x,y)\in G$, $i = \inf A$, $s = \sup A$. \\
-Module : \texttt{bourbaki/ordre/iii\_1\_relations\_ordre/bornes\_sup/ensembles\_inf\_sup\_prop4\_iii1.py}.
+Module : \texttt{bourbaki/iii\_ensembles\_ordonnes\_cardinaux\_entiers/iii\_1\_relations\_ordre/bornes\_sup/ensembles\_inf\_sup\_prop4\_iii1.py}.
 
 \textbf{Preuve (\Nstar).} On \texttt{assume} les quatre hypothèses puis, par \texttt{conjonction\_elim} sur les prédicats \texttt{borne\_inferieure}/\texttt{borne\_superieure}, on extrait que $i$ minore $A$ ($(\forall x)(x\in A \Rightarrow (i,x)\in G)$) et que $s$ majore $A$. Sous un témoin $a \in A$ (\texttt{assume}), \texttt{instancie} + \texttt{modus\_ponens} donnent $(i,a)\in G$ et $(a,s)\in G$ ; la transitivité instanciée en $(i,a,s)$ conjuguée par \texttt{conjonction\_intro} conclut $(i,s)\in G$. Le témoin est déchargé par \texttt{loi\_deduction} puis \texttt{existe\_elimination} : la conclusion ne contient pas $a$ libre, donc l'hypothèse honnête reste $(\exists z)(z\in A)$, pas le témoin.
 
@@ -12,7 +12,7 @@ Module : \texttt{bourbaki/ordre/iii\_1\_relations\_ordre/bornes\_sup/ensembles\_
 \textbf{Énoncé (Bourbaki).} Soit $E$ un ensemble ordonné filtrant à droite (deux éléments quelconques admettent un majorant commun) et $a$ un élément maximal de $E$. Alors $a$ est le plus grand élément de $E$.
 
 \textbf{Formalisé.} Cible : $\texttt{plus\_grand\_element}(G,E,a)$, c.-à-d. $a\in E \;\wedge\; (\forall x)(x\in E \Rightarrow (x,a)\in G)$. \\
-Module : \texttt{bourbaki/ordre/iii\_1\_relations\_ordre/iii\_1\_8\_filtrants/ensembles\_prop10\_maximal\_filtrant.py}. Ce module comble le dossier-trou \texttt{iii\_1\_8\_filtrants}.
+Module : \texttt{bourbaki/iii\_ensembles\_ordonnes\_cardinaux\_entiers/iii\_1\_relations\_ordre/iii\_1\_8\_filtrants/ensembles\_prop10\_maximal\_filtrant.py}. Ce module comble le dossier-trou \texttt{iii\_1\_8\_filtrants}.
 
 \textbf{Preuve (\Nstar).} On \texttt{assume} \texttt{est\_ordre}, \texttt{filtrant\_droite\_G} et \texttt{element\_maximal}, dont on extrait par \texttt{conjonction\_elim} : $a\in E$, le corps de maximalité, la réflexivité et la transitivité. Pour $x \in E$ (\texttt{assume}), le filtrant instancié en $(x,a)$ fournit par \texttt{modus\_ponens} un majorant commun $(\exists z)(z\in E \wedge (x,z)\in G \wedge (a,z)\in G)$. Sous le témoin $z$, la maximalité appliquée à $z$ (avec $(a,z)\in G$) force $z=a$ ; la réflexivité $(a,a)\in G$ est transportée par $a=z$ via Leibniz \texttt{N.s6} + \texttt{equivalence\_avant} en $(z,a)\in G$, puis la transitivité en $(x,z,a)$ donne $(x,a)\in G$. \texttt{existe\_elimination} décharge le témoin, \texttt{generalisation} (sur le liant interne fixé) ferme le corps « plus grand ». C'est ici que \texttt{est\_ordre} devient load-bearing (réflexivité + transitivité).
 
@@ -22,7 +22,7 @@ Module : \texttt{bourbaki/ordre/iii\_1\_relations\_ordre/iii\_1\_8\_filtrants/en
 \textbf{Énoncé (Bourbaki).} L'intersection $\intEE{a}{b} \cap \intEE{c}{d}$ de deux intervalles fermés (même support $E$, même ordre $G$) est encore un intervalle fermé. La preuve « treillis » l'identifie à $\intEE{\sup(a,c)}{\inf(b,d)}$, ce qui suppose l'existence des bornes des paires.
 
 \textbf{Formalisé.} Cible : $(\forall x)\bigl(x \in \intEE{a}{b}\cap\intEE{c}{d} \iff (x\in E \wedge (a,x)\in G \wedge (c,x)\in G \wedge (x,b)\in G \wedge (x,d)\in G)\bigr)$ (forme membership). \\
-Module : \texttt{bourbaki/ordre/iii\_1\_relations\_ordre/ordre\_treillis/ensembles\_intervalles\_prop13.py}.
+Module : \texttt{bourbaki/iii\_ensembles\_ordonnes\_cardinaux\_entiers/iii\_1\_relations\_ordre/ordre\_treillis/ensembles\_intervalles\_prop13.py}.
 
 \textbf{Preuve (\Nstar).} L'axiome de membership de $\intEE{\cdot}{\cdot}$ vit dans la théorie dédiée \texttt{theorie\_intervalle\_ferme} et est déchargé par \texttt{N.axiome}, puis \texttt{instancie} en $(E,a,b,x)$ et $(E,c,d,x)$. Le lemme \texttt{\_instance\_intersection} (via \texttt{AXIOME\_INTER} de \texttt{theorie\_ensembles}) donne $x\in X\cap Y \iff (x\in X \wedge x\in Y)$. Sens $\Rightarrow$ : \texttt{assume} $x\in\intEE{a}{b}\cap\intEE{c}{d}$, puis \texttt{equivalence\_avant} + \texttt{modus\_ponens} + \texttt{conjonction\_elim} extraient $x\in E$, $a\le x$, $c\le x$, $x\le b$, $x\le d$, recombinés par \texttt{conjonction\_intro}. Sens $\Leftarrow$ : on reconstruit les deux memberships et on réinjecte par \texttt{equivalence\_arriere} dans les axiomes puis dans l'intersection. \texttt{conjonction\_intro} des deux sens donne l'équivalence, \texttt{generalisation} en $x$ ferme.
 

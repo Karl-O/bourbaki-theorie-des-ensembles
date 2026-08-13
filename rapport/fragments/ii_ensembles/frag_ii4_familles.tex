@@ -7,7 +7,7 @@ famille-réciproque déjà certifiée, exposée sous ses noms canoniques \texttt
 \texttt{famille\_image\_recip}. L'import a été remis en cohérence par aliasage
 (\texttt{membre\_image\_recip as membre\_image\_reciproque}, \texttt{famille\_image\_recip as famille\_reciproque}),
 ce qui a supprimé la dernière erreur de collecte du dépôt sous \texttt{pytest}. \\
-Module : \texttt{bourbaki/ensembles/familles/ii\_4\_reunion\_intersection\_familles/ii\_4\_1\_definitions\_algebre/ensembles\_familles\_algebre.py}.
+Module : \texttt{bourbaki/ii\_theorie\_des\_ensembles/ii\_4\_reunion\_intersection\_famille/ii\_4\_1\_definitions\_algebre/ensembles\_familles\_algebre.py}.
 
 \textbf{Preuve (\Nstar).} Sans objet : aucun théorème n'est construit ni modifié par cette opération.
 Les symboles importés ne sont que des renommages locaux des fonctions certifiées d'origine ; la chaîne
@@ -22,7 +22,7 @@ de preuve reste identique.
 commutatives : $A \cup B = B \cup A$ et $A \cap B = B \cap A$.
 
 \textbf{Formalisé.} Cibles : $A \cup B = B \cup A$ et $A \cap B = B \cap A$. \\
-Module : \texttt{bourbaki/ensembles/familles/ii\_4\_reunion\_intersection\_familles/ii\_4\_1\_definitions\_algebre/ensembles\_binaire\_commut\_ii4.py}.
+Module : \texttt{bourbaki/ii\_theorie\_des\_ensembles/ii\_4\_reunion\_intersection\_famille/ii\_4\_1\_definitions\_algebre/ensembles\_binaire\_commut\_ii4.py}.
 
 \textbf{Preuve (\Nstar).} Preuve point par point par extensionnalité. On instancie l'axiome de réunion
 (resp. d'intersection) sur $z$ et l'on généralise (\texttt{generalisation}) : $A\cup B$ et $B\cup A$
@@ -41,7 +41,7 @@ f\langle A\rangle \setminus f\langle X\rangle$.
 
 \textbf{Formalisé.} Cible : $\mathrm{Injective}(f) \Rightarrow f\langle A \setminus X\rangle =
 f\langle A\rangle \setminus f\langle X\rangle$. \\
-Module : \texttt{bourbaki/ensembles/familles/ii\_4\_reunion\_intersection\_familles/ii\_4\_image\_famille/ensembles\_image\_difference\_injective.py}.
+Module : \texttt{bourbaki/ii\_theorie\_des\_ensembles/ii\_4\_reunion\_intersection\_famille/ii\_4\_image\_famille/ensembles\_image\_difference\_injective.py}.
 
 \textbf{Preuve (\Nstar).} Dual exact de l'image réciproque de la différence : les couples sont $(x,a)\in f$
 (antécédent $x$, valeur $a$) et l'univalence devient l'injectivité. Preuve point par point sous
@@ -66,7 +66,7 @@ $\bigcup_{\lambda\in L} X_\lambda = \bigcup_{\lambda\in L}\bigl(\bigcup_{\iota\i
 On en formalise la partie inconditionnelle (sans l'hypothèse $J_\lambda \neq \varnothing$).
 
 \textbf{Formalisé.} Cible : $\bigcup_{\lambda\in L} X_\lambda = \bigcup_{\lambda\in L}\bigl(\bigcup_{\iota\in J_\lambda} X_\iota\bigr)$. \\
-Module : \texttt{bourbaki/ensembles/familles/ii\_4\_reunion\_intersection\_familles/ii\_4\_1\_definitions\_algebre/ensembles\_familles\_assoc\_reunion.py}.
+Module : \texttt{bourbaki/ii\_theorie\_des\_ensembles/ii\_4\_reunion\_intersection\_famille/ii\_4\_1\_definitions\_algebre/ensembles\_familles\_assoc\_reunion.py}.
 
 \textbf{Preuve (\Nstar).} L'hypothèse $L = \bigcup_\lambda J_\lambda$ est scindée fidèlement en deux clauses
 assumées (\texttt{assume}) : \emph{(a) couverture} $(\forall\iota)(\iota\in L \Rightarrow (\exists\lambda)
