@@ -201,3 +201,109 @@ Bourbaki lui-même la donne comme immédiate. Aucune version non-triviale possib
 - LEÇON RE-CONFIRMÉE : la re-vérification indépendante du travail d'agent N'EST PAS optionnelle —
   « 5 tests verts / FAIT » de l'agent aurait committé une tautologie. §II.3.4-3.8 = SATURÉE
   (seul « trou » trouvé = α-trivial). Frontière réelle = chantiers cardinaux (lourds/lents).
+
+---
+
+## 12 août 2026 — UTILISER COQ/LEAN SANS LES IMPORTER
+
+**Question de Karl** : mélanger Coq et Bourbaki, chacun là où il est bon ?
+
+**La ligne, et elle n'est pas négociable** : la VÉRITÉ ne se mélange pas.
+Importer un théorème de Coq ajoute son noyau, sa théorie des types et ses
+axiomes à notre base de confiance. La frontière LCF du projet dit qu'un
+`Theoreme` ne naît que des primitives du noyau — un pont Coq→nous la
+détruirait, et avec elle la seule garantie que le projet offre.
+
+**Ce qui se mélange, en revanche, c'est la CARTE.** Le coût d'un gros théorème
+n'est pas dans les pas de preuve, il est dans l'architecture : quelle
+décomposition en lemmes, quelles bornes intermédiaires, dans quel ordre. Cette
+information est libre de fondations. La lire dans mathlib et la re-dériver chez
+nous ne coûte RIEN en soundness, puisque notre noyau re-vérifie tout.
+(C'est l'idée déjà consignée en mémoire : miner les énoncés, le DAG et la
+stratégie — jamais les pas.)
+
+**L'asymétrie qui rend l'échange intéressant** : ils ont l'étendue de
+l'arithmétique élémentaire ; nous avons une chose qu'ils NE PEUVENT PAS écrire
+— la forme sans quantificateur existentiel, parce que le τ de Hilbert est dans
+nos fondations et pas dans les leurs. Partage naturel : leur bibliothèque comme
+plan de route, notre noyau comme juge.
+
+**LE RISQUE, à surveiller** : tout ce qui vient de mathlib n'est pas dans
+Bourbaki, donc sort du comptage `@livre`. Or c'est cette discipline qui fait de
+notre arbre un DÉTECTEUR DE TROUS du livre — un des rares outils du projet qui
+ait vraiment payé. Un import mal rangé le casse silencieusement.
+
+**Application immédiate envisagée** : le postulat de Bertrand est formalisé
+dans mathlib. Lire sa décomposition en lemmes pourrait faire passer notre
+estimation de « plusieurs mois » à « quelques semaines ». Le contenu formel
+resterait intégralement construit ici, dans `recherche/`.
+
+---
+
+## 12 août 2026 — CE QUE LES 26 TOMES CONTIENNENT POUR BERTRAND (scan complet)
+
+Karl a la collection Bourbaki complète. Scan des tables des matières et des
+index, avec pages à l'appui. **Deux de mes affirmations précédentes étaient
+fausses, dans des directions opposées** : « Legendre n'est dans aucun
+Bourbaki » (faux), puis « sa machinerie est dans Algèbre commutative » (faux
+aussi). Voici l'état réel.
+
+### DÉMONTRÉ, directement utilisable
+
+| repère Bourbaki | fichier / PDF | énoncé |
+|---|---|---|
+| **A I §4, th. 7 + cor.** | `2.1) Algèbre` **p. 59** | `a = ∏ p^{v_p(a)}`, unicité ; **`v_p(ab)=v_p(a)+v_p(b)`** ; **`a\|b ⟺ v_p(a)⩽v_p(b)`** |
+| A I §4, déf. 16 | `2.1` p. 58 | définition de « premier » |
+| A I §8 n°2, cor. 1 | `2.1` p. 104 | formule du binôme |
+| A I §5 n°6, lemme | `2.1` p. 84 | `C(n,pʳ) ≡ m (mod p)` |
+| A V §1 n°3, lemme 1 | `2.2` p. 107 | `p \| C(p,i)` pour `1⩽i⩽p−1` |
+| A VII §1, th. 2 | `2.2` p. 335 | factorisation unique dans un anneau principal |
+| **A VII §1, prop. 5** | `2.2` p. 337 | **« L'ensemble des nombres premiers est infini »** — SEUL résultat de répartition démontré dans un texte principal de toute la collection |
+| AC VI §3, déf. 1 | `7.2` p. 96 | axiomes de valuation (`v_p` n'y est qu'un **exemple**, par renvoi à A VII) |
+| FVR III §1 / V §3 | `4` p. 92 / 239 | exp, log ; formule de Stirling |
+
+### ÉNONCÉ MAIS NON DÉMONTRÉ — et c'est une feuille de route
+
+**`2.2) Algèbre`, page 384** (A VII.52), en exercices :
+
+· **exerc. 19** — « l'exposant auquel figure un nombre premier `p` dans la
+  décomposition de `n!` est `Σ_k ⌊n·p^{−k}⌋` ». **C'est la formule de
+  Legendre.** Énoncée, non démontrée.
+
+· **exerc. 20** — Tchebychev, avec les indications : *« remarquer que `C(2n,n)`
+  est multiple du produit des premiers `q` tels que `n < q ⩽ 2n` … montrer que
+  `C(2n,n)` divise `∏ p^{r(p)}` … remarquer que `2^{2n}(2n+1)^{−1} < C(2n,n)
+  < 2^{2n}` »*. **C'est littéralement le squelette de la preuve d'Erdős**,
+  écrit par Bourbaki, étapes dans l'ordre.
+
+· exerc. 22 — l'intégralité des coefficients binomiaux, autre démonstration.
+
+### CE QUI MANQUE DANS TOUTE LA COLLECTION
+
+Aucune borne `Π_{p⩽n} p < 4ⁿ`, même en exercice. Aucun lemme de manipulation
+de `⌊n/p⌋`. Le mot **« Bertrand » n'apparaît dans aucun des 26 volumes** ;
+« Tchebychev » n'y est jamais arithmétique (approximation en EVT, convolution
+en Intégration) ; le théorème des nombres premiers est **explicitement
+sous-traité** à Ingham (1932) en note de bas de page.
+
+**Verdict** : Bourbaki donne toute l'algèbre de la divisibilité et **zéro
+arithmétique quantitative**. Le diagnostic du crible abstrait — « nos
+réductions ne contiennent aucune arithmétique » — se prolonge intact jusqu'au
+bout de la collection : ce n'est pas une lacune de notre travail, c'est une
+frontière du traité lui-même.
+
+### CORRECTION SUR LES BINOMIAUX — le trou est CHEZ NOUS
+
+Les coefficients binomiaux de E III.42 portent les étiquettes **`cor. 1`** et
+**`prop. 15`** : ce sont des résultats **démontrés dans le livre**, dont Sylow
+(A I.74) et la formule du binôme (A I.94) se servent comme acquis. Notre dépôt
+n'en a que les **énoncés** (`ensembles_combinatoire_enonces.py`). C'est donc du
+rattrapage de couverture, pas de la création — et c'est le vrai premier pas.
+
+### NOTE D'OUTILLAGE
+
+Le PDF `1) Theorie Des Ensembles.pdf` est un **scan sans couche texte** : l'agent
+n'a pas pu l'ouvrir et a reconstruit son contenu par les citations croisées des
+25 autres volumes. Notre projet dispose pourtant d'un pipeline PDF qui
+fonctionne (pymupdf) — à fournir aux agents de reconnaissance la prochaine fois.
+

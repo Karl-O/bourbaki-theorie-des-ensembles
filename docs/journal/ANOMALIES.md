@@ -252,3 +252,481 @@ CORRECTIONS appliquees :
   conséquence de CST8, PAS le critere lui-meme) ».
 Plus aucune collision de citation : `E IV.12 p.215` = UNIQUEMENT le vrai CST8
 (`ensembles_cst8_inversible_iso.py`). 172 tests structures verts (edits commentaire/docstring seulement).
+
+## 2026-07-26/27 — RÉSOLU : `AXIOME_PRODUIT_FAM` avait perdu le conjoint du livre (INFIDÉLITÉ, classe E6)
+
+**LA FAUTE.** `ensembles_abrege.AXIOME_PRODUIT_FAM` (l'un des 22) encodait la Déf. 1 du produit d'une
+famille (E II.32, PDF p.83) par ses seuls TROIS derniers conjoints :
+
+    F ∈ ∏(f,I)  ⇔  ( est_fonctionnel(F) ∧ dom F = I ∧ (∀ι)(ι∈I ⇒ F(ι) ∈ X_ι) )
+
+Le conjoint de TÊTE — « F est un élément de 𝔓(I × A) », A = ⋃_{ι∈I} X_ι, que Bourbaki écrit dans le
+PRÉAMBULE de la Déf. 1 pour justifier la sélection S8 — avait été perdu à la transcription. Le
+commentaire du code annonçait pourtant « sélection dans P(I×A) », et l'axiome FRÈRE `axiome_exposant`
+(F^E, E II.5.2) avait, lui, correctement gardé son « G ⊂ E×F ».
+
+**LA MESURE, à 0 hypothèse.** `est_fonctionnel` n'est QUE l'univocité : elle ne dit rien des éléments
+de F qui ne sont pas des couples. Le témoin `{∅}` (qui ne contient aucun couple, un couple de
+Kuratowski (a,b)={{a},{a,b}} contenant {a} n'étant jamais vide) satisfaisait donc les trois conjoints
+retenus, et le corpus démontrait, CLOS :   ⊢ {∅} ∈ ∏(u,∅)   puis   ⊢ ¬( ∏(u,∅) = {∅} ).
+Or E II.32 dit, MÊME PAGE : « Si I = ∅, l'ensemble ∏_{ι∈I} X_ι ne possède qu'un seul élément, savoir
+l'ensemble vide. » **Le corpus RÉFUTAIT le livre.** Défaut de FIDÉLITÉ, pas de soundness — le noyau
+ne garantit que la seconde.
+
+**LA RÉPARATION** (remplacement, PAS un ajout : `theorie_ensembles()` = 22 avant et après ; noyau et
+`subst` intouchés). Conjoint rétabli EN TÊTE, forme du livre :
+
+    F ∈ ∏(f,I)  ⇔  ( F ⊂ I × ⋃_{ι∈I} X_ι ∧ est_fonctionnel(F) ∧ dom F = I
+                     ∧ (∀ι)(ι∈I ⇒ F(ι) ∈ X_ι) )
+
+Placement EN TÊTE choisi sur mesure comparative : 18 théorèmes à ré-adresser contre 33 en queue
+(facteur 1,8) ; en tête, les accesseurs `dom F = I` (chemin g,d) et `(∀ι)…` (chemin d) sont
+LITTÉRALEMENT inchangés. Précédent exact : `AXIOME_INTER_FAM`, même journée.
+
+**CE QUI A DÛ MOURIR, ET POURQUOI C'ÉTAIT OBLIGATOIRE.** `hypothese_graphes_produit_vide_refutee`
+montrait { (∀F)(F∈∏(u,∅) ⇒ est_un_graphe F) } ⊢ ∅∈∅. Après réparation cette hypothèse est
+DÉMONTRABLE (`produit_graphe`, CLOS) : la garder à côté de sa réfutation aurait rendu la théorie
+INCOHÉRENTE. Supprimés avec elle : `singleton_vide_dans_produit_vide`,
+`produit_vide_n_est_pas_singleton(_enonce)`, `hypothese_graphes_produit_vide`. Ils sont remplacés par
+leur MIROIR `singleton_vide_hors_produit_vide` : ⊢ ¬( {∅} ∈ ∏(u,∅) ), CLOS — le corpus cesse de
+contredire E II.32.
+
+**LA DÉRIVE SILENCIEUSE (leçon d'outillage).** Sans ré-adressage, `produit_fonctionnel` et
+`_fonctionnel_imp` SE CONSTRUISENT ENCORE et restent CLOS : leur conclusion devient
+« F∈∏ ⇒ (F ⊂ I×⋃X_ι et fonct F) ». Aucun garde-fou du noyau ne le signale. De même `membre_but`
+(iii_3_5) change de conclusion sans rien casser, et son test n'assertait que `est_clos`. **Un test
+qui ne vérifie que « ça construit » ne verrouille RIEN** : les cibles sont désormais RECONSTRUITES À
+LA MAIN dans les tests, hors des modules testés.
+
+**RIPPLE.** `outils_ia/verite/classer_residu.py` perdait son unique schéma de réfutation certifié
+(H-graphe). Il a été REMPLACÉ, pas supprimé, par H-univ := (∃X)(∀x)(x∈X) réfutée par Russell
+(`pas_ensemble_universel`) — sans quoi le registre `SCHEMAS_REFUTATION` serait vide et la machinerie
+de certification ne serait plus mesurée. ⚠️ DETTE DÉCLARÉE : ce certificat consomme, outre les 22
+axiomes, l'instance de sélection S8 de R_b = {x∈b | x∉x} (théorie DÉDIÉE) — l'ancien tenait sur T₀
+seule. À composer avec `verite.axiomes_consommes.invariant_reel` (classe E4).
+
+
+## 2026-07-31 — RÉSOLU : `segment_extremite` avait perdu son PARAMÈTRE D'ORDRE (INCOHÉRENCE, classe E6)
+
+**LE DÉFAUT.** `segment_extremite(R, e, x)` rendait `app("seg_ext", e, x)` : le paramètre d'ordre R
+(un *callable* Python) N'ENTRAIT PAS dans le terme.  Deux ordres différents — typiquement un ordre
+et son OPPOSÉ — produisaient donc LE MÊME terme.  `axiome_segment_extremite(R)` n'avait aucune
+garde et `theorie_segment_extremite(R)` rendait `N.Theorie("Segment-extremite", [ax])` avec un NOM
+CONSTANT : autant de théories deux à deux INCOMPATIBLES que de relations R, toutes portant sur le
+même terme.  Conséquence dérivée par gestes purs du noyau, 0 hypothèse : `⊢ ∅ ∈ ∅`.  La théorie
+ambiante était CONTRADICTOIRE.
+
+**POURQUOI UNE GARDE N'AURAIT RIEN RÉPARÉ.**  Mettre l'axiome sous « R est un ordre sur E » ne
+change rien : un ordre ET son opposé satisfont tous deux la garde et se contredisent encore.
+L'axiome avait perdu un PARAMÈTRE, pas une condition — la réparation est STRUCTURELLE.
+
+**LA RÉPARATION.**
+1. `segment_extremite(G, e, x)` prend le GRAPHE DE L'ORDRE **en tant que TERME** et rend
+   `app("seg_ext", G, e, x)` ; une garde `TypeError` REFUSE bruyamment tout callable (aucun site
+   non migré ne peut passer en silence).
+2. `axiome_segment_extremite()` est désormais une formule **CLOSE**, ∀-close sur G aussi :
+   `(∀G)(∀E)(∀x)(∀y)( y ∈ seg_ext(G,E,x) ⇔ ((y∈E et (y,x)∈G) et y≠x) )`, `libres_f == ∅`.
+3. `theorie_segment_extremite()` n'a plus de paramètre : UNE théorie, UN axiome clos.
+   `theorie_ensembles()` reste à **22** (l'axiome vit dans sa théorie DÉDIÉE).
+**Effet dérivé** : plus de variable libre dans l'axiome ⇒ plus de CONSTANTE de théorie ⇒ le défaut
+C27 (généralisation sur une constante) disparaît DE CE SITE.
+
+**LA DÉRIVE VOULUE.**  Toute conclusion contenant un terme `seg_ext` change de forme (un argument G
+en plus).  Les cibles des tests ont été RECONSTRUITES depuis les primitives, jamais recopiées depuis
+la sortie des modules.
+
+**⚠️ CE QUE LA RÉPARATION A RÉVÉLÉ — LE « GATE ℕ » DE III.4 REPOSAIT SUR LE DÉFAUT.**
+Trois preuves de `iii_4_entiers_finis/ordinal_cardinal/realisation_segment/` éliminaient `(∃Ro)`
+(Zermelo) en s'appuyant EXPLICITEMENT sur le fait que « `seg(a,·,t)` ne porte pas Ro syntaxiquement
+— terme `seg_ext(a,t)` » :
+  * `ensembles_realisation_segment_preuve.bon_ordre_intervalle_depuis_realisation` (L.324) ;
+  * `ensembles_realisation_segment_close.bon_ordre_intervalle_depuis_subset` (L.533).
+⚠ NUANCE MESURÉE : `ensembles_gate_onto_top._bon_ordre_intervalle_close_raw` (L.869), qui
+élimine AUSSI un `(∃Ro)`, **SURVIT** (test_gate_onto_top VERT) : il DÉCHARGE la garde AVANT de
+généraliser, si bien qu'aucune hypothèse résiduelle ne contient Ro.  C'est le BON patron, et il
+montre que la réparation proposée ci-dessous est réalisable.  Le résultat capstone
+`bon_ordre_intervalle_close` (CLOS, 0 hyp) est donc **INTACT**.
+Le segment portant maintenant son graphe, l'hypothèse résiduelle (`realisation_segment_garde` /
+`realisation_hypothese` / `subset_realise_segment`) est Ro-DÉPENDANTE, et le noyau REFUSE la
+généralisation : `ValueError: généralisation : 'Ro' libre dans une hypothèse` (C27).  **Ces résultats
+n'étaient donc démontrables que grâce à l'incohérence.**  16 tests de ce dossier échouaient (sur 391 dans tout `tests/iii_4_entiers_finis` : 375 verts) ;
+c'était le signal HONNÊTE, et il a conduit à la réparation ci-dessous.
+**RÉPARATION FAITE ET MESURÉE (2026-08-01).**  L'hypothèse Ro-paramétrée est remplacée par sa
+forme Ro-CLOSE, dans les deux modules :
+  * `ensembles_realisation_segment_preuve.realisation_hypothese_close(a)` :=
+    `(∃Ro)( bo_form(Ro,a) ∧ (∀c) realisation_segment(Ro,a,c) )` ;
+  * `ensembles_realisation_segment_close.subset_realise_segment_close(a)` :=
+    `(∃Ro)( bo_form(Ro,a) ∧ subset_realise_segment(Ro,a) )`.
+Le schéma de preuve : on passe le maillon EN ANTÉCÉDENT (et plus seulement `bo_form`), ce qui rend
+l'implication CLOSE ; la généralisation sur Ro est alors autorisée et `existe_elimination` passe.
+C'est l'IDIOME DÉJÀ EN PLACE au dépôt — `hyp_transport_ordinal` (E III.24) met déjà le bon ordre et
+la propriété demandée sous LE MÊME ∃.
+
+**⚠️ CE QUI EST PERDU, NOMMÉMENT.**  ZERMELO SEUL NE SUFFIT PLUS pour ces deux réductions : il donne
+un bon ordre, pas la réalisation des segments PAR ce bon ordre ; les deux doivent être demandées
+ensemble.  L'ancien énoncé (hypothèse Ro-libre + Zermelo) était STRICTEMENT PLUS FORT et n'était
+démontrable que par le défaut.  **En revanche le capstone `bon_ordre_intervalle_close`
+(`ensembles_gate_onto_top`, CLOS, 0 hypothèse) est INTACT** — il décharge sa garde AVANT de
+généraliser, donc aucune hypothèse résiduelle ne porte Ro (test_gate_onto_top : 13 passed, mesuré).
+Ces deux modules restent donc des réductions intermédiaires, désormais plus faibles.
+
+**TESTS.**  `test_garde_est_Ro_independante` est REMPLACÉ (son objet a disparu : la
+Ro-indépendance était l'artefact) par
+`test_garde_depend_bien_de_Ro_et_le_GATE_la_clot_sous_existe`, qui épingle la garantie NOUVELLE :
+(a) garde et maillon DÉPENDENT de Ro, (b) le GATE les referme sous ∃ (hypothèse Ro-close),
+(c) l'axiome de segment est CLOS et la fabrique de théorie n'a plus de paramètre.  Les cibles
+d'hypothèse sont RÉASSEMBLÉES dans les tests depuis les primitives (`existe`/`et`/`_bo_form_canon`),
+jamais recopiées du module ; sonde adverse : 18 contrôles, tous MORDENT (voisin permuté, voisin sans
+`bo_form`, ancienne forme Ro-libre, conjonction non close, α-variant).
+
+
+## 2026-08-01 — DÉFAUT INTRODUIT PUIS CORRIGÉ pendant la migration seg_ext (traçabilité)
+
+`ensembles_factorielle_existence_vrai.factorielle_caracterisation_cible` appelait
+`E.segment_extremite(_t(G), ve, m)` alors que ce module n'avait **pas** de helper `_t` (il
+n'importait que `var`) : `NameError: name '_t' is not defined`, 5 tests rouges.  Ce n'était PAS une
+cible périmée mais un vrai défaut du module migré.  Corrigé en ajoutant le helper `_t` (idiome du
+dépôt : `Terme` importé, `return t if isinstance(t, Terme) else var(t)`).  Les tests de mutants du
+fichier meurent de nouveau sur une INÉGALITÉ de formule (`MIROIR-CONCLUSION` /
+`MIROIR-HYPOTHESES`), jamais sur une exception — vérifié.
+Leçon d'outillage : un remplacement textuel `R` → `_t(G)` appliqué par lot doit être suivi d'un scan
+AST « le helper existe-t-il dans CE module ? ».  Le scan a été écrit et rejoué : plus aucun module
+n'utilise `_t` sans le définir.
+
+
+## 2026-08-04 — ÉCART DE FIDÉLITÉ : `est_systeme_projectif` omet le TYPAGE des transitions
+
+**LE LIVRE** (§III.7.1, transcription V7 `7_Limites.../1_Limites_projectives/Texte.tex`, fidèle
+au scan) : « Pour tout couple (α, β) d'indices de I tels que α ≤ β, soit f_{αβ} **une application
+de E_β dans E_α**. On suppose que les f_{αβ} vérifient les conditions suivantes : (LP_I) … (LP_II) … »
+
+Le typage « application de E_β dans E_α » est posé AVANT (LP_I)/(LP_II) et fait donc pleinement
+partie de la donnée d'un système projectif.
+
+**LE CODE** (`iii_7_limites/ensembles_limites.py:101`) :
+```python
+def est_systeme_projectif(f, leq, i, ...):
+    return et(cocycle_projectif(...), identite_projectif(...))
+```
+— soit (LP_I) et (LP_II) SEULEMENT.  **Le typage des transitions est absent.**
+
+**CE QUE ÇA COÛTE, concrètement.**  Toute preuve qui a besoin de « f_{αβ}(z) ∈ E_α pour z ∈ E_β »
+ne peut pas l'obtenir de `est_systeme_projectif` et doit la porter comme hypothèse séparée.  C'est
+exactement ce qui bloque l'INCLUSION RÉCIPROQUE de la surjectivité de la Prop. 3 (§III.7.2) : pour
+placer le prolongement x̃ dans lim←_I il faut x̃_α = f_{αβ(α)}(x_{β(α)}) ∈ E_α, et rien ne le donne.
+
+**AMPLEUR MESURÉE** : 9 références à `est_systeme_projectif` dans `bourbaki/` + `tests/`, dont une
+DÉRIVATION (`ensembles_cofinal.py:341` : « {sys. projectif relatif à I filtrant} ⊢
+est_systeme_projectif »).  Renforcer la définition rendrait les théorèmes qui la SUPPOSENT encore
+valides (hypothèse plus forte) mais casserait cette dérivation et les tests qui épinglent la forme.
+
+**DÉCISION (assumée) — documenter et fournir, PAS modifier en cours de chantier.**  Changer une
+définition consommée par neuf sites au milieu d'un autre chantier, c'est prendre le risque de
+réparer sous pression des dérivations qu'on n'a pas le temps d'auditer.  La condition manquante est
+donc fournie comme constructeur nommé et portée en hypothèse HONNÊTE là où elle sert.  Le
+renforcement de `est_systeme_projectif` lui-même est un chantier à part, à faire d'un bloc avec
+l'audit de sa dérivation.
+
+**RÈGLE GÉNÉRALE QUI EN SORT** : une définition du livre encodée comme conjonction de ses
+*conditions numérotées* peut avoir perdu le TYPAGE énoncé en prose juste avant — le typage n'a pas
+de numéro, donc il ne saute pas aux yeux à la relecture.  Vérifier, pour chaque définition
+structurée, que la prose introductive n'apportait pas une condition non numérotée.
+
+
+### 2026-08-05 — RÉSOLUE : le typage des transitions est maintenant DANS la définition
+
+L'écart consigné la veille est **comblé**.  `est_systeme_projectif` porte désormais les TROIS
+conditions du livre — le typage des transitions, (LP_I) et (LP_II) — au lieu des deux numérotées.
+
+**Ce qui a rendu la correction possible, et ce que ça apprend.**  La signature ignorait `Efam` :
+on ne peut pas énoncer « f_{αβ} envoie E_β dans E_α » sans nommer la famille.  **Le manque était
+inscrit dans le TYPE de la fonction, pas seulement dans son corps** — d'où son invisibilité à la
+relecture.  La signature a donc gagné `Efam` en tête.
+
+**Ampleur réelle, mesurée avant l'opération** (l'estimation de la veille, « neuf sites dont une
+dérivation », était juste mais alarmiste) : la définition composite n'est ASSUMÉE par aucun
+théorème du dépôt — les preuves utilisent `cocycle_projectif` directement.  Elle n'est que
+*composée* (`est_systeme_projectif_filtrant`) et *projetée*
+(`systeme_projectif_filtrant_est_systeme`).  Or renforcer le conjoint droit d'une conjonction ne
+casse pas sa projection : la dérivation reste valide telle quelle.  Le renforcement était donc sûr.
+
+**Fait** : `Efam` threadé dans `est_systeme_projectif`, `est_systeme_projectif_filtrant` et les
+deux projections ; `transitions_typees` reste exposée séparément, parce que la plupart des preuves
+n'ont besoin QUE d'elle et que la porter seule est plus honnête que de supposer tout le système.
+
+**Le test a été INVERSÉ, pas supprimé** : `test_transitions_typees_condition_non_numerotee`
+épinglait l'ABSENCE du typage ; il devient
+`test_definition_systeme_projectif_est_fidele_au_livre` et épingle sa PRÉSENCE, plus celle des deux
+conditions numérotées.  C'est le même test qui garantit qu'on ne reperdra pas le typage.
+156/156 iii_7_limites, theorie_ensembles()=22.
+
+**Règle qui en sort** : quand une définition du livre paraît incomplète, regarder d'abord si sa
+SIGNATURE peut seulement exprimer ce qui manque.  Un paramètre absent est un symptôme plus fiable
+qu'une relecture du corps.
+
+
+### 2026-08-05 (soir) — la résolution du matin était PARTIELLE : « application » dit TROIS choses
+
+Le comblement consigné plus haut ajoutait `transitions_typees` — « f_{αβ} envoie E_β dans E_α ».
+C'est **un tiers** de ce que Bourbaki écrit.  « f_{αβ} une **application** de E_β dans E_α » veut
+dire : graphe **fonctionnel**, **défini sur tout** E_β, à **valeurs** dans E_α.
+
+**Comment le manque s'est révélé** — et c'est la partie utile : en tentant l'inclusion réciproque
+de la Prop. 3, les hypothèses résiduelles indémontrables se sont avérées être des conditions de
+DOMAINE, « (∃y)((t,y) ∈ f_{αβ}) », c'est-à-dire « f_{αβ} est définie en t ».  Elles ont été
+identifiées non pas en devinant, mais en **rappelant les briques sources aux mêmes arguments et en
+lisant leurs hypothèses**.
+
+**Ajouté** : `transitions_applications` — (∀α)(∀β)((α,β∈I et α≤β) ⇒ f_{αβ} ∈ (E_α)^(E_β)) — et
+`transitions_fonctionnelles_et_totales`, qui en tire fonctionnalité et domaine par
+`axiome_exposant`.  `transitions_typees` reste : la plupart des preuves n'ont besoin que d'elle.
+
+**⚠️ PIÈGE D'ENCODAGE, à ne pas rater** : c'est l'**exposant** (E_α)^(E_β) — l'ensemble des
+GRAPHES fonctionnels — et **non** 𝓕(E_β;E_α), qui est l'ensemble des TRIPLETS ((G,E),F).  Les
+transitions du dépôt sont manipulées comme des graphes (`valeur(f_{αβ}, t)`, sans `graphe_de`) :
+prendre 𝓕 donnerait un terme qui ne se raccorde à rien, et l'erreur n'apparaîtrait qu'au premier
+modus ponens, loin de sa cause.
+
+**RÈGLE** : un comblement de fidélité peut être PARTIEL.  Vérifier qu'on a capturé tout ce que le
+mot du livre implique — pas seulement le conjoint qui manquait à la preuve du jour.
+
+## 8 août 2026 — Snapshot lemme_17 (auto-découvert) périmé par le fix subst
+`test_tous_les_lemmes_se_recertifient` ROUGE : le lemme 17 (transitivité
+couple_egal_si_composantes ∘ coincidence_meme_graphe) se re-certifie CLOS,
+mais `repr(conclusion)` ≠ snapshot `_CIBLES[17]` (juillet). Cause : le
+court-circuit `(T|x)t = t si x∉libres(t)` (fix subst du 24 juillet) supprime
+des renommages gratuits → les lieurs canoniques `@n` de la conclusion
+re-dérivée diffèrent (2611 → 2597 caractères). α-variants ≠ dans ce noyau :
+le snapshot est re-calé sur la forme ACTUELLE (commentaire daté en place),
+l'ancienne repr est perdante par construction. Seul le NOM des lieurs change ;
+la certification (clos, 22 axiomes) n'a jamais cassé. Les 19 autres snapshots
+sont inchangés. Leçon : les catalogues à snapshot-repr sont fragiles aux
+changements de canonicalisation — re-vérifier après tout fix de subst.
+
+## 2026-08-10 — `est_premier` ne contraint pas p à être un entier (FIDÉLITÉ)
+
+**Constat** (`outils_ia/conjectures/goldbach.py:95`) :
+`est_premier(p) := ¬(p=1) ∧ (∀d)((Fini d ∧ divise_propre(d,p)) ⇒ (d=1 ∨ d=p))`.
+La garde `est_fini` porte sur le **diviseur** d, jamais sur **p**. Or
+`divise_propre(d,p)` = `(∃q)(Fini q ∧ p = Card(d×q))` exige que p soit
+littéralement un terme `Card(·)`. Si p n'est pas un cardinal, **aucun d ne le
+divise**, la clause (∀d) est vacuously vraie, et « p premier » se réduit à
+« p ≠ 1 ».
+
+**Mesuré (noyau, scratchpad `PB32_audit_premier.py`)** :
+`A1 : ⊢ ( ¬(p=1) ∧ (∀d)¬divise_propre(d,p) ) ⇒ est_premier(p)` — CLOS.
+Autrement dit : *tout objet indivisible et ≠ 1 est « premier »*.
+
+**Portée.** Soundness INTACTE (aucun faux théorème : les preuves existantes
+construisent des témoins numéraux). C'est un défaut de **fidélité** :
+`goldbach()` et `decomposition(2n)` quantifient sur des témoins non
+contraints à être des entiers, donc l'énoncé formalisé est **plus faible**
+que la conjecture de Goldbach. Même famille que l'incohérence de
+l'intersection (26 juil.) : le noyau garantit qu'on ne prouve rien de faux,
+pas qu'on prouve la bonne chose.
+
+**Symptôme rencontré** : blocage du sens retour de GG18 (forme crible) — on
+ne peut pas placer un témoin p dans [0,2k] sans savoir qu'il est un cardinal.
+
+**Correction proposée** (NON APPLIQUÉE — décision d'énoncé = Karl) :
+`est_premier_ent(p) := est_fini(p) ∧ est_premier(p)`. Mesuré `A2` : la garde
+est **gratuite** sur les numéraux (`fini_num(2) ∧ est_premier_num(2)`, clos),
+donc la correction ne coûte rien aux acquis — elle ajoute une obligation
+`Fini(p)` là où les témoins sont construits, ce qui est déjà le cas partout.
+
+## 2026-08-11 — L'associativité de « + » sur les cardinaux n'est PAS au format attendu
+
+**Constat.** `somme_cardinale_associative(A,B,C)` (exposée par
+`iii_3_3_somme/ensembles_arith_somme.py`, ré-export de
+`ensembles_somme_associe.py`) démontre
+
+    Card((A⊔B)⊔C) = Card(A⊔(B⊔C))
+
+et sa docstring annonce « = (a+b)+c = a+(b+c) ». **Ce n'est pas le même
+énoncé.** Avec `SC(x,y) := Card(x⊔y)`, la forme itérée s'écrit
+
+    SC(SC(A,B),C) = Card( Card(A⊔B) ⊔ C )
+
+— il y a un `Card` **de plus** au niveau interne. Les deux termes sont
+distincts pour le noyau ; aucune des deux formes ne se réécrit en l'autre sans
+un lemme d'invariance (la somme cardinale ne change pas si l'on remplace un
+argument par un ensemble équipotent).
+
+**Portée.** Soundness intacte : le théorème prouvé est vrai et clos. C'est un
+écart **prose / code** (le piège déjà rencontré sur `prop2_sous_fini`, dont la
+docstring annonçait une forme conjonctive et le code une forme curryfiée) —
+*la prose n'est pas un contrat, le code l'est*.
+
+**Conséquence mesurée** (script `ALG2_associativite.py`, 11 août) : la machine
+ne peut pas établir l'associativité d'une opération dérivée `a ⊕ b := (a+b)+1`,
+non par manque d'organe, mais parce que **le lemme requis n'est pas au dépôt**.
+Le premier diagnostic (« il manque un moteur de réécriture ») était donc
+incomplet : l'organe v17 fonctionne (vérifié sur des chaînes à 1 et 2 pas), le
+pool est vide de ce qu'il faudrait enchaîner.
+
+**Reste à faire** : démontrer `SC(SC(a,b),c) = SC(a,SC(b,c))` sur les cardinaux
+(via l'invariance de `Card` par équipotence), ou documenter que seule la forme
+« sommes disjointes sous Card » est disponible. Chantier non ouvert.
+
+## 2026-08-11 — L'associativité ITÉRÉE de « + » manquait (COMBLÉ)
+
+**Constat.** Le dépôt démontre `somme_cardinale_associative` :
+`Card((A⊔B)⊔C) = Card(A⊔(B⊔C))` — l'associativité au niveau des sommes
+**disjointes**. Ce n'est PAS la forme itérée dont tout calcul a besoin :
+`SC(SC(a,b), c)` vaut `Card( Card(a⊔b) ⊔ c )`, avec un `Card` **de plus à
+l'intérieur**. Aucun théorème du dépôt ne permettait de le résorber.
+
+**Le chaînon absent** — l'invariance de la somme par équipotence :
+
+    Card( Card(X) ⊔ Z ) = Card( X ⊔ Z )        (et le symétrique à droite)
+
+Preuve : `Eq(Card X, X)` (symétrie de `equipotent_son_cardinal`) et `Eq(Z,Z)`
+donnent `Eq(Card X ⊔ Z, X ⊔ Z)` par `eq_somme_invariant` ; la Prop. 1 conclut.
+
+**COMBLÉ** (scratchpad `ASSOC1_somme_cardinale.py`, 6 s) :
+
+    ⊢ SC(SC(a,b), c) = SC(a, SC(b,c))          CLOS, 0 hypothèse, theorie == 22
+
+**Portée.** Avec la commutativité (déjà au dépôt), le neutre `0` et cette
+associativité, les cardinaux forment un **monoïde commutatif** — la première
+structure algébrique complète disponible pour la machine.
+
+**Promotion suggérée** : ce résultat est **dans Bourbaki** (III.3.3), il a donc
+sa place dans `bourbaki/iii_3_3_operations_cardinaux/iii_3_3_somme/`, PAS dans
+`recherche/`. Deux lemmes à exposer : `invariance_somme_gauche/droite`, puis
+`somme_cardinale_associative_iteree`.
+
+**PIÈGE MESURÉ (coûteux).** `equipotence_symetrique` et `eq_somme_invariant`
+portent des liants de graphe **canoniques** (`F`, `G`). Les généraliser puis
+instancier les α-renomme et fait échouer un modus ponens **interne** à la
+fonction. Ces deux fonctions acceptent des TERMES en argument : il faut les
+appeler **directement**, jamais via `generalisation`/`instancie`.
+
+---
+
+## 12 août 2026 — DÉFAUT D'OUTILLAGE : un organe écrit DEUX FOIS
+
+**Constat.** L'organe v17 (réécriture par les égalités du pool) existait en
+deux exemplaires, écrits à un jour d'intervalle et par la même main :
+
+| fichier | date | moteur | testé |
+|---|---|---|---|
+| `autonomie/reecriture.py` | 11 août | largeur d'abord, bornes explicites | oui (`test_organe_v17_chaine_de_reecritures`) |
+| `autonomie/congruence.py` | 12 août | profondeur d'abord, via la récursion de `besoins` | non |
+
+`besoin.py` appelait **les deux**, sous le même alias `_fpr`, l'un après
+l'autre. Aucun test ne l'a vu : les deux sont *corrects*, donc la suite
+restait verte — le doublon coûtait du temps de calcul, pas de la justesse.
+
+**Conséquence mesurable.** `congruence.py` était passé à **356 lignes de code**,
+au-delà de la barre de 300 fixée par les conventions du projet.
+
+**Cause.** Le second a été écrit à partir du diagnostic (« il faut chaîner des
+égalités ») sans relire le contenu du dossier `autonomie/` — dont le nom de
+fichier `reecriture.py` disait pourtant exactement ce qui existait déjà.
+
+**Réparé.** Un seul moteur, celui de `reecriture.py` (mieux conçu : largeur
+d'abord, donc chaînes courtes en premier ; bornes `max_pas`/`max_noeuds`
+explicites ; test dédié). L'apport propre du second — l'instanciation des lois
+— y a été porté, et **amélioré au passage** : au lieu d'énumérer les instances
+à l'avance, la loi est matchée *au moment d'être appliquée* (`_instances`),
+ce qui est moins cher et couvre les termes intermédiaires que l'énumération
+initiale ne pouvait pas voir.
+
+| fichier | avant | après |
+|---|---|---|
+| `congruence.py` | 356 | **235** |
+| `reecriture.py` | 128 | **167** |
+| `besoin.py` | 299 | **285** |
+
+**Garde à retenir** (généralisable, c'est là l'intérêt) : *avant d'écrire un
+organe, lister le dossier `autonomie/`*. Les noms de fichiers y sont la table
+des matières des capacités de la machine — `congruence.py`, `reecriture.py`,
+`general.py`, `premiers.py`. Un organe dont le nom existe déjà est un organe à
+enrichir, pas à réécrire.
+
+---
+
+## 12 août 2026 — LES LIANTS CANONIQUES : deux familles, deux traitements OPPOSÉS
+
+Ce piège a mordu **trois fois en une matinée**, sous deux formes contraires.
+Il vaut donc une règle de détection, pas une note de plus.
+
+**Le symptôme est toujours le même** : `ValueError: modus ponens : mineure ≠
+antécédent`, levé **à l'intérieur** du lemme appelé — pas dans notre code. La
+cause est un liant que la généralisation ou l'instanciation a α-renommé, alors
+qu'une étape interne du lemme comptait dessus.
+
+**FAMILLE A — appeler DIRECTEMENT, jamais généraliser.**
+`equipotence_symetrique`, `eq_somme_invariant`. Ces fonctions acceptent des
+TERMES pour leurs arguments mathématiques ; leurs liants canoniques (`F`, `G`)
+ne servent qu'aux graphes internes. Les généraliser puis instancier renomme les
+graphes et casse un modus ponens interne.
+
+```python
+eq_somme_invariant(f="F", g="G", a=A, b=B, a1=A1, b1=B1)   # ✅ direct
+```
+
+**FAMILLE B — appeler sur SES PROPRES noms, puis généraliser, puis instancier.**
+`simplification_additive_finie` (récurrence, liant `aSA`), `prop2_sous_fini`
+(variables `a`/`b`/`c` libres). Ces fonctions sont prouvées AVEC leurs noms ;
+leur passer un terme court-circuite la construction.
+
+```python
+gen = N.generalisation("aSA", simplification_additive_finie("aSA"))  # ✅
+simp = instancie(gen, mon_terme)
+```
+
+**LA RÈGLE DE DÉTECTION, actionnable avant d'écrire une ligne.** Lire la
+signature :
+
+| ce qu'on voit | famille | traitement |
+|---|---|---|
+| des paramètres qui acceptent des TERMES (`a=A`, `x=u`) **et** des paramètres de liant séparés (`f="F"`) | A | appel direct |
+| tous les paramètres sont des NOMS de variables (`a="aSA"`, `a="a"`) | B | propres noms → généraliser → instancier |
+
+Autrement dit : **si le lemme sait déjà prendre un terme, donne-lui le terme ;
+s'il ne prend que des noms, ne lui donne jamais un terme.** Le mélange des deux
+est ce qui coûte du temps — les deux traitements sont l'exact inverse l'un de
+l'autre, donc appliquer le mauvais échoue à tous les coups.
+
+**Contexte des trois occurrences** : `ASSOC1` (famille A, `F`/`G` — associativité
+itérée) ; `symetrie.py` (famille A, pont-α gardé) ; `DEMI1` (famille B, `aSA` —
+simplification additive). Les deux premières ont été résolues en appelant
+direct, la troisième en faisant l'inverse.
+
+---
+
+## 12 août 2026 — LOI : LES TERMES SONT OPAQUES, LES FORMULES NE LE SONT PAS
+
+**Découverte en construisant l'oracle numérique, et valable pour tout futur
+évaluateur, simplificateur ou analyseur de termes.**
+
+Dans ce noyau, `N(7)` et `N(3) + N(4)` sont **tous deux** des τ-termes de
+`tag == 'tau'` avec **un seul argument** (une formule). Il n'y a donc rien à
+décomposer dans un terme arithmétique : `SC(a, b)` n'est PAS un nœud binaire
+d'enfants `a` et `b`.
+
+**Conséquence** : aucun évaluateur ne peut fonctionner par descente dans les
+termes. La seule voie est la **reconstruction** — bâtir le terme attendu et
+comparer. C'est praticable parce que les assemblages sont hashables et que
+l'égalité est en O(1) ; c'est impraticable si l'on reconstruit à chaque appel.
+D'où : **une table bâtie une fois**.
+
+**Les FORMULES, en revanche, se décomposent normalement** (`¬`, `∨`, `∃`, `=`).
+Et comme `et`, `⇒`, `∀` en sont des abréviations, évaluer les primitives les
+donne gratuitement. La frontière « formule décomposable / terme opaque » est
+la structure obligée de tout outil de ce genre.
+
+**Mesure** : descente naïve 333 s → table 3 s, **facteur 100**, sur le même
+jeu de six évaluations.
+
+**J'ai fait l'erreur DEUX FOIS en vingt minutes** — d'abord sur les termes,
+puis sur la reconnaissance des prédicats, où je naviguais à coups de
+`.sous[0].sous[1].sous[0]`. La seconde fois, appliquer la loi qu'on venait
+d'écrire a marché du premier coup. C'est le même défaut que
+`PIEGES_MESURES` §9 (« ne pas naviguer dans les sous-formules ; reconstruire
+et asserter »), généralisé : **ne jamais supposer une structure, la regarder.**
+Une introspection de trois lignes (`type`, `tag`, `len(args)`) a réglé en
+quelques secondes ce que deux hypothèses successives avaient coûté.
+
