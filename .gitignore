@@ -3,3 +3,20 @@ __pycache__/
 *.pyo
 .pytest_cache/
 outils_ia/pdf/pdf_pages/
+
+# ── sorties de compilation LaTeX (régénérables) ──────────────────────────
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.out
+*.synctex.gz
+*.toc
+
+# ── sorties de tests et traces de brouillon ──────────────────────────────
+*.log
+*.jsonl
+
+# ── PDF sources tiers : 30 Mo, hors dépôt (inventaire : sources/INDEX.md) ─
+sources/**/*.pdf
