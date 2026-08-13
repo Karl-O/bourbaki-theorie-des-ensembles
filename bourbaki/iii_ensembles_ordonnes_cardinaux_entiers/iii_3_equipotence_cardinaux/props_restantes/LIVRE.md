@@ -16,12 +16,15 @@
 | E III.29 | L.50-54 | 3.6 | Prop.13 | `prop13_equivalence` | `ensembles_prop13_full_iii3.py` |
 | E III.29 | L.55-58 | 3.6 | Demo.13 | `?` | `ensembles_prop13_complement.py` |
 | E III.30 | L.1-3 | 3.6 | Rem.- | `?` | `ensembles_cardinaux_props_restantes.py` |
+| E III.39 | L.20-23 | 5.6 | Lem.- | `cible` | `ensembles_diviseur_majore.py` |
+| E III.39 | L.20-23 | 5.6 | Lem.- | `diviseur_majore` | `ensembles_diviseur_majore.py` |
+| E III.39 | L.20-23 | 5.6 | Lem.- | `diviseur_majore_quantifie` | `ensembles_diviseur_majore.py` |
 | E III.39 | L.20-23 | 5.6 | Def.1 | `?` | `ensembles_divisibilite_propre.py` |
 | E III.39 | L.32-33 | 5.6 | Rem.- | `est_pair_propre` | `ensembles_divisibilite_propre.py` |
 
 ## Bilan cumulé (ce dossier + descendants)
 
-- Notions calées : **11**
+- Notions calées : **14**
 - Fichiers à caler : **0**
 - Marqueurs non conformes : **0**
 - Livre **E III** : pages couvertes 25-26, 28-30, 39 — **pages manquantes : 27, 31-38**

@@ -14,13 +14,13 @@
 | `iii_3_3_definition_ordre/` | 0 | 0 | 0 | — |
 | `ordre_cardinaux/` | 18 | 0 | 0 | E III: 24-25, 30 |
 | `parties_equipotentes/` | 6 | 0 | 0 | E R: 32 |
-| `props_restantes/` | 11 | 0 | 0 | E III: 25-26, 28-30, 39 |
+| `props_restantes/` | 14 | 0 | 0 | E III: 25-26, 28-30, 39 |
 | `recollement/` | 5 | 0 | 0 | E III: 25, 28, 48 ; E R: 22 |
 | `somme_produit_bornes/` | 7 | 0 | 0 | E III: 28, 30, 48 |
 
 ## Bilan cumulé (ce dossier + descendants)
 
-- Notions calées : **86**
+- Notions calées : **89**
 - Fichiers à caler : **0**
 - Marqueurs non conformes : **0**
 - Livre **E III** : pages couvertes 5, 23-26, 28-30, 39, 48 — **pages manquantes : 6-22, 27, 31-38, 40-47**

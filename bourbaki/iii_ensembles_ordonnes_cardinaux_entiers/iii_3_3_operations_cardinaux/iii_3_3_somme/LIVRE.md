@@ -20,12 +20,15 @@
 | E III.27 | L.10-11 | 3.3 | Cor.- | `somme_cardinale_commutative` | `ensembles_arith_somme.py` |
 | E III.27 | L.10-11 | 3.3 | Demo.- | `eq_somme_commute` | `ensembles_somme_commute.py` |
 | E III.27 | L.12-12 | 3.3 | Cor.- | `somme_cardinale_associative` | `ensembles_somme_associe.py` |
+| E III.27 | L.12-12 | 3.3 | Cor.- | `invariance_somme_gauche` | `ensembles_somme_iteree.py` |
+| E III.27 | L.12-12 | 3.3 | Cor.- | `invariance_somme_droite` | `ensembles_somme_iteree.py` |
+| E III.27 | L.12-12 | 3.3 | Cor.- | `somme_cardinale_associative_iteree` | `ensembles_somme_iteree.py` |
 | E III.27 | L.14-14 | 3.4 | Rem.- | `card_somme_zero_neutre` | `ensembles_somme_zero.py` |
 | E III.27 | L.24-24 | 3.4 | Cor.1 | `card_somme_zero_neutre` | `ensembles_somme_zero.py` |
 
 ## Bilan cumulé (ce dossier + descendants)
 
-- Notions calées : **15**
+- Notions calées : **18**
 - Fichiers à caler : **0**
 - Marqueurs non conformes : **0**
 - Livre **E III** : pages couvertes 25-27 — aucune page manquante dans l'intervalle
