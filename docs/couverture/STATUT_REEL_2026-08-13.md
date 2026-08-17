@@ -110,3 +110,20 @@ périmés ont déjà été trouvés en 24 h début août.
   réellement clos donnerait le seul taux qui réponde à la question du projet :
   « démontré dans le livre » coïncide-t-il avec « vérifié par la machine » ?
   **Ce croisement n'existe pas.** C'est le prochain instrument à construire.
+
+---
+
+## MISE À JOUR du 18 août, 1h20 — LA SUITE COMPLÈTE EST VERTE
+
+**4204 passed en 2 h 20 (pytest-xdist, 12 workers, exit 0).** C'est la
+PREMIÈRE exécution complète de la suite jamais menée à terme : en série elle
+dépasse 90 minutes et personne ne l'attendait jamais. La zone d'ombre n°1 de
+ce document est levée : la restructuration de 1693 fichiers n'a rien cassé,
+et c'est désormais PROUVÉ, plus supposé.
+
+Il aura fallu trois essais pour l'obtenir : deux timeouts à 90 min (le
+second parce que la suite et l'évaluation noyau se partageaient les 16
+cœurs), et à chaque fois une notification « exit 0 » TROMPEUSE — c'était le
+code de sortie de l'echo, pas celui de pytest (le vrai : 124). Leçon
+d'infra, la même que partout ailleurs dans ce projet : ne jamais accepter un
+verdict sans lire la pièce (ici, la dernière ligne du fichier de sortie).
