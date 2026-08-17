@@ -1,0 +1,252 @@
+{
+ "bourbaki/ii_theorie_des_ensembles/ii_1_relations_collectivisantes/ensembles_difference.py::de_morgan_reunion": {
+  "etat": "FAIT",
+  "hyp": 0,
+  "detail": ""
+ },
+ "bourbaki/ii_theorie_des_ensembles/ii_1_relations_collectivisantes/ensembles_difference.py::de_morgan_inter": {
+  "etat": "FAIT",
+  "hyp": 0,
+  "detail": ""
+ },
+ "bourbaki/ii_theorie_des_ensembles/ii_1_relations_collectivisantes/ensembles_difference_identites.py::difference_vide": {
+  "etat": "FAIT",
+  "hyp": 0,
+  "detail": ""
+ },
+ "bourbaki/ii_theorie_des_ensembles/ii_1_relations_collectivisantes/ensembles_difference_identites.py::inter_complement_vide": {
+  "etat": "FAIT",
+  "hyp": 0,
+  "detail": ""
+ },
+ "bourbaki/ii_theorie_des_ensembles/ii_1_relations_collectivisantes/ensembles_difference_identites.py::inter_ambiant_neutre": {
+  "etat": "PARTIEL",
+  "hyp": 1,
+  "detail": ""
+ },
+ "bourbaki/ii_theorie_des_ensembles/ii_1_relations_collectivisantes/ensembles_difference_identites.py::reunion_ambiant_absorbe": {
+  "etat": "PARTIEL",
+  "hyp": 1,
+  "detail": ""
+ },
+ "bourbaki/ii_theorie_des_ensembles/ii_1_relations_collectivisantes/ensembles_difference_identites.py::reunion_complement_plein": {
+  "etat": "PARTIEL",
+  "hyp": 1,
+  "detail": ""
+ },
+ "bourbaki/ii_theorie_des_ensembles/ii_1_relations_collectivisantes/ensembles_theoremes.py::inclusion_reunion_gauche": {
+  "etat": "FAIT",
+  "hyp": 0,
+  "detail": ""
+ },
+ "bourbaki/ii_theorie_des_ensembles/ii_1_relations_collectivisantes/ensembles_theoremes.py::commutativite_reunion": {
+  "etat": "FAIT",
+  "hyp": 0,
+  "detail": ""
+ },
+ "bourbaki/ii_theorie_des_ensembles/ii_1_relations_collectivisantes/ensembles_theoremes.py::inclusion_intersection_gauche": {
+  "etat": "FAIT",
+  "hyp": 0,
+  "detail": ""
+ },
+ "bourbaki/ii_theorie_des_ensembles/ii_1_relations_collectivisantes/ensembles_theoremes.py::commutativite_intersection": {
+  "etat": "FAIT",
+  "hyp": 0,
+  "detail": ""
+ },
+ "bourbaki/ii_theorie_des_ensembles/ii_1_relations_collectivisantes/ensembles_vide_identites.py::reunion_vide_neutre": {
+  "etat": "FAIT",
+  "hyp": 0,
+  "detail": ""
+ },
+ "bourbaki/ii_theorie_des_ensembles/ii_1_relations_collectivisantes/ensembles_vide_identites.py::intersection_vide": {
+  "etat": "FAIT",
+  "hyp": 0,
+  "detail": ""
+ },
+ "bourbaki/ii_theorie_des_ensembles/ii_1_relations_collectivisantes/ii_1_algebre_booleenne/ensembles_algebre_booleenne.py::associativite_reunion": {
+  "etat": "FAIT",
+  "hyp": 0,
+  "detail": ""
+ },
+ "bourbaki/ii_theorie_des_ensembles/ii_1_relations_collectivisantes/ii_1_algebre_booleenne/ensembles_algebre_booleenne.py::associativite_intersection": {
+  "etat": "FAIT",
+  "hyp": 0,
+  "detail": ""
+ },
+ "bourbaki/ii_theorie_des_ensembles/ii_1_relations_collectivisantes/ii_1_algebre_booleenne/ensembles_algebre_booleenne.py::idempotence_reunion": {
+  "etat": "FAIT",
+  "hyp": 0,
+  "detail": ""
+ },
+ "bourbaki/ii_theorie_des_ensembles/ii_1_relations_collectivisantes/ii_1_algebre_booleenne/ensembles_algebre_booleenne.py::idempotence_intersection": {
+  "etat": "FAIT",
+  "hyp": 0,
+  "detail": ""
+ },
+ "bourbaki/ii_theorie_des_ensembles/ii_1_relations_collectivisantes/ii_1_algebre_booleenne/ensembles_algebre_booleenne.py::absorption_reunion": {
+  "etat": "FAIT",
+  "hyp": 0,
+  "detail": ""
+ },
+ "bourbaki/ii_theorie_des_ensembles/ii_1_relations_collectivisantes/ii_1_algebre_booleenne/ensembles_algebre_booleenne.py::absorption_intersection": {
+  "etat": "FAIT",
+  "hyp": 0,
+  "detail": ""
+ },
+ "bourbaki/ii_theorie_des_ensembles/ii_1_relations_collectivisantes/ii_1_algebre_booleenne/ensembles_algebre_booleenne.py::distributivite_intersection_reunion": {
+  "etat": "FAIT",
+  "hyp": 0,
+  "detail": ""
+ },
+ "bourbaki/ii_theorie_des_ensembles/ii_1_relations_collectivisantes/ii_1_algebre_booleenne/ensembles_algebre_booleenne.py::distributivite_reunion_intersection": {
+  "etat": "FAIT",
+  "hyp": 0,
+  "detail": ""
+ },
+ "bourbaki/ii_theorie_des_ensembles/ii_1_relations_collectivisantes/ii_1_algebre_booleenne/ensembles_algebre_booleenne.py::de_morgan_complement_reunion": {
+  "etat": "FAIT",
+  "hyp": 0,
+  "detail": ""
+ },
+ "bourbaki/ii_theorie_des_ensembles/ii_1_relations_collectivisantes/ii_1_algebre_booleenne/ensembles_algebre_booleenne.py::de_morgan_complement_intersection": {
+  "etat": "FAIT",
+  "hyp": 0,
+  "detail": ""
+ },
+ "bourbaki/ii_theorie_des_ensembles/ii_1_relations_collectivisantes/ii_1_algebre_booleenne/ensembles_disjonction_complement.py::disjonction_complement": {
+  "etat": "PARTIEL",
+  "hyp": 1,
+  "detail": ""
+ },
+ "bourbaki/ii_theorie_des_ensembles/ii_1_relations_collectivisantes/ii_1_algebre_booleenne/ensembles_egalite_leibniz.py::egalite_leibniz_parties": {
+  "etat": "FAIT",
+  "hyp": 0,
+  "detail": ""
+ },
+ "bourbaki/ii_theorie_des_ensembles/ii_1_relations_collectivisantes/ii_1_algebre_booleenne/ensembles_inclusion_treillis.py::inclusion_ssi_intersection_egale": {
+  "etat": "FAIT",
+  "hyp": 0,
+  "detail": ""
+ },
+ "bourbaki/ii_theorie_des_ensembles/ii_1_relations_collectivisantes/ii_1_algebre_booleenne/ensembles_inclusion_treillis.py::inclusion_ssi_reunion_egale": {
+  "etat": "FAIT",
+  "hyp": 0,
+  "detail": ""
+ },
+ "bourbaki/ii_theorie_des_ensembles/ii_1_relations_collectivisantes/ii_1_algebre_booleenne/ensembles_inf_sup_universel.py::inf_universel_binaire": {
+  "etat": "FAIT",
+  "hyp": 0,
+  "detail": ""
+ },
+ "bourbaki/ii_theorie_des_ensembles/ii_1_relations_collectivisantes/ii_1_algebre_booleenne/ensembles_inf_sup_universel.py::sup_universel_binaire": {
+  "etat": "FAIT",
+  "hyp": 0,
+  "detail": ""
+ },
+ "bourbaki/ii_theorie_des_ensembles/ii_1_relations_collectivisantes/ii_1_algebre_booleenne/ensembles_monotonie_union_inter.py::monotonie_union_inter": {
+  "etat": "PARTIEL",
+  "hyp": 1,
+  "detail": ""
+ },
+ "bourbaki/ii_theorie_des_ensembles/ii_1_relations_collectivisantes/ii_1_algebre_booleenne/ensembles_recouvrement_complement.py::recouvrement_complement": {
+  "etat": "PARTIEL",
+  "hyp": 2,
+  "detail": ""
+ },
+ "bourbaki/ii_theorie_des_ensembles/ii_1_relations_collectivisantes/ii_1_algebre_booleenne/ensembles_trace.py::trace": {
+  "etat": "NON_EVALUABLE",
+  "hyp": null,
+  "detail": "appel: TypeError"
+ },
+ "bourbaki/ii_theorie_des_ensembles/ii_1_relations_collectivisantes/ii_1_algebre_booleenne/ensembles_trace.py::trace_reunion": {
+  "etat": "FAIT",
+  "hyp": 0,
+  "detail": ""
+ },
+ "bourbaki/ii_theorie_des_ensembles/ii_1_relations_collectivisantes/ii_1_algebre_booleenne/ensembles_trace.py::trace_intersection": {
+  "etat": "FAIT",
+  "hyp": 0,
+  "detail": ""
+ },
+ "bourbaki/ii_theorie_des_ensembles/ii_1_relations_collectivisantes/ii_1_algebre_booleenne/ensembles_trace.py::trace_complement": {
+  "etat": "PARTIEL",
+  "hyp": 1,
+  "detail": ""
+ },
+ "bourbaki/ii_theorie_des_ensembles/ii_3_correspondances/ii_3_2_reciproque/ensembles_image_reciproque_props.py::inclus_image_reciproque_image": {
+  "etat": "FAIT",
+  "hyp": 0,
+  "detail": ""
+ },
+ "bourbaki/ii_theorie_des_ensembles/ii_3_correspondances/ii_3_2_reciproque/ensembles_image_reciproque_props.py::image_image_reciproque_inclus": {
+  "etat": "FAIT",
+  "hyp": 0,
+  "detail": ""
+ },
+ "bourbaki/ii_theorie_des_ensembles/ii_3_correspondances/ii_3_2_reciproque/ensembles_image_reciproque_props.py::image_reciproque_image_inclus_si_injective": {
+  "etat": "FAIT",
+  "hyp": 0,
+  "detail": ""
+ },
+ "bourbaki/ii_theorie_des_ensembles/ii_3_correspondances/ii_3_2_reciproque/ensembles_image_reciproque_props.py::image_reciproque_image_egal_si_injective": {
+  "etat": "FAIT",
+  "hyp": 0,
+  "detail": ""
+ },
+ "bourbaki/ii_theorie_des_ensembles/ii_3_correspondances/ii_3_2_reciproque/ensembles_image_reciproque_props.py::image_image_reciproque_contient_si_surjective": {
+  "etat": "FAIT",
+  "hyp": 0,
+  "detail": ""
+ },
+ "bourbaki/ii_theorie_des_ensembles/ii_3_correspondances/ii_3_2_reciproque/ensembles_image_reciproque_props.py::image_image_reciproque_egal_si_surjective": {
+  "etat": "FAIT",
+  "hyp": 0,
+  "detail": ""
+ },
+ "bourbaki/ii_theorie_des_ensembles/ii_3_correspondances/ii_3_6_fonction_terme/ensembles_fonction_constante.py::fonction_constante": {
+  "etat": "PAS_UN_THEOREME",
+  "hyp": null,
+  "detail": "Terme"
+ },
+ "bourbaki/ii_theorie_des_ensembles/ii_3_correspondances/ii_3_6_fonction_terme/ensembles_fonction_constante.py::graphe_constante_fonctionnel": {
+  "etat": "FAIT",
+  "hyp": 0,
+  "detail": ""
+ },
+ "bourbaki/ii_theorie_des_ensembles/ii_3_correspondances/ii_3_6_fonction_terme/ensembles_fonction_constante.py::valeur_constante": {
+  "etat": "PARTIEL",
+  "hyp": 1,
+  "detail": ""
+ },
+ "bourbaki/ii_theorie_des_ensembles/ii_4_reunion_intersection_famille/ii_4_1_definitions_algebre/ensembles_reunion_ensemble_membre_ii4.py::a_plus_petit_pour_inclusion": {
+  "etat": "PAS_UN_THEOREME",
+  "hyp": null,
+  "detail": "Formule"
+ },
+ "bourbaki/ii_theorie_des_ensembles/ii_4_reunion_intersection_famille/ii_4_1_definitions_algebre/ensembles_reunion_ensemble_membre_ii4.py::plus_petit_est_inter": {
+  "etat": "PARTIEL",
+  "hyp": 2,
+  "detail": ""
+ },
+ "bourbaki/ii_theorie_des_ensembles/ii_4_reunion_intersection_famille/ii_4_1_definitions_algebre/ensembles_reunion_ensemble_membre_ii4.py::plus_petit_ssi_inter_membre": {
+  "etat": "PARTIEL",
+  "hyp": 2,
+  "detail": ""
+ },
+ "bourbaki/ii_theorie_des_ensembles/ii_4_reunion_intersection_famille/ii_4_1_definitions_algebre/ensembles_reunion_ensemble_membre_ii4.py::a_plus_grand_pour_inclusion": {
+  "etat": "PAS_UN_THEOREME",
+  "hyp": null,
+  "detail": "Formule"
+ },
+ "bourbaki/ii_theorie_des_ensembles/ii_4_reunion_intersection_famille/ii_4_1_definitions_algebre/ensembles_reunion_ensemble_membre_ii4.py::plus_grand_est_reunion": {
+  "etat": "PARTIEL",
+  "hyp": 1,
+  "detail": ""
+ },
+ "bourbaki/ii_theorie_des_ensembles/ii_4_reunion_intersection_famille/ii_4_1_definitions_algebre/ensembles_reunion_ensemble_membre_ii4.py::plus_grand_ssi_reunion_membre": {
+  "etat": "PARTIEL",
+  "hyp": 1,
+  "detail": ""
+ }
+}
