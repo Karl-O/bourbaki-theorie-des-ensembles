@@ -148,13 +148,44 @@ def _module_de(chemin: str) -> str:
     return chemin[:-3].replace("/", ".")
 
 
+#: types @livre qui PROMETTENT une démonstration — la question FAIT/PARTIEL
+#: n'a de sens que pour eux ; Def/Rem/Ex construisent, elles n'ont rien à
+#: décharger. Mélanger les deux populations, c'est diluer le seul taux qui
+#: réponde à la question du projet (mesuré : 354 « NON_EVALUABLE » dont une
+#: grande part était simplement… des définitions qui construisent très bien).
+TYPES_DEMONTRABLES = frozenset({"Prop", "Th", "Cor", "Crit", "Lem", "Demo",
+                                "Sch", "Ax"})
+
+
+def est_demontrable(type_livre: str) -> bool:
+    return type_livre in TYPES_DEMONTRABLES
+
+
+def _classer_retour(th) -> tuple[str, int | None, str]:
+    hyps = getattr(th, "hypotheses", None)
+    if hyps is None:
+        #   la notion CONSTRUIT un objet (Terme, formule, booléen…) : c'est le
+        #   comportement attendu d'une DÉFINITION, pas un échec.
+        return "CONSTRUIT", None, type(th).__name__
+    return ("FAIT" if len(hyps) == 0 else "PARTIEL"), len(hyps), ""
+
+
 def verdict_noyau(chemin: str, notion: str) -> tuple[str, int | None, str]:
     """Passe (2) : ce que le NOYAU dit. Importe, appelle, compte les hypothèses.
 
     Rend (état, nb d'hypothèses, détail). Un échec n'est jamais silencieux :
     il devient l'état NON_EVALUABLE avec sa cause, parce qu'une notion qu'on
-    ne sait pas évaluer n'est PAS une notion démontrée."""
+    ne sait pas évaluer n'est PAS une notion démontrée.
+
+    REPLI « arguments génériques » : la convention du dépôt est que les
+    paramètres des constructeurs de théorèmes sont des NOMS (chaînes),
+    convertis par `var()`/`_t()` à l'intérieur. Une fonction sans valeurs par
+    défaut s'appelle donc en passant à chaque paramètre… son propre nom : le
+    théorème obtenu est l'instance générique, qui est exactement la notion.
+    Si la fonction attend de vrais objets (couche assemblage, prédicats), le
+    repli échoue et l'état NON_EVALUABLE reste — jamais de faux verdict."""
     import importlib
+    import inspect
 
     try:
         mod = importlib.import_module(_module_de(chemin))
@@ -166,18 +197,25 @@ def verdict_noyau(chemin: str, notion: str) -> tuple[str, int | None, str]:
     if not callable(fn):
         return "NON_EVALUABLE", None, "non appelable"
     try:
-        th = fn()
+        return _classer_retour(fn())
+    except TypeError:
+        pass                                   # → repli arguments génériques
     except Exception as e:                                  # noqa: BLE001
         return "NON_EVALUABLE", None, "appel: %s" % type(e).__name__
-    hyps = getattr(th, "hypotheses", None)
-    if hyps is None:
-        return "PAS_UN_THEOREME", None, type(th).__name__
-    return ("FAIT" if len(hyps) == 0 else "PARTIEL"), len(hyps), ""
+    try:
+        sig = inspect.signature(fn)
+        args = [p.name for p in sig.parameters.values()
+                if p.default is inspect.Parameter.empty
+                and p.kind in (p.POSITIONAL_ONLY, p.POSITIONAL_OR_KEYWORD)]
+        etat, n, detail = _classer_retour(fn(*args))
+        return etat, n, (detail + " args génériques").strip()
+    except Exception as e:                                  # noqa: BLE001
+        return "NON_EVALUABLE", None, "appel: %s" % type(e).__name__
 
 
 def croisement(decl: str, etat: str) -> str:
     """Le produit utile : où la déclaration et le noyau se contredisent."""
-    if etat in ("NON_EVALUABLE", "PAS_UN_THEOREME"):
+    if etat in ("NON_EVALUABLE", "PAS_UN_THEOREME", "CONSTRUIT"):
         return "NON_TRANCHE"
     if etat == "FAIT":
         if decl == "REPORTE":
@@ -206,6 +244,12 @@ def evaluer(lignes: list[dict], chap: str | None, limite: int | None) -> None:
     Le cache est INCRÉMENTAL : une passe interrompue garde tout ce qu'elle a
     tranché, et la suivante reprend où elle s'est arrêtée."""
     cache = json.loads(CACHE.read_text(encoding="utf-8")) if CACHE.exists() else {}
+    if getattr(evaluer, "rejuge", False):
+        avant = len(cache)
+        cache = {k: v for k, v in cache.items()
+                 if v["etat"] not in ("NON_EVALUABLE", "PAS_UN_THEOREME")}
+        print(" rejuge : %d entrées invalidées" % (avant - len(cache)),
+              flush=True)
     faits = 0
     for L in lignes:
         if chap and L["chap"] != chap:
@@ -256,12 +300,25 @@ def rapport(lignes: list[dict], avec_noyau: bool) -> str:
     evalues = [L for L in lignes if "etat" in L]
     o += ["-" * 78, " (2) NOYAU — %d notions évaluées" % len(evalues), ""]
     et = Counter(L["etat"] for L in evalues)
-    for k in ("FAIT", "PARTIEL", "NON_EVALUABLE", "PAS_UN_THEOREME"):
-        o.append("   %-18s %5d" % (k, et[k]))
-    tranchees = et["FAIT"] + et["PARTIEL"]
+    for k in ("FAIT", "PARTIEL", "CONSTRUIT", "NON_EVALUABLE",
+              "PAS_UN_THEOREME"):
+        if et[k]:
+            o.append("   %-18s %5d" % (k, et[k]))
+    #   LE CHIFFRE DE TÊTE : sur les seuls types qui PROMETTENT une preuve.
+    #   Une Def qui construit n'est ni FAIT ni PARTIEL — l'y mélanger dilue
+    #   la seule réponse chiffrée à « démontré == vérifié ? ».
+    dem = [L for L in evalues if est_demontrable(L["type"])]
+    etd = Counter(L["etat"] for L in dem)
+    o += ["", "   TYPES DÉMONTRABLES (Prop/Th/Cor/Crit/Lem/Demo/Sch/Ax) : %d"
+          % len(dem)]
+    for k in ("FAIT", "PARTIEL", "CONSTRUIT", "NON_EVALUABLE",
+              "PAS_UN_THEOREME"):
+        if etd[k]:
+            o.append("     %-18s %5d" % (k, etd[k]))
+    tranchees = etd["FAIT"] + etd["PARTIEL"]
     if tranchees:
-        o.append("   → taux FAIT sur les notions TRANCHÉES : %.1f %% (%d/%d)"
-                 % (100.0 * et["FAIT"] / tranchees, et["FAIT"], tranchees))
+        o.append("   → taux FAIT sur les DÉMONTRABLES tranchées : %.1f %% (%d/%d)"
+                 % (100.0 * etd["FAIT"] / tranchees, etd["FAIT"], tranchees))
     o += ["-" * 78, " (3) CROISEMENT — ce qu'aucun autre outil ne voit", ""]
     cr = Counter(L["croisement"] for L in evalues)
     for k in ("ACCORD", "REPORT_PERIME", "DECLARATION_TROP_FORTE",
@@ -289,10 +346,14 @@ def main(argv):
     ap.add_argument("--limite", type=int,
                     help="borne le nombre de NOUVELLES évaluations")
     ap.add_argument("--md", help="écrit aussi un rapport Markdown")
+    ap.add_argument("--rejuge", action="store_true",
+                    help="rejuge les NON_EVALUABLE/PAS_UN_THEOREME du cache "
+                         "(après une amélioration du repli d'appel)")
     a = ap.parse_args(argv)
 
     lignes = passe_declarative(Path(a.racine))
     if a.noyau:
+        evaluer.rejuge = a.rejuge
         evaluer(lignes, a.chap, a.limite)
     txt = rapport(lignes, a.noyau)
     print(txt, flush=True)
@@ -301,7 +362,8 @@ def main(argv):
     return 0 if lignes else 1
 
 
-__all__ = ["declaration", "docstrings_du_fichier", "passe_declarative",
+__all__ = ["TYPES_DEMONTRABLES", "est_demontrable",
+           "declaration", "docstrings_du_fichier", "passe_declarative",
            "verdict_noyau", "croisement", "evaluer", "rapport"]
 
 

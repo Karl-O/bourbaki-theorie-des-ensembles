@@ -8,7 +8,9 @@ les plus honnêtes du dépôt. C'est arrivé, et les tests ci-dessous verrouille
 chacune des formes qui l'avaient piégé."""
 from __future__ import annotations
 
-from outils_ia.audit.statut_notions import croisement, declaration
+from outils_ia.audit.statut_notions import (
+    croisement, declaration, est_demontrable, verdict_noyau,
+)
 
 
 def test_clos_sec_est_lu_comme_clos():
@@ -90,3 +92,42 @@ def test_ce_qui_n_est_pas_evaluable_n_est_jamais_tranche():
     for decl in ("CLOS", "CLOS_MODULO", "REPORTE", "MUET"):
         assert croisement(decl, "NON_EVALUABLE") == "NON_TRANCHE"
         assert croisement(decl, "PAS_UN_THEOREME") == "NON_TRANCHE"
+        assert croisement(decl, "CONSTRUIT") == "NON_TRANCHE"
+
+
+def test_seuls_les_types_demontrables_portent_la_question():
+    """La question FAIT/PARTIEL n'a de sens que pour ce qui PROMET une preuve.
+
+    Une Def qui construit un Terme n'est ni FAIT ni PARTIEL ; la compter dans
+    le taux dilue la seule réponse chiffrée à « démontré == vérifié ? » —
+    mesuré : une grande part des 354 « NON_EVALUABLE » de la première passe
+    étaient des définitions qui construisaient très bien."""
+    for t in ("Prop", "Th", "Cor", "Crit", "Lem", "Demo", "Sch", "Ax"):
+        assert est_demontrable(t)
+    for t in ("Def", "Rem", "Ex"):
+        assert not est_demontrable(t)
+
+
+def test_le_repli_arguments_generiques_evalue_une_notion_a_parametres():
+    """Le repli du verdict : fn sans défauts s'appelle avec ses PROPRES noms.
+
+    Convention du dépôt — les paramètres sont des noms de variables, convertis
+    par `var()`/`_t()` à l'intérieur. `injectivite_g_construite(gterme, ...)`
+    doit donc être évaluable, et rendre un théorème générique.
+
+    Lent à froid (imports du chapitre III), instantané ensuite."""
+    etat, n, detail = verdict_noyau(
+        "bourbaki/iii_ensembles_ordonnes_cardinaux_entiers/iii_7_limites/"
+        "prop1_proj/ensembles_g_construite.py",
+        "injectivite_g_construite")
+    assert etat in ("FAIT", "PARTIEL")
+    assert n is not None
+
+
+def test_le_repli_classe_une_definition_comme_CONSTRUIT():
+    """Une définition qui rend un Terme est CONSTRUIT — pas un échec, pas un
+    théorème. `classe` (II.6.2) construit le terme « classe de x mod R »."""
+    etat, _n, _d = verdict_noyau(
+        "bourbaki/ii_theorie_des_ensembles/ii_1_relations_collectivisantes/"
+        "ensembles_abrege.py", "classe")
+    assert etat == "CONSTRUIT"
