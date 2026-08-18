@@ -20,3 +20,5 @@ outils_ia/pdf/pdf_pages/
 
 # ── PDF sources tiers : 30 Mo, hors dépôt (inventaire : sources/INDEX.md) ─
 sources/**/*.pdf
+
+_verifie_pytest.txt
