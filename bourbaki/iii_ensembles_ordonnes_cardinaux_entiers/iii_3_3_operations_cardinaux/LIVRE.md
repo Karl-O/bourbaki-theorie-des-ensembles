@@ -12,13 +12,13 @@
 | `iii_3_3_produit/` | 17 | 0 | 0 | E III: 25-27 |
 | `iii_3_3_somme/` | 18 | 0 | 0 | E III: 25-27 |
 | `iii_3_4_prop8_successeur/` | 20 | 0 | 0 | E III: 28 |
-| `iii_3_5_exposant/` | 36 | 0 | 0 | E III: 28-30 |
+| `iii_3_5_exposant/` | 37 | 0 | 0 | E III: 28-30 |
 | `iii_3_6_familles/` | 19 | 0 | 0 | E II: 32, 34-35 ; E III: 26, 41 |
 | `iii_3_7_inegalites/` | 0 | 0 | 0 | — |
 
 ## Bilan cumulé (ce dossier + descendants)
 
-- Notions calées : **130**
+- Notions calées : **131**
 - Fichiers à caler : **0**
 - Marqueurs non conformes : **0**
 - Livre **E II** : pages couvertes 10, 32, 34-35 — **pages manquantes : 11-31, 33**

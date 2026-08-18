@@ -57,11 +57,11 @@
 
 | Dossier | Notions | À caler | Non conformes | Pages livre |
 |---|---|---|---|---|
-| `cst_criteres/` | 48 | 0 | 0 | E II: 18, 30 ; E III: 23 ; E IV: 2-3, 6, 8, 10-11, 14, 16-19, 21-22, 24 |
+| `cst_criteres/` | 50 | 0 | 0 | E II: 18, 30 ; E III: 23 ; E IV: 2-3, 6, 8, 10-11, 14, 16-19, 21-22, 24 |
 
 ## Bilan cumulé (ce dossier + descendants)
 
-- Notions calées : **93**
+- Notions calées : **95**
 - Fichiers à caler : **0**
 - Marqueurs non conformes : **0**
 - Livre **E II** : pages couvertes 18, 30 — **pages manquantes : 19-29**

@@ -301,6 +301,7 @@ def _struct_induite(s, base):
 
 
 # @livre Ch.IV §2.4 Crit.CST12 | E IV.16 L.22-26 | PDF p.219
+# @livre Ch.IV §2.4 Demo.- | E IV.16 L.27-32 | PDF p.219  (démonstration de cst12_restriction_morphisme)
 def cst12_restriction_morphisme(a="A", s="S", ap="Ap", sp="Sp", b="B", bp="Bp",
                                 f="f", morph=None):
     """CST12 (cœur logique, IV.2) — RESTRICTION D'UN MORPHISME AUX SOUS-STRUCTURES.

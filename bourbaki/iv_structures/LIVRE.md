@@ -48,12 +48,12 @@
 | Dossier | Notions | À caler | Non conformes | Pages livre |
 |---|---|---|---|---|
 | `iv_1_structures_isomorphismes/` | 53 | 0 | 0 | E IV: 1-9 |
-| `iv_2_morphismes_structures_derivees/` | 93 | 0 | 0 | E II: 18, 30 ; E III: 23 ; E IV: 2-3, 6, 8, 10-22, 24 |
+| `iv_2_morphismes_structures_derivees/` | 95 | 0 | 0 | E II: 18, 30 ; E III: 23 ; E IV: 2-3, 6, 8, 10-22, 24 |
 | `iv_3_applications_universelles/` | 4 | 0 | 0 | E IV: 23 |
 
 ## Bilan cumulé (ce dossier + descendants)
 
-- Notions calées : **185**
+- Notions calées : **187**
 - Fichiers à caler : **0**
 - Marqueurs non conformes : **0**
 - Livre **E II** : pages couvertes 18, 30 — **pages manquantes : 19-29**

@@ -242,6 +242,7 @@ def relation_adjoint(R, e, a):
 
 
 # @livre Ch.III §1.7 Prop.3 | E III.9 L.4-9 | PDF p.112
+# @livre Ch.III §1.7 Demo.- | E III.9 L.10-14 | PDF p.112  (démonstration de est_adjonction_plus_grand)
 def est_adjonction_plus_grand(R, Rp, e, a, x="x"):
     """est_adjonction_plus_grand(R,R',E,a) := « R' est un ordre sur E'=E∪{a} qui
         induit R sur E et pour lequel a est le plus grand élément de E' » :

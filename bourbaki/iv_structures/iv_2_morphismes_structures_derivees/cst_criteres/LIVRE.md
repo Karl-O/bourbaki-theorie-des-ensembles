@@ -32,8 +32,10 @@
 | E IV.14 | L.40-46 | 2.3 | Crit.CST10 | `cst10_initiales_egales` | `ensembles_cst_criteres_suite.py` |
 | E IV.16 | L.18-21 | 2.4 | Crit.CST11 | `cst11_induites_egales` | `ensembles_cst_criteres_suite.py` |
 | E IV.16 | L.22-26 | 2.4 | Crit.CST12 | `cst12_restriction_morphisme` | `ensembles_chap4_props_restantes.py` |
+| E IV.16 | L.27-32 | 2.4 | Demo.- | `cst12_restriction_morphisme` | `ensembles_chap4_props_restantes.py` |
 | E IV.17 | L.1-6 | 2.4 | Crit.CST13 | `cst13_produit_associatif_egales` | `ensembles_cst_produit_quotient.py` |
 | E IV.17 | L.9-16 | 2.4 | Crit.CST14 | `cst14_produit_induite_egales` | `ensembles_cst_criteres_suite.py` |
+| E IV.17 | L.17-25 | 2.4 | Demo.- | `cst14_produit_induite_egales` | `ensembles_cst_criteres_suite.py` |
 | E IV.17 | L.26-31 | 2.4 | Crit.CST15 | `cst15_imrec_produit_egales` | `ensembles_cst_produit_quotient.py` |
 | E IV.18 | L.4-8 | 2.4 | Crit.CST16 | `cst16_famille_morphismes_produit` | `ensembles_cst_produit_quotient.py` |
 | E IV.18 | L.40-46 | 2.4 | Crit.CST17 | `cst17_morphisme_caracterise_par_graphe` | `ensembles_cst_produit_quotient.py` |
@@ -52,7 +54,7 @@
 
 ## Bilan cumulé (ce dossier + descendants)
 
-- Notions calées : **48**
+- Notions calées : **50**
 - Fichiers à caler : **0**
 - Marqueurs non conformes : **0**
 - Livre **E II** : pages couvertes 18, 30 — **pages manquantes : 19-29**

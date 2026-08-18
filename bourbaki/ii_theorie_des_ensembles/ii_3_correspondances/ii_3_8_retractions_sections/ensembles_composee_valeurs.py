@@ -57,6 +57,7 @@ def _symetrie_thm(thm_eq):
 
 
 # @livre Ch.II §3.8 Lem.- | E II.19 L.27-37 | PDF p.70
+# @livre Ch.II §3.8 Demo.- | E II.19 L.26-26 | PDF p.70  (démonstration de composition_valeur_t)
 def composition_valeur_t(tG, tF, tx):
     """⊢ (tG∘tF)(x) = tG(tF(x))   (version TERMES de composition_valeur).
 

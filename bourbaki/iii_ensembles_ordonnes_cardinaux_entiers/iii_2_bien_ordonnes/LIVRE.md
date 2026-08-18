@@ -8,11 +8,11 @@
 | Dossier | Notions | À caler | Non conformes | Pages livre |
 |---|---|---|---|---|
 | `bon_ordre/` | 45 | 0 | 0 | E III: 15-21 ; E R: 27 |
-| `trichotomie_ordinaux/` | 63 | 0 | 0 | E III: 15-16, 21-22 |
+| `trichotomie_ordinaux/` | 64 | 0 | 0 | E III: 15-16, 21-22 |
 
 ## Bilan cumulé (ce dossier + descendants)
 
-- Notions calées : **108**
+- Notions calées : **109**
 - Fichiers à caler : **0**
 - Marqueurs non conformes : **0**
 - Livre **E III** : pages couvertes 15-22 — aucune page manquante dans l'intervalle

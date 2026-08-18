@@ -38,6 +38,7 @@
 | E III.53 | L.10-11 | 7.2 | Prop.1 | `cone_coordonnee_valeur` | `ensembles_limites_iii7.py` |
 | E III.53 | L.12-15 | 7.2 | Prop.1 | `cone_condition_1` | `ensembles_limites_iii7.py` |
 | E III.53 | L.12-15 | 7.2 | Prop.1 | `cone_image_dans_limite` | `ensembles_limites_iii7.py` |
+| E III.53 | L.16-21 | 7.2 | Demo.- | `passage_limite_proj` | `ensembles_limites_props2.py` |
 | E III.53 | L.22-30 | 7.2 | Cor.1 | `passage_limite_proj` | `ensembles_limites_props2.py` |
 | E III.54 | L.1-3 | 7.2 | Def.- | `est_systeme_projectif_applications` | `ensembles_limites_canoniques.py` |
 | E III.54 | L.1-5 | 7.2 | Def.- | `lim_proj_u` | `ensembles_limites_prop2_3_iii7.py` |
@@ -101,13 +102,13 @@
 
 | Dossier | Notions | À caler | Non conformes | Pages livre |
 |---|---|---|---|---|
-| `prop1_proj/` | 50 | 0 | 0 | E III: 11, 13, 52-55 |
-| `prop6/` | 17 | 0 | 0 | E III: 61-63 |
+| `prop1_proj/` | 51 | 0 | 0 | E III: 11, 13, 52-55 |
+| `prop6/` | 18 | 0 | 0 | E III: 61-63 |
 | `th1_proj/` | 7 | 0 | 0 | E III: 59 |
 
 ## Bilan cumulé (ce dossier + descendants)
 
-- Notions calées : **163**
+- Notions calées : **166**
 - Fichiers à caler : **0**
 - Marqueurs non conformes : **0**
 - Livre **E III** : pages couvertes 11, 13, 51-66 — **pages manquantes : 12, 14-50**

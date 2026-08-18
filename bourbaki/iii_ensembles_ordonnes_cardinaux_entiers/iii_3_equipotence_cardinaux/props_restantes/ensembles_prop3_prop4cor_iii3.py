@@ -95,6 +95,7 @@ def cible_prop3_surjection_inf_egal(x="X", y="Y"):
 
 # ── PROPOSITION 4, COROLLAIRE (E III.26) — Card(⋃ E_ι) ≤ ∑ Card(E_ι) ──────────
 # @livre Ch.III §3.3 Cor.- | E III.26 L.13-16 | PDF p.129
+# @livre Ch.III §3.3 Demo.- | E III.26 L.9-12 | PDF p.129  (démonstration de prop4cor_card_reunion_inf_egal_somme)
 def prop4cor_card_reunion_inf_egal_somme(g="G", u="U", fam="A", i="I"):
     """⊢_{g section de la surjection canonique (⊔E_ι)↠U ; g:U→⊔E_ι application}
          (Card(U) ≤ ∑_{ι∈I} Card(E_ι))

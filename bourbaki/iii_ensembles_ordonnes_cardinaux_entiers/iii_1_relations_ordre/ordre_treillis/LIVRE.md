@@ -39,6 +39,7 @@
 | E III.8 | L.36-38 | 1.7 | Rem.- | `plus_grand_est_maximal` | `ensembles_ordre_relation.py` |
 | E III.8 | L.36-38 | 1.7 | Rem.- | `plus_petit_est_minimal` | `ensembles_ordre_relation.py` |
 | E III.9 | L.4-9 | 1.7 | Prop.3 | `est_adjonction_plus_grand` | `ensembles_ordre_vocab.py` |
+| E III.9 | L.10-14 | 1.7 | Demo.- | `est_adjonction_plus_grand` | `ensembles_ordre_vocab.py` |
 | E III.9 | L.22-25 | 1.8 | Def.5 | `majorant` | `ensembles_ordre_relation.py` |
 | E III.9 | L.22-25 | 1.8 | Def.5 | `minorant` | `ensembles_ordre_relation.py` |
 | E III.9 | L.30-32 | 1.8 | Rem.- | `minorant_partie` | `ensembles_ordre.py` |
@@ -56,6 +57,7 @@
 | E III.14 | L.31-36 | 1.13 | Def.- | `intervalle_semi_ouvert_gauche` | `ensembles_ordre_vocab.py` |
 | E III.15 | L.1-2 | 1.13 | Rem.- | `intervalle_ferme_non_vide_si_a_inf_b` | `ensembles_ordre_treillis_props.py` |
 | E III.15 | L.10-13 | 1.13 | Prop.13 | `intersection_intervalles_fermes` | `ensembles_intervalles_prop13.py` |
+| E III.15 | L.14-19 | 1.13 | Demo.- | `intersection_intervalles_fermes` | `ensembles_intervalles_prop13.py` |
 | E R.26 | (item) | 6 | Prop.- | `preordre_equivalence_associee` | `ensembles_ordre.py` |
 | E R.26 | (item) | 6 | Ex.- | `inclusion_reflexive_sur` | `ensembles_ordre_relation.py` |
 | E R.26 | (item) | 6 | Ex.- | `inclusion_transitive_rel` | `ensembles_ordre_relation.py` |
@@ -80,7 +82,7 @@
 
 ## Bilan cumulé (ce dossier + descendants)
 
-- Notions calées : **70**
+- Notions calées : **72**
 - Fichiers à caler : **0**
 - Marqueurs non conformes : **0**
 - Livre **E III** : pages couvertes 2-3, 5-10, 13-15 — **pages manquantes : 4, 11-12**

@@ -13,11 +13,12 @@
 | E III.34 | L.33-34 | 4.4 | Cor.2 | `cor2_maximal` | `ensembles_ordre_fini_iii4.py` |
 | E III.35 | L.7-8 | 4.5 | Th.1 | `Tukey_theoreme` | `ensembles_tukey_iii4.py` |
 | E III.35 | L.7-8 | 4.5 | Th.1 | `Tukey_theoreme_complet` | `ensembles_tukey_sous_lemme.py` |
+| E III.35 | L.9-18 | 4.5 | Demo.- | `Tukey_theoreme_complet` | `ensembles_tukey_sous_lemme.py` |
 | E R.27 | (item) | 6 | Prop.- | `prop3_total` | `ensembles_ordre_fini_iii4.py` |
 
 ## Bilan cumulé (ce dossier + descendants)
 
-- Notions calées : **7**
+- Notions calées : **8**
 - Fichiers à caler : **0**
 - Marqueurs non conformes : **0**
 - Livre **E III** : pages couvertes 34-35 — aucune page manquante dans l'intervalle

@@ -227,6 +227,7 @@ def generalisation(x: str, thm: Theoreme, sig: Signature = DEFAUT) -> Theoreme:
 
 # @livre Ch.I §3.3 Crit.14 | E I.27 L.4-5 | PDF p.27  (C14, critère de la déduction : énoncé L.4-5, démo L.6-20 — primitive de confiance du noyau)
 # @livre Ch.I §3.3 Demo.- | E I.27 L.6-20 | PDF p.27  (démo de C14 : récurrence sur la démonstration B1..Bn de T', cas axiome via C9/C8, cas MP via C13+C6+S3+S2+S4+S1)
+# @livre Ch.I §3.3 Demo.- | E I.27 L.8-30 | PDF p.27  (démonstration de loi_deduction)
 def loi_deduction(a: Assemblage, thm: Theoreme, sig: Signature = DEFAUT) -> Theoreme:
     """De Γ⊢B, déduire (Γ\\{A}) ⊢ (A ⇒ B). C14 (critère de la déduction), E I.27 (PDF p.27).
 

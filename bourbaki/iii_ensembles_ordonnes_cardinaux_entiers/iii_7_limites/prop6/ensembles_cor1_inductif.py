@@ -88,6 +88,7 @@ def hyp_u_arrive(uf, Efam, Ffam, i, a="ai", x="xi"):
 
 
 # @livre Ch.III §7.6 Cor.1 | E III.63 L.1-14 | PDF p.166  (Cor. 1 : la famille (g_α∘u_α) vérifie (23), donc la Prop. 6 s'y applique et fournit u)
+# @livre Ch.III §7.6 Demo.- | E III.63 L.19-28 | PDF p.166  (démonstration de cor1_relation_23)
 def cor1_relation_23(uf="uf", f="f", g="g", Efam="E", Ffam="F", i="I",
                      leq=None, gleq=None, a="ai", b="bi", x="xi"):
     """{ diagramme, (22), u_α arrive dans F_α, prémisses } ⊢

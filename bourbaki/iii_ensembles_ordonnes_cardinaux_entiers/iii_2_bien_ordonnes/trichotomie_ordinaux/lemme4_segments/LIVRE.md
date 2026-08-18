@@ -15,10 +15,11 @@
 | E III.16 | L.21-30 | 2.1 | Prop.2 | `seg_strict_monotone` | `ensembles_segments_construction.py` |
 | E III.22 | L.5-7 | 2.5 | Lem.4 | `lemme_4` | `ensembles_lemme4_croissante.py` |
 | E III.22 | L.5-7 | 2.5 | Lem.4 | `lemme_4_sous_domaine` | `ensembles_lemme4_sous_domaine.py` |
+| E III.22 | L.8-14 | 2.5 | Demo.- | `lemme_4_sous_domaine` | `ensembles_lemme4_sous_domaine.py` |
 
 ## Bilan cumulé (ce dossier + descendants)
 
-- Notions calées : **8**
+- Notions calées : **9**
 - Fichiers à caler : **0**
 - Marqueurs non conformes : **0**
 - Livre **E III** : pages couvertes 15-16, 22 — **pages manquantes : 17-21**

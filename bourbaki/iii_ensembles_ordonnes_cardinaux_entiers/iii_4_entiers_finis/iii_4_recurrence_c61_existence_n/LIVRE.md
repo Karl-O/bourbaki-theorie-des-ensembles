@@ -36,13 +36,14 @@
 | E III.33 | L.34-36 | 4.3 | Rem.4 | `?` | `ensembles_recurrence_variantes.py` |
 | E III.34 | L.1-7 | 4.3 | Demo.- | `recurrence_descendante` | `ensembles_recurrence_descendante_preuve.py` |
 | E III.34 | L.2-3 | 4.3 | Demo.- | `pas_ascendant_non_R` | `ensembles_recurrence_descendante_preuve.py` |
+| E III.34 | L.4-12 | 4.3 | Demo.- | `recurrence_descendante` | `ensembles_recurrence_descendante_preuve.py` |
 | E III.45 | L.5-14 | 6.1 | Rem.- | `cardinal_infini_existe_card` | `ensembles_recurrence_vraie.py` |
 | E III.45 | L.5-14 | 6.1 | Rem.- | `N_collectivise_vrai` | `ensembles_recurrence_vraie.py` |
 | E III.45 | L.20-20 | 6.1 | Th.1 | `N_collectivise_vrai` | `ensembles_recurrence_vraie.py` |
 
 ## Bilan cumulé (ce dossier + descendants)
 
-- Notions calées : **32**
+- Notions calées : **33**
 - Fichiers à caler : **0**
 - Marqueurs non conformes : **0**
 - Livre **E III** : pages couvertes 31-34, 45 — **pages manquantes : 35-44**

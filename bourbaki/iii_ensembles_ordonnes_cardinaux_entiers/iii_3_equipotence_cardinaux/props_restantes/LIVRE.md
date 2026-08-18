@@ -8,6 +8,7 @@
 | Page livre | Lignes | § | Type | Notion | Fichier |
 |---|---|---|---|---|---|
 | E III.25 | L.40-43 | 3.2 | Prop.3 | `prop3_surjection_inf_egal` | `ensembles_prop3_prop4cor_iii3.py` |
+| E III.26 | L.9-12 | 3.3 | Demo.- | `prop4cor_card_reunion_inf_egal_somme` | `ensembles_prop3_prop4cor_iii3.py` |
 | E III.26 | L.13-16 | 3.3 | Cor.- | `prop4cor_card_reunion_inf_egal_somme` | `ensembles_prop3_prop4cor_iii3.py` |
 | E III.28 | L.3-5 | 3.4 | Prop.7 | `prop7_produit_non_nul` | `ensembles_cardinaux_props_restantes_prop7.py` |
 | E III.29 | L.50-54 | 3.6 | Prop.13 | `prop13_si_somme` | `ensembles_cardinaux_props_restantes.py` |
@@ -24,7 +25,7 @@
 
 ## Bilan cumulé (ce dossier + descendants)
 
-- Notions calées : **14**
+- Notions calées : **15**
 - Fichiers à caler : **0**
 - Marqueurs non conformes : **0**
 - Livre **E III** : pages couvertes 25-26, 28-30, 39 — **pages manquantes : 27, 31-38**

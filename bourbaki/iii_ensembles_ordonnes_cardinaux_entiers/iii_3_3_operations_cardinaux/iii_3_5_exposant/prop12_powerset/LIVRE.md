@@ -16,11 +16,11 @@
 
 | Dossier | Notions | À caler | Non conformes | Pages livre |
 |---|---|---|---|---|
-| `prop12_card/` | 4 | 0 | 0 | E III: 29-30 |
+| `prop12_card/` | 5 | 0 | 0 | E III: 29-30 |
 
 ## Bilan cumulé (ce dossier + descendants)
 
-- Notions calées : **8**
+- Notions calées : **9**
 - Fichiers à caler : **0**
 - Marqueurs non conformes : **0**
 - Livre **E III** : pages couvertes 29-30 — aucune page manquante dans l'intervalle

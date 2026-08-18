@@ -67,6 +67,7 @@ def _graphe_injectif(f, u="u", v="v", z="z"):
 
 
 # @livre Ch.II §3.7 Prop.7 | E II.17 L.25-26 | PDF p.68
+# @livre Ch.II §3.7 Demo.- | E II.17 L.27-31 | PDF p.68  (démonstration de reciproque_fonctionnel_ssi_injectif)
 def reciproque_fonctionnel_ssi_injectif(f="F"):
     """⊢ est_fonctionnel(F⁻¹) ⇔ F injectif (graphe).   (Prop. 7, cœur — CLOS, 0 hyp.)
 

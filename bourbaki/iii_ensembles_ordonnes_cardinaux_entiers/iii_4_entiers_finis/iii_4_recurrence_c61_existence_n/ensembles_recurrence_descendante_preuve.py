@@ -81,6 +81,7 @@ def pas_ascendant_non_R(R, a="ades", b="bdes", m="mdes"):
 
 # @livre Ch.III §4.3 Rem.4 | E III.33 L.34-36 | PDF p.136
 # @livre Ch.III §4.3 Demo.- | E III.34 L.1-7 | PDF p.137  (« variante 3 sur ¬R + contradiction » — DÉRIVÉ)
+# @livre Ch.III §4.3 Demo.- | E III.34 L.4-12 | PDF p.137  (démonstration de recurrence_descendante)
 def recurrence_descendante(R, a="ades", b="bdes"):
     """🎯🎯 VARIANTE 4 (« récurrence descendante », E III.33-34) — DÉRIVÉE via la variante 3 :
 

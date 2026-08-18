@@ -10,12 +10,12 @@
 | `definition/` | 13 | 0 | 0 | E III: 28-29 |
 | `prop10_currying/` | 7 | 0 | 0 | E III: 29 |
 | `prop11_petits_cas/` | 0 | 0 | 0 | — |
-| `prop12_powerset/` | 8 | 0 | 0 | E III: 29-30 |
+| `prop12_powerset/` | 9 | 0 | 0 | E III: 29-30 |
 | `prop9_exp_somme/` | 8 | 0 | 0 | E III: 28 |
 
 ## Bilan cumulé (ce dossier + descendants)
 
-- Notions calées : **36**
+- Notions calées : **37**
 - Fichiers à caler : **0**
 - Marqueurs non conformes : **0**
 - Livre **E III** : pages couvertes 28-30 — aucune page manquante dans l'intervalle

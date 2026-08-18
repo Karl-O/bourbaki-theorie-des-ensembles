@@ -211,6 +211,7 @@ def _canon_proj_au_point(Efam, f, leq, i, a_terme, z_terme):
 #      se propage le long des transitions.
 # ════════════════════════════════════════════════════════════════════════════
 # @livre Ch.III §7.2 Cor.1 | E III.53 L.22-30 | PDF p.156
+# @livre Ch.III §7.2 Demo.- | E III.53 L.16-21 | PDF p.156  (démonstration de passage_limite_proj)
 def passage_limite_proj(u="u", EfamE="E", fE="f", EfamF="F", gF="g", leq=None, i="I",
                         a="a", b="b", z="z"):
     """{ g_α(u(z)) = u_α(f_α(z))  (∀α,z) ;  α,β∈I ;  α≤β ;  u(z)∈lim←F ;

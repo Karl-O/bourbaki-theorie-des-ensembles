@@ -387,6 +387,7 @@ def membre_fibre_t(u, b, z, t="tz"):
 
 
 # @livre Ch.III §7.2 Prop.2 | E III.54 L.20-27 | PDF p.157  (Prop. 2, 1ʳᵉ assertion : les fibres M_α = (u_α)⁻¹(x'_α) forment un SYSTÈME PROJECTIF de parties — f_αβ⟨M_β⟩ ⊂ M_α)
+# @livre Ch.III §7.2 Demo.- | E III.54 L.32-38 | PDF p.157  (démonstration de fibres_systeme_projectif)
 def fibres_systeme_projectif(u="uf", f="ff", g="gg", Efamp="Ep", xp="xp",
                              i="I", leq=None, a="a", b="b", z="zf", x="xw"):
     """{ α,β∈I et α≤β ; x'∈lim← ; commute_valeur_proj ; f_αβ, u_α, u_β

@@ -31,6 +31,7 @@ def _sorte(a, sig):
 
 # @livre Ch.I §1.4 Crit.1 | E I.19 L.10-10 | PDF p.19
 # @livre Ch.I §1.4 Demo.- | E I.19 L.11-19 | PDF p.19  (démo de CF1 par concaténation de constructions formatives ; vaut aussi pour CF2-CF4, « on établit de façon analogue »)
+# @livre Ch.I §1.4 Demo.- | E I.19 L.11-19 | PDF p.19  (démonstration de cf1)
 def cf1(a, b, sig=DEFAUT) -> bool:
     return est_relation(a, sig) and est_relation(b, sig) and est_relation(disjonction(a, b), sig)
 
@@ -67,6 +68,7 @@ def cf6(a, x, y, sig=DEFAUT) -> bool:
 
 # @livre Ch.I §1.4 Crit.7 | E I.20 L.4-5 | PDF p.20
 # @livre Ch.I §1.4 Demo.- | E I.20 L.6-27 | PDF p.20  (démo de CF7 : récurrence sur la construction formative ; cas lettre / ¬ / ∨ / signe, puis sous-cas a-b-c du τ_z)
+# @livre Ch.I §1.4 Demo.- | E I.20 L.6-27 | PDF p.20  (démonstration de cf7)
 def cf7(a, x, y, sig=DEFAUT) -> bool:
     """(y|x)A garde l'espèce de A (x, y lettres quelconques)."""
     s = _sorte(a, sig)

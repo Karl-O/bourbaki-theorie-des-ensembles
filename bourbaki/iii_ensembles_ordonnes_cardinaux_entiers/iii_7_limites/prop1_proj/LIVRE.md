@@ -32,6 +32,7 @@
 | E III.54 | L.24-27 | 7.2 | Prop.2 | `point_dans_produit_fibres` | `ensembles_prop2_identite.py` |
 | E III.54 | L.24-27 | 7.2 | Prop.2 | `point_dans_limite_fibres` | `ensembles_prop2_identite.py` |
 | E III.54 | L.24-27 | 7.2 | Prop.2 | `point_dans_limite_depuis_u` | `ensembles_prop2_identite.py` |
+| E III.54 | L.32-38 | 7.2 | Demo.- | `fibres_systeme_projectif` | `ensembles_prop2_fibres.py` |
 | E III.55 | L.3-13 | 7.2 | Prop.3 | `g_bijection_sous_surjectivite` | `ensembles_g_construite.py` |
 | E III.55 | L.3-11 | 7.2 | Prop.3 | `prolongement_bien_defini` | `ensembles_prolongement_cofinal.py` |
 | E III.55 | L.3-11 | 7.2 | Prop.3 | `prolongement_coherent` | `ensembles_prolongement_cofinal.py` |
@@ -51,7 +52,7 @@
 
 ## Bilan cumulé (ce dossier + descendants)
 
-- Notions calées : **50**
+- Notions calées : **51**
 - Fichiers à caler : **0**
 - Marqueurs non conformes : **0**
 - Livre **E III** : pages couvertes 11, 13, 52-55 — **pages manquantes : 12, 14-51**

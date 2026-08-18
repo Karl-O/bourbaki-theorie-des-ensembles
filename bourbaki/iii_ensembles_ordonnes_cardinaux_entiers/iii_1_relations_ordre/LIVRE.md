@@ -16,11 +16,11 @@
 | `iii_1_7_plus_grand_plus_petit/` | 5 | 0 | 0 | E III: 8, 46 |
 | `iii_1_8_filtrants/` | 2 | 0 | 0 | E III: 9, 13 |
 | `isomorphismes_ordre/` | 7 | 0 | 0 | E III: 5, 21 |
-| `ordre_treillis/` | 70 | 0 | 0 | E III: 2-3, 5-10, 13-15 ; E R: 26-28 |
+| `ordre_treillis/` | 72 | 0 | 0 | E III: 2-3, 5-10, 13-15 ; E R: 26-28 |
 
 ## Bilan cumulé (ce dossier + descendants)
 
-- Notions calées : **101**
+- Notions calées : **103**
 - Fichiers à caler : **0**
 - Marqueurs non conformes : **0**
 - Livre **E III** : pages couvertes 2-3, 5-15, 21, 46 — **pages manquantes : 4, 16-20, 22-45**

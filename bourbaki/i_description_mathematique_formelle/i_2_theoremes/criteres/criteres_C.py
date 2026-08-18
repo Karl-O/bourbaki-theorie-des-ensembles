@@ -25,6 +25,7 @@ from bourbaki.i_description_mathematique_formelle.i_2_theoremes.tactiques.tactiq
 
 # @livre Ch.I §3.2 Crit.7 | E I.26 L.5-5 | PDF p.26
 # @livre Ch.I §3.2 Demo.- | E I.26 L.6-7 | PDF p.26  (démo de C7 : S2 et S3 donnent les deux implications, puis C6)
+# @livre Ch.I §3.2 Demo.- | E I.26 L.6-7 | PDF p.26  (démonstration de c7)
 def c7(a, b, sig=DEFAUT):
     """⊢ B ⇒ (A ∨ B).  (S2, S3, syllogisme.)"""
     return syllogisme(noyau.s2(b, a, sig), noyau.s3(b, a, sig), sig)
@@ -40,6 +41,7 @@ c21d = projection_droite          # ⊢ (A et B) ⇒ B
 
 # @livre Ch.I §3.3 Crit.17 | E I.28 L.11-13 | PDF p.28
 # @livre Ch.I §3.3 Demo.- | E I.28 L.14-16 | PDF p.28  (démo de C17 : hypothèse auxiliaire (non B)⇒(non A), puis A vraie, absurde)
+# @livre Ch.I §3.3 Demo.- | E I.28 L.14-17 | PDF p.28  (démonstration de c17)
 def c17(a, b, sig=DEFAUT):
     """⊢ ((¬B ⇒ ¬A) ⇒ (A ⇒ B))."""
     h = noyau.assume(implication(negation(b), negation(a)), sig)

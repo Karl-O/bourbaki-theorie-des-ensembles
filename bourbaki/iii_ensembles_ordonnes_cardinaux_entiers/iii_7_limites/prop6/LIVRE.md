@@ -24,10 +24,11 @@
 | E III.62 | L.36-40 | 7.6 | Prop.6 | `prop6_injectif` | `ensembles_prop6_injectif.py` |
 | E III.63 | L.1-14 | 7.6 | Cor.1 | `hyp_diagramme` | `ensembles_cor1_inductif.py` |
 | E III.63 | L.1-14 | 7.6 | Cor.1 | `cor1_relation_23` | `ensembles_cor1_inductif.py` |
+| E III.63 | L.19-28 | 7.6 | Demo.- | `cor1_relation_23` | `ensembles_cor1_inductif.py` |
 
 ## Bilan cumulé (ce dossier + descendants)
 
-- Notions calées : **17**
+- Notions calées : **18**
 - Fichiers à caler : **0**
 - Marqueurs non conformes : **0**
 - Livre **E III** : pages couvertes 61-63 — aucune page manquante dans l'intervalle

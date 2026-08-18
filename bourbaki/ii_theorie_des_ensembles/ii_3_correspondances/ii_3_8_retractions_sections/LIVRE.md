@@ -13,6 +13,7 @@
 | E II.18 | L.15-19 | 3.8 | Prop.8 | `retraction_implique_injective` | `ensembles_retractions.py` |
 | E II.18 | L.16-17 | 3.8 | Prop.8 | `section_implique_surjective_valeur` | `ensembles_retractions_props.py` |
 | E II.18 | L.17-19 | 3.8 | Prop.8 | `section_construite_par_tau` | `ensembles_retractions.py` |
+| E II.18 | L.20-25 | 3.8 | Demo.- | `section_construite_par_tau` | `ensembles_retractions.py` |
 | E II.18 | L.26-36 | 3.8 | Prop.8 | `retraction_construite_par_tau` | `ensembles_retractions.py` |
 | E II.18 | L.34-36 | 3.8 | Cor.- | `corollaire_f_injective` | `ensembles_retractions_props.py` |
 | E II.18 | L.34-36 | 3.8 | Cor.- | `corollaire_g_injective` | `ensembles_retractions_props.py` |
@@ -27,6 +28,7 @@
 | E II.19 | L.22-23 | 3.8 | Th.1 | `theoreme1_e_injective_valeur` | `ensembles_theoreme1_e.py` |
 | E II.19 | L.24-25 | 3.8 | Th.1 | `theoreme1_f_injective_valeur` | `ensembles_theoreme1_f.py` |
 | E II.19 | L.24-25 | 3.8 | Th.1 | `theoreme1_f_retraction_valeur` | `ensembles_theoreme1_f.py` |
+| E II.19 | L.26-26 | 3.8 | Demo.- | `composition_valeur_t` | `ensembles_composee_valeurs.py` |
 | E II.19 | L.27-37 | 3.8 | Lem.- | `composition_valeur_t` | `ensembles_composee_valeurs.py` |
 | E II.19 | L.27-37 | 3.8 | Prop.- | `composee_valeur_app` | `ensembles_composee_valeurs.py` |
 | E R.10 | (item) | 2 | Prop.- | `injective_facteur_droit` | `ensembles_composee_valeurs.py` |
@@ -36,7 +38,7 @@
 
 ## Bilan cumulé (ce dossier + descendants)
 
-- Notions calées : **26**
+- Notions calées : **28**
 - Fichiers à caler : **0**
 - Marqueurs non conformes : **0**
 - Livre **E II** : pages couvertes 12, 14, 18-19 — **pages manquantes : 13, 15-17**

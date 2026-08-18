@@ -74,6 +74,7 @@ def cible_intersection_intervalles(G="G", e="E", a="a", b="b", c="c", d="d", x="
 
 
 # @livre Ch.III §1.13 Prop.13 | E III.15 L.10-13 | PDF p.118
+# @livre Ch.III §1.13 Demo.- | E III.15 L.14-19 | PDF p.118  (démonstration de intersection_intervalles_fermes)
 def intersection_intervalles_fermes(G="G", e="E", a="a", b="b", c="c", d="d", x="x"):
     """⊢ (∀x)( x∈[a,b]∩[c,d] ⇔ (x∈E et a≤x et c≤x et x≤b et x≤d) ).
 

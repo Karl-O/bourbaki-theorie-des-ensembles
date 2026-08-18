@@ -364,6 +364,7 @@ def cst11_induites_egales(a="A", b="B", c="C", s="S", ind_directe="indAC",
 #  les deux valent le même transporté (induite et produit commutent, hyp.) ⇒ égales.
 #
 # @livre Ch.IV §2.4 Crit.CST14 | E IV.17 L.9-16 | PDF p.220
+# @livre Ch.IV §2.4 Demo.- | E IV.17 L.17-25 | PDF p.220  (démonstration de cst14_produit_induite_egales)
 def cst14_produit_induite_egales(prod_induite="SprodB", induite_prod="SindB",
                                  commun="Scommun"):
     """{ S_indB = S_commun,   S_prodB = S_commun }   ⊢   S_indB = S_prodB.

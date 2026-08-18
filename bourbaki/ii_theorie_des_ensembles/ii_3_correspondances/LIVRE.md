@@ -13,12 +13,12 @@
 | `ii_3_4_fonctions/` | 34 | 0 | 0 | E II: 11-13, 15, 17, 19, 21 ; E R: 10-11, 13-14, 16 |
 | `ii_3_5_restrictions_prolongements/` | 11 | 0 | 0 | E II: 15 ; E R: 11 |
 | `ii_3_6_fonction_terme/` | 19 | 0 | 0 | E II: 9, 11, 15-16 ; E IV: 2 ; E R: 6 |
-| `ii_3_7_composee_fonctions/` | 12 | 0 | 0 | E II: 16-17, 20 ; E R: 10 |
-| `ii_3_8_retractions_sections/` | 26 | 0 | 0 | E II: 12, 14, 18-19 ; E R: 10-11 |
+| `ii_3_7_composee_fonctions/` | 13 | 0 | 0 | E II: 16-17, 20 ; E R: 10 |
+| `ii_3_8_retractions_sections/` | 28 | 0 | 0 | E II: 12, 14, 18-19 ; E R: 10-11 |
 
 ## Bilan cumulé (ce dossier + descendants)
 
-- Notions calées : **184**
+- Notions calées : **187**
 - Fichiers à caler : **0**
 - Marqueurs non conformes : **0**
 - Livre **E II** : pages couvertes 9-21 — aucune page manquante dans l'intervalle

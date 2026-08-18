@@ -65,6 +65,7 @@ def retraction_implique_injective(r="R", f="F", a="A", u="u", up="up"):
 
 
 # @livre Ch.II §3.8 Prop.8 | E II.18 L.17-19 | PDF p.69
+# @livre Ch.II §3.8 Demo.- | E II.18 L.20-25 | PDF p.69  (démonstration de section_construite_par_tau)
 def section_construite_par_tau(f="F", b="B"):
     """⊢ (∀y)(y∈B ⇒ (∃x)(y=f(x))) ⇒ (∀y)(y∈B ⇒ f(s(y))=y), où s := y ↦ τx(y=f(x)).
        (Prop. 8, sens réciproque, cas surjectif — CONSTRUCTION EFFECTIVE de la

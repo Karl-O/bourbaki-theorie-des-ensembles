@@ -308,6 +308,7 @@ def powerset_equipotent_applications(x="X"):
 
 
 # @livre Ch.III §3.5 Prop.12 | E III.29 L.19-27 | PDF p.132
+# @livre Ch.III §3.5 Demo.- | E III.29 L.27-27 | PDF p.132  (démonstration de card_parties_egale_deux_exp)
 def card_parties_egale_deux_exp(x="X"):
     """⊢ Card(𝔓X) = exposant_cardinal_binaire(2, X) = 2^Card X.   (PROPOSITION 12.)
 
