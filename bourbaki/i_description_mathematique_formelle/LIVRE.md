@@ -10,12 +10,12 @@
 | `i_1_termes_relations/` | 86 | 0 | 0 | E I: 14-21, 29-30, 32, 42-46 |
 | `i_2_theoremes/` | 155 | 0 | 0 | E I: 17, 21-34, 38-39 ; E II: 2 |
 | `i_3_theories_logiques/` | 5 | 0 | 0 | E I: 29-30 |
-| `i_4_theories_quantifiees/` | 37 | 0 | 0 | E I: 32-38 |
+| `i_4_theories_quantifiees/` | 34 | 0 | 0 | E I: 32-38 |
 | `i_5_theories_egalitaires/` | 22 | 0 | 0 | E I: 34, 38-42 |
 
 ## Bilan cumulé (ce dossier + descendants)
 
-- Notions calées : **305**
+- Notions calées : **302**
 - Fichiers à caler : **0**
 - Marqueurs non conformes : **0**
 - Livre **E I** : pages couvertes 14-46 — aucune page manquante dans l'intervalle
