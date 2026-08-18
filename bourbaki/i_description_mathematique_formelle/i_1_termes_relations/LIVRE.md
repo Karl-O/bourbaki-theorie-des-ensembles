@@ -49,12 +49,14 @@
 | E I.18 | L.39-43 | 1.3 | Ex.- | `?` | `i_1_3_constructions_formatives.py` |
 | E I.19 | L.1-8 | 1.3 | Meta.- | `?` | `i_1_3_constructions_formatives.py` |
 | E I.19 | L.10-10 | 1.4 | Crit.1 | `cf1` | `i_1_4_criteres_CF.py` |
+| E I.19 | L.11-19 | 1.4 | Demo.- | `cf1` | `i_1_4_criteres_CF.py` |
 | E I.19 | L.20-20 | 1.4 | Crit.2 | `cf2` | `i_1_4_criteres_CF.py` |
 | E I.19 | L.21-21 | 1.4 | Crit.3 | `cf3` | `i_1_4_criteres_CF.py` |
 | E I.19 | L.22-23 | 1.4 | Crit.4 | `cf4` | `i_1_4_criteres_CF.py` |
 | E I.19 | L.25-25 | 1.4 | Crit.5 | `cf5` | `i_1_4_criteres_CF.py` |
 | E I.19 | L.26-28 | 1.4 | Crit.6 | `cf6` | `i_1_4_criteres_CF.py` |
 | E I.20 | L.4-5 | 1.4 | Crit.7 | `cf7` | `i_1_4_criteres_CF.py` |
+| E I.20 | L.6-27 | 1.4 | Demo.- | `cf7` | `i_1_4_criteres_CF.py` |
 | E I.20 | L.28-29 | 1.4 | Crit.8 | `cf8` | `i_1_4_criteres_CF.py` |
 | E I.21 | L.1-17 | 1.4 | Demo.- | `cf8` | `i_1_4_criteres_CF.py` |
 | E I.21 | L.18-22 | 1.4 | Rem.- | `cf8` | `i_1_4_criteres_CF.py` |
@@ -92,7 +94,7 @@
 
 ## Bilan cumulé (ce dossier + descendants)
 
-- Notions calées : **82**
+- Notions calées : **84**
 - Fichiers à caler : **0**
 - Marqueurs non conformes : **0**
 - Livre **E I** : pages couvertes 14-21, 29-30, 32, 42-46 — **pages manquantes : 22-28, 31, 33-41**

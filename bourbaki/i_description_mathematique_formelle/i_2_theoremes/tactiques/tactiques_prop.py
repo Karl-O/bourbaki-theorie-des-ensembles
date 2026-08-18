@@ -22,6 +22,7 @@ from bourbaki.i_description_mathematique_formelle.i_2_theoremes.tactiques.tactiq
 
 
 # @livre Ch.I §3 Crit.11 | E I.26 L.18-18 | PDF p.26
+# @livre Ch.I §3 Demo.- | E I.26 L.19-20 | PDF p.26  (démo de C11 : A⇒(non non A) n'est autre que « (non A) ou (non non A) », d'où C10)
 def double_negation_intro(a: Assemblage, sig: Signature = DEFAUT) -> Theoreme:
     """⊢ A ⇒ ¬¬A.  (¬A⇒¬A est ¬¬A∨¬A ; on commute par S3.)"""
     t = a_implique_a(negation(a), sig)          # ⊢ ¬A⇒¬A  =  ¬¬A ∨ ¬A
@@ -30,6 +31,7 @@ def double_negation_intro(a: Assemblage, sig: Signature = DEFAUT) -> Theoreme:
 
 
 # @livre Ch.I §3 Crit.16 | E I.28 L.7-7 | PDF p.28
+# @livre Ch.I §3 Demo.- | E I.28 L.8-10 | PDF p.28  (démo de C16 par l'absurde : « non non A » et « non A » théorèmes ⇒ absurde)
 def double_negation_elim(a: Assemblage, sig: Signature = DEFAUT) -> Theoreme:
     """⊢ ¬¬A ⇒ A.  (À partir de ¬A∨A et de ¬A⇒¬¬¬A, mono-gauche.)"""
     em = a_implique_a(a, sig)                   # ⊢ A⇒A  =  ¬A ∨ A
@@ -39,6 +41,7 @@ def double_negation_elim(a: Assemblage, sig: Signature = DEFAUT) -> Theoreme:
 
 
 # @livre Ch.I §3 Crit.12 | E I.26 L.21-23 | PDF p.26
+# @livre Ch.I §3 Demo.- | E I.26 L.24-30 | PDF p.26  (démo de C12, trois formules affichées : C11+S4+C1, puis S3, puis C6)
 def contraposition(thm_pq: Theoreme, sig: Signature = DEFAUT) -> Theoreme:
     """⊢ P⇒Q  ⟹  ⊢ ¬Q ⇒ ¬P.  Constructive (S3 + mono-gauche + dni)."""
     p, q = antecedent_consequent(thm_pq.conclusion, sig)
@@ -55,6 +58,7 @@ def syllogisme_disjonctif(p: Assemblage, q: Assemblage,
 
 
 # @livre Ch.I §3 Crit.20 | E I.29 L.20-20 | PDF p.29
+# @livre Ch.I §3 Demo.- | E I.29 L.21-24 | PDF p.29  (démo de C20 par l'absurde : C16 donne A⇒(non B), donc « non B » vraie — absurde)
 def conjonction_intro(thm_a: Theoreme, thm_b: Theoreme,
                       sig: Signature = DEFAUT) -> Theoreme:
     """⊢ A,  ⊢ B  ⟹  ⊢ (A et B).  (A et B = ¬(¬A∨¬B).)
@@ -96,6 +100,7 @@ def composantes_conjonction(c: Assemblage, sig: Signature = DEFAUT
 
 
 # @livre Ch.I §3 Crit.21 | E I.29 L.25-26 | PDF p.29
+# @livre Ch.I §3 Demo.- | E I.29 L.27-35 | PDF p.29  (démo de C21, cinq formules affichées : S2+C7, puis C11, puis C17)
 def projection_gauche(a: Assemblage, b: Assemblage, sig: Signature = DEFAUT) -> Theoreme:
     """⊢ (A et B) ⇒ A.  (contraposée de S2 ¬A⇒(¬A∨¬B), puis DNE.)"""
     s2 = noyau.s2(negation(a), negation(b), sig)            # ¬A⇒(¬A∨¬B)
@@ -146,6 +151,7 @@ def equivalence_modus(thm_equiv: Theoreme, thm_a: Theoreme,
 # ── Théorèmes propositionnels nommés (clos) ──────────────────────────────────
 
 # @livre Ch.I §3 Crit.10 | E I.26 L.15-15 | PDF p.26
+# @livre Ch.I §3 Demo.- | E I.26 L.16-17 | PDF p.26  (démo de C10 : « (non A) ou A » par C8, puis S3 + C1)
 def tiers_exclu(a: Assemblage, sig: Signature = DEFAUT) -> Theoreme:
     """⊢ A ∨ ¬A.  (de A⇒A = ¬A∨A, commuté par S3.)"""
     return noyau.modus_ponens(a_implique_a(a, sig),

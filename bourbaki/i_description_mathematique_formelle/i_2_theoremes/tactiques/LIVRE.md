@@ -15,23 +15,30 @@
 | E I.25 | L.32-33 | 3 | Crit.6 | `syllogisme` | `tactiques_abrege.py` |
 | E I.26 | L.8-8 | 3 | Crit.8 | `a_implique_a` | `tactiques.py` |
 | E I.26 | L.8-8 | 3 | Crit.8 | `a_implique_a` | `tactiques_abrege.py` |
+| E I.26 | L.9-10 | 3 | Demo.- | `a_implique_a` | `tactiques.py` |
 | E I.26 | L.11-11 | 3 | Crit.9 | `affaiblissement` | `tactiques.py` |
 | E I.26 | L.11-11 | 3 | Crit.9 | `affaiblissement` | `tactiques_abrege2.py` |
+| E I.26 | L.12-14 | 3 | Demo.- | `affaiblissement` | `tactiques.py` |
 | E I.26 | L.15-15 | 3 | Crit.10 | `tiers_exclu` | `tactiques_abrege2.py` |
 | E I.26 | L.15-15 | 3 | Crit.10 | `tiers_exclu` | `tactiques_prop.py` |
+| E I.26 | L.16-17 | 3 | Demo.- | `tiers_exclu` | `tactiques_prop.py` |
 | E I.26 | L.18-18 | 3 | Crit.11 | `dni` | `tactiques_abrege2.py` |
 | E I.26 | L.18-18 | 3 | Crit.11 | `double_negation_intro` | `tactiques_prop.py` |
+| E I.26 | L.19-20 | 3 | Demo.- | `double_negation_intro` | `tactiques_prop.py` |
 | E I.26 | L.21-23 | 3 | Crit.12 | `contraposition` | `tactiques_abrege2.py` |
 | E I.26 | L.21-23 | 3 | Crit.12 | `contraposition` | `tactiques_prop.py` |
 | E I.26 | L.21-23 | 3 | Crit.12 | `contraposition_theoreme` | `tactiques_prop.py` |
+| E I.26 | L.24-30 | 3 | Demo.- | `contraposition` | `tactiques_prop.py` |
 | E I.26 | L.31-33 | 3 | Crit.13 | `importation` | `tactiques.py` |
 | E I.27 | L.6-7 | 3 | Crit.- | `distribution` | `tactiques.py` |
 | E I.27 | L.6-7 | 3 | Crit.- | `distribution` | `tactiques_abrege2.py` |
 | E I.28 | L.7-7 | 3 | Crit.16 | `dne` | `tactiques_abrege2.py` |
 | E I.28 | L.7-7 | 3 | Crit.16 | `double_negation_elim` | `tactiques_prop.py` |
+| E I.28 | L.8-10 | 3 | Demo.- | `double_negation_elim` | `tactiques_prop.py` |
 | E I.28 | L.18-19 | 3 | Crit.18 | `cas` | `tactiques_abrege2.py` |
 | E I.29 | L.20-20 | 3 | Crit.20 | `conjonction_intro` | `tactiques_abrege2.py` |
 | E I.29 | L.20-20 | 3 | Crit.20 | `conjonction_intro` | `tactiques_prop.py` |
+| E I.29 | L.21-24 | 3 | Demo.- | `conjonction_intro` | `tactiques_prop.py` |
 | E I.29 | L.25-26 | 3 | Crit.21 | `projection_gauche` | `tactiques_abrege2.py` |
 | E I.29 | L.25-26 | 3 | Crit.21 | `projection_droite` | `tactiques_abrege2.py` |
 | E I.29 | L.25-26 | 3 | Crit.21 | `conjonction_elim_gauche` | `tactiques_abrege2.py` |
@@ -40,6 +47,7 @@
 | E I.29 | L.25-26 | 3 | Crit.21 | `projection_droite` | `tactiques_prop.py` |
 | E I.29 | L.25-26 | 3 | Crit.21 | `conjonction_elim_gauche` | `tactiques_prop.py` |
 | E I.29 | L.25-26 | 3 | Crit.21 | `conjonction_elim_droite` | `tactiques_prop.py` |
+| E I.29 | L.27-35 | 3 | Demo.- | `projection_gauche` | `tactiques_prop.py` |
 | E I.30 | L.34-37 | 3 | Crit.- | `equivalence_avant` | `tactiques_abrege2.py` |
 | E I.30 | L.34-37 | 3 | Crit.- | `equivalence_arriere` | `tactiques_abrege2.py` |
 | E I.30 | L.34-37 | 3 | Crit.- | `equivalence_reflexive` | `tactiques_prop.py` |
@@ -68,7 +76,7 @@
 
 ## Bilan cumulé (ce dossier + descendants)
 
-- Notions calées : **58**
+- Notions calées : **66**
 - Fichiers à caler : **0**
 - Marqueurs non conformes : **0**
 - Livre **E I** : pages couvertes 25-31, 34 — **pages manquantes : 32-33**

@@ -72,6 +72,7 @@ def congruence_existe(thm_eq, x):
 
 
 # @livre Ch.I §4.3 Crit.33 | E I.35 L.8-12 | PDF p.35
+# @livre Ch.I §4.3 Demo.- | E I.35 L.13-20 | PDF p.35  (démo de C33 dans T₀ : adjonction de (∀x)(R ou S), aller puis réciproque, règle ∃ par C29)
 def et_existe_droite(p, y, q):
     """⊢ (P et (∃y)Q) ⇔ (∃y)(P et Q)   (y non libre dans P).   (C33, distribution et/∃.)"""
     if y in libres_f(p):

@@ -7,14 +7,14 @@
 
 | Dossier | Notions | À caler | Non conformes | Pages livre |
 |---|---|---|---|---|
-| `i_description_mathematique_formelle/` | 274 | 0 | 0 | E I: 14-46 ; E II: 2 |
+| `i_description_mathematique_formelle/` | 291 | 0 | 0 | E I: 14-46 ; E II: 2 |
 | `ii_theorie_des_ensembles/` | 720 | 0 | 0 | E II: 1-48 ; E III: 2, 4-5, 25, 27 ; E IV: 2 ; E R: 3-27, 29 |
 | `iii_ensembles_ordonnes_cardinaux_entiers/` | 1008 | 0 | 0 | E II: 10, 32, 34-36 ; E III: 2-3, 5-66, 87 ; E R: 7, 13, 22, 26-28, 30-32 |
 | `iv_structures/` | 185 | 0 | 0 | E II: 18, 30 ; E III: 23 ; E IV: 1-26 |
 
 ## Bilan cumulé (ce dossier + descendants)
 
-- Notions calées : **2187**
+- Notions calées : **2204**
 - Fichiers à caler : **0**
 - Marqueurs non conformes : **0**
 - Livre **E I** : pages couvertes 14-46 — aucune page manquante dans l'intervalle

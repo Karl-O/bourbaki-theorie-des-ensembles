@@ -29,14 +29,14 @@
 
 | Dossier | Notions | À caler | Non conformes | Pages livre |
 |---|---|---|---|---|
-| `criteres/` | 25 | 0 | 0 | E I: 26-28, 31, 33 |
-| `noyau/` | 31 | 0 | 0 | E I: 17, 21-23, 25, 27, 32-33, 38-39 |
-| `tactiques/` | 58 | 0 | 0 | E I: 25-31, 34 ; E II: 2 |
+| `criteres/` | 27 | 0 | 0 | E I: 26-28, 31, 33 |
+| `noyau/` | 32 | 0 | 0 | E I: 17, 21-23, 25, 27, 32-33, 38-39 |
+| `tactiques/` | 66 | 0 | 0 | E I: 25-31, 34 ; E II: 2 |
 | `verification/` | 2 | 0 | 0 | E I: 22 |
 
 ## Bilan cumulé (ce dossier + descendants)
 
-- Notions calées : **133**
+- Notions calées : **144**
 - Fichiers à caler : **0**
 - Marqueurs non conformes : **0**
 - Livre **E I** : pages couvertes 17, 21-34, 38-39 — **pages manquantes : 18-20, 35-37**

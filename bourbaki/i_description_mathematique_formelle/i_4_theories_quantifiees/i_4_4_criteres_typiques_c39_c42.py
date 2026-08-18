@@ -116,6 +116,7 @@ def _impl_et_distrib(a, r, s):
 
 # ── C39 — monotonie typique sous hypothèse A⇒(R⇒S) ───────────────────────────
 # @livre Ch.I §4.4 Crit.39 | E I.37 L.18-26 | PDF p.37
+# @livre Ch.I §4.4 Demo.- | E I.37 L.27-27 | PDF p.37  (démo de C39, une ligne)
 def c39_existe_typique(a, r, s, x):
     """{A⇒(R⇒S)} ⊢ (∃_A x)R ⇒ (∃_A x)S.   (x non libre dans A,R,S.)
 
@@ -145,6 +146,7 @@ def c39_pourtout_typique(a, r, s, x):
 
 # ── C40 — distribution typique (théorèmes purs) ──────────────────────────────
 # @livre Ch.I §4.4 Crit.40 | E I.37 L.28-33 | PDF p.37
+# @livre Ch.I §4.4 Demo.- | E I.37 L.34-34 | PDF p.37  (démo de C40, une ligne)
 def c40_existe_typique(a, r, s, x):
     """⊢ (∃_A x)(R ou S) ⇔ ((∃_A x)R ou (∃_A x)S).
 
@@ -185,6 +187,7 @@ def _et_reassoc(a, b, r):
 
 
 # @livre Ch.I §4.4 Crit.42 | E I.37 L.35-41 | PDF p.37
+# @livre Ch.I §4.4 Demo.- | E I.37 L.42-42 | PDF p.37  (démo de C42, une ligne)
 # @livre Ch.I §4.4 Demo.- | E I.38 L.1-5 | PDF p.38  (démonstration d'une partie de C42, via C33+C31+C34)
 # @livre Ch.I §4.4 Ex.- | E I.38 L.6-13 | PDF p.38  (exemple en petit texte : négation de « (fₙ) converge uniformément vers 0 » via C38 — prose, rien à formaliser)
 def c42_existe_typique(a, b, r, x, y):

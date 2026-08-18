@@ -26,6 +26,7 @@
 | E I.25 | L.10-12 | 3.1 | Sch.4 | `s4` | `noyau_abrege.py` |
 | E I.27 | L.4-5 | 3.3 | Crit.14 | `loi_deduction` | `noyau.py` |
 | E I.27 | L.4-5 | 3.3 | Crit.14 | `loi_deduction` | `noyau_abrege.py` |
+| E I.27 | L.6-20 | 3.3 | Demo.- | `loi_deduction` | `noyau.py` |
 | E I.32 | L.1-6 | 4.1 | Def.- | `existe_temoin` | `noyau_abrege.py` |
 | E I.32 | L.37-39 | 4.1 | Crit.27 | `generalisation` | `noyau.py` |
 | E I.32 | L.37-39 | 4.1 | Crit.27 | `generalisation` | `noyau_abrege.py` |
@@ -41,7 +42,7 @@
 
 ## Bilan cumulé (ce dossier + descendants)
 
-- Notions calées : **31**
+- Notions calées : **32**
 - Fichiers à caler : **0**
 - Marqueurs non conformes : **0**
 - Livre **E I** : pages couvertes 17, 21-23, 25, 27, 32-33, 38-39 — **pages manquantes : 18-20, 24, 26, 28-31, 34-37**
