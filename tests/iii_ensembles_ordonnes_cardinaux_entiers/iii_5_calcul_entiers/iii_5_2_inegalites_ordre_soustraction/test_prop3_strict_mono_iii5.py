@@ -5,6 +5,12 @@ from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_5_calcul_entiers.iii_
     somme_strict_monotone, somme_strict_monotone_enonce,
     produit_strict_monotone, produit_strict_monotone_enonce,
 )
+import pytest
+
+#: FICHIER LOURD — 2609 s mesurés le 18 août (pytest --durations).
+#: Marqué slow : la porte « not slow » ne le voit plus, mais le théorème
+#: reste vérifié par la suite COMPLÈTE — à lancer avant toute annonce.
+pytestmark = pytest.mark.slow
 
 
 def test_theorie_22():

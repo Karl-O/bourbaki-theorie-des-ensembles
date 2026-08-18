@@ -6,6 +6,12 @@ import bourbaki.ii_theorie_des_ensembles.ii_1_relations_collectivisantes.ensembl
 from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_6_infinis.entiers_infinis.iii_6_1_n_objet_existence.ensembles_factorielle_entier_NN import (
     factorielle_entier_NN,
 )
+import pytest
+
+#: FICHIER LOURD — 891 s mesurés le 18 août (pytest --durations).
+#: Marqué slow : la porte « not slow » ne le voit plus, mais le théorème
+#: reste vérifié par la suite COMPLÈTE — à lancer avant toute annonce.
+pytestmark = pytest.mark.slow
 
 
 def test_theorie_22():

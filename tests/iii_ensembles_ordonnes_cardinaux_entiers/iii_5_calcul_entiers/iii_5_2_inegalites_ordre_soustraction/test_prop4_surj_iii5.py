@@ -6,6 +6,12 @@ from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_5_calcul_entiers.iii_
     prop4_surjective, prop4_surjective_enonce,
     prop4_ordre_iso, prop4_ordre_iso_enonce,
 )
+import pytest
+
+#: FICHIER LOURD — 1967 s mesurés le 18 août (pytest --durations).
+#: Marqué slow : la porte « not slow » ne le voit plus, mais le théorème
+#: reste vérifié par la suite COMPLÈTE — à lancer avant toute annonce.
+pytestmark = pytest.mark.slow
 
 
 def test_existe_complement_somme_cardinal_close():

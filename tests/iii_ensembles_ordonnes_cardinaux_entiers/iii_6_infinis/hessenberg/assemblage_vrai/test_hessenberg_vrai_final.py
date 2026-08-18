@@ -13,6 +13,12 @@ from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_6_infinis.hessenberg.
 from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_6_infinis.hessenberg.assemblage_vrai.ensembles_hessenberg_vrai_final import (
     unpack_maximal, hessenberg_vrai,
 )
+import pytest
+
+#: FICHIER LOURD — 852 s mesurés le 18 août (pytest --durations).
+#: Marqué slow : la porte « not slow » ne le voit plus, mais le théorème
+#: reste vérifié par la suite COMPLÈTE — à lancer avant toute annonce.
+pytestmark = pytest.mark.slow
 
 LOCK = egal(E.reunion(var("S0"), var("Ucadre")), var("S0"))
 

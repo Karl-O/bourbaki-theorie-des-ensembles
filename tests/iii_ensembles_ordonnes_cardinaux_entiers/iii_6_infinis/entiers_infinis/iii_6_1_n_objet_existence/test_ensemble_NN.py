@@ -20,6 +20,11 @@ from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_4_entiers_finis.iii_4
 
 import bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_6_infinis.entiers_infinis.iii_6_1_n_objet_existence.ensembles_ensemble_NN as M
 
+#: FICHIER LOURD — 718 s mesurés le 18 août (pytest --durations).
+#: Marqué slow : la porte « not slow » ne le voit plus, mais le théorème
+#: reste vérifié par la suite COMPLÈTE — à lancer avant toute annonce.
+pytestmark = pytest.mark.slow
+
 
 # ────────────────────────────────────────────────────────────────────────────
 #  Fixtures session-scope : on construit chaque théorème UNE fois (N_existe lent).

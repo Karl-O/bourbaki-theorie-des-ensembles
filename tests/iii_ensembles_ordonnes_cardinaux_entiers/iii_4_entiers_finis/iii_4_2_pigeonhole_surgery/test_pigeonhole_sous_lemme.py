@@ -4,6 +4,12 @@ from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_4_entiers_finis.iii_4
     partie_egal_cardinal_egal, partie_egal_cardinal_egal_enonce,
     cor2_partie_propre_inf_strict, cor2_partie_propre_inf_strict_enonce,
 )
+import pytest
+
+#: FICHIER LOURD — 2916 s mesurés le 18 août (pytest --durations).
+#: Marqué slow : la porte « not slow » ne le voit plus, mais le théorème
+#: reste vérifié par la suite COMPLÈTE — à lancer avant toute annonce.
+pytestmark = pytest.mark.slow
 
 
 def _nb_axiomes():

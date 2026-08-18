@@ -5,6 +5,12 @@ from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_4_entiers_finis.iii_4
     section_finie_implique_bijective,
     section_finie_implique_bijective_enonce,
 )
+import pytest
+
+#: FICHIER LOURD — 735 s mesurés le 18 août (pytest --durations).
+#: Marqué slow : la porte « not slow » ne le voit plus, mais le théorème
+#: reste vérifié par la suite COMPLÈTE — à lancer avant toute annonce.
+pytestmark = pytest.mark.slow
 
 
 def test_section_finie_implique_bijective_close():

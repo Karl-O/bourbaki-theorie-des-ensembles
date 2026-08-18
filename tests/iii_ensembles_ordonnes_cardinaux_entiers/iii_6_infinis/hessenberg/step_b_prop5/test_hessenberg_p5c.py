@@ -8,6 +8,12 @@ seules hypothèses résiduelles sont les 2 résidus E-niveau de frame_a_maximal 
 """
 from bourbaki.i_description_mathematique_formelle.i_1_termes_relations.outil_formule import libres_f, non, egal, var
 from bourbaki.ii_theorie_des_ensembles.ii_1_relations_collectivisantes import ensembles_abrege as E
+import pytest
+
+#: FICHIER LOURD — 978 s mesurés le 18 août (pytest --durations).
+#: Marqué slow : la porte « not slow » ne le voit plus, mais le théorème
+#: reste vérifié par la suite COMPLÈTE — à lancer avant toute annonce.
+pytestmark = pytest.mark.slow
 
 
 def test_theorie_22():

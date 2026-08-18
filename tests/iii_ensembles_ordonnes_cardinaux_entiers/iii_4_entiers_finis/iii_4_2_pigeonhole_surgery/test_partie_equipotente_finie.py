@@ -3,6 +3,12 @@ from bourbaki.ii_theorie_des_ensembles.ii_1_relations_collectivisantes import en
 from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_4_entiers_finis.iii_4_2_pigeonhole_surgery.ensembles_partie_equipotente_finie import (
     partie_equipotente_egale, partie_equipotente_egale_enonce,
 )
+import pytest
+
+#: FICHIER LOURD — 731 s mesurés le 18 août (pytest --durations).
+#: Marqué slow : la porte « not slow » ne le voit plus, mais le théorème
+#: reste vérifié par la suite COMPLÈTE — à lancer avant toute annonce.
+pytestmark = pytest.mark.slow
 
 
 def test_partie_equipotente_egale_close():

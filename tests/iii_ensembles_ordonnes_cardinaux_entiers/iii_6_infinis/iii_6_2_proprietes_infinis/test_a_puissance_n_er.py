@@ -9,6 +9,12 @@ from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_6_infinis.iii_6_2_pro
     eq_Fsucc_A, enonce_eq_Fsucc_A, eq_R_np1, enonce_eq_R_np1,
     heredite_111, enonce_heredite_111, base_111, enonce_base_111,
     a_puissance_n_egale_a, enonce_a_puissance_n_egale_a, hyp_carre)
+import pytest
+
+#: FICHIER LOURD — 741 s mesurés le 18 août (pytest --durations).
+#: Marqué slow : la porte « not slow » ne le voit plus, mais le théorème
+#: reste vérifié par la suite COMPLÈTE — à lancer avant toute annonce.
+pytestmark = pytest.mark.slow
 
 
 def test_copie_gauche_inclus_somme():
