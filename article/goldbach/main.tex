@@ -145,6 +145,12 @@ conjecture. The defect is a kernel theorem; the repair is proved free on numeral
 (Section~\ref{sec:repro}): a column separating ``closed'' from ``axiom-free'' --- eleven
 of eighteen links are free, seven rest on the sieve's two dedicated axioms --- and a
 test that fails if anything in the research folder concludes the conjecture.
+\item \textbf{A worked case of the measurement failing on itself}
+(Section~\ref{sec:overclaim}): the claim of item 3 was overstated for a week --- asserted
+of four reductions where the code established two --- and we report how it was written,
+how it propagated, how it was caught, and why no test in a kernel-verified repository
+could have caught it. We include this because a paper whose contribution is an audit
+instrument owes the reader the instrument's own failure mode.
 \end{enumerate}
 
 \paragraph{What we do not claim.} No new arithmetic fact about the primes is
@@ -511,16 +517,35 @@ half-interval restriction --- \emph{without ever opening $S$}. The proofs are no
 adapted per instance; the same derivation is executed with different arguments.
 
 \begin{center}
-\begin{tabular}{@{}lll@{}}
+\begin{tabular}{@{}lrrrrrr@{}}
 \toprule
-$S$ & time & what it is \\
+& \multicolumn{5}{c}{seconds, by reduction} & \\
+\cmidrule(lr){2-6}
+$S$ & GG19$_\Leftarrow$ & GG19$_\Rightarrow$ & GG22 & sym. & half & total \\
 \midrule
-$x \in \mathbb{S}$, $\mathbb{S}$ totally opaque & 5 s & no property assumed whatsoever \\
-$\mathrm{est\_premier}(x)$ & 4 s & \textbf{Goldbach} \\
-$\mathrm{est\_pair\_propre}(x)$ & 4 s & a set for which the question is trivial \\
+$x \in \mathbb{S}$, totally opaque & 0 & 2 & 2 & 3 & 102 & \textbf{110} \\
+	exttt{est\_premier}$(x)$ --- \textbf{Goldbach} & 0 & 2 & 2 & 4 & 102 & \textbf{110} \\
+	exttt{est\_pair\_propre}$(x)$ --- trivial & 0 & 2 & 2 & 4 & 102 & \textbf{110} \\
 \bottomrule
 \end{tabular}
 \end{center}
+
+Every cell is a closed theorem. The first predicate assumes nothing whatsoever about
+$\mathbb{S}$; the second \emph{is} Goldbach; the third is a set for which the additive
+question is trivial. The three rows are indistinguishable to the second, which is the
+entire point: primality costs exactly what a set with no properties costs, because the
+derivation never looks at either.
+
+\begin{remark}[how these numbers were obtained, and one trap in them]
+Whichever predicate runs \emph{first} in a fresh process pays a one-off cost of about
+two minutes on the half-interval lemma --- 219\,s in a first pass that began with the
+opaque predicate, 237\,s in a second pass that began with the trivial one --- after which
+every subsequent instance settles at 102\,s. The excess therefore follows the
+\emph{position}, not the predicate. We report the steady-state figure, and we know it is
+the steady state because the passes were run in both orders on purpose. Reading the
+first pass alone would have shown the opaque predicate costing twice the others and
+invited an explanation that does not exist.
+\end{remark}
 
 The three rows are three tests in \texttt{tests/recherche/additif/}, named after what
 they establish: \texttt{test\_symetrie\_sur\_un\_predicat\_totalement\_opaque},
@@ -805,32 +830,78 @@ about Goldbach.
 \label{sec:limitations}
 %% ============================================================================
 
+\paragraph{The measurement is three instances, not a quantified statement.} This is the
+sharpest caveat, and it bounds the central result. The kernel proves, for each choice of
+$S$, a separate closed theorem; it does not prove a meta-statement of the form ``for
+every predicate $S$, the reduction holds''. Such a statement is not expressible as a
+kernel object here --- it quantifies over formulas, and a schema over formulas is a
+Python generator in this architecture, never a theorem (the companion paper makes that
+boundary its central discipline). What is parametric is the \emph{derivation}: one
+function from predicates to proofs, executed three times. The opaque instance
+$S(x) := x \in \mathbb{S}$ with $\mathbb{S}$ carrying no axioms is the closest thing to
+a universal case, since no property of $\mathbb{S}$ is available to be used, and we
+regard it as strong evidence; but ``strong evidence at the meta-level'' is exactly the
+right strength of claim, and it is weaker than the theorems around it. A reader who
+wants the universal statement wants a different system.
+
 \paragraph{The measurement covers four reductions, not the whole map.} All four major
-reductions are now measured (Section~\ref{sec:overclaim}), but ``major'' is our
-judgement. Smaller links of the chain --- the $\tau$ bridge, the bounded arc absorbed by
-GG25 --- have not been re-derived parametrically, and we do not claim they are free of
-arithmetic. The honest statement is that every reduction we identified as load-bearing
-has been measured, not that the entire eighteen-link chain has.
+reductions are measured (Section~\ref{sec:overclaim}), but ``major'' is our judgement.
+Smaller links --- the $\tau$ bridge, the bounded arc absorbed by GG25 --- have not been
+re-derived parametrically, and we do not claim they are free of arithmetic. Given
+Section~\ref{sec:overclaim}, we are wary of that judgement in particular: the previous
+version of this sentence was wrong for a week.
 
-\paragraph{The negative results are measurements.} The counting result is numerical
-evidence about $\pi$ over a finite range, not a theorem; a proof that no
-counting-only argument can succeed is not offered. The equational result describes the
-shape of a gap reported by our organs at a given state of the system, and a different
-instrument could in principle report differently.
+\paragraph{The negative results are measurements, not impossibility theorems.} The
+counting result is numerical evidence about $\pi$ over a finite range; we offer no proof
+that a counting-only argument must fail, and the growth of the actual decomposition
+count over the same range is consistent with the criterion simply being the wrong one
+rather than the family being hopeless. The equational result describes the shape of a
+gap \emph{reported by our organs at a given state of the system}: a different search
+procedure, or the same one with a larger law pool, could in principle report a different
+frontier. Both are decisions about where not to spend effort, and they are good
+decisions on the evidence; neither is a theorem.
 
-\paragraph{Two dedicated axioms.} Seven of the eighteen links rest on the sieve's
-axioms characterizing $P_b$ and $Q_b$. They are bounded selections, deliberately built
-to avoid the incoherence class the project met in July, but they are assumptions and
-they are counted as such.
+\paragraph{Two dedicated axioms, and what they buy.} Seven of the eighteen links rest on
+the two axioms characterizing $P_b$ and $Q_b$. These are \emph{bounded} selections,
+deliberately built that way after the project derived a contradiction from an unbounded
+one in July, and they are counted in a dedicated column rather than folded into the
+22-axiom invariant. Still, they are assumptions: a reader who rejects them keeps the
+eleven free links and loses the sieve form.
 
-\paragraph{One mind.} The system was designed, operated and audited by a single
-person. The guards of Section~\ref{sec:repro} exist precisely because self-audit is
-weak, but they do not replace external review.
+\paragraph{Scale.} One conjecture, eighteen links, thirty-two tests, one parametric
+package with three instantiations. The instrument of Section~\ref{sec:abstract} has been
+applied to exactly one body of reductions --- our own --- and its cost profile (seconds
+per instance) is measured on derivations that were already cheap. Whether it stays cheap
+on a reduction whose concrete proof takes minutes is untested; the most expensive link
+in this package already takes 259\,s, and nothing guarantees the parametric version of a
+future result stays in the seconds range.
 
-\paragraph{An exact oracle.} Everything here enjoys a decision procedure for
-``is this a theorem''. The methodology --- parameterize, re-derive, report what still
-closes --- should transfer to any system with a checkable kernel, but we have not tested
-it outside this one.
+\paragraph{Known unmeasured areas.} The bounded arc for $n \le 86$ was not migrated to
+the guarded predicate and is not part of the replayed chain. The campaign's search
+organs, which produced several of the statements the map rests on, are reported in the
+companion paper and their behaviour is not re-measured here. And we have not checked
+whether the abstract package's theorems are \emph{stronger} than their concrete
+counterparts in any way that matters --- they are more general in the bound $b$, which we
+state, but we have not looked for other differences.
+
+\paragraph{One mind.} The system was designed, operated and audited by one person. The
+two guards of Section~\ref{sec:repro} exist precisely because self-audit is weak, and
+Section~\ref{sec:overclaim} is a case where self-audit worked --- but it worked seven
+days late, and only because the claim happened to be re-read while drafting. That is not
+a process, it is luck with a good habit attached. External review is not replaced by any
+of it.
+
+\paragraph{An exact oracle.} Everything here enjoys a decision procedure for ``is this a
+theorem''. The methodology --- parameterize, re-derive, report what still closes ---
+should transfer to any system with a checkable kernel, and nothing in it is specific to
+Bourbaki's formalism; but we have not tested it outside this one, and systems whose
+statements are harder to abstract over may not admit the same cheap instrumentation.
+
+\paragraph{Reproducibility.} All timings were taken on a single Windows~11 machine with
+the system Python (3.13), in a fresh process per measurement, and are reported to the
+precision the run gives rather than averaged over repetitions. The chain replay, the
+parametric package and the research test tree are all in the repository and can be
+re-run directly; the figures quoted in this paper come from runs of 19 August 2026.
 
 %% ============================================================================
 \section{Conclusion}
