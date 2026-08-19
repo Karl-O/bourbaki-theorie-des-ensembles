@@ -32,13 +32,13 @@
 | E II.6 | L.14-17 | 1.7 | Rem.- | `difference_vide_neutre` | `ensembles_vide_identites.py` |
 | E II.6 | L.18-20 | 1.7 | Prop.- | `complement_involution` | `ensembles_difference_identites.py` |
 | E II.6 | L.24-27 | 1.7 | Th.1 | `vide_relation_fonctionnelle` | `ensembles_vide.py` |
+| E II.6 | L.28-30 | 1.7 | Rem.- | `vide_ssi_sans_element` | `ensembles_vide.py` |
 | E II.6 | L.30-30 | 1.7 | Th.1 | `vide_sans_element` | `ensembles_theoremes.py` |
-| E II.6 | L.30-30 | 1.7 | Rem.- | `vide_ssi_sans_element` | `ensembles_vide.py` |
 | E II.6 | L.30-30 | 1.7 | Rem.- | `non_vide_ssi_element` | `ensembles_vide.py` |
 | E II.6 | L.30-30 | 1.7 | Th.1 | `difference_self` | `ensembles_vide_identites.py` |
-| E II.6 | L.36-37 | 1.7 | Th.- | `vide_inclus_partout` | `ensembles_vide.py` |
-| E II.6 | L.37-38 | 1.7 | Th.- | `sous_ensemble_vide_ssi_egal` | `ensembles_vide.py` |
-| E II.6 | L.38-39 | 1.7 | Th.- | `vacuite_sur_vide` | `ensembles_vide.py` |
+| E II.6 | L.31-31 | 1.7 | Th.- | `vide_inclus_partout` | `ensembles_vide.py` |
+| E II.6 | L.31-32 | 1.7 | Th.- | `sous_ensemble_vide_ssi_egal` | `ensembles_vide.py` |
+| E II.6 | L.32-32 | 1.7 | Th.- | `vacuite_sur_vide` | `ensembles_vide.py` |
 | E II.7 | L.3-4 | 2.1 | Prop.1 | `couple_egal_si_composantes` | `ensembles_theoremes.py` |
 | E II.22 | L.49-53 | 4.1 | Def.2 | `?` | `ensembles_abrege.py` |
 | E II.39 | L.29-30 | 6.1 | Def.- | `est_symetrique` | `ensembles_abrege.py` |

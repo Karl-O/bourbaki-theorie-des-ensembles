@@ -7,7 +7,7 @@
 
 | Page livre | Lignes | § | Type | Notion | Fichier |
 |---|---|---|---|---|---|
-| E II.6 | L.21-22 | 1.7 | Prop.- | `antitonie_complement` | `ensembles_inclusion_treillis.py` |
+| E II.6 | L.21-23 | 1.7 | Prop.- | `antitonie_complement` | `ensembles_inclusion_treillis.py` |
 | E R.3 | L.46-49 | 1.11 | Prop.11 | `egalite_leibniz_parties` | `ensembles_egalite_leibniz.py` |
 | E R.4 | L.7-8 | 1.13 | Rem.- | `associativite_reunion` | `ensembles_algebre_booleenne.py` |
 | E R.4 | L.7-8 | 1.13 | Rem.- | `associativite_intersection` | `ensembles_algebre_booleenne.py` |

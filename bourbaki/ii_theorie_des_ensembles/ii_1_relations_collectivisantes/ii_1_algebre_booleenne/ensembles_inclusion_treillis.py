@@ -125,7 +125,7 @@ def _antitone_impl(a, b):
     return N.loi_deduction(inclus(va, vb), gen)
 
 
-# @livre Ch.II §1.7 Prop.- | E II.6 L.21-22 | PDF p.57
+# @livre Ch.II §1.7 Prop.- | E II.6 L.21-23 | PDF p.57
 def antitonie_complement(a="A", b="B", e="E"):
     """⊢ (A ⊂ B) ⇔ ((E∖B) ⊂ (E∖A))   sous (A⊂E, B⊂E)   (E.II.6, nº7).
 

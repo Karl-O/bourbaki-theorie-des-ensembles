@@ -18,7 +18,7 @@ from bourbaki.i_description_mathematique_formelle.i_5_theories_egalitaires.i_5_3
 from bourbaki.ii_theorie_des_ensembles.ii_1_relations_collectivisantes.ensembles_theoremes import extensionnalite_appliquee
 
 
-# @livre Ch.II §1.7 Rem.- | E II.6 L.30-30 | PDF p.57
+# @livre Ch.II §1.7 Rem.- | E II.6 L.28-30 | PDF p.57
 def vide_ssi_sans_element(a="A"):
     """⊢ (A = ∅) ⇔ (∀z)¬(z ∈ A).   (a : variable-nom ou terme quelconque sans z libre.)
 
@@ -69,7 +69,7 @@ def non_vide_ssi_element(a="A"):
     return equivalence_transitivite(neg_vide, bridge)  # ¬(A=∅) ⇔ (∃z)(z∈A)
 
 
-# @livre Ch.II §1.7 Th.- | E II.6 L.36-37 | PDF p.57
+# @livre Ch.II §1.7 Th.- | E II.6 L.31-31 | PDF p.57
 def vide_inclus_partout(x="X"):
     """⊢ ∅ ⊂ X.   (E II.6 §7 : « On a les théorèmes x∉∅, ∅⊂X, … ».)
 
@@ -83,7 +83,7 @@ def vide_inclus_partout(x="X"):
     return N.generalisation("z", body)                             # (∀z)(z∈∅⇒z∈X) = ∅⊂X
 
 
-# @livre Ch.II §1.7 Th.- | E II.6 L.37-38 | PDF p.57
+# @livre Ch.II §1.7 Th.- | E II.6 L.31-32 | PDF p.57
 def sous_ensemble_vide_ssi_egal(x="X"):
     """⊢ (X ⊂ ∅) ⇔ (X = ∅).   (E II.6 §7 : « la relation X⊂∅ est équivalente à X=∅ ».)
 
@@ -104,7 +104,7 @@ def sous_ensemble_vide_ssi_egal(x="X"):
     return conjonction_intro(fwd, bwd)                                  # (X⊂∅) ⇔ (X=∅)
 
 
-# @livre Ch.II §1.7 Th.- | E II.6 L.38-39 | PDF p.57
+# @livre Ch.II §1.7 Th.- | E II.6 L.32-32 | PDF p.57
 def vacuite_sur_vide(R, x="x"):
     """⊢ (∀x)((x∈∅) ⇒ R{x}).   (E II.6 §7 : « Si R{x} est une relation, la relation
     (∀x)((x∈∅)⇒R{x}) est vraie ».)
