@@ -317,10 +317,42 @@ $\vdash (\forall k)\bigl[\, (\exists m)(m \in P_{2k} \wedge m \in Q_{2k})
 \;\Longleftrightarrow\; 2k = p+q \text{ with } p,q \text{ prime} \,\bigr]$.
 \end{proposition}
 
-Write $\mathrm{meet}(k)$ for the left-hand side. The forward direction is derivable only
-with the \emph{guarded} statement of Section~\ref{sec:fidelity}: it consumes finiteness
-of $p$. This is worth recording, because it is the pattern by which a fidelity defect
-announces itself --- the guard is not decorative, the proof demands it.
+Write $\mathrm{meet}(k)$ for the left-hand side.
+
+\emph{Proof sketch, and where the two directions differ.} The $\Leftarrow$ direction is
+free: under a point $m$ of the meeting, the guarded predicate $S^{+}(m)$ falls out of
+the $P$ axiom, the internal witness $y$ (guarded, with $2k = m + y$) falls out of the
+$Q$ axiom, two applications of the witness rule S5 close the double existential, and
+$\exists$-elimination discharges $y$ then $m$. The $\Rightarrow$ direction is the one
+that \emph{consumes the guard}: from $2k = p + q$ and $\mathrm{Fin}(p)$, the
+proposition ``a summand of a finite sum is below it'' gives $p \le 2k$; with $p$ a
+cardinal and $0 \le p$ this places $p$ in $[0, 2k]$, hence in $P_{2k}$; and $p \in
+Q_{2k}$ with internal witness $q$. Without $\mathrm{Fin}(p)$ not one of those steps is
+available. This is worth recording, because it is the pattern by which a fidelity
+defect announces itself --- the guard is not decorative, the proof demands it, and
+Section~\ref{sec:fidelity} reports what happened where no proof was demanding anything.
+
+\emph{A trap, and the discipline it forced.} The mirror's defining formula binds an
+internal variable, and the kernel is free to $\alpha$-rename that binder when it
+instantiates the axiom. Reconstructing the expected matrix by hand and comparing
+against it therefore fails intermittently and for reasons that look like nonsense. The
+rule adopted throughout the campaign is to \emph{read the binder the kernel produced}
+off the instantiated theorem, build the supplied matrix against it, and assert equality
+before applying S5. Every witness-introduction site in the package does this. The same
+assertion caught a genuine error during the parametric port of
+Section~\ref{sec:overclaim}: the mirror's internal witness is not in general the
+element being placed --- it is the other summand in the equivalence, and the element
+itself only in the composites branch, where $2k = k + k$.
+
+\paragraph{How the statements themselves are checked.} A reduction is only as good as
+the faithfulness of the two formulas it relates, and a transcription error there would
+be invisible to the kernel --- it would simply prove a different theorem. The package
+establishes fidelity by \emph{excision}: the antecedent and the consequent are cut out
+of the repository's own statement rather than retyped, and the recomposition is checked
+for syntactic identity against it. A statement built this way cannot silently differ
+from the one it claims to be about; what it cannot do is guarantee that the
+repository's statement is itself faithful to the mathematics, which is the separate
+problem of Section~\ref{sec:fidelity}.
 
 The map's payoff is that everything the campaign proved lands on $\mathrm{meet}$:
 
@@ -340,6 +372,16 @@ sieve & $P_{2k}$ meets its mirror & the arrival form \\
 $\vdash \bigl[\,(\forall k)\;(\text{$k$ finite, composite}) \Rightarrow \mathrm{meet}(k)\,\bigr]
 \;\Longrightarrow\; H .$
 \end{proposition}
+
+\emph{Proof sketch.} Excluded middle on $\mathrm{prime}(k)$. On the composite branch the
+hypothesis applies directly. On the prime branch the meeting is witnessed by $m := k$
+itself: $k$ lies in $P_{2k}$ because it is prime and $k \le 2k$, and in $Q_{2k}$ with
+internal witness $y := k$, since $2k = k + k$ is a reflexivity. The branch then feeds
+the sieve equivalence and the link to the repository's historical statement. The prime
+branch costs one thing the abstract version of Section~\ref{sec:abstract} does not pay:
+an $\alpha$-spelling bridge, because the repository's statement of decomposition forces
+two distinct spellings of the primality predicate and the witness must cross between
+them.
 
 Three scattered formulations became one goal. We state the obvious reservation in the
 repository's own words: this is an implication whose hypothesis is not proved, and that
@@ -388,6 +430,25 @@ $\vdash (\forall k)(\forall m)\bigl[\, m \in P_{2k} \cap Q_{2k} \Rightarrow
 
 Solutions come in pairs, stable under the involution $m \mapsto 2k - m$ whose fixed
 point is $k$ --- exactly the case GG22 handles. Goldbach decompositions go two by two.
+
+\emph{Proof sketch, and what the migration cost.} The partner of $m$ is nothing other
+than the mirror's own internal witness $y$: it lies in $S$ because the mirror says so,
+it is bounded because $y \le m + y = 2k$, and $m$ re-enters the mirror of $y$ by
+commutativity of cardinal addition. No subtraction is used --- there is none available
+--- and no counting. The exploratory version of this proof was written with a
+\emph{single} spelling of primality on both sets, which made the step invisible; on the
+repository's real definitions the two $\alpha$-spellings cross, the partner leaving the
+mirror in one spelling and having to enter $P$ in the other, while $m$ makes the
+opposite trip. The bridge had to be parameterized by source and target spelling. A
+convenient simplification in an exploration script had concealed the entire real
+difficulty; the script ``worked'', it simply did not prove what we thought.
+
+\begin{remark}[the negated bridge is not free]
+The contrapositive bridge $\neg\,\mathrm{prime}_2 \Rightarrow \neg\,\mathrm{prime}_1$
+remains unavailable and does not follow from the parameterization --- an implication
+does not contrapose for free here. The composites form carries the first spelling
+deliberately.
+\end{remark}
 
 \begin{proposition}[the half suffices]
 $\vdash (\forall k)\bigl[\,k \text{ finite} \Rightarrow
@@ -677,20 +738,67 @@ rather than quietly carrying the old numbers forward.
 %% avant gel -- voir PLAN.md. Ne rien citer ici qui ne soit dans le .bib.
 %% ============================================================================
 
-\emph{[To be completed before freeze. The repository's bibliography carries 47 verified
-entries; the Goldbach-specific references --- large-scale numerical verification, the
-ternary case and its formalization, and work on parametricity and the computational
-content of proofs --- are not yet among them and must be verified against sources before
-citation, per the discipline stated in the companion paper. This section is deliberately
-left unwritten rather than populated with unverified citations.]}
+\paragraph{What is known about Goldbach, and what we do not add to it.} The even
+conjecture has been verified numerically for all $n \le 4 \cdot 10^{18}$, together with
+extensive data on minimal partitions and prime gaps~\cite{oesilva2014goldbach}. The
+ternary conjecture --- every odd $n > 5$ is a sum of three primes --- was proved by
+Helfgott~\cite{helfgott2013ternary}, resting on a numerical verification up to
+$8.875 \cdot 10^{30}$~\cite{helfgott2013numerical}. Against that background our bounded
+arc, which certifies decompositions for $n \le 86$, is arithmetically negligible, and we
+do not present it as a contribution: its role is structural, feeding the concrete
+witnesses that GG25 absorbs into the meeting form. We add no arithmetic fact, and
+nothing here bears on the ternary case. To our knowledge neither Helfgott's proof nor
+the numerical verifications have been mechanized, and we do not attempt either.
 
-The positioning we expect to defend: formalizing an open conjecture is not new, and
+\paragraph{Formalizing statements that have no proof.} Large collaborative
+formalizations of recent mathematics --- the Polynomial Freiman--Ruzsa project is the
+best-documented example, with a human-readable blueprint linked to the formal
+development~\cite{tao2023pfr} --- take as input a proof that \emph{exists} and transcribe
+it. The activity reported here is different in kind: there is no proof to transcribe.
+What gets formalized is the statement, its equivalent forms, and the exact obligation at
+each leaf. The two are complementary rather than competing, and the distinction matters
+for what one can promise: a blueprint project can be finished, whereas a map of an open
+problem can only be extended or shown, as in Section~\ref{sec:abstract}, to be measuring
+less than it appeared to.
+
+\paragraph{Measuring what a theorem needs.} The closest conceptual relative to our
+central result is reverse mathematics, which calibrates theorems by the subsystem of
+second-order arithmetic required to prove them~\cite{simpson2009sosoa}. The question is
+the same in spirit --- \emph{what does this proof actually use?} --- and the answers have
+the same negative flavour: a theorem provable in a weak system cannot, by itself, yield
+one that is not. Two differences are worth stating. Reverse mathematics calibrates
+against a fixed hierarchy of set-existence axioms; we calibrate against a
+\emph{parameter in the statement}, asking whether a specific predicate is used at all.
+And our calibration is executable rather than proof-theoretic: it consists in running
+the same derivation with different arguments and letting the kernel judge, which takes
+seconds and can be applied routinely to a reduction before one invests in it. We do not
+claim a reverse-mathematical result; we claim a cheap, mechanical instrument in the same
+family.
+
+\paragraph{Negative results in automated reasoning.} Systems that establish something by
+failing to prove --- counterexample search~\cite{blanchette2011nitpick}, and more
+recently learned disproof~\cite{learningtodisprove2026} --- have a long history, and the
+survey literature on conjecture generation catalogues what such systems
+propose~\cite{conjecturingsurvey2026}. Our negative results are of a different type.
+They do not refute a statement; they establish that a family of \emph{our own}
+statements is insensitive to the parameter the problem turns on. Nothing is disproved,
+and the conjecture's truth value is untouched.
+
+\paragraph{Bourbaki in a machine.} Prior mechanization of \emph{Th\'eorie des ensembles}
+formalizes the content over the host logic rather than inhabiting Bourbaki's own
+formalism~\cite{grimm2010gaia}, for reasons the size of $\tau$-expanded assemblies makes
+plain~\cite{mathias2002term}. The kernel used here inhabits the formalism, which is what
+makes the $\tau$ rewriting of Section~\ref{sec:map} a kernel operation rather than an
+encoding trick; the companion paper argues that point and we do not repeat it.
+
+\paragraph{Novelty, honestly stated.} Formalizing an open conjecture is not new, and
 neither is reducing one to an equivalent form. What we have not found elsewhere is the
-\emph{measurement} of a reduction's arithmetic content by executable parameterization ---
-running the same derivation against an opaque predicate, against the intended one, and
+\emph{measurement} of a reduction's arithmetic content by executable parameterization:
+running one derivation against an opaque predicate, against the intended one, and
 against a trivial one, and reporting that all three close. Our claim of novelty is
-semi-decidable in the sense the companion paper insists on: no counterexample after
-methodical search, never more.
+semi-decidable in the sense the companion paper insists on --- no counterexample after
+methodical search, never more --- and it is a claim about the \emph{instrument}, not
+about Goldbach.
 
 %% ============================================================================
 \section{Limitations and threats to validity}
