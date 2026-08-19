@@ -775,3 +775,45 @@ sont pas recalées.
 marqueur dont la borne haute atteint 50 est fautif, et un décrochage brutal
 entre le max et le 2ᵉ max des bornes d'une même page trahit le même défaut à
 plus petite échelle.
+
+## 2026-08-19 (2) — LA CONVENTION `L.x-y` N'EST PAS LA MÊME D'UNE PAGE À L'AUTRE
+
+**C'est la racine du travail de marqueurs restant, et elle interdit de le
+poursuivre au jugé.** `CLAUDE.md` définit `L.<l1>-<l2>` comme « les lignes sur
+CETTE page ». Quatre pages ouvertes et comptées à la main aujourd'hui donnent
+quatre décalages différents entre le marqueur et la ligne physique :
+
+| page | notion repère | marqueur dit | ligne physique | décalage |
+|---|---|---|---|---|
+| E II.6 (p.57) | Th. 1 | L.24-27 | L.24-27 | **0** |
+| E II.10 (p.61) | Déf. 2 | L.6-8 | L.6-8 | **0** |
+| E II.7 (p.58) | Prop. 1 | L.3-4 | L.5-6 | **−2** (le comptage semble démarrer au titre « §2. COUPLES ») |
+| E II.22 (p.73) | Déf. 1 | L.31-36 | L.15-18 | **×2 environ**, non constant |
+
+Un marqueur de E III.46 porte d'ailleurs la mention « lignes RECOMPTÉES sur le
+PNG le 27 juil. 2026 » : quelqu'un avait déjà buté sur le problème et recalé
+cette page-là seule.
+
+**CE QUE ÇA IMPLIQUE.** Tant que la convention n'est pas tranchée, poser ou
+élargir un marqueur revient à choisir arbitrairement l'un des comptages — et
+produit un travail plausible mais faux, que la suite de tests laissera passer
+sans broncher (le noyau juge la soundness, jamais la fidélité). Sur E II.7,
+« élargir l'ancre pour couvrir le trou » donnerait un résultat différent selon
+qu'on suit le comptage physique ou celui des deux marqueurs déjà en place.
+
+**LA DÉCISION À PRENDRE, et elle appartient à Karl** — trois options :
+1. **La ligne physique imprimée** (en-tête courant exclu, titres et notes de
+   bas de page inclus). C'est ce que dit CLAUDE.md aujourd'hui. Coût : recaler
+   les pages fautives, dont les 8 « dilatées » (109 marqueurs) et celles à
+   décalage constant.
+2. **Assouplir la spécification** : `L.x-y` devient un repère *relatif et
+   cohérent par page*, pas une coordonnée absolue. Coût nul, mais on perd la
+   possibilité de vérifier un marqueur contre le scan.
+3. **Rendre le détecteur tolérant** : ne signaler un trou que s'il dépasse une
+   largeur (3-4 lignes), ce qui absorbe le bruit de comptage sans rien
+   corriger. Palliatif, pas remède.
+
+**EN L'ÉTAT, le chantier des marqueurs restants est SUSPENDU à cette
+décision.** 25 des 45 marqueurs non-démo du tri du 18 août sont concernés.
+Ce qui a pu être corrigé sans ambiguïté l'a été (commits 452f071, 5bb1e59,
+3f0ee94, 0b5e515) ; le reste attend la règle.
