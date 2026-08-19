@@ -50,20 +50,68 @@ tout renommage doit raccourcir ou rester neutre.
   III.4 entiers/finis · III.5 calcul sur les entiers · III.6 ensembles infinis · III.7 limites proj./induct.
 - **Chap. IV** Structures : IV.1 structures/isomorphismes · IV.2 morphismes/structures dérivées · IV.3 applications universelles
 
-## Suivi de couverture  (mis à jour le 2026-08-04 — VÉRIFIÉ en code)
-`outils_ia/audit/couverture.py` est PÉRIMÉ : ne pas s'y fier. Deux outils font foi, à
-relancer après chaque session :
-- `python outils_ia/audit/gen_livre_manifestes.py` — couverture **page par page** du
-  livre. État au 2026-08-04 (fin de journée) : **les cinq parties « complet sur
-  l'intervalle »** (E I 14-46, E II 1-48, E III 2-66 + 87, E IV 1-26, E R 3-32),
-  **2147 notions**, 0 fichier à caler, 0 marqueur non conforme. ⚠️ « couvert » =
-  chaque page a ses notions formalisées et marquées `@livre` — **pas** que tout
-  est démontré.
-- `python outils_ia/audit/audit_reports.py` — croise les listes `REPORTES` avec les
-  `@livre` et signale les reports **PÉRIMÉS**. État : 45 reports, 6 suspects.
-  **Lancer cet outil AVANT d'attaquer un report, et TESTER EN CODE (import + appel)
-  qu'il est bien ouvert** : 4 reports périmés ont été trouvés en 24 h (Prop. 1 1°,
-  Prop. 1 2°, Prop. 10 III.1.10, Prop. 6 III.7.6) — on risque de réécrire un acquis.
+## Suivi de couverture  (mis à jour le 2026-08-19 — VÉRIFIÉ en code)
+
+**LA PREMIÈRE COMMANDE À LANCER, avant et après chaque session :**
+```
+python outils_ia/audit/verifie.py
+```
+Six constats, **un seul verdict**, code de retour 0/1 : axiomes 22 · 0 SyntaxError ·
+marqueurs et trous · manifestes (notions, non conformes, parties complètes) ·
+reports suspects · tests. ⚠️ Sa règle cardinale : **il n'annonce JAMAIS vert ce
+qui n'a pas tourné** — sans `--tests` il dit « NON LANCÉ », pas « OK ». Trois
+notifications « exit 0 » de ce projet se sont avérées être des timeouts ; on ne
+lit un verdict qu'à la dernière ligne du fichier de sortie.
+
+**État au 2026-08-19** : **2230 notions** aux manifestes, 1983 marqueurs `@livre`,
+**179 trous** intra-page, 51 reports dont 6 suspects, 0 marqueur non conforme, les
+cinq parties « complet sur l'intervalle » (E I 14-46, E II 1-48, E III 2-66 + 87,
+E IV 1-26, E R 3-32).
+
+**LE TAUX QUI RÉPOND À LA QUESTION DU PROJET — 50,7 %.**
+`python outils_ia/audit/statut_notions.py --noyau` croise chaque `@livre` avec le
+VERDICT DU NOYAU (nombre d'hypothèses non déchargées). Sur les 1142 notions de type
+démontrable (Prop/Th/Cor/Crit/Lem/Demo/Sch/Ax), 815 sont tranchées : **413 FAIT**
+(0 hypothèse) contre 402 PARTIEL. C'est la première réponse chiffrée à
+« démontré dans le livre » == « vérifié par la machine ». Il signale aussi 23
+REPORTS PÉRIMÉS et 92 déclarations trop fortes — à vérifier une par une, il
+signale, il ne juge pas la nuance d'une docstring.
+
+`outils_ia/audit/couverture.py` est PÉRIMÉ : ne pas s'y fier. Les outils qui font foi :
+- `gen_livre_manifestes.py` — couverture **page par page**. ⚠️ « couvert » = chaque
+  page a ses notions marquées `@livre`, **pas** que tout est démontré. Ce détecteur
+  est SATURÉ (5/5 parties complètes) : il ne peut plus rien trouver.
+- `gen_trous_livre.py` — granularité **ligne**, le seul qui voie encore quelque
+  chose. Ses 211 trous ont été triés le 18 août par lecture du PDF : **41 % n'en
+  étaient pas** (démonstrations non annotées). Reste 93 vrais manques.
+- `audit_reports.py` — croise `REPORTES` et `@livre`, signale les reports PÉRIMÉS.
+  **Lancer AVANT d'attaquer un report et TESTER EN CODE (import + appel)** : 4
+  périmés trouvés en 24 h début août — on risque de réécrire un acquis.
+
+**LA FILE DE TRAVAIL EST `docs/couverture/CIBLES_VERIFIEES_2026-08-19.md`**, pas le
+tri. Sur les 38 cibles « HAUTE » du tri, **20 avaient déjà une `def`** dans le
+dépôt : les attaquer telles quelles, c'était réécrire vingt notions existantes.
+17 sont vraiment ABSENTES. ⚠️ Une `def` au bon nom ne prouve ni que son énoncé est
+celui de Bourbaki, ni qu'elle est close — lire la fonction ET la page.
+
+**LES TESTS, ET CE QU'ILS COÛTENT VRAIMENT** (mesuré le 18 août) :
+- suite complète : `pytest tests/ -q -n 12 --dist loadfile` → **4210 passed en
+  2 h 20**. C'est un contrôle à lancer AVANT d'annoncer un résultat, pas à chaque
+  commit.
+- porte « not slow » : **1 h 18**. Utile, mais pas un garde-fou de commit.
+- ⚠️ **Il n'existe PAS de porte de 5 minutes, et ce n'est pas faute d'avoir
+  essayé.** Sous `--dist loadfile` un fichier ne se découpe pas : le plus lourd
+  impose 54 min ; même test par test, le plus lent en fait 40 à lui seul. Et le
+  coût est DIFFUS — après retrait des 21 fichiers les plus lourds il reste 1 h 18.
+- **La porte de commit est donc** : `verifie.py` sans les tests (≈1 min) **plus les
+  tests des fichiers touchés**. Pour un lot qui touche `tests/`,
+  `pytest --collect-only` attrape les imports cassés en quelques secondes.
+
+⚠️ **CE QU'AUCUN TEST N'ATTRAPERA.** Le noyau garantit la SOUNDNESS, jamais la
+FIDÉLITÉ. Un marqueur qui ment sur le livre laisse la suite verte, les 22 axiomes
+en place et les manifestes conformes — c'est arrivé le 18 août (trois `Demo.-`
+posés sur des clôtures d'énoncé de C39/C40/C42, où Bourbaki n'imprime AUCUNE
+démonstration, corrigé en 452f071). Seule l'ouverture de la page le révèle.
 
 Gros chantiers : **FAITS** — Hessenberg a²=a (III.6), division euclidienne (III.5),
 trichotomie/bon ordre des cardinaux (III.3), Cantor, **CST1 + CST1-identité + CST2 +
