@@ -491,11 +491,12 @@ without waiting to need them.
 %% ============================================================================
 \section{What the reductions do not contain}
 \label{sec:abstract}
-%% ANCRE: recherche/additif/crible_abstrait.py (symetrie_additive),
-%% demi_abstrait.py (restriction_a_la_moitie, moitie_implique_rencontre) ;
-%% tests/recherche/additif/{test_crible_abstrait,test_demi_abstrait}.py ;
-%% CARTE_GOLDBACH.md section 12. VERIFIE 19 aout : la portee est de 2 reductions
-%% sur 4 -- la carte en annonce 4, le code en etablit 2. Voir la reserve infra.
+%% ANCRE: recherche/additif/equivalence_abstraite.py (GG19 les 2 sens + GG22),
+%% crible_abstrait.py (symetrie_additive), demi_abstrait.py
+%% (restriction_a_la_moitie, moitie_implique_rencontre) ;
+%% tests/recherche/additif/ 13 tests verts ; CARTE_GOLDBACH.md section 12.
+%% Les 4 reductions sont mesurees depuis le 19 aout (commit 5d7396b) ; l'histoire
+%% de la surdeclaration 2/4 est racontee en sec:overclaim.
 %% ============================================================================
 
 Sections~\ref{sec:map} and~\ref{sec:structure} produce certified reductions of an open
@@ -562,9 +563,9 @@ therefore an execution, not a sentence of prose.
 \node[ax, below=of pr] (pa) {$S(x) := \mathrm{even}_{\text{proper}}(x)$ \;\; \emph{trivial}};
 \node[goal, right=of pr, text width=41mm, align=center] (der)
   {ONE derivation\\[1pt]{\normalfont\scriptsize sieve equivalence ($\Leftarrow$, $\Rightarrow$),\\composites, symmetry, half-interval}};
-\node[th, right=of der] (c1) {closed \;\; 5 s};
-\node[th, below=of c1] (c2) {closed \;\; 4 s};
-\node[th, below=of c2] (c3) {closed \;\; 4 s};
+\node[th, right=of der] (c1) {closed \;\; 110 s};
+\node[th, below=of c1] (c2) {closed \;\; 110 s};
+\node[th, below=of c2] (c3) {closed \;\; 110 s};
 \draw[fl] (op) -- (der);   \draw[fl] (pr) -- (der);   \draw[fl] (pa) -- (der);
 \draw[gl] (der) -- (c1);   \draw[gl] (der) -- (c2);   \draw[gl] (der) -- (c3);
 \end{tikzpicture}
@@ -581,9 +582,10 @@ defect of the proof.}
 
 A proof that does not distinguish the primes from a structureless set cannot be used to
 prove Goldbach. This is not a defect of our proofs: it is a property of the statements
-they establish. The symmetry of the sieve and the sufficiency of the half-interval
-carry \emph{no arithmetic content} --- they are facts about additive structure, and
-primality is an instance that plays no role in the derivation.
+they establish. The sieve equivalence, the reduction to composites, the symmetry and
+the sufficiency of the half-interval all carry \emph{no arithmetic content} --- they are
+facts about additive structure, and primality is an instance that plays no role in any
+of the four derivations.
 
 We regard this as a result rather than a confession, for three reasons. It
 \emph{delimits} the conjecture, drawing the line between the structural and the
@@ -758,9 +760,9 @@ rather than quietly carrying the old numbers forward.
 %% ============================================================================
 \section{Related work}
 \label{sec:related}
-%% ANCRE: ../references.bib (47 entrees verifiees au 2 aout).
-%% ATTENTION : la liste des references specifiques Goldbach est A VERIFIER
-%% avant gel -- voir PLAN.md. Ne rien citer ici qui ne soit dans le .bib.
+%% ANCRE: ../references.bib (52 entrees, toutes verifiees ; les 5 ajouts Goldbach
+%% du 19 aout portent leur note de verification en commentaire %).
+%% REGLE : ne rien citer ici qui ne soit dans le .bib et verifie a la source.
 %% ============================================================================
 
 \paragraph{What is known about Goldbach, and what we do not add to it.} The even
@@ -919,7 +921,7 @@ a parameter and re-running the derivations unchanged, we measured that our own
 reductions contain no arithmetic --- and thereby explained, at one stroke, why two
 independent lines of attack had already failed. A research program cannot easily tell,
 from the inside, whether it is approaching a problem or orbiting it. Here that question
-became a test that runs in four seconds and reports an answer we did not want.
+became a test that runs in under two minutes and reports an answer we did not want.
 
 That, we think, is the transferable object: not the map, but the habit of asking a
 verified system to measure the content of its own reductions --- and being willing to
