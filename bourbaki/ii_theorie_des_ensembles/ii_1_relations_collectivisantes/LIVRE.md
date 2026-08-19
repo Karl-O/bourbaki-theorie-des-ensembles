@@ -40,6 +40,9 @@
 | E II.6 | L.31-32 | 1.7 | Th.- | `sous_ensemble_vide_ssi_egal` | `ensembles_vide.py` |
 | E II.6 | L.32-32 | 1.7 | Th.- | `vacuite_sur_vide` | `ensembles_vide.py` |
 | E II.7 | L.3-4 | 2.1 | Prop.1 | `couple_egal_si_composantes` | `ensembles_theoremes.py` |
+| E II.10 | L.10-11 | 3.1 | Def.- | `dom` | `ensembles_abrege.py` |
+| E II.10 | L.12-13 | 3.1 | Def.- | `img` | `ensembles_abrege.py` |
+| E II.10 | L.23-25 | 3.1 | Def.3 | `image` | `ensembles_abrege.py` |
 | E II.22 | L.49-53 | 4.1 | Def.2 | `?` | `ensembles_abrege.py` |
 | E II.39 | L.29-30 | 6.1 | Def.- | `est_symetrique` | `ensembles_abrege.py` |
 | E II.39 | L.34-35 | 6.1 | Def.- | `est_transitive` | `ensembles_abrege.py` |
@@ -135,10 +138,10 @@
 
 ## Bilan cumulé (ce dossier + descendants)
 
-- Notions calées : **151**
+- Notions calées : **154**
 - Fichiers à caler : **0**
 - Marqueurs non conformes : **0**
-- Livre **E II** : pages couvertes 1-7, 22, 39-43 — **pages manquantes : 8-21, 23-38**
+- Livre **E II** : pages couvertes 1-7, 10, 22, 39-43 — **pages manquantes : 8-9, 11-21, 23-38**
 - Livre **E III** : pages couvertes 2, 4-5 — aucune page manquante dans l'intervalle
 - Livre **E R** : pages couvertes 3-5, 7-8, 11-14, 16-18, 20-27 — **pages manquantes : 6, 9-10, 15, 19**
 

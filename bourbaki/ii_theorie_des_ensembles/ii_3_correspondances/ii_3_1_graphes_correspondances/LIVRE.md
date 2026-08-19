@@ -17,6 +17,7 @@
 | E II.10 | L.34-35 | 3.1 | Rem.- | `image_dans_img` | `ensembles_correspondances.py` |
 | E II.10 | L.36-36 | 3.1 | Rem.- | `image_vide` | `ensembles_correspondances.py` |
 | E II.10 | L.36-36 | 3.1 | Rem.- | `image_domaine_egale_img` | `ensembles_image_domaine.py` |
+| E II.10 | L.37-37 | 3.1 | Prop.- | `image_non_vide` | `ensembles_image_non_vide.py` |
 | E II.10 | L.38-39 | 3.1 | Prop.2 | `?` | `ensembles_correspondances.py` |
 | E II.11 | L.1-1 | 3.1 | Cor.- | `image_egale_img_si_domaine_inclus` | `ensembles_image_domaine.py` |
 | E II.11 | L.2-5 | 3.1 | Def.4 | `coupe_membre` | `ensembles_correspondances.py` |
@@ -55,7 +56,7 @@
 
 ## Bilan cumulé (ce dossier + descendants)
 
-- Notions calées : **45**
+- Notions calées : **46**
 - Fichiers à caler : **0**
 - Marqueurs non conformes : **0**
 - Livre **E II** : pages couvertes 9-11, 13-14 — **pages manquantes : 12**

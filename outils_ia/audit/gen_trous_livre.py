@@ -149,8 +149,9 @@ def rapport_texte(marqueurs: list[Marqueur], trous: list[tuple]) -> str:
                    f"{mq.type}.{mq.num:<4} {mq.notion}")
     out.append("")
     if trous:
-        out.append(f"TROUS POTENTIELS ({len(trous)}) "
-                   f"— lignes non couvertes entre deux notions d'une même page :")
+        nl = sum(b - a + 1 for _c, _p, a, b, _x, _y in trous)
+        out.append(f"TROUS POTENTIELS ({len(trous)} trous, {nl} LIGNES non couvertes) "
+                   f"— l'intervalle non couvert entre deux notions d'une même page :")
         for chap, phys, gl1, gl2, av, ap in sorted(trous):
             out.append(f"  Ch.{chap} PDF p.{phys} : L.{gl1}-{gl2} non couvert "
                        f"(entre « {av} » et « {ap} »)")

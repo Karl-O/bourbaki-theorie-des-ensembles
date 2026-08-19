@@ -80,11 +80,13 @@ def est_un_graphe(g):
     return pourtout("z", impl(appartient(var("z"), g), est_un_couple(var("z"))))
 
 
+# @livre Ch.II §3.1 Def.- | E II.10 L.10-11 | PDF p.61  (« pr₁ G est appelé l'ensemble de définition (ou domaine) de Γ »)
 def dom(g):
     """pr₁⟨G⟩ := {x | (∃y)((x,y)∈G)}  (domaine / ensemble de définition, E.II.38)."""
     return app("dom", g)
 
 
+# @livre Ch.II §3.1 Def.- | E II.10 L.12-13 | PDF p.61  (« pr₂ G est appelé l'ensemble des valeurs (ou image) de Γ »)
 def img(g):
     """pr₂⟨G⟩ := {y | (∃x)((x,y)∈G)}  (image / ensemble des valeurs, E.II.38)."""
     return app("img", g)
@@ -92,6 +94,7 @@ def img(g):
 
 # @livre Ch.R §2 Def.- | E.R.7 item 4 (image de X par f, extension aux ensembles de parties) | PDF p.310
 # @livre Ch.R §3 Def.- | E.R.14 item 6 (application X↦K(X) définie par la partie K) | PDF p.317
+# @livre Ch.II §3.1 Def.3 | E II.10 L.23-25 | PDF p.61  (Déf. 3 : « l'ensemble des objets qui correspondent par G à des éléments de X s'appelle l'image de X par G »)
 def image(g, x):
     """G⟨X⟩ := {y | (∃x)(x∈X et (x,y)∈G)}  (image directe de X par G, E.II.39, Déf. 3)."""
     return app("image", g, x)

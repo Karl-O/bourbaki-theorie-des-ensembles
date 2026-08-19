@@ -7,7 +7,7 @@
 
 | Dossier | Notions | À caler | Non conformes | Pages livre |
 |---|---|---|---|---|
-| `ii_3_1_graphes_correspondances/` | 45 | 0 | 0 | E II: 9-11, 13-14 ; E R: 7-8, 12-15 |
+| `ii_3_1_graphes_correspondances/` | 46 | 0 | 0 | E II: 9-11, 13-14 ; E R: 7-8, 12-15 |
 | `ii_3_2_reciproque/` | 25 | 0 | 0 | E II: 11 ; E R: 8-10, 12-13 |
 | `ii_3_3_composee_graphes/` | 12 | 0 | 0 | E II: 11-13 ; E R: 10, 15 |
 | `ii_3_4_fonctions/` | 34 | 0 | 0 | E II: 11-13, 15, 17, 19, 21 ; E R: 10-11, 13-14, 16 |
@@ -18,7 +18,7 @@
 
 ## Bilan cumulé (ce dossier + descendants)
 
-- Notions calées : **187**
+- Notions calées : **188**
 - Fichiers à caler : **0**
 - Marqueurs non conformes : **0**
 - Livre **E II** : pages couvertes 9-21 — aucune page manquante dans l'intervalle

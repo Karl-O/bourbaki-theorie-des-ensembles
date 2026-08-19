@@ -46,6 +46,7 @@ def image_non_vide_enonce(x: str = "X", f: str = "f"):
 
 # @livre Ch.R §2 Prop.- | E.R.8 item 5b | PDF p.311  (X≠∅ ⇔ f⟨X⟩≠∅ — DÉRIVÉ, hyp honnête X ⊂ dom f)
 # @livre Ch.R §2 Demo.- | E.R.8 item 5b | PDF p.311  (démo : témoin via AXIOME_DOM + AXIOME_IMAGE ; réciproque par congruence + image_vide + contraposition)
+# @livre Ch.II §3.1 Prop.- | E II.10 L.37-37 | PDF p.61  (« Si X ⊂ pr₁ G et X ≠ ∅, on a G⟨X⟩ ≠ ∅ » — était marqué SEULEMENT sur le Résumé)
 def image_non_vide(x: str = "X", f: str = "f"):
     """🎯 { X ⊂ dom f } ⊢ ¬(X=∅) ⇔ ¬(f⟨X⟩=∅).   [1 hypothèse HONNÊTE]"""
     from bourbaki.i_description_mathematique_formelle.i_1_termes_relations.outil_formule import equiv
