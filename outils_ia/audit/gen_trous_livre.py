@@ -115,10 +115,20 @@ def trouver_trous(marqueurs: list[Marqueur]) -> list[tuple]:
         par_page.setdefault((mq.chap, mq.phys), []).append(mq)
     for (chap, phys), groupe in par_page.items():
         groupe.sort(key=lambda x: (x.l1, x.l2))
-        for a, b in zip(groupe, groupe[1:]):
-            # chevauchement ou contiguïté toléré ; trou si b commence > a.l2 + 1
-            if b.l1 > a.l2 + 1:
-                trous.append((chap, phys, a.l2 + 1, b.l1 - 1, a.notion, b.notion))
+        # ⚠️ On suit le MAXIMUM COURANT des bornes hautes, pas la borne du
+        # marqueur précédent. Sans cela, des intervalles IMBRIQUÉS fabriquent
+        # des trous fantômes : sur E III.46, les marqueurs L.14-20, L.15-16,
+        # L.19-19, L.21-24 faisaient croire à des trous L.17-18 et L.20-20,
+        # tous deux À L'INTÉRIEUR de L.14-20 (mesuré le 19 août : 175 trous
+        # signalés dont une part purement algorithmique).
+        couvert = None          # plus grande ligne couverte jusqu'ici
+        porteur = None          # le marqueur qui l'a établie
+        for mq in groupe:
+            if couvert is not None and mq.l1 > couvert + 1:
+                trous.append((chap, phys, couvert + 1, mq.l1 - 1,
+                              porteur.notion, mq.notion))
+            if couvert is None or mq.l2 > couvert:
+                couvert, porteur = mq.l2, mq
     return trous
 
 
