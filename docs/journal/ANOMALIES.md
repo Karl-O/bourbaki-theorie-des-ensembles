@@ -730,3 +730,48 @@ et asserter »), généralisé : **ne jamais supposer une structure, la regarder
 Une introspection de trois lignes (`type`, `tag`, `len(args)`) a réglé en
 quelques secondes ce que deux hypothèses successives avaient coûté.
 
+
+## 2026-08-19 — NUMÉROTATION DE LIGNES DILATÉE sur 8 pages (109 marqueurs)
+
+**Trouvé en cherchant systématiquement les marqueurs qui désignent des lignes
+inexistantes**, après en avoir corrigé un à la main (`Prop.2 | E II.31 L.41-44`
+alors que la page compte 37 lignes — commit 5bb1e59).
+
+**Le fait.** 36 marqueurs revendiquent une ligne `L.≥50`. Une page imprimée de
+Bourbaki en compte 35 à 49. Ils se concentrent sur 8 pages, qui portent en tout
+**109 marqueurs** :
+
+    Ch.II  p.59 (E II.8)   p.73 (E II.22)  p.74 (E II.23)  p.84 (E II.33)
+    Ch.II  p.86 (E II.35)  p.89 (E II.38)
+    Ch.III p.132 (E III.29)
+    Ch.IV  p.208 (E IV.5)
+
+**Le cas d'école, E II.22 (PDF p.73), 34 marqueurs.** Ils situent la Définition 1
+(réunion) en `L.31-36` et la Définition 2 (intersection) en `L.49-53`. Page
+ouverte et comptée : la Déf. 1 est en **L.15-18**, la Déf. 2 en **L.27-30**, et
+la page se termine vers **L.37** sur une note de bas de page. L'échelle est
+donc dilatée d'un facteur ~2 au début et ~1,8 plus loin — non constant, donc
+pas un simple décalage.
+
+**Conséquence mesurée.** Les marqueurs d'une même page restent COHÉRENTS ENTRE
+EUX (26-30, 31-36, 38-40, 49-53 forment une suite croissante) ; c'est le rapport
+au livre qui est faux. `gen_trous_livre.py` signale alors des intervalles vides
+de cette échelle fantôme — les « trous » L.37-37 et L.41-48 de la p.73 n'existent
+pas dans le livre. Une part des 177 trous restants vient de là.
+
+**POURQUOI JE NE CORRIGE PAS.** Renuméroter 109 marqueurs d'après mon propre
+comptage de lignes sur un scan introduirait probablement plus d'erreurs que
+cela n'en retire — j'ai déjà commis une erreur de comptage le 18 août (trois
+`Demo.-` posés sur des clôtures d'énoncé, corrigé en 452f071). Cette correction
+demande le livre en main et une passe délibérée, page par page, pas un script.
+
+**CE QUE ÇA COÛTE EN L'ÉTAT.** Rien pour la soundness : ces marqueurs ne
+touchent aucune preuve, la suite reste verte et `theorie_ensembles()` vaut 22.
+Le coût est sur la FIDÉLITÉ (un `@livre` doit caler la notion sur le livre) et
+sur le SIGNAL du détecteur de trous, qui reste bruité tant que ces 8 pages ne
+sont pas recalées.
+
+**COMMENT LE RETROUVER.** Les pages suspectes se listent en une commande : tout
+marqueur dont la borne haute atteint 50 est fautif, et un décrochage brutal
+entre le max et le 2ᵉ max des bornes d'une même page trahit le même défaut à
+plus petite échelle.
