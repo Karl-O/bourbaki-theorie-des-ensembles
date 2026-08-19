@@ -90,7 +90,7 @@ def _corps(fterm, vg, vu, vv, vE, vEp, vF):
                                  E.valeur(vg, xp, b="b")))))
 
 
-# @livre Ch.II §5.2 Prop.2 | E II.31 L.41-44 | PDF p.82
+# @livre Ch.II §5.2 Prop.2 | E II.31 L.24-26 | PDF p.82
 def prop2_conjugaison_surjective(g="g", u="u", rp="rp", sp="sp", v="v",
                                  e="E", ep="Ep", f_set="F", fp="Fp"):
     """⊢ (H₀ ⇒ … ⇒ H₅ ⇒ (∃f)(f:E→F ∧ v∘f∘u = g)).   (PROPOSITION 2, cas 2° surjectif.)

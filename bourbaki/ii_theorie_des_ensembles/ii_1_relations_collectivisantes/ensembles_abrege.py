@@ -445,7 +445,7 @@ def est_relation_equivalence(R, x="x", y="y", z="z"):
     return et(est_symetrique(R, x, y), est_transitive(R, x, y, z))
 
 
-# @livre Ch.II §6.1 Def.- | E II.40 L.11-13 | PDF p.91
+# @livre Ch.II §6.1 Def.- | E II.40 L.11-14 | PDF p.91
 def est_reflexive_dans(R, e, x="x"):
     """« R réflexive dans E » := (∀x)(R{x,x} ⇔ x∈E)  (E.II.6.1 ; x ne figure pas dans E)."""
     vx = var(x)

@@ -44,7 +44,7 @@
 | E II.39 | L.29-30 | 6.1 | Def.- | `est_symetrique` | `ensembles_abrege.py` |
 | E II.39 | L.34-35 | 6.1 | Def.- | `est_transitive` | `ensembles_abrege.py` |
 | E II.40 | L.4-5 | 6.1 | Def.- | `est_relation_equivalence` | `ensembles_abrege.py` |
-| E II.40 | L.11-13 | 6.1 | Def.- | `est_reflexive_dans` | `ensembles_abrege.py` |
+| E II.40 | L.11-14 | 6.1 | Def.- | `est_reflexive_dans` | `ensembles_abrege.py` |
 | E II.40 | L.15-16 | 6.1 | Def.- | `est_relation_equivalence_dans` | `ensembles_abrege.py` |
 | E II.41 | L.17-19 | 6.2 | Def.- | `relation_associee_fonction` | `ensembles_abrege.py` |
 | E II.41 | L.25-26 | 6.2 | Def.- | `classe` | `ensembles_abrege.py` |

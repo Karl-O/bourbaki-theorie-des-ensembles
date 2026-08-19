@@ -7,7 +7,7 @@
 
 | Page livre | Lignes | § | Type | Notion | Fichier |
 |---|---|---|---|---|---|
-| E III.19 | L.11-18 | 2.3 | Lem.3 | `bourbaki_witt` | `ensembles_bourbaki_witt.py` |
+| E III.19 | L.11-19 | 2.3 | Lem.3 | `bourbaki_witt` | `ensembles_bourbaki_witt.py` |
 | E III.19 | L.20-38 | 2.3 | Demo.3 | `bourbaki_witt_theoreme` | `ensembles_bourbaki_witt_chaine.py` |
 | E III.20 | L.1-5 | 2.3 | Demo.3 | `bourbaki_witt_theoreme` | `ensembles_bourbaki_witt_chaine.py` |
 | E III.20 | L.9-10 | 2.3 | Th.1 | `zermelo` | `ensembles_zermelo.py` |
