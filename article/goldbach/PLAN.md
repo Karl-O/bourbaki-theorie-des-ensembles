@@ -43,30 +43,45 @@ A3, sinon les deux articles se recouvrent et aucun des deux ne tient seul.
 | **G1** | Une **carte certifiée** d'un problème ouvert : 18 maillons jugés par le noyau, rejoués en processus frais, invariant 22 partout | `recherche/goldbach/capstone.py::verifie_chaine` — **18/18 CLOS**, `theorie_ensembles()`=22, ~7 min 30 | ✅ **mesuré le 19 août** |
 | **G2** | La conjecture réduite à **un seul objet** : les trois lignes du projet (bornée `n≤86`, composés, crible) convergent sur la rencontre | `synthese.py::composes_impliquent_goldbach` (GG24) ; absorption par GG25 / GG22 | ✅ clos (2 ax. ad hoc) |
 | **G3** | **Goldbach sans `∃`** : chez Bourbaki `∃x φ(x)` *est* `φ(τx φ)` ; la conjecture devient trois propriétés de deux termes nommés | `pont_tau.py::forme_canonique` (GG9/GG10) ; primitives `existe_temoin`, `s5` (E I.32) | ✅ clos, 0 ax. ad hoc |
-| **G4** | 🎯 **LE RÉSULTAT CENTRAL — les réductions ne contiennent aucune arithmétique.** La *même preuve*, `S` en paramètre, ferme sur un prédicat totalement opaque, sur la primalité (= Goldbach) et sur un prédicat trivial | `recherche/additif/crible_abstrait.py::symetrie_additive` ; `demi_abstrait.py::restriction_a_la_moitie`, `moitie_implique_rencontre` ; `tests/recherche/additif/` (7 tests, dont `test_goldbach_est_une_instance`) | ✅ mesuré — **portée exacte : 2 réductions sur 4, voir la réserve ci-dessous** |
+| **G4** | 🎯 **LE RÉSULTAT CENTRAL — les réductions ne contiennent aucune arithmétique.** La *même preuve*, `S` en paramètre, ferme sur un prédicat totalement opaque, sur la primalité (= Goldbach) et sur un prédicat trivial | **les 4 réductions** : `equivalence_abstraite.py::equivalence_abstraite` (GG19 ⇐ et ⇒), `::rencontre_des_elements` (GG22), `crible_abstrait.py::symetrie_additive`, `demi_abstrait.py::restriction_a_la_moitie` ; `tests/recherche/additif/` **13 tests verts, 5 min 53** | ✅ **COMPLET (19 août)** — voir l'historique ci-dessous |
 | **G5** | **Deux voies refermées PAR LA NÉGATIVE**, pour la même raison : le comptage brut (tiroirs `2·π(2k) > 2k+1` faux pour tout `k≥2`) et l'équationnel (après les organes v16–v18, le manque a une forme *strictement identique*) | `CARTE_GOLDBACH.md` §7 et §8 ; `RESONDE1_goldbach_v18.py` | ✅ mesuré (numérique pour §7 — **pas une preuve**) |
 | **G6** | Un **défaut de fidélité certifié**, puis réparé : `est_premier(p)` ne contraint pas `p` à être un entier, donc `goldbach()` est *plus faible* que la conjecture ; la garde `premier_ent := Fini ∧ est_premier` est **gratuite sur les numéraux** | `audit_fidelite.py::indivisible_implique_premier` ; maillon A2 du capstone (50 s) | ✅ clos, 0 ax. ad hoc |
 | **G7** | Deux **faits de structure** sur la rencontre : les solutions vont par paires (involution `m ↦ 2k−m`, point fixe `k`) ; et **la moitié suffit** (`m ≤ k` ou `m' ≤ k`) | `symetrie.py::symetrie_du_crible` (GG23) ; `demi.py::demi_intervalle`, `rencontre_se_restreint` | ✅ clos |
 | **G8** | **« Clos » ≠ « sans axiome »** — et le dépôt le dit lui-même : 11 maillons sur 18 sont libres, 7 reposent sur les 2 axiomes du crible ; `atteste()` porte la colonne | `recherche/README.md` ; `AXIOMES_CRIBLE` ; colonne du capstone | ✅ mesuré |
 | **G9** | Un **test garde la porte** : il balaie tous les exports et échoue si l'un conclut `H` tout seul. Si ce test tombe, ce n'est pas une bonne nouvelle — c'est un énoncé à auditer | `test_goldbach_reste_ouverte` | ✅ en place |
 
-## ⚠️ Réserve à tenir sur G4 (trouvée le 19 août, en vérifiant le code)
+## L'historique de G4 — une surdéclaration trouvée, puis refermée (19 août)
 
-`CARTE_GOLDBACH.md` §12 écrit : « Les **quatre** grandes réductions de cette carte —
-composés, crible, symétrie, demi-intervalle — ne portent aucun contenu arithmétique. »
+**Ce document a d'abord porté une réserve, et elle est devenue une section de
+l'article** (§5.3, `sec:overclaim`). Le récit vaut d'être gardé ici parce qu'il est
+l'argument le plus concret du papier.
 
-**Le code n'en établit que deux.** `recherche/additif/` exporte `symetrie_additive`,
-`restriction_a_la_moitie` et `moitie_implique_rencontre` — la **symétrie** et le
-**demi-intervalle**. Il ne contient ni la réduction aux composés (GG7/GG22) ni
-l'équivalence crible (GG19) sous forme paramétrique (`grep` sur `recherche/additif/` :
-aucune occurrence de `composes` ni de `equivalence_crible`).
+**L'écart.** `CARTE_GOLDBACH.md` §12 et la docstring de `demi_abstrait.py` écrivaient,
+depuis le 12 août : « les **quatre** grandes réductions ne portent aucun contenu
+arithmétique ». Le code n'en établissait que **deux** — symétrie et demi-intervalle.
+Ni GG19 ni GG22 n'existaient sous forme paramétrique (`grep` sur `recherche/additif/` :
+aucune occurrence de `composes` ni de `equivalence_crible`). L'affirmation était en
+route vers la section centrale de l'article.
 
-**Conséquence pour l'article** : G4 s'énonce sur *deux* réductions, mesurées ; les deux
-autres sont **plausibles et non mesurées**, et doivent être présentées comme telles.
+**La détection.** Le 19 août, en relisant le code contre notre propre prose pendant la
+rédaction de A3. **Aucun test ne pouvait l'attraper** : le noyau garantit la soundness,
+jamais la fidélité d'un commentaire. C'est le même défaut que G6, un cran plus haut —
+là l'énoncé formel dérivait du livre, ici l'affirmation informelle dérivait de l'énoncé
+formel.
 
-**Conséquence pour le dépôt** : soit corriger la phrase de `CARTE_GOLDBACH.md`, soit
-fermer l'écart en portant GG19 et GG22 en abstrait — ce second choix rendrait G4
-complet et c'est, de loin, ce qui renforcerait le plus l'article. À trancher par Karl.
+**La fermeture, le jour même.** `recherche/additif/equivalence_abstraite.py` — GG19 les
+deux sens + GG22, clos sur les trois prédicats, 13 tests verts en 5 min 53. Le portage
+s'est révélé **mécanique** : les preuves concrètes ne se servent de la primalité que
+comme d'un conjoint opaque, jamais ouvert. *Il n'y avait rien d'arithmétique à porter*
+— ce qui est la thèse même de G4, sous une forme plus nette que prévu.
+
+**Un gain de généralité au passage** : l'équivalence abstraite vaut pour un `b`
+QUELCONQUE, alors que la version du dépôt est écrite sur `b = 2k` sans jamais utiliser
+que `b` est un double. Seul GG22 en a besoin, et seulement pour une réflexivité.
+
+**Ce qui reste non mesuré, et qui est écrit aux Limitations** : « les quatre grandes
+réductions » est notre jugement de ce qui porte la charge. Les maillons plus petits
+(pont τ, arc borné absorbé par GG25) n'ont pas été re-dérivés en paramétrique.
 
 ## Ce que l'article NE revendique PAS (à écrire noir sur blanc)
 

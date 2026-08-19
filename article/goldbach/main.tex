@@ -52,9 +52,9 @@ for every composite $k$ the primes below $2k$ meet their additive mirror. Two
 structural facts are certified about that meeting: its solutions come in pairs under
 the involution $m \mapsto 2k-m$, and one member of each pair lies in the lower half,
 so searching half the interval suffices. Our central result is negative and
-\emph{measured}: re-deriving those reductions with the primality predicate replaced by
-a \emph{parameter}, the same proofs close verbatim on a totally opaque set, on
-primality, and on a predicate for which the question is trivial. Reductions that
+\emph{measured}: re-deriving all four of the campaign's major reductions with the
+primality predicate replaced by a \emph{parameter}, the same proofs close verbatim on a
+totally opaque set, on primality, and on a predicate for which the question is trivial. Reductions that
 cannot distinguish the primes from a structureless set cannot prove Goldbach --- and
 this is a property of the statements, not a defect of the proofs. The measurement
 explains, at one stroke, two further paths we had already closed negatively: raw
@@ -128,9 +128,11 @@ the primes $\le 2k$ meet their additive mirror.
 $\tau$, the conjecture becomes three properties of two named terms. Both directions are
 certified.
 \item \textbf{A measurement of arithmetic content} (Section~\ref{sec:abstract}, our
-central result): with the primality predicate as a parameter, the symmetry and
-half-interval reductions close verbatim on an opaque predicate, on primality, and on a
-trivial predicate. ``Goldbach is an instance'' is an execution, not a claim of prose.
+central result): with the primality predicate as a parameter, \emph{all four} major
+reductions --- the sieve equivalence in both directions, the reduction to composites,
+the symmetry and the half-interval restriction --- close verbatim on an opaque
+predicate, on primality, and on a trivial predicate. ``Goldbach is an instance'' is an
+execution, not a claim of prose.
 \item \textbf{Two paths closed negatively, with a common cause}
 (Section~\ref{sec:negative}): raw counting and equational strengthening both fail, and
 the parameterization of the previous item explains why --- neither ever inspects which
@@ -161,39 +163,90 @@ on $S$. That is a delimitation, not a lower bound.
 %% ============================================================================
 
 We summarize only what this paper needs; the kernel, its trust boundary, and the
-instrumentation around it are the subject of a companion paper.
+instrumentation around it are the subject of a companion paper. Three features of the
+substrate shape every result below, and each is load-bearing rather than incidental.
 
-The kernel is LCF-style: a value of type \texttt{Theoreme} is constructible only
-through kernel primitives, and the repository forbids fabricating one by any other
-route. A theorem is \emph{closed} when its hypothesis set is empty. Theories are
-Bourbaki's: a named finite set of explicit axioms. The reference theory of sets carries
-22 axioms, and that count is asserted at every execution of every script in this paper.
+\subsection{The trust boundary, and what ``closed'' means}
 
-Two features of the substrate shape everything below.
+The kernel is written in pure Python, in the LCF style: a value of type
+\texttt{Theoreme} is constructible only through kernel primitives, and the repository
+forbids fabricating one by any other route --- no back-door constructor, no
+monkey-patching, no hand-built theorem object.
 
-\paragraph{Arithmetic is constructed, and cardinal.} There is no primitive type of
-natural numbers. Integers are finite cardinals, and the additive laws available are
-those of cardinal arithmetic. This is not a stylistic choice --- it is the book's
-development --- and it has a sharp consequence for statement fidelity: a quantifier
-that the author believes ranges over integers in fact ranges over cardinals unless a
-finiteness guard is written. Section~\ref{sec:fidelity} reports what that cost, and
-Section~\ref{sec:structure} reports a case where omitting the guard would have made a
-statement \emph{false} rather than merely unprovable, since additive cancellation fails
-for infinite cardinals: $\aleph_0 + 1 = \aleph_0 + 2$ while $1 \neq 2$.
+\begin{definition}[Theorem object]\label{def:theoreme}
+A \emph{theorem} is a triple $\theta = (H, C, j)$ where $H$ is a finite set of
+relations (the \emph{hypotheses} $\theta$ still depends on), $C$ is a relation (its
+\emph{conclusion}), and $j$ names the kernel rule that produced it --- including, for
+the axiom rule, \emph{which theory the axiom was drawn from}. The theorem is
+\emph{closed} when $H = \emptyset$.
+\end{definition}
 
-\paragraph{The existential quantifier is not primitive.} In Bourbaki's system,
-$(\exists x)\varphi(x)$ is an abbreviation for $\varphi(\tau x\,\varphi)$. The kernel
-exposes this directly, so an existential goal can be traded for properties of an
-explicitly named term. Section~\ref{sec:map} uses this to rewrite the conjecture
-without any existential quantifier; the same mechanism is what lets a search organ
-later perform that rewriting on its own.
+A \emph{theory} in Bourbaki's sense is a name together with a finite set of explicit
+axioms. The reference theory of sets carries 22 of them, and that count is re-asserted
+at every execution of every script in this paper --- it is the invariant by which the
+repository detects an axiom silently added anywhere.
 
-\paragraph{Where the results live.} The repository's main tree mirrors the book's table
-of contents, so that an empty directory is a coverage hole. Goldbach is not in
-\emph{Theory of Sets}. Results proved beyond the book therefore live in a separate
-\texttt{recherche/} tree, exempt from the book-anchoring discipline but subject to
-\emph{identical} kernel rules: same primitives, no fabricated theorems, 22 axioms
-asserted throughout. A research result is not less certified --- it is only off-book.
+The third component $j$ is what makes Section~\ref{sec:repro} possible. The axiom rule
+produces a theorem with \emph{empty} hypotheses: drawing $A$ from a dedicated theory
+$T$ yields a closed theorem whose dependence on $T$ has vanished from the sequent.
+Closure therefore does not mean ``assumption-free'', and the two must be reported
+separately or a result rests on axioms nobody counted.
+
+\subsection{The existential quantifier is not primitive}
+
+In \emph{Th\'eorie des ensembles} the quantifiers are not primitive signs but
+\emph{abbreviations} built from Hilbert's choice operator $\tau$. For a relation $R$
+and a letter $x$,
+\[ (\exists x)R \;:=\; (\tau_x(R) \mid x)\,R , \]
+where $(A \mid x)\,R$ denotes the assembly obtained by substituting $A$ for every
+occurrence of $x$ in $R$. The term $\tau_x(R)$ denotes ``some object satisfying $R$,
+if there is one'', so the existential statement \emph{is} the statement that this
+particular named term satisfies $R$.
+
+Two consequences matter here. First, an existential goal can be traded for properties
+of an explicitly named term, with no extra axiom --- this is the mechanism of
+Section~\ref{sec:map}, and it is not available in a setting where $\exists$ is a
+primitive binder. Second, $\tau_x(R)$ contains a full copy of $R$, so unfolding
+quantifiers copies formulas into themselves and nested quantifiers grow
+multiplicatively; the corpus works on shared structure throughout, and the campaign's
+one attempt to reason on unfolded terms is reported in the companion paper as a
+measured failure.
+
+\subsection{Arithmetic is constructed, and cardinal --- so it must be guarded}
+
+There is no primitive type of natural numbers. Integers are \emph{finite cardinals},
+and the additive laws available are those of cardinal arithmetic, developed in the
+book's Chapter~III. This is not a stylistic choice; it is the development the
+repository mirrors. It has one sharp consequence, and this paper turns on it twice.
+
+A quantifier the author believes ranges over integers in fact ranges over
+\emph{cardinals} unless a finiteness guard is written. Omitting the guard is not a
+matter of elegance:
+
+\begin{remark}[cancellation fails without finiteness]\label{rem:cancel}
+Additive cancellation --- from $a + b = a + c$ conclude $b = c$ --- is \emph{false} for
+infinite cardinals: $\aleph_0 + 1 = \aleph_0 + 2$ while $1 \neq 2$. A statement that
+uses cancellation without a $\mathrm{Fin}$ guard is therefore not merely unprovable,
+it is wrong.
+\end{remark}
+
+Write $S^{+}(t) := \mathrm{Fin}(t) \wedge S(t)$ for the \emph{guarded} form of a
+predicate. Section~\ref{sec:fidelity} reports what the missing guard cost on the
+statement of primality --- the formalized conjecture came out strictly weaker than the
+conjecture --- and Section~\ref{sec:structure} reports the half-interval lemma, where
+the guard was written from the start because the proof demanded it. The asymmetry
+between those two cases is the paper's most transferable observation about fidelity.
+
+\subsection{Where these results live}
+
+The repository's main tree mirrors the book's table of contents, so that an empty
+directory is a coverage hole and every formalized notion carries a marker naming the
+page and lines it transcribes. Goldbach is not in \emph{Theory of Sets}. Results proved
+beyond the book therefore live in a separate \texttt{recherche/} tree, exempt from the
+book-anchoring discipline but subject to \emph{identical} kernel rules: same
+primitives, no fabricated theorems, the 22-axiom invariant asserted throughout. A
+research result is not less certified --- it is only off-book. Nothing in the book tree
+is permitted to depend on the research tree.
 
 %% ============================================================================
 \section{The certified map}
@@ -391,9 +444,10 @@ P_b := \{\, x : \mathrm{Fin}\,x \wedge S(x) \wedge x \in [0,b] \,\},
 \qquad
 Q_b := \{\, x : (\exists y)(\mathrm{Fin}\,y \wedge S(y) \wedge b = x + y) \,\},
 \]
-and re-derives the symmetry and the half-interval restriction \emph{without ever opening
-$S$}. The proofs are not adapted per instance; the same derivation is executed with
-different arguments.
+and re-derives \emph{all four} of the campaign's major reductions --- the sieve
+equivalence in both directions, the reduction to composites, the symmetry, and the
+half-interval restriction --- \emph{without ever opening $S$}. The proofs are not
+adapted per instance; the same derivation is executed with different arguments.
 
 \begin{center}
 \begin{tabular}{@{}lll@{}}
@@ -413,6 +467,29 @@ they establish: \texttt{test\_symetrie\_sur\_un\_predicat\_totalement\_opaque},
 \texttt{test\_un\_predicat\_sans\_rapport\_ferme\_aussi}. Each asserts closure in the
 kernel sense and re-asserts the 22-axiom invariant. ``Goldbach is an instance'' is
 therefore an execution, not a sentence of prose.
+
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[node distance=5mm and 14mm]
+\node[ax] (op) {$S(x) := x \in \mathbb{S}$ \;\; \emph{opaque}};
+\node[ax, below=of op] (pr) {$S(x) := \mathrm{prime}(x)$ \;\; \textbf{Goldbach}};
+\node[ax, below=of pr] (pa) {$S(x) := \mathrm{even}_{\text{proper}}(x)$ \;\; \emph{trivial}};
+\node[goal, right=of pr, text width=41mm, align=center] (der)
+  {ONE derivation\\[1pt]{\normalfont\scriptsize sieve equivalence ($\Leftarrow$, $\Rightarrow$),\\composites, symmetry, half-interval}};
+\node[th, right=of der] (c1) {closed \;\; 5 s};
+\node[th, below=of c1] (c2) {closed \;\; 4 s};
+\node[th, below=of c2] (c3) {closed \;\; 4 s};
+\draw[fl] (op) -- (der);   \draw[fl] (pr) -- (der);   \draw[fl] (pa) -- (der);
+\draw[gl] (der) -- (c1);   \draw[gl] (der) -- (c2);   \draw[gl] (der) -- (c3);
+\end{tikzpicture}
+\caption{The measurement. One derivation, three predicates with nothing in common,
+three kernel-closed theorems. $S$ is never opened: the derivation is not adapted per
+instance, it is \emph{executed} with different arguments, and the kernel judges each
+result independently. A proof that cannot tell the primes from a structureless set
+cannot prove Goldbach --- and that is a property of the statement it establishes, not a
+defect of the proof.}
+\label{fig:parametric}
+\end{figure}
 
 \subsection{The verdict}
 
@@ -439,20 +516,42 @@ disappears entirely}. It was therefore not a mathematical step but an artifact o
 notation --- and it had cost real work.
 \end{remark}
 
-\subsection{Reservation: the exact scope of the measurement}
+\subsection{How this measurement was itself found to be overstated}
+\label{sec:overclaim}
 
-The campaign's internal map states that all four of its major reductions --- composites,
-sieve, symmetry, half-interval --- carry no arithmetic content. \textbf{The code
-establishes two of the four.} \texttt{recherche/additif/} exports the parametric
-symmetry and the parametric half-interval restriction; it contains no parametric form
-of the composites reduction (GG7/GG22) nor of the sieve equivalence (GG19). We
-therefore state the measurement on its measured scope, and record the other two as
-plausible and unmeasured. Closing that gap is the most valuable single piece of work
-this paper points to, and we have not done it.
+The paragraph above is the one we would most like the reader to distrust, so we report
+how it came to be true.
 
-We flag this because the discrepancy was found by checking the code against our own
-prose, which is exactly the discipline the companion paper argues for. An unmeasured
-claim propagates faster than a measured one.
+For a week, it was not. The campaign's internal map asserted that all four major
+reductions carry no arithmetic content; the code established \emph{two} --- the
+symmetry and the half-interval restriction. No parametric form of the sieve equivalence
+or of the composites reduction existed: a search of the parametric package for either
+returned nothing. The claim had been written in a module docstring on 12 August,
+propagated into the campaign's map document, and was on its way into this paper's
+central section.
+
+It was caught on 19 August by reading the code against our own prose while drafting
+this section, and closed the same day: a new module derives the sieve equivalence in
+both directions and the composites reduction parametrically, closed in the kernel on
+all three predicates, with the parametric package's tests green (13 tests,
+5\,min 53\,s) and the whole research tree re-run green (32 tests, 12\,min 27\,s). What the
+port revealed is the finding itself in a sharper form --- \textbf{it was mechanical}.
+The concrete proofs use primality only as an opaque conjunct, carried from one end to
+the other and never opened; all the real work in them is cardinal arithmetic with no
+prime in it. There was nothing arithmetic to port, which is precisely what
+Section~\ref{sec:abstract} claims.
+
+Two things are worth extracting. First, the port \emph{gained} generality: the abstract
+sieve equivalence holds for an arbitrary bound $b$, whereas the repository's version is
+written on $b = 2k$ and never uses that $b$ is a double --- only the composites
+reduction needs it, and only for a reflexivity. Second, and this is the methodological
+point: \textbf{no test catches a comment that lies about the code.} The kernel
+guarantees soundness; it guarantees nothing about the prose written beside it. This is
+the same class of defect as the fidelity failure of Section~\ref{sec:fidelity}, one
+level up --- there the formal statement drifted from the book, here the informal claim
+drifted from the formal statement. An unmeasured claim propagates faster than a
+measured one, and it propagates through exactly the channel a proof assistant does not
+police.
 
 %% ============================================================================
 \section{Two paths closed by the negative}
@@ -539,9 +638,10 @@ drifted. Proving forces hypotheses to be named. Stating forces nothing.
 %% ============================================================================
 
 The arc is not a pile of session scripts. It is a permanent package of nine modules
-under \texttt{recherche/goldbach/}, with 26 tests across the research tree --- all
-green, 13\,min 05\,s, re-run 19 August 2026 --- and \texttt{capstone.py} replays the
-chain with the kernel as sole judge. Re-run in a fresh process on 19 August 2026: \textbf{18 links, all closed},
+under \texttt{recherche/goldbach/}, plus the parametric package of
+Section~\ref{sec:abstract} under \texttt{recherche/additif/}, with 32 tests across the
+research tree --- all green, 12\,min 27\,s, re-run 19 August 2026 --- and
+\texttt{capstone.py} replays the chain with the kernel as sole judge. Re-run in a fresh process on 19 August 2026: \textbf{18 links, all closed},
 \texttt{theorie\_ensembles()} $= 22$, about seven and a half minutes end to end. The
 dominant costs are the half-interval lemma (259 s) and its sieve instance (120 s); the
 guard-is-free theorem takes 50 s; ten links are instantaneous.
@@ -597,10 +697,12 @@ methodical search, never more.
 \label{sec:limitations}
 %% ============================================================================
 
-\paragraph{The measurement's scope is two reductions, not four.} Stated in full in
-Section~\ref{sec:abstract}. The headline result is established for the symmetry and the
-half-interval restriction. The composites reduction and the sieve equivalence are
-plausibly parametric and are not measured.
+\paragraph{The measurement covers four reductions, not the whole map.} All four major
+reductions are now measured (Section~\ref{sec:overclaim}), but ``major'' is our
+judgement. Smaller links of the chain --- the $\tau$ bridge, the bounded arc absorbed by
+GG25 --- have not been re-derived parametrically, and we do not claim they are free of
+arithmetic. The honest statement is that every reduction we identified as load-bearing
+has been measured, not that the entire eighteen-link chain has.
 
 \paragraph{The negative results are measurements.} The counting result is numerical
 evidence about $\pi$ over a finite range, not a theorem; a proof that no
