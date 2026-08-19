@@ -388,15 +388,16 @@ Toute la carte qui précède décrit des réductions certifiées de Goldbach. La
 question qu'il fallait finir par poser : **combien d'arithmétique y a-t-il
 là-dedans ?**
 
-La réponse est mesurée, pas argumentée. Le module `recherche/additif/` reprend
+La réponse est mesurée, pas argumentée. Le dossier `recherche/additif/` reprend
 la construction du crible avec le prédicat en **paramètre** — une fonction
 `Terme → Formule` :
 
     P_b := { x : Fini x ∧ S(x) ∧ x ∈ [0,b] }
     Q_b := { x : (∃y)( Fini y ∧ S(y) ∧ b = x + y ) }
 
-et démontre la symétrie ainsi que la restriction au demi-intervalle **sans
-jamais ouvrir `S`**. La même preuve, mot pour mot, ferme sur :
+et démontre **les quatre grandes réductions** — forme crible (GG19, les deux
+sens), réduction aux composés (GG22), symétrie, demi-intervalle — **sans jamais
+ouvrir `S`**. La même preuve, mot pour mot, ferme sur :
 
 | `S` | temps | ce que c'est |
 |---|---|---|
@@ -409,6 +410,31 @@ d'un ensemble sans structure ne peut pas servir à démontrer Goldbach. Ce n'est
 pas un défaut de nos preuves : c'est une propriété des énoncés qu'elles
 établissent. Les quatre grandes réductions de cette carte — composés, crible,
 symétrie, demi-intervalle — **ne portent aucun contenu arithmétique**.
+
+**⚠️ CETTE PHRASE A ÉTÉ FAUSSE DU 12 AU 19 AOÛT, et c'est instructif.** Écrite
+le 12, elle annonçait QUATRE réductions ; le code n'en établissait que DEUX
+(symétrie et demi-intervalle). Ni GG19 ni GG22 n'existaient sous forme
+paramétrique — `grep composes|equivalence_crible recherche/additif/` ne rendait
+rien. L'écart a été trouvé le 19 août **en relisant le code contre cette
+prose-ci**, pendant la rédaction de l'article A3, et refermé le jour même par
+`equivalence_abstraite.py` (GG19 les deux sens + GG22, clos sur les trois
+prédicats, 13 tests verts en 5 min 53). Le portage s'est révélé **mécanique** :
+les preuves concrètes ne se servaient de la primalité que comme d'un conjoint
+opaque, jamais ouvert — *il n'y avait rien d'arithmétique à porter*, ce qui est
+la thèse même de cette section.
+
+*La leçon, à retenir au-delà du cas : aucun test n'attrape une phrase de
+document qui ment sur le code. Le noyau garantit la soundness, jamais la
+fidélité de ce qu'on écrit à côté.*
+
+**Où c'est démontré :**
+
+| réduction | module abstrait | fonction |
+|---|---|---|
+| forme crible GG19 (⇐ et ⇒) | `additif/equivalence_abstraite.py` | `equivalence_abstraite` |
+| composés GG22 | `additif/equivalence_abstraite.py` | `rencontre_des_elements` |
+| symétrie GG23 | `additif/crible_abstrait.py` | `symetrie_additive` |
+| demi-intervalle | `additif/demi_abstrait.py` | `restriction_a_la_moitie` |
 
 **Pourquoi c'est un résultat et pas un aveu.** Il délimite la conjecture : ce
 qui est structurel d'un côté, ce qui est arithmétique de l'autre, avec la

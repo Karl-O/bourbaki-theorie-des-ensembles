@@ -17,6 +17,17 @@ Conclusion, pour la carte : **des quatre grandes réductions certifiées de
 Goldbach (composés, crible, symétrie, demi-intervalle), aucune ne distingue
 les nombres premiers d'un ensemble sans structure.**
 
+⚠️ HISTORIQUE DE CETTE PHRASE — elle a été FAUSSE pendant une semaine. Écrite
+ici le 12 août, elle annonçait QUATRE réductions alors que `recherche/additif/`
+n'en établissait que DEUX : la symétrie (`crible_abstrait`) et le
+demi-intervalle (ce module). Ni la forme crible ni la réduction aux composés
+n'existaient sous forme paramétrique. L'écart a été trouvé le 19 août en
+relisant le code contre notre propre prose, à l'occasion de la rédaction de
+l'article A3, et refermé le jour même par `equivalence_abstraite`. La phrase
+est vraie depuis — et c'est `equivalence_abstraite`, pas ce module-ci, qui
+porte les deux réductions manquantes. *Aucun test n'aurait attrapé ça : le
+noyau garantit la soundness, jamais la fidélité d'un commentaire.*
+
 ⚠️ ON TRAVAILLE SUR `b = 2k`, et c'est un choix assumé. Pour un `b` QUELCONQUE
 la conclusion s'écrirait `m + m ≤ b` (les cardinaux n'ont pas de division par
 deux), et le lemme arithmétique correspondant reste à démontrer — il demande
