@@ -650,7 +650,7 @@ hypothèse qu'il laisse ouverte.
 %% mur (n+1)! = ev. 2 (9 hyps succ) + ev. 85 (pont de domaine, cul-de-sac n-1).
 %% La legende DIT l'agregation : ce n'est PAS un instantane unique du journal.
 \begin{figure}[t]\centering
-\resizebox{\linewidth}{!}{%
+\resizebox{\ifdim\width>\linewidth \linewidth\else\width\fi}{!}{%
 \begin{tikzpicture}[node distance=5mm and 7mm]
 \node[goal, draw=gray!70, fill=gray!8] (P) {$(n{+}1)! = n!\cdot(n{+}1)$ \; \textbf{?}};
 \node[below=3mm of P, font=\scriptsize\itshape, gray!70!black] (mur)
@@ -831,7 +831,7 @@ La figure~\ref{fig:proofgraph} montre cette dérivation réhabilitée, la branch
 que le défaut bloquait étant marquée en vert.
 
 \begin{figure}[t]\centering
-\resizebox{\linewidth}{!}{%
+\resizebox{\ifdim\width>\linewidth \linewidth\else\width\fi}{!}{%
 \begin{tikzpicture}[node distance=4mm and 3mm]
 \node[ax] (vide) {axiome de $\emptyset$};
 \node[ax, right=of vide] (paire) {axiome de la paire};
@@ -1299,7 +1299,7 @@ localiser par périmètre mesuré, réparer structurellement, prouver la guéris
 le coût} --- tourne de bout en bout sur des mathématiques vivantes, deux fois.
 
 \begin{figure}[t]\centering
-\resizebox{\linewidth}{!}{%
+\resizebox{\ifdim\width>\linewidth \linewidth\else\width\fi}{!}{%
 \begin{tikzpicture}[node distance=5mm and 8mm]
 \node[draw=gray, rounded corners=3pt, minimum width=34mm, minimum height=22mm, font=\scriptsize] (T0) {};
 \node[font=\scriptsize\bfseries, anchor=north west] at (T0.north west) {\;$T_0$ (22 axiomes)};
