@@ -5,7 +5,21 @@
 \usepackage{amsmath,amssymb,amsthm}
 \usepackage{booktabs}
 \usepackage{graphicx}
-\usepackage[margin=2.7cm]{geometry}
+% ---------------------------------------------------------------------------
+% LISIBILITE (retour de Karl, 20 aout) : « trop de gros paves, ca donne pas
+% envie de lire ». Mesure faite avant de toucher : les paragraphes de A3 sont
+% DEJA plus courts que ceux de A1 (mediane 544 car. contre 652). La cause
+% n'etait donc pas la longueur du texte mais la mise en page :
+%   · ligne de 15,6 cm a 11pt = ~90 caracteres, tres au-dessus de l'optimum
+%     de lecture (65-75) : n'importe quel paragraphe y devient un bloc gris ;
+%   · \parskip nul par defaut : rien ne separe visuellement deux paragraphes,
+%     la page est une seule masse.
+% On corrige les deux, et on garde le texte.
+% ---------------------------------------------------------------------------
+\usepackage[a4paper,textwidth=13.8cm,textheight=22.4cm]{geometry}
+\linespread{1.06}
+\setlength{\parskip}{.55em plus .15em minus .1em}
+\setlength{\parindent}{1.1em}
 \usepackage{hyperref}
 \usepackage{tikz}
 \usetikzlibrary{positioning,arrows.meta,calc}
@@ -475,12 +489,33 @@ $\vdash (\forall k)\bigl[\,k \text{ fini} \Rightarrow
 \bigl(\mathrm{rencontre}(k) \Leftrightarrow (\exists m)(m \in P_{2k} \cap Q_{2k} \wedge m \le k)\bigr)\,\bigr].$
 \end{proposition}
 
-Le lemme de soutien est de l'arithmétique cardinale pure, sans aucun nombre premier~: si
-$2k = m + m'$ avec les trois finis, alors $m \le k$ ou $m' \le k$. Sa preuve évite
-entièrement les inégalités strictes --- elles coûtent cher dans ce noyau --- en utilisant
-la comparabilité pour ouvrir deux cas, l'existence d'un complément dans le cas $k \le m$
-pour écrire $m = k + d$, puis la simplification additive finie sur
-$k + k = (k+d) + m' = k + (d + m')$ pour obtenir $k = d + m'$.
+Le lemme de soutien est de l'arithmétique cardinale pure, sans aucun nombre premier~:
+\[
+\mathrm{Fini}\,k \wedge \mathrm{Fini}\,m \wedge \mathrm{Fini}\,m'
+\wedge\; 2k = m + m'
+\qquad\Longrightarrow\qquad
+m \le k \;\;\text{ou}\;\; m' \le k .
+\]
+
+Sa preuve tient en quatre lignes, et elle vaut d'être montrée parce qu'elle
+\emph{n'utilise aucune inégalité stricte} --- elles coûtent cher dans ce noyau. La
+comparabilité des cardinaux ouvre deux cas~; celui où $m \le k$ conclut tout seul. Voici
+l'autre, le cas $k \le m$~:
+
+\[
+\begin{array}{r@{\;}c@{\;}l@{\qquad}l}
+  k + k &=& m + m'      & \text{l'hypothèse} \\[2pt]
+        &=& (k + d) + m'& d \text{ existe car } k \le m \text{ (Prop.\ 13 : le complément)} \\[2pt]
+        &=& k + (d + m')& \text{associativité itérée} \\[4pt]
+\hline \\[-8pt]
+      k &=& d + m'      & \text{simplification additive --- \emph{exige} } \mathrm{Fini} \\[2pt]
+     m' &\le& k         & \text{Prop.\ 2 : un sommant est sous la somme}
+\end{array}
+\]
+
+\noindent
+La dernière ligne est celle qui donne le résultat, et l'avant-dernière est celle qui
+oblige à la garde~: c'est exactement là que la remarque~\ref{rem:cancel} mord.
 
 \begin{remarque}[la garde n'est pas de la prudence]
 La simplification additive finie est \emph{fausse} pour les cardinaux infinis. Sans les
@@ -657,13 +692,37 @@ surveille pas.
 \label{sec:negative}
 %% ============================================================================
 
-\paragraph{Le comptage brut.} Le critère des tiroirs $2 \cdot \pi(2k) > 2k+1$ --- qui
-forcerait $P_{2k}$ et son miroir à se rencontrer par la seule cardinalité --- ne tient
-pour aucun $k \ge 2$. La densité $\pi/k$ tombe de $0{,}50$ à $0{,}18$ à
-$2k = 2 \cdot 10^5$, alors que le nombre réel de décompositions \emph{croît} (de 2 à
-1417) sur la même plage. C'est une mesure numérique, pas une preuve. Sa conséquence a été
-une décision~: ne pas formaliser l'inclusion--exclusion pour ce problème. Ce qu'il faut,
-c'est de l'information sur la \emph{répartition} de $P_{2k}$, pas sur son cardinal.
+\paragraph{Le comptage brut.} Un argument de cardinalité pure forcerait la rencontre si
+les deux ensembles étaient trop gros pour s'éviter~:
+\[
+\underbrace{2 \cdot \pi(2k) > 2k + 1}_{\text{critère des tiroirs}}
+\quad\Longrightarrow\quad
+P_{2k} \cap Q_{2k} \neq \emptyset .
+\]
+L'implication est correcte. Son antécédent, lui, \textbf{ne tient pour aucun
+$k \ge 2$} --- et l'écart ne cesse de se creuser.
+
+La figure~\ref{fig:comptage} met les deux quantités côte à côte, et c'est tout
+l'argument~: \emph{la grandeur que le comptage regarde s'effondre pendant que la
+grandeur qui nous intéresse explose}. Sur $2k$ allant de $4$ à $192\,152$, la densité
+$\pi(2k)/k$ passe de $1{,}00$ à $0{,}18$, tandis que le nombre de décompositions de $2k$
+en somme de deux premiers passe de $1$ à $1\,031$ (paires non ordonnées, $p \le q$).
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\linewidth]{figures/comptage.png}
+\caption{Les deux courbes vont en sens contraire. En rouge, ce qu'un argument de
+cardinalité peut voir~: la densité $\pi(2k)/k$, qui tombe et ne repasse jamais le seuil
+des tiroirs. En bleu, ce qui nous intéresse~: le nombre réel de décompositions, qui
+croît. Un critère qui ne lit que la première courbe ne peut rien dire de la seconde.
+\textbf{Mesure numérique par crible, pas une preuve}~: aucune de ces valeurs n'entre
+dans un théorème. Script~: \texttt{figures/gen\_comptage.py}.}
+\label{fig:comptage}
+\end{figure}
+
+La conséquence a été une décision~: ne pas formaliser l'inclusion--exclusion pour ce
+problème. Ce qu'il faut, c'est de l'information sur la \emph{répartition} de $P_{2k}$,
+pas sur son cardinal --- et aucune quantité agrégée ne la porte.
 
 \paragraph{Le raisonnement équationnel.} La carte ci-dessus a été dressée par une machine
 qui ne savait pas raisonner équationnellement --- elle ne fabriquait aucune congruence, ne

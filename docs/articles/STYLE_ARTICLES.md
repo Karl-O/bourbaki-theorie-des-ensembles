@@ -1,0 +1,168 @@
+# Style des articles — ce qu'on a appris en écrivant A3 (20 août 2026)
+
+**Portée.** Ces règles valent pour A1, A2, A3, A4 et tout ce qui suivra. Elles sont
+nées d'un retour de Karl sur A3 : *« l'article est bien organisé, le texte est bien
+consistant, mais y a trop de gros pavés, ça donne pas envie de lire »*, complété par
+*« si c'est compliqué à lire c'est qu'on a mal compris la chose ; faut souvent aller au
+plus simple, mettre des équations, des graphes, expliquer des passages de l'équation »*.
+
+Chaque règle ci-dessous est adossée à une mesure ou à un incident réel. Aucune n'est
+une préférence esthétique.
+
+---
+
+## 1. Mesurer la densité AVANT de diagnostiquer
+
+L'explication évidente était « les paragraphes sont trop longs ». **Elle était fausse**,
+et la mesure l'a montré en une minute :
+
+| | A3 (dont on se plaignait) | A1 (dont on ne se plaignait pas) |
+|---|---|---|
+| paragraphes de corps | 72 | 63 |
+| longueur médiane | **544 car.** | 652 car. |
+| pavés ≥ 800 car. | **14** | 25 |
+
+A3 était donc **déjà moins dense** que A1. Le problème n'était pas le texte, c'était la
+**mise en page**. Diagnostiquer à l'œil aurait conduit à charcuter de la prose correcte.
+
+**Outil** : `article/scripts/densite.py` — médiane, maximum, répartition par seuil et les
+douze plus gros paragraphes d'un `.tex`. À lancer **avant** toute réécriture motivée par
+« c'est illisible » :
+
+```bash
+python article/scripts/densite.py article/goldbach/main_fr.tex article/main_fr.tex
+```
+
+Il rend un verdict explicite : au-dessus d'une médiane de ~700 caractères, le texte est
+en cause ; en dessous, c'est le préambule (§2). ⚠️ Il ne voit **pas** la longueur de
+ligne ni l'interligne — c'est-à-dire, très souvent, la vraie cause. Il le dit lui-même
+plutôt que de laisser croire qu'il mesure la lisibilité.
+
+*(Il vit dans `article/scripts/` et non `outils_ia/audit/` : c'est un outil de rédaction,
+et le dossier d'audit est déjà à 15 entrées pour une limite de 10 — dette signalée, on
+ne l'aggrave pas.)*
+
+---
+
+## 2. Les deux réglages typographiques qui font tout
+
+Les deux causes réelles du « pavé », et leur correction :
+
+| cause | avant | après |
+|---|---|---|
+| ligne trop longue | `margin=2.7cm` → 15,6 cm ≈ **90 caractères** | `textwidth=13.8cm` ≈ **72 caractères** |
+| rien entre les paragraphes | `\parskip` = 0 (défaut LaTeX) | `\parskip = .55em plus .15em minus .1em` |
+
+Plus `\linespread{1.06}` et `\parindent{1.1em}`. Le bloc à copier en préambule est en
+tête de `article/goldbach/main_fr.tex`, commenté.
+
+**L'optimum de lecture est de 65 à 75 caractères par ligne.** Au-delà, l'œil perd le
+début de la ligne suivante et n'importe quel paragraphe devient un bloc gris — quelle
+que soit sa longueur. C'est pour ça que la mesure du §1 semblait contredire le ressenti :
+les deux articles souffraient, A1 autant que A3.
+
+⚠️ **Ça coûte des pages** : A3 est passé de 16 à 21 pages sans un mot de plus. C'est le
+prix, et il est bon à payer. Un article de 16 pages qu'on ne lit pas vaut moins qu'un
+article de 21 qu'on lit.
+
+---
+
+## 3. Une preuve qui se raconte en prose doit s'AFFICHER
+
+C'est la règle la plus rentable du lot, et elle vient de Karl : *aller au plus simple,
+mettre des équations, expliquer des passages de l'équation.*
+
+Dans un article sur des dérivations certifiées, un paragraphe qui **narre** un calcul est
+toujours moins lisible que le calcul **affiché et annoté**. Exemple réel, le lemme du
+demi-intervalle de A3 — même contenu, deux rendus :
+
+**Avant** (un pavé de six lignes) :
+> « Sa preuve évite entièrement les inégalités strictes en utilisant la comparabilité
+> pour ouvrir deux cas, l'existence d'un complément dans le cas `k ≤ m` pour écrire
+> `m = k + d`, puis la simplification additive finie sur `k + k = (k+d) + m' = k + (d + m')`
+> pour obtenir `k = d + m'`. »
+
+**Après** (un tableau aligné, une justification par ligne) :
+
+```
+  k + k  =  m + m'         l'hypothèse
+         =  (k + d) + m'   d existe car k ≤ m (Prop. 13 : le complément)
+         =  k + (d + m')   associativité itérée
+  ─────────────────────────────────────────────────────────
+      k  =  d + m'         simplification additive — EXIGE Fini
+     m'  ≤  k              Prop. 2 : un sommant est sous la somme
+```
+
+Le lecteur voit d'un coup où la garde `Fini` mord — ce que la prose noyait. **Colonne de
+droite obligatoire** : chaque ligne dit *pourquoi*, sinon on a déplacé le problème.
+
+**Quand appliquer.** Dès qu'un paragraphe contient trois `=` ou plus, ou décrit une
+suite d'étapes. Candidats dans les autres articles : les dérivations de réparation de A1,
+la chaîne des organes de A2, les routes de témoins de A3.
+
+---
+
+## 4. Une affirmation chiffrée agrégée appelle une COURBE
+
+Deuxième application du même principe. Si le texte dit « X s'effondre pendant que Y
+croît », le lecteur doit le *voir*, pas le croire sur parole.
+
+Exemple : le §6 de A3 affirmait en deux phrases que la densité des premiers tombe
+pendant que le nombre de décompositions monte. Une figure à deux axes montre les deux
+courbes se croiser, et l'argument est compris en une seconde.
+
+**Protocole** (déjà dans `CLAUDE.md`, ici précisé) :
+- matplotlib → PNG, **script de génération versionné à côté du PNG**
+  (`article/goldbach/figures/gen_comptage.py` → `comptage.png`) ;
+- le script **recalcule les données**, il ne recopie pas des chiffres d'un document ;
+- il **imprime les valeurs clés** en fin d'exécution, pour que le texte les cite sans
+  les réinventer ;
+- la légende dit ce que la figure **ne prouve pas** : « mesure numérique par crible, pas
+  une preuve ; aucune de ces valeurs n'entre dans un théorème ».
+
+⚠️ **Trois pièges de mise en page vus le même jour**, tous invisibles dans le log LaTeX
+et trouvés en OUVRANT le PNG : une légende posée dans le cadre recouvrait une courbe et
+donnait l'illusion d'un trou dans les données ; une grille en deux morceaux laissait une
+vraie coupure ; une annotation calée à droite chevauchait la seconde courbe.
+**Toujours regarder l'image, jamais se fier au fait qu'elle a été produite.**
+
+---
+
+## 5. Recalculer les chiffres en les intégrant — jamais les recopier
+
+En traçant la courbe du §4, les valeurs mesurées ne correspondaient **pas** à celles que
+l'article avait héritées d'un document interne (`0,50 → 0,18` et `2 → 1417` annoncés,
+`1,00 → 0,18` et `1 → 1031` mesurés, en paires non ordonnées sur `2k = 4 … 192 152`).
+L'écart venait d'une convention de comptage jamais écrite.
+
+**Règle** : tout chiffre d'un article est produit par une exécution faite pour l'article,
+et la convention est écrite à côté. Un chiffre repris d'un document interne est un
+chiffre non vérifié.
+
+---
+
+## 6. Traduire est le meilleur relecteur mécanique dont on dispose
+
+La traduction française de A3 a fait tomber **quatre restes périmés** qu'aucun grep ni
+compilateur n'avait vus : une figure affichant les anciens temps, un verdict qui ne
+parlait que de deux réductions sur quatre, une conclusion annonçant « quatre secondes »
+au lieu de 110, et deux commentaires d'ancre.
+
+Aucun n'était détectable autrement qu'en lisant chaque phrase. **Traduire force à
+relire** — c'est le seul contrôle systématique qu'on ait contre la prose qui ment sur le
+dépôt. Faire la traduction *avant* de figer, pas après.
+
+---
+
+## 7. La règle d'or, rappelée
+
+Elle précède tout le reste et ne change pas : **chaque phrase d'un article doit être
+adossée à un objet du dépôt** — théorème, mesure, événement, source. Une affirmation sans
+ancre est une docstring qui ment, en public.
+
+Corollaire acquis en écrivant A3 : le noyau garantit la *soundness*, **jamais** la
+fidélité de ce qu'on écrit à côté. Aucun test n'attrape une phrase fausse sur le code.
+Une surdéclaration a survécu sept jours dans une docstring, s'est propagée dans un
+document de carte, et allait entrer dans la section centrale de A3 — elle a été prise en
+relisant le code contre la prose, pas par un outil. Cette relecture-là est obligatoire
+avant tout gel.
