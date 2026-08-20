@@ -4,7 +4,17 @@
 \usepackage{amsmath,amssymb,amsthm}
 \usepackage{booktabs}
 \usepackage{graphicx}
-\usepackage[margin=2.7cm]{geometry}
+% ---------------------------------------------------------------------------
+% LISIBILITE — voir docs/articles/STYLE_ARTICLES.md §2. Mesure : a 11pt, une
+% marge de 2,7cm donne une ligne de 15,6cm, soit ~90 caracteres, tres au-dessus
+% de l'optimum de lecture (65-75) ; et \parskip nul ne separe pas visuellement
+% deux paragraphes. Les deux ensemble font la page en « bloc gris », quelle que
+% soit la longueur des paragraphes (mesuree ici : mediane 652 caracteres).
+% ---------------------------------------------------------------------------
+\usepackage[a4paper,textwidth=13.8cm,textheight=22.4cm]{geometry}
+\linespread{1.06}
+\setlength{\parskip}{.55em plus .15em minus .1em}
+\setlength{\parindent}{1.1em}
 \usepackage{hyperref}
 \usepackage{tikz}
 \usetikzlibrary{positioning,arrows.meta,calc}
@@ -325,7 +335,7 @@ corner: theorem objects carry no trace of their theory, so the kernel cannot see
 a free variable of an ad-hoc axiom is a \emph{constant} of that theory when
 generalizing.
 
-The corpus at the time of writing: 4{,}099 collected tests re-deriving its theorems at
+The corpus at the time of writing: 4{,}221 collected tests re-deriving its theorems at
 each run, 2{,}234 notions anchored to the printed book at page granularity, and a
 232-event journal of certified failures --- the object of study of this paper.
 
@@ -547,6 +557,7 @@ in place, with the verdict of each hypothesis it leaves open.
 %% mur (n+1)! = ev. 2 (9 hyps succ) + ev. 85 (pont de domaine, cul-de-sac n-1).
 %% La legende DIT l'agregation : ce n'est PAS un instantane unique du journal.
 \begin{figure}[t]\centering
+\resizebox{\linewidth}{!}{%
 \begin{tikzpicture}[node distance=5mm and 7mm]
 \node[goal, draw=gray!70, fill=gray!8] (P) {$(n{+}1)! = n!\cdot(n{+}1)$ \; \textbf{?}};
 \node[below=3mm of P, font=\scriptsize\itshape, gray!70!black] (mur)
@@ -563,7 +574,7 @@ in place, with the verdict of each hypothesis it leaves open.
 \draw[fl, dashed] (chain) -- (bo);
 \draw[fl, dashed] (chain) -- (hg);
 \draw[fl, dashed] (chain) -- (hw);
-\end{tikzpicture}
+\end{tikzpicture}}
 \caption{A real wall: the factorial front's last open equation. Solid boxes are
 kernel objects, dashed boxes are the hypotheses the derivation chain leaves
 \emph{open}, and the bar is the wall standing between them and the goal. Box colour
@@ -702,6 +713,7 @@ Figure~\ref{fig:proofgraph} shows that rehabilitated derivation, with
 the branch the defect had blocked marked in green.
 
 \begin{figure}[t]\centering
+\resizebox{\linewidth}{!}{%
 \begin{tikzpicture}[node distance=4mm and 3mm]
 \node[ax] (vide) {axiom of $\emptyset$};
 \node[ax, right=of vide] (paire) {axiom of the pair};
@@ -716,7 +728,7 @@ the branch the defect had blocked marked in green.
 \draw[gl] (prod) -- (uni); \draw[fl] (ext) -- (uni);
 \draw[fl] (hab) -- (e232); \draw[gl] (uni) -- (e232);
 \draw[gl] (e232) -- (card); \draw[gl] (card) -- (fact);
-\end{tikzpicture}
+\end{tikzpicture}}
 \caption{The real derivation of $0! = 1$ (Def.~2 route) as a graph inside the theory
 box. \textbf{How to read}: every box is a kernel object --- bottom row, the axioms
 consumed; above them, derived theorems; the green-filled box is the goal. An arrow
@@ -930,121 +942,57 @@ referenced on the title page.
 \subsection{Second case study: an open statement under instrumentation}
 \label{sec:goldbach}
 
-Two days after the week reported above (August 5--6), the same instrumentation
-was turned toward an \emph{open} statement: the Goldbach conjecture, written over
-the corpus's constructed arithmetic. The episode tests what the preceding
-sections promise --- that statement defects are \emph{proved}, that debt is
-\emph{measured}, and that an open problem is \emph{transformed} into closed
-theorems.
+Two days after the week reported above (August 5--6), the same instrumentation was
+turned toward an \emph{open} statement: the Goldbach conjecture, written over the
+corpus's constructed arithmetic. We report here only what bears on this paper's
+theses --- that statement defects are \emph{proved} and that debt is \emph{measured}.
+The reductions the episode produced, and the measurement of how much arithmetic they
+contain, are the subject of a companion paper; the discovery organs it exercised belong
+to another still.
 
-\emph{(i) Two statement defects, proved in the kernel.} The first rendering of
-the conjecture read ``$n$ even and $n \neq 2$''. Its antecedent is satisfied at
-$n = 0$ --- proved, closed: $\vdash \mathrm{even}(0)$ (witness $k := 0$) and
-$\vdash \neg(0 = 2)$ --- so the statement asserted that \emph{zero is the sum of
-two primes}. Repaired, it was still wrong: ``even'' constrains $n$ to be a
-\emph{cardinal}, not an integer, and the antecedent is also satisfied by
-$n := \mathbb{N} + \mathbb{N}$, which is infinite --- likewise proved, the
-equality with the old antecedent instantiated being checked formula against
-formula. The same fault --- a quantifier ranging over sets while believed to
-range over integers --- had been committed the day before on primality's
-$(\forall d)$: it is a \emph{pattern}, now on record. Notably, the \emph{proved}
-(bounded) variant of the statement carried the finiteness guard from its first
-draft, because its proof demanded it; only the \emph{unproved} statement had
-drifted. Proving forces hypotheses to be named; stating forces nothing.
+\emph{(i) Two statement defects, proved in the kernel.} The first rendering of the
+conjecture read ``$n$ even and $n \neq 2$''. Its antecedent is satisfied at $n = 0$ ---
+proved, closed: $\vdash \mathrm{even}(0)$ (witness $k := 0$) and $\vdash \neg(0 = 2)$ ---
+so the statement asserted that \emph{zero is the sum of two primes}. Repaired, it was
+still wrong: ``even'' constrains $n$ to be a \emph{cardinal}, not an integer, and the
+antecedent is also satisfied by $n := \mathbb{N} + \mathbb{N}$, which is infinite ---
+likewise proved, the equality with the old antecedent instantiated being checked formula
+against formula. The same fault --- a quantifier ranging over sets while believed to
+range over integers --- had been committed the day before on primality's $(\forall d)$:
+it is a \emph{pattern}, now on record.
 
-\emph{(ii) The equivalence theorem.} The episode's main result is closed, with
-no bound and no case analysis on $n$:
-\[
-\vdash\;\bigl(H \Rightarrow \mathrm{Goldbach}\bigr)\;\wedge\;
-\bigl(\mathrm{Goldbach} \Rightarrow H\bigr),
-\qquad
-H \;=\; (\forall k)\bigl(\,\mathrm{Fin}\,k \wedge k \neq 0 \wedge k \neq 1
-\;\Rightarrow\; (\exists p)(\exists p')\,(p, p' \text{ prime} \wedge k+k = p+p')\,\bigr).
-\]
-The conjecture \emph{is} its ``halves'' form: the two statements are
-interderivable, and what the open problem lacks is isolated at a single point ---
-producing the decomposition. Fidelity of both formulas is established by
-\emph{excision}: antecedent and consequent are cut out of the repository's
-statement and the recomposition is checked for identity, so that no transcription
-can lie. The converse direction crosses a forced $\alpha$-renaming (the parity
-witness bears the same name as the instantiated variable); the fresh binder is
-\emph{read off the instantiated theorem} rather than predicted. The forward
-direction contains no case analysis; the converse contains exactly one, declared:
-$k \in \{0,1,2\}$, fixed size, over the statement's constant $2$.
+Notably, the \emph{proved} (bounded) variant of the statement carried the finiteness
+guard from its first draft, because its proof demanded it; only the \emph{unproved}
+statement had drifted. \textbf{Proving forces hypotheses to be named; stating forces
+nothing.} We regard this as the most transferable observation of the episode, and it is
+why the fidelity audit of Section~\ref{sec:fidelity} targets statements that no proof
+is currently exercising.
 
-\emph{(iii) Debt, in three numbers.} ``Zero residual hypotheses'' and ``the
-22-axiom invariant holds'' read together as ``depends only on the 22'' --- false
-in the measured sense, since axioms enter through the $\mathrm{axiom}$ rule and
-vanish from the sequent (Section~\ref{sec:certified-failure}). Measured in a
-fresh process on the bounded $n$-form: \textbf{0} residual hypotheses;
-\textbf{14} of the 22 reference axioms consumed; \textbf{53} foreign formulas ---
-one single rule, criterion C54 (the graph of a term-defined function, a theorem
-in Bourbaki, a dedicated-theory axiom here), instantiated 52 times, plus one
-Knaster--Tarski instance. An honest result is announced with all three numbers;
-the third says what remains to be derived. On the equivalence itself:
-\textbf{0}; \textbf{14}; \textbf{73} --- spread over \emph{21} dedicated
-theories, the well-ordering machinery (Zorn, Zermelo, Bourbaki--Witt) entering
-through the ``a lower bound of a finite is finite'' lemma. Removing the bound is
-paid for in well-ordering: the jump from 2 to 21 theories \emph{measures} what
-generality costs. The first measurement returned zero in one second --- the
-theorem came out of a cache, and the instrument is blind to what is not built:
-the fresh-process rule, written for other measurements, applies to itself.
+\emph{(ii) Debt, in three numbers.} ``Zero residual hypotheses'' and ``the 22-axiom
+invariant holds'' read together as ``depends only on the 22'' --- false in the measured
+sense, since axioms enter through the $\mathrm{axiom}$ rule and vanish from the sequent
+(Section~\ref{sec:certified-failure}). Measured in a fresh process on the bounded
+$n$-form: \textbf{0} residual hypotheses; \textbf{14} of the 22 reference axioms
+consumed; \textbf{53} foreign formulas --- one single rule, criterion C54 (the graph of a
+term-defined function, a theorem in Bourbaki, a dedicated-theory axiom here),
+instantiated 52 times, plus one Knaster--Tarski instance. An honest result is announced
+with all three numbers; the third says what remains to be derived.
 
-\emph{(iv) The machine invents.} On the third day, the discovery organs of
-Sections~\ref{sec:certified-failure}--\ref{sec:vectors} were aimed at the
-island. The conjecturer (transitivity + detachment, kernel as sole judge)
-certified 60~theorems over three rounds, rediscovering on its own the glue
-lemmas the campaign had written by hand; four were \emph{promoted} to the
-repository with their provenance --- the corpus's first theorems of machine
-origin. The existential regime first died of its own representation ---
-$2+2=4$ \emph{unfolded} exceeds $400{,}000$ nodes where its shared DAG counts
-about fifty --- then, rewritten against the shared structure, yielded the
-decisive observation: in this corpus the arithmetic level is $\tau$;
-application constructors are only the encoding's plumbing. Finally,
-\emph{selective} abstraction --- abstracting within \emph{one side} of an
-equality only, which satisfies S5 despite the nesting of numerals, at linear
-cost --- let the machine \emph{invent notions}: from $\vdash 6 = 3+3$ it
-produces exactly $\mathrm{even}(6)$ --- the statement module's formula, compared
-character for character --- and likewise $\mathrm{even}(4)$ and
-$\mathrm{even}(10)$, plus 57~complement and cofactor existentials, each
-kernel-certified, at one second per pass.
+On the episode's main equivalence the same measurement returns \textbf{0}; \textbf{14};
+\textbf{73} --- spread over \emph{21} dedicated theories, the well-ordering machinery
+(Zorn, Zermelo, Bourbaki--Witt) entering through the ``a lower bound of a finite is
+finite'' lemma. Removing a bound is paid for in well-ordering: the jump from 2 to 21
+theories \emph{measures} what generality costs. The first measurement returned zero in
+one second --- the theorem came out of a cache, and the instrument is blind to what is
+not built: the fresh-process rule, written for other measurements, applies to itself.
 
-The cycle closed when the machine \emph{consumed} its own invention:
-$\mathrm{even}(6)$, assembled with the repository's four remaining conjuncts by a
-conjunctive-detachment organ --- whose lesson is that, definitions being
-conjunctions themselves, flattening must stop \emph{at known facts} --- then
-detached through the bounded theorem, yields the decomposition of $6$ again,
-closed, hypothesis-free. Run as a series, $6$, $8$ and $10$ each fall in a tenth
-of a second after a single warm-up; and every existential-introduction site of
-the campaign now goes through the verified-witness tactic this harvest brought
-out.
-
-\emph{(v) The machine composes.} The fourth day closed the loop. The
-wake-sleep flywheel --- abstraction of motifs shared across proofs, kernel
-gate, compression criterion --- was extended to \emph{parameterized} provers
-(36 of the island's 43 proofs are; the gate only executed zero-argument code),
-with a veil over declared caches: without it, a memoized prover returns its
-cached theorem and the gate tests nothing. Each round became
-\emph{observable} --- a stream of events names the source being processed,
-every certified discovery, every discarded brick --- and the stream paid for
-itself at once: two freezes that the silent version had billed as a full night
-were localized in minutes (deduplication and brick-sorting walked the
-\emph{unfolded} trees; rewritten against the shared structure, five rounds of
-discovery go from three frozen hours to ten minutes). The full cycle then runs
-smoothly: 64~theorems discovered in-stream, three promoted as
-\emph{depth-2} lemmas --- the repository's first derived through a machine
-lemma --- and the next compression round absorbs them: the library grows from
-4 to 18~certified notions (compression gain 80~steps, 42~repository proofs
-shortened, 96~order-2 macros consuming the notions). The third instance of a
-motif the machine had held at zero gain, supplied by its own lemma, pushed it
-positive: yesterday's invention funds today's compression.
-
-The episode took four days, added seven modules and some thirty tests to the
-repository (final suite: 152 green, the equivalence re-proved in a fresh
-process), and left the axiom count at 22. None of the theorems above comes close
-to the conjecture itself; all of them bound exactly what it lacks --- and the
-machine now speaks, theorem by theorem, the language in which that lack is
-stated.
+\emph{What is deferred.} The episode ran four days and left the axiom count at 22. Its
+mathematical output --- a chain of certified reductions collapsing the conjecture onto a
+single object, and the measurement, by parameterizing the primality predicate, that
+those reductions contain no arithmetic at all --- is reported separately, as is the work
+of the discovery organs it exercised. None of it comes close to the conjecture. What
+belongs here is the pair of results above: an open statement is an unusually good place
+to catch a fidelity defect, precisely because nothing is proving it.
 
 %% ============================================================================
 \section{Related Work}
@@ -1167,9 +1115,10 @@ the loop's failures are recorded with equal discipline.
 \paragraph{Scale.} 232 certified events, 8 debt measurements, 60 dedicated theory
 factories, one book. Every claim in this paper is an existence or instance claim, never a
 statistical one. The debt instrument is valid only on the first call of a fresh
-process (measured $-62\%$ undercount otherwise); the full suite runs in 2\,h\,43 at
-four workers and the environment kills long runs near 50 minutes, which bounds
-experimental turnaround and dictated the sharding discipline.
+process (measured $-62\%$ undercount otherwise); the full suite runs in
+2\,h\,03 at twelve workers (2\,h\,43 at the four used during the week reported here)
+and the environment kills long runs near 50 minutes, which bounds experimental
+turnaround and dictated the sharding discipline.
 
 \paragraph{Known unmeasured areas.} Assertion quality of tests outside the files we
 edited (a drift could hide behind a closedness-only test elsewhere); the 19 parametric
@@ -1203,20 +1152,21 @@ instrumented week is the existence proof that the hard part --- the full cycle
 healing, name the cost} --- runs end to end on live mathematics, twice.
 
 \begin{figure}[t]\centering
+\resizebox{\linewidth}{!}{%
 \begin{tikzpicture}[node distance=5mm and 8mm]
 \node[draw=gray, rounded corners=3pt, minimum width=34mm, minimum height=22mm, font=\scriptsize] (T0) {};
 \node[font=\scriptsize\bfseries, anchor=north west] at (T0.north west) {\;$T_0$ (22 axioms)};
 \node[open, draw=orange!85!black, font=\scriptsize] at ($(T0.center)+(0,1.5mm)$) {$X_\iota = f(\iota)$ ?};
 \node[font=\tiny, gray, anchor=south] at (T0.south) {$T_0 \nvdash P$ \; and \; $T_0 \nvdash \neg P$};
-\node[draw=blue!60!black, fill=blue!5, rounded corners=3pt, minimum width=46mm, minimum height=26mm, right=12mm of T0, font=\scriptsize] (T1) {};
+\node[draw=blue!60!black, fill=blue!5, rounded corners=3pt, minimum width=58mm, minimum height=26mm, right=12mm of T0, font=\scriptsize] (T1) {};
 \node[font=\scriptsize\bfseries, anchor=north west, blue!60!black] at (T1.north west) {\;$T' = T_0 \cup \{\delta\}$};
-\node[ax, font=\tiny] at ($(T1.center)+(-9mm,-5mm)$) (a22) {22 axioms};
-\node[draw=orange!85!black, fill=orange!14, rounded corners=2pt, font=\tiny] at ($(T1.center)+(9mm,-5mm)$) (delta) {$\delta$: fam$\leftrightarrow$value bridge};
+\node[ax, font=\tiny] at ($(T1.center)+(-15mm,-5mm)$) (a22) {22 axioms};
+\node[draw=orange!85!black, fill=orange!14, rounded corners=2pt, font=\tiny] at ($(T1.center)+(11mm,-5mm)$) (delta) {$\delta$: fam$\leftrightarrow$value};
 \node[goal, font=\tiny] at ($(T1.center)+(1mm,4mm)$) (iP) {$\vdash X_\iota = f(\iota)$};
 \draw[fl] (a22) -- (iP); \draw[fl] (delta) -- (iP);
 \draw[fl] (T0.east) -- node[above, font=\tiny] {$\iota$} (T1.west);
 \draw[gl, dashed] (iP.west) to[bend right=25] node[above, font=\tiny, green!40!black] {transport} ($(T0.north)+(2mm,-1mm)$);
-\end{tikzpicture}
+\end{tikzpicture}}
 \caption{The move that only a theory-as-data substrate permits. \textbf{How to read}:
 each large rounded rectangle is a \emph{theory} (left, the reference $T_0$; right,
 its extension $T'$); inside, blue boxes are axioms, the \textbf{orange} box the added
@@ -1236,7 +1186,7 @@ code rather than philosophy of science. That limit is what makes the corpus valu
 as training data: every label is exact.
 
 The roadmap follows from the measurements. Replay instrumentation turns the existing
-4{,}099-test corpus into $10^5$--$10^6$ certified (state, action, verdict) tuples
+4{,}221-test corpus into $10^5$--$10^6$ certified (state, action, verdict) tuples
 without formalizing a single new page --- the data factory is the same infrastructure
 as the term cache that removes the dominant reconstruction cost. An environment API
 ($\mathit{reset}(T,P)$ / $\mathit{step}$) exposes the loop to any policy: frontier
