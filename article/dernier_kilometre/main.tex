@@ -522,22 +522,61 @@ Protecting twenty-one organs is cheap; proving Euclid is not.
 %% ATTENTION : ne rien citer qui ne soit dans le .bib ET verifie a la source.
 %% ============================================================================
 
-\emph{[To be completed before freeze, under the discipline stated in the companion paper:
-no citation that has not been checked against its source. The repository's bibliography
-carries 52 verified entries; the references specific to failure localisation, premise
-selection and proof repair are not yet all among them. This section is deliberately left
-short rather than padded with unverified citations.]}
+\paragraph{Premise selection --- the nearest neighbour, and the sharpest contrast.} Given
+a goal and a large library, premise selection ranks which existing facts to feed the
+prover: by hand-built semantic features \cite{kaliszyk2015features}, by learned
+classifiers \cite{alemi2016deepmath}, by transformers over the library
+\cite{mikula2023magnushammer}. The question sounds like ours --- \emph{what should be
+added?} --- and the difference is exactly where the interest lies. Premise selection
+\emph{ranks what exists}; the need organ \emph{names formulas that may not exist at all}.
+When our system reports $\neg(n = n)$ (Section~\ref{sec:frontier}), no ranking over any
+library could have produced that answer, because the answer is not a library element ---
+it is a statement about what the search would have had to be given. Premise selection
+optimises retrieval; we characterise absence.
 
-Instrumentation work has shown that discarded proof activity can be captured
-\cite{ringer2020replica}, and current provers consume failures as training negatives or
-repair prompts \cite{first2023baldur,reichel2023proofrepair}. Systems that establish
-something by failing to prove --- counterexample search \cite{blanchette2011nitpick},
-learned disproof \cite{learningtodisprove2026} --- form a second family, and the
-conjecture-generation literature a third \cite{conjecturingsurvey2026}. Our departure is
-narrower than any of them: the failure object here is neither a training signal nor a
-refutation, but \emph{a list of formulas the search would have consumed}, judged by an
-exact kernel. Whether that object is genuinely new we state as the companion paper does
---- semi-decidably: no counterexample found after methodical search, never more.
+\paragraph{Proof repair.} A second family takes a proof that \emph{used to work} and
+mends it after its context changed, either by adapting automation to the change
+\cite{ringer2018pumpkin} or by learning from a corpus of repairs
+\cite{reichel2023proofrepair,april2026}. The input is a broken artefact; ours is a search
+that never produced one. The two are complementary --- repair presupposes a proof, and
+the last mile is precisely where there is none.
+
+\paragraph{Failure as data.} That discarded proof activity is worth capturing has been
+argued and instrumented \cite{ringer2020replica}, and current systems consume failures as
+training negatives or as repair prompts \cite{first2023baldur}. We share the premise and
+differ on the object. In those systems the recorded failure is an \emph{unverified}
+artefact: a message, a trajectory, a model's own account of itself. Here it is a set of
+formulas the kernel will judge if anyone tries to use them. That is what makes a gap
+actionable rather than merely loggable.
+
+\paragraph{Guiding search, versus describing its edge.} Learned guidance --- ENIGMA in a
+saturation prover \cite{jakubuv2020enigma}, policies over tactic trees
+\cite{yang2019coqgym,polu2020gptf}, hypertree search \cite{lample2022htps} --- aims at
+the same wall from the other side: it tries to make the search succeed more often. None
+of it says anything when the search still fails, which is the case this paper is about.
+The two are orthogonal, and a system with both would be strictly better than ours.
+
+\paragraph{Exploration and conjecture.} Theory exploration generates candidate lemmas and
+keeps those a prover confirms \cite{johansson2014hipster}, and the recent survey
+catalogues what such systems propose \cite{conjecturingsurvey2026}. Our organs generate
+\emph{obligations} rather than conjectures: not interesting statements worth proving, but
+the specific formulas a stalled route needed. Systems that establish something by failing
+to prove --- counterexample search \cite{blanchette2011nitpick}, learned disproof
+\cite{learningtodisprove2026} --- form a third family, and refute rather than locate.
+
+\paragraph{Growth by encounter.} Finally, the shape of our result --- a library of organs
+accreted from measured shortfalls, each earning its place --- has a relative in program
+synthesis, where a system grows a library of abstractions from the problems it solves
+\cite{ellis2021dreamcoder}. The mechanism differs (compression there, diagnosis here) but
+the epistemic claim is close, and we take it as evidence that the pattern is not an
+artefact of our setting.
+
+\paragraph{Novelty, honestly stated.} Formalised failure objects are not new; nor is
+premise selection, nor repair. What we have not found elsewhere is a search whose failure
+mode is \emph{a kernel-checkable list of the formulas it would have consumed}, together
+with a catalogue showing that such objects, read as specifications, generated the tool's
+own extensions. As the companion papers insist, this claim is semi-decidable: no
+counterexample after methodical search, never more.
 
 %% ============================================================================
 \section{Limitations}
