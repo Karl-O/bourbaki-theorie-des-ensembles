@@ -651,28 +651,60 @@ hypothèse qu'il laisse ouverte.
 %% La legende DIT l'agregation : ce n'est PAS un instantane unique du journal.
 \begin{figure}[t]\centering
 \resizebox{\ifdim\width>\linewidth \linewidth\else\width\fi}{!}{%
-\begin{tikzpicture}[node distance=5mm and 7mm]
-\node[goal, draw=gray!70, fill=gray!8] (P) {$(n{+}1)! = n!\cdot(n{+}1)$ \; \textbf{?}};
-\node[below=3mm of P, font=\scriptsize\itshape, gray!70!black] (mur)
-  {\rule{52mm}{1.4mm}};
-\node[right=1mm of mur, font=\scriptsize\itshape, gray!70!black] {mur};
-\node[open, draw=green!50!black, below=4mm of mur, xshift=-19mm] (bo)
+\begin{tikzpicture}[node distance=5mm and 5mm]
+%% ---- le but, en haut : ce qu'on VOUDRAIT
+\node[goal, draw=gray!70, fill=gray!8] (P)
+  {$(n{+}1)! = n!\cdot(n{+}1)$ \;\textbf{?}};
+\node[right=2mm of P, font=\scriptsize\itshape, gray!55!black] {le but visé};
+
+%% ---- le mur, avec ce qu'il SIGNIFIE ecrit dessus
+\node[below=3.5mm of P] (murbar) {\textcolor{gray!55!black}{\rule{74mm}{1.5mm}}};
+\node[right=2mm of murbar, font=\scriptsize\itshape, gray!55!black, align=left,
+      text width=27mm] {le \textbf{mur}~: aucune recherche de preuve ne le franchit};
+
+%% ---- les quatre hypotheses laissees ouvertes (une par ligne du tableau 1)
+\node[open, draw=green!50!black, below=5mm of murbar, xshift=-27mm] (bo)
   {$bo(\le,\mathbb{N})$};
 \node[open, draw=red!70!black, right=of bo] (hg) {$\mathcal{H}$};
-\node[open, draw=orange!85!black, right=of hg] (hw) {$X_\iota = f(\iota)$};
-\node[th, below=5mm of hg] (chain) {chaîne C60/C62 \; + \; équations du cas 0};
+\node[open, draw=green!50!black, right=of hg] (h23) {$H_2,\,H_3$};
+\node[open, draw=orange!85!black, right=of h23] (hw) {$H_W,\,H_N$};
+\node[left=2mm of bo, font=\scriptsize\itshape, gray!55!black, align=right,
+      text width=15mm] {restées \mbox{\textbf{ouvertes}}};
+
+%% ---- ce qui est ACQUIS, en bas
+\node[th, below=6mm of hg, xshift=13mm] (chain)
+  {chaîne C60/C62 \;+\; équations du cas 0};
 \node[ax, below=4mm of chain] (axs)
-  {$A_{T_0}$ \; + \; théories dédiées $(Ax(D))$};
+  {$A_{T_0}$ \;+\; théories dédiées $(Ax(D))$};
+\node[left=2mm of axs, font=\scriptsize\itshape, gray!55!black, align=right,
+      text width=15mm] {\textbf{acquis}};
+
 \draw[fl] (axs) -- (chain);
 \draw[fl, dashed] (chain) -- (bo);
 \draw[fl, dashed] (chain) -- (hg);
+\draw[fl, dashed] (chain) -- (h23);
 \draw[fl, dashed] (chain) -- (hw);
+
+%% ---- pas de fleche « sens de lecture » : elle percutait l'etiquette de gauche,
+%% et la legende dit deja « Se lit de bas en haut ». Un repere redondant qui
+%% abime la mise en page coute plus qu'il ne rapporte.
+
+%% ---- legende des couleurs, LUE SUR PLACE plutot qu'au tableau
+\node[below=5mm of axs, font=\scriptsize, align=center] (leg)
+  {\tikz\draw[draw=green!50!black,dashed,rounded corners=2pt](0,0)rectangle(3.4mm,2.2mm);
+   \; déchargeable \quad
+   \tikz\draw[draw=red!70!black,dashed,rounded corners=2pt](0,0)rectangle(3.4mm,2.2mm);
+   \; réfutable \quad
+   \tikz\draw[draw=orange!85!black,dashed,rounded corners=2pt](0,0)rectangle(3.4mm,2.2mm);
+   \; indépendante};
 \end{tikzpicture}}
-\caption{Un mur réel~: la dernière équation ouverte du front factorielle. Les boîtes
-pleines sont des objets du noyau, les boîtes en tirets les hypothèses que la chaîne
-de dérivation laisse \emph{ouvertes}, et la barre est le mur qui les sépare du but.
-La couleur d'une boîte est son verdict de trichotomie, détaillé au
-tableau~\ref{tab:frontier}.}
+\caption{Un mur réel~: la dernière équation ouverte du front factorielle. \textbf{Se lit
+de bas en haut}~: en bas ce qui est acquis (boîtes pleines --- axiomes, puis théorèmes
+du noyau), au-dessus les quatre hypothèses que la chaîne de dérivation laisse
+\emph{ouvertes} (boîtes en tirets), et la barre est le mur qui les sépare du but. La
+couleur d'une boîte ouverte est son verdict de trichotomie, rappelé en légende~: seule
+l'orange --- \emph{indépendante} --- est un mur véritable, les deux autres se ferment.
+Les quatre boîtes correspondent une à une aux lignes du tableau~\ref{tab:frontier}.}
 \label{fig:wall}
 \end{figure}
 

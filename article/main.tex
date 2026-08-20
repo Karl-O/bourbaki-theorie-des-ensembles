@@ -613,27 +613,60 @@ in place, with the verdict of each hypothesis it leaves open.
 %% La legende DIT l'agregation : ce n'est PAS un instantane unique du journal.
 \begin{figure}[t]\centering
 \resizebox{\ifdim\width>\linewidth \linewidth\else\width\fi}{!}{%
-\begin{tikzpicture}[node distance=5mm and 7mm]
-\node[goal, draw=gray!70, fill=gray!8] (P) {$(n{+}1)! = n!\cdot(n{+}1)$ \; \textbf{?}};
-\node[below=3mm of P, font=\scriptsize\itshape, gray!70!black] (mur)
-  {\rule{52mm}{1.4mm}};
-\node[right=1mm of mur, font=\scriptsize\itshape, gray!70!black] {wall};
-\node[open, draw=green!50!black, below=4mm of mur, xshift=-19mm] (bo)
+\begin{tikzpicture}[node distance=5mm and 5mm]
+%% ---- the goal, on top: what we WANT
+\node[goal, draw=gray!70, fill=gray!8] (P)
+  {$(n{+}1)! = n!\cdot(n{+}1)$ \;\textbf{?}};
+\node[right=2mm of P, font=\scriptsize\itshape, gray!55!black] {the goal};
+
+%% ---- the wall, with what it MEANS written on it
+\node[below=3.5mm of P] (murbar) {\textcolor{gray!55!black}{\rule{74mm}{1.5mm}}};
+\node[right=2mm of murbar, font=\scriptsize\itshape, gray!55!black, align=left,
+      text width=27mm] {the \textbf{wall}: no amount of proof search crosses it};
+
+%% ---- the four hypotheses left open (one per row of Table 1)
+\node[open, draw=green!50!black, below=5mm of murbar, xshift=-27mm] (bo)
   {$bo(\le,\mathbb{N})$};
 \node[open, draw=red!70!black, right=of bo] (hg) {$\mathcal{H}$};
-\node[open, draw=orange!85!black, right=of hg] (hw) {$X_\iota = f(\iota)$};
-\node[th, below=5mm of hg] (chain) {C60/C62 chain \; + \; case-0 equations};
+\node[open, draw=green!50!black, right=of hg] (h23) {$H_2,\,H_3$};
+\node[open, draw=orange!85!black, right=of h23] (hw) {$H_W,\,H_N$};
+\node[left=2mm of bo, font=\scriptsize\itshape, gray!55!black, align=right,
+      text width=15mm] {left \mbox{\textbf{open}}};
+
+%% ---- what is ESTABLISHED, at the bottom
+\node[th, below=6mm of hg, xshift=13mm] (chain)
+  {C60/C62 chain \;+\; case-0 equations};
 \node[ax, below=4mm of chain] (axs)
-  {$A_{T_0}$ \; + \; dedicated theories $(Ax(D))$};
+  {$A_{T_0}$ \;+\; dedicated theories $(Ax(D))$};
+\node[left=2mm of axs, font=\scriptsize\itshape, gray!55!black, align=right,
+      text width=15mm] {\textbf{established}};
+
 \draw[fl] (axs) -- (chain);
 \draw[fl, dashed] (chain) -- (bo);
 \draw[fl, dashed] (chain) -- (hg);
+\draw[fl, dashed] (chain) -- (h23);
 \draw[fl, dashed] (chain) -- (hw);
+
+%% ---- no « reading direction » arrow: it collided with the left-hand label,
+%% and the caption already says « read from the bottom up ». A redundant cue
+%% that wrecks the layout costs more than it gives.
+
+%% ---- colour key, READ IN PLACE rather than in the table
+\node[below=5mm of axs, font=\scriptsize, align=center] (leg)
+  {\tikz\draw[draw=green!50!black,dashed,rounded corners=2pt](0,0)rectangle(3.4mm,2.2mm);
+   \; dischargeable \quad
+   \tikz\draw[draw=red!70!black,dashed,rounded corners=2pt](0,0)rectangle(3.4mm,2.2mm);
+   \; refutable \quad
+   \tikz\draw[draw=orange!85!black,dashed,rounded corners=2pt](0,0)rectangle(3.4mm,2.2mm);
+   \; independent};
 \end{tikzpicture}}
-\caption{A real wall: the factorial front's last open equation. Solid boxes are
-kernel objects, dashed boxes are the hypotheses the derivation chain leaves
-\emph{open}, and the bar is the wall standing between them and the goal. Box colour
-is the trichotomy verdict of Table~\ref{tab:frontier}.}
+\caption{A real wall: the factorial front's last open equation. \textbf{Read from the
+bottom up}: at the bottom what is established (solid boxes --- axioms, then kernel
+theorems), above it the four hypotheses the derivation chain leaves \emph{open} (dashed
+boxes), and the bar is the wall standing between them and the goal. The colour of an
+open box is its trichotomy verdict, given in the key: only the orange one ---
+\emph{independent} --- is a wall in the strict sense, the other two close. The four boxes
+correspond one-to-one to the rows of Table~\ref{tab:frontier}.}
 \label{fig:wall}
 \end{figure}
 
