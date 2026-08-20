@@ -123,12 +123,14 @@ assemblages abrégés, et le corps de critères que Bourbaki \emph{démontre} su
 démonstrations au lieu de les poser comme règles. L'arithmétique est l'arithmétique
 cardinale construite du corpus, non un type primitif d'entiers naturels. Deux
 conséquences comptent ici. L'oracle est \emph{exact}~: chaque affirmation ci-dessous est
-un objet du noyau ou une mesure énoncée, jamais une estimation. Et parce que
-$\exists x\,\varphi(x)$ \emph{est} $\varphi(\tau x\,\varphi)$ chez Bourbaki plutôt qu'un
-quantificateur séparé, la conjecture peut être réécrite sans aucun quantificateur
-existentiel --- trois propriétés de deux termes nommés (section~\ref{sec:map}). Cela n'est
-pas disponible dans un cadre conventionnel, et il se trouve que c'est la forme sous
-laquelle les organes de recherche de la machine re-dérivent plus tard l'énoncé d'eux-mêmes.
+un objet du noyau ou une mesure énoncée, jamais une estimation. Et le quantificateur
+existentiel n'est pas primitif~: chez Bourbaki, $(\exists x)R$ est une \emph{abréviation}
+obtenue en substituant à $x$, dans $R$, un terme construit sur l'opérateur de choix
+$\tau$ (section~\ref{sec:background}). La conjecture peut donc être réécrite sans aucun
+quantificateur existentiel --- trois propriétés de deux termes nommés
+(section~\ref{sec:map}). Cela n'est pas disponible dans un cadre conventionnel, et il se
+trouve que c'est la forme sous laquelle les organes de recherche de la machine
+re-dérivent plus tard l'énoncé d'eux-mêmes.
 
 Nous rendons compte de la campagne honnêtement, ce qui veut dire rendre compte de ce
 qu'elle n'a pas marché. Goldbach est ouverte. Tout théorème ci-dessous est de la forme
@@ -226,11 +228,34 @@ séparément, sinon un résultat repose sur des axiomes que personne n'a compté
 
 Dans la \emph{Théorie des ensembles}, les quantificateurs ne sont pas des signes
 primitifs mais des \emph{abréviations} construites sur l'opérateur de choix de Hilbert.
-Pour une relation $R$ et une lettre $x$,
+Il faut d'abord dire ce qu'est $\tau_x(A)$, et le point est facile à manquer.
+
+\begin{definition}[$\tau_x(A)$ --- E~I.16, l.~1--4]\label{def:tau}
+Former $\tau_x(A)$, c'est~: préfixer $A$ par le signe $\tau$, lier au $\tau$ chaque
+occurrence de la lettre $x$, puis \textbf{remplacer chacune de ces occurrences par le
+signe $\square$}. Le résultat \textbf{ne contient plus la lettre $x$}. Bourbaki en donne
+l'exemple à la ligne suivante~:
+\[ \tau_x(\,\in\, x\, y\,) \;=\; \tau \in \square\, y . \]
+La notation « $\tau_x$ » est métalinguistique~: elle rappelle quelle lettre a été
+abstraite, mais l'assemblage, lui, n'en porte aucune trace.
+\end{definition}
+
+C'est de là que vient tout le reste. Puisque la variable liée a disparu dans les liens,
+il n'y a \emph{rien à renommer}~: le système n'a pas d'$\alpha$-conversion, et la
+substitution y est triviale par construction. Sur cette base, pour une relation $R$ et
+une lettre $x$~:
 \[ (\exists x)R \;:=\; (\tau_x(R) \mid x)\,R , \]
-où $(A \mid x)\,R$ désigne l'assemblage obtenu en substituant $A$ à toute occurrence de
-$x$ dans $R$. Le terme $\tau_x(R)$ dénote « un objet satisfaisant $R$, s'il en existe »~;
-l'énoncé existentiel \emph{est} donc l'énoncé que ce terme nommé-là satisfait $R$.
+où $(B \mid x)\,A$ désigne l'assemblage obtenu en remplaçant par $B$ chaque occurrence
+de $x$ dans $A$. Le terme $\tau_x(R)$ dénote « un objet satisfaisant $R$, s'il en existe
+un »~; l'énoncé existentiel \emph{est} donc l'énoncé que ce terme-là, explicitement
+construit, satisfait $R$.
+
+\begin{remarque}[ce qu'il ne faut pas écrire]
+On lit parfois $(\exists x)\varphi(x) = \varphi(\tau x\,\varphi)$. Les deux membres sont
+fautifs~: $\varphi$ n'est pas une fonction qu'on applique, et surtout « $\tau x\,\varphi$ »
+laisse croire que $x$ figure encore dans le terme, alors que la définition~\ref{def:tau}
+vient précisément de l'en effacer. La forme correcte est celle de substitution ci-dessus.
+\end{remarque}
 
 Deux conséquences comptent ici. D'abord, un but existentiel peut s'échanger contre des
 propriétés d'un terme explicitement nommé, sans axiome supplémentaire --- c'est le
@@ -313,10 +338,16 @@ graphies distinctes de \texttt{est\_premier}, et le pont traverse de l'une à l'
 pont réapparaîtra à la section~\ref{sec:abstract} comme un artefact et non comme une
 étape.
 
-\paragraph{La conjecture sans quantificateur existentiel.} En appliquant deux fois
-$(\exists x)\varphi \equiv \varphi(\tau x\,\varphi)$, avec
-$T := \tau p\,(\exists q\;\mathrm{mat})$ et $Q := \tau q\,(\mathrm{mat}[p := T])$, la
-conjecture devient
+\paragraph{La conjecture sans quantificateur existentiel.} On applique deux fois la
+définition de la section~\ref{sec:background}. Écrivons $\mathrm{mat}$ pour la matrice
+« $p$ et $q$ premiers et $2k = p+q$ », et posons les deux termes
+\[
+T \;:=\; \tau_p\bigl((\exists q)\,\mathrm{mat}\bigr),
+\qquad
+Q \;:=\; \tau_q\bigl((T \mid p)\,\mathrm{mat}\bigr) .
+\]
+Ni $T$ ni $Q$ ne contient de lettre liée --- c'est la définition~\ref{def:tau}. En
+substituant successivement $T$ à $p$ puis $Q$ à $q$, la conjecture devient
 \[
 \mathrm{premier}_1(T) \;\wedge\; \mathrm{premier}_2(Q) \;\wedge\; 2k = T + Q ,
 \]
@@ -325,7 +356,7 @@ axiome ad hoc. Rien n'est gagné mathématiquement --- aucune information n'est 
 mais la \emph{forme} de la question change, de « existe-t-il un témoin~? » à « un terme
 nommé a-t-il ces propriétés~? ». Nous notons en passant, puisque cela relève de l'article
 compagnon, que les organes de recherche de la campagne ont plus tard reconstruit ce geste
-exact d'eux-mêmes~: un organe \emph{proposeur} de témoins qui fabrique $\tau x(\varphi)$
+exact d'eux-mêmes~: un organe \emph{proposeur} de témoins qui fabrique $\tau_x(\varphi)$
 depuis le seul but fait passer le manque rapporté sur un but de décomposition de
 l'énoncé existentiel intact à un énoncé sur les propriétés d'un terme nommé.
 
