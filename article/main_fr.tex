@@ -275,8 +275,7 @@ supposition. Décharger cette supposition par la règle de déduction donne
    C(\theta_2) = \bigl((x \in E) \Rightarrow (x \in E)\bigr), \qquad
    j(\theta_2) = \text{déduction}, \]
 qui est clos. Rien n'a été démontré sur $E$ en chemin~: ce que le second objet
-enregistre, c'est que l'hypothèse est passée de la gauche du signe $\vdash$ dans la
-conclusion. Ce déplacement est toute la \emph{décharge}, et la
+enregistre, c'est que l'hypothèse est passée de $H(\theta)$ dans $C(\theta)$. Ce déplacement est toute la \emph{décharge}, et la
 section~\ref{sec:certified-failure} repose sur le fait que c'est la seule chose qu'un
 compte d'hypothèses reflète.
 \end{example}
@@ -445,6 +444,16 @@ $\emptyset \vdash R$, un théorème clos. C'est un énoncé sur ce que le noyau
 \emph{peut bâtir}~: chaque $\vdash$ de cet article est donc témoigné par un objet,
 jamais affirmé.
 
+La négation $\Gamma \nvdash R$ ne lui est pas symétrique, et l'asymétrie compte d'un bout
+à l'autre. $\vdash$ s'établit en exhibant \emph{un} objet~; $\nvdash$ affirme
+qu'\emph{aucun} objet n'existe, ce que le noyau ne peut pas témoigner. Partout où
+$\nvdash$ apparaît ci-dessous, il s'agit donc soit d'une réfutation démontrée
+($\Gamma \vdash \neg R$, une affirmation plus forte), soit d'un \emph{défaut déclaré}
+après une recherche bornée --- jamais d'un théorème. La trichotomie de la
+section~\ref{sec:trichotomy} est bâtie sur cette distinction exacte, et $\vdash$ comme
+$\nvdash$ sont des notations métalinguistiques sur le noyau, non des signes d'une théorie
+qu'il manipule.
+
 Une \emph{route} vers un but est une dérivation tentée de ce but, et le \emph{résidu}
 d'une route est l'ensemble des hypothèses que porte encore le théorème auquel elle
 aboutit --- c'est-à-dire $H(\theta)$ pour le $\theta$ que la route a produit. Un but a
@@ -546,6 +555,7 @@ comparées syntaxiquement, et les ensembles d'hypothèses sont comparés par ég
 exacte d'ensembles, jamais par cardinalité.
 
 \subsection{La trichotomie des hypothèses ouvertes}
+\label{sec:trichotomy}
 \begin{definition}[Trichotomie]
 Pour une hypothèse ouverte $h$ portée par une route sur $T$~:
 $h$ est \emph{déchargeable} ssi $A_T \vdash h$~;

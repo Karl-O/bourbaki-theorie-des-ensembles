@@ -260,8 +260,7 @@ assumption. Discharging that assumption with the deduction rule gives
    C(\theta_2) = \bigl((x \in E) \Rightarrow (x \in E)\bigr), \qquad
    j(\theta_2) = \text{deduction}, \]
 which is closed. Nothing was proved about $E$ along the way: what the second object
-records is that the hypothesis has moved from the left of the turnstile into the
-conclusion. That move is the whole of \emph{discharge}, and Section~\ref{sec:certified-failure}
+records is that the hypothesis has moved from $H(\theta)$ into $C(\theta)$. That move is the whole of \emph{discharge}, and Section~\ref{sec:certified-failure}
 turns on the fact that it is the only thing a hypothesis count reflects.
 \end{example}
 
@@ -418,6 +417,15 @@ enter through the $\mathsf{axiome}$ rule, and $\vdash R$ alone means $\emptyset 
 a closed theorem. This is a statement about what the kernel \emph{can build}, so every
 $\vdash$ in this paper is witnessed by an object, never asserted.
 
+The negation $\Gamma \nvdash R$ is not symmetric with it, and the asymmetry matters
+throughout. $\vdash$ is established by exhibiting one object; $\nvdash$ asserts that
+\emph{no} object exists, which the kernel cannot witness. Wherever $\nvdash$ appears
+below it is therefore either a proved refutation ($\Gamma \vdash \neg R$, a stronger
+claim) or a \emph{declared default} after a bounded search --- never a theorem. The
+trichotomy of Section~\ref{sec:trichotomy} is built on exactly that distinction, and
+$\vdash$ and $\nvdash$ are metalinguistic notations about the kernel, not signs of any
+theory it manipulates.
+
 A \emph{route} to a goal is one attempted derivation of it, and the \emph{residue} of
 a route is the set of hypotheses the theorem it reaches still carries --- that is,
 $H(\theta)$ for the $\theta$ the route produced. A goal typically has several routes,
@@ -516,6 +524,7 @@ them: targets are rebuilt outside the module and compared syntactically, and
 hypothesis sets are compared by exact set equality, never by cardinality.
 
 \subsection{The trichotomy of open hypotheses}
+\label{sec:trichotomy}
 \begin{definition}[Trichotomy]
 For an open hypothesis $h$ carried by a route over $T$:
 $h$ is \emph{dischargeable} iff $A_T \vdash h$;
