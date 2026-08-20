@@ -188,6 +188,13 @@ Elle précède tout le reste et ne change pas : **chaque phrase d'un article doi
 adossée à un objet du dépôt** — théorème, mesure, événement, source. Une affirmation sans
 ancre est une docstring qui ment, en public.
 
+**Cas particulier, et il est tentant** : ne jamais attribuer sa propre erreur à un « on »
+anonyme. A3 avait écrit « *on lit parfois* $(\exists x)\varphi(x) = \varphi(\tau x\varphi)$ » —
+personne d'autre n'avait écrit ça, c'était nous. Une affirmation sur ce que la
+littérature contient est une affirmation comme une autre : sans référence vérifiée, elle
+n'a pas sa place. Écrire « une première rédaction de cet article » coûte le même nombre
+de mots et dit la vérité.
+
 Corollaire acquis en écrivant A3 : le noyau garantit la *soundness*, **jamais** la
 fidélité de ce qu'on écrit à côté. Aucun test n'attrape une phrase fausse sur le code.
 Une surdéclaration a survécu sept jours dans une docstring, s'est propagée dans un
