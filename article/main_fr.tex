@@ -4,7 +4,13 @@
 \usepackage{amsmath,amssymb,amsthm}
 \usepackage{booktabs}
 \usepackage{graphicx}
-\usepackage[margin=2.7cm]{geometry}
+% --------------------------------------------------------------------------
+% LISIBILITE — voir docs/articles/STYLE_ARTICLES.md §2.
+% --------------------------------------------------------------------------
+\usepackage[a4paper,textwidth=13.8cm,textheight=22.4cm]{geometry}
+\linespread{1.06}
+\setlength{\parskip}{.55em plus .15em minus .1em}
+\setlength{\parindent}{1.1em}
 \usepackage{hyperref}
 \usepackage{tikz}
 \usetikzlibrary{positioning,arrows.meta,calc}
@@ -62,7 +68,7 @@ objets du noyau, le troisième un défaut dont nous énonçons explicitement le 
 mesuré consommant 53 axiomes de théories ad hoc invisibles à son énoncé, ce qui motive
 une comptabilité correcte de ce qu'une dérivation suppose réellement~; et (iv) un
 \emph{audit de fidélité mécanisé} contre le texte source à la granularité
-page-et-ligne, sous lequel deux défauts de transcription d'axiome ont été détectés en
+à la granularité de la page, sous lequel deux défauts de transcription d'axiome ont été détectés en
 \emph{dérivant une contradiction}, réparés en restaurant la forme du livre, et prouvés
 corrigés par l'impossibilité de la re-dériver. Un balayage de similarité de
 Weisfeiler-Leman réduit la détection d'une de ces incohérences d'une investigation à
@@ -352,13 +358,14 @@ théorème ne portent aucune trace de leur théorie, si bien que le noyau ne peu
 voir qu'une variable libre d'un axiome ad hoc est une \emph{constante} de cette
 théorie au moment de généraliser.
 
-Le corpus à l'heure où nous écrivons~: 4\,099 tests collectés re-dérivant à chaque
-passage ses théorèmes, 2\,181 notions ancrées au livre imprimé à la granularité
-page-et-ligne, et un journal de 232 événements d'échecs certifiés --- l'objet d'étude
+Le corpus à l'heure où nous écrivons~: 4\,221 tests collectés re-dérivant à chaque
+passage ses théorèmes, 2\,234 notions ancrées au livre imprimé à la granularité
+à la granularité de la page, et un journal de 232 événements d'échecs certifiés --- l'objet d'étude
 de cet article.
 
 Sa répartition mérite d'être dite, car le titre du livre invite à une image fausse.
-Les 2\,181 notions ancrées se distribuent sur la tour et sur les chapitres qu'elle
+Les 2\,181 notions ancrées au moment de la campagne rapportée en
+section~ef{sec:case-study} se distribuent sur la tour et sur les chapitres qu'elle
 porte~:
 
 \begin{center}\small
@@ -584,6 +591,7 @@ hypothèse qu'il laisse ouverte.
 %% mur (n+1)! = ev. 2 (9 hyps succ) + ev. 85 (pont de domaine, cul-de-sac n-1).
 %% La legende DIT l'agregation : ce n'est PAS un instantane unique du journal.
 \begin{figure}[t]\centering
+\resizebox{\linewidth}{!}{%
 \begin{tikzpicture}[node distance=5mm and 7mm]
 \node[goal, draw=gray!70, fill=gray!8] (P) {$(n{+}1)! = n!\cdot(n{+}1)$ \; \textbf{?}};
 \node[below=3mm of P, font=\scriptsize\itshape, gray!70!black] (mur)
@@ -600,7 +608,7 @@ hypothèse qu'il laisse ouverte.
 \draw[fl, dashed] (chain) -- (bo);
 \draw[fl, dashed] (chain) -- (hg);
 \draw[fl, dashed] (chain) -- (hw);
-\end{tikzpicture}
+\end{tikzpicture}}
 \caption{Un mur réel~: la dernière équation ouverte du front factorielle. Les boîtes
 pleines sont des objets du noyau, les boîtes en tirets les hypothèses que la chaîne
 de dérivation laisse \emph{ouvertes}, et la barre est le mur qui les sépare du but.
@@ -660,10 +668,37 @@ semaine instrumentée, vérifié par le noyau.}
 %% ============================================================================
 \label{sec:fidelity}
 \subsection{La discipline d'ancrage et le verdict d'infidélité}
-Toute notion formalisée porte une ancre lisible par machine
-\texttt{@livre Ch.X \S{}s.ss Type.n | E X.pp L.a-b | PDF p.n} la reliant à la source
-imprimée à la granularité page-et-ligne (2\,181 notions ancrées à l'heure où nous
-écrivons). Soit $\Phi$ la transcription des énoncés numérotés du livre. La fidélité
+Chaque notion formalisée porte un ancrage lisible par la machine
+\texttt{@livre Ch.X \S{}s.ss Type.n | E X.pp L.a-b | PDF p.n} qui la relie à la source
+imprimée (2\,234 notions ancrées à l'heure où nous écrivons). L'ancrage a deux champs de
+fiabilité inégale, et nous les séparons parce que nous les avons mesurés.
+
+\paragraph{La page est sûre~; l'intervalle de lignes ne l'est pas uniformément.} C'est le
+champ « page » qui porte les résultats de couverture ci-dessous~: zéro ancrage non
+conforme, et cinq parties du livre déclarées complètes sur leur intervalle. L'intervalle
+de lignes est plus faible, et nous l'avons découvert en auditant nos propres ancrages
+contre le livre. Sur la page E~II.22 --- 36 lignes imprimées, comptées à la main --- la
+Définition~1 occupe les lignes 15--18 et la Définition~2 les lignes 27--30, tandis que
+leurs ancrages disent \texttt{L.31-36} et \texttt{L.49-53}~; le second dépasse la page.
+Or la ligne 53 de notre \emph{transcription} \LaTeX{} de cette page est exactement
+l'en-tête de la Définition~2~: ces deux ancrages indexent la transcription, pas le livre.
+Sur la page E~II.7, l'inverse --- l'ancrage suit la ligne imprimée à un petit décalage
+près et ne correspond pas du tout à la transcription. Au moins deux conventions coexistent
+dans le corpus.
+
+Mesuré sur les 1\,992 ancrages portant un intervalle de lignes~: \textbf{12,2\,\%
+finissent au-delà de la ligne 36}, soit environ une page pleine de cette édition, et ne
+peuvent donc pas être des références à des lignes imprimées~; le maximum est 63. Le gros
+de la distribution a la forme d'une page imprimée, avec une queue qui n'en a pas.
+
+Nous revendiquons donc la traçabilité \emph{à la granularité de la page}, qui est ce que
+les instruments de couverture consomment réellement, et nous présentons les intervalles
+de lignes intra-page comme une \emph{heuristique} de localisation du matériel non
+formalisé plutôt que comme une mesure certifiée. C'est une revendication plus faible que
+celle que cet article portait en brouillon, et la raison de la consigner ici est que
+c'est la thèse même de l'article retournée contre lui~: aucun test d'un dépôt vérifié par
+noyau n'attrape un ancrage qui décrit mal le livre, et les nôtres sont restés inexaminés
+jusqu'à ce que nous ouvrions les pages. Soit $\Phi$ la transcription des énoncés numérotés du livre. La fidélité
 elle-même --- « $\varphi(b)$ \emph{signifie} $b$ », pour un énoncé $b$ du livre et sa
 formalisation $\varphi(b)$ --- relie du texte à des formules et
 n'est pas formalisable~; sa négation, si~:
@@ -718,6 +753,7 @@ La figure~\ref{fig:proofgraph} montre cette dérivation réhabilitée, la branch
 que le défaut bloquait étant marquée en vert.
 
 \begin{figure}[t]\centering
+\resizebox{\linewidth}{!}{%
 \begin{tikzpicture}[node distance=4mm and 3mm]
 \node[ax] (vide) {axiome de $\emptyset$};
 \node[ax, right=of vide] (paire) {axiome de la paire};
@@ -732,7 +768,7 @@ que le défaut bloquait étant marquée en vert.
 \draw[gl] (prod) -- (uni); \draw[fl] (ext) -- (uni);
 \draw[fl] (hab) -- (e232); \draw[gl] (uni) -- (e232);
 \draw[gl] (e232) -- (card); \draw[gl] (card) -- (fact);
-\end{tikzpicture}
+\end{tikzpicture}}
 \caption{La dérivation réelle de $0! = 1$ (route Déf.~2) comme graphe à l'intérieur de
 la boîte-théorie. \textbf{Lecture}~: chaque boîte est un objet du noyau --- rangée du
 bas, les axiomes consommés~; au-dessus, les théorèmes dérivés~; la boîte à fond vert
@@ -875,6 +911,7 @@ désormais une requête de conformité permanente.
 
 %% ============================================================================
 \section{Étude de cas~: une semaine instrumentée}
+\label{sec:case-study}
 %% ANCRE: CAMPAGNE_DEMOS.md (26 juil - 2 aout) ; events.jsonl (95) ; suites de tests
 %% ============================================================================
 \label{sec:casestudy}
@@ -939,8 +976,10 @@ section~\ref{sec:related} a plus tard renvoyé 69 références triées pour 237k
 où le premier fan-out de la semaine en avait brûlé 266k pour zéro résultat. Le harnais,
 lui aussi, fait partie de l'expérience.
 
-\paragraph{Reproductibilité.} Toutes les mesures ont été prises sur une seule machine
-Windows~11~: Python~3.13, pytest~9.0.3 avec \texttt{pytest-xdist} à quatre workers,
+\paragraph{Reproductibilité.} Les comptes de tests cités dans l'étude de cas ci-dessus sont ceux de la semaine instrumentée et sont laissés tels que mesurés alors~; pour mémoire, la suite relancée intégralement le 20~août 2026 rend 	extbf{4\,221 passed en 2\,h\,03} à douze workers avec 	exttt{--dist loadfile}. Nous rapportons les deux plutôt que de rétrofitter le récit avec un nombre postérieur.
+
+Toutes les mesures ont été prises sur une seule machine
+Windows~11~: Python~3.13, pytest~9.0.3 avec \texttt{pytest-xdist},
 \texttt{PYTHONIOENCODING=utf-8}, suites découpées par zone. L'instrument de dette n'est
 valide qu'à la première mesure d'un process frais
 (section~\ref{sec:certified-failure})~; le balayage des jumeaux a tourné avec $K = 3$,
@@ -954,124 +993,60 @@ en page de titre.
 \subsection{Seconde étude de cas~: un énoncé ouvert sous instrumentation}
 \label{sec:goldbach}
 
-Deux jours après la semaine rapportée ci-dessus (5--6 août), la même
-instrumentation a été tournée vers un énoncé \emph{ouvert}~: la conjecture de
-Goldbach, écrite sur l'arithmétique construite du corpus. L'épisode teste ce que
-les sections précédentes promettent --- que les défauts d'énoncé se
-\emph{démontrent}, que la dette se \emph{mesure}, et qu'un problème ouvert se
-\emph{transforme} en théorèmes clos.
+Deux jours après la semaine rapportée ci-dessus (5--6 août), la même instrumentation a
+été tournée vers un énoncé \emph{ouvert}~: la conjecture de Goldbach, écrite sur
+l'arithmétique construite du corpus. Nous n'en rapportons ici que ce qui porte sur les
+thèses de cet article --- que les défauts d'énoncé se \emph{démontrent} et que la dette
+se \emph{mesure}. Les réductions produites par l'épisode, et la mesure de la quantité
+d'arithmétique qu'elles contiennent, font l'objet d'un article compagnon~; les organes
+de découverte qu'il a exercés relèvent d'un troisième.
 
-\emph{(i) Deux défauts d'énoncé, démontrés dans le noyau.} La première rédaction
-de la conjecture disait «~$n$ pair et $n \neq 2$~». Son antécédent est satisfait
-en $n = 0$ --- démontré, clos~: $\vdash \mathrm{pair}(0)$ (témoin $k := 0$) et
-$\vdash \neg(0 = 2)$ --- de sorte que l'énoncé affirmait que \emph{zéro est somme
-de deux nombres premiers}. Réparé, il restait faux~: «~pair~» contraint $n$ à
-être un \emph{cardinal}, nullement un entier, et l'antécédent est aussi satisfait
-par $n := \mathbb{N} + \mathbb{N}$, qui est infini --- démontré également, l'égalité
-avec l'ancien antécédent instancié étant vérifiée formule contre formule. La même
-faute --- un quantificateur posé sur les ensembles quand on le croit posé sur les
-entiers --- avait été commise la veille sur le $(\forall d)$ de la primalité~:
-c'est un \emph{motif}, désormais consigné. Fait notable~: la variante
-\emph{démontrée} (bornée) de l'énoncé portait la garde de finitude depuis son
-premier jet, parce que sa preuve l'exigeait~; seul l'énoncé \emph{non démontré}
-avait dérivé. Démontrer force à nommer les hypothèses~; énoncer ne force rien.
+\emph{(i) Deux défauts d'énoncé, démontrés dans le noyau.} La première rédaction de la
+conjecture disait «~$n$ pair et $n \neq 2$~». Son antécédent est satisfait en $n = 0$ ---
+démontré, clos~: $\vdash \mathrm{pair}(0)$ (témoin $k := 0$) et $\vdash \neg(0 = 2)$ ---
+de sorte que l'énoncé affirmait que \emph{zéro est somme de deux nombres premiers}.
+Réparé, il restait faux~: «~pair~» contraint $n$ à être un \emph{cardinal}, non un
+entier, et l'antécédent est aussi satisfait par $n := \mathbb{N} + \mathbb{N}$, qui est
+infini --- démontré de même, l'égalité avec l'ancien antécédent instancié étant
+vérifiée formule contre formule. La même faute --- un quantificateur portant sur des
+ensembles alors qu'on le croit porter sur des entiers --- avait été commise la veille sur
+le $(\forall d)$ de la primalité~: c'est un \emph{motif}, désormais consigné.
 
-\emph{(ii) Le théorème d'équivalence.} Le résultat principal de l'épisode est
-clos, sans borne, sans analyse de cas sur $n$~:
-\[
-\vdash\;\bigl(H \Rightarrow \mathrm{Goldbach}\bigr)\;\wedge\;
-\bigl(\mathrm{Goldbach} \Rightarrow H\bigr),
-\qquad
-H \;=\; (\forall k)\bigl(\,\mathrm{Fini}\,k \wedge k \neq 0 \wedge k \neq 1
-\;\Rightarrow\; (\exists p)(\exists p')\,(p, p' \text{ premiers} \wedge k+k = p+p')\,\bigr).
-\]
-La conjecture \emph{est} sa forme «~moitiés~»~: les deux énoncés sont
-interdérivables, et ce qui manque au problème ouvert est isolé en un point
-unique --- produire la décomposition. La fidélité des deux formules est établie
-par \emph{prélèvement}~: l'antécédent et le conséquent sont découpés dans
-l'énoncé du dépôt puis la recomposition est vérifiée à l'identique, de sorte
-qu'aucune recopie ne peut mentir. La direction réciproque traverse un
-$\alpha$-renommage forcé (le témoin de parité porte le même nom que la variable
-instanciée)~; le lieur frais est \emph{lu sur le théorème instancié} plutôt que
-prédit. L'aller ne contient aucune analyse de cas~; la réciproque en contient
-exactement une, déclarée~: $k \in \{0,1,2\}$, taille fixe, sur la constante $2$
-de l'énoncé.
+Fait notable~: la variante bornée \emph{démontrée} de l'énoncé portait la garde de
+finitude dès son premier jet, parce que sa preuve l'exigeait~; seul l'énoncé \emph{non
+démontré} avait dérivé. \textbf{Démontrer force à nommer ses hypothèses~; énoncer ne
+force à rien.} Nous tenons cela pour l'observation la plus transférable de l'épisode, et
+c'est pourquoi l'audit de fidélité de la section~\ref{sec:fidelity} vise les énoncés
+qu'aucune preuve n'exerce actuellement.
 
-\emph{(iii) La dette, en trois nombres.} «~Zéro hypothèse résiduelle~» et
-«~l'invariant des 22 axiomes tient~» se lisent ensemble comme «~ne dépend que des
-22~» --- c'est faux au sens mesuré, puisque les axiomes entrent par la règle
-$\mathrm{axiome}$ et disparaissent du séquent (section~\ref{sec:certified-failure}).
-Mesuré en process frais sur la forme bornée en $n$~: \textbf{0} hypothèse
-résiduelle~; \textbf{14} des 22 axiomes de référence consommés~; \textbf{53}
-formules étrangères --- une seule règle, le critère C54 (le graphe d'une fonction
-définie par un terme, théorème chez Bourbaki, axiome de théorie dédiée ici),
-instanciée 52 fois, plus une instance de Knaster--Tarski. Un résultat honnête
-s'annonce avec les trois nombres~; le troisième dit ce qui reste à dériver. Sur
-l'équivalence elle-même~: \textbf{0}~; \textbf{14}~; \textbf{73} --- réparties
-sur \emph{21} théories dédiées, la machinerie du bon ordre (Zorn, Zermelo,
-Bourbaki--Witt) entrant par le lemme «~un minorant d'un fini est fini~».
-Enlever la borne se paie en bon ordre~: le passage de 2 à 21 théories
-\emph{mesure} ce que la généralité coûte. La première mesure avait rendu zéro en
-une seconde --- le théorème sortait d'un cache, et l'instrument est aveugle à ce
-qui ne se construit pas~: la règle du process frais, écrite pour d'autres
-mesures, s'applique à elle-même.
+\emph{(ii) La dette, en trois nombres.} «~Zéro hypothèse résiduelle~» et «~l'invariant
+des 22 axiomes tient~» se lisent ensemble comme «~ne dépend que des 22~» --- faux au sens
+mesuré, puisque les axiomes entrent par la règle d'$\mathrm{axiome}$ et disparaissent du
+séquent (section~\ref{sec:certified-failure}). Mesuré en process frais sur la forme
+bornée en $n$~: \textbf{0} hypothèse résiduelle~; \textbf{14} des 22 axiomes de
+référence consommés~; \textbf{53} formules étrangères --- une seule règle, le critère C54
+(le graphe d'une fonction définie par un terme, théorème chez Bourbaki, axiome de
+théorie dédiée ici), instanciée 52 fois, plus une instance de Knaster--Tarski. Un
+résultat honnête s'annonce avec les trois nombres~; le troisième dit ce qui reste à
+dériver.
 
-\emph{(iv) La machine invente.} Le troisième jour, les organes de découverte des
-sections~\ref{sec:certified-failure}--\ref{sec:vectors} ont été braqués sur
-l'îlot. Le conjectureur (transitivité + détachement, noyau seul juge) a certifié
-60~théorèmes en trois tours, retrouvant seul les lemmes de liaison que la
-campagne avait écrits à la main~; quatre ont été \emph{promus} au dépôt avec leur
-provenance --- les premiers théorèmes du corpus dont l'origine est la machine.
-Le régime existentiel a d'abord péri sur sa propre représentation ---
-$2+2=4$ \emph{déplié} dépasse $400\,000$ nœuds là où son DAG partagé en compte
-une cinquantaine --- puis, réécrit contre la structure partagée, a livré
-l'observation décisive~: dans ce corpus le niveau arithmétique est $\tau$, les
-constructeurs d'application ne sont que la plomberie de l'encodage. Enfin,
-l'abstraction \emph{sélective} --- n'abstraire que dans \emph{un membre} d'une
-égalité, ce qui satisfait S5 malgré l'emboîtement des numéraux, en coût
-linéaire --- a permis à la machine d'\emph{inventer des notions}~: de
-$\vdash 6 = 3+3$ elle produit exactement $\mathrm{pair}(6)$ --- la formule du
-module d'énoncé, comparée caractère à caractère --- et de même $\mathrm{pair}(4)$
-et $\mathrm{pair}(10)$, plus 57~existentiels de complément et de cofacteur,
-chacun certifié par le noyau, en une seconde par passe.
+Sur l'équivalence principale de l'épisode, la même mesure rend \textbf{0}~;
+\textbf{14}~; \textbf{73} --- répartis sur \emph{21} théories dédiées, la machinerie du
+bon ordre (Zorn, Zermelo, Bourbaki--Witt) entrant par le lemme «~un minorant d'un fini
+est fini~». Lever une borne se paie en bon ordre~: le saut de 2 à 21 théories
+\emph{mesure} ce que coûte la généralité. La première mesure avait rendu zéro en une
+seconde --- le théorème sortait d'un cache, et l'instrument est aveugle à ce qui n'est
+pas construit~: la règle du process frais, écrite pour d'autres mesures, s'applique à
+elle-même.
 
-Le cycle s'est refermé quand la machine a \emph{consommé} sa propre invention~:
-$\mathrm{pair}(6)$, assemblée aux quatre conjoints restants du dépôt par un organe
-de détachement conjonctif --- dont la leçon est que, les définitions étant
-elles-mêmes des conjonctions, l'aplatissement doit s'arrêter \emph{aux faits
-connus} --- puis détachée à travers le théorème borné, redonne la décomposition
-de $6$, close, sans hypothèse. En série, $6$, $8$ et $10$ tombent en un dixième
-de seconde chacune après une chauffe unique~; et chaque site d'introduction
-existentielle de la campagne passe désormais par la tactique à témoin vérifié
-que cette moisson a fait émerger.
-
-\emph{(v) La machine compose.} Le quatrième jour a fermé la boucle. Le volant
-wake-sleep --- abstraction des motifs partagés entre preuves, gate noyau,
-critère de compression --- a été étendu aux prouveurs \emph{paramétrés} (36 des
-43 preuves de l'îlot le sont~; le gate n'exécutait que du zéro-argument), avec
-un voile sur les caches déclarés~: sans lui, un prouveur mémoïsé rend son
-théorème en cache et le gate ne teste rien. Chaque tour est devenu
-\emph{observable} --- un flux d'événements nomme la source en cours, chaque
-découverte certifiée, chaque brique écartée --- et ce flux a payé aussitôt~:
-deux gels que la version muette avait facturés une nuit entière ont été
-localisés en minutes (la déduplication et le tri des briques marchaient sur les
-arbres \emph{dépliés}~; réécrits contre la structure partagée, cinq tours de
-découverte passent de trois heures gelées à dix minutes). Le cycle complet
-tourne alors sans à-coup~: 64~théorèmes découverts en flux, trois promus comme
-lemmes de \emph{profondeur~2} --- le premier du dépôt dérivé à travers un lemme
-machine --- et le tour de compression suivant les absorbe~: la bibliothèque
-passe de 4 à 18~notions certifiées (gain de compression 80~pas, 42~preuves du
-dépôt raccourcies, 96~macros d'ordre~2 consommant les notions). La troisième
-instance d'un motif que la machine tenait à gain nul, apportée par son propre
-lemme, l'a fait passer au positif~: l'invention de la veille finance la
-compression du lendemain.
-
-L'épisode a coûté quatre jours, ajouté sept modules et une trentaine de tests au
-dépôt (suite finale~: 152 verts, équivalence redémontrée en process frais), et
-laissé le compte d'axiomes à 22. Aucun des théorèmes ci-dessus n'approche la
-conjecture elle-même~; tous bornent exactement ce qui lui manque --- et la
-machine parle désormais, théorème par théorème, le langage dans lequel ce
-manque s'énonce.
+\emph{Ce qui est différé.} L'épisode a duré quatre jours et laissé le compte d'axiomes à
+22. Sa production mathématique --- une chaîne de réductions certifiées faisant converger
+la conjecture sur un seul objet, et la mesure, par paramétrisation du prédicat de
+primalité, que ces réductions ne contiennent aucune arithmétique --- est rapportée
+séparément, de même que le travail des organes de découverte qu'il a exercés. Rien de
+tout cela n'approche la conjecture. Ce qui a sa place ici est la paire de résultats
+ci-dessus~: un énoncé ouvert est un endroit particulièrement propice pour attraper un
+défaut de fidélité, précisément parce que rien ne le démontre.
 
 %% ============================================================================
 \section{Travaux connexes}
@@ -1205,7 +1180,7 @@ enregistrés avec une discipline égale.
 un livre. Chaque revendication de cet article est une revendication d'existence ou
 d'instance, jamais une revendication statistique. L'instrument de dette n'est valide
 qu'au premier appel d'un process frais (sous-comptage mesuré de $-62\,\%$ sinon)~; la
-suite complète tourne en 2\,h\,43 à quatre workers et l'environnement tue les longues
+suite complète tourne en 2\,h\,03 à douze workers (2\,h\,43 aux quatre de la semaine rapportée ici) et l'environnement tue les longues
 exécutions vers 50 minutes, ce qui borne le délai expérimental et a dicté la discipline
 de découpage.
 
@@ -1246,20 +1221,21 @@ localiser par périmètre mesuré, réparer structurellement, prouver la guéris
 le coût} --- tourne de bout en bout sur des mathématiques vivantes, deux fois.
 
 \begin{figure}[t]\centering
+\resizebox{\linewidth}{!}{%
 \begin{tikzpicture}[node distance=5mm and 8mm]
 \node[draw=gray, rounded corners=3pt, minimum width=34mm, minimum height=22mm, font=\scriptsize] (T0) {};
 \node[font=\scriptsize\bfseries, anchor=north west] at (T0.north west) {\;$T_0$ (22 axiomes)};
 \node[open, draw=orange!85!black, font=\scriptsize] at ($(T0.center)+(0,1.5mm)$) {$X_\iota = f(\iota)$ ?};
 \node[font=\tiny, gray, anchor=south] at (T0.south) {$T_0 \nvdash P$ \; et \; $T_0 \nvdash \neg P$};
-\node[draw=blue!60!black, fill=blue!5, rounded corners=3pt, minimum width=46mm, minimum height=26mm, right=12mm of T0, font=\scriptsize] (T1) {};
+\node[draw=blue!60!black, fill=blue!5, rounded corners=3pt, minimum width=58mm, minimum height=26mm, right=12mm of T0, font=\scriptsize] (T1) {};
 \node[font=\scriptsize\bfseries, anchor=north west, blue!60!black] at (T1.north west) {\;$T' = T_0 \cup \{\delta\}$};
-\node[ax, font=\tiny] at ($(T1.center)+(-9mm,-5mm)$) (a22) {22 axiomes};
-\node[draw=orange!85!black, fill=orange!14, rounded corners=2pt, font=\tiny] at ($(T1.center)+(9mm,-5mm)$) (delta) {$\delta$~: pont fam$\leftrightarrow$valeur};
+\node[ax, font=\tiny] at ($(T1.center)+(-15mm,-5mm)$) (a22) {22 axiomes};
+\node[draw=orange!85!black, fill=orange!14, rounded corners=2pt, font=\tiny] at ($(T1.center)+(11mm,-5mm)$) (delta) {$\delta$: fam$\leftrightarrow$valeur};
 \node[goal, font=\tiny] at ($(T1.center)+(1mm,4mm)$) (iP) {$\vdash X_\iota = f(\iota)$};
 \draw[fl] (a22) -- (iP); \draw[fl] (delta) -- (iP);
 \draw[fl] (T0.east) -- node[above, font=\tiny] {$\iota$} (T1.west);
 \draw[gl, dashed] (iP.west) to[bend right=25] node[above, font=\tiny, green!40!black] {transport} ($(T0.north)+(2mm,-1mm)$);
-\end{tikzpicture}
+\end{tikzpicture}}
 \caption{Le coup que seul un substrat où la théorie est une donnée permet.
 \textbf{Lecture}~: chaque grand rectangle arrondi est une \emph{théorie} (à gauche la
 référence $T_0$, à droite son extension $T'$)~; à l'intérieur, les boîtes bleues sont
@@ -1282,7 +1258,7 @@ cette limite qui rend le corpus précieux comme données d'entraînement~: chaqu
 étiquette est exacte.
 
 La feuille de route découle des mesures. Une instrumentation de rejeu transforme le
-corpus existant de 4\,099 tests en $10^5$--$10^6$ tuples certifiés (état, action,
+corpus existant de 4\,221 tests en $10^5$--$10^6$ tuples certifiés (état, action,
 verdict) sans formaliser une seule page nouvelle --- l'usine à données est la même
 infrastructure que le cache de termes qui supprime le coût dominant de reconstruction.
 Une API d'environnement ($\mathit{reset}(T,P)$ / $\mathit{step}$) expose la boucle à
