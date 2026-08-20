@@ -163,6 +163,26 @@ sur blanc dans l'article est condescendant. Ce qui compte est que l'article le
 **fasse**, pas qu'il l'annonce. *(A3 avait une Remarque là-dessus ; elle a été
 supprimée.)*
 
+**Corollaire, et il se balaie mécaniquement : aucune notation ne doit être employée
+avant d'être introduite.** Karl a relevé trois fautes de cette famille une par une ;
+corriger les trois n'était que traiter des instances. `article/scripts/notations.py`
+traite la classe — il donne, pour chaque notation en mode mathématique, sa première
+utilisation et le premier endroit qui l'introduit, et classe en `JAMAIS` / `APRÈS` / `OK`.
+
+```bash
+python article/scripts/notations.py article/main.tex article/goldbach/main_fr.tex
+```
+
+Ce qu'il a trouvé au premier passage, et qu'aucune relecture n'avait vu : **A3 employait
+`⊢` d'un bout à l'autre sans jamais l'introduire** — A1 le pose, A3 déférait au compagnon
+sans le dire. Et `□` y était utilisé sans qu'on précise ce qu'il marque.
+
+⚠️ **L'outil range, il ne tranche pas**, et il le dit lui-même : il ne comprend pas le
+texte, sa liste `STANDARD` exempte les notations usuelles à la main, et il renonce
+explicitement à suivre les `$…$` multilignes — une désynchronisation ferait prendre des
+pages de prose pour des formules, et il vaut mieux qu'il sous-signale que qu'il invente.
+Le jugement reste humain ; l'outil garantit seulement que rien n'échappe à l'examen.
+
 La règle, posée par Karl le 20 août après deux erreurs relevées sur A3 : **utiliser un
 signe, c'est déclarer qu'on travaille dans une théorie qui le possède.** Elle est facile
 à enfreindre sans s'en apercevoir, et le noyau ne l'attrape pas — il vérifie des

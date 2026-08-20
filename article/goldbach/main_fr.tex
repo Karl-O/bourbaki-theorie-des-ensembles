@@ -213,6 +213,14 @@ règle d'axiome, \emph{de quelle théorie l'axiome a été tiré}. Le théorème
 lorsque $H = \emptyset$.
 \end{definition}
 
+\noindent
+\textbf{Notation.} Nous écrivons $\vdash R$ lorsque le noyau peut construire un théorème
+clos de conclusion $R$, et $\Gamma \vdash R$ lorsqu'il en construit un dont les
+hypothèses sont contenues dans $\Gamma$. Tous les $\vdash$ de cet article sont donc
+\emph{témoignés par un objet}, jamais affirmés~: chacun correspond à une exécution que le
+paquet rejoue (section~\ref{sec:repro}). C'est une notation métalinguistique sur le
+noyau, non un signe d'une théorie qu'il manipule.
+
 Une \emph{théorie} au sens de Bourbaki est un nom accompagné d'un ensemble fini d'axiomes
 explicites. La théorie des ensembles de référence en porte 22, et ce compte est
 ré-affirmé à chaque exécution de chaque script de cet article --- c'est l'invariant par
@@ -233,8 +241,9 @@ Il faut d'abord dire ce qu'est $\tau_x(A)$, et le point est facile à manquer.
 \begin{definition}[$\tau_x(A)$ --- E~I.16, l.~1--4]\label{def:tau}
 Former $\tau_x(A)$, c'est~: préfixer $A$ par le signe $\tau$, \textbf{lier} au $\tau$
 chaque occurrence de la lettre $x$, puis \textbf{remplacer chacune de ces occurrences par
-le signe $\square$}. Le résultat \textbf{ne contient plus la lettre $x$}. Bourbaki en
-donne l'exemple à la ligne suivante~:
+le signe $\square$} --- l'un des quatre signes logiques du livre, qui marque une position
+occupée jadis par une variable liée. Le résultat \textbf{ne contient plus la lettre $x$}.
+Bourbaki en donne l'exemple à la ligne suivante~:
 \[
 \tau_x(\,\in\, x\, y\,)
 \quad\text{\emph{est l'assemblage}}\quad
