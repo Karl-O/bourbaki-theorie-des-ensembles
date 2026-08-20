@@ -175,6 +175,19 @@ de trous.*
   avec une note « prose, rien à formaliser » — ainsi CHAQUE ligne du livre est comptabilisée.
 - `<repère Bourbaki>` = repère imprimé du livre, ex. `E III.2` (E = pagination interne du livre).
 - `L.<l1>-<l2>` = lignes sur CETTE page (une démo placée ailleurs a son **propre** `@livre`).
+  ⚠️ **MESURÉ LE 2026-08-20 : L'EXISTANT NE TIENT PAS CETTE CONVENTION.** Au moins deux
+  références coexistent dans le corpus. Sur `E II.22` (36 lignes imprimées, comptées à la
+  main : Déf. 1 en L.15-18, Déf. 2 en L.27-30) les marqueurs disent `L.31-36` et
+  `L.49-53` — le second dépasse la page, mais la ligne 53 de la **transcription V7** est
+  exactement `\paragraph{Définition 2}` : ces marqueurs-là indexent le `Texte.tex`. Sur
+  `E II.7`, l'inverse : le marqueur colle à la page imprimée (à ±2) et pas du tout à V7.
+  Sur les 1 992 intervalles du dépôt, **12,2 % finissent au-delà de la ligne 36** (≈ une
+  page pleine de cette édition), max 63 — ceux-là ne peuvent pas être des lignes
+  imprimées. **Conséquence : la PAGE est fiable, l'intervalle de LIGNES ne l'est pas.**
+  Les trous intra-page de `gen_trous_livre.py` sont donc une **heuristique de localisation**,
+  pas une mesure certifiée ; ne pas leur faire dire plus. Pour toute notion écrite
+  désormais, tenir la convention ci-dessus (ligne imprimée) ; le recalage de l'existant
+  n'est pas fait.
 - `PDF p.<phys>` = page physique du scan. Offsets : Ch I `+0`, II `+51`, III `+103`, IV `+203`, Résumé `+303`.
   (Ancres vérifiées en-tête : E III.7=p.110, E III.66=p.169 ; E IV.1=p.204, E IV.2=p.205, E IV.3=p.206. Ces offsets sont des **ancres** : toujours confirmer l'en-tête imprimé de la page rendue, car la pagination peut dériver d'1 page dans une queue d'exercices.)
 - Exemple : `# @livre Ch.III §1.2 Prop.1 | E III.2 L.3-14 | PDF p.109`

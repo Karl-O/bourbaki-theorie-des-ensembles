@@ -817,3 +817,60 @@ qu'on suit le comptage physique ou celui des deux marqueurs déjà en place.
 décision.** 25 des 45 marqueurs non-démo du tri du 18 août sont concernés.
 Ce qui a pu être corrigé sans ambiguïté l'a été (commits 452f071, 5bb1e59,
 3f0ee94, 0b5e515) ; le reste attend la règle.
+
+---
+
+## 2026-08-20 — La convention `L.x-y` des `@livre` : DEUX références coexistent
+
+**Statut : MESURÉ, non corrigé.** Ceci clôt la question laissée en suspens le 19 août
+(« quelle convention adopter ? »). Ce n'était pas une décision à prendre : c'était une
+mesure à faire.
+
+### Ce qui a été trouvé
+
+`E II.22` (PDF p.73) a été comptée à la main : **36 lignes imprimées** en tout, en-têtes
+et note de bas de page comprises. Déf. 1 y occupe les lignes **15-18**, Déf. 2 les
+lignes **27-30**.
+
+Les marqueurs du dépôt disent `L.31-36` (Déf. 1) et `L.49-53` (Déf. 2). Le second
+**dépasse la page**. Mais dans la transcription V7
+(`Chapitre_II.../4_Reunion_et_intersection.../1_Definition.../Texte.tex`), la ligne 53
+est exactement `\paragraph{Définition 2}` : **ces marqueurs indexent le `Texte.tex`, pas
+le livre.**
+
+Sur `E II.7`, c'est l'inverse : le marqueur `L.3-4` de la Prop. 1 est proche de la ligne
+imprimée (5-6, écart −2) et ne correspond pas à V7 (la Prop. 1 y est en 6-8).
+
+### Le chiffre
+
+Sur les **1 992** marqueurs portant un intervalle :
+
+| seuil | marqueurs | part |
+|---|---:|---:|
+| fin > 36 (≈ une page pleine) | 243 | **12,2 %** |
+| fin > 45 | 64 | 3,2 % |
+| fin > 55 | 6 | 0,3 % |
+| maximum | 63 | — |
+
+Le gros de la distribution a la forme d'une page imprimée ; la queue de 12 % ne peut pas
+en être une.
+
+### Conséquence, et ce qu'on en fait
+
+- **La PAGE est fiable.** C'est elle qui porte les 5 parties « complètes sur
+  l'intervalle » et les 0 marqueur non conforme de `gen_livre_manifestes`.
+- **L'intervalle de LIGNES ne l'est pas, de façon non uniforme.** Les trous intra-page de
+  `gen_trous_livre.py` restent une **heuristique de localisation** — utile pour savoir où
+  regarder, sans valeur de mesure.
+- `CLAUDE.md` a été corrigé : la convention y est maintenue pour ce qu'on écrit
+  désormais, avec l'avertissement que l'existant ne la tient pas.
+- L'article A1 a été recalé en conséquence : il revendique la traçabilité **à la
+  granularité de la page**, et présente les intervalles comme heuristiques. C'était une
+  revendication trop forte, et c'est le propre thèse de A1 retournée contre lui — aucun
+  test n'attrape un marqueur qui décrit mal le livre.
+
+### Ce qui reste ouvert
+
+Le recalage des ~243 marqueurs hors-page n'est pas fait, et il demande d'ouvrir les
+pages une à une. Rien ne presse : aucun résultat n'en dépend, puisque plus rien ne
+s'appuie sur l'intervalle.

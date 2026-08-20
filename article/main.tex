@@ -52,7 +52,7 @@ status we state explicitly; (iii) \emph{debt measurement}: a theorem
 advertised as hypothesis-free is measured to consume 53 axioms of ad-hoc theories
 invisible to its statement, motivating a sound accounting of what a derivation actually
 assumes; and (iv) \emph{mechanized fidelity auditing} against the source text at
-page-and-line grain, under which two axiom transcription defects were detected by
+page granularity, under which two axiom transcription defects were detected by
 \emph{deriving a contradiction}, repaired by restoring the book's form, and proven fixed
 by the impossibility of re-deriving it. A Weisfeiler-Leman similarity scan reduces the
 detection of one such incoherence from a 95-minute two-agent investigation to a
@@ -326,11 +326,14 @@ a free variable of an ad-hoc axiom is a \emph{constant} of that theory when
 generalizing.
 
 The corpus at the time of writing: 4{,}099 collected tests re-deriving its theorems at
-each run, 2{,}181 notions anchored to the printed book at page-and-line grain, and a
+each run, 2{,}234 notions anchored to the printed book at page granularity, and a
 232-event journal of certified failures --- the object of study of this paper.
 
 Its weight is worth stating, because the name of the book invites a wrong picture. The
-2{,}181 anchored notions distribute over the tower and the chapters it carries:
+2{,}181 notions anchored at the time of the campaign reported in
+Section~\ref{sec:case-study} distribute over the tower and the chapters it carries as
+follows (the corpus has since grown to 2{,}234; the breakdown is a snapshot, not a
+running total):
 
 \begin{center}\small
 \begin{tabular}{llr}
@@ -621,7 +624,33 @@ case from the instrumented week.}
 \subsection{The anchoring discipline and the infidelity verdict}
 Every formalized notion carries a machine-readable anchor
 \texttt{@livre Ch.X \S{}s.ss Type.n | E X.pp L.a-b | PDF p.n} tying it to the printed
-source at page-and-line grain (2{,}181 anchored notions at the time of writing). Let
+source (2{,}234 anchored notions at the time of writing). The anchor has two fields of
+different reliability, and we separate them because we measured them.
+
+\paragraph{The page anchor is sound; the line interval is not uniformly so.} The page
+field is what carries the coverage results below: zero non-conforming anchors, and five
+parts of the book reported complete over their intervals. The line interval is weaker,
+and we discovered this by auditing our own anchors against the book. On page E~II.22 ---
+36 printed lines, counted by hand --- Definition~1 stands at lines 15--18 and
+Definition~2 at 27--30, while their anchors read \texttt{L.31-36} and \texttt{L.49-53};
+the second exceeds the page. Line 53 of our \LaTeX{} \emph{transcription} of that page,
+however, is exactly the header of Definition~2: those two anchors index the
+transcription, not the book. On page E~II.7 the opposite holds --- the anchor tracks the
+printed line with a small offset and does not match the transcription at all. At least
+two conventions coexist in the corpus.
+
+Measured over the 1{,}992 anchors carrying a line interval: \textbf{12.2\% end beyond
+line 36}, which is about a full page of this edition, so they cannot be printed-line
+references; the maximum is 63. The bulk of the distribution has the shape of a printed
+page, with a tail that does not.
+
+We therefore claim traceability \emph{at page granularity}, which is what the coverage
+instruments actually consume, and we report the intra-page line intervals as a
+\emph{heuristic} for locating unformalized material rather than as a certified measure.
+This is a weaker claim than the one this paper made in draft, and the reason to record
+it here is that it is the paper's own thesis turned on the paper: no test in a
+kernel-verified repository catches an anchor that misdescribes the book, and ours went
+unexamined until we opened the pages. Let
 $\Phi$ be the transcription of the book's numbered statements. Fidelity itself ---
 ``$\varphi(b)$ \emph{means} $b$'', for a statement $b$ of the book and its
 formalization $\varphi(b)$ --- relates text to formulas and is not formalizable;
@@ -821,6 +850,7 @@ query.
 
 %% ============================================================================
 \section{Case Study: One Instrumented Week}
+\label{sec:case-study}
 %% ANCRE: CAMPAGNE_DEMOS.md (26 juil - 2 aout) ; events.jsonl (95) ; suites de tests
 %% ============================================================================
 \label{sec:casestudy}
