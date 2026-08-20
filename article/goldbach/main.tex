@@ -4,7 +4,16 @@
 \usepackage{amsmath,amssymb,amsthm}
 \usepackage{booktabs}
 \usepackage{graphicx}
-\usepackage[margin=2.7cm]{geometry}
+% ---------------------------------------------------------------------------
+% LISIBILITE — voir docs/articles/STYLE_ARTICLES.md §2. A 11pt, une marge de
+% 2,7cm donne une ligne de ~90 caracteres, tres au-dessus de l'optimum de
+% lecture (65-75) ; et \parskip nul ne separe pas deux paragraphes. Les deux
+% ensemble font la page en « bloc gris », quelle que soit la longueur du texte.
+% ---------------------------------------------------------------------------
+\usepackage[a4paper,textwidth=13.8cm,textheight=22.4cm]{geometry}
+\linespread{1.06}
+\setlength{\parskip}{.55em plus .15em minus .1em}
+\setlength{\parindent}{1.1em}
 \usepackage{hyperref}
 \usepackage{tikz}
 \usetikzlibrary{positioning,arrows.meta,calc}
@@ -104,10 +113,11 @@ assemblies, and the body of criteria Bourbaki \emph{proves} about proofs rather 
 posits as rules. The arithmetic is the corpus's own constructed cardinal arithmetic,
 not a primitive type of naturals. Two consequences matter here. The oracle is
 \emph{exact}: every claim below is a kernel object or a stated measurement, never an
-estimate. And because $\exists x\,\varphi(x)$ \emph{is} $\varphi(\tau x\,\varphi)$ in
-Bourbaki's system rather than a separate quantifier, the conjecture can be rewritten
-with no existential quantifier at all --- three properties of two named terms
-(Section~\ref{sec:map}). That is not available in a conventional setting, and it turns
+estimate. And the existential quantifier is not primitive: in Bourbaki's system
+$(\exists x)R$ is an \emph{abbreviation}, obtained by substituting for $x$ in $R$ a term
+built on the choice operator $\tau$ (Section~\ref{sec:background}). The conjecture can
+therefore be rewritten with no existential quantifier at all --- three properties of two
+named terms (Section~\ref{sec:map}). That is not available in a conventional setting, and it turns
 out to be the form in which the machine's own search organs later re-derive the
 statement unaided.
 
@@ -187,6 +197,14 @@ the axiom rule, \emph{which theory the axiom was drawn from}. The theorem is
 \emph{closed} when $H = \emptyset$.
 \end{definition}
 
+\noindent
+\textbf{Notation.} We write $\vdash R$ when the kernel can construct a closed theorem
+whose conclusion is $R$, and $\Gamma \vdash R$ when it constructs one whose hypotheses
+are contained in $\Gamma$. Every $\vdash$ in this paper is therefore \emph{witnessed by
+an object}, never asserted: each corresponds to an execution the package replays
+(Section~\ref{sec:repro}). It is a metalinguistic notation about the kernel, not a sign
+of any theory the kernel manipulates.
+
 A \emph{theory} in Bourbaki's sense is a name together with a finite set of explicit
 axioms. The reference theory of sets carries 22 of them, and that count is re-asserted
 at every execution of every script in this paper --- it is the invariant by which the
@@ -201,13 +219,41 @@ separately or a result rests on axioms nobody counted.
 \subsection{The existential quantifier is not primitive}
 
 In \emph{Th\'eorie des ensembles} the quantifiers are not primitive signs but
-\emph{abbreviations} built from Hilbert's choice operator $\tau$. For a relation $R$
-and a letter $x$,
+\emph{abbreviations} built from Hilbert's choice operator $\tau$. One must first say
+what $\tau_x(A)$ is, and the point is easy to miss.
+
+\begin{definition}[$\tau_x(A)$ --- E~I.16, ll.~1--4]\label{def:tau}
+To form $\tau_x(A)$: prefix $A$ with the sign $\tau$, \textbf{link} to that $\tau$ every
+occurrence of the letter $x$, then \textbf{replace each of those occurrences by the sign
+$\square$} --- one of the book's four logical signs, marking a position a bound variable
+used to occupy. The result \textbf{no longer contains the letter $x$}. Bourbaki gives the
+example on the next line:
+\[
+\tau_x(\,\in\, x\, y\,)
+\quad\text{\emph{is the assembly}}\quad
+\vcenter{\hbox{\begin{tikzpicture}[inner sep=1.2pt, node distance=4pt]
+  \node (t) {$\tau$};
+  \node[right=of t] (i) {$\in$};
+  \node[right=of i] (b) {$\square$};
+  \node[right=of b] (y) {$y$};
+  \draw[semithick] (t.north) -- ++(0,3.4mm) -| (b.north);
+\end{tikzpicture}}}
+\]
+The stroke \emph{is} the link: it belongs to the assembly exactly as the signs do. It is
+what says which $\tau$ governs which $\square$, and it is why an assembly is a
+\textbf{graph} and not a string --- two adjacent $\square$ may be linked to different
+$\tau$. The notation ``$\tau_x$'' is metalinguistic: it reminds us which letter was
+abstracted, but the assembly carries no trace of it.
+\end{definition}
+
+Everything else follows. Since the bound variable has vanished into the links, there is
+\emph{nothing to rename}: the system has no $\alpha$-conversion, and substitution in it
+is trivial by construction. On that basis, for a relation $R$ and a letter $x$:
 \[ (\exists x)R \;:=\; (\tau_x(R) \mid x)\,R , \]
-where $(A \mid x)\,R$ denotes the assembly obtained by substituting $A$ for every
-occurrence of $x$ in $R$. The term $\tau_x(R)$ denotes ``some object satisfying $R$,
-if there is one'', so the existential statement \emph{is} the statement that this
-particular named term satisfies $R$.
+where $(B \mid x)\,A$ denotes the assembly obtained by replacing every occurrence of $x$
+in $A$ by $B$. The term $\tau_x(R)$ denotes ``some object satisfying $R$, if there is
+one'', so the existential statement \emph{is} the statement that this particular,
+explicitly constructed term satisfies $R$.
 
 Two consequences matter here. First, an existential goal can be traded for properties
 of an explicitly named term, with no extra axiom --- this is the mechanism of
@@ -289,10 +335,16 @@ $\alpha$-renaming bridge --- the repository's statement forces two distinct spel
 \texttt{est\_premier}, and the bridge crosses between them. That bridge will reappear in
 Section~\ref{sec:abstract} as an artifact rather than a step.
 
-\paragraph{The conjecture without an existential quantifier.} Applying
-$(\exists x)\varphi \equiv \varphi(\tau x\,\varphi)$ twice, with
-$T := \tau p\,(\exists q\;\mathrm{mat})$ and $Q := \tau q\,(\mathrm{mat}[p := T])$, the
-conjecture becomes
+\paragraph{The conjecture without an existential quantifier.} Apply the definition of
+Section~\ref{sec:background} twice. Write $\mathrm{mat}$ for the matrix ``$p$ and $q$
+prime and $2k = p+q$'', and set the two terms
+\[
+T \;:=\; \tau_p\bigl((\exists q)\,\mathrm{mat}\bigr),
+\qquad
+Q \;:=\; \tau_q\bigl((T \mid p)\,\mathrm{mat}\bigr) .
+\]
+Neither $T$ nor $Q$ contains a bound letter --- that is Definition~\ref{def:tau}.
+Substituting $T$ for $p$ and then $Q$ for $q$, the conjecture becomes
 \[
 \mathrm{prime}_1(T) \;\wedge\; \mathrm{prime}_2(Q) \;\wedge\; 2k = T + Q ,
 \]
@@ -301,7 +353,7 @@ axioms. Nothing is gained mathematically --- no information is created --- but t
 \emph{shape} of the question changes, from ``does a witness exist'' to ``does a named
 term have these properties''. We note in passing, since it belongs to the companion
 paper, that the campaign's search organs later reconstructed exactly this move on their
-own: a witness-\emph{proposing} organ that fabricates $\tau x(\varphi)$ from the goal
+own: a witness-\emph{proposing} organ that fabricates $\tau_x(\varphi)$ from the goal
 alone turns the reported gap on a decomposition goal from the intact existential
 statement into a statement about the properties of a named term.
 
@@ -461,12 +513,32 @@ $\vdash (\forall k)\bigl[\,k \text{ finite} \Rightarrow
 \bigl(\mathrm{meet}(k) \Leftrightarrow (\exists m)(m \in P_{2k} \cap Q_{2k} \wedge m \le k)\bigr)\,\bigr].$
 \end{proposition}
 
-The supporting lemma is pure cardinal arithmetic with no prime in it: if $2k = m + m'$
-with all three finite, then $m \le k$ or $m' \le k$. Its proof avoids strict
-inequalities entirely --- they are expensive in this kernel --- by using comparability
-to open two cases, the existence of a complement in the case $k \le m$ to write
-$m = k + d$, and then finite additive cancellation on
-$k + k = (k+d) + m' = k + (d + m')$ to get $k = d + m'$.
+The supporting lemma is pure cardinal arithmetic with no prime in it:
+\[
+\mathrm{Fin}\,k \wedge \mathrm{Fin}\,m \wedge \mathrm{Fin}\,m'
+\wedge\; 2k = m + m'
+\qquad\Longrightarrow\qquad
+m \le k \;\;\text{or}\;\; m' \le k .
+\]
+
+Its proof takes four lines, and is worth showing because it uses \emph{no strict
+inequality} --- those are expensive in this kernel. Comparability of cardinals opens two
+cases; the one where $m \le k$ concludes by itself. Here is the other, $k \le m$:
+
+\[
+\begin{array}{r@{\;}c@{\;}l@{\qquad}l}
+  k + k &=& m + m'      & \text{the hypothesis} \\[2pt]
+        &=& (k + d) + m'& d \text{ exists since } k \le m \text{ (Prop.\ 13: the complement)} \\[2pt]
+        &=& k + (d + m')& \text{iterated associativity} \\[4pt]
+\hline \\[-8pt]
+      k &=& d + m'      & \text{additive cancellation --- \emph{requires} } \mathrm{Fin} \\[2pt]
+     m' &\le& k         & \text{Prop.\ 2: a summand is below the sum}
+\end{array}
+\]
+
+\noindent
+The last line gives the result; the one above it is what forces the guard --- exactly
+where Remark~\ref{rem:cancel} bites.
 
 \begin{remark}[the guard is not caution]
 Finite additive cancellation is \emph{false} for infinite cardinals. Without the
@@ -648,13 +720,37 @@ police.
 %% journal du 11 aout (v17 fermait deja a+b=b+a)
 %% ============================================================================
 
-\paragraph{Raw counting.} The pigeonhole criterion $2 \cdot \pi(2k) > 2k+1$ --- which
-would force $P_{2k}$ and its mirror to intersect by cardinality alone --- holds for no
-$k \ge 2$. The density $\pi/k$ falls from $0.50$ to $0.18$ by $2k = 2 \cdot 10^5$, while
-the actual number of decompositions \emph{grows} (2 to 1417) over the same range. This
-is a numerical measurement, not a proof. Its consequence was a decision: do not
-formalize inclusion--exclusion for this problem. What is needed is information about the
-\emph{distribution} of $P_{2k}$, not about its cardinality.
+\paragraph{Raw counting.} A pure cardinality argument would force the meeting if the two
+sets were too large to avoid one another:
+\[
+\underbrace{2 \cdot \pi(2k) > 2k + 1}_{\text{pigeonhole criterion}}
+\quad\Longrightarrow\quad
+P_{2k} \cap Q_{2k} \neq \emptyset .
+\]
+The implication is correct. Its antecedent \textbf{holds for no $k \ge 2$} --- and the
+gap only widens.
+
+Figure~\ref{fig:comptage} puts the two quantities side by side, and that is the whole
+argument: \emph{the quantity counting can see collapses while the quantity we care about
+explodes}. Over $2k$ from $4$ to $192\,152$, the density $\pi(2k)/k$ falls from $1.00$ to
+$0.18$, while the number of decompositions of $2k$ into two primes rises from $1$ to
+$1\,031$ (unordered pairs, $p \le q$).
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\linewidth]{figures/comptage.png}
+\caption{The two curves run in opposite directions. In red, what a cardinality argument
+can see: the density $\pi(2k)/k$, which falls and never crosses the pigeonhole threshold
+again. In blue, what we care about: the actual number of decompositions, which grows. A
+criterion reading only the first curve can say nothing about the second.
+\textbf{A numerical measurement by sieve, not a proof}: none of these values enters a
+theorem. Script: \texttt{figures/gen\_comptage.py}.}
+\label{fig:comptage}
+\end{figure}
+
+The consequence was a decision: do not formalize inclusion--exclusion for this problem.
+What is needed is information about the \emph{distribution} of $P_{2k}$, not about its
+cardinality --- and no aggregate quantity carries it.
 
 \paragraph{Equational reasoning.} The map above was drawn by a machine that could not
 reason equationally --- it built no congruences, chained no rewrites, instantiated no
