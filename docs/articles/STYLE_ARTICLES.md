@@ -154,7 +154,35 @@ dépôt. Faire la traduction *avant* de figer, pas après.
 
 ---
 
-## 7. La règle d'or, rappelée
+## 7. Un signe qu'on écrit est un signe qu'on suppose
+
+Règle posée par Karl le 20 août, après deux erreurs relevées sur A3 : **utiliser un
+signe, c'est déclarer qu'on travaille dans une théorie qui le possède.** Elle est facile
+à enfreindre sans s'en apercevoir, et le noyau ne l'attrape pas — il vérifie des
+dérivations, pas le sens qu'on prête aux symboles dans une phrase de prose.
+
+Les deux fautes réelles, à ne pas refaire :
+
+- **`=` hors d'une théorie égalitaire.** L'article écrivait `τx(∈ x y) = τ ∈ ▢ y`. Or
+  `=` est un signe relationnel de poids 2 introduit en **E I.38 (§I.5)**, avec les
+  schémas qui le gouvernent ; il n'existe pas au niveau §I.1 où vivent les assemblages.
+  Ce qu'on voulait dire était une **identité métalinguistique** — deux notations
+  désignent la même suite de signes et de liens. Écrire « *est l'assemblage* », pas `=`.
+  (Les `=` de l'arithmétique cardinale sont légitimes : on y est dans la théorie des
+  ensembles, qui est égalitaire.)
+
+- **`τx(A)` écrit comme s'il contenait encore `x`.** Former `τx(A)` lie chaque occurrence
+  de `x` au `τ` **puis la remplace par ▢** : le terme ne contient plus la lettre
+  (E I.16 L.1-4, exemple L.5). Donc jamais `φ(τx φ)` — ni la notation fonctionnelle, ni
+  le `x` fantôme. La forme correcte est la substitution `(τx(R) | x) R`.
+
+**Le réflexe à avoir** : avant d'écrire un symbole dans une section qui parle du niveau
+logique, se demander *à quel chapitre du livre ce signe est-il introduit, et suis-je déjà
+dedans ?* Les marqueurs `@livre` du dépôt répondent en une recherche.
+
+---
+
+## 8. La règle d'or, rappelée
 
 Elle précède tout le reste et ne change pas : **chaque phrase d'un article doit être
 adossée à un objet du dépôt** — théorème, mesure, événement, source. Une affirmation sans
