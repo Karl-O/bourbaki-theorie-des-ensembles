@@ -139,7 +139,8 @@ ce kilomètre instrumenté, non tel ou tel théorème, que cet article mesure.
   \item La première mécanisation, à notre connaissance, du formalisme propre de
         Bourbaki~: $\tau$, assemblages et critères C1--C62, comme corpus vivant et
         testé (section~\ref{sec:background}).
-  \item Des objets d'échec certifiés à périmètre calculé, et la taxonomie E1--E7,
+  \item Des objets d'échec certifiés à périmètre calculé, et la taxonomie E1--E7
+        (sept classes identifiées, chacune instanciée~; la liste est ouverte),
         chaque classe étant instanciée par un cas réel et mesuré
         (section~\ref{sec:certified-failure}).
   \item La mesure de dette $Ax(D)$ --- avec l'écart mesuré entre hypothèses déclarées
@@ -620,8 +621,9 @@ $\mathit{Echec} = (P, \kappa, c, \mathit{rebroussement}, \mathit{perimetre})$ --
 gardons les noms français du dépôt, $\mathit{Echec}$ et $\mathit{Mur}$, pour coller au
 code. Ici $P$ est le \emph{but} au sens fixé plus haut --- une relation de $\mathcal{R}$
 à dériver dans une théorie ---, et non la route ni le théorème auquel elle a abouti~;
-$\kappa \in \{E1,\dots,E7\}$ sa classe
-d'échec, $c$ un objet du noyau certifiant cette classe, $\mathit{rebroussement}$ le
+$\kappa \in \mathcal{K}$ sa classe d'échec, où $\mathcal{K}$ est l'ensemble des classes
+que nous avons \emph{identifiées} et $|\mathcal{K}| \ge 7$ (voir ci-dessous)~;
+$c$ un objet du noyau certifiant cette classe, $\mathit{rebroussement}$ le
 changement énoncé qui évite d'y retomber, et $\mathit{perimetre}$ l'ensemble
 \emph{calculé} des buts que l'échec condamne.
 $\mathsf{verifier}$ accepte ssi $c$ correspond à $\kappa$~: pour $E2$ (vacuité),
@@ -715,9 +717,28 @@ E6 infidélité & $A_{T_0} \cup \Phi \vdash \bot$ & dérivation close $+$ ancre 
 E7 mesure & la sonde a menti & contre-mesure & sonde à noms devinés (faux négatif) \\
 \bottomrule
 \end{tabular}
-\caption{La taxonomie des échecs. Chaque classe est instanciée par un cas réel de la
-semaine instrumentée, vérifié par le noyau.}
+\caption{La taxonomie des échecs \emph{telle que nous l'avons identifiée}. Chaque classe
+listée est instanciée par un cas réel de la semaine instrumentée, vérifié par le noyau.
+La liste est \textbf{ouverte}~: rien ici ne montre que sept soit tout ce qu'il y a.}
 \end{table}
+
+\paragraph{La taxonomie est ouverte, et ne se referme pas par les mêmes moyens que le
+reste.} Nous écrivons $\mathcal{K}$ pour l'ensemble des classes d'échec et
+$|\mathcal{K}| \ge 7$ plutôt que $\kappa \in \{E1,\dots,E7\}$, parce que la seconde
+notation affirme ce que nous n'avons pas établi. Sept classes ont été identifiées et
+chacune instanciée par un cas réel~; qu'il existe un échec n'entrant dans aucune n'est ni
+exclu ni exclusible ici. Les classes ont été trouvées en regardant des échecs, non
+dérivées d'un principe~: le catalogue s'accroît donc par rencontre, et un échec ne
+correspondant à aucun $\kappa$ devient $E8$.
+
+L'asymétrie est celle que cet article rencontre deux fois ailleurs. L'infidélité est
+semi-décidable --- on peut toujours en \emph{trouver} une, jamais certifier leur absence
+(section~\ref{sec:fidelity})~; la nouveauté de même (section~\ref{sec:related}).
+L'exhaustivité de $\mathcal{K}$ est de cette famille~: exhiber une huitième classe est un
+acte fini, prouver qu'il n'y en a pas ne l'est pas. Nous rapportons donc un catalogue
+avec une borne inférieure, non un type à sept habitants --- et nous préférons qu'un
+lecteur trouve un $E8$ plutôt qu'il croie la liste close parce que nous l'avons composée
+entre accolades.
 
 %% ============================================================================
 \section{Fidélité mécanisée~: quand le corpus réfute le livre}

@@ -128,7 +128,8 @@ that instrumented mile, not any single theorem, that this paper measures.
   \item The first mechanization, to our knowledge, of Bourbaki's own formalism:
         $\tau$, assemblies and the C1--C62 criteria, as a live, tested corpus
         (Section~\ref{sec:background}).
-  \item Certified failure objects with computed scope, and the E1--E7 taxonomy,
+  \item Certified failure objects with computed scope, and the E1--E7 taxonomy
+        (seven classes identified, each instantiated; the list is open),
         every class instantiated by a real, measured case
         (Section~\ref{sec:certified-failure}).
   \item Debt measurement $Ax(D)$, the axioms a derivation $D$ actually
@@ -584,8 +585,9 @@ $\mathit{Echec} = (P, \kappa, c, \mathit{backtrack}, \mathit{scope})$ --- we kee
 repository's French names, $\mathit{Echec}$ (failure) and $\mathit{Mur}$ (wall), to
 match the code. Here $P$ is the \emph{goal} in the sense fixed above --- a relation of
 $\mathcal{R}$ to be derived in a theory --- not the route and not the theorem it
-reached, $\kappa \in
-\{E1,\dots,E7\}$ its failure class, $c$ a kernel object certifying that class,
+reached; $\kappa \in \mathcal{K}$ its failure class, where $\mathcal{K}$ is the set of
+classes we have \emph{identified} and $|\mathcal{K}| \ge 7$ (see below); $c$ a kernel
+object certifying that class,
 $\mathit{backtrack}$ the stated change that avoids falling into it again, and
 $\mathit{scope}$ the \emph{computed} set of goals the failure condemns. $\mathsf{verifier}$ accepts
 iff $c$ matches $\kappa$: for $E2$ (vacuity), $C(c) = \bot$ and $H(c) \subseteq$ the
@@ -676,9 +678,26 @@ E6 infidelity & $A_{T_0} \cup \Phi \vdash \bot$ & closed derivation $+$ source a
 E7 measurement & the probe lied & counter-measurement & name-guessing probe (false negative) \\
 \bottomrule
 \end{tabular}
-\caption{The failure taxonomy. Every class is instantiated by a real, kernel-checked
-case from the instrumented week.}
+\caption{The failure taxonomy \emph{as far as we have identified it}. Every class listed
+is instantiated by a real, kernel-checked case from the instrumented week. The list is
+\textbf{open}: nothing here shows that seven are all there are.}
 \end{table}
+
+\paragraph{The taxonomy is open, and cannot be closed by the same means as the rest.}
+We write $\mathcal{K}$ for the set of failure classes and $|\mathcal{K}| \ge 7$ rather
+than $\kappa \in \{E1,\dots,E7\}$, because the second notation asserts something we have
+not established. Seven classes were identified and each was instantiated by a real case;
+that a failure exists which fits none of them is neither excluded nor excludable here.
+The classes were found by looking at failures, not derived from a principle, so the
+catalogue grows by encounter: a failure matching no $\kappa$ becomes $E8$.
+
+The asymmetry is the same one this paper meets twice elsewhere. Infidelity is
+semi-decidable --- one can always \emph{find} one, never certify their absence
+(Section~\ref{sec:fidelity}); novelty likewise (Section~\ref{sec:related}). Exhaustiveness
+of $\mathcal{K}$ is of that family: exhibiting an eighth class is a finite act, proving
+there is none is not. We therefore report a catalogue with a lower bound, not a type with
+seven inhabitants, and we would rather the reader find an $E8$ than believe the list
+closed because we typeset it with braces.
 
 %% ============================================================================
 \section{Mechanized Fidelity: When the Corpus Refutes the Book}

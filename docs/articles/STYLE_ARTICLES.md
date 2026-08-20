@@ -209,7 +209,39 @@ dedans ?* Les marqueurs `@livre` du dépôt répondent en une recherche.
 
 ---
 
-## 8. La règle d'or, rappelée
+## 8. Une énumération n'est close que si on l'a démontrée close
+
+Règle posée par Karl le 20 août : *« tu dis qu'il y a 7 classes, mais on n'a pas prouvé
+qu'il n'y a que 7 échecs possibles — on en connaît 7, il y en a peut-être d'autres ».*
+
+A1 écrivait `κ ∈ {E1,…,E7}`. Les accolades **affirment un type fermé** alors que la
+taxonomie est un catalogue empirique : les classes ont été trouvées en regardant des
+échecs, pas dérivées d'un principe. Corrigé en `κ ∈ 𝒦` avec `|𝒦| ≥ 7`, plus un
+paragraphe qui dit pourquoi la liste ne peut pas se refermer ici.
+
+**Le test à s'appliquer** devant toute énumération : *l'a-t-on démontrée exhaustive, ou
+seulement constatée ?*
+
+| cas | comment l'écrire |
+|---|---|
+| exhaustif **par construction** (le dernier cas est « sinon ») | l'écrire fermé — c'est le cas de la trichotomie de A1 |
+| exhaustif **par le livre** (les 4 signes logiques de Bourbaki) | l'écrire fermé, avec le repère |
+| **catalogue constaté** (les 7 classes d'échec, les organes, les pièges) | `N` identifiés, `≥ N`, « la liste est ouverte » |
+| **compte d'un existant** (18 maillons, 32 tests, 2 234 notions) | fermé — c'est un inventaire, pas une théorie |
+
+⚠️ **Dire aussi ce qu'on ignore de la structure de l'ensemble** quand la question a un
+sens : fini, infini, dénombrable ? Pour les classes d'échec, on n'en sait rien, et
+l'article le dit plutôt que de laisser les accolades répondre à notre place.
+
+**Pourquoi ça compte au-delà du détail.** L'asymétrie est la même que celle que ces
+articles rencontrent partout ailleurs : exhiber une huitième classe est un acte fini,
+prouver qu'il n'y en a pas ne l'est pas — exactement comme l'infidélité et la nouveauté,
+que A1 déclare déjà semi-décidables. Une énumération faussement close est donc une
+incohérence *interne* au papier, pas seulement une imprécision.
+
+---
+
+## 9. La règle d'or, rappelée
 
 Elle précède tout le reste et ne change pas : **chaque phrase d'un article doit être
 adossée à un objet du dépôt** — théorème, mesure, événement, source. Une affirmation sans
