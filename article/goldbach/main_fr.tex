@@ -231,13 +231,27 @@ primitifs mais des \emph{abréviations} construites sur l'opérateur de choix de
 Il faut d'abord dire ce qu'est $\tau_x(A)$, et le point est facile à manquer.
 
 \begin{definition}[$\tau_x(A)$ --- E~I.16, l.~1--4]\label{def:tau}
-Former $\tau_x(A)$, c'est~: préfixer $A$ par le signe $\tau$, lier au $\tau$ chaque
-occurrence de la lettre $x$, puis \textbf{remplacer chacune de ces occurrences par le
-signe $\square$}. Le résultat \textbf{ne contient plus la lettre $x$}. Bourbaki en donne
-l'exemple à la ligne suivante~:
-\[ \tau_x(\,\in\, x\, y\,) \;=\; \tau \in \square\, y . \]
-La notation « $\tau_x$ » est métalinguistique~: elle rappelle quelle lettre a été
-abstraite, mais l'assemblage, lui, n'en porte aucune trace.
+Former $\tau_x(A)$, c'est~: préfixer $A$ par le signe $\tau$, \textbf{lier} au $\tau$
+chaque occurrence de la lettre $x$, puis \textbf{remplacer chacune de ces occurrences par
+le signe $\square$}. Le résultat \textbf{ne contient plus la lettre $x$}. Bourbaki en
+donne l'exemple à la ligne suivante~:
+\[
+\tau_x(\,\in\, x\, y\,) \;=\;
+\vcenter{\hbox{\begin{tikzpicture}[inner sep=1.2pt, node distance=4pt]
+  \node (t) {$\tau$};
+  \node[right=of t] (i) {$\in$};
+  \node[right=of i] (b) {$\square$};
+  \node[right=of b] (y) {$y$};
+  \draw[semithick] (t.north) -- ++(0,3.4mm) -| (b.north);
+\end{tikzpicture}}}
+\]
+Le trait est \emph{le lien} lui-même~: il fait partie de l'assemblage, au même titre que
+les signes. C'est lui qui dit quel $\tau$ gouverne quel $\square$, et c'est pourquoi un
+assemblage est un \textbf{graphe} et non une chaîne de caractères --- deux $\square$
+côte à côte peuvent être liés à des $\tau$ différents.
+
+La notation « $\tau_x$ » est, elle, métalinguistique~: elle nous rappelle quelle lettre a
+été abstraite, mais l'assemblage n'en porte aucune trace.
 \end{definition}
 
 C'est de là que vient tout le reste. Puisque la variable liée a disparu dans les liens,
