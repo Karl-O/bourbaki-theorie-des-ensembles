@@ -912,8 +912,12 @@ later returned 69 triaged references for 237k tokens where the week's first fan-
 had burned 266k for zero results. The harness, too, is part of the experiment.
 
 \paragraph{Reproducibility.} All measurements were taken on one Windows~11 machine:
-Python~3.13, pytest~9.0.3 with \texttt{pytest-xdist} at four workers,
-\texttt{PYTHONIOENCODING=utf-8}, suites sharded by zone. The debt instrument is valid
+Python~3.13, pytest~9.0.3 with \texttt{pytest-xdist}, \texttt{PYTHONIOENCODING=utf-8},
+suites sharded by zone. The test counts quoted in the case study above are those of the
+instrumented week and are left as measured then; for the record, the suite re-run in
+full on 20~August 2026 reports \textbf{4{,}221 passed in 2\,h\,03} at twelve workers
+with \texttt{--dist loadfile}. We report both rather than retrofitting the narrative
+with a later number. The debt instrument is valid
 only on the first measurement of a fresh process
 (Section~\ref{sec:certified-failure}); the twin scan ran with $K = 3$, $d = 512$,
 $\theta = 0.90$, $\theta_{\mathrm{twin}} = 0.95$, and is reproduced by
