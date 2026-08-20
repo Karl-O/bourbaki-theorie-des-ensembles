@@ -472,9 +472,12 @@ section~\ref{sec:trichotomy} est bâtie sur cette distinction exacte, et $\vdash
 $\nvdash$ sont des notations métalinguistiques sur le noyau, non des signes d'une théorie
 qu'il manipule.
 
-Une \emph{route} vers un but est une dérivation tentée de ce but, et le \emph{résidu}
-d'une route est l'ensemble des hypothèses que porte encore le théorème auquel elle
-aboutit --- c'est-à-dire $H(\theta)$ pour le $\theta$ que la route a produit. Un but a
+Un \emph{but} est un couple $(T, P)$ où $T$ est une théorie et $P \in \mathcal{R}$ la
+relation à y dériver~; on écrit le but $P$ seul chaque fois que la théorie est fixée par
+le contexte, ce qui est le cas dans tout cet article sauf mention contraire. Une
+\emph{route} vers un but est une dérivation tentée de $P$, et le \emph{résidu} d'une
+route est l'ensemble des hypothèses que porte encore le théorème auquel elle aboutit ---
+c'est-à-dire $H(\theta)$ pour le $\theta$ que la route a produit. Un but a
 en général plusieurs routes, et une même hypothèse peut être ouverte sur l'une et
 close sur l'autre~; c'est pourquoi les verdicts ci-dessous portent sur une hypothèse
 \emph{sur une route}, et non sur une hypothèse tout court.
@@ -615,7 +618,9 @@ l'enregistre comme telle.
 \begin{definition}[Échec certifié]
 $\mathit{Echec} = (P, \kappa, c, \mathit{rebroussement}, \mathit{perimetre})$ --- nous
 gardons les noms français du dépôt, $\mathit{Echec}$ et $\mathit{Mur}$, pour coller au
-code. Ici $P$ est le but qui était visé, $\kappa \in \{E1,\dots,E7\}$ sa classe
+code. Ici $P$ est le \emph{but} au sens fixé plus haut --- une relation de $\mathcal{R}$
+à dériver dans une théorie ---, et non la route ni le théorème auquel elle a abouti~;
+$\kappa \in \{E1,\dots,E7\}$ sa classe
 d'échec, $c$ un objet du noyau certifiant cette classe, $\mathit{rebroussement}$ le
 changement énoncé qui évite d'y retomber, et $\mathit{perimetre}$ l'ensemble
 \emph{calculé} des buts que l'échec condamne.

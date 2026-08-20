@@ -443,9 +443,12 @@ trichotomy of Section~\ref{sec:trichotomy} is built on exactly that distinction,
 $\vdash$ and $\nvdash$ are metalinguistic notations about the kernel, not signs of any
 theory it manipulates.
 
-A \emph{route} to a goal is one attempted derivation of it, and the \emph{residue} of
-a route is the set of hypotheses the theorem it reaches still carries --- that is,
-$H(\theta)$ for the $\theta$ the route produced. A goal typically has several routes,
+A \emph{goal} is a pair $(T, P)$ with $T$ a theory and $P \in \mathcal{R}$ the relation
+to be derived in it; we write the goal as $P$ alone whenever the theory is fixed by
+context, which it is throughout this paper unless stated. A \emph{route} to a goal is
+one attempted derivation of $P$, and the \emph{residue} of a route is the set of
+hypotheses the theorem it reaches still carries --- that is, $H(\theta)$ for the
+$\theta$ the route produced. A goal typically has several routes,
 and the same hypothesis may be open on one and closed on another; that is why the
 verdicts below are stated of a hypothesis \emph{on a route}, not of a hypothesis
 outright.
@@ -579,7 +582,9 @@ whose verdict is defeasible, and the corpus records it as such.
 \begin{definition}[Certified failure]
 $\mathit{Echec} = (P, \kappa, c, \mathit{backtrack}, \mathit{scope})$ --- we keep the
 repository's French names, $\mathit{Echec}$ (failure) and $\mathit{Mur}$ (wall), to
-match the code. Here $P$ is the goal that was being attempted, $\kappa \in
+match the code. Here $P$ is the \emph{goal} in the sense fixed above --- a relation of
+$\mathcal{R}$ to be derived in a theory --- not the route and not the theorem it
+reached, $\kappa \in
 \{E1,\dots,E7\}$ its failure class, $c$ a kernel object certifying that class,
 $\mathit{backtrack}$ the stated change that avoids falling into it again, and
 $\mathit{scope}$ the \emph{computed} set of goals the failure condemns. $\mathsf{verifier}$ accepts
