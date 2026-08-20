@@ -188,12 +188,22 @@ Elle précède tout le reste et ne change pas : **chaque phrase d'un article doi
 adossée à un objet du dépôt** — théorème, mesure, événement, source. Une affirmation sans
 ancre est une docstring qui ment, en public.
 
-**Cas particulier, et il est tentant** : ne jamais attribuer sa propre erreur à un « on »
-anonyme. A3 avait écrit « *on lit parfois* $(\exists x)\varphi(x) = \varphi(\tau x\varphi)$ » —
-personne d'autre n'avait écrit ça, c'était nous. Une affirmation sur ce que la
-littérature contient est une affirmation comme une autre : sans référence vérifiée, elle
-n'a pas sa place. Écrire « une première rédaction de cet article » coûte le même nombre
-de mots et dit la vérité.
+**Une erreur de brouillon n'est pas de la matière d'article — on la retire.** Deux
+réflexes fautifs, vus le même jour sur la même remarque de A3 :
+
+1. écrire « *on lit parfois* $(\exists x)\varphi(x) = \varphi(\tau x\varphi)$ » alors que
+   personne d'autre ne l'avait écrit — c'était nous. Une affirmation sur ce que contient
+   la littérature est une affirmation comme une autre : sans référence vérifiée, elle
+   n'a pas sa place ;
+2. corriger l'attribution puis **garder la remarque** en la déguisant en avertissement
+   pédagogique. Elle ne l'était pas. Le lecteur n'a que faire d'une notation qu'on a mal
+   écrite dans un brouillon ; la remarque a été supprimée.
+
+⚠️ **Ne pas confondre avec le §5.3 de A3**, qui raconte une surdéclaration de notre fait
+et la garde. La différence est nette : là, l'erreur avait *propagé dans le dépôt* et sa
+détection dit quelque chose sur la méthode — c'est un résultat. Ici, c'était une coquille
+de rédaction rattrapée avant publication : ça n'apprend rien à personne. **Publier ses
+erreurs quand elles enseignent, les effacer quand elles ne sont que du bruit.**
 
 Corollaire acquis en écrivant A3 : le noyau garantit la *soundness*, **jamais** la
 fidélité de ce qu'on écrit à côté. Aucun test n'attrape une phrase fausse sur le code.
