@@ -158,6 +158,7 @@ what a single-operator, exact-oracle study can and cannot claim.
 \label{sec:background}
 
 \subsection{A formalism nobody inhabits}
+\label{sec:tau}
 In \emph{Th\'eorie des ensembles}, quantifiers do not exist as primitives. They are
 \emph{abbreviations} built from Hilbert's choice operator. Write $R$ for a relation,
 $x$ for a letter, and $A$ for an \emph{assembly}: a finite sequence of signs --- the
@@ -199,10 +200,31 @@ defined by mutual induction, exactly as the kernel represents them:
      &&\text{(the five relation-formers)}
 \end{align*}
 where $x$ ranges over letters, $s$ over the specific signs of the theory, and
-$T, U \in \mathcal{T}$, $R, S \in \mathcal{R}$. These eight constructors are the only
-ones: $\forall$, $\wedge$, $\Rightarrow$ and $\Leftrightarrow$ are abbreviations built
-from them, in Bourbaki's sense and in the code alike.
+$T, U \in \mathcal{T}$, $R, S \in \mathcal{R}$.
 \end{definition}
+
+\noindent
+\textbf{These eight are the constructors of the ABBREVIATED layer}, the one the kernel
+manipulates --- and they must be distinguished from Bourbaki's primitives, on pain of
+drawing the boundary in the wrong place. The book's logical signs are \emph{four}:
+$\square$, $\tau$, $\vee$, $\neg$. In the list above:
+
+\begin{itemize}\itemsep1pt
+\item $(\exists x)R$ \textbf{is already an abbreviation} in Bourbaki's sense --- it is
+  $(\tau_x(R) \mid x)\,R$ (Section~\ref{sec:tau}). The kernel gives it a node of its own
+  because unfolding would mean manipulating assemblies of astronomical size;
+\item $=$ and $\in$ are not \emph{logical} signs but \emph{specific} ones, relational of
+  weight~2: $=$ belongs to egalitarian theories (E~I.38), $\in$ to the theory of sets.
+  They are therefore a special case of $s(T_1,\dots,T_n)$, singled out here only because
+  the kernel treats them separately;
+\item $\forall$, $\wedge$, $\Rightarrow$, $\Leftrightarrow$ are abbreviations to which
+  the kernel gives no node at all.
+\end{itemize}
+
+\noindent
+The list describes a \emph{representation}, not primitiveness. Writing a sign commits one
+to the theory that owns it, and this definition borrows two; left unsaid, the abbreviated
+layer would read as if it were Bourbaki's language.
 
 \begin{definition}[Theorem object]\label{def:theoreme}
 Write $\mathcal{P}_{\mathrm{fin}}(\mathcal{R})$ for the set of finite subsets of

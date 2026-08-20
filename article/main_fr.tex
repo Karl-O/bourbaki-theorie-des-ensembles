@@ -168,6 +168,7 @@ et adversarial de l'état de l'art~; la section~\ref{sec:limitations} énonce ce
 \label{sec:background}
 
 \subsection{Un formalisme que personne n'habite}
+\label{sec:tau}
 Dans la \emph{Th\'eorie des ensembles}, les quantificateurs n'existent pas comme
 primitifs. Ce sont des \emph{abréviations} construites à partir de l'opérateur de choix
 de Hilbert. Notons $R$ une relation, $x$ une lettre, et $A$ un \emph{assemblage}~:
@@ -212,10 +213,32 @@ sont définis par induction mutuelle, exactement comme le noyau les représente~
      &&\text{(les cinq formateurs de relation)}
 \end{align*}
 où $x$ parcourt les lettres, $s$ les signes spécifiques de la théorie, et
-$T, U \in \mathcal{T}$, $R, S \in \mathcal{R}$. Ces huit constructeurs sont les
-seuls~: $\forall$, $\wedge$, $\Rightarrow$ et $\Leftrightarrow$ sont des abréviations
-bâties sur eux, au sens de Bourbaki comme dans le code.
+$T, U \in \mathcal{T}$, $R, S \in \mathcal{R}$.
 \end{definition}
+
+\noindent
+\textbf{Ces huit constructeurs sont ceux de la couche ABRÉGÉE}, celle que le noyau
+manipule --- et il faut les distinguer des primitifs de Bourbaki, sous peine de tracer
+la frontière au mauvais endroit. Les signes logiques du livre sont \emph{quatre}~:
+$\square$, $\tau$, $\vee$, $\neg$. Dans la liste ci-dessus~:
+
+\begin{itemize}\itemsep1pt
+\item $(\exists x)R$ \textbf{est déjà une abréviation} au sens de Bourbaki --- c'est
+  $(\tau_x(R) \mid x)\,R$ (section~\ref{sec:tau}). Le noyau lui donne un n\oe{}ud propre
+  parce que déplier reviendrait à manipuler des assemblages de taille astronomique~;
+\item $=$ et $\in$ ne sont pas des signes \emph{logiques} mais des signes
+  \emph{spécifiques}, relationnels de poids~2~: $=$ appartient aux théories égalitaires
+  (E~I.38), $\in$ à la théorie des ensembles. Ils sont donc un cas particulier de
+  $s(T_1,\dots,T_n)$, isolés ici parce que le noyau les traite à part~;
+\item $\forall$, $\wedge$, $\Rightarrow$, $\Leftrightarrow$ sont des abréviations
+  auxquelles le noyau ne donne même pas de n\oe{}ud.
+\end{itemize}
+
+\noindent
+Autrement dit, la liste décrit une \emph{représentation}, pas une primitivité. Écrire un
+signe, c'est se placer dans la théorie qui le possède, et cette définition en emprunte
+deux~: sans le dire, on lirait la couche abrégée comme si elle était le langage de
+Bourbaki.
 
 \begin{definition}[Objet théorème]\label{def:theoreme}
 Notons $\mathcal{P}_{\mathrm{fin}}(\mathcal{R})$ l'ensemble des parties finies de
@@ -365,7 +388,8 @@ de cet article.
 
 Sa répartition mérite d'être dite, car le titre du livre invite à une image fausse.
 Les 2\,181 notions ancrées au moment de la campagne rapportée en
-section~ef{sec:case-study} se distribuent sur la tour et sur les chapitres qu'elle
+section~
+ef{sec:case-study} se distribuent sur la tour et sur les chapitres qu'elle
 porte~:
 
 \begin{center}\small
