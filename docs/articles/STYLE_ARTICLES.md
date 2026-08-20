@@ -156,7 +156,14 @@ dépôt. Faire la traduction *avant* de figer, pas après.
 
 ## 7. Un signe qu'on écrit est un signe qu'on suppose
 
-Règle posée par Karl le 20 août, après deux erreurs relevées sur A3 : **utiliser un
+⚠️ **Règle de RÉDACTION, pas de contenu d'article.** Elle appartient à ce document et
+n'a rien à faire dans le texte publié : le lectorat d'un article de méthodes formelles
+sait qu'on n'emploie pas un symbole hors de la théorie qui l'introduit. L'écrire noir
+sur blanc dans l'article est condescendant. Ce qui compte est que l'article le
+**fasse**, pas qu'il l'annonce. *(A3 avait une Remarque là-dessus ; elle a été
+supprimée.)*
+
+La règle, posée par Karl le 20 août après deux erreurs relevées sur A3 : **utiliser un
 signe, c'est déclarer qu'on travaille dans une théorie qui le possède.** Elle est facile
 à enfreindre sans s'en apercevoir, et le noyau ne l'attrape pas — il vérifie des
 dérivations, pas le sens qu'on prête aux symboles dans une phrase de prose.
