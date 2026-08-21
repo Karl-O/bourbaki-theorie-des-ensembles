@@ -51,8 +51,51 @@ graphe_egal_par_valeurs (clos, 6 conjoints).
 """
 from __future__ import annotations
 
-#   Les imports arrivent avec le premier sous-lemme — AUCUN théorème n'est
-#   dérivé dans ce module tant que la ligne ci-dessous n'est pas remplacée
-#   par du contenu certifié. (Jamais de stub qui « fait semblant ».)
+from bourbaki.i_description_mathematique_formelle.i_1_termes_relations.outil_formule import (
+    Terme, var, inclus, appartient)
+from bourbaki.i_description_mathematique_formelle.i_2_theoremes.noyau import noyau_abrege as N
+from bourbaki.i_description_mathematique_formelle.i_2_theoremes.tactiques.tactiques_abrege2 import (
+    conjonction_elim_gauche, conjonction_elim_droite, instancie, equivalence_avant)
+from bourbaki.ii_theorie_des_ensembles.ii_1_relations_collectivisantes import ensembles_abrege as E
+from bourbaki.ii_theorie_des_ensembles.ii_5_produit_famille.ii_5_2_ensemble_applications.ensembles_application_valeur import (
+    _inclus_produit_est_graphe)
+from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_3_3_operations_cardinaux.iii_3_5_exposant.prop12_powerset.ensembles_powerset_deux import (
+    deux)
 
-__all__: list = []
+
+def _t(v):
+    return v if isinstance(v, Terme) else var(v)
+
+
+def _cut(thm, P, pr):
+    """Décharge l'hypothèse P de `thm` en la remplaçant par sa preuve `pr`."""
+    return N.modus_ponens(pr, N.loi_deduction(P, thm))
+
+
+# Sous-lemmes 1+2 (+graphe) — (b), (d), (e) du plan, d'un coup.
+def g_decompose(g="Gext", x="Xext"):
+    """{G ∈ 2^X} ⊢ le quadruplet (G ⊂ X×2, G fonctionnel, dom G = X,
+    est_un_graphe(G)) — tuple de quatre théorèmes, chacun sous la seule
+    hypothèse d'appartenance à l'exposant.
+
+    axiome_exposant (E.II.5.2, via theorie_exposant) : G ∈ 2^X ⇔
+    (G ⊂ X×2 et G fonctionnel et dom G = X) ; le quatrième membre vient du
+    pont `_inclus_produit_est_graphe` (un ensemble de couples est un graphe),
+    son hypothèse d'inclusion étant coupée par la première conclusion."""
+    vg, vx = _t(g), _t(x)
+    deux_ens = deux()
+    ax = N.axiome(E.theorie_exposant(vx, deux_ens),
+                  E.axiome_exposant(vx, deux_ens))       # (∀G)(G∈2^X ⇔ …)
+    car = instancie(ax, vg)                              # G∈2^X ⇔ (⊂ et fonct et dom)
+    h = N.assume(appartient(vg, E.exposant(vx, deux_ens)))
+    corps = N.modus_ponens(h, equivalence_avant(car))    # (G⊂X×2 et fonct) et dom=X
+    dom_eq = conjonction_elim_droite(corps)              # dom G = X
+    gauche = conjonction_elim_gauche(corps)
+    incl = conjonction_elim_gauche(gauche)               # G ⊂ X×2
+    fonct = conjonction_elim_droite(gauche)              # est_fonctionnel(G)
+    graphe = _cut(_inclus_produit_est_graphe(vg, vx, deux_ens),
+                  inclus(vg, E.produit(vx, deux_ens)), incl)   # est_un_graphe(G)
+    return incl, fonct, dom_eq, graphe
+
+
+__all__ = ["g_decompose"]
