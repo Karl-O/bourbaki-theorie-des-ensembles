@@ -148,3 +148,21 @@ Verrouillé par test : `test_marcheur_schemas_croises_distributivite`
 (2 passed en 19,66 s avec le test ⊕ — aucune régression). Ces lois sont
 POST-publication : l'article reste à l'état 414 s ; elles nourrissent la
 suite (A4', ou le papier du mineur).
+
+### EXP6 (21 août, soir) — le banc 2 : la machine NOMME le pont manquant
+
+`exp6_pont_distributivite.py` : but = PCB(a, SC(b,c)) = SC(PCB(a,b), PCB(a,c)),
+pool = {distributivite_cardinale (niveau ENSEMBLES), comm+, assoc+}.
+
+- direct : échec en 6,4 s, 1 manque ;
+- marche (2,78 s) : SC-comm et SC-assoc CERTIFIÉS (<1 s), SC-idempotence
+  réfutée (x=1), **4 conjectures morphisme toutes NON-CERTIFIÉES** (~0,3 s
+  chacune), re-essai ouvert, ronde 2 rien de neuf → terminal. 22 axiomes.
+
+LECTURE : la distributivité au niveau des OPÉRATIONS n'est pas dérivable du
+théorème niveau-ensembles par les organes actuels. Le chaînon manquant est le
+PONT du respect de l'équipotence : PCB(a, SC(b,c)) = Card(a × Card(b⊔c))
+demande « le produit ne voit que le cardinal de son facteur » (Eq(Card S, S)
++ produit/somme respectent Eq). C'est une BRIQUE DU LIVRE (§III.3.3) que la
+machine vient de désigner — le mode de croissance du projet depuis ev.373,
+cette fois pointé sur le programme du LIVRE lui-même. Chantier ouvert.
