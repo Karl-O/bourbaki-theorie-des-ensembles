@@ -374,3 +374,18 @@ au scan (p.133 : § 3 ? l'en-tête dit §4 ENTIERS NATURELS commence PLUS BAS
 sur la page — le Th.2 est en §3.6 « le théorème de Cantor » probablement).
 
 EN COURS : identité somme_quotients écrite, test en fond (blxaqyfwo).
+
+## 2026-08-21 (21h30) — CANTOR rectifié : prop12 est REPORTÉ, la vraie file a 4 briques
+
+`bijection_prop12_REPORTE` (prop12_fin l.337) : l'emballage triple
+χ_Y ∈ F(X;2) et ρ∘χ = id (Pre(χ_Y)=Y) sont FAITS ; restent :
+  (iii) χ∘ρ = id sur F(X;2) — extensionnalité fonctionnelle via
+        graphe_egal_par_valeurs, VOLUMINEUX, round dédié ;
+  (iv)  la BIJECTION assemblée (graphe {(Y, χ_Y)}, fonctionnel/dom/inj/image,
+        Eq(PX, F(X;2)) par S5) ;
+  (v)   Card PX = 2^Card X (_prop1_direct_t + exposant_deux_base) ;
+  (vi)  Th.2 restaté : cantor_strict + (v) ⇒ 2^a > a.
+Mon plan de 21h25 (« il ne manque que le pont ») était TROP optimiste —
+le pont présuppose (v), qui présuppose (iii)-(iv). La file est donc :
+(iii) → (iv) → (v) → (vi). C'est la file que la stratégie voulait voir
+nommée — ici par la docstring du report, avant même le marcheur.
