@@ -3,8 +3,11 @@
 **Cible** : preprint arXiv (cs.LO), après A1/A3/A2. **Langue : anglais d'abord**,
 traduction française ensuite — mêmes conventions que les trois premiers.
 
-**Titre de travail** : *Learning to Propose: A Walker on the Derivation Graph,
-with an Exact Kernel as Guard.*
+**Titre de travail** : *The Walk Across the Last Mile: a Kernel-Guarded
+Search That Invents Its Own Waypoints.* (Le titre du plan éditorial —
+« Apprendre à proposer » — est ABANDONNÉ : le code ne retient rien entre
+deux marches, il n'apprend pas ; un titre qui promet plus que le code viole
+la règle de fidélité. Continuité avec A2 : A2 localise, A4 traverse.)
 
 **Position** : **A4** du plan éditorial (`docs/articles/PLAN_ARTICLES.md`).
 Question unique : *comment une machine apprend-elle à fabriquer le témoin — ou

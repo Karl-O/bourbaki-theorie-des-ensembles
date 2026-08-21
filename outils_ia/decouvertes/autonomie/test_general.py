@@ -190,3 +190,103 @@ def test_euclide_infinitude():
     assert th.est_clos and not th.hypotheses
     assert th.conclusion == enonce_infinitude()
     assert len(E.theorie_ensembles().axiomes) == 22
+
+
+# ═══════════════════════════════════════════════════════════════════════════
+#  LE MARCHEUR (21 août 2026, chantier A4)
+# ═══════════════════════════════════════════════════════════════════════════
+
+def _banc_oplus():
+    """Le banc ⊕ de v16-v18 : `a ⊕ b := (a+b)+1`, pool = 2 lois brutes sur +,
+    but B4 (quatre éléments — sa chaîne brute dépasse `max_pas=5`)."""
+    from bourbaki.i_description_mathematique_formelle.i_1_termes_relations.outil_formule import (
+        var, egal,
+    )
+    from bourbaki.ii_theorie_des_ensembles.ii_4_reunion_intersection_famille.ii_4_recollement_somme.ensembles_somme_disjointe import (
+        somme_cardinale_binaire as SC,
+    )
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import (
+        successeur,
+    )
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_3_3_operations_cardinaux.iii_3_3_somme.ensembles_arith_somme import (
+        somme_cardinale_commutative,
+    )
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_3_3_operations_cardinaux.iii_3_3_somme.ensembles_somme_iteree import (
+        somme_cardinale_associative_iteree,
+    )
+    a, b, c, d = var("aMt"), var("bMt"), var("cMt"), var("dMt")
+
+    def oplus(x, y):
+        return successeur(SC(x, y))
+
+    assoc = somme_cardinale_associative_iteree(a, b, c)
+    comm = somme_cardinale_commutative(a, b)
+    brut = {assoc.conclusion: ("assoc+", assoc), comm.conclusion: ("comm+", comm)}
+    B4 = egal(oplus(oplus(oplus(a, b), c), d), oplus(a, oplus(b, oplus(c, d))))
+    F4 = egal(oplus(oplus(oplus(a, b), c), d), oplus(a, oplus(b, oplus(d, d))))
+    return (a, b, c, d), oplus, brut, B4, F4
+
+
+def test_marcheur_le_mineur_retrouve_l_operation():
+    """P3 : le motif de tête miné dans B4 EST ⊕ — personne ne le lui nomme.
+
+    Le mineur ne connaît ni `successeur` ni `SC` : il anti-unifie les
+    sous-termes du but et classe par gain MDL. L'assertion est une égalité
+    d'assemblages (O(1)) : motif appliqué à (a, b) == ⊕(a, b). Et l'oracle
+    réfute l'idempotence (schéma faux) en millisecondes — AVANT tout noyau."""
+    from outils_ia.arithmetique.oracle_num import contre_exemple
+    from outils_ia.decouvertes.autonomie.marcheur import (
+        miner_motifs, conjectures_pour, _appliquer,
+    )
+    (a, b, _, _), oplus, _, B4, _ = _banc_oplus()
+    motifs = miner_motifs(B4)
+    assert motifs, "aucun motif miné"
+    tete = motifs[0]
+    assert _appliquer(tete["motif"], tete["noms"], [a, b]) == oplus(a, b)
+    verdicts = {}
+    for schema, conj, libres in conjectures_pour(tete["motif"], tete["noms"]):
+        verdicts[schema] = contre_exemple(conj, libres, borne=6)
+    assert verdicts["idempotence"] is not None          # faux → réfuté
+    assert verdicts["commutativite"] is None            # vrai → autorisé
+    assert verdicts["associativite"] is None
+    assert len(E.theorie_ensembles().axiomes) == 22
+
+
+@pytest.mark.slow
+def test_marcheur_franchit_la_porte():
+    """🚪 LA PORTE D'A4 (plan éditorial, 10 août), les DEUX côtés assertés.
+
+    Côté 1 : le chaînage seul — les organes, budgets mesurés (`max_pas=5`,
+    borne posée par v18) — laisse B4 OUVERT (mesuré : 692 s d'épuisement).
+    Côté 2 : la marche ferme le MÊME but depuis le MÊME pool brut — en
+    minant ⊕, certifiant ses lois, et re-essayant sur pool comprimé
+    (mesuré : le lemme seul 73 s contre 962 s en pool cumulé, facteur 13).
+    Le noyau juge tout : est_clos, 0 hypothèse, conclusion == B4. ~15 min."""
+    from outils_ia.decouvertes.besoin import besoins
+    from outils_ia.decouvertes.autonomie.marcheur import marcher
+    _, _, brut, B4, _ = _banc_oplus()
+
+    th_direct, manques = besoins(B4, [], dict(brut), profondeur=4)
+    assert th_direct is None, "le chaînage seul a fermé B4 — la porte a bougé"
+    assert manques, "l'échec doit nommer au moins un manque"
+
+    th, journal = marcher(B4, brut)
+    assert th is not None and th.est_clos and not th.hypotheses
+    assert th.conclusion == B4
+    assert any(e.get("type") == "FERMÉ" for e in journal)
+    assert any(e.get("type") == "réfuté" for e in journal), \
+        "l'oracle n'a tué aucun schéma faux — le banc a changé"
+    assert len(E.theorie_ensembles().axiomes) == 22
+
+
+@pytest.mark.slow
+def test_marcheur_ne_ferme_pas_le_faux():
+    """Garde-fou : une variante FAUSSE de B4 reste ouverte à travers TOUTE la
+    marche (mêmes lemmes certifiés, même re-essai), et l'échec rend un
+    journal terminal — le marcheur échoue en nommant, jamais en silence."""
+    from outils_ia.decouvertes.autonomie.marcheur import marcher
+    _, _, brut, _, F4 = _banc_oplus()
+    th, journal = marcher(F4, brut)
+    assert th is None
+    assert any(e.get("type") == "terminal" for e in journal)
+    assert len(E.theorie_ensembles().axiomes) == 22

@@ -75,3 +75,27 @@ def test_aucun_contre_exemple_n_est_PAS_une_preuve():
     n'a aucun contre-exemple connu jusqu'à 4×10¹⁸."""
     n = var("n")
     assert contre_exemple(egal(SC(n, n), SC(n, n)), ["n"], borne=4) is None
+
+
+def test_couche_successeur_rend_les_operations_derivees_visibles():
+    """`succ(3+4)` vaut 8 — l'opération dérivée `a ⊕ b := (a+b)+1` devient
+    réfutable (21 août 2026, chantier marcheur).
+
+    AVANT la couche : `succ(somme)` n'était dans aucune entrée, l'oracle
+    rendait `None` sur toute conjecture ⊕ — invisible, ni réfutable ni
+    autorisée. APRÈS : l'idempotence de ⊕ (fausse) meurt en millisecondes.
+    LIMITE DITE : UNE couche seulement — un terme dérivé IMBRIQUÉ
+    (`succ(succ(a+b)+c)`) reste hors table, et l'oracle doit alors se taire
+    (`None`), jamais affirmer."""
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import (
+        successeur,
+    )
+    table(BORNE)
+    assert valeur(successeur(SC(num(3), num(4))), borne=BORNE) == 8
+    #   l'idempotence de ⊕ est fausse : succ(x+x) = x n'a pas de modèle
+    x = var("xsucc")
+    faux = contre_exemple(egal(successeur(SC(x, x)), x), ["xsucc"], borne=6)
+    assert faux is not None
+    #   l'imbriqué est HORS table : silence, jamais une affirmation
+    imbrique = successeur(SC(successeur(SC(num(1), num(1))), num(1)))
+    assert valeur(imbrique, borne=BORNE) is None

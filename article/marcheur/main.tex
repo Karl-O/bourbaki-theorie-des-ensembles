@@ -1,0 +1,298 @@
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage{array}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\usepackage{graphicx}
+% ---------------------------------------------------------------------------
+% LISIBILITE — docs/articles/STYLE_ARTICLES.md §2.
+% ---------------------------------------------------------------------------
+\usepackage[a4paper,textwidth=13.8cm,textheight=22.4cm]{geometry}
+\linespread{1.06}
+\setlength{\parskip}{.55em plus .15em minus .1em}
+\setlength{\parindent}{1.1em}
+\emergencystretch=1.5em
+\usepackage{hyperref}
+
+% ============================================================================
+% A4 — LE MARCHEUR. Chiffres : article/marcheur/MESURES.md, JAMAIS le journal.
+% Chaque section porte en commentaire l'ANCRE (le fichier du depot qui la
+% justifie). Regle d'or : une phrase = un objet du depot.
+% ============================================================================
+
+\newtheorem{definition}{Definition}
+\newtheorem{proposition}{Proposition}
+\theoremstyle{remark}\newtheorem{remark}{Remark}
+
+\title{The Walk Across the Last Mile:\\
+a Kernel-Guarded Search That Invents Its Own Waypoints}
+
+\author{Karl Olivet\thanks{Independent researcher. Contact:
+\texttt{karl.olivet@gmail.com}. Code and certified corpus:
+\url{https://github.com/Karl-O/bourbaki-theorie-des-ensembles}; every figure
+reported here was measured on 21 August 2026 and is recorded, with its
+experiment, in \texttt{article/marcheur/MESURES.md}.}}
+
+\date{Preprint --- August 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+%% ANCRE : MESURES.md §1 (la porte), §2 (mineur), §3 (oracle).
+A companion paper argued that in mechanised proof search the last mile is
+located, not crossed: a search that fails should name exactly what it lacks.
+This paper reports the next step --- a \emph{walker} that crosses the stretch
+the previous system could only locate. Given a goal that backward chaining
+alone cannot close --- measured: on a four-element reassociation over a derived
+operation $a \oplus b := (a+b)+1$, chaining exhausts its budget in 692\,s ---
+the walker mines the goal's own subterms for repeated patterns, rediscovers
+$\oplus$ without being told it exists, conjectures laws for it from an open
+list of schemas, lets a numeric oracle kill the false ones in milliseconds,
+has the kernel certify the true ones, and re-attempts the goal on the
+\emph{compressed} pool of derived lemmas alone. The same goal then closes,
+kernel-checked, in about 73\,s. Two measured facts frame the contribution.
+First, compression is a \emph{replacement}, not an addition: re-attempting on
+the derived lemma alone takes 72.6\,s, while adding it to the raw laws takes
+962\,s --- a factor of 13, because new knowledge enlarges the search space
+unless the old knowledge is set aside. Second, the walker's own first
+component failed in a way worth reporting: ranking candidate patterns by size
+selected only fragments of the huge $\tau$-developments (a triple-$\oplus$
+term has $\approx$13{,}700 nodes) and missed $\oplus$ entirely; the fix ---
+pairing subterms by root signature --- is itself a measured design law. As
+everywhere in this series, the kernel guards every step: a bad proposal costs
+a dead route, never a false theorem.
+\end{abstract}
+
+%% ============================================================================
+\section{Introduction}
+\label{sec:intro}
+%% ANCRE : PLAN_ARTICLES.md (la porte, 10 aout) ; MESURES.md §1.
+%% ============================================================================
+
+The companion paper on failure reporting ended on a gate it refused to cross:
+its editorial plan states that no walker should be published before it has
+closed at least one goal that chaining alone cannot close. This paper begins
+by crossing that gate, measured on both sides, and everything else in it is a
+consequence of how the crossing was done.
+
+\paragraph{The claim, in one paragraph.} A goal that defeats a bounded
+backward search does not usually defeat it by depth alone. What is missing is
+a \emph{waypoint}: an intermediate statement that, once certified and placed
+in the pool, makes the remaining distance short. The walker's job is to invent
+candidate waypoints from the goal's own structure, discard the false ones
+cheaply, pay the kernel's price for the true ones, and then attempt the goal
+from the waypoint rather than from the raw laws. None of this requires the
+machine to be right: every candidate is judged --- first by a numeric oracle
+that can only refute, then by the kernel that alone can certify. A wrong
+proposal costs seconds; an unsound one is impossible.
+
+%% A REMPLIR (EXP4) : le paragraphe de contributions avec le chiffre de la
+%% marche de bout en bout, une fois exp4.out lu et colle dans MESURES.md §4.
+
+%% ============================================================================
+\section{Background: the bench, the budget, the gap}
+\label{sec:background}
+%% ANCRE : test_autonomie.py (v16-v18) ; MESURES.md de A2 ; besoin.py.
+%% ============================================================================
+
+We reuse the toy-algebra bench on which the failure-reporting paper measured
+its rewriting organs. The base theory provides cardinal addition $a+b$ and its
+two raw laws --- iterated associativity and commutativity --- as the only
+facts in the pool. On top of it, a derived operation is defined and never
+named anywhere in the repository:
+\[
+a \oplus b \;:=\; (a+b)+1 .
+\]
+The engine's budget is not a guess: the minimal raw rewriting chain for the
+three-element associativity of $\oplus$ was measured at five steps, and five
+is therefore the engine's cap (\texttt{max\_pas=5}); with a cap of three, that
+same goal failed. All experiments below inherit this measured budget.
+
+The goal that crosses the gate is the four-element reassociation
+\[
+B_4 \;:\;\; ((a \oplus b) \oplus c) \oplus d \;=\; a \oplus (b \oplus (c
+\oplus d)),
+\]
+true, and out of reach of a five-step raw chain: each application of
+$\oplus$-associativity costs about five raw steps, and $B_4$ needs two.
+
+%% ============================================================================
+\section{The gate, measured on both sides}
+\label{sec:porte}
+%% ANCRE : MESURES.md §1 (EXP1-EXP3).
+%% ============================================================================
+
+\begin{center}\small
+\begin{tabular}{@{}L{0.42\linewidth}L{0.24\linewidth}r@{}}
+\toprule
+experiment & verdict & time \\
+\midrule
+chaining alone on $B_4$ (raw pool) & \textbf{fails}, one gap named & 692.5\,s \\
+certifying the lemma $\oplus$-assoc & closed, kernel-checked & 4--7\,s \\
+$B_4$ on the \emph{compressed} pool (lemma alone) & \textbf{closed}, 0 hypotheses & 72.6\,s \\
+$B_4$ on the cumulative pool (raw $+$ lemma) & closed & 962.4\,s \\
+false variant $F_4$ on the compressed pool & stays open (correct) & 79.1\,s \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Three readings, in decreasing order of importance.
+
+\paragraph{The gate holds.} The same goal, from the same pool, under the same
+budgets: chaining exhausts itself in 692\,s and returns a named gap; the
+two-step walk --- certify the waypoint, then re-attempt from it --- closes it.
+``Cannot close'' here is not an asymptotic claim; it is the measured behaviour
+of the full 21-organ engine at its measured budget.
+
+\paragraph{Compression is a replacement, not an addition.} The most useful
+number in the table is the least intuitive one: adding the certified lemma to
+the raw laws makes the search \emph{thirteen times slower} than replacing them
+with it (962\,s against 72.6\,s). Every fact in the pool is a rewriting
+candidate at every node; new knowledge enlarges the space unless the old
+knowledge is set aside. The walker therefore re-attempts goals on the derived
+lemmas \emph{alone} --- and says so in its journal, rather than silently.
+
+\paragraph{Certification cost is noisy.} The same lemma certified twice took
+3.8\,s and then 7.4\,s depending on cache state. We quote ``a few seconds''
+and refuse a single figure.
+
+%% ============================================================================
+\section{The walker}
+\label{sec:marcheur}
+%% ANCRE : autonomie/marcheur.py (docstring de module).
+%% ============================================================================
+
+The walker's state is a pair (goal, pool of certified facts). One step:
+
+\begin{enumerate}
+\item \textbf{Sense.} Run the need organ. Closed: done. Open: a list of named
+  gaps --- the failure object of the companion paper.
+\item \textbf{Mine.} Extract repeated term patterns from the goal itself, by
+  anti-unification with shared slots, ranked by the MDL gain
+  $(\mathrm{occurrences}-1) \times \mathrm{size}$ --- the compression
+  criterion of the notion-mining organ, transposed from formulas to terms.
+\item \textbf{Conjecture.} Instantiate law schemas on each binary pattern:
+  commutativity, associativity, idempotence. The schema list is \emph{open};
+  nothing proves these three suffice, and the paper does not claim it.
+\item \textbf{Refute cheaply.} A numeric oracle looks for small
+  counterexamples. A false conjecture dies in milliseconds, never in minutes
+  of kernel time. The oracle can only refute: no counterexample authorises
+  spending, proves nothing.
+\item \textbf{Certify, compress, retry.} Surviving conjectures go to the need
+  organ over the raw pool; the kernel judges. Certified lemmas form the
+  compressed pool on which the goal is re-attempted. No progress in a round:
+  stop, and return the terminal gaps --- the walker, like the organ it wraps,
+  fails by naming.
+\end{enumerate}
+
+The safety principle is unchanged since the first proposer organ: the walker
+\emph{suggests}, the kernel \emph{judges}. No theorem object is built in the
+walker's code; everything that enters the pool came out of the need organ,
+hence out of the kernel.
+
+%% ============================================================================
+\section{The miner, including its first failure}
+\label{sec:mineur}
+%% ANCRE : MESURES.md §2 ; marcheur.py (miner_motifs, docstring).
+%% ============================================================================
+
+The miner answers the question the reader should be asking: \emph{who told
+the machine about $\oplus$?} Nobody. The pattern is recovered from the goal.
+
+\paragraph{Version 1 failed, and the failure is a design law.} The first
+miner collected the goal's subterms and anti-unified the 24 largest. It found
+nothing usable: in this kernel, terms are opaque $\tau$-developments, and a
+triple-$\oplus$ term has ${\approx}13{,}700$ nodes, so the largest subterms
+are all \emph{fragments of the developments' insides} --- and the small
+instances $a \oplus b$, the ones that carry the pattern, never entered the
+top-24. The top pattern was a three-slot context of MDL gain 13{,}737,
+useless for conjecturing, and $\oplus$ was absent from the list. Ranking by
+size selects noise.
+
+\paragraph{Version 2 pairs by root signature.} Subterms are grouped by root
+signature (tag, name, binder, arity) and each is anti-unified with its
+size-neighbours \emph{within its group}: $O(n)$ pairs instead of $O(n^2)$,
+and two instances of the same operation necessarily meet. Occurrences are
+then counted over \emph{all} subterms, and candidates are validated by
+reconstruction: a pattern applied to the pieces of its own generator must
+rebuild it identically --- assemblages are hashable, so this is one $O(1)$
+equality, never a structural guess. On $B_4$ the head pattern comes out with
+6 occurrences and gain 4{,}045, and applying it to $(a,b)$ yields exactly
+$\oplus(a,b)$: mining took 1.1\,s.
+
+%% ============================================================================
+\section{The oracle had a hole, and one layer was enough}
+\label{sec:oracle}
+%% ANCRE : MESURES.md §3 ; oracle_num.py (table, docstring).
+%% ============================================================================
+
+The refutation step exposed a measured blind spot. The oracle evaluates terms
+by a reconstruction table --- numerals, their sums, their products --- because
+terms here are opaque: there is nothing to descend into. But
+$\mathrm{succ}(\text{sum})$ was in no entry, so \emph{every} conjecture about
+a derived operation evaluated to ``unknown'': invisible, neither refutable
+nor authorised.
+
+One layer fixed it: for every term already in the table with value $v$, add
+its successor with value $v+1$. After the extension, the idempotence schema
+for $\oplus$ --- false --- dies in under a millisecond, before any kernel
+call; commutativity and associativity survive the sweep (about a second each)
+and proceed to certification. The limit is stated where the code is: one
+layer only. A nested derived term such as $\mathrm{succ}(\mathrm{succ}(a+b)+c)$
+is still outside the table, the full closure would cost $|\text{table}|^2$,
+and on such conjectures the oracle stays silent --- it never affirms.
+
+%% ============================================================================
+\section{The walk, end to end}
+\label{sec:marche}
+%% ANCRE : MESURES.md §4 — A REMPLIR depuis exp4.out. NE RIEN ECRIRE AVANT.
+%% ============================================================================
+
+%% A REMPLIR (EXP4) : journal de marche reel (motifs, refutes, certifies,
+%% FERME), duree totale, comparaison avec 692 s. Garde-fou F4 via la marche.
+
+%% ============================================================================
+\section{What the walk does not find}
+\label{sec:limites-goldbach}
+%% ANCRE : P6 — A MESURER (marcheur pointe sur un but Goldbach).
+%% ============================================================================
+
+%% A REMPLIR (P6) : le marcheur sur un but Goldbach ne ferme pas et rend ses
+%% manques ; renvoi A3. NE RIEN ECRIRE AVANT LA MESURE.
+
+%% ============================================================================
+\section{Related work}
+\label{sec:related}
+%% A ECRIRE en dernier — regle 0-entree-(v?) : chaque citation verifiee a la
+%% source dans ../references.bib.
+%% ============================================================================
+
+%% ============================================================================
+\section{Limitations}
+\label{sec:limitations}
+%% ============================================================================
+
+One bench. The walker has closed one family of goals over one derived
+operation on one toy algebra. Nothing here claims generality: the paper's
+claim is that the gate --- close something chaining cannot --- has been
+crossed with every step measured, and that two of those measurements
+(replacement-not-addition; size-ranking selects noise) are design laws that
+survive the bench. The schema list is open. The walker does not learn: it
+retains nothing between runs, and the title of the editorial plan for this
+paper --- ``learning to propose'' --- has deliberately \emph{not} been kept,
+because the code does not yet earn it.
+
+%% ============================================================================
+\section{Conclusion}
+\label{sec:conclusion}
+%% ============================================================================
+
+%% A ECRIRE apres EXP4 et P6.
+
+\bibliographystyle{alpha}
+\bibliography{../references}
+
+\end{document}
