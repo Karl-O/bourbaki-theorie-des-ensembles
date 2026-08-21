@@ -349,3 +349,28 @@ existe-t-elle ? (grep singleton/injection dans iii_3) ; l'ensemble diagonal
 avec pool {prop12, briques ≤} → manques nommés = file de briques ;
 (4) écrire les briques une à une. EN COURS AUSSI : identité (c+d)/b
 (plan complet au journal de boucle, fichier quotient à 209 l).
+
+## 2026-08-21 (21h25) — CANTOR : niveau ensembles DÉJÀ CLOS, il ne manque que le pont
+
+Inventaire fait : `iii_3_equipotence_cardinaux/cantor/ensembles_cantor.py`
+contient TOUT le cœur, certifié : injection-singleton (étape 1, X ≤ P(X)),
+paradoxe_diagonal, aucune_surjection_parties, cantor_non_equipotent,
+cantor_distinct, **cantor_strict ⊢ Card X < Card P(X)**. Et prop12_powerset
+donne Card(P(a)) = 2^a.
+
+CE QUI MANQUE pour le Th.2 du livre (E III.30 L.20-21, lu au scan) « pour
+tout cardinal a, 2^a > a » : L'ASSEMBLAGE-PONT (≈ 60 l, patron du jour) :
+  est_cardinal(a) ⇒ : cantor_strict(a) [Card a < Card P(a)] ;
+  cardinal_de_cardinal [Card a = a] ; prop12 [Card P(a) = 2^a] ;
+  réécritures (congruence sur <) → a < 2^a.
+⚠️ la réécriture sous inf_strict_card = et(≤, ≠) : réécrire les DEUX
+conjoints (congruence_terme sur chaque côté de ≤ et de ≠) ou lemme de
+substitution d'égaux dans < s'il existe (grep reecrit/substitution ordre).
+Fichier : cantor/ensembles_cantor_theoreme2.py (dossier à 3 entrées, OK)
++ test miroir + @livre Ch.III §3.6? NON — vérifier la SECTION du Th.2 :
+la page E III.30 est §3 fin (avant §4) — marqueur « Ch.III §3.6 Th.2 » ?
+le § imprimé en haut de page dit §3 n°6… vérifier le numéro de sous-section
+au scan (p.133 : § 3 ? l'en-tête dit §4 ENTIERS NATURELS commence PLUS BAS
+sur la page — le Th.2 est en §3.6 « le théorème de Cantor » probablement).
+
+EN COURS : identité somme_quotients écrite, test en fond (blxaqyfwo).
