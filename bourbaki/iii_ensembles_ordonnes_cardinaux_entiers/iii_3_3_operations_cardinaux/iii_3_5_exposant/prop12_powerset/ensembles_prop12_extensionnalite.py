@@ -26,7 +26,9 @@ G := graphe sous-jacent de f (= pr₁(pr₁ f) si f est le triple (G, X, 2)) :
 ORDRE D'ÉCRITURE (un sous-lemme = un commit testé) :
   1. `f_graphe_fonctionnel(f, x)`   — (b)+(d) depuis f ∈ 𝓕(X;2) ;
   2. `f_domaine(f, x)`              — (e) côté f ;
-  3. `f_deux_valeurs(f, x, z)`      — f(z) ∈ {0,1} (dichotomie image ⊂ 2) ;
+  3. FAIT SANS BRIQUE : deux_membre(z) (powerset_exp l.72) donne la
+     dichotomie z∈2 ⇔ (z=∅ ou z={∅}) ; zero_dans_deux / un_dans_deux dispo.
+  3bis. (ancien 3) `f_deux_valeurs`      — f(z) ∈ {0,1} (dichotomie image ⊂ 2) ;
   4. `valeurs_coincident(f, x, z)`  — (f), par cas via 3 + valeurs de χ ;
   5. `chi_rho_identite(f, x)`       — l'assemblage par graphe_egal_par_valeurs.
 
