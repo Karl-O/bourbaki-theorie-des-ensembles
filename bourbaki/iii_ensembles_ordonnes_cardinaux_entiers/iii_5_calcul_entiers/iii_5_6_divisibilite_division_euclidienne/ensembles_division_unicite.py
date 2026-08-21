@@ -247,7 +247,15 @@ def _unicite(a="auc", b="buc", q="quc", qp="qpuc", r="ruc", rp="rpuc"):
     r_eq = N.modus_ponens(eq_bqr_bqrp, N.modus_ponens(
         conjonction_intro(conjonction_intro(fin_bq, card_r), card_rp), pti))                # r = r'
 
-    res = N.loi_deduction(ante, conjonction_intro(q_eq, r_eq))
+    corps = conjonction_intro(q_eq, r_eq)
+    #   Les hypothèses r<b et r'<b (héritées de _lt_chain) sont REDONDANTES :
+    #   l'antécédent les contient déjà — on les absorbe par lui (h_r, h_rp),
+    #   sinon toute généralisation sur r/r' est refusée par le noyau
+    #   (« 'rdf2' libre dans une hypothèse » — mesuré le 21 août sur
+    #   l'assemblage du Th.1 complet).
+    corps = _cut(corps, inf_strict_card(vr, vb), h_r)
+    corps = _cut(corps, inf_strict_card(vrp, vb), h_rp)
+    res = N.loi_deduction(ante, corps)
     assert res.conclusion == enonce_unicite(a, b, q, qp, r, rp), "_unicite : conclusion inattendue"
     return res
 

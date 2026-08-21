@@ -307,3 +307,23 @@ n'a pas pu l'ouvrir et a reconstruit son contenu par les citations croisées des
 25 autres volumes. Notre projet dispose pourtant d'un pipeline PDF qui
 fonctionne (pymupdf) — à fournir aux agents de reconnaissance la prochaine fois.
 
+## 2026-08-21 — Chantier division : la suite après le Th.1 complet
+
+**Prochaine brique décidée : « a = bq ⟺ q = a/b » (E III.39, ligne sous la
+Def.1).** C'est LA clé de toutes les identités de quotients de la page
+((c+d)/b = c/b + d/b, (c−d)/b, a'/b = (a'/a)(a/b)) : elle convertit toute
+équation de quotient en équation de PRODUIT, là où vivent les lois brutes.
+Stratégie : le τ `quotient_cardinal(a,b)` satisfait sa propriété définissante
+par le τ-axiome sous l'existence (témoin (q, 0), nécessite b·q+0 = b·q) ;
+l'UNICITÉ du Th.1 complet identifie alors q au τ. Première consommation
+réelle de `division_euclidienne` — le théorème sert dès sa naissance.
+
+**Banc 2 du marcheur décidé : la distributivité pure a·(b+c) = a·b + a·c**
+(exp6_pont_distributivite.py, écrit, à lancer machine libre). Le dépôt n'a
+que la version niveau-ensembles Card(A×(B⊔C)) ; si la certification échoue,
+la machine NOMME le pont manquant — les deux issues sont des résultats.
+
+**III.5.7 inventorié** : énoncés formalisés (Prop.8, développement,
+majoration a < b^a), DÉMONSTRATIONS NON DÉRIVÉES — gros PARTIEL, récurrence
+sur k enchainant Prop.2 §4.2 / Prop.3 §5.2 / Prop.5 §5.4 / Cor.4 §4.4.
+Parité (bas de E III.39) : déjà couverte (ensembles_parite_iii5).

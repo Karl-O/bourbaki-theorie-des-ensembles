@@ -874,3 +874,24 @@ en être une.
 Le recalage des ~243 marqueurs hors-page n'est pas fait, et il demande d'ouvrir les
 pages une à une. Rien ne presse : aucun résultat n'en dépend, puisque plus rien ne
 s'appuie sur l'intervalle.
+
+### 2026-08-21 — III.5.6 Th.1 complet : écart d'ORIENTATION d'égalité (consigné, non corrigé)
+
+Le livre énonce « a = bq + r » (E III.39 L.10-11, PDF p.142, vérifié au scan) ;
+la formalisation — héritée de `_R_rel` (division_existence, août) — écrit
+« b·q + r = a ». Même relation, orientation inversée. Réorienter SOUS les ∃
+imbriqués exigerait une congruence-∃ (réécrire dans la portée d'un lieur via
+l'équivalence ∃xφ ⇔ ∃xψ quand φ⇔ψ) — outil non disponible à ce jour. Décision :
+l'énoncé machine garde son orientation, l'écart est DIT ici et dans la docstring
+de `enonce_division_euclidienne`. La question « l'orientation d'une égalité
+fait-elle partie de la fidélité ? » reste ouverte — pour l'instant on la traite
+comme un écart mineur mais TRAÇÉ. Même page : l'hypothèse du livre est
+« b > 0 » — le Th.1 complet la prend TELLE QUELLE et DÉRIVE le b ≠ 0 des
+briques (contraposition de la symétrie sur le conjoint droit de 0 < b) ;
+aucun écart là-dessus.
+
+Au passage, une redondance d'HYPOTHÈSES découverte par le garde-fou du noyau :
+`_unicite` portait r<b et r'<b en hypothèses NUES alors que son antécédent les
+contient (héritage de `_lt_chain`) — la généralisation ∀q∀r∀q'∀r' était
+refusée (« 'rdf2' libre dans une hypothèse »). Absorbées via l'antécédent
+assumé (_cut ×2). Le noyau a fait exactement son travail.

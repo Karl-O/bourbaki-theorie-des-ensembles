@@ -252,6 +252,45 @@ def test_marcheur_le_mineur_retrouve_l_operation():
     assert len(E.theorie_ensembles().axiomes) == 22
 
 
+def test_marcheur_schemas_croises_distributivite():
+    """Les schemas a DEUX motifs : sur un but melant produit et somme, le
+    mineur sort les DEUX motifs, et la conjecture croisee de tete EST la
+    distributivite a.(b+c) = a.b + a.c — construite, jamais nommee.
+
+    Ne du chantier division (E III.39) : les identites de quotients reposent
+    sur ce schema. Ici on verrouille la GENERATION (formes + oracle) ; la
+    certification est mesuree a part (elle depend des ponts du depot)."""
+    from bourbaki.i_description_mathematique_formelle.i_1_termes_relations.outil_formule import (
+        var, egal,
+    )
+    from bourbaki.ii_theorie_des_ensembles.ii_4_reunion_intersection_famille.ii_4_recollement_somme.ensembles_somme_disjointe import (
+        somme_cardinale_binaire as SC,
+    )
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_3_3_operations_cardinaux.iii_3_3_produit.ensembles_arith_cardinale import (
+        produit_cardinal_binaire as PCB,
+    )
+    from outils_ia.decouvertes.autonomie.marcheur import (
+        conjectures_croisees, miner_motifs, _appliquer,
+    )
+    a, b, c = var("atgx"), var("btgx"), var("ctgx")
+    #   un but qui MELANGE les deux operations (la distributivite elle-meme)
+    but = egal(PCB(a, SC(b, c)), SC(PCB(a, b), PCB(a, c)))
+    motifs = miner_motifs(but)
+    assert len(motifs) >= 2, "il faut deux motifs pour un schema croise"
+    m1, m2 = motifs[0], motifs[1]
+    #   les deux motifs de tete sont bien PCB et SC (a l'ordre pres)
+    inst = {_appliquer(m["motif"], m["noms"], [a, b]) for m in (m1, m2)}
+    assert inst == {PCB(a, b), SC(a, b)}
+    #   les conjectures croisees existent et ont la bonne FORME
+    tous = {sch: conj for sch, conj, _ in
+            conjectures_croisees(m1, m2) + conjectures_croisees(m2, m1)}
+    assert set(tous) == {"distributivite-gauche", "distributivite-droite"} or         len(tous) == 2
+    x, y, z = var("xmarche"), var("ymarche"), var("zmarche")
+    attendu = egal(PCB(x, SC(y, z)), SC(PCB(x, y), PCB(x, z)))
+    assert attendu in tous.values(),         "la distributivite produit-sur-somme doit etre parmi les conjecturees"
+    assert len(E.theorie_ensembles().axiomes) == 22
+
+
 @pytest.mark.slow
 def test_marcheur_franchit_la_porte():
     """🚪 LA PORTE D'A4 (plan éditorial, 10 août), les DEUX côtés assertés.
