@@ -35,3 +35,33 @@ et _bijection — TOUJOURS tester les chantiers voisins avant d'ouvrir une file
 sous-lemmes verts DU PREMIER COUP aujourd'hui : le patron « lire les formes
 exactes en code avant d'écrire » paie.
 PROCHAIN : CIBLE 2 Hessenberg a²=a (III.6).
+
+## 2026-08-21 23h59 — CIBLE 2 Hessenberg : CARTE COMPLÈTE de la frontière
+Suite complète hessenberg/ : 99 passed en 41 min (rien de rouge). La pointe
+est `hessenberg_a_carre_egal_a_0hyp(E)` (frame_maximal_clos) : conclusion
+enonce_hessenberg(E), E-seule, tous témoins éliminés, lock absent, sous
+EXACTEMENT 2 résidus Zorn E-niveau :
+  H1 = 𝔉(E)≠∅ (l'amorçage) ; H2 = m_dans_frame_universel (frame-inductivité
+  du recollement de chaîne).
+Les DEUX butent sur les Lemmes 1-2 de Bourbaki E.III.48, ABSENTS du dépôt :
+  L1 « a infini ⇒ ℵ₀ ≤ a » — REPORTÉ (infinis_props l.301 :
+     aleph0_inf_egal_cardinal_infini_enonce) ; exige la collectivisation de ℕ
+     + la récurrence « n ≤ a pour tout entier n ».
+  L2 « ℕ×ℕ ≃ ℕ » — chantier denombrable/ensembles_denombrable_carre_iii6 :
+     direction A (ℕ ≤ ℕ×ℕ) CLOSE ; direction B (ℕ×ℕ ≤ ℕ) ⛔ bloquée sur
+     l'ARITHMÉTIQUE MULTIPLICATIVE de ℕ : a^b∈ℕ (Cor.3 §III.5.1, récurrence
+     Prop.1 §III.5), puis unicité de factorisation OU 2-valuation, d'où
+     l'injectivité du pairing (m,n)↦2^m·3^n ; Cantor-Bernstein est déjà là.
+ROUTE DE LA CIBLE 2 (ordre d'attaque, du plus élémentaire au sommet) :
+  (1) §III.5 arithmétique : a^b∈ℕ par récurrence (le socle C61/Prop.1 existe,
+      la division euclidienne d'aujourd'hui en est la preuve de maturité) ;
+  (2) le pairing 2^m·3^n injectif (2-valuation OU factorisation minimale —
+      décider en lisant ce que le livre fait au juste, E III.48 Lemme 2 :
+      développement dyadique — lire PDF p.151 avant de choisir) ;
+  (3) L2 par Cantor-Bernstein (direction A déjà close) ;
+  (4) L1 (collectivisation ℕ + récurrence n≤a) ;
+  (5) décharge H1 (𝔉∋(D,ψ₀) avec D dénombrable ⊂ E par L1, ψ₀ par L2) et
+      H2 (le recollement de chaîne, « bute sur Lemme 1 » dixit frame_zorn) ;
+  (6) a²=a 0-hyp par hessenberg_a_carre_egal_a_0hyp.
+C'est le vrai chantier mathématique (semaines) — exactement l'objectif validé
+par Karl (cibles-qui-commandent). Dette signalée : cadre_plat.py 748 l.
