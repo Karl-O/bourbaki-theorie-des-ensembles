@@ -17,5 +17,17 @@ def test_bijection_fonctionnel_et_domaine():
     assert len(E.theorie_ensembles().axiomes) == 22
 
 
+def test_bijection_injective():
+    """(b) : B injectif sur P(A), clos."""
+    from bourbaki.i_description_mathematique_formelle.i_1_termes_relations.outil_formule import var
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_3_3_operations_cardinaux.iii_3_5_exposant.prop12_powerset.ensembles_prop12_bijection import (
+        bijection_graphe, bijection_injective)
+    vA = var("Abij")
+    r = bijection_injective()
+    assert not r.hypotheses
+    assert r.conclusion == E.injective_dans(bijection_graphe(), E.parties(vA))
+    assert len(E.theorie_ensembles().axiomes) == 22
+
+
 def test_theorie_inchangee():
     assert len(E.theorie_ensembles().axiomes) == 22
