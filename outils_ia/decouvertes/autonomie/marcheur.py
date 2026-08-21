@@ -261,6 +261,19 @@ def marcher(but, faits_bruts, impls=(), rondes=3, profondeur=4,
         if sonde is not None:
             sonde(e)
 
+    #   battement de coeur pendant les LONGS appels besoins (règle du 21 août :
+    #   jamais de calcul long sans sortie — deux morts silencieuses mesurées).
+    #   Échantillonné : 1 ligne tous les 200 événements de route.
+    _compte = {"n": 0}
+
+    def _battement(e):
+        _compte["n"] += 1
+        if sonde is not None and _compte["n"] % 200 == 0:
+            sonde({"type": "battement", "routes": _compte["n"],
+                   "dernier": e.get("type")})
+        if trace is not None:
+            trace(e)
+
     derives = {}                       # conj → (nom, th, rang_du_motif)
     tentees = set()
     extras = []
@@ -303,7 +316,7 @@ def marcher(but, faits_bruts, impls=(), rondes=3, profondeur=4,
                 note({"type": "re-essai", "ronde": ronde, "palier": k,
                       "lemmes": len(palier)})
                 th, manques = besoins(but, list(impls), palier,
-                                      profondeur=profondeur)
+                                      profondeur=profondeur, trace=_battement)
                 if th is not None and th.est_clos and th.conclusion == but:
                     note({"type": "FERMÉ", "ronde": ronde, "palier": k,
                           "pool": "comprimé (%d lemmes)" % len(palier)})

@@ -292,7 +292,22 @@ retry, ladder rung 1 (the head pattern's 2 lemmas) & 53.2--414.2\,s & 361.0\,s \
 \end{center}
 
 The walk closes in 414\,s a goal that chaining spends 692\,s \emph{failing}
-to close. But the number worth the section is how the retry got its shape.
+to close. Figure~\ref{fig:chronologie} puts the four searches of this paper
+side by side. But the number worth the section is how the retry got its
+shape.
+
+\begin{figure}[htbp]
+\centering
+\resizebox{\ifdim\width>\linewidth \linewidth\else\width\fi}{!}{%
+\includegraphics{chronologie.png}}
+\caption{Four searches on the same goal $B_4$, same budgets, one machine
+(script: \texttt{scripts/gen\_chronologie.py}, figures from
+\texttt{MESURES.md}). Chaining alone exhausts its budget and fails; the walk
+closes, and most of its time is the final retry --- on the head pattern's two
+lemmas only. The figure proves no generality: one goal, one bench, and
+failure durations depend on the measured budget caps.}
+\label{fig:chronologie}
+\end{figure}
 
 \paragraph{The walk first failed by its own richness.} The first version
 re-attempted the goal on \emph{all} certified lemmas at once --- six of them,
@@ -419,7 +434,26 @@ because the code does not yet earn it.
 \label{sec:conclusion}
 %% ============================================================================
 
-%% A ECRIRE apres EXP4 et P6.
+The companion paper's thesis was that the last mile is located, not crossed:
+a search should fail by naming what it lacks. This paper kept the naming and
+added the crossing --- and the crossing turned out to be made of the same
+material as the locating. The walker closes $B_4$ not by searching harder but
+by changing what it searches \emph{with}: mine the goal for its own
+operation, refute the false laws for pennies, pay the kernel for the true
+ones, and then --- the step the measurements insist on --- \emph{set the raw
+laws aside}. Every number in this paper that surprised us is the same law
+seen from a different side: knowledge that is not replaced is weight
+(72.6\,s alone, 361\,s with one extra lemma, 962\,s cumulative, over 580\,s
+with all six); and a walk that grows its pool without pruning fails by
+growing, exactly like the raw searches of the companion paper.
+
+What the walker still is not: a learner. It retains nothing between runs;
+the learned-proposer organ that remembers which witnesses paid is wired to
+the need organ, not yet to the walk. Connecting them --- so that the ladder's
+first rung is ordered by remembered success rather than by MDL gain alone
+--- is the natural next step, and this time the gate for claiming
+``learning'' in a title is already written: the memory must change a
+measured outcome on a goal the memoryless walker fails.
 
 \bibliographystyle{alpha}
 \bibliography{../references}
