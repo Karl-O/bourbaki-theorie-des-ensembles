@@ -26,5 +26,14 @@ def test_quotient_de_produit():
     assert len(E.theorie_ensembles().axiomes) == 22
 
 
+def test_divise_donne_quotient():
+    """⊢ (b|a) ⇒ (a = b·(a/b)) — la seconde moitié, sous la convention du livre."""
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_5_calcul_entiers.iii_5_6_divisibilite_division_euclidienne.ensembles_division_quotient import (
+        divise_donne_quotient, enonce_divise_donne_quotient)
+    r = divise_donne_quotient()
+    assert r.conclusion == enonce_divise_donne_quotient()
+    assert len(E.theorie_ensembles().axiomes) == 22
+
+
 def test_theorie_inchangee():
     assert len(E.theorie_ensembles().axiomes) == 22

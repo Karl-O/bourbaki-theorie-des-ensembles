@@ -156,4 +156,54 @@ def quotient_de_produit(a="aqt", b="bqt", q="qqt"):
     return res
 
 
-__all__ = ["enonce_quotient_de_produit", "quotient_de_produit"]
+def enonce_divise_donne_quotient(a="aqt", b="bqt"):
+    va, vb = _t(a), _t(b)
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_5_calcul_entiers.iii_5_6_divisibilite_division_euclidienne.ensembles_division_definitions import (
+        divise_cardinal)
+    return impl(divise_cardinal(vb, va),
+                egal(va, produit_cardinal_binaire(vb, quotient_cardinal(va, vb))))
+
+
+# @livre Ch.III §5.6 Rem.- | E III.39 L.30-30 | PDF p.142
+def divise_donne_quotient(a="aqt", b="bqt"):
+    """🎯 ⊢ ( b | a ) ⇒ ( a = b·(a/b) ).   (Seconde moitié de l'équivalence du
+    livre — la convention « écrire a/b implique b|a » rend l'équivalence
+    conditionnelle à la divisibilité, dit en tête de module.)"""
+    from bourbaki.i_description_mathematique_formelle.i_5_theories_egalitaires.i_5_2_tactiques_abrege_egalite import (
+        congruence_terme)
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_5_calcul_entiers.iii_5_6_divisibilite_division_euclidienne.ensembles_division_definitions import (
+        divise_cardinal)
+    va, vb = _t(a), _t(b)
+    vqd = var("qd")
+    T = quotient_cardinal(va, vb)
+
+    #   sous le corps de b|a : Fini qd  et  a = b·qd
+    corps = et(est_fini(vqd), egal(va, produit_cardinal_binaire(vb, vqd)))
+    assert existe("qd", corps) == divise_cardinal(vb, va), \
+        "divise_donne_quotient : corps ≠ Déf.1"
+    h = N.assume(corps)
+    eq = conjonction_elim_droite(h)                       # a = b·qd
+    #   la première moitié identifie qd au τ (mêmes hypothèses fusionnent :
+    #   Fini qd est ici DÉRIVÉ du corps par _cut)
+    moitie1 = _cut(quotient_de_produit(a, b, "qd"), est_fini(vqd),
+                   conjonction_elim_gauche(h))
+    qd_eq_T = N.modus_ponens(eq, moitie1)                 # qd = a/b
+    #   réécrire a = b·qd en a = b·(a/b)  (congruence du terme b·(·))
+    cong = N.modus_ponens(qd_eq_T,
+                          congruence_terme(vqd, T,
+                                           produit_cardinal_binaire(vb, var("w"))))
+    res_sous = composer_egalites(eq, cong)                # a = b·(a/b)
+    #   éliminer l'∃ du témoin (qd n'est libre ni dans la conclusion — le
+    #   τ LIE qd — ni dans les hypothèses restantes)
+    step = N.loi_deduction(corps, res_sous)
+    res = N.loi_deduction(
+        divise_cardinal(vb, va),
+        N.modus_ponens(N.assume(divise_cardinal(vb, va)),
+                       existe_elimination(step, "qd")))
+    assert res.conclusion == enonce_divise_donne_quotient(a, b), \
+        "divise_donne_quotient : conclusion inattendue"
+    return res
+
+
+__all__ = ["enonce_quotient_de_produit", "quotient_de_produit",
+           "enonce_divise_donne_quotient", "divise_donne_quotient"]

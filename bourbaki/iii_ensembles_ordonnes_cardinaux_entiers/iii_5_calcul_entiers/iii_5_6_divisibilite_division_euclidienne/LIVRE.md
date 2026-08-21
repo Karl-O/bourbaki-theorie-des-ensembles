@@ -33,10 +33,11 @@
 | E III.39 | L.27-28 | 5.6 | Prop.- | `multiple_de_multiple` | `ensembles_division_multiples.py` |
 | E III.39 | L.29-31 | 5.6 | Prop.- | `somme_multiples` | `ensembles_division_multiples.py` |
 | E III.39 | L.30-30 | 5.6 | Rem.- | `quotient_de_produit` | `ensembles_division_quotient.py` |
+| E III.39 | L.30-30 | 5.6 | Rem.- | `divise_donne_quotient` | `ensembles_division_quotient.py` |
 
 ## Bilan cumulé (ce dossier + descendants)
 
-- Notions calées : **26**
+- Notions calées : **27**
 - Fichiers à caler : **0**
 - Marqueurs non conformes : **0**
 - Livre **E III** : pages couvertes 39 — aucune page manquante dans l'intervalle
