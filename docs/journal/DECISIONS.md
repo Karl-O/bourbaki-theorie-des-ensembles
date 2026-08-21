@@ -89,3 +89,38 @@ CHOIX DE ROUTE pour L2-direction-B (à confirmer après audit iii_5_7) :
   Si retenue : écart de DÉMO (énoncé identique) à consigner dans ANOMALIES.
 Vu aussi : puissance_entiers_ferme (Fini a^b) existe (n_arith_iii5) sous
 prémisses B0(a)/(∀m)B(a,m) à examiner ; iii_5_1 récurrence C61 outillée.
+
+## 2026-08-22 00h15 — ROUTE L2 TRANCHÉE : continuer le chantier 2^m·3^n du dépôt
+AUDIT : iii_5_7 (base b) = énoncés seuls, termes opaques (Option F trop
+chère) ; MAIS le dépôt a DÉJÀ choisi et fondé la route 2^m·3^n :
+  • puissance_deux_trois_NN : Fini n ⇒ Fini 2^n / Fini 3^n — CLOS ;
+  • puissance_entiers_inconditionnel (Cor.3 §III.5.1) — CLOS (B0/B déchargés
+    par eq_exposant_invariant) ;
+  • parite_iii5 : division_par_deux, impair_decompose, un_impair,
+    deux_k_plus_un_impair, impair_fois_impair, successeur injectif (Prop.8)
+    — « fondation ℵ₀·ℵ₀=ℵ₀ » explicite ;
+  • produits_disjoints / produit_union_carre (support cadre-réunion) — clos.
+L'injectivité du pairing N'EST PAS commencée. Écart de DÉMO vs livre
+(entrelacement dyadique, E III.48) : à consigner dans ANOMALIES quand L2
+sera clos — l'ÉNONCÉ Eq(N×N, N) reste identique.
+PLAN DE BRIQUES W (un commit testé chacune) :
+  W1 trois_puissance_impair : ¬(2 | 3^n) — récurrence (3^0=1 un_impair ;
+     3^(n+1)=3^n·3 impair_fois_impair).
+  W2 simplification par b>0 : (b·a = b·a') ⇒ a=a' pour entiers — via
+     l'unicité du quotient de la division euclidienne §III.5.6 (quotient_de_
+     produit : (a=b·q)⇒(q=a/b) + congruence) ; instances b=2, b=3.
+  W3 2-valuation : 2^m·u = 2^m'·u' (u,u' impairs) ⇒ m=m' et u=u' —
+     récurrence sur m, base par pair_neq_impair, pas par W2(b=2).
+  W4 3-injectivité : 3^n = 3^n' ⇒ n=n' — récurrence + W2(b=3) + 1≠3·3^k
+     (pair_neq_impair ne suffit pas : 1 impair, 3^k impair — utiliser plutôt
+     1 < 3·3^k par monotonie, OU l'unicité W3-analogue en base 3 : à décider
+     en écrivant, la division par 3 donne le même patron que la parité).
+  W5 injectivité pairing : 2^m·3^n = 2^m'·3^n' ⇒ m=m' ∧ n=n' = W1+W3+W4.
+  W6 graphe F = graphe_terme(N×N, 2^(pr1 z)·3^(pr2 z)) : fonctionnel/domaine
+     (C54), injectif sur N×N (W5 + couples), image ⊂ N → est_injection_de →
+     Card(N×N) ≤ Card N. (Reprendre la représentation de N de la direction A
+     NN_inf_egal_NN_carre ; vérifier pr1/pr2 comme termes du dépôt.)
+  W7 L2 : Eq(N×N, N) par cantor_bernstein + direction A (close).
+Ensuite : L1 (route livre : Zermelo + comparaison th.3 §III.2 — auditer ce
+qui existe côté iii_2_bien_ordonnes), puis décharge H1/H2, puis a²=a 0-hyp
++ restatement littéral-cardinal (comme Cantor).
