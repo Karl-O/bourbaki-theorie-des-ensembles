@@ -122,3 +122,29 @@ plafonne à 1 palier et ASSERTE que le journal déclare les paliers sautés
   la conjecture.
 - Le coût COMPLET d'un échec (toute l'échelle) : non mesurable à ce
   jour — les paliers ≥ 2 tuent le processus (§4bis).
+
+## 6. APRES PUBLICATION (21 août, soir) — le banc 2 fait tomber trois lois
+
+Le banc 2 (distributivité pure a·(b+c) = a·b + a·c, chantier division) a fait
+perdre TROIS fois le test du schéma croisé — chaque perte est une mesure :
+
+1. **Le MDL préfère le substrat.** Les motifs de tête ne sont pas PCB/SC mais
+   `paire` et le produit ensembliste — l'intérieur des développements τ bat
+   les opérations de surface au gain. Le banc ⊕ marchait parce que ⊕ y était
+   SEUL. (La machine surfaçait au passage la notion de COUPLE — un vrai objet
+   du livre.)
+2. **Argument partagé ⇒ arité 1.** Toutes les instances du produit du but
+   partagent `a` : chaque paire ne diverge qu'en un point, le motif binaire
+   complet n'est PAS récupérable du but. Le motif UNAIRE a·(·) l'est (occ 3,
+   gain 226) — d'où le schéma MORPHISME H(y+z) = H(y)+H(z) (unaire, binaire),
+   qui EST la distributivité du but.
+3. **La signature de racine confond les τ.** Tous les τ-termes ont la même
+   racine (tau/Z/1 arg) : la paire (SC(b,c), SC(PCB,PCB)) — positions 2 et 4
+   d'un groupe de 5 — n'était jamais essayée par l'appariement (i−1, 0).
+   Correctif : descente vers le bas jusqu'à la première anti-unification
+   compatible (cap 12 essais / 2 rencontres, dit dans le code).
+
+Verrouillé par test : `test_marcheur_schemas_croises_distributivite`
+(2 passed en 19,66 s avec le test ⊕ — aucune régression). Ces lois sont
+POST-publication : l'article reste à l'état 414 s ; elles nourrissent la
+suite (A4', ou le papier du mineur).
