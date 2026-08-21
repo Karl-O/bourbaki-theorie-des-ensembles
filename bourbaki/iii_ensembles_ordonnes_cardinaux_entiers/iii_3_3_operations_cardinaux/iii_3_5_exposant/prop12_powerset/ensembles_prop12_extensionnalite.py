@@ -47,6 +47,22 @@ FORMES EXACTES vérifiées (21 août, 22h00) :
   · l'ordre de la conjonction (gauche-associée) : ((((fonct F et fonct G)
     et graphe F) et graphe G) et dom=dom) et ∀-valeurs.
 
+RECETTE DU CŒUR (sous-lemme 4), formes vérifiées 22h15 :
+  · egalite_valeurs = (∀x)(x∈dom F ⇒ E.valeur(F,x) = E.valeur(G,x)) — il faut
+    donc le PONT VALEUR : (z,v)∈G et fonctionnel(G) ⇒ E.valeur(G,z)=v
+    (à localiser : grep def.*valeur dans ii_3_1/ii_3_4/ii_5_2 —
+    graphe_terme_valeur n'est que pour graphe_terme) ;
+  · côté χ : chi_valeur_dans_Y {z∈Y} ⊢ (z,1)∈χ_Y ; chi_valeur_hors_Y
+    {z∈X∖Y} ⊢ (z,0)∈χ_Y — niveau COUPLE, à remonter au niveau valeur
+    par le même pont ;
+  · preimage_un(f,x)/preimage_membre (powerset_deux l.102/126) : version
+    GRAPHE (z∈Pre ⇔ z∈X et (z,1)∈f) — compatible témoin G ;
+  · par cas sur G(z) via deux_membre + l'appartenance de la valeur à 2
+    (dom G=X, z∈X ⇒ (z, G(z))∈G — pont valeur inverse — puis G⊂X×2 ⇒
+    G(z)∈2) ; cas G(z)={∅} ⇒ (z,1)∈G ⇒ z∈Pre ⇒ (z,1)∈χ ⇒ valeurs 1=1 ;
+    cas G(z)=∅ ⇒ z∉Pre (sinon (z,1)∈G et fonctionnel ⇒ ∅={∅}, absurde
+    par singleton≠vide — lemme à localiser) ⇒ z∈X∖Y-forme ⇒ (z,0)∈χ.
+
 Pièces existantes vérifiées ce jour : chi_dans_applications (χ_Y ∈ 𝓕(X;2)),
 rho_chi_identite (Pre(χ_Y) = Y), preimage_membre, chi_inclus_produit,
 graphe_egal_par_valeurs (clos, 6 conjoints).
