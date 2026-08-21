@@ -73,8 +73,9 @@ PONTS DU CŒUR TOUS LOCALISÉS (22h20) :
 DERNIÈRES FORMES (22h25) : couple_dans_dom {(x,y)∈F} ⊢ x∈dom F et
 _inst_dom(vf,vx) : (x∈dom F)⇔(∃y)((x,y)∈F) (extensionnalite.py, privé
 importable) — l'étape (0) passe par dom G=X réécrit puis equivalence_avant ;
-_couple_dans_produit_imp (prop12_fin l.115) pour l'étape (2) — forme à
-confirmer à l'écriture ; le plan par cas passe par z∈Pre ∨ ¬(z∈Pre)
+l'étape (2) est DIRECTE : couple_dans_produit_ssi (ii_2_2/
+ensembles_produit l.78) ⊢ ((u,v)∈A×B) ⇔ (u∈A et v∈B), termes-ok —
+G⊂X×2 instancié à (z, G(z)) puis equivalence_avant + elim_droite ; le plan par cas passe par z∈Pre ∨ ¬(z∈Pre)
 (tiers exclu) MAIS l'étape (2) G(z)∈2 reste nécessaire au cas négatif
 (G(z)≠1 et G(z)∈2 ⇒ G(z)=0).
 
