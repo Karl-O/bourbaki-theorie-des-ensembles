@@ -135,5 +135,126 @@ def bijection_injective(a="Abij"):
     return N.generalisation("u", N.generalisation("up", t2))
 
 
+# Sous-lemme (c) : image(B, P(A)) = 𝓕(A;2) — la SURJECTIVITÉ.
+def bijection_image(a="Abij"):
+    """⊢ image(B, P(A)) = 𝓕(A;2)   (= est_surjective(B, P(A), 𝓕(A;2))).
+
+    ⊂ : z ∈ B⟨P(A)⟩ ⇒ z = chi_appli(tb) pour un tb ∈ P(A) (membre_graphe_terme),
+        d'où z ∈ 𝓕(A;2) (chi_dans_applications, implication close, sous tb⊂A).
+        Patron α du lieur frais de AXIOME_IMAGE : singleton_graphe_image_incluse.
+    ⊃ : z ∈ 𝓕(A;2) ⇒ z = ((G,A),2) avec G ∈ 2^A (axiome_applications, témoin
+        α-renommé Gc) ; χ_{Pre(Gc)} = Gc (chi_rho_identite) donne par congruence
+        z = chi_appli(Pre(Gc)), et Pre(Gc) ∈ P(A) (preimage_dans_parties) :
+        (Pre(Gc), z) ∈ B, donc z ∈ image (S5 puis élim ∃Gc).
+    Égalité : A1 (extensionnalite_appliquee) sur la double inclusion."""
+    from bourbaki.i_description_mathematique_formelle.i_1_termes_relations.outil_formule import (
+        et, appartient)
+    from bourbaki.i_description_mathematique_formelle.i_2_theoremes.tactiques.tactiques_abrege2 import (
+        conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
+        equivalence_avant, equivalence_arriere, equivalence_transitivite, instancie)
+    from bourbaki.i_description_mathematique_formelle.i_4_theories_quantifiees.i_4_3_tactiques_abrege_quantif import (
+        alpha_existe, existe_elimination)
+    from bourbaki.i_description_mathematique_formelle.i_5_theories_egalitaires.i_5_2_tactiques_abrege_egalite import (
+        symetrie, composer_egalites, congruence_terme)
+    from bourbaki.ii_theorie_des_ensembles.ii_1_relations_collectivisantes.ensembles_theoremes import (
+        extensionnalite_appliquee)
+    from bourbaki.ii_theorie_des_ensembles.ii_3_correspondances.ii_3_6_fonction_terme.ensembles_fonction_terme import (
+        membre_graphe_terme)
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_3_3_operations_cardinaux.iii_3_5_exposant.prop12_powerset.ensembles_powerset_deux import (
+        preimage_un, preimage_dans_parties, membre_parties_t)
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_3_3_operations_cardinaux.iii_3_5_exposant.prop12_powerset.ensembles_prop12_powerset import (
+        chi)
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_3_3_operations_cardinaux.iii_3_5_exposant.prop12_powerset.ensembles_powerset_exp import (
+        deux)
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_3_3_operations_cardinaux.iii_3_5_exposant.prop12_powerset.ensembles_prop12_fin import (
+        chi_dans_applications)
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_3_3_operations_cardinaux.iii_3_5_exposant.prop12_powerset.ensembles_prop12_extensionnalite import (
+        chi_rho_identite)
+
+    def _cut(thm, P, pr):
+        return N.modus_ponens(pr, N.loi_deduction(P, thm))
+
+    vA = _t(a)
+    B = bijection_graphe(a)
+    PA = E.parties(vA)
+    deux_ens = deux()
+    FA2 = E.applications(vA, deux_ens)
+    vz = var("z")
+    T = chi_appli(var("x"), vA)
+
+    #   caractérisation IMAGE, lieur α-frais renommé en tb (patron cantor l.230)
+    ax_img = N.axiome(E.theorie_ensembles(), E.AXIOME_IMAGE)
+    img_car0 = instancie(instancie(instancie(ax_img, B), PA), vz)
+    impl_LtoEX = img_car0.conclusion.sous[0].sous[0].sous[0]
+    rhs_ex = impl_LtoEX.sous[1]
+    assert rhs_ex.tag == "exists"
+    nom_lie = rhs_ex.lieur
+    inner0 = et(appartient(var(nom_lie), PA),
+                appartient(E.couple(var(nom_lie), vz), B))
+    img_car = equivalence_transitivite(
+        img_car0, alpha_existe(nom_lie, "tb", inner0))
+    #   z∈B⟨P(A)⟩ ⇔ (∃tb)(tb∈P(A) et (tb,z)∈B)
+    vtb = var("tb")
+    corps = et(appartient(vtb, PA), appartient(E.couple(vtb, vz), B))
+
+    #   ((tb,z)∈B) ⇔ (tb∈P(A) et z = chi_appli(tb))
+    mem = membre_graphe_terme(PA, T, "tb", "z", "x", "y")
+
+    # ── ⊂ : image(B, P(A)) ⊂ 𝓕(A;2) ───────────────────────────────────────
+    hb = N.assume(corps)
+    tb_inPA = conjonction_elim_gauche(hb)                     # tb ∈ P(A)
+    cond = N.modus_ponens(conjonction_elim_droite(hb), equivalence_avant(mem))
+    z_eq = conjonction_elim_droite(cond)                      # z = chi_appli(tb)
+    sub_tb = N.modus_ponens(tb_inPA, equivalence_avant(membre_parties_t(vtb, vA)))
+    chiT_in = N.modus_ponens(sub_tb, chi_dans_applications(vtb, vA))   # ∈ 𝓕(A;2)
+    z_in = N.modus_ponens(chiT_in, equivalence_arriere(N.modus_ponens(
+        z_eq, N.s6(vz, chi_appli(vtb, vA), "w", appartient(var("w"), FA2)))))
+    ex_imp = existe_elimination(N.loi_deduction(corps, z_in), "tb")
+    h_img = N.assume(appartient(vz, E.image(B, PA)))
+    z_inFA2 = N.modus_ponens(N.modus_ponens(h_img, equivalence_avant(img_car)), ex_imp)
+    sub1 = N.generalisation("z", N.loi_deduction(
+        appartient(vz, E.image(B, PA)), z_inFA2))             # image ⊂ 𝓕(A;2)
+
+    # ── ⊃ : 𝓕(A;2) ⊂ image(B, P(A)) ───────────────────────────────────────
+    ax_ap = N.axiome(E.theorie_applications(vA, deux_ens),
+                     E.axiome_applications(vA, deux_ens))
+    car_z0 = instancie(ax_ap, vz)   # z∈𝓕(A;2) ⇔ (∃G)(z=((G,A),2) et G∈2^A)
+    inner_G = et(egal(vz, E.couple(E.couple(var("G"), vA), deux_ens)),
+                 appartient(var("G"), E.exposant(vA, deux_ens)))
+    car_z = equivalence_transitivite(car_z0, alpha_existe("G", "Gc", inner_G))
+    vGc = var("Gc")
+    body_G = et(egal(vz, E.couple(E.couple(vGc, vA), deux_ens)),
+                appartient(vGc, E.exposant(vA, deux_ens)))
+    hg = N.assume(body_G)
+    z_eq_t = conjonction_elim_gauche(hg)                      # z = ((Gc,A),2)
+    g_in = conjonction_elim_droite(hg)                        # Gc ∈ 2^A
+    PreG = preimage_un(vGc, vA)
+    rho = _cut(chi_rho_identite(vGc, vA),
+               appartient(vGc, E.exposant(vA, deux_ens)), g_in)   # χ_{Pre(Gc)} = Gc
+    triple_chi = chi_appli(PreG, vA)                          # ((χ_{Pre},A),2)
+    eq_triples = N.modus_ponens(rho, congruence_terme(
+        chi(PreG, vA), vGc, E.couple(E.couple(var("w"), vA), deux_ens)))
+    z_eq_chi = composer_egalites(z_eq_t, N.modus_ponens(
+        eq_triples, symetrie(triple_chi, E.couple(E.couple(vGc, vA), deux_ens))))
+    #   z = chi_appli(Pre(Gc))
+    PreG_inPA = preimage_dans_parties(vGc, vA)                # ⊢ Pre(Gc) ∈ P(A)
+    mem_pre = instancie(N.generalisation("tb", mem), PreG)
+    cpl_in = N.modus_ponens(conjonction_intro(PreG_inPA, z_eq_chi),
+                            equivalence_arriere(mem_pre))     # (Pre(Gc), z) ∈ B
+    wit = conjonction_intro(PreG_inPA, cpl_in)
+    ex_tb = N.modus_ponens(wit, N.s5(corps, PreG, "tb"))      # (∃tb)corps
+    z_img = N.modus_ponens(ex_tb, equivalence_arriere(img_car))
+    imp_G = existe_elimination(N.loi_deduction(body_G, z_img), "Gc")
+    h_ap = N.assume(appartient(vz, FA2))
+    z_img2 = N.modus_ponens(N.modus_ponens(h_ap, equivalence_avant(car_z)), imp_G)
+    sub2 = N.generalisation("z", N.loi_deduction(appartient(vz, FA2), z_img2))
+
+    # ── égalité (A1, double inclusion) ───────────────────────────────────
+    res = N.modus_ponens(conjonction_intro(sub1, sub2),
+                         extensionnalite_appliquee(E.image(B, PA), FA2))
+    assert res.conclusion == E.est_surjective(B, PA, FA2), "bijection_image : forme"
+    return res
+
+
 __all__ = ["bijection_graphe", "bijection_fonctionnel", "bijection_domaine",
-           "bijection_injective"]
+           "bijection_injective", "bijection_image"]

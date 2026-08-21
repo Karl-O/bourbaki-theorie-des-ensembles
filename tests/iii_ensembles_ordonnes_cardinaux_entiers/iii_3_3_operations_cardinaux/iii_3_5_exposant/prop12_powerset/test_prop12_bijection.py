@@ -29,5 +29,20 @@ def test_bijection_injective():
     assert len(E.theorie_ensembles().axiomes) == 22
 
 
+def test_bijection_image():
+    """(c) : image(B, P(A)) = 𝓕(A;2), clos."""
+    from bourbaki.i_description_mathematique_formelle.i_1_termes_relations.outil_formule import var
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_3_3_operations_cardinaux.iii_3_5_exposant.prop12_powerset.ensembles_prop12_bijection import (
+        bijection_graphe, bijection_image)
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_3_3_operations_cardinaux.iii_3_5_exposant.prop12_powerset.ensembles_powerset_deux import (
+        deux)
+    vA = var("Abij")
+    r = bijection_image()
+    assert not r.hypotheses
+    assert r.conclusion == E.est_surjective(
+        bijection_graphe(), E.parties(vA), E.applications(vA, deux()))
+    assert len(E.theorie_ensembles().axiomes) == 22
+
+
 def test_theorie_inchangee():
     assert len(E.theorie_ensembles().axiomes) == 22
