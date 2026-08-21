@@ -1,0 +1,21 @@
+# -*- coding: utf-8 -*-
+"""Test brique (iv) de Cantor — la bijection Y ↦ ((χ_Y, A), 2), sous-lemme (a)."""
+import bourbaki.ii_theorie_des_ensembles.ii_1_relations_collectivisantes.ensembles_abrege as E
+
+
+def test_bijection_fonctionnel_et_domaine():
+    from bourbaki.i_description_mathematique_formelle.i_1_termes_relations.outil_formule import (
+        var, egal)
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_3_3_operations_cardinaux.iii_3_5_exposant.prop12_powerset.ensembles_prop12_bijection import (
+        bijection_graphe, bijection_fonctionnel, bijection_domaine)
+    vA = var("Abij")
+    B = bijection_graphe()
+    f = bijection_fonctionnel()
+    d = bijection_domaine()
+    assert not f.hypotheses and not d.hypotheses
+    assert d.conclusion == egal(E.dom(B), E.parties(vA))
+    assert len(E.theorie_ensembles().axiomes) == 22
+
+
+def test_theorie_inchangee():
+    assert len(E.theorie_ensembles().axiomes) == 22
