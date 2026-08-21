@@ -256,5 +256,33 @@ def bijection_image(a="Abij"):
     return res
 
 
+# Sous-lemme (d) : L'ASSEMBLAGE — Eq(P(A), 𝓕(A;2)).
+def bijection_equipotent(a="Abij"):
+    """🎯 ⊢ Eq(P(A), 𝓕(A;2))   (la brique (iv) de la file Cantor, CLOSE).
+
+    est_bijection_de(B, P(A), 𝓕(A;2)) = (fonct ∧ dom) ∧ (inj ∧ surj) — les
+    quatre conjoints sont les sous-lemmes (a)-(c) — puis S5 au témoin B
+    (patron : inf_egal_parties, cantor l.270)."""
+    from bourbaki.i_description_mathematique_formelle.i_2_theoremes.tactiques.tactiques_abrege2 import (
+        conjonction_intro)
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import (
+        est_bijection_de, equipotent)
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_3_3_operations_cardinaux.iii_3_5_exposant.prop12_powerset.ensembles_powerset_exp import (
+        deux)
+
+    vA = _t(a)
+    B = bijection_graphe(a)
+    PA = E.parties(vA)
+    FA2 = E.applications(vA, deux())
+    bij = conjonction_intro(
+        conjonction_intro(bijection_fonctionnel(a), bijection_domaine(a)),
+        conjonction_intro(bijection_injective(a), bijection_image(a)))
+    assert bij.conclusion == est_bijection_de(B, PA, FA2), \
+        "bijection_equipotent : conjonction mal ordonnée"
+    res = N.modus_ponens(bij, N.s5(est_bijection_de(var("F"), PA, FA2), B, "F"))
+    assert res.conclusion == equipotent(PA, FA2), "bijection_equipotent : forme Eq"
+    return res
+
+
 __all__ = ["bijection_graphe", "bijection_fonctionnel", "bijection_domaine",
-           "bijection_injective", "bijection_image"]
+           "bijection_injective", "bijection_image", "bijection_equipotent"]

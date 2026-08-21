@@ -44,5 +44,21 @@ def test_bijection_image():
     assert len(E.theorie_ensembles().axiomes) == 22
 
 
+def test_bijection_equipotent():
+    """🎯 (d) : Eq(P(A), 𝓕(A;2)), clos — la brique (iv) entière."""
+    from bourbaki.i_description_mathematique_formelle.i_1_termes_relations.outil_formule import var
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_3_3_operations_cardinaux.iii_3_5_exposant.prop12_powerset.ensembles_prop12_bijection import (
+        bijection_equipotent)
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import (
+        equipotent)
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_3_3_operations_cardinaux.iii_3_5_exposant.prop12_powerset.ensembles_powerset_deux import (
+        deux)
+    vA = var("Abij")
+    r = bijection_equipotent()
+    assert not r.hypotheses
+    assert r.conclusion == equipotent(E.parties(vA), E.applications(vA, deux()))
+    assert len(E.theorie_ensembles().axiomes) == 22
+
+
 def test_theorie_inchangee():
     assert len(E.theorie_ensembles().axiomes) == 22
