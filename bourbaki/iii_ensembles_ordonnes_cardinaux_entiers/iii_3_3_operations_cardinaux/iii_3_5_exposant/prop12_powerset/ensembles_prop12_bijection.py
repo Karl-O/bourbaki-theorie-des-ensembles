@@ -7,6 +7,9 @@ Design (DECISIONS 21 août 22h40) : B := graphe_terme(parties(A), chi_appli(x,A)
   (b) B injectif   [couple_egal_implique_composantes ×2 + rho_chi_identite]
   (c) image B = F(A;2)   [chi_dans_applications ; chi_rho_identite]
   (d) est_bijection_de(B, P(A), F(A;2)) puis Eq par S5.
+FORME CIBLE (lue 22h50) : est_bijection_de(F,X,Y) = (fonctionnel ∧ dom=X)
+∧ est_bijective(F,X,Y) [= injectif ∧ image F<X> = Y, E.II.49 — lire sa déf
+exacte au prochain sous-lemme] ; (a) couvre déjà les 2 premiers conjoints.
 X := a cardinal dès le départ — F(a;2) est LITTÉRALEMENT le support de 2^a
 (exposant_cardinal_binaire, Déf. 4) : la brique (v) sera Prop.1 directe.
 """
