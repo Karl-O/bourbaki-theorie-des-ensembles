@@ -238,23 +238,30 @@ def conjectures_pour(motif, noms):
 
 
 def marcher(but, faits_bruts, impls=(), rondes=3, profondeur=4,
-            borne_oracle=8, trace=None):
+            borne_oracle=8, trace=None, sonde=None):
     """La marche complète. → (Theoreme_ou_None, journal).
 
     Le journal est la DONNÉE du marcheur : chaque motif miné, chaque
     conjecture réfutée (et par quelle affectation), chaque lemme certifié,
     chaque re-essai — l'échec final rend les manques terminaux.
 
-    ⚠️ Le re-essai se fait sur le pool COMPRIMÉ (les lemmes dérivés SEULS) :
-    mesuré le 21 août, B4 ferme en 73 s ainsi contre 962 s sur pool cumulé.
-    L'essai sur pool cumulé n'est PAS fait ici — dit dans le journal, jamais
-    en silence."""
+    ⚠️ Le re-essai se fait sur le pool COMPRIMÉ, par ÉCHELLE : les lemmes du
+    motif de tête seuls, puis élargi motif par motif en cas d'échec. Mesuré
+    le 21 août : B4 ferme en ~73 s sur le lemme dérivé seul, 962 s en pool
+    cumulé, et le re-essai « tous les lemmes certifiés d'un coup » (6)
+    dépassait 580 s — chaque fait de plus agrandit l'espace. L'essai sur
+    pool cumulé n'est PAS fait ici — dit dans le journal, jamais en silence."""
     from outils_ia.arithmetique.oracle_num import contre_exemple
     from outils_ia.decouvertes.besoin import besoins
 
     journal = []
-    note = journal.append
-    derives = {}
+
+    def note(e):
+        journal.append(e)
+        if sonde is not None:
+            sonde(e)
+
+    derives = {}                       # conj → (nom, th, rang_du_motif)
     tentees = set()
     extras = []
     for ronde in range(1, rondes + 1):
@@ -262,34 +269,49 @@ def marcher(but, faits_bruts, impls=(), rondes=3, profondeur=4,
         note({"type": "motifs", "ronde": ronde,
               "gains": [(m["occ"], m["gain"]) for m in motifs]})
         nouveaux = 0
-        for m in motifs:
+        for rang, m in enumerate(motifs, start=1):
             for schema, conj, libres in conjectures_pour(m["motif"], m["noms"]):
                 if conj in faits_bruts or conj in derives or conj in tentees:
                     continue
                 tentees.add(conj)
+                note({"type": "essai", "schema": schema,
+                      "motif": (m["occ"], m["gain"])})
                 aff = contre_exemple(conj, libres, borne_oracle)
                 if aff is not None:
                     note({"type": "réfuté", "schema": schema, "par": aff})
                     continue
                 pool = dict(faits_bruts)
-                pool.update(derives)
+                pool.update((c, (n, t)) for c, (n, t, _) in derives.items())
                 th, _ = besoins(conj, list(impls), pool, profondeur=profondeur)
                 if th is not None and th.est_clos and th.conclusion == conj:
-                    derives[conj] = ("marche:" + schema, th)
+                    derives[conj] = ("marche:" + schema, th, rang)
                     nouveaux += 1
                     note({"type": "certifié", "schema": schema})
                 else:
                     note({"type": "non-certifié", "schema": schema})
-        if derives:
-            th, manques = besoins(but, list(impls), dict(derives),
-                                  profondeur=profondeur)
-            if th is not None and th.est_clos and th.conclusion == but:
-                note({"type": "FERMÉ", "ronde": ronde,
-                      "pool": "comprimé (%d lemmes)" % len(derives)})
-                if trace:
-                    trace(journal)
-                return th, journal
-            note({"type": "ouvert", "ronde": ronde, "manques": len(manques)})
+        #   ÉCHELLE DE COMPRESSION (mesurée le 21 août) : re-essayer sur les
+        #   lemmes du motif de TÊTE seuls, puis élargir motif par motif. Le
+        #   re-essai « tous les lemmes d'un coup » (6 lemmes) dépassait 580 s
+        #   là où les 2 lemmes du motif de tête suffisent — même loi que le
+        #   pool cumulé : chaque fait de plus agrandit l'espace de recherche.
+        if nouveaux:
+            rangs = sorted({r for (_, _, r) in derives.values()})
+            manques = []
+            for k in rangs:
+                palier = {c: (n, t) for c, (n, t, r) in derives.items()
+                          if r <= k}
+                note({"type": "re-essai", "ronde": ronde, "palier": k,
+                      "lemmes": len(palier)})
+                th, manques = besoins(but, list(impls), palier,
+                                      profondeur=profondeur)
+                if th is not None and th.est_clos and th.conclusion == but:
+                    note({"type": "FERMÉ", "ronde": ronde, "palier": k,
+                          "pool": "comprimé (%d lemmes)" % len(palier)})
+                    if trace:
+                        trace(journal)
+                    return th, journal
+                note({"type": "ouvert", "ronde": ronde, "palier": k,
+                      "manques": len(manques)})
             extras = [d["manque"] for d in manques
                       if d.get("manque") is not None]
         if nouveaux == 0:

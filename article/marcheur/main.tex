@@ -53,7 +53,8 @@ $\oplus$ without being told it exists, conjectures laws for it from an open
 list of schemas, lets a numeric oracle kill the false ones in milliseconds,
 has the kernel certify the true ones, and re-attempts the goal on the
 \emph{compressed} pool of derived lemmas alone. The same goal then closes,
-kernel-checked, in about 73\,s. Two measured facts frame the contribution.
+kernel-checked, end to end in 414\,s --- less time than chaining needs to
+fail. Two measured facts frame the contribution.
 First, compression is a \emph{replacement}, not an addition: re-attempting on
 the derived lemma alone takes 72.6\,s, while adding it to the raw laws takes
 962\,s --- a factor of 13, because new knowledge enlarges the search space
@@ -89,8 +90,26 @@ machine to be right: every candidate is judged --- first by a numeric oracle
 that can only refute, then by the kernel that alone can certify. A wrong
 proposal costs seconds; an unsound one is impossible.
 
-%% A REMPLIR (EXP4) : le paragraphe de contributions avec le chiffre de la
-%% marche de bout en bout, une fois exp4.out lu et colle dans MESURES.md §4.
+\paragraph{Contributions.} All figures were measured on 21 August 2026 and
+are reproducible from the repository (Section~\ref{sec:repro}).
+\begin{itemize}
+\item \textbf{The gate, crossed and asserted on both sides}
+  (Sections~\ref{sec:porte} and~\ref{sec:marche}): chaining alone fails on
+  $B_4$ in 692\,s; one unattended call to the walker closes it,
+  kernel-checked, in 414\,s. A test in the repository asserts both sides.
+\item \textbf{Replacement, not addition, measured three times}
+  (Sections~\ref{sec:porte} and~\ref{sec:marche}): the derived lemma alone,
+  72.6\,s; with one more true lemma, 361\,s; added to the raw laws, 962\,s;
+  all six certified lemmas at once, over 580\,s and killed. Hence the
+  walker's compression ladder.
+\item \textbf{A miner that rediscovers the operation from the goal}
+  (Section~\ref{sec:mineur}) --- including the measured failure of its first
+  version, which ranked by size and saw only $\tau$-development noise.
+\item \textbf{A refutation oracle with a stated blind spot}
+  (Section~\ref{sec:oracle}): one added layer makes derived-operation
+  conjectures visible; what stays invisible cost a measured 11\,s of failed
+  certifications on this bench.
+\end{itemize}
 
 %% ============================================================================
 \section{Background: the bench, the budget, the gap}
@@ -248,11 +267,54 @@ and on such conjectures the oracle stays silent --- it never affirms.
 %% ============================================================================
 \section{The walk, end to end}
 \label{sec:marche}
-%% ANCRE : MESURES.md §4 — A REMPLIR depuis exp4.out. NE RIEN ECRIRE AVANT.
+%% ANCRE : MESURES.md §4 (exp4_b4.out, sonde horodatee, 21 aout).
 %% ============================================================================
 
-%% A REMPLIR (EXP4) : journal de marche reel (motifs, refutes, certifies,
-%% FERME), duree totale, comparaison avec 692 s. Garde-fou F4 via la marche.
+Everything above described organs; this section reports the machine running
+them unattended. One call --- \texttt{marcher($B_4$, raw pool)} --- with a
+timestamped probe on its journal:
+
+\begin{center}\small
+\begin{tabular}{@{}L{0.58\linewidth}rr@{}}
+\toprule
+phase & window & duration \\
+\midrule
+mining (4 patterns, gains 4045/1771/1155/895) & 0--4.0\,s & 4.0\,s \\
+12 conjectures: 6 certified, 2 refuted, 4 failed & 4.0--53.2\,s & 49.2\,s \\
+\quad $\oplus$-commutativity certified & & 20.2\,s \\
+\quad $\oplus$-associativity certified & & 16.8\,s \\
+\quad idempotence refuted (at $x=0$, resp.\ $x=1$) & & ${<}0.1$\,s \\
+retry, ladder rung 1 (the head pattern's 2 lemmas) & 53.2--414.2\,s & 361.0\,s \\
+\midrule
+\textbf{closed} --- kernel-checked, 0 hypotheses, 22 axioms & & \textbf{414.2\,s} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The walk closes in 414\,s a goal that chaining spends 692\,s \emph{failing}
+to close. But the number worth the section is how the retry got its shape.
+
+\paragraph{The walk first failed by its own richness.} The first version
+re-attempted the goal on \emph{all} certified lemmas at once --- six of them,
+since the miner's lesser patterns also yield certifiable laws. That retry
+exceeded 580\,s and was killed: the walker had grown its pool into its own
+obstacle, exactly the failing-by-growing signature the companion paper
+documents for raw search. The fix is the \emph{compression ladder}: re-attempt
+on the head pattern's lemmas alone, widen to the next pattern only on
+failure. Rung 1 sufficed. And a finer measurement sharpens the replacement
+law: the rung's two lemmas ($\oplus$-comm $+$ $\oplus$-assoc) close $B_4$ in
+361\,s, while $\oplus$-assoc \emph{alone} closes it in 72.6\,s ---
+even one true, on-topic, certified lemma too many costs a factor of five.
+
+\paragraph{The price of the oracle's blind spot, measured.} Four conjectures
+(associativity and idempotence of the two lesser patterns) were out of the
+one-layer oracle's fragment, went to certification, and failed there ---
+about 11\,s of the 414. That is what the stated limit of
+Section~\ref{sec:oracle} costs on this bench: real, small, and on the
+journal rather than hidden.
+
+%% A REMPLIR (F4) : garde-fou — la variante fausse a travers la MARCHE
+%% complete (exp4_f4.out, en cours).
 
 %% ============================================================================
 \section{What the walk does not find}
@@ -264,11 +326,78 @@ and on such conjectures the oracle stays silent --- it never affirms.
 %% manques ; renvoi A3. NE RIEN ECRIRE AVANT LA MESURE.
 
 %% ============================================================================
+\section{Reproducibility}
+\label{sec:repro}
+%% ANCRE : article/marcheur/scripts/ (exp1, exp3, exp4) ; autonomie/
+%% test_general.py (les 3 tests marcheur) ; MESURES.md.
+%% ============================================================================
+
+Every figure in this paper was measured on 21 August 2026 and recorded, with
+its experiment, in \texttt{article/marcheur/MESURES.md}; the experiment
+scripts are versioned beside it in \texttt{article/marcheur/scripts/}
+(\texttt{exp1\_porte\_directe.py}, \texttt{exp3\_pool\_comprime.py},
+\texttt{exp4\_marche.py}). The gate itself is locked by tests in
+\texttt{outils\_ia/decouvertes/autonomie/test\_general.py}: a fast one
+asserting the miner rediscovers $\oplus$ and the oracle's verdicts, and two
+slow ones asserting both sides of the gate and the false-variant guard.
+Durations are whole-call wall-clock on one machine (Python 3.13, Windows);
+the certification variance of Section~\ref{sec:porte} applies throughout.
+
+%% A REMPLIR : verdict de la suite de tests marcheur (derniere ligne du
+%% fichier de sortie) une fois lancee.
+
+%% ============================================================================
 \section{Related work}
 \label{sec:related}
-%% A ECRIRE en dernier — regle 0-entree-(v?) : chaque citation verifiee a la
-%% source dans ../references.bib.
+%% ANCRE : ../references.bib — UNIQUEMENT des entrees deja verifiees a la
+%% source (regle 0-entree-(v?), campagne du 2 aout).
 %% ============================================================================
+
+\paragraph{Theory exploration.} The closest relative of the
+mine--conjecture--refute--certify loop is theory exploration as practised by
+Hipster in Isabelle/HOL~\cite{johansson2014hipster}, in the QuickSpec lineage:
+enumerate candidate lemmas about given operations, filter them by testing,
+prove the survivors. Two differences matter here. Hipster explores
+\emph{around a theory} --- its input is a set of operations, its output a
+library; the walker is \emph{goal-directed} --- its input is one goal it must
+close, the operations are not given but mined from that goal's own subterms,
+and a conjecture is only certified because a crossing needs it. And our
+setting is a Bourbaki $\tau$-calculus on an LCF kernel, where terms are
+opaque developments: the mining step (and its measured failure) has no
+counterpart when terms are readable trees. The survey of automated
+conjecturing~\cite{conjecturingsurvey2026} maps the wider landscape.
+
+\paragraph{Counterexample before proof.} Killing conjectures with small
+models before attempting proof is established Isabelle practice ---
+Nitpick and its integration with Sledgehammer~\cite{blanchette2011nitpick};
+recent work learns to generate formal counterexamples with language
+models~\cite{learningtodisprove2026}. Our oracle is deliberately humbler: a
+reconstruction table over numerals, extended by one measured layer, whose
+blind spots are stated rather than smoothed over --- and whose verdicts are
+asymmetric by construction, refutation certain, silence otherwise.
+
+\paragraph{Library learning and compression.} The MDL criterion the miner
+ranks by --- name what repeats, weighted by what naming saves --- is the
+compression principle of wake-sleep library learning in
+DreamCoder~\cite{ellis2021dreamcoder}. What the bench adds is a caution
+those systems rarely measure: a learned abstraction only pays if it
+\emph{replaces} the primitives in the search space; kept alongside them, it
+made our search thirteen times slower.
+
+\paragraph{Learned proposers and guided search.} GPT-$f$~\cite{polu2020gptf},
+HyperTree Proof Search~\cite{lample2022htps} and
+ENIGMA~\cite{jakubuv2020enigma} learn to propose or rank inference steps,
+with success measured over benchmark corpora. The walker shares their
+architecture-level premise --- an unsound proposer behind an exact judge ---
+but not their mechanism: it learns nothing, retains nothing between runs,
+and proposes from the structure of the one goal in front of it. The
+comparison it invites is therefore not proof rates but failure behaviour:
+what remains when the run does not close.
+
+\paragraph{Conjectures and refutations.} The loop's shape --- propose a law,
+seek a counterexample, keep what survives --- is Lakatos's method reduced to
+its mechanical shadow; Pease's computational model~\cite{pease2007lakatos}
+works the same ground from the philosophy side.
 
 %% ============================================================================
 \section{Limitations}

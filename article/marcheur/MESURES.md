@@ -61,14 +61,38 @@ Lectures honnêtes :
   réfutées par l'oracle : elles coûteront un échec de certification (mesuré
   au journal de marche).
 
-## 4. La marche de bout en bout (EXP4) — EN COURS
+## 4. La marche de bout en bout (EXP4) — FERMÉE en 414,24 s
 
-`marcher(B4, brut)` : miner → conjecturer → réfuter → certifier → re-essayer
-sur pool comprimé. Résultats à coller ici À LA LECTURE, pas de mémoire.
+`marcher(B4, brut)`, chronologie lue dans exp4_b4.out (sonde horodatée) :
+
+| phase | fenêtre | durée |
+|---|---|---:|
+| minage (4 motifs : gains 4045/1771/1155/895) | 0 → 4,0 s | 4,0 s |
+| 12 conjectures : **6 certifiées**, 2 réfutées oracle, 4 non-certifiées | 4,0 → 53,2 s | 49,2 s |
+| · ⊕-comm certifiée | | 20,2 s |
+| · ⊕-assoc certifiée | | 16,8 s |
+| · idempotence ⊕ réfutée (x=0) / SC (x=1) | | < 0,1 s |
+| re-essai palier 1 (2 lemmes du motif ⊕) | 53,2 → 414,2 s | **361,0 s** |
+| **TOTAL — FERMÉE, est_clos, ==B4, 0 hyp, 22 axiomes** | | **414,24 s** |
+
+Lectures :
+
+- **La marche ferme en 414 s ce que le chaînage met 692 s à NE PAS fermer.**
+- La loi du remplacement se raffine : 2 lemmes (⊕-comm + ⊕-assoc) = 361 s
+  là où ⊕-assoc SEUL = 72,6 s (EXP3). MÊME un lemme VRAI et thématique en
+  trop coûte ×5. L'échelle de compression (re-essai par paliers de motif)
+  est née de cette mesure : le premier jet « tous les lemmes certifiés d'un
+  coup » (6) dépassait 580 s — la marche échouait par sa propre richesse.
+- Les 2 morts silencieuses des lancements en fond (aucune sortie, aucun
+  code) sont restées inexpliquées ; l'exécution instrumentée (sonde
+  horodatée, avant-plan) a tout donné. Règle retenue : jamais de calcul
+  long sans battement de sortie.
 
 ## 5. Ce qui N'EST PAS mesuré (à ne pas écrire dans l'article)
 
 - Aucune généralité au-delà du banc ⊕ (un seul banc à ce jour).
-- Le coût d'une conjecture fausse PROFONDE (hors de portée de l'oracle) —
-  à mesurer si EXP4 en rencontre une.
+- ~~Le coût d'une conjecture fausse profonde~~ MESURÉ par EXP4 : les 4
+  « non-certifiées » (assoc/idem des motifs 3-4, hors de portée de l'oracle
+  à une couche) ont coûté 3,2 + 7,8 + ~0,3 s d'échecs de certification —
+  le prix de l'aveuglement de l'oracle est de l'ordre de 11 s sur 414.
 - Rien sur Goldbach : le marcheur n'y a pas encore été pointé (P6).
