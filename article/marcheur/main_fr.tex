@@ -257,8 +257,9 @@ $\oplus(a,b)$~: le minage a pris 1,1\,s.
 Le pas de réfutation a mis au jour un angle mort mesuré. L'oracle évalue les
 termes par une table de reconstruction --- les numéraux, leurs sommes, leurs
 produits --- parce que les termes sont ici opaques~: il n'y a rien où
-descendre. Mais $\mathrm{succ}(\text{somme})$ n'était dans aucune entrée, si
-bien que \emph{toute} conjecture sur une opération dérivée s'évaluait en
+descendre. Mais --- en notant $\mathrm{succ}$ l'opération successeur, le
+$+1$ du $\oplus$ du banc --- $\mathrm{succ}(\text{somme})$ n'était dans
+aucune entrée, si bien que \emph{toute} conjecture sur une opération dérivée s'évaluait en
 « inconnu »~: invisible, ni réfutable ni autorisée.
 
 Une couche a suffi~: pour chaque terme déjà en table de valeur $v$, ajouter
@@ -360,7 +361,26 @@ bout.
 \label{sec:limites-goldbach}
 %% ============================================================================
 
-%% A REMPLIR (P6) : traduire la section anglaise une fois la mesure faite.
+Pointé sur l'énoncé général de Goldbach --- le but formalisé en $\tau$ de
+l'article compagnon sur la cartographie de l'ouvert, avec les deux mêmes
+lois brutes au pool --- le marcheur a fait tout ce que cet article décrit.
+Il a miné quatre motifs dans l'énoncé (celui de tête, 8 occurrences, est
+la somme dont $2n = p+q$ est fait)~; il a \emph{certifié} des lemmes de
+commutativité et d'associativité --- vrais, contrôlés noyau, et portant
+sur l'\emph{addition} de l'énoncé, pas sur la primalité~; il a réfuté
+deux schémas d'idempotence en $x=1$ et $x=2$~; il a re-essayé sur son
+échelle~; et il s'est arrêté sur un état \textbf{terminal en 35,7\,s}, un manque nommé,
+rien de fermé, 22 axiomes comme toujours.
+
+C'est la revendication négative de l'article, et sa frontière. La marche ne
+crée aucune information mathématique~: des lemmes vrais et certifiés sur
+les opérations qu'une conjecture mentionne ne déplacent pas la conjecture.
+Le marcheur traverse les derniers kilomètres \emph{pavables} --- fermables
+par des lemmes de la théorie qu'il tient déjà~; devant une conjecture
+ouverte il fait la seule chose honnête qu'il sache~: s'arrêter vite, et
+dire où. Ce que la machine peut dire \emph{du} manque lui-même --- le
+reformuler en propriétés d'un $\tau$-terme --- est le sujet de l'article
+compagnon, pas de celui-ci.
 
 %% ============================================================================
 \section{Reproductibilité}
@@ -379,7 +399,10 @@ variante fausse. Les durées sont du temps mural d'appel entier sur une
 machine (Python 3.13, Windows)~; la variance de certification de la
 section~\ref{sec:porte} s'applique partout.
 
-%% A REMPLIR : verdict de la suite de tests marcheur (derniere ligne).
+Les verdicts, lus sur la dernière ligne des fichiers de sortie, jamais sur
+une notification~: le test rapide du mineur, 	extbf{1 passed en 34,0\,s}~;
+les deux tests lents --- les deux côtés de la porte, et le garde-fou
+plafonné --- 	extbf{2 passed en 2673,1\,s} (44\,min\,33).
 
 %% ============================================================================
 \section{Travaux voisins}

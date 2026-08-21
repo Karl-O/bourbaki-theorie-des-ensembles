@@ -250,8 +250,9 @@ $\oplus(a,b)$: mining took 1.1\,s.
 
 The refutation step exposed a measured blind spot. The oracle evaluates terms
 by a reconstruction table --- numerals, their sums, their products --- because
-terms here are opaque: there is nothing to descend into. But
-$\mathrm{succ}(\text{sum})$ was in no entry, so \emph{every} conjecture about
+terms here are opaque: there is nothing to descend into. But --- writing
+$\mathrm{succ}$ for the successor operation, the $+1$ of the bench's
+$\oplus$ --- $\mathrm{succ}(\text{sum})$ was in no entry, so \emph{every} conjecture about
 a derived operation evaluated to ``unknown'': invisible, neither refutable
 nor authorised.
 
@@ -351,8 +352,24 @@ measure to the end.
 %% ANCRE : P6 — A MESURER (marcheur pointe sur un but Goldbach).
 %% ============================================================================
 
-%% A REMPLIR (P6) : le marcheur sur un but Goldbach ne ferme pas et rend ses
-%% manques ; renvoi A3. NE RIEN ECRIRE AVANT LA MESURE.
+Pointed at the general Goldbach statement --- the $\tau$-formalised goal of
+the companion paper on mapping the open, with the same two raw laws in the
+pool --- the walker did everything this paper describes. It mined four
+patterns from the statement (the head one, 8 occurrences, is the sum that
+$2n = p+q$ is made of); it \emph{certified} commutativity and associativity
+lemmas --- true, kernel-checked, and about the \emph{addition} in the
+statement, not about primality; it refuted two idempotence schemas at $x=1$
+and $x=2$; it re-attempted on its ladder; and it ended \textbf{terminal in
+35.7\,s}, one gap named, nothing closed, 22 axioms as always.
+
+This is the paper's negative claim, and its boundary. The walk creates no
+mathematical information: certified true lemmas about the operations a
+conjecture mentions do not move the conjecture. The walker crosses last
+miles that are \emph{pavable} --- closable with lemmas of the theory it
+already holds; on an open conjecture it does the only honest thing it knows,
+which is to stop quickly and say where it stopped. What the machine can say
+\emph{about} that gap --- reformulating it as properties of a $\tau$-term
+--- is the companion paper's subject, not this one's.
 
 %% ============================================================================
 \section{Reproducibility}
@@ -372,8 +389,10 @@ slow ones asserting both sides of the gate and the false-variant guard.
 Durations are whole-call wall-clock on one machine (Python 3.13, Windows);
 the certification variance of Section~\ref{sec:porte} applies throughout.
 
-%% A REMPLIR : verdict de la suite de tests marcheur (derniere ligne du
-%% fichier de sortie) une fois lancee.
+The verdicts, read off the last line of the output files, never off a
+notification: the fast miner test, 	extbf{1 passed in 34.0\,s}; the two
+slow tests --- both sides of the gate, and the capped guard ---
+	extbf{2 passed in 2673.1\,s} (44\,min\,33).
 
 %% ============================================================================
 \section{Related work}

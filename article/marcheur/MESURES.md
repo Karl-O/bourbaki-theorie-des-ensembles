@@ -112,7 +112,13 @@ plafonne à 1 palier et ASSERTE que le journal déclare les paliers sautés
   « non-certifiées » (assoc/idem des motifs 3-4, hors de portée de l'oracle
   à une couche) ont coûté 3,2 + 7,8 + ~0,3 s d'échecs de certification —
   le prix de l'aveuglement de l'oracle est de l'ordre de 11 s sur 414.
-- Rien sur Goldbach : le marcheur n'y a pas encore été pointé (P6 —
-  exp5_goldbach.py prêt, en attente de machine libre).
+- ~~Rien sur Goldbach~~ MESURÉ (exp5_goldbach.py, exp5.out) : sur le but
+  général goldbach(), le marcheur mine 4 motifs (tête occ=8 gain=1127 =
+  la somme de 2n=p+q), CERTIFIE comm+assoc (vrais, sur l'addition de
+  l'énoncé — 18,6 s), réfute 2 idempotences (x=1, x=2), re-essaie
+  (palier 1 : ouvert, 1 manque, 16 s), ronde 2 : rien de neuf →
+  \u00ab terminal \u00bb en **35,70 s**, rien de fermé, 22 axiomes. P6 ✅ :
+  des lemmes vrais sur les opérations d'une conjecture ne déplacent pas
+  la conjecture.
 - Le coût COMPLET d'un échec (toute l'échelle) : non mesurable à ce
   jour — les paliers ≥ 2 tuent le processus (§4bis).

@@ -63,20 +63,20 @@ Banc ⊕ de v16–v18 : `a ⊕ b := (a+b)+1`, pool = les deux lois brutes sur `+
 - Garde-fou : une variante FAUSSE de B4 doit rester ouverte à travers toute la
   marche (et mourir à l'oracle une fois l'extension faite).
 
-STATUT : expérience lancée (exp_marcheur.py), résultats non encore lus.
-**Si EXP1 ferme B4 directement, ce but ne franchit pas la porte** — en trouver
-un plus profond (5 éléments, ou commutations mêlées), et le DIRE dans l'article.
+STATUT (21 août, soirée) : PORTE FRANCHIE — voir la table des revendications.
+Le journal de campagne détaillé est dans MESURES.md ; les trois morts de
+processus inexpliquées (pools ≥ 4 lemmes) y sont consignées telles quelles.
 
 ## Table des revendications (claim → preuve → statut)
 
-| # | revendication | preuve attendue dans le dépôt | statut |
+| # | revendication | preuve dans le dépôt | statut |
 |---|---|---|---|
-| **P1** | **La porte est franchie** : un but que le chaînage seul (21 organes, budgets mesurés) laisse ouvert est fermé par la marche | test qui asserte les DEUX côtés | 🔴 à construire |
-| **P2** | **Le pas de compression** : le lemme certifié raccourcit la chaîne sous le budget — mesuré (pas bruts vs pas dérivés, temps) | mesures dans MESURES.md | 🔴 |
-| **P3** | **La proposition vient du but** : les motifs sont minés dans le but lui-même (MDL), pas nommés par nous | code du mineur + test « la machine retrouve ⊕ sans qu'on le lui dise » | 🔴 |
-| **P4** | **La réfutation avant la dépense** : l'oracle tue les schémas faux (idempotence…) avant tout appel noyau | test + coût comparé | 🔴 |
-| **P5** | **L'échec reste une donnée** : une marche qui ne ferme pas rend ses manques terminaux | test négatif | 🔴 |
-| **P6** | **Ce que ça ne fait pas** : aucune information mathématique nouvelle ; sur Goldbach le marcheur ne fait que reformuler le manque | renvoi A3 + test | 🔴 |
+| **P1** | **La porte est franchie** : B4 ouvert en chaînage seul (692,54 s d'épuisement), fermé par la marche (414,24 s, est_clos, 0 hyp) | `test_marcheur_franchit_la_porte` — 2 passed en 2673 s avec P5 | ✅ 21 août |
+| **P2** | **Compression = REMPLACEMENT** : lemme seul 72,6 s ; +1 lemme vrai 361 s ; cumulé 962 s ; 6 lemmes >580 s tué → échelle de compression | MESURES.md §1+§4 ; `marcher` (échelle) | ✅ |
+| **P3** | **La proposition vient du but** : motif de tête miné == ⊕ (occ 6, gain 4045), personne ne le nomme | `test_marcheur_le_mineur_retrouve_l_operation` — 1 passed 34 s | ✅ |
+| **P4** | **La réfutation avant la dépense** : idempotence ⊕ morte à x=0 en <1 ms ; angle mort de l'oracle = 11 s mesurées | même test + test_oracle_num (6 passed 1,76 s) | ✅ |
+| **P5** | **L'échec reste une donnée** : F4 → terminal, manques nommés, paliers sautés DÉCLARÉS au journal | `test_marcheur_ne_ferme_pas_le_faux` | ✅ |
+| **P6** | **Ce que ça ne fait pas** : sur le but Goldbach général le marcheur ne ferme pas et rend ses manques | exp5_goldbach.py + exp5.out : terminal en 35,70 s, 1 manque, 2 lemmes vrais certifiés sans effet sur la conjecture | ✅ |
 
 ## Ce que l'article NE revendiquera PAS
 
