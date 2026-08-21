@@ -41,5 +41,22 @@ def test_valeurs_coincident():
     assert len(E.theorie_ensembles().axiomes) == 22
 
 
+def test_chi_rho_identite():
+    """🎯 La brique (iii) : {G∈2^X} ⊢ χ_{Pre(G)} = G."""
+    from bourbaki.i_description_mathematique_formelle.i_1_termes_relations.outil_formule import (
+        var, egal, appartient)
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_3_3_operations_cardinaux.iii_3_5_exposant.prop12_powerset.ensembles_prop12_extensionnalite import (
+        chi_rho_identite)
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_3_3_operations_cardinaux.iii_3_5_exposant.prop12_powerset.ensembles_powerset_deux import (
+        preimage_un, deux)
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_3_3_operations_cardinaux.iii_3_5_exposant.prop12_powerset.ensembles_prop12_powerset import (
+        chi)
+    vg, vx = var("Gext"), var("Xext")
+    r = chi_rho_identite()
+    assert r.conclusion == egal(chi(preimage_un(vg, vx), vx), vg)
+    assert set(r.hypotheses) == {appartient(vg, E.exposant(vx, deux()))}
+    assert len(E.theorie_ensembles().axiomes) == 22
+
+
 def test_theorie_inchangee():
     assert len(E.theorie_ensembles().axiomes) == 22

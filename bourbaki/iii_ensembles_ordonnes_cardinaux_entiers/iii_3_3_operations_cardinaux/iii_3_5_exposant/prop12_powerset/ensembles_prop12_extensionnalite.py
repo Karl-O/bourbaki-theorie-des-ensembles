@@ -194,6 +194,10 @@ def valeurs_coincident(g="Gext", x="Xext", z="zext"):
 
     #   caractérisations (∀-clôturées sur y puis instanciées au bon terme)
     carG = valeur_caracterisation(vg, vz)                     # ((z,y)∈G)⇔... y libre
+    #   couper ses hypothèses (fonctionnel G ; ∃y — z LIBRE dedans, le noyau
+    #   refuserait la généralisation finale de l'assemblage sinon — mesuré)
+    carG = _cut(carG, E.est_fonctionnel(vg), fonct)
+    carG = _cut(carG, existe("y", appartient(E.couple(vz, var("y")), vg)), ex_y)
     carG_fwd_UN = _gen_inst(conjonction_elim_gauche(carG), "y", UN)   # ((z,UN)∈G)⇒(UN=G(z))
     carG_bwd_UN = _gen_inst(conjonction_elim_droite(carG), "y", UN)   # (UN=G(z))⇒((z,UN)∈G)
 
@@ -258,4 +262,70 @@ def valeurs_coincident(g="Gext", x="Xext", z="zext"):
     return cas(tiers_exclu(appartient(vz, Pre)), br1, br2)
 
 
-__all__ = ["g_decompose", "valeurs_coincident"]
+# Sous-lemme 5 — L'ASSEMBLAGE : χ∘ρ = id sur 2^X.
+def chi_rho_identite(g="Gext", x="Xext"):
+    """🎯 {G ∈ 2^X} ⊢ χ_{Pre(G)} = G.   (La brique (iii) de la file Cantor.)
+
+    Extensionnalité fonctionnelle (graphe_egal_par_valeurs, 6 conjoints dans
+    l'ordre EXACT de _conjonction_hypotheses) avec F := χ_{Pre(G)} et G."""
+    from bourbaki.i_description_mathematique_formelle.i_1_termes_relations.outil_formule import (
+        egal, impl)
+    from bourbaki.i_description_mathematique_formelle.i_2_theoremes.tactiques.tactiques_abrege2 import (
+        conjonction_intro)
+    from bourbaki.i_description_mathematique_formelle.i_5_theories_egalitaires.i_5_2_tactiques_abrege_egalite import (
+        symetrie, composer_egalites)
+    from bourbaki.ii_theorie_des_ensembles.ii_3_correspondances.ii_3_4_fonctions.ensembles_extensionnalite import (
+        graphe_egal_par_valeurs, _conjonction_hypotheses)
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_3_3_operations_cardinaux.iii_3_5_exposant.prop12_powerset.ensembles_powerset_deux import (
+        preimage_un, preimage_inclus)
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_3_3_operations_cardinaux.iii_3_5_exposant.prop12_powerset.ensembles_prop12_powerset import (
+        chi, chi_fonctionnel, chi_domaine)
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_3_3_operations_cardinaux.iii_3_5_exposant.prop12_powerset.ensembles_prop12_fin import (
+        chi_inclus_produit)
+
+    vg, vx = _t(g), _t(x)
+    deux_ens = deux()
+    Pre = preimage_un(vg, vx)
+    Chi = chi(Pre, vx)
+    #   variable de travail "z" (le nom "x" collisionne avec les lieurs
+    #   internes des lemmes de couples — 3e échec mesuré) ; l'α-passage vers
+    #   le lieur "x" d'egalite_valeurs se fait à la fin par inst+gen
+    vz = var("z")
+
+    incl_G, fonct_G, dom_G, graphe_G = g_decompose(g, x)
+    pre_sub = preimage_inclus(vg, vx)                          # ⊢ Pre ⊂ X (clos)
+
+    #   côté χ : fonctionnel (clos), inclusion ⊂ X×2 sous Pre⊂X, graphe, dom=X
+    fonct_C = chi_fonctionnel(Pre, vx)
+    incl_C = N.modus_ponens(pre_sub, chi_inclus_produit(Pre, vx))
+    graphe_C = _cut(_inclus_produit_est_graphe(Chi, vx, deux_ens),
+                    __import__("bourbaki.i_description_mathematique_formelle.i_1_termes_relations.outil_formule", fromlist=["inclus"]).inclus(Chi, E.produit(vx, deux_ens)),
+                    incl_C)
+    dom_C = N.modus_ponens(pre_sub, chi_domaine(Pre, vx))      # dom χ = X
+    dom_eq = composer_egalites(dom_C, N.modus_ponens(dom_G, symetrie(E.dom(vg), vx)))
+    #   dom χ = dom G
+
+    #   ∀-valeurs : (∀z)(z ∈ dom χ ⇒ χ(z) = G(z))
+    h_zdom = N.assume(appartient(vz, E.dom(Chi)))
+    x_from_dom = N.modus_ponens(h_zdom, equivalence_avant(N.modus_ponens(
+        dom_C, N.s6(E.dom(Chi), vx, "w", appartient(vz, var("w"))))))   # z ∈ X
+    vals = valeurs_coincident(g, x, vz)                        # {G∈2^X, z∈X} ⊢ χ(z)=G(z)
+    vals = _cut(vals, appartient(vz, vx), x_from_dom)          # hyp z∈X → z∈dom χ
+    val_imp = N.loi_deduction(appartient(vz, E.dom(Chi)), vals)
+    #   α-passage z → x : ∀z puis instance à var("x") puis ∀x (légal : ni z
+    #   ni x libres dans les hypothèses restantes)
+    val_all = N.generalisation("x", instancie(
+        N.generalisation("z", val_imp), var("x")))
+
+    #   la grande conjonction, ordre EXACT
+    corps = conjonction_intro(conjonction_intro(conjonction_intro(
+        conjonction_intro(conjonction_intro(
+            fonct_C, fonct_G), graphe_C), graphe_G), dom_eq), val_all)
+    assert corps.conclusion == _conjonction_hypotheses(Chi, vg), \
+        "chi_rho_identite : conjonction mal ordonnée"
+    res = N.modus_ponens(corps, graphe_egal_par_valeurs(Chi, vg))
+    assert res.conclusion == egal(Chi, vg), "chi_rho_identite : conclusion inattendue"
+    return res
+
+
+__all__ = ["g_decompose", "valeurs_coincident", "chi_rho_identite"]
