@@ -145,4 +145,76 @@ def division_existence(b="bdf"):
     return res
 
 
-__all__ = ["enonce_division_existence", "_strong_step", "division_existence"]
+# ---------------------------------------------------------------------------
+#  Le THEOREME COMPLET du livre : existence ET unicite (le << couple unique >>)
+# ---------------------------------------------------------------------------
+
+def _cloture_unicite_enonce(a, b):
+    """La cloture-du-livre de l'unicite : (pour tous entiers q, r, q', r') les
+    conditions determinent q et r — gardes Fini en implications, puis (pour tout)."""
+    from bourbaki.i_description_mathematique_formelle.i_1_termes_relations.outil_formule import pourtout
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_5_calcul_entiers.iii_5_6_divisibilite_division_euclidienne.ensembles_division_unicite import (
+        enonce_unicite)
+    corps = enonce_unicite(a, b, "qdf1", "qdf2", "rdf1", "rdf2")
+    for v in ("rdf2", "rdf1", "qdf2", "qdf1"):
+        corps = impl(est_fini(var(v)), corps)
+    for v in ("rdf2", "rdf1", "qdf2", "qdf1"):
+        corps = pourtout(v, corps)
+    return corps
+
+
+# @livre Ch.III §5.6 Th.1 | E III.39 L.10-11 | PDF p.142
+def enonce_division_euclidienne(a="adf", b="bdf"):
+    """L'enonce COMPLET de Bourbaki : << il existe des entiers q et r tels que
+    a = bq + r et r < b, et les entiers q et r sont determines de facon unique
+    par ces conditions >>. Machine : existence a a fixe ET cloture-(pour tout)
+    de l'unicite. Ecart d'orientation consigne (livre a = bq+r ; machine
+    b.q+r = a) : ANOMALIES.md 2026-08-21."""
+    va, vb = var(a) if isinstance(a, str) else a, var(b) if isinstance(b, str) else b
+    return et(_R_rel(vb, va), _cloture_unicite_enonce(va, vb))
+
+
+# @livre Ch.III §5.6 Th.1 | E III.39 L.10-11 | PDF p.142
+def division_euclidienne(a="adf", b="bdf"):
+    """🎯🎯 THEOREME 1 §III.5.6 COMPLET — LA DIVISION EUCLIDIENNE :
+
+    ⊢ {Fini a, Fini b, 0 < b, + residus C61} ⊢
+        (exists q)(exists r)( b.q+r = a  et  r < b )
+        ET  (pour tous entiers q,r,q',r') les conditions determinent (q,r).
+
+    FIDELITE : l'hypothese du livre est << b > 0 >> (E III.39 L.10) — c'est
+    elle qu'on prend ; le b != 0 des briques en est DERIVE (0<b est un
+    et(0<=b, non(0=b)) : elim droite + contraposition de la symetrie).
+    Strategie : existence = division_existence instanciee au dividende a ;
+    unicite = _unicite dont les gardes Fini sont dechargees en implications
+    puis generalisees (le noyau refuse toute variable encore libre dans une
+    hypothese — c'est le garde-fou, pas nous)."""
+    from bourbaki.i_description_mathematique_formelle.i_2_theoremes.tactiques.tactiques_abrege2 import (
+        conjonction_elim_droite, contraposition)
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_5_calcul_entiers.iii_5_6_divisibilite_division_euclidienne.ensembles_division_unicite import (
+        _unicite)
+    va, vb = _t(a), _t(b)
+
+    #   1. les hypotheses du LIVRE
+    fin_a = N.assume(est_fini(va))
+    b_pos = N.assume(inf_strict_card(ZERO, vb))                    # b > 0
+    #   2. b != 0, DERIVE de b > 0
+    ne_zb = conjonction_elim_droite(b_pos)                         # non(0 = b)
+    b_ne0 = N.modus_ponens(ne_zb, contraposition(symetrie(vb, ZERO)))   # non(b = 0)
+    #   3. EXISTENCE au dividende a (b!=0 remplace par sa preuve)
+    ex = _cut(division_existence(b), non(egal(vb, ZERO)), b_ne0)
+    ex_a = N.modus_ponens(fin_a, instancie(ex, va))                # (Eq)(Er)(b.q+r=a et r<b)
+    #   4. UNICITE : gardes Fini dechargees puis generalisees
+    un = _unicite(a, b, "qdf1", "qdf2", "rdf1", "rdf2")
+    for v in ("rdf2", "rdf1", "qdf2", "qdf1"):
+        un = N.loi_deduction(est_fini(var(v)), un)
+    for v in ("rdf2", "rdf1", "qdf2", "qdf1"):
+        un = N.generalisation(v, un)
+    #   5. le couple unique
+    res = conjonction_intro(ex_a, un)
+    assert res.conclusion == enonce_division_euclidienne(a, b),         "division_euclidienne : conclusion inattendue"
+    return res
+
+
+__all__ = ["enonce_division_existence", "_strong_step", "division_existence",
+           "enonce_division_euclidienne", "division_euclidienne"]
