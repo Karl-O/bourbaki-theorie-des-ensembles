@@ -253,13 +253,17 @@ def test_marcheur_le_mineur_retrouve_l_operation():
 
 
 def test_marcheur_schemas_croises_distributivite():
-    """Les schemas a DEUX motifs : sur un but melant produit et somme, le
-    mineur sort les DEUX motifs, et la conjecture croisee de tete EST la
-    distributivite a.(b+c) = a.b + a.c — construite, jamais nommee.
+    """Le schema MORPHISME : sur a.(b+c) = a.b + a.c, la machine mine le
+    motif UNAIRE H = a.(.) et le motif binaire de la somme, et la conjecture
+    morphisme H(y+z) = H(y)+H(z) EST la distributivite du but.
 
-    Ne du chantier division (E III.39) : les identites de quotients reposent
-    sur ce schema. Ici on verrouille la GENERATION (formes + oracle) ; la
-    certification est mesuree a part (elle depend des ponts du depot)."""
+    MESURE du 21 aout (deux versions PERDUES avant celle-ci, et ce sont des
+    resultats) : (1) les motifs de tete sont ceux du SUBSTRAT tau (paire,
+    produit ensembliste) — le MDL prefere l'interieur des developpements aux
+    operations de surface ; (2) toutes les instances de produit du but
+    partagent `a`, donc le motif binaire du produit N'EST PAS recuperable —
+    il n'existe qu'en arite 1. D'ou le schema morphisme (unaire, binaire).
+    Consigne : DECISIONS.md 21 aout."""
     from bourbaki.i_description_mathematique_formelle.i_1_termes_relations.outil_formule import (
         var, egal,
     )
@@ -270,26 +274,37 @@ def test_marcheur_schemas_croises_distributivite():
         produit_cardinal_binaire as PCB,
     )
     from outils_ia.decouvertes.autonomie.marcheur import (
-        conjectures_croisees, miner_motifs, _appliquer,
+        conjectures_morphisme, miner_motifs, _appliquer,
     )
     a, b, c = var("atgx"), var("btgx"), var("ctgx")
-    #   un but qui MELANGE les deux operations (la distributivite elle-meme)
     but = egal(PCB(a, SC(b, c)), SC(PCB(a, b), PCB(a, c)))
-    motifs = miner_motifs(but)
-    assert len(motifs) >= 2, "il faut deux motifs pour un schema croise"
-    m1, m2 = motifs[0], motifs[1]
-    #   les deux motifs de tete sont bien PCB et SC (a l'ordre pres)
-    inst = {_appliquer(m["motif"], m["noms"], [a, b]) for m in (m1, m2)}
-    assert inst == {PCB(a, b), SC(a, b)}
-    #   les conjectures croisees existent et ont la bonne FORME
-    tous = {sch: conj for sch, conj, _ in
-            conjectures_croisees(m1, m2) + conjectures_croisees(m2, m1)}
-    assert set(tous) == {"distributivite-gauche", "distributivite-droite"} or         len(tous) == 2
-    x, y, z = var("xmarche"), var("ymarche"), var("zmarche")
-    attendu = egal(PCB(x, SC(y, z)), SC(PCB(x, y), PCB(x, z)))
-    assert attendu in tous.values(),         "la distributivite produit-sur-somme doit etre parmi les conjecturees"
-    assert len(E.theorie_ensembles().axiomes) == 22
 
+    #   le motif UNAIRE a.(.) — mine en arite 1
+    unaires = miner_motifs(but, arite=1, top=4)
+    m_h = next((m for m in unaires
+                if _appliquer(m["motif"], m["noms"], [b]) == PCB(a, b)), None)
+    assert m_h is not None, "le motif unaire a.(.) doit etre dans le top-4"
+
+    #   le motif binaire de la somme — l'ordre des slots suit le
+    #   developpement tau, on accepte les deux
+    binaires = miner_motifs(but, arite=2, top=10)
+    m_g = next((m for m in binaires
+                if _appliquer(m["motif"], m["noms"], [a, b]) in (SC(a, b), SC(b, a))),
+               None)
+    assert m_g is not None, "le motif-somme doit etre dans le top-10"
+
+    #   la conjecture morphisme EST la distributivite (a l'ordre des slots
+    #   de G pres)
+    lst = conjectures_morphisme(m_h, m_g)
+    assert len(lst) == 1
+    _, conj, libres = lst[0]
+    y, z = var("ymarche"), var("zmarche")
+    attendus = {
+        egal(PCB(a, SC(y, z)), SC(PCB(a, y), PCB(a, z))),
+        egal(PCB(a, SC(z, y)), SC(PCB(a, z), PCB(a, y))),
+    }
+    assert conj in attendus, "la conjecture morphisme doit etre la distributivite"
+    assert len(E.theorie_ensembles().axiomes) == 22
 
 @pytest.mark.slow
 def test_marcheur_franchit_la_porte():

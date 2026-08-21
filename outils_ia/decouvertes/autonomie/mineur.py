@@ -151,15 +151,28 @@ def miner_motifs(but, extras=(), arite=2, top=4, maxi_paire=40000):
     for membres in groupes.values():
         membres.sort(key=lambda s: tailles[s])
         for i in range(1, len(membres)):
-            for j in (i - 1, 0):
-                u, v = membres[i], membres[j]
+            u = membres[i]
+            #   DESCENTE JUSQU'À LA RENCONTRE (2e correction mesurée, 21 août) :
+            #   la signature de racine confond TOUS les τ-termes (tau/Z/1 arg),
+            #   et l'appariement (i-1, 0) ratait la paire (SC(b,c), SC(PCB,PCB))
+            #   aux positions 2 et 4 d'un groupe de 5. On descend donc vers le
+            #   bas jusqu'à la première anti-unification COMPATIBLE — une
+            #   divergence est bon marché et discrimine les opérations entre
+            #   elles — avec un cap d'essais DIT ici (12, et 2 rencontres max).
+            essais, rencontres = 0, 0
+            for j in range(i - 1, -1, -1):
+                v = membres[j]
                 if u == v or tailles[u] + tailles[v] > maxi_paire:
                     continue
+                if essais >= 12 or rencontres >= 2:
+                    break
+                essais += 1
                 slots = {}
                 try:
                     motif = _generaliser(u, v, slots)
                 except (_Divergence, RecursionError):
                     continue
+                rencontres += 1
                 if len(slots) != arite or _est_slot(motif):
                     continue
                 noms = _noms_slots(motif)

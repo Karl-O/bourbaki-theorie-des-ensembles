@@ -203,7 +203,10 @@ def division_euclidienne(a="adf", b="bdf"):
     b_ne0 = N.modus_ponens(ne_zb, contraposition(symetrie(vb, ZERO)))   # non(b = 0)
     #   3. EXISTENCE au dividende a (b!=0 remplace par sa preuve)
     ex = _cut(division_existence(b), non(egal(vb, ZERO)), b_ne0)
-    ex_a = N.modus_ponens(fin_a, instancie(ex, va))                # (Eq)(Er)(b.q+r=a et r<b)
+    #   conclusion_recurrence enveloppe DEJA la garde Fini : l'existence
+    #   conclut (pour tout n)(Fini n => (Fini n => R{n})) — double garde,
+    #   donc modus ponens DEUX fois (mesure : 1er echec d'assertion, 21 aout).
+    ex_a = N.modus_ponens(fin_a, N.modus_ponens(fin_a, instancie(ex, va)))
     #   4. UNICITE : gardes Fini dechargees puis generalisees
     un = _unicite(a, b, "qdf1", "qdf2", "rdf1", "rdf2")
     for v in ("rdf2", "rdf1", "qdf2", "qdf1"):
@@ -212,7 +215,12 @@ def division_euclidienne(a="adf", b="bdf"):
         un = N.generalisation(v, un)
     #   5. le couple unique
     res = conjonction_intro(ex_a, un)
-    assert res.conclusion == enonce_division_euclidienne(a, b),         "division_euclidienne : conclusion inattendue"
+    attendu = enonce_division_euclidienne(a, b)
+    #   diagnostic par COMPOSANTE : en cas d'echec, dire QUEL cote diverge
+    #   (lecon du 1er tour : 45 min de test pour un booleen sec).
+    assert res.conclusion == attendu, (
+        "division_euclidienne : conclusion inattendue -- existence==%s cloture==%s"
+        % (ex_a.conclusion == _R_rel(vb, va), un.conclusion == _cloture_unicite_enonce(va, vb)))
     return res
 
 

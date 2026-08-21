@@ -97,6 +97,33 @@ def conjectures_croisees(m1, m2):
     ]
 
 
+def conjectures_morphisme(h1, g2):
+    """Schéma (unaire, binaire) : H est-il un MORPHISME pour G ?
+        H(G(y, z)) = G(H(y), H(z)).
+
+    Né d'une mesure du 21 août : sur a·(b+c) = a·b + a·c, TOUTES les
+    instances de produit partagent `a` — chaque paire ne diverge qu'en un
+    point, le motif binaire complet du produit n'est PAS récupérable du but.
+    Le motif UNAIRE H = a·(·) l'est (occ 3, gain 226), et la distributivité
+    du but est exactement « H morphisme pour + ». Liste OUVERTE."""
+    from bourbaki.i_description_mathematique_formelle.i_1_termes_relations.outil_formule import (
+        egal, var,
+    )
+    if len(h1["noms"]) != 1 or len(g2["noms"]) != 2:
+        return []
+    y, z = var("ymarche"), var("zmarche")
+
+    def H(u):
+        return _appliquer(h1["motif"], h1["noms"], [u])
+
+    def G(u, v):
+        return _appliquer(g2["motif"], g2["noms"], [u, v])
+
+    return [
+        ("morphisme", egal(H(G(y, z)), G(H(y), H(z))), ["ymarche", "zmarche"]),
+    ]
+
+
 def marcher(but, faits_bruts, impls=(), rondes=3, profondeur=4,
             borne_oracle=8, trace=None, sonde=None, paliers_max=None):
     """La marche complète. → (Theoreme_ou_None, journal).
@@ -178,6 +205,17 @@ def marcher(but, faits_bruts, impls=(), rondes=3, profondeur=4,
                 for schema, conj, libres in conjectures_croisees(m1, m2):
                     nouveaux += _essayer(schema, conj, libres, max(r1, r2),
                                          (m1["occ"], m2["occ"]))
+        #   schémas MORPHISME (unaire sur binaire) — l'arité 1 est minée à
+        #   part : les motifs dont les occurrences partagent un argument
+        #   n'existent QU'en arité 1 (mesuré le 21 août sur a·(b+c))
+        unaires = miner_motifs(but, extras=extras, arite=1, top=2)
+        note({"type": "motifs-unaires", "ronde": ronde,
+              "gains": [(m["occ"], m["gain"]) for m in unaires]})
+        for r1, h in enumerate(unaires, start=1):
+            for r2, g in tetes:
+                for schema, conj, libres in conjectures_morphisme(h, g):
+                    nouveaux += _essayer(schema, conj, libres, r2,
+                                         (h["occ"], g["occ"]))
         #   ÉCHELLE DE COMPRESSION (mesurée le 21 août) : re-essayer sur les
         #   lemmes du motif de TÊTE seuls, puis élargir motif par motif. Le
         #   re-essai « tous les lemmes d'un coup » (6 lemmes) dépassait 580 s
@@ -222,4 +260,5 @@ def marcher(but, faits_bruts, impls=(), rondes=3, profondeur=4,
     return None, journal
 
 
-__all__ = ["miner_motifs", "conjectures_pour", "conjectures_croisees", "marcher"]
+__all__ = ["miner_motifs", "conjectures_pour", "conjectures_croisees",
+           "conjectures_morphisme", "marcher"]
