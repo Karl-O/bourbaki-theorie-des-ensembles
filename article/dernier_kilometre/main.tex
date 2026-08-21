@@ -94,6 +94,24 @@ returns \textbf{the set of formulas that would close the goal if they were added
 pool}. Failure becomes a datum with a shape: not ``no'', but ``no, and here is exactly
 what is missing''. We call the component that does this the \emph{need organ}.
 
+\paragraph{The last mile, defined.} We borrow the term from logistics, where it names the
+final stretch of a delivery --- short, disproportionately expensive, and the part no
+amount of investment in the trunk network shortens. In proof search it names this:
+
+\begin{quote}
+Given a goal, a search derives what it can and stops. \textbf{The last mile is the
+distance between what it derived and what was asked} --- the stretch where mechanised
+search has done everything it knows how to do and the goal is still open.
+\end{quote}
+
+Three properties make it its own problem rather than merely ``the hard part''. It is
+\emph{not proportional to effort}: doubling the budget does not halve it, because what
+is usually missing is not more search but a different object --- a witness the pool never
+named, a law at an instance nobody generated. It is \emph{not visible}: a timeout looks
+identical whether one lemma or a whole theory is absent. And it is \emph{where the human
+comes back in}, which is exactly why leaving it undescribed is expensive --- the person
+who resumes the work has to rediscover what the machine already knew and discarded.
+
 \paragraph{The thesis.} The last mile is not crossed in one jump; it is \emph{located}.
 A system that fails while producing the exact statement of its lack is worth more than
 one that succeeds half the time without knowing why --- because the first can be
