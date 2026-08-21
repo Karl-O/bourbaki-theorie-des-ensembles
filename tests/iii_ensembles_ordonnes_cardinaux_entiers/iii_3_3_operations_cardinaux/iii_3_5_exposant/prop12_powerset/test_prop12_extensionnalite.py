@@ -22,5 +22,24 @@ def test_g_decompose():
     assert len(E.theorie_ensembles().axiomes) == 22
 
 
+def test_valeurs_coincident():
+    """Le cœur de (iii) : {G∈2^X, z∈X} ⊢ χ_{Pre(G)}(z) = G(z)."""
+    from bourbaki.i_description_mathematique_formelle.i_1_termes_relations.outil_formule import (
+        var, egal, appartient)
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_3_3_operations_cardinaux.iii_3_5_exposant.prop12_powerset.ensembles_prop12_extensionnalite import (
+        valeurs_coincident)
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_3_3_operations_cardinaux.iii_3_5_exposant.prop12_powerset.ensembles_powerset_deux import (
+        preimage_un, deux)
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_3_3_operations_cardinaux.iii_3_5_exposant.prop12_powerset.ensembles_prop12_powerset import (
+        chi)
+    vg, vx, vz = var("Gext"), var("Xext"), var("zext")
+    r = valeurs_coincident()
+    Pre = preimage_un(vg, vx)
+    assert r.conclusion == egal(E.valeur(chi(Pre, vx), vz), E.valeur(vg, vz))
+    assert appartient(vg, E.exposant(vx, deux())) in r.hypotheses
+    assert appartient(vz, vx) in r.hypotheses
+    assert len(E.theorie_ensembles().axiomes) == 22
+
+
 def test_theorie_inchangee():
     assert len(E.theorie_ensembles().axiomes) == 22

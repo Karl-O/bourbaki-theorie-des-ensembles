@@ -132,4 +132,130 @@ def g_decompose(g="Gext", x="Xext"):
     return incl, fonct, dom_eq, graphe
 
 
-__all__ = ["g_decompose"]
+def _gen_inst(thm, nom, terme):
+    """∀-clôture sur `nom` puis instance au TERME (jamais var() sur un Terme)."""
+    return instancie(N.generalisation(nom, thm), terme)
+
+
+# Sous-lemme 4 — LE CŒUR : les valeurs de χ_{Pre(G)} et de G coïncident sur X.
+def valeurs_coincident(g="Gext", x="Xext", z="zext"):
+    """{G ∈ 2^X, z ∈ X} ⊢ valeur(χ_{Pre(G)}, z) = valeur(G, z).
+
+    Par cas sur z ∈ Pre(G) (tiers exclu) ; toutes les pièces sont des lemmes
+    clos du dépôt (recette et formes : docstring de module). ZERO = ∅ et
+    UN = {∅} LITTÉRALEMENT (somme_disjointe l.51-52) — la dichotomie de
+    deux_membre recolle sans pont."""
+    from bourbaki.i_description_mathematique_formelle.i_1_termes_relations.outil_formule import (
+        egal, et, existe, non)
+    from bourbaki.i_description_mathematique_formelle.i_2_theoremes.tactiques.tactiques_abrege2 import (
+        conjonction_intro, equivalence_arriere, tiers_exclu, cas, contraposition)
+    from bourbaki.i_description_mathematique_formelle.i_5_theories_egalitaires.i_5_2_tactiques_abrege_egalite import (
+        symetrie, composer_egalites)
+    from bourbaki.ii_theorie_des_ensembles.ii_3_correspondances.ii_3_4_fonctions.ensembles_fonctions import (
+        valeur_dans_graphe, valeur_caracterisation)
+    from bourbaki.ii_theorie_des_ensembles.ii_3_correspondances.ii_3_4_fonctions.ensembles_extensionnalite import (
+        _inst_dom)
+    from bourbaki.ii_theorie_des_ensembles.ii_2_couples.ii_2_2_produit_deux_ensembles.ensembles_produit import (
+        couple_dans_produit_ssi)
+    from bourbaki.ii_theorie_des_ensembles.ii_4_reunion_intersection_famille.ii_4_recollement_somme.ensembles_somme_disjointe import (
+        ZERO, UN)
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_3_3_operations_cardinaux.iii_3_5_exposant.prop12_powerset.ensembles_powerset_deux import (
+        preimage_un, preimage_membre)
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_3_3_operations_cardinaux.iii_3_5_exposant.prop12_powerset.ensembles_powerset_exp import (
+        deux_membre)
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_3_3_operations_cardinaux.iii_3_5_exposant.prop12_powerset.ensembles_prop12_powerset import (
+        chi, chi_fonctionnel, chi_valeur_dans_Y, chi_valeur_hors_Y)
+
+    vg, vx, vz = _t(g), _t(x), _t(z)
+    deux_ens = deux()
+    Pre = preimage_un(vg, vx)
+    Chi = chi(Pre, vx)
+    Gz = E.valeur(vg, vz)
+    Cz = E.valeur(Chi, vz)
+
+    incl, fonct, dom_eq, _ = g_decompose(g, x)
+    h_zX = N.assume(appartient(vz, vx))                       # z ∈ X
+
+    #   (0) z ∈ dom G puis ∃y((z,y)∈G)
+    x_eq_dom = N.modus_ponens(dom_eq, symetrie(E.dom(vg), vx))  # X = dom G
+    z_domG = N.modus_ponens(h_zX, equivalence_avant(N.modus_ponens(
+        x_eq_dom, N.s6(vx, E.dom(vg), "w", appartient(vz, var("w"))))))
+    ex_y = N.modus_ponens(z_domG, equivalence_avant(_inst_dom(vg, vz)))
+
+    #   (1) (z, G(z)) ∈ G
+    zGz_in = N.modus_ponens(ex_y, N.loi_deduction(
+        existe("y", appartient(E.couple(vz, var("y")), vg)),
+        valeur_dans_graphe(vg, vz)))
+
+    #   (2) G(z) ∈ 2
+    zGz_prod = N.modus_ponens(zGz_in, instancie(incl, E.couple(vz, Gz)))
+    Gz_in_2 = conjonction_elim_droite(N.modus_ponens(
+        zGz_prod, equivalence_avant(couple_dans_produit_ssi(vz, Gz, vx, deux_ens))))
+
+    #   caractérisations (∀-clôturées sur y puis instanciées au bon terme)
+    carG = valeur_caracterisation(vg, vz)                     # ((z,y)∈G)⇔... y libre
+    carG_fwd_UN = _gen_inst(conjonction_elim_gauche(carG), "y", UN)   # ((z,UN)∈G)⇒(UN=G(z))
+    carG_bwd_UN = _gen_inst(conjonction_elim_droite(carG), "y", UN)   # (UN=G(z))⇒((z,UN)∈G)
+
+    car_pre = preimage_membre(vg, vx, vz)                     # z∈Pre ⇔ (z∈X et (z,UN)∈G)
+
+    #   CAS 1 : z ∈ Pre
+    h_in = N.assume(appartient(vz, Pre))
+    zUN_G = conjonction_elim_droite(N.modus_ponens(h_in, equivalence_avant(car_pre)))
+    UN_eq_Gz = N.modus_ponens(zUN_G, carG_fwd_UN)             # UN = G(z)
+    zUN_chi = N.modus_ponens(h_in, N.loi_deduction(
+        appartient(vz, Pre), chi_valeur_dans_Y(Pre, vx, vz)))  # (z,UN)∈χ
+    ex_chi = N.modus_ponens(zUN_chi, N.s5(
+        appartient(E.couple(vz, var("y")), Chi), UN, "y"))     # ∃y((z,y)∈χ)
+    carC = valeur_caracterisation(Chi, vz)
+    carC = _cut(carC, E.est_fonctionnel(Chi), chi_fonctionnel(Pre, vx))
+    carC = _cut(carC, existe("y", appartient(E.couple(vz, var("y")), Chi)), ex_chi)
+    carC_fwd_UN = _gen_inst(conjonction_elim_gauche(carC), "y", UN)
+    UN_eq_Cz = N.modus_ponens(zUN_chi, carC_fwd_UN)           # UN = χ(z)
+    egal_cas1 = composer_egalites(
+        N.modus_ponens(UN_eq_Cz, symetrie(UN, Cz)),           # χ(z) = UN
+        UN_eq_Gz)                                             # χ(z) = G(z)
+    br1 = N.loi_deduction(appartient(vz, Pre), egal_cas1)
+
+    #   CAS 2 : ¬(z ∈ Pre)
+    h_out = N.assume(non(appartient(vz, Pre)))
+    #   G(z) ≠ UN : sinon (z,UN)∈G puis z∈Pre, contre h_out
+    to_pre = N.loi_deduction(egal(UN, Gz), N.modus_ponens(
+        conjonction_intro(h_zX, N.modus_ponens(N.assume(egal(UN, Gz)), carG_bwd_UN)),
+        equivalence_arriere(car_pre)))                        # (UN=G(z)) ⇒ z∈Pre
+    Gz_ne_UN = N.modus_ponens(h_out, contraposition(to_pre))  # ¬(UN = G(z))
+    #   dichotomie → G(z) = ∅ (=ZERO) ; deux_membre : G(z)=∅ ou G(z)={∅}=UN
+    dm = N.modus_ponens(Gz_in_2, equivalence_avant(deux_membre(Gz)))
+    #   (G(z)=∅ ou G(z)=UN) et ¬(UN=G(z)) → G(z)=∅ : cas() avec branche droite absurde
+    br_gauche = N.loi_deduction(egal(Gz, ZERO), N.assume(egal(Gz, ZERO)))
+    #   branche droite : G(z)={∅}=UN → UN=G(z) → contradiction → ex falso G(z)=∅
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux_consequences import (
+        _ex_falso)
+    h_un = N.assume(egal(Gz, E.singleton(E.VIDE)))            # G(z)={∅} = UN
+    un_eq_gz = N.modus_ponens(h_un, symetrie(Gz, E.singleton(E.VIDE)))  # UN=G(z)
+    br_droite = N.loi_deduction(egal(Gz, E.singleton(E.VIDE)),
+                                _ex_falso(un_eq_gz, Gz_ne_UN, egal(Gz, ZERO)))
+    Gz_eq_0 = cas(dm, br_gauche, br_droite)                   # G(z) = ∅
+    #   z ∈ X∖Pre puis (z,ZERO)∈χ puis χ(z)=ZERO
+    car_diff = instancie(instancie(instancie(
+        N.axiome(E.theorie_ensembles(), E.AXIOME_DIFF), vx), Pre), vz)
+    z_diff = N.modus_ponens(conjonction_intro(h_zX, h_out),
+                            equivalence_arriere(car_diff))
+    z0_chi = N.modus_ponens(z_diff, N.loi_deduction(
+        appartient(vz, E.difference(vx, Pre)), chi_valeur_hors_Y(Pre, vx, vz)))
+    ex_chi0 = N.modus_ponens(z0_chi, N.s5(
+        appartient(E.couple(vz, var("y")), Chi), ZERO, "y"))
+    carC0 = valeur_caracterisation(Chi, vz)
+    carC0 = _cut(carC0, E.est_fonctionnel(Chi), chi_fonctionnel(Pre, vx))
+    carC0 = _cut(carC0, existe("y", appartient(E.couple(vz, var("y")), Chi)), ex_chi0)
+    Z_eq_Cz = N.modus_ponens(z0_chi, _gen_inst(conjonction_elim_gauche(carC0), "y", ZERO))
+    egal_cas2 = composer_egalites(
+        N.modus_ponens(Z_eq_Cz, symetrie(ZERO, Cz)),          # χ(z) = ZERO
+        N.modus_ponens(Gz_eq_0, symetrie(Gz, ZERO)))          # χ(z) = G(z)
+    br2 = N.loi_deduction(non(appartient(vz, Pre)), egal_cas2)
+
+    #   (4) fusion par tiers exclu
+    return cas(tiers_exclu(appartient(vz, Pre)), br1, br2)
+
+
+__all__ = ["g_decompose", "valeurs_coincident"]
