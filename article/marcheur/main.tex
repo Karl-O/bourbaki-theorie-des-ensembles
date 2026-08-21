@@ -328,8 +328,22 @@ about 11\,s of the 414. That is what the stated limit of
 Section~\ref{sec:oracle} costs on this bench: real, small, and on the
 journal rather than hidden.
 
-%% A REMPLIR (F4) : garde-fou — la variante fausse a travers la MARCHE
-%% complete (exp4_f4.out, en cours).
+\paragraph{The guard, and what it cost to run.} The same walk was pointed at
+a false variant $F_4$ (a $d$ where a $c$ should be). It certified the same
+lemmas --- the lemmas are about $\oplus$, not about the goal --- and then
+failed the first ladder rung honestly: 788\,s of exhaustion, one terminal gap
+named, nothing closed. The kernel makes the strong half of this guarantee
+trivial (no false theorem is \emph{possible}); what the run adds is the weak
+half --- the walker does not loop forever and does not claim.
+
+Then the honest caveat. On the higher rungs (pools of four to six lemmas),
+the guard run died three times --- silently: no exit code, no traceback, no
+system event; cause not identified, correlated with pool size, not duration.
+The repository's guard test therefore caps the ladder at one rung
+\emph{and asserts that the journal says so} --- the cap is a stated
+workaround, not a hidden optimisation. A failing walk that must climb the
+whole ladder is expensive by construction; how expensive, we cannot yet
+measure to the end.
 
 %% ============================================================================
 \section{What the walk does not find}

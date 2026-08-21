@@ -281,12 +281,20 @@ def test_marcheur_franchit_la_porte():
 
 @pytest.mark.slow
 def test_marcheur_ne_ferme_pas_le_faux():
-    """Garde-fou : une variante FAUSSE de B4 reste ouverte à travers TOUTE la
+    """Garde-fou : une variante FAUSSE de B4 reste ouverte à travers la
     marche (mêmes lemmes certifiés, même re-essai), et l'échec rend un
-    journal terminal — le marcheur échoue en nommant, jamais en silence."""
+    journal terminal — le marcheur échoue en nommant, jamais en silence.
+
+    ⚠️ `paliers_max=1`, et le test EXIGE que le journal le dise. Mesuré le
+    21 août : le palier 1 échoue proprement (788 s, 1 manque nommé) ; les
+    paliers ≥ 2 (pools de 4-6 lemmes) ont tué le processus TROIS fois sans
+    aucune trace (ni exit code, ni traceback, ni événement système) — cause
+    non identifiée, corrélée à la taille du pool. Le plafond est donc un
+    contournement DIT, pas une optimisation cachée."""
     from outils_ia.decouvertes.autonomie.marcheur import marcher
     _, _, brut, _, F4 = _banc_oplus()
-    th, journal = marcher(F4, brut)
+    th, journal = marcher(F4, brut, paliers_max=1)
     assert th is None
     assert any(e.get("type") == "terminal" for e in journal)
+    assert any(e.get("type") == "paliers-sautés" for e in journal),         "le plafond doit être DIT au journal"
     assert len(E.theorie_ensembles().axiomes) == 22

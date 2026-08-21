@@ -238,7 +238,7 @@ def conjectures_pour(motif, noms):
 
 
 def marcher(but, faits_bruts, impls=(), rondes=3, profondeur=4,
-            borne_oracle=8, trace=None, sonde=None):
+            borne_oracle=8, trace=None, sonde=None, paliers_max=None):
     """La marche complète. → (Theoreme_ou_None, journal).
 
     Le journal est la DONNÉE du marcheur : chaque motif miné, chaque
@@ -309,6 +309,17 @@ def marcher(but, faits_bruts, impls=(), rondes=3, profondeur=4,
         #   pool cumulé : chaque fait de plus agrandit l'espace de recherche.
         if nouveaux:
             rangs = sorted({r for (_, _, r) in derives.values()})
+            #   `paliers_max` : plafond du nombre de paliers essayes — les
+            #   paliers saut'es sont DITS au journal (jamais de cap silencieux).
+            #   Mesure du 21 aout : trois executions en fond sont mortes sans
+            #   trace (ni code de sortie, ni traceback, ni evenement systeme)
+            #   TOUTES dans une epuisement de re-essai a >= 4 lemmes ; cause
+            #   non identifiee, correlee a la taille du pool. Le garde-fou de
+            #   test plafonne donc a 1 palier, et le dit.
+            if paliers_max is not None and len(rangs) > paliers_max:
+                note({"type": "paliers-sautés", "essayés": paliers_max,
+                      "sautés": rangs[paliers_max:]})
+                rangs = rangs[:paliers_max]
             manques = []
             for k in rangs:
                 palier = {c: (n, t) for c, (n, t, r) in derives.items()

@@ -88,6 +88,23 @@ Lectures :
   horodatée, avant-plan) a tout donné. Règle retenue : jamais de calcul
   long sans battement de sortie.
 
+## 4bis. Le garde-fou F4 (variante fausse) — et ses trois morts
+
+`marcher(F4, brut)` (exp4_f4.out, sonde horodatée) :
+
+- certifications : 35,0 s (les mêmes lemmes — ils parlent de ⊕, pas du but) ;
+- palier 1 (2 lemmes) : **échec PROPRE en 788,2 s**, 1 manque nommé, rien fermé ;
+- palier 2 (4 lemmes) : **processus MORT sans trace** — ni code de sortie,
+  ni traceback, ni événement système (Event Log 2004 vérifié : rien depuis
+  juillet). TROISIÈME mort identique de la journée (les deux lancements de
+  la marche avec re-essai à 6 lemmes ont péri pareil). Corrélation : POOLS
+  ≥ 4 lemmes ; les exécutions à ≤ 3 lois (dont 962 s en avant-plan) survivent.
+  CAUSE NON IDENTIFIÉE — on l'écrit tel quel, on ne présume pas.
+
+Conséquence d'ingénierie : `paliers_max` dans `marcher` — le test garde-fou
+plafonne à 1 palier et ASSERTE que le journal déclare les paliers sautés
+(« paliers-sautés ») : contournement DIT, jamais cap silencieux.
+
 ## 5. Ce qui N'EST PAS mesuré (à ne pas écrire dans l'article)
 
 - Aucune généralité au-delà du banc ⊕ (un seul banc à ce jour).
@@ -95,4 +112,7 @@ Lectures :
   « non-certifiées » (assoc/idem des motifs 3-4, hors de portée de l'oracle
   à une couche) ont coûté 3,2 + 7,8 + ~0,3 s d'échecs de certification —
   le prix de l'aveuglement de l'oracle est de l'ordre de 11 s sur 414.
-- Rien sur Goldbach : le marcheur n'y a pas encore été pointé (P6).
+- Rien sur Goldbach : le marcheur n'y a pas encore été pointé (P6 —
+  exp5_goldbach.py prêt, en attente de machine libre).
+- Le coût COMPLET d'un échec (toute l'échelle) : non mesurable à ce
+  jour — les paliers ≥ 2 tuent le processus (§4bis).
