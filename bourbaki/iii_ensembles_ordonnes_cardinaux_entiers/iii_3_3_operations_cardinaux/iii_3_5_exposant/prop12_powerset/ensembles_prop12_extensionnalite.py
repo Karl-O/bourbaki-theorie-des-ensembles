@@ -63,6 +63,13 @@ RECETTE DU CŒUR (sous-lemme 4), formes vérifiées 22h15 :
     cas G(z)=∅ ⇒ z∉Pre (sinon (z,1)∈G et fonctionnel ⇒ ∅={∅}, absurde
     par singleton≠vide — lemme à localiser) ⇒ z∈X∖Y-forme ⇒ (z,0)∈χ.
 
+PONTS DU CŒUR TOUS LOCALISÉS (22h20) :
+  · valeur_caracterisation(f, x) (ii_3_4/ensembles_fonctions l.32, C46,
+    E II.13 L.32-33) : {F fonctionnel, ∃y((x,y)∈F)} ⊢ ((x,y)∈F) ⇔ (y=f(x)) —
+    accepte les TERMES ; valeur_dans_graphe pour (x, f(x))∈F ;
+  · singleton_vide_different_du_vide (ii_5_definitions/
+    ensembles_produit_famille_graphe l.173) pour l'absurde du cas 0.
+
 Pièces existantes vérifiées ce jour : chi_dans_applications (χ_Y ∈ 𝓕(X;2)),
 rho_chi_identite (Pre(χ_Y) = Y), preimage_membre, chi_inclus_produit,
 graphe_egal_par_valeurs (clos, 6 conjoints).
