@@ -35,5 +35,14 @@ def test_divise_donne_quotient():
     assert len(E.theorie_ensembles().axiomes) == 22
 
 
+def test_somme_quotients():
+    """⊢ {b|c, b|d, …} (c+d)/b = c/b + d/b — identité de E III.39."""
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_5_calcul_entiers.iii_5_6_divisibilite_division_euclidienne.ensembles_division_quotient import (
+        somme_quotients, enonce_somme_quotients)
+    r = somme_quotients()
+    assert r.conclusion == enonce_somme_quotients()
+    assert len(E.theorie_ensembles().axiomes) == 22
+
+
 def test_theorie_inchangee():
     assert len(E.theorie_ensembles().axiomes) == 22

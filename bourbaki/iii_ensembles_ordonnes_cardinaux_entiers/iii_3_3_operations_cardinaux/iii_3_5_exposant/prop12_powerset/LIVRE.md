@@ -12,6 +12,10 @@
 | E III.29 | L.23-25 | 3.5 | Demo.12 | `preimage_un` | `ensembles_powerset_deux.py` |
 | E III.29 | L.25-26 | 3.5 | Demo.12 | `rho_chi_identite` | `ensembles_prop12_fin.py` |
 
+## Fichiers À CALER (aucun `@livre`)
+
+- `ensembles_prop12_extensionnalite.py`
+
 ## Sous-dossiers (cumul)
 
 | Dossier | Notions | À caler | Non conformes | Pages livre |
@@ -21,8 +25,8 @@
 ## Bilan cumulé (ce dossier + descendants)
 
 - Notions calées : **9**
-- Fichiers à caler : **0**
+- Fichiers à caler : **1**
 - Marqueurs non conformes : **0**
 - Livre **E III** : pages couvertes 29-30 — aucune page manquante dans l'intervalle
 
-**Verdict : RIEN D'OUBLIÉ (sur l'intervalle annoté)**
+**Verdict : COUVERTURE INCOMPLÈTE — voir ci-dessus**

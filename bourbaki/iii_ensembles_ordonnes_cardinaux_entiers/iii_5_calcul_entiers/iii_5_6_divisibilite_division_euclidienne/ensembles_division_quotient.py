@@ -205,5 +205,55 @@ def divise_donne_quotient(a="aqt", b="bqt"):
     return res
 
 
+def enonce_somme_quotients(c="cqt", d="dqt", b="bqt"):
+    vc, vd, vb = _t(c), _t(d), _t(b)
+    from bourbaki.ii_theorie_des_ensembles.ii_4_reunion_intersection_famille.ii_4_recollement_somme.ensembles_somme_disjointe import (
+        somme_cardinale_binaire as _SC)
+    return egal(quotient_cardinal(_SC(vc, vd), vb),
+                _SC(quotient_cardinal(vc, vb), quotient_cardinal(vd, vb)))
+
+
+# @livre Ch.III §5.6 Rem.- | E III.39 L.31-33 | PDF p.142
+def somme_quotients(c="cqt", d="dqt", b="bqt"):
+    """🎯 ⊢ {b|c, b|d, …} (c+d)/b = c/b + d/b.   (Identité de E III.39 ;
+    résidus Fini des τ-quotients déclarés, même classe que quotient_de_produit.)"""
+    from bourbaki.i_description_mathematique_formelle.i_5_theories_egalitaires.i_5_2_tactiques_abrege_egalite import (
+        congruence_terme)
+    from bourbaki.ii_theorie_des_ensembles.ii_4_reunion_intersection_famille.ii_4_recollement_somme.ensembles_somme_disjointe import (
+        somme_cardinale_binaire as _SC)
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_3_3_operations_cardinaux.iii_3_3_produit.ensembles_distributivite_operations import (
+        distributivite_operations)
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_5_calcul_entiers.iii_5_6_divisibilite_division_euclidienne.ensembles_division_definitions import (
+        divise_cardinal)
+    vc, vd, vb = _t(c), _t(d), _t(b)
+    Qc = quotient_cardinal(vc, vb)
+    Qd = quotient_cardinal(vd, vb)
+
+    e_c = N.modus_ponens(N.assume(divise_cardinal(vb, vc)),
+                         divise_donne_quotient(c, b))          # c = b·(c/b)
+    e_d = N.modus_ponens(N.assume(divise_cardinal(vb, vd)),
+                         divise_donne_quotient(d, b))          # d = b·(d/b)
+    #   c+d = b·(c/b) + d  puis  = b·(c/b) + b·(d/b)   (congruences du terme)
+    g1 = N.modus_ponens(e_c, congruence_terme(
+        vc, produit_cardinal_binaire(vb, Qc), _SC(var("w"), vd)))
+    g2 = N.modus_ponens(e_d, congruence_terme(
+        vd, produit_cardinal_binaire(vb, Qd),
+        _SC(produit_cardinal_binaire(vb, Qc), var("w"))))
+    #   b·(c/b) + b·(d/b) = b·(c/b + d/b)   (distributivité, à l'envers)
+    dist = distributivite_operations(vb, Qc, Qd)
+    lhs, rhs = dist.conclusion.termes
+    dist_sym = N.modus_ponens(dist, symetrie(lhs, rhs))
+    total = composer_egalites(composer_egalites(g1, g2), dist_sym)
+    #   c+d = b·(c/b + d/b)  ⇒[quotient_de_produit]  c/b + d/b = (c+d)/b
+    q_eq = N.modus_ponens(total,
+                          quotient_de_produit(_SC(vc, vd), vb, _SC(Qc, Qd)))
+    QT = quotient_cardinal(_SC(vc, vd), vb)
+    res = N.modus_ponens(q_eq, symetrie(_SC(Qc, Qd), QT))
+    assert res.conclusion == enonce_somme_quotients(c, d, b), \
+        "somme_quotients : conclusion inattendue"
+    return res
+
+
 __all__ = ["enonce_quotient_de_produit", "quotient_de_produit",
-           "enonce_divise_donne_quotient", "divise_donne_quotient"]
+           "enonce_divise_donne_quotient", "divise_donne_quotient",
+           "enonce_somme_quotients", "somme_quotients"]
