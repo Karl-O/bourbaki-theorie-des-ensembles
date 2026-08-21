@@ -9,7 +9,7 @@
 |---|---|---|---|---|
 | `iii_1_relations_ordre/` | 103 | 0 | 0 | E III: 2-3, 5-15, 21, 46 ; E R: 26-28 |
 | `iii_2_bien_ordonnes/` | 109 | 0 | 0 | E III: 15-22 ; E R: 27 |
-| `iii_3_3_operations_cardinaux/` | 131 | 0 | 0 | E II: 10, 32, 34-35 ; E III: 25-30, 41 |
+| `iii_3_3_operations_cardinaux/` | 133 | 0 | 0 | E II: 10, 32, 34-35 ; E III: 25-30, 41 |
 | `iii_3_equipotence_cardinaux/` | 90 | 0 | 0 | E III: 5, 23-26, 28-30, 39, 48 ; E R: 7, 13, 22, 32 |
 | `iii_4_entiers_finis/` | 109 | 0 | 0 | E III: 23-25, 30-35, 37, 45, 48, 50 ; E R: 27 |
 | `iii_5_calcul_entiers/` | 122 | 0 | 0 | E II: 36 ; E III: 8, 31, 35-44, 46, 48 |
@@ -18,7 +18,7 @@
 
 ## Bilan cumulé (ce dossier + descendants)
 
-- Notions calées : **1020**
+- Notions calées : **1022**
 - Fichiers à caler : **0**
 - Marqueurs non conformes : **0**
 - Livre **E II** : pages couvertes 10, 32, 34-36 — **pages manquantes : 11-31, 33**

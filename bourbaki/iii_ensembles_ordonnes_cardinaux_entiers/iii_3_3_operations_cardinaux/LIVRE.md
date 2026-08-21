@@ -9,7 +9,7 @@
 |---|---|---|---|---|
 | `fondations/` | 2 | 0 | 0 | E II: 10 |
 | `iii_3_2_monotonie/` | 18 | 0 | 0 | E III: 29-30 |
-| `iii_3_3_produit/` | 17 | 0 | 0 | E III: 25-27 |
+| `iii_3_3_produit/` | 19 | 0 | 0 | E III: 25-27 |
 | `iii_3_3_somme/` | 18 | 0 | 0 | E III: 25-27 |
 | `iii_3_4_prop8_successeur/` | 20 | 0 | 0 | E III: 28 |
 | `iii_3_5_exposant/` | 37 | 0 | 0 | E III: 28-30 |
@@ -18,7 +18,7 @@
 
 ## Bilan cumulé (ce dossier + descendants)
 
-- Notions calées : **131**
+- Notions calées : **133**
 - Fichiers à caler : **0**
 - Marqueurs non conformes : **0**
 - Livre **E II** : pages couvertes 10, 32, 34-35 — **pages manquantes : 11-31, 33**
