@@ -65,3 +65,27 @@ ROUTE DE LA CIBLE 2 (ordre d'attaque, du plus élémentaire au sommet) :
   (6) a²=a 0-hyp par hessenberg_a_carre_egal_a_0hyp.
 C'est le vrai chantier mathématique (semaines) — exactement l'objectif validé
 par Karl (cibles-qui-commandent). Dette signalée : cadre_plat.py 748 l.
+
+## 2026-08-22 00h06 — Lecture PDF p.150-151 (E III.47-48) : Lemmes 1-2 EXACTS
+En-têtes vérifiés (E III.47 / E III.48). Th.2 : « Pour tout cardinal infini a,
+on a a² = a » (§6.3) — le restatement final devra être littéral-cardinal comme
+Cantor (est_cardinal(a) ∧ est_infini(a) ⇒ a·a = a), en plus de la forme
+E-niveau du dépôt.
+L1 (E III.47) : « Tout ensemble infini E contient un ensemble équipotent à N. »
+Démo livre : bon ordre sur E (Zermelo III p.20 th.1) ; E bien ordonné non
+isomorphe à un segment propre de N (segment (0,n) fini, III p.16 prop.1 +
+p.38 prop.5) ; donc N isomorphe à un segment de E (comparaison III p.21 th.3).
+L2 (E III.48) : « L'ensemble N×N est équipotent à N. » Démo livre : ≤ facile
+par {0}×N ; injection f par ENTRELACEMENT des développements dyadiques
+(φ : N → I^N, I={0,1}, via n = Σ ε_k 2^(r-k-1) (III p.41) ; φ injective par
+prop.8 III p.40 ; f(n,n') = l'entier s dont la suite dyadique entrelace
+w_2m=u_m, w_2m+1=v_m) ; conclut par antisymétrie de ≤ (Cantor-Bernstein).
+CHOIX DE ROUTE pour L2-direction-B (à confirmer après audit iii_5_7) :
+  Option F (fidèle) : formaliser §III.5.7 (développement base b, existence+
+  unicité) + entrelacement. Le chantier iii_5_7_developpement_base_b EXISTE —
+  auditer son état au prochain tick.
+  Option V (variante courte) : pairing (m,n) ↦ 2^m(2n+1), unicité par
+  2-valuation (division euclidienne par 2 itérée — Th.1 §III.5.6 clos hier).
+  Si retenue : écart de DÉMO (énoncé identique) à consigner dans ANOMALIES.
+Vu aussi : puissance_entiers_ferme (Fini a^b) existe (n_arith_iii5) sous
+prémisses B0(a)/(∀m)B(a,m) à examiner ; iii_5_1 récurrence C61 outillée.
