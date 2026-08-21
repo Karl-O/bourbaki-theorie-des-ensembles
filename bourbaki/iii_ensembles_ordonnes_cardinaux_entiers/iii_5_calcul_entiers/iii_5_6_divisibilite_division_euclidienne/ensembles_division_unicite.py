@@ -77,7 +77,7 @@ def _reecrit(thm, egalite, gauche, droite, contexte_hole):
 
 
 def enonce_gap(q="qu", qp="qpu"):
-    vq, vqp = var(q), var(qp)
+    vq, vqp = _t(q), _t(qp)          # _t : accepte noms ET termes (21 aout)
     return impl(inf_strict_card(vq, vqp), inf_egal_card(successeur(vq), vqp))
 
 
@@ -133,7 +133,7 @@ def _gap(q="qu", qp="qpu"):
 
 
 def enonce_lt_chain(b="blc", q="qlc", qp="qplc", r="rlc", rp="rplc"):
-    vb, vq, vqp, vr, vrp = var(b), var(q), var(qp), var(r), var(rp)
+    vb, vq, vqp, vr, vrp = _t(b), _t(q), _t(qp), _t(r), _t(rp)
     scb, pcb = somme_cardinale_binaire, produit_cardinal_binaire
     return inf_strict_card(scb(pcb(vb, vq), vr), scb(pcb(vb, vqp), vrp))
 
@@ -191,7 +191,7 @@ def _lt_chain(b="blc", q="qlc", qp="qplc", r="rlc", rp="rplc"):
 
 
 def enonce_unicite(a="auc", b="buc", q="quc", qp="qpuc", r="ruc", rp="rpuc"):
-    va, vb, vq, vqp, vr, vrp = var(a), var(b), var(q), var(qp), var(r), var(rp)
+    va, vb, vq, vqp, vr, vrp = _t(a), _t(b), _t(q), _t(qp), _t(r), _t(rp)
     scb, pcb = somme_cardinale_binaire, produit_cardinal_binaire
     bqr = scb(pcb(vb, vq), vr); bqprp = scb(pcb(vb, vqp), vrp)
     ante = et(et(et(egal(bqr, va), inf_strict_card(vr, vb)),

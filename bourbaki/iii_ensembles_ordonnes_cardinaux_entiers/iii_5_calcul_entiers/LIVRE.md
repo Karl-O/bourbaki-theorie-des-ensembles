@@ -11,7 +11,7 @@
 | `iii_5_1_somme_produit_entiers/` | 8 | 0 | 0 | E III: 35-37 |
 | `iii_5_2_inegalites_ordre_soustraction/` | 12 | 0 | 0 | E III: 31, 36-37 |
 | `iii_5_5_caracteristique_combinatoire/` | 5 | 0 | 0 | E III: 38-39, 41 |
-| `iii_5_6_divisibilite_division_euclidienne/` | 25 | 0 | 0 | E III: 39 |
+| `iii_5_6_divisibilite_division_euclidienne/` | 26 | 0 | 0 | E III: 39 |
 | `iii_5_7_developpement_base_b/` | 5 | 0 | 0 | E III: 40 |
 | `iii_5_8_factorielle/` | 30 | 0 | 0 | E III: 41-44, 46 |
 | `iii_5_intervalles_comptage/` | 18 | 0 | 0 | E III: 8, 37-38, 46 |
@@ -19,7 +19,7 @@
 
 ## Bilan cumulé (ce dossier + descendants)
 
-- Notions calées : **122**
+- Notions calées : **123**
 - Fichiers à caler : **0**
 - Marqueurs non conformes : **0**
 - Livre **E II** : pages couvertes 36 — aucune page manquante dans l'intervalle

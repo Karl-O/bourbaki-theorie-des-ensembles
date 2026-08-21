@@ -79,7 +79,9 @@ def _inst2(thm_libre, noms, termes):
     """∀-clôture d'un lemme à variables libres, puis instances aux TERMES
     (jamais var() sur un Terme — piège mesuré le 21 août)."""
     th = thm_libre
-    for n in noms:
+    #   generaliser en ordre INVERSE : le premier nom doit finir EXTERNE,
+    #   pour que la premiere instance le vise (bug d'ordre mesure, 21 aout).
+    for n in reversed(noms):
         th = N.generalisation(n, th)
     for t in termes:
         th = instancie(th, t)
