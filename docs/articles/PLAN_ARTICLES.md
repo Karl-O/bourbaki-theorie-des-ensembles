@@ -5,6 +5,18 @@ la même question, ils fusionnent. Les « grosses idées » sont numérotées et
 attribuées à UN SEUL article : ce qui circule ailleurs y est cité, pas
 re-expliqué.
 
+## Statut (21 août 2026)
+
+| article | état | où |
+|---|---|---|
+| A1 | **écrit, relu par Karl, poussé** (EN 28 p + FR 30 p) | `article/` |
+| A3 | **écrit, relu par Karl, poussé** (EN 21 p + FR 22 p) | `article/goldbach/` |
+| A2 | **écrit, relu par Karl le 21 août, poussé** (EN 14 p + FR 14 p) | `article/dernier_kilometre/` |
+| A4 | non commencé — bloqué par la condition ci-dessous (le marcheur doit fermer un but que le chaînage seul ne ferme pas) | — |
+
+La soumission arXiv est l'étape suivante ; elle passe par le compte de Karl
+(licence + endorsement). Catégorie suggérée : cs.LO principal.
+
 ---
 
 ## A1 — Une théorie de Bourbaki dans une machine
