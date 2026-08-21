@@ -3,6 +3,8 @@
 \usepackage[T1]{fontenc}
 \usepackage{amsmath,amssymb,amsthm}
 \usepackage{booktabs}
+\usepackage{array}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
 \usepackage{graphicx}
 % ---------------------------------------------------------------------------
 % LISIBILITE — docs/articles/STYLE_ARTICLES.md §2. A 11pt, une marge de 2,7cm
@@ -14,6 +16,7 @@
 \linespread{1.06}
 \setlength{\parskip}{.55em plus .15em minus .1em}
 \setlength{\parindent}{1.1em}
+\emergencystretch=1.5em
 \usepackage{hyperref}
 \usepackage{tikz}
 \usetikzlibrary{positioning,arrows.meta,calc}
@@ -237,7 +240,7 @@ failure that can be replayed. Four examples, chosen because their diagnoses are 
 different kinds:
 
 \begin{center}\small
-\begin{tabular}{@{}llp{62mm}@{}}
+\begin{tabular}{@{}lL{0.34\linewidth}L{0.42\linewidth}@{}}
 \toprule
 organ & what it does & \textbf{born from which diagnosis} \\
 \midrule
@@ -467,7 +470,7 @@ on 10--12 August. Before drawing a single sentence from it, every figure it cont
 re-measured. \textbf{Eight out of eight had drifted.}
 
 \begin{center}\small
-\begin{tabular}{@{}lll@{}}
+\begin{tabular}{@{}L{0.30\linewidth}L{0.34\linewidth}L{0.26\linewidth}@{}}
 \toprule
 the document says & measured 20 August & nature \\
 \midrule

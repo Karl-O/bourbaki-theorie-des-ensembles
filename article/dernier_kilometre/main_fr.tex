@@ -4,6 +4,8 @@
 \usepackage[french]{babel}
 \usepackage{amsmath,amssymb,amsthm}
 \usepackage{booktabs}
+\usepackage{array}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
 \usepackage{graphicx}
 % ---------------------------------------------------------------------------
 % LISIBILITE — docs/articles/STYLE_ARTICLES.md §2.
@@ -12,6 +14,7 @@
 \linespread{1.06}
 \setlength{\parskip}{.55em plus .15em minus .1em}
 \setlength{\parindent}{1.1em}
+\emergencystretch=1.5em
 \usepackage{hyperref}
 \usepackage{tikz}
 \usetikzlibrary{positioning,arrows.meta,calc}
@@ -241,7 +244,7 @@ donc en rencontrant de nouveaux échecs, et rien ici ne borne combien il en rest
 de natures différentes~:
 
 \begin{center}\small
-\begin{tabular}{@{}llp{58mm}@{}}
+\begin{tabular}{@{}lL{0.34\linewidth}L{0.42\linewidth}@{}}
 \toprule
 organe & ce qu'il fait & \textbf{né de quel diagnostic} \\
 \midrule
@@ -381,7 +384,7 @@ apparieur littéral ne peut pas trouver et ce que v18 rend atteignable~:
 \[
 \begin{array}{r@{\;}c@{\;}l@{\qquad}l}
 ((a+b)+1)+c &=& (a+b)+(1+c) & \text{associativité itérée} \\[2pt]
-            &=& (a+b)+(c+1) & \text{commutativité, \emph{à l'intérieur} de l'opérande droit} \\[2pt]
+            &=& (a+b)+(c+1) & \text{commutativité, \emph{dans} l'opérande droit} \\[2pt]
             &=& a+(b+(c+1)) & \text{associativité de nouveau} \\[2pt]
             &=& a+((b+c)+1) & \text{et encore, dans l'autre sens}
 \end{array}
@@ -464,7 +467,7 @@ Le matériau de cet article --- un catalogue des organes et un corpus de pièges
 re-mesuré. \textbf{Huit sur huit avaient dérivé.}
 
 \begin{center}\small
-\begin{tabular}{@{}lll@{}}
+\begin{tabular}{@{}L{0.30\linewidth}L{0.34\linewidth}L{0.26\linewidth}@{}}
 \toprule
 ce que dit le document & mesuré le 20 août & nature \\
 \midrule
