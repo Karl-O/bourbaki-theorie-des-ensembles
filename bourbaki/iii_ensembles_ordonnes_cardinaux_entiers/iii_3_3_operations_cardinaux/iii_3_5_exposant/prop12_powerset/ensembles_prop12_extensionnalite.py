@@ -30,6 +30,19 @@ ORDRE D'ÉCRITURE (un sous-lemme = un commit testé) :
   4. `valeurs_coincident(f, x, z)`  — (f), par cas via 3 + valeurs de χ ;
   5. `chi_rho_identite(f, x)`       — l'assemblage par graphe_egal_par_valeurs.
 
+FORMES EXACTES vérifiées (21 août, 22h00) :
+  · axiome_exposant (via N.axiome(E.theorie_exposant(X, deux()), …) puis
+    instancie à G) : G ∈ 2^X ⇔ (G ⊂ X×2 et G fonctionnel et dom G = X) —
+    l'équivalence-avant sous assume(G∈2^X) donne d'un coup les sous-lemmes
+    1 (fonctionnel) et 2 (dom = X) ;
+  · _conjonction_hypotheses de graphe_egal_par_valeurs exige AUSSI
+    est_un_graphe(F) et est_un_graphe(G) : pour G, à dériver de G ⊂ X×2
+    (un ensemble de couples est un graphe — lemme-pont « inclus dans un
+    produit ⇒ graphe » À LOCALISER (grep est_un_graphe) ou à écrire) ;
+    pour F = χ_{Pre(f)} : chi_inclus_produit + le même pont ;
+  · l'ordre de la conjonction (gauche-associée) : ((((fonct F et fonct G)
+    et graphe F) et graphe G) et dom=dom) et ∀-valeurs.
+
 Pièces existantes vérifiées ce jour : chi_dans_applications (χ_Y ∈ 𝓕(X;2)),
 rho_chi_identite (Pre(χ_Y) = Y), preimage_membre, chi_inclus_produit,
 graphe_egal_par_valeurs (clos, 6 conjoints).
