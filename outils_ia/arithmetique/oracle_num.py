@@ -62,8 +62,14 @@ _TABLE_BORNE = 0
 def table(borne=24):
     """La table des termes évaluables jusqu'à `borne` — bâtie UNE fois.
 
-    Contient les numéraux, leurs sommes et leurs produits. Sa construction
-    coûte O(borne²) constructions de termes ; son usage est en O(1)."""
+    Contient les numéraux, leurs sommes et leurs produits, plus UNE couche
+    `successeur` par-dessus (21 août 2026, chantier marcheur : les opérations
+    dérivées du style `a ⊕ b := (a+b)+1` étaient invisibles — `succ(somme)`
+    n'était dans aucune entrée, et l'oracle rendait `None` sur toute
+    conjecture ⊕). ⚠️ UNE couche seulement : un terme dérivé IMBRIQUÉ
+    (`succ(succ(a+b)+c)`…) reste hors table — c'est une somme d'entrées
+    non-numérales, dont la clôture coûterait |table|². Limite mesurée, dite.
+    Sa construction coûte O(borne²) constructions de termes ; usage O(1)."""
     global _TABLE_BORNE
     if borne <= _TABLE_BORNE:
         return _TABLE
@@ -74,6 +80,8 @@ def table(borne=24):
             _TABLE.setdefault(_somme(num(a), num(b)), a + b)
             if a * b <= borne:
                 _TABLE.setdefault(_produit(num(a), num(b)), a * b)
+    for t, v in list(_TABLE.items()):
+        _TABLE.setdefault(_succ(t), v + 1)
     _TABLE_BORNE = borne
     return _TABLE
 
@@ -113,6 +121,13 @@ def _produit(a, b):
         produit_cardinal_binaire,
     )
     return produit_cardinal_binaire(a, b)
+
+
+def _succ(t):
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import (
+        successeur,
+    )
+    return successeur(t)
 
 
 # ══════════════════════════════════════════════════════════════════════════════
