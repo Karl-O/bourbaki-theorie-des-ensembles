@@ -147,3 +147,19 @@ def test_cantor_deux_exp_via_bijection():
     attendu = inf_strict_card(cardinal(vX), exposant_cardinal_binaire(deux(), vX))
     assert t.conclusion == attendu
     assert t.est_clos
+
+
+def test_theoreme_deux_cantor():
+    """🏆 CIBLE 1 : ⊢ est_cardinal(𝔞) ⇒ (𝔞 < 2^𝔞), CLOS — le Théorème 2 LITTÉRAL."""
+    from bourbaki.i_description_mathematique_formelle.i_1_termes_relations.outil_formule import impl
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import (
+        est_cardinal)
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_3_3_operations_cardinaux.iii_3_5_exposant.prop12_powerset.prop12_card._cantor import (
+        theoreme_deux_cantor)
+    va = var("a")
+    r = theoreme_deux_cantor()
+    attendu = impl(est_cardinal(va),
+                   inf_strict_card(va, exposant_cardinal_binaire(deux(), va)))
+    assert r.conclusion == attendu
+    assert r.est_clos
+    assert len(E.theorie_ensembles().axiomes) == 22

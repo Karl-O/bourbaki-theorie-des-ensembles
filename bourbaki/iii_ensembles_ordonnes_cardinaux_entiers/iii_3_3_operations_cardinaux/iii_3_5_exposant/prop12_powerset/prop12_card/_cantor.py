@@ -223,4 +223,33 @@ def cantor_deux_exp(x="X"):
     return res
 
 
-__all__ = ["cantor_face_inf_egal", "cantor_face_non_egal", "cantor_deux_exp"]
+# @livre Ch.III §3.6 Th.2 | E III.30 L.20-21 | PDF p.133
+def theoreme_deux_cantor(a="a"):
+    """🏆 ⊢ est_cardinal(𝔞) ⇒ (𝔞 < 2^𝔞).   (THÉORÈME 2, LITTÉRAL :
+    « Pour tout cardinal 𝔞, on a 𝔞 < 2^𝔞 », E III.30 L.20-21.)
+
+    cantor_deux_exp au TERME 𝔞 : Card 𝔞 < 2^𝔞 — avec X := 𝔞, l'exposant
+    2^𝔞 = Card 𝓕(𝔞;2) est déjà LITTÉRAL en 𝔞 (zéro pont d'équipotence,
+    DECISIONS 21 août) ; seul le membre gauche Card 𝔞 se réécrit en 𝔞 par
+    cardinal_de_cardinal (Card 𝔞 = 𝔞 sous est_cardinal(𝔞)) et Leibniz S6."""
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_fini_successeur import (
+        cardinal_de_cardinal)
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import (
+        est_cardinal)
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_3_3_operations_cardinaux.iii_3_5_exposant.prop12_powerset.ensembles_powerset_exp import (
+        deux)
+    va = _t(a)
+    exp2a = exposant_cardinal_binaire(deux(), va)              # 2^𝔞 = Card 𝓕(𝔞;2)
+    h = N.assume(est_cardinal(va))                             # 𝔞 est un cardinal
+    card_eq = N.modus_ponens(h, cardinal_de_cardinal(va))      # Card 𝔞 = 𝔞
+    strict = cantor_deux_exp(va)                               # Card 𝔞 < 2^𝔞
+    rew = N.modus_ponens(card_eq, N.s6(cardinal(va), va, "w",
+        inf_strict_card(var("w"), exp2a)))                     # (Card𝔞<2^𝔞) ⇔ (𝔞<2^𝔞)
+    res = N.modus_ponens(strict, equivalence_avant(rew))       # 𝔞 < 2^𝔞
+    conc = N.loi_deduction(est_cardinal(va), res)
+    assert conc.est_clos, "theoreme_deux_cantor : non clos"
+    return conc
+
+
+__all__ = ["cantor_face_inf_egal", "cantor_face_non_egal", "cantor_deux_exp",
+           "theoreme_deux_cantor"]
