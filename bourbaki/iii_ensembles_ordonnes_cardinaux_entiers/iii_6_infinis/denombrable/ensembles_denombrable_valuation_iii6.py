@@ -130,4 +130,134 @@ def exposant_somme_pont(base, m="mvw", d="dvw"):
     return res
 
 
-__all__ = ["exposant_somme_pont", "exposant_somme_pont_cible"]
+# ══════════════════════════════════════════════════════════════════════════════
+#  W3b — base^n ≠ 0   (récurrence C61 ; base := Card(base_inner), non nulle)
+# ══════════════════════════════════════════════════════════════════════════════
+def puissance_non_nulle_cible(base, n="npnz"):
+    from bourbaki.i_description_mathematique_formelle.i_1_termes_relations.outil_formule import non, impl
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import (
+        est_fini, ZERO)
+    vb, vn = _t(base), _t(n)
+    return impl(est_fini(vn), non(egal(exposant_cardinal_binaire(vb, vn), ZERO)))
+
+
+def puissance_non_nulle(base_inner, nn_thm, n="npnz", k="kpnz"):
+    """🎯 ⊢ Fini n ⇒ ¬( base^n = 0 ),   base := Card(base_inner).
+
+    `nn_thm` : théorème CLOS ⊢ ¬(base = 0) fourni par l'appelant (pour DEUX :
+    successeur_non_nul(UN), car DEUX = succ(UN) littéralement).  Récurrence C61,
+    P[n] := ¬(base^n = 0) :
+      • P[0]  : base^0 = Card(𝓕(∅;base)) [B0_preuve] = Card({∅}) [exposant_zero_
+        egale_un] = 1 [un_egale_card_singleton sym] ; ¬(1=0) = successeur_non_nul(0) ;
+      • pas   : base^(n+1) = base^n·base [puissance_succ_eq_incond ∀-clos aux termes] ;
+        ¬(produit = 0) par Prop. 7 (∀-close aux termes) dont les membres Card(·)
+        se replient par IDEMPOTENCE (Card(Card X) = Card X) sur P[n] et nn_thm."""
+    from bourbaki.i_description_mathematique_formelle.i_1_termes_relations.outil_formule import non, impl, pourtout
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import (
+        est_fini, successeur, ZERO, UN)
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_fini_un import (
+        un_egale_card_singleton)
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_fini_successeur import (
+        _card_idempotent_t)
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_6_infinis.entiers_infinis.iii_6_1_n_objet_existence.ensembles_aleph0 import (
+        successeur_non_nul)
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_5_calcul_entiers.entiers_cardinaux.ensembles_puissance_entiers_inconditionnel import (
+        B0_preuve)
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_3_3_operations_cardinaux.iii_3_5_exposant.definition.ensembles_exposant_cardinal import (
+        exposant_zero_egale_un)
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_3_equipotence_cardinaux.props_restantes.ensembles_cardinaux_props_restantes_prop7 import (
+        prop7_produit_non_nul)
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_6_infinis.denombrable.ensembles_denombrable_injection_iii6 import (
+        puissance_succ_eq_incond)
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_4_entiers_finis.iii_4_recurrence_c61_existence_n.ensembles_recurrence_C61 import (
+        _fini_et_P_implique_succ)
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_4_entiers_finis.iii_4_recurrence_c61_existence_n.ensembles_principe_recurrence_preuve import (
+        principe_recurrence_preuve, predecesseur_fini_universel)
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_4_entiers_finis.iii_4_recurrence_c61_existence_n.ensembles_predecesseur_prop2 import (
+        predecesseur_fini_universel_preuve)
+    from bourbaki.i_description_mathematique_formelle.i_2_theoremes.tactiques.tactiques_abrege2 import (
+        conjonction_elim_gauche, conjonction_elim_droite, equivalence_arriere)
+    from bourbaki.i_description_mathematique_formelle.i_5_theories_egalitaires.i_5_2_tactiques_abrege_egalite import (
+        symetrie)
+
+    def _cut(thm, hyp, pr):
+        return N.modus_ponens(pr, N.loi_deduction(hyp, thm))
+
+    def _card_est_cardinal_t(tX):
+        from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers_theoremes import (
+            card_est_un_cardinal)
+        return instancie(N.generalisation("Xcuc3",
+            card_est_un_cardinal("Xcuc3", lieur="X")), _t(tX))
+
+    base = cardinal(_t(base_inner))
+    vn = var(n)
+    P = lambda b: non(egal(exposant_cardinal_binaire(base, _t(b)), ZERO))
+
+    # ── P[0] : ¬(base^0 = 0) ──────────────────────────────────────────────
+    exp0 = exposant_cardinal_binaire(base, ZERO)
+    card_un = cardinal(E.singleton(E.VIDE))
+    chain = composer_egalites(composer_egalites(
+        B0_preuve(base), exposant_zero_egale_un(base)),
+        N.modus_ponens(un_egale_card_singleton(), symetrie(UN, card_un)))  # base^0 = UN
+    nn_un = successeur_non_nul(ZERO)                     # ¬(UN = 0)  (UN = succ 0)
+    leib0 = N.modus_ponens(chain, N.s6(exp0, UN, "wpnz",
+                                       non(egal(var("wpnz"), ZERO))))
+    p0 = N.modus_ponens(nn_un, equivalence_arriere(leib0))
+    assert p0.conclusion == P(ZERO), "puissance_non_nulle : P[0] mal formé"
+
+    # ── pas : (Fini n et P[n]) ⇒ P[n+1] ──────────────────────────────────
+    expn = exposant_cardinal_binaire(base, vn)
+    exps = exposant_cardinal_binaire(base, successeur(vn))
+    prod = produit_cardinal_binaire(expn, base)
+    h = N.assume(et(est_fini(vn), P(vn)))
+    fn = conjonction_elim_gauche(h)
+    pn = conjonction_elim_droite(h)                      # ¬(base^n = 0)
+    # base^(n+1) = base^n · base   (∀-clos aux termes)
+    g_pse = N.generalisation("Apsi", N.generalisation("Npsi",
+        puissance_succ_eq_incond("Apsi", "Npsi")))
+    pse = instancie(instancie(g_pse, base), vn)
+    eq_s = N.modus_ponens(conjonction_intro(_card_est_cardinal_t(_t(base_inner)), fn), pse)
+    # Prop. 7 ∀-close : ¬(Card(base^n × base) = 0) ⇔ (¬(Card base^n = 0) et ¬(Card base = 0))
+    g7 = N.generalisation("A", N.generalisation("B", prop7_produit_non_nul("A", "B")))
+    p7 = instancie(instancie(g7, expn), base)
+    # membres droits par IDEMPOTENCE de Card
+    idem_n = _card_idempotent_t(E.applications(vn, base))     # Card(base^n) = base^n
+    nn_cn = N.modus_ponens(pn, equivalence_arriere(N.modus_ponens(
+        idem_n, N.s6(cardinal(expn), expn, "wpnz2", non(egal(var("wpnz2"), ZERO))))))
+    idem_b = _card_idempotent_t(_t(base_inner))               # Card(base) = base
+    nn_cb = N.modus_ponens(nn_thm, equivalence_arriere(N.modus_ponens(
+        idem_b, N.s6(cardinal(base), base, "wpnz3", non(egal(var("wpnz3"), ZERO))))))
+    nn_prod = N.modus_ponens(conjonction_intro(nn_cn, nn_cb),
+                             equivalence_arriere(p7))    # ¬(base^n·base = 0)
+    leib_s = N.modus_ponens(eq_s, N.s6(exps, prod, "wpnz4",
+                                       non(egal(var("wpnz4"), ZERO))))
+    p_succ = N.modus_ponens(nn_prod, equivalence_arriere(leib_s))
+    step = N.generalisation(n, N.loi_deduction(et(est_fini(vn), P(vn)), p_succ))
+    assert step.conclusion == _fini_et_P_implique_succ(P, n), \
+        "puissance_non_nulle : pas mal formé"
+
+    # ── assemblage C61 (patron pair_neq_impair) ──────────────────────────
+    princ = principe_recurrence_preuve(P, n, k=k)
+    pfu = predecesseur_fini_universel(k=k)
+    if pfu in princ.hypotheses:
+        princ = _cut(princ, pfu, predecesseur_fini_universel_preuve(k=k))
+    fini_implique_P = N.modus_ponens(conjonction_intro(p0, step), princ)
+    res = instancie(fini_implique_P, vn)                 # Fini n ⇒ ¬(base^n = 0)
+    assert res.conclusion == puissance_non_nulle_cible(base, n), \
+        f"puissance_non_nulle : conclusion inattendue\n{res.conclusion}"
+    assert not res.hypotheses, "puissance_non_nulle : hypothèses résiduelles"
+    return res
+
+
+def deux_puissance_non_nulle(n="npnz", k="kpnz"):
+    """⊢ Fini n ⇒ ¬( 2^n = 0 ).   (DEUX = succ(UN) = Card(UN⊔{∅}) littéralement.)"""
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import UN
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_6_infinis.entiers_infinis.iii_6_1_n_objet_existence.ensembles_aleph0 import (
+        successeur_non_nul)
+    inner = somme_disjointe(UN, E.singleton(E.VIDE))     # DEUX = Card(UN⊔{∅})
+    return puissance_non_nulle(inner, successeur_non_nul(UN), n, k)
+
+
+__all__ = ["exposant_somme_pont", "exposant_somme_pont_cible",
+           "puissance_non_nulle", "puissance_non_nulle_cible",
+           "deux_puissance_non_nulle"]

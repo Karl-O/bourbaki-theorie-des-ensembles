@@ -16,5 +16,17 @@ def test_exposant_somme_pont_deux():
     assert len(E.theorie_ensembles().axiomes) == 22
 
 
+def test_deux_puissance_non_nulle():
+    """W3b : ⊢ Fini n ⇒ ¬(2^n = 0)."""
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import (
+        DEUX)
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_6_infinis.denombrable.ensembles_denombrable_valuation_iii6 import (
+        deux_puissance_non_nulle, puissance_non_nulle_cible)
+    r = deux_puissance_non_nulle()
+    assert not r.hypotheses
+    assert r.conclusion == puissance_non_nulle_cible(DEUX, "npnz")
+    assert len(E.theorie_ensembles().axiomes) == 22
+
+
 def test_theorie_inchangee():
     assert len(E.theorie_ensembles().axiomes) == 22
