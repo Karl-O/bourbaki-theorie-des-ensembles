@@ -38,7 +38,9 @@ FORMES EXACTES vérifiées (21 août, 22h00) :
   · _conjonction_hypotheses de graphe_egal_par_valeurs exige AUSSI
     est_un_graphe(F) et est_un_graphe(G) : pour G, à dériver de G ⊂ X×2
     (un ensemble de couples est un graphe — lemme-pont « inclus dans un
-    produit ⇒ graphe » À LOCALISER (grep est_un_graphe) ou à écrire) ;
+    produit ⇒ graphe » : TROUVÉ — _inclus_produit_est_graphe(vG, vE, vF)
+    (ii_5_2/ensembles_application_valeur l.163, {G⊂E×F} ⊢ est_un_graphe(G),
+    prend des TERMES) ;
     pour F = χ_{Pre(f)} : chi_inclus_produit + le même pont ;
   · l'ordre de la conjonction (gauche-associée) : ((((fonct F et fonct G)
     et graphe F) et graphe G) et dom=dom) et ∀-valeurs.
