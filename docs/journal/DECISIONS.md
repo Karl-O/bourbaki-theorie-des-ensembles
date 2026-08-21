@@ -327,3 +327,25 @@ la machine NOMME le pont manquant — les deux issues sont des résultats.
 majoration a < b^a), DÉMONSTRATIONS NON DÉRIVÉES — gros PARTIEL, récurrence
 sur k enchainant Prop.2 §4.2 / Prop.3 §5.2 / Prop.5 §5.4 / Cor.4 §4.4.
 Parité (bas de E III.39) : déjà couverte (ensembles_parite_iii5).
+
+## 2026-08-21 (21h15) — CIBLE CANTOR : lecture fidélité faite, plan posé
+
+**Stratégie validée par Karl : cibles-qui-commandent** (les grands théorèmes
+tirent la formalisation ; Goldbach = étalon de frontière ; jamais de tick
+sans travail).
+
+**Th.2 (Cantor), E III.30 L.20-21, PDF p.133 (scan VÉRIFIÉ, en-tête E III.30)** :
+« Pour tout cardinal a, on a 2^a > a. » Démo L.22-28 : (i) Card(P(a)) = 2^a
+par Prop.12 — DÉJÀ FORMALISÉE (iii_3_5_exposant/prop12_powerset :
+powerset_deux, powerset_exp, prop12_fin) ; (ii) a ≤ 2^a par l'injection
+x ↦ {x} de a dans P(a) ; (iii) a ≠ 2^a par la DIAGONALE : pour toute
+f : a → P(a), X = {x ∈ a : x ∉ f(x)} n'est pas dans l'image (si x∈X,
+x∉f(x) donc f(x)≠X ; si x∈a−X, x∈f(x) donc f(x)≠X).
+
+FILE DE TRAVAIL CANTOR : (1) énoncé fidèle inf_strict_card(a, 2^a) sous
+est_cardinal(a) ; (2) inventorier les briques : l'injection-singleton
+existe-t-elle ? (grep singleton/injection dans iii_3) ; l'ensemble diagonal
+= séparation/collectivisante (E II) ; (3) pointer marcher() sur l'énoncé
+avec pool {prop12, briques ≤} → manques nommés = file de briques ;
+(4) écrire les briques une à une. EN COURS AUSSI : identité (c+d)/b
+(plan complet au journal de boucle, fichier quotient à 209 l).
