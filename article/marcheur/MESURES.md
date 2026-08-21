@@ -166,3 +166,21 @@ demande « le produit ne voit que le cardinal de son facteur » (Eq(Card S, S)
 + produit/somme respectent Eq). C'est une BRIQUE DU LIVRE (§III.3.3) que la
 machine vient de désigner — le mode de croissance du projet depuis ev.373,
 cette fois pointé sur le programme du LIVRE lui-même. Chantier ouvert.
+
+### EXP7 (21 août, soir) — la boucle complète, et sa lecture honnête
+
+Après écriture de la brique désignée (`distributivite_operations`, III.3.3,
+close en 4,88 s de test), le banc 2 relancé avec la brique au pool en
+VARIABLES FRAÎCHES :
+
+- **direct : FERMÉ en 6,14 s** (v18 instancie la loi — le chaînage suffit) ;
+- marche : FERMÉE en 2,04 s, morphisme certifié en route (l'instanciation de
+  la loi par la machine), palier 1, 0 hyp, 22 axiomes.
+
+LECTURE : ce n'est PAS un franchissement de porte (les deux côtés ferment).
+C'est la boucle entière qui est le résultat : exp6 = le chaînage échoue ET le
+marcheur DIAGNOSTIQUE la brique manquante ; la brique est écrite dans le
+LIVRE ; exp7 = le but devient facile pour tout le monde. Le marcheur n'a pas
+franchi ce banc — il l'a rendu inutile à franchir. C'est le mode de
+croissance du projet (l'outil se déduit du diagnostic) appliqué pour la
+première fois au PROGRAMME DU LIVRE lui-même.
