@@ -151,11 +151,17 @@ def division_existence(b="bdf"):
 
 def _cloture_unicite_enonce(a, b):
     """La cloture-du-livre de l'unicite : (pour tous entiers q, r, q', r') les
-    conditions determinent q et r — gardes Fini en implications, puis (pour tout)."""
+    conditions determinent q et r — gardes Fini en implications, puis (pour tout).
+
+    ⚠️ `enonce_unicite` applique var() AVEUGLEMENT a ses arguments : lui passer
+    un Terme fabrique var(Terme), un objet difforme — 2e echec du 21 aout
+    (« cloture==False », 23 min de test pour le voir). On normalise aux NOMS."""
     from bourbaki.i_description_mathematique_formelle.i_1_termes_relations.outil_formule import pourtout
     from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_5_calcul_entiers.iii_5_6_divisibilite_division_euclidienne.ensembles_division_unicite import (
         enonce_unicite)
-    corps = enonce_unicite(a, b, "qdf1", "qdf2", "rdf1", "rdf2")
+    na = a if isinstance(a, str) else a.nom
+    nb = b if isinstance(b, str) else b.nom
+    corps = enonce_unicite(na, nb, "qdf1", "qdf2", "rdf1", "rdf2")
     for v in ("rdf2", "rdf1", "qdf2", "qdf1"):
         corps = impl(est_fini(var(v)), corps)
     for v in ("rdf2", "rdf1", "qdf2", "qdf1"):
@@ -171,7 +177,7 @@ def enonce_division_euclidienne(a="adf", b="bdf"):
     de l'unicite. Ecart d'orientation consigne (livre a = bq+r ; machine
     b.q+r = a) : ANOMALIES.md 2026-08-21."""
     va, vb = var(a) if isinstance(a, str) else a, var(b) if isinstance(b, str) else b
-    return et(_R_rel(vb, va), _cloture_unicite_enonce(va, vb))
+    return et(_R_rel(vb, va), _cloture_unicite_enonce(a, b))
 
 
 # @livre Ch.III §5.6 Th.1 | E III.39 L.10-11 | PDF p.142

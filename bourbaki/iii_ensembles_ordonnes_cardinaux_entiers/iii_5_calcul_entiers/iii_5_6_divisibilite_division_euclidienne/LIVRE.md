@@ -10,6 +10,8 @@
 | E III.39 | L.10-11 | 5.6 | Th.1 | `division_cas_petit` | `ensembles_division_cas_petit.py` |
 | E III.39 | L.10-19 | 5.6 | Demo.- | `_strong_step` | `ensembles_division_existence_final.py` |
 | E III.39 | L.10-19 | 5.6 | Th.1 | `division_existence` | `ensembles_division_existence_final.py` |
+| E III.39 | L.10-11 | 5.6 | Th.1 | `enonce_division_euclidienne` | `ensembles_division_existence_final.py` |
+| E III.39 | L.10-11 | 5.6 | Th.1 | `division_euclidienne` | `ensembles_division_existence_final.py` |
 | E III.39 | L.10-11 | 5.6 | Th.1 | `division_pas_recomposition` | `ensembles_division_pas.py` |
 | E III.39 | L.10-11 | 5.6 | Th.1 | `division_successeur` | `ensembles_division_successeur.py` |
 | E III.39 | L.10-19 | 5.6 | Demo.- | `_gap` | `ensembles_division_unicite.py` |
@@ -33,7 +35,7 @@
 
 ## Bilan cumulé (ce dossier + descendants)
 
-- Notions calées : **23**
+- Notions calées : **25**
 - Fichiers à caler : **0**
 - Marqueurs non conformes : **0**
 - Livre **E III** : pages couvertes 39 — aucune page manquante dans l'intervalle
