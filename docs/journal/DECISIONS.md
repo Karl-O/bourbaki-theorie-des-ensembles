@@ -175,3 +175,17 @@ via Card D = ℵ₀ (aleph0/est_infini_ensemble, brique-surensemble p5c l.154) ;
 + transitivité/symétrie + lemme_deux_NN) ; S5 ×2 vers le corps ∃S∃φ.
 (2) L1 : audit iii_2_bien_ordonnes (Zermelo/th.3/segments) vs route ÉTAPE C
 de N_collectivise (n≤a). (3) H2 ensuite (restructuration + recollement).
+
+## 2026-08-22 09h35 — AUDIT iii_2 : 621 passed (47 min) — ROUTE-LIVRE L1 retenue
+TOUT iii_2_bien_ordonnes est VERT. ZERMELO EST CLOS ET INCONDITIONNEL :
+⊢ (∃R) est_bien_ordonne(R_R, X) (zermelo.py l.2594, via Zorn sur le poset
+des bons ordres partiels en end-extension). La trichotomie des ordinaux
+(comparaison th.3) est le 2e pilier — conclusions exactes à relire au
+prochain tick (trichotomie_ordinaux/assemblage : « DEUX VERSIONS LIVRÉES »).
+DÉCISION : route-livre pour L1 (E III.47 Lemme 1) — bon ordre sur E
+(Zermelo) + comparaison (E,R) vs (ℕ,≤) + « segment propre de ℕ ⇒ fini »
+(realisation_segment/intervalles §III.4) ; la route-cardinale reste bloquée
+par le passage sup (∀n n≤a → ℵ₀≤a, arithmétique infinie absente).
+CIBLE MINIMALE pour H1 (suffit) : {est_infini(Card E)} ⊢ (∃D)(D⊂E ∧ Eq(D,ℕ))
+— H1 se décharge SOUS Inf par restructuration légale (assume Inf ; L1 ; cut ;
+loi_deduction), donc L1 conditionnel à l'infinité suffit.
