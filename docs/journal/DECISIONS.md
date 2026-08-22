@@ -400,3 +400,21 @@ valeur de la restriction ((p|X)(u)=p(u) pour u∈X∩dom — chercher
 restriction_valeur / _restriction_valeurs_coincident (prop9_close l.559) /
 dans cantor_bernstein_bij ; sinon dériver de AXIOME_RESTRICTION +
 valeur_caracterisation) ; (iv) graphe_egal_par_valeurs (patron prop12).
+
+## 2026-08-22 10h45 — R2'a : briques (ii) CLOSE et (iii) DÉJÀ CLOSE
+(ii) ÉCRITE ET VERTE (rec_veritable/ensembles_seg_transitif.py, commit 4762f29,
+2 passed 0.08 s) : seg_transitif_strict {bo} ⊢ (z∈seg x ∧ u∈seg z) ⇒ u∈seg x
+(transitivité + antisymétrie extraites de est_bien_ordonne, patron CASE A/B
+factorisé de couverture_segment_realise) ; seg_inclus_dom_essai {bo} ⊢
+z∈dom_essai(x) ⇒ seg z ⊂ dom_essai(x) (cas z∈seg x / z=x par S6, puis
+S2+axiome-réunion). UNE hypothèse honnête chacun (le bon ordre).
+(iii) DÉJÀ CLOSE, rien à écrire : restriction_valeur (cantor_bernstein_bij
+l.206) {F fonct, u∈X, u∈dom F} ⊢ (f|X)(u)=F(u) — accepte des TERMES (_t),
+donc directement applicable à p|seg(z). En bonus pour (iv) :
+_restriction_fonctionnelle_terme ⊢ func(F) ⇒ func(f|X) (implication CLOSE)
+et _restriction_incluse_terme ⊢ f|X ⊂ F, mêmes signatures-termes.
+RESTE R2'a : (iv) seule — assembler graphe_egal_par_valeurs (patron prop12)
+sur p|seg z et q|seg z : fonctionnelles (✓ _restriction_fonctionnelle_terme),
+incluses dans un produit (via f|X ⊂ F + F ⊂ E×V hypothèse honnête de R2'),
+doms égaux ((i)+(ii) : les deux valent seg z), valeurs égales (HR + (iii)).
+Leçon : les deux ticks de recherche ont évité ~150 lignes de redérivation.
