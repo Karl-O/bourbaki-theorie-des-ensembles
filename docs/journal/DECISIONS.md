@@ -124,3 +124,24 @@ PLAN DE BRIQUES W (un commit testé chacune) :
 Ensuite : L1 (route livre : Zermelo + comparaison th.3 §III.2 — auditer ce
 qui existe côté iii_2_bien_ordonnes), puis décharge H1/H2, puis a²=a 0-hyp
 + restatement littéral-cardinal (comme Cantor).
+
+## 2026-08-22 03h20 — L2 : W3 CLOS, W4-W5 écrits (nuit de l'arithmétique)
+W3 deux_valuation_unique CLOS (0e0e4a8, 38 min de C61) : l'unicité 2-adique
+SANS report — la route « écart d=m'−m » butait sur fini_downward (REPORTÉ,
+bon ordre des cardinaux) ; la récurrence C61 patron pair_neq_impair l'évite
+(le prédécesseur s'applique à mp, FINI PAR HYPOTHÈSE du corps ∀-imbriqué).
+Briques neuves en route : exposant_somme_pont (base^(m+d)=base^m·base^d,
+Cor.1 §III.3.5 aux opérations), puissance_non_nulle (base^n≠0, C61),
+ops_produit_commutatif/associatif (ponts Card intercalés), exposant_zero_un,
+ops_produit_un_droite (neutre x·1=x).
+W4 trois_puiss_injectif écrit (en test) : C61, cœur absurde 1=3^(succ j) par
+produit/somme_succ_distribue + Prop.8 + successeur_non_nul — PAS d'ordre.
+W5 pairing_injectif écrit : assemblage pur W1+W3+W4.
+LEÇONS de capture (cumul de la nuit) :
+  8. congruence_terme(t,u,v,w='w') : trou EXPLICITE si le template n'use pas w.
+  9. lieur d'un ∃ à éliminer ≠ tout témoin reçu de l'appelant (kpred vs kpred2
+     dans un helper appelé SOUS un autre prédécesseur).
+  10. les keystones-à-noms se ∀-closent sur LEURS noms puis s'instancient aux
+     termes ; ne jamais gen sur Z (τ de cardinal), F/G (∃ bij), w (trou).
+RESTE pour L2 : W6 graphe est_injection_de(F, N×N, N) (lire la repr. N de la
+direction A + pr1/pr2 + pont ∈N/Fini), W7 Eq par Cantor-Bernstein.
