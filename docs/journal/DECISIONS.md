@@ -870,3 +870,17 @@ projection) et relier union_famille(pr₂⟨C⟩) à union_seconde(C) — les de
 termes ont la même caractérisation membre-à-membre ((∃p∈C)(w∈pr₂p)), donc
 l'égalité s'obtient par extensionnalité à partir des deux axiomes. C'est le
 premier pas concret de (α), à écrire au prochain tick.
+
+## 2026-08-23 01h23 — 🏆 H1 CERTIFIÉ DE BOUT EN BOUT (décharge comprise)
+test_h1_decharge : « 1 passed in 8889.90s (2:28:09) ».
+  h1_decharge : { est_infini(Card E) } ⊢ (∃x)( x ∈ 𝔉(E) )
+Le résidu H1 de la campagne Hessenberg — l'amorçage du frame de Zorn — est
+DÉCHARGÉ : plus une hypothèse honnête, sinon « E est infini ». La chaîne
+complète a tourné : Lemme 1 (tout infini contient une copie de ℕ) → couple
+témoin (D,ψ) avec ψ le τ-témoin de Eq(D×D,D) → corps du frame → élimination
+des témoins → décharge du Lemme 2 et de « ℕ infini ».
+Les 2h28 sont le prix des deux gros lemmes payés une seule fois ; l'argument
+lui-même se vérifie en 7 s (h1_sous_lemmes). Test marqué slow : à relancer
+seulement quand la chaîne amont change.
+RESTE pour Hessenberg : le seul résidu H2 (recollement de chaîne), en deux
+chaînons (α) ordre→famille et (β) couple→valeur.
