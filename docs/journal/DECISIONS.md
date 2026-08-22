@@ -581,3 +581,28 @@ existant c62 pour la CIBLE exacte f(0)=e0 ∧ f(succ n)=S(f(n))). Le C62
 déposé (tabulation) a déjà une cible-itération — la NÔTRE la remplace avec
 la vraie équation. PUIS K6 (injectivité de l'itérée de succ), K7 (D:=im f,
 Eq(ℕ,D)), D1-Dedekind, L1 {Inf(Card E)}⊢∃D⊂E Eq(D,ℕ), H1, H2, a²=a 🏆.
+
+## 2026-08-22 13h05 — R8' RECONNAISSANCE : l'itération ℕ a un TERRAIN DÉJÀ RICHE
+Vérifié en code : bo_graphe_NN ⊢CLOS est_bien_ordonne(≤_G, ℕ) (iii_6_1) ;
+segment_zero_NN_est_vide ⊢CLOS seg(≤,ℕ,0)=∅ ; restriction_vide_est_vide(F)
+(factorielle_zero l.108 : F|∅=∅) ; h2_seg_succ_intervalle (donnees_ordre_NN) ;
+h1_succ_dans_NN. La CIBLE C63 existe (c62_recursion l.210) MAIS sur la
+TABULATION, et sa regle_iteration(S,a) = τ_y((u=∅∧y=a)∨(u≠∅∧y=S(u(M(Du)))))
+a un FALLBACK LOUCHE : M=sup_borne ABSENT d'abrege → M:=dom(u) (terme bien
+formé mais sémantiquement faux — l'équation au succ vaudrait S(u(dom u))).
+DÉCOUVERTE : le chantier factorielle (iii_5_8) a DÉJÀ construit
+factorielle_fonction_existe (3 hyps) et factorielle_equation_restriction
+(4 hyps, LA FORME DU LIVRE f(n)=T_fac(f|seg n)) via C60-déposé+gluing
+déverrouillé, avec les τ-évaluations en 0 (factorielle_zero) et succ
+(factorielle_succ, t_fac_en_non_vide). DEUX ROUTES pour R8' :
+(A) NOTRE capstone C60-vrai + regle_iteration RÉPARÉE : définir le max d'un
+segment ℕ par un vrai terme (τ du plus grand élément : plus_grand_element
+existe-t-il en abrege ? grep au prochain tick) puis DEUX τ-évaluations
+(patrons factorielle_zero/succ) → f(0)=a ∧ f(succ n)=S(f(n)) DÉRIVÉES de
+l'équation-restriction de est_solution_rec — PROPRE, réutilise R7'.
+(B) recopier le montage factorielle en généralisant T_fac → T_{S,a} —
+plus long, doublonne. DÉCISION : route (A), en volant les τ-patrons de
+factorielle_zero/succ (lire T_fac exact d'abord : comment il récupère la
+« dernière valeur » sans sup ? — si T_fac contourne le max par la forme
+u((n-1)-du-POINT)… non, T ne voit pas le point : LIRE factorielle_succ
+au prochain tick AVANT d'écrire).
