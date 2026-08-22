@@ -158,3 +158,20 @@ patché (α-récupération du lieur si l'axiome DOM renomme — additif,
 non-régression cantor 14 passed).
 RESTE pour CIBLE 2 : L1 (tout infini ⊃ dénombrable), décharge H1/H2 Zorn,
 a²=a 0-hyp + littéral.
+
+## 2026-08-22 08h35 — Cahier des charges décharge H1/H2 (lecture des formes)
+residu_H1 = (∃x)(x ∈ 𝔉(E)) ; residu_H2 = (∀C)((⋃S(C),⋃φ(C)) ∈ 𝔉(E)).
+𝔉(E) = {p | ∃S∃φ(p=(S,φ) ∧ S⊂E ∧ S INFINI ∧ φ bij S×S→S)} (axiome_frame).
+⚠️ DIAGNOSTIC H2 : le ∀C est NU — pour C:=∅ le recollement est (∅,∅) et
+« ∅ infini » est FAUX : H2 semble INSATISFIABLE telle quelle. La décharge
+exigera de REFORMULER l'inductivité (frame_inductif_assemblage /
+enonce_chaine_majoree_preuve) : cas C=∅ majoré par le témoin de H1, garde
+« C ≠ ∅ » (ou « C chaîne de 𝔉 ») sur le résidu de recollement. À VÉRIFIER
+finement (union_premiere(∅) = ∅ ?) avant de restructurer — si confirmé,
+consigner aussi dans ANOMALIES (le résidu du chantier Zorn était trop fort).
+PLAN : (1) H1 D'ABORD — témoin (D,ψ) : L1 donne D⊂E, Eq(D,ℕ) ; D infini
+via Card D = ℵ₀ (aleph0/est_infini_ensemble, brique-surensemble p5c l.154) ;
+ψ par élim ∃ de Eq(D×D,D) = transport de L2 (Eq(D,ℕ) + eq_produit_invariant
++ transitivité/symétrie + lemme_deux_NN) ; S5 ×2 vers le corps ∃S∃φ.
+(2) L1 : audit iii_2_bien_ordonnes (Zermelo/th.3/segments) vs route ÉTAPE C
+de N_collectivise (n≤a). (3) H2 ensuite (restructuration + recollement).
