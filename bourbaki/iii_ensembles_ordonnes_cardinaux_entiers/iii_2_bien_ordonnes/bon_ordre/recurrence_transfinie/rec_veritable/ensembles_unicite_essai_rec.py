@@ -28,7 +28,7 @@ theorie_ensembles() INCHANGÉE (22).  Noyau INTACT.  vh OPAQUE (callable).
 from __future__ import annotations
 
 from bourbaki.i_description_mathematique_formelle.i_1_termes_relations.outil_formule import (
-    Terme, var, egal, appartient,
+    Terme, var, egal, impl, appartient, pourtout,
 )
 from bourbaki.i_description_mathematique_formelle.i_2_theoremes.noyau import noyau_abrege as N
 from bourbaki.ii_theorie_des_ensembles.ii_1_relations_collectivisantes import ensembles_abrege as E
@@ -40,6 +40,12 @@ from bourbaki.i_description_mathematique_formelle.i_5_theories_egalitaires.i_5_2
     symetrie, composer_egalites, congruence_terme,
 )
 from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_2_bien_ordonnes.bon_ordre.recurrence_transfinie.ensembles_c60_existence_close import dom_essai
+from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_2_bien_ordonnes.bon_ordre.recurrence_transfinie.ensembles_recursion_transfinie_existence import (
+    heredite_couverture, couverture_transfinie,
+)
+from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_2_bien_ordonnes.bon_ordre.recurrence_transfinie.rec_veritable.ensembles_seg_transitif import (
+    seg_inclus_dom_essai,
+)
 from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_2_bien_ordonnes.bon_ordre.recurrence_transfinie.rec_veritable.ensembles_essai_rec import (
     est_essai_rec, restriction_seg,
 )
@@ -107,4 +113,71 @@ def unicite_au_point(vh, p="pre", q="qre", G="Gsr", e="Esr", x="xsr", z="zsr",
     return composer_egalites(gauche_, retour)               # p(z) = q(z)
 
 
-__all__ = ["unicite_au_point"]
+def couvert_unicite(p, q, G, e, x):
+    """Le prédicat d'induction : couvert[t] := (t∈dom_essai(x) ⇒ p(t)=q(t)).
+
+    GARDÉ par le domaine : hors de dom_essai(x) les valeurs sont du bruit-τ,
+    l'égalité n'y est ni vraie ni utile — la garde rend l'hérédité prouvable."""
+    vp, vq = _t(p), _t(q)
+    domx = dom_essai(_t(G), _t(e), _t(x))
+    return lambda t: impl(appartient(t, domx),
+                          egal(E.valeur(vp, t), E.valeur(vq, t)))
+
+
+def heredite_unicite(vh, p="pre", q="qre", G="Gsr", e="Esr", x="xsr"):
+    """{bo, est_essai_rec(p,x), est_essai_rec(q,x)}
+       ⊢ heredite_couverture(couvert_unicite, G, E)        [3 hyps honnêtes].
+
+    L'HÉRÉDITÉ du prédicat gardé, aux liants x0tf/ytf imposés par le squelette
+    C59 (couverture_transfinie).  Sous x0tf∈dom_essai(x) : seg(x0tf) ⊂
+    dom_essai(x) [brique (ii)], donc l'HR gardée (∀ytf∈seg)(garde⇒égalité) se
+    DÉGARDE en l'HR nue (∀ure∈seg)(p=q), et unicite_au_point conclut.
+    Le conjoint x0tf∈E est un AFFAIBLISSEMENT (loi_deduction sur non-hypothèse)."""
+    vp, vq, vG, ve = _t(p), _t(q), _t(G), _t(e)
+    domx = dom_essai(vG, ve, _t(x))
+    couvert = couvert_unicite(p, q, G, e, x)
+    vy = var("x0tf")                                        # le point d'hérédité
+    seg_y = E.segment_extremite(vG, ve, vy)
+    hr_gardee = pourtout("ytf", impl(appartient(var("ytf"), seg_y),
+                                     couvert(var("ytf"))))
+    h_hrg = N.assume(hr_gardee)                             # l'HR GARDÉE (C59)
+    h_yd = N.assume(appartient(vy, domx))                   # x0tf∈dom_essai(x)
+
+    sub = N.modus_ponens(h_yd, seg_inclus_dom_essai(G, e, x, "x0tf"))  # {bo} seg⊂domx
+    # l'HR NUE (∀ure)(ure∈seg(x0tf) ⇒ p(ure)=q(ure))  [dégardage point par point]
+    vu = var("ure")
+    h_us = N.assume(appartient(vu, seg_y))
+    u_domx = N.modus_ponens(h_us, instancie(sub, vu))       # ure∈dom_essai(x)
+    pq_u = N.modus_ponens(u_domx, N.modus_ponens(h_us, instancie(h_hrg, vu)))
+    hr_nue = N.generalisation("ure", N.loi_deduction(appartient(vu, seg_y), pq_u))
+
+    # le pas : unicite_au_point en z := x0tf, HR coupée par l'HR nue dérivée
+    up = unicite_au_point(vh, p, q, G, e, x, z="x0tf", u="ure")
+    up = _cut(hr_nue, hypothese_recurrence(vp, vq, vG, ve, vy), up)
+    couv_y = N.loi_deduction(appartient(vy, domx), up)      # couvert[x0tf]
+    imp_hr = N.loi_deduction(hr_gardee, couv_y)             # HR-gardée ⇒ couvert
+    imp_E = N.loi_deduction(appartient(vy, ve), imp_hr)     # affaiblissement x0tf∈E
+    her = N.generalisation("x0tf", imp_E)
+
+    cible = heredite_couverture(couvert, G, ve, "x0tf", "ytf")
+    assert her.conclusion == cible, "heredite_unicite : ≠ heredite_couverture"
+    return her
+
+
+def couverture_unicite(vh, p="pre", q="qre", G="Gsr", e="Esr", x="xsr"):
+    """{bo, est_essai_rec(p,x), est_essai_rec(q,x)}
+       ⊢ (∀x0tf)( x0tf∈E ⇒ (x0tf∈dom_essai(x) ⇒ p(x0tf)=q(x0tf)) )   [3 hyps].
+
+    LA COUVERTURE TOTALE de l'unicité : le squelette C59 (couverture_transfinie)
+    appliqué au prédicat gardé, son hypothèse d'hérédité DÉCHARGÉE par
+    heredite_unicite.  Deux essais récursifs en x coïncident en tout point de E
+    de leur domaine commun — l'extensionnalité (p=q) s'assemble en R2'-final."""
+    ve = _t(e)
+    couvert = couvert_unicite(p, q, G, e, x)
+    her = heredite_unicite(vh, p, q, G, e, x)               # {bo, essais} ⊢ hérédité
+    cov = couverture_transfinie(couvert, e, G)              # {bo, hérédité} ⊢ ∀
+    return _cut(her, heredite_couverture(couvert, G, ve, "x0tf", "ytf"), cov)
+
+
+__all__ = ["unicite_au_point", "couvert_unicite", "heredite_unicite",
+           "couverture_unicite"]
