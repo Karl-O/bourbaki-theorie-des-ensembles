@@ -24,3 +24,17 @@ def test_dom_union_egale():
     assert t.conclusion == egal(E.dom(U), Prod)
     assert set(t.hypotheses) == {recollement_domaine(_D, Prod), inclus(E.dom(U), Prod)}
     assert len(E.theorie_ensembles().axiomes) == 22
+
+
+def test_surj_riche_et_image():
+    """🎯 surjectivité RICHE (a∈US×US) puis image(⋃𝔇, US×US) = US."""
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_6_infinis.frame_zorn.h2_garde.ensembles_pont_valeur import (
+        surj_riche, image_union_egale,
+    )
+    t1 = surj_riche()
+    assert len(t1.hypotheses) == 3
+    t2 = image_union_egale()
+    U, Prod = union_famille(_D), E.produit(_US, _US)
+    assert t2.conclusion == egal(E.image(U, Prod), _US)
+    assert len(t2.hypotheses) == 4
+    assert len(E.theorie_ensembles().axiomes) == 22
