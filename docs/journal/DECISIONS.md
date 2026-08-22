@@ -937,3 +937,21 @@ théorèmes existants, ou ponter explicitement par alpha_bridge en partant de
 la forme de l'axiome (pas de la forme canonique).
 PROCHAIN ANGLE : (β) le pont couple→valeur, en commençant par inventorier ce
 que chaine_recollement/ensembles_ponts_couple_valeur_surj.py fournit déjà.
+
+## 2026-08-23 02h05 — 🎯🎯 H2 (β) COMPLET : plus aucune hypothèse VALEUR
+Le changement d'angle a payé : en une session, les trois hypothèses valeur de
+union_chaine_est_bijection sont DÉRIVÉES du niveau couple.
+  • dom_union_egale   ⊢ dom(⋃𝔇) = US×US        [union_chaine_dom + pont
+    générique, raccordés par alpha_bridge — les deux énoncés étaient le même
+    à un renommage de liants près] ;
+  • surj_riche        ⊢ surjectivité couple RICHE (a∈US×US) — l'amont ne
+    donnait que la forme pauvre ; c'est le pont du domaine qui l'enrichit ;
+  • image_union_egale ⊢ image(⋃𝔇, US×US) = US ;
+  • inj_valeur        ⊢ injective_dans(⋃𝔇, US×US) [injectif_graphe_implique_
+    injective_dans donne « sur dom F », le pont du domaine transporte] ;
+  • bijection_sans_valeur ⊢ est_bijection_de(⋃𝔇, US×US, US), 9 hypothèses
+    toutes couple-natives ou inclusions — AUCUNE hypothèse valeur.
+LEÇON CONFIRMÉE : tout le matériel existait, éparpillé ; la valeur ajoutée a
+été de le RACCORDER (α-ponts, ordre des dérivations), pas de re-prouver.
+RESTE : le raccord (α) union_famille(𝔇) ↔ ⋃φ(C) (chantier, leçon 15), OU son
+contournement en reformulant le résidu gardé avec union_famille(pr₂⟨C⟩).
