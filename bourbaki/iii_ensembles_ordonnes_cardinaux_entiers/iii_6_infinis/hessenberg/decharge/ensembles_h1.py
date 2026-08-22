@@ -181,11 +181,14 @@ def temoin_frame(d="Dld", e="Eld"):
 
 # @livre Ch.III §6.3 Demo.2 | E III.48 L.22-25 | PDF p.151  (« 𝔐 n'est pas vide » —
 #   l'amorçage de Zorn par les Lemmes 1 et 2, ici déchargé)
-def h1_decharge(e="Eld", d="Dld"):
-    """🎯 H1 : { est_infini(Card E) } ⊢ (∃x)( x ∈ 𝔉(E) )   [1 hyp].
+@lru_cache(maxsize=None)  # pur : Theoreme immuable, args hashables
+def h1_sous_lemmes(e="Eld", d="Dld"):
+    """H1 SOUS SES TROIS LEMMES (étage rapide, tout l'argument est ici) :
+       { (∃D)(D⊂E ∧ Eq(D,ℕ)),  Eq(ℕ×ℕ,ℕ),  ℕ infini } ⊢ (∃x)( x ∈ 𝔉(E) ).
 
-    Le Lemme 1 fournit (∃D)(D⊂E ∧ Eq(D,ℕ)) ; sous son corps, temoin_frame
-    conclut ; élimination du témoin D."""
+    Sous le corps du Lemme 1, temoin_frame conclut ; élimination du témoin D.
+    Les trois lemmes restent en hypothèses honnêtes — leur décharge (coûteuse :
+    ≈ 740 s au total) est isolée dans h1_decharge."""
     ve, vD = _t(e), _t(d)
     NN = ensemble_NN()
     corps_l1 = et(inclus(vD, ve), equipotent(vD, NN))
@@ -194,8 +197,25 @@ def h1_decharge(e="Eld", d="Dld"):
     b = _cut(conjonction_elim_droite(h_c), equipotent(vD, NN), b)
     imp = N.loi_deduction(corps_l1, b)
     ex = existe_elimination(imp, d if isinstance(d, str) else d.nom)
-    res = N.modus_ponens(lemme_1(e), ex)
-    #   décharge des deux lemmes CLOS — l'unique endroit où on paie leur prix
+    h_l1 = N.assume(existe(d if isinstance(d, str) else d.nom, corps_l1))
+    res = N.modus_ponens(h_l1, ex)
+    assert res.conclusion == residu_H1(e), "h1_sous_lemmes : forme"
+    assert len(res.hypotheses) == 3, "h1_sous_lemmes : hyps ≠ 3"
+    return res
+
+
+def h1_decharge(e="Eld", d="Dld"):
+    """🎯 H1 : { est_infini(Card E) } ⊢ (∃x)( x ∈ 𝔉(E) )   [1 hyp].
+
+    h1_sous_lemmes, avec ses trois lemmes déchargés : le Lemme 1 (qui apporte
+    l'hypothèse est_infini(Card E)), le Lemme 2 et « ℕ infini » (tous deux
+    CLOS).  C'est l'unique endroit où l'on paie leur dérivation."""
+    ve, vD = _t(e), _t(d)
+    NN = ensemble_NN()
+    dn = d if isinstance(d, str) else d.nom
+    corps_l1 = et(inclus(vD, ve), equipotent(vD, NN))
+    res = h1_sous_lemmes(e, d)
+    res = _cut(lemme_1(e), existe(dn, corps_l1), res)
     res = _cut(lemme_deux_NN(), equipotent(E.produit(NN, NN), NN), res)
     res = _cut(NN_est_infini_ensemble(), est_infini_ensemble(NN), res)
     assert res.conclusion == residu_H1(e), "h1_decharge : forme"
@@ -205,4 +225,4 @@ def h1_decharge(e="Eld", d="Dld"):
 
 
 __all__ = ["eq_DD_D", "psi_de", "psi_bijection", "d_infini",
-           "temoin_frame", "h1_decharge"]
+           "temoin_frame", "h1_sous_lemmes", "h1_decharge"]

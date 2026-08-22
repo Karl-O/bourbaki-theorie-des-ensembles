@@ -44,3 +44,14 @@ def test_h1_decharge():
     assert t.conclusion == residu_H1("Eld")
     assert list(t.hypotheses) == [est_infini(cardinal(_E))]
     assert len(E.theorie_ensembles().axiomes) == 22
+
+
+def test_h1_sous_lemmes():
+    """H1 sous ses 3 lemmes (tout l'argument, sans payer les dérivations)."""
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_6_infinis.hessenberg.decharge.ensembles_h1 import (
+        h1_sous_lemmes,
+    )
+    t = h1_sous_lemmes("Eld")
+    assert t.conclusion == residu_H1("Eld")
+    assert len(t.hypotheses) == 3
+    assert len(E.theorie_ensembles().axiomes) == 22
