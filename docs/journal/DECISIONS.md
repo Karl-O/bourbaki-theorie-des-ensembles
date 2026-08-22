@@ -260,3 +260,21 @@ u(M(Du)) — au point z, T(z) est... relire la définition exacte).
 NOTE session : la CIBLE 2 complète (a²=a 0-hyp) reste un chantier de
 plusieurs jours ; les jalons de session (Cantor, L2, Prop.2) sont déjà
 poussables — PUSH JALON dès que Karl est là.
+
+## 2026-08-22 10h00 — DIAGNOSTIC FINAL front L1 : la récursion réelle manque
+est_essai (c60_existence_close l.337) : l'équation est valeur(p,z) = vh(z)
+avec vh : Terme→Terme appliquée AU POINT z — vh ne reçoit JAMAIS p. C'est
+une TABULATION (f = graphe de vh), pas l'équation de récursion
+f(z)=T{f|seg(z)} : le chantier C60/C62 « hygienic » a dérivé l'existence
+d'une fonction tabulée, l'équation récursive est l'« écart de fidélité »
+avoué de fonction_existence. La route D2 (itération gⁿ(e₀)) attend donc une
+REFONTE de l'équation d'essai (profonde : C59/C60/C62 re-dérivés avec
+vh(restriction(p, seg(z)))).
+FRONT L1 (résumé pour Karl) — trois routes, trois murs :
+  (1) trichotomie th.3 : résidus R1-R4, R3 sur axiome opaque (refonte h) ;
+  (2) Dedekind/itération : équation de récursion absente (refonte C60+) ;
+  (3) cardinale : passage sup (∀n n≤a → ℵ₀≤a) absent.
+Le mur (2) est le plus « rentable » (débloque récursion partout : factorielle
+index-dépendante incluse) mais c'est une refonte multi-jours. PIVOT du matin :
+rapport V9 (documenter Prop.12+Th.2 Cantor + Lemme 2 — livrable en attente),
+en laissant le choix du mur à discuter avec Karl (stratégie cibles).
