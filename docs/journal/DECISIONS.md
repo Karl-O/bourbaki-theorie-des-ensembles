@@ -779,3 +779,18 @@ predecesseur_fini_universel_preuve. AVANT : test_lemme1 seul = 561.9 s
 dont lemme_1) = 418.9 s. Gain ≈ 28 %, marge restaurée sous le timeout 600 s
 pour les tests H (qui empilent sur la chaîne). Jamais de cache sur les
 fonctions à paramètre callable (S, P — lambdas non hashables).
+
+## 2026-08-22 20h10 — PLAN H2 (restructuration du résidu d'inductivité)
+Lecture frame_inductif_assemblage : le résidu H2 (m_dans_frame_universel,
+∀C NU — insatisfiable pour C=∅) n'est instancié QUE sous h_chaine dans
+enonce_chaine_majoree_preuve → restructuration en 3 pas :
+(1) nouveau résidu GARDÉ : (∀C)( (chaîne(Γ𝔉,𝔉,C) ∧ C≠∅) ⇒ (⋃S,⋃φ)∈𝔉 ) ;
+(2) enonce_chaine_majoree_preuve version case-split : C≠∅ → chemin actuel
+    sous le résidu gardé ; C=∅ → majorant := le témoin H1 ((∃x)x∈𝔉 en hyp,
+    DÉSORMAIS DISPONIBLE via h1_decharge), (∀x)(x∈∅⇒…) par vacuité ;
+(3) décharge du résidu gardé = LE recollement réel (chaîne non vide de
+    couples (S,φ) → (⋃S, ⋃φ) est une frame-pair : ⋃S⊂E, ⋃S infini (contient
+    un S infini), ⋃φ bijection de ⋃S×⋃S sur ⋃S — chantier
+    chaine_recollement/ensembles_union_chaine_bijection, LE gros morceau).
+H1 (h1_decharge) est écrit, en test détaché (WMI — leçon : Start-Process
+depuis l'outil meurt avec le tour ; ([wmiclass]win32_process).Create survit).
