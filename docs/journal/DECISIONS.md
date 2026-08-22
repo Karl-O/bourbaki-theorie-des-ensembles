@@ -457,3 +457,34 @@ patron structurel) ; les briques recollement (reunion_essais_fonctionnelle,
 valeur_essai_reunion) sont DÉJÀ closes au niveau binaire — le pas p∪{(x,v)}
 est EXACTEMENT ce niveau binaire (singleton = essai trivial ? NON : le
 singleton {(x,v)} est fonctionnel/dom={x} — briques singleton à chercher).
+
+## 2026-08-22 11h18 — R3' : DESIGN ARBITRÉ (route B binaire) + carte de réutilisation
+DÉCISION : R3'-binaire d'abord (l'extension p' := p∪{(x, vh(p|seg x))} pour p
+« essai-sur-seg(x) » : func p, dom p=seg(x), équation-restriction sur dom p),
+la famille/recollement (route A, analogue Dfam avec P2-coïncidence PAR R2'-
+unicité au lieu de valeurs-épinglées) viendra pour le cas limite en R4'.
+CARTE DE RÉUTILISATION (vérifiée en code ce tick) :
+- func(p∪S) : extension_un_pas_fonctionnelle (c60_existence_close l.290,
+  {func p, dom p=seg}) — DIRECTEMENT réutilisable ✓
+- (p∪S)(x)=v : valeur_reunion_point(g,j,x) (produit_adjonction_briques,
+  {func(G∪S)} ⊢ (G∪{(j,x)})(j)=x, TERMES génériques) ✓
+- (p∪S)(z)=p(z) sur dom p : valeur_reunion_gauche(g,h,t) (idem, TERMES —
+  PAS la version famille de c60_final) ✓
+- dom(p∪S) : dom_reunion_graphes (restriction_somme l.187, CLOS) + dom du
+  singleton (chercher E2 dans c60_existence_close) → dom p'=seg∪{x}=dom_essai ✓
+- helper _dech(thm,*preuves) (adjonction_briques) = multi-coupure ✓
+- patron témoins ∃p∃q de AXIOME_RESTRICTION : restriction_est_graphe
+  (adjonction_briques l.93 : subst_f+S5 re-liage, existe_elimination ×2) ✓
+BRIQUE NOUVELLE UNIQUE : restriction_reunion_singleton_hors {¬(x∈X)} ⊢
+(p∪{(x,v)})|X = p|X — double inclusion par AXIOME_RESTRICTION, cas (pb,qb)∈S
+absurde (pb=x∈X par couple_egal_implique_composantes+S6, contredit x∉X,
+ex falso via patron s2-encodage) ; puis x∉seg x vient de l'axiome-segment
+(conjoint y≠x avec y:=x : x∈seg x ⇒ x≠x ⇒ absurde avec reflexivite).
+ASSEMBLAGE FINAL extension_essai_rec : équation en z∈dom p' par cas
+(z∈dom p : valeur_reunion_gauche + équation-p + p'|seg z=p|seg z [la brique
+nouvelle, x∉seg z car seg z⊂seg x∌x… NON : x∉seg z car z∈seg x → seg z⊂seg x
+(seg_transitif !) et x∉seg x] ; z=x : valeur_reunion_point + p'|seg x=p|seg x
+= p [restriction pleine : dom p=seg x → p|dom p=p — chercher
+restriction_identite/restriction_totale, sinon dériver] + v:=vh(p) donc
+vh(p'|seg x)=vh(p)=v par congruence).
+⚠️ MANQUE ENCORE : p|dom p = p (restriction identité) — grep au prochain tick.
