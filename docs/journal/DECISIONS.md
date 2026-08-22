@@ -203,3 +203,27 @@ clore la trichotomie, PUIS L1a-d (Zermelo clos + comparaison + segments).
 Alternative en réserve : construction directe de D par itération C63
 (E III.47 Exemple 1 — vérifier l'état de C63 dans le dépôt si #8/#13
 résistent).
+
+## 2026-08-22 09h45 — L1 : ROUTE DEDEKIND retenue (trichotomie : résidu quadruple)
+Lecture complète du résidu trichotomie : R1 (#8 image-segment + #13
+resserrage), R2 (val_dans_F), R3 (h_graphe_hyp — BLOQUÉ par l'axiome opaque
+de h qui ne caractérise que les couples : restructuration d'axiome), R4
+(segment pr₂h). R3 rend la clôture de la trichotomie un chantier lourd.
+ROUTE DEDEKIND pour L1 (écart de démo vs livre, énoncé identique, à
+consigner dans ANOMALIES quand clos) :
+  D1 Dedekind : est_infini(a) ⇒ a = a+1 — dedekind_cardinal INCONDITIONNEL ✓
+     (infinis_props l.150) ; pour a := Card E : Eq(E, E⊔{∅})-transport →
+     une bijection g̃ : E⊔{∅} → E ; g := restriction de g̃ à E (injection
+     E→E) et e₀ := g̃((∅,1)) ∉ image(g) (l'injectivité sépare les images).
+  D2 l'itération : f(n) = gⁿ(e₀) — C62/C63 existent (regle_iteration,
+     iii_1_7/terme_plus_grand + recursion_hygienic §6.2) ; caveat (O1) :
+     C63 ne livre pas f assemblée mais une conclusion quantifiée — lire la
+     forme exacte et éliminer les ∃.
+  D3 injectivité de n ↦ gⁿ(e₀) : récurrence C61 (patron W3/W4 de la nuit) —
+     gⁿ(e₀)=gᵐ(e₀) ∧ n<m → simplifier par g (injective) → e₀ = g^(m-n)(e₀)
+     ∈ im(g), contredit e₀ ∉ im(g).
+  D4 D := image de f ; Eq(ℕ, D) (graphe injectif → bijection sur image,
+     patron W6/bijection_injective) ; D ⊂ E ; sym → cible L1 minimale
+     {est_infini(Card E)} ⊢ (∃D)(D⊂E ∧ Eq(D,ℕ)).
+PROCHAIN : lire regle_iteration/C63 (factorielle_existence l.26-60 +
+recursion_hygienic) — la forme exacte de ce que C63 conclut.
