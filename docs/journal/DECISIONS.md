@@ -327,3 +327,19 @@ d'hygiène inclus (hypothèses conservées). Le cas u=∅ est symétrique.
 Recommandation ferme à Karl : mur 2 (refonte C60-récursion, R1'-R8') —
 débloque L1-Dedekind, la factorielle index-dépendante, et toute suite
 récurrente à venir. Prêt à commencer R1' sur son accord.
+
+## 2026-08-22 10h20 — R' RÉVISION MAJEURE : le pont-restriction a déjà son CŒUR
+c62_fonction_restriction (jamais cité par fonction_existence !) contient :
+  restriction_egale_essai_seg {p∈𝔇_tot, est_essai(p,x)} ⊢ f|seg(x) = p|seg(x)
+— la cohérence des essais au niveau graphe (sens dur par l'épinglage). DONC
+la stratégie du dépôt était probablement : équation-au-point f(z)=vh(z) PLUS
+le pont f|seg=p|seg, et la forme fidèle f(z)=T{f|seg(z)} se DÉRIVE si vh(z)
+est définie comme T{essai-canonique(z)|seg(z)} (τ-sélection indépendante de
+p). HYPOTHÈSE À VÉRIFIER au prochain tick : lire les USAGES de vh (qui
+choisit la règle dans les théories dédiées theorie_Dtot/theorie C60 — la
+règle est un callable ambiant : l'instancier en (z ↦ T{restriction(f, seg z)})
+est-il LÉGAL (f = le terme-union, indépendant de p ✓ !) — ALORS l'équation
+f(z) = T{f|seg(z)} sort DIRECTEMENT de fonction_recursion_c62 avec CE vh,
+sans AUCUNE refonte : vh(z) := T(restriction(Dtot-union, seg(z))) est un
+Terme→Terme parfaitement valide !!). Si ça tient : R' se réduit à R5'+R8'
+(bien-formés/codomain pour cette règle + évaluation τ) ≈ 2-3 jours.
