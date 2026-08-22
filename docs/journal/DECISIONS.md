@@ -919,3 +919,21 @@ PISTE POUR LE PROCHAIN CYCLE (précise) : ne plus manipuler les corps
 existentiels du tout — utiliser membre_donne_inclus_seconde {p∈C} ⊢ pr₂p ⊂ ⋃φ
 (déjà prouvé) pour le sens ⇒, et son analogue côté union_famille pour le sens
 ⇐ ; sinon, alpha_bridge pour convertir explicitement les deux formes.
+
+## 2026-08-23 02h20 — LEÇON 15 précisée, et arrêt discipliné sur le raccord
+Huit essais sur union_fam_egale : je m'arrête (règle des 4 essais dépassée),
+je consigne, je change d'angle. ACQUIS RÉELS : membre_famille CLOS ; le sens
+⇒ de l'égalité passe désormais, en contournant les corps existentiels par
+membre_donne_inclus_seconde (bonne technique, à réemployer).
+DIAGNOSTIC COMPLET (LEÇON 15, plus large que prévu) : les formules produites
+par l'AXIOME INSTANCIÉ de ⋃φ ne sont pas structurellement reconstructibles.
+Mesuré : membre_union_seconde(C,w) donne un consequent ≠ _corps_union_seconde(C,w)
+— c'est-à-dire que même la fonction-corps OFFICIELLE du module ne reproduit
+pas ce que l'axiome instancié contient (le liant interne du τ de pr₂, lieur
+'y', est renommé par la substitution). Et l'écart touche jusqu'à l'antécédent
+w∈⋃φ. CONSÉQUENCE PRATIQUE GÉNÉRALE : sur les termes à τ imbriqués (pr₁/pr₂),
+ne jamais reconstruire une formule pour la donner en mineure — la dériver des
+théorèmes existants, ou ponter explicitement par alpha_bridge en partant de
+la forme de l'axiome (pas de la forme canonique).
+PROCHAIN ANGLE : (β) le pont couple→valeur, en commençant par inventorier ce
+que chaine_recollement/ensembles_ponts_couple_valeur_surj.py fournit déjà.

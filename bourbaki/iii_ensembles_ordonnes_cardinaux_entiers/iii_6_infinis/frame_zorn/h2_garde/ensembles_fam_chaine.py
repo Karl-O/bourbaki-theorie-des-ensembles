@@ -20,7 +20,7 @@ theorie_ensembles() INCHANGÉE (22).  Noyau INTACT.
 from __future__ import annotations
 
 from bourbaki.i_description_mathematique_formelle.i_1_termes_relations.outil_formule import (
-    Terme, var, egal, et, appartient, existe,
+    Terme, var, egal, et, impl, appartient, existe,
 )
 from bourbaki.i_description_mathematique_formelle.i_2_theoremes.noyau import noyau_abrege as N
 from bourbaki.ii_theorie_des_ensembles.ii_1_relations_collectivisantes import ensembles_abrege as E
@@ -35,6 +35,9 @@ from bourbaki.i_description_mathematique_formelle.i_2_theoremes.tactiques.tactiq
 from bourbaki.i_description_mathematique_formelle.i_4_theories_quantifiees.i_4_3_tactiques_abrege_quantif import (
     existe_elimination,
 )
+from bourbaki.i_description_mathematique_formelle.i_4_theories_quantifiees.outil_alpha_bridge import (
+    alpha_bridge,
+)
 from bourbaki.ii_theorie_des_ensembles.ii_1_relations_collectivisantes.ensembles_theoremes import (
     extensionnalite_appliquee,
 )
@@ -48,7 +51,7 @@ from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_2_bien_ordonnes.bon_o
     union_famille, membre_union_famille,
 )
 from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_6_infinis.chaine_recollement.ensembles_chaine_temoin_abstrait import (
-    union_seconde, membre_union_seconde,
+    union_seconde, membre_union_seconde, membre_donne_inclus_seconde,
 )
 
 _X = "xdd"          # liant du graphe-terme p ↦ pr₂ p
@@ -123,7 +126,14 @@ def membre_famille(C="Cch", g=_G):
 
 
 def union_fam_egale(C="Cch", w="z", _trace=False):
-    """🎯 ⊢ union_famille( 𝔇(C) ) = ⋃φ(C)   (CLOS — le RACCORD).
+    """⚠️ EN CHANTIER — NE PAS IMPORTER : ⊢ union_famille( 𝔇(C) ) = ⋃φ(C).
+
+    Le sens ⇒ passe (via membre_donne_inclus_seconde) ; le sens ⇐ bute sur la
+    LEÇON 15 : les termes produits par l'axiome instancié de ⋃φ ne sont pas
+    structurellement reconstructibles (le liant interne du τ de pr₂ est
+    renommé), y compris pour l'appartenance w∈⋃φ elle-même.  Diagnostic et
+    piste dans DECISIONS (2026-08-23 02h20).  membre_famille, lui, est CLOS
+    et utilisable.
 
     Les deux termes ont la même caractérisation : w y appartient exactement
     quand un membre p de la chaîne a w dans sa seconde projection.  Le membre
@@ -137,13 +147,10 @@ def union_fam_egale(C="Cch", w="z", _trace=False):
     mu = instancie(instancie(N.generalisation("Df", N.generalisation(
         "wf", membre_union_famille("Df", "wf"))), D), vw)   # w∈⋃𝔇 ⇔ (∃p)(p∈𝔇 ∧ w∈p)
     ms = membre_union_seconde(vC, vw)                       # w∈⋃φ ⇔ (∃p)(p∈C ∧ w∈pr₂p)
-    #   ⚠️ LEÇON : pr₁/pr₂ sont des τ-termes dont le liant interne est renommé à
-    #   l'instanciation — on EXTRAIT donc les corps des axiomes au lieu de les
-    #   reconstruire (sinon l'égalité structurelle échoue silencieusement).
-    corps_droit = antecedent_consequent(
-        equivalence_arriere(ms).conclusion)[0].sous[0]
-    corps_gauche = antecedent_consequent(
-        equivalence_arriere(mu).conclusion)[0].sous[0]
+    #   corps RECONSTRUITS en forme canonique (patron membre_donne_inclus_seconde,
+    #   qui procède ainsi et passe) — le témoin, lui, ne doit JAMAIS être le liant.
+    corps_droit = et(appartient(vp, vC), appartient(vw, E.pr2(vp)))
+    corps_gauche = et(appartient(vg, D), appartient(vw, vg))
 
     #   ⇒ : w∈⋃𝔇 donne un graphe g∈𝔇 avec w∈g ; g=pr₂p pour un p∈C
     h_g = N.assume(corps_gauche)
@@ -155,15 +162,16 @@ def union_fam_egale(C="Cch", w="z", _trace=False):
     w_in_pr2 = N.modus_ponens(w_in_g, equivalence_avant(N.modus_ponens(
         conjonction_elim_droite(h_p),
         N.s6(vg, E.pr2(vq), "wfc", appartient(vw, var("wfc"))))))
-    #   ⚠️ témoin = vq (le membre issu de la famille), JAMAIS vp qui EST le liant
-    wit_d = N.modus_ponens(conjonction_intro(conjonction_elim_gauche(h_p), w_in_pr2),
-                           N.s5(corps_droit, vq, _P))
+    #   w∈pr₂q et q∈C : l'inclusion pr₂q ⊂ ⋃φ (déjà prouvée) conclut directement
+    incl_q = membre_donne_inclus_seconde(C if isinstance(C, str) else C.nom, _Q)
+    w_in_US = N.modus_ponens(w_in_pr2, instancie(incl_q, vw))
+    w_in_US = N.modus_ponens(conjonction_elim_gauche(h_p),
+                             N.loi_deduction(appartient(vq, vC), w_in_US))
     inner_d = N.modus_ponens(ex_p, existe_elimination(
-        N.loi_deduction(et(appartient(vq, vC), egal(vg, E.pr2(vq))), wit_d), _Q))
-    avant = N.modus_ponens(N.modus_ponens(N.assume(appartient(vw, UD)),
+        N.loi_deduction(et(appartient(vq, vC), egal(vg, E.pr2(vq))), w_in_US), _Q))
+    droit = N.modus_ponens(N.modus_ponens(N.assume(appartient(vw, UD)),
                                           equivalence_avant(mu)),
                            existe_elimination(N.loi_deduction(corps_gauche, inner_d), _G))
-    droit = N.modus_ponens(avant, equivalence_arriere(ms))
 
     #   ⇐ : d'un p∈C avec w∈pr₂p, le graphe g:=pr₂p est dans 𝔇 et contient w
     h_d = N.assume(corps_droit)
@@ -176,9 +184,14 @@ def union_fam_egale(C="Cch", w="z", _trace=False):
     wit_g = N.modus_ponens(conjonction_intro(g_in, w_in),
                            N.s5(corps_gauche, E.pr2(vp), _G))
     inner_g = N.modus_ponens(wit_g, equivalence_arriere(mu))
-    arriere = N.modus_ponens(N.modus_ponens(N.assume(appartient(vw, US)),
-                                            equivalence_avant(ms)),
-                             existe_elimination(N.loi_deduction(corps_droit, inner_g), _P))
+    #   ⚠️ LEÇON 15 : l'instanciation de l'axiome RENOMME le liant interne du τ
+    #   de pr₂ — la forme canonique et la forme de l'axiome sont α-équivalentes
+    #   mais pas structurellement égales.  alpha_bridge fait le pont.
+    imp_can = existe_elimination(N.loi_deduction(corps_droit, inner_g), _P)
+    ex_axiome = N.modus_ponens(N.assume(appartient(vw, US)), equivalence_avant(ms))
+    imp_ax = alpha_bridge(imp_can, impl(ex_axiome.conclusion,
+                                        appartient(vw, UD)))
+    arriere = N.modus_ponens(ex_axiome, imp_ax)
 
     equiv_w = conjonction_intro(N.loi_deduction(appartient(vw, UD), droit),
                                 N.loi_deduction(appartient(vw, US), arriere))
