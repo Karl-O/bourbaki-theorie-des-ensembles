@@ -823,3 +823,25 @@ soundness : le théorème final a exactement les mêmes hypothèses qu'avant.
 MESURES : eq_DD_D 164 s → 1.4 s ; d_infini > 140 s → 0.9 s ; temoin_frame
 > 600 s (tué) → 1.4 s, test vert en 6 s. h1_decharge (marqué @pytest.mark.slow)
 paie Lemme 1 + Lemme 2 + ℕ-infini : à lancer seul, machine libre.
+
+## 2026-08-22 23h45 — CARTE EXACTE DU RÉSIDU RESTANT (relecture de l'amont)
+Avant d'écrire quoi que ce soit : l'amont contenait DÉJÀ ce que je m'apprêtais
+à refaire (ensembles_recol.py écrit puis SUPPRIMÉ — doublon).
+DÉJÀ FAIT dans chaine_recollement/ et frame_zorn/ :
+  • est_infini_union_chaine {p∈C, p∈𝔉} ⊢ ⋃S infini (frame_a_maximal:138) ;
+  • membre_donne_inclus_premiere {p∈C} ⊢ pr₁p ⊂ ⋃S ;
+  • union_chaine_bijection_graphe ⊢ fonctionnel(⋃φ) ∧ injectif_graphe(⋃φ) ;
+  • union_chaine_est_bijection ⊢ est_bijection_de(⋃φ, US×US, US) sous 3 hyps
+    VALEUR honnêtes (dom(⋃φ)=US×US, injective_dans, image=US) ;
+  • union_chaine_dans_frame ⊢ (US,⋃φ)∈𝔉(E) sous {ces hyps, US⊂E, US infini}.
+L'OBSTRUCTION (3) documentée dans ce module — « enonce_chaine_majoree exige le
+majorant, donnée d'ordre non produite » — est EXACTEMENT celle que la version
+gardée de ce soir a levée (enonce_chaine_majoree_garde + temoin_majore_membre).
+IL RESTE DONC, précisément, DEUX CHAÎNONS :
+  (α) PONT ORDRE→FAMILLE : de « C est une chaîne pour Γ𝔉 » (Γ𝔉 = l'ordre
+      d'EXTENSION : S_p⊂S_q et φ_q prolonge φ_p) dériver famille_compatible(C)
+      et famille_dirigee(C) — c'est de la manipulation d'axiome-ordre, faisable.
+  (β) PONT COUPLE→VALEUR : les trois hyps valeur de union_chaine_est_bijection
+      (dom, injective_dans, image) depuis le graphe-niveau déjà prouvé. C'est
+      LE morceau dur, identifié depuis longtemps dans le dépôt.
+Prochain pas : (α) d'abord (accessible), puis (β) avec la règle perf.
