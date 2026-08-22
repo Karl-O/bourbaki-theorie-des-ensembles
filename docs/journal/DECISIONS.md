@@ -900,3 +900,22 @@ DEUX VOIES pour raccorder :
      de même forme. À vérifier module par module, mais cela éviterait tout
      le pont (i).
 DÉCISION : tenter (ii) d'abord (moins de dette), (i) en repli.
+
+## 2026-08-23 02h10 — Raccord (α) : membre_famille CLOS, l'égalité bute sur α(τ)
+ACQUIS : famille_de_chaine(C) := pr₂⟨C⟩ et
+  membre_famille ⊢ ( g ∈ 𝔇(C) ) ⇔ (∃q)( q∈C ∧ g = pr₂ q )      [CLOS, 0 hyp]
+— le pont couples→graphes existe et est certifié.
+BLOCAGE de union_fam_egale (l'égalité des unions) : DEUX pièges de capture
+rencontrés, le second non encore contourné.
+  (1) le témoin ne doit jamais être le liant : pr₂(p) contient p, donc S5 sur
+      un corps lié par p abstrait aussi le témoin. Résolu en donnant à
+      membre_famille son propre liant (qfam ≠ punionpr).
+  (2) ⚠️ LEÇON 15 : pr₁/pr₂ sont des τ-TERMES ; leur liant interne est
+      renommé à l'instanciation, si bien que E.pr2(v) reconstruit à la main
+      n'est PAS structurellement égal au pr₂ qui figure dans l'axiome
+      instancié. Extraire le corps de l'axiome règle un côté mais casse
+      l'autre (les briques canoniques ne matchent plus).
+PISTE POUR LE PROCHAIN CYCLE (précise) : ne plus manipuler les corps
+existentiels du tout — utiliser membre_donne_inclus_seconde {p∈C} ⊢ pr₂p ⊂ ⋃φ
+(déjà prouvé) pour le sens ⇒, et son analogue côté union_famille pour le sens
+⇐ ; sinon, alpha_bridge pour convertir explicitement les deux formes.
