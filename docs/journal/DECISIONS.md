@@ -388,3 +388,15 @@ Toutes les briques R2'a en découlent : (i) dom(f|X) = dom f ∩ X (par AXIOME_
 DOM + l'axiome ci-dessus), (ii) l'inclusion f|X ⊂ produit (idem), (iii) les
 valeurs (valeur_caracterisation), (iv) graphe_egal_par_valeurs. Écriture de
 rec_veritable/ensembles_restrictions_egales.py au prochain tick.
+
+## 2026-08-22 10h35 — R2'a : brique (i) DÉJÀ CLOSE + inventaire
+restriction_dom_sous_inclusion (cantor_bernstein_bij l.150) : ⊢ (X ⊂ dom F)
+⇒ dom(f|X) = X — exactement la forme utile (X := seg z, avec (ii)
+seg z ⊂ dom p). restriction_domaine_piece (iso_ordre) = la version
+à-hypothèse. RESTE pour R2'a : (ii) seg-transitivité (chercher dans
+segment_extremite-lemmes/bon_ordre : « z∈dom_essai(x) ⇒ seg z ⊂ dom_essai(x) »
+— découle de la transitivité de l'ordre + structure seg(x)∪{x}) ; (iii)
+valeur de la restriction ((p|X)(u)=p(u) pour u∈X∩dom — chercher
+restriction_valeur / _restriction_valeurs_coincident (prop9_close l.559) /
+dans cantor_bernstein_bij ; sinon dériver de AXIOME_RESTRICTION +
+valeur_caracterisation) ; (iv) graphe_egal_par_valeurs (patron prop12).
