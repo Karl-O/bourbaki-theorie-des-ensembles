@@ -12,7 +12,7 @@ re-expliqué.
 | A1 | **écrit, relu par Karl, poussé** (EN 28 p + FR 30 p) | `article/` |
 | A3 | **écrit, relu par Karl, poussé** (EN 21 p + FR 22 p) | `article/goldbach/` |
 | A2 | **écrit, relu par Karl le 21 août, poussé** (EN 14 p + FR 14 p) | `article/dernier_kilometre/` |
-| A4 | **écrit le 21 août** — porte franchie EN CODE (marche 414 s vs échec direct 692 s, tests des deux côtés verts en 2673 s) ; EN 10 p + FR 10 p ; relecture Karl en attente | `article/marcheur/` |
+| A4 | **écrit, relu par Karl le 22 août** (EN 10 p + FR 10 p) | `article/marcheur/` |
 
 La soumission arXiv est l'étape suivante ; elle passe par le compte de Karl
 (licence + endorsement). Catégorie suggérée : cs.LO principal.
@@ -246,3 +246,11 @@ de MÉTHODE que la boucle a nommée en échouant, puis consignée, puis réusit�
 avec succès (3 sous-lemmes verts du premier coup ensuite). Matériau :
 DECISIONS.md leçons 1-12, la pile W, les temps de certification (figure du
 rapport V9). Statut : idée, à écrire après la CIBLE 2.
+
+## Publication (22 août 2026, soir)
+- arXiv : bloqué sur l'endorsement cs.LO (demande à faire partir — brouillon de
+  mail prêt) ; les 4 zips source sont dans `article/arxiv_soumission/`.
+- HAL : dépôt EN COURS par Karl (compte validé, CC BY 4.0, type
+  pré-publication, affiliation « Chercheur indépendant ») — A1, A2, A3, A4,
+  chacun EN (principal) + FR (fichier joint). PDF renommés dans
+  `article/arxiv_soumission/`. Identifiants HAL à consigner ici dès réception.
