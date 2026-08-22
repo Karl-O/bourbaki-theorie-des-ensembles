@@ -82,10 +82,16 @@ def _cut(preuve, formule, thm):
 
 @lru_cache(maxsize=None)  # pur : Theoreme immuable, args hashables
 def eq_DD_D(d="Dld"):
-    """{ Eq(D,ℕ) } ⊢ Eq(D×D, D)   (invariance du produit + Lemme 2 + sym/trans)."""
+    """{ Eq(D,ℕ), Eq(ℕ×ℕ,ℕ) } ⊢ Eq(D×D, D)   (invariance du produit + sym/trans).
+
+    ⚠️ Le Lemme 2 (Eq(ℕ×ℕ,ℕ), CLOS) est porté en HYPOTHÈSE HONNÊTE et déchargé
+    une seule fois, tout à la fin (h1_decharge) : le re-dériver ici coûterait
+    plus de 150 s par appel (chaîne du couplage 2^m·3^n), ce qui rendait toute
+    la chaîne H1 intestable en un seul run."""
     vD = _t(d)
     NN = ensemble_NN()
     h_eq = N.assume(equipotent(vD, NN))                     # Eq(D,ℕ)  [HONNÊTE]
+    h_l2 = N.assume(equipotent(E.produit(NN, NN), NN))      # Lemme 2  [HONNÊTE]
     inv = instancie(instancie(instancie(instancie(
         N.generalisation("X", N.generalisation("Y", N.generalisation(
             "X1", N.generalisation("Y1",
@@ -95,12 +101,14 @@ def eq_DD_D(d="Dld"):
     sym, trans = _sym_all(), _trans_all()
     e3 = N.modus_ponens(h_eq, instancie(instancie(sym, vD), NN))  # Eq(ℕ, D)
     DD, NNNN = E.produit(vD, vD), E.produit(NN, NN)
-    t1 = N.modus_ponens(conjonction_intro(e1, lemme_deux_NN()),
+    t1 = N.modus_ponens(conjonction_intro(e1, h_l2),
         instancie(instancie(instancie(trans, DD), NNNN), NN))  # Eq(D×D, ℕ)
     res = N.modus_ponens(conjonction_intro(t1, e3),
         instancie(instancie(instancie(trans, DD), NN), vD))    # Eq(D×D, D)
     assert res.conclusion == equipotent(DD, vD), "eq_DD_D : forme"
-    assert list(res.hypotheses) == [equipotent(vD, NN)], "eq_DD_D : hyps"
+    assert set(res.hypotheses) == {equipotent(vD, NN),
+                                   equipotent(E.produit(NN, NN), NN)}, \
+        "eq_DD_D : hyps ≠ {Eq(D,ℕ), Lemme 2}"
     return res
 
 
@@ -123,17 +131,23 @@ def psi_bijection(d="Dld"):
 
 @lru_cache(maxsize=None)  # pur : Theoreme immuable, args hashables
 def d_infini(d="Dld"):
-    """{ Eq(D,ℕ) } ⊢ est_infini_ensemble(D)   (Card D = Card ℕ, ℕ infini)."""
+    """{ Eq(D,ℕ), est_infini_ensemble(ℕ) } ⊢ est_infini_ensemble(D).
+
+    Card D = Card ℕ (Prop. 1) puis Leibniz.  ⚠️ « ℕ est infini » (CLOS) est
+    porté en HYPOTHÈSE HONNÊTE et déchargé une seule fois tout à la fin
+    (h1_decharge) : sa re-dérivation coûte plus de 140 s par appel."""
     vD = _t(d)
     NN = ensemble_NN()
     h_eq = N.assume(equipotent(vD, NN))
+    h_NN = N.assume(est_infini_ensemble(NN))                # ℕ infini [HONNÊTE]
     c_eq = N.modus_ponens(h_eq, _prop1_direct_t(vD, NN))    # Card D = Card ℕ
     leib = N.s6(cardinal(vD), cardinal(NN), "wh1",
                 non(est_fini(var("wh1"))))
-    res = N.modus_ponens(NN_est_infini_ensemble(),
+    res = N.modus_ponens(h_NN,
         equivalence_arriere(N.modus_ponens(c_eq, leib)))    # est_infini(Card D)
     assert res.conclusion == est_infini_ensemble(vD), "d_infini : forme"
-    assert list(res.hypotheses) == [equipotent(vD, NN)], "d_infini : hyps"
+    assert set(res.hypotheses) == {equipotent(vD, NN),
+                                   est_infini_ensemble(NN)}, "d_infini : hyps"
     return res
 
 
@@ -161,7 +175,7 @@ def temoin_frame(d="Dld", e="Eld"):
     res = N.modus_ponens(p_in,
         N.s5(appartient(var("x"), frame_pair(ve)), p, "x"))
     assert res.conclusion == residu_H1(e), "temoin_frame : forme"
-    assert len(res.hypotheses) == 2, "temoin_frame : hyps ≠ 2"
+    assert len(res.hypotheses) == 4,         "temoin_frame : hyps ≠ 4 (D⊂E, Eq(D,ℕ), Lemme 2, ℕ infini)"
     return res
 
 
@@ -181,6 +195,9 @@ def h1_decharge(e="Eld", d="Dld"):
     imp = N.loi_deduction(corps_l1, b)
     ex = existe_elimination(imp, d if isinstance(d, str) else d.nom)
     res = N.modus_ponens(lemme_1(e), ex)
+    #   décharge des deux lemmes CLOS — l'unique endroit où on paie leur prix
+    res = _cut(lemme_deux_NN(), equipotent(E.produit(NN, NN), NN), res)
+    res = _cut(NN_est_infini_ensemble(), est_infini_ensemble(NN), res)
     assert res.conclusion == residu_H1(e), "h1_decharge : forme"
     assert list(res.hypotheses) == [est_infini(cardinal(ve))], \
         "h1_decharge : hyps"

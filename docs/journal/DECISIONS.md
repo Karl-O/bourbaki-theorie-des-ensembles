@@ -809,3 +809,17 @@ SUITE ÉDITORIALE : v2-A1 enrichie des résultats du 22 août (la « récursion 
 déposée qui était une tabulation = 3ᵉ incident soundness≠fidélité ; C60-vrai
 → C63-vrai ; Lemme 1 clos) — à préparer quand la campagne Hessenberg aura
 livré a²=a.
+
+## 2026-08-22 22h50 — PERF : les gros lemmes CLOS deviennent des hypothèses
+DIAGNOSTIC (mesuré) : la chaîne H1 dépassait 600 s et se faisait tuer AVANT
+que pytest n'écrive (fichiers de sortie vides — trois runs perdus à chercher
+un bug qui n'existait pas). Coupables : pairing_graphe_injectif > 150 s et
+NN_est_infini_ensemble > 140 s, re-dérivés à chaque appel.
+RÈGLE ADOPTÉE : un gros lemme CLOS et déjà testé ailleurs est porté en
+HYPOTHÈSE HONNÊTE dans les briques intermédiaires, et déchargé UNE SEULE
+FOIS dans le théorème final (le seul endroit où l'on paie son prix). C'est le
+patron habituel du projet appliqué à la performance, sans rien changer à la
+soundness : le théorème final a exactement les mêmes hypothèses qu'avant.
+MESURES : eq_DD_D 164 s → 1.4 s ; d_infini > 140 s → 0.9 s ; temoin_frame
+> 600 s (tué) → 1.4 s, test vert en 6 s. h1_decharge (marqué @pytest.mark.slow)
+paie Lemme 1 + Lemme 2 + ℕ-infini : à lancer seul, machine libre.
