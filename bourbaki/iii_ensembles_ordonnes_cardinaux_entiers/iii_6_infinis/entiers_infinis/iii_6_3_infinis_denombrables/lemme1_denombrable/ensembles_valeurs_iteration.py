@@ -86,6 +86,8 @@ def _u_val_dans_E(vu, ve, t, h_incl, h_dom, preuve_t_in):
     return _cut(preuve_t_in, appartient(t, ve), vdc)        # u(t)∈E
 
 
+# @livre Ch.III §6.2 Ex.1 | E III.47 L.7-12 | PDF p.150  (« on a f(n)∈E ; f est
+#   par suite une application de ℕ dans E » — la moitié « valeurs dans E »)
 def valeurs_dans_E(u, x0, e, g="gcap", zname="zcl", yname="ycl", n="nitv"):
     """🎯 K6c : {corps, x0∈E, u⊂E×E, dom u=E} ⊢ (∀n)(n∈ℕ ⇒ g(n)∈E)  [4 hyps]."""
     vu, vx0, ve, vg, S_c, h_x0, h_incl, h_dom, eq0, eq_succ = _contexte(
@@ -129,6 +131,8 @@ def valeurs_dans_E(u, x0, e, g="gcap", zname="zcl", yname="ycl", n="nitv"):
     return res
 
 
+# @livre Ch.III §6.2 Ex.1 | E III.47 L.7-12 | PDF p.150  (« f(0) = a et
+#   f(n+1) = g(f(n)) pour tout entier n » — l'équation de l'exemple, déclampée)
 def equation_declampee(u, x0, e, g="gcap", zname="zcl", yname="ycl", n="nitv"):
     """🎯 K6c : {corps, x0∈E, u⊂E×E, dom u=E}
        ⊢ (∀n)( n∈ℕ ⇒ valeur(g, succ n) = valeur(u, valeur(g, n)) )   [4 hyps].
