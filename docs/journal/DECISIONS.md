@@ -379,3 +379,12 @@ Hérédité sous HR = (∀y∈seg z)P(y) et z∈les deux doms :
     = vh(q|seg z) = q(z). ✓
 Écriture : R2'a d'abord (fichier rec_veritable/ensembles_restrictions_egales.py,
 briques (i)-(iv)), puis R2'b+induction (ensembles_unicite_essai_rec.py).
+
+## 2026-08-22 10h30 — R2'a : AXIOME_RESTRICTION est z-ARBITRAIRE (bonne nouvelle)
+(∀F)(∀X)(∀z)(z∈f|X ⇔ (∃p)(∃q)(z=(p,q) ∧ p∈X ∧ (p,q)∈F)) — l'axiome (l.970
+abrege, dans les 22) caractérise un z arbitraire, PAS seulement les couples
+(contrairement à l'axiome de h qui bloque la trichotomie, R3). Liants p/q.
+Toutes les briques R2'a en découlent : (i) dom(f|X) = dom f ∩ X (par AXIOME_
+DOM + l'axiome ci-dessus), (ii) l'inclusion f|X ⊂ produit (idem), (iii) les
+valeurs (valeur_caracterisation), (iv) graphe_egal_par_valeurs. Écriture de
+rec_veritable/ensembles_restrictions_egales.py au prochain tick.
