@@ -516,3 +516,24 @@ par seg_inclus + {y}⊂seg x) ; (P4-équation sur la réunion) = valeur_union +
 Dfam_real/_inst_Dfam_real de c60_realisation, S8-légal).
 PROCHAIN TICK : lire c60_realisation (Dfam_real, l'axiome S8, ambiant) +
 chercher composition de restrictions ((p|A)|B = p|B si B⊂A ou p|A∩B).
+
+## 2026-08-22 11h45 — R4' COMPLET + design R5'-coïncidence SANS wlog
+R4'b composition_restrictions (207d435) + R4'a restriction_essai_rec/
+dom_essai_monotone (d1a06cc) : 19 tests rec_veritable verts, tout premier-coup.
+DESIGN R5'-COÏNCIDENCE (l'écueil wlog résolu) : pour p essai-en-y, q essai-en-
+y', a∈dom p∩dom q : descendre LES DEUX au point commun — a∈dom p=dom_essai(y)
+donc restriction_essai_rec donne p|dom_essai(a) essai-EN-a (idem q) ; R2'-
+unicité (unicite_essai_rec) au point a donne p|dom_essai(a) = q|dom_essai(a) ;
+puis p(a) = (p|dom_essai(a))(a) [restriction_valeur, a∈dom_essai(a) car
+a∈{a}⊂dom_essai(a) — PETIT LEMME point_dans_dom_essai à écrire : S2+réunion]
+= (q|…)(a) = q(a). Besoins R2' : a∈E (de a∈dom_essai(y)⊂E, dom_essai_inclus_E
+sous y∈E — y∈seg(x)⊂E dans la famille ✓) + graphes des restrictions
+(restriction_est_graphe CLOS ✓). AUCUNE trichotomie, AUCUN wlog.
+PROCHAIN TICK — R5'a : (1) point_dans_dom_essai ⊢CLOS x∈dom_essai(G,e,x)
+(reflexivite+singleton_membre arriere+S2/S3+_instance_reunion arriere) ;
+(2) coincidence_essais_rec {bo, essai p en y, essai q en y', a∈dom p… reformulé
+a∈dom_essai(y), a∈dom_essai(y'), y∈E?…} ⊢ p(a)=q(a) — assembler descente ×2 +
+R2' + valeur ×2. PUIS R5'b la famille S8 (patron axiome_Dfam_real/theorie_
+Dfam_real de c60_realisation À LIRE avant), P3-domaine, P4-équation, ⋃D
+essai-sur-seg, R3' → hérédité de couvert_essai_rec ; R6' couverture totale
+(couverture_transfinie) ; R7' capstone ∃!f.
