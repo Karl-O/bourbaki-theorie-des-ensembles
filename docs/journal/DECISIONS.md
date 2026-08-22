@@ -189,3 +189,17 @@ par le passage sup (∀n n≤a → ℵ₀≤a, arithmétique infinie absente).
 CIBLE MINIMALE pour H1 (suffit) : {est_infini(Card E)} ⊢ (∃D)(D⊂E ∧ Eq(D,ℕ))
 — H1 se décharge SOUS Inf par restructuration légale (assume Inf ; L1 ; cut ;
 loi_deduction), donc L1 conditionnel à l'infinité suffit.
+
+## 2026-08-22 09h40 — Trichotomie (th.3) : SOUS RÉSIDU residu_univ_app
+Précision d'audit : la trichotomie des bons ordres n'est PROUVÉE que sous
+{bo(R,E), bo(Rp,F), residu_univ_app} (trichotomie_ordinaux_canon_prouve,
+assemblage l.185). Le résidu structurel est PRÉCISÉMENT rapporté :
+  #8  est_segment(image(φ_grand, S_petit), R', F) — « l'image d'un segment
+      par un isomorphisme est un segment » ;
+  #13 une inclusion de graphe du chevauchement des isos (Lemme 1 §III.2).
+Ces deux briques MANQUENT (pas d'impossibilité structurelle — des lemmes
+segment/iso à construire). ROUTE L1 ACTUALISÉE : attaquer #8 puis #13 pour
+clore la trichotomie, PUIS L1a-d (Zermelo clos + comparaison + segments).
+Alternative en réserve : construction directe de D par itération C63
+(E III.47 Exemple 1 — vérifier l'état de C63 dans le dépôt si #8/#13
+résistent).
