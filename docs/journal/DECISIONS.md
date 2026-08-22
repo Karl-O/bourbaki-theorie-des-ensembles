@@ -537,3 +537,24 @@ R2' + valeur ×2. PUIS R5'b la famille S8 (patron axiome_Dfam_real/theorie_
 Dfam_real de c60_realisation À LIRE avant), P3-domaine, P4-équation, ⋃D
 essai-sur-seg, R3' → hérédité de couvert_essai_rec ; R6' couverture totale
 (couverture_transfinie) ; R7' capstone ∃!f.
+
+## 2026-08-22 12h35 — 🏆🏆 R5'-FINAL + R6' CLOS : LA COUVERTURE TOTALE
+heredite_rec + couverture_totale_rec {bo, regle_dans_V} ⊢ (∀x∈E)(∃p ambiant)
+est_essai_rec(p,x) — 29 tests rec_veritable verts, TOUT premier-coup sauf
+U4 (leçon 13). Le chantier vraie-récursion aura pris ~20 ticks : R1' prédicat,
+R2' unicité (6 ticks), R3' extension (3), R4' descente (2), R5' famille/
+réunion (5), hérédité+couverture (2). Techniques nouvelles consignées :
+garde-domaine C59, descente bilatérale sans wlog, terme-porteur-du-graphe,
+α-pont ytf/yaa entre l'HR C59 et l'antécédent des U-lemmes, règle bornée
+regle_dans_V instanciée au terme ⋃D.
+RESTE R7' (capstone ∃!f global) : famille GLOBALE Dglob:={p∈𝔓(E×V)|∃y∈E
+essai_rec(p,y)} (S8 analogue à Dfam_rec avec E au lieu de seg x — écrire
+famille_globale_rec), f:=⋃Dglob ; dom f=E (⊆ : dom p=dom_essai(y)⊂E
+[dom_essai_inclus_E {y∈E}] ; ⊇ : couverture_totale_rec fournit l'essai de
+chaque x, x∈dom_essai(x) [point_dans]) ; compat globale (coincidence_essais_rec
+— a∈E direct cette fois) ; équation de f (analogue U4 : f(z)=paa(z)=
+vh(paa|seg z)=vh(f|seg z), la restriction-coïncidence avec seg z⊂dom f=E par
+seg⊂E [axiome-segment]) ; UNICITÉ de f (analogue R2'-sur-E : deux solutions
+globales coïncident par C59 sur P(z):=f(z)=g(z) SANS garde — les doms sont E) ;
+puis (∃!f) formulé. ~3-4 ticks. PUIS R8' ℕ-itération → K6-K7 → D1 → L1 → H1
+→ H2 → a²=a 🏆 CIBLE 2.
