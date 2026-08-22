@@ -41,6 +41,8 @@ Eq(m, D⊔{∅}).
 """
 from __future__ import annotations
 
+from functools import lru_cache
+
 from bourbaki.i_description_mathematique_formelle.i_1_termes_relations.outil_formule import (
     Terme, var, egal, et, non, impl, existe, pourtout, appartient, inclus,
 )
@@ -398,6 +400,7 @@ def _k_inf_strict_m_t(m_term, k_term):
 #  🎯 PROPOSITION 2 (E.III.5) — predecesseur_fini_universel
 # ════════════════════════════════════════════════════════════════════════════
 # @livre Ch.III §4.2 Demo.2 | E III.31 L.33-43 | PDF p.134
+@lru_cache(maxsize=None)  # pur : Theoreme immuable, args hashables
 def predecesseur_fini_universel_preuve(m="mpred", k="kpred", x0="x0pred"):
     """🎯🎯 ⊢ predecesseur_fini_universel().   (THÉORÈME CLOS, 0 hyp.)
 

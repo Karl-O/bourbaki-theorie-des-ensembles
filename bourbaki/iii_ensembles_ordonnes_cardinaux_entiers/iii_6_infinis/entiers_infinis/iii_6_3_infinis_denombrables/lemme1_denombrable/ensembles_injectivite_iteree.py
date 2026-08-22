@@ -18,6 +18,8 @@ theorie_ensembles() INCHANGÉE (22).  Noyau INTACT.
 """
 from __future__ import annotations
 
+from functools import lru_cache
+
 from bourbaki.i_description_mathematique_formelle.i_1_termes_relations.outil_formule import (
     Terme, var, egal, et, impl, non, appartient, pourtout, inclus,
 )
@@ -54,6 +56,7 @@ def x0_hors_image(u, x0, e, t="thi"):
                             non(egal(E.valeur(vu, vt), vx0))))
 
 
+@lru_cache(maxsize=None)  # pur : Theoreme immuable, args hashables
 def g_succ_evite_x0(u, x0, e, g="gcap", n="nitv"):
     """{corps, x0∈E, u⊂E×E, dom u=E, hors} ⊢ (∀n∈ℕ)(¬(g(succ n)=x0))  [5 hyps].
 
@@ -86,6 +89,7 @@ def g_succ_evite_x0(u, x0, e, g="gcap", n="nitv"):
     return res
 
 
+@lru_cache(maxsize=None)  # pur : Theoreme immuable, args hashables
 def succ_simplification(u, x0, e, g="gcap", m="mitv", n="nitv"):
     """{corps, x0∈E, u⊂E×E, dom u=E, injective_dans(u,E)} ⊢
        (∀m)(∀n)( (m∈ℕ ∧ n∈ℕ ∧ g(succ m)=g(succ n)) ⇒ g(m)=g(n) )   [5 hyps].

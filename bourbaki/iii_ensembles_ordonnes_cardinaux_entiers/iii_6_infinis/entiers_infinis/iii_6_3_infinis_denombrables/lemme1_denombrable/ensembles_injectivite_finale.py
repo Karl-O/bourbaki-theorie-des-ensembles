@@ -19,6 +19,8 @@ theorie_ensembles() INCHANGÉE (22).  Noyau INTACT.
 """
 from __future__ import annotations
 
+from functools import lru_cache
+
 from bourbaki.i_description_mathematique_formelle.i_1_termes_relations.outil_formule import (
     Terme, var, egal, et, impl, non, appartient, pourtout,
 )
@@ -85,6 +87,7 @@ def _fini_k(b_eq, card_k, fini_m, vm, vkp):
     return N.modus_ponens(fini_succk, N.modus_ponens(card_k, fsif))
 
 
+@lru_cache(maxsize=None)  # pur : Theoreme immuable, args hashables
 def injectivite_iteree(u, x0, e, g="gcap", m="mitv", n="nitv",
                        zname="zcl", yname="ycl"):
     """🎯 K6d : {corps, x0∈E, u⊂E×E, dom u=E, hors, injective_dans(u,E)} ⊢

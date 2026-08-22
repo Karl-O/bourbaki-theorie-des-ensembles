@@ -19,6 +19,8 @@ theorie_ensembles() INCHANGÉE (22).  Noyau INTACT.
 """
 from __future__ import annotations
 
+from functools import lru_cache
+
 from bourbaki.i_description_mathematique_formelle.i_1_termes_relations.outil_formule import (
     Terme, var, egal, et, impl, appartient, pourtout, inclus,
 )
@@ -88,6 +90,7 @@ def _u_val_dans_E(vu, ve, t, h_incl, h_dom, preuve_t_in):
 
 # @livre Ch.III §6.2 Ex.1 | E III.47 L.7-12 | PDF p.150  (« on a f(n)∈E ; f est
 #   par suite une application de ℕ dans E » — la moitié « valeurs dans E »)
+@lru_cache(maxsize=None)  # pur : Theoreme immuable, args Termes/str hashables
 def valeurs_dans_E(u, x0, e, g="gcap", zname="zcl", yname="ycl", n="nitv"):
     """🎯 K6c : {corps, x0∈E, u⊂E×E, dom u=E} ⊢ (∀n)(n∈ℕ ⇒ g(n)∈E)  [4 hyps]."""
     vu, vx0, ve, vg, S_c, h_x0, h_incl, h_dom, eq0, eq_succ = _contexte(
@@ -133,6 +136,7 @@ def valeurs_dans_E(u, x0, e, g="gcap", zname="zcl", yname="ycl", n="nitv"):
 
 # @livre Ch.III §6.2 Ex.1 | E III.47 L.7-12 | PDF p.150  (« f(0) = a et
 #   f(n+1) = g(f(n)) pour tout entier n » — l'équation de l'exemple, déclampée)
+@lru_cache(maxsize=None)  # pur : Theoreme immuable, args Termes/str hashables
 def equation_declampee(u, x0, e, g="gcap", zname="zcl", yname="ycl", n="nitv"):
     """🎯 K6c : {corps, x0∈E, u⊂E×E, dom u=E}
        ⊢ (∀n)( n∈ℕ ⇒ valeur(g, succ n) = valeur(u, valeur(g, n)) )   [4 hyps].

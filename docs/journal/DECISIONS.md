@@ -769,3 +769,13 @@ l'assemblage (instanciation K6 + décharges + éliminations gcap puis h) —
 test chaîne complète en cours. Si >10 min : mémoïsation des fonctions pures
 (pfu_preuve, valeurs_dans_E, equation_declampee, injectivite_iteree —
 Theoreme immuable, Termes hashables, AUCUNE modification du noyau).
+
+## 2026-08-22 18h30 — PERF : mémoïsation des théorèmes purs (mesurée)
+lru_cache(maxsize=None) sur 6 bâtisseurs PURS (Theoreme immuable, args
+Termes/str hashables ; noyau INTOUCHÉ, theorie==22) : valeurs_dans_E,
+equation_declampee, g_succ_evite_x0, succ_simplification, injectivite_iteree,
+predecesseur_fini_universel_preuve. AVANT : test_lemme1 seul = 561.9 s
+(+ suite rapide ≈ 13 s → ~575 s). APRÈS : suite dedekind COMPLÈTE (7 tests
+dont lemme_1) = 418.9 s. Gain ≈ 28 %, marge restaurée sous le timeout 600 s
+pour les tests H (qui empilent sur la chaîne). Jamais de cache sur les
+fonctions à paramètre callable (S, P — lambdas non hashables).
