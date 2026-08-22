@@ -34,10 +34,19 @@ from bourbaki.i_description_mathematique_formelle.i_2_theoremes.noyau import noy
 from bourbaki.ii_theorie_des_ensembles.ii_1_relations_collectivisantes import ensembles_abrege as E
 
 from bourbaki.i_description_mathematique_formelle.i_2_theoremes.tactiques.tactiques_abrege2 import (
-    conjonction_elim_gauche, conjonction_elim_droite, equivalence_avant, instancie,
+    conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
+    equivalence_avant, equivalence_arriere, instancie, cas,
+)
+from bourbaki.i_description_mathematique_formelle.i_4_theories_quantifiees.i_4_3_tactiques_abrege_quantif import (
+    alpha_pour_tout,
 )
 from bourbaki.i_description_mathematique_formelle.i_5_theories_egalitaires.i_5_2_tactiques_abrege_egalite import (
     symetrie, composer_egalites, congruence_terme,
+)
+from bourbaki.ii_theorie_des_ensembles.ii_2_couples.ii_2_1_definition_couples.ensembles_couples import singleton_membre
+from bourbaki.ii_theorie_des_ensembles.ii_1_relations_collectivisantes.ensembles_theoremes import _instance_reunion
+from bourbaki.ii_theorie_des_ensembles.ii_3_correspondances.ii_3_4_fonctions.ensembles_extensionnalite import (
+    graphe_egal_par_valeurs,
 )
 from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_2_bien_ordonnes.bon_ordre.recurrence_transfinie.ensembles_c60_existence_close import dom_essai
 from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_2_bien_ordonnes.bon_ordre.recurrence_transfinie.ensembles_recursion_transfinie_existence import (
@@ -179,5 +188,92 @@ def couverture_unicite(vh, p="pre", q="qre", G="Gsr", e="Esr", x="xsr"):
     return _cut(her, heredite_couverture(couvert, G, ve, "x0tf", "ytf"), cov)
 
 
+def dom_essai_inclus_E(G="Gsr", e="Esr", x="xsr", u="ude"):
+    """{ x∈E } ⊢ dom_essai(G,E,x) ⊂ E.
+
+    dom_essai(x) = seg(x)∪{x} : u∈seg(x) donne u∈E par l'axiome-segment
+    (conjoint gauche-gauche) ; u∈{x} donne u=x puis u∈E par Leibniz depuis
+    l'hypothèse x∈E.  UNE hypothèse honnête."""
+    vG, ve, vx, vu = _t(G), _t(e), _t(x), var(u)
+    segx = E.segment_extremite(vG, ve, vx)
+    singx = E.singleton(vx)
+    domx = dom_essai(vG, ve, vx)
+
+    h_xE = N.assume(appartient(vx, ve))                     # x∈E        [HONNÊTE]
+    h_u = N.assume(appartient(vu, domx))
+    disj = N.modus_ponens(h_u, equivalence_avant(
+        _instance_reunion(segx, singx, vu)))                # u∈seg(x) ∨ u∈{x}
+
+    # CAS A : u∈seg(x) ⇒ u∈E  (axiome-segment)
+    h_us = N.assume(appartient(vu, segx))
+    ax_seg = instancie(N.axiome(E.theorie_segment_extremite(),
+                                E.axiome_segment_extremite()), vG)
+    body = N.modus_ponens(h_us, equivalence_avant(
+        instancie(instancie(instancie(ax_seg, ve), vx), vu)))
+    impA = N.loi_deduction(appartient(vu, segx),
+        conjonction_elim_gauche(conjonction_elim_gauche(body)))
+
+    # CAS B : u∈{x} ⇒ u=x ⇒ u∈E  (Leibniz depuis x∈E)
+    h_usx = N.assume(appartient(vu, singx))
+    u_eq_x = N.modus_ponens(h_usx, equivalence_avant(singleton_membre(vu, vx)))
+    u_E_B = N.modus_ponens(h_xE, equivalence_arriere(
+        N.modus_ponens(u_eq_x, N.s6(vu, vx, "wue", appartient(var("wue"), ve)))))
+    impB = N.loi_deduction(appartient(vu, singx), u_E_B)
+
+    imp_u = N.loi_deduction(appartient(vu, domx), cas(disj, impA, impB))
+    gen = N.generalisation(u, imp_u)
+    return N.modus_ponens(gen, equivalence_avant(alpha_pour_tout(
+        u, "z", impl(appartient(vu, domx), appartient(vu, ve)))))  # domx ⊂ E
+
+
+# @livre Ch.III §2.2 Demo.60 | E III.18 L.34-39 | PDF p.121  (démonstration de C60 :
+#   l'unicité tacite du recollement — deux essais récursifs au même point coïncident)
+def unicite_essai_rec(vh, p="pre", q="qre", G="Gsr", e="Esr", x="xsr"):
+    """🎯 LE LEMME R2' :
+    { est_bien_ordonne(R,E),  est_essai_rec(p,vh,G,E,x),  est_essai_rec(q,vh,G,E,x),
+      x∈E,  est_un_graphe(p),  est_un_graphe(q) }  ⊢  p = q     [6 hyps honnêtes].
+
+    Deux essais RÉCURSIFS au même point sont LE MÊME graphe.  couverture_unicite
+    (l'induction C59) donne l'égalité des valeurs sur E∩dom_essai(x) ;
+    dom p = dom_essai(x) ⊂ E (sous x∈E) la transporte sur TOUT dom p ;
+    graphe_egal_par_valeurs conclut.  Les hypothèses est_un_graphe viendront des
+    essais bien-formés (R6') — ici honnêtes, jamais postulées."""
+    vp, vq, vG, ve, vx = _t(p), _t(q), _t(G), _t(e), _t(x)
+    domx = dom_essai(vG, ve, vx)
+
+    h_ep = N.assume(est_essai_rec(vp, vh, vG, ve, vx))      # essai p    [HONNÊTE]
+    h_eq = N.assume(est_essai_rec(vq, vh, vG, ve, vx))      # essai q    [HONNÊTE]
+    h_gp = N.assume(E.est_un_graphe(vp))                    # p graphe   [HONNÊTE]
+    h_gq = N.assume(E.est_un_graphe(vq))                    # q graphe   [HONNÊTE]
+    func_p = conjonction_elim_gauche(conjonction_elim_gauche(h_ep))
+    dom_p = conjonction_elim_droite(conjonction_elim_gauche(h_ep))
+    func_q = conjonction_elim_gauche(conjonction_elim_gauche(h_eq))
+    dom_q = conjonction_elim_droite(conjonction_elim_gauche(h_eq))
+
+    cov = couverture_unicite(vh, p, q, G, e, x)             # {bo, essais}
+    incl_E = dom_essai_inclus_E(G, e, x)                    # {x∈E} domx ⊂ E
+
+    # egalite_valeurs (lieur « x » imposé par l'extensionnalité — sans capture)
+    vt = var("x")
+    h_t = N.assume(appartient(vt, E.dom(vp)))
+    t_domx = N.modus_ponens(h_t, equivalence_avant(
+        N.modus_ponens(dom_p, N.s6(E.dom(vp), domx, "wre",
+                                   appartient(vt, var("wre"))))))      # t∈domx
+    t_E = N.modus_ponens(t_domx, instancie(incl_E, vt))                # t∈E
+    pq_t = N.modus_ponens(t_domx, N.modus_ponens(t_E, instancie(cov, vt)))
+    val_eq = N.generalisation("x", N.loi_deduction(appartient(vt, E.dom(vp)), pq_t))
+
+    # dom p = dom_essai(x) = dom q, puis les 6 prémisses gauche-associées
+    dom_eq = composer_egalites(dom_p, N.modus_ponens(dom_q, symetrie(E.dom(vq), domx)))
+    prem = conjonction_intro(conjonction_intro(conjonction_intro(conjonction_intro(
+        conjonction_intro(func_p, func_q), h_gp), h_gq), dom_eq), val_eq)
+    res = N.modus_ponens(prem, graphe_egal_par_valeurs(vp, vq))        # p = q
+
+    assert res.conclusion == egal(vp, vq), "unicite_essai_rec : conclusion ≠ p=q"
+    assert len(res.hypotheses) == 6, "unicite_essai_rec : hyps ≠ 6"
+    assert res.conclusion not in res.hypotheses, "unicite_essai_rec : VACUOUS"
+    return res
+
+
 __all__ = ["unicite_au_point", "couvert_unicite", "heredite_unicite",
-           "couverture_unicite"]
+           "couverture_unicite", "dom_essai_inclus_E", "unicite_essai_rec"]

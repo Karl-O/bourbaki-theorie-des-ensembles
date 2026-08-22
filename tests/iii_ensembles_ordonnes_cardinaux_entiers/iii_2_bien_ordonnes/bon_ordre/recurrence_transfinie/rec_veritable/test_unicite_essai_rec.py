@@ -17,7 +17,7 @@ from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_2_bien_ordonnes.bon_o
     hypothese_recurrence,
 )
 from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_2_bien_ordonnes.bon_ordre.recurrence_transfinie.rec_veritable.ensembles_unicite_essai_rec import (
-    unicite_au_point, couverture_unicite,
+    unicite_au_point, couverture_unicite, unicite_essai_rec,
 )
 
 _P, _Q = var("pre"), var("qre")
@@ -62,4 +62,19 @@ def test_couverture_unicite():
     assert est_essai_rec(_P, _vh, _G, _E, _X) in hyps
     assert est_essai_rec(_Q, _vh, _G, _E, _X) in hyps
     assert t.conclusion not in hyps
+    assert len(E.theorie_ensembles().axiomes) == 22
+
+
+def test_unicite_essai_rec():
+    """🎯 LE LEMME R2' : {bo, essai p, essai q, x∈E, graphe p, graphe q} ⊢ p=q."""
+    t = unicite_essai_rec(_vh)
+    assert t.conclusion == egal(_P, _Q)
+    hyps = list(t.hypotheses)
+    assert len(hyps) == 6
+    assert E.est_bien_ordonne(_graphe_R(_G), _E) in hyps
+    assert est_essai_rec(_P, _vh, _G, _E, _X) in hyps
+    assert est_essai_rec(_Q, _vh, _G, _E, _X) in hyps
+    assert appartient(_X, _E) in hyps
+    assert E.est_un_graphe(_P) in hyps
+    assert E.est_un_graphe(_Q) in hyps
     assert len(E.theorie_ensembles().axiomes) == 22
