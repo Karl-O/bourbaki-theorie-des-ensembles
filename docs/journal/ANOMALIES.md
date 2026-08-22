@@ -895,3 +895,17 @@ Au passage, une redondance d'HYPOTHÈSES découverte par le garde-fou du noyau :
 contient (héritage de `_lt_chain`) — la généralisation ∀q∀r∀q'∀r' était
 refusée (« 'rdf2' libre dans une hypothèse »). Absorbées via l'antécédent
 assumé (_cut ×2). Le noyau a fait exactement son travail.
+
+## 2026-08-22 — Lemme 2 §III.6.3 (E III.48) : écart de DÉMONSTRATION (énoncé identique)
+Bourbaki démontre « ℕ×ℕ est équipotent à ℕ » en construisant l'injection
+f : ℕ×ℕ → ℕ par ENTRELACEMENT des développements dyadiques (φ : ℕ → I^ℕ via
+n = Σ ε_k 2^(r-k-1), III p.41 ; injectivité par la prop. 8 de III p.40 ;
+f(n,n') = l'entier s dont la suite dyadique entrelace celles de n et n').
+Le dépôt (ensembles_denombrable_graphe_pairing.lemme_deux_NN) utilise le
+COUPLAGE (m,n) ↦ 2^m·3^n, dont l'injectivité est dérivée élémentairement :
+2-valuation unique (deux_valuation_unique, C61) + injectivité de n↦3^n
+(trois_puiss_injectif, C61) sur les briques closes §III.5 (parité, division,
+distributions succ). Le développement en base 2 (§III.5.7) reste un
+chantier-livre séparé (énoncés posés, démos non dérivées).
+L'ÉNONCÉ certifié est IDENTIQUE à celui du livre : Eq(ℕ×ℕ, ℕ). Le noyau
+garantit la soundness ; l'écart ne porte que sur le chemin de preuve.

@@ -145,3 +145,16 @@ LEÇONS de capture (cumul de la nuit) :
      termes ; ne jamais gen sur Z (τ de cardinal), F/G (∃ bij), w (trou).
 RESTE pour L2 : W6 graphe est_injection_de(F, N×N, N) (lire la repr. N de la
 direction A + pr1/pr2 + pont ∈N/Fini), W7 Eq par Cantor-Bernstein.
+
+## 2026-08-22 08h30 — 🎉🎉🎉 LEMME 2 CLOS : Eq(ℕ×ℕ, ℕ) (3 passed, 2 h 53)
+La route L2 est TERMINÉE : W1-W7 tous clos. Chronologie des validations :
+W1+W2 (44 min), W3a (7 s), W3b (3 min), ops commut/assoc (4 s),
+W3 deux_valuation_unique (38 min), W4 trois_puiss_injectif (34 min),
+W5 pairing_injectif (1 h 30), W6+W7 graphe+Cantor-Bernstein (2 h 53).
+Leçons 11/11bis/12 (capture C54) : la variable du terme C54 doit être
+FRAÎCHE si le terme contient des τ à lieurs x/y (pr1/pr2) ; y reste au
+DÉFAUT (valeur_caracterisation le code en dur) ; graphe_terme_domaine
+patché (α-récupération du lieur si l'axiome DOM renomme — additif,
+non-régression cantor 14 passed).
+RESTE pour CIBLE 2 : L1 (tout infini ⊃ dénombrable), décharge H1/H2 Zorn,
+a²=a 0-hyp + littéral.

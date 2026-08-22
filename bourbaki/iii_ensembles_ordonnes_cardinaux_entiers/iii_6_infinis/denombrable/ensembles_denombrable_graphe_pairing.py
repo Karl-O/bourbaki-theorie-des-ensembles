@@ -77,8 +77,13 @@ def _NN():
 
 
 def _T():
-    """Le terme de couplage EN LA VARIABLE « x » (convention C54)."""
-    return pairing_terme(E.pr1(var("x")), E.pr2(var("x")))
+    """Le terme de couplage en la variable FRAÎCHE « zgp ».
+
+    ⚠️ PAS « x » : pr₁/pr₂ sont des τ à lieurs internes x/y — la convention C54
+    par défaut CAPTURERAIT la variable du terme (leçon n°11).  Tous les lemmes
+    C54 sont appelés avec x="zgp" (y garde son défaut « y » :
+    valeur_caracterisation a « y » codé en dur — leçon n°11bis)."""
+    return pairing_terme(E.pr1(var("zgp")), E.pr2(var("zgp")))
 
 
 def pairing_graphe():
@@ -101,13 +106,13 @@ def _NN_de_fini(tz, fini_thm):
 def pairing_graphe_fonctionnel():
     """⊢ F fonctionnel   (C54)."""
     NN = _NN()
-    return graphe_terme_fonctionnel(E.produit(NN, NN), _T())
+    return graphe_terme_fonctionnel(E.produit(NN, NN), _T(), x="zgp")
 
 
 def pairing_graphe_domaine():
     """⊢ dom F = ℕ×ℕ   (C54)."""
     NN = _NN()
-    return graphe_terme_domaine(E.produit(NN, NN), _T())
+    return graphe_terme_domaine(E.produit(NN, NN), _T(), x="zgp")
 
 
 # ── (c) : injectif sur ℕ×ℕ ────────────────────────────────────────────────────
@@ -130,8 +135,8 @@ def pairing_graphe_injectif():
     h_up = eld(elg(h))
     h_eq = eld(h)
 
-    v_u = _cut(graphe_terme_valeur(P, _T(), "ug"), appartient(vu, P), h_u)
-    v_up = _cut(graphe_terme_valeur(P, _T(), "upg"), appartient(vup, P), h_up)
+    v_u = _cut(graphe_terme_valeur(P, _T(), "ug", x="zgp"), appartient(vu, P), h_u)
+    v_up = _cut(graphe_terme_valeur(P, _T(), "upg", x="zgp"), appartient(vup, P), h_up)
     eq_T = composer_egalites(composer_egalites(
         N.modus_ponens(v_u, symetrie(E.valeur(F, vu), Tu)), h_eq), v_up)
     #   2^(pr₁u)·3^(pr₂u) = 2^(pr₁u')·3^(pr₂u')
@@ -199,7 +204,7 @@ def pairing_graphe_image_incluse():
     vtg = var("tg")
     corps = et(appartient(vtg, P), appartient(E.couple(vtg, vz), F))
 
-    mem = membre_graphe_terme(P, _T(), "tg", "z", "x", "y")
+    mem = membre_graphe_terme(P, _T(), "tg", "z", "zgp", "y")
     hb = N.assume(corps)
     t_inP = elg(hb)
     cond = N.modus_ponens(eld(hb), equivalence_avant(mem))

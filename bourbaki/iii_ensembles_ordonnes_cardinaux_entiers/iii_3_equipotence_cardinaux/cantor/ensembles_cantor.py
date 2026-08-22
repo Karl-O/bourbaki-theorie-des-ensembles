@@ -114,6 +114,14 @@ def graphe_terme_domaine(a, t, x="x", y="y", z="z"):
     # caractérisation du domaine : z∈dom F ⇔ (∃y)((z,y)∈F)
     ax_dom = N.axiome(E.theorie_ensembles(), E.AXIOME_DOM)
     dom_car = instancie(instancie(ax_dom, F), vz)       # z∈dom F ⇔ (∃y)((z,y)∈F)
+    #   si F contient un lieur homonyme (τ internes de A ou T), l'instanciation
+    #   α-renomme le ∃ : on récupère le lieur RÉEL et on le renomme en `y`
+    #   (patron singleton_graphe_image_incluse ; additif, no-op sinon)
+    rhs_ex = dom_car.conclusion.sous[0].sous[0].sous[0].sous[1]
+    if rhs_ex.tag == "exists" and rhs_ex.lieur != y:
+        inner_frais = appartient(E.couple(vz, var(rhs_ex.lieur)), F)
+        dom_car = equivalence_transitivite(
+            dom_car, alpha_existe(rhs_ex.lieur, y, inner_frais))
     # (z,y)∈F ⇔ (z∈A et y=T[z])   (membre_graphe_terme, coordonnée libre z,y ;
     # nom interne du corps « yb » ≠ y pour ne pas collisionner avec le ∃y du domaine)
     mem = membre_graphe_terme(vA, t, z, y, x, "yb")     # ((z,y)∈F) ⇔ (z∈A et y=T[z])
