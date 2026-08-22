@@ -11,11 +11,12 @@
 | E III.29 | L.25-26 | 3.5 | Demo.12 | `round_trip_rho_chi` | `_crux.py` |
 | E III.29 | L.27-27 | 3.5 | Demo.- | `card_parties_egale_deux_exp` | `_bijection.py` |
 | E III.30 | L.20-20 | 3.6 | Th.2 | `cantor_deux_exp` | `_cantor.py` |
+| E III.30 | L.20-21 | 3.6 | Th.2 | `theoreme_deux_cantor` | `_cantor.py` |
 | E III.30 | L.21-26 | 3.6 | Demo.2 | `cantor_deux_exp` | `_cantor.py` |
 
 ## Bilan cumulé (ce dossier + descendants)
 
-- Notions calées : **5**
+- Notions calées : **6**
 - Fichiers à caler : **0**
 - Marqueurs non conformes : **0**
 - Livre **E III** : pages couvertes 29-30 — aucune page manquante dans l'intervalle

@@ -260,6 +260,7 @@ def _deballer(h):
             elg(elg(A2)), eld(elg(A2)), eld(A2))
 
 
+# @livre Ch.III §6.3 Demo.Lem2 | E III.48 L.4-16 | PDF p.151  (unicité 2-adique — brique de l'injectivité du couplage)
 def deux_valuation_unique(m="mdv", k="kdv"):
     """🎯 ⊢ Fini m ⇒ (∀mp)(∀u)(∀up)( (Fini mp ∧ Fini u ∧ Fini up ∧ impair u ∧
         impair up ∧ 2^m·u = 2^mp·up) ⇒ (m = mp ∧ u = up) ).

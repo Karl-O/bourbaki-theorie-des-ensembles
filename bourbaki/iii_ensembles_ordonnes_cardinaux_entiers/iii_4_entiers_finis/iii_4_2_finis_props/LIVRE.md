@@ -11,6 +11,7 @@
 | E III.30 | L.20-20 | 3.6 | Th.2 | `cantor_strict_cardinal` | `ensembles_chap3_props_restantes.py` |
 | E III.30 | L.20-20 | 3.6 | Th.2 | `cantor_deux_exp` | `ensembles_chap3_props_restantes.py` |
 | E III.30 | L.21-26 | 3.6 | Demo.2 | `cantor_strict_cardinal` | `ensembles_chap3_props_restantes.py` |
+| E III.31 | L.29-32 | 4.2 | Prop.2 | `prop2_fini_downward` | `ensembles_prop2_fini_downward.py` |
 | E III.31 | L.33-33 | 4.2 | Cor.1 | `cor1_partie_finie_est_finie_conditionnel` | `ensembles_finis_props.py` |
 | E III.31 | L.35-41 | 4.2 | Cor.2 | `cor2_partie_stricte_card_strict_cond` | `ensembles_finis_props2.py` |
 | E III.32 | L.1-3 | 4.2 | Cor.3 | `cor3_image_finie_cond` | `ensembles_finis_props2.py` |
@@ -20,7 +21,7 @@
 
 ## Bilan cumulé (ce dossier + descendants)
 
-- Notions calées : **10**
+- Notions calées : **11**
 - Fichiers à caler : **0**
 - Marqueurs non conformes : **0**
 - Livre **E III** : pages couvertes 23, 30-32, 50 — **pages manquantes : 24-29, 33-49**

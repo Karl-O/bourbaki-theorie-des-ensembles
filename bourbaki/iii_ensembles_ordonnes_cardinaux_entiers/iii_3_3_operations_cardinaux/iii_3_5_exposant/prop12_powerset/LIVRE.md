@@ -14,18 +14,19 @@
 
 ## Fichiers À CALER (aucun `@livre`)
 
+- `ensembles_prop12_bijection.py`
 - `ensembles_prop12_extensionnalite.py`
 
 ## Sous-dossiers (cumul)
 
 | Dossier | Notions | À caler | Non conformes | Pages livre |
 |---|---|---|---|---|
-| `prop12_card/` | 5 | 0 | 0 | E III: 29-30 |
+| `prop12_card/` | 6 | 0 | 0 | E III: 29-30 |
 
 ## Bilan cumulé (ce dossier + descendants)
 
-- Notions calées : **9**
-- Fichiers à caler : **1**
+- Notions calées : **10**
+- Fichiers à caler : **2**
 - Marqueurs non conformes : **0**
 - Livre **E III** : pages couvertes 29-30 — aucune page manquante dans l'intervalle
 

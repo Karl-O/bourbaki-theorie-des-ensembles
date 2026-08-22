@@ -74,6 +74,7 @@ def _eq_sym_t(thm, u, v):
 # ══════════════════════════════════════════════════════════════════════════════
 #  (1) commutativité au niveau des opérations :  a·b = b·a
 # ══════════════════════════════════════════════════════════════════════════════
+# @livre Ch.III §3.3 Prop.5 | E III.26 L.13-15 | PDF p.129  (commutativité aux opérations cardinales)
 def ops_produit_commutatif(a, b):
     """⊢ a·b = b·a.   (eq_produit_commute ∀-clos aux termes + Prop. 1.)"""
     va, vb = _t(a), _t(b)
@@ -88,6 +89,7 @@ def ops_produit_commutatif(a, b):
 # ══════════════════════════════════════════════════════════════════════════════
 #  (2) associativité au niveau des opérations :  (a·b)·c = a·(b·c)
 # ══════════════════════════════════════════════════════════════════════════════
+# @livre Ch.III §3.3 Prop.5 | E III.26 L.13-15 | PDF p.129  (associativité aux opérations cardinales)
 def ops_produit_associatif(a, b, c):
     """⊢ (a·b)·c = a·(b·c).   (associatif ensembliste + ponts Card intercalés.)
 

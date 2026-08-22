@@ -74,6 +74,7 @@ def pairing_injectif_cible(m="mpg", mp="mppg", n="npg", np="nppg"):
     return impl(ante, et(egal(vm, vmp), egal(vn, vnp)))
 
 
+# @livre Ch.III §6.3 Demo.Lem2 | E III.48 L.4-16 | PDF p.151  (le couplage (m,n)↦2^m·3^n est injectif)
 def pairing_injectif(m="mpg", mp="mppg", n="npg", np="nppg"):
     """🎯 ⊢ (Fini m,mp,n,np ∧ 2^m·3^n = 2^mp·3^np) ⇒ (m=mp ∧ n=np).   (W5.)"""
     vm, vmp, vn, vnp = _t(m), _t(mp), _t(n), _t(np)

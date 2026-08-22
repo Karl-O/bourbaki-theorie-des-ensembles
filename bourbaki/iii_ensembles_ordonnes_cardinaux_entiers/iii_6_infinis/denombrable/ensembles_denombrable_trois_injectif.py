@@ -240,6 +240,7 @@ def _P3(b):
     return pourtout("npv", impl(_ANTE3(b), egal(_t(b), var("npv"))))
 
 
+# @livre Ch.III §6.3 Demo.Lem2 | E III.48 L.4-16 | PDF p.151  (injectivité de n↦3^n — brique de l'injectivité du couplage)
 def trois_puiss_injectif(n="ntj", k="ktj"):
     """🎯 ⊢ Fini n ⇒ (∀np)( (Fini np ∧ 3^n = 3^np) ⇒ n = np ).   (W4, C61.)"""
     vnp = var("npv")

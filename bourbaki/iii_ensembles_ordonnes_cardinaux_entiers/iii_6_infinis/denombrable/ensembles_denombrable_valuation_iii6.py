@@ -141,6 +141,7 @@ def puissance_non_nulle_cible(base, n="npnz"):
     return impl(est_fini(vn), non(egal(exposant_cardinal_binaire(vb, vn), ZERO)))
 
 
+# @livre Ch.III §6.3 Demo.Lem2 | E III.48 L.4-16 | PDF p.151  (base^n ≠ 0 — support de la simplification)
 def puissance_non_nulle(base_inner, nn_thm, n="npnz", k="kpnz"):
     """🎯 ⊢ Fini n ⇒ ¬( base^n = 0 ),   base := Card(base_inner).
 

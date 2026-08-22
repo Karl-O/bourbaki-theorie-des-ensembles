@@ -249,6 +249,7 @@ def _e3h(vt):
 
 
 # ── (e) : ℕ×ℕ ≤ ℕ puis le LEMME 2 ────────────────────────────────────────────
+# @livre Ch.III §6.3 Demo.Lem2 | E III.48 L.4-16 | PDF p.151  (N×N ≤ N — la direction dure du Lemme 2)
 def NN_carre_inf_egal_NN():
     """🎯 ⊢ ℕ×ℕ ≤ ℕ.   (est_injection_de(F, ℕ×ℕ, ℕ) + S5, patron inf_egal_parties.)"""
     NN = _NN()

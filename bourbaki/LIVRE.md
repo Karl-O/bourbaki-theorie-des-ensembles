@@ -9,13 +9,13 @@
 |---|---|---|---|---|
 | `i_description_mathematique_formelle/` | 302 | 0 | 0 | E I: 14-46 ; E II: 2 |
 | `ii_theorie_des_ensembles/` | 727 | 0 | 0 | E II: 1-48 ; E III: 2, 4-5, 25, 27 ; E IV: 2 ; E R: 3-27, 29 |
-| `iii_ensembles_ordonnes_cardinaux_entiers/` | 1025 | 1 | 0 | E II: 10, 32, 34-36 ; E III: 2-3, 5-66, 87 ; E R: 7, 13, 22, 26-28, 30-32 |
+| `iii_ensembles_ordonnes_cardinaux_entiers/` | 1036 | 2 | 0 | E II: 10, 32, 34-36 ; E III: 2-3, 5-66, 87 ; E R: 7, 13, 22, 26-28, 30-32 |
 | `iv_structures/` | 187 | 0 | 0 | E II: 18, 30 ; E III: 23 ; E IV: 1-26 |
 
 ## Bilan cumulé (ce dossier + descendants)
 
-- Notions calées : **2241**
-- Fichiers à caler : **1**
+- Notions calées : **2252**
+- Fichiers à caler : **2**
 - Marqueurs non conformes : **0**
 - Livre **E I** : pages couvertes 14-46 — aucune page manquante dans l'intervalle
 - Livre **E II** : pages couvertes 1-48 — aucune page manquante dans l'intervalle
