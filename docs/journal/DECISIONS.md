@@ -634,3 +634,27 @@ PLAN R8' (3-4 ticks) — rec_veritable/couverture_rec/capstone/ est PLEIN ?
     → =S(f(n)) ; CIBLE C63-VRAIE : (∃f)(f(0)=a ∧ (∀n∈ℕ)(f(succ n)=S(f(n))))
     + unicité (déjà unicite_globale) — @livre Ch.III §6.2 Crit.C63
     E III.46 L.21-24 PDF p.149.
+
+## 2026-08-22 15h42 — ÉVAL-SUCC : plan précis aux VRAIS noms (tout existe)
+Briques vérifiées : h4_n_dans_seg ⊢CLOS (∀n)(Fini n ⇒ n∈seg(ℕ,succ n))
+(donnees_ordre_NN l.165) ; h2_seg_succ_intervalle ⊢CLOS (∀n)(Fini n ⇒
+seg(ℕ,succ n)=[0,n]) (l.114 ; version {n∈ℕ} : segment_succ_est_intervalle,
+pont_segment_iii5 l.163 ; termes segment_succ_NN(k)/intervalle_zero(n)) ;
+max_intervalle_vaut_n_entier {est_entier n} ⊢ M([0,n])=n (max_intervalle_iii5
+l.262 — vérifier que son M est le même terme_plus_grand(inf_egal_card,·,
+"m","x") que ma règle) ; h1_succ_dans_NN (succ n∈ℕ sous Fini) ; les gardes
+Fini se dérivent de n∈ℕ par appartenance_NN avant. NON-VIDE : pas de lemme
+membre⇒non-vide générique trouvé → dériver inline (~8 l.) : assume u=∅,
+S6 réécrit (n,g(n))∈u → ∈∅, AXIOME_VIDE instancié réfute, patron
+ex-falso-∨+S1 → ¬(u=∅).
+PREUVE valeur_succ_iteration {sol(g), n∈ℕ} ⊢ g(succ n)=S(g(n)) :
+Fini n [appartenance_NN] → succ n∈ℕ [h1] → ∈dom g [Leibniz] → éq instanciée
+→ g(succ n)=T(u), u:=g|seg(succ n) ; n∈seg(succ n) [h4+Fini] ; (n,g(n))∈g
+[valeur_dans_graphe coupures] → ∈u [_couple_restriction arriere] → u≠∅
+[inline] ; t_fac_en_non_vide(T,u,nonvide) → T(u)=S(valeur(u, M(dom u))) ;
+dom u=seg succ n [restriction_dom_sous_inclusion {seg⊂ℕ=dom g :
+seg_inclus_E+Leibniz}] ; M(dom u)=M(seg succ n)=M([0,n])=n [congruences sur
+le trou DANS S(valeur(u,·)) + h2/segment_succ_est_intervalle +
+max_intervalle_vaut_n_entier{est_entier n : pont Fini→est_entier à vérifier}] ;
+valeur(u,n)=g(n) [restriction_valeur coupures] ; réécritures congruence_terme
+trou wits dans S(valeur(u, ·)) puis S(·) → chaîne → g(succ n)=S(g(n)).
