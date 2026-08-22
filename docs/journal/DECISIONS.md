@@ -606,3 +606,31 @@ factorielle_zero/succ (lire T_fac exact d'abord : comment il récupère la
 « dernière valeur » sans sup ? — si T_fac contourne le max par la forme
 u((n-1)-du-POINT)… non, T ne voit pas le point : LIRE factorielle_succ
 au prochain tick AVANT d'écrire).
+
+## 2026-08-22 13h10 — R8' DESIGN FINALISÉ : tout l'outillage existe
+regle_factorielle (factorielle_existence l.126) montre LA solution au max :
+prev = u(terme_plus_grand(inf_egal_card, dom u, "m", "x")) — le τ-terme du
+plus grand élément (§III.1.7, E III.46 note 2), liants m/x HORS des liants
+cardinaux (piège du 27 juil. payé) ; max_intervalle_vaut_n_entier
+(ensembles_max_intervalle_iii5) évalue M([0,n-1])=n-1. Et t_fac_en_non_vide
+(factorielle_succ l.56) est GÉNÉRIQUE : (T, u, thm_nonvide) → Γ⊢T(u)=Sval
+pour TOUTE règle de la forme τ_y((u=∅∧y=a)∨(u≠∅∧y=Sval)).
+PLAN R8' (3-4 ticks) — rec_veritable/couverture_rec/capstone/ est PLEIN ?
+(6 modules ✓ marge) — nouveau ensembles_iteration_N.py :
+(1) regle_iteration_vraie(S, a) := τ_y((u=∅∧y=a)∨(u≠∅∧y=S(u(M(Du)))))
+    avec M = terme_plus_grand(inf_egal_card, ·, "m", "x") — copie de
+    regle_factorielle en remplaçant n·prev par S(prev) ;
+(2) iteration_N_vrai := existence_solution(T_{S,a}, G_ordre_NN(),
+    ensemble_NN(), V) + coupure bo par bo_graphe_NN → {regle_dans_V(T)}
+    ⊢ (∃f)(sol(f)) — UNE hypothèse honnête ;
+(3) éval-0 : sol(f) donne f(0)=T(f|seg 0) ; segment_zero_NN_est_vide +
+    Leibniz + restriction_vide_est_vide (factorielle_zero) → T(∅) ;
+    t-en-vide (patron factorielle_zero, adapter à S-générique) → =a ;
+(4) éval-succ : (n, f(n))∈f|seg(succ n) (n<succ n → n∈seg succ n) → ≠∅ ;
+    t_fac_en_non_vide GÉNÉRIQUE → T(…)=S(valeur(f|seg succ n, M(D…))) ;
+    D(f|seg succ n)=seg succ n (restriction_dom_sous_inclusion) ;
+    M(seg succ n)=n (max_intervalle_vaut_n_entier + h2_seg_succ_intervalle
+    — VÉRIFIER les formes exactes au moment d'écrire) ; valeur-restriction
+    → =S(f(n)) ; CIBLE C63-VRAIE : (∃f)(f(0)=a ∧ (∀n∈ℕ)(f(succ n)=S(f(n))))
+    + unicité (déjà unicite_globale) — @livre Ch.III §6.2 Crit.C63
+    E III.46 L.21-24 PDF p.149.
