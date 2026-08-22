@@ -436,3 +436,24 @@ vh(q|seg z), composer p(z)=vh(p|seg z)=vh(q|seg z)=q(z) ; PUIS l'induction
 C59 (couverture_transfinie {bo, heredite}) sur P(z) := z∈dom_essai(x) ⇒
 p(z)=q(z) pour décharger l'HR — ATTENTION : l'HR de couverture_transfinie
 porte sur TOUT z∈E (vérifier la forme exacte de heredite_couverture(P)).
+
+## 2026-08-22 11h12 — 🏆 R2' CLOS EN 6 TICKS : l'unicité de la vraie récursion
+unicite_essai_rec {bo, essai p, essai q, x∈E, graphe p, graphe q} ⊢ p=q
+(commit 675ae56, 9 passed, fichier 279 l.). Chaîne complète :
+R2'a (i) restriction_dom_sous_inclusion [déjà close] + (ii) seg_transitif
+[4762f29] + (iii) restriction_valeur [déjà close] + (iv) restrictions_egales
+[36124c2] → unicite_au_point [2052054] → couverture_unicite C59 [9ac1825]
+→ dom_essai_inclus_E + graphe_egal_par_valeurs → p=q [675ae56].
+TECHNIQUES-CLÉS consignées : prédicat C59 GARDÉ par le domaine (le dégardage
+par seg_inclus_dom_essai) ; affaiblissement loi_deduction (hyps-{a}, a absent
+OK) pour le conjoint x∈E de l'hérédité ; liants x0tf/ytf imposés par
+couverture_transfinie ; l'appel unicite_au_point(z="x0tf") DIRECTEMENT au nom
+du liant avant generalisation (pas de α-détour).
+PROCHAIN — R3' (hérédité-EXISTENCE de la couverture couvert_essai_rec) :
+l'essai étendu p' := p ∪ {(x, vh(p|seg x))} pour x non couvert ; chercher
+extension_un_pas / prolongement dans c60 (grep extension\|prolonge dans
+recurrence_transfinie + c60_final l.646 heredite_couverture_realisee comme
+patron structurel) ; les briques recollement (reunion_essais_fonctionnelle,
+valeur_essai_reunion) sont DÉJÀ closes au niveau binaire — le pas p∪{(x,v)}
+est EXACTEMENT ce niveau binaire (singleton = essai trivial ? NON : le
+singleton {(x,v)} est fonctionnel/dom={x} — briques singleton à chercher).
