@@ -488,3 +488,31 @@ nouvelle, x∉seg z car seg z⊂seg x∌x… NON : x∉seg z car z∈seg x → s
 restriction_identite/restriction_totale, sinon dériver] + v:=vh(p) donc
 vh(p'|seg x)=vh(p)=v par congruence).
 ⚠️ MANQUE ENCORE : p|dom p = p (restriction identité) — grep au prochain tick.
+
+## 2026-08-22 11h34 — 🏆 R3' CLOS : le prolongement d'un pas (extension_essai_rec)
+{bo, func p, dom p=seg(x), graphe p, éq-seg} ⊢ est_essai_rec(p∪{(x,vh(p))}, x)
+(dc4b2ab, 5 hyps, 13 tests rec_veritable verts). Clé conceptuelle : v := vh(p)
+— la règle appliquée à p ENTIER, qui EST p'|seg(x) après effacement (brique 1)
+et restriction pleine. Le pas de la vraie récursion tient en ~90 l. grâce à la
+carte de réutilisation (extension_un_pas_fonctionnelle, valeur_reunion_*, doms).
+ÉTAT DU CHANTIER R' : R1' (prédicat) ✓ R2' (unicité) ✓ R3' (pas) ✓.
+RESTE POUR LA COUVERTURE (R4', le morceau famille/limite) : pour x∈E avec
+(∀y<x) couvert_essai_rec(y), construire l'essai-SUR-SEG p_seg (recollement
+⋃D des essais des y<x) puis R3' conclut couvert_essai_rec(x). Structure =
+couverture_segment_realise/Dfam_real de C60 déposé MAIS : (P2-coïncidence)
+vient de R2'-unicité (les valeurs d'essais récursifs distincts coïncident où
+les deux sont définis — ATTENTION R2' unifie des essais AU MÊME point x ; pour
+y≠y' il faut « l'essai de y restreint à seg(y'')∩… coïncide » — le VRAI
+argument : deux essais récursifs p_y, p_y' avec y'≤y : p_y|dom_essai(y') est
+un essai récursif en y' (LEMME R4'a À ÉCRIRE : la restriction d'un essai
+récursif à un dom_essai inférieur est un essai récursif — équation par
+restriction-de-restriction : (p|A)|seg z = p|seg z si seg z ⊂ A… composition
+de restrictions À CHERCHER) puis R2'-unicité en y' donne p_y|… = p_y' ✓) ;
+(P3-domaine) = réunion des dom_essai(y) pour y∈seg x = seg x (chaque y∈seg x
+est dans son propre dom_essai ⊂ seg x quand y<x : dom_essai(y)⊂dom_essai(x)
+par seg_inclus + {y}⊂seg x) ; (P4-équation sur la réunion) = valeur_union +
+équation des membres. GROS MORCEAU (S8-collectivisation de la famille D :=
+{p ∈ 𝔓(E×V) | ∃y∈seg x, est_essai_rec(p,y)} — vérifier le patron
+Dfam_real/_inst_Dfam_real de c60_realisation, S8-légal).
+PROCHAIN TICK : lire c60_realisation (Dfam_real, l'axiome S8, ambiant) +
+chercher composition de restrictions ((p|A)|B = p|B si B⊂A ou p|A∩B).
