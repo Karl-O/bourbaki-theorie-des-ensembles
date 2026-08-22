@@ -169,5 +169,118 @@ def extension_ambiante(p="pha", x="xsr", v="vha", e="Esr", V="Vval"):
     return res
 
 
+# @livre Ch.III §2.2 Demo.60 | E III.19 L.1-5 | PDF p.122  (fin de la démonstration
+#   de C60 : recollement des essais + prolongement d'un pas = l'hérédité)
+def heredite_rec(vh, G="Gsr", e="Esr", V="Vval"):
+    """🎯 R5'-FINAL : { bo, regle_dans_V(vh,V) }
+       ⊢ heredite_couverture( couvert_essai_rec_amb, G, E )   [2 hyps honnêtes].
+
+    L'HÉRÉDITÉ COMPLÈTE : pour x0tf∈E dont tout le segment est couvert (HR C59
+    au lieur ytf, α-pontée vers l'antécédent yaa des U-lemmes), le recollement
+    U := ⋃Dfam_rec(x0tf) est un essai-sur-seg (U1 fonctionnalité, U-dom, U4
+    équation, ambiance→graphe) ; l'extension R3' donne l'essai récursif
+    p' := U∪{(x0tf, vh(U))} EN x0tf, ambiant (extension_ambiante sous
+    vh(U)∈V, la règle bornée) — le témoin S5 de couvert[x0tf]."""
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_2_bien_ordonnes.bon_ordre.recurrence_transfinie.ensembles_recursion_transfinie_existence import (
+        heredite_couverture,
+    )
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_2_bien_ordonnes.bon_ordre.recurrence_transfinie.ensembles_c60_coeur import (
+        famille_compatible, union_famille_fonctionnelle,
+    )
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_2_bien_ordonnes.bon_ordre.recurrence_transfinie.rec_veritable.ensembles_extension_assemblage import (
+        equation_sur_seg, extension_essai_rec,
+    )
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_2_bien_ordonnes.bon_ordre.recurrence_transfinie.rec_veritable.ensembles_essai_rec import (
+        est_essai_rec,
+    )
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_2_bien_ordonnes.bon_ordre.recurrence_transfinie.rec_veritable.couverture_rec.ensembles_domaine_union import (
+        couvert_essai_rec_amb, antecedent_couverture_rec, dom_union_rec,
+    )
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_2_bien_ordonnes.bon_ordre.recurrence_transfinie.rec_veritable.couverture_rec.ensembles_union_rec import (
+        compatibilite_Dfam_rec,
+    )
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_2_bien_ordonnes.bon_ordre.recurrence_transfinie.rec_veritable.couverture_rec.ensembles_equation_union import (
+        equation_union_rec,
+    )
+    vG, ve, vV = _t(G), _t(e), _t(V)
+    couvert = couvert_essai_rec_amb(vh, G, e, V)
+    vx0 = var("x0tf")
+    segx0 = E.segment_extremite(vG, ve, vx0)
+    D = Dfam_rec(vG, ve, vx0, V)
+    U = union_famille(D)
+    pprime = E.reunion(U, E.singleton(E.couple(vx0, vh(U))))
+
+    h_xE = N.assume(appartient(vx0, ve))                    # x0tf∈E
+    hr_ytf = pourtout("ytf", impl(appartient(var("ytf"), segx0),
+                                  couvert(var("ytf"))))
+    h_hrg = N.assume(hr_ytf)                                # l'HR C59 (lieur ytf)
+    h_regle = N.assume(regle_dans_V(vh, V))                 # vh à valeurs dans V
+
+    # pont α ytf→yaa : l'antécédent au lieur des U-lemmes
+    ant_formule = antecedent_couverture_rec(vh, G, e, "x0tf", V)
+    ant_yaa = N.modus_ponens(h_hrg, equivalence_avant(alpha_pour_tout(
+        "ytf", "yaa", impl(appartient(var("ytf"), segx0), couvert(var("ytf"))))))
+
+    # U est un essai-sur-seg : les 4 conjoints d'extension_essai_rec
+    compat = compatibilite_Dfam_rec(vh, G, e, "x0tf", V)    # {bo}
+    func_U = _cut(compat, famille_compatible(D), union_famille_fonctionnelle(D))
+    du = _cut(ant_yaa, ant_formule, dom_union_rec(vh, G, e, "x0tf", V))
+    g_U = _cut(union_rec_ambiante(vh, G, e, "x0tf", V),
+               appartient(U, ambiant(e, V)), membre_ambiant_graphe(e, V, U))
+    equ = _cut(ant_yaa, ant_formule, equation_union_rec(vh, G, e, "x0tf", V))
+
+    ext = extension_essai_rec(vh, U, G, e, "x0tf")          # 5 hyps
+    ext = _cut(func_U, E.est_fonctionnel(U), ext)
+    ext = _cut(du, egal(E.dom(U), segx0), ext)
+    ext = _cut(g_U, E.est_un_graphe(U), ext)
+    ext = _cut(equ, equation_sur_seg(U, vh, vG, ve), ext)   # est_essai_rec(p', x0tf)
+
+    # p' ∈ 𝔓(E×V)  (vh(U)∈V par la règle bornée instanciée au terme U)
+    amb_p = extension_ambiante(U, "x0tf", vh(U), e, V)
+    amb_p = _cut(union_rec_ambiante(vh, G, e, "x0tf", V),
+                 appartient(U, ambiant(e, V)), amb_p)
+    amb_p = _cut(instancie(h_regle, U), appartient(vh(U), vV), amb_p)
+
+    # couvert[x0tf] : témoin S5 = p'
+    corps_paa = et(appartient(var("paa"), ambiant(e, V)),
+                   est_essai_rec(var("paa"), vh, vG, ve, vx0))
+    cov_x0 = N.modus_ponens(conjonction_intro(amb_p, ext),
+                            N.s5(corps_paa, pprime, "paa"))
+
+    her = N.generalisation("x0tf", N.loi_deduction(appartient(vx0, ve),
+                           N.loi_deduction(hr_ytf, cov_x0)))
+    cible = heredite_couverture(couvert, G, ve, "x0tf", "ytf")
+    assert her.conclusion == cible, "heredite_rec : ≠ heredite_couverture"
+    assert len(her.hypotheses) == 2, "heredite_rec : hyps ≠ 2 (bo, règle)"
+    return her
+
+
+# @livre Ch.III §2.2 Crit.C60 | E III.18 L.24-33 | PDF p.121  (C60, moitié existence :
+#   tout point de E porte un essai récursif — la couverture totale)
+def couverture_totale_rec(vh, G="Gsr", e="Esr", V="Vval"):
+    """🎯🎯 R6' — LA COUVERTURE TOTALE DE LA VRAIE RÉCURSION :
+       { bo, regle_dans_V(vh,V) }
+       ⊢ (∀x)( x∈E ⇒ (∃p)( p∈𝔓(E×V) ∧ est_essai_rec(p, vh, G, E, x) ) ).
+
+    Le squelette C59 (couverture_transfinie) sur le prédicat ambiant, son
+    hypothèse d'hérédité DÉCHARGÉE par heredite_rec : TOUT point d'un ensemble
+    bien ordonné porte un essai de la VRAIE récursion (l'équation lit la
+    restriction).  Deux hypothèses honnêtes : le bon ordre, la règle bornée."""
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_2_bien_ordonnes.bon_ordre.recurrence_transfinie.ensembles_recursion_transfinie_existence import (
+        heredite_couverture, couverture_transfinie,
+    )
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_2_bien_ordonnes.bon_ordre.recurrence_transfinie.rec_veritable.couverture_rec.ensembles_domaine_union import (
+        couvert_essai_rec_amb,
+    )
+    ve = _t(e)
+    couvert = couvert_essai_rec_amb(vh, G, e, V)
+    her = heredite_rec(vh, G, e, V)                         # {bo, règle}
+    cov = couverture_transfinie(couvert, e, G)              # {bo, hérédité}
+    res = _cut(her, heredite_couverture(couvert, G, ve, "x0tf", "ytf"), cov)
+    assert len(res.hypotheses) == 2, "couverture_totale_rec : hyps ≠ 2"
+    return res
+
+
 __all__ = ["regle_dans_V", "membre_ambiant_graphe", "union_rec_incluse",
-           "union_rec_ambiante", "extension_ambiante"]
+           "union_rec_ambiante", "extension_ambiante", "heredite_rec",
+           "couverture_totale_rec"]
