@@ -278,3 +278,10 @@ Le mur (2) est le plus « rentable » (débloque récursion partout : factoriell
 index-dépendante incluse) mais c'est une refonte multi-jours. PIVOT du matin :
 rapport V9 (documenter Prop.12+Th.2 Cantor + Lemme 2 — livrable en attente),
 en laissant le choix du mur à discuter avec Karl (stratégie cibles).
+
+## 2026-08-22 10h05 — Proposition à Karl : rafraîchir CLAUDE.md §Suivi de couverture
+Le paragraphe « Gros chantiers ouverts » de CLAUDE.md est périmé : Cantor
+2^a>a est FAIT (CIBLE 1), la division euclidienne est FAITE (Th.1 complet).
+Restent réellement : Hessenberg a²=a (frontière = L1 + H2, cartographiée),
+bon ordre des cardinaux (III.3), limites (III.7), CST1/CST2 (IV). À valider
+par Karl avant toute édition de CLAUDE.md (consigne utilisateur).

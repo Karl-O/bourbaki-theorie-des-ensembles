@@ -235,3 +235,14 @@ section.
 dans une machine » · A2 « Le dernier kilomètre : une machine qui nomme son
 manque » · A3 « Cartographier l'ouvert : Goldbach vu par un noyau LCF » ·
 A4 « Apprendre à proposer ».
+
+## A5 (esquisse) — « Nommer la brique manquante : la boucle livre-solveur et les leçons de capture nominale »
+Pitch : A4 a montré (EXP6/EXP7) qu'un marcheur peut NOMMER la brique qui lui
+manque, et qu'un humain qui l'écrit dans le livre rend le but facile à tous.
+La session des 21-22 août fournit le second volet : DOUZE leçons de capture
+nominale (lieurs τ, keystones-à-noms, trous de congruence, variables C54)
+accumulées en fermant le Lemme 2 (ℵ₀·ℵ₀=ℵ₀) — chaque leçon est une brique
+de MÉTHODE que la boucle a nommée en échouant, puis consignée, puis réusitée
+avec succès (3 sous-lemmes verts du premier coup ensuite). Matériau :
+DECISIONS.md leçons 1-12, la pile W, les temps de certification (figure du
+rapport V9). Statut : idée, à écrire après la CIBLE 2.
