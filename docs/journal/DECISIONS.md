@@ -418,3 +418,21 @@ sur p|seg z et q|seg z : fonctionnelles (✓ _restriction_fonctionnelle_terme),
 incluses dans un produit (via f|X ⊂ F + F ⊂ E×V hypothèse honnête de R2'),
 doms égaux ((i)+(ii) : les deux valent seg z), valeurs égales (HR + (iii)).
 Leçon : les deux ticks de recherche ont évité ~150 lignes de redérivation.
+
+## 2026-08-22 10h58 — R2'a COMPLET : brique (iv) restrictions_egales CLOSE
+rec_veritable/ensembles_restrictions_egales.py (1 passed 0.28 s) :
+restrictions_egales {bo, func p, func q, dom p=dom_essai(x), dom q=dom_essai(x),
+z∈dom_essai(x), HR:(∀u)(u∈seg z ⇒ p(u)=q(u))} ⊢ p|seg z = q|seg z.
+Assemblage exactement comme conçu : graphe_egal_par_valeurs à 6 prémisses
+gauche-associées ((((func∧func)∧gr)∧gr)∧dom)∧val, lieur « x » imposé par
+egalite_valeurs (aucune capture : mes noms pre/qre/Gsr/Esr/xsr/zsr/ure).
+hypothese_recurrence(p,q,G,e,z) exporté = la forme EXACTE que l'induction
+C59 devra fournir (interface R2'a↔R2'b propre).
+PLAN R2'b (prochain fichier rec_veritable/ensembles_unicite_essai_rec.py) :
+sous les hyps est_essai_rec(p,x) ∧ est_essai_rec(q,x) déplier les deux
+équations en z (instancie à vz + mp z∈dom p), congruence_terme(p|seg z,
+q|seg z, vh(var("wrec")), "wrec") sur restrictions_egales → vh(p|seg z)=
+vh(q|seg z), composer p(z)=vh(p|seg z)=vh(q|seg z)=q(z) ; PUIS l'induction
+C59 (couverture_transfinie {bo, heredite}) sur P(z) := z∈dom_essai(x) ⇒
+p(z)=q(z) pour décharger l'HR — ATTENTION : l'HR de couverture_transfinie
+porte sur TOUT z∈E (vérifier la forme exacte de heredite_couverture(P)).
