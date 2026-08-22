@@ -357,3 +357,25 @@ formule en p, aucune référence au terme défini). RETOUR AU PLAN R'
 (R2'-R8', 7-9 j), avec la bonne nouvelle intacte : le patron du pont
 (c62_fonction_restriction) et t_fac_en_non_vide se réutilisent comme
 PATRONS de preuves dans la refonte.
+
+## 2026-08-22 10h28 — DESIGN FIN R2' (unicité des essais-rec)
+Squelette : couverture_transfinie(P, e, G, ...) : {bo, heredite_couverture(P)}
+⊢ (∀x)(x∈E ⇒ P(x)) — le C59 du dépôt (recursion_transfinie_existence l.250,
+utilisé par couverture_essais_via_c59). Pour l'unicité, P est paramétré par
+DEUX essais-rec p (en xp) et q (en xq) :
+    P(z) := (z ∈ dom p ∧ z ∈ dom q) ⇒ valeur(p,z) = valeur(q,z).
+Hérédité sous HR = (∀y∈seg z)P(y) et z∈les deux doms :
+  R2'a — ÉGALITÉ DES RESTRICTIONS : p|seg(z) = q|seg(z).
+    Sous-briques : (i) dom(p|seg z) = dom p ∩ seg z (lemme restriction-dom —
+    chercher/écrire) ; (ii) seg z ⊂ dom p et ⊂ dom q (z ∈ seg(xp)∪{xp} et
+    l'ordre est transitif : y<z ≤ xp ⇒ y ∈ seg(xp) — brique
+    segment-transitivité, chercher dans segment_extremite-lemmes) ; donc les
+    deux restrictions ont LE MÊME domaine seg z ; (iii) valeurs égales sur ce
+    domaine (HR instanciée) ; (iv) extensionnalité des graphes fonctionnels
+    (patron graphe_egal_par_valeurs, prop12) → égalité.
+  R2'b — CONGRUENCE DE LA RÈGLE : (A=B) ⇒ vh(A)=vh(B) par
+    congruence_terme(A, B, vh(var("wrec")), "wrec") (vh accepte var ✓) ;
+    avec les équations d'essai instanciées en z : p(z) = vh(p|seg z)
+    = vh(q|seg z) = q(z). ✓
+Écriture : R2'a d'abord (fichier rec_veritable/ensembles_restrictions_egales.py,
+briques (i)-(iv)), puis R2'b+induction (ensembles_unicite_essai_rec.py).
