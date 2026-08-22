@@ -18,7 +18,11 @@
      (0∈ℕ ⇒ ℕ≠∅).  C'est EXACTEMENT le « ℕ×ℕ contient {0}×ℕ équipotent à ℕ, donc
      Card(ℕ)≤Card(ℕ×ℕ) » du Lemme 2 de Bourbaki.
 
-  ⛔ DIRECTION (B) — ℕ×ℕ ≤ ℕ : NON ATTEIGNABLE en l'état (obstruction d'infrastructure).
+  ✅ DIRECTION (B) — ℕ×ℕ ≤ ℕ : CLOSE le 22 août 2026 — voir
+     `ensembles_denombrable_graphe_pairing.NN_carre_inf_egal_NN` (couplage
+     (m,n) ↦ 2^m·3^n, piles W1-W7) et `lemme_deux_NN` = Eq(ℕ×ℕ, ℕ).
+     (L'état ci-dessous, conservé pour mémoire, date du 2026-06-22.)
+  (périmé) DIRECTION (B) — ℕ×ℕ ≤ ℕ : NON ATTEIGNABLE en l'état (obstruction d'infrastructure).
      Bourbaki construit l'injection f:ℕ×ℕ→ℕ par développement DYADIQUE (la 2-valuation
      donne m, la partie impaire donne n).  L'injection ALTERNATIVE (m,n)↦2^m·3^n est
      injective par UNICITÉ DE LA FACTORISATION.  Or le dépôt n'a AUCUNE arithmétique
