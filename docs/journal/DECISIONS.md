@@ -227,3 +227,16 @@ consigner dans ANOMALIES quand clos) :
      {est_infini(Card E)} ⊢ (∃D)(D⊂E ∧ Eq(D,ℕ)).
 PROCHAIN : lire regle_iteration/C63 (factorielle_existence l.26-60 +
 recursion_hygienic) — la forme exacte de ce que C63 conclut.
+
+## 2026-08-22 09h50 — D2 VIABLE : les obstructions C63 sont levées
+Lecture factorielle_existence : (O1) RÉFUTÉ (la fonction assemblée existe
+depuis le 25 juil. — chantier iii_6_2_recursion_c62 : fonction_globale/
+existence/unicite/domaine/restriction) ; (O3) RÉFUTÉ (le « renommage gratuit »
+de subst corrigé par court-circuit CS) ; (O2) vrai mais SANS OBJET pour D2
+(l'itération gⁿ(e₀) est index-INdépendante — exactement la forme C63
+regle_iteration(S, a) : T{u} = τ_y((u=∅ ∧ y=a) ∨ (u≠∅ ∧ y=S{u(M(Du))})),
+c62_recursion l.171 ; S := valeur(g, ·), a := e₀).
+PROCHAIN : lire la conclusion EXACTE du capstone (c62_fonction_globale +
+c62_recursion_sur_N l.106 : signature (vh, e=Enat, G=Gle, V=Uval...) — vh ?
+sous quelles hypothèses ; puis tests miroir iii_6_2 pour l'état vert).
+Ensuite D1 (bijection Dedekind → g, e₀), D3 (injectivité C61), D4 (image).
