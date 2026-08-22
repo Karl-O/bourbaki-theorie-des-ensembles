@@ -316,3 +316,14 @@ le dépôt (L1-Dedekind, factorielle index-dépendante via C62-rec, suites).
 ALTERNATIVES : mur 1 (trichotomie R1-R4, R3 = refonte d'axiome opaque de h,
 estimé comparable, gain limité au th.3) ; mur 3 (sup cardinal, non exploré).
 DÉCISION EN ATTENTE DE KARL. En attendant : vérifier l'inconnue-clé R8'.
+
+## 2026-08-22 10h12 — R8' : l'inconnue-clé est LEVÉE (patron t_fac_en_non_vide)
+L'évaluation du τ-disjonctif de regle_iteration a son patron COMPLET dans
+factorielle_succ.t_fac_en_non_vide : sous Γ ⊢ ¬(u=∅), la garde-disjonction
+(_garde_disjonction + _ou_commute_gd) réduit le corps à (y=Sval), puis S7
+(τ-extensionnalité) et S5+existe_temoin évaluent τ(y=Sval)=Sval — asserts
+d'hygiène inclus (hypothèses conservées). Le cas u=∅ est symétrique.
+⇒ R8' ≈ 1 jour. DESIGN R' CONSOLIDÉ : 7-9 jours estimés au total.
+Recommandation ferme à Karl : mur 2 (refonte C60-récursion, R1'-R8') —
+débloque L1-Dedekind, la factorielle index-dépendante, et toute suite
+récurrente à venir. Prêt à commencer R1' sur son accord.
