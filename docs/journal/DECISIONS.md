@@ -558,3 +558,26 @@ seg⊂E [axiome-segment]) ; UNICITÉ de f (analogue R2'-sur-E : deux solutions
 globales coïncident par C59 sur P(z):=f(z)=g(z) SANS garde — les doms sont E) ;
 puis (∃!f) formulé. ~3-4 ticks. PUIS R8' ℕ-itération → K6-K7 → D1 → L1 → H1
 → H2 → a²=a 🏆 CIBLE 2.
+
+## 2026-08-22 13h00 — 🏆🏆🏆 R7' CLOS : LE CRITÈRE C60 VÉRITABLE (chantier R' TERMINÉ)
+existence_solution {bo, regle_dans_V} ⊢ (∃g)(sol(g)) + unicite_globale
+{bo, sol g, sol h, graphes} ⊢ g=h — LE critère C60 de Bourbaki avec la vraie
+équation f(x)=T(f|seg x), certifié noyau, 37 tests verts. LE CHANTIER R'
+COMPLET EN UNE JOURNÉE (~25 ticks) : R1' prédicat → R2' unicité locale →
+R3' prolongement → R4' descente/composition → R5' famille/recollement →
+R6' couverture totale → R7' capstone global (famille Dglob, dom f=E,
+équation partout, unicité C59 sans garde, ∃ par S5-témoin-f).
+L'ANCIEN point dur (« recollement/collectivisation des essais — REPORTÉ »
+de C60-déposé) est LEVÉ : la sélection S8 sur 𝔓(E×V) + la coïncidence par
+unicité remplacent les résidus honnêtes. Écart avec le livre : notre V est
+DONNÉ avec la règle bornée (∀p)(vh(p)∈V) — c'est la donnée de Bourbaki
+(« T à valeurs dans V », E III.18) rendue explicite en hypothèse.
+PROCHAIN — R8' L'ITÉRATION SUR ℕ : spécialiser le critère à (ℕ, bo_graphe_NN
+[vérifier son nom/état exact : grep bo_graphe_NN\|bien_ordonne.*NN]) avec la
+règle d'itération T(p) := « S(p(dernier)) si p≠∅ sinon e0 » — τ-évaluation
+patron t_fac_en_non_vide (garde-disjonction) OU la forme Bourbaki §III.6.1
+(l'itération = C60 appliqué : LIRE V7 Texte.tex §III.6.1 + iii_6 code
+existant c62 pour la CIBLE exacte f(0)=e0 ∧ f(succ n)=S(f(n))). Le C62
+déposé (tabulation) a déjà une cible-itération — la NÔTRE la remplace avec
+la vraie équation. PUIS K6 (injectivité de l'itérée de succ), K7 (D:=im f,
+Eq(ℕ,D)), D1-Dedekind, L1 {Inf(Card E)}⊢∃D⊂E Eq(D,ℕ), H1, H2, a²=a 🏆.
