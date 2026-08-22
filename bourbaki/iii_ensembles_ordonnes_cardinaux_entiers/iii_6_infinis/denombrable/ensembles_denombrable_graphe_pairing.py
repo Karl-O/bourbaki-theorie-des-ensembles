@@ -19,6 +19,8 @@ theorie_ensembles INCHANGÉE (22).  Noyau INTACT.  Aucun axiome nouveau.
 """
 from __future__ import annotations
 
+from functools import lru_cache
+
 from bourbaki.i_description_mathematique_formelle.i_1_termes_relations.outil_formule import (
     Terme, var, egal, et, appartient, inclus,
 )
@@ -103,12 +105,14 @@ def _NN_de_fini(tz, fini_thm):
 
 
 # ── (a)+(b) : fonctionnel, domaine ────────────────────────────────────────────
+@lru_cache(maxsize=None)  # pur : Theoreme immuable, args hashables
 def pairing_graphe_fonctionnel():
     """⊢ F fonctionnel   (C54)."""
     NN = _NN()
     return graphe_terme_fonctionnel(E.produit(NN, NN), _T(), x="zgp")
 
 
+@lru_cache(maxsize=None)  # pur : Theoreme immuable, args hashables
 def pairing_graphe_domaine():
     """⊢ dom F = ℕ×ℕ   (C54)."""
     NN = _NN()
@@ -116,6 +120,7 @@ def pairing_graphe_domaine():
 
 
 # ── (c) : injectif sur ℕ×ℕ ────────────────────────────────────────────────────
+@lru_cache(maxsize=None)  # pur : Theoreme immuable, args hashables
 def pairing_graphe_injectif():
     """⊢ injective_dans(F, ℕ×ℕ).   (W5 sur les projections + reconstruction.)
 
@@ -184,6 +189,7 @@ def pairing_graphe_injectif():
 
 
 # ── (d) : image ⊂ ℕ ───────────────────────────────────────────────────────────
+@lru_cache(maxsize=None)  # pur : Theoreme immuable, args hashables
 def pairing_graphe_image_incluse():
     """⊢ image(F, ℕ×ℕ) ⊂ ℕ.   (les valeurs 2^m·3^n sont des entiers.)"""
     NN = _NN()
@@ -250,6 +256,7 @@ def _e3h(vt):
 
 # ── (e) : ℕ×ℕ ≤ ℕ puis le LEMME 2 ────────────────────────────────────────────
 # @livre Ch.III §6.3 Demo.Lem2 | E III.48 L.4-16 | PDF p.151  (N×N ≤ N — la direction dure du Lemme 2)
+@lru_cache(maxsize=None)  # pur : Theoreme immuable, args hashables
 def NN_carre_inf_egal_NN():
     """🎯 ⊢ ℕ×ℕ ≤ ℕ.   (est_injection_de(F, ℕ×ℕ, ℕ) + S5, patron inf_egal_parties.)"""
     NN = _NN()
@@ -267,6 +274,7 @@ def NN_carre_inf_egal_NN():
 
 
 # @livre Ch.III §6.3 Lem.2 | E III.48 L.4-16 | PDF p.151
+@lru_cache(maxsize=None)  # pur : Theoreme immuable, args hashables
 def lemme_deux_NN():
     """🎯🎯 ⊢ Eq(ℕ×ℕ, ℕ).   (LEMME 2, E III.48 — « ℕ×ℕ est équipotent à ℕ ».)
 

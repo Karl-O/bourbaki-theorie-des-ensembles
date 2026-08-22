@@ -22,6 +22,8 @@ theorie_ensembles INCHANGÉE (22).  Noyau INTACT.  Aucun axiome nouveau.
 """
 from __future__ import annotations
 
+from functools import lru_cache
+
 from bourbaki.i_description_mathematique_formelle.i_1_termes_relations.outil_formule import (
     Terme, var, egal, et, non,
 )
@@ -89,11 +91,13 @@ def _card_est_cardinal_t(tX):
         card_est_un_cardinal("Xcuc3", lieur="X")), _t(tX))
 
 
+@lru_cache(maxsize=None)  # pur : Theoreme immuable, args hashables
 def _card_deux():
     """⊢ est_cardinal(DEUX)   (DEUX = Card(UN⊔{∅}) littéralement)."""
     return _card_est_cardinal_t(somme_disjointe(UN, E.singleton(E.VIDE)))
 
 
+@lru_cache(maxsize=None)  # pur : Theoreme immuable, args hashables
 def exposant_zero_un(base):
     """⊢ base^0 = 1.   (B0_preuve + exposant_zero_egale_un + 1 = Card{∅} sym.)"""
     vb = _t(base)
@@ -261,6 +265,7 @@ def _deballer(h):
 
 
 # @livre Ch.III §6.3 Demo.Lem2 | E III.48 L.4-16 | PDF p.151  (unicité 2-adique — brique de l'injectivité du couplage)
+@lru_cache(maxsize=None)  # pur : Theoreme immuable, args hashables
 def deux_valuation_unique(m="mdv", k="kdv"):
     """🎯 ⊢ Fini m ⇒ (∀mp)(∀u)(∀up)( (Fini mp ∧ Fini u ∧ Fini up ∧ impair u ∧
         impair up ∧ 2^m·u = 2^mp·up) ⇒ (m = mp ∧ u = up) ).
