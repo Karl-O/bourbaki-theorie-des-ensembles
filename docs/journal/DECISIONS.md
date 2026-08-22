@@ -738,3 +738,26 @@ recherche = 1ʳᵉ mécanisation intégrale de Bourbaki + mesures métamathémat
 Leibniz+Prop.1). Briques 1-2 (4ad7cd8) consommées. Vert premier coup (6 min).
 Prochain : K6e — Eq(ℕ, image de g), puis D1 (construire (u,x0) réels sous
 est_infini(Card E)) → Lemme 1 → Hessenberg.
+
+## 2026-08-22 — Chantier K6 CLOS (0189812) + design D1 (construction Dedekind réelle)
+K6 complet : itération forte (func+dom gardés), valeurs dans E, déclampage,
+injectivité (C61 patron W3), Eq(ℕ, g⟨ℕ⟩) (surjectivité = réflexivité de
+l'image), g⟨ℕ⟩⊂E, assemblage lemme1_sous_hypotheses {6 hyps Dedekind}
+⊢ (∃D)(D⊂E ∧ Eq(D,ℕ)). Lecture PDF p.150 (E III.47) : l'Exemple 1 du C63
+= K6b/K6c mot pour mot (@livre posés) ; Lem.1 L.34-35 ; Th.2 L.30-32 ;
+démo du livre par bon ordre ≠ la nôtre par Dedekind (à consigner dans
+ANOMALIES à la clôture — énoncé identique, précédent Th2).
+**Design D1** (décharger les 6 hyps sous est_infini(Card E)) — ponts CLOS
+vérifiés : dedekind_cardinal (infinis_props:150), equipotent_son_cardinal et
+equipotent_si_cardinal_egal (Prop.1 réciproque, cardinaux_theoremes),
+equipotence_symetrique/transitive, somme_disjointe_cardinal (arith_somme:94 :
+(Card X=a ∧ Card Y=b) ⇒ Card(X⊔Y)=a+b), somme_graphe_* (bijections de somme).
+Chaîne D1a : W' := somme_disjointe(E, {∅}) ; Card(W') = Card E + Card {∅}
+[somme_disjointe_cardinal, réflexivités] = successeur(Card E) [maillon à
+vérifier : forme exacte de somme_cardinale_binaire vs Card({∅}) — lire
+arith_somme en tête] = Card E [dedekind sous est_infini] ; Prop.1 réciproque
+→ Eq(W', E) → témoin h : W'→E bijection. D1b : marqueur m := point {∅}-côté
+de W' (forme concrète de somme_disjointe à lire) ; x0 := h(m). D1c :
+u := composée(h, J) avec J := graphe de x↦(x, tag-gauche) sur E — builder à
+chercher, sinon théorie S8 dédiée (motif Dfam). Les 5 hyps se prouvent par
+la bijectivité de h (hors : h injective sépare m des points E-côté).
