@@ -845,3 +845,14 @@ IL RESTE DONC, précisément, DEUX CHAÎNONS :
       (dom, injective_dans, image) depuis le graphe-niveau déjà prouvé. C'est
       LE morceau dur, identifié depuis longtemps dans le dépôt.
 Prochain pas : (α) d'abord (accessible), puis (β) avec la règle perf.
+
+## 2026-08-23 00h00 — MESURE : 7574 s → 6 s (facteur ≈ 1250)
+Le run lancé à 21h54 sur l'ANCIENNE version de temoin_frame vient de finir :
+« 1 passed in 7574.77s (2:06:14) ». Il n'était donc pas tué — il était
+simplement d'une lenteur inimaginable (les briques re-dérivaient le Lemme 2
+et « ℕ infini » à chaque appel, en cascade). Le MÊME test, après application
+de la règle « gros lemme clos → hypothèse honnête déchargée une seule fois »,
+passe en 6 secondes. Facteur ≈ 1250, à soundness identique (le théorème final
+garde exactement ses hypothèses). C'est le chiffre à mettre dans la v2 de A1 :
+la performance d'un corpus LCF ne se joue pas dans le noyau mais dans la
+DISCIPLINE DE DÉCHARGE — où l'on paie ses lemmes.
