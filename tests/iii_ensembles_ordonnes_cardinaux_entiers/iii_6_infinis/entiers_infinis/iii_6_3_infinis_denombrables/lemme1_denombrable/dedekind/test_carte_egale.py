@@ -10,7 +10,7 @@ from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_3_equipotence_cardina
 from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_6_infinis.entiers_infinis.iii_6_3_infinis_denombrables.ensembles_infinis import (
     est_infini,
 )
-from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_6_infinis.entiers_infinis.iii_6_3_infinis_denombrables.lemme1_denombrable.construction_dedekind.ensembles_carte_egale import (
+from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_6_infinis.entiers_infinis.iii_6_3_infinis_denombrables.lemme1_denombrable.dedekind.ensembles_carte_egale import (
     ensemble_marque, card_idempotent_terme, est_cardinal_du_cardinal,
     carte_w_egale, eq_w_e,
 )
