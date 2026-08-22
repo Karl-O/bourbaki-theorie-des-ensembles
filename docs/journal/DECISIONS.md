@@ -285,3 +285,34 @@ Le paragraphe « Gros chantiers ouverts » de CLAUDE.md est périmé : Cantor
 Restent réellement : Hessenberg a²=a (frontière = L1 + H2, cartographiée),
 bon ordre des cardinaux (III.3), limites (III.7), CST1/CST2 (IV). À valider
 par Karl avant toute édition de CLAUDE.md (consigne utilisateur).
+
+## 2026-08-22 10h10 — DESIGN R' (refonte C60-récursion, mur 2) — à valider avec Karl
+La nouvelle équation d'essai : p(z) = vh(restriction(p, seg(R,E,z))) — la
+règle lit LA RESTRICTION (vraie récursion), au lieu de vh(z)-au-point
+(tabulation actuelle). Chantier C60 existant : 8 modules (clauses, coeur,
+existence_close, final, pont, realisation, recurrence_transfinie,
+recursion_transfinie_existence), extension_un_pas en 3 variantes,
+heredite_couverture_realisee (final l.646). Briques du design :
+  R1' est_essai_rec : le prédicat avec l'équation-restriction (± 0,5 j).
+  R2' UNICITÉ des essais-rec (deux essais en x coïncident sur seg∪{x}) —
+      induction C59 sur « coïncide sous z » ; LE morceau dur : remplace
+      l'épinglage-tabulation dans la coïncidence de famille (± 2-3 j).
+  R3' hérédité : extension d'un cran p' = p ∪ {(x, vh(p|seg(x)))} — les
+      extension_un_pas_* se réutilisent (fonctionnalité/domaines), la
+      valeur au nouveau point est bien définie par construction (± 1-2 j).
+  R4' couverture C59 → (∀x∈E)(∃p essai-rec) (± 1 j, calque de l'existant).
+  R5' bien-formés/codomain pour la règle concrète (± 0,5 j).
+  R6' famille 𝔇_tot + union + capstone : la coïncidence de famille passe
+      par R2' (± 1-2 j).
+  R7' spécialisation ℕ (bo_graphe_NN clos) (± 0,5 j).
+  R8' itération : dériver f(0)=a ∧ f(succ n)=S(f(n)) de l'équation-
+      restriction — DEUX évaluations du τ de regle_iteration (branche u=∅ ;
+      branche u≠∅ avec M(D(u))=n) : ⚠️ INCONNUE-CLÉ : l'évaluation du τ
+      exige soit les tactiques τ existantes (existe_temoin/S7, patron
+      chi/_fonct_un_zero), soit un axiome-définition dédié (motif
+      diff/preimage). À VÉRIFIER avant tout engagement (± 1-3 j selon).
+TOTAL estimé : 7 à 13 jours de ticks. GAIN : la récursion réelle pour tout
+le dépôt (L1-Dedekind, factorielle index-dépendante via C62-rec, suites).
+ALTERNATIVES : mur 1 (trichotomie R1-R4, R3 = refonte d'axiome opaque de h,
+estimé comparable, gain limité au th.3) ; mur 3 (sup cardinal, non exploré).
+DÉCISION EN ATTENTE DE KARL. En attendant : vérifier l'inconnue-clé R8'.
