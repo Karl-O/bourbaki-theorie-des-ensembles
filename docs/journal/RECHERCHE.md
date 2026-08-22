@@ -57,3 +57,19 @@ des théories S8 jamais auto-référentes.
 théorie dédiée conservative ») et prouver sa conservativité au-dessus des 22
 axiomes — un mini-théorème métathéorique sur NOTRE architecture, publiable dans
 le rapport et l'article A1.
+
+## R-7 (2026-08-22, CLOSE — leçon d'outillage) — MAX_PATH 260 sur l'arbre profond
+**Née de** : import impossible du module D1b (chemin absolu à 261 caractères) ;
+symptôme piégeux : listdir voit le fichier, stat/import échouent (WinError 3).
+**Leçon** : sur un dépôt qui calque la table des matières (arbres profonds),
+la limite Windows MAX_PATH mord ; noms de dossiers/fichiers COURTS près des
+feuilles. Candidat outillage : un lint CI qui borne la longueur des chemins.
+
+## R-8 (2026-08-22, OUVERTE) — La chaîne K6 paramétrique : un « foncteur de preuve »
+**Née de** : l'assemblage D1d — toute la chaîne K6 (itération, valeurs,
+injectivité, équipotence) est PARAMÉTRIQUE en (u, x0) : l'instancier aux
+termes concrets h∘ι, h(m) a suffi, aucune preuve refaite.
+**Idée** : ce motif (bibliothèque de théorèmes à paramètres-termes + décharges
+par coupure) est l'analogue LCF-τ des foncteurs/locales d'Isabelle. À
+systématiser et à mesurer (coût des substitutions sur gros termes vs re-preuve)
+— matériau pour l'article ingénierie de preuve du τ.

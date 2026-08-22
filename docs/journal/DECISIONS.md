@@ -761,3 +761,11 @@ de W' (forme concrète de somme_disjointe à lire) ; x0 := h(m). D1c :
 u := composée(h, J) avec J := graphe de x↦(x, tag-gauche) sur E — builder à
 chercher, sinon théorie S8 dédiée (motif Dfam). Les 5 hyps se prouvent par
 la bijectivité de h (hors : h injective sépare m des points E-côté).
+
+## 2026-08-22 — D1 COMPLET : la construction Dedekind (dedekind/, 4 modules)
+D1a Eq(E⊔{∅},E) (e7ef821) ; D1b x0=h(m)∈E (a888ec6, + leçon MAX_PATH) ;
+D1c les 4 hyps de u (43d8317, vert premier coup 0.45 s) ; D1d lemme_1 =
+l'assemblage (instanciation K6 + décharges + éliminations gcap puis h) —
+test chaîne complète en cours. Si >10 min : mémoïsation des fonctions pures
+(pfu_preuve, valeurs_dans_E, equation_declampee, injectivite_iteree —
+Theoreme immuable, Termes hashables, AUCUNE modification du noyau).

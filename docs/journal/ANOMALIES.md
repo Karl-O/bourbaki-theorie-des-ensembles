@@ -909,3 +909,17 @@ distributions succ). Le développement en base 2 (§III.5.7) reste un
 chantier-livre séparé (énoncés posés, démos non dérivées).
 L'ÉNONCÉ certifié est IDENTIQUE à celui du livre : Eq(ℕ×ℕ, ℕ). Le noyau
 garantit la soundness ; l'écart ne porte que sur le chemin de preuve.
+
+## 2026-08-22 — Lemme 1 (§III.6.3, E III.47) : démonstration DIFFÉRENTE du livre
+**Énoncé** : identique au livre (« Tout ensemble infini E contient un ensemble
+équipotent à N ») — formalisé {est_infini(Card E)} ⊢ (∃D)(D⊂E ∧ Eq(D,ℕ)).
+**Écart** : la démonstration du livre passe par le BON ORDRE (Th.1 de III.2 :
+E bien ordonné ne peut être isomorphe à un segment propre de ℕ) ; la nôtre
+passe par la caractérisation de DEDEKIND (Card E = Card E + 1 → bijection
+E⊔{∅}→E → u:E→E injective non surjective → itération C63-vraie → l'itérée
+n↦g(n) est une injection de ℕ dans E, son image est le D cherché).
+**Justification** : le Th.1 (bon ordre) n'est pas encore formalisé (chantier
+ouvert) ; la voie Dedekind est entièrement close dans le noyau. Précédent :
+Th2 (préambule du projet — le noyau tranche pour la soundness, le PDF prime
+pour la fidélité des ÉNONCÉS ; les démonstrations peuvent différer si l'écart
+est consigné). Marqueurs @livre posés sur lemme_1 (énoncé + démo).
