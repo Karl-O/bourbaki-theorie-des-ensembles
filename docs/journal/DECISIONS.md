@@ -856,3 +856,17 @@ passe en 6 secondes. Facteur ≈ 1250, à soundness identique (le théorème fin
 garde exactement ses hypothèses). C'est le chiffre à mettre dans la v2 de A1 :
 la performance d'un corpus LCF ne se joue pas dans le noyau mais dans la
 DISCIPLINE DE DÉCHARGE — où l'on paie ses lemmes.
+
+## 2026-08-23 00h05 — Chaînon (α) : le matériel est là, un décalage à combler
+frame_ordre_axiome.py fournit DÉJÀ frame_ordre_membre_t :
+  (p,q)∈Γ𝔉(E) ⇔ ( p∈𝔉 ∧ q∈𝔉 ∧ pr₁p⊂pr₁q ∧ pr₂p⊂pr₂q )   [théorie dédiée]
+— c'est exactement l'ordre d'extension du livre, et il rend (α) faisable :
+d'une chaîne C (totalement ordonnée par Γ𝔉) on tire, pour p,q∈C, l'une des
+deux inclusions, donc la compatibilité et le caractère dirigé.
+⚠️ DÉCALAGE REPÉRÉ : union_chaine_* travaille sur une famille 𝔇 de GRAPHES
+(⋃𝔇 = union_famille(𝔇) = « ⋃φ »), tandis que la chaîne C est faite de
+COUPLES p=(S,φ). Il faut donc poser 𝔇 := pr₂⟨C⟩ (l'image de C par la seconde
+projection) et relier union_famille(pr₂⟨C⟩) à union_seconde(C) — les deux
+termes ont la même caractérisation membre-à-membre ((∃p∈C)(w∈pr₂p)), donc
+l'égalité s'obtient par extensionnalité à partir des deux axiomes. C'est le
+premier pas concret de (α), à écrire au prochain tick.
