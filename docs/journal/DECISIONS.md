@@ -343,3 +343,17 @@ f(z) = T{f|seg(z)} sort DIRECTEMENT de fonction_recursion_c62 avec CE vh,
 sans AUCUNE refonte : vh(z) := T(restriction(Dtot-union, seg(z))) est un
 Terme→Terme parfaitement valide !!). Si ça tient : R' se réduit à R5'+R8'
 (bien-formés/codomain pour cette règle + évaluation τ) ≈ 2-3 jours.
+
+## 2026-08-22 10h25 — CLEF vh* REJETÉE (soundness) : imprédicativité de l'axiome
+Vérification code : Dtot(e,V) = app("c62_Dtot", E, V) — le terme est vh-libre
+✓. MAIS l'axiome de sélection de theorie_Dtot(vh*) aurait son SÉLECTEUR
+mentionnant restriction(union(Dtot(E,V)), ...) — c'est-à-dire LE TERME QUE
+L'AXIOME DÉFINIT, dans son propre membre droit : un POINT FIXE imprédicatif,
+PAS une instance de S8 (dont le prédicat doit être donné avant l'ensemble).
+Un tel axiome pourrait encoder p∈D ⇔ p∉D : INTERDIT par la frontière de
+confiance. La clef-raccourci est morte ; en revanche le prédicat
+est_essai_rec (R1') est S8-LÉGAL (l'équation mentionne p lui-même — une
+formule en p, aucune référence au terme défini). RETOUR AU PLAN R'
+(R2'-R8', 7-9 j), avec la bonne nouvelle intacte : le patron du pont
+(c62_fonction_restriction) et t_fac_en_non_vide se réutilisent comme
+PATRONS de preuves dans la refonte.
