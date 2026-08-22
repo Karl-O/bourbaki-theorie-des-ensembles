@@ -1,0 +1,96 @@
+\subsection{§III.6, Lemme 2 --- $\aleph_0 \cdot \aleph_0 = \aleph_0$ (l'ensemble $\mathbf{N}\times\mathbf{N}$ est équipotent à $\mathbf{N}$)}
+\textbf{Énoncé (Bourbaki, E III.48).} « L'ensemble $\mathbf{N}\times\mathbf{N}$ est
+équipotent à $\mathbf{N}$. » C'est le Lemme 2 de la démonstration du \theoreme{} 2
+(Hessenberg, $\mathfrak{a}^2=\mathfrak{a}$), §III.6.3.
+
+\textbf{Formalisé.} Cible : $\mathrm{Eq}(\mathbf{N}\times\mathbf{N},\,\mathbf{N})$ avec
+$\mathbf{N} = \texttt{ensemble\_NN()}$ (le $\tau$ de la propriété collectivisante
+« $\mathrm{Fini}$ », Théorème 1 §III.6.1, close). \\
+Module : \texttt{iii\_6\_infinis/denombrable/ensembles\_denombrable\_graphe\_pairing.py}
+(fonction-cible \texttt{lemme\_deux\_NN}), au sommet d'une pile de sept briques
+(\texttt{W1}--\texttt{W7}) réparties sur six modules du dossier \texttt{denombrable/}.
+
+\textbf{Écart de démonstration (assumé, énoncé identique).} Bourbaki construit
+l'injection $\mathbf{N}\times\mathbf{N}\to\mathbf{N}$ par entrelacement des
+développements dyadiques (prop.~8, E III.40) ; le développement de base $b$
+(§III.5.7) n'étant pas encore dérivé dans le dépôt, la formalisation utilise le
+couplage $(m,n)\mapsto 2^{m}\cdot 3^{n}$, dont l'injectivité se ramène à
+l'arithmétique élémentaire déjà close de §III.5. L'écart, qui ne porte que sur le
+chemin de preuve, est consigné dans \texttt{ANOMALIES.md}.
+
+\textbf{Preuve (\Nstar), la pile W.}
+\emph{W1} : $3^{n}$ est impair (récurrence C61 sur l'imparité, produit d'impairs).
+\emph{W2} : simplification multiplicative $(a c = b c \wedge c \neq 0) \Rightarrow a = b$
+(trichotomie des entiers + monotonie stricte du produit).
+\emph{W3} : \emph{unicité de la 2-valuation} --- $2^{m} u = 2^{m'} u'$ avec $u, u'$
+impairs force $m = m'$ et $u = u'$ ; récurrence C61 dont le pas divise les deux membres
+par $2$, le prédécesseur s'appliquant à $m'$ (fini par hypothèse), ce qui évite le
+lemme « downward » alors non disponible. Certifiée en 38~min.
+\emph{W4} : $n \mapsto 3^{n}$ est injective --- le cœur absurde
+$1 = 3^{\,\mathrm{succ}\,j}$ se réfute par l'arithmétique du successeur
+($3\cdot\mathrm{succ}\,i = \mathrm{succ}(3i+2)$, injectivité du successeur, successeur
+non nul), sans aucun lemme d'ordre. Certifiée en 34~min.
+\emph{W5} : injectivité du couplage --- assemblage pur de W1, W3, W4 (1~h~30).
+\emph{W6} : le graphe $F = \texttt{graphe\_terme}(\mathbf{N}\times\mathbf{N},\,
+2^{\mathrm{pr}_1 x}\cdot 3^{\mathrm{pr}_2 x})$ est fonctionnel, de domaine
+$\mathbf{N}\times\mathbf{N}$ (critère C54), injectif (W5 sur les projections,
+reconstruction $z = (\mathrm{pr}_1 z, \mathrm{pr}_2 z)$), d'image incluse dans
+$\mathbf{N}$ (les valeurs sont des entiers ; pont $x \in \mathbf{N}
+\Leftrightarrow \mathrm{Fini}\,x$ clos) ; d'où
+$\mathbf{N}\times\mathbf{N} \le \mathbf{N}$ par S5.
+\emph{W7} : Cantor--Bernstein sur W6 et la direction facile
+$\mathbf{N} \le \mathbf{N}\times\mathbf{N}$ (injection $x \mapsto (x, e)$, close
+antérieurement) conclut $\mathrm{Eq}(\mathbf{N}\times\mathbf{N}, \mathbf{N})$
+(2~h~53 de certification, chaîne complète).
+
+Trois leçons de capture nominale ont été consignées en route : la variable du terme
+C54 doit être fraîche quand le terme contient des $\tau$ à lieurs internes
+($\mathrm{pr}_1/\mathrm{pr}_2$) ; le paramètre $y$ des lemmes C54 reste au défaut
+(codé en dur dans \texttt{valeur\_caracterisation}) ; le lemme partagé
+\texttt{graphe\_terme\_domaine} récupère désormais le lieur réel si l'axiome du
+domaine $\alpha$-renomme (patch additif, non-régression vérifiée).
+
+\textbf{Statut.} CLOS (0 hypothèse), \texttt{theorie\_ensembles()==22} ; le test
+\texttt{test\_denombrable\_graphe\_pairing} verrouille $\mathbf{N}\times\mathbf{N}
+\le \mathbf{N}$ et l'équipotence finale.
+
+\subsection{§III.6, \theoreme{} 2 (Cantor, restatement littéral) --- $\mathfrak{a} < 2^{\mathfrak{a}}$}
+\textbf{Énoncé (Bourbaki, E III.30).} « Pour tout cardinal $\mathfrak{a}$, on a
+$\mathfrak{a} < 2^{\mathfrak{a}}$. »
+
+\textbf{Formalisé.} $\mathrm{est\_cardinal}(\mathfrak{a}) \Rightarrow
+\mathfrak{a} < 2^{\mathfrak{a}}$, où $2^{\mathfrak{a}} =
+\texttt{exposant\_cardinal\_binaire}(2, \mathfrak{a})$ est \emph{littéralement}
+$\mathrm{Card}\,\mathcal{F}(\mathfrak{a}; 2)$ --- en prenant $X := \mathfrak{a}$
+dès le départ, aucun pont d'équipotence n'est nécessaire sur l'exposant. \\
+Module : \texttt{prop12\_powerset/prop12\_card/\_cantor.py}
+(fonction-cible \texttt{theoreme\_deux\_cantor}).
+
+\textbf{Preuve (\Nstar).} \texttt{cantor\_deux\_exp} au terme $\mathfrak{a}$ donne
+$\mathrm{Card}\,\mathfrak{a} < 2^{\mathfrak{a}}$ ; sous
+$\mathrm{est\_cardinal}(\mathfrak{a})$, \texttt{cardinal\_de\_cardinal} fournit
+$\mathrm{Card}\,\mathfrak{a} = \mathfrak{a}$ et Leibniz (S6) réécrit le membre
+gauche ; la loi de déduction referme l'antécédent.
+
+\textbf{Statut.} CLOS (0 hypothèse), certifié en 18,7~s une fois la Proposition 12
+chargée.
+
+\subsection{§III.4.2, Proposition 2 (gardée) --- un cardinal majoré par un entier est un entier}
+\textbf{Énoncé (Bourbaki, E III.31).} « Soit $n$ un entier. Tout cardinal
+$\mathfrak{a}$ tel que $\mathfrak{a} \le n$ est un entier. »
+
+\textbf{Formalisé.} $\mathrm{est\_cardinal}(\mathfrak{a}) \Rightarrow
+(\forall x)\bigl((\mathfrak{a} \le x \wedge \mathrm{Fini}\,x) \Rightarrow
+\mathrm{Fini}\,\mathfrak{a}\bigr)$ --- la clôture descendante de $\mathrm{Fini}$,
+\emph{gardée} par $\mathrm{est\_cardinal}$ (la forme universelle nue est fausse
+pour $\mathfrak{a}$ non cardinal). \\
+Module : \texttt{iii\_4\_2\_finis\_props/ensembles\_prop2\_fini\_downward.py}.
+
+\textbf{Preuve (\Nstar).} \texttt{fini\_downward\_garde\_thm} (la récurrence C61
+« vraie ») porte deux hypothèses ; le résidu \texttt{predecesseur\_fini\_universel}
+est déchargé par sa preuve close (Proposition 2 §III.5), la garde passe en
+antécédent. Ce théorème ferme l'énoncé-cible historiquement reporté
+\texttt{prop2\_cardinal\_inf\_n\_est\_entier} ; sa contraposée (un cardinal infini
+n'est majoré par aucun entier) sert de brique à la campagne du Lemme 1.
+
+\textbf{Statut.} CLOS (0 hypothèse), certifié en 2~min~38.
