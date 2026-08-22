@@ -794,3 +794,18 @@ enonce_chaine_majoree_preuve → restructuration en 3 pas :
     chaine_recollement/ensembles_union_chaine_bijection, LE gros morceau).
 H1 (h1_decharge) est écrit, en test détaché (WMI — leçon : Start-Process
 depuis l'outil meurt avec le tour ; ([wmiclass]win32_process).Create survit).
+
+## 2026-08-22 21h39 — 📰 LES 4 ARTICLES SONT DÉPOSÉS SUR HAL
+A1 (Failure as a Theorem), A2 (The Last Mile Is Located), A3 (Charting the
+Open — Goldbach), A4 (The Walk Across the Last Mile) : déposés par Karl,
+compte HAL validé, licence CC BY 4.0, type pré-publication, chacun EN
+(fichier principal) + FR (joint), affiliation « Chercheur indépendant ».
+Première diffusion publique du projet. Identifiants HAL à ajouter ici dès
+que Karl les communique (à reporter aussi dans PLAN_ARTICLES.md et dans le
+README du dépôt). arXiv reste bloqué sur l'endorsement cs.LO — les 4 zips
+source sont prêts dans article/arxiv_soumission/ ; la présence HAL renforce
+la demande d'endorsement.
+SUITE ÉDITORIALE : v2-A1 enrichie des résultats du 22 août (la « récursion »
+déposée qui était une tabulation = 3ᵉ incident soundness≠fidélité ; C60-vrai
+→ C63-vrai ; Lemme 1 clos) — à préparer quand la campagne Hessenberg aura
+livré a²=a.
