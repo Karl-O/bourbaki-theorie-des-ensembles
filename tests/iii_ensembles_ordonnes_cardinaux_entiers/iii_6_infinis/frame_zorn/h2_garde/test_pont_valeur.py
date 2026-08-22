@@ -38,3 +38,22 @@ def test_surj_riche_et_image():
     assert t2.conclusion == egal(E.image(U, Prod), _US)
     assert len(t2.hypotheses) == 4
     assert len(E.theorie_ensembles().axiomes) == 22
+
+
+def test_bijection_sans_valeur():
+    """🎯🎯 ⊢ est_bijection_de(⋃𝔇, US×US, US) — les 3 hyps VALEUR dérivées."""
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import (
+        est_bijection_de,
+    )
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_6_infinis.frame_zorn.h2_garde.ensembles_pont_valeur import (
+        inj_valeur, bijection_sans_valeur,
+    )
+    U, Prod = union_famille(_D), E.produit(_US, _US)
+    assert inj_valeur().conclusion == E.injective_dans(U, Prod)
+    t = bijection_sans_valeur()
+    assert t.conclusion == est_bijection_de(U, Prod, _US)
+    # aucune des trois hypothèses VALEUR ne subsiste
+    assert egal(E.dom(U), Prod) not in t.hypotheses
+    assert E.injective_dans(U, Prod) not in t.hypotheses
+    assert E.est_surjective(U, Prod, _US) not in t.hypotheses
+    assert len(E.theorie_ensembles().axiomes) == 22

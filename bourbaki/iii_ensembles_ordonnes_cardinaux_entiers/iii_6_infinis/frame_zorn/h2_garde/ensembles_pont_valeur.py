@@ -37,9 +37,18 @@ from bourbaki.i_description_mathematique_formelle.i_4_theories_quantifiees.outil
 from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_2_bien_ordonnes.bon_ordre.recurrence_transfinie.ensembles_c60_coeur import (
     union_famille,
 )
+from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import (
+    est_bijection_de,
+)
+from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_6_infinis.chaine_recollement.ensembles_chaine_frame_membership import (
+    union_chaine_est_bijection,
+)
 from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_6_infinis.chaine_recollement.ensembles_chaine_surjective_frame import (
     union_chaine_dom, recollement_domaine, union_chaine_surjective,
     recollement_surjectif,
+)
+from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_3_equipotence_cardinaux.somme_produit_bornes.ensembles_injectif_graphe_pont import (
+    injectif_graphe_implique_injective_dans,
 )
 from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_6_infinis.chaine_recollement.ensembles_ponts_couple_valeur_surj import (
     domaine_couple, couple_domaine_implique_dom_egale,
@@ -134,4 +143,47 @@ def image_union_egale(D="Dchaine", US="USchaine"):
     return res
 
 
-__all__ = ["dom_union_egale", "surj_riche", "image_union_egale"]
+def inj_valeur(D="Dchaine", US="USchaine"):
+    """🎯 { fonctionnel(⋃𝔇), injectif_graphe(⋃𝔇), recollement_domaine, dom⊂US×US }
+       ⊢ injective_dans( ⋃𝔇, US×US ).
+
+    Le pont générique du dépôt donne injective_dans(F, dom F) ; le pont du
+    domaine identifie dom(⋃𝔇) à US×US, et Leibniz transporte."""
+    vD, vUS = _t(D), _t(US)
+    U = union_famille(vD)
+    Prod = E.produit(vUS, vUS)
+    sur_dom = injectif_graphe_implique_injective_dans(U)   # injective_dans(U, dom U)
+    dom_eq = dom_union_egale(D, US)                        # dom U = US×US
+    res = N.modus_ponens(sur_dom, equivalence_avant(N.modus_ponens(
+        dom_eq, N.s6(E.dom(U), Prod, "wij",
+                     E.injective_dans(U, var("wij"))))))
+    assert res.conclusion == E.injective_dans(U, Prod), "inj_valeur : forme"
+    assert len(res.hypotheses) == 4, "inj_valeur : hyps ≠ 4"
+    return res
+
+
+def bijection_sans_valeur(D="Dchaine", US="USchaine"):
+    """🎯🎯 union_chaine_est_bijection AVEC SES TROIS HYPOTHÈSES VALEUR DÉRIVÉES :
+       { famille_compatible, famille_dirigee, membres_injectifs,
+         recollement_surjectif, recollement_domaine,
+         dom(⋃𝔇)⊂US×US, image(⋃𝔇,US×US)⊂US }
+           ⊢ est_bijection_de( ⋃𝔇, US×US, US ).
+
+    Les trois hypothèses VALEUR que le dépôt portait faute de pont
+    (dom=US×US, injective_dans, image=US) sont désormais DÉRIVÉES du niveau
+    couple ; il ne reste que des données couple-natives et deux inclusions."""
+    vD, vUS = _t(D), _t(US)
+    U = union_famille(vD)
+    Prod = E.produit(vUS, vUS)
+    base = union_chaine_est_bijection(vD, vUS)
+    base = _cut(dom_union_egale(D, US), egal(E.dom(U), Prod), base)
+    base = _cut(inj_valeur(D, US), E.injective_dans(U, Prod), base)
+    base = _cut(image_union_egale(D, US), E.est_surjective(U, Prod, vUS), base)
+    assert base.conclusion == est_bijection_de(U, Prod, vUS),         "bijection_sans_valeur : forme"
+    assert egal(E.dom(U), Prod) not in base.hypotheses,         "bijection_sans_valeur : hyp dom non déchargée"
+    assert E.injective_dans(U, Prod) not in base.hypotheses,         "bijection_sans_valeur : hyp injective non déchargée"
+    return base
+
+
+__all__ = ["dom_union_egale", "surj_riche", "image_union_egale", "inj_valeur",
+           "bijection_sans_valeur"]
