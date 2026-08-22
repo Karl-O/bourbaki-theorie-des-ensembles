@@ -884,3 +884,19 @@ lui-même se vérifie en 7 s (h1_sous_lemmes). Test marqué slow : à relancer
 seulement quand la chaîne amont change.
 RESTE pour Hessenberg : le seul résidu H2 (recollement de chaîne), en deux
 chaînons (α) ordre→famille et (β) couple→valeur.
+
+## 2026-08-23 01h30 — (α) : la cible exacte du pont, et une simplification
+temoin_couple(C) = (union_premiere(C), union_seconde(C)) — donc le résidu H2
+porte littéralement sur ⋃S(C) et ⋃φ(C), pas sur une famille de graphes.
+union_chaine_dans_frame, lui, conclut sur (US, union_famille(𝔇)).
+DEUX VOIES pour raccorder :
+ (i) construire 𝔇 := pr₂⟨C⟩ et prouver union_famille(𝔇) = union_seconde(C)
+     (extensionnalité entre deux axiomes de même forme : w∈⋃𝔇 ⇔ (∃g)(g∈𝔇 ∧ w∈g)
+     et x∈⋃φ(C) ⇔ (∃p)(p∈C ∧ x∈pr₂p) ; le maillon central est un va-et-vient
+     d'existentielles via membre_image + membre_graphe_terme) ;
+ (ii) PLUS DIRECT — refaire union_chaine_est_bijection/union_chaine_dans_frame
+     directement sur ⋃φ(C) : leurs preuves n'utilisent de ⋃𝔇 que sa
+     caractérisation membre-à-membre, et membre_union_seconde en fournit une
+     de même forme. À vérifier module par module, mais cela éviterait tout
+     le pont (i).
+DÉCISION : tenter (ii) d'abord (moins de dette), (i) en repli.
