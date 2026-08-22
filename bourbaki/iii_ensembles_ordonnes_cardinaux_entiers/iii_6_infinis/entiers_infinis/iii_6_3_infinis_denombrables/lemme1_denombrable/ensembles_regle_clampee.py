@@ -172,5 +172,55 @@ def regle_clampee_bornee(u, x0, e, zname="zcl", yname="ycl", p="pgv"):
     return res
 
 
+def clamp_eval(t, e, x0, zname="zcl"):
+    """{ t∈E } ⊢ clamp_E(t) = t   (le rabatteur est l'identité sur E).
+
+    Garde-disjonction : la garde gauche (t∈E) est vraie, la droite (¬(t∈E))
+    réfutée par ¬¬(t∈E) ; S7 puis S5+existe_temoin évaluent le τ à t."""
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_5_calcul_entiers.iii_5_8_factorielle.ensembles_factorielle_zero import _nn
+    from bourbaki.i_description_mathematique_formelle.i_5_theories_egalitaires.i_5_2_tactiques_abrege_egalite import composer_egalites
+    vt, ve, vx0 = _t(t), _t(e), _t(x0)
+    C = clamp_E(vt, ve, vx0, zname)
+    cond = C.args[0]
+    vz = var(zname)
+    R = egal(vz, vt)
+    S_part = egal(vz, vx0)
+
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_3_3_operations_cardinaux.iii_3_3_somme.ensembles_somme_equipotence import _garde_disjonction
+    h_t = N.assume(appartient(vt, ve))                      # t∈E     [HONNÊTE]
+    gd = _garde_disjonction(h_t, _nn(h_t), R, S_part)       # cond ⇔ (z=t)
+    gen = N.generalisation(zname, gd)
+    tau_eq = N.modus_ponens(gen, N.s7(cond, R, zname))      # τ(cond)=τ(z=t)
+    tau_val = N.modus_ponens(
+        N.modus_ponens(N.reflexivite(vt), N.s5(R, vt, zname)),
+        N.existe_temoin(R, zname))                          # τ(z=t)=t
+    res = composer_egalites(tau_eq, tau_val)
+    assert res.conclusion == egal(C, vt), "clamp_eval : ≠ clamp(t)=t"
+    assert list(res.hypotheses) == [appartient(vt, ve)], "clamp_eval : hyps"
+    return res
+
+
+def iteration_dedekind(u, x0, e, zname="zcl", yname="ycl"):
+    """🎯 K6b : { x0∈E } ⊢ (∃gcap)( g(0)=x0 ∧ (∀n∈ℕ)(g(succ n)=S_c(g(n))) ).
+
+    L'itération C63-vraie de la règle clampée S_c = clamp_E∘u, la borne V:=E
+    DÉCHARGÉE par regle_clampee_bornee — il ne reste que x0∈E.  Le
+    « déclampage » (S_c(g(n)) = u(g(n)) sous g(n)∈E) est l'affaire de K6c."""
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_2_bien_ordonnes.bon_ordre.recurrence_transfinie.rec_veritable.couverture_rec.capstone.ensembles_c63_vrai import (
+        corps_c63, iteration_complete,
+    )
+    vu, vx0, ve = _t(u), _t(x0), _t(e)
+    T, S_c = regle_clampee(u, x0, e, zname, yname)
+    it = iteration_complete(S_c, vx0, V=ve, yname=yname)    # {regle_dans_V(T, E)}
+    res = N.modus_ponens(regle_clampee_bornee(u, x0, e, zname, yname),
+                         N.loi_deduction(regle_dans_V(T, ve), it))
+    from bourbaki.i_description_mathematique_formelle.i_1_termes_relations.outil_formule import existe
+    assert res.conclusion == existe("gcap", corps_c63(S_c, vx0)), \
+        "iteration_dedekind : forme"
+    assert list(res.hypotheses) == [appartient(vx0, ve)], \
+        "iteration_dedekind : hyps ≠ {x0∈E}"
+    return res
+
+
 __all__ = ["tiers_exclu", "clamp_E", "regle_clampee", "clamp_dans_E",
-           "regle_clampee_bornee"]
+           "regle_clampee_bornee", "clamp_eval", "iteration_dedekind"]
