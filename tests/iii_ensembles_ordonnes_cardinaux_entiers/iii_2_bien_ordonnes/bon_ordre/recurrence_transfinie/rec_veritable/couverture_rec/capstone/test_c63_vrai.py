@@ -14,7 +14,7 @@ from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_2_bien_ordonnes.bon_o
     regle_iteration_vraie,
 )
 from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_2_bien_ordonnes.bon_ordre.recurrence_transfinie.rec_veritable.couverture_rec.capstone.ensembles_c63_vrai import (
-    corps_c63, iteration_complete,
+    corps_c63, iteration_complete, corps_c63_fort, iteration_complete_forte,
 )
 
 
@@ -30,4 +30,13 @@ def test_iteration_complete():
     assert t.conclusion == existe("gcap", corps_c63(_S, ZERO))
     assert list(t.hypotheses) == [regle_dans_V(T, "Vitv")]
     assert t.conclusion not in t.hypotheses
+    assert len(E.theorie_ensembles().axiomes) == 22
+
+
+def test_iteration_complete_forte():
+    """🎯 {règle bornée} ⊢ (∃g)( func g ∧ dom g=ℕ ∧ corps_c63 )."""
+    t = iteration_complete_forte(_S, ZERO)
+    T = regle_iteration_vraie(_S, ZERO)
+    assert t.conclusion == existe("gcap", corps_c63_fort(_S, ZERO))
+    assert list(t.hypotheses) == [regle_dans_V(T, "Vitv")]
     assert len(E.theorie_ensembles().axiomes) == 22

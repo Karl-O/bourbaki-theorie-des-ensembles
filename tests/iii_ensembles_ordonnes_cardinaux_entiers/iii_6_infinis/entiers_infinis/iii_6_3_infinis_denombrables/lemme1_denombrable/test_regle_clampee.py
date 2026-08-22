@@ -9,7 +9,7 @@ from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_2_bien_ordonnes.bon_o
 )
 from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_6_infinis.entiers_infinis.iii_6_3_infinis_denombrables.lemme1_denombrable.ensembles_regle_clampee import (
     clamp_E, regle_clampee, clamp_dans_E, regle_clampee_bornee,
-    clamp_eval, iteration_dedekind,
+    clamp_eval, iteration_dedekind, iteration_dedekind_forte,
 )
 
 _U, _X0, _E = var("uld"), var("xze"), var("Eld")
@@ -50,5 +50,18 @@ def test_iteration_dedekind():
     t = iteration_dedekind(_U, _X0, _E)
     _, S_c = regle_clampee(_U, _X0, _E)
     assert t.conclusion == existe("gcap", corps_c63(S_c, _X0))
+    assert list(t.hypotheses) == [appartient(_X0, _E)]
+    assert len(E.theorie_ensembles().axiomes) == 22
+
+
+def test_iteration_dedekind_forte():
+    """🎯 K6e-amont : {x0∈E} ⊢ (∃g)( func g ∧ dom g=ℕ ∧ corps_c63(S_c, x0) )."""
+    from bourbaki.i_description_mathematique_formelle.i_1_termes_relations.outil_formule import existe
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_2_bien_ordonnes.bon_ordre.recurrence_transfinie.rec_veritable.couverture_rec.capstone.ensembles_c63_vrai import (
+        corps_c63_fort,
+    )
+    t = iteration_dedekind_forte(_U, _X0, _E)
+    _, S_c = regle_clampee(_U, _X0, _E)
+    assert t.conclusion == existe("gcap", corps_c63_fort(S_c, _X0))
     assert list(t.hypotheses) == [appartient(_X0, _E)]
     assert len(E.theorie_ensembles().axiomes) == 22

@@ -222,5 +222,27 @@ def iteration_dedekind(u, x0, e, zname="zcl", yname="ycl"):
     return res
 
 
+def iteration_dedekind_forte(u, x0, e, zname="zcl", yname="ycl"):
+    """🎯 K6e-amont : { x0∈E } ⊢ (∃gcap)( func ∧ dom=ℕ ∧ corps_c63(S_c, x0) ).
+
+    Comme iteration_dedekind, mais l'∃ garde la fonctionnalité et le domaine
+    du témoin (iteration_complete_forte) — le témoin d'équipotence du Lemme 1."""
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_2_bien_ordonnes.bon_ordre.recurrence_transfinie.rec_veritable.couverture_rec.capstone.ensembles_c63_vrai import (
+        corps_c63_fort, iteration_complete_forte,
+    )
+    vu, vx0, ve = _t(u), _t(x0), _t(e)
+    T, S_c = regle_clampee(u, x0, e, zname, yname)
+    it = iteration_complete_forte(S_c, vx0, V=ve, yname=yname)
+    res = N.modus_ponens(regle_clampee_bornee(u, x0, e, zname, yname),
+                         N.loi_deduction(regle_dans_V(T, ve), it))
+    from bourbaki.i_description_mathematique_formelle.i_1_termes_relations.outil_formule import existe
+    assert res.conclusion == existe("gcap", corps_c63_fort(S_c, vx0)), \
+        "iteration_dedekind_forte : forme"
+    assert list(res.hypotheses) == [appartient(vx0, ve)], \
+        "iteration_dedekind_forte : hyps ≠ {x0∈E}"
+    return res
+
+
 __all__ = ["tiers_exclu", "clamp_E", "regle_clampee", "clamp_dans_E",
-           "regle_clampee_bornee", "clamp_eval", "iteration_dedekind"]
+           "regle_clampee_bornee", "clamp_eval", "iteration_dedekind",
+           "iteration_dedekind_forte"]
