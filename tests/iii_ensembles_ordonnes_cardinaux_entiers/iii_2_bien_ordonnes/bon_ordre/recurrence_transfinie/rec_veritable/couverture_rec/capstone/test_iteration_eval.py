@@ -20,7 +20,7 @@ from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_2_bien_ordonnes.bon_o
     regle_iteration_vraie,
 )
 from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_2_bien_ordonnes.bon_ordre.recurrence_transfinie.rec_veritable.couverture_rec.capstone.ensembles_iteration_eval import (
-    valeur_zero_iteration,
+    valeur_zero_iteration, valeur_succ_iteration,
 )
 
 
@@ -36,4 +36,24 @@ def test_valeur_zero_iteration():
     assert t.conclusion == egal(E.valeur(var("gcap"), ZERO), ZERO)
     hyps = list(t.hypotheses)
     assert hyps == [est_solution_rec(var("gcap"), T, G_ordre_NN(), ensemble_NN())]
+    assert len(E.theorie_ensembles().axiomes) == 22
+
+
+def test_valeur_succ_iteration():
+    """🎯 {sol(g), n∈ℕ} ⊢ g(succ n)=S(g(n)) — la seconde équation de C63."""
+    from bourbaki.i_description_mathematique_formelle.i_1_termes_relations.outil_formule import (
+        appartient,
+    )
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_4_entiers_finis.iii_4_1_definitions_premiers_entiers.ensembles_entiers import (
+        successeur,
+    )
+    t = valeur_succ_iteration(_S, ZERO)
+    T = regle_iteration_vraie(_S, ZERO)
+    vn = var("nitv")
+    assert t.conclusion == egal(E.valeur(var("gcap"), successeur(vn)),
+                                _S(E.valeur(var("gcap"), vn)))
+    hyps = list(t.hypotheses)
+    assert len(hyps) == 2
+    assert est_solution_rec(var("gcap"), T, G_ordre_NN(), ensemble_NN()) in hyps
+    assert appartient(vn, ensemble_NN()) in hyps
     assert len(E.theorie_ensembles().axiomes) == 22
