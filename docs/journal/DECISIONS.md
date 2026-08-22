@@ -715,3 +715,26 @@ rec_veritable/couverture_rec/capstone/…NON — iii_6_infinis/ côté Lemme 1 ?
 MIEUX : le chantier K6-L1 est du §III.6.3 (Lemme 1 de Hessenberg) →
 iii_6_infinis/entiers_infinis/iii_6_3_infinis_denombrables/ (vérifier place
 libre : ls) ou nouveau sous-dossier lemme1_denombrable/ là-bas.
+
+## 2026-08-22 — Plan « machine » (discussion Karl, après-midi)
+Karl demande si le projet peut faire de la recherche au-delà de la retranscription
+(« on a le bac à sable, manque plus qu'à créer la machine »). Plan retenu, à lancer
+APRÈS la campagne Hessenberg (le noyau LCF = arbitre incorruptible, jamais modifié) :
+1. **Étage 1 — automate déterministe** : tautologies propositionnelles (S1-S4),
+   chaînes d'égalités, instanciations ∀ évidentes. Accélère le chantier lui-même.
+2. **Étage 2 — chaînage arrière** sur la bibliothèque de lemmes + force brute sur
+   les énoncés combinatoires finis (premières preuves trouvées par la machine).
+3. **Étage 3 — LLM suggéreur de tactiques + noyau juge** (« LLM + calcul du τ »,
+   sujet vierge ; lucidité : corpus petit vs mathlib, pas d'AlphaProof maison).
+En parallèle, **métamathématique empirique** : déplieur-compteur du terme « 1 » de
+Bourbaki (vérifier l'estimation de Mathias ~10^54 symboles) — résultat original
+publiable, ne demande pas de prouveur. Aucune conjecture célèbre visée : la valeur
+recherche = 1ʳᵉ mécanisation intégrale de Bourbaki + mesures métamathématiques.
+
+## 2026-08-22 — K6d CLOS : l'injectivité complète de l'itérée (591e5f2)
+`injectivite_iteree` {corps, x0∈E, u⊂E×E, dom u=E, hors, inj : 6 hyps} ⊢
+(∀n∈ℕ)(∀m∈ℕ)(g(m)=g(n)⇒m=n). C61 sur P(n)=(∀m∈ℕ)(g(m)=g(n)⇒m=n), patron W3
+(tiers exclu m=0, pfu CLOS, témoin kpred éliminé par branche, Fini k par
+Leibniz+Prop.1). Briques 1-2 (4ad7cd8) consommées. Vert premier coup (6 min).
+Prochain : K6e — Eq(ℕ, image de g), puis D1 (construire (u,x0) réels sous
+est_infini(Card E)) → Lemme 1 → Hessenberg.
