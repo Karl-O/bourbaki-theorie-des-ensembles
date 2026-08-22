@@ -658,3 +658,27 @@ le trou DANS S(valeur(u,·)) + h2/segment_succ_est_intervalle +
 max_intervalle_vaut_n_entier{est_entier n : pont Fini→est_entier à vérifier}] ;
 valeur(u,n)=g(n) [restriction_valeur coupures] ; réécritures congruence_terme
 trou wits dans S(valeur(u, ·)) puis S(·) → chaîne → g(succ n)=S(g(n)).
+
+## 2026-08-22 16h05 — 🏆🏆🏆 R8' COMPLET : LE C63 VÉRITABLE (l'itération du livre)
+iteration_complete {regle_dans_V} ⊢ (∃g)(g(0)=a ∧ ∀n∈ℕ g(succ n)=S(g(n)))
+— LA CHAÎNE C60-vrai→C63-vrai est entière et certifiée noyau, en une journée
+de boucle (~30 ticks). Modules capstone/ : 9 (capstone_rec, domaine_global,
+equation_globale, unicite_globale, critere_c60_vrai, iteration_N,
+iteration_eval, c63_vrai + init). Tests capstone ~3-5 min chacun
+(re-certification bo_graphe_NN/segment_zero à chaque appel — DETTE PERF
+notée : mémoïser bo_graphe_NN() et t-briques si les chaînes K6+ deviennent
+lentes ; cache par module-level UNE FOIS calculé interdit (zéro théorème au
+niveau module) → passer par fixture pytest ou lru_cache sur les fonctions
+0-argument ? lru_cache est PUR (mêmes objets Theoreme immuables) — décision
+au besoin).
+PROCHAIN — K6-K7 (le pont vers Lemme 1) : PLAN (à raffiner au tick avec le
+vieux plan DECISIONS « route Dedekind D1-D4 ») : donnée = E avec u:E→E
+INJECTIVE et x0∈E∖im(u) (la caractérisation Dedekind de l'infini) ; S:=u,
+a:=x0 → iteration_complete fournit g : g(0)=x0, g(n+1)=u(g(n)) ; K6 =
+injectivité de g (récurrence C61 double ou « m<n ⇒ g(m)≠g(n) » : le patron
+du livre §III.6.4 — LIRE E III.49 + V7 avant) ; K7 = D:=im g ⊂ E, Eq(ℕ,D)
+(graphe_terme/W6-patron) ; D1 = pour E INFINI, obtenir (u, x0) — c'est le
+théorème « infini ⇒ Dedekind-infini » (utilise AC/bon ordre : LIRE la
+démonstration du livre §III.6.4 Th.4/Cor avant de designer) ; L1 =
+{Inf(Card E)} ⊢ (∃D)(D⊂E ∧ Eq(D,ℕ)) ; puis H1-décharge sous Inf, H2-garde,
+Hessenberg a²=a 🏆 CIBLE 2.
