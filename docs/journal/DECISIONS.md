@@ -240,3 +240,23 @@ PROCHAIN : lire la conclusion EXACTE du capstone (c62_fonction_globale +
 c62_recursion_sur_N l.106 : signature (vh, e=Enat, G=Gle, V=Uval...) — vh ?
 sous quelles hypothèses ; puis tests miroir iii_6_2 pour l'état vert).
 Ensuite D1 (bijection Dedekind → g, e₀), D3 (injectivité C61), D4 (image).
+
+## 2026-08-22 09h55 — PANORAMA L1 (honnête) : trois routes, trois chantiers
+C62 est VERT (39 passed) et conclut fonction_recursion_c62 :
+{bo, ebf, rc} ⊢ (∃f)(fonctionnel ∧ dom=E ∧ ∀z(z∈E ⇒ f(z)=T(z))) — MAIS
+l'équation est au niveau VALEUR-RÈGLE (T appliquée au POINT z), pas encore
+f(z)=T{f|seg(z)} : le PONT-RESTRICTION est « le chantier suivant » (docstring
+fonction_existence). L'itération D2 (f(n+1)=S{f(n)}) en dépend. De plus 3
+résidus C62 {bo, ebf, rc} à identifier/décharger pour E=ℕ.
+ROUTES L1 : (1) trichotomie — résidus R1-R4, R3 bloqué (axiome opaque de h) ;
+(2) Dedekind — pont-restriction C62 + 3 résidus ; (3) cardinale — sup absent.
+DÉCISION : continuer (2) — l'infrastructure essais/famille est VERTE et le
+pont-restriction est un chantier LOCALISÉ (l'équation d'essai contient déjà
+la lecture de la restriction : il s'agit de la faire remonter à f=⋃𝔇).
+PROCHAIN : lire les 3 résidus {bo, ebf, rc} (fonction_domaine) + l'équation
+d'essai (est_essai) + évaluer le pont pour la FORME ITÉRATION précisément
+(pour regle_iteration, T(z) au point vs T{restriction} : la règle τ lit
+u(M(Du)) — au point z, T(z) est... relire la définition exacte).
+NOTE session : la CIBLE 2 complète (a²=a 0-hyp) reste un chantier de
+plusieurs jours ; les jalons de session (Cantor, L2, Prop.2) sont déjà
+poussables — PUSH JALON dès que Karl est là.
