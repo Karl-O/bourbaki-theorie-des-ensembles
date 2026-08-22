@@ -682,3 +682,36 @@ théorème « infini ⇒ Dedekind-infini » (utilise AC/bon ordre : LIRE la
 démonstration du livre §III.6.4 Th.4/Cor avant de designer) ; L1 =
 {Inf(Card E)} ⊢ (∃D)(D⊂E ∧ Eq(D,ℕ)) ; puis H1-décharge sous Inf, H2-garde,
 Hessenberg a²=a 🏆 CIBLE 2.
+
+## 2026-08-22 16h12 — K6 : LE VERROU V-BORNE TRANCHÉ (la règle clampée)
+PROBLÈME : iteration_complete exige regle_dans_V(T,V) = (∀p)(T(p)∈V) — pour
+T_{S,a} avec S=valeur(u,·), T(p)=S(p(M)) est du bruit-τ hors-domaine : AUCUN
+V-ensemble ne contient les sorties sur TOUS les p. L1 ne pourrait pas clore.
+SOLUTION (dérivable !) : la RÈGLE CLAMPÉE
+  clamp_E(t) := τ_z( (t∈E ∧ z=t) ∨ (¬(t∈E) ∧ z=x0) )
+  T_E(p) := τ_y( (p=∅ ∧ y=x0) ∨ (¬(p=∅) ∧ y=clamp_E(S(p(M)))) )
+regle_dans_V(T_E, E) SE PROUVE sous {x0∈E} seul : (1) (∃y)cond TOUJOURS
+(tiers exclu sur p=∅ : témoin x0 ou témoin clamp) ; (2) existe_temoin :
+cond(τ) ; (3) par cas, les deux disjoints forcent y∈E (y=x0∈E Leibniz ;
+y=clamp(…)∈E par le même argument un niveau plus bas : tiers exclu sur
+t∈E, les deux branches donnent z∈E) → T_E(p)∈E ; generalisation p.
+COÛT : re-dériver les τ-évals pour T_E : (a) T_E(∅)=x0 (même patron
+garde-disjonction) ; (b) clamp-éval {t∈E} ⊢ clamp_E(t)=t (garde-disjonction
+encore) ; (c) au succ : T_E(u)=clamp(S(u(M)))=…=S(g(n)) sous S(g(n))∈E —
+fourni par la C61-induction « g(n)∈E » (g(0)=x0∈E ; g(n+1)=u(g(n)), u
+application E→E totale : valeur∈E par le lemme image/application à trouver).
+NOTE : iteration_complete/iteration_N_vrai sont PARAMÉTRIQUES en S/a/V —
+K6 les instancie avec S_clampé et V:=E-terme (les params acceptent termes).
+Les lemmes t_iter_en_vide/valeur_succ_iteration sont liés à
+regle_iteration_vraie : K6 aura ses PROPRES variantes clampées (patrons
+identiques, ~3 briques) — PAS de modification des modules existants.
+ORDRE K6 : (K6a) module clamp : clamp_E, T_clamp, regle_bornee_clamp
+{x0∈E}⊢regle_dans_V(T_clamp, E) [tiers exclu : grep tiers_exclu\|
+tertium\|excluded pour le lemme A∨¬A] ; (K6b) τ-évals clampées ;
+(K6c) g(n)∈E par C61 ; (K6d) injectivité D3 (C61, e0∉im sépare) ;
+(K6e) D4 image + Eq(ℕ,D) ; puis D1 (bijection Dedekind→(u,x0)) et L1.
+Emplacement : capstone/ PLEIN (10) → nouveau sous-dossier
+rec_veritable/couverture_rec/capstone/…NON — iii_6_infinis/ côté Lemme 1 ?
+MIEUX : le chantier K6-L1 est du §III.6.3 (Lemme 1 de Hessenberg) →
+iii_6_infinis/entiers_infinis/iii_6_3_infinis_denombrables/ (vérifier place
+libre : ls) ou nouveau sous-dossier lemme1_denombrable/ là-bas.
