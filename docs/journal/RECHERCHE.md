@@ -288,3 +288,27 @@ Briques repérées : `frame_ordre_membre_t` (frame_zorn/ensembles_frame_ordre_ax
 
 Ordre d'attaque révisé : (4) dirigée d'abord — elle donne (2) immédiatement —
 puis (3) compatible, qui donne (6). Restera (1), (7), (9), (10).
+
+### R-13, suite (07h30) — donnée (4) dirigée : essai 2/4, deux étages sur trois
+
+Module écrit : `h2_garde/claim/ensembles_famille_dirigee.py` (marqué EN CHANTIER).
+
+**Ce qui PASSE** : l'α-renommage du second témoin — `membre_famille` fixe le
+nom de son liant existentiel, l'appeler deux fois donnait deux ∃ homonymes
+impossibles à éliminer imbriqués sans capture — et `_branche`, qui tire
+X ⊂ Y de la comparabilité dans Γ𝔉 en transportant par les deux égalités
+X = pr₂(u), Y = pr₂(v).
+
+**Ce qui ÉCHOUE** : l'introduction existentielle finale (S5). La mineure
+`((q∈𝔇 et p⊂q) et q⊂q)` ne coïncide pas avec le corps de `famille_dirigee`
+substitué en r := q.
+
+**Piège déjà rencontré et corrigé en route** : `inclus` construit un ∀ — il
+n'a donc pas d'attribut `.termes`. Relire un terme sur une conclusion de type
+inclusion lève un IndexError ; il faut prendre les termes sur les ÉGALITÉS.
+
+**Suspect n°1 pour le prochain essai** : le LIANT interne de l'inclusion.
+`inclus(t,u,z="z")` change de liant si « z » est libre dans t ou u, et
+`inclusion_reflexive_terme` pourrait en produire un troisième. Méthode :
+comparer les deux formules terme à terme (booléens seulement) AVANT de
+retoucher la preuve — ne pas deviner.
