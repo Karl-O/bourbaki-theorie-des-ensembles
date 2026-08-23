@@ -765,3 +765,58 @@ Trois raisons, dans cet ordre :
      explicite — pas d'être attaqué en fin de chaîne.
 
 À arbitrer par Karl, mais l'écart de risque entre les deux options est net.
+
+
+## R-12 — AVANCEMENT (2026-08-23, après-midi) : 3 étapes sur 4
+
+| étape | contenu | statut |
+|---|---|---|
+| 1 | Prop. 13 RENFORCÉE : `(∃c)(est_cardinal(c) et Card a = b+c)` | ✅ CLOSE, 5,8 s, 0 hyp (commit 478788d) |
+| 2 | `diff_cardinale := τc.(est_cardinal(c) et a = b+c)` + garde + équation | ✅ 6,2 s / 6,4 s, 3 gardes (commit 06ca386) |
+| 3 | `Fini(a−b)` sur la downward-closure GARDÉE | 🔄 écrit, sonde en cours |
+| 4 | recâblage des 2 modules de division euclidienne | ⏳ à faire |
+
+**Ce que les étapes 1 et 2 ont confirmé.** Le diagnostic de la requalification
+était juste, et la réparation aussi bon marché qu'annoncé : le témoin de la
+Prop. 13 était **déjà** `Card(a ∖ Im)`, donc déjà un cardinal ; il suffisait de
+le DIRE avant le S5 final. Deux lignes de fond, sous un paramètre `fort` qui
+laisse la version historique intacte (non-régression testée).
+
+Et un seul `existe_temoin` sur le τ gardé livre les DEUX faits — la garde
+`est_cardinal(a−b)` ET l'équation `a = b + (a−b)`. C'est ce qui rendra l'étape 4
+mécanique plutôt que coûteuse.
+
+**Une simplification non prévue à l'étape 3.** `_diff_inf_egal` (version
+`diff_somme`) établissait `(a−b) ≤ a` par l'invariance de ≤ sous équipotence.
+Avec le τ gardé, l'équation caractéristique la donne directement : la différence
+s'injecte dans la somme dont elle est un terme (`inf_egal_somme_droite`), puis
+le pont ENSEMBLE → CARDINAL. Trois pas au lieu d'une machinerie.
+
+**Structure** : le dossier `iii_5_2_inegalites_ordre_soustraction` ayant atteint
+10 entrées, les deux nouveaux modules sont dans `soustraction_cardinale/`
+(règle des ≤10, éclatement par thème du livre).
+
+**Étape 4 : bien moins coûteuse que je ne l'avais d'abord écrit — VÉRIFIÉ.**
+
+J'avais noté ici que les énoncés de la division mentionnaient `diff_somme` et
+qu'il faudrait donc revérifier leur fidélité au PDF. **C'est faux**, et la
+lecture du code le montre :
+
+    _R_rel(b, cible) = (∃q)(∃r)( b·q + r = cible  et  r < b )
+    enonce_division_euclidienne = _R_rel(b, a)  et  clôture de l'unicité
+
+Aucune trace de `diff_somme` : c'est l'énoncé de Bourbaki, tel quel. La
+soustraction n'apparaît que dans la MACHINERIE INTERNE de la preuve —
+`_strong_step`, `_diff_est_fini`, `_diff_strict` — où `n − b` sert de mesure
+pour la récurrence forte.
+
+**Conséquence** : le recâblage est purement interne. Les énoncés finaux ne
+bougent pas, donc leur fidélité n'est pas en jeu ; ce qui change est la VALEUR
+des théorèmes, qui cessent d'être vides. C'est exactement la réparation
+souhaitée, sans le risque que je craignais.
+
+**Ce qui reste à faire** : porter `_diff_est_fini` et `_diff_strict` sur
+`diff_cardinale`, puis `_strong_step` qui les consomme. Le point d'attention est
+que la mesure de récurrence doit rester la MÊME expression tout du long — mêler
+`diff_somme` et `diff_cardinale` dans une même récurrence produirait des termes
+τ distincts et des « mineure ≠ antécédent » en cascade.

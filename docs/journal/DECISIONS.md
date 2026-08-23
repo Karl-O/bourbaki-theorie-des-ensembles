@@ -1402,3 +1402,32 @@ qu'un résultat est bloqué par ses prérequis.
 **Comment on le CONSTATE plutôt que de l'espérer** : les tests miroirs vérifient
 la LISTE EXACTE des hypothèses, pas leur nombre. Une brique qui réintroduirait
 une famille ferait apparaître une hypothèse supplémentaire, et le test tomberait.
+
+
+## 2026-08-23 — LEÇON 25 : le SENS de l'équivalence S6, et comment le trancher en 10 s
+
+Encore un « mineure ≠ antécédent », et encore la même parade (LEÇON 18) : ne pas
+retoucher la preuve, comparer les formules. Mais le diagnostic mérite d'être
+nommé, parce qu'il revient à chaque réécriture de Leibniz.
+
+`N.s6(t, u, w, motif)` sous `t = u` produit `motif[t] ⇔ motif[u]`. Donc :
+  · `equivalence_avant`   donne  motif[t] ⇒ motif[u]  (on part de la GAUCHE) ;
+  · `equivalence_arriere` donne  motif[u] ⇒ motif[t]  (on part de la DROITE).
+
+Le choix ne dépend PAS de la direction dans laquelle on lit l'égalité, mais de
+**quel membre on tient déjà**. Ici, sous `a = b + (a−b)` et avec le motif
+`d ≤ ·`, on tenait `d ≤ b+(a−b)` — le membre DROIT — et l'on voulait `d ≤ a`.
+Donc `arriere`. J'avais écrit `avant` par réflexe.
+
+**Le diagnostic mécanique, à réutiliser tel quel** : construire les deux formes,
+extraire leur antécédent par `antecedent_consequent`, et comparer chacune à la
+formule qu'on tient :
+
+    av, _ = antecedent_consequent(equivalence_avant(s6).conclusion)
+    ar, _ = antecedent_consequent(equivalence_arriere(s6).conclusion)
+    print(av == acquis, ar == acquis)      # exactement un des deux est True
+
+Dix secondes, une réponse binaire, aucun essai perdu. Le même script a confirmé
+au passage que l'AUTRE modus ponens du module (la transitivité du pont
+ENSEMBLE → CARDINAL) était correct — ce qui évite de le suspecter et de le
+« corriger » inutilement, faute la plus coûteuse devant ce message d'erreur.
