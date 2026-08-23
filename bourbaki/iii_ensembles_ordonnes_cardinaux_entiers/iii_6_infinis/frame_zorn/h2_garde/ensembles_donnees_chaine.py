@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """§III.6.3 — H2 : LES DONNÉES DU RECOLLEMENT, TIRÉES DE « C CHAÎNE NON VIDE ».
 
-🎯 CIBLES (les hypothèses que `frame_de_recollement` réclame, dérivées) :
+🎯 CIBLES — DEUX des neuf données que `frame_de_recollement` réclame, DÉRIVÉES :
 
     us_inclus_E   : { chaîne(Γ𝔉,𝔉,C) }            ⊢ ⋃S(C) ⊂ E
     us_infini     : { chaîne(Γ𝔉,𝔉,C), C≠∅ }       ⊢ est_infini_ensemble( ⋃S(C) )
@@ -10,6 +10,13 @@ Deux des données les plus simples : la réunion des premières projections
 reste incluse dans E (chaque membre du frame a la sienne incluse), et elle
 est infinie dès que la chaîne a un membre (celui-ci a déjà une première
 projection infinie).  C'est ici que « C non vide » sert vraiment.
+
+⚠️ LE PIÈGE QUI LES AVAIT BLOQUÉES (2026-08-23).  `membre_union_premiere`
+attend des NOMS de variables — il applique `var()` lui-même.  Lui passer des
+Termes fabriquait une variable bâtarde (une variable dont le nom EST un Terme),
+et le modus ponens échouait sur « mineure ≠ antécédent ».  Rien à voir avec un
+piège τ : une simple API mal appelée, qui avait fait classer le module en
+chantier.  Règle : vérifier si une fonction prend des noms ou des termes.
 
 theorie_ensembles() INCHANGÉE (22).  Noyau INTACT.
 """
@@ -104,7 +111,7 @@ def pr1_inclus_E(E_set="E", p="pmemb"):
 
 
 def us_inclus_E(E_set="E", C="Cch", x="xdc", p="punionpr"):
-    """⚠️ EN CHANTIER (ne pas importer) : { chaîne } ⊢ ⋃S(C) ⊂ E.
+    """🎯 { chaîne(Γ𝔉,𝔉,C) } ⊢ ⋃S(C) ⊂ E.   [1 hyp].
 
     Point à point : x∈⋃S donne un p∈C avec x∈pr₁(p) ; la chaîne étant
     incluse dans 𝔉, pr₁(p)⊂E, donc x∈E."""
@@ -113,7 +120,9 @@ def us_inclus_E(E_set="E", C="Cch", x="xdc", p="punionpr"):
     Gam, Fr = frame_ordre(vE), frame_pair(vE)
     h_ch = N.assume(chaine(Gam, Fr, vC, "xmaj", "y", "z"))
     C_inc = conjonction_elim_gauche(h_ch)                   # C⊂𝔉
-    mem = membre_union_premiere(vC, vx)
+    #  ⚠️ `membre_union_premiere` attend des NOMS (il applique var() lui-même) :
+    #  lui passer des Termes fabrique une variable bâtarde et le modus ponens rate.
+    mem = membre_union_premiere(C, x)
     #   ⚠️ LEÇON 15 : pr₁ est un τ-terme — on EXTRAIT le corps ET le nom du
     #   liant réel de l'axiome (l'instanciation a pu le renommer).
     ex_reel = antecedent_consequent(equivalence_avant(mem).conclusion)[1]
@@ -137,7 +146,7 @@ def us_inclus_E(E_set="E", C="Cch", x="xdc", p="punionpr"):
 
 
 def us_infini(E_set="E", C="Cch", p="pmemb"):
-    """⚠️ EN CHANTIER (ne pas importer) : { chaîne, C≠∅ } ⊢ ⋃S(C) infinie.
+    """🎯 { chaîne(Γ𝔉,𝔉,C), C≠∅ } ⊢ est_infini_ensemble( ⋃S(C) ).   [2 hyps].
 
     « C non vide » fournit un membre p ; il est dans 𝔉 (la chaîne y est
     incluse) et sa première projection est infinie, donc ⋃S l'est aussi."""
@@ -166,4 +175,4 @@ def us_infini(E_set="E", C="Cch", p="pmemb"):
     return res
 
 
-__all__ = ["pr1_inclus_E", "us_inclus_E", "us_infini"]
+__all__ = ["pr1_inclus_E", "us_infini", "us_inclus_E"]

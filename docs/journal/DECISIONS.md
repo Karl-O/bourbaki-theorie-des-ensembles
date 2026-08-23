@@ -1154,3 +1154,27 @@ Card X) suivi de la transitivité. Vérifier le NIVEAU de chaque ≤ avant de
 composer.
 
 Coût mesuré : 199,9 s pour l'absorption complète (marquée `slow`).
+
+## 2026-08-23 — LEÇON 17 : noms ou termes ? (deux « chantiers » qui n'en étaient pas)
+
+`us_inclus_E` et `us_infini` (2 des 9 données du recollement) étaient marquées
+« ⚠️ EN CHANTIER — ne pas importer » depuis des jours. Éprouvées une par une,
+**les deux passent** : `us_infini` telle quelle (153,9 s), `us_inclus_E` après
+UN caractère de correction.
+
+Le blocage n'était pas un piège τ (LEÇON 15) mais une **API mal appelée** :
+`membre_union_premiere(C, x)` attend des NOMS de variables — elle applique
+`var()` elle-même. Lui passer des Termes fabriquait une variable dont le nom
+EST un Terme, et le modus ponens échouait sur « mineure ≠ antécédent ».
+
+**Deux règles qui en découlent :**
+  1. Avant d'appeler une fonction du dépôt, vérifier si elle prend des NOMS ou
+     des TERMES — beaucoup font `var()` en interne, d'autres `_t()`. Les deux
+     conventions coexistent et l'erreur est silencieuse jusqu'au modus ponens.
+  2. **Ré-éprouver systématiquement ce qui est marqué « en chantier ».** Un
+     marqueur posé en fin de session sous fatigue peut masquer un succès à un
+     caractère près. Le coût de la ré-épreuve (quelques minutes) est sans
+     commune mesure avec celui d'une réécriture.
+
+Reste 7 des 9 données du recollement à dériver pour clore `donnees_recollement`,
+l'unique hypothèse ouverte de `hess_maximal`.
