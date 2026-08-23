@@ -120,12 +120,17 @@ def enonce_absorption(S="S0"):
 
 
 # @livre Ch.III §6.3 Demo.2 | E III.48 L.27-28 | PDF p.151  (« 𝔟 + 𝔟 = 𝔟 »)
-def absorption_au_maximal(S="S0", phi="phi0"):
-    """🎯 { S₀ infini, φ₀ bijection } ⊢ Card S₀ + Card S₀ = Card S₀.
+def absorption_depuis_carre(S, carre):
+    """{ S infini } ∪ hyps(carre) ⊢ Card S + Card S = Card S.
 
-    Les deux hypothèses sont exactement des DONNÉES DU MAXIMAL, fournies dans
-    la portée par `unpack_sous_maximal` : l'absorption cesse donc d'être un
-    résidu à porter."""
+    Le CŒUR de l'absorption, paramétré par la seule étape qui varie : `carre`,
+    une preuve de « 𝔟·𝔟 = 𝔟 ».  Tout le reste — distributivité, 2 ≤ 𝔟,
+    monotonie, antisymétrie — est indépendant de la PROVENANCE du carré.
+
+    ⚠️ 2026-08-23 : extrait de `absorption_au_maximal` sans en changer une
+    ligne de raisonnement.  Au maximal, le carré vient de la bijection φ₀ ;
+    depuis que le Théorème 2 est démontré, il peut aussi venir de Hessenberg —
+    et l'absorption cesse alors d'être locale (cf. `ensembles_absorption_generale`)."""
     vS = _t(S)
     b = cardinal(vS)                                        # 𝔟 = Card S₀
     somme_bb = somme_cardinale_binaire(b, b)                # 𝔟 + 𝔟
@@ -163,13 +168,8 @@ def absorption_au_maximal(S="S0", phi="phi0"):
                              deux_inf_egal_infini(b))        # 2 ≤ 𝔟
     mono = N.modus_ponens(deux_le, produit_cardinale_monotone_droite(DEUX, b, b))
 
-    #  ── (4) 𝔟·𝔟 = 𝔟   (la bijection φ₀ du maximal) ───────────────────────
-    refl = N.reflexivite(b)                                  # Card S₀ = 𝔟
-    sq = N.modus_ponens(conjonction_intro(refl, refl),
-                        produit_cardinal_bien_defini(vS, vS, b, b))
-    carre = composer_egalites(N.modus_ponens(sq, symetrie(
-        cardinal(E.produit(vS, vS)), carre_b)),
-        maximal_carre_egal(S, phi))                          # 𝔟·𝔟 = 𝔟
+    #  ── (4) 𝔟·𝔟 = 𝔟   (fourni par l'appelant : bijection φ₀, ou Hessenberg) ──
+    assert carre.conclusion == egal(carre_b, b),         "absorption_depuis_carre : `carre` ne conclut pas 𝔟·𝔟 = 𝔟"
 
     #  ── (5) 𝔟+𝔟 ≤ 𝔟 ≤ 𝔟+𝔟, puis antisymétrie ───────────────────────────
     #  réécritures de Leibniz SUR LA FORMULE (S6), aux deux membres de `mono`
@@ -198,4 +198,27 @@ def absorption_au_maximal(S="S0", phi="phi0"):
     return res
 
 
-__all__ = ["enonce_absorption", "absorption_au_maximal"]
+# @livre Ch.III §6.3 Demo.2 | E III.48 L.27-28 | PDF p.151  (« 𝔟 + 𝔟 = 𝔟 »)
+def absorption_au_maximal(S="S0", phi="phi0"):
+    """🎯 { S₀ infini, φ₀ bijection } ⊢ Card S₀ + Card S₀ = Card S₀.
+
+    Les deux hypothèses sont exactement des DONNÉES DU MAXIMAL, fournies dans
+    la portée par `unpack_sous_maximal` : l'absorption cesse donc d'être un
+    résidu à porter.
+
+    Le carré 𝔟·𝔟 = 𝔟 vient ici de la bijection φ₀ ; le reste du raisonnement
+    est dans `absorption_depuis_carre`."""
+    vS = _t(S)
+    b = cardinal(vS)
+    carre_b = produit_cardinal_binaire(b, b)
+    refl = N.reflexivite(b)                                  # Card S₀ = 𝔟
+    sq = N.modus_ponens(conjonction_intro(refl, refl),
+                        produit_cardinal_bien_defini(vS, vS, b, b))
+    carre = composer_egalites(N.modus_ponens(sq, symetrie(
+        cardinal(E.produit(vS, vS)), carre_b)),
+        maximal_carre_egal(S, phi))                          # 𝔟·𝔟 = 𝔟
+    return absorption_depuis_carre(S, carre)
+
+
+__all__ = ["enonce_absorption", "absorption_depuis_carre",
+           "absorption_au_maximal"]
