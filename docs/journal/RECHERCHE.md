@@ -73,3 +73,29 @@ termes concrets h∘ι, h(m) a suffi, aucune preuve refaite.
 par coupure) est l'analogue LCF-τ des foncteurs/locales d'Isabelle. À
 systématiser et à mesurer (coût des substitutions sur gros termes vs re-preuve)
 — matériau pour l'article ingénierie de preuve du τ.
+
+## R-9 — Dériver l'absorption 𝔟+𝔟=𝔟 (résidu 1/3 de Hessenberg)
+
+**Statut : plan établi, toutes les briques repérées, non encore écrit.**
+
+L'absorption n'est PAS un théorème global à importer : au maximal elle se tire
+de la bijection φ₀ elle-même (𝔟·𝔟=𝔟), ce qui la rend LOCALE et donc dérivable
+dans la portée. Chaîne :
+
+    𝔟 + 𝔟  =  𝔟·(1+1)   [distributivite_operations, a=𝔟, b=c=1]
+           =  𝔟·1 + 𝔟·1  ↔  𝔟+𝔟          [produit_cardinal_un ×2]
+    2 ≤ 𝔟                                  [deux_inf_egal_infini, S₀ infini]
+    𝔟·2 ≤ 𝔟·𝔟                              [produit_cardinale_monotone_droite]
+    𝔟·𝔟 = 𝔟                                [maximal_carre_egal, la bijection φ₀]
+    𝔟 ≤ 𝔟+𝔟                                [_inf_egal_somme_gauche_t]
+    ⇒ 𝔟+𝔟 = 𝔟                              [inf_egal_antisymetrique_card]
+
+**Difficulté attendue** : les « 1 » ne sont pas au même niveau — `produit_cardinal_un`
+parle de l'ENSEMBLE {∅}, `DEUX = successeur(UN)` de la SOMME de cardinaux. Il
+faudra des ponts de Leibniz entre `singleton(∅)` et `Card({∅})`, comme
+`successeur_zero_egale_un` en fournit déjà un.
+
+Les deux autres résidus : le TRANSPORT (déjà isolé et nommé en amont, la
+bijection canonique Card A → A) et le PAQUET ψ (le vrai calcul cardinal de
+Bourbaki : la zone (S₀∪U)² ∖ (S₀×S₀) a le cardinal 𝔟, donc se met en bijection
+avec U). Le paquet est le plus gros ; il consomme précisément 𝔟·𝔟=𝔟 et 𝔟+𝔟=𝔟.
