@@ -41,7 +41,10 @@ from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_3_equipotence_cardina
     est_bijection_de,
 )
 from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_6_infinis.chaine_recollement.ensembles_chaine_frame_membership import (
-    union_chaine_est_bijection,
+    union_chaine_est_bijection, union_chaine_dans_frame,
+)
+from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_6_infinis.hessenberg.coeur.ensembles_hessenberg_hard import (
+    frame_pair,
 )
 from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_6_infinis.chaine_recollement.ensembles_chaine_surjective_frame import (
     union_chaine_dom, recollement_domaine, union_chaine_surjective,
@@ -185,5 +188,24 @@ def bijection_sans_valeur(D="Dchaine", US="USchaine"):
     return base
 
 
+def frame_de_recollement(D="Dchaine", US="USchaine", E_set="E"):
+    """🎯🎯🎯 { données couple-natives, US⊂E, US infini, 2 inclusions }
+       ⊢ ( US, ⋃𝔇 ) ∈ 𝔉(E).
+
+    union_chaine_dans_frame avec ses TROIS hypothèses valeur déchargées par
+    les ponts : le couple-recollement d'une chaîne est une frame-pair sans
+    qu'aucune donnée de niveau valeur ne soit postulée."""
+    vD, vUS, vE = _t(D), _t(US), _t(E_set)
+    U = union_famille(vD)
+    Prod = E.produit(vUS, vUS)
+    base = union_chaine_dans_frame(vE, vD, vUS)
+    base = _cut(dom_union_egale(D, US), egal(E.dom(U), Prod), base)
+    base = _cut(inj_valeur(D, US), E.injective_dans(U, Prod), base)
+    base = _cut(image_union_egale(D, US), E.est_surjective(U, Prod, vUS), base)
+    assert base.conclusion == appartient(E.couple(vUS, U), frame_pair(vE)),         "frame_de_recollement : forme"
+    assert egal(E.dom(U), Prod) not in base.hypotheses,         "frame_de_recollement : hyp valeur non déchargée"
+    return base
+
+
 __all__ = ["dom_union_egale", "surj_riche", "image_union_egale", "inj_valeur",
-           "bijection_sans_valeur"]
+           "bijection_sans_valeur", "frame_de_recollement"]

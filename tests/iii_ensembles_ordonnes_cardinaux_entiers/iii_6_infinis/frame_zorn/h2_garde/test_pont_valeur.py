@@ -57,3 +57,20 @@ def test_bijection_sans_valeur():
     assert E.injective_dans(U, Prod) not in t.hypotheses
     assert E.est_surjective(U, Prod, _US) not in t.hypotheses
     assert len(E.theorie_ensembles().axiomes) == 22
+
+
+def test_frame_de_recollement():
+    """🎯🎯🎯 ⊢ (US, ⋃𝔇) ∈ 𝔉(E) — sans aucune hypothèse de niveau valeur."""
+    from bourbaki.i_description_mathematique_formelle.i_1_termes_relations.outil_formule import appartient
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_6_infinis.hessenberg.coeur.ensembles_hessenberg_hard import (
+        frame_pair,
+    )
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_6_infinis.frame_zorn.h2_garde.ensembles_pont_valeur import (
+        frame_de_recollement,
+    )
+    t = frame_de_recollement()
+    U, Prod = union_famille(_D), E.produit(_US, _US)
+    assert t.conclusion == appartient(E.couple(_US, U), frame_pair(var("E")))
+    assert egal(E.dom(U), Prod) not in t.hypotheses
+    assert E.injective_dans(U, Prod) not in t.hypotheses
+    assert len(E.theorie_ensembles().axiomes) == 22
