@@ -1063,3 +1063,33 @@ briques DANS la portée du maximal, dans l'ordre de Bourbaki —
   Card S₀ = Card E → endgame E-seul.
 C'est le même exercice de raccordement que celui réussi cette nuit sur les
 hypothèses valeur, mais plus long (≈ 8 à 12 briques à enchaîner).
+
+## 2026-08-23 — CARTE DES 12 HYPOTHÈSES DE STEP 5 (`extension_absurde_chainee`)
+
+Inspection en code (0,3 s — la dérivation est rapide, c'est son *assemblage*
+qui coûtait) : `extension_absurde_chainee("E","phi0","psi","S0","Ucadre","uwit")`
+⊢ ¬(uwit ∈ Ucadre) sous **12** hypothèses, qui se partitionnent en TROIS groupes :
+
+**(a) Déjà disponibles dans la portée du maximal** (ne mentionnent ni U ni ψ) :
+`(S₀,φ₀) ∈ 𝔉(E)`, `element_maximal(…)`, `φ₀ bijection S₀×S₀→S₀`, plus une
+identité de couples. Elles viennent de `unpack_sous_maximal`.
+
+**(b) DÉRIVÉES ce jour** de « U ⊂ E∖S₀ » (module `claim/ensembles_u_data.py`) :
+`(∀u)(u∈U ⇒ ¬(u∈S₀))` et `S₀∪U ⊂ E`. Test d'IDENTITÉ avec les hypothèses de
+STEP 5 (pas seulement de forme) : `test_sont_bien_des_hypotheses_de_step5`.
+
+**(c) Le reste — mentionne U ou ψ** : le témoin `uwit ∈ Ucadre`, la géométrie du
+carré (décomposition de (S₀∪U)² ), et le PAQUET ψ (ψ bijection de la zone
+complémentaire sur U, domaines disjoints, images d'union U∪S₀ et d'intersection
+vide).
+
+**Conséquence structurelle.** Le groupe (c) mentionne le témoin Ucadre : il ne
+peut PAS rester en hypothèse résiduelle lors de l'∃-élimination de U. Il faut
+donc le porter comme UN énoncé quantifié — exactement le patron qui a marché
+pour le recollement :
+
+    donnees_extension(E,S₀) :=
+        (∀U)( (U ⊂ E∖S₀ et Card U = Card S₀) ⇒ (∃ψ) PAQUET(U,ψ) )
+
+ψ doit être **existentiel** à l'intérieur (un ψ par U ; le sortir en variable
+libre affirmerait qu'un seul ψ vaut pour tous les U — non satisfiable).

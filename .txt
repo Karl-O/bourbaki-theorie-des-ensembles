@@ -1,2 +1,1 @@
-..                                                                       [100%]
-2 passed in 19.31s
+C:\Users\KARL\AppData\Local\Microsoft\WindowsApps\python.exe: can't open file 'C:\\Users\\KARL\\OneDrive\\Bureau\\Apprendre\\Livre\\Bourbakie\\Theorie_des_ensembles\\V9\\.py': [Errno 2] No such file or directory
