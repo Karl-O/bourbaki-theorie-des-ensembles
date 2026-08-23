@@ -923,3 +923,51 @@ ouvert) ; la voie Dedekind est entièrement close dans le noyau. Précédent :
 Th2 (préambule du projet — le noyau tranche pour la soundness, le PDF prime
 pour la fidélité des ÉNONCÉS ; les démonstrations peuvent différer si l'écart
 est consigné). Marqueurs @livre posés sur lemme_1 (énoncé + démo).
+
+## 2026-08-23 — ⚠️ TENSION INTERNE autour de `fini_downward` (vacuité possible)
+
+**Statut : SIGNALÉE, non tranchée. À résoudre avant de revendiquer tout théorème
+qui porte ces résidus.**
+
+Trois faits, dont deux vérifiés en code :
+
+1. *(docstring)* `ensembles_recurrence_vraie.fini_downward_garde_thm` qualifie
+   explicitement l'universel NU `(∀a)(∀x)( (a≤x et Fini x) ⇒ Fini a )` de **FAUX**,
+   et n'en prouve qu'une version GARDÉE par `est_cardinal(a)`.
+
+2. *(docstring)* `ensembles_recurrence_C61.fini_downward_thm` annonce dériver
+   EXACTEMENT cet universel nu, à partir de deux hypothèses nommées :
+   `principe_recurrence(P)` et `(∀c)(∀b) cardinal_pas_entre(b,c)`.
+
+3. *(VÉRIFIÉ en code)* `negation_strict_sous_maximal_reunion` (step_b_prop5/stepb3)
+   porte 7 hypothèses : 5 sont la maximal-data, et les 2 autres sont CLOSES —
+   ce sont, d'après les modules, précisément ces deux-là.
+
+**Conséquence logique** (le noyau étant sound, il ne peut dériver un faux d'un vrai) :
+**ou bien** l'annotation « FAUX » de (1) est erronée, **ou bien** l'une des deux
+prémisses de (2) est fausse — et dans ce second cas TOUT théorème qui les porte est
+**VACUOUS** : vrai, mais vide.
+
+Noter que la version gardée est prouvée sous `est_cardinal(a)`, tandis que
+`cardinal_pas_entre_mod_general` est elle aussi gardée par `est_cardinal(b)` : la
+∀∀-clôture NUE de ces énoncés laisse tomber la garde. C'est le suspect naturel —
+pour un `b` qui n'est pas un cardinal, `Fini(b)` est faux par définition alors que
+`b ≤ c` peut tenir. **Mais je ne l'ai pas établi** : ce serait un contre-modèle à
+construire, pas une intuition à consigner comme un fait.
+
+**Impact opérationnel immédiat :**
+  • Le chemin RAPIDE de Hessenberg (`claim_clos` par défaut, résidu =
+    `donnees_extension`, le paquet ψ) **n'est PAS concerné** : ses hypothèses sont
+    la maximal-data et le paquet, aucune ne descend de `fini_downward`.
+  • Le chemin `paquet_derive=True` (via stepb3) **hérite de la tension** : tant
+    qu'elle n'est pas tranchée, il ne doit PAS être présenté comme « zéro résidu
+    honnête », mais comme « résidus reportés sur `fini_downward` ».
+  • Même prudence pour `ensembles_extension_z_infini` et tout ce qui cite les
+    « 2 résidus ∀∀ de fini_downward_thm ».
+
+**Prochaine étape** : vérifier en code (a) que `fini_downward_thm` conclut bien
+l'universel nu et sous quelles hypothèses exactes ; (b) chercher si le dépôt
+possède une variante gardée de `cardinal_pas_entre` ∀∀-close ; (c) si la tension
+est réelle, remplacer dans stepb3 la chaîne `fini_downward` nue par sa version
+gardée — la garde `est_cardinal` étant DISPONIBLE partout où on l'applique
+(les objets manipulés y sont des cardinaux).

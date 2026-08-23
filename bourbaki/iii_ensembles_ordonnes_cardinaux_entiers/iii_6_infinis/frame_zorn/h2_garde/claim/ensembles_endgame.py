@@ -128,17 +128,47 @@ def non_strict_clos(E_set="E", S="S0", phi0="phi0", psi="psi",
     return res
 
 
+def non_strict_sans_paquet(E_set="E", S="S0", phi0="phi0"):
+    """⊢ ¬( Card S₀ < Card E ) SANS le paquet ψ en résidu.   [~385 s]
+
+    Le CHEMIN COMPLET : `negation_strict_sous_maximal_reunion` (step_b_prop5)
+    construit lui-même la bijection ψ — par `cadre_card_trois_b_reunion` et le
+    recâblage RÉUNION qui dissout le mur de la somme disjointe — au lieu de la
+    porter en hypothèse ∀U.  Vérifié en code le 2026-08-23 : conclusion exacte,
+    7 hypothèses, aucune ne mentionnant Ucadre, ψ ni uwit (RECHERCHE R-11).
+
+    À réserver à la CERTIFICATION : il coûte ~385 s là où `non_strict_clos` en
+    demande ~20, au prix d'un résidu nommé.  Les deux chemins prouvent le même
+    énoncé ; seul diffère ce qui reste ouvert."""
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_6_infinis.hessenberg.step_b_prop5.ensembles_hessenberg_stepb3 import (
+        negation_strict_sous_maximal_reunion,
+    )
+    vE, vS = _t(E_set), _t(S)
+    res = negation_strict_sous_maximal_reunion(E_set, S, phi0)
+    assert res.conclusion == non(inf_strict_card(cardinal(vS), cardinal(vE))),         "non_strict_sans_paquet : conclusion inattendue"
+    for h in res.hypotheses:
+        libres = libres_f(h)
+        assert not ({"Ucadre", "psi", "uwit"} & libres),             "non_strict_sans_paquet : témoin résiduel"
+    return res
+
+
 # @livre Ch.III §6.3 Demo.2 | E III.49 L.6-7 | PDF p.152  (« on a donc Card F = Card E »)
-def claim_clos(E_set="E", S="S0", phi0="phi0", psi="psi", U="Ucadre", u="z"):
-    """🎯🎯 ⊢ Card S₀ = Card E — LE CLAIM, dans la portée du maximal."""
+def claim_clos(E_set="E", S="S0", phi0="phi0", psi="psi", U="Ucadre", u="z",
+               paquet_derive=False):
+    """🎯🎯 ⊢ Card S₀ = Card E — LE CLAIM, dans la portée du maximal.
+
+    `paquet_derive=True` emprunte `non_strict_sans_paquet` : plus aucun résidu
+    honnête, mais ~385 s au lieu de ~20."""
     from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_6_infinis.frame_zorn.h2_garde.ensembles_claim import (
         claim_depuis_non_strict,
     )
     vE, vS = _t(E_set), _t(S)
-    res = claim_depuis_non_strict(E_set, S, N.assume(inclus(vS, vE)),
-                                  non_strict_clos(E_set, S, phi0, psi, U, u))
+    non_strict = (non_strict_sans_paquet(E_set, S, phi0) if paquet_derive
+                  else non_strict_clos(E_set, S, phi0, psi, U, u))
+    res = claim_depuis_non_strict(E_set, S, N.assume(inclus(vS, vE)), non_strict)
     assert res.conclusion == egal(cardinal(vS), cardinal(vE)), "claim_clos : forme"
     return res
 
 
-__all__ = ["donnees_extension", "non_strict_clos", "claim_clos"]
+__all__ = ["donnees_extension", "non_strict_clos",
+           "non_strict_sans_paquet", "claim_clos"]

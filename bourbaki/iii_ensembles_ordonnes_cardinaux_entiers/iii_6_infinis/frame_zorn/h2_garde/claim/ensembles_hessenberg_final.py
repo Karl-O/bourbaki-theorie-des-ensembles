@@ -25,10 +25,10 @@ theorie_ensembles() INCHANGÉE (22).  Noyau INTACT.
 """
 from __future__ import annotations
 
-from functools import reduce
+from functools import lru_cache, reduce
 
 from bourbaki.i_description_mathematique_formelle.i_1_termes_relations.outil_formule import (
-    Terme, var, et, appartient, inclus, pourtout, afficher_f,
+    Terme, var, et, appartient, inclus, pourtout, afficher_f, libres_f,
 )
 from bourbaki.i_description_mathematique_formelle.i_2_theoremes.noyau import noyau_abrege as N
 from bourbaki.ii_theorie_des_ensembles.ii_1_relations_collectivisantes import ensembles_abrege as E
@@ -88,21 +88,33 @@ def _donnees_du_maximal(E_set, S=_S, phi=_PHI):
             appartient(couple, frame_pair(vE))}
 
 
-def _residus(E_set, S=_S, phi=_PHI):
+@lru_cache(maxsize=None)
+def _claim_memo(E_set, S, phi, paquet_derive):
+    """`claim_clos` MÉMOÏSÉ (arguments hashables, Theoreme immuable).
+
+    Mesure : le chemin complet coûte ~385 s et l'assemblage l'appelle trois
+    fois (collationnement des résidus, énoncé du paquet, dérivation).  Le
+    cache ramène le total au coût d'UNE dérivation.  Aucun effet sur la
+    soundness : la fonction est pure et le noyau ne connaît pas l'identité
+    des objets."""
+    return claim_clos(E_set, S, phi, paquet_derive=paquet_derive)
+
+
+def _residus(E_set, S=_S, phi=_PHI, paquet_derive=False):
     """Les résidus honnêtes du CLAIM (transport, garde d'extension) — tout ce
     qui n'est ni donnée du maximal, ni DÉRIVÉ sur place.
 
     L'absorption 𝔟+𝔟=𝔟 n'en fait plus partie : `absorption_au_maximal` la tire
     de la bijection φ₀.  On la reconnaît par son ÉNONCÉ seul, pour ne pas payer
     les ~200 s de sa dérivation à chaque collationnement."""
-    claim = claim_clos(E_set, S, phi)
+    claim = _claim_memo(E_set, S, phi, paquet_derive)
     connus = _donnees_du_maximal(E_set, S, phi) | {enonce_absorption(S)}
     return sorted((h for h in claim.hypotheses if h not in connus),
                   key=afficher_f)
 
 
 # @livre Ch.III §6.3 Demo.2 | E III.48 L.26-33 | PDF p.151
-def residus_maximal(E_set="E", S=_S, phi=_PHI):
+def residus_maximal(E_set="E", S=_S, phi=_PHI, paquet_derive=False):
     """L'UNIQUE hypothèse honnête restante, quantifiée sur le maximal :
 
         (∀S)(∀φ)(∀U)( garde ⇒ (∃ψ) PAQUET(U,ψ) ).
@@ -114,9 +126,14 @@ def residus_maximal(E_set="E", S=_S, phi=_PHI):
     Les deux autres résidus ont été ÉLIMINÉS le 2026-08-23 : l'ABSORPTION est
     dérivée (`ensembles_absorption`), et le TRANSPORT était déjà clos en amont
     (GAP B, `existe_sous_ensemble_cardinal_transporte`)."""
-    res = _residus(E_set, S, phi)
+    res = _residus(E_set, S, phi, paquet_derive)
     corps = reduce(lambda acc, x: et(x, acc), reversed(res[:-1]), res[-1])
-    return pourtout(S, pourtout(phi, corps))
+    #  le ∀S∀φ ne sert QUE si le corps mentionne le maximal ; avec
+    #  `paquet_derive` les résidus sont déjà CLOS, l'enrobage serait décoratif.
+    libres = libres_f(corps)
+    if S in libres or phi in libres:
+        return pourtout(S, pourtout(phi, corps))
+    return corps
 
 
 def _decoupe(thm, n):
@@ -130,7 +147,7 @@ def _decoupe(thm, n):
 
 
 # @livre Ch.III §6.3 Th.2 | E III.47 L.30-32 | PDF p.150
-def hessenberg_par_extension(E_set="E"):
+def hessenberg_par_extension(E_set="E", paquet_derive=False):
     """🏆🏆 { existence_maximal(E), residus_maximal(E) } ⊢ enonce_hessenberg(E).
 
     Le théorème de Hessenberg par la démonstration de Bourbaki au complet :
@@ -138,11 +155,12 @@ def hessenberg_par_extension(E_set="E"):
     et la bijection f : F×F → F transporte l'égalité à E."""
     vE = _t(E_set)
     Gam, Fr = frame_ordre(vE), frame_pair(vE)
-    residus = _residus(E_set)
-    paquet_residus = residus_maximal(E_set)
+    residus = _residus(E_set, paquet_derive=paquet_derive)
+    paquet_residus = residus_maximal(E_set, paquet_derive=paquet_derive)
+    enrobe = paquet_residus != residus[0] or len(residus) > 1
 
     def derive(bij0, S_inc, S_inf, h_max, vS0, vphi0, p_eq):
-        claim = claim_clos(E_set, vS0.nom, vphi0.nom)
+        claim = _claim_memo(E_set, vS0.nom, vphi0.nom, paquet_derive)
         couple = E.couple(vS0, vphi0)
 
         #  l'absorption est DÉRIVÉE de la bijection φ₀, non portée en résidu
@@ -165,7 +183,9 @@ def hessenberg_par_extension(E_set="E"):
                 claim = _cut(preuve, preuve.conclusion, claim)
 
         #  les résidus honnêtes : instanciation (identité) du ∀S∀φ
-        corps = instancie(instancie(N.assume(paquet_residus), vS0), vphi0)
+        corps = N.assume(paquet_residus)
+        if enrobe:
+            corps = instancie(instancie(corps, vS0), vphi0)
         for morceau in _decoupe(corps, len(residus)):
             if morceau.conclusion in claim.hypotheses:
                 claim = _cut(morceau, morceau.conclusion, claim)
