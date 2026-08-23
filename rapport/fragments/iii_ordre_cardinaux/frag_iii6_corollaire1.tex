@@ -1,0 +1,64 @@
+\subsection{§III.6.3, Corollaire 1 --- $\mathfrak{a}^n = \mathfrak{a}$, et ce que
+coûte une promesse en commentaire}
+\label{sec:iii6-cor1}
+
+\textbf{Énoncé (Bourbaki, E III.49).} Si $\mathfrak{a}$ est un cardinal infini et
+$n \ge 1$ un entier, $\mathfrak{a}^n = \mathfrak{a}$. La démonstration est une
+récurrence sur $n$ à partir de $1$, dont l'hérédité repose sur le Théorème 2.
+
+\textbf{Ce que le dépôt contenait déjà.} Toute la récurrence :
+$\mathcal{F}(n;A)$ borné inférieurement puis supérieurement, Cantor--Bernstein
+pour conclure, base $R\{1\}$ close, hérédité $R\{n\} \Rightarrow R\{n+1\}$.
+Le travail mathématique était fait. Mais \texttt{a\_puissance\_n\_egale\_a}
+concluait sous \textbf{trois} hypothèses --- \texttt{predecesseur\_fini\_universel},
+$\mathrm{Eq}(A\times A, A)$, et $a_0 \in A$ --- et sa docstring annonçait la
+décharge de la deuxième « via \texttt{hessenberg\_0hyp} ».
+
+\textbf{Cette fonction n'existait pas.} Un \texttt{grep} sur le dépôt entier en
+donne une seule occurrence : celle de la docstring qui la promet. C'est le même
+défaut que la surdéclaration débusquée dans le dossier Goldbach, en plus
+discret : \emph{un nom de fonction dans un commentaire n'est pas une fonction},
+et aucun test ne peut attraper cela --- le noyau garantit la soundness, jamais
+la fidélité d'une prose.
+
+\textbf{Les trois décharges.} Chacune a demandé un objet distinct, et aucune
+n'était où on l'attendait.
+
+\emph{(i) Le carré.} Le Théorème 2 conclut sur les \textbf{cardinaux}
+($\mathrm{Card}\,A \cdot \mathrm{Card}\,A = \mathrm{Card}\,A$) ; le corollaire
+réclame les \textbf{ensembles} ($\mathrm{Eq}(A\times A, A)$). Le pont tient en
+trois pas : \texttt{produit\_cardinal\_bien\_defini} nourri de deux réflexivités
+donne $\mathrm{Card}(A\times A) = \mathrm{Card}\,A \cdot \mathrm{Card}\,A$
+(clos, $1{,}2$~s) ; Hessenberg donne le membre droit ; la Proposition 1 dans son
+sens réciproque conclut. Le test vérifie l'identité de formules par
+\texttt{==} et non la ressemblance --- une ressemblance ne déchargerait rien.
+
+\emph{(ii) Le point $a_0$.} Bourbaki ne mentionne pas cette hypothèse, et il a
+raison : elle découle de « $A$ infini ». Encore fallait-il la dériver. La route
+est entièrement par contraposition et tient en trois théorèmes \textbf{clos} :
+$\emptyset$ est fini, donc un infini n'est pas $\emptyset$, donc il a un élément.
+Le point élégant est que $\mathrm{est\_infini}$ est \emph{défini} comme
+$\neg\mathrm{Fini}$ (E III.6.1, Déf.~1) : la contraposée tombe exactement sur la
+forme voulue, sans pont ni réécriture.
+
+\emph{(iii) Le résidu.} \texttt{predecesseur\_fini\_universel} était --- une fois
+de plus --- \textbf{déjà prouvé} par le dépôt et simplement non branché.
+
+\textbf{Une condition de licéité rendue vérifiable.} $a_0 \in A$ disparaît par
+$\exists$-élimination, qui n'est licite que si $a_0$ n'est libre dans
+\emph{aucune autre} hypothèse au moment où on l'applique. Plutôt que de le
+supposer, un étage intermédiaire (\texttt{puissance\_n\_sous\_hessenberg}) porte
+cette assertion, et son test la vérifie : si elle tombait, le théorème final
+serait invalide sans que rien d'autre ne le signale.
+
+\textbf{Résultat.} $\vdash$ $\mathrm{est\_infini}(\mathrm{Card}\,A) \Rightarrow
+(\forall n)\big((n \text{ entier} \wedge n \ge 1) \Rightarrow
+\mathrm{Eq}(\mathcal{F}(n;A), A)\big)$ sous la seule hypothèse
+\texttt{enonce\_hessenberg(A)} --- le Théorème 2 lui-même. Mesuré : $66{,}4$~s,
+une hypothèse, non vacuous, \texttt{theorie\_ensembles()} $= 22$.
+
+Le Théorème 2 est \emph{porté} plutôt que dérivé, par application de la règle de
+performance du projet : sa preuve coûte $5172{,}8$~s, et un grand lemme clos ne
+se repaie pas à chaque brique intermédiaire --- il devient une hypothèse
+honnête, déchargée une fois au dernier étage. \textbf{Statut : FAIT}, au même
+titre que le théorème dont il dépend.
