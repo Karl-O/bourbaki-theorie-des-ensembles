@@ -22,3 +22,24 @@ def test_majore_fam():
     assert appartient(m, frame_pair(vE)) in t.hypotheses
     assert len(t.hypotheses) == 3
     assert len(E.theorie_ensembles().axiomes) == 22
+
+
+def test_chaine_majoree_et_maximal():
+    """🎯🎯🎯 {résidu famille, H1} ⊢ (∃m) element_maximal — Zorn version famille."""
+    from bourbaki.i_description_mathematique_formelle.i_1_termes_relations.outil_formule import existe
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_1_relations_ordre.ordre_treillis.ensembles_ordre_relation import (
+        element_maximal,
+    )
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_6_infinis.frame_zorn.ensembles_frame_maximal_clos import (
+        residu_H1,
+    )
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_6_infinis.frame_zorn.h2_garde.ensembles_majore_fam import (
+        residu_fam, chaine_majoree_fam, maximal_fam,
+    )
+    assert len(chaine_majoree_fam().hypotheses) == 2
+    t = maximal_fam()
+    vE = var("E")
+    assert t.conclusion == existe("m", element_maximal(
+        frame_ordre(vE), frame_pair(vE), var("m"), "x"))
+    assert set(t.hypotheses) == {residu_fam("E"), residu_H1("E")}
+    assert len(E.theorie_ensembles().axiomes) == 22
