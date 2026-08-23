@@ -1353,3 +1353,52 @@ Mesuré : 1,8 s, 2 hypothèses, et la conclusion est **identique** à `hyp_carre
 prouvé par le dépôt, à brancher comme dans `fini_downward_cardinal`) et
 `a₀ ∈ A`, qui demande une ∃-élimination depuis « A infini ⇒ A non vide » — la
 conclusion ne mentionne pas a₀, l'élimination est donc licite.
+
+
+## 2026-08-23 — LEÇON 24 : extraire plutôt que dupliquer, mais toujours avec un témoin
+
+Deux extractions ce jour, sur la même preuve, et le même schéma :
+
+  · `absorption_depuis_carre` — tiré d'`absorption_au_maximal`. En relisant, la
+    bijection φ₀ ne servait qu'à **UNE** étape sur cinq (le carré 𝔞·𝔞 = 𝔞) ;
+    tout le reste — distributivité, 2 ≤ 𝔞, monotonie, antisymétrie — en était
+    indépendant. Paramétrer cette unique étape rend l'absorption GLOBALE au lieu
+    de locale au maximal de Zorn, sans réécrire une ligne de raisonnement.
+  · `produit_par_un` — tiré de l'étape (1) du même. Il encapsule le **piège des
+    trois « un »** (LEÇON 16), et sert maintenant aussi au volet produit du
+    Cor. 4, où « 𝔞 ≤ 𝔞·𝔟 » passe par 𝔞 = 𝔞·1.
+
+**La règle** : quand une preuve close mentionne une hypothèse forte, chercher
+COMBIEN de ses étapes en dépendent vraiment. La réponse est souvent « une », et
+l'extraction transforme alors un résultat local en résultat général pour le prix
+d'un paramètre.
+
+**Le garde-fou, non négociable** : extraire le cœur d'une preuve TESTÉE sans
+l'éprouver serait un pari. Un test de NON-RÉGRESSION accompagne l'extraction
+dans le même commit, jamais après — `test_non_regression_absorption_au_maximal`
+rejoue la version d'origine et vérifie qu'elle conclut à l'identique (mesuré :
+53,7 s puis 215,3 s selon la charge, 2 hypothèses, inchangée).
+
+## 2026-08-23 — Ce que la formalisation du Cor. 4 a RÉVÉLÉ sur l'énoncé
+
+Bourbaki exige « 𝔞 et 𝔟 non nuls » et déduit le Corollaire 4 des Cor. 2 et 3 en
+une ligne. Deux observations que seule l'écriture séparée des deux moitiés fait
+apparaître :
+
+**(1) La garde « non nul » ne sert QUE pour le produit.** Le volet somme s'en
+passe entièrement : 𝔞 ≤ 𝔞+𝔟 se lit sur l'injection gauche et vaut même pour
+𝔟 = 0. Le volet produit ne le peut pas (𝔞·0 = 0 ≠ 𝔞) et sa borne inférieure doit
+passer par la neutralité de 1. Deux moitiés d'un même corollaire, deux besoins
+différents — distinction qu'une preuve écrite pour un lecteur peut laisser
+implicite et qu'un noyau oblige à trancher.
+
+**(2) Les familles servent à la DÉMONSTRATION, pas à l'énoncé.** Les Cor. 2 et 3
+passent par la Prop. 14 en forme FAMILLE, absente du dépôt (R-14). Mais
+l'énoncé du Cor. 4 est BINAIRE : la déduction directe évite entièrement les
+familles. Le détour de Bourbaki est une économie de rédaction, pas une nécessité
+logique. **Vérifier si le chemin du livre est le seul chemin** avant de conclure
+qu'un résultat est bloqué par ses prérequis.
+
+**Comment on le CONSTATE plutôt que de l'espérer** : les tests miroirs vérifient
+la LISTE EXACTE des hypothèses, pas leur nombre. Une brique qui réintroduirait
+une famille ferait apparaître une hypothèse supplémentaire, et le test tomberait.

@@ -685,7 +685,7 @@ la démonstration que Bourbaki en donne :
 | **Cor. 1** | a infini ⇒ aⁿ = a pour tout entier n ≥ 1 | « évident par récurrence sur n » | ✅ **CLOS 2026-08-23** (`puissance_n_clos`, 66,4 s, 1 hyp = le Th. 2) |
 | **Cor. 2** | produit d'une famille FINIE (aᵢ)ᵢ∈I de cardinaux non nuls, dont le plus grand a est infini, = a | b ≤ aⁿ = a où n = Card I ; et b ≥ a car aᵢ ≥ 1 (Prop. 14, E III.30) | ⛔ bloqué (voir ci-dessous) |
 | **Cor. 3** | a infini, (aᵢ) famille de cardinaux ≤ a, Card I ≤ a ⇒ Σaᵢ ≤ a ; et = a si un aᵢ = a | Σaᵢ ≤ a·b ≤ a² = a où b = Card I ; et Σaᵢ ≥ a_κ | ⛔ bloqué (voir ci-dessous) |
-| **Cor. 4** | a, b non nuls dont l'un est infini ⇒ **ab = a + b = sup(a,b)** | « résulte aussitôt des cor. 2 et 3 » | 🎯 accessible par une AUTRE route |
+| **Cor. 4** | a, b non nuls dont l'un est infini ⇒ **ab = a + b = sup(a,b)** | « résulte aussitôt des cor. 2 et 3 » | ✅ **CLOS 2026-08-23** par la route binaire (`cor4_somme` 200,0 s / 3 hyps, `cor4_produit` 8,3 s / 4 hyps) |
 
 **LE BLOCAGE de Cor. 2 et 3, mesuré et non supposé.** Les deux passent par la
 Proposition 14 (§III.3.6, E III.30) sous sa **forme FAMILLE** — monotonie de
@@ -720,3 +720,48 @@ rapport ; l'écart de CONTENU est nul.
 rencontrée dans `absorption_au_maximal` (§III.6.3), où l'absorption 𝔟+𝔟=𝔟 est
 tirée de la bijection φ₀ ; voir si elle s'en extrait, ou si le chemin
 `2·a = a + a` via `distributivite_operations` est plus court.
+
+
+### R-14, suite (2026-08-23 soir) — Cor. 4 CLOS, et ce qu'il reste
+
+**Fait.** La route binaire a tenu exactement comme prévu, sans surprise ni
+essai perdu. Les mesures : `absorption_sous_hessenberg` 183,4 s / 2 hyps ;
+`cor4_somme` 200,0 s / 3 hyps ; `cor4_produit` 8,3 s / 4 hyps ; 22 axiomes ;
+aucun résultat vacuous. Deux extractions au passage (`absorption_depuis_carre`,
+`produit_par_un`), chacune avec son test de non-régression.
+
+**Un gain non prévu** : l'absorption a+a=a, que le dépôt n'avait qu'AU MAXIMAL
+de Zorn, est devenue GLOBALE. La bijection φ₀ ne servait qu'à une étape sur
+cinq.
+
+**Ce qui reste ouvert sur E III.49** : les Cor. 2 et 3, toujours bloqués sur la
+**Proposition 14 en forme FAMILLE**. C'est maintenant le seul verrou de la
+page, et il vaut mieux que sa taille soit dite : il s'agit de porter la
+monotonie de ∏ᵢ et Σᵢ d'un ensemble d'indices quelconque, ce que le dépôt n'a
+jamais fait — le cas binaire y est traité à part, dans deux modules dédiés.
+C'est un chantier de §III.3.6, pas de §III.6.3, et il débloquerait plus que ces
+deux corollaires.
+
+**⚠️ LE CHANTIER FAMILLE EST PLUS PROFOND QU'ESTIMÉ — vérifié en code.** Avant
+de le recommander, lecture de `iii_3_6_familles/ensembles_prop4_famille_cardinaux.py`.
+La Proposition 4 (§III.3.3) — `Card(∏E_ι) = ∏Card(E_ι)` — y est déjà décomposée
+en briques, et **la BRIQUE 1 est BLOQUÉE** par ce que le dépôt nomme le
+**VERROU-τ** : le terme-valeur `Card(E_ι)` est un τ riche en liants
+{F,Z,u,up,v,y,z} qui entrent en collision avec les liants internes de
+`graphe_terme_valeur` — « mineure ≠ antécédent », même avec un y frais. Le
+module annonce lui-même qu'en sortir demande « une SESSION DÉDIÉE » par
+contournement indexé.
+
+Or la Prop. 14 en forme famille suppose ce socle. Les Cor. 2 et 3 sont donc
+derrière **deux** verrous, pas un.
+
+**Prochaine cible recommandée : R-12** (division euclidienne, plan en 4 étapes
+écrit, point de départ acquis — le témoin de la Prop. 13 est déjà un cardinal).
+Trois raisons, dans cet ordre :
+  1. elle referme une **VACUITÉ** (deux modules aujourd'hui vrais et vides),
+     ce qui vaut mieux que d'ajouter de la couverture par-dessus une dette ;
+  2. elle est **courte et sans verrou connu**, là où la voie famille en a deux ;
+  3. le VERROU-τ mérite sa propre session, avec la tête reposée et un plan
+     explicite — pas d'être attaqué en fin de chaîne.
+
+À arbitrer par Karl, mais l'écart de risque entre les deux options est net.

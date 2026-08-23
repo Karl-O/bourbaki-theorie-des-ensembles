@@ -120,6 +120,34 @@ def enonce_absorption(S="S0"):
 
 
 # @livre Ch.III §6.3 Demo.2 | E III.48 L.27-28 | PDF p.151  (« 𝔟 + 𝔟 = 𝔟 »)
+# @livre Ch.III §3.3 Def.3 | E III.26 L.20-24 | PDF p.129   (1 est neutre pour ·)
+def produit_par_un(b, card_b):
+    """→ (𝔟·{∅} = 𝔟, 𝔟·1 = 𝔟) où « 1 » est l'ENTIER, non l'ensemble {∅}.
+
+    ⚠️ LE PIÈGE DES TROIS « UN » (LEÇON 16).  Le dépôt manipule trois objets
+    distincts qui valent tous 1 : l'ENSEMBLE {∅}, son CARDINAL Card({∅}), et
+    l'ENTIER UN = successeur(0).  `produit_cardinal_un` ne parle que du premier.
+    Le pont est `produit_cardinal_bien_defini` — « Card(X×Y) ne dépend que de
+    Card X et Card Y » — qui traverse les trois niveaux d'un coup, sans jamais
+    reconstruire un τ-terme (LEÇON 15).
+
+    `card_b` doit prouver « Card 𝔟 = 𝔟 » (𝔟 est un cardinal).
+
+    ⚠️ 2026-08-23 : extrait de l'étape (1) d'`absorption_depuis_carre`, sans
+    changement, pour servir aussi à la moitié PRODUIT du Corollaire 4 (où
+    « a ≤ a·b sous 1 ≤ b » passe par a = a·1 puis monotonie).  La
+    non-régression est couverte par `test_non_regression_absorption_au_maximal`."""
+    b_unite = composer_egalites(produit_cardinal_un(b), card_b)        # 𝔟·{∅} = 𝔟
+    card_unite = N.modus_ponens(un_egale_card_singleton(),
+                                symetrie(UN, cardinal(_UNITE)))        # Card{∅} = 1
+    bien_def = N.modus_ponens(conjonction_intro(card_b, card_unite),
+                              produit_cardinal_bien_defini(b, _UNITE, b, UN))
+    b_un = composer_egalites(N.modus_ponens(bien_def, symetrie(
+        cardinal(E.produit(b, _UNITE)), produit_cardinal_binaire(b, UN))),
+        b_unite)                                            # 𝔟·1 = 𝔟
+    return b_unite, b_un
+
+
 def absorption_depuis_carre(S, carre):
     """{ S infini } ∪ hyps(carre) ⊢ Card S + Card S = Card S.
 
@@ -141,14 +169,7 @@ def absorption_depuis_carre(S, carre):
     card_b = N.modus_ponens(h_card, _cardinal_est_son_cardinal_t(b))   # Card 𝔟 = 𝔟
 
     #  ── (1) 𝔟·{∅} = 𝔟   puis   𝔟·1 = 𝔟 (l'ENTIER un) ──────────────────────
-    b_unite = composer_egalites(produit_cardinal_un(b), card_b)        # 𝔟·{∅} = 𝔟
-    card_unite = N.modus_ponens(un_egale_card_singleton(),
-                                symetrie(UN, cardinal(_UNITE)))        # Card{∅} = 1
-    bien_def = N.modus_ponens(conjonction_intro(card_b, card_unite),
-                              produit_cardinal_bien_defini(b, _UNITE, b, UN))
-    b_un = composer_egalites(N.modus_ponens(bien_def, symetrie(
-        cardinal(E.produit(b, _UNITE)), produit_cardinal_binaire(b, UN))),
-        b_unite)                                            # 𝔟·1 = 𝔟
+    b_unite, b_un = produit_par_un(b, card_b)
 
     #  ── (2) 𝔟·2 = 𝔟+𝔟   (distributivité ; 1+{∅} EST 2, syntaxiquement) ────
     dist = distributivite_operations(b, UN, _UNITE)
@@ -220,5 +241,5 @@ def absorption_au_maximal(S="S0", phi="phi0"):
     return absorption_depuis_carre(S, carre)
 
 
-__all__ = ["enonce_absorption", "absorption_depuis_carre",
+__all__ = ["enonce_absorption", "produit_par_un", "absorption_depuis_carre",
            "absorption_au_maximal"]

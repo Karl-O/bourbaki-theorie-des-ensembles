@@ -128,6 +128,22 @@ Deux corrections y ont mené, et elles valent comme méthode. (1) Une hypothèse
 cette seule chaîne, six « lacunes » étaient en fait des câbles absents. **Relire l'amont
 avant de déclarer un trou.** Voir RECHERCHE R-13 et `frag_iii6_hessenberg.tex`.
 
+✅ **RÉCOLTE DES COROLLAIRES DU TH. 2 (E III.49) — 2026-08-23, tous MESURÉS.**
+`Cor. 1` aⁿ = a : `puissance_n_clos`, 66,4 s, 1 hypothèse (le Th. 2 lui-même).
+`Cor. 4` ab = a+b = sup(a,b), cas binaire : `cor4_somme` 200,0 s / 3 hyps,
+`cor4_produit` 8,3 s / 4 hyps. Au passage, l'absorption a+a=a cesse d'être locale
+au maximal de Zorn (`absorption_sous_hessenberg`, 183,4 s) — la bijection φ₀ ne
+servait qu'à UNE étape, extraite et paramétrée.
+
+⛔ `Cor. 2` et `Cor. 3` restent BLOQUÉS, et pas faute de travail : tous deux
+passent par la **Proposition 14 en forme FAMILLE**, que le dépôt n'a pas (il n'a
+que le cas binaire et le dit lui-même). Les fermer = porter la Prop. 14 en
+famille, un chantier à part. Voir RECHERCHE R-14.
+
+⚠️ **Écart de FORME assumé sur le Cor. 4** : `sup(a,b)` exigerait la
+comparabilité des cardinaux pour que le TERME soit défini ; les énoncés portent
+donc la garde `b ≤ a`. Contenu identique, forme différente — consigné au rapport.
+
 ⚠️ **CONTRE-EXEMPLE À LA LIGNE CI-DESSOUS : la division euclidienne (III.5.6) y est
 comptée FAITE, elle est VIDE.** Mesuré le 2026-08-23 : ses deux modules dépendent de
 `_diff_est_fini`, qui instancie l'universel NU de `fini_downward` — l'hypothèse **non

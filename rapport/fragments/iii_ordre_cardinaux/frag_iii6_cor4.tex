@@ -1,0 +1,80 @@
+\subsection{§III.6.3, Corollaire 4 --- $\mathfrak{ab} = \mathfrak{a}+\mathfrak{b}
+= \sup(\mathfrak{a},\mathfrak{b})$, et une asymétrie que la preuve révèle}
+\label{sec:iii6-cor4}
+
+\textbf{Énoncé (Bourbaki, E III.49).} « Si $\mathfrak{a}$ et $\mathfrak{b}$ sont
+deux cardinaux non nuls dont l'un est infini, on a
+$\mathfrak{ab} = \mathfrak{a}+\mathfrak{b} = \sup(\mathfrak{a},\mathfrak{b})$. »
+La démonstration tient en une ligne : « Cela résulte aussitôt des cor. 2 et 3. »
+
+\textbf{Un détour obligé.} Cette ligne n'était pas praticable ici. Les
+Corollaires 2 et 3 portent sur des \emph{familles} $(\mathfrak{a}_\iota)_{\iota
+\in I}$ et passent tous deux par la Proposition~14 (§III.3.6) sous sa forme
+famille --- monotonie de $\prod_\iota$ et $\sum_\iota$ sur un ensemble d'indices
+quelconque. Le dépôt n'en possède que le \textbf{cas binaire}, et le dit
+lui-même dans son propre code. Fermer les Corollaires 2 et 3 suppose donc de
+porter d'abord la Proposition~14 en famille : un chantier à part entière, pas un
+corollaire.
+
+\textbf{La route courte.} Mais l'énoncé du Corollaire~4 est lui-même
+\emph{binaire}. Les familles ne servent qu'à sa \emph{démonstration}, pas à son
+contenu, et la déduction directe les évite entièrement :
+\[
+\mathfrak{a}+\mathfrak{b} \le \mathfrak{a}+\mathfrak{a}
+= \mathfrak{a} \quad\text{et}\quad \mathfrak{a} \le \mathfrak{a}+\mathfrak{b}
+\;\Longrightarrow\; \mathfrak{a}+\mathfrak{b} = \mathfrak{a} ,
+\]
+et de même pour le produit. Monotonie binaire, absorption, antisymétrie de
+Cantor--Bernstein : tout était disponible.
+
+\textbf{L'absorption cesse d'être locale.} Le pas $\mathfrak{a}+\mathfrak{a} =
+\mathfrak{a}$ existait déjà, mais seulement \emph{au maximal} : la démonstration
+de Hessenberg le tirait de la bijection $\varphi_0$ fournie par Zorn, ce qui
+suffisait à cet usage et ne donnait rien pour un cardinal infini quelconque. En
+relisant cette preuve, il apparaît que $\varphi_0$ n'y sert qu'à \textbf{une
+seule} étape --- le carré $\mathfrak{a}\cdot\mathfrak{a} = \mathfrak{a}$. D'où
+une \emph{extraction} plutôt qu'une réécriture : le raisonnement est paramétré
+par cette unique étape, et le Théorème~2 s'y substitue à la bijection. Aucune
+ligne de preuve n'a changé, et un test de non-régression accompagne l'extraction
+plutôt que de la suivre --- extraire le c\oe{}ur d'une preuve testée sans
+l'éprouver serait un pari.
+
+\textbf{L'asymétrie que la formalisation révèle.} Bourbaki exige $\mathfrak{a}$
+et $\mathfrak{b}$ \emph{non nuls}. En écrivant les deux moitiés séparément, on
+constate que cette garde ne sert \textbf{que pour le produit}. Le volet somme
+s'en passe entièrement : $\mathfrak{a} \le \mathfrak{a}+\mathfrak{b}$ se lit sur
+l'injection gauche et vaut même pour $\mathfrak{b} = 0$. Le volet produit ne le
+peut pas --- $\mathfrak{a}\cdot 0 = 0 \ne \mathfrak{a}$ --- et sa borne
+inférieure doit passer par la neutralité de $1$, donc par le \emph{piège des
+trois « un »} (l'ensemble $\{\emptyset\}$, son cardinal, l'entier). Deux moitiés
+d'un même corollaire, deux besoins différents : c'est le genre de distinction
+qu'une preuve écrite pour un lecteur peut laisser implicite et qu'un noyau
+oblige à trancher.
+
+\textbf{Une note de forme, assumée.} Écrire $\sup(\mathfrak{a},\mathfrak{b})$
+exigerait la comparabilité des cardinaux (Th.~1 §III.3) pour que le \emph{terme}
+soit défini. Les énoncés portent donc la garde $\mathfrak{b} \le \mathfrak{a}$,
+qui rend $\sup = \mathfrak{a}$ manifeste sans rien postuler. L'écart avec le
+livre est de \textbf{forme} ; le \textbf{contenu} est identique. On note au
+passage que $\mathfrak{b}$ n'a pas besoin d'être supposé cardinal : la seule
+inégalité suffit, et l'énoncé formalisé est donc un peu plus général que celui
+du livre.
+
+\textbf{Résultat.} Mesuré, tests verts :
+\begin{center}
+\small
+\begin{tabular}{@{}lrrl@{}}
+\toprule
+& temps & hyps & hypothèses \\
+\midrule
+\texttt{absorption\_sous\_hessenberg} & $183{,}4$~s & 2 & Th.~2, $A$ infini \\
+\texttt{cor4\_somme} & $200{,}0$~s & 3 & + $\mathfrak{b} \le \mathrm{Card}\,A$ \\
+\texttt{cor4\_produit} & $8{,}3$~s & 4 & + $1 \le \mathfrak{b}$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\texttt{theorie\_ensembles()} $= 22$, aucun résultat vacuous. Les tests vérifient
+la \emph{liste exacte} des hypothèses et non leur nombre : c'est le seul moyen de
+constater que la route binaire tient, une brique qui réintroduirait une famille
+faisant apparaître une hypothèse de plus. \textbf{Statut : FAIT}, sous la réserve
+de forme ci-dessus.
