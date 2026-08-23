@@ -33,6 +33,9 @@ from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_3_equipotence_cardina
 from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux_consequences import strict_implique_inf_egal
 from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_4_entiers_finis.iii_4_2_finis_props.ensembles_finis_props import trichotomie_finis
 from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_5_calcul_entiers.iii_5_2_inegalites_ordre_soustraction.ensembles_soustraction_iii5 import diff_somme
+from bourbaki.ii_theorie_des_ensembles.ii_4_reunion_intersection_famille.ii_4_recollement_somme.ensembles_somme_disjointe import (
+    somme_cardinale_binaire,
+)
 from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_5_calcul_entiers.iii_5_6_divisibilite_division_euclidienne.ensembles_division_existence import (
     _R_rel, _pas_petit, _pas_grand)
 from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_5_calcul_entiers.iii_5_6_divisibilite_division_euclidienne.ensembles_division_recurrence import (
@@ -62,12 +65,24 @@ def enonce_division_existence(b="bdf"):
 
 
 # @livre Ch.III §5.6 Demo.- | E III.39 L.10-19 | PDF p.142   (pas de récurrence forte)
-def _strong_step(b="bdf"):
+def _strong_step(b="bdf", cardinal=False):
     """⊢ {Fini b, b≠0, + résidus C61} ⊢ (∀n)( S{n} ⇒ R_rec{n} ) = H.   (LE cœur : trichotomie.)"""
     vb = _t(b)
     R_rec = _R_rec(vb)
     vn = var("nfor")
-    diff = diff_somme(vn, vb, "c")                            # n − b
+    if cardinal:
+        from bourbaki.i_description_mathematique_formelle.i_5_theories_egalitaires.i_5_2_tactiques_abrege_egalite import (
+            symetrie as _sym,
+        )
+        from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_5_calcul_entiers.iii_5_2_inegalites_ordre_soustraction.soustraction_cardinale.ensembles_diff_cardinale import (
+            diff_cardinale, diff_cardinale_equation,
+        )
+        diff = diff_cardinale(vn, vb)                         # τc(est_cardinal c et n = b+c)
+        _rec_bd = N.modus_ponens(diff_cardinale_equation(vn, vb),
+                                 _sym(vn, somme_cardinale_binaire(vb, diff)))
+    else:
+        diff = diff_somme(vn, vb, "c")                        # n − b
+        _rec_bd = None
     S_n = s_recurrence_forte(R_rec, vn, "pfor")               # (∀p)((n fini ∧ p fini ∧ p<n)⇒R_rec{p})
 
     fin_b = N.assume(est_fini(vb))
@@ -89,15 +104,25 @@ def _strong_step(b="bdf"):
     # ── build_grand(le_bn) : R{n} sous b≤n (via _pas_grand + R{n−b} depuis S{n}) ──
     def build_grand(le_bn):
         S_at = instancie(h_S, diff)                          # (n fini ∧ diff fini ∧ diff<n) ⇒ R_rec{diff}
-        ds = _diff_strict("nfor", "bdf")                     # diff < n   {card n,card b,b≤n,Fini n,Fini b,b≠0}
-        de = _diff_est_fini("nfor", "bdf")                   # diff fini  {card n,card b,b≤n,Fini n,+C61}
+        if cardinal:
+            from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_5_calcul_entiers.iii_5_2_inegalites_ordre_soustraction.soustraction_cardinale.ensembles_diff_cardinale_fini import (
+                diff_cardinale_inf_egal, diff_cardinale_fini,
+            )
+            de = diff_cardinale_fini("nfor", "bdf")           # diff fini, SANS hypothèse fausse
+            de = _cut(de, est_fini(vn), h_fin_n)              # sa garde Fini n, en plus
+            ds = _diff_strict("nfor", "bdf", diff=diff,
+                              le1=diff_cardinale_inf_egal("nfor", "bdf"),
+                              sc_eq=_rec_bd)                  # diff < n
+        else:
+            ds = _diff_strict("nfor", "bdf")                  # diff < n
+            de = _diff_est_fini("nfor", "bdf")                # diff fini  {+ résidus C61}
         for P, pr in [(est_cardinal(vn), card_n), (est_cardinal(vb), card_b), (le_bn_f, le_bn)]:
             ds = _cut(ds, P, pr)
             de = _cut(de, P, pr)
         ante = conjonction_intro(conjonction_intro(h_fin_n, de), ds)   # n fini ∧ diff fini ∧ diff<n
         R_rec_diff = N.modus_ponens(ante, S_at)              # R_rec{diff} = (Fini diff ⇒ R{n−b})
         R_diff = N.modus_ponens(de, R_rec_diff)              # R{n−b}
-        pg = _pas_grand("nfor", "bdf")                       # {Fini n,Fini b,b≤n,R{n−b}} R{n}
+        pg = _pas_grand("nfor", "bdf", diff=diff, rec_bd=_rec_bd)
         for P, pr in [(est_fini(vn), h_fin_n), (est_fini(vb), fin_b),
                       (le_bn_f, le_bn), (_R_rel(vb, diff), R_diff)]:
             pg = _cut(pg, P, pr)

@@ -124,13 +124,15 @@ def _diff_est_fini(a="adf", b="bdf"):
     return res
 
 
-def enonce_diff_strict(a="adf", b="bdf"):
+def enonce_diff_strict(a="adf", b="bdf", diff=None):
     va, vb = var(a), var(b)
-    return inf_strict_card(diff_somme(va, vb, "c"), va)
+    if diff is None:
+        diff = diff_somme(va, vb, "c")
+    return inf_strict_card(diff, va)
 
 
 # @livre Ch.III §5.6 Demo.- | E III.39 L.12-19 | PDF p.142   (a−b < a  quand b≠0)
-def _diff_strict(a="adf", b="bdf"):
+def _diff_strict(a="adf", b="bdf", diff=None, le1=None, sc_eq=None):
     """⊢ {card a, card b, b≤a, Fini a, Fini b, b≠0} ⊢ (a−b) < a.   (SANS résidu C61 — route commute-free.)
 
     ROUTE SANS COMMUTATIVITÉ (évite le verrou-τ ; cf. mémoire bourbaki-commute-ordre-dependant).
@@ -141,7 +143,12 @@ def _diff_strict(a="adf", b="bdf"):
     ⚠️ CLEF verrou-τ : somme_strict_monotone appliqué à ZERO (τ Card-valué) DIRECTEMENT rebute ; on passe
     par _inst_gen (théorème symbolique CLOS puis substitution PURE de ZERO — pas de bijection reconstruite)."""
     va, vb = _t(a), _t(b)
-    diff = diff_somme(va, vb, "c")                             # a−b
+    #  ⚠️ 2026-08-23 (R-12, étape 4c).  `diff` désigne la différence employée,
+    #  `le1` prouve (a−b) ≤ a et `sc_eq` prouve b + (a−b) = a.  Par défaut :
+    #  `diff_somme` et le comportement historique.  L'argument par l'absurde
+    #  n'utilise de la différence QUE ces deux faits, jamais sa construction.
+    if diff is None:
+        diff = diff_somme(va, vb, "c")                         # a−b
     ZA = somme_cardinale_binaire(ZERO, va)                     # 0+a
     BA = somme_cardinale_binaire(vb, va)                       # b+a
     card_a = N.assume(est_cardinal(va))
@@ -151,7 +158,9 @@ def _diff_strict(a="adf", b="bdf"):
     fin_b = N.assume(est_fini(vb))
     b_ne0 = N.assume(non(egal(vb, ZERO)))
 
-    le1 = _diff_inf_egal(a, b)                                 # (a−b) ≤ a   (Partie 1)
+    if le1 is None:
+        le1 = _diff_inf_egal(a, b)                             # (a−b) ≤ a   (Partie 1)
+    assert le1.conclusion == inf_egal_card(diff, va),         "_diff_strict : `le1` ne prouve pas (a−b) ≤ a"
 
     # ── 0+a = a  (indépendant de l'absurde) : scb(ZERO,va) = scb(∅,va) = Card(va) = va ──
     cve = cardinal_vide_egale_vide()                          # Card(∅) = ∅ , i.e. ZERO = ∅
@@ -180,8 +189,11 @@ def _diff_strict(a="adf", b="bdf"):
 
     # ── ABSURDE : si a−b = a alors b+a = a, donc a < b+a = a, contredit ¬(a<a) ──
     h_diff = N.assume(egal(diff, va))                         # a−b = a
-    sc = soustraction_caracterisation(vb, va, "c")            # (card b,card a,b≤a) ⇒ scb(vb,a−b)=a
-    sc_eq = N.modus_ponens(conjonction_intro(conjonction_intro(card_b, card_a), h_le), sc)  # scb(vb,diff)=va
+    if sc_eq is None:
+        sc = soustraction_caracterisation(vb, va, "c")        # (card b,card a,b≤a) ⇒ scb(vb,a−b)=a
+        sc_eq = N.modus_ponens(conjonction_intro(
+            conjonction_intro(card_b, card_a), h_le), sc)     # scb(vb,diff)=va
+    assert sc_eq.conclusion == egal(somme_cardinale_binaire(vb, diff), va),         "_diff_strict : `sc_eq` ne prouve pas b + (a−b) = a"
     leibD = N.s6(diff, va, "wd", egal(somme_cardinale_binaire(vb, var("wd")), va))
     ba_eq = N.modus_ponens(sc_eq, equivalence_avant(N.modus_ponens(h_diff, leibD)))   # b+a = a  (scb(vb,va)=va)
     leibB = N.s6(BA, va, "wB", inf_strict_card(va, var("wB")))
@@ -191,7 +203,7 @@ def _diff_strict(a="adf", b="bdf"):
     ne = N.modus_ponens(nlt, contraposition(imp_absurd))     # ¬(a−b = a)   (Partie 2)
 
     res = conjonction_intro(le1, ne)                         # (a−b) ≤ a  et  a−b ≠ a  =  (a−b) < a
-    assert res.conclusion == enonce_diff_strict(a, b), "_diff_strict : conclusion inattendue"
+    assert res.conclusion == enonce_diff_strict(a, b, diff), "_diff_strict : conclusion inattendue"
     return res
 
 

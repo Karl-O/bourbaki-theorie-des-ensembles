@@ -11,6 +11,7 @@ Le premier test est une NON-RÉGRESSION ; le second établit que la preuve
 n'utilise de la différence que son ÉQUATION, jamais sa construction — c'est
 pourquoi le port est mécanique.
 """
+import pytest
 from bourbaki.i_description_mathematique_formelle.i_1_termes_relations.outil_formule import (
     var,
 )
@@ -89,3 +90,48 @@ def test_pas_grand_porte_sur_diff_cardinale():
     t = _pas_grand("a", "b", diff=d, rec_bd=rec)
     assert t.conclusion == enonce_pas_grand("a", "b")[1],         "le port doit conclure la MÊME relation R{a}"
     assert len(E.theorie_ensembles().axiomes) == 22
+
+
+# ── ÉTAPE 4c : l'inégalité stricte, les deux branches ─────────────────────────
+#  Les deux sont LENTES (mesuré : 457,7 s et 569,8 s) : l'argument par l'absurde
+#  passe par somme_strict_monotone sur des termes τ volumineux.
+
+@pytest.mark.slow
+def test_non_regression_diff_strict():
+    """`_diff_strict` sans paramètre reste identique.   [~460 s]"""
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_5_calcul_entiers.iii_5_6_divisibilite_division_euclidienne.ensembles_division_recurrence import (
+        _diff_strict, enonce_diff_strict,
+    )
+    t = _diff_strict("adf", "bdf")
+    assert t.conclusion == enonce_diff_strict("adf", "bdf")
+    assert len(t.hypotheses) == 6, "hyps : %d" % len(t.hypotheses)
+    assert len(E.theorie_ensembles().axiomes) == 22
+
+
+@pytest.mark.slow
+def test_diff_strict_porte_sur_diff_cardinale():
+    """🎯 `_diff_strict` conclut ( a−b ) < a pour `diff_cardinale`.  [~570 s]
+
+    Troisième étage où le même constat tient : l'argument par l'absurde
+    n'utilise de la différence que sa borne et son équation, jamais sa
+    construction."""
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_5_calcul_entiers.iii_5_6_divisibilite_division_euclidienne.ensembles_division_recurrence import (
+        _diff_strict, enonce_diff_strict,
+    )
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_5_calcul_entiers.iii_5_2_inegalites_ordre_soustraction.soustraction_cardinale.ensembles_diff_cardinale_fini import (
+        diff_cardinale_inf_egal,
+    )
+    d, rec = _diff_et_equation_adf()
+    t = _diff_strict("adf", "bdf", diff=d,
+                     le1=diff_cardinale_inf_egal("adf", "bdf"), sc_eq=rec)
+    assert t.conclusion == enonce_diff_strict("adf", "bdf", d)
+    assert len(E.theorie_ensembles().axiomes) == 22
+
+
+def _diff_et_equation_adf():
+    """Le couple (diff_cardinale, preuve de b+diff=a) sur les liants adf/bdf."""
+    va, vb = var("adf"), var("bdf")
+    d = diff_cardinale(va, vb)
+    rec = N.modus_ponens(diff_cardinale_equation(va, vb),
+                         symetrie(va, somme_cardinale_binaire(vb, d)))
+    return d, rec
