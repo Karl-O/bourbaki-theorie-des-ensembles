@@ -157,7 +157,10 @@ def hessenberg_par_extension(E_set="E", paquet_derive=False):
     Gam, Fr = frame_ordre(vE), frame_pair(vE)
     residus = _residus(E_set, paquet_derive=paquet_derive)
     paquet_residus = residus_maximal(E_set, paquet_derive=paquet_derive)
-    enrobe = paquet_residus != residus[0] or len(residus) > 1
+    #  `residus_maximal` n'enrobe de (∀S)(∀φ) que si le corps mentionne le
+    #  maximal : on le détecte en comparant au corps replié, pas en comptant.
+    corps_nu = reduce(lambda acc, x: et(x, acc), reversed(residus[:-1]), residus[-1])
+    enrobe = paquet_residus != corps_nu
 
     def derive(bij0, S_inc, S_inf, h_max, vS0, vphi0, p_eq):
         claim = _claim_memo(E_set, vS0.nom, vphi0.nom, paquet_derive)

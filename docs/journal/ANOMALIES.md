@@ -983,3 +983,43 @@ possède une variante gardée de `cardinal_pas_entre` ∀∀-close ; (c) si la t
 est réelle, remplacer dans stepb3 la chaîne `fini_downward` nue par sa version
 gardée — la garde `est_cardinal` étant DISPONIBLE partout où on l'applique
 (les objets manipulés y sont des cardinaux).
+
+### 2026-08-23, 06h10 — TRANCHÉE : le défaut est LOCALISÉ (et réparable)
+
+Quatre faits, **tous vérifiés en code** (comparaisons par `==`, jamais par lecture) :
+
+| # | fait | vérif |
+|---|------|-------|
+| A | `cardinal_pas_entre_inconditionnel(b,c)` conclut `est_cardinal(b) ⇒ cardinal_pas_entre(b,c)` | `==` ✔ |
+| B | …et il est **CLOS** (0 hypothèse) | ✔ |
+| C | `fini_downward_thm` porte la version **NUE** `(∀c)(∀b) cardinal_pas_entre(b,c)` | `in hypotheses` ✔ |
+| D | …et **PAS** la version gardée `(∀c)(∀b)( est_cardinal(b) ⇒ … )` | ✔ |
+
+**Diagnostic.** Le dépôt PROUVE la forme gardée, inconditionnellement. Mais
+`fini_downward_thm` suppose la forme NUE — strictement plus forte, et que le
+dépôt qualifie lui-même de fausse (`fini_downward_garde_thm`). On ne peut pas
+passer de la gardée à la nue : il faudrait `est_cardinal(b)` pour TOUT b, ce
+qui est faux dès que b est un ensemble concret non-cardinal (alors `Fini(b)`
+est faux par définition alors que `b ≤ c` peut tenir).
+
+Ce n'est donc PAS une contradiction du noyau — la dérivation est correcte —
+mais une **hypothèse honnête non satisfaite** : tout théorème qui la porte est
+VRAI et VIDE. La soundness n'est pas en cause ; la FIDÉLITÉ l'est.
+
+**Périmètre exact.** Sont touchés : `fini_downward_thm`, `N_collectivise` par
+son intermédiaire, `ensembles_extension_z_infini`, et donc
+`negation_strict_sous_maximal_reunion` (stepb3) — c'est-à-dire le chemin
+`paquet_derive=True`. **Ne sont PAS touchés** : le chemin rapide de Hessenberg
+(résidu = paquet ψ), l'absorption, le transport, H1, hess_maximal, le Lemme 1,
+le Lemme 2 — aucun ne descend de `fini_downward`.
+
+**RÉPARATION (identifiée, à implémenter).** `fini_downward_garde_thm` fournit
+déjà la bonne forme : `{ est_cardinal(a), predecesseur_fini_universel }
+⊢ (∀x) fini_downward(a,x)`. En aval, le `a` est toujours un cardinal (Card U,
+Card S₀…), donc la garde se décharge par `est_cardinal_de_cardinal`. Il resterait
+`predecesseur_fini_universel` (Prop. 2 §III.5) — une hypothèse honnête VRAIE
+mais non encore prouvée, ce qui est le statut acceptable.
+
+Autrement dit : la réparation échange une hypothèse FAUSSE contre une hypothèse
+VRAIE-non-prouvée, et transforme un théorème vide en un théorème conditionnel
+légitime. C'est le gain de fidélité le plus important de la nuit.
