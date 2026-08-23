@@ -83,8 +83,9 @@ def fini_downward_cardinal(A, tX, a="a", x="x", c="c", b="b"):
 
     La forme que l'aval consomme réellement (cf. `z_infini_derive`, qui
     instancie à a := Card S₀ et x := Card Z).  La garde `est_cardinal(Card A)`
-    est déchargée par `est_cardinal_de_cardinal`, close — il ne subsiste que
-    `predecesseur_fini_universel`, hypothèse honnête VRAIE.
+    est déchargée par `est_cardinal_de_cardinal`, close ; et
+    `predecesseur_fini_universel` l'est aussi depuis le 2026-08-23 — le dépôt le
+    PROUVE (Prop. 2 §III.5), il n'était pas branché.  Le résultat est donc CLOS.
 
     C'est le REMPLAÇANT sûr de `fini_downward_thm` instancié : même conclusion,
     mais sans l'hypothèse non satisfaite (ANOMALIES 2026-08-23)."""
@@ -94,6 +95,17 @@ def fini_downward_cardinal(A, tX, a="a", x="x", c="c", b="b"):
     sous_garde = instancie(gen, cA)                  # est_cardinal(Card A) ⇒ (∀x)…
     tous_x = N.modus_ponens(est_cardinal_de_cardinal(vA), sous_garde)
     res = instancie(tous_x, vX)
+
+    #  ⚠️ 2026-08-23 : `predecesseur_fini_universel` n'est PAS un résidu — le dépôt
+    #  le PROUVE (Prop. 2 §III.5, `predecesseur_fini_universel_preuve`, CLOS, 7,7 s).
+    #  Il n'était simplement pas branché.  On le décharge ici, à la source, pour que
+    #  toute la chaîne en aval en hérite.
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_4_entiers_finis.iii_4_recurrence_c61_existence_n.ensembles_predecesseur_prop2 import (
+        predecesseur_fini_universel_preuve,
+    )
+    pfu = predecesseur_fini_universel_preuve()
+    if pfu.conclusion in res.hypotheses:
+        res = N.modus_ponens(pfu, N.loi_deduction(pfu.conclusion, res))
 
     cible = impl(et(inf_egal_card(cA, vX), est_fini(vX)), est_fini(cA))
     assert res.conclusion == cible, "fini_downward_cardinal : forme"

@@ -24,14 +24,15 @@ from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_6_infinis.frame_zorn.
 
 
 def test_fini_downward_cardinal():
-    """{pfu} ⊢ (Card S₀ ≤ Card Z et Fini(Card Z)) ⇒ Fini(Card S₀)."""
+    """⊢ (Card S₀ ≤ Card Z et Fini(Card Z)) ⇒ Fini(Card S₀).   CLOS."""
     vS = var("S0")
     cZ = cardinal(E.reunion(vS, var("Ucadre")))
     t = fini_downward_cardinal("S0", cZ)
     cS = cardinal(vS)
     assert t.conclusion == impl(et(inf_egal_card(cS, cZ), est_fini(cZ)), est_fini(cS))
-    assert len(t.hypotheses) == 1, "une seule hypothèse attendue : %d" % len(t.hypotheses)
-    assert not libres_f(list(t.hypotheses)[0]), "l'hypothèse doit être close"
+    #  2026-08-23 : CLOS. `predecesseur_fini_universel` n'était pas un résidu —
+    #  le dépôt le PROUVE (Prop. 2 §III.5), il n'était simplement pas branché.
+    assert not t.hypotheses, "doit être CLOS : %d hyps" % len(t.hypotheses)
     assert len(E.theorie_ensembles().axiomes) == 22
 
 

@@ -611,3 +611,33 @@ que de l'espérer.
 **Conséquence attendue** : `hess_maximal` doit passer de 2 hypothèses à UNE
 (« E infini »), et `hessenberg_par_extension` tenir sous
 { E infini, predecesseur_fini_universel } après branchement.
+
+## 🎯 LE DERNIER RÉSIDU N'EN ÉTAIT PAS UN (2026-08-23, 10h50)
+
+`predecesseur_fini_universel` — l'unique résidu de Hessenberg après le travail
+de la nuit — **est prouvé dans le dépôt** :
+`predecesseur_fini_universel_preuve` (iii_4_recurrence_c61_existence_n/
+ensembles_predecesseur_prop2.py:404), **CLOS, 0 hypothèse, 7,7 s**, conclusion
+littéralement égale à l'énoncé. Vérifié par `==`, pas sur la docstring.
+
+Il n'était **pas branché** : `fini_downward_garde_thm` le portait en hypothèse
+alors que sa preuve existait à côté. Une ligne de coupure dans
+`fini_downward_cardinal` — à la source, pour que tout l'aval en hérite — et le
+lemme devient CLOS (mesuré : 160,9 s, 0 hyp).
+
+**C'est la SIXIÈME fois cette nuit que « relire l'amont » paie** :
+  1. le transport (GAP B) était clos, seul l'appelant n'était pas recâblé ;
+  2. deux « chantiers » (us_inclus_E, us_infini) passaient déjà ;
+  3. `union_famille_injective` et `union_famille_fonctionnelle` donnaient deux
+     données du recollement gratuitement ;
+  4. le défaut `fini_downward` était déjà documenté ;
+  5. `cardinal_pas_entre_univ` livrait la forme gardée toute faite ;
+  6. et maintenant `predecesseur_fini_universel_preuve`.
+
+**Règle renforcée** : avant de traiter une hypothèse comme un résidu, chercher
+`<son_nom>_preuve` / `_prouve` / `_clos` / `_inconditionnel` dans tout le dépôt.
+Un dépôt de cette taille accumule des preuves non branchées, et l'écart entre
+« ce qui est prouvé » et « ce qui est utilisé » ne se voit qu'en le mesurant.
+
+**Attendu, en cours de mesure** : `hessenberg_final` sous la SEULE
+`est_infini(Card E)` — c'est-à-dire Hessenberg **FAIT** au sens strict.
