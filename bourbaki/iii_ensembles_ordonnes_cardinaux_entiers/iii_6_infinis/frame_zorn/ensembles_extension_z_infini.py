@@ -8,15 +8,17 @@ sous l'architecture taguée, mais ce n'est que l'ENCODAGE de « Z est infini »
 
     S₀ ⊂ Z                        [inclusion_reunion_gauche, INCONDITIONNEL]
     (S₀⊂Z et Fini(Card Z)) ⇒ Fini(Card S₀)
-                                  [Cor. 1 §III.4.2 + fini_downward_thm instancié]
+                                  [Cor. 1 §III.4.2 + fini_downward_cardinal]
     ¬Fini(Card S₀)                [maximal-data : S₀ infini, corps du frame]
     ⇒ ¬Fini(Card Z)  =  est_infini_ensemble(Z)          [contraposition].
 
 RÉSIDUS (honnêtes, TOUS Ucadre-LIBRES — c'est le point : ils n'obstruent PAS
 l'élimination existentielle de Ucadre en B2) :
   • est_infini_ensemble(S₀)   (maximal-data, déchargée par unpack_maximal) ;
-  • les 2 résidus ∀∀-clos de `fini_downward_thm` (principe_recurrence C61,
-    cardinal_pas_entre) — reportés là-bas, jamais postulés ici.
+  • `predecesseur_fini_universel` (Prop. 2 §III.5), close — l'UNIQUE résidu de
+    la downward-closure depuis le recâblage du 2026-08-23 sur sa version GARDÉE
+    (`fini_downward_cardinal`).  L'ancienne route portait la ∀∀-clôture NUE de
+    `cardinal_pas_entre`, non satisfaite : cf. ANOMALIES.
 INVARIANT : theorie_ensembles()=22 ; rien postulé ; conclusion ∉ hypothèses.
 """
 from __future__ import annotations
@@ -36,8 +38,8 @@ from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_4_entiers_finis.iii_4
 from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_4_entiers_finis.iii_4_2_finis_props.ensembles_finis_props import (
     cor1_partie_finie_est_finie_conditionnel,
 )
-from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_4_entiers_finis.iii_4_recurrence_c61_existence_n.ensembles_recurrence_C61 import (
-    fini_downward_thm,
+from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_6_infinis.frame_zorn.ensembles_fini_downward_garde import (
+    fini_downward_cardinal,
 )
 from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_6_infinis.entiers_infinis.iii_6_3_infinis_denombrables.ensembles_infinis import (
     est_infini_ensemble,
@@ -60,25 +62,29 @@ def _inclusion_gauche_t(ta, tb):
 
 # @livre Ch.III §6.3 Demo.2 | E III.48 L.27-30 | PDF p.151  (Z = S₀∪U : le prolongé reste infini — support de (Z,φ₁)∈𝔉)
 def z_infini_derive(S="S0", U="Ucadre"):
-    """{ est_infini_ensemble(S₀), résidus ∀∀ de fini_downward_thm }
+    """{ est_infini_ensemble(S₀), predecesseur_fini_universel }
         ⊢ est_infini_ensemble( S₀ ∪ U ).            [résidus Ucadre-LIBRES].
 
     L'hyp n°6 de B0, DÉRIVÉE (cf. en-tête).  Le maillon central est le
     Corollaire 1 §III.4.2 instancié (X:=S₀, E:=Z) dont l'antécédent
-    fini_downward(Card S₀, Card Z) est déchargé par `fini_downward_thm`
-    instancié — l'assert d'α-identité garde la coïncidence byte-à-byte."""
+    fini_downward(Card S₀, Card Z) est déchargé par `fini_downward_cardinal`
+    (version GARDÉE) — l'assert d'α-identité garde la coïncidence byte-à-byte."""
     vS, vU = _t(S), _t(U)
     Z = E.reunion(vS, vU)
     cS, cZ = cardinal(vS), cardinal(Z)
 
     h_infS = N.assume(est_infini_ensemble(vS))               # ¬Fini(Card S₀)  [maximal-data]
 
-    # H := (Card S₀ ≤ Card Z et Fini(Card Z)) ⇒ Fini(Card S₀)  — depuis le ∀∀.
-    fdt = fini_downward_thm()                                # {2 résidus ∀∀} ⊢ (∀a)(∀x)(…)
-    H_inst = instancie(instancie(fdt, cS), cZ)
+    # H := (Card S₀ ≤ Card Z et Fini(Card Z)) ⇒ Fini(Card S₀).
+    #  ⚠️ RECÂBLÉ le 2026-08-23 sur la version GARDÉE.  L'ancienne route portait
+    #  la ∀∀-clôture NUE de `cardinal_pas_entre`, hypothèse NON SATISFAITE qui
+    #  rendait VIDE tout théorème en aval (ANOMALIES 2026-08-23).
+    #  `fini_downward_cardinal` conclut la MÊME chose sous la seule
+    #  `predecesseur_fini_universel`, la garde `est_cardinal(Card S₀)` étant close.
+    H_inst = fini_downward_cardinal(S, cZ)                   # {pfu} ⊢ H_form
     H_form = impl(et(inf_egal_card(cS, cZ), est_fini(cZ)), est_fini(cS))
     assert H_inst.conclusion == H_form, \
-        "z_infini_derive : α-mismatch fini_downward_thm instancié vs H (cf. cor1)"
+        "z_infini_derive : α-mismatch fini_downward_cardinal vs H (cf. cor1)"
 
     # Cor. 1 : H ⇒ ((S₀⊂Z et Fini(Card Z)) ⇒ Fini(Card S₀)).
     imp = N.modus_ponens(H_inst, cor1_partie_finie_est_finie_conditionnel(vS, Z))
