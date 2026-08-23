@@ -177,24 +177,56 @@ résidu de Hessenberg. Prix à payer : 384 s contre ~30 s — donc garder les DE
 chemins (le rapide, à résidu nommé, pour l'itération ; le complet, marqué
 `slow`, pour la certification).
 
-## R-12 — Prouver « une différence d'entiers est un entier » : est_cardinal(a − b)
+## R-12 — REQUALIFIÉE (2026-08-23) : ce n'est pas un lemme manquant, c'est la DÉFINITION
 
-**Pourquoi** : c'est l'unique brique qui bloque le recâblage de la division
-euclidienne sur la downward-closure GARDÉE (cf. ANOMALIES 2026-08-23). Sans
-elle, `_diff_est_fini` doit passer par l'universel nu, non satisfait, et les
-deux modules de division restent vides.
+**La fiche initiale demandait** : prouver `est_cardinal(diff_somme(a,b))`, l'unique
+brique bloquant le recâblage de la division euclidienne sur la downward-closure
+GARDÉE. **Ce n'est pas démontrable, et il faut le dire.**
 
-**Énoncé visé** : { a ≥ b (ou : Fini a, b ≤ a) } ⊢ est_cardinal( diff_somme(a,b) ).
+**Les deux faits, lus dans le code, pas déduits.**
 
-**Piste** : sous `b ≤ a`, `existe_temoin` donne un témoin c avec a = b + c, et
-`diff_somme(a,b)` EST ce τ. Il faudrait alors montrer que ce c peut être choisi
-CARDINAL — typiquement en le réalisant comme `Card(A ∖ B)` pour des ensembles
-témoins, ce qui relie R-12 à `_card_E_somme` (déjà utilisé par
-`complement_grand` : Card E = Card S₀ + Card(E∖S₀)).
+  1. `est_fini(a) = est_cardinal(a) ∧ a ≠ a+1` (`ensembles_entiers.py:84`).
+     Donc `Fini(a−b)` **entraîne** `est_cardinal(a−b)` : la cible de
+     `_diff_est_fini` contient la brique manquante. Ce n'est pas un détour, c'est
+     un cercle.
+  2. `somme_cardinale_binaire(a,b) = Card(a ⊔ b)`
+     (`ensembles_somme_disjointe.py:223`). Donc `a = b + c` s'écrit
+     `a = Card(b ⊔ c)` et ne contraint **en rien** `c` à être un cardinal :
+     tout ensemble équipotent à un témoin valable est un témoin valable.
 
-**Retombée** : la division euclidienne est l'un des gros chantiers ouverts listés
-dans CLAUDE.md ; cette brique la débloquerait au niveau de la fidélité, pas
-seulement de la couverture.
+**Conséquence.** `diff_somme(a,b) := τc.( a = b + c )` porte un τ sur une formule
+dont les témoins ne sont PAS tous des cardinaux. Le τ en choisit un
+arbitrairement. `est_cardinal(τc.(a = b+c))` **n'est pas dérivable** — et ce n'est
+pas une lacune du dépôt, c'est une propriété de la formule.
+
+**Ce que cela révèle sur l'anomalie du jour, et c'est le vrai résultat.** Le naked
+`fini_downward` n'était pas une négligence de plomberie : il était **porteur**.
+Il fermait un pas qui n'a pas de preuve honnête. Une hypothèse fausse ne fait
+jamais que « manquer de justification » — elle *travaille*, et ce qu'elle
+dissimule est exactement la difficulté qu'on croyait avoir contournée. C'est le
+diagnostic à garder pour les autres résidus du dépôt.
+
+**LA RÉPARATION (plan, non encore exécuté).** Rendre la différence cardinale
+*par construction*, au lieu d'espérer qu'elle le soit :
+
+    diff_cardinale(a, b) := τc.( est_cardinal(c) et a = b + c )
+
+  - **étape 1** — renforcer la Prop. 13 : dans
+    `existe_complement_depuis_inf_egal`, le témoin est **déjà** `Card(a ∖ Im)`,
+    donc déjà un cardinal. Il suffit de conjoindre `est_cardinal_de_cardinal(R)`
+    avant le S5 final pour conclure `(∃c)( est_cardinal(c) et Card a = b + c )`.
+    Modification ADDITIVE (nouveau module), deux lignes de fond.
+  - **étape 2** — `existe_temoin` sur ce ∃ livre d'un coup
+    `est_cardinal(diff_cardinale) et a = b + diff_cardinale` : la garde ET
+    l'équation caractéristique, sans lemme supplémentaire.
+  - **étape 3** — `_diff_est_fini` se recâble sur
+    `fini_downward_garde_universel` instancié au terme `diff_cardinale`, la garde
+    étant déchargée par l'étape 2. Plus aucun universel nu.
+  - **étape 4** — §III.5.6 (deux modules de division) suit `diff_cardinale`.
+
+**Fidélité.** À vérifier au PDF (E III.37 L.17-20) avant d'exécuter : Bourbaki
+définit `b − a` sur des entiers, où la question ne se pose pas. Le τ gardé est
+donc plus proche du livre que le τ nu, mais l'écart doit être consigné.
 
 ## R-13 — CARTE des données du recollement (mesurée en code, 2026-08-23)
 
