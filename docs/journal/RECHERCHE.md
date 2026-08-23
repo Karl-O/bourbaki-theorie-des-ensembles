@@ -491,3 +491,27 @@ sans essai perdu : les leçons 17 et 18 se paient d'elles-mêmes.
 la forme « tout point est atteint par un membre » : elles iront dans l'autre
 sens que les précédentes — `membre_union_premiere` en sens AVANT pour DÉFAIRE
 l'appartenance à US, puis S5 pour produire le témoin réclamé.
+
+### R-13, suite (08h20) — énoncés EXACTS des deux dernières, et `valeur_atteinte`
+
+Lus en code (et non devinés) :
+
+    (7) surjectivité   : (∀w)( w ∈ US ⇒ (∃p)( p∈𝔇 et (∃a)( (a,w) ∈ p ) ) )
+    (1) domaine couvrant : (∀a)( a ∈ US×US ⇒ (∃p)( p∈𝔇 et (∃w)( (a,w) ∈ p ) ) )
+
+Elles disent donc : tout point de US est une VALEUR d'un membre, tout point de
+US×US est dans le DOMAINE d'un membre.
+
+`valeur_atteinte` (0,4 s, 1 hyp, du premier coup) fournit la pièce de la (7) :
+{ p ∈ 𝔉(E) } ⊢ (∀w)( w ∈ pr₁p ⇒ (∃a)((a,w) ∈ pr₂p) ) — réciproque de
+`valeur_dans_pr1`, c'est la surjectivité `image(φ,S×S)=S` lue dans l'autre sens.
+
+**Assemblage restant pour (7)** : w ∈ US donne u ∈ C avec w ∈ pr₁u
+(`membre_union_premiere` sens AVANT) ; `valeur_atteinte` donne l'antécédent ;
+le membre cherché est pr₂u, à produire par `membre_famille` en sens ARRIÈRE.
+
+**Pour (1)** : a ∈ US×US donne deux composantes dans US, donc DEUX membres de
+la chaîne, qu'il faut comparer pour les loger dans un seul —
+`_inclusion_membres` (ensembles_famille_dirigee.py) le fait déjà, mais il
+faudra son conjoint pr₁ (`conjonction_elim_droite(conjonction_elim_gauche(corps))`)
+et non le conjoint pr₂ qu'il extrait actuellement.

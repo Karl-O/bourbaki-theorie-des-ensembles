@@ -83,3 +83,24 @@ def test_valeur_dans_pr1():
     assert len(t.hypotheses) == 1
     assert t.conclusion not in t.hypotheses, "VACUOUS"
     assert len(E.theorie_ensembles().axiomes) == 22
+
+
+def test_valeur_atteinte():
+    """🎯 { p ∈ 𝔉(E) } ⊢ (∀w)( w ∈ pr₁(p) ⇒ (∃a)( (a,w) ∈ pr₂(p) ) ).
+
+    Réciproque de `valeur_dans_pr1` : toute la base d'un membre est ATTEINTE,
+    c'est la surjectivité lue dans l'autre sens.  Pièce de la donnée (7)."""
+    from bourbaki.i_description_mathematique_formelle.i_1_termes_relations.outil_formule import (
+        appartient, pourtout, impl, existe,
+    )
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_6_infinis.frame_zorn.h2_garde.claim.donnees.ensembles_union_premiere import (
+        valeur_atteinte,
+    )
+    vp, vw = var("pmemb"), var("wva")
+    t = valeur_atteinte()
+    assert t.conclusion == pourtout("wva", impl(
+        appartient(vw, E.pr1(vp)),
+        existe("ava", appartient(E.couple(var("ava"), vw), E.pr2(vp)))))
+    assert len(t.hypotheses) == 1
+    assert t.conclusion not in t.hypotheses, "VACUOUS"
+    assert len(E.theorie_ensembles().axiomes) == 22

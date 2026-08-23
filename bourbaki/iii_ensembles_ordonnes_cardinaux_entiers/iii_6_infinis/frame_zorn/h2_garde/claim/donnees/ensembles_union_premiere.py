@@ -223,4 +223,74 @@ def valeur_dans_pr1(E_set="E", p="pmemb", x="xvp", w="wvp"):
     return res
 
 
-__all__ = ["pr1_inclus_union", "dom_pr2_egale_carre", "valeur_dans_pr1"]
+# @livre Ch.III §6.3 Demo.2 | E III.48 L.24-26 | PDF p.151  (la bijection d'un membre est SURJECTIVE sur sa base)
+def valeur_atteinte(E_set="E", p="pmemb", w="wva", a="ava"):
+    """🎯 { p ∈ 𝔉(E) } ⊢ (∀w)( w ∈ pr₁(p) ⇒ (∃a)( (a,w) ∈ pr₂(p) ) ).
+
+    RÉCIPROQUE de `valeur_dans_pr1` : non seulement les valeurs d'un membre
+    restent dans sa base, mais toute la base est ATTEINTE — c'est la
+    surjectivité `image(φ,S×S) = S` lue dans l'autre sens.  Pièce de la
+    donnée (7)."""
+    from bourbaki.i_description_mathematique_formelle.i_1_termes_relations.outil_formule import pourtout, impl, existe
+    from bourbaki.i_description_mathematique_formelle.i_2_theoremes.tactiques.tactiques_abrege import antecedent_consequent
+    from bourbaki.i_description_mathematique_formelle.i_2_theoremes.tactiques.tactiques_abrege2 import (
+        conjonction_elim_gauche, conjonction_elim_droite, instancie)
+    from bourbaki.i_description_mathematique_formelle.i_4_theories_quantifiees.i_4_3_tactiques_abrege_quantif import existe_elimination
+    from bourbaki.i_description_mathematique_formelle.i_5_theories_egalitaires.i_5_2_tactiques_abrege_egalite import (
+        symetrie, composer_egalites, congruence_terme)
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_6_infinis.hessenberg.coeur.ensembles_hessenberg_hard import frame_pair
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_6_infinis.frame_zorn.ensembles_frame_a_maximal import _frame_membre_t
+    from bourbaki.ii_theorie_des_ensembles.ii_2_couples.ii_2_1_definition_couples.ensembles_projections import (
+        projection_premiere, projection_seconde)
+    vE, vp, vw = _t(E_set), _t(p), var(w)
+    pr1p, pr2p = E.pr1(vp), E.pr2(vp)
+    but = existe(a, appartient(E.couple(var(a), vw), pr2p))
+    decl = N.modus_ponens(N.assume(appartient(vp, frame_pair(vE))),
+                          equivalence_avant(_frame_membre_t(vE, vp)))
+    nS, bodyS = decl.conclusion.lieur, decl.conclusion.sous[0]
+    nphi, bodyphi = bodyS.lieur, bodyS.sous[0]
+    ax_img = N.axiome(E.theorie_ensembles(), E.AXIOME_IMAGE)
+
+    def inner(b):
+        hh = N.assume(b)
+        vS, vphi = var(nS), var(nphi)
+        SxS = E.produit(vS, vS)
+        bij = conjonction_elim_droite(hh)
+        p_eq = conjonction_elim_gauche(conjonction_elim_gauche(conjonction_elim_gauche(hh)))
+        surj = conjonction_elim_droite(conjonction_elim_droite(bij))   # image(φ,S×S)=S
+        eq2 = composer_egalites(N.modus_ponens(p_eq, congruence_terme(
+            vp, E.couple(vS, vphi), E.pr2(var("wvq")), "wvq")), projection_seconde(nS, nphi))
+        eq1 = composer_egalites(N.modus_ponens(p_eq, congruence_terme(
+            vp, E.couple(vS, vphi), E.pr1(var("wvq")), "wvq")), projection_premiere(nS, nphi))
+        #  w ∈ pr₁p = S = image(φ,S×S), d'où un antécédent
+        w_S = N.modus_ponens(N.assume(appartient(vw, pr1p)), equivalence_avant(
+            N.modus_ponens(eq1, N.s6(pr1p, vS, "wvq", appartient(vw, var("wvq"))))))
+        w_img = N.modus_ponens(w_S, equivalence_avant(N.modus_ponens(
+            N.modus_ponens(surj, symetrie(E.image(vphi, SxS), vS)),
+            N.s6(vS, E.image(vphi, SxS), "wvq", appartient(vw, var("wvq"))))))
+        cim = instancie(instancie(instancie(ax_img, vphi), SxS), vw)
+        lim = antecedent_consequent(equivalence_avant(cim).conclusion)[1]
+        ex_x = N.modus_ponens(w_img, equivalence_avant(cim))
+        nx, corps_x = ex_x.conclusion.lieur, ex_x.conclusion.sous[0]
+        vx = var(nx)
+        #  ne garder que « (x,w) ∈ φ », puis réintroduire ∃a sur pr₂p
+        xw_phi = conjonction_elim_droite(N.assume(corps_x))
+        xw_pr2 = N.modus_ponens(xw_phi, equivalence_avant(N.modus_ponens(
+            N.modus_ponens(eq2, symetrie(pr2p, vphi)),
+            N.s6(vphi, pr2p, "wvq", appartient(E.couple(vx, vw), var("wvq"))))))
+        cible = N.modus_ponens(xw_pr2, N.s5(but.sous[0], vx, a))
+        sortie = N.modus_ponens(ex_x, existe_elimination(
+            N.loi_deduction(corps_x, cible), nx))
+        return N.loi_deduction(b, N.loi_deduction(appartient(vw, pr1p), sortie))
+
+    imp_phi = existe_elimination(inner(bodyphi), nphi)
+    body = N.modus_ponens(N.assume(bodyS), imp_phi)
+    res = N.modus_ponens(decl, existe_elimination(N.loi_deduction(bodyS, body), nS))
+    res = N.generalisation(w, res)
+    assert res.conclusion == pourtout(w, impl(appartient(vw, pr1p), but)),         "valeur_atteinte : forme"
+    assert len(res.hypotheses) == 1, "valeur_atteinte : hyps ≠ 1"
+    return res
+
+
+__all__ = ["pr1_inclus_union", "dom_pr2_egale_carre",
+           "valeur_dans_pr1", "valeur_atteinte"]
