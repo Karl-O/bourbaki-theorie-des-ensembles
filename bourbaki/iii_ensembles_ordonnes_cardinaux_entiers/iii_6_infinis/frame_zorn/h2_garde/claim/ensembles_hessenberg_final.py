@@ -125,8 +125,15 @@ def residus_maximal(E_set="E", S=_S, phi=_PHI, paquet_derive=False):
 
     Les deux autres résidus ont été ÉLIMINÉS le 2026-08-23 : l'ABSORPTION est
     dérivée (`ensembles_absorption`), et le TRANSPORT était déjà clos en amont
-    (GAP B, `existe_sous_ensemble_cardinal_transporte`)."""
+    (GAP B, `existe_sous_ensemble_cardinal_transporte`).
+
+    ⚠️ RETOURNE `None` quand il n'y a PLUS AUCUN résidu — c'est l'état VISÉ, pas
+    une anomalie : avec `paquet_derive=True` le paquet ψ est construit et le
+    claim ne porte plus que les données du maximal.  Une conjonction vide n'a
+    pas de formule ; l'appelant saute alors l'étape de décharge."""
     res = _residus(E_set, S, phi, paquet_derive)
+    if not res:
+        return None
     corps = reduce(lambda acc, x: et(x, acc), reversed(res[:-1]), res[-1])
     #  le ∀S∀φ ne sert QUE si le corps mentionne le maximal ; avec
     #  `paquet_derive` les résidus sont déjà CLOS, l'enrobage serait décoratif.
@@ -148,19 +155,27 @@ def _decoupe(thm, n):
 
 # @livre Ch.III §6.3 Th.2 | E III.47 L.30-32 | PDF p.150
 def hessenberg_par_extension(E_set="E", paquet_derive=False):
-    """🏆🏆 { existence_maximal(E), residus_maximal(E) } ⊢ enonce_hessenberg(E).
+    """🏆🏆 { existence_maximal(E) [, residus_maximal(E)] } ⊢ enonce_hessenberg(E).
 
     Le théorème de Hessenberg par la démonstration de Bourbaki au complet :
     Zorn fournit le maximal (F,f), l'argument d'extension force Card F = Card E,
-    et la bijection f : F×F → F transporte l'égalité à E."""
+    et la bijection f : F×F → F transporte l'égalité à E.
+
+    Sous `paquet_derive=True` il n'y a PLUS de résidu du tout (`residus_maximal`
+    rend `None`) : l'existence du maximal reste seule, et `hessenberg_final` la
+    décharge à son tour."""
     vE = _t(E_set)
     Gam, Fr = frame_ordre(vE), frame_pair(vE)
     residus = _residus(E_set, paquet_derive=paquet_derive)
     paquet_residus = residus_maximal(E_set, paquet_derive=paquet_derive)
     #  `residus_maximal` n'enrobe de (∀S)(∀φ) que si le corps mentionne le
     #  maximal : on le détecte en comparant au corps replié, pas en comptant.
-    corps_nu = reduce(lambda acc, x: et(x, acc), reversed(residus[:-1]), residus[-1])
-    enrobe = paquet_residus != corps_nu
+    #  Sans aucun résidu (paquet_derive=True), il n'y a ni corps ni enrobage.
+    enrobe = False
+    if residus:
+        corps_nu = reduce(lambda acc, x: et(x, acc),
+                          reversed(residus[:-1]), residus[-1])
+        enrobe = paquet_residus != corps_nu
 
     def derive(bij0, S_inc, S_inf, h_max, vS0, vphi0, p_eq):
         claim = _claim_memo(E_set, vS0.nom, vphi0.nom, paquet_derive)
@@ -185,13 +200,15 @@ def hessenberg_par_extension(E_set="E", paquet_derive=False):
             if preuve.conclusion in claim.hypotheses:
                 claim = _cut(preuve, preuve.conclusion, claim)
 
-        #  les résidus honnêtes : instanciation (identité) du ∀S∀φ
-        corps = N.assume(paquet_residus)
-        if enrobe:
-            corps = instancie(instancie(corps, vS0), vphi0)
-        for morceau in _decoupe(corps, len(residus)):
-            if morceau.conclusion in claim.hypotheses:
-                claim = _cut(morceau, morceau.conclusion, claim)
+        #  les résidus honnêtes : instanciation (identité) du ∀S∀φ.
+        #  Liste vide ⇒ rien à décharger : le claim est déjà sans résidu.
+        if residus:
+            corps = N.assume(paquet_residus)
+            if enrobe:
+                corps = instancie(instancie(corps, vS0), vphi0)
+            for morceau in _decoupe(corps, len(residus)):
+                if morceau.conclusion in claim.hypotheses:
+                    claim = _cut(morceau, morceau.conclusion, claim)
 
         return claim_vers_endgame(E_set, vS0.nom, vphi0.nom, bij0, claim)
 
@@ -224,12 +241,16 @@ def hess_maximal_clos(E_set="E"):
 
 # @livre Ch.III §6.3 Th.2 | E III.47 L.30-32 | PDF p.150
 def hessenberg_final(E_set="E", paquet_derive=True):
-    """🏆🏆🏆 { est_infini(Card E), predecesseur_fini_universel }
-       ⊢ enonce_hessenberg(E).
+    """🏆🏆🏆 { est_infini(Card E) } ⊢ enonce_hessenberg(E).
 
     L'existence du maximal, jusqu'ici portée en hypothèse, est DÉCHARGÉE par
     `hess_maximal_clos` — elle ne coûte plus que « E est infini », qui est
-    l'hypothèse même du théorème de Bourbaki."""
+    l'hypothèse même du théorème de Bourbaki.
+
+    ⚠️ 2026-08-23 : `predecesseur_fini_universel` ne figure plus ici.  Le dépôt
+    la PROUVE (Prop. 2 §III.5) et elle est déchargée à la source, dans
+    `fini_downward_cardinal` ; l'ancienne docstring la portait encore.  Il ne
+    reste donc QUE l'hypothèse de Bourbaki."""
     from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_6_infinis.frame_zorn.h2_garde.ensembles_unpack_garde import (
         existence_maximal,
     )

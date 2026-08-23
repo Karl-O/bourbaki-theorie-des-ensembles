@@ -44,36 +44,35 @@ def test_hessenberg_par_extension():
 
 
 @pytest.mark.slow
-def test_chemin_complet_un_seul_residu():
-    """🏆 Hessenberg SANS le paquet ψ et SANS hypothèse fausse.   [~400 s]
+def test_chemin_complet_sans_aucun_residu():
+    """🏆 Hessenberg SANS le paquet ψ et SANS AUCUN résidu.   [~400 s]
 
-    Depuis le recâblage de `z_infini_derive` sur la version GARDÉE de la
-    downward-closure (ANOMALIES 2026-08-23), le chemin complet ne porte plus
-    qu'UN résidu, CLOS : `predecesseur_fini_universel` (Prop. 2 §III.5), une
-    hypothèse VRAIE quoique non encore prouvée.
+    ÉVOLUTION 2026-08-23 : ce test attendait UN résidu,
+    `predecesseur_fini_universel`.  Le dépôt le PROUVE (Prop. 2 §III.5) — il
+    n'était pas branché ; déchargé à la source dans `fini_downward_cardinal`,
+    il a disparu de la chaîne.  Il ne reste donc QUE l'existence du maximal,
+    que `hess_maximal_clos` décharge à son tour.
 
-    Ce test garde les deux propriétés qui comptent : le résidu est clos (il ne
-    mentionne aucun témoin, donc rien n'obstrue les éliminations), et
-    l'hypothèse NON SATISFAITE — la ∀∀-clôture nue de `cardinal_pas_entre` —
+    Le test garde les deux propriétés qui comptent : plus aucun résidu (donc
+    `residus_maximal` rend `None` — une conjonction vide n'a pas de formule),
+    et l'hypothèse NON SATISFAITE, la ∀∀-clôture nue de `cardinal_pas_entre`,
     est absente."""
     from bourbaki.i_description_mathematique_formelle.i_1_termes_relations.outil_formule import (
-        var, pourtout, libres_f,
+        var, pourtout,
     )
     from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_4_entiers_finis.iii_4_recurrence_c61_existence_n.ensembles_recurrence_C61 import (
         cardinal_pas_entre,
     )
     t = hessenberg_par_extension("E", paquet_derive=True)
     assert t.conclusion == enonce_hessenberg("E")
-    assert len(t.hypotheses) == 2
-    assert existence_maximal("E") in t.hypotheses
+    assert set(t.hypotheses) == {existence_maximal("E")},         "seule l'existence du maximal doit subsister : %d" % len(t.hypotheses)
 
     residus = _residus("E", paquet_derive=True)
-    assert len(residus) == 1, "un seul résidu attendu : %d" % len(residus)
-    assert not libres_f(residus[0]), "le résidu doit être CLOS"
+    assert residus == [], "plus aucun résidu attendu : %d" % len(residus)
+    assert residus_maximal("E", paquet_derive=True) is None,         "sans résidu, residus_maximal doit rendre None"
 
     nue = pourtout("c", pourtout("b", cardinal_pas_entre(var("b"), var("c"))))
     assert nue not in t.hypotheses, "l'hypothèse non satisfaite est revenue"
-    assert nue != residus[0], "le résidu EST l'hypothèse non satisfaite"
     assert len(E.theorie_ensembles().axiomes) == 22
 
 
@@ -93,19 +92,24 @@ def test_hess_maximal_clos():
 
 @pytest.mark.slow
 def test_hessenberg_final():
-    """🏆🏆🏆 { E infini, predecesseur_fini_universel } ⊢ enonce_hessenberg(E).
+    """🏆🏆🏆 { est_infini(Card E) } ⊢ enonce_hessenberg(E).   [~1 h 50]
 
-    L'aboutissement : l'hypothèse même du théorème de Bourbaki, plus un unique
-    résidu CLOS et vrai (Prop. 2 §III.5), non encore dérivé.   [~10 min]"""
+    L'ABOUTISSEMENT : l'hypothèse du théorème de Bourbaki, et RIEN d'autre.
+
+    ÉVOLUTION 2026-08-23 : ce test attendait DEUX hypothèses (profil [0,1]),
+    la seconde étant `predecesseur_fini_universel`.  Elle est déchargée depuis
+    que le dépôt la branche, et le profil tombe à [1] — une seule hypothèse,
+    de surcroît la seule variable libre étant E.  C'est le critère « FAIT » du
+    projet : 0 hypothèse non déchargée hors l'énoncé de Bourbaki lui-même."""
     from bourbaki.i_description_mathematique_formelle.i_1_termes_relations.outil_formule import libres_f
     from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_6_infinis.frame_zorn.h2_garde.claim.ensembles_hessenberg_final import (
         hessenberg_final,
     )
     t = hessenberg_final("E")
     assert t.conclusion == enonce_hessenberg("E")
-    assert len(t.hypotheses) == 2, "hyps : %d" % len(t.hypotheses)
-    #  l'une ne parle que de E, l'autre est CLOSE : aucun témoin résiduel
+    assert len(t.hypotheses) == 1, "hyps : %d" % len(t.hypotheses)
+    #  l'unique hypothèse ne mentionne que E : aucun témoin résiduel
     formes = sorted(len(libres_f(h)) for h in t.hypotheses)
-    assert formes == [0, 1], "profil des hypothèses inattendu : %s" % formes
+    assert formes == [1], "profil des hypothèses inattendu : %s" % formes
     assert t.conclusion not in t.hypotheses, "VACUOUS"
     assert len(E.theorie_ensembles().axiomes) == 22
