@@ -992,3 +992,14 @@ d'extension qui force Card S₀ = Card E. Les briques existent
 (extension_absurde_chainee et sa chaîne) ; le travail est de décharger leurs
 12 hypothèses, exactement le même exercice que celui mené cette nuit sur les
 hypothèses VALEUR du recollement (et qui a réussi).
+
+## 2026-08-23 04h03 — 🏆 hess_maximal CERTIFIÉ (test 1h25 vert)
+« 1 passed in 5096.74s (1:24:56) » :
+  { est_infini(Card E), donnees_recollement(E) }
+      ⊢ (∃m) element_maximal( Γ𝔉(E), 𝔉(E), m )
+L'élément maximal (F,f) de Bourbaki EXISTE, machine-vérifié, sous une seule
+hypothèse mathématique ouverte (le recollement de chaîne). Toute la chaîne a
+réellement tourné : Lemme 1 → H1 → Zorn version famille → maximal.
+BILAN DE LA NUIT (Chapitre III, §6.3) :
+  Lemme 1 CLOS · Lemme 2 CLOS · H1 CERTIFIÉ · hess_maximal CERTIFIÉ ·
+  3 hypothèses VALEUR du recollement DÉRIVÉES · perf ×1250 · leçon 15.
