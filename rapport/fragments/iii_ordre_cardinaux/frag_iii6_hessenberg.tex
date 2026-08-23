@@ -1,0 +1,71 @@
+\subsection{§III.6.3, Théorème 2 --- Hessenberg, $\mathfrak{a}\cdot\mathfrak{a}=\mathfrak{a}$}
+\textbf{Énoncé (Bourbaki, E III.47).} « Si $\mathfrak{a}$ est un cardinal infini,
+$\mathfrak{a}\cdot\mathfrak{a} = \mathfrak{a}$. » La démonstration occupe E III.48--49 :
+on ordonne par extension l'ensemble $\mathfrak{M}$ des couples $(X,\psi)$ où $X\subset E$
+est infini et $\psi$ une bijection $X\times X\to X$ ; Zorn y fournit un élément maximal
+$(F,f)$ ; et l'on montre par l'absurde que $\mathrm{Card}\,F = \mathrm{Card}\,E$.
+
+\textbf{Formalisé.} Cible : \texttt{enonce\_hessenberg(E)}, obtenue par
+\texttt{hessenberg\_final} (module
+\texttt{iii\_6\_infinis/frame\_zorn/h2\_garde/claim/ensembles\_hessenberg\_final.py}).
+Le \emph{frame} $\mathfrak{F}(E)$ et son ordre $\Gamma\mathfrak{F}(E)$ sont des termes
+opaques munis d'axiomes S8 dédiés ; \texttt{theorie\_ensembles()} reste à 22 axiomes.
+
+\textbf{Architecture de la preuve.} Elle se lit en trois étages, chacun réduisant
+les hypothèses ouvertes du précédent.
+
+\emph{(i) Zorn s'applique.} Le point délicat est que $\mathfrak{M}$ soit inductif :
+le recollement d'une chaîne doit être une \emph{frame-pair}. Le pont
+\texttt{frame\_de\_recollement} le prouve à partir de \textbf{onze} données
+élémentaires --- domaine couvrant, injectivité et fonctionnalité de la réunion,
+compatibilité et direction de la famille, membres injectifs, surjectivité, deux
+inclusions, $\bigcup S \subset E$ et $\bigcup S$ infinie. Les onze sont dérivées de
+la seule hypothèse « $C$ est une chaîne » ; \texttt{donnees\_recollement\_prouve} en
+tire, par généralisation sur $C$, un théorème \textbf{clos}.
+
+\emph{(ii) Le maximal.} \texttt{hess\_maximal\_clos} livre alors
+$(\exists m)\,\mathrm{element\_maximal}(\Gamma\mathfrak{F},\mathfrak{F},m)$ sous la
+seule donnée « $E$ infini ».
+
+\emph{(iii) L'argument d'extension.} Dans la portée du maximal, on suppose
+$\mathfrak{b} < \mathrm{Card}\,E$ où $\mathfrak{b} = \mathrm{Card}\,S_0$ ; le
+complément est alors « grand » (\texttt{complement\_grand}), on y réalise une partie
+$U$ de cardinal $\mathfrak{b}$, on prolonge la bijection, et la maximalité est
+contredite. Comme $x < y$ est \emph{défini} chez Bourbaki par $x \le y \wedge x \ne y$,
+le passage final ne demande ni trichotomie ni antisymétrie : il est purement
+propositionnel.
+
+\textbf{Trois hypothèses honnêtes éliminées.} L'\textbf{absorption}
+$\mathfrak{b}+\mathfrak{b}=\mathfrak{b}$ n'est pas un théorème global à importer :
+au maximal elle se tire de la bijection $\varphi_0$ elle-même, ce qui la rend locale
+(\texttt{absorption\_au\_maximal}). Le \textbf{transport} d'un cardinal en partie de
+$A$ était déjà clos ailleurs dans le dépôt (GAP B) : seul l'appelant n'avait pas été
+recâblé. Le \textbf{paquet} $\psi$ est construit par le chemin
+\texttt{paquet\_derive}.
+
+\textbf{Une hypothèse fausse débusquée.} La chaîne d'extension consommait
+$\mathrm{fini\_downward}$ sous sa forme \emph{nue} $(\forall a)(\forall x)$, dont le
+dépôt ne prouve que la version \emph{gardée} par $\mathrm{est\_cardinal}$ --- la nue
+étant fausse dès que $a$ n'est pas un cardinal. Le noyau restait sound (la dérivation
+est correcte), mais tout théorème la portant était \emph{vrai et vide}. Le défaut
+était déjà documenté par le dépôt ; ce travail y ajoute sa vérification mécanique
+et le \emph{recâblage effectif} de la chaîne sur la version gardée, ce qui échange
+une hypothèse fausse contre \texttt{predecesseur\_fini\_universel}, vraie quoique non
+encore prouvée. Voir \texttt{ANOMALIES.md}, 2026-08-23.
+
+\textbf{Résultat.} $\vdash$ \texttt{enonce\_hessenberg(E)} sous
+$\{\,\mathrm{est\_infini}(\mathrm{Card}\,E),\ \texttt{predecesseur\_fini\_universel}\,\}$
+--- c'est-à-dire l'hypothèse même du théorème de Bourbaki, plus un unique résidu
+\emph{clos} et vrai (Prop.~2 §III.5). \textbf{Statut : PARTIEL} au sens strict du
+projet, ce résidu n'étant pas encore dérivé ; mais l'argument de Bourbaki est
+formalisé de bout en bout, sans hypothèse mentionnant un témoin ni aucune
+hypothèse non satisfaite.
+
+\textbf{Leçons de méthode.} Quatre régularités se sont dégagées, consignées dans
+\texttt{DECISIONS.md} : \emph{(15)} sur un terme $\tau$, ne jamais reconstruire une
+formule pour la fournir en mineure --- la lire sur l'axiome ; \emph{(16)} trois objets
+distincts valent $1$ (l'ensemble $\{\emptyset\}$, son cardinal, l'entier), et chaque
+lemme n'en connaît qu'un ; \emph{(17)} ré-éprouver ce qui est marqué « en chantier »,
+un marqueur pouvant masquer un succès à un caractère près ; \emph{(18)} devant
+« mineure $\ne$ antécédent », comparer les formules \emph{avant} de retoucher la
+preuve --- le coupable est presque toujours un liant, jamais le raisonnement.

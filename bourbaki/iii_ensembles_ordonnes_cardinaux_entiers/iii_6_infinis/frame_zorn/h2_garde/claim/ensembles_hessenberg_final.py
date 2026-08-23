@@ -201,4 +201,53 @@ def hessenberg_par_extension(E_set="E", paquet_derive=False):
     return res
 
 
-__all__ = ["residus_maximal", "hessenberg_par_extension"]
+# @livre Ch.III §6.3 Demo.2 | E III.48 L.24-25 | PDF p.151
+def hess_maximal_clos(E_set="E"):
+    """🎯🎯🎯 { est_infini(Card E) } ⊢ (∃m) element_maximal( Γ𝔉(E), 𝔉(E), m ).
+
+    `hess_maximal` portait DEUX hypothèses ; la seconde, `donnees_recollement`,
+    est devenue un théorème (`donnees_recollement_prouve`, 0 hypothèse, via les
+    onze données du recollement).  Il ne reste que la donnée du théorème."""
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_6_infinis.frame_zorn.h2_garde.ensembles_hess_garde import (
+        hess_maximal, donnees_recollement,
+    )
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_6_infinis.frame_zorn.h2_garde.claim.donnees.ensembles_recollement import (
+        donnees_recollement_prouve,
+    )
+    base = hess_maximal(E_set)
+    dr = donnees_recollement_prouve(E_set)
+    assert dr.conclusion == donnees_recollement(E_set),         "hess_maximal_clos : le théorème ne coïncide pas avec l'hypothèse portée"
+    res = _cut(dr, dr.conclusion, base)
+    assert len(res.hypotheses) == 1,         "hess_maximal_clos : hyps ≠ 1 (%d)" % len(res.hypotheses)
+    return res
+
+
+# @livre Ch.III §6.3 Th.2 | E III.47 L.30-32 | PDF p.150
+def hessenberg_final(E_set="E", paquet_derive=True):
+    """🏆🏆🏆 { est_infini(Card E), predecesseur_fini_universel }
+       ⊢ enonce_hessenberg(E).
+
+    L'existence du maximal, jusqu'ici portée en hypothèse, est DÉCHARGÉE par
+    `hess_maximal_clos` — elle ne coûte plus que « E est infini », qui est
+    l'hypothèse même du théorème de Bourbaki."""
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_6_infinis.frame_zorn.h2_garde.ensembles_unpack_garde import (
+        existence_maximal,
+    )
+    from bourbaki.i_description_mathematique_formelle.i_4_theories_quantifiees.i_4_3_tactiques_abrege_quantif import (
+        alpha_existe,
+    )
+    base = hessenberg_par_extension(E_set, paquet_derive=paquet_derive)
+    porte = existence_maximal(E_set)
+    maxi = hess_maximal_clos(E_set)
+    if maxi.conclusion != porte:
+        #  les liants diffèrent (« m » chez hess_maximal, « mmx » ici) : α-pont
+        maxi = N.modus_ponens(maxi, equivalence_avant(alpha_existe(
+            maxi.conclusion.lieur, porte.lieur, maxi.conclusion.sous[0])))
+    assert maxi.conclusion == porte, "hessenberg_final : α-pont insuffisant"
+    res = _cut(maxi, porte, base)
+    assert res.conclusion == enonce_hessenberg(E_set), "hessenberg_final : forme"
+    return res
+
+
+__all__ = ["residus_maximal", "hessenberg_par_extension",
+           "hess_maximal_clos", "hessenberg_final"]
