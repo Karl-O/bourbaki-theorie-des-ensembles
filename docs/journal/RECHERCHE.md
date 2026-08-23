@@ -378,3 +378,20 @@ données sans duplication (non-régression vérifiée sur la dirigée).
 US×US, (10) image(⋃𝔇, US×US) ⊂ US. Ces quatre-là mêlent 𝔇 ET US : elles
 demanderont le lien entre `union_premiere(C)` et les pr₁ des membres, là où
 les sept premières ne parlaient que de 𝔇.
+
+### R-13, suite (07h50) — `pr1_inclus_union` : la brique des quatre dernières
+
+{ u ∈ C } ⊢ pr₁(u) ⊂ ⋃S(C), 0,1 s, 1 hyp. Les sept données closes ne parlaient
+que de 𝔇 ; les quatre restantes mêlent 𝔇 et US, et toutes passeront par ce
+pont : la première projection d'un membre est contenue dans leur réunion.
+
+Emploi ARRIÈRE de `membre_union_premiere` — S5 introduit l'existentielle au
+témoin u — là où `us_inclus_E` l'employait dans le sens avant. Le corps et le
+liant de cette existentielle sont LUS sur l'axiome (`antecedent_consequent`),
+jamais reconstruits : c'est ce qui protège de la LEÇON 15.
+
+**Reste à faire pour (9)** : de x ∈ dom(⋃𝔇) tirer un membre, puis son domaine
+pr₁u × pr₁u, puis conclure par monotonie du produit pour ⊂ — chercher
+`produit_monotone_inclusion` AVANT d'écrire.
+
+⚠️ `claim/` atteint 10 entrées : le prochain module exigera un sous-dossier.
