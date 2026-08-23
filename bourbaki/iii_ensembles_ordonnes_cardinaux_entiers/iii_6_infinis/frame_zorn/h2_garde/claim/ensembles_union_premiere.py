@@ -253,5 +253,82 @@ def dom_union_inclus_carre(E_set="E", C="Cch", z="zdu"):
     return res
 
 
+# @livre Ch.III §6.3 Demo.2 | E III.48 L.24-26 | PDF p.151  (les valeurs d'un membre sont dans sa base)
+def valeur_dans_pr1(E_set="E", p="pmemb", x="xvp", w="wvp"):
+    """🎯 { p ∈ 𝔉(E) } ⊢ (∀x)(∀w)( (x,w) ∈ pr₂(p) ⇒ w ∈ pr₁(p) ).
+
+    Les valeurs de la bijection d'un membre restent dans sa base.  Le corps du
+    frame donne `est_surjective(φ,S×S,S)`, c'est-à-dire `image(φ,S×S) = S` ;
+    tout antécédent est dans `dom φ = S×S`, donc toute valeur est dans l'image,
+    donc dans S.  Pièce de la donnée (10), jumelle de `dom_pr2_egale_carre`."""
+    from bourbaki.i_description_mathematique_formelle.i_1_termes_relations.outil_formule import egal, pourtout, impl
+    from bourbaki.i_description_mathematique_formelle.i_2_theoremes.tactiques.tactiques_abrege import antecedent_consequent
+    from bourbaki.i_description_mathematique_formelle.i_2_theoremes.tactiques.tactiques_abrege2 import (
+        conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite, instancie)
+    from bourbaki.i_description_mathematique_formelle.i_4_theories_quantifiees.i_4_3_tactiques_abrege_quantif import existe_elimination
+    from bourbaki.i_description_mathematique_formelle.i_5_theories_egalitaires.i_5_2_tactiques_abrege_egalite import (
+        symetrie, composer_egalites, congruence_terme)
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_6_infinis.hessenberg.coeur.ensembles_hessenberg_hard import frame_pair
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_6_infinis.frame_zorn.ensembles_frame_a_maximal import _frame_membre_t
+    from bourbaki.ii_theorie_des_ensembles.ii_2_couples.ii_2_1_definition_couples.ensembles_projections import (
+        projection_premiere, projection_seconde)
+    vE, vp, vx, vw = _t(E_set), _t(p), var(x), var(w)
+    pr1p, pr2p = E.pr1(vp), E.pr2(vp)
+    decl = N.modus_ponens(N.assume(appartient(vp, frame_pair(vE))),
+                          equivalence_avant(_frame_membre_t(vE, vp)))
+    nS, bodyS = decl.conclusion.lieur, decl.conclusion.sous[0]
+    nphi, bodyphi = bodyS.lieur, bodyS.sous[0]
+    ax_dom = N.axiome(E.theorie_ensembles(), E.AXIOME_DOM)
+    ax_img = N.axiome(E.theorie_ensembles(), E.AXIOME_IMAGE)
+
+    def inner(b):
+        hh = N.assume(b)
+        vS, vphi = var(nS), var(nphi)
+        SxS = E.produit(vS, vS)
+        bij = conjonction_elim_droite(hh)
+        p_eq = conjonction_elim_gauche(conjonction_elim_gauche(conjonction_elim_gauche(hh)))
+        dom_eq = conjonction_elim_droite(conjonction_elim_gauche(bij))
+        surj = conjonction_elim_droite(conjonction_elim_droite(bij))   # image(φ,S×S)=S
+        h_c = N.assume(appartient(E.couple(vx, vw), vphi))
+        #  x ∈ dom φ = S×S
+        car = instancie(instancie(ax_dom, vphi), vx)
+        loc = antecedent_consequent(equivalence_avant(car).conclusion)[1]
+        x_dom = N.modus_ponens(N.modus_ponens(h_c, N.s5(loc.sous[0], vw, loc.lieur)),
+                               equivalence_arriere(car))
+        x_SxS = N.modus_ponens(x_dom, equivalence_avant(N.modus_ponens(
+            dom_eq, N.s6(E.dom(vphi), SxS, "wvz", appartient(vx, var("wvz"))))))
+        #  w ∈ image(φ, S×S) = S
+        cim = instancie(instancie(instancie(ax_img, vphi), SxS), vw)
+        lim = antecedent_consequent(equivalence_avant(cim).conclusion)[1]
+        w_img = N.modus_ponens(N.modus_ponens(conjonction_intro(x_SxS, h_c),
+                                              N.s5(lim.sous[0], vx, lim.lieur)),
+                               equivalence_arriere(cim))
+        w_S = N.modus_ponens(w_img, equivalence_avant(N.modus_ponens(
+            surj, N.s6(E.image(vphi, SxS), vS, "wvz", appartient(vw, var("wvz"))))))
+        #  transport φ → pr₂p et S → pr₁p
+        eq2 = composer_egalites(N.modus_ponens(p_eq, congruence_terme(
+            vp, E.couple(vS, vphi), E.pr2(var("wvy")), "wvy")), projection_seconde(nS, nphi))
+        eq1 = composer_egalites(N.modus_ponens(p_eq, congruence_terme(
+            vp, E.couple(vS, vphi), E.pr1(var("wvy")), "wvy")), projection_premiere(nS, nphi))
+        w_pr1 = N.modus_ponens(w_S, equivalence_avant(N.modus_ponens(
+            N.modus_ponens(eq1, symetrie(pr1p, vS)),
+            N.s6(vS, pr1p, "wvy", appartient(vw, var("wvy"))))))
+        sous_c = N.loi_deduction(appartient(E.couple(vx, vw), vphi), w_pr1)
+        pont = N.modus_ponens(N.modus_ponens(eq2, symetrie(pr2p, vphi)),
+                              N.s6(vphi, pr2p, "wvy", impl(
+                                  appartient(E.couple(vx, vw), var("wvy")),
+                                  appartient(vw, pr1p))))
+        return N.loi_deduction(b, N.modus_ponens(sous_c, equivalence_avant(pont)))
+
+    imp_phi = existe_elimination(inner(bodyphi), nphi)
+    body = N.modus_ponens(N.assume(bodyS), imp_phi)
+    res = N.modus_ponens(decl, existe_elimination(N.loi_deduction(bodyS, body), nS))
+    res = N.generalisation(x, N.generalisation(w, res))
+    assert res.conclusion == pourtout(x, pourtout(w, impl(
+        appartient(E.couple(vx, vw), pr2p), appartient(vw, pr1p)))),         "valeur_dans_pr1 : forme"
+    assert len(res.hypotheses) == 1, "valeur_dans_pr1 : hyps ≠ 1"
+    return res
+
+
 __all__ = ["pr1_inclus_union", "dom_pr2_egale_carre",
-           "dom_union_inclus_carre"]
+           "dom_union_inclus_carre", "valeur_dans_pr1"]

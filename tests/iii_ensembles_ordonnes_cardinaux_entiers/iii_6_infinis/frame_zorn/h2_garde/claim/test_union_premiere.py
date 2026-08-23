@@ -63,3 +63,23 @@ def test_dom_union_inclus_carre():
     assert len(t.hypotheses) == 1
     assert t.conclusion not in t.hypotheses, "VACUOUS"
     assert len(E.theorie_ensembles().axiomes) == 22
+
+
+def test_valeur_dans_pr1():
+    """🎯 { p ∈ 𝔉(E) } ⊢ (∀x)(∀w)( (x,w) ∈ pr₂(p) ⇒ w ∈ pr₁(p) ).
+
+    Les valeurs de la bijection d'un membre restent dans sa base : pièce de la
+    donnée (10), jumelle de `dom_pr2_egale_carre` côté image."""
+    from bourbaki.i_description_mathematique_formelle.i_1_termes_relations.outil_formule import (
+        appartient, pourtout, impl,
+    )
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_6_infinis.frame_zorn.h2_garde.claim.ensembles_union_premiere import (
+        valeur_dans_pr1,
+    )
+    vp, vx, vw = var("pmemb"), var("xvp"), var("wvp")
+    t = valeur_dans_pr1()
+    assert t.conclusion == pourtout("xvp", pourtout("wvp", impl(
+        appartient(E.couple(vx, vw), E.pr2(vp)), appartient(vw, E.pr1(vp)))))
+    assert len(t.hypotheses) == 1
+    assert t.conclusion not in t.hypotheses, "VACUOUS"
+    assert len(E.theorie_ensembles().axiomes) == 22

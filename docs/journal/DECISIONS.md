@@ -1178,3 +1178,18 @@ EST un Terme, et le modus ponens échouait sur « mineure ≠ antécédent ».
 
 Reste 7 des 9 données du recollement à dériver pour clore `donnees_recollement`,
 l'unique hypothèse ouverte de `hess_maximal`.
+
+## 2026-08-23 — DETTE ASSUMÉE : `claim/ensembles_union_premiere.py` à 334 lignes
+
+La brique `valeur_dans_pr1` fait passer ce module de 254 à **334 lignes**, soit
+34 au-dessus de la limite de 300. Je le consigne plutôt que de le masquer.
+
+**Pourquoi je n'ai pas découpé tout de suite** : `claim/` est à 10 entrées, donc
+ajouter un module voisin violerait l'autre règle (≤10 par dossier). Le découpage
+correct est un DÉPLACEMENT, pas un ajout : créer `claim/donnees/` et y déplacer
+`ensembles_union_premiere.py` et `ensembles_famille_dirigee.py` — après quoi
+`claim/` retombe à 9 entrées et `donnees/` en compte 3. Cela demande de corriger
+les imports de plusieurs modules et de leurs tests miroirs ; à faire d'un bloc,
+tests verts avant/après, et non en fin de session.
+
+**À FAIRE au prochain tick, avant d'écrire quoi que ce soit de neuf.**
