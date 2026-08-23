@@ -246,4 +246,50 @@ def pr2_injectif(E_set="E", p="pmemb"):
     return res
 
 
-__all__ = ["pr1_inclus_E", "pr2_injectif", "us_infini", "us_inclus_E"]
+# @livre Ch.III §6.3 Demo.2 | E III.48 L.24-26 | PDF p.151  (chaque φ de la chaîne est une fonction)
+def pr2_fonctionnel(E_set="E", p="pmemb"):
+    """{ p ∈ 𝔉(E) } ⊢ est_fonctionnel( pr₂(p) ).
+
+    Jumelle de `pr2_injectif` : le corps du frame donne `est_bijection_de`,
+    dont le PREMIER conjoint du premier conjoint est la fonctionnalité — pas
+    de pont à traverser cette fois, seulement le transport Leibniz φ → pr₂(p)."""
+    from bourbaki.ii_theorie_des_ensembles.ii_2_couples.ii_2_1_definition_couples.ensembles_projections import (
+        projection_seconde,
+    )
+    from bourbaki.i_description_mathematique_formelle.i_5_theories_egalitaires.i_5_2_tactiques_abrege_egalite import (
+        symetrie, composer_egalites, congruence_terme,
+    )
+    vE, vp = _t(E_set), _t(p)
+    pr2p = E.pr2(vp)
+    decl = N.modus_ponens(N.assume(appartient(vp, frame_pair(vE))),
+                          equivalence_avant(_frame_membre_t(vE, vp)))
+    exS = decl.conclusion
+    nS, bodyS = exS.lieur, exS.sous[0]
+    nphi, bodyphi = bodyS.lieur, bodyS.sous[0]
+
+    def inner(b):
+        hh = N.assume(b)
+        vS, vphi = var(nS), var(nphi)
+        bij = conjonction_elim_droite(hh)
+        p_eq = conjonction_elim_gauche(conjonction_elim_gauche(
+            conjonction_elim_gauche(hh)))
+        fonc = conjonction_elim_gauche(conjonction_elim_gauche(bij))
+        cong = N.modus_ponens(p_eq, congruence_terme(
+            vp, E.couple(vS, vphi), E.pr2(var("wdc")), "wdc"))
+        eq_pr2 = composer_egalites(cong, projection_seconde(nS, nphi))
+        return N.loi_deduction(b, N.modus_ponens(fonc, equivalence_avant(
+            N.modus_ponens(N.modus_ponens(eq_pr2, symetrie(pr2p, vphi)),
+                           N.s6(vphi, pr2p, "wdc",
+                                E.est_fonctionnel(var("wdc")))))))
+
+    imp_phi = existe_elimination(inner(bodyphi), nphi)
+    body = N.modus_ponens(N.assume(bodyS), imp_phi)
+    imp_S = existe_elimination(N.loi_deduction(bodyS, body), nS)
+    res = N.modus_ponens(decl, imp_S)
+    assert res.conclusion == E.est_fonctionnel(pr2p), "pr2_fonctionnel : forme"
+    assert list(res.hypotheses) == [appartient(vp, frame_pair(vE))],         "pr2_fonctionnel : hyps"
+    return res
+
+
+__all__ = ["pr1_inclus_E", "pr2_injectif", "pr2_fonctionnel",
+           "us_infini", "us_inclus_E"]

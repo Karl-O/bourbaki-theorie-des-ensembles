@@ -336,3 +336,26 @@ le script de comparaison.
 
 **Reste 6 sur 11** : (1) domaine couvrant, (3) compatible, (6) fonctionnalité
 de l'union (⟸ 3), (7) surjectivité, (9) et (10) les deux inclusions.
+
+### R-13, suite (07h40) — `pr2_fonctionnel`, la brique de la donnée (3)
+
+`pr2_fonctionnel` : { p ∈ 𝔉(E) } ⊢ est_fonctionnel(pr₂ p), 0,4 s, 1 hyp.
+Jumelle de `pr2_injectif` — même squelette, mais sans pont : la fonctionnalité
+est directement le premier conjoint de `est_bijection_de`.
+
+**Plan pour la donnée (3)**, famille_compatible(𝔇) =
+(∀p)(∀q)(∀a)(∀b)(∀c)( ((p∈𝔇 et q∈𝔇) et ((a,b)∈p et (a,c)∈q)) ⇒ b=c ) :
+
+  p = pr₂u, q = pr₂v avec u,v comparables dans Γ𝔉 (même départ que la donnée 4,
+  squelette réutilisable tel quel) ;
+  cas (u,v)∈Γ𝔉 : p ⊂ q, donc (a,b)∈q ET (a,c)∈q ; `pr2_fonctionnel` sur v donne
+  est_fonctionnel(q), qu'on instancie en a,b,c ⇒ b=c ;
+  cas (v,u) : symétrique, les deux couples atterrissent dans p.
+
+⚠️ Attention à l'ORDRE ici aussi (LEÇON 18) : selon la branche, c'est (a,b) ou
+(a,c) qu'il faut transporter par l'inclusion, et `est_fonctionnel` attend
+(u,v)∈F puis (u,z)∈F dans cet ordre — la conclusion b=c n'est PAS symétrique
+en b,c du point de vue de la construction.
+
+Puis la donnée (6) tombera par `union_famille_fonctionnelle` (c60_coeur.py:180),
+exactement comme (2) est tombée de (4)+(5).

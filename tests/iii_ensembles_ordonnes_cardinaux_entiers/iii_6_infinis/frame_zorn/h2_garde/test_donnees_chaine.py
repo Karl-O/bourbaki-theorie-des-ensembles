@@ -70,3 +70,18 @@ def test_membres_famille_injectifs():
     assert len(t.hypotheses) == 1, "hyps : %d" % len(t.hypotheses)
     assert t.conclusion not in t.hypotheses, "VACUOUS"
     assert len(E.theorie_ensembles().axiomes) == 22
+
+
+def test_pr2_fonctionnel():
+    """{ p ∈ 𝔉(E) } ⊢ est_fonctionnel( pr₂(p) ).
+
+    Jumelle de `pr2_injectif`, requise par la donnée (3) « famille compatible » :
+    deux membres emboîtés s'accordent parce que le plus grand est une FONCTION."""
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_6_infinis.frame_zorn.h2_garde.ensembles_donnees_chaine import (
+        pr2_fonctionnel,
+    )
+    t = pr2_fonctionnel()
+    assert t.conclusion == E.est_fonctionnel(E.pr2(var("pmemb")))
+    assert len(t.hypotheses) == 1
+    assert t.conclusion not in t.hypotheses, "VACUOUS"
+    assert len(E.theorie_ensembles().axiomes) == 22
