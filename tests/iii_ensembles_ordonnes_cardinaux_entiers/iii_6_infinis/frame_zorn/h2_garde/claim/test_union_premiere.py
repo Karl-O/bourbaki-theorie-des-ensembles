@@ -24,3 +24,21 @@ def test_pr1_inclus_union():
     assert list(t.hypotheses) == [appartient(vu, vC)]
     assert t.conclusion not in t.hypotheses, "VACUOUS"
     assert len(E.theorie_ensembles().axiomes) == 22
+
+
+def test_dom_pr2_egale_carre():
+    """🎯 { p ∈ 𝔉(E) } ⊢ dom( pr₂(p) ) = pr₁(p) × pr₁(p).
+
+    Situe le domaine de chaque membre dans un CARRÉ — seule forme que
+    `produit_monotone_carre` sait faire croître, donc la pièce qui manquait
+    à la donnée (9)."""
+    from bourbaki.i_description_mathematique_formelle.i_1_termes_relations.outil_formule import egal
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_6_infinis.frame_zorn.h2_garde.claim.ensembles_union_premiere import (
+        dom_pr2_egale_carre,
+    )
+    vp = var("pmemb")
+    t = dom_pr2_egale_carre()
+    assert t.conclusion == egal(E.dom(E.pr2(vp)), E.produit(E.pr1(vp), E.pr1(vp)))
+    assert len(t.hypotheses) == 1
+    assert t.conclusion not in t.hypotheses, "VACUOUS"
+    assert len(E.theorie_ensembles().axiomes) == 22

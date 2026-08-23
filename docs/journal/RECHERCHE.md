@@ -410,3 +410,20 @@ place là, et `claim/` avait de toute façon atteint ses 10 entrées. Un lemme
 
 **Il reste pour (9)** : assembler — z ∈ dom(⋃𝔇) → membre p=pr₂u → dom(pr₂u) =
 pr₁u×pr₁u (corps du frame) → ⊂ US×US par les deux briques.
+
+### R-13, suite (08h00) — `dom_pr2_egale_carre` : la donnée (9) n'attend plus que l'assemblage
+
+{ p ∈ 𝔉(E) } ⊢ dom(pr₂ p) = pr₁(p) × pr₁(p), 0,3 s, 1 hyp, du premier coup.
+Le corps du frame donne « dom φ = S×S » ; deux transports de Leibniz (φ → pr₂p,
+S → pr₁p) suffisent.
+
+Son intérêt est de mettre le domaine d'un membre sous forme de CARRÉ — la seule
+que `produit_monotone_carre` sache faire croître. Les trois pièces de la donnée
+(9) sont donc en place :
+
+    z ∈ dom(⋃𝔇) → un membre p=pr₂u le contient       [membre_union_famille + membre_famille]
+    dom(pr₂u) = pr₁u × pr₁u                          [dom_pr2_egale_carre]
+    pr₁u ⊂ US  ⇒  pr₁u×pr₁u ⊂ US×US                  [pr1_inclus_union + produit_monotone_carre]
+
+Il ne reste que le chaînage — mais attention, il faudra passer de « (z,y) ∈ p »
+à « z ∈ dom(p) » (axiome du domaine, sens arrière) avant d'appliquer l'égalité.
