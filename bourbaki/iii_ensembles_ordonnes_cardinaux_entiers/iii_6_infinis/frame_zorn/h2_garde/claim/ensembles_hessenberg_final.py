@@ -11,9 +11,9 @@ portée du maximal ; `claim_vers_endgame` en tire l'énoncé de Hessenberg ; il
 ne reste qu'à sortir de la portée par `unpack_sous_maximal`.
 
 ⚠️ LA CONTRAINTE QUI FAÇONNE CE MODULE.  Sortir de la portée exige qu'AUCUNE
-hypothèse résiduelle ne mentionne les témoins S₀, φ₀, m.  Or les trois résidus
-honnêtes du CLAIM les mentionnent tous (l'absorption porte sur Card S₀, le
-transport sur E∖S₀, le paquet sur (S₀,φ₀)).  Ils sont donc portés SOUS
+hypothèse résiduelle ne mentionne les témoins S₀, φ₀, m.  Or les résidus
+honnêtes du CLAIM les mentionnent tous (le transport porte sur E∖S₀, le paquet
+sur (S₀,φ₀)).  Ils sont donc portés SOUS
 (∀S)(∀φ) — exactement le traitement déjà appliqué à U dans `donnees_extension`
 et aux chaînes dans `donnees_recollement`.
 
@@ -61,6 +61,9 @@ from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_6_infinis.frame_zorn.
 from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_6_infinis.frame_zorn.h2_garde.claim.ensembles_endgame import (
     claim_clos,
 )
+from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_6_infinis.frame_zorn.h2_garde.claim.ensembles_absorption import (
+    enonce_absorption, absorption_au_maximal,
+)
 
 _S, _PHI, _M = "Smx", "phimx", "mmx"
 
@@ -87,10 +90,14 @@ def _donnees_du_maximal(E_set, S=_S, phi=_PHI):
 
 
 def _residus(E_set, S=_S, phi=_PHI):
-    """Les résidus honnêtes du CLAIM, en ordre canonique (absorption,
-    transport, garde d'extension) — tout ce qui n'est pas donnée du maximal."""
+    """Les résidus honnêtes du CLAIM (transport, garde d'extension) — tout ce
+    qui n'est ni donnée du maximal, ni DÉRIVÉ sur place.
+
+    L'absorption 𝔟+𝔟=𝔟 n'en fait plus partie : `absorption_au_maximal` la tire
+    de la bijection φ₀.  On la reconnaît par son ÉNONCÉ seul, pour ne pas payer
+    les ~200 s de sa dérivation à chaque collationnement."""
     claim = claim_clos(E_set, S, phi)
-    connus = _donnees_du_maximal(E_set, S, phi)
+    connus = _donnees_du_maximal(E_set, S, phi) | {enonce_absorption(S)}
     return sorted((h for h in claim.hypotheses if h not in connus),
                   key=afficher_f)
 
@@ -99,12 +106,12 @@ def _residus(E_set, S=_S, phi=_PHI):
 def residus_maximal(E_set="E", S=_S, phi=_PHI):
     """L'unique hypothèse honnête restante, quantifiée sur le maximal :
 
-        (∀S)(∀φ)( absorption(Card S)  et  transport(Card S, E∖S)
-                  et  (∀U)(garde ⇒ (∃ψ)PAQUET) ).
+        (∀S)(∀φ)( transport(Card S, E∖S)  et  (∀U)(garde ⇒ (∃ψ)PAQUET) ).
 
-    Ce sont les trois pièces que Bourbaki obtient par le calcul cardinal et
-    par le choix d'une partie de E∖F ; elles sont ici NOMMÉES, jamais
-    postulées vraies, et déchargées explicitement."""
+    Les deux pièces que Bourbaki obtient par le choix d'une partie de E∖F et
+    par le calcul cardinal ; elles sont NOMMÉES, jamais postulées vraies, et
+    déchargées explicitement.  L'ABSORPTION, elle, est DÉRIVÉE (module
+    `ensembles_absorption`) et ne figure plus ici."""
     res = _residus(E_set, S, phi)
     corps = reduce(lambda acc, x: et(x, acc), reversed(res[:-1]), res[-1])
     return pourtout(S, pourtout(phi, corps))
@@ -135,6 +142,11 @@ def hessenberg_par_extension(E_set="E"):
     def derive(bij0, S_inc, S_inf, h_max, vS0, vphi0, p_eq):
         claim = claim_clos(E_set, vS0.nom, vphi0.nom)
         couple = E.couple(vS0, vphi0)
+
+        #  l'absorption est DÉRIVÉE de la bijection φ₀, non portée en résidu
+        abso = absorption_au_maximal(vS0.nom, vphi0.nom)
+        if abso.conclusion in claim.hypotheses:
+            claim = _cut(abso, abso.conclusion, claim)
         vm = _t(_M)
 
         #  transport Leibniz : ce qui vaut de m vaut de (S₀,φ₀)

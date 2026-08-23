@@ -99,3 +99,32 @@ Les deux autres résidus : le TRANSPORT (déjà isolé et nommé en amont, la
 bijection canonique Card A → A) et le PAQUET ψ (le vrai calcul cardinal de
 Bourbaki : la zone (S₀∪U)² ∖ (S₀×S₀) a le cardinal 𝔟, donc se met en bijection
 avec U). Le paquet est le plus gros ; il consomme précisément 𝔟·𝔟=𝔟 et 𝔟+𝔟=𝔟.
+
+## R-9 — RÉSOLU (2026-08-23) : absorption 𝔟+𝔟=𝔟 DÉRIVÉE
+
+`absorption_au_maximal` : { S₀ infini, φ₀ bijection } ⊢ Card S₀+Card S₀ = Card S₀.
+199,9 s, 2 hypothèses — toutes deux DONNÉES DU MAXIMAL, donc fournies par
+`unpack_sous_maximal` : l'absorption disparaît des résidus (3 → 2).
+Difficulté réelle rencontrée : les trois « un » et les deux niveaux de ≤ —
+voir LEÇON 16 dans DECISIONS.
+
+## R-10 — Dériver le TRANSPORT (résidu 2/3, dernier « petit »)
+
+**Énoncé** (`_transport_sous_ensemble_hyp`, déjà isolé et nommé en amont) :
+
+    (∃U)( U ⊂ Card A  et  Card U = c )  ⇒  (∃V)( V ⊂ A  et  Card V = c )
+
+**Idée** : la bijection canonique g : Card A → A (témoin de Eq(A, Card A)
+symétrisée) transporte U en V := g⟨U⟩.
+
+**Brique clé repérée** : `injection_donne_equipotent_image(F,c,a)` (CLOSE, 0
+hypothèse) — « ⊢ est_injection_de(F,c,a) ⇒ Eq(c, image(F,c)) » : une injection
+est une bijection sur son image. Avec F := g restreinte à U, elle donne
+Eq(U, g⟨U⟩), donc Card g⟨U⟩ = Card U = c.
+
+**Point délicat attendu** : la RESTRICTION de g à U ⊂ Card A — montrer que
+c'est encore une injection de U dans A. C'est le seul maillon sans brique
+toute faite ; chercher `restriction`, `induit`, `graphe_restreint` avant
+d'écrire, et appliquer la règle des 4 essais.
+
+**Puis** : le PAQUET ψ (résidu 3/3, le gros morceau) et `donnees_recollement`.

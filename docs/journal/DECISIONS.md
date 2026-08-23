@@ -1122,3 +1122,35 @@ aucune reconstruction de formule, donc aucune prise avec la LEÇON 15 (les
 trois résidus (l'absorption 𝔟+𝔟=𝔟 se tire de 𝔟·𝔟=𝔟 au maximal via 2𝔟 ≤ 𝔟·𝔟 ;
 le transport est déjà isolé et nommé en amont ; le paquet ψ est le calcul
 cardinal de Bourbaki) et `donnees_recollement`.
+
+## 2026-08-23 — LEÇON 16 : LES TROIS « UN » (et les deux niveaux de ≤)
+
+En dérivant l'absorption 𝔟+𝔟=𝔟 (`claim/ensembles_absorption.py`), on bute sur
+un piège de représentation qui vaut pour toute l'arithmétique cardinale du
+dépôt. **Trois objets distincts valent 1** :
+
+  1. l'ENSEMBLE `{∅}` = `E.singleton(E.VIDE)` ;
+  2. son CARDINAL `Card({∅})` ;
+  3. l'ENTIER `UN = successeur(ZERO)`.
+
+Ils ne sont PAS syntaxiquement égaux (`un_egale_card_singleton` PROUVE 1 =
+Card({∅}), ce n'est pas une définition), et chaque lemme ne parle que de l'un
+d'eux : `produit_cardinal_un` du premier, `deux_inf_egal_infini` du troisième.
+
+**Le pont universel est `produit_cardinal_bien_defini`** : « Card(X×Y) ne dépend
+que de Card X et Card Y ». Il traverse les trois niveaux d'un seul modus ponens,
+sans jamais RECONSTRUIRE un τ-terme — donc sans prise avec la LEÇON 15.
+
+**Corollaire de méthode** : choisir les arguments d'un lemme pour que la forme
+visée tombe SYNTAXIQUEMENT. Ici, `distributivite_operations(𝔟, UN, {∅})` donne
+𝔟·(1+{∅}) et `somme_cardinale_binaire(UN,{∅})` EST `successeur(UN)` = DEUX au
+sens de l'égalité d'assemblages — le « 2 » de `deux_inf_egal_infini` et de la
+monotonie du produit tombe alors juste, sans aucun pont.
+
+**Second piège, jumeau** : `inf_egal_card` se lit aussi bien entre ENSEMBLES
+qu'entre CARDINAUX. `_inf_egal_somme_gauche_t(𝔟,𝔟)` conclut « 𝔟 ≤ 𝔟⊔𝔟 » au
+niveau ENSEMBLE, pas « 𝔟 ≤ Card(𝔟⊔𝔟) ». Le pont est `_set_le_eq_card` (X ≤
+Card X) suivi de la transitivité. Vérifier le NIVEAU de chaque ≤ avant de
+composer.
+
+Coût mesuré : 199,9 s pour l'absorption complète (marquée `slow`).
