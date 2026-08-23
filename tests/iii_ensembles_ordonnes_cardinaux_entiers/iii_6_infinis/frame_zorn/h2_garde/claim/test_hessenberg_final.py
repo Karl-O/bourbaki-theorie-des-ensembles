@@ -5,6 +5,8 @@ Ce que le test verrouille : l'énoncé de Bourbaki (Th. 2, E III.47) est obtenu
 sous DEUX hypothèses seulement, toutes deux explicites — l'existence du
 maximal (que `hess_maximal` prouve, certifié) et les trois résidus honnêtes
 quantifiés sur le maximal."""
+import pytest
+
 from bourbaki.ii_theorie_des_ensembles.ii_1_relations_collectivisantes import ensembles_abrege as E
 from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_6_infinis.hessenberg.coeur.ensembles_hessenberg import (
     enonce_hessenberg,
@@ -38,4 +40,38 @@ def test_hessenberg_par_extension():
     assert set(t.hypotheses) == {existence_maximal("E"), residus_maximal("E")}, \
         "hypothèses inattendues : l'assemblage a fui"
     assert t.conclusion not in t.hypotheses, "VACUOUS"
+    assert len(E.theorie_ensembles().axiomes) == 22
+
+
+@pytest.mark.slow
+def test_chemin_complet_un_seul_residu():
+    """🏆 Hessenberg SANS le paquet ψ et SANS hypothèse fausse.   [~400 s]
+
+    Depuis le recâblage de `z_infini_derive` sur la version GARDÉE de la
+    downward-closure (ANOMALIES 2026-08-23), le chemin complet ne porte plus
+    qu'UN résidu, CLOS : `predecesseur_fini_universel` (Prop. 2 §III.5), une
+    hypothèse VRAIE quoique non encore prouvée.
+
+    Ce test garde les deux propriétés qui comptent : le résidu est clos (il ne
+    mentionne aucun témoin, donc rien n'obstrue les éliminations), et
+    l'hypothèse NON SATISFAITE — la ∀∀-clôture nue de `cardinal_pas_entre` —
+    est absente."""
+    from bourbaki.i_description_mathematique_formelle.i_1_termes_relations.outil_formule import (
+        var, pourtout, libres_f,
+    )
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_4_entiers_finis.iii_4_recurrence_c61_existence_n.ensembles_recurrence_C61 import (
+        cardinal_pas_entre,
+    )
+    t = hessenberg_par_extension("E", paquet_derive=True)
+    assert t.conclusion == enonce_hessenberg("E")
+    assert len(t.hypotheses) == 2
+    assert existence_maximal("E") in t.hypotheses
+
+    residus = _residus("E", paquet_derive=True)
+    assert len(residus) == 1, "un seul résidu attendu : %d" % len(residus)
+    assert not libres_f(residus[0]), "le résidu doit être CLOS"
+
+    nue = pourtout("c", pourtout("b", cardinal_pas_entre(var("b"), var("c"))))
+    assert nue not in t.hypotheses, "l'hypothèse non satisfaite est revenue"
+    assert nue != residus[0], "le résidu EST l'hypothèse non satisfaite"
     assert len(E.theorie_ensembles().axiomes) == 22

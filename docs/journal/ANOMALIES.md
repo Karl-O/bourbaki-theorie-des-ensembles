@@ -1047,3 +1047,35 @@ l'hypothèse non satisfaite reparaît quelque part dans cette chaîne.
 Hessenberg (notamment `N_collectivise`) portent TOUJOURS l'hypothèse nue. Ils ne
 sont pas cassés — ils sont VIDES, et doivent être recâblés de la même façon.
 À traiter section par section, en mesurant chaque fois l'avant/après.
+
+### 2026-08-23, 06h40 — RECTIFICATION : le défaut était DÉJÀ CONNU du dépôt
+
+`iii_4_entiers_finis/ordinal_cardinal/ordinal_cardinal_correspondance/ensembles_cardinal_pas_entre_univ.py`
+le documente déjà, et dans les mêmes termes :
+
+> « Le bare universel (∀c)(∀b)cardinal_pas_entre(b,c) — consommé tel quel par
+> `_preuve_step` / `fini_downward_thm` / `N_collectivise_final` — N'EST PAS
+> dérivable (cf. contre-exemple). »
+
+Ce module livre même `cardinal_pas_entre_univ()` : ⊢ (∀c)(∀b)( est_cardinal(b) ⇒
+cardinal_pas_entre(b,c) ), CLOS, 0 hypothèse — et conclut : « Pour brancher en
+aval, le pas de récurrence devrait fournir est_cardinal(b) sur le b qu'il
+quantifie — ce que sa rédaction actuelle ne fait pas ; report documenté. »
+
+**Ma contribution n'est donc PAS la découverte du défaut**, mais :
+  1. sa VÉRIFICATION MÉCANIQUE — les quatre faits établis par `==` et par
+     appartenance, là où le dépôt les affirmait en prose ; et
+  2. le RECÂBLAGE EFFECTIF d'une chaîne consommatrice, que ce module laissait
+     explicitement en report : `z_infini_derive`, et par lui tout l'argument
+     d'extension de Hessenberg, ne portent plus l'hypothèse non satisfaite.
+
+Le contournement emprunté diffère de celui qu'anticipait le module : au lieu de
+faire fournir `est_cardinal(b)` par le pas de récurrence (ce qui exigerait de
+récrire `ensembles_recurrence_C61`), on court-circuite la récurrence en passant
+par `fini_downward_garde_thm`, dont la garde se décharge sur des `Card(...)`.
+`ensembles_recurrence_C61.py` reste INCHANGÉ, comme le demandait le report.
+
+**Consommateurs ENCORE vides** (portent toujours l'universel nu) :
+`iii_5_6_divisibilite_division_euclidienne/ensembles_division_quotient.py` et
+`ensembles_division_recurrence.py` — la division euclidienne. Même méthode
+applicable si leurs instanciations portent sur des cardinaux ; à mesurer.
