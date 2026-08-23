@@ -1431,3 +1431,43 @@ Dix secondes, une réponse binaire, aucun essai perdu. Le même script a confirm
 au passage que l'AUTRE modus ponens du module (la transitivité du pont
 ENSEMBLE → CARDINAL) était correct — ce qui évite de le suspecter et de le
 « corriger » inutilement, faute la plus coûteuse devant ce message d'erreur.
+
+
+## 2026-08-23 — LEÇON 26 : paramétrer une preuve DÉPLACE ses décharges
+
+Le port de la division euclidienne sur le τ gardé (R-12, étape 4) a buté sur
+un message que je n'avais pas anticipé :
+
+    ValueError: généralisation : 'nfor' libre dans une hypothèse
+
+Rien à voir avec un liant ni avec une mineure. La cause est structurelle, et
+elle est propre au geste « paramétrer plutôt que dupliquer » employé quatre
+fois aujourd'hui.
+
+**Le mécanisme.** `_pas_grand` construisait elle-même la preuve de
+« b + (a−b) = a », en déchargeant au passage les gardes `est_cardinal(a)`,
+`est_cardinal(b)`, `b ≤ a` qu'elle avait introduites. En lui PASSANT cette
+preuve toute faite (`rec_bd=`), on court-circuite la branche qui la construit —
+donc aussi la décharge. Les gardes de l'appelant traversent alors la fonction
+sans être vues, et ressortent tout en haut, là où la généralisation les refuse.
+
+**La règle** : quand on remplace un calcul interne par un paramètre, il faut se
+demander *ce que ce calcul déchargeait*, pas seulement *ce qu'il produisait*.
+Une preuve n'est pas seulement une conclusion : c'est une conclusion ET un jeu
+d'hypothèses consommées. Le paramètre transmet la première et perd la seconde.
+
+**La parade appliquée** : rendre la décharge explicite chez l'appelant, sous
+garde d'appartenance —
+
+    for P, pr in [(est_cardinal(vn), card_n), (est_cardinal(vb), card_b)]:
+        if P in pg.hypotheses:
+            pg = _cut(pg, P, pr)
+
+Le `if P in …` importe : dans la branche historique ces hypothèses ont déjà été
+déchargées, et tenter de les décharger deux fois échouerait. La même fonction
+doit rester correcte dans les deux modes.
+
+**Diagnostic générique, à réutiliser** : devant « x libre dans une hypothèse »,
+lister `thm.hypotheses` et chercher celles qui mentionnent x — la coupable est
+presque toujours une hypothèse qu'un chemin antérieur déchargeait et que le
+nouveau chemin ne voit plus.

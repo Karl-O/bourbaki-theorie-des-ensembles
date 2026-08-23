@@ -126,6 +126,15 @@ def _strong_step(b="bdf", cardinal=False):
         for P, pr in [(est_fini(vn), h_fin_n), (est_fini(vb), fin_b),
                       (le_bn_f, le_bn), (_R_rel(vb, diff), R_diff)]:
             pg = _cut(pg, P, pr)
+        if cardinal:
+            #  ⚠️ L'équation `_rec_bd` porte est_cardinal(n) et est_cardinal(b) :
+            #  le chemin historique les déchargeait DANS `_pas_grand` (branche
+            #  `rec is None`), qu'on court-circuite ici.  Sans cette décharge,
+            #  est_cardinal(n) survit et la généralisation finale sur « nfor »
+            #  est refusée par le noyau — à juste titre.
+            for P, pr in [(est_cardinal(vn), card_n), (est_cardinal(vb), card_b)]:
+                if P in pg.hypotheses:
+                    pg = _cut(pg, P, pr)
         return pg                                            # R{n}
 
     # ── CAS b < n : b≤n par strict_implique_inf_egal ──
@@ -157,12 +166,20 @@ def _strong_step(b="bdf", cardinal=False):
 
 
 # @livre Ch.III §5.6 Th.1 | E III.39 L.10-19 | PDF p.142
-def division_existence(b="bdf"):
+def division_existence(b="bdf", cardinal=False):
     """🎯 THÉORÈME 1 §III.5.6 — EXISTENCE de la division euclidienne :
-    ⊢ {b≠0, Fini b, + résidus C61} ⊢ (∀n)( Fini n ⇒ (∃q)(∃r)( b·q+r=n et r<b ) )."""
+    ⊢ {b≠0, Fini b, + résidus C61} ⊢ (∀n)( Fini n ⇒ (∃q)(∃r)( b·q+r=n et r<b ) ).
+
+    ⚠️ 2026-08-23 (R-12).  Sous `cardinal=True`, la récurrence forte mesure avec
+    `diff_cardinale` (τ GARDÉ) au lieu de `diff_somme`, ce qui élimine l'universel
+    NU de `fini_downward` — hypothèse NON SATISFAITE qui rendait ce théorème VRAI
+    ET VIDE (ANOMALIES 2026-08-23).  MESURÉ : `_strong_step(cardinal=True)` rend
+    877,4 s et DEUX hypothèses seulement — est_cardinal(b) et b≠0 — l'universel
+    nu étant absent.  L'ÉNONCÉ ne change pas : il ne mentionne pas la
+    soustraction, qui n'est qu'une mesure interne."""
     vb = _t(b)
     R_rec = _R_rec(vb)
-    H_proof = _strong_step(b)                                # ⊢ H
+    H_proof = _strong_step(b, cardinal=cardinal)             # ⊢ H
     rf = recurrence_forte(R_rec, "pfor")                     # {H, pred_univ} ⊢ (∀n)(Fini n ⇒ R_rec{n})
     H = hypothese_recurrence_forte(R_rec, "nfor", "pfor")
     res = _cut(rf, H, H_proof)                               # décharge H
