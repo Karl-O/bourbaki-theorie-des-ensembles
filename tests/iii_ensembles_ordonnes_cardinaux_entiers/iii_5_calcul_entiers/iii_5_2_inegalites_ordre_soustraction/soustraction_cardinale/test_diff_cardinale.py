@@ -22,7 +22,7 @@ from bourbaki.ii_theorie_des_ensembles.ii_4_reunion_intersection_famille.ii_4_re
 from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import (
     est_cardinal, inf_egal_card,
 )
-from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_5_calcul_entiers.iii_5_2_inegalites_ordre_soustraction.ensembles_diff_cardinale import (
+from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_5_calcul_entiers.iii_5_2_inegalites_ordre_soustraction.soustraction_cardinale.ensembles_diff_cardinale import (
     diff_cardinale, diff_cardinale_garde, diff_cardinale_equation,
 )
 
