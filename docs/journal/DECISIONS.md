@@ -1302,3 +1302,54 @@ résidu », clos depuis longtemps, jamais câblé. Une hypothèse honnête signa
 aussi bien un trou qu'un **câble absent**, et le second cas s'est révélé le plus
 fréquent. Le réflexe (grep `<nom>_preuve` / `_prouve` / `_clos` /
 `_inconditionnel`) doit précéder toute déclaration de lacune.
+
+
+## 2026-08-23 — LEÇON 23 : généraliser dans l'ordre INVERSE de l'instanciation
+
+Beaucoup de théorèmes du dépôt attendent des NOMS de variables là où l'on tient
+des TERMES (LEÇON 17). Le passage se fait par ∀-clôture puis instanciation —
+licite dès que le théorème est CLOS. Mais l'ordre n'est pas libre :
+
+    generalisation  EMPILE vers l'extérieur   (le dernier généralisé est dehors)
+    instancie       DÉPILE depuis l'extérieur (le plus externe part le premier)
+
+Donc **le dernier nom généralisé est le premier instancié**. Pour que `noms[i]`
+reçoive `termes[i]`, il faut généraliser `reversed(noms)`. Généraliser dans
+l'ordre naturel produit une **permutation silencieuse des arguments** : aucune
+erreur au moment de la faute, et un « mineure ≠ antécédent » très en aval, sur
+une formule τ de plusieurs centaines de caractères où rien ne saute aux yeux.
+
+**Diagnostic (LEÇON 18 appliquée)** : ne pas retoucher la preuve. Imprimer
+l'antécédent obtenu et la mineure, comparer — puis retenter avec l'ordre
+inversé et comparer encore. Deux impressions ont suffi ; sans elles, le motif
+était invisible, les deux formules ne différant que par la position de `A` et de
+`Card A` au fond d'un τ.
+
+**Parade** : un helper unique, `_clot_puis_instancie(thm, noms, termes)`, qui
+inverse en interne. À réutiliser partout où ce passage NOMS → TERMES se
+présente, plutôt que de réécrire la boucle et de refaire l'erreur.
+
+## 2026-08-23 — Le Corollaire 1 (aⁿ = a) : le pont qui manquait
+
+`a_puissance_n_egale_a` (§III.6.3 Cor. 1) est construit en entier — récurrence
+sur n depuis 1, bornes, Cantor–Bernstein — sous TROIS hypothèses :
+`predecesseur_fini_universel`, `hyp_carre(A) = Eq(A×A, A)`, et `a₀ ∈ A`. Sa
+docstring annonçait la décharge de la deuxième « via `hessenberg_0hyp` ».
+
+**`hessenberg_0hyp` n'existe pas** — grep sur tout le dépôt : une seule
+occurrence, celle de la docstring qui la promet. Un nom de fonction dans un
+commentaire n'est pas une fonction ; c'est le même défaut de fidélité que la
+surdéclaration Goldbach, en plus discret.
+
+**Le pont écrit** (`ensembles_carre_equipotent`) : le Théorème 2 conclut sur les
+CARDINAUX (`Card A · Card A = Card A`), le Corollaire réclame les ENSEMBLES
+(`Eq(A×A, A)`). Trois pas — `produit_cardinal_bien_defini` nourri de deux
+réflexivités donne `Card(A×A) = Card A · Card A` (CLOS, 1,2 s) ; Hessenberg
+donne le membre droit ; la Proposition 1 dans son sens réciproque conclut.
+Mesuré : 1,8 s, 2 hypothèses, et la conclusion est **identique** à `hyp_carre`
+(vérifié par `==`, pas par ressemblance).
+
+**Reste pour clore le Corollaire 1** : `predecesseur_fini_universel` (déjà
+prouvé par le dépôt, à brancher comme dans `fini_downward_cardinal`) et
+`a₀ ∈ A`, qui demande une ∃-élimination depuis « A infini ⇒ A non vide » — la
+conclusion ne mentionne pas a₀, l'élimination est donc licite.
