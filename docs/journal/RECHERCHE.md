@@ -211,7 +211,7 @@ docstring). Classées, avec leurs variables libres :
 | 6 | fonctionnalité de l'union | 𝔇 | ✅ CLOSE (`union_compatible_fonctionnelle`) |
 | 7 | surjectivité du recollement | 𝔇,US | à faire |
 | 8 | US ⊂ E | E,US | ✅ CLOSE (`us_inclus_E`) |
-| 9 | dom(⋃𝔇) ⊂ US×US | 𝔇,US | à faire |
+| 9 | dom(⋃𝔇) ⊂ US×US | 𝔇,US | ✅ CLOSE (`dom_union_inclus_carre`) |
 | 10 | image(⋃𝔇, US×US) ⊂ US | 𝔇,US | à faire |
 | 11 | US infinie | US | ✅ CLOSE (`us_infini`) |
 
@@ -427,3 +427,23 @@ que `produit_monotone_carre` sache faire croître. Les trois pièces de la donn�
 
 Il ne reste que le chaînage — mais attention, il faudra passer de « (z,y) ∈ p »
 à « z ∈ dom(p) » (axiome du domaine, sens arrière) avant d'appliquer l'égalité.
+
+
+### R-13, suite (08h05) — donnée (9) CLOSE : 8 sur 11
+
+`dom_union_inclus_carre` : { chaîne } ⊢ dom(⋃𝔇(C)) ⊂ US×US, 0,4 s, 1 hyp.
+Trois descentes existentielles emboîtées (un y, le membre p contenant (z,y),
+le u de la chaîne dont p est la seconde projection), deux remontées.
+
+**Un seul essai raté, et la LEÇON 18 l'a réglé en une ligne** : l'échec était
+sur « mineure ≠ antécédent », et le coupable n'était pas la preuve mais le
+LIANT — `pr1_inclus_union` produit une inclusion de liant « xup », alors que
+`produit_monotone_carre` en attend une de liant « z » (le défaut de `inclus`).
+Il a suffi de demander le bon liant à la première. Comparer plutôt que deviner
+a encore payé.
+
+**Reste 3 sur 11** : (10) image(⋃𝔇, US×US) ⊂ US, (1) domaine couvrant,
+(7) surjectivité. La (10) devrait suivre le même schéma que la (9), avec
+l'axiome de l'IMAGE au lieu de celui du domaine, et `pr2 ⊂ US` en bout de
+chaîne — c'est-à-dire que l'image d'un membre est incluse dans US, ce qui
+demandera un pendant de `pr1_inclus_union` côté image.
