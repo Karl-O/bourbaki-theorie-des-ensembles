@@ -17,9 +17,12 @@ from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_6_infinis.frame_zorn.
 )
 
 
-def test_trois_residus_honnetes():
-    """Le CLAIM ne laisse que TROIS résidus : absorption, transport, garde ∀U."""
-    assert len(_residus("E")) == 3
+def test_deux_residus_honnetes():
+    """Le CLAIM ne laisse plus que DEUX résidus : transport et garde ∀U.
+
+    L'absorption 𝔟+𝔟=𝔟 en est sortie le 2026-08-23 : `absorption_au_maximal`
+    la DÉRIVE de la bijection φ₀ du maximal (LEÇON 16)."""
+    assert len(_residus("E")) == 2
 
 
 def test_hessenberg_par_extension():
