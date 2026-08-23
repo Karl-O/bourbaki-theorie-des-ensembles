@@ -212,7 +212,7 @@ docstring). Classées, avec leurs variables libres :
 | 7 | surjectivité du recollement | 𝔇,US | à faire |
 | 8 | US ⊂ E | E,US | ✅ CLOSE (`us_inclus_E`) |
 | 9 | dom(⋃𝔇) ⊂ US×US | 𝔇,US | ✅ CLOSE (`dom_union_inclus_carre`) |
-| 10 | image(⋃𝔇, US×US) ⊂ US | 𝔇,US | à faire |
+| 10 | image(⋃𝔇, US×US) ⊂ US | 𝔇,US | ✅ CLOSE (`img_union_inclus_us`) |
 | 11 | US infinie | US | ✅ CLOSE (`us_infini`) |
 
 **Le blocage précis de (5).** La route naturelle est celle de `pr1_inclus_E` :
@@ -475,3 +475,19 @@ pr₁u, ce qui est exactement le contenu de la surjectivité du membre.
 
 ⚠️ Ne pas oublier d'aligner le LIANT de l'inclusion finale (LEÇON 18) : c'est
 ce qui a coûté l'unique essai raté de la donnée (9).
+
+
+### R-13, suite (08h15) — donnée (10) CLOSE : 9 sur 11
+
+`img_union_inclus_us` : { chaîne } ⊢ image(⋃𝔇(C), US×US) ⊂ US, 0,4 s, 1 hyp,
+**du premier coup**. Jumelle de la (9) : même descente en trois existentielles
+emboîtées, mais l'axiome de l'IMAGE au départ et `valeur_dans_pr1` à l'arrivée.
+
+L'avertissement sur le liant, laissé après l'essai raté de la (9), a été
+appliqué d'emblée — `pr1_inclus_union(C, vu, x="z")`. Deux données consécutives
+sans essai perdu : les leçons 17 et 18 se paient d'elles-mêmes.
+
+**Reste 2 sur 11** : (1) domaine couvrant et (7) surjectivité. Toutes deux de
+la forme « tout point est atteint par un membre » : elles iront dans l'autre
+sens que les précédentes — `membre_union_premiere` en sens AVANT pour DÉFAIRE
+l'appartenance à US, puis S5 pour produire le témoin réclamé.
