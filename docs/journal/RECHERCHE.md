@@ -673,3 +673,50 @@ Un dépôt de cette taille accumule des preuves non branchées, et l'écart entr
 
 **Attendu, en cours de mesure** : `hessenberg_final` sous la SEULE
 `est_infini(Card E)` — c'est-à-dire Hessenberg **FAIT** au sens strict.
+
+
+## R-14 — Les corollaires du Théorème 2 (E III.49, PDF p.152), lus au PDF
+
+Carte établie en lisant la page, pas en devinant. Les quatre corollaires, avec
+la démonstration que Bourbaki en donne :
+
+| # | énoncé | preuve de Bourbaki | statut |
+|---|--------|--------------------|--------|
+| **Cor. 1** | a infini ⇒ aⁿ = a pour tout entier n ≥ 1 | « évident par récurrence sur n » | ✅ **CLOS 2026-08-23** (`puissance_n_clos`, 66,4 s, 1 hyp = le Th. 2) |
+| **Cor. 2** | produit d'une famille FINIE (aᵢ)ᵢ∈I de cardinaux non nuls, dont le plus grand a est infini, = a | b ≤ aⁿ = a où n = Card I ; et b ≥ a car aᵢ ≥ 1 (Prop. 14, E III.30) | ⛔ bloqué (voir ci-dessous) |
+| **Cor. 3** | a infini, (aᵢ) famille de cardinaux ≤ a, Card I ≤ a ⇒ Σaᵢ ≤ a ; et = a si un aᵢ = a | Σaᵢ ≤ a·b ≤ a² = a où b = Card I ; et Σaᵢ ≥ a_κ | ⛔ bloqué (voir ci-dessous) |
+| **Cor. 4** | a, b non nuls dont l'un est infini ⇒ **ab = a + b = sup(a,b)** | « résulte aussitôt des cor. 2 et 3 » | 🎯 accessible par une AUTRE route |
+
+**LE BLOCAGE de Cor. 2 et 3, mesuré et non supposé.** Les deux passent par la
+Proposition 14 (§III.3.6, E III.30) sous sa **forme FAMILLE** — monotonie de
+∏ᵢ et Σᵢ sur un ensemble d'indices I quelconque. Le dépôt n'en possède que le
+**cas BINAIRE**, et le dit lui-même :
+`ensembles_arith_cardinale_props_produit_monotone.py:165` — « Prop.14, volet
+PRODUIT, cas binaire : la forme famille (P sur I) n'est pas formalisée ».
+Fermer Cor. 2 et 3 exige donc d'abord de porter la Prop. 14 en famille, ce qui
+est un chantier à part entière et non un corollaire.
+
+**LA ROUTE COURTE POUR Cor. 4.** Bourbaki le déduit de Cor. 2 et 3, mais dans le
+cas BINAIRE — le seul qu'il énonce ! — la déduction directe évite entièrement
+les familles. Sous « b ≤ a, a infini, a ≠ 0, b ≠ 0 » :
+
+    a + b ≤ a + a ≤ a · a = a      (monotonie binaire, puis Hessenberg)
+    a + b ≥ a                       (monotonie de la somme)
+    ⇒ a + b = a                     (antisymétrie)
+
+    a · b ≤ a · a = a               (monotonie binaire, puis Hessenberg)
+    a · b ≥ a                       (car b ≥ 1)
+    ⇒ a · b = a
+
+**Choix de formulation, à assumer explicitement.** Écrire `sup(a,b)` exigerait
+la comparabilité des cardinaux (Th. 1 §III.3) pour que le terme soit défini. On
+formule donc la cible sous la garde « b ≤ a », qui rend `sup(a,b) = a`
+manifeste sans rien postuler : **{ a infini, b ≤ a, b ≠ 0 } ⊢ a+b = a et
+a·b = a**. C'est le contenu exact du corollaire, avec le sup explicité plutôt
+qu'introduit comme terme. L'écart de FORME avec Bourbaki est à consigner au
+rapport ; l'écart de CONTENU est nul.
+
+**Brique à vérifier avant d'écrire** : `a + a ≤ a · a`. Elle a déjà été
+rencontrée dans `absorption_au_maximal` (§III.6.3), où l'absorption 𝔟+𝔟=𝔟 est
+tirée de la bijection φ₀ ; voir si elle s'en extrait, ou si le chemin
+`2·a = a + a` via `distributivite_operations` est plus court.
