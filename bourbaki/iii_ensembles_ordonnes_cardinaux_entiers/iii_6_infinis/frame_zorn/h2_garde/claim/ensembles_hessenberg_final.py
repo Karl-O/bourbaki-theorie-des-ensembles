@@ -11,9 +11,8 @@ portée du maximal ; `claim_vers_endgame` en tire l'énoncé de Hessenberg ; il
 ne reste qu'à sortir de la portée par `unpack_sous_maximal`.
 
 ⚠️ LA CONTRAINTE QUI FAÇONNE CE MODULE.  Sortir de la portée exige qu'AUCUNE
-hypothèse résiduelle ne mentionne les témoins S₀, φ₀, m.  Or les résidus
-honnêtes du CLAIM les mentionnent tous (le transport porte sur E∖S₀, le paquet
-sur (S₀,φ₀)).  Ils sont donc portés SOUS
+hypothèse résiduelle ne mentionne les témoins S₀, φ₀, m.  Or le résidu honnête
+du CLAIM — le paquet ψ — les mentionne.  Il est donc porté SOUS
 (∀S)(∀φ) — exactement le traitement déjà appliqué à U dans `donnees_extension`
 et aux chaînes dans `donnees_recollement`.
 
@@ -104,14 +103,17 @@ def _residus(E_set, S=_S, phi=_PHI):
 
 # @livre Ch.III §6.3 Demo.2 | E III.48 L.26-33 | PDF p.151
 def residus_maximal(E_set="E", S=_S, phi=_PHI):
-    """L'unique hypothèse honnête restante, quantifiée sur le maximal :
+    """L'UNIQUE hypothèse honnête restante, quantifiée sur le maximal :
 
-        (∀S)(∀φ)( transport(Card S, E∖S)  et  (∀U)(garde ⇒ (∃ψ)PAQUET) ).
+        (∀S)(∀φ)(∀U)( garde ⇒ (∃ψ) PAQUET(U,ψ) ).
 
-    Les deux pièces que Bourbaki obtient par le choix d'une partie de E∖F et
-    par le calcul cardinal ; elles sont NOMMÉES, jamais postulées vraies, et
-    déchargées explicitement.  L'ABSORPTION, elle, est DÉRIVÉE (module
-    `ensembles_absorption`) et ne figure plus ici."""
+    C'est le calcul cardinal de Bourbaki : la zone (S₀∪U)² ∖ (S₀×S₀) a le
+    cardinal 𝔟, donc se met en bijection avec U.  NOMMÉE, jamais postulée
+    vraie, déchargée explicitement.
+
+    Les deux autres résidus ont été ÉLIMINÉS le 2026-08-23 : l'ABSORPTION est
+    dérivée (`ensembles_absorption`), et le TRANSPORT était déjà clos en amont
+    (GAP B, `existe_sous_ensemble_cardinal_transporte`)."""
     res = _residus(E_set, S, phi)
     corps = reduce(lambda acc, x: et(x, acc), reversed(res[:-1]), res[-1])
     return pourtout(S, pourtout(phi, corps))

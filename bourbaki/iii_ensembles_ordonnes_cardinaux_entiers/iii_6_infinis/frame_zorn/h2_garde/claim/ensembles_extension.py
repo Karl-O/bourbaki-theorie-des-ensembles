@@ -18,8 +18,9 @@ une partie Y ⊂ E∖F équipotente à F. »  Les deux moitiés :
     de E∖S₀ : c'est le U de l'extension, à éliminer en témoin LOCAL Ucadre.
 
 Hypothèses honnêtes portées (jamais postulées) : S₀⊂E et 𝔟<Card E (fournies par
-la portée du maximal et par l'absurde), l'ABSORPTION 𝔟+𝔟=𝔟, et le transport
-`_transport_sous_ensemble_hyp` déjà isolé en amont.
+la portée du maximal et par l'absurde) et l'ABSORPTION 𝔟+𝔟=𝔟 — cette dernière
+étant elle-même DÉRIVÉE au maximal (`ensembles_absorption`).  Le transport, lui,
+est CLOS en amont (GAP B, `existe_sous_ensemble_cardinal_transporte`).
 
 theorie_ensembles() INCHANGÉE (22).  Noyau INTACT.
 """
@@ -44,7 +45,10 @@ from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_4_entiers_finis.iii_4
     est_cardinal_de_cardinal,
 )
 from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_6_infinis.hessenberg.coeur.ensembles_hessenberg_extension import (
-    complement_grand, existe_sous_ensemble_cardinal,
+    complement_grand,
+)
+from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_4_entiers_finis.ordinal_cardinal.realisation_segment.ensembles_transport_sous_ensemble import (
+    existe_sous_ensemble_cardinal_transporte,
 )
 
 
@@ -83,11 +87,16 @@ def b_le_complement(E_set="E", S="S0"):
 # @livre Ch.III §6.3 Demo.2 | E III.48 L.29-30 | PDF p.151
 #   (« il existe donc une partie Y ⊂ E∖F équipotente à F »)
 def existe_u_cadre(E_set="E", S="S0", U="Ucard", V="Ucadre"):
-    """{ S₀⊂E, 𝔟+𝔟=𝔟, 𝔟<Card E, transport } ⊢
-           (∃Ucadre)( Ucadre ⊂ E∖S₀  et  Card Ucadre = 𝔟 ).
+    """{ S₀⊂E, 𝔟+𝔟=𝔟, 𝔟<Card E } ⊢
+           (∃Ucadre)( Ucadre ⊂ E∖S₀  et  Card Ucadre = 𝔟 )   [3 hyps].
 
     Le U de l'extension.  Son témoin sera éliminé LOCALEMENT (la conclusion de
-    l'argument, ⊥, ne le mentionne pas), ce qui rend l'élimination licite."""
+    l'argument, ⊥, ne le mentionne pas), ce qui rend l'élimination licite.
+
+    ⚠️ On emploie `existe_sous_ensemble_cardinal_transporte` (CLOS, 0 hypothèse)
+    et NON `existe_sous_ensemble_cardinal`, qui portait le transport en résidu
+    honnête : le dépôt avait déjà fermé ce trou (GAP B), en réalisant c ≤ A
+    directement au lieu de transporter une partie de Card A vers A."""
     vS = _t(S)
     cS = cardinal(vS)
     R = _reste(E_set, S)
@@ -97,7 +106,8 @@ def existe_u_cadre(E_set="E", S="S0", U="Ucard", V="Ucadre"):
     donnees = conjonction_intro(est_cardinal_de_cardinal(vS),   # est_cardinal(𝔟)  [CLOS]
                                b_le_complement(E_set, S))       # 𝔟 ≤ Card(E∖S₀)
     assert donnees.conclusion == ante, "existe_u_cadre : antécédent inattendu"
-    res = N.modus_ponens(donnees, existe_sous_ensemble_cardinal(cS, R, U, V))
+    res = N.modus_ponens(donnees,
+                         existe_sous_ensemble_cardinal_transporte(cS, R, V))
 
     cible = existe(Vn, et(inclus(var(Vn), R), egal(cardinal(var(Vn)), cS)))
     assert res.conclusion == cible, "existe_u_cadre : forme"

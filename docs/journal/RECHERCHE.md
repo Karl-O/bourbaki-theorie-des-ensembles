@@ -128,3 +128,51 @@ toute faite ; chercher `restriction`, `induit`, `graphe_restreint` avant
 d'écrire, et appliquer la règle des 4 essais.
 
 **Puis** : le PAQUET ψ (résidu 3/3, le gros morceau) et `donnees_recollement`.
+
+## R-10 — RÉSOLU SANS ÉCRIRE UNE LIGNE DE PREUVE (2026-08-23)
+
+Le transport n'était PAS un trou : le dépôt le ferme depuis
+`iii_4_entiers_finis/ordinal_cardinal/realisation_segment/ensembles_transport_sous_ensemble.py`
+(GAP B), par `existe_sous_ensemble_cardinal_transporte(c, A, V)` — **0 hypothèse**.
+L'astuce y est de ne PAS transporter une partie de Card A vers A, mais de
+réaliser directement c ≤ A par transitivité (c ≤ Card A ≤ A via Eq(A,Card A)).
+
+Mon `existe_u_cadre` appelait encore l'ANCIENNE version
+(`existe_sous_ensemble_cardinal`), celle qui porte le transport en hypothèse
+honnête. Un seul changement d'import : les résidus de Hessenberg passent de
+2 à **1** (il ne reste que le garde ∀U, c'est-à-dire le paquet ψ).
+
+**Règle qui en découle** (à appliquer AVANT de traiter un résidu comme ouvert) :
+chercher une variante `_transporte` / `_clos` / `_prouve` du même nom. Un
+résidu nommé peut avoir été fermé ailleurs sans que ses appelants soient
+recâblés. Le grep « qui utilise la version close ? » montre d'ailleurs que
+`step_b_prop5/` et `assemblage_vrai/` l'utilisaient déjà — mon module neuf
+était le seul en retard.
+
+## R-11 — PISTE : `negation_strict_sous_maximal_reunion` (step_b_prop5/stepb3)
+
+Sa docstring annonce ¬(𝔟 < Card E) sous la SEULE maximal-data (+ résidus ∀∀ de
+`fini_downward_thm`) — donc SANS le paquet ψ, qu'elle construirait elle-même
+via `cadre_card_trois_b_reunion` (le calcul cardinal de la zone). Si c'est
+exact en code, le dernier résidu de Hessenberg tombe.
+⚠️ À VÉRIFIER EN CODE, jamais sur la foi de la docstring (leçon des agents).
+
+### R-11 — VÉRIFIÉ EN CODE (2026-08-23, 05h43)
+
+`negation_strict_sous_maximal_reunion("E","S0","phi0")` :
+  • conclusion == ¬( Card S₀ < Card E )  ✔ (comparaison par `==`, pas de lecture)
+  • **7 hypothèses, AUCUNE ne mentionne Ucadre, ψ ni uwit** ✔
+  • deux d'entre elles sont CLOSES (aucune variable libre) — vraisemblablement
+    les résidus ∀∀ de `fini_downward_thm` ; les cinq autres ne parlent que de
+    S₀, φ₀, E.
+  • coût : 384 s.
+
+Donc la docstring dit vrai : ce module construit LUI-MÊME le paquet ψ (via
+`cadre_card_trois_b_reunion` et le recâblage RÉUNION qui dissout le mur de la
+somme disjointe) et n'en laisse aucune trace en hypothèse.
+
+**Conséquence** : il est plus fort que mon `non_strict_clos`, qui porte le
+paquet en résidu ∀U. Le brancher dans `claim_clos` ferait tomber le DERNIER
+résidu de Hessenberg. Prix à payer : 384 s contre ~30 s — donc garder les DEUX
+chemins (le rapide, à résidu nommé, pour l'itération ; le complet, marqué
+`slow`, pour la certification).
