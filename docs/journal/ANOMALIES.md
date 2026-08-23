@@ -1100,3 +1100,52 @@ Périmètre final de la vacuité `fini_downward` à ce jour :
   • ENCORE VIDE : `ensembles_division_recurrence`, `ensembles_division_quotient`
     (division euclidienne), et les appelants historiques de `fini_downward_thm`
     hors de ces chaînes.
+
+
+## 2026-08-23 (soir) — CLÔTURE de l'anomalie `fini_downward` : RÉSOLUE en III.6, OUVERTE en III.5.6
+
+**Statut par chaîne, et il faut les séparer** — la même hypothèse fausse
+traversait deux chaînes indépendantes ; l'une est réparée, l'autre ne peut pas
+l'être par le même geste.
+
+### ✅ Chaîne §III.6.3 (Hessenberg) — RÉSOLUE, mesurée
+
+Recâblée sur la version GARDÉE (`fini_downward_cardinal`), elle-même devenue
+CLOSE une fois `predecesseur_fini_universel_preuve` branchée à la source. Le
+résultat final ne porte plus AUCUNE trace de l'anomalie :
+
+    hessenberg_final   5172,8 s   hyps=1 = est_infini(Card E)   VACUOUS False
+    _residus(paquet_derive=True) = 0        theorie_ensembles() = 22
+
+L'universel nu n'apparaît dans aucune hypothèse ; le test miroir
+`test_chemin_complet_sans_aucun_residu` le vérifie explicitement, pour que la
+régression soit détectée si elle revenait.
+
+### ⚠️ Chaîne §III.5.6 (division euclidienne) — OUVERTE, et pas pour la raison
+qu'on croyait
+
+Le recâblage y est **impossible en l'état**, et ce n'est pas un manque de
+travail : c'est un défaut de DÉFINITION (R-12 requalifiée le même jour).
+
+  · `_diff_est_fini` conclut `Fini(diff_somme(a,b))`, où
+    `diff_somme(a,b) = τc.( a = b + c )` ;
+  · `est_fini(x) = est_cardinal(x) ∧ x ≠ x+1` — la cible **entraîne** donc
+    `est_cardinal(a−b)` ;
+  · mais `somme_cardinale_binaire(b,c) = Card(b ⊔ c)` ne contraint **en rien**
+    `c` à être un cardinal : tout ensemble équipotent à un témoin valable en est
+    un. Le τ en choisit un arbitrairement.
+
+Donc `est_cardinal(τc.(a = b+c))` **n'est pas dérivable**. L'hypothèse fausse
+n'était pas une négligence de plomberie : elle était **PORTEUSE** — elle fermait
+un pas qui n'a pas de preuve honnête. C'est le diagnostic à retenir et à
+appliquer aux autres résidus du dépôt : *une hypothèse non satisfaite ne se
+contente pas de manquer de justification, elle travaille, et ce qu'elle
+dissimule est exactement la difficulté qu'on croyait avoir contournée.*
+
+**Réparation planifiée** (RECHERCHE R-12, 4 étapes) : rendre la différence
+cardinale PAR CONSTRUCTION, via `diff_cardinale(a,b) := τc.( est_cardinal(c) et
+a = b + c )`. Le point de départ est acquis — le témoin de la Prop. 13 est
+**déjà** `Card(a ∖ Im)`, donc déjà un cardinal ; il suffit de le conjoindre
+avant le S5 final. Tant que ce n'est pas fait, **les deux modules de division
+euclidienne restent VRAIS ET VIDES**, et `CLAUDE.md` porte désormais cet
+avertissement à côté de la ligne qui les comptait « FAITS ».
