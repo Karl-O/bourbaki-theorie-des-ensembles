@@ -34,7 +34,9 @@ def test_claim_clos():
     vE, vS = var("E"), var("S0")
     t = claim_clos()
     assert t.conclusion == egal(cardinal(vS), cardinal(vE))
-    assert len(t.hypotheses) == 8, "hyps : %d" % len(t.hypotheses)
+    #  7 depuis le 2026-08-23 : le TRANSPORT était déjà clos en amont (GAP B),
+    #  son résidu a disparu en recâblant `existe_u_cadre`.
+    assert len(t.hypotheses) == 7, "hyps : %d" % len(t.hypotheses)
     assert inclus(vS, vE) in t.hypotheses, "S₀⊂E doit venir du maximal"
     assert t.conclusion not in t.hypotheses, "VACUOUS"
     assert len(E.theorie_ensembles().axiomes) == 22
