@@ -66,9 +66,11 @@ def existence_maximal(E_set="E", m="mmx"):
 def unpack_sous_maximal(E_set, derive, mfresh="mmx", Sf="Smx", phif="phimx"):
     """{ existence_maximal(E) } ∪ résidus(derive) ⊢ C.
 
-    `derive(bij0, S0_inclus, S0_infini, maximal_hyp, vS0, vphi0)` reçoit les
-    quatre données du maximal dans une portée fraîche et rend un théorème dont
-    la conclusion C ne mentionne librement ni Sf, ni phif, ni mfresh."""
+    `derive(bij0, S0_inclus, S0_infini, maximal_hyp, vS0, vphi0, m_egal_couple)`
+    reçoit les quatre données du maximal PLUS l'égalité m=(S₀,φ₀) — celle-ci
+    permet de transporter par Leibniz les énoncés portant sur m (maximalité,
+    appartenance à 𝔉) vers leur forme en (S₀,φ₀).  Sa conclusion C ne doit
+    mentionner librement ni Sf, ni phif, ni mfresh."""
     vE = _t(E_set)
     Gam, Fr = frame_ordre(vE), frame_pair(vE)
     vm, vS0, vphi0 = var(mfresh), var(Sf), var(phif)
@@ -88,7 +90,9 @@ def unpack_sous_maximal(E_set, derive, mfresh="mmx", Sf="Smx", phif="phimx"):
         S_inf = conjonction_elim_droite(conjonction_elim_gauche(hh))
         S_inc = conjonction_elim_droite(conjonction_elim_gauche(
             conjonction_elim_gauche(hh)))
-        res_C = derive(bij0, S_inc, S_inf, h_max, vS0, vphi0)
+        p_eq = conjonction_elim_gauche(conjonction_elim_gauche(
+            conjonction_elim_gauche(hh)))                   # mmx = (S₀,φ₀)
+        res_C = derive(bij0, S_inc, S_inf, h_max, vS0, vphi0, p_eq)
         for bad in (Sf, phif, mfresh):
             assert bad not in libres_f(res_C.conclusion), \
                 "unpack_sous_maximal : %r libre dans la conclusion" % bad

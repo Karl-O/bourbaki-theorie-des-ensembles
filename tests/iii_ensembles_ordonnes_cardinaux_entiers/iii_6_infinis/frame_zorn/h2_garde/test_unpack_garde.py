@@ -16,7 +16,7 @@ def test_unpack_sous_maximal():
     """{(∃m) element_maximal} ⊢ C — les données du maximal servies à `derive`."""
     vu = []
 
-    def derive(bij0, S_inc, S_inf, h_max, vS0, vphi0):
+    def derive(bij0, S_inc, S_inf, h_max, vS0, vphi0, p_eq):
         vu.append((bij0.conclusion, S_inc.conclusion, S_inf.conclusion))
         return a_implique_a(appartient(var("t"), var("T")))
 

@@ -1093,3 +1093,32 @@ pour le recollement :
 
 ψ doit être **existentiel** à l'intérieur (un ψ par U ; le sortir en variable
 libre affirmerait qu'un seul ψ vaut pour tous les U — non satisfiable).
+
+## 2026-08-23 — 🏆🏆 HESSENBERG a·a = a ASSEMBLÉ (2 hypothèses)
+
+    hessenberg_par_extension(E) :
+        { existence_maximal(E), residus_maximal(E) } ⊢ enonce_hessenberg(E)
+
+**existence_maximal** est PROUVÉE par `hess_maximal` (certifié, test 1 h 25)
+sous « E infini » et `donnees_recollement`.  **residus_maximal** réunit les
+TROIS résidus honnêtes NOMMÉS, quantifiés sur le maximal :
+(∀S)(∀φ)( absorption Card S + Card S = Card S · transport (E∖S) ·
+(∀U)(garde ⇒ (∃ψ)PAQUET) ).
+
+**La leçon de structure de cette nuit.** Chaque fois qu'un témoin doit être
+éliminé, tout ce qui le mentionne doit être porté par un énoncé QUANTIFIÉ
+au-dessus de lui.  On l'a rencontré TROIS fois, à trois étages :
+
+  1. les chaînes → `donnees_recollement` = (∀C)(… ⇒ (⋃S,⋃𝔇)∈𝔉) ;
+  2. le U de l'extension → `donnees_extension` = (∀U)(garde ⇒ (∃ψ)PAQUET) ;
+  3. le maximal lui-même → `residus_maximal` = (∀S)(∀φ)(…).
+
+Et l'astuce qui rend l'instanciation SÛRE : donner au liant le NOM MÊME du
+témoin (Ucadre, Smx, phimx), si bien que l'instanciation est l'identité —
+aucune reconstruction de formule, donc aucune prise avec la LEÇON 15 (les
+τ-termes renomment leurs liants internes).
+
+**Ce qui reste pour clore Th.2 sans aucune hypothèse ouverte** : dériver les
+trois résidus (l'absorption 𝔟+𝔟=𝔟 se tire de 𝔟·𝔟=𝔟 au maximal via 2𝔟 ≤ 𝔟·𝔟 ;
+le transport est déjà isolé et nommé en amont ; le paquet ψ est le calcul
+cardinal de Bourbaki) et `donnees_recollement`.
