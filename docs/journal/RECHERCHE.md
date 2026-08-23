@@ -447,3 +447,31 @@ a encore payé.
 l'axiome de l'IMAGE au lieu de celui du domaine, et `pr2 ⊂ US` en bout de
 chaîne — c'est-à-dire que l'image d'un membre est incluse dans US, ce qui
 demandera un pendant de `pr1_inclus_union` côté image.
+
+### R-13, suite (08h10) — plan CORRIGÉ pour la donnée (10)
+
+Vérification en code avant d'écrire, et elle corrige l'intuition du tick
+précédent : `est_bijection_de(φ,S×S,S)` se déplie en
+`(fonctionnel et dom=S×S) et est_bijective(φ,S×S,S)`, et
+`est_bijective(f,a,b) = injective_dans(f,a) et est_surjective(f,a,b)` — il n'y
+a donc PAS de conjoint « image(φ,S×S)=S » directement lisible. L'idée
+« l'image d'un membre est sa première projection » demande de passer par
+`est_surjective`, dont la forme reste à lire.
+
+**Mais l'axiome de l'image RANGE offre un chemin plus court** :
+
+    AXIOME_IMG :  ( y ∈ img(G) )  ⇔  (∃x)( (x,y) ∈ G )
+
+De « (x,w) ∈ p » on obtient donc w ∈ img(p) par S5 — sans passer par le
+domaine ni par une image directe. Il ne resterait qu'à relier img(pr₂u) à
+pr₁u, ce qui est exactement le contenu de la surjectivité du membre.
+
+**Plan pour (10)**, à exécuter au prochain tick :
+  1. lire `est_surjective(f,a,b)` en code (forme exacte) ;
+  2. en tirer `img(pr₂u) ⊂ pr₁u` — brique à écrire, jumelle de
+     `dom_pr2_egale_carre` mais côté image ;
+  3. chaîner comme (9) : AXIOME_IMAGE, membre_union_famille, membre_famille,
+     puis AXIOME_IMG et `pr1_inclus_union`.
+
+⚠️ Ne pas oublier d'aligner le LIANT de l'inclusion finale (LEÇON 18) : c'est
+ce qui a coûté l'unique essai raté de la donnée (9).
