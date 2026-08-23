@@ -1,0 +1,85 @@
+\subsection{§III.5.6 --- La division euclidienne, ou une hypothèse fausse qui
+travaillait}
+\label{sec:iii5-division-reparee}
+
+\textbf{Le constat de départ.} Le dépôt comptait la division euclidienne parmi
+ses résultats acquis. Elle était \emph{vide}. Ses deux modules dépendaient de
+\texttt{\_diff\_est\_fini}, qui instancie l'universel \emph{nu}
+$(\forall a)(\forall x)\big((a \le x \wedge \mathrm{Fini}\,x) \Rightarrow
+\mathrm{Fini}\,a\big)$ --- une hypothèse que le dépôt ne prouve que sous sa
+forme \emph{gardée} par $\mathrm{est\_cardinal}$, et qui est fausse dès que $a$
+n'est pas un cardinal. Le noyau restait sound : la dérivation est correcte. Mais
+tout théorème portant une hypothèse insatisfaisable est \emph{vrai et vide}.
+
+\textbf{Pourquoi le recâblage semblait bloqué.} La version gardée exige
+$\mathrm{est\_cardinal}(a-b)$. Or la soustraction du dépôt est
+$a - b := \tau c\,(a = b + c)$, et deux lectures du code suffisent à montrer que
+cette formule est hors d'atteinte :
+\begin{itemize}
+\item $\mathrm{est\_fini}(x) = \mathrm{est\_cardinal}(x) \wedge x \neq x+1$ ---
+la cible \emph{contient} la brique manquante, c'est un cercle ;
+\item $\mathfrak{b} + \mathfrak{c} = \mathrm{Card}(\mathfrak{b} \sqcup
+\mathfrak{c})$ --- l'équation ne contraint \emph{en rien} $c$ à être un
+cardinal, tout ensemble équipotent à un témoin valable en étant un.
+\end{itemize}
+Le $\tau$ choisit donc un témoin arbitraire, et
+$\mathrm{est\_cardinal}(\tau c\,(a = b+c))$ \textbf{n'est pas dérivable}.
+
+\textbf{Ce que cela révèle, et qui dépasse ce théorème.} L'hypothèse fausse
+n'était pas une négligence de plomberie : elle était \textbf{porteuse}. Elle
+fermait un pas qui n'a pas de preuve honnête. Une hypothèse non satisfaite ne se
+contente pas de manquer de justification --- \emph{elle travaille}, et ce
+qu'elle dissimule est exactement la difficulté qu'on croyait avoir contournée.
+C'est le diagnostic à appliquer aux autres résidus du dépôt.
+
+\textbf{La réparation : mettre la garde dans le terme.} Plutôt que d'espérer que
+la différence soit cardinale, on la construit ainsi :
+\[
+a - b := \tau c\,\big(\mathrm{est\_cardinal}(c) \wedge a = b + c\big).
+\]
+Le point de départ était acquis sans le savoir : le témoin que la Proposition~13
+construit est \emph{littéralement} $\mathrm{Card}(a \setminus \mathrm{Im})$, donc
+déjà un cardinal. Il suffisait de le \emph{dire} avant le S5 final --- deux
+lignes de fond. Un unique \texttt{existe\_temoin} sur le $\tau$ gardé livre alors
+les \emph{deux} faits d'un coup : la garde et l'équation caractéristique.
+
+\textbf{Le port, ou ce que la preuve de Bourbaki demandait vraiment.} Restait à
+faire basculer la division sur cette différence. En relisant chaque étage, le
+même constat s'est répété quatre fois : \textbf{la démonstration n'utilise jamais
+la construction de la soustraction, seulement son équation
+$b + (a-b) = a$ et sa borne $(a-b) \le a$.} La recomposition, le pas
+« $a \ge b$ », l'inégalité stricte, la récurrence forte --- aucun ne regarde
+comment la différence est faite. Quatre modules ont donc reçu un \emph{paramètre},
+jamais une copie, la version historique restant le défaut \emph{et} restant
+testée.
+
+\textbf{Un piège propre à ce geste.} Le premier essai a échoué sur
+« généralisation : \texttt{nfor} libre dans une hypothèse » --- ni un liant, ni
+une mineure. \texttt{\_pas\_grand} construisait elle-même la preuve de
+$b + (a-b) = a$ et \emph{déchargeait au passage} les gardes qu'elle avait
+introduites ; lui passer cette preuve toute faite court-circuite la branche, donc
+aussi la décharge. \textbf{Paramétrer une preuve déplace ses décharges} : une
+preuve n'est pas seulement une conclusion, c'est une conclusion \emph{et} un jeu
+d'hypothèses consommées.
+
+\textbf{Résultat.} L'énoncé du théorème ne change pas --- il ne mentionne pas la
+soustraction, qui n'est qu'une mesure interne de la récurrence. Ce qui change est
+la \emph{valeur} des théorèmes : ils cessent d'être vides.
+\begin{center}
+\small
+\begin{tabular}{@{}llrl@{}}
+\toprule
+étape & résultat & temps & hypothèses \\
+\midrule
+1 & Prop.~13 renforcée & $5{,}8$~s & \textbf{0} (close) \\
+2 & $\mathrm{est\_cardinal}(a-b)$ & $6{,}2$~s & 3 gardes \\
+3 & $\mathrm{Fini}(a-b)$ & $266{,}8$~s & 4 gardes, \emph{nu absent} \\
+4c & $(a-b) < a$ & $569{,}8$~s & 6, conclusion identique \\
+4d & récurrence forte & $877{,}4$~s & \textbf{2}, \emph{nu absent} \\
+\bottomrule
+\end{tabular}
+\end{center}
+\texttt{theorie\_ensembles()} $= 22$ partout, et chaque paramétrage est
+accompagné, \emph{dans le même commit}, d'un test de non-régression sur la
+version historique --- extraire le c\oe{}ur d'une preuve testée sans l'éprouver
+serait un pari.

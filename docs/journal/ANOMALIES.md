@@ -1149,3 +1149,39 @@ a = b + c )`. Le point de départ est acquis — le témoin de la Prop. 13 est
 avant le S5 final. Tant que ce n'est pas fait, **les deux modules de division
 euclidienne restent VRAIS ET VIDES**, et `CLAUDE.md` porte désormais cet
 avertissement à côté de la ligne qui les comptait « FAITS ».
+
+
+## 2026-08-23 (soir, suite) — §III.5.6 : la vacuité est LEVÉE, mesurée
+
+La section précédente laissait la chaîne §III.5.6 OUVERTE, avec le diagnostic
+que le recâblage y était impossible en l'état. Il l'était avec `diff_somme` ; il
+ne l'est plus avec le τ gardé.
+
+**Mesuré, de bas en haut :**
+
+| maillon | temps | hypothèses | universel NU |
+|---|---|---|---|
+| `diff_cardinale_garde` | 6,2 s | 3 gardes | — |
+| `diff_cardinale_fini` | 266,8 s | 4 gardes | **absent** |
+| `_diff_strict` porté | 569,8 s | 6 | — |
+| `_strong_step(cardinal=True)` | 877,4 s | **2** (est_cardinal b, b≠0) | **absent** |
+| `division_existence(cardinal=True)` | 926,0 s | 3, conclusion exacte | **absent** |
+
+La troisième hypothèse de `division_existence` était
+`predecesseur_fini_universel`, portée par `recurrence_forte` — **elle non plus
+n'est pas un résidu** : le dépôt la PROUVE (Prop. 2 §III.5) et ne la branchait
+pas. Branchée sur place, comme dans `fini_downward_cardinal`. C'est la
+**septième** fois aujourd'hui qu'une hypothèse réputée manquante se révèle être
+un câble absent.
+
+**Ce qui reste à faire pour clore proprement.** `division_euclidienne` (le
+théorème complet, existence + unicité) ne propage pas encore le paramètre
+`cardinal`. Tant que ce n'est pas fait, c'est la version HISTORIQUE qui reste
+appelée par défaut, et elle demeure vide. La réparation est disponible, elle
+n'est pas encore branchée par défaut — distinction à ne pas effacer.
+
+**Pourquoi ne pas simplement basculer le défaut à `cardinal=True` ?** Parce que
+la version portée n'a pas encore la même couverture de tests que l'historique,
+et que basculer un défaut sans cela reviendrait à échanger une dette connue
+contre une dette non mesurée. Le paramètre reste donc opt-in jusqu'à ce que la
+suite complète de §III.5.6 tourne verte dans les deux modes.

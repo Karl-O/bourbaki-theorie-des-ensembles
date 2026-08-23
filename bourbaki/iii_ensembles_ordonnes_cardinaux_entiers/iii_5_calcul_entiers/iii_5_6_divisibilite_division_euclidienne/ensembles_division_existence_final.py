@@ -183,6 +183,18 @@ def division_existence(b="bdf", cardinal=False):
     rf = recurrence_forte(R_rec, "pfor")                     # {H, pred_univ} ⊢ (∀n)(Fini n ⇒ R_rec{n})
     H = hypothese_recurrence_forte(R_rec, "nfor", "pfor")
     res = _cut(rf, H, H_proof)                               # décharge H
+
+    #  ⚠️ `predecesseur_fini_universel` n'est PAS un résidu : le dépôt la PROUVE
+    #  (Prop. 2 §III.5) — elle n'était pas branchée.  `recurrence_forte` la porte ;
+    #  on la décharge ici, comme le fait `fini_downward_cardinal` depuis le
+    #  2026-08-23.  Sans cela, le théorème garderait un résidu inutile.
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_4_entiers_finis.iii_4_recurrence_c61_existence_n.ensembles_predecesseur_prop2 import (
+        predecesseur_fini_universel_preuve,
+    )
+    pfu = predecesseur_fini_universel_preuve()
+    if pfu.conclusion in res.hypotheses:
+        res = _cut(res, pfu.conclusion, pfu)
+
     assert res.conclusion == enonce_division_existence(b), "division_existence : conclusion inattendue"
     return res
 
