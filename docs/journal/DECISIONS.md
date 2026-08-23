@@ -1226,3 +1226,44 @@ contenait aussi `\t`), sans que rien ne le signale.
      ils annonçaient exactement ce bug ;
   3. après tout patch de LaTeX, `grep -P '\t'` pour vérifier qu'aucune
      tabulation parasite n'a été introduite.
+
+
+## 2026-08-23 — LEÇON 20 : zéro hypothèse EST une propriété de sûreté
+
+Karl a demandé un audit de l'architecture Goldbach — « je ne sais pas si elle ne
+contient pas des hommes d'ombre ». L'angle apporté était celui du jour : le mode
+de défaillance découvert sur `fini_downward` (une hypothèse HONNÊTE mais NON
+SATISFAITE rend vrais-et-vides tous ses dépendants, sans que le noyau bronche ni
+qu'aucun test le voie).
+
+**Résultat mesuré** : aucune contamination. Mais la vraie leçon n'est pas le
+résultat, elle est la RAISON du résultat.
+
+Les 18 maillons de Goldbach ont `hypotheses == ∅`. Or **le mode de vacuité exige
+une hypothèse pour s'y loger**. Un théorème sans hypothèse y est donc immunisé
+*par construction*, non par chance. Ce que le dépôt notait comme une élégance —
+« CLOS, 0 hypothèse » — est en réalité une **propriété de sûreté** : c'est la
+seule forme sur laquelle la question « et si cette hypothèse était fausse ? » ne
+se pose pas.
+
+**Corollaire opérationnel, qui vaut pour tout le projet.** Décharger une
+hypothèse ne fait pas que « faire joli dans le compte » : cela retire une
+surface d'attaque entière. À l'inverse, chaque hypothèse honnête laissée ouverte
+est une dette de DEUX natures — non prouvée (connu) *et* possiblement
+insatisfaisable (invisible). Les deux se paient, la seconde en silence.
+
+**Et le déplacement, qui est le vrai livrable de l'audit.** Si la chaîne ne porte
+rien, alors toute sa surface de risque tient dans ses 2 axiomes ad hoc — et le
+mode de vacuité se transpose intégralement d'un cran plus haut : une théorie
+dédiée CONTRADICTOIRE rend vides tous ses théorèmes, exactement comme une
+hypothèse fausse. `atteste()` compte ces axiomes ; rien ne les justifie. Ici la
+forme sûre est respectée (sélection bornée par `[0,b]`, miroir par ∃ interne,
+jamais de compréhension non bornée — précisément à cause de l'incohérence
+prouvée le 2026-07-26, `outils_ia/audit/preuve_incoherence_inter_vide.py`), mais
+c'est un argument de forme, pas une preuve. Consigné aux Limitations.
+
+**Outil** : `outils_ia/audit/audit_vacuite.py` — éprouve les exports sans
+argument d'un paquet et compare leurs hypothèses au registre des formules datées
+insatisfaisables. Il ne DÉCOUVRE pas de formule fausse ; il vérifie la
+non-contamination par celles qu'on a déjà identifiées. Le registre est à
+alimenter à chaque anomalie de ce genre.

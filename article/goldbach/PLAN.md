@@ -49,6 +49,8 @@ A3, sinon les deux articles se recouvrent et aucun des deux ne tient seul.
 | **G7** | Deux **faits de structure** sur la rencontre : les solutions vont par paires (involution `m ↦ 2k−m`, point fixe `k`) ; et **la moitié suffit** (`m ≤ k` ou `m' ≤ k`) | `symetrie.py::symetrie_du_crible` (GG23) ; `demi.py::demi_intervalle`, `rencontre_se_restreint` | ✅ clos |
 | **G8** | **« Clos » ≠ « sans axiome »** — et le dépôt le dit lui-même : 11 maillons sur 18 sont libres, 7 reposent sur les 2 axiomes du crible ; `atteste()` porte la colonne | `recherche/README.md` ; `AXIOMES_CRIBLE` ; colonne du capstone | ✅ mesuré |
 | **G9** | Un **test garde la porte** : il balaie tous les exports et échoue si l'un conclut `H` tout seul. Si ce test tombe, ce n'est pas une bonne nouvelle — c'est un énoncé à auditer | `test_goldbach_reste_ouverte` | ✅ en place |
+| **G10** | **La vacuité ne peut pas frapper cette chaîne** — et pour une raison structurelle, non par chance : les 18 maillons ont `hypotheses == ∅`. Or le mode de défaillance découvert le 23 août sur Hessenberg (une hypothèse *honnête* mais NON SATISFAITE rend vrais-et-vides tous ses dépendants) exige une hypothèse. Zéro hypothèse ⇒ mode impossible. **Toute la surface de risque se réduit donc aux 2 axiomes ad hoc du crible** — ce que G8 *compte* sans le *justifier* | audit `audit_vacuite.py` (17 exports 0-arg éprouvés, 0 touché) ; sémantique de `atteste` vérifiée (`enonces.py:120` — « CLOS » ⟺ `est_clos and not hypotheses`) ; rejeu 18/18 CLOS | ✅ **mesuré le 23 août** |
+
 
 ## L'historique de G4 — une surdéclaration trouvée, puis refermée (19 août)
 
@@ -82,6 +84,47 @@ que `b` est un double. Seul GG22 en a besoin, et seulement pour une réflexivit�
 **Ce qui reste non mesuré, et qui est écrit aux Limitations** : « les quatre grandes
 réductions » est notre jugement de ce qui porte la charge. Les maillons plus petits
 (pont τ, arc borné absorbé par GG25) n'ont pas été re-dérivés en paramétrique.
+
+## L'audit de vacuité du 23 août — ce qu'il ferme, et ce qu'il ouvre
+
+**L'angle.** Le 23 août, en réparant Hessenberg (§III.6.3), un mode de défaillance
+neuf est apparu : `fini_downward_thm` concluait un universel NU depuis deux
+hypothèses closes dont l'une n'est **pas satisfaite** — le dépôt ne prouve que la
+forme gardée par `est_cardinal`. Le noyau restait sound (la dérivation est juste),
+mais tout théorème portant cette hypothèse était **vrai et vide**. Ni G8 ni G9 ne
+détectent cela : G8 compte les axiomes ad hoc, G9 vérifie que nul n'énonce `H`
+seul. Une hypothèse honnête *fausse* passe entre les deux.
+
+**La question posée à Goldbach.** Un maillon de la chaîne porte-t-il, lui aussi,
+une hypothèse non satisfaite ?
+
+**La réponse, et elle est structurelle.** Non — et pas par chance. Les 18 maillons
+sont **sans aucune hypothèse** : `atteste` (`enonces.py:120`) n'écrit « CLOS » que
+sous `th.est_clos and not th.hypotheses`, et le rejeu donne 18/18 CLOS. Le mode de
+défaillance exige une hypothèse pour s'y loger ; il n'y en a pas. L'audit
+mécanique (`outils_ia/audit/audit_vacuite.py`, 17 exports sans argument éprouvés)
+confirme : **0 touché**.
+
+**Ce que cela déplace — et c'est le point.** Si la chaîne ne porte rien, alors
+**toute sa surface de risque tient dans les 2 axiomes ad hoc du crible**. G8 les
+*compte* (7 maillons sur 18 les consomment) ; il ne les *justifie* pas. Et le mode
+de vacuité se transpose intégralement d'un cran plus haut : **si
+`theorie_crible()` était contradictoire, ses 7 maillons seraient vrais et vides**,
+exactement comme les dépendants de `fini_downward` nu.
+
+**Ce qui rassure, et qui est du code, non du raisonnement.** Les deux axiomes ont
+la forme sûre — terme opaque + axiome caractérisant, à sélection **bornée** :
+`P_b` est coupé par `[0,b]`, et `Q_b` est défini par un **∃ interne**, jamais par
+une soustraction. Le dépôt a déjà **prouvé une incohérence** née d'une
+compréhension NON bornée (`outils_ia/audit/preuve_incoherence_inter_vide.py`,
+2026-07-26) : la borne de `P_b` est là *à cause de* cet incident, et le dit dans
+sa docstring. La forme dangereuse est donc connue, datée, et évitée sciemment.
+
+**Ce qui reste non mesuré, et doit aller aux Limitations.** La consistance de
+`theorie_crible()` n'est pas *démontrée* — elle est argumentée par la forme des
+axiomes. C'est aujourd'hui la seule dette de vacuité de l'article, et elle est
+nommée.
+
 
 ## Ce que l'article NE revendique PAS (à écrire noir sur blanc)
 

@@ -1,0 +1,78 @@
+\subsection{§III.6.3 --- Le recollement d'une chaîne, ou comment onze données
+tombent d'une seule}
+\label{sec:iii6-recollement}
+
+\textbf{Le point de Bourbaki.} Pour appliquer Zorn à l'ensemble $\mathfrak{M}$ des
+couples $(X,\psi)$, il faut que $\mathfrak{M}$ soit \emph{inductif} : toute chaîne
+y admet un majorant. Bourbaki l'expédie en une phrase (E III.48, l.~24--26) --- la
+réunion d'une chaîne de prolongements est encore un prolongement. La phrase est
+juste ; c'est sa \emph{formalisation} qui est longue, et l'écart mérite d'être
+montré, parce qu'il dit quelque chose de général sur ce projet.
+
+\textbf{Ce que le pont réclamait.} Le lemme \texttt{frame\_de\_recollement}
+établit que $(\bigcup S(C), \bigcup \mathfrak{D}(C))$ est une \emph{frame-pair},
+mais il le fait sous \textbf{onze} antécédents distincts. Tant qu'ils étaient
+postulés, le théorème du maximal portait une hypothèse ouverte
+(\texttt{donnees\_recollement}) que la chaîne traînait depuis des semaines.
+
+\begin{center}
+\small
+\begin{tabular}{@{}rlp{5.6cm}@{}}
+\toprule
+\# & donnée & module qui la clôt \\
+\midrule
+1 & domaine couvrant : tout point de $US\times US$ est atteint & \texttt{ensembles\_dom\_couvrant} \\
+2 & la famille est dirigée & \texttt{ensembles\_famille\_dirigee} \\
+3 & la famille est compatible & \texttt{ensembles\_famille\_dirigee} \\
+4 & la réunion dirigée est injective & \texttt{ensembles\_famille\_dirigee} \\
+5 & les membres de la famille sont injectifs & \texttt{ensembles\_fam\_chaine} \\
+6 & la réunion compatible est fonctionnelle & \texttt{ensembles\_famille\_dirigee} \\
+7 & surjectivité sur $\bigcup S$ & \texttt{ensembles\_surj\_union} \\
+8 & $\bigcup S \subset E$ & \texttt{ensembles\_donnees\_chaine} \\
+9 & $\mathrm{dom} \subset (\bigcup S)^2$ & \texttt{ensembles\_dom\_union} \\
+10 & $\mathrm{img} \subset \bigcup S$ & \texttt{ensembles\_img\_union} \\
+11 & $\bigcup S$ est infinie & \texttt{ensembles\_donnees\_chaine} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{Les onze sortent d'une seule.} Chacune est dérivée du \emph{même} unique
+garde, « $C$ est une chaîne », auquel s'ajoute pour la seule donnée~11 le second
+conjoint « $C \neq \emptyset$ » --- et c'est mathématiquement nécessaire : une
+chaîne vide n'a aucun membre dont hériter l'infinité. \texttt{recollement\_de\_chaine}
+les décharge une à une et retombe exactement sur les \emph{deux} conjoints du garde
+de Bourbaki, ni plus ni moins ($176$~s, assertion d'égalité ensembliste sur les
+hypothèses résiduelles). Puis \texttt{donnees\_recollement\_prouve} décharge le
+garde et généralise sur $C$ : le résultat est \textbf{clos, zéro hypothèse}. La
+généralisation n'est licite que là --- $C$ étant libre dans le garde, l'ordre
+« décharger \emph{puis} généraliser » n'est pas un détail de style.
+
+\textbf{Ce que la donnée~1 coûte, et pourquoi.} La plus composite des onze : un
+point de $US\times US$ a \emph{deux} composantes, chacune fournissant son membre de
+la chaîne. Il faut les \emph{comparer} --- c'est là et seulement là que la totalité
+de l'ordre sert --- pour les loger dans un seul membre, dont la base contient alors
+les deux ; et le carré de cette base \emph{est} le domaine de la bijection. On
+emploie le conjoint $\mathrm{pr}_1$ de l'ordre du frame (les bases s'emboîtent), là
+où les autres données lisent le conjoint $\mathrm{pr}_2$ (les graphes s'emboîtent) :
+deux lectures du même ordre, pour deux besoins opposés.
+
+\textbf{Une donnée qui inverse la mécanique.} Les données~9 et~10 \emph{défont} une
+appartenance pour remonter au membre ; la donnée~7 doit au contraire \emph{produire}
+un témoin. D'où deux emplois en sens arrière (\texttt{membre\_famille} pour établir
+que $\mathrm{pr}_2(u)$ est bien dans la famille, puis S5 pour livrer le membre
+demandé). La distinction avant/arrière est, en pratique, ce qui détermine la
+longueur d'une preuve dans ce noyau.
+
+\textbf{Un piège de liant, et sa parade.} Trois des onze devaient être demandées
+avec le liant « $z$ » : \texttt{inclus(t,u,z)} construit un $\forall$, et leurs
+liants naturels (\texttt{xdc}, \texttt{zdu}, \texttt{wiu}) n'auraient pas coïncidé
+avec ceux qu'attend le pont. Le désaccord a été détecté \emph{par comparaison des
+formules avant tout branchement} --- $8/11$ d'abord, $11/11$ après --- ce qui a
+évité trois essais de débogage. C'est la leçon 18 : devant « mineure $\neq$
+antécédent », comparer avant de retoucher ; le coupable est presque toujours un
+liant, jamais le raisonnement.
+
+\textbf{Statut : FAIT.} Le caractère inductif de $\mathfrak{M}$ est établi sans
+qu'aucune propriété élémentaire du recollement ne soit postulée. Onze modules pour
+une phrase du livre : c'est le taux de change habituel entre une preuve écrite pour
+un lecteur et une preuve écrite pour un noyau.
