@@ -113,6 +113,17 @@ en place et les manifestes conformes — c'est arrivé le 18 août (trois `Demo.
 posés sur des clôtures d'énoncé de C39/C40/C42, où Bourbaki n'imprime AUCUNE
 démonstration, corrigé en 452f071). Seule l'ouverture de la page le révèle.
 
+⚠️ **PRÉCISION MESURÉE le 2026-08-23 sur Hessenberg a²=a (III.6.3).** Le compte
+« FAIT » ci-dessous demande une nuance, établie en code et non en prose. `hessenberg_final`
+⊢ `enonce_hessenberg(E)` sous DEUX hypothèses : « E infini » — celle du théorème lui-même —
+et `predecesseur_fini_universel` (Prop. 2 §III.5), résidu CLOS et vrai mais **non encore
+dérivé**. Statut STRICT du projet : **PARTIEL**. Ce qui est acquis : l'argument de Bourbaki
+est formalisé de bout en bout, aucune hypothèse ne mentionne un témoin, et une hypothèse
+FAUSSE (`fini_downward` nu) a été retirée de la chaîne — les théorèmes qui la portaient
+étaient vrais et VIDES (ANOMALIES 2026-08-23). Chemin : 11 données du recollement closes →
+`donnees_recollement_prouve` (0 hyp) → `hess_maximal_clos` (1 hyp, 1 h 25) → LE CLAIM →
+`hessenberg_final` (608 s). Voir RECHERCHE R-13 et `frag_iii6_hessenberg.tex`.
+
 Gros chantiers : **FAITS** — Hessenberg a²=a (III.6), division euclidienne (III.5),
 trichotomie/bon ordre des cardinaux (III.3), Cantor, **CST1 + CST1-identité + CST2 +
 CST3 + capstone ⟨f⁻¹⟩^S∘⟨f⟩^S=Δ (IV.1.2)**, réversion/composition d'isomorphismes
