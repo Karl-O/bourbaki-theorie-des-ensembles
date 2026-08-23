@@ -534,3 +534,34 @@ composante du couple) à comparer pour les loger dans un seul ;
 `_inclusion_membres` le fait déjà mais extrait le conjoint pr₂ de l'ordre du
 frame — il faudra le conjoint pr₁,
 `conjonction_elim_droite(conjonction_elim_gauche(corps))`.
+
+### R-13, suite (08h30) — donnée (1) : écriture INTERROMPUE, fichier retiré
+
+J'ai commencé `ensembles_dom_couvrant.py` puis me suis arrêté au milieu de la
+fonction de branche. Le fichier contenait une scorie (`if False`) et un
+`return None` : **je l'ai supprimé** plutôt que de le laisser en l'état. Un
+module à moitié écrit coûte plus cher à réparer qu'à réécrire depuis un plan
+clair, et il pollue le dépôt entre-temps.
+
+**Ce qui était JUSTE et sera repris tel quel** (la mise en place, non triviale) :
+
+    prod = _membre_produit(US, US, va)        # a = (c1,c2), c1,c2 ∈ US
+    → éliminer c1 puis c2 (liants lus sur l'axiome du produit)
+    → membre_union_premiere(C, n1) et (C, n2) donnent u1, u2 ∈ C
+      ⚠️ MÊME liant pour les deux ∃ : α-renommer le second (nu2 = nu1+"b")
+    → comparables = conjonction_elim_droite(conjonction_elim_droite(h_ch))
+      instanciée en u1, u2 donne la disjonction
+
+**Ce qui restait à écrire** : la branche. Pour le majorant `vmaj` :
+  • `frame_ordre_membre_t(vE, autre, vmaj)` puis le conjoint **pr₁** —
+    `conjonction_elim_droite(conjonction_elim_gauche(corps))` — donne
+    pr₁(autre) ⊂ pr₁(vmaj) ;
+  • la composante de `autre` y passe par instanciation, celle de `vmaj` y est
+    déjà : les DEUX sont dans pr₁(vmaj) ;
+  • `_membre_produit` en sens ARRIÈRE (S5 sur les deux témoins c1, c2, avec
+    l'égalité a=(c1,c2)) donne a ∈ pr₁(vmaj)×pr₁(vmaj) ;
+  • `dom_pr2_egale_carre` en sens ARRIÈRE (Leibniz) donne a ∈ dom(pr₂ vmaj) ;
+  • AXIOME_DOM donne (∃w)((a,w) ∈ pr₂ vmaj) ;
+  • `_membre_famille_t` + S5 donnent pr₂(vmaj) ∈ 𝔇 ;
+  • conjonction_intro puis S5 sur `pdm` concluent.
+⚠️ ORDRE des conjoints du corps cible : (p∈𝔇) PUIS (∃w)(…).
