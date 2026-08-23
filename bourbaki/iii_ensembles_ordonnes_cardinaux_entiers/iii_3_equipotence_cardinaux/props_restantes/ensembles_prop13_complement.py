@@ -52,6 +52,9 @@ from bourbaki.i_description_mathematique_formelle.i_1_termes_relations.outil_for
     Terme, var, egal, et, non, impl, existe, pourtout, appartient, inclus, tau,
 )
 from bourbaki.i_description_mathematique_formelle.i_2_theoremes.noyau import noyau_abrege as N
+from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_4_entiers_finis.iii_4_2_finis_props.ensembles_chap3_props_restantes import (
+    est_cardinal_de_cardinal,
+)
 from bourbaki.ii_theorie_des_ensembles.ii_1_relations_collectivisantes import ensembles_abrege as E
 from bourbaki.i_description_mathematique_formelle.i_2_theoremes.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite, instancie,
@@ -172,7 +175,24 @@ def _eq_reunion_disjointe_somme_t(ta, tb):
 #   (démonstration du sens direct : « la relation a ≥ b signifie qu'il existe une
 #    partie B de a équipotente à b, c'est-à-dire que a est équipotent à l'ensemble
 #    somme de b et d'un ensemble C. » — construction du complément certifiée ici.)
-def existe_complement_depuis_inf_egal(b="Bp13", a="Ap13", c="Cp13"):
+def existe_complement_cardinal_fort(b, a, c="Cp13"):
+    """FORMULE : (∃c)( est_cardinal(c)  et  Card a = somme_cardinale_binaire(b, c) ).
+
+    Version RENFORCÉE de `existe_complement_cardinal` : le témoin est en outre
+    déclaré CARDINAL.  Elle ne coûte rien — le témoin construit par
+    `existe_complement_depuis_inf_egal` est LITTÉRALEMENT `Card(a ∖ Im)`, donc
+    déjà un cardinal — et c'est elle qui débloque R-12 (la différence
+    d'entiers), là où la version nue ne le peut pas : rien dans « a = b + c » ne
+    contraint c à être un cardinal, donc `est_cardinal(τc.(a = b+c))` n'est PAS
+    dérivable.  Voir RECHERCHE R-12 et ANOMALIES 2026-08-23."""
+    vb, va = _t(b), _t(a)
+    cname = c if isinstance(c, str) else c.nom
+    return existe(cname, et(est_cardinal(var(cname)),
+                            egal(cardinal(va),
+                                 somme_cardinale_binaire(vb, var(cname)))))
+
+
+def existe_complement_depuis_inf_egal(b="Bp13", a="Ap13", c="Cp13", fort=False):
     """⊢ ( est_cardinal(b)  et  inf_egal_card(b, a) )  ⇒  existe_complement_cardinal(b, a).
 
     🎯 LE CŒUR COMBINATOIRE de la Proposition 13 sens DIRECT (E.III.3.6), DÉMONTRÉ :
@@ -232,9 +252,20 @@ def existe_complement_depuis_inf_egal(b="Bp13", a="Ap13", c="Cp13"):
 
     # ── (∃c) Card a = somme_cardinale_binaire(b, c) ──────────────────────────────
     cible_body = egal(cardinal(va), somme_cardinale_binaire(vb, var(cname)))
-    ex = N.modus_ponens(carda_eq_bcR, N.s5(cible_body, cR, cname))   # (∃c) Card a = b + c
-    assert ex.conclusion == existe_complement_cardinal(b, a, c), \
-        "existe_complement : conclusion ≠ existe_complement_cardinal(b, a)"
+    if fort:
+        #  ⚠️ R-12 : le témoin est `Card(a ∖ Im)`, donc DÉJÀ un cardinal --
+        #  il suffit de le DIRE avant le S5.  Deux lignes, et la différence
+        #  d'entiers cesse d'être hors de portée (cf. RECHERCHE R-12).
+        corps_fort = et(est_cardinal(var(cname)), cible_body)
+        ex = N.modus_ponens(
+            conjonction_intro(est_cardinal_de_cardinal(R), carda_eq_bcR),
+            N.s5(corps_fort, cR, cname))
+        assert ex.conclusion == existe_complement_cardinal_fort(b, a, c), \
+            "existe_complement : conclusion ≠ existe_complement_cardinal_fort"
+    else:
+        ex = N.modus_ponens(carda_eq_bcR, N.s5(cible_body, cR, cname))
+        assert ex.conclusion == existe_complement_cardinal(b, a, c), \
+            "existe_complement : conclusion ≠ existe_complement_cardinal(b, a)"
     return N.loi_deduction(ante, ex)   # (est_cardinal(b) et b≤a) ⇒ existe_complement_cardinal(b,a)
 
 
@@ -292,5 +323,6 @@ def prop13_forward_ferme_cible(b="Bp13", a="Ap13", c="Cp13"):
 
 __all__ = [
     "existe_complement_depuis_inf_egal", "existe_complement_depuis_inf_egal_cible",
+    "existe_complement_cardinal_fort",
     "prop13_forward_ferme", "prop13_forward_ferme_cible",
 ]
