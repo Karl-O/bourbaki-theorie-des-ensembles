@@ -1023,3 +1023,27 @@ mais non encore prouvée, ce qui est le statut acceptable.
 Autrement dit : la réparation échange une hypothèse FAUSSE contre une hypothèse
 VRAIE-non-prouvée, et transforme un théorème vide en un théorème conditionnel
 légitime. C'est le gain de fidélité le plus important de la nuit.
+
+### 2026-08-23, 06h30 — ✅ RÉPARÉE EN AVAL
+
+`fini_downward_cardinal` (frame_zorn/ensembles_fini_downward_garde.py) livre la
+downward-closure sous la SEULE `predecesseur_fini_universel`, en passant par
+`fini_downward_garde_thm` et en déchargeant la garde `est_cardinal(Card A)` par
+`est_cardinal_de_cardinal` — l'aval n'instancie jamais qu'à des `Card(...)`.
+
+Détail technique qui compte : la garde doit passer en ANTÉCÉDENT avant la
+généralisation sur `a`, sinon celle-ci est illicite (`a` libre dans
+`est_cardinal(a)`).
+
+`z_infini_derive` est RECÂBLÉ dessus. Mesuré :
+  • hypothèses 3 → 2, l'hypothèse NUE **absente** (test d'appartenance) ;
+  • conclusion INCHANGÉE — les 3 tests miroir existants restent verts (257,80 s) ;
+  • coût 11 s → 160 s : la route gardée est plus longue, c'est le prix de l'honnêteté.
+
+Un test anti-régression dédié (`test_hypothese_nue_absente`) échouera si
+l'hypothèse non satisfaite reparaît quelque part dans cette chaîne.
+
+**Ce qui reste** : `fini_downward_thm` et ses appelants historiques hors chaîne
+Hessenberg (notamment `N_collectivise`) portent TOUJOURS l'hypothèse nue. Ils ne
+sont pas cassés — ils sont VIDES, et doivent être recâblés de la même façon.
+À traiter section par section, en mesurant chaque fois l'avant/après.
