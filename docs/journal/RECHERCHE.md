@@ -204,9 +204,9 @@ docstring). Classées, avec leurs variables libres :
 | # | contenu | libres | statut |
 |---|---------|--------|--------|
 | 1 | domaine couvrant : tout point de US×US est dans le domaine d'un membre | 𝔇,US | à faire |
-| 2 | injectivité de l'union (forme couple) | 𝔇 | à faire |
+| 2 | injectivité de l'union (forme couple) | 𝔇 | ✅ CLOSE (`union_dirigee_injective`) |
 | 3 | famille COMPATIBLE (deux membres coïncident là où les deux sont définis) | 𝔇 | à faire |
-| 4 | famille DIRIGÉE (p,q ∈ 𝔇 ⇒ ∃r les prolongeant) | 𝔇 | à faire |
+| 4 | famille DIRIGÉE (p,q ∈ 𝔇 ⇒ ∃r les prolongeant) | 𝔇 | ✅ CLOSE (`famille_dirigee_de_chaine`) |
 | 5 | MEMBRES INJECTIFS : (∀p)(p∈𝔇 ⇒ injectif_graphe(p)) | 𝔇 | ✅ CLOSE (`membres_famille_injectifs`) |
 | 6 | fonctionnalité de l'union | 𝔇 | à faire |
 | 7 | surjectivité du recollement | 𝔇,US | à faire |
@@ -312,3 +312,27 @@ inclusion lève un IndexError ; il faut prendre les termes sur les ÉGALITÉS.
 `inclusion_reflexive_terme` pourrait en produire un troisième. Méthode :
 comparer les deux formules terme à terme (booléens seulement) AVANT de
 retoucher la preuve — ne pas deviner.
+
+
+### R-13, suite (07h35) — données (4) et (2) CLOSES : 5 sur 11
+
+`famille_dirigee_de_chaine` : { chaîne } ⊢ famille_dirigee(𝔇(C)), 0,1 s, 1 hyp.
+`union_dirigee_injective` : { chaîne } ⊢ injectif_graphe(⋃𝔇(C)), 0,4 s, 1 hyp —
+elle tombe des données (4) et (5) par `union_famille_injective`, déjà dans le
+dépôt. C'est le rendement direct du travail de cartographie.
+
+**Ce qui avait bloqué, et ce qui l'a débloqué.** Deux essais perdus à soupçonner
+le liant de `inclus`. La comparaison des formules — imposée au 3ᵉ essai — a
+écarté ce suspect en trois lignes et montré le vrai défaut : dans une des deux
+branches, les deux inclusions du corps étaient INTERVERTIES. Le corps attend
+« p⊂r PUIS q⊂r » ; quand r := q c'est la dérivée puis la réflexivité, mais
+quand r := p c'est l'inverse. Une asymétrie que la symétrie apparente du
+raisonnement mathématique masque complètement.
+
+**LEÇON 18** : quand une preuve échoue sur « mineure ≠ antécédent », COMPARER
+les deux formules avant de toucher à la preuve. Le suspect intuitif (ici le
+liant) est souvent innocent, et chaque essai à l'aveugle coûte plus cher que
+le script de comparaison.
+
+**Reste 6 sur 11** : (1) domaine couvrant, (3) compatible, (6) fonctionnalité
+de l'union (⟸ 3), (7) surjectivité, (9) et (10) les deux inclusions.

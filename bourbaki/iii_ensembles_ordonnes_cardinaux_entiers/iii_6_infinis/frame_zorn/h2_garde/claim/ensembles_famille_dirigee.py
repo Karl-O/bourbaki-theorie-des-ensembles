@@ -1,16 +1,13 @@
 # -*- coding: utf-8 -*-
 """§III.6.3 — LA FAMILLE 𝔇(C) EST DIRIGÉE (donnée 4/11 du recollement).
 
-⚠️ EN CHANTIER (ne pas importer) — état au 2026-08-23 07h30, essai 2/4.
-Les deux premiers étages PASSENT : l'α-renommage du second témoin, et
-`_branche` qui tire X ⊂ Y de la comparabilité dans Γ𝔉.  L'échec est à
-l'introduction existentielle finale (S5) : la mineure construite
-`((q∈𝔇 et p⊂q) et q⊂q)` ne coïncide pas avec le corps de `famille_dirigee`
-substitué en r := q.  Suspect n°1 : le LIANT interne de l'inclusion —
-`inclus(t,u,z="z")` choisit un autre liant si « z » est libre dans t ou u,
-et `inclusion_reflexive_terme` pourrait en produire un troisième.
-Diagnostic à faire au prochain essai : comparer les DEUX formules terme à
-terme (booléens seulement) avant de retoucher la preuve.
+⚠️ CE QUI AVAIT BLOQUÉ (essais 1-2, résolu au 3ᵉ).  L'introduction
+existentielle échouait parce que les deux inclusions du corps étaient
+INTERVERTIES dans une des deux branches : le corps attend « p⊂r PUIS q⊂r »,
+or quand r := p c'est la RÉFLEXIVITÉ qui vient en premier et la dérivée en
+second — l'inverse de la branche r := q.  Le liant de `inclus`, d'abord
+suspecté, était hors de cause : la comparaison des formules l'a montré en
+trois lignes, là où retoucher la preuve à l'aveugle aurait coûté des essais.
 
 🎯 CIBLES :
 
@@ -139,18 +136,22 @@ def famille_dirigee_de_chaine(E_set="E", C="Cch", p="pdir", q="qdir", r="rdir"):
         disj = N.modus_ponens(conjonction_intro(u_in, v_in),
                               instancie(instancie(comparables, vu), vv))
 
-        def _cote(vmaj, autre, eq_autre, eq_maj, membre_maj, autre_incl):
-            incl_pq = _branche(vmaj, autre, eq_autre, eq_maj, N.assume(
+        def _cote(vmaj, autre, eq_autre, eq_maj, membre_maj, r_terme, maj_est_q):
+            """Branche « autre ≼ vmaj » : le majorant r est le membre associé à
+            vmaj.  Le corps attend l'ordre (p⊂r, PUIS q⊂r) : selon que r vaut q
+            ou p, c'est la dérivée puis la réflexivité, ou l'inverse."""
+            derivee = _branche(vmaj, autre, eq_autre, eq_maj, N.assume(
                 appartient(E.couple(autre, vmaj), Gam)))
-            majore = conjonction_intro(conjonction_intro(membre_maj, incl_pq),
-                                       inclusion_reflexive_terme(autre_incl))
+            refl = inclusion_reflexive_terme(r_terme)
+            deux, trois = (derivee, refl) if maj_est_q else (refl, derivee)
+            majore = conjonction_intro(conjonction_intro(membre_maj, deux), trois)
             return N.loi_deduction(appartient(E.couple(autre, vmaj), Gam),
                                    N.modus_ponens(majore, N.s5(
                                        et(et(appartient(var(r), D), inclus(vp, var(r))),
-                                          inclus(vq, var(r))), autre_incl, r)))
+                                          inclus(vq, var(r))), r_terme, r)))
 
-        gauche = _cote(vv, vu, eq_p, eq_q, conjonction_elim_droite(h_pq), vq)
-        droite = _cote(vu, vv, eq_q, eq_p, conjonction_elim_gauche(h_pq), vp)
+        gauche = _cote(vv, vu, eq_p, eq_q, conjonction_elim_droite(h_pq), vq, True)
+        droite = _cote(vu, vv, eq_q, eq_p, conjonction_elim_gauche(h_pq), vp, False)
         return cas(disj, gauche, droite)
 
     but = inner(corps_u, corps_v)
@@ -176,9 +177,8 @@ def union_dirigee_injective(E_set="E", C="Cch"):
     base = union_famille_injective(D)
     base = _cut(famille_dirigee_de_chaine(E_set, C), famille_dirigee(D), base)
     base = _cut(membres_famille_injectifs(E_set, C), membres_injectifs(D), base)
-    assert base.conclusion == injectif_graphe(E.union_famille(D)
-                                              if hasattr(E, "union_famille") else D), \
-        "union_dirigee_injective : forme"
+    assert base.conclusion == injectif_graphe(union_famille(D)),         "union_dirigee_injective : forme"
+    assert len(base.hypotheses) == 1, "union_dirigee_injective : hyps ≠ 1"
     return base
 
 
