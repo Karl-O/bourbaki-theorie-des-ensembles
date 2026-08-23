@@ -935,9 +935,10 @@ Trois faits, dont deux vérifiés en code :
    explicitement l'universel NU `(∀a)(∀x)( (a≤x et Fini x) ⇒ Fini a )` de **FAUX**,
    et n'en prouve qu'une version GARDÉE par `est_cardinal(a)`.
 
-2. *(docstring)* `ensembles_recurrence_C61.fini_downward_thm` annonce dériver
-   EXACTEMENT cet universel nu, à partir de deux hypothèses nommées :
-   `principe_recurrence(P)` et `(∀c)(∀b) cardinal_pas_entre(b,c)`.
+2. *(VÉRIFIÉ en code, 14,4 s)* `ensembles_recurrence_C61.fini_downward_thm`
+   conclut EXACTEMENT cet universel nu — comparaison par `==` avec
+   `pourtout("a", pourtout("x", fini_downward(a,x)))` — à partir de deux
+   hypothèses CLOSES : `principe_recurrence(P)` et `(∀c)(∀b) cardinal_pas_entre(b,c)`.
 
 3. *(VÉRIFIÉ en code)* `negation_strict_sous_maximal_reunion` (step_b_prop5/stepb3)
    porte 7 hypothèses : 5 sont la maximal-data, et les 2 autres sont CLOSES —
@@ -964,6 +965,17 @@ construire, pas une intuition à consigner comme un fait.
     honnête », mais comme « résidus reportés sur `fini_downward` ».
   • Même prudence pour `ensembles_extension_z_infini` et tout ce qui cite les
     « 2 résidus ∀∀ de fini_downward_thm ».
+
+**Précision importante sur ce que « faux » veut dire ici.** Une hypothèse
+simplement NON PROUVABLE est légitime — c'est le statut normal d'un résidu
+honnête. Le danger de vacuité n'existe que si l'hypothèse est RÉFUTABLE (sa
+négation dérivable), car alors tout se dérive d'elle. Or les cardinaux de
+Bourbaki étant des τ-termes opaques, on ne peut vraisemblablement pas RÉFUTER
+`est_cardinal(a)` pour un ensemble concret : la ∀∀-clôture nue serait alors
+fausse dans le MODÈLE visé sans être réfutable dans la théorie. Le risque est
+donc celui d'une hypothèse *invérifiable et non satisfaite*, pas d'une
+explosion logique — ce qui reste inacceptable pour la fidélité, mais n'invalide
+aucun théorème déjà certifié SANS elle.
 
 **Prochaine étape** : vérifier en code (a) que `fini_downward_thm` conclut bien
 l'universel nu et sous quelles hypothèses exactes ; (b) chercher si le dépôt
