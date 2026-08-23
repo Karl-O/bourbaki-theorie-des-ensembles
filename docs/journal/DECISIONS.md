@@ -955,3 +955,16 @@ LEÇON CONFIRMÉE : tout le matériel existait, éparpillé ; la valeur ajoutée
 été de le RACCORDER (α-ponts, ordre des dérivations), pas de re-prouver.
 RESTE : le raccord (α) union_famille(𝔇) ↔ ⋃φ(C) (chantier, leçon 15), OU son
 contournement en reformulant le résidu gardé avec union_famille(pr₂⟨C⟩).
+
+## 2026-08-23 02h25 — Données de chaîne : 1 sur 3, et arrêt discipliné
+pr1_inclus_E CLOS ({p∈𝔉} ⊢ pr₁(p)⊂E) — c'est la brique qui avait échoué
+hier soir, elle passe maintenant (patron _membre_pr1_infini suivi à la
+lettre).  us_inclus_E et us_infini restent EN CHANTIER (marqués, non
+importés) : le premier bute encore sur un appariement de liants dans le corps
+extrait de l'axiome de ⋃S, le second meurt sans sortie (coût, à mesurer).
+DÉCISION (stratégie annoncée) : ne pas s'acharner — ASSEMBLER le résidu
+final en laissant « ⋃S⊂E » et « ⋃S infinie » comme HYPOTHÈSES HONNÊTES
+NOMMÉES.  Un Hessenberg sous deux résidus explicitement nommés et
+mathématiquement évidents (une réunion de parties de E reste dans E ; une
+réunion contenant un infini est infinie) vaut mieux qu'un chantier ouvert,
+et le journal dit exactement lesquels.
