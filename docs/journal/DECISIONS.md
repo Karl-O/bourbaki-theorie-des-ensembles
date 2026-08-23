@@ -1209,3 +1209,20 @@ cassé, et les seuls importateurs étaient les deux tests miroirs.
 **La leçon de découpage** : séparer les BRIQUES de l'ASSEMBLAGE est le bon axe.
 Un module qui grossit le fait presque toujours parce qu'il mélange les deux ;
 la coupure suit alors une ligne naturelle plutôt qu'arbitraire.
+
+## 2026-08-23 — LEÇON 19 : `\t` dans un patch Python corrompt le LaTeX
+
+En insérant les chiffres mesurés dans le fragment du rapport, `\texttt` écrit
+dans une chaîne Python NON brute est devenu **tabulation + « exttt »** : Python
+interprète `\t`. Deux effets, dont le second est le pire : le fichier a été
+corrompu à un endroit, et le premier `replace` n'a pas mordu du tout (sa cible
+contenait aussi `\t`), sans que rien ne le signale.
+
+**Règles** :
+  1. pour patcher du LaTeX (ou tout texte à antislashs), utiliser l'outil
+     `Edit`, jamais un `replace` dans une chaîne Python — ou alors des chaînes
+     BRUTES (`r"""…"""`) ;
+  2. les `SyntaxWarning: invalid escape sequence` du shell ne sont PAS du bruit :
+     ils annonçaient exactement ce bug ;
+  3. après tout patch de LaTeX, `grep -P '\t'` pour vérifier qu'aucune
+     tabulation parasite n'a été introduite.
