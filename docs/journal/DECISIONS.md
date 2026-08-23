@@ -1003,3 +1003,23 @@ réellement tourné : Lemme 1 → H1 → Zorn version famille → maximal.
 BILAN DE LA NUIT (Chapitre III, §6.3) :
   Lemme 1 CLOS · Lemme 2 CLOS · H1 CERTIFIÉ · hess_maximal CERTIFIÉ ·
   3 hypothèses VALEUR du recollement DÉRIVÉES · perf ×1250 · leçon 15.
+
+## 2026-08-23 04h10 — STEP B : classification des 12 hypothèses (plan d'attaque)
+Inventaire machine des hypothèses de extension_absurde_chainee, classées par
+les symboles qu'elles contiennent :
+  CATÉGORIE (i) — DONNÉES DU MAXIMAL, déchargeables dans la portée de
+  `unpack_maximal` (le maximal est déjà CERTIFIÉ existant, hess_maximal) :
+    • #7  element_maximal(Γ𝔉, 𝔉, (S₀,φ₀))      [hessenberg_frame_ordre]
+    • #10 (S₀,φ₀) ∈ 𝔉(E)                        [hessenberg_frame]
+    • #1  est_bijection_de(φ₀, S₀×S₀, S₀)       [dom/image/produit/φ₀]
+  CATÉGORIE (ii) — DONNÉES DE L'EXTENSION (le cadre U, la bijection ψ) :
+    • #4  uwit ∈ Ucadre     (le complément est non vide)
+    • #9  uwit ∉ S₀          (disjonction ponctuelle)
+    • #2  géométrie U/S₀/E   • #3, #5, #11, #12 disjonctions et images
+    • #6, #8 bijections du cadre
+  CATÉGORIE (iii) — LE CŒUR COMBINATOIRE : ces données viennent de
+  `complement_grand` (si Card S₀ < Card E, le complément est assez grand) —
+  c'est l'argument de Bourbaki qu'il faut monter.
+STRATÉGIE : (i) d'abord — purement mécanique, et le maximal existe désormais
+pour de bon ; puis (ii) via les constructions de cadre_bijection ; (iii) en
+dernier, c'est là qu'est la vraie mathématique restante.
