@@ -209,7 +209,7 @@ docstring). Classées, avec leurs variables libres :
 | 4 | famille DIRIGÉE (p,q ∈ 𝔇 ⇒ ∃r les prolongeant) | 𝔇 | ✅ CLOSE (`famille_dirigee_de_chaine`) |
 | 5 | MEMBRES INJECTIFS : (∀p)(p∈𝔇 ⇒ injectif_graphe(p)) | 𝔇 | ✅ CLOSE (`membres_famille_injectifs`) |
 | 6 | fonctionnalité de l'union | 𝔇 | ✅ CLOSE (`union_compatible_fonctionnelle`) |
-| 7 | surjectivité du recollement | 𝔇,US | à faire |
+| 7 | surjectivité du recollement | 𝔇,US | ✅ CLOSE (`surj_union_us`) |
 | 8 | US ⊂ E | E,US | ✅ CLOSE (`us_inclus_E`) |
 | 9 | dom(⋃𝔇) ⊂ US×US | 𝔇,US | ✅ CLOSE (`dom_union_inclus_carre`) |
 | 10 | image(⋃𝔇, US×US) ⊂ US | 𝔇,US | ✅ CLOSE (`img_union_inclus_us`) |
@@ -515,3 +515,22 @@ la chaîne, qu'il faut comparer pour les loger dans un seul —
 `_inclusion_membres` (ensembles_famille_dirigee.py) le fait déjà, mais il
 faudra son conjoint pr₁ (`conjonction_elim_droite(conjonction_elim_gauche(corps))`)
 et non le conjoint pr₂ qu'il extrait actuellement.
+
+
+### R-13, suite (08h25) — donnée (7) CLOSE : 10 sur 11
+
+`surj_union_us` : { chaîne } ⊢ (∀w)( w ∈ US ⇒ (∃p)(p∈𝔇 et (∃a)((a,w)∈p)) ),
+0,4 s, 1 hyp. Première donnée à INVERSER la mécanique : produire un témoin au
+lieu d'en remonter un. Deux emplois en sens ARRIÈRE — `membre_famille` pour
+établir pr₂(u) ∈ 𝔇 (u se prenant pour témoin), puis S5 pour livrer le membre.
+
+**Un essai raté, réglé en une comparaison** (LEÇON 18) : j'extrayais
+l'antécédent d'une implication par `.sous[0]`, ce qui rend la NÉGATION —
+une implication est `ou(non A, B)`. Il faut `antecedent_consequent`. Ajouté
+aux réflexes : `.sous[0]` sur une implication est presque toujours un bug.
+
+**Reste 1 sur 11** : (1) domaine couvrant. Elle donne DEUX membres (un par
+composante du couple) à comparer pour les loger dans un seul ;
+`_inclusion_membres` le fait déjà mais extrait le conjoint pr₂ de l'ordre du
+frame — il faudra le conjoint pr₁,
+`conjonction_elim_droite(conjonction_elim_gauche(corps))`.
