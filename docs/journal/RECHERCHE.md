@@ -203,7 +203,7 @@ docstring). Classées, avec leurs variables libres :
 
 | # | contenu | libres | statut |
 |---|---------|--------|--------|
-| 1 | domaine couvrant : tout point de US×US est dans le domaine d'un membre | 𝔇,US | à faire |
+| 1 | domaine couvrant | 𝔇,US | ✅ CLOSE (`dom_couvrant`) |
 | 2 | injectivité de l'union (forme couple) | 𝔇 | ✅ CLOSE (`union_dirigee_injective`) |
 | 3 | famille COMPATIBLE | 𝔇 | ✅ CLOSE (`famille_compatible_de_chaine`) |
 | 4 | famille DIRIGÉE (p,q ∈ 𝔇 ⇒ ∃r les prolongeant) | 𝔇 | ✅ CLOSE (`famille_dirigee_de_chaine`) |
@@ -565,3 +565,30 @@ clair, et il pollue le dépôt entre-temps.
   • `_membre_famille_t` + S5 donnent pr₂(vmaj) ∈ 𝔇 ;
   • conjonction_intro puis S5 sur `pdm` concluent.
 ⚠️ ORDRE des conjoints du corps cible : (p∈𝔇) PUIS (∃w)(…).
+
+
+## R-13 — RÉSOLU : les ONZE données du recollement sont CLOSES (2026-08-23, 08h35)
+
+`dom_couvrant` : { chaîne } ⊢ (∀a)( a ∈ US×US ⇒ (∃p)(p∈𝔇 et (∃w)((a,w)∈p)) ),
+0,4 s, 1 hyp, **du premier coup et d'un trait** — la consigne « écrire le module
+en une passe, fonction d'abord » a corrigé l'échec du tick précédent.
+
+**Les 11 sur 11, toutes sous la SEULE hypothèse « C est une chaîne »** :
+
+| # | donnée | preuve |
+|---|--------|--------|
+| 1 | domaine couvrant | `dom_couvrant` |
+| 2 | injectivité de l'union | `union_dirigee_injective` |
+| 3 | famille compatible | `famille_compatible_de_chaine` |
+| 4 | famille dirigée | `famille_dirigee_de_chaine` |
+| 5 | membres injectifs | `membres_famille_injectifs` |
+| 6 | fonctionnalité de l'union | `union_compatible_fonctionnelle` |
+| 7 | surjectivité | `surj_union_us` |
+| 8 | US ⊂ E | `us_inclus_E` |
+| 9 | dom(⋃𝔇) ⊂ US×US | `dom_union_inclus_carre` |
+| 10 | image ⊂ US | `img_union_inclus_us` |
+| 11 | US infinie | `us_infini` |
+
+**PROCHAIN JALON** : les brancher dans `frame_de_recollement`, puis dans
+`donnees_recollement` — l'unique hypothèse ouverte de `hess_maximal`. Si le
+branchement passe, Hessenberg tient sous la SEULE `predecesseur_fini_universel`.
