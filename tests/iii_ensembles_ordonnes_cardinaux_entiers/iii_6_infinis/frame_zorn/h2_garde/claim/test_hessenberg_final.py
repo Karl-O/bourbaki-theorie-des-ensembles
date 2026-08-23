@@ -75,3 +75,37 @@ def test_chemin_complet_un_seul_residu():
     assert nue not in t.hypotheses, "l'hypothèse non satisfaite est revenue"
     assert nue != residus[0], "le résidu EST l'hypothèse non satisfaite"
     assert len(E.theorie_ensembles().axiomes) == 22
+
+
+@pytest.mark.slow
+def test_hess_maximal_clos():
+    """🎯🎯🎯 { est_infini(Card E) } ⊢ (∃m) element_maximal.   [~1 h 25]
+
+    hess_maximal portait DEUX hypothèses ; la seconde, donnees_recollement,
+    est devenue un théorème via les onze données du recollement."""
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_6_infinis.frame_zorn.h2_garde.claim.ensembles_hessenberg_final import (
+        hess_maximal_clos,
+    )
+    t = hess_maximal_clos("E")
+    assert len(t.hypotheses) == 1, "hyps : %d" % len(t.hypotheses)
+    assert len(E.theorie_ensembles().axiomes) == 22
+
+
+@pytest.mark.slow
+def test_hessenberg_final():
+    """🏆🏆🏆 { E infini, predecesseur_fini_universel } ⊢ enonce_hessenberg(E).
+
+    L'aboutissement : l'hypothèse même du théorème de Bourbaki, plus un unique
+    résidu CLOS et vrai (Prop. 2 §III.5), non encore dérivé.   [~10 min]"""
+    from bourbaki.i_description_mathematique_formelle.i_1_termes_relations.outil_formule import libres_f
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_6_infinis.frame_zorn.h2_garde.claim.ensembles_hessenberg_final import (
+        hessenberg_final,
+    )
+    t = hessenberg_final("E")
+    assert t.conclusion == enonce_hessenberg("E")
+    assert len(t.hypotheses) == 2, "hyps : %d" % len(t.hypotheses)
+    #  l'une ne parle que de E, l'autre est CLOSE : aucun témoin résiduel
+    formes = sorted(len(libres_f(h)) for h in t.hypotheses)
+    assert formes == [0, 1], "profil des hypothèses inattendu : %s" % formes
+    assert t.conclusion not in t.hypotheses, "VACUOUS"
+    assert len(E.theorie_ensembles().axiomes) == 22
