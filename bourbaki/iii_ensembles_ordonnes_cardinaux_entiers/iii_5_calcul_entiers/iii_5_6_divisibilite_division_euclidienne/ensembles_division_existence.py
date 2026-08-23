@@ -172,15 +172,27 @@ def _inst_gen(thm, noms, termes):
     return out
 
 
-def enonce_pas_grand(a="a", b="b"):
+def enonce_pas_grand(a="a", b="b", diff=None):
+    """(antécédent, conséquent) du pas « a ≥ b ».
+
+    ⚠️ `diff` permet de désigner une AUTRE différence que `diff_somme` — le
+    conséquent, lui, n'en dépend pas (R-12, étape 4)."""
     va, vb = var(a), var(b)
-    diff = diff_somme(va, vb, "c")
+    if diff is None:
+        diff = diff_somme(va, vb, "c")
     return et(et(et(est_fini(va), est_fini(vb)), inf_egal_card(vb, va)), _R_rel(vb, diff)), _R_rel(vb, va)
 
 
 # @livre Ch.III §5.6 Demo.- | E III.39 L.12-19 | PDF p.142   (cas a≥b : recomposition via HR sur a−b)
-def _pas_grand(a="a", b="b"):
+def _pas_grand(a="a", b="b", diff=None, rec_bd=None):
     """⊢ {a fini, b fini, b≤a, R{a−b}}  R{a}.   (pas de récurrence forte, cas a≥b.)
+
+    ⚠️ 2026-08-23 (R-12, étape 4).  `diff` désigne la différence employée et
+    `rec_bd` prouve « b + diff = a » ; par défaut, `diff_somme` et le
+    comportement historique.  La preuve n'utilise de la différence que son
+    équation caractéristique, d'où un port mécanique vers `diff_cardinale`,
+    dont le τ porte la garde `est_cardinal` (sans quoi `Fini(a−b)` exige une
+    hypothèse NON SATISFAITE et la division est vraie et VIDE).
 
     Extrait (Q0,R0) de R{a−b} (b·Q0+R0=a−b, R0<b) ; division_pas_recomposition donne
     b+(b·Q0+R0)=a ; division_successeur + _assoc_binaire recomposent b·(Q0+1)+R0=a ;
@@ -191,7 +203,8 @@ def _pas_grand(a="a", b="b"):
     distributivite_cardinale (le « verrou-τ » supposé bloquant était en fait une simple collision
     de NOMS d'arguments ; avec des noms frais tout est clos)."""
     va, vb = var(a), var(b)
-    diff = diff_somme(va, vb, "c")                       # a−b = τc(a=b+c)
+    if diff is None:
+        diff = diff_somme(va, vb, "c")                   # a−b = τc(a=b+c)
     card_a = N.modus_ponens(N.assume(est_fini(va)), fini_implique_cardinal(va))
     card_b = N.modus_ponens(N.assume(est_fini(vb)), fini_implique_cardinal(vb))
     h_le = N.assume(inf_egal_card(vb, va))               # b≤a
@@ -210,7 +223,7 @@ def _pas_grand(a="a", b="b"):
     diff_eq = N.modus_ponens(eq_bqr, symetrie(bQ0R0, diff))   # a−b = b·Q0+R0
 
     # (2) division_pas_recomposition (générique q,r) → décharge HR, généralise, instancie Q0,R0
-    P = division_pas_recomposition(a, b, "qDE", "rDE")   # {ante, a−b=b·q+r} ⊢ b+(b·q+r)=a
+    P = division_pas_recomposition(a, b, "qDE", "rDE", diff=diff, rec=rec_bd)
     ante = et(et(est_cardinal(vb), est_cardinal(va)), inf_egal_card(vb, va))
     P1 = N.loi_deduction(egal(diff, _bqr(vb, var(_Q), var(_R))), P)   # {ante} ⊢ (a−b=b·q+r)⇒b+(b·q+r)=a
     P2 = _inst_gen(P1, [_Q, _R], [Q0, R0])              # {ante} ⊢ (a−b=b·Q0+R0)⇒b+(b·Q0+R0)=a
@@ -237,7 +250,7 @@ def _pas_grand(a="a", b="b"):
     phi_a = _phi(vb, va, successeur(Q0), var(_R))
     ex_r = N.modus_ponens(conjonction_intro(eq_final, r0_lt), N.s5(phi_a, R0, _R))
     ex_qr = N.modus_ponens(ex_r, N.s5(existe(_R, _phi(vb, va, var(_Q), var(_R))), successeur(Q0), _Q))
-    assert ex_qr.conclusion == enonce_pas_grand(a, b)[1], "_pas_grand : conclusion ≠ R{a}"
+    assert ex_qr.conclusion == enonce_pas_grand(a, b, diff)[1], "_pas_grand : conclusion ≠ R{a}"
     return ex_qr
 
 

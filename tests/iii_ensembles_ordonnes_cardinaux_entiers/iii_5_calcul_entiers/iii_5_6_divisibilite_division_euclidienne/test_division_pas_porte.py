@@ -32,6 +32,19 @@ from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_5_calcul_entiers.iii_
 from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_5_calcul_entiers.iii_5_6_divisibilite_division_euclidienne.ensembles_division_pas import (
     division_pas_recomposition, division_pas_recomposition_cible,
 )
+from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_5_calcul_entiers.iii_5_6_divisibilite_division_euclidienne.ensembles_division_existence import (
+    _pas_grand, enonce_pas_grand,
+)
+
+
+def _diff_et_equation():
+    """(diff_cardinale, preuve de « b + diff = a ») — le couple que les
+    fonctions paramétrées attendent."""
+    va, vb = var("a"), var("b")
+    d = diff_cardinale(va, vb)
+    rec = N.modus_ponens(diff_cardinale_equation(va, vb),
+                         symetrie(va, somme_cardinale_binaire(vb, d)))
+    return d, rec
 
 
 def test_non_regression_appel_historique():
@@ -55,4 +68,24 @@ def test_port_sur_diff_cardinale():
     t = division_pas_recomposition("a", "b", "q", "r", diff=d, rec=rec)
     assert t.conclusion == division_pas_recomposition_cible("a", "b", "q", "r"), \
         "le port doit conclure la MÊME cible"
+    assert len(E.theorie_ensembles().axiomes) == 22
+
+
+def test_non_regression_pas_grand():
+    """`_pas_grand` sans `diff` reste identique.   [~23 s]"""
+    t = _pas_grand("a", "b")
+    assert t.conclusion == enonce_pas_grand("a", "b")[1]
+    assert len(t.hypotheses) == 4, "hyps : %d" % len(t.hypotheses)
+    assert len(E.theorie_ensembles().axiomes) == 22
+
+
+def test_pas_grand_porte_sur_diff_cardinale():
+    """🎯 `_pas_grand` conclut la MÊME relation avec `diff_cardinale`.  [~21 s]
+
+    Le pas « a ≥ b » de la récurrence forte ne dépend donc pas du choix de la
+    différence — seulement de son équation. C'est ce qui permettra de porter
+    `_strong_step` sans réécrire la démonstration de Bourbaki."""
+    d, rec = _diff_et_equation()
+    t = _pas_grand("a", "b", diff=d, rec_bd=rec)
+    assert t.conclusion == enonce_pas_grand("a", "b")[1],         "le port doit conclure la MÊME relation R{a}"
     assert len(E.theorie_ensembles().axiomes) == 22
