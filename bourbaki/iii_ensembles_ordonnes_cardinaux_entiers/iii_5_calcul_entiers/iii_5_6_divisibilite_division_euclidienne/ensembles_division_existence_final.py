@@ -235,7 +235,7 @@ def enonce_division_euclidienne(a="adf", b="bdf"):
 
 
 # @livre Ch.III §5.6 Th.1 | E III.39 L.10-11 | PDF p.142
-def division_euclidienne(a="adf", b="bdf"):
+def division_euclidienne(a="adf", b="bdf", cardinal=False):
     """🎯🎯 THEOREME 1 §III.5.6 COMPLET — LA DIVISION EUCLIDIENNE :
 
     ⊢ {Fini a, Fini b, 0 < b, + residus C61} ⊢
@@ -262,7 +262,13 @@ def division_euclidienne(a="adf", b="bdf"):
     ne_zb = conjonction_elim_droite(b_pos)                         # non(0 = b)
     b_ne0 = N.modus_ponens(ne_zb, contraposition(symetrie(vb, ZERO)))   # non(b = 0)
     #   3. EXISTENCE au dividende a (b!=0 remplace par sa preuve)
-    ex = _cut(division_existence(b), non(egal(vb, ZERO)), b_ne0)
+    #  ⚠️ 2026-08-23 (R-12) : `cardinal=True` fait mesurer la récurrence par
+    #  `diff_cardinale` (τ GARDÉ) et élimine l'universel NU de `fini_downward`,
+    #  hypothèse NON SATISFAITE qui rendait ce théorème VRAI ET VIDE.  Le défaut
+    #  reste `False` tant que la version portée n'a pas la même couverture de
+    #  tests que l'historique — basculer avant serait échanger une dette CONNUE
+    #  contre une dette NON MESURÉE.  Voir ANOMALIES 2026-08-23.
+    ex = _cut(division_existence(b, cardinal=cardinal), non(egal(vb, ZERO)), b_ne0)
     #   conclusion_recurrence enveloppe DEJA la garde Fini : l'existence
     #   conclut (pour tout n)(Fini n => (Fini n => R{n})) — double garde,
     #   donc modus ponens DEUX fois (mesure : 1er echec d'assertion, 21 aout).

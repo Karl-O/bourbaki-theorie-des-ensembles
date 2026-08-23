@@ -1185,3 +1185,40 @@ la version portée n'a pas encore la même couverture de tests que l'historique,
 et que basculer un défaut sans cela reviendrait à échanger une dette connue
 contre une dette non mesurée. Le paramètre reste donc opt-in jusqu'à ce que la
 suite complète de §III.5.6 tourne verte dans les deux modes.
+
+
+## 2026-08-23 — 🏆 R-12 CLOSE : la division euclidienne n'est plus vide
+
+    division_euclidienne(cardinal=True)   1491,0 s   hyps = 3
+        { Fini a, Fini b, 0 < b }         — EXACTEMENT E III.39 L.10
+    conclusion EXACTE · universel NU ABSENT · non vacuous · theorie = 22
+    chaque hypothèse ne mentionne qu'UNE variable : aucun témoin résiduel
+
+Les trois hypothèses ont été identifiées mécaniquement (comparaison de formules,
+pas lecture à l'œil) : `est_fini(adf)`, `est_fini(bdf)` et `inf_strict_card(0,
+bdf)`. Le rendu de `0 < b` et celui de `b < a` partagent leur préfixe ; c'est le
+COMPTE DES VARIABLES LIBRES qui tranche — H1 n'en a qu'une, donc `0 < b`.
+
+**Les résidus C61 ont disparu.** La docstring historique annonçait
+« {Fini a, Fini b, 0 < b, + residus C61} » ; il ne reste que les trois premières.
+
+### Ce qui reste vrai, et qu'il ne faut pas effacer
+
+**Le mode `cardinal=True` est OPT-IN.** Le défaut reste la version historique,
+qui demeure vide. La réparation est DISPONIBLE, elle n'est pas BRANCHÉE.
+
+**Pourquoi je ne bascule pas le défaut.** La version portée n'a pas encore la
+couverture de tests de l'historique : deux tests `slow` contre une suite
+complète. Basculer maintenant échangerait une dette CONNUE et documentée contre
+une dette NON MESURÉE — précisément le travers que cet audit a passé la journée
+à débusquer (docs affirmant plus que le code, `hessenberg_0hyp` promise et
+jamais écrite, `fini_downward` nu). La décision appartient à Karl ; les deux
+chemins sont désormais mesurés, ce qui est la condition pour qu'elle soit
+éclairée.
+
+### Le fil de la journée, en une phrase
+
+Sept fois, une hypothèse réputée manquante s'est révélée être un **câble
+absent** — le dépôt possédait la preuve et ne la branchait pas. Et une fois,
+l'hypothèse manquante était **fausse et porteuse** : elle fermait un pas sans
+preuve honnête, et c'est en la retirant qu'on a découvert ce qu'elle cachait.
