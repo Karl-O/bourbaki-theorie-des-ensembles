@@ -20,13 +20,22 @@ theorie_ensembles() INCHANGÉE (22).  Noyau INTACT.
 from __future__ import annotations
 
 from bourbaki.i_description_mathematique_formelle.i_1_termes_relations.outil_formule import (
-    Terme, var, egal,
+    Terme, var, egal, non, inclus,
 )
 from bourbaki.i_description_mathematique_formelle.i_2_theoremes.noyau import noyau_abrege as N
 from bourbaki.ii_theorie_des_ensembles.ii_1_relations_collectivisantes import ensembles_abrege as E
 
+from bourbaki.i_description_mathematique_formelle.i_2_theoremes.tactiques.tactiques_abrege2 import (
+    conjonction_intro, dne,
+)
 from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_3_equipotence_cardinaux.definitions_cardinaux.ensembles_cardinaux import (
-    cardinal,
+    cardinal, inf_egal_card, inf_strict_card,
+)
+from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_6_infinis.entiers_infinis.iii_6_3_infinis_denombrables.ensembles_infinis_props import (
+    _refuter,
+)
+from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_6_infinis.hessenberg.coeur.ensembles_hessenberg_structural_discharge import (
+    card_inclus_inf_egal,
 )
 from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_6_infinis.hessenberg.coeur.ensembles_hessenberg import (
     enonce_hessenberg,
@@ -77,4 +86,37 @@ def claim_vers_endgame(E_set, S, phi, bij0, claim):
     return res
 
 
-__all__ = ["claim_vers_endgame"]
+# @livre Ch.III §6.3 Demo.2 | E III.48 L.30-31 | PDF p.151
+#   (« on aurait donc Card F = Card E » — la conclusion de l'argument par l'absurde)
+def claim_depuis_non_strict(E_set, S, S_inc, non_strict):
+    """🎯 { S₀ ⊂ E } ∪ hyps(non_strict) ⊢ Card S₀ = Card E   (LE CLAIM).
+
+    Étapes (7)+(8) de la chaîne de Bourbaki, PUREMENT propositionnelles : chez
+    Bourbaki  x < y  est DÉFINI par  (x ≤ y  et  x ≠ y)  (`inf_strict_card`),
+    donc ni trichotomie ni antisymétrie ne sont requises —
+
+        • S₀ ⊂ E donne  Card S₀ ≤ Card E              (`card_inclus_inf_egal`) ;
+        • sous « Card S₀ ≠ Card E » la conjonction des deux EST Card S₀ < Card E,
+          que `non_strict` réfute — d'où ¬¬(Card S₀ = Card E), puis le CLAIM (dne).
+
+    `S_inc`    : ⊢ S₀ ⊂ E                    (donnée du maximal) ;
+    `non_strict` : ⊢ ¬( Card S₀ < Card E )   (l'argument d'extension, étapes 1-6)."""
+    vE, vS = _t(E_set), _t(S)
+    cS, cE = cardinal(vS), cardinal(vE)
+    cible = egal(cS, cE)
+    assert non_strict.conclusion == non(inf_strict_card(cS, cE)),         "claim_depuis_non_strict : `non_strict` n'est pas ¬(Card S₀ < Card E)"
+
+    le = _cut(S_inc, inclus(vS, vE), card_inclus_inf_egal(S, E_set))   # Card S₀ ≤ Card E
+    assert le.conclusion == inf_egal_card(cS, cE), "claim_depuis_non_strict : ≤"
+
+    h_ne = N.assume(non(cible))                       # supposé : Card S₀ ≠ Card E
+    strict = conjonction_intro(le, h_ne)              # … alors Card S₀ < Card E
+    assert strict.conclusion == inf_strict_card(cS, cE),         "claim_depuis_non_strict : la conjonction n'est pas l'ordre strict"
+
+    res = N.modus_ponens(_refuter(non(cible), strict, non_strict), dne(cible))
+    assert res.conclusion == cible, "claim_depuis_non_strict : forme"
+    assert non(cible) not in res.hypotheses, "claim_depuis_non_strict : ¬(=) non déchargée"
+    return res
+
+
+__all__ = ["claim_vers_endgame", "claim_depuis_non_strict"]
