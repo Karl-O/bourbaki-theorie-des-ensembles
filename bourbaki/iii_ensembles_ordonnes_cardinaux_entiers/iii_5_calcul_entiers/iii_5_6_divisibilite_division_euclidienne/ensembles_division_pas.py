@@ -39,17 +39,31 @@ def division_pas_recomposition_cible(a="a", b="b", q="q", r="r"):
 
 # @livre Ch.III §5.6 Th.1 | E III.39 L.10-11 | PDF p.142
 # @livre Ch.III §5.6 Demo.- | E III.39 L.12-19 | PDF p.142
-def division_pas_recomposition(a="a", b="b", q="q", r="r"):
+def division_pas_recomposition(a="a", b="b", q="q", r="r", diff=None, rec=None):
     """{est_cardinal b, est_cardinal a, b≤a, a−b = b·q+r} ⊢ b + (b·q + r) = a.
 
-    Hypothèses honnêtes (4) : la garde cardinale + l'ordre (le cas a≥b) + l'HR de récurrence."""
+    Hypothèses honnêtes (4) : la garde cardinale + l'ordre (le cas a≥b) + l'HR de récurrence.
+
+    ⚠️ 2026-08-23 (R-12, étape 4).  `diff` et `rec` permettent de fournir une
+    AUTRE différence que `diff_somme` : `diff` est le terme, `rec` une preuve de
+    « b + diff = a ».  Par défaut on retrouve exactement le comportement
+    historique.  Ce paramétrage sert à porter la division euclidienne sur
+    `diff_cardinale`, dont le τ porte la garde `est_cardinal` — sans quoi
+    `Fini(a−b)` n'est obtenable qu'au prix d'une hypothèse NON SATISFAITE, et
+    les théorèmes de division sont vrais et VIDES (ANOMALIES 2026-08-23).
+
+    La preuve NE CHANGE PAS : elle n'utilise de la différence que son équation
+    caractéristique, jamais sa construction."""
     va, vb, vq, vr = var(a), var(b), var(q), var(r)
-    diff = diff_somme(va, vb, "c")                      # a−b  =  τc(a = b + c)
+    if diff is None:
+        diff = diff_somme(va, vb, "c")                  # a−b  =  τc(a = b + c)
     bqr = somme_cardinale_binaire(produit_cardinal_binaire(vb, vq), vr)
 
     # (1) b + (a−b) = a   — Cor.4 §III.5 avec les rôles échangés (a:=b, b:=a).
-    ante = et(et(est_cardinal(vb), est_cardinal(va)), inf_egal_card(vb, va))
-    rec = N.modus_ponens(N.assume(ante), soustraction_caracterisation(b, a))
+    if rec is None:
+        ante = et(et(est_cardinal(vb), est_cardinal(va)), inf_egal_card(vb, va))
+        rec = N.modus_ponens(N.assume(ante), soustraction_caracterisation(b, a))
+    assert rec.conclusion == egal(somme_cardinale_binaire(vb, diff), va),         "division_pas_recomposition : `rec` ne prouve pas b + diff = a"
 
     # (2) b + (a−b) = b + (b·q + r)   — congruence de l'HR dans le contexte  b + w.
     hr = N.assume(egal(diff, bqr))                      # a−b = b·q + r   (HR)
