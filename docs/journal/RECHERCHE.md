@@ -195,3 +195,39 @@ témoins, ce qui relie R-12 à `_card_E_somme` (déjà utilisé par
 **Retombée** : la division euclidienne est l'un des gros chantiers ouverts listés
 dans CLAUDE.md ; cette brique la débloquerait au niveau de la fidélité, pas
 seulement de la couverture.
+
+## R-13 — CARTE des données du recollement (mesurée en code, 2026-08-23)
+
+`frame_de_recollement()` réclame **11** hypothèses (et non 9 comme le disait sa
+docstring). Classées, avec leurs variables libres :
+
+| # | contenu | libres | statut |
+|---|---------|--------|--------|
+| 1 | domaine couvrant : tout point de US×US est dans le domaine d'un membre | 𝔇,US | à faire |
+| 2 | injectivité de l'union (forme couple) | 𝔇 | à faire |
+| 3 | famille COMPATIBLE (deux membres coïncident là où les deux sont définis) | 𝔇 | à faire |
+| 4 | famille DIRIGÉE (p,q ∈ 𝔇 ⇒ ∃r les prolongeant) | 𝔇 | à faire |
+| 5 | MEMBRES INJECTIFS : (∀p)(p∈𝔇 ⇒ injectif_graphe(p)) | 𝔇 | **bloquée, cf. infra** |
+| 6 | fonctionnalité de l'union | 𝔇 | à faire |
+| 7 | surjectivité du recollement | 𝔇,US | à faire |
+| 8 | US ⊂ E | E,US | ✅ CLOSE (`us_inclus_E`) |
+| 9 | dom(⋃𝔇) ⊂ US×US | 𝔇,US | à faire |
+| 10 | image(⋃𝔇, US×US) ⊂ US | 𝔇,US | à faire |
+| 11 | US infinie | US | ✅ CLOSE (`us_infini`) |
+
+**Le blocage précis de (5).** La route naturelle est celle de `pr1_inclus_E` :
+g ∈ 𝔇 donne (∃q)(q∈C ∧ g = pr₂ q) par `membre_famille` (CLOS) ; q ∈ C ⊂ 𝔉 donne
+`est_bijection_de(φ, S×S, S)`. Mais `est_bijection_de` fournit l'injectivité au
+niveau VALEUR (`injective_dans`), tandis que (5) la réclame au niveau COUPLE
+(`injectif_graphe`). Le dépôt ne possède que le pont dans l'AUTRE sens :
+
+    injectif_graphe_implique_injective_dans : {est_fonctionnel, injectif_graphe}
+                                              ⊢ injective_dans(F, dom F)
+
+**Brique manquante nommée** : la RÉCIPROQUE,
+`{ est_fonctionnel(F), injective_dans(F, dom F) } ⊢ injectif_graphe(F)`.
+Elle est vraie (si f est une fonction et que ses valeurs distinguent les points,
+deux antécédents d'une même image coïncident) et elle débloquerait (5), donc
+vraisemblablement aussi (2) et (6) qui portent sur l'union des mêmes graphes.
+C'est le prochain objectif naturel, avant d'attaquer (3) et (4) qui, eux,
+dépendent de l'ORDRE de la chaîne et non de la structure de graphe.
