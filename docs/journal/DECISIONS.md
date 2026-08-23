@@ -968,3 +968,27 @@ NOMMÉES.  Un Hessenberg sous deux résidus explicitement nommés et
 mathématiquement évidents (une réunion de parties de E reste dans E ; une
 réunion contenant un infini est infinie) vaut mieux qu'un chantier ouvert,
 et le journal dit exactement lesquels.
+
+## 2026-08-23 02h45 — CARTE COMPLÈTE VERS a²=a (lecture de l'assemblage)
+Découverte en lisant hessenberg/assemblage_vrai : le sommet EXISTE déjà.
+  hessenberg_vrai : { Card S₀ = Card E, bij φ₀ }
+                        ⊢ est_infini(Card E) ⇒ Card E · Card E = Card E
+C'est le Théorème 2 monté non-vacuousement depuis le carré du maximal. Il
+reste DEUX hypothèses honnêtes, et le module documente lui-même l'obstacle :
+« STEP B » = dériver Card S₀ = Card E dans la portée du maximal, ce qui exige
+la chaîne d'extension/contradiction de Bourbaki (complement_grand →
+transport → cadre_bijection → extension_absurde_chainee ⇒ ⊥), laquelle porte
+12 hypothèses honnêtes mentionnant des témoins internes (S₀, Ucadre, φ₀, ψ,
+uwit) à décharger AVANT l'élimination de S₀.
+ÉTAT RÉEL DE LA CAMPAGNE, donc :
+  • Lemme 1 : CLOS ✅ (cette nuit) ;
+  • Lemme 2 : CLOS ✅ ;
+  • H1 (𝔉≠∅) : CERTIFIÉ ✅ (cette nuit, 2h28) ;
+  • existence du maximal : hess_maximal sous {E infini, donnees_recollement} ;
+  • a²=a : hessenberg_vrai sous {Card S₀=Card E, bij φ₀} — le CLAIM.
+PROCHAINE PRIORITÉ (revue) : le chemin le plus court vers a²=a SANS hypothèse
+n'est plus le recollement (déjà bien avancé) mais le STEP B — l'argument
+d'extension qui force Card S₀ = Card E. Les briques existent
+(extension_absurde_chainee et sa chaîne) ; le travail est de décharger leurs
+12 hypothèses, exactement le même exercice que celui mené cette nuit sur les
+hypothèses VALEUR du recollement (et qui a réussi).
