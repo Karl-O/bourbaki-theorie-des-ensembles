@@ -1267,3 +1267,38 @@ argument d'un paquet et compare leurs hypothèses au registre des formules daté
 insatisfaisables. Il ne DÉCOUVRE pas de formule fausse ; il vérifie la
 non-contamination par celles qu'on a déjà identifiées. Le registre est à
 alimenter à chaque anomalie de ce genre.
+
+
+## 2026-08-23 — 🏆 HESSENBERG CERTIFIÉ, et LEÇON 21 : un plantage peut être le succès
+
+**Le chiffre.** `hessenberg_final` ⊢ `enonce_hessenberg(E)` en **5172,8 s** sous
+**UNE seule hypothèse** — `est_infini(Card E)`, l'énoncé même du théorème, unique
+variable libre E. Conclusion identique à la cible, non vacuous,
+`theorie_ensembles()` = 22. Étapes : `_residus(paquet_derive=True)` = **0**,
+`hessenberg_par_extension` = 64,4 s sous la seule existence du maximal,
+`hess_maximal_clos` = 5796,7 s (re-mesure ; 5104,4 s au premier passage).
+**Statut FAIT au sens strict du projet.**
+
+**LEÇON 21 — le plantage était le résultat.** La mesure a d'abord échoué sur
+`IndexError: list index out of range`, au `res[-1]` du repli de la conjonction des
+résidus. Réflexe naturel : chercher la régression. La cause réelle est
+l'aboutissement — la liste des résidus était devenue **vide**, et une conjonction
+vide n'a pas de formule. Le code supposait qu'il resterait toujours au moins une
+hypothèse honnête à décharger ; cette supposition venait de cesser d'être vraie.
+
+**La règle** : devant une exception, demander d'abord *de quel état elle témoigne*
+avant de la réparer. Les cas limites d'un pipeline de preuve — zéro résidu, zéro
+hypothèse, conjonction vide — sont précisément les états que l'on vise. Un
+assemblage qui ne les gère pas plantera **au moment du succès**, jamais avant.
+Corollaire pratique : écrire les replis (`reduce` sur une liste d'hypothèses) avec
+le cas vide traité dès le départ, et le documenter comme la cible, non comme une
+garde défensive.
+
+**LEÇON 21 bis — relire l'amont, six fois payant.** Sur cette seule chaîne, six
+hypothèses réputées manquantes étaient **déjà prouvées** ailleurs dans le dépôt et
+n'attendaient qu'un branchement : le transport (GAP B), l'absorption, les onze
+données du recollement, et pour finir `predecesseur_fini_universel` — le « dernier
+résidu », clos depuis longtemps, jamais câblé. Une hypothèse honnête signale
+aussi bien un trou qu'un **câble absent**, et le second cas s'est révélé le plus
+fréquent. Le réflexe (grep `<nom>_preuve` / `_prouve` / `_clos` /
+`_inconditionnel`) doit précéder toute déclaration de lacune.

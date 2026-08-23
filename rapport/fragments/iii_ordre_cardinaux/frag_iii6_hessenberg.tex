@@ -25,8 +25,9 @@ tire, par généralisation sur $C$, un théorème \textbf{clos}.
 
 \emph{(ii) Le maximal.} \texttt{hess\_maximal\_clos} livre alors
 $(\exists m)\,\mathrm{element\_maximal}(\Gamma\mathfrak{F},\mathfrak{F},m)$ sous la
-seule donnée « $E$ infini » --- une hypothèse au lieu de deux. Mesuré :
-$5104{,}4$~s (1~h~25), le coût dominant de toute la chaîne.
+seule donnée « $E$ infini » --- une hypothèse au lieu de deux. Mesuré deux fois :
+$5104{,}4$~s puis $5796{,}7$~s (1~h~25 à 1~h~37), le coût dominant de toute la
+chaîne.
 
 \emph{(iii) L'argument d'extension.} Dans la portée du maximal, on suppose
 $\mathfrak{b} < \mathrm{Card}\,E$ où $\mathfrak{b} = \mathrm{Card}\,S_0$ ; le
@@ -51,18 +52,31 @@ dépôt ne prouve que la version \emph{gardée} par $\mathrm{est\_cardinal}$ ---
 est correcte), mais tout théorème la portant était \emph{vrai et vide}. Le défaut
 était déjà documenté par le dépôt ; ce travail y ajoute sa vérification mécanique
 et le \emph{recâblage effectif} de la chaîne sur la version gardée, ce qui échange
-une hypothèse fausse contre \texttt{predecesseur\_fini\_universel}, vraie quoique non
-encore prouvée. Voir \texttt{ANOMALIES.md}, 2026-08-23.
+une hypothèse fausse contre \texttt{predecesseur\_fini\_universel}. Voir
+\texttt{ANOMALIES.md}, 2026-08-23.
+
+\textbf{Et ce dernier résidu n'en était pas un.} En relisant l'amont plutôt qu'en
+le supposant manquant, \texttt{predecesseur\_fini\_universel} s'est révélé
+\textbf{déjà prouvé} par le dépôt (Prop.~2 §III.5,
+\texttt{predecesseur\_fini\_universel\_preuve}, close, $7{,}7$~s) --- simplement
+\emph{non branché}. Il a été déchargé à la source, dans
+\texttt{fini\_downward\_cardinal}, pour que toute la chaîne en hérite.
+
+\textbf{Un plantage qui était le résultat.} La mesure suivante s'est arrêtée sur
+un \texttt{IndexError} au repli de la conjonction des résidus. La cause est
+l'aboutissement lui-même : la liste des résidus était devenue \emph{vide}, et une
+conjonction vide n'a pas de formule. Le code supposait qu'il resterait toujours au
+moins une hypothèse honnête à décharger. \texttt{residus\_maximal} rend désormais
+\texttt{None} dans ce cas, documenté comme l'état visé.
 
 \textbf{Résultat.} $\vdash$ \texttt{enonce\_hessenberg(E)} sous
-$\{\,\mathrm{est\_infini}(\mathrm{Card}\,E),\ \texttt{predecesseur\_fini\_universel}\,\}$
---- c'est-à-dire l'hypothèse même du théorème de Bourbaki, plus un unique résidu
-\emph{clos} et vrai (Prop.~2 §III.5). Mesuré : $608{,}2$~s au-dessus du maximal,
-deux hypothèses dont l'une ne mentionne que $E$ et l'autre est close ---
-\emph{aucun témoin résiduel} --- et \texttt{theorie\_ensembles()} $= 22$.
-\textbf{Statut : PARTIEL} au sens strict du
-projet, ce résidu n'étant pas encore dérivé ; mais l'argument de Bourbaki est
-formalisé de bout en bout, sans hypothèse mentionnant un témoin ni aucune
+$\{\,\mathrm{est\_infini}(\mathrm{Card}\,E)\,\}$ --- l'hypothèse du théorème de
+Bourbaki, et \emph{rien d'autre}. Mesuré de bout en bout : $5172{,}8$~s, une seule
+hypothèse, dont l'unique variable libre est $E$ ; conclusion identique à l'énoncé
+cible ; non vacuous ; \texttt{theorie\_ensembles()} $= 22$. Étapes intermédiaires :
+$0$ résidu, \texttt{hessenberg\_par\_extension} en $64{,}4$~s sous la seule
+existence du maximal. \textbf{Statut : FAIT} au sens strict du projet --- zéro
+hypothèse non déchargée hors celle de Bourbaki, aucun témoin résiduel, aucune
 hypothèse non satisfaite.
 
 \textbf{Leçons de méthode.} Quatre régularités se sont dégagées, consignées dans
@@ -73,3 +87,12 @@ lemme n'en connaît qu'un ; \emph{(17)} ré-éprouver ce qui est marqué « en c
 un marqueur pouvant masquer un succès à un caractère près ; \emph{(18)} devant
 « mineure $\ne$ antécédent », comparer les formules \emph{avant} de retoucher la
 preuve --- le coupable est presque toujours un liant, jamais le raisonnement.
+
+À quoi cette section en ajoute deux, qui portent plus loin que le théorème.
+\emph{(21)} \textbf{Relire l'amont avant de déclarer une lacune} : sur cette seule
+chaîne, six hypothèses réputées manquantes étaient déjà prouvées ailleurs dans le
+dépôt et attendaient d'être branchées. Une hypothèse honnête signale aussi bien un
+trou qu'un câble absent, et le second cas est le plus fréquent.
+\emph{(22)} \textbf{Un plantage peut être le succès} : le repli d'une conjonction
+vide n'échoue que lorsqu'il n'y a plus rien à replier. Avant de réparer une
+exception, il faut se demander de quel état elle témoigne.

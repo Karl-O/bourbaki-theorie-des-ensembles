@@ -113,16 +113,31 @@ en place et les manifestes conformes — c'est arrivé le 18 août (trois `Demo.
 posés sur des clôtures d'énoncé de C39/C40/C42, où Bourbaki n'imprime AUCUNE
 démonstration, corrigé en 452f071). Seule l'ouverture de la page le révèle.
 
-⚠️ **PRÉCISION MESURÉE le 2026-08-23 sur Hessenberg a²=a (III.6.3).** Le compte
-« FAIT » ci-dessous demande une nuance, établie en code et non en prose. `hessenberg_final`
-⊢ `enonce_hessenberg(E)` sous DEUX hypothèses : « E infini » — celle du théorème lui-même —
-et `predecesseur_fini_universel` (Prop. 2 §III.5), résidu CLOS et vrai mais **non encore
-dérivé**. Statut STRICT du projet : **PARTIEL**. Ce qui est acquis : l'argument de Bourbaki
-est formalisé de bout en bout, aucune hypothèse ne mentionne un témoin, et une hypothèse
-FAUSSE (`fini_downward` nu) a été retirée de la chaîne — les théorèmes qui la portaient
-étaient vrais et VIDES (ANOMALIES 2026-08-23). Chemin : 11 données du recollement closes →
-`donnees_recollement_prouve` (0 hyp) → `hess_maximal_clos` (1 hyp, 1 h 25) → LE CLAIM →
-`hessenberg_final` (608 s). Voir RECHERCHE R-13 et `frag_iii6_hessenberg.tex`.
+✅ **HESSENBERG a²=a (III.6.3, Th. 2) — CERTIFIÉ le 2026-08-23, statut FAIT au sens
+strict.** Mesuré de bout en bout, pas affirmé : `hessenberg_final` ⊢ `enonce_hessenberg(E)`
+en **5172,8 s** sous **UNE seule hypothèse**, `est_infini(Card E)` — l'énoncé même du
+théorème — dont l'unique variable libre est E ; conclusion identique à la cible, **non
+vacuous**, `theorie_ensembles()` = 22. Chemin : 11 données du recollement closes →
+`donnees_recollement_prouve` (0 hyp) → `hess_maximal_clos` (1 hyp, 5796,7 s) → LE CLAIM →
+`hessenberg_par_extension` (**0 résidu**, 64,4 s) → `hessenberg_final`.
+
+Deux corrections y ont mené, et elles valent comme méthode. (1) Une hypothèse **FAUSSE**
+(`fini_downward` nu) a été retirée : les théorèmes qui la portaient étaient vrais et
+**VIDES** (ANOMALIES 2026-08-23). (2) Le dernier résidu, `predecesseur_fini_universel`,
+**n'en était pas un** — le dépôt le PROUVE (Prop. 2 §III.5) et ne le branchait pas ; sur
+cette seule chaîne, six « lacunes » étaient en fait des câbles absents. **Relire l'amont
+avant de déclarer un trou.** Voir RECHERCHE R-13 et `frag_iii6_hessenberg.tex`.
+
+⚠️ **CONTRE-EXEMPLE À LA LIGNE CI-DESSOUS : la division euclidienne (III.5.6) y est
+comptée FAITE, elle est VIDE.** Mesuré le 2026-08-23 : ses deux modules dépendent de
+`_diff_est_fini`, qui instancie l'universel NU de `fini_downward` — l'hypothèse **non
+satisfaite**. Vrais et vides, donc. Et le recâblage n'est pas qu'une affaire de plomberie
+(R-12 requalifiée) : `est_fini(a) = est_cardinal(a) ∧ a≠a+1`, tandis que
+`somme_cardinale_binaire(a,b) = Card(a⊔b)` ne contraint **pas** b à être un cardinal —
+donc `est_cardinal(τc.(a=b+c))` **n'est pas dérivable**, et l'hypothèse fausse était
+**porteuse** : elle fermait un pas sans preuve honnête. Réparation en 4 étapes dans
+RECHERCHE R-12 (τ gardé `diff_cardinale`). **Leçon générale : « FAIT » dans ce fichier
+n'est fiable que là où une mesure est datée à côté.**
 
 Gros chantiers : **FAITS** — Hessenberg a²=a (III.6), division euclidienne (III.5),
 trichotomie/bon ordre des cardinaux (III.3), Cantor, **CST1 + CST1-identité + CST2 +
