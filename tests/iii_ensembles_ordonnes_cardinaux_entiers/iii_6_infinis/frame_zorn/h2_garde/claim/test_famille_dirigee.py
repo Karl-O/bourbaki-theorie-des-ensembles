@@ -40,3 +40,34 @@ def test_union_dirigee_injective():
     assert len(t.hypotheses) == 1, "hyps : %d" % len(t.hypotheses)
     assert t.conclusion not in t.hypotheses, "VACUOUS"
     assert len(E.theorie_ensembles().axiomes) == 22
+
+
+def test_famille_compatible_de_chaine():
+    """🎯 { chaîne } ⊢ famille_compatible( 𝔇(C) )   (donnée 3/11).
+
+    Deux membres emboîtés : les deux couples atterrissent dans le plus grand,
+    qui est une FONCTION — d'où b=c.  L'asymétrie de construction (c'est le
+    couple du PETIT qu'on transporte) est traitée branche par branche."""
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_2_bien_ordonnes.bon_ordre.recurrence_transfinie.ensembles_c60_coeur import (
+        famille_compatible,
+    )
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_6_infinis.frame_zorn.h2_garde.claim.ensembles_famille_dirigee import (
+        famille_compatible_de_chaine,
+    )
+    D = famille_de_chaine(var("Cch"))
+    t = famille_compatible_de_chaine()
+    assert t.conclusion == famille_compatible(D, "pcf", "qcf", "acf", "bcf", "ccf")
+    assert len(t.hypotheses) == 1
+    assert t.conclusion not in t.hypotheses, "VACUOUS"
+
+
+def test_union_compatible_fonctionnelle():
+    """🎯 { chaîne } ⊢ est_fonctionnel( ⋃𝔇(C) )   (donnée 6/11)."""
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_6_infinis.frame_zorn.h2_garde.claim.ensembles_famille_dirigee import (
+        union_compatible_fonctionnelle,
+    )
+    D = famille_de_chaine(var("Cch"))
+    t = union_compatible_fonctionnelle()
+    assert t.conclusion == E.est_fonctionnel(union_famille(D))
+    assert len(t.hypotheses) == 1
+    assert len(E.theorie_ensembles().axiomes) == 22

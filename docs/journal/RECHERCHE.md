@@ -205,10 +205,10 @@ docstring). Classées, avec leurs variables libres :
 |---|---------|--------|--------|
 | 1 | domaine couvrant : tout point de US×US est dans le domaine d'un membre | 𝔇,US | à faire |
 | 2 | injectivité de l'union (forme couple) | 𝔇 | ✅ CLOSE (`union_dirigee_injective`) |
-| 3 | famille COMPATIBLE (deux membres coïncident là où les deux sont définis) | 𝔇 | à faire |
+| 3 | famille COMPATIBLE | 𝔇 | ✅ CLOSE (`famille_compatible_de_chaine`) |
 | 4 | famille DIRIGÉE (p,q ∈ 𝔇 ⇒ ∃r les prolongeant) | 𝔇 | ✅ CLOSE (`famille_dirigee_de_chaine`) |
 | 5 | MEMBRES INJECTIFS : (∀p)(p∈𝔇 ⇒ injectif_graphe(p)) | 𝔇 | ✅ CLOSE (`membres_famille_injectifs`) |
-| 6 | fonctionnalité de l'union | 𝔇 | à faire |
+| 6 | fonctionnalité de l'union | 𝔇 | ✅ CLOSE (`union_compatible_fonctionnelle`) |
 | 7 | surjectivité du recollement | 𝔇,US | à faire |
 | 8 | US ⊂ E | E,US | ✅ CLOSE (`us_inclus_E`) |
 | 9 | dom(⋃𝔇) ⊂ US×US | 𝔇,US | à faire |
@@ -359,3 +359,22 @@ en b,c du point de vue de la construction.
 
 Puis la donnée (6) tombera par `union_famille_fonctionnelle` (c60_coeur.py:180),
 exactement comme (2) est tombée de (4)+(5).
+
+
+### R-13, suite (07h45) — données (3) et (6) CLOSES : 7 sur 11
+
+`famille_compatible_de_chaine` : { chaîne } ⊢ famille_compatible(𝔇(C)), 0,5 s,
+1 hyp — **du premier coup**, l'avertissement LEÇON 18 ayant fait traiter
+l'asymétrie dès l'écriture : c'est le couple du PETIT qu'on transporte, donc
+(a,b) quand le majorant est q, mais (a,c) quand c'est p.
+
+`union_compatible_fonctionnelle` : { chaîne } ⊢ est_fonctionnel(⋃𝔇(C)), 0,1 s —
+tombe de (3) par `union_famille_fonctionnelle`, déjà dans le dépôt.
+
+`_inclusion_membres` a été remonté au niveau module pour servir les deux
+données sans duplication (non-régression vérifiée sur la dirigée).
+
+**Reste 4 sur 11** : (1) domaine couvrant, (7) surjectivité, (9) dom(⋃𝔇) ⊂
+US×US, (10) image(⋃𝔇, US×US) ⊂ US. Ces quatre-là mêlent 𝔇 ET US : elles
+demanderont le lien entre `union_premiere(C)` et les pr₁ des membres, là où
+les sept premières ne parlaient que de 𝔇.
