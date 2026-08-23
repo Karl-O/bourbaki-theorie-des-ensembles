@@ -1193,3 +1193,19 @@ les imports de plusieurs modules et de leurs tests miroirs ; à faire d'un bloc,
 tests verts avant/après, et non en fin de session.
 
 **À FAIRE au prochain tick, avant d'écrire quoi que ce soit de neuf.**
+
+### 2026-08-23, 08h15 — dette SOLDÉE
+
+`claim/donnees/` créé ; `ensembles_union_premiere.py` et
+`ensembles_famille_dirigee.py` y sont déplacés (git mv, avec leurs tests
+miroirs), puis le premier est SCINDÉ : les BRIQUES restent dans
+`ensembles_union_premiere.py` (226 l), l'ASSEMBLAGE de la donnée (9) part dans
+`ensembles_dom_union.py` (144 l).
+
+Résultat : `claim/` retombe à 9 entrées, `donnees/` en compte 4, aucun fichier
+au-dessus de 300 lignes. 8 tests verts avant ET après — le déplacement n'a rien
+cassé, et les seuls importateurs étaient les deux tests miroirs.
+
+**La leçon de découpage** : séparer les BRIQUES de l'ASSEMBLAGE est le bon axe.
+Un module qui grossit le fait presque toujours parce qu'il mélange les deux ;
+la coupure suit alors une ligne naturelle plutôt qu'arbitraire.

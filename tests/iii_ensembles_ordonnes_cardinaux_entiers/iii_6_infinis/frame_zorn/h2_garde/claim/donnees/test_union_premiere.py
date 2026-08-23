@@ -7,7 +7,7 @@ from bourbaki.ii_theorie_des_ensembles.ii_1_relations_collectivisantes import en
 from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_6_infinis.chaine_recollement.ensembles_chaine_temoin_abstrait import (
     union_premiere,
 )
-from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_6_infinis.frame_zorn.h2_garde.claim.ensembles_union_premiere import (
+from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_6_infinis.frame_zorn.h2_garde.claim.donnees.ensembles_union_premiere import (
     pr1_inclus_union,
 )
 
@@ -33,7 +33,7 @@ def test_dom_pr2_egale_carre():
     `produit_monotone_carre` sait faire croître, donc la pièce qui manquait
     à la donnée (9)."""
     from bourbaki.i_description_mathematique_formelle.i_1_termes_relations.outil_formule import egal
-    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_6_infinis.frame_zorn.h2_garde.claim.ensembles_union_premiere import (
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_6_infinis.frame_zorn.h2_garde.claim.donnees.ensembles_union_premiere import (
         dom_pr2_egale_carre,
     )
     vp = var("pmemb")
@@ -53,7 +53,7 @@ def test_dom_union_inclus_carre():
     from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_6_infinis.frame_zorn.h2_garde.ensembles_fam_chaine import (
         famille_de_chaine,
     )
-    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_6_infinis.frame_zorn.h2_garde.claim.ensembles_union_premiere import (
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_6_infinis.frame_zorn.h2_garde.claim.donnees.ensembles_dom_union import (
         dom_union_inclus_carre,
     )
     vC = var("Cch")
@@ -73,7 +73,7 @@ def test_valeur_dans_pr1():
     from bourbaki.i_description_mathematique_formelle.i_1_termes_relations.outil_formule import (
         appartient, pourtout, impl,
     )
-    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_6_infinis.frame_zorn.h2_garde.claim.ensembles_union_premiere import (
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_6_infinis.frame_zorn.h2_garde.claim.donnees.ensembles_union_premiere import (
         valeur_dans_pr1,
     )
     vp, vx, vw = var("pmemb"), var("xvp"), var("wvp")

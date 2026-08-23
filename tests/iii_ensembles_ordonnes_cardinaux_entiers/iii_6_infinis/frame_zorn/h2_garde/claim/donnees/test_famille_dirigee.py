@@ -11,7 +11,7 @@ from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_3_equipotence_cardina
 from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_6_infinis.frame_zorn.h2_garde.ensembles_fam_chaine import (
     famille_de_chaine,
 )
-from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_6_infinis.frame_zorn.h2_garde.claim.ensembles_famille_dirigee import (
+from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_6_infinis.frame_zorn.h2_garde.claim.donnees.ensembles_famille_dirigee import (
     famille_dirigee_de_chaine, union_dirigee_injective,
 )
 
@@ -51,7 +51,7 @@ def test_famille_compatible_de_chaine():
     from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_2_bien_ordonnes.bon_ordre.recurrence_transfinie.ensembles_c60_coeur import (
         famille_compatible,
     )
-    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_6_infinis.frame_zorn.h2_garde.claim.ensembles_famille_dirigee import (
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_6_infinis.frame_zorn.h2_garde.claim.donnees.ensembles_famille_dirigee import (
         famille_compatible_de_chaine,
     )
     D = famille_de_chaine(var("Cch"))
@@ -63,7 +63,7 @@ def test_famille_compatible_de_chaine():
 
 def test_union_compatible_fonctionnelle():
     """🎯 { chaîne } ⊢ est_fonctionnel( ⋃𝔇(C) )   (donnée 6/11)."""
-    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_6_infinis.frame_zorn.h2_garde.claim.ensembles_famille_dirigee import (
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_6_infinis.frame_zorn.h2_garde.claim.donnees.ensembles_famille_dirigee import (
         union_compatible_fonctionnelle,
     )
     D = famille_de_chaine(var("Cch"))
