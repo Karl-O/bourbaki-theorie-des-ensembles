@@ -238,5 +238,62 @@ def inclus_dans_union_fam(C="Cch", q="pmemb", w="z"):
     return res
 
 
+# @livre Ch.III §6.3 Demo.2 | E III.48 L.24-26 | PDF p.151
+#   (« 𝔐 est inductif » : chaque membre de la famille recollée est injectif)
+def membres_famille_injectifs(E_set="E", C="Cch", g="pmi"):
+    """🎯 { chaine(Γ𝔉,𝔉,C) } ⊢ membres_injectifs( 𝔇(C) ).   [donnée 5/11].
+
+    `membre_famille` (CLOS) identifie tout membre à un pr₂(q) pour un q de la
+    chaîne, lequel appartient au frame — `pr2_injectif` s'applique, Leibniz
+    transporte.  Le liant porte le nom `pmi` attendu par `membres_injectifs`,
+    d'où une conclusion identique au caractère près (LEÇON 15)."""
+    from bourbaki.i_description_mathematique_formelle.i_5_theories_egalitaires.i_5_2_tactiques_abrege_egalite import (
+        symetrie,
+    )
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_2_bien_ordonnes.bon_ordre.zorn_zermelo.ensembles_zorn import (
+        chaine,
+    )
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_3_equipotence_cardinaux.somme_produit_bornes.ensembles_recollement_famille_injectif import (
+        injectif_graphe, membres_injectifs,
+    )
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_6_infinis.hessenberg.coeur.ensembles_hessenberg_hard import (
+        frame_pair, frame_ordre,
+    )
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_6_infinis.frame_zorn.h2_garde.ensembles_donnees_chaine import (
+        pr2_injectif,
+    )
+    vE, vC, vg = _t(E_set), _t(C), var(g)
+    Fr = frame_pair(vE)
+    h_ch = N.assume(chaine(frame_ordre(vE), Fr, vC, "xmaj", "y", "z"))
+    C_inc = conjonction_elim_gauche(h_ch)                   # C ⊂ 𝔉(E)
+
+    mem = membre_famille(C, g)                              # g∈𝔇 ⇔ (∃q)(q∈C et g=pr₂q)
+    ex = N.modus_ponens(N.assume(appartient(vg, famille_de_chaine(vC))),
+                        equivalence_avant(mem))
+    corps = ex.conclusion.sous[0]
+    nq = ex.conclusion.lieur
+    vq = var(nq)
+
+    h_c = N.assume(corps)
+    q_in_C = conjonction_elim_gauche(h_c)
+    g_eq = conjonction_elim_droite(h_c)                     # g = pr₂ q
+    q_in_Fr = N.modus_ponens(q_in_C, instancie(C_inc, vq))
+    inj_q = N.modus_ponens(q_in_Fr, N.loi_deduction(
+        appartient(vq, Fr), pr2_injectif(E_set, vq)))       # injectif_graphe(pr₂ q)
+    inj_g = N.modus_ponens(inj_q, equivalence_avant(N.modus_ponens(
+        N.modus_ponens(g_eq, symetrie(vg, E.pr2(vq))),
+        N.s6(E.pr2(vq), vg, "wmf", injectif_graphe(var("wmf"))))))
+
+    sortie = N.modus_ponens(ex, existe_elimination(
+        N.loi_deduction(corps, inj_g), nq))
+    res = N.generalisation(g, N.loi_deduction(
+        appartient(vg, famille_de_chaine(vC)), sortie))
+
+    assert res.conclusion == membres_injectifs(famille_de_chaine(vC), g),         "membres_famille_injectifs : forme"
+    assert len(res.hypotheses) == 1, "membres_famille_injectifs : hyps ≠ 1"
+    return res
+
+
 __all__ = ["graphe_pr2", "famille_de_chaine", "membre_famille",
+           "membres_famille_injectifs",
            "inclus_dans_union_fam", "union_fam_egale"]

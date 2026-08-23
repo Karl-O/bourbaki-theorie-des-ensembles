@@ -30,7 +30,7 @@ from bourbaki.ii_theorie_des_ensembles.ii_1_relations_collectivisantes import en
 
 from bourbaki.i_description_mathematique_formelle.i_2_theoremes.tactiques.tactiques_abrege2 import (
     conjonction_elim_gauche, conjonction_elim_droite, equivalence_avant,
-    instancie,
+    equivalence_arriere, instancie,
 )
 from bourbaki.i_description_mathematique_formelle.i_2_theoremes.tactiques.tactiques_abrege import (
     antecedent_consequent,
@@ -175,4 +175,75 @@ def us_infini(E_set="E", C="Cch", p="pmemb"):
     return res
 
 
-__all__ = ["pr1_inclus_E", "us_infini", "us_inclus_E"]
+# @livre Ch.III §6.3 Demo.2 | E III.48 L.24-26 | PDF p.151  (chaque φ de la chaîne est injectif)
+def pr2_injectif(E_set="E", p="pmemb"):
+    """{ p ∈ 𝔉(E) } ⊢ injectif_graphe( pr₂(p) ).
+
+    Miroir de `pr1_inclus_E` pour la SECONDE projection : le corps du frame
+    donne `est_bijection_de(φ, S×S, S)`, dont on extrait la fonctionnalité et
+    l'injectivité au niveau VALEUR ; le pont réciproque
+    (`injective_dans_implique_injectif_graphe`) la convertit en forme COUPLE,
+    qui est celle qu'exige `membres_injectifs`.
+
+    ⚠️ Le pont est appelé par le NOM du liant (nphi), jamais par le terme : il
+    relaie vers `couple_donne_valeur`, qui attend des noms (LEÇON 17)."""
+    from bourbaki.ii_theorie_des_ensembles.ii_2_couples.ii_2_1_definition_couples.ensembles_projections import (
+        projection_seconde,
+    )
+    from bourbaki.i_description_mathematique_formelle.i_5_theories_egalitaires.i_5_2_tactiques_abrege_egalite import (
+        symetrie, composer_egalites, congruence_terme,
+    )
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_3_equipotence_cardinaux.somme_produit_bornes.ensembles_recollement_famille_injectif import (
+        injectif_graphe,
+    )
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_3_equipotence_cardinaux.somme_produit_bornes.ensembles_injectif_graphe_pont import (
+        injective_dans_implique_injectif_graphe,
+    )
+    vE, vp = _t(E_set), _t(p)
+    pr2p = E.pr2(vp)
+    decl = N.modus_ponens(N.assume(appartient(vp, frame_pair(vE))),
+                          equivalence_avant(_frame_membre_t(vE, vp)))
+    exS = decl.conclusion
+    nS, bodyS = exS.lieur, exS.sous[0]
+    nphi, bodyphi = bodyS.lieur, bodyS.sous[0]
+
+    def inner(b):
+        hh = N.assume(b)
+        vS, vphi = var(nS), var(nphi)
+        bij = conjonction_elim_droite(hh)                   # est_bijection_de(φ,S×S,S)
+        p_eq = conjonction_elim_gauche(conjonction_elim_gauche(
+            conjonction_elim_gauche(hh)))                   # p = (S,φ)
+        fonc = conjonction_elim_gauche(conjonction_elim_gauche(bij))
+        dom_eq = conjonction_elim_droite(conjonction_elim_gauche(bij))
+        inj_A = conjonction_elim_gauche(conjonction_elim_droite(bij))
+
+        #  injective_dans(φ, S×S)  →  injective_dans(φ, dom φ)   [Leibniz]
+        SxS = E.produit(vS, vS)
+        equiv = N.modus_ponens(dom_eq, N.s6(E.dom(vphi), SxS, "wij",
+                                            E.injective_dans(vphi, var("wij"))))
+        inj_dom = N.modus_ponens(inj_A, equivalence_arriere(equiv))
+
+        pont = injective_dans_implique_injectif_graphe(nphi)
+        ig = N.modus_ponens(fonc, N.loi_deduction(E.est_fonctionnel(vphi), pont))
+        ig = N.modus_ponens(inj_dom, N.loi_deduction(
+            E.injective_dans(vphi, E.dom(vphi)), ig))       # injectif_graphe(φ)
+
+        #  transport φ → pr₂(p)   (patron de pr1_inclus_E)
+        cong = N.modus_ponens(p_eq, congruence_terme(
+            vp, E.couple(vS, vphi), E.pr2(var("wdc")), "wdc"))
+        eq_pr2 = composer_egalites(cong, projection_seconde(nS, nphi))
+        return N.loi_deduction(b, N.modus_ponens(ig, equivalence_avant(
+            N.modus_ponens(N.modus_ponens(eq_pr2, symetrie(pr2p, vphi)),
+                           N.s6(vphi, pr2p, "wdc",
+                                injectif_graphe(var("wdc")))))))
+
+    imp_phi = existe_elimination(inner(bodyphi), nphi)
+    body = N.modus_ponens(N.assume(bodyS), imp_phi)
+    imp_S = existe_elimination(N.loi_deduction(bodyS, body), nS)
+    res = N.modus_ponens(decl, imp_S)
+    assert res.conclusion == injectif_graphe(pr2p), "pr2_injectif : forme"
+    assert list(res.hypotheses) == [appartient(vp, frame_pair(vE))],         "pr2_injectif : hyps"
+    return res
+
+
+__all__ = ["pr1_inclus_E", "pr2_injectif", "us_infini", "us_inclus_E"]

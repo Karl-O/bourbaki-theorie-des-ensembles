@@ -41,3 +41,32 @@ def test_us_infini():
     assert len(t.hypotheses) == 2
     assert non(egal(vC, E.VIDE)) in t.hypotheses, "« C non vide » doit servir"
     assert t.conclusion not in t.hypotheses, "VACUOUS"
+
+
+def test_pr2_injectif():
+    """{ p ∈ 𝔉(E) } ⊢ injectif_graphe( pr₂(p) )."""
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_3_equipotence_cardinaux.somme_produit_bornes.ensembles_recollement_famille_injectif import (
+        injectif_graphe,
+    )
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_6_infinis.frame_zorn.h2_garde.ensembles_donnees_chaine import (
+        pr2_injectif,
+    )
+    t = pr2_injectif()
+    assert t.conclusion == injectif_graphe(E.pr2(var("pmemb")))
+    assert len(t.hypotheses) == 1
+    assert t.conclusion not in t.hypotheses, "VACUOUS"
+
+
+def test_membres_famille_injectifs():
+    """🎯 { chaîne } ⊢ membres_injectifs( 𝔇(C) )   (donnée 5/11 du recollement)."""
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_3_equipotence_cardinaux.somme_produit_bornes.ensembles_recollement_famille_injectif import (
+        membres_injectifs,
+    )
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_6_infinis.frame_zorn.h2_garde.ensembles_fam_chaine import (
+        famille_de_chaine, membres_famille_injectifs,
+    )
+    t = membres_famille_injectifs()
+    assert t.conclusion == membres_injectifs(famille_de_chaine(var("Cch")), "pmi")
+    assert len(t.hypotheses) == 1, "hyps : %d" % len(t.hypotheses)
+    assert t.conclusion not in t.hypotheses, "VACUOUS"
+    assert len(E.theorie_ensembles().axiomes) == 22

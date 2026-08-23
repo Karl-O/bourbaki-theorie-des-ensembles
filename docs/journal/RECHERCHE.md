@@ -207,7 +207,7 @@ docstring). Classées, avec leurs variables libres :
 | 2 | injectivité de l'union (forme couple) | 𝔇 | à faire |
 | 3 | famille COMPATIBLE (deux membres coïncident là où les deux sont définis) | 𝔇 | à faire |
 | 4 | famille DIRIGÉE (p,q ∈ 𝔇 ⇒ ∃r les prolongeant) | 𝔇 | à faire |
-| 5 | MEMBRES INJECTIFS : (∀p)(p∈𝔇 ⇒ injectif_graphe(p)) | 𝔇 | **bloquée, cf. infra** |
+| 5 | MEMBRES INJECTIFS : (∀p)(p∈𝔇 ⇒ injectif_graphe(p)) | 𝔇 | ✅ CLOSE (`membres_famille_injectifs`) |
 | 6 | fonctionnalité de l'union | 𝔇 | à faire |
 | 7 | surjectivité du recollement | 𝔇,US | à faire |
 | 8 | US ⊂ E | E,US | ✅ CLOSE (`us_inclus_E`) |
@@ -231,3 +231,28 @@ deux antécédents d'une même image coïncident) et elle débloquerait (5), don
 vraisemblablement aussi (2) et (6) qui portent sur l'union des mêmes graphes.
 C'est le prochain objectif naturel, avant d'attaquer (3) et (4) qui, eux,
 dépendent de l'ORDRE de la chaîne et non de la structure de graphe.
+
+
+### R-13, suite (2026-08-23, 07h15) — donnée (5) CLOSE, le pont a payé
+
+Le pont réciproque écrit au tick précédent débloque exactement ce qui était
+annoncé. Deux briques neuves :
+
+  • `pr2_injectif` : { p ∈ 𝔉(E) } ⊢ injectif_graphe(pr₂ p) — miroir de
+    `pr1_inclus_E` pour la seconde projection ; le corps du frame donne la
+    bijection, dont on extrait fonctionnalité et injectivité-VALEUR, que le
+    pont convertit en forme COUPLE. 0,4 s, 1 hypothèse.
+  • `membres_famille_injectifs` : { chaîne } ⊢ membres_injectifs(𝔇(C)) —
+    la donnée (5). 0,2 s, 1 hypothèse.
+
+**Piège évité** : le pont relaie vers `couple_donne_valeur`, qui attend des
+NOMS ; on l'appelle donc par le nom du liant (`nphi`), jamais par le terme.
+C'est la LEÇON 17 appliquée avant de se cogner, pour une fois.
+
+`union_fam_egale` ré-éprouvée au passage (LEÇON 17) : elle échoue TOUJOURS,
+même erreur qu'avant. Le contournement `inclus_dans_union_fam` reste la voie.
+
+**Reste 8 des 11.** Les prochaines dans l'ordre de facilité présumée : (2) et
+(6), injectivité et fonctionnalité de l'UNION — mêmes graphes, et le dépôt a
+`union_famille_injective` dans `ensembles_recollement_famille_injectif.py` :
+RELIRE L'AMONT avant d'écrire.
