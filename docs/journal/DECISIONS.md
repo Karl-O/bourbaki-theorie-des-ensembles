@@ -1023,3 +1023,25 @@ les symboles qu'elles contiennent :
 STRATÉGIE : (i) d'abord — purement mécanique, et le maximal existe désormais
 pour de bon ; puis (ii) via les constructions de cadre_bijection ; (iii) en
 dernier, c'est là qu'est la vraie mathématique restante.
+
+## 2026-08-23 04h15 — STEP B : pourquoi il ne se contourne PAS (fait structurel)
+En branchant unpack_sous_maximal sur l'endgame, le point dur devient net :
+  hessenberg_aa_egal_de_maximal {Card S₀=Card E, Card(S₀×S₀)=Card S₀}
+      ⊢ enonce_hessenberg(E)                        ← conclusion E-SEULE ✅
+  maximal_carre_egal {bij φ₀} ⊢ Card(S₀×S₀)=Card S₀ ← déchargeable par bij0 ✅
+  Card S₀ = Card E                                   ← LE CLAIM ❌
+Le CLAIM ne peut pas être « laissé en hypothèse » comme on l'a fait ailleurs :
+il MENTIONNE S₀, qui est le témoin local ouvert par unpack_sous_maximal. Or
+`existe_elimination` exige qu'aucune hypothèse restante ne contienne le
+témoin. Toute donnée résiduelle parlant de S₀, Ucadre, ψ ou uwit bloque donc
+la sortie de la portée — c'est exactement l'avertissement que porte déjà
+hessenberg_vrai (« 12 hyps mentionnant les témoins internes à décharger AVANT
+l'élimination »).
+CONSÉQUENCE : il n'y a pas de raccourci vers a²=a sans hypothèse ; il faut
+CONSTRUIRE le cadre dans la portée (Ucadre := le complément de S₀ dans E, ψ
+:= la bijection fournie par complement_grand + cadre_bijection) et dériver
+la contradiction, ce qui décharge tout d'un coup. C'est le vrai reste de
+mathématique de la campagne, et il est parfaitement délimité.
+PROCHAIN PAS : lire hessenberg/coeur/ensembles_hessenberg_extension.py et
+frame_zorn/ensembles_extension_z_infini.py pour voir quelles briques du cadre
+existent déjà, et lesquelles il faut construire.
