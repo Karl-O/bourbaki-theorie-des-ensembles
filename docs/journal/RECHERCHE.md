@@ -395,3 +395,18 @@ pr₁u × pr₁u, puis conclure par monotonie du produit pour ⊂ — chercher
 `produit_monotone_inclusion` AVANT d'écrire.
 
 ⚠️ `claim/` atteint 10 entrées : le prochain module exigera un sous-dossier.
+
+### R-13, suite (07h55) — `produit_monotone_carre`, et une question de PLACE
+
+{ A ⊂ B } ⊢ A×A ⊂ B×B, 0,1 s, 1 hyp. Le dépôt ne l'avait pas (grep : aucune
+monotonie du produit pour ⊂). C'est le dernier maillon de la donnée (9), après
+`pr1_inclus_union`.
+
+**Décision d'architecture** : l'énoncé a été écrit dans `ii_2_2_produit_deux_ensembles/`,
+au chapitre du PRODUIT, et non dans la machinerie du §III.6 qui le réclame.
+Il est général, la règle « l'arborescence calque la table des matières » le
+place là, et `claim/` avait de toute façon atteint ses 10 entrées. Un lemme
+écrit pour un besoin local mais d'énoncé général se range à son vrai chapitre.
+
+**Il reste pour (9)** : assembler — z ∈ dom(⋃𝔇) → membre p=pr₂u → dom(pr₂u) =
+pr₁u×pr₁u (corps du frame) → ⊂ US×US par les deux briques.
