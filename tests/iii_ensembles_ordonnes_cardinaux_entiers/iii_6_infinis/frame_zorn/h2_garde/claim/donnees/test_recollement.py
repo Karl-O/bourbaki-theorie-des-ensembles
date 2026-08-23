@@ -43,3 +43,21 @@ def test_recollement_de_chaine():
         non(egal(vC, E.VIDE))}
     assert t.conclusion not in t.hypotheses, "VACUOUS"
     assert len(E.theorie_ensembles().axiomes) == 22
+
+
+@pytest.mark.slow
+def test_donnees_recollement_prouve():
+    """🎯🎯🎯 ⊢ (∀C)( (chaîne et C≠∅) ⇒ (⋃S,⋃𝔇)∈𝔉(E) ) — CLOS.   [~175 s]
+
+    C'était l'UNIQUE hypothèse ouverte de `hess_maximal`, portée sous le nom
+    `donnees_recollement`.  Elle est maintenant un théorème sans hypothèse."""
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_6_infinis.frame_zorn.h2_garde.ensembles_majore_fam import (
+        residu_fam,
+    )
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_6_infinis.frame_zorn.h2_garde.claim.donnees.ensembles_recollement import (
+        donnees_recollement_prouve,
+    )
+    t = donnees_recollement_prouve()
+    assert t.conclusion == residu_fam("E", "C", "xmaj", "y", "z")
+    assert not t.hypotheses, "doit être CLOS : %d hyps" % len(t.hypotheses)
+    assert len(E.theorie_ensembles().axiomes) == 22

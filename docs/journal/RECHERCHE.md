@@ -592,3 +592,22 @@ en une passe, fonction d'abord » a corrigé l'échec du tick précédent.
 **PROCHAIN JALON** : les brancher dans `frame_de_recollement`, puis dans
 `donnees_recollement` — l'unique hypothèse ouverte de `hess_maximal`. Si le
 branchement passe, Hessenberg tient sous la SEULE `predecesseur_fini_universel`.
+
+## 🎯🎯🎯 R-13 — ABOUTI : `donnees_recollement` est un THÉORÈME (2026-08-23, 09h00)
+
+`donnees_recollement_prouve` : ⊢ (∀C)( (chaîne(Γ𝔉,𝔉,C) et C≠∅) ⇒
+(⋃S(C),⋃𝔇(C)) ∈ 𝔉(E) ), **0 hypothèse**, 174,4 s, 22 axiomes.
+
+C'était l'UNIQUE hypothèse ouverte de `hess_maximal`, portée depuis des
+semaines. La chaîne complète :
+
+    11 données (chacune sous « C chaîne »)   → recollement_de_chaine
+    recollement_de_chaine (sous le garde)    → donnees_recollement_prouve (CLOS)
+
+La généralisation sur C n'est licite que parce que les deux conjoints du garde
+sont déchargés JUSTE AVANT — l'assertion `not imp.hypotheses` le vérifie plutôt
+que de l'espérer.
+
+**Conséquence attendue** : `hess_maximal` doit passer de 2 hypothèses à UNE
+(« E infini »), et `hessenberg_par_extension` tenir sous
+{ E infini, predecesseur_fini_universel } après branchement.

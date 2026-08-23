@@ -18,9 +18,12 @@ theorie_ensembles() INCHANGÉE (22).  Noyau INTACT.
 from __future__ import annotations
 
 from bourbaki.i_description_mathematique_formelle.i_1_termes_relations.outil_formule import (
-    Terme, var, egal, non, appartient,
+    Terme, var, egal, et, non, appartient,
 )
 from bourbaki.i_description_mathematique_formelle.i_2_theoremes.noyau import noyau_abrege as N
+from bourbaki.i_description_mathematique_formelle.i_2_theoremes.tactiques.tactiques_abrege2 import (
+    conjonction_elim_gauche, conjonction_elim_droite,
+)
 from bourbaki.ii_theorie_des_ensembles.ii_1_relations_collectivisantes import ensembles_abrege as E
 
 from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_2_bien_ordonnes.bon_ordre.recurrence_transfinie.ensembles_c60_coeur import (
@@ -43,6 +46,9 @@ from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_6_infinis.frame_zorn.
 )
 from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_6_infinis.frame_zorn.h2_garde.ensembles_pont_valeur import (
     frame_de_recollement,
+)
+from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_6_infinis.frame_zorn.h2_garde.ensembles_majore_fam import (
+    residu_fam,
 )
 from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_6_infinis.frame_zorn.h2_garde.claim.donnees.ensembles_famille_dirigee import (
     famille_dirigee_de_chaine, union_dirigee_injective,
@@ -109,4 +115,35 @@ def recollement_de_chaine(E_set="E", C="Cch"):
     return base
 
 
-__all__ = ["les_onze_donnees", "recollement_de_chaine"]
+# @livre Ch.III §6.3 Demo.2 | E III.48 L.24-25 | PDF p.151
+#   (« 𝔐 est un ensemble inductif » — le résidu gardé, désormais PROUVÉ)
+def donnees_recollement_prouve(E_set="E", C="C", x="xmaj", y="y", z="z"):
+    """🎯🎯🎯 ⊢ (∀C)( (chaîne(Γ𝔉,𝔉,C) et C≠∅) ⇒ (⋃S(C),⋃𝔇(C)) ∈ 𝔉(E) ).
+       CLOS — 0 hypothèse.
+
+    C'était l'UNIQUE hypothèse ouverte de `hess_maximal`, portée depuis des
+    semaines sous le nom `donnees_recollement`.  Elle est désormais un
+    THÉORÈME : `recollement_de_chaine` la donne pour un C fixé sous les deux
+    conjoints du garde, qu'on décharge avant de généraliser.
+
+    ⚠️ La généralisation sur C n'est licite que parce qu'il ne reste AUCUNE
+    hypothèse — les deux conjoints ayant été déchargés juste avant."""
+    vE, vC = _t(E_set), var(C)
+    Gam, Fr = frame_ordre(vE), frame_pair(vE)
+    garde = et(chaine(Gam, Fr, vC, x, y, z), non(egal(vC, E.VIDE)))
+    h = N.assume(garde)
+    rec = recollement_de_chaine(E_set, C)
+    rec = N.modus_ponens(conjonction_elim_gauche(h), N.loi_deduction(
+        chaine(Gam, Fr, vC, x, y, z), rec))
+    rec = N.modus_ponens(conjonction_elim_droite(h), N.loi_deduction(
+        non(egal(vC, E.VIDE)), rec))
+    imp = N.loi_deduction(garde, rec)
+    assert not imp.hypotheses,         "donnees_recollement_prouve : hypothèse résiduelle, généralisation illicite"
+    res = N.generalisation(C, imp)
+    assert res.conclusion == residu_fam(E_set, C, x, y, z),         "donnees_recollement_prouve : forme ≠ residu_fam"
+    assert not res.hypotheses, "donnees_recollement_prouve : doit être CLOS"
+    return res
+
+
+__all__ = ["les_onze_donnees", "recollement_de_chaine",
+           "donnees_recollement_prouve"]
