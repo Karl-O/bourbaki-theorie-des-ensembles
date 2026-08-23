@@ -20,7 +20,7 @@ theorie_ensembles() INCHANGÉE (22).  Noyau INTACT.
 from __future__ import annotations
 
 from bourbaki.i_description_mathematique_formelle.i_1_termes_relations.outil_formule import (
-    Terme, var, egal, et, impl, appartient, existe,
+    Terme, var, egal, et, impl, appartient, existe, inclus,
 )
 from bourbaki.i_description_mathematique_formelle.i_2_theoremes.noyau import noyau_abrege as N
 from bourbaki.ii_theorie_des_ensembles.ii_1_relations_collectivisantes import ensembles_abrege as E
@@ -204,4 +204,39 @@ def union_fam_egale(C="Cch", w="z", _trace=False):
     return res
 
 
-__all__ = ["graphe_pr2", "famille_de_chaine", "membre_famille", "union_fam_egale"]
+def inclus_dans_union_fam(C="Cch", q="pmemb", w="z"):
+    """🎯 { q ∈ C } ⊢ pr₂(q) ⊂ union_famille( 𝔇(C) )   [1 hyp].
+
+    Le miroir de membre_donne_inclus_seconde, mais du côté FAMILLE : le graphe
+    pr₂(q) est un membre de 𝔇(C) (membre_famille, CLOS), donc tout w qu'il
+    contient est dans la réunion de la famille.  C'est la brique qui permet de
+    remplacer ⋃φ(C) par ⋃𝔇 dans le témoin-majorant, SANS passer par l'égalité
+    des deux unions (celle-ci reste en chantier, cf. leçon 15)."""
+    vC, vq, vw = _t(C), var(q), var(w)
+    D = famille_de_chaine(vC)
+    UD = union_famille(D)
+    pr = E.pr2(vq)
+
+    h_q = N.assume(appartient(vq, vC))                      # q∈C  [HONNÊTE]
+    h_w = N.assume(appartient(vw, pr))                      # w∈pr₂q
+    #   pr₂q ∈ 𝔇(C) : témoin q dans la caractérisation de la famille
+    fam_q = instancie(N.generalisation(_G, membre_famille(vC, _G)), pr)
+    temoin = N.modus_ponens(
+        conjonction_intro(h_q, N.reflexivite(pr)),
+        N.s5(et(appartient(var(_Q), vC), egal(pr, E.pr2(var(_Q)))), vq, _Q))
+    g_in = N.modus_ponens(temoin, equivalence_arriere(fam_q))
+    #   w ∈ ⋃𝔇 : témoin pr₂q dans la caractérisation de la réunion
+    mu = instancie(instancie(N.generalisation("Df", N.generalisation(
+        "wf", membre_union_famille("Df", "wf"))), D), vw)
+    corps = et(appartient(var(_G), D), appartient(vw, var(_G)))
+    wit = N.modus_ponens(conjonction_intro(g_in, h_w), N.s5(corps, pr, _G))
+    w_in = N.modus_ponens(wit, equivalence_arriere(mu))
+    res = N.generalisation(w, N.loi_deduction(appartient(vw, pr), w_in))
+
+    assert res.conclusion == inclus(pr, UD, w), "inclus_dans_union_fam : forme"
+    assert list(res.hypotheses) == [appartient(vq, vC)],         "inclus_dans_union_fam : hyps ≠ {q∈C}"
+    return res
+
+
+__all__ = ["graphe_pr2", "famille_de_chaine", "membre_famille",
+           "inclus_dans_union_fam", "union_fam_egale"]

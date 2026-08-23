@@ -74,3 +74,19 @@ def test_frame_de_recollement():
     assert egal(E.dom(U), Prod) not in t.hypotheses
     assert E.injective_dans(U, Prod) not in t.hypotheses
     assert len(E.theorie_ensembles().axiomes) == 22
+
+
+def test_inclus_dans_union_fam():
+    """🎯 {q∈C} ⊢ pr₂(q) ⊂ ⋃𝔇(C) — le contournement de l'égalité des unions."""
+    from bourbaki.i_description_mathematique_formelle.i_1_termes_relations.outil_formule import (
+        appartient, inclus,
+    )
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_6_infinis.frame_zorn.h2_garde.ensembles_fam_chaine import (
+        famille_de_chaine, inclus_dans_union_fam,
+    )
+    t = inclus_dans_union_fam()
+    vC, vq = var("Cch"), var("pmemb")
+    UD = union_famille(famille_de_chaine(vC))
+    assert t.conclusion == inclus(E.pr2(vq), UD, "z")
+    assert list(t.hypotheses) == [appartient(vq, vC)]
+    assert len(E.theorie_ensembles().axiomes) == 22
