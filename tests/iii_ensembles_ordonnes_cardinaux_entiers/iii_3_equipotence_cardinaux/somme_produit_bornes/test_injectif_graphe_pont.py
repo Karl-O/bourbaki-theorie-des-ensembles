@@ -25,3 +25,26 @@ def test_pont_deux_hyps_honnetes():
     assert E.est_fonctionnel(vF) in th.hypotheses
     assert injectif_graphe(vF) in th.hypotheses
     assert len(th.hypotheses) == 2
+
+
+def test_pont_reciproque_valeur_vers_couple():
+    """🎯 { est_fonctionnel(F), injective_dans(F, dom F) } ⊢ injectif_graphe(F).
+
+    La RÉCIPROQUE du pont couple→valeur, exigée par les données du recollement
+    (RECHERCHE R-13) : on dispose d'une bijection, donc de l'injectivité au
+    niveau VALEUR, et il faut la forme COUPLE-NATIVE."""
+    from bourbaki.i_description_mathematique_formelle.i_1_termes_relations.outil_formule import var
+    from bourbaki.ii_theorie_des_ensembles.ii_1_relations_collectivisantes import ensembles_abrege as EE
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_3_equipotence_cardinaux.somme_produit_bornes.ensembles_recollement_famille_injectif import (
+        injectif_graphe,
+    )
+    from bourbaki.iii_ensembles_ordonnes_cardinaux_entiers.iii_3_equipotence_cardinaux.somme_produit_bornes.ensembles_injectif_graphe_pont import (
+        injective_dans_implique_injectif_graphe,
+    )
+    vF = var("Fpont")
+    t = injective_dans_implique_injectif_graphe()
+    assert t.conclusion == injectif_graphe(vF)
+    assert set(t.hypotheses) == {EE.est_fonctionnel(vF),
+                                 EE.injective_dans(vF, EE.dom(vF))}
+    assert t.conclusion not in t.hypotheses, "VACUOUS"
+    assert len(EE.theorie_ensembles().axiomes) == 22

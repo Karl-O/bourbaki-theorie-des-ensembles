@@ -36,7 +36,7 @@ from bourbaki.i_description_mathematique_formelle.i_2_theoremes.noyau import noy
 from bourbaki.ii_theorie_des_ensembles.ii_1_relations_collectivisantes import ensembles_abrege as E
 from bourbaki.i_description_mathematique_formelle.i_2_theoremes.tactiques.tactiques_abrege2 import (
     conjonction_intro, conjonction_elim_gauche, conjonction_elim_droite,
-    equivalence_avant, instancie,
+    equivalence_avant, equivalence_arriere, instancie,
 )
 from bourbaki.i_description_mathematique_formelle.i_4_theories_quantifiees.i_4_3_tactiques_abrege_quantif import (
     existe_elimination, alpha_existe,
@@ -156,4 +156,68 @@ def injectif_graphe_implique_injective_dans(F="Fpont"):
     return res
 
 
-__all__ = ["injectif_graphe_implique_injective_dans"]
+
+
+# ════════════════════════════════════════════════════════════════════════════
+#  🎯 LE PONT RÉCIPROQUE — valeur → couple.
+#
+#  Le sens ci-dessus (couple → valeur) suffisait tant qu'on PARTAIT d'un graphe
+#  injectif.  Les données du recollement (RECHERCHE R-13) demandent l'inverse :
+#  on DISPOSE d'une bijection — donc de l'injectivité au niveau VALEUR — et il
+#  faut en tirer la forme COUPLE-NATIVE qu'exige `membres_injectifs`.
+# ════════════════════════════════════════════════════════════════════════════
+# @livre Ch.III §3.5 Prop.- | E III.29 L.20-24 | PDF p.132  (injectivité : formes couple et valeur)
+def injective_dans_implique_injectif_graphe(F="Fpont", a="ainj", b="binj", c="cinj"):
+    """{ est_fonctionnel(F), injective_dans(F, dom F) } ⊢ injectif_graphe(F).
+                                                          [2 hyps HONNÊTES].
+
+    🎯 Le PONT valeur→couple, RÉCIPROQUE de celui ci-dessus.  Si (a,c)∈F et
+    (b,c)∈F, alors a et b sont dans dom F, et la fonctionnalité donne
+    c = F(a) = F(b) (`couple_donne_valeur`) ; l'injectivité au niveau valeur,
+    appliquée sur le domaine, conclut a = b.
+
+    Les binders portent les noms mêmes de `injectif_graphe` (ainj, binj, cinj)
+    pour que la conclusion coïncide au caractère près — aucune reconstruction,
+    donc aucune prise avec les renommages de τ (LEÇON 15)."""
+    vF = _t(F)
+    A = E.dom(vF)
+    va, vb, vc = var(a), var(b), var(c)
+    h_fonc = N.assume(E.est_fonctionnel(vF))
+    h_inj = N.assume(E.injective_dans(vF, A))
+
+    prem = et(appartient(E.couple(va, vc), vF), appartient(E.couple(vb, vc), vF))
+    h = N.assume(prem)
+    ac, bc = conjonction_elim_gauche(h), conjonction_elim_droite(h)
+
+    ax_dom = N.axiome(E.theorie_ensembles(), E.AXIOME_DOM)
+
+    def _dans_domaine(vx, couple_thm):
+        """(x,c)∈F  ⟹  x ∈ dom F   (S5 pour l'existentielle, puis l'axiome)."""
+        ex = N.modus_ponens(couple_thm,
+                            N.s5(appartient(E.couple(vx, var("y")), vF), vc, "y"))
+        return N.modus_ponens(ex, equivalence_arriere(
+            instancie(instancie(ax_dom, vF), vx)))
+
+    a_in, b_in = _dans_domaine(va, ac), _dans_domaine(vb, bc)
+
+    #  c = F(a)  et  c = F(b), donc F(a) = F(b)
+    val_a = N.modus_ponens(ac, N.loi_deduction(
+        appartient(E.couple(va, vc), vF), couple_donne_valeur(F, a, c)))
+    val_b = N.modus_ponens(bc, N.loi_deduction(
+        appartient(E.couple(vb, vc), vF), couple_donne_valeur(F, b, c)))
+    eq_val = composer_egalites(
+        N.modus_ponens(val_a, symetrie(vc, E.valeur(vF, va))), val_b)
+
+    inst = instancie(instancie(h_inj, va), vb)
+    res = N.modus_ponens(conjonction_intro(conjonction_intro(a_in, b_in), eq_val),
+                         inst)
+    imp = N.loi_deduction(prem, res)
+    out = N.generalisation(a, N.generalisation(b, N.generalisation(c, imp)))
+
+    assert out.conclusion == injectif_graphe(vF, a, b, c),         "injective_dans_implique_injectif_graphe : forme"
+    assert out.conclusion not in out.hypotheses, "pont réciproque : VACUOUS"
+    return out
+
+
+__all__ = ["injectif_graphe_implique_injective_dans",
+           "injective_dans_implique_injectif_graphe"]
