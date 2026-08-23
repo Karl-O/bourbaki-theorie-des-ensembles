@@ -1045,3 +1045,21 @@ mathématique de la campagne, et il est parfaitement délimité.
 PROCHAIN PAS : lire hessenberg/coeur/ensembles_hessenberg_extension.py et
 frame_zorn/ensembles_extension_z_infini.py pour voir quelles briques du cadre
 existent déjà, et lesquelles il faut construire.
+
+## 2026-08-23 04h20 — Les briques du cadre EXISTENT (inventaire)
+Lecture de hessenberg/coeur/ensembles_hessenberg_extension.py et
+frame_zorn/ensembles_extension_z_infini.py — le cadre est largement outillé :
+  • complement_grand {S₀⊂E, 𝔟+𝔟=𝔟, 𝔟<Card E} ⊢ ¬(Card(E∖S₀) ≤ 𝔟)
+    — « si le maximal était trop petit, son complément serait grand » ;
+  • existe_sous_ensemble_cardinal : réaliser un cardinal c ≤ Card A comme
+    SOUS-ENSEMBLE de A — c'est ce qui fabrique Ucadre ⊂ E∖S₀ de cardinal 𝔟 ;
+  • z_infini_derive, cadre_card_trois_b_reunion : la géométrie de Z=S₀∪U ;
+  • extension_absurde_chainee : la contradiction finale, déjà chaînée.
+Donc le STEP B n'est PAS à écrire de zéro : il s'agit d'ORCHESTRER ces
+briques DANS la portée du maximal, dans l'ordre de Bourbaki —
+  supposer 𝔟 < Card E → complement_grand → réaliser Ucadre de cardinal 𝔟
+  dans E∖S₀ → cadre_bijection donne ψ → extension_absurde_chainee ⇒ ⊥
+  → donc ¬(𝔟 < Card E) → avec S₀⊂E (card_inclus_inf_egal) et la trichotomie,
+  Card S₀ = Card E → endgame E-seul.
+C'est le même exercice de raccordement que celui réussi cette nuit sur les
+hypothèses valeur, mais plus long (≈ 8 à 12 briques à enchaîner).
