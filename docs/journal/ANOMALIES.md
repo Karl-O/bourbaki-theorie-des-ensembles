@@ -1079,3 +1079,24 @@ par `fini_downward_garde_thm`, dont la garde se décharge sur des `Card(...)`.
 `iii_5_6_divisibilite_division_euclidienne/ensembles_division_quotient.py` et
 `ensembles_division_recurrence.py` — la division euclidienne. Même méthode
 applicable si leurs instanciations portent sur des cardinaux ; à mesurer.
+
+### 2026-08-23, 06h50 — DIVISION EUCLIDIENNE : recâblage IMPOSSIBLE en l'état
+
+`iii_5_6_divisibilite_division_euclidienne/ensembles_division_recurrence.py`
+(`_diff_est_fini`) instancie `fini_downward_thm` sur `a−b` et `a`, où
+`a−b := diff_somme(a,b) = τc.( a = b + c )` — un τ-TERME, pas un `Card(...)`.
+
+La route gardée exigerait `est_cardinal(a − b)`. **Le dépôt ne le prouve nulle
+part** (grep : aucun lemme « une différence est un cardinal »). Et il ne se tire
+pas facilement : `est_cardinal(x)` = (∃X)(x = Card X), or de `a = b + (a−b)`
+(donné par `existe_temoin` sous a ≥ b) on n'extrait pas que `a−b` soit un Card —
+la somme cardinale est un `cardinal(...)`, le terme soustrait ne l'est pas.
+
+**Décision : ne pas forcer.** Ces deux modules restent VIDES, et c'est consigné
+plutôt que masqué. La brique exactement manquante est nommée en RECHERCHE R-12.
+
+Périmètre final de la vacuité `fini_downward` à ce jour :
+  • RÉPARÉ : `z_infini_derive` et toute la chaîne d'extension de Hessenberg ;
+  • ENCORE VIDE : `ensembles_division_recurrence`, `ensembles_division_quotient`
+    (division euclidienne), et les appelants historiques de `fini_downward_thm`
+    hors de ces chaînes.

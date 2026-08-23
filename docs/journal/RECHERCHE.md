@@ -176,3 +176,22 @@ paquet en résidu ∀U. Le brancher dans `claim_clos` ferait tomber le DERNIER
 résidu de Hessenberg. Prix à payer : 384 s contre ~30 s — donc garder les DEUX
 chemins (le rapide, à résidu nommé, pour l'itération ; le complet, marqué
 `slow`, pour la certification).
+
+## R-12 — Prouver « une différence d'entiers est un entier » : est_cardinal(a − b)
+
+**Pourquoi** : c'est l'unique brique qui bloque le recâblage de la division
+euclidienne sur la downward-closure GARDÉE (cf. ANOMALIES 2026-08-23). Sans
+elle, `_diff_est_fini` doit passer par l'universel nu, non satisfait, et les
+deux modules de division restent vides.
+
+**Énoncé visé** : { a ≥ b (ou : Fini a, b ≤ a) } ⊢ est_cardinal( diff_somme(a,b) ).
+
+**Piste** : sous `b ≤ a`, `existe_temoin` donne un témoin c avec a = b + c, et
+`diff_somme(a,b)` EST ce τ. Il faudrait alors montrer que ce c peut être choisi
+CARDINAL — typiquement en le réalisant comme `Card(A ∖ B)` pour des ensembles
+témoins, ce qui relie R-12 à `_card_E_somme` (déjà utilisé par
+`complement_grand` : Card E = Card S₀ + Card(E∖S₀)).
+
+**Retombée** : la division euclidienne est l'un des gros chantiers ouverts listés
+dans CLAUDE.md ; cette brique la débloquerait au niveau de la fidélité, pas
+seulement de la couverture.
