@@ -256,3 +256,35 @@ même erreur qu'avant. Le contournement `inclus_dans_union_fam` reste la voie.
 (6), injectivité et fonctionnalité de l'UNION — mêmes graphes, et le dépôt a
 `union_famille_injective` dans `ensembles_recollement_famille_injectif.py` :
 RELIRE L'AMONT avant d'écrire.
+
+### R-13, suite (07h20) — DÉPENDANCES : il ne reste que DEUX briques à écrire
+
+Relecture de l'amont (`ensembles_recollement_famille_injectif.py` et
+`ensembles_c60_coeur.py`) : **deux des données restantes sont déjà des
+théorèmes du dépôt**, il suffit de leur fournir leurs hypothèses.
+
+  • `union_famille_injective(𝔇)` : { famille_dirigee(𝔇), membres_injectifs(𝔇) }
+    ⊢ injectif_graphe(⋃𝔇)  — c'est la donnée **(2)** ;
+  • `union_famille_fonctionnelle(𝔇, p="pcf", q="qcf", …)` — c'est la donnée
+    **(6)**, et ses liants `pcf`/`qcf` sont EXACTEMENT ceux de la donnée (3)
+    dans la carte : elle se déduit donc de la compatibilité.
+
+D'où la structure réelle :
+
+    (2)  ⟸  (4) dirigée  +  (5) membres injectifs ✅
+    (6)  ⟸  (3) compatible
+
+**Il ne reste donc que DEUX briques à écrire dans ce cluster** — (3) et (4) —
+toutes deux tirées de « C est une CHAÎNE » :
+
+    p, q ∈ 𝔇(C)  ⇒  p = pr₂u, q = pr₂v avec u,v ∈ C        [membre_famille, CLOS]
+    C totalement ordonnée par Γ𝔉  ⇒  (u,v) ∈ Γ𝔉  ou  (v,u) ∈ Γ𝔉
+    (u,v) ∈ Γ𝔉  ⇒  pr₁u ⊂ pr₁v  et  pr₂u ⊂ pr₂v            [frame_ordre_membre_t]
+    ⇒ (4) : prendre r := le plus grand des deux ;
+    ⇒ (3) : deux graphes emboîtés coïncident là où les deux sont définis.
+
+Briques repérées : `frame_ordre_membre_t` (frame_zorn/ensembles_frame_ordre_axiome.py:91),
+`frame_ordre_reflexive` (…_est_ordre.py:64), `membre_famille` (CLOS).
+
+Ordre d'attaque révisé : (4) dirigée d'abord — elle donne (2) immédiatement —
+puis (3) compatible, qui donne (6). Restera (1), (7), (9), (10).
