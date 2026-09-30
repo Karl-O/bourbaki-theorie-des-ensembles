@@ -7,15 +7,15 @@
 
 | Dossier | Notions | À caler | Non conformes | Pages livre |
 |---|---|---|---|---|
-| `bon_ordre/` | 45 | 0 | 0 | E III: 15-21 ; E R: 27 |
+| `bon_ordre/` | 56 | 14 | 0 | E III: 15-21, 46 ; E R: 27 |
 | `trichotomie_ordinaux/` | 64 | 0 | 0 | E III: 15-16, 21-22 |
 
 ## Bilan cumulé (ce dossier + descendants)
 
-- Notions calées : **109**
-- Fichiers à caler : **0**
+- Notions calées : **120**
+- Fichiers à caler : **14**
 - Marqueurs non conformes : **0**
-- Livre **E III** : pages couvertes 15-22 — aucune page manquante dans l'intervalle
+- Livre **E III** : pages couvertes 15-22, 46 — **pages manquantes : 23-45**
 - Livre **E R** : pages couvertes 27 — aucune page manquante dans l'intervalle
 
-**Verdict : RIEN D'OUBLIÉ (sur l'intervalle annoté)**
+**Verdict : COUVERTURE INCOMPLÈTE — voir ci-dessus**

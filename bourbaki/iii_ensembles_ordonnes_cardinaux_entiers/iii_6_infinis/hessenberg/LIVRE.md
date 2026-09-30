@@ -9,11 +9,12 @@
 |---|---|---|---|---|
 | `assemblage_vrai/` | 15 | 0 | 0 | E III: 47-49 |
 | `coeur/` | 30 | 0 | 0 | E III: 47-49 |
+| `decharge/` | 1 | 0 | 0 | E III: 48 |
 | `step_b_prop5/` | 9 | 0 | 0 | E III: 47-49 |
 
 ## Bilan cumulé (ce dossier + descendants)
 
-- Notions calées : **54**
+- Notions calées : **55**
 - Fichiers à caler : **0**
 - Marqueurs non conformes : **0**
 - Livre **E III** : pages couvertes 47-49 — aucune page manquante dans l'intervalle

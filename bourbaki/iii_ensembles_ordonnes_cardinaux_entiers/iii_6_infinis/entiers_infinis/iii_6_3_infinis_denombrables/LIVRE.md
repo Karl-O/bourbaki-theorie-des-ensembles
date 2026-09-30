@@ -46,11 +46,17 @@
 | E III.50 | L.35-37 | 6.5 | Def.5 | `est_stationnaire` | `ensembles_infinis.py` |
 | E III.51 | L.22-23 | 6.5 | Def.- | `est_noetherien` | `ensembles_infinis.py` |
 
+## Sous-dossiers (cumul)
+
+| Dossier | Notions | À caler | Non conformes | Pages livre |
+|---|---|---|---|---|
+| `lemme1_denombrable/` | 5 | 8 | 0 | E III: 47 |
+
 ## Bilan cumulé (ce dossier + descendants)
 
-- Notions calées : **38**
-- Fichiers à caler : **0**
+- Notions calées : **43**
+- Fichiers à caler : **8**
 - Marqueurs non conformes : **0**
-- Livre **E III** : pages couvertes 45-46, 49-51 — **pages manquantes : 47-48**
+- Livre **E III** : pages couvertes 45-47, 49-51 — **pages manquantes : 48**
 
 **Verdict : COUVERTURE INCOMPLÈTE — voir ci-dessus**

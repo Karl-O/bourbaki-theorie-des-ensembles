@@ -16,6 +16,7 @@
 | E II.8 | L.59-63 | 2.2 | Prop.3 | `produit_vide_si` | `ensembles_produit.py` |
 | E II.8 | L.59-63 | 2.2 | Prop.3 | `produit_vide_dur` | `ensembles_produit.py` |
 | E II.8 | L.59-63 | 2.2 | Prop.3 | `produit_vide` | `ensembles_produit.py` |
+| E II.33 | L.12-16 | 2.2 | Prop.- | `produit_monotone_carre` | `ensembles_produit_monotone.py` |
 | E R.12 | L.13-14 | R.3 | Rem.- | `produit_egalite_par_couples` | `ensembles_produit_extensionnalite.py` |
 | E R.12 | L.20-21 | R.3 | Prop.22 | `couple_dans_produit_distrib_reunion_premier_facteur` | `ensembles_produit_distrib_reunion_gauche.py` |
 | E R.12 | L.20-21 | R.3 | Rem.- | `couple_dans_produit_distributif_reunion` | `ensembles_produit_distributif.py` |
@@ -27,10 +28,10 @@
 
 ## Bilan cumulé (ce dossier + descendants)
 
-- Notions calées : **17**
+- Notions calées : **18**
 - Fichiers à caler : **0**
 - Marqueurs non conformes : **0**
-- Livre **E II** : pages couvertes 8 — aucune page manquante dans l'intervalle
+- Livre **E II** : pages couvertes 8, 33 — **pages manquantes : 9-32**
 - Livre **E R** : pages couvertes 12 — aucune page manquante dans l'intervalle
 
-**Verdict : RIEN D'OUBLIÉ (sur l'intervalle annoté)**
+**Verdict : COUVERTURE INCOMPLÈTE — voir ci-dessus**

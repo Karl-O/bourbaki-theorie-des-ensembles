@@ -8,15 +8,15 @@
 | Dossier | Notions | À caler | Non conformes | Pages livre |
 |---|---|---|---|---|
 | `bon_ordre_segments/` | 15 | 0 | 0 | E III: 15-17 |
-| `recurrence_transfinie/` | 17 | 0 | 0 | E III: 17-19 |
+| `recurrence_transfinie/` | 28 | 14 | 0 | E III: 17-19, 46 |
 | `zorn_zermelo/` | 13 | 0 | 0 | E III: 19-21 ; E R: 27 |
 
 ## Bilan cumulé (ce dossier + descendants)
 
-- Notions calées : **45**
-- Fichiers à caler : **0**
+- Notions calées : **56**
+- Fichiers à caler : **14**
 - Marqueurs non conformes : **0**
-- Livre **E III** : pages couvertes 15-21 — aucune page manquante dans l'intervalle
+- Livre **E III** : pages couvertes 15-21, 46 — **pages manquantes : 22-45**
 - Livre **E R** : pages couvertes 27 — aucune page manquante dans l'intervalle
 
-**Verdict : RIEN D'OUBLIÉ (sur l'intervalle annoté)**
+**Verdict : COUVERTURE INCOMPLÈTE — voir ci-dessus**

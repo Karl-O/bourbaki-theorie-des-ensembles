@@ -20,11 +20,17 @@
 | E III.37 | L.27-35 | 5.3 | Prop.4 | `prop4_surjective` | `ensembles_prop4_surj_iii5.py` |
 | E III.37 | L.27-35 | 5.3 | Prop.4 | `prop4_ordre_iso` | `ensembles_prop4_surj_iii5.py` |
 
+## Sous-dossiers (cumul)
+
+| Dossier | Notions | À caler | Non conformes | Pages livre |
+|---|---|---|---|---|
+| `soustraction_cardinale/` | 5 | 0 | 0 | E III: 37, 39 |
+
 ## Bilan cumulé (ce dossier + descendants)
 
-- Notions calées : **12**
+- Notions calées : **17**
 - Fichiers à caler : **0**
 - Marqueurs non conformes : **0**
-- Livre **E III** : pages couvertes 31, 36-37 — **pages manquantes : 32-35**
+- Livre **E III** : pages couvertes 31, 36-37, 39 — **pages manquantes : 32-35, 38**
 
 **Verdict : COUVERTURE INCOMPLÈTE — voir ci-dessus**

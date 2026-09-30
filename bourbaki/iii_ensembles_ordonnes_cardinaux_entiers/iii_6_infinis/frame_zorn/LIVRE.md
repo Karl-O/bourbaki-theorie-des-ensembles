@@ -7,6 +7,7 @@
 
 | Page livre | Lignes | § | Type | Notion | Fichier |
 |---|---|---|---|---|---|
+| E III.31 | L.9-12 | 4.2 | Prop.3 | `fini_downward_garde_universel` | `ensembles_fini_downward_garde.py` |
 | E III.47 | L.30-32 | 6.3 | Th.2 | `hessenberg_a_carre_egal_a` | `ensembles_frame_extension_finale.py` |
 | E III.47 | L.30-32 | 6.3 | Th.2 | `hessenberg_a_carre_egal_a_0hyp` | `ensembles_frame_maximal_clos.py` |
 | E III.48 | L.19-24 | 6.3 | Demo.2 | `est_infini_union_chaine` | `ensembles_frame_a_maximal.py` |
@@ -26,11 +27,17 @@
 | E III.49 | L.3-4 | 6.3 | Demo.2 | `phi_etendue_bijection` | `ensembles_frame_extension_finale.py` |
 | E III.49 | L.3-4 | 6.3 | Demo.2 | `extension_absurde` | `ensembles_frame_extension_finale.py` |
 
+## Sous-dossiers (cumul)
+
+| Dossier | Notions | À caler | Non conformes | Pages livre |
+|---|---|---|---|---|
+| `h2_garde/` | 35 | 4 | 0 | E III: 26, 47-49 |
+
 ## Bilan cumulé (ce dossier + descendants)
 
-- Notions calées : **18**
-- Fichiers à caler : **0**
+- Notions calées : **54**
+- Fichiers à caler : **4**
 - Marqueurs non conformes : **0**
-- Livre **E III** : pages couvertes 47-49 — aucune page manquante dans l'intervalle
+- Livre **E III** : pages couvertes 26, 31, 47-49 — **pages manquantes : 27-30, 32-46**
 
-**Verdict : RIEN D'OUBLIÉ (sur l'intervalle annoté)**
+**Verdict : COUVERTURE INCOMPLÈTE — voir ci-dessus**

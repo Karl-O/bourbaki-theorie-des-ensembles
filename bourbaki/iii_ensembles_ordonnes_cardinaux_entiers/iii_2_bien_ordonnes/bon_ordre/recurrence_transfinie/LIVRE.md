@@ -25,11 +25,17 @@
 | E III.19 | L.1-5 | 2.2 | Demo.60 | `recursion_transfinie_existence_final` | `ensembles_c60_pont.py` |
 | E III.19 | L.1-5 | 2.2 | Demo.60 | `recursion_transfinie_existence_reduite` | `ensembles_c60_realisation.py` |
 
+## Sous-dossiers (cumul)
+
+| Dossier | Notions | À caler | Non conformes | Pages livre |
+|---|---|---|---|---|
+| `rec_veritable/` | 11 | 14 | 0 | E III: 18-19, 46 |
+
 ## Bilan cumulé (ce dossier + descendants)
 
-- Notions calées : **17**
-- Fichiers à caler : **0**
+- Notions calées : **28**
+- Fichiers à caler : **14**
 - Marqueurs non conformes : **0**
-- Livre **E III** : pages couvertes 17-19 — aucune page manquante dans l'intervalle
+- Livre **E III** : pages couvertes 17-19, 46 — **pages manquantes : 20-45**
 
-**Verdict : RIEN D'OUBLIÉ (sur l'intervalle annoté)**
+**Verdict : COUVERTURE INCOMPLÈTE — voir ci-dessus**

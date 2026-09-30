@@ -8,15 +8,15 @@
 | Dossier | Notions | À caler | Non conformes | Pages livre |
 |---|---|---|---|---|
 | `ii_2_1_definition_couples/` | 21 | 0 | 0 | E II: 7 ; E R: 11, 15 |
-| `ii_2_2_produit_deux_ensembles/` | 17 | 0 | 0 | E II: 8 ; E R: 12 |
+| `ii_2_2_produit_deux_ensembles/` | 18 | 0 | 0 | E II: 8, 33 ; E R: 12 |
 | `ii_2_5_graphe_produit/` | 0 | 0 | 0 | — |
 
 ## Bilan cumulé (ce dossier + descendants)
 
-- Notions calées : **38**
+- Notions calées : **39**
 - Fichiers à caler : **0**
 - Marqueurs non conformes : **0**
-- Livre **E II** : pages couvertes 7-8 — aucune page manquante dans l'intervalle
+- Livre **E II** : pages couvertes 7-8, 33 — **pages manquantes : 9-32**
 - Livre **E R** : pages couvertes 11-12, 15 — **pages manquantes : 13-14**
 
 **Verdict : COUVERTURE INCOMPLÈTE — voir ci-dessus**
